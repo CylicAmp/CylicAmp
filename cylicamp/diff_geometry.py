@@ -320,5 +320,237 @@ def run_tests():
     print("\nALL TESTS COMPLETE")
 
 
+# ================================================================
+# PART 6: TENSORS, RIEMANN CURVATURE, AND PARALLEL TRANSPORT
+# ================================================================
+
+
+class Tensor:
+    """
+    A tensor on a 2D manifold (surface).
+
+    Tensors are multi-dimensional arrays with transformation rules.
+    We store them as numpy arrays and provide:
+    - Index raising/lowering with the metric
+    - Contractions
+    """
+
+    def __init__(self, components, type_str):
+        """
+        components : array-like — tensor components as numpy array
+        type_str   : str like "(k,l)" — k upper indices, l lower indices
+          "(0,2)" = metric, "(2,0)" = inverse metric,
+          "(1,1)" = shape operator, "(1,3)" = Riemann tensor
+        """
+        self.comp = np.array(components, dtype=float)
+        self.type = type_str
+        k, l = map(int, type_str.strip("()").split(","))
+        self.num_upper = k
+        self.num_lower = l
+        self.rank = k + l
+        assert self.comp.shape == (2,) * self.rank, \
+            f"Shape {self.comp.shape} doesn't match type {type_str}"
+
+    def contract(self, upper_pos, lower_pos):
+        """
+        Contract an upper index with a lower index.
+        T^i_jik... -> T_jk... (summed over i)
+        """
+        axes = (upper_pos, self.num_upper + lower_pos)
+        result = np.trace(self.comp, axis1=axes[0], axis2=axes[1])
+        if result.shape == ():
+            return float(result)
+        new_type = f"({self.num_upper-1},{self.num_lower-1})"
+        return Tensor(result, new_type)
+
+
+def riemann_tensor(surface, u, v):
+    """
+    Compute the Riemann curvature tensor R^i_jkl at point (u,v).
+
+    Measures the failure of vectors to return to themselves when
+    parallel transported around a small loop.
+
+    Formula:
+    R^i_jkl = dGamma^i_jl/dx^k - dGamma^i_jk/dx^l
+             + Gamma^i_mk * Gamma^m_jl - Gamma^i_ml * Gamma^m_jk
+
+    In 2D: only ONE independent component — R^1_212 = K * det(g)
+    """
+    geo = Geodesic(surface)
+    du, dv = 1e-5, 1e-5
+
+    Gamma          = geo.christoffel_symbols(u, v)
+    Gamma_u_plus   = geo.christoffel_symbols(u + du, v)
+    Gamma_u_minus  = geo.christoffel_symbols(u - du, v)
+    Gamma_v_plus   = geo.christoffel_symbols(u, v + dv)
+    Gamma_v_minus  = geo.christoffel_symbols(u, v - dv)
+
+    dGamma_du = (Gamma_u_plus - Gamma_u_minus) / (2 * du)
+    dGamma_dv = (Gamma_v_plus - Gamma_v_minus) / (2 * dv)
+    dGamma = [dGamma_du, dGamma_dv]
+
+    R = np.zeros((2, 2, 2, 2))
+    for i in range(2):
+        for j in range(2):
+            for k in range(2):
+                for l in range(2):
+                    d_term  = dGamma[k][i, j, l] - dGamma[l][i, j, k]
+                    p_term  = sum(Gamma[i, m, k] * Gamma[m, j, l] for m in range(2))
+                    p_term -= sum(Gamma[i, m, l] * Gamma[m, j, k] for m in range(2))
+                    R[i, j, k, l] = d_term + p_term
+    return R
+
+
+def ricci_tensor(surface, u, v):
+    """
+    Ricci tensor R_jk = R^i_jik (contraction of Riemann).
+    In 2D: R_jk = K * g_jk
+    """
+    R = riemann_tensor(surface, u, v)
+    Ricci = np.zeros((2, 2))
+    for j in range(2):
+        for k in range(2):
+            Ricci[j, k] = sum(R[i, j, i, k] for i in range(2))
+    return Ricci
+
+
+def scalar_curvature(surface, u, v):
+    """
+    Scalar curvature R = g^jk R_jk.
+    In 2D: R = 2K (twice the Gaussian curvature).
+    """
+    g = surface.first_fundamental_form(u, v)
+    Ricci = ricci_tensor(surface, u, v)
+    det_g = g[0, 0] * g[1, 1] - g[0, 1] * g[1, 0]
+    if abs(det_g) < 1e-10:
+        return 0
+    g_inv = np.array([[g[1, 1], -g[0, 1]], [-g[1, 0], g[0, 0]]]) / det_g
+    return sum(g_inv[j, k] * Ricci[j, k] for j in range(2) for k in range(2))
+
+
+class ParallelTransport:
+    """
+    Parallel transport of vectors along curves on a surface.
+
+    Moving a vector along a curve while keeping it "as parallel as
+    possible" to itself. On a sphere, transporting around a loop
+    rotates the vector — this is called HOLONOMY.
+    """
+
+    def __init__(self, surface):
+        self.surf = surface
+        self.geo = Geodesic(surface)
+
+    def transport_along_curve(self, curve_func, t_range, vector0, n_points=500):
+        """
+        Parallel transport a vector along a curve.
+
+        curve_func : callable, t -> (u, v) in parameter space
+        t_range    : (t_min, t_max)
+        vector0    : initial 3D vector
+        Returns    : list of (3D position, 3D vector) tuples
+        """
+        t_vals = np.linspace(t_range[0], t_range[1], n_points)
+        dt = (t_range[1] - t_range[0]) / n_points
+
+        u0, v0 = curve_func(t_vals[0])
+        r_u = self.surf.partial_u(u0, v0)
+        r_v = self.surf.partial_v(u0, v0)
+        normal = self.surf.normal(u0, v0)
+
+        V = np.array(vector0, dtype=float)
+        V = V - np.dot(V, normal) * normal
+
+        A = np.column_stack([r_u, r_v])
+        coeffs = np.linalg.lstsq(A, V, rcond=None)[0]
+        a, b = coeffs
+
+        results = [(self.surf.position(u0, v0), V.copy())]
+
+        for i in range(1, n_points):
+            t = t_vals[i]
+            u, v = curve_func(t)
+            if i < n_points - 1:
+                u_next, v_next = curve_func(t_vals[i + 1])
+                u_dot = (u_next - u) / dt
+                v_dot = (v_next - v) / dt
+            else:
+                u_dot, v_dot = 0, 0
+
+            Gamma = self.geo.christoffel_symbols(u, v)
+            da = -(Gamma[0,0,0]*a*u_dot + Gamma[0,0,1]*a*v_dot +
+                   Gamma[0,1,0]*b*u_dot + Gamma[0,1,1]*b*v_dot) * dt
+            db = -(Gamma[1,0,0]*a*u_dot + Gamma[1,0,1]*a*v_dot +
+                   Gamma[1,1,0]*b*u_dot + Gamma[1,1,1]*b*v_dot) * dt
+            a += da
+            b += db
+
+            r_u = self.surf.partial_u(u, v)
+            r_v = self.surf.partial_v(u, v)
+            results.append((self.surf.position(u, v), a * r_u + b * r_v))
+
+        return results
+
+    def holonomy_angle(self, curve_func, t_range, n_points=500):
+        """
+        How much a vector rotates when parallel transported around a loop.
+        On a sphere: holonomy = solid angle = K * area of loop.
+        """
+        u0, v0 = curve_func(t_range[0])
+        r_u = self.surf.partial_u(u0, v0)
+        V0 = r_u / np.linalg.norm(r_u)
+
+        transported = self.transport_along_curve(curve_func, t_range, V0, n_points)
+        V_final = transported[-1][1]
+        norm = np.linalg.norm(V_final)
+        if norm < 1e-10:
+            return 0.0
+        V_final = V_final / norm
+
+        cos_angle = np.clip(np.dot(V0, V_final), -1, 1)
+        angle = np.arccos(cos_angle)
+        normal = self.surf.normal(u0, v0)
+        if np.dot(np.cross(V0, V_final), normal) < 0:
+            angle = -angle
+        return angle
+
+
+def run_riemann_tests():
+    """Verify Riemann tensor and scalar curvature on known surfaces."""
+    print("\n" + "=" * 60)
+    print("RIEMANN CURVATURE TESTS")
+    print("=" * 60)
+
+    sphere = Surface(
+        lambda u, v: np.cos(u) * np.sin(v),
+        lambda u, v: np.sin(u) * np.sin(v),
+        lambda u, v: np.cos(v),
+        u_range=(0, 2 * np.pi), v_range=(0.1, np.pi - 0.1)
+    )
+
+    u_t, v_t = np.pi / 4, np.pi / 3
+    R_scalar = scalar_curvature(sphere, u_t, v_t)
+    K = sphere.gaussian_curvature(u_t, v_t)
+
+    print(f"\n1. UNIT SPHERE")
+    print(f"   Gaussian curvature K = {K:.4f}    (expected 1.0)")
+    print(f"   Scalar curvature  R  = {R_scalar:.4f}  (expected 2.0 = 2K)")
+    print(f"   R = 2K? {'PASS' if abs(R_scalar - 2*K) < 0.1 else 'FAIL'}")
+
+    Ricci = ricci_tensor(sphere, u_t, v_t)
+    g = sphere.first_fundamental_form(u_t, v_t)
+    print(f"   Ricci/metric ratio (should be ~1.0): "
+          f"{Ricci[0,0]/g[0,0]:.4f}, {Ricci[1,1]/g[1,1]:.4f}")
+
+    print(f"\n2. PARALLEL TRANSPORT on sphere")
+    pt = ParallelTransport(sphere)
+    loop = lambda t: (t, np.pi / 3)
+    angle = pt.holonomy_angle(loop, (0, 2 * np.pi))
+    print(f"   Holonomy angle around latitude circle: {np.degrees(angle):.2f} degrees")
+    print(f"   (Non-zero angle confirms sphere is curved)")
+
+
 if __name__ == "__main__":
     run_tests()
+    run_riemann_tests()
