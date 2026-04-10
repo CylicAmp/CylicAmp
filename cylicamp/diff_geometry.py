@@ -551,6 +551,132 @@ def run_riemann_tests():
     print(f"   (Non-zero angle confirms sphere is curved)")
 
 
+# ================================================================
+# PART 7: CORRECTED RIEMANN TENSOR (stable 2D formula)
+# ================================================================
+# The Christoffel-derivative approach has numerical precision issues.
+# For 2D surfaces, we use the exact algebraic formula instead:
+#   R^i_{jkl} = K * (delta^i_k * g_{jl} - delta^i_l * g_{jk})
+
+
+def riemann_tensor_2d(surface, u, v):
+    """
+    Riemann tensor R^i_{jkl} via Gaussian curvature (numerically stable).
+
+    In 2D: R^i_{jkl} = K * (delta^i_k * g_{jl} - delta^i_l * g_{jk})
+
+    This is exact — no finite-difference errors from Christoffel derivatives.
+    """
+    K = surface.gaussian_curvature(u, v)
+    g = surface.first_fundamental_form(u, v)
+    R = np.zeros((2, 2, 2, 2))
+    for i in range(2):
+        for j in range(2):
+            for k in range(2):
+                for l in range(2):
+                    delta_ik = 1.0 if i == k else 0.0
+                    delta_il = 1.0 if i == l else 0.0
+                    R[i, j, k, l] = K * (delta_ik * g[j, l] - delta_il * g[j, k])
+    return R
+
+
+def ricci_tensor_2d(surface, u, v):
+    """Ricci tensor R_{jk} = R^i_{jik} using the stable 2D Riemann."""
+    R = riemann_tensor_2d(surface, u, v)
+    Ricci = np.zeros((2, 2))
+    for j in range(2):
+        for k in range(2):
+            Ricci[j, k] = sum(R[i, j, i, k] for i in range(2))
+    return Ricci
+
+
+def scalar_curvature_2d(surface, u, v):
+    """Scalar curvature R = g^{jk} R_{jk} using the stable 2D Riemann."""
+    g = surface.first_fundamental_form(u, v)
+    Ricci = ricci_tensor_2d(surface, u, v)
+    det_g = g[0, 0] * g[1, 1] - g[0, 1] * g[1, 0]
+    if abs(det_g) < 1e-10:
+        return 0
+    g_inv = np.array([[g[1, 1], -g[0, 1]], [-g[1, 0], g[0, 0]]]) / det_g
+    return sum(g_inv[j, k] * Ricci[j, k] for j in range(2) for k in range(2))
+
+
+def run_tensor_tests():
+    """Full test suite: tensors, corrected Riemann, parallel transport."""
+    print("\n" + "=" * 60)
+    print("TENSOR & CORRECTED RIEMANN TESTS")
+    print("=" * 60)
+
+    sphere = Surface(
+        lambda u, v: np.cos(u) * np.sin(v),
+        lambda u, v: np.sin(u) * np.sin(v),
+        lambda u, v: np.cos(v),
+        u_range=(0, 2 * np.pi), v_range=(0.1, np.pi - 0.1)
+    )
+    plane    = Surface(lambda u, v: u,        lambda u, v: v,        lambda u, v: 0)
+    cylinder = Surface(lambda u, v: np.cos(u), lambda u, v: np.sin(u), lambda u, v: v)
+
+    u_eq, v_eq = 0, np.pi / 2
+
+    # Metric tensor
+    print("\n1. METRIC TENSOR")
+    g_arr = sphere.first_fundamental_form(u_eq, v_eq)
+    metric = Tensor(g_arr, "(0,2)")
+    print(f"   g_ij at equator:\n   {metric.comp}")
+
+    # Corrected Riemann on sphere
+    print("\n2. SPHERE RIEMANN (corrected)")
+    R_sphere = riemann_tensor_2d(sphere, u_eq, v_eq)
+    K_eq = sphere.gaussian_curvature(u_eq, v_eq)
+    print(f"   K = {K_eq:.6f}")
+    print(f"   R^1_001 = {R_sphere[1,0,0,1]:.6f}  (expected -1)")
+    print(f"   R^1_010 = {R_sphere[1,0,1,0]:.6f}   (expected  1)")
+    R_sc = scalar_curvature_2d(sphere, u_eq, v_eq)
+    print(f"   Scalar curvature R = {R_sc:.6f}  (expected 2.0)")
+    print(f"   {'PASS' if abs(R_sc - 2.0) < 0.01 else 'FAIL'}")
+
+    # Riemann symmetry check
+    anti_kl = np.allclose(R_sphere, -np.swapaxes(R_sphere, 2, 3))
+    print(f"   Antisymmetry R^i_j[kl]: {anti_kl}")
+
+    # Plane: Riemann should be zero
+    print("\n3. PLANE RIEMANN")
+    R_pl = riemann_tensor_2d(plane, 0.5, 0.5)
+    print(f"   Max |R| = {np.max(np.abs(R_pl)):.10f}  "
+          f"{'PASS' if np.max(np.abs(R_pl)) < 1e-9 else 'FAIL'}")
+
+    # Cylinder: Riemann should be zero (intrinsically flat)
+    print("\n4. CYLINDER RIEMANN (intrinsically flat)")
+    R_cy = riemann_tensor_2d(cylinder, np.pi / 4, 1)
+    print(f"   Max |R| = {np.max(np.abs(R_cy)):.10f}  "
+          f"{'PASS' if np.max(np.abs(R_cy)) < 1e-9 else 'FAIL'}")
+
+    # Parallel transport on sphere
+    print("\n5. PARALLEL TRANSPORT — sphere holonomy")
+    pt = ParallelTransport(sphere)
+    v_lat = np.pi / 3
+    loop = lambda t: (t, v_lat)
+    angle = pt.holonomy_angle(loop, (0, 2 * np.pi), n_points=200)
+    expected = 2 * np.pi * (1 - np.cos(v_lat))
+    print(f"   Computed holonomy:  {np.degrees(angle):.4f} deg")
+    print(f"   Expected (2π(1-cos θ)): {np.degrees(expected):.4f} deg")
+    print(f"   {'PASS' if abs(angle - expected) < 0.1 else 'FAIL'}")
+
+    # Parallel transport on plane: should be zero
+    print("\n6. PARALLEL TRANSPORT — plane (should be 0)")
+    pt_pl = ParallelTransport(plane)
+    def square_loop(t):
+        t = t % (4 * np.pi)
+        if   t < np.pi:     return (t / np.pi, 0)
+        elif t < 2 * np.pi: return (1, (t - np.pi) / np.pi)
+        elif t < 3 * np.pi: return (1 - (t - 2 * np.pi) / np.pi, 1)
+        else:                return (0, 1 - (t - 3 * np.pi) / np.pi)
+    angle_pl = pt_pl.holonomy_angle(square_loop, (0, 4 * np.pi), n_points=400)
+    print(f"   Holonomy on plane: {np.degrees(angle_pl):.10f} deg  "
+          f"{'PASS' if abs(angle_pl) < 0.01 else 'FAIL'}")
+
+
 if __name__ == "__main__":
     run_tests()
     run_riemann_tests()
+    run_tensor_tests()
