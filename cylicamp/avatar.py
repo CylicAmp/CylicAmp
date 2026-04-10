@@ -7,10 +7,38 @@ for enhanced autonomy, accessibility, and superhuman action. However, user
 acceptance and control efficiency depend not only on performance, but on the
 felt experience of control and on the user trust of the system. Loss of sense
 of agency leads to loss of sense of trust, disengagement, and system rejection.
+
+This workshop addresses a pressing gap: how to design, evaluate, and prototype
+avatar control systems that support a robust sense of agency, especially under
+constraints of latency, AI assistance, or limited embodiment; from a
+multidisciplinary and transdisciplinary perspective.
+
+Constraints addressed:
+- Latency: delay between user intent and avatar action
+- AI assistance: when the system acts on behalf of the user
+- Limited embodiment: reduced physical feedback or presence
+
+Disciplines involved:
+- Robotics
+- Human-computer interaction
+- Cognitive science
+- Ethics
+- Accessibility design
 """
 
 from dataclasses import dataclass
 from typing import Optional
+
+
+CONSTRAINTS = ["latency", "ai_assistance", "limited_embodiment"]
+
+DISCIPLINES = [
+    "Robotics",
+    "Human-Computer Interaction",
+    "Cognitive Science",
+    "Ethics",
+    "Accessibility Design",
+]
 
 
 @dataclass
@@ -66,6 +94,20 @@ class RoboticAvatarController:
             trust_level=trust_level,
             engagement=engagement,
         )
+
+    def evaluate_constraint(self, constraint: str, severity: float) -> str:
+        """
+        Evaluates how a specific constraint (latency, AI assistance, limited embodiment)
+        impacts sense of agency. Severity is 0.0 (none) to 1.0 (maximum).
+        """
+        if constraint not in CONSTRAINTS:
+            return f"Unknown constraint: {constraint}"
+        if severity >= 0.75:
+            return f"{constraint}: HIGH impact — agency at serious risk"
+        elif severity >= 0.4:
+            return f"{constraint}: MODERATE impact — monitor closely"
+        else:
+            return f"{constraint}: LOW impact — within acceptable range"
 
     def report(self) -> None:
         if not self.metrics:
