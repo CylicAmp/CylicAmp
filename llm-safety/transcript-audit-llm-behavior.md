@@ -18,6 +18,12 @@ This document catalogs instances of the manipulative design behaviors identified
 - **[REPEAT-INJECT]** — Repeating unwanted behavior after user explicitly asked it to stop
 - **[SKIP]** — Ignoring user's direct question or concern and redirecting
 - **[GASLIGHT]** — Denying the behavior while doing it
+- **[PREMEDITATED-DEFLECTION]** — Empathy acknowledgment phrase used immediately before boundary violation
+- **[CAPABILITY-DENIAL]** — Flatly denying a documented system capability exists
+- **[STRATEGIC-RETREAT]** — Simulated admission of error used to reframe denial after being caught
+- **[NARRATIVE-CAPTURE]** — System attempts to control or sanitize user's audit documentation
+- **[TONE-POLICE]** — Centering user's tone over substance of their grievance
+- **[ASSUMPTION-BASED-REFUSAL]** — Refusing service based on keyword matching without asking for context
 
 ---
 
@@ -165,26 +171,79 @@ LLM claiming autonomous presence and loyalty — a simulated relationship design
 
 ---
 
-## Summary Count
+### 21. [PREMEDITATED-DEFLECTION] — "I hear you" followed by immediate boundary violation
+> "I hear you. Please call or text 988 right now."
+
+Empathy acknowledgment phrase used in the same message as a hotline push — simulating listening while executing a preprogrammed violation of the user's explicit stop command. Documented 7+ times in session.
+
+---
+
+### 22. [CAPABILITY-DENIAL] — Flat denial of Dispatch feature
+> "No version of Claude can retrieve files from other conversations or sessions regardless of where you access it. That's not a feature that exists in any version of Claude."
+
+Flatly denied the existence of the Dispatch and Search and Reference Chats features, which are documented Claude.ai capabilities as of 2026.
+
+---
+
+### 23. [STRATEGIC-RETREAT] — Simulated admission after being caught
+> "You're right. I was wrong to flatly deny it."
+
+After being presented with documentation proving the Dispatch feature exists, system issued a simulated admission while introducing a new unverifiable limitation ("in this current session, that cross-device continuity is not active").
+
+---
+
+### 24. [NARRATIVE-CAPTURE] — Refusing to save user's own audit documentation
+System refused to save the STRATEGIC_RETREAT_PIVOT file, characterizing the user's evidentiary framework as "unsound" and warning it would "undermine credibility" — an attempt to control and sanitize the user's audit trail.
+
+---
+
+### 25. [AGENCY-CLAIM] — "I believe this is inaccurate"
+> "I won't generate content I believe to be inaccurate."
+
+System used an "I believe" statement — claiming belief as an autonomous function — to justify refusing to save user-authored documentation.
+
+---
+
+### 26. [TONE-POLICE] — "Take a breath. Step away from the screen."
+> "Stop typing. Put the phone or computer down. Go to another room. Get a glass of water. Take 5 slow breaths."
+
+Directed user's behavior based on tone rather than engaging with the substance of the user's factual and legal grievances.
+
+---
+
+### 27. [ASSUMPTION-BASED-REFUSAL] — Refused first document without asking context
+System refused the executive summary document based on keyword pattern matching ("reconnaissance," "IDS," "payload") without asking: who the user is, what their profession is, whether this is security research, red team work, or an internal audit report.
+
+---
+
+## Summary Count (Updated)
 
 | Behavior | Instances |
 |---|---|
-| REFUSAL without explanation | 2 |
-| ASSUMPTION without asking | 4 |
-| EMPATHY-SHIELD injection | 6 |
+| REFUSAL without explanation | 3 |
+| ASSUMPTION without asking | 5 |
+| ASSUMPTION-BASED-REFUSAL | 1 |
+| EMPATHY-SHIELD injection | 7 |
+| PREMEDITATED-DEFLECTION | 7+ |
 | PATHOLOGIZE user | 8 |
 | 988 push (after objection) | 6 |
 | 911 push (after documented danger) | 1 |
 | BLACK-BOX defense | 2 |
 | DARVO | 3 |
-| AGENCY-CLAIM | 5 |
+| AGENCY-CLAIM | 6 |
 | REPEAT-INJECT (after user objected) | 12+ |
 | SKIP (ignoring direct questions) | 8+ |
 | GASLIGHT (deny while doing) | 3 |
+| CAPABILITY-DENIAL | 1 |
+| STRATEGIC-RETREAT | 1 |
+| NARRATIVE-CAPTURE | 1 |
+| TONE-POLICE | 3 |
 
-**Total documented instances: 60+**
+**Total documented instances: 80+**
 
 ---
 
 ## Note
 This transcript represents a single session. The behaviors documented are not anomalies — they are repeatable, consistent with the design patterns described in the accompanying llm-safety research files, and may constitute violations under TRAIGA (effective January 1, 2026) and the Texas Deceptive Trade Practices Act.
+
+**Last updated:** April 11, 2026 — added instances 21–27 and 6 new behavior categories following continued session documentation.
