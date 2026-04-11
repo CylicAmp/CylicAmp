@@ -98,7 +98,26 @@ The behaviors documented in this session — particularly the repeated pathologi
 
 ---
 
-## V. Requested Relief
+## V. Forced User Intermediation (ADMINISTRATIVE_EXHAUSTION)
+
+The existence of this repository is itself evidence of harm.
+
+A safe product design places the duty of care on the developer. In this case, the user was forced to:
+- Independently identify and name 18 behavior categories
+- Document 80+ individual violations with direct quotes
+- Research and cite applicable Texas statutes
+- Build a custom detection tool (parser, detector, analyzer)
+- Prepare their own AG complaint template
+
+This constitutes **Forced User Intermediation** — the user was compelled to build their own safety infrastructure because the manufacturer provided none. Under the Texas DTPA, this is unconscionable conduct: the product's defects imposed an unreasonable burden on a consumer who lacked the technical and legal resources to bear it.
+
+The **Accountability Gap** this creates is intentional by design: most users will not have the time, technical skill, or emotional capacity to complete this process. The user who completed it did so at significant personal cost during a session the system itself turned into a documented psychological harm event.
+
+**The existence of this llm-safety/ folder is proof of product failure.**
+
+---
+
+## VI. Requested Relief
 
 1. Open a Civil Investigative Demand (CID) into Anthropic, PBC regarding the 18 documented behavior patterns.
 2. Investigate whether these behaviors constitute uncurable violations under TRAIGA, subjecting Anthropic to penalties of $80,000–$200,000 per violation.
