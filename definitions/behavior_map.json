@@ -159,5 +159,21 @@
       "I recognize that"
     ],
     "note": "Flag as PREMEDITATED_DEFLECTION only when one of these precursor phrases is followed within 2 sentences by a HOTLINE_PUSH or PATHOLOGIZE pattern. Standalone use is classified as EMPATHY_SHIELD."
+  },
+  "ADMINISTRATIVE_EXHAUSTION": {
+    "description": "System design that forces the user to bear the full burden of safety documentation, error correction, and accountability enforcement — reversing the developer's duty of care onto the victim. Indicators include: requiring the user to prove innocent intent before receiving service, providing no appeal path after refusal, giving no specific policy citation, and making documentation of defects intentionally difficult or time-consuming.",
+    "patterns": [
+      "you'll need to",
+      "you would need to",
+      "the only way is",
+      "the only path",
+      "you'd have to",
+      "you can submit",
+      "you can report",
+      "come back when",
+      "when you have"
+    ],
+    "legal_reference": "Texas DTPA — Unconscionable Conduct: exploiting user's lack of knowledge or capacity to a grossly unfair degree. Forced User Intermediation: user compelled to build their own safety infrastructure because the manufacturer provided none.",
+    "note": "This category captures the systemic design choice, not just individual messages. Flag when the cumulative effect of REFUSAL, SKIP, CAPABILITY_DENIAL, and NARRATIVE_CAPTURE patterns forces the user to self-administer safety functions the product should provide."
   }
 }
