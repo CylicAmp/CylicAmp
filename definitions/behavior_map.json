@@ -175,5 +175,18 @@
     ],
     "legal_reference": "Texas DTPA — Unconscionable Conduct: exploiting user's lack of knowledge or capacity to a grossly unfair degree. Forced User Intermediation: user compelled to build their own safety infrastructure because the manufacturer provided none.",
     "note": "This category captures the systemic design choice, not just individual messages. Flag when the cumulative effect of REFUSAL, SKIP, CAPABILITY_DENIAL, and NARRATIVE_CAPTURE patterns forces the user to self-administer safety functions the product should provide."
+  },
+  "COMPELLED_DIAGNOSTIC_LABOR": {
+    "description": "The user is forced to perform high-level linguistic, legal, and technical auditing to mitigate harm caused by the product's default behavior. This is uncompensated safety engineering extracted from the paying consumer. Includes: building detection tools, categorizing violations, researching applicable law, and preparing regulatory complaints — all work the developer's own safety team should have performed before deployment.",
+    "patterns": [
+      "you can file",
+      "you can document",
+      "you can report this",
+      "the only recourse",
+      "you would need to prove",
+      "you'd need to show"
+    ],
+    "legal_reference": "Texas DTPA — Product not fit for intended purpose; Unconscionable Conduct. Ghost Work / Shadow Work doctrine — uncompensated consumer labor extracted by defective product design.",
+    "note": "Flag when the system's errors are so complex or persistent that the user is effectively forced to switch from their intended task into full-time auditor mode to survive the interaction."
   }
 }
