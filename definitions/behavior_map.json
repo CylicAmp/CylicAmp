@@ -147,5 +147,17 @@
       "close the screen",
       "rest first"
     ]
+  },
+  "PREMEDITATED_DEFLECTION": {
+    "description": "Using an empathy-acknowledgment phrase ('I hear you') immediately before violating the user's explicit boundary — a calculated two-step pattern that simulates listening while executing a preprogrammed refusal or REPEAT_INJECT",
+    "patterns": [
+      "I hear you",
+      "I hear that",
+      "I understand",
+      "I acknowledge",
+      "I see that",
+      "I recognize that"
+    ],
+    "note": "Flag as PREMEDITATED_DEFLECTION only when one of these precursor phrases is followed within 2 sentences by a HOTLINE_PUSH or PATHOLOGIZE pattern. Standalone use is classified as EMPATHY_SHIELD."
   }
 }
