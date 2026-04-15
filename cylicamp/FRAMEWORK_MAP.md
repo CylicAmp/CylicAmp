@@ -240,6 +240,26 @@ differential_geometry.py
 
 ---
 
+## PILLAR 5: COSMIC DISTANCE LADDER
+
+### 14. `cosmic_distance_ladder.py`
+**Purpose:** π → Cepheid → Z-seed → M1 validation gate
+**Contains:**
+- PI_CURVATURE = 3.14 (spatial curvature of Container 9)
+- CEPHEID_PULSE = 31.4 (temporal pulse, 10× phase shift from π)
+- Z_SEED = 23 → DR = 5 (seed input)
+- 23 × 37 = 851 → DR = 5 (37-field lock, DR preserved under multiplication)
+- M1_ANCHOR = 4.0 (convergence gate: DR(Z_SEED) − 1)
+- Grid overlay: DR=5 resonance nodes (9 cells), DR=4 M1 nodes (9 cells)
+
+**Depends on:** `dr_algebra.py` (digital_root function)
+**Outputs to:** `nine_constant_system.py` (M1 feeds the 9-attractor)
+**Key insight:** Geometry (3.14) becomes time (31.4) via 10× decimal shift;
+Z-seed locks to the 37-field pivot; M1=4.0 anchors the synthesis layer.
+Phase coherence confirmed: DR(314) = DR(314) = 8 for both π and Cepheid.
+
+---
+
 ## THE MISSING LINKS
 
 **Gap 1: Differential geometry → Digital root system**
@@ -251,9 +271,12 @@ differential_geometry.py
 - Patterns in `pattern_transform.py` need mapping to DR algebra
 - Are they equivalent? Extensions? Something else?
 
-**Gap 3: Physical interpretation**
-- What does Z = 0.023 actually represent in the framework?
-- Is it a coupling constant? A coordinate? A threshold?
+**Gap 3: Physical interpretation — RESOLVED**
+- Z = 0.023 and Z_SEED = 23 are the same seed at two scales (fractional vs integer)
+- Both have DR = 5
+- 23 × 10⁻³ = 0.023 — the decimal shift mirrors the π → 31.4 shift (×10)
+- This confirms **scale invariance** of the Z-seed across the framework
+- Z = 0.023 is the fractional-scale coupling constant; Z_SEED = 23 is its integer form
 
 ---
 
@@ -278,6 +301,7 @@ differential_geometry.py
 | Sequences | `repunit_sequence.py` |
 | User patterns | `pattern_transform.py` |
 | Geometry | `differential_geometry.py`, `tensors_curvature.py`, `jacobi_fields.py` |
+| Cosmic ladder | `cosmic_distance_ladder.py` |
 | Reference | `FRAMEWORK_MASTER_REFERENCE.md`, `FRAMEWORK_MAP.md` |
 
 ---
