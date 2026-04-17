@@ -271,6 +271,27 @@
     tr:hover td { background: rgba(42,32,96,0.25); }
     tr.milestone td { background: rgba(192,48,232,0.06); }
     tr.milestone td:first-child { color: var(--accent2); }
+    /* ── 9×9 GRID ────────────────────────────────────────── */
+    .grid-container { position: relative; max-width: 400px; margin: 0 auto; }
+    .grid-canvas { display: block; width: 100%; cursor: crosshair; }
+    .grid-hover { font-size: 11px; font-family: monospace; color: var(--text2); padding: 5px 2px 0; min-height: 18px; text-align: center; }
+
+    /* ── JUMP FLOW ────────────────────────────────────────── */
+    .jump-flow { display: flex; flex-direction: column; }
+    .jump-node { background: var(--bg3); border: 1px solid var(--border2); border-radius: 6px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; }
+    .jump-node.final { border-color: var(--accent); background: rgba(192,48,232,0.08); }
+    .jump-val { font-size: 17px; font-family: monospace; font-weight: 700; }
+    .jump-meta { font-size: 10px; color: var(--text3); font-family: monospace; text-align: right; }
+    .jump-step { display: flex; align-items: center; padding: 3px 10px; font-size: 11px; font-family: monospace; gap: 6px; }
+    .jump-step-line { flex: 1; height: 1px; background: var(--border2); }
+    .coord-tbl { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 10px; font-family: monospace; }
+    .coord-tbl th { color: var(--text3); padding: 4px 8px; border-bottom: 1px solid var(--border); font-size: 10px; text-align: right; font-weight: 600; }
+    .coord-tbl th:first-child { text-align: left; }
+    .coord-tbl td { color: var(--text2); padding: 4px 8px; border-bottom: 1px solid rgba(42,32,96,0.3); text-align: right; }
+    .coord-tbl td:first-child { text-align: left; }
+    .coord-tbl tr:last-child td { border-bottom: none; }
+    .coord-tbl tr.best td { color: var(--val3); }
+
     /* ── SECTION DIVIDER ────────────────────────────────── */
     .sec-div {
       display: flex;
@@ -467,6 +488,38 @@
       <div class="rel-row"><span class="rel-key">φ(34)</span><span class="rel-value">= 16 = 2⁴</span></div>
       <div class="rel-row"><span class="rel-key">34 mod 37</span><span class="rel-value">= 34</span></div>
       <div class="rel-row"><span class="rel-key">pos (3,4) DR</span><span class="rel-value">DR(3+4)=7</span></div>
+    </div>
+  </div>
+
+  <!-- ══ 9×9 GRID SECTION ══════════════════════════════════ -->
+  <div class="sec-div">
+    <span class="sec-div-title">360 on the 9×9 Digital Root Grid</span>
+    <div class="sec-div-line"></div>
+  </div>
+
+  <div class="charts-row">
+    <div class="chart-wrap">
+      <div class="chart-title">
+        9×9 DR Grid — cell(r,c) = DR(r+c)
+        <span class="chart-note">— ★ = 360 positions (3,6)&amp;(6,3) · ◆ = center(4,4) DR=8</span>
+      </div>
+      <div class="grid-container">
+        <canvas id="grid9x9" class="grid-canvas"></canvas>
+      </div>
+      <div id="gridHover" class="grid-hover">hover a cell to inspect</div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">
+        Jump Sequence 360 → 432
+        <span class="chart-note">— 6 → 3 → 9  (Bridge → Generator → Container)</span>
+      </div>
+      <div class="jump-flow" id="jumpFlow"></div>
+      <div style="margin-top:14px">
+        <div class="chart-title" style="margin-bottom:6px">
+          DR=9 Coordinate Pairs &nbsp;<span class="chart-note">all (a,b) with DR(a+b)=9</span>
+        </div>
+        <table class="coord-tbl" id="coordTable"></table>
+      </div>
     </div>
   </div>
 
@@ -901,6 +954,145 @@ document.getElementById('factorPairs').innerHTML = factors.map(([a, b]) => `
     <span class="rel-key">${a} × ${b}</span>
     <span class="rel-value blue">${a === b ? '= √432' : `DR=${dr(a)}×${dr(b)}`}</span>
   </div>`).join('');
+
+// ── 9×9 DR GRID ───────────────────────────────────────────────
+(function () {
+  const canvas  = document.getElementById('grid9x9');
+  const hoverEl = document.getElementById('gridHover');
+  const STAR_CELLS = new Set(['3,6', '6,3']); // 360 coordinate positions
+  const DIAMOND    = '4,4';
+
+  function draw() {
+    const W = canvas.parentElement.clientWidth || 360;
+    canvas.width  = W;
+    canvas.height = W;
+    const ctx  = canvas.getContext('2d');
+    const CELL = W / 9;
+    ctx.clearRect(0, 0, W, W);
+
+    for (let r = 1; r <= 9; r++) {
+      for (let c = 1; c <= 9; c++) {
+        const val  = dr(r + c);
+        const key  = `${r},${c}`;
+        const isStar    = STAR_CELLS.has(key);
+        const isDiamond = key === DIAMOND;
+        const isDR9     = val === 9;
+
+        const x  = (c - 1) * CELL,  y  = (r - 1) * CELL;
+        const cx = x + CELL / 2,    cy = y + CELL / 2;
+
+        // Background fill
+        ctx.fillStyle = DR_COLOR[val] + (isStar ? '55' : isDiamond ? '45' : isDR9 ? '35' : '18');
+        ctx.fillRect(x, y, CELL, CELL);
+
+        // Border
+        if (isStar) {
+          ctx.strokeStyle = DR_COLOR[9] + 'dd';
+          ctx.lineWidth   = 2;
+          ctx.strokeRect(x + 1, y + 1, CELL - 2, CELL - 2);
+        } else if (isDiamond) {
+          ctx.strokeStyle = '#e8d040bb';
+          ctx.lineWidth   = 1.5;
+          ctx.strokeRect(x + 1, y + 1, CELL - 2, CELL - 2);
+        } else {
+          ctx.strokeStyle = '#2a206050';
+          ctx.lineWidth   = 0.5;
+          ctx.strokeRect(x, y, CELL, CELL);
+        }
+
+        // Text
+        const fs = Math.max(10, Math.floor(CELL * 0.30));
+        ctx.textAlign    = 'center';
+        ctx.textBaseline = 'middle';
+
+        if (isStar) {
+          ctx.font      = `bold ${fs + 4}px sans-serif`;
+          ctx.fillStyle = '#ffffff';
+          ctx.fillText('★', cx, cy - fs * 0.28);
+          ctx.font      = `${fs - 1}px monospace`;
+          ctx.fillStyle = DR_COLOR[9] + 'cc';
+          ctx.fillText('9', cx, cy + fs * 0.62);
+        } else if (isDiamond) {
+          ctx.font      = `bold ${fs + 2}px sans-serif`;
+          ctx.fillStyle = '#e8d040';
+          ctx.fillText('◆', cx, cy - fs * 0.22);
+          ctx.font      = `${fs - 1}px monospace`;
+          ctx.fillStyle = '#e8d04099';
+          ctx.fillText('8', cx, cy + fs * 0.62);
+        } else {
+          ctx.font      = `${fs}px monospace`;
+          ctx.fillStyle = DR_COLOR[val] + (isDR9 ? 'ee' : '99');
+          ctx.fillText(val, cx, cy);
+        }
+      }
+    }
+  }
+
+  canvas.addEventListener('mousemove', e => {
+    const rect  = canvas.getBoundingClientRect();
+    const scale = canvas.width / rect.width;
+    const CELL  = canvas.width / 9;
+    const col   = Math.floor((e.clientX - rect.left) * scale / CELL) + 1;
+    const row   = Math.floor((e.clientY - rect.top)  * scale / CELL) + 1;
+    if (col < 1 || col > 9 || row < 1 || row > 9) return;
+    const val = dr(row + col);
+    const key = `${row},${col}`;
+    const note = STAR_CELLS.has(key) ? '  ★ 360-position (coordinate fit)'
+               : key === DIAMOND     ? '  ◆ center node'
+               : val === 9           ? '  (DR=9 axis)'
+               : '';
+    hoverEl.style.color = DR_COLOR[val];
+    hoverEl.textContent = `(r=${row}, c=${col})  →  DR(${row}+${col}) = DR(${row + col}) = ${val}${note}`;
+  });
+  canvas.addEventListener('mouseleave', () => {
+    hoverEl.style.color = '';
+    hoverEl.textContent = 'hover a cell to inspect';
+  });
+
+  draw();
+  new ResizeObserver(draw).observe(canvas.parentElement);
+})();
+
+// ── JUMP FLOW 360 → 432 ───────────────────────────────────────
+const JUMP_STEPS = [
+  { sum: 360, k: 34, delta: null, drDelta: null, role: null,               drSum: 9 },
+  { sum: 384, k: 35, delta: 24,   drDelta: 6,    role: 'Bridge',           drSum: 6 },
+  { sum: 396, k: 36, delta: 12,   drDelta: 3,    role: 'Generator',        drSum: 9 },
+  { sum: 432, k: 37, delta: 36,   drDelta: 9,    role: 'Container',        drSum: 9 },
+];
+
+document.getElementById('jumpFlow').innerHTML = JUMP_STEPS.map(s => {
+  const valColor  = DR_COLOR[s.drSum];
+  const arrow = s.delta ? `
+    <div class="jump-step">
+      <div class="jump-step-line"></div>
+      <span style="color:${DR_COLOR[s.drDelta]}">+${s.delta}</span>
+      <span style="color:var(--text3)">φ(${s.k})</span>
+      <span style="color:${DR_COLOR[s.drDelta]}">DR=${s.drDelta} — ${s.role}</span>
+      <div class="jump-step-line"></div>
+    </div>` : '';
+  const extra = s.sum === 360 ? ' · 360°' : s.sum === 432 ? ' · ★ Master' : '';
+  return `${arrow}<div class="${s.sum === 432 ? 'jump-node final' : 'jump-node'}">
+    <div class="jump-val" style="color:${valColor}">${s.sum}</div>
+    <div class="jump-meta">k=${s.k} · DR=${s.drSum}${extra}</div>
+  </div>`;
+}).join('');
+
+// ── DR=9 COORDINATE PAIRS TABLE ──────────────────────────────
+const coordPairs = Array.from({ length: 8 }, (_, i) => ({ a: i + 1, b: 8 - i, prod: (i + 1) * (8 - i) }));
+document.getElementById('coordTable').innerHTML = `
+  <thead><tr>
+    <th>(a,b)</th><th>a+b</th><th>DR</th><th>a×b</th>
+  </tr></thead>
+  <tbody>${coordPairs.map(p => {
+    const best = (p.a === 3 && p.b === 6) || (p.a === 6 && p.b === 3);
+    return `<tr${best ? ' class="best"' : ''}>
+      <td style="color:${best ? 'var(--val3)' : 'var(--text)'}">(${p.a},${p.b})${best ? ' ★' : ''}</td>
+      <td>${p.a + p.b}</td>
+      <td style="color:${DR_COLOR[dr(p.a + p.b)]}">${dr(p.a + p.b)}</td>
+      <td>${p.prod}</td>
+    </tr>`;
+  }).join('')}</tbody>`;
 
 // ── DR PROBE ─────────────────────────────────────────────────
 const drInput = document.getElementById('drInput');
