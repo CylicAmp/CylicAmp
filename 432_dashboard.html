@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>432 Registry — 37-Field Analysis</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #07071a;
+      --bg2:     #0d0d22;
+      --bg3:     #12122e;
+      --border:  #2a2060;
+      --border2: #3a2880;
+      --accent:  #c030e8;
+      --accent2: #e050ff;
+      --text:    #ddddf8;
+      --text2:   #9090c0;
+      --text3:   #6060a0;
+      --val:     #ff5585;
+      --val2:    #5b9aff;
+      --val3:    #40d0b0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ──────────────────────────────────────────── */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 16px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      min-height: 46px;
+    }
+    .header-icon { color: var(--accent); font-size: 20px; }
+    .header-title { flex: 1; font-size: 13px; color: var(--text2); }
+    .header-badge {
+      font-size: 11px;
+      padding: 2px 10px;
+      border-radius: 4px;
+      background: rgba(192,48,232,0.12);
+      border: 1px solid var(--accent);
+      color: var(--accent2);
+      font-family: monospace;
+    }
+
+    /* ── DASH ────────────────────────────────────────────── */
+    .dash {
+      flex: 1;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+    }
+
+    /* ── IDENTITY BAR ────────────────────────────────────── */
+    .id-bar {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 11px 16px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      font-family: monospace;
+    }
+    .id-item {
+      display: flex;
+      flex-direction: column;
+      padding: 0 20px 0 0;
+      margin-right: 20px;
+      border-right: 1px solid var(--border2);
+    }
+    .id-item:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+    .id-label { font-size: 10px; color: var(--text3); letter-spacing: 0.6px; margin-bottom: 3px; }
+    .id-expr  { font-size: 13px; color: var(--val2); }
+
+    /* ── CARDS ───────────────────────────────────────────── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 700px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .card.highlight { border-color: var(--accent); background: rgba(192,48,232,0.07); }
+    .card-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    .card-value { font-size: 22px; font-family: monospace; color: var(--accent2); font-weight: 700; }
+    .card-sub   { font-size: 11px; color: var(--text2); margin-top: 4px; font-family: monospace; }
+
+    /* ── CHARTS ──────────────────────────────────────────── */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 700px) { .charts-row { grid-template-columns: 1fr; } }
+    .chart-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .chart-wrap.full { grid-column: 1 / -1; }
+    .chart-title {
+      font-size: 10px;
+      color: var(--accent2);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chart-note { color: var(--text3); font-weight: 400; font-size: 10px; }
+    canvas { width: 100% !important; max-height: 220px; }
+
+    /* ── DR LEGEND ───────────────────────────────────────── */
+    .dr-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .dr-pip {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      color: var(--text2);
+    }
+    .dr-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── RELATIONS GRID ──────────────────────────────────── */
+    .rel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 700px) { .rel-grid { grid-template-columns: 1fr; } }
+    .rel-card {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .rel-title {
+      font-size: 10px;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .rel-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(42,32,96,0.4);
+      font-size: 12px;
+      font-family: monospace;
+    }
+    .rel-row:last-child { border-bottom: none; }
+    .rel-key   { color: var(--text2); }
+    .rel-value { color: var(--val3); }
+    .rel-value.red  { color: var(--val); }
+    .rel-value.blue { color: var(--val2); }
+    .rel-value.purple { color: var(--accent2); }
+
+    /* ── DR INPUT ────────────────────────────────────────── */
+    .dr-probe {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .dr-probe-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.6px; }
+    .dr-input {
+      background: #0a0820;
+      border: 1px solid var(--border2);
+      border-radius: 5px;
+      color: var(--text);
+      font-family: monospace;
+      font-size: 14px;
+      padding: 5px 10px;
+      width: 140px;
+      outline: none;
+    }
+    .dr-input:focus { border-color: var(--accent); }
+    .dr-result {
+      font-family: monospace;
+      font-size: 14px;
+      color: var(--accent2);
+      min-width: 80px;
+    }
+    .dr-result-detail { font-size: 11px; color: var(--text2); font-family: monospace; }
+
+    /* ── TABLE ───────────────────────────────────────────── */
+    .table-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table-header {
+      padding: 9px 14px;
+      font-size: 10px;
+      color: var(--accent2);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .table-note { color: var(--text3); font-weight: 400; }
+    .tbl-scroll { overflow-x: auto; }
+    table  { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th {
+      padding: 7px 10px;
+      text-align: right;
+      color: var(--text3);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg3);
+      white-space: nowrap;
+    }
+    th:first-child { text-align: center; }
+    td {
+      padding: 5px 10px;
+      text-align: right;
+      color: var(--text2);
+      border-bottom: 1px solid rgba(42,32,96,0.4);
+      font-family: monospace;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    td:first-child { text-align: center; color: var(--text); font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(42,32,96,0.25); }
+    tr.milestone td { background: rgba(192,48,232,0.06); }
+    tr.milestone td:first-child { color: var(--accent2); }
+    .dr-badge {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      line-height: 22px;
+      text-align: center;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-icon">✦</span>
+  <span class="header-title">432 Registry — 37-Field Totient Analysis</span>
+  <span class="header-badge">Σφ(k) k=1..37 = 432</span>
+</div>
+
+<div class="dash">
+
+  <!-- Identity bar -->
+  <div class="id-bar">
+    <div class="id-item">
+      <div class="id-label">Master Identity</div>
+      <div class="id-expr">Σφ(k), k=1..37 = 432</div>
+    </div>
+    <div class="id-item">
+      <div class="id-label">Factorization</div>
+      <div class="id-expr">432 = 2⁴ × 3³ = 16 × 27</div>
+    </div>
+    <div class="id-item">
+      <div class="id-label">Tesla Cycle</div>
+      <div class="id-expr">432 = 3 × 144 = 3 × F₁₂</div>
+    </div>
+    <div class="id-item">
+      <div class="id-label">37-Field Residue</div>
+      <div class="id-expr">432 mod 37 = 25 = 5²</div>
+    </div>
+    <div class="id-item">
+      <div class="id-label">81-Grid Residue</div>
+      <div class="id-expr">432 mod 81 = 27 = 3³</div>
+    </div>
+  </div>
+
+  <!-- Stat cards -->
+  <div class="cards">
+    <div class="card highlight">
+      <div class="card-label">Digital Root</div>
+      <div class="card-value">DR = 9</div>
+      <div class="card-sub">4+3+2 = 9</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Totient Sum</div>
+      <div class="card-value">432</div>
+      <div class="card-sub">Σφ(k), k=1..37</div>
+    </div>
+    <div class="card">
+      <div class="card-label">mod 37</div>
+      <div class="card-value">25</div>
+      <div class="card-sub">25 = 5²  DR(25) = 7</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Tesla Factor</div>
+      <div class="card-value">× 3</div>
+      <div class="card-sub">144 × 3 = 432 = 3×F₁₂</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Doubling DR</div>
+      <div class="card-value">always 9</div>
+      <div class="card-sub">DR(432 × 2ⁿ) = 9 ∀n</div>
+    </div>
+  </div>
+
+  <!-- Charts row 1 -->
+  <div class="charts-row">
+    <div class="chart-wrap">
+      <div class="chart-title">
+        φ(k) — Euler Totient Values k=1..37
+        <span class="chart-note">coloured by DR(φ(k))</span>
+      </div>
+      <div class="dr-legend" id="drLegend"></div>
+      <canvas id="totientChart"></canvas>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">
+        432 × 2ⁿ — Doubling Cycle
+        <span class="chart-note">DR = 9 for all n</span>
+      </div>
+      <canvas id="doublingChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Cumulative chart full-width -->
+  <div class="charts-row">
+    <div class="chart-wrap full">
+      <div class="chart-title">
+        Cumulative Σφ(k) Building to 432
+        <span class="chart-note">— dashed lines: 144 (F₁₂), 216 (432/2), 360 (exact hit at k=34), 432 (target)</span>
+      </div>
+      <canvas id="cumulChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Relations grid -->
+  <div class="rel-grid">
+    <div class="rel-card">
+      <div class="rel-title">432 × Z-Seed (23)</div>
+      <div class="rel-row"><span class="rel-key">432 + 23</span><span class="rel-value">455 → DR=5</span></div>
+      <div class="rel-row"><span class="rel-key">432 − 23</span><span class="rel-value">409 → DR=4</span></div>
+      <div class="rel-row"><span class="rel-key">432 / 23</span><span class="rel-value blue">≈ 18.7826</span></div>
+      <div class="rel-row"><span class="rel-key">432 × 23</span><span class="rel-value">9936 → DR=9</span></div>
+    </div>
+    <div class="rel-card">
+      <div class="rel-title">432 in 37-Field</div>
+      <div class="rel-row"><span class="rel-key">432 / 37</span><span class="rel-value blue">= 11 r 25</span></div>
+      <div class="rel-row"><span class="rel-key">432 mod 37</span><span class="rel-value">= 25 = 5²</span></div>
+      <div class="rel-row"><span class="rel-key">DR(25)</span><span class="rel-value">= 7</span></div>
+      <div class="rel-row"><span class="rel-key">25 = 3²+4²</span><span class="rel-value blue">Pythagorean</span></div>
+    </div>
+    <div class="rel-card">
+      <div class="rel-title">432 Factor Pairs</div>
+      <div id="factorPairs"></div>
+    </div>
+  </div>
+
+  <!-- DR probe -->
+  <div class="dr-probe">
+    <span class="dr-probe-label">DR Calculator</span>
+    <input class="dr-input" type="number" id="drInput" placeholder="enter any number" />
+    <span class="dr-result" id="drResultBadge"></span>
+    <span class="dr-result-detail" id="drResultDetail"></span>
+  </div>
+
+  <!-- Full data table -->
+  <div class="table-wrap">
+    <div class="table-header">
+      Totient Table k=1..37
+      <span class="table-note">— purple rows = milestones (360 exact, 432 final)</span>
+    </div>
+    <div class="tbl-scroll">
+      <table id="dataTable"></table>
+    </div>
+  </div>
+
+</div><!-- .dash -->
+
+<script>
+// ── CORE MATH ─────────────────────────────────────────────────
+function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+
+function totient(n) {
+  let count = 0;
+  for (let k = 1; k <= n; k++) if (gcd(k, n) === 1) count++;
+  return count;
+}
+
+function dr(n) {
+  n = Math.abs(Math.round(n));
+  if (n === 0) return 0;
+  const r = n % 9;
+  return r === 0 ? 9 : r;
+}
+
+function drFull(n) {
+  n = Math.abs(Math.round(n));
+  let steps = [n];
+  while (n >= 10) {
+    n = String(n).split('').reduce((s, d) => s + Number(d), 0);
+    steps.push(n);
+  }
+  return { result: n, steps };
+}
+
+// ── DATA ──────────────────────────────────────────────────────
+const N = 37;
+const TOTS = [];
+const CUMSUM = [];
+let running = 0;
+for (let k = 1; k <= N; k++) {
+  const t = totient(k);
+  TOTS.push(t);
+  running += t;
+  CUMSUM.push(running);
+}
+// CUMSUM[36] === 432
+
+const DOUBLING = Array.from({ length: 9 }, (_, n) => {
+  const val = 432 * Math.pow(2, n);
+  return { n, val, dr: dr(val), label: `432×2^${n}` };
+});
+
+// DR color palette (indexed by DR 0-9)
+const DR_COLOR = [
+  '#404060', // 0
+  '#5b9aff', // 1 – blue
+  '#40d0b0', // 2 – teal
+  '#70e870', // 3 – green
+  '#e8d040', // 4 – yellow
+  '#ff9040', // 5 – orange
+  '#ff5585', // 6 – pink
+  '#e050ff', // 7 – purple
+  '#40c8ff', // 8 – cyan
+  '#c030e8', // 9 – deep purple
+];
+
+// ── DR LEGEND ─────────────────────────────────────────────────
+document.getElementById('drLegend').innerHTML = DR_COLOR.map((c, i) => `
+  <div class="dr-pip">
+    <div class="dr-swatch" style="background:${c}"></div>
+    DR=${i}
+  </div>`).join('');
+
+// ── CHART SHARED ─────────────────────────────────────────────
+Chart.defaults.color = '#9090c0';
+Chart.defaults.borderColor = '#2a2060';
+Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+
+const TT_BASE = {
+  backgroundColor: '#12122e',
+  borderColor: '#3a2880',
+  borderWidth: 1,
+  titleColor: '#e050ff',
+  bodyColor: '#ddddf8',
+  padding: 10,
+};
+
+const SCALE_BASE = {
+  x: { grid: { color: 'rgba(42,32,96,0.4)' }, ticks: { color: '#9090c0', font: { size: 10 } } },
+  y: { grid: { color: 'rgba(42,32,96,0.4)' }, ticks: { color: '#9090c0', font: { size: 10 } } },
+};
+
+// ── CHART 1: Totient bars coloured by DR ──────────────────────
+new Chart(document.getElementById('totientChart'), {
+  type: 'bar',
+  data: {
+    labels: Array.from({ length: N }, (_, i) => i + 1),
+    datasets: [{
+      data: TOTS,
+      backgroundColor: TOTS.map(t => DR_COLOR[dr(t)] + '80'),
+      borderColor:     TOTS.map(t => DR_COLOR[dr(t)]),
+      borderWidth: 1,
+      borderRadius: 2,
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        ...TT_BASE,
+        callbacks: {
+          title: ctx => `k = ${ctx[0].label}`,
+          label: ctx => [
+            `φ(${ctx.label}) = ${ctx.raw}`,
+            `DR(${ctx.raw}) = ${dr(ctx.raw)}`,
+            `Running sum: ${CUMSUM[ctx.dataIndex]}`,
+          ],
+        },
+      },
+    },
+    scales: {
+      ...SCALE_BASE,
+      x: { ...SCALE_BASE.x, ticks: { ...SCALE_BASE.x.ticks, maxTicksLimit: 19 } },
+      y: { ...SCALE_BASE.y, title: { display: true, text: 'φ(k)', color: '#6060a0', font: { size: 10 } } },
+    },
+  },
+});
+
+// ── CHART 2: Doubling cycle ───────────────────────────────────
+new Chart(document.getElementById('doublingChart'), {
+  type: 'bar',
+  data: {
+    labels: DOUBLING.map(d => `2^${d.n}`),
+    datasets: [{
+      label: '432 × 2^n',
+      data: DOUBLING.map(d => d.val),
+      backgroundColor: 'rgba(192,48,232,0.30)',
+      borderColor: '#c030e8',
+      borderWidth: 1,
+      borderRadius: 3,
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        ...TT_BASE,
+        callbacks: {
+          title: ctx => `432 × 2^${ctx[0].dataIndex}`,
+          label: ctx => [
+            `Value: ${ctx.raw.toLocaleString()}`,
+            `DR = ${dr(ctx.raw)}  ← always 9`,
+          ],
+        },
+      },
+    },
+    scales: {
+      ...SCALE_BASE,
+      y: {
+        ...SCALE_BASE.y,
+        type: 'logarithmic',
+        ticks: {
+          color: '#9090c0',
+          font: { size: 10 },
+          callback: v => {
+            const e = Math.log10(v);
+            return Number.isInteger(e) ? `10^${e}` : '';
+          },
+        },
+        title: { display: true, text: '432 × 2ⁿ (log)', color: '#6060a0', font: { size: 10 } },
+      },
+    },
+  },
+});
+
+// ── CHART 3: Cumulative Σφ(k) with milestone annotations ─────
+const MILESTONES = { 144: '144 = F₁₂', 216: '216 = 432/2', 360: '360° exact at k=34', 432: '432 target' };
+
+new Chart(document.getElementById('cumulChart'), {
+  type: 'line',
+  data: {
+    labels: Array.from({ length: N }, (_, i) => i + 1),
+    datasets: [{
+      label: 'Σφ(k)',
+      data: CUMSUM,
+      borderColor: '#5b9aff',
+      backgroundColor: 'rgba(91,154,255,0.08)',
+      borderWidth: 2,
+      pointBackgroundColor: CUMSUM.map(s => DR_COLOR[dr(s)]),
+      pointRadius: 4,
+      pointHoverRadius: 7,
+      tension: 0.2,
+      fill: true,
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        ...TT_BASE,
+        callbacks: {
+          title: ctx => `k = ${ctx[0].label}`,
+          label: ctx => [
+            `Σφ(1..${ctx.label}) = ${ctx.raw}`,
+            `DR(${ctx.raw}) = ${dr(ctx.raw)}`,
+            `φ(${ctx.label}) = ${TOTS[ctx.dataIndex]}`,
+          ],
+        },
+      },
+      annotation: undefined, // handled as reference lines below
+    },
+    scales: {
+      ...SCALE_BASE,
+      x: { ...SCALE_BASE.x, title: { display: true, text: 'k', color: '#6060a0', font: { size: 10 } } },
+      y: {
+        ...SCALE_BASE.y,
+        title: { display: true, text: 'Σφ(k)', color: '#6060a0', font: { size: 10 } },
+        // Reference lines drawn as dataset overlay
+      },
+    },
+  },
+  plugins: [{
+    id: 'refLines',
+    beforeDraw(chart) {
+      const { ctx, chartArea: { left, right, top, bottom }, scales: { y } } = chart;
+      const refs = [
+        { val: 144,  color: '#ff9040', label: '144 (F₁₂)' },
+        { val: 216,  color: '#40d0b0', label: '216 (432/2)' },
+        { val: 360,  color: '#e050ff', label: '360 (k=34)' },
+        { val: 432,  color: '#c030e8', label: '432 ★' },
+      ];
+      ctx.save();
+      refs.forEach(r => {
+        const yy = y.getPixelForValue(r.val);
+        ctx.beginPath();
+        ctx.setLineDash([5, 4]);
+        ctx.strokeStyle = r.color + '99';
+        ctx.lineWidth = 1;
+        ctx.moveTo(left, yy);
+        ctx.lineTo(right, yy);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = r.color;
+        ctx.font = '10px monospace';
+        ctx.fillText(r.label, left + 4, yy - 3);
+      });
+      ctx.restore();
+    },
+  }],
+});
+
+// ── FACTOR PAIRS ─────────────────────────────────────────────
+const factors = [];
+for (let i = 1; i <= Math.sqrt(432); i++) {
+  if (432 % i === 0) factors.push([i, 432 / i]);
+}
+document.getElementById('factorPairs').innerHTML = factors.map(([a, b]) => `
+  <div class="rel-row">
+    <span class="rel-key">${a} × ${b}</span>
+    <span class="rel-value blue">${a === b ? '= √432' : `DR=${dr(a)}×${dr(b)}`}</span>
+  </div>`).join('');
+
+// ── DR PROBE ─────────────────────────────────────────────────
+const drInput = document.getElementById('drInput');
+const drBadge = document.getElementById('drResultBadge');
+const drDetail = document.getElementById('drResultDetail');
+
+drInput.addEventListener('input', () => {
+  const raw = drInput.value.trim();
+  if (!raw || isNaN(raw)) { drBadge.textContent = ''; drDetail.textContent = ''; return; }
+  const n = Math.abs(Math.round(Number(raw)));
+  const { result, steps } = drFull(n);
+  drBadge.textContent = `DR = ${result}`;
+  drBadge.style.color = DR_COLOR[result];
+  drDetail.textContent = steps.length > 1
+    ? `${steps.join(' → ')}`
+    : `single digit`;
+});
+
+// ── TABLE ─────────────────────────────────────────────────────
+const thead = `<thead><tr>
+  <th>k</th>
+  <th>φ(k)</th>
+  <th>DR(φ(k))</th>
+  <th>Σφ(1..k)</th>
+  <th>DR(Σφ)</th>
+  <th>note</th>
+</tr></thead>`;
+
+const MILESTONES_K = { 22: '144 crossed', 27: '216 crossed', 31: '288 crossed', 34: 'Σ=360 exact', 37: 'Σ=432 ★' };
+
+const rows = Array.from({ length: N }, (_, i) => {
+  const k   = i + 1;
+  const t   = TOTS[i];
+  const cum = CUMSUM[i];
+  const drT = dr(t);
+  const drC = dr(cum);
+  const note = MILESTONES_K[k] || '';
+  const isMilestone = !!note;
+  const drTBadge = `<span class="dr-badge" style="background:${DR_COLOR[drT]}22;color:${DR_COLOR[drT]}">${drT}</span>`;
+  const drCBadge = `<span class="dr-badge" style="background:${DR_COLOR[drC]}22;color:${DR_COLOR[drC]}">${drC}</span>`;
+  return `<tr${isMilestone ? ' class="milestone"' : ''}>
+    <td>${k}</td>
+    <td>${t}</td>
+    <td>${drTBadge}</td>
+    <td>${cum}</td>
+    <td>${drCBadge}</td>
+    <td style="color:var(--accent2);font-size:11px">${note}</td>
+  </tr>`;
+}).join('');
+
+document.getElementById('dataTable').innerHTML = thead + `<tbody>${rows}</tbody>`;
+</script>
+</body>
+</html>
