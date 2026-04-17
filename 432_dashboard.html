@@ -271,6 +271,22 @@
     tr:hover td { background: rgba(42,32,96,0.25); }
     tr.milestone td { background: rgba(192,48,232,0.06); }
     tr.milestone td:first-child { color: var(--accent2); }
+    /* ── SECTION DIVIDER ────────────────────────────────── */
+    .sec-div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sec-div-title {
+      font-size: 10px;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .sec-div-line { flex: 1; height: 1px; background: var(--border2); }
+
     .dr-badge {
       display: inline-block;
       width: 22px;
@@ -374,6 +390,90 @@
       </div>
       <canvas id="cumulChart"></canvas>
     </div>
+  </div>
+
+  <!-- ══ 360 → 432 ARC SECTION ═════════════════════════════ -->
+  <div class="sec-div">
+    <span class="sec-div-title">360 → 432 — Completion Arc</span>
+    <div class="sec-div-line"></div>
+  </div>
+
+  <div class="cards">
+    <div class="card highlight">
+      <div class="card-label">Geometric Baseline</div>
+      <div class="card-value">360°</div>
+      <div class="card-sub">Σφ(1..34) = 360 · DR=9</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Ratio 360/432</div>
+      <div class="card-value">5/6</div>
+      <div class="card-sub">= 0.8333…</div>
+    </div>
+    <div class="card">
+      <div class="card-label">360 mod 37</div>
+      <div class="card-value">27</div>
+      <div class="card-sub">= 3³  DR(27) = 9</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Gap 432 − 360</div>
+      <div class="card-value">72</div>
+      <div class="card-sub">DR(72) = 9 · = 8×9</div>
+    </div>
+    <div class="card">
+      <div class="card-label">k=34 properties</div>
+      <div class="card-value">DR=7</div>
+      <div class="card-sub">34 = 2×17 · φ(34)=16</div>
+    </div>
+  </div>
+
+  <div class="charts-row">
+    <div class="chart-wrap">
+      <div class="chart-title">
+        360 ÷ 432 Partition
+        <span class="chart-note">— 5/6 circle vs 1/6 arc</span>
+      </div>
+      <canvas id="arcDonut" style="max-height:210px"></canvas>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">
+        Final Steps k=34→37 — The 72-Arc
+        <span class="chart-note">— bars coloured by DR(Σφ)</span>
+      </div>
+      <canvas id="arcSteps"></canvas>
+    </div>
+  </div>
+
+  <div class="rel-grid">
+    <div class="rel-card">
+      <div class="rel-title">360 Factorization</div>
+      <div class="rel-row"><span class="rel-key">360 = 2³×3²×5</span><span class="rel-value purple">= 8×45</span></div>
+      <div class="rel-row"><span class="rel-key">= 9 × 40</span><span class="rel-value">DR(9)=9</span></div>
+      <div class="rel-row"><span class="rel-key">= 10 × 36</span><span class="rel-value blue">= 10×F_9?</span></div>
+      <div class="rel-row"><span class="rel-key">= 12 × 30</span><span class="rel-value">DR=3×3</span></div>
+      <div class="rel-row"><span class="rel-key">= 18 × 20</span><span class="rel-value">DR=9×2</span></div>
+    </div>
+    <div class="rel-card">
+      <div class="rel-title">72 — The Bridge</div>
+      <div class="rel-row"><span class="rel-key">72 = 2³ × 3²</span><span class="rel-value purple">= 8 × 9</span></div>
+      <div class="rel-row"><span class="rel-key">DR(72)</span><span class="rel-value">= 9</span></div>
+      <div class="rel-row"><span class="rel-key">72 = 2 × 36</span><span class="rel-value blue">= 2×φ(37)</span></div>
+      <div class="rel-row"><span class="rel-key">432 − 360</span><span class="rel-value">= 72</span></div>
+      <div class="rel-row"><span class="rel-key">72/432</span><span class="rel-value">= 1/6</span></div>
+    </div>
+    <div class="rel-card">
+      <div class="rel-title">k=34 Deep Properties</div>
+      <div class="rel-row"><span class="rel-key">34 = 2 × 17</span><span class="rel-value blue">17 = Mersenne exp</span></div>
+      <div class="rel-row"><span class="rel-key">DR(34)</span><span class="rel-value">= 7</span></div>
+      <div class="rel-row"><span class="rel-key">φ(34)</span><span class="rel-value">= 16 = 2⁴</span></div>
+      <div class="rel-row"><span class="rel-key">34 mod 37</span><span class="rel-value">= 34</span></div>
+      <div class="rel-row"><span class="rel-key">pos (3,4) DR</span><span class="rel-value">DR(3+4)=7</span></div>
+    </div>
+  </div>
+
+  <!-- ══ 432 RELATIONS (original) ═══════════════════════════ -->
+  <div class="sec-div">
+    <span class="sec-div-title">432 — Core Relations</span>
+    <div class="sec-div-line"></div>
   </div>
 
   <!-- Relations grid -->
@@ -665,6 +765,128 @@ new Chart(document.getElementById('cumulChart'), {
         ctx.fillText(r.label, left + 4, yy - 3);
       });
       ctx.restore();
+    },
+  }],
+});
+
+// ── ARC DONUT: 360 vs 72 within 432 ──────────────────────────
+new Chart(document.getElementById('arcDonut'), {
+  type: 'doughnut',
+  data: {
+    labels: ['360  —  5/6  (k=1..34)', '72  —  1/6  (k=35..37)'],
+    datasets: [{
+      data: [360, 72],
+      backgroundColor: ['rgba(64,208,176,0.35)', 'rgba(192,48,232,0.35)'],
+      borderColor: ['#40d0b0', '#c030e8'],
+      borderWidth: 2,
+      hoverOffset: 6,
+    }],
+  },
+  options: {
+    responsive: true,
+    cutout: '62%',
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: { color: '#9090c0', font: { size: 10 }, boxWidth: 14, padding: 12 },
+      },
+      tooltip: {
+        ...TT_BASE,
+        callbacks: {
+          label: ctx => [
+            `${ctx.raw} = ${ctx.raw === 360 ? '5/6' : '1/6'} of 432`,
+            `DR(${ctx.raw}) = ${dr(ctx.raw)}`,
+            ctx.raw === 72 ? '= 8 × 9  (doubling × container)' : '= 360° full circle',
+          ],
+        },
+      },
+    },
+  },
+  plugins: [{
+    id: 'centerLabel',
+    beforeDraw(chart) {
+      const { ctx, width, height } = chart;
+      const cx = width / 2, cy = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+      ctx.save();
+      ctx.font = 'bold 20px monospace';
+      ctx.fillStyle = '#e050ff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('432', cx, cy - 9);
+      ctx.font = '10px monospace';
+      ctx.fillStyle = '#9090c0';
+      ctx.fillText('5/6 + 1/6', cx, cy + 9);
+      ctx.restore();
+    },
+  }],
+});
+
+// ── ARC STEPS: zoomed k=34..37 ────────────────────────────────
+const ARC_K = [34, 35, 36, 37];
+const ARC_SUMS  = [360, 384, 396, 432];
+const ARC_PHIS  = [16,   24,  12,  36];   // φ(k) for each
+const ARC_DELTA = [null,  24,  12,  36];  // increment above previous (null = baseline)
+
+new Chart(document.getElementById('arcSteps'), {
+  type: 'bar',
+  data: {
+    labels: ARC_K.map(k => `k=${k}`),
+    datasets: [{
+      data: ARC_SUMS,
+      backgroundColor: ARC_SUMS.map(v => DR_COLOR[dr(v)] + '55'),
+      borderColor:     ARC_SUMS.map(v => DR_COLOR[dr(v)]),
+      borderWidth: 2,
+      borderRadius: 4,
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        ...TT_BASE,
+        callbacks: {
+          title: ctx => `k = ${ARC_K[ctx[0].dataIndex]}`,
+          label: ctx => {
+            const i = ctx.dataIndex;
+            const lines = [
+              `Σφ(1..${ARC_K[i]}) = ${ARC_SUMS[i]}`,
+              `DR(${ARC_SUMS[i]}) = ${dr(ARC_SUMS[i])}`,
+              ARC_DELTA[i] ? `+φ(${ARC_K[i]}) = +${ARC_DELTA[i]}` : 'geometric baseline (360°)',
+            ];
+            if (ARC_SUMS[i] === 432) lines.push('★ MASTER CONTAINER');
+            if (ARC_SUMS[i] === 360) lines.push('= 360° full circle');
+            return lines;
+          },
+        },
+      },
+    },
+    scales: {
+      ...SCALE_BASE,
+      y: {
+        ...SCALE_BASE.y,
+        min: 348,
+        title: { display: true, text: 'Σφ(1..k)', color: '#6060a0', font: { size: 10 } },
+      },
+    },
+  },
+  plugins: [{
+    id: 'stepLabels',
+    afterDraw(chart) {
+      const { ctx } = chart;
+      const meta = chart.getDatasetMeta(0);
+      ARC_DELTA.forEach((delta, i) => {
+        if (!delta) return;
+        const bar = meta.data[i];
+        ctx.save();
+        ctx.fillStyle = DR_COLOR[dr(ARC_PHIS[i])];
+        ctx.font = 'bold 11px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(`+${delta}`, bar.x, bar.y - 6);
+        ctx.restore();
+      });
     },
   }],
 });
