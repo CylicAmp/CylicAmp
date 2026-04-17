@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfect Numbers × φ — Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #07071a;
+      --bg2:     #0d0d22;
+      --bg3:     #12122e;
+      --border:  #2a2060;
+      --border2: #3a2880;
+      --accent:  #c030e8;
+      --accent2: #e050ff;
+      --text:    #ddddf8;
+      --text2:   #9090c0;
+      --text3:   #6060a0;
+      --val:     #ff5585;
+      --val2:    #5b9aff;
+      --val3:    #40d0b0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────── */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 16px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      min-height: 46px;
+      flex-shrink: 0;
+    }
+    .header-icon { color: var(--accent); font-size: 18px; }
+    .header-title { flex: 1; font-size: 13px; color: var(--text2); }
+    .header-badge {
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 4px;
+      background: rgba(192,48,232,0.12);
+      border: 1px solid var(--accent);
+      color: var(--accent2);
+      font-family: monospace;
+    }
+
+    /* ── DASHBOARD ───────────────────────────────────────── */
+    .dash {
+      flex: 1;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+    }
+
+    /* ── FORMULA BAR ─────────────────────────────────────── */
+    .formula-bar {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .formula-item { font-size: 12px; font-family: monospace; }
+    .formula-label { color: var(--text3); font-size: 10px; margin-bottom: 2px; }
+    .formula-expr { color: var(--val2); }
+    .formula-sep { color: var(--border2); font-size: 18px; }
+
+    /* ── STAT CARDS ──────────────────────────────────────── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 700px) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .card-label {
+      font-size: 10px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+    .card-value {
+      font-size: 20px;
+      font-family: monospace;
+      color: var(--accent2);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .card-sub { font-size: 11px; color: var(--text2); margin-top: 4px; }
+
+    /* ── CHART GRID ──────────────────────────────────────── */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 700px) { .charts-row { grid-template-columns: 1fr; } }
+    .chart-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 14px;
+      position: relative;
+    }
+    .chart-wrap.full { grid-column: 1 / -1; }
+    .chart-title {
+      font-size: 10px;
+      color: var(--accent2);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chart-note { color: var(--text3); font-weight: 400; font-size: 10px; }
+    .toggle-btn {
+      margin-left: auto;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border2);
+      background: #130e2e;
+      color: var(--text2);
+      cursor: pointer;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 400;
+      transition: background 0.12s, color 0.12s;
+    }
+    .toggle-btn:hover { background: #1e1448; color: var(--text); }
+    canvas { width: 100% !important; max-height: 230px; }
+
+    /* ── TABLE ───────────────────────────────────────────── */
+    .table-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table-header {
+      padding: 10px 14px;
+      font-size: 10px;
+      color: var(--accent2);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .table-header .table-note { color: var(--text3); font-weight: 400; font-size: 10px; }
+    .tbl-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th {
+      padding: 8px 12px;
+      text-align: right;
+      color: var(--text3);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg3);
+      white-space: nowrap;
+    }
+    th:first-child { text-align: center; }
+    td {
+      padding: 7px 12px;
+      text-align: right;
+      color: var(--text2);
+      border-bottom: 1px solid rgba(42,32,96,0.5);
+      font-family: monospace;
+      white-space: nowrap;
+    }
+    td:first-child { text-align: center; color: var(--text); font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(42,32,96,0.3); }
+    .c-teal { color: var(--val3); }
+    .c-blue { color: var(--val2); }
+    .c-red  { color: var(--val); }
+    .c-dim  { color: var(--text3); }
+    .c-accent { color: var(--accent2); }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-icon">◈</span>
+  <span class="header-title">Perfect Numbers × φ — Golden Ratio Alignment Explorer</span>
+  <span class="header-badge">φ = (1+√5)/2 ≈ 1.6180339…</span>
+</div>
+
+<div class="dash">
+
+  <!-- Formula bar -->
+  <div class="formula-bar">
+    <div>
+      <div class="formula-label">Even perfect number</div>
+      <div class="formula-item formula-expr">P(p) = 2^(p−1) × (2^p − 1)</div>
+    </div>
+    <div class="formula-sep">|</div>
+    <div>
+      <div class="formula-label">Consecutive ratio</div>
+      <div class="formula-item formula-expr">R_i = P(p_{i+1}) / P(p_i)</div>
+    </div>
+    <div class="formula-sep">|</div>
+    <div>
+      <div class="formula-label">φ-alignment</div>
+      <div class="formula-item formula-expr">A_i = R_i / φ^(Δp) &nbsp;[1 = perfect alignment]</div>
+    </div>
+    <div class="formula-sep">|</div>
+    <div>
+      <div class="formula-label">Exponents used</div>
+      <div class="formula-item" style="color:var(--text2)">2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107</div>
+    </div>
+  </div>
+
+  <!-- Stat cards -->
+  <div class="cards" id="cards"></div>
+
+  <!-- Charts row 1 -->
+  <div class="charts-row">
+    <div class="chart-wrap">
+      <div class="chart-title">
+        Digit Count Growth
+        <span class="chart-note">— digits in P(p)</span>
+      </div>
+      <canvas id="digitChart"></canvas>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">
+        φ-Alignment &nbsp;A = R / φ^Δp
+        <span class="chart-note">— log scale; 1.0 = aligned</span>
+        <button class="toggle-btn" id="alignToggle">Linear</button>
+      </div>
+      <canvas id="alignChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Charts row 2 -->
+  <div class="charts-row">
+    <div class="chart-wrap full">
+      <div class="chart-title">
+        Consecutive Ratios vs φ^Δp
+        <span class="chart-note">— both series, log scale</span>
+        <button class="toggle-btn" id="ratioToggle">Linear</button>
+      </div>
+      <canvas id="ratioChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Data table -->
+  <div class="table-wrap">
+    <div class="table-header">
+      Full Data Table
+      <span class="table-note">— teal = ratio/φ^Δp close to 1 &nbsp;|&nbsp; red = far from φ-alignment</span>
+    </div>
+    <div class="tbl-scroll">
+      <table id="dataTable"></table>
+    </div>
+  </div>
+
+</div><!-- .dash -->
+
+<script>
+// ── COMPUTATION ───────────────────────────────────────────────
+const EXPONENTS = [2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107];
+const PHI = (1 + Math.sqrt(5)) / 2;
+const LOG_PHI = Math.log(PHI);
+
+// Exact digit count via BigInt (replicates Python's len(str(int(p))))
+function perfectDigits(p) {
+  const mers = (2n ** BigInt(p)) - 1n;
+  return String((2n ** BigInt(p - 1)) * mers).length;
+}
+
+// Natural log of P(p) = 2^(p-1)*(2^p-1)
+// = (2p-1)*ln2 + ln(1 - 2^-p)
+// For p > 52 the correction is below float precision
+function logPerfect(p) {
+  const corr = p <= 52 ? Math.log1p(-Math.pow(2, -p)) : 0;
+  return (2 * p - 1) * Math.LN2 + corr;
+}
+
+const digitCounts = EXPONENTS.map(perfectDigits);
+
+// Build transitions (replicates the Python loop)
+const transitions = [];
+for (let i = 0; i < EXPONENTS.length - 1; i++) {
+  const p1 = EXPONENTS[i], p2 = EXPONENTS[i + 1];
+  const dp = p2 - p1;
+  const logR = logPerfect(p2) - logPerfect(p1);
+  const ratio = Math.exp(logR);
+  const phiPow = Math.pow(PHI, dp);
+  const alignment = ratio / phiPow;
+  const logAlign = logR - dp * LOG_PHI;
+  transitions.push({ p1, p2, dp, ratio, phiPow, alignment, logAlign });
+}
+
+// ── STAT CARDS ────────────────────────────────────────────────
+const mostAligned = transitions.reduce((a, b) =>
+  Math.abs(a.logAlign) < Math.abs(b.logAlign) ? a : b);
+const leastAligned = transitions.reduce((a, b) =>
+  Math.abs(a.logAlign) > Math.abs(b.logAlign) ? a : b);
+
+const CARDS = [
+  {
+    label: 'Perfect Numbers',
+    value: EXPONENTS.length,
+    sub: `exponents: ${EXPONENTS[0]}…${EXPONENTS[EXPONENTS.length-1]}`
+  },
+  {
+    label: 'Digit Span',
+    value: `${digitCounts[0]} → ${digitCounts[digitCounts.length-1]}`,
+    sub: `p=${EXPONENTS[0]} → p=${EXPONENTS[EXPONENTS.length-1]}`
+  },
+  {
+    label: 'Closest φ-Align',
+    value: `p${mostAligned.p1}→${mostAligned.p2}`,
+    sub: `A = ${mostAligned.alignment.toFixed(3)} &nbsp;(Δp=${mostAligned.dp})`
+  },
+  {
+    label: 'Ratio Range',
+    value: `${transitions[0].ratio.toExponential(2)}`,
+    sub: `to ${transitions[transitions.length-1].ratio.toExponential(2)}`
+  },
+];
+
+document.getElementById('cards').innerHTML = CARDS.map(c => `
+  <div class="card">
+    <div class="card-label">${c.label}</div>
+    <div class="card-value">${c.value}</div>
+    <div class="card-sub">${c.sub}</div>
+  </div>`).join('');
+
+// ── CHART HELPERS ─────────────────────────────────────────────
+Chart.defaults.color = '#9090c0';
+Chart.defaults.borderColor = '#2a2060';
+Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+
+const tooltipBase = {
+  backgroundColor: '#12122e',
+  borderColor: '#3a2880',
+  borderWidth: 1,
+  titleColor: '#e050ff',
+  bodyColor: '#ddddf8',
+  padding: 10,
+};
+
+function scaleBase(type = 'linear', yLabel = '') {
+  return {
+    x: {
+      grid: { color: 'rgba(42,32,96,0.45)' },
+      ticks: { color: '#9090c0', font: { size: 10 } },
+    },
+    y: {
+      type,
+      grid: { color: 'rgba(42,32,96,0.45)' },
+      ticks: {
+        color: '#9090c0',
+        font: { size: 10 },
+        callback: type === 'logarithmic'
+          ? v => { const e = Math.log10(v); return Number.isInteger(e) ? `10^${e}` : ''; }
+          : undefined,
+      },
+      title: yLabel ? { display: true, text: yLabel, color: '#6060a0', font: { size: 10 } } : { display: false },
+    },
+  };
+}
+
+// ── CHART 1: Digit counts ─────────────────────────────────────
+new Chart(document.getElementById('digitChart'), {
+  type: 'bar',
+  data: {
+    labels: EXPONENTS.map(p => `p=${p}`),
+    datasets: [{
+      data: digitCounts,
+      backgroundColor: 'rgba(192,48,232,0.30)',
+      borderColor: '#c030e8',
+      borderWidth: 1,
+      borderRadius: 3,
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        ...tooltipBase,
+        callbacks: {
+          title: ctx => `p = ${EXPONENTS[ctx[0].dataIndex]}`,
+          label: ctx => [
+            `Digits in P(p): ${ctx.raw}`,
+            `≈ 2p−1 × log₁₀(2) = ${((2*EXPONENTS[ctx.dataIndex]-1)*Math.log10(2)).toFixed(1)}`,
+          ],
+        },
+      },
+    },
+    scales: scaleBase('linear', 'digits'),
+  },
+});
+
+// ── CHART 2: φ-Alignment (ratio / φ^Δp) ──────────────────────
+let alignLogScale = true;
+const alignData = transitions.map(t => t.alignment);
+const alignLabels = transitions.map(t => `p${t.p1}→${t.p2}`);
+
+const alignChart = new Chart(document.getElementById('alignChart'), {
+  type: 'bar',
+  data: {
+    labels: alignLabels,
+    datasets: [{
+      label: 'R / φ^Δp',
+      data: alignData,
+      backgroundColor: transitions.map(t =>
+        t.alignment < 100 ? 'rgba(64,208,176,0.35)' : 'rgba(255,85,133,0.30)'),
+      borderColor: transitions.map(t =>
+        t.alignment < 100 ? '#40d0b0' : '#ff5585'),
+      borderWidth: 1,
+      borderRadius: 3,
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        ...tooltipBase,
+        callbacks: {
+          title: ctx => {
+            const t = transitions[ctx[0].dataIndex];
+            return `p${t.p1} → p${t.p2}  (Δp=${t.dp})`;
+          },
+          label: ctx => {
+            const t = transitions[ctx.dataIndex];
+            return [
+              `R / φ^${t.dp} = ${t.alignment.toExponential(4)}`,
+              `log(alignment) = ${t.logAlign.toFixed(4)}`,
+              t.alignment < 2 ? '★ Close to φ-alignment!' : '',
+            ].filter(Boolean);
+          },
+        },
+      },
+    },
+    scales: scaleBase('logarithmic', 'R / φ^Δp'),
+  },
+});
+
+document.getElementById('alignToggle').addEventListener('click', function () {
+  alignLogScale = !alignLogScale;
+  alignChart.options.scales.y.type = alignLogScale ? 'logarithmic' : 'linear';
+  alignChart.options.scales.y.ticks.callback = alignLogScale
+    ? v => { const e = Math.log10(v); return Number.isInteger(e) ? `10^${e}` : ''; }
+    : undefined;
+  this.textContent = alignLogScale ? 'Linear' : 'Log';
+  alignChart.update();
+});
+
+// ── CHART 3: Ratios vs φ^Δp ──────────────────────────────────
+let ratioLogScale = true;
+
+const ratioChart = new Chart(document.getElementById('ratioChart'), {
+  type: 'line',
+  data: {
+    labels: transitions.map(t => `p${t.p1}→${t.p2} (Δp=${t.dp})`),
+    datasets: [
+      {
+        label: 'R = P(p₂)/P(p₁)',
+        data: transitions.map(t => t.ratio),
+        borderColor: '#5b9aff',
+        backgroundColor: 'rgba(91,154,255,0.08)',
+        borderWidth: 2,
+        pointBackgroundColor: '#5b9aff',
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        tension: 0.25,
+        fill: true,
+      },
+      {
+        label: 'φ^Δp  (reference)',
+        data: transitions.map(t => t.phiPow),
+        borderColor: '#c030e8',
+        borderDash: [6, 4],
+        borderWidth: 1.5,
+        pointBackgroundColor: '#c030e8',
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        tension: 0.25,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        display: true,
+        labels: { color: '#9090c0', font: { size: 11 }, boxWidth: 18, padding: 14 },
+      },
+      tooltip: {
+        ...tooltipBase,
+        callbacks: {
+          title: ctx => {
+            const t = transitions[ctx[0].dataIndex];
+            return `p${t.p1} → p${t.p2}  (Δp = ${t.dp})`;
+          },
+          label: ctx => {
+            const t = transitions[ctx.dataIndex];
+            if (ctx.datasetIndex === 0) {
+              return `Ratio R = ${t.ratio.toExponential(6)}`;
+            }
+            return `φ^${t.dp} = ${t.phiPow.toExponential(6)}`;
+          },
+          afterBody: ctx => {
+            const t = transitions[ctx[0].dataIndex];
+            return [
+              `─────────────────────`,
+              `R / φ^Δp = ${t.alignment.toExponential(4)}`,
+              `log(R / φ^Δp) = ${t.logAlign.toFixed(4)}`,
+            ];
+          },
+        },
+      },
+    },
+    scales: scaleBase('logarithmic', 'value'),
+  },
+});
+
+document.getElementById('ratioToggle').addEventListener('click', function () {
+  ratioLogScale = !ratioLogScale;
+  ratioChart.options.scales.y.type = ratioLogScale ? 'logarithmic' : 'linear';
+  ratioChart.options.scales.y.ticks.callback = ratioLogScale
+    ? v => { const e = Math.log10(v); return Number.isInteger(e) ? `10^${e}` : ''; }
+    : undefined;
+  this.textContent = ratioLogScale ? 'Linear' : 'Log';
+  ratioChart.update();
+});
+
+// ── DATA TABLE ────────────────────────────────────────────────
+const thead = `<thead><tr>
+  <th>p</th>
+  <th title="exact digit count via BigInt">digits in P(p)</th>
+  <th title="transition">→ p_next</th>
+  <th title="exponent gap">Δp</th>
+  <th title="ratio of consecutive perfect numbers">R = P(p₂)/P(p₁)</th>
+  <th title="phi raised to the exponent gap">φ^Δp</th>
+  <th title="how aligned the ratio is with a power of phi">R / φ^Δp</th>
+  <th title="log of alignment - 0 means perfect phi alignment">log(R / φ^Δp)</th>
+</tr></thead>`;
+
+const tbRows = EXPONENTS.map((p, i) => {
+  const dc = digitCounts[i];
+  const t = transitions[i];
+  if (!t) {
+    return `<tr>
+      <td>${p}</td>
+      <td class="c-accent">${dc}</td>
+      <td class="c-dim" colspan="6">— (last exponent)</td>
+    </tr>`;
+  }
+  // Colour the alignment column
+  const aVal = Math.abs(t.logAlign);
+  const aCls = aVal < 1 ? 'c-teal' : aVal < 5 ? 'c-blue' : aVal < 20 ? '' : 'c-red';
+  return `<tr>
+    <td>${p}</td>
+    <td class="c-accent">${dc}</td>
+    <td class="c-dim">p${t.p2}</td>
+    <td>${t.dp}</td>
+    <td class="c-blue">${t.ratio.toExponential(8)}</td>
+    <td class="c-dim">${t.phiPow.toExponential(6)}</td>
+    <td class="${aCls}">${t.alignment.toExponential(6)}</td>
+    <td class="${aCls}">${t.logAlign.toFixed(6)}</td>
+  </tr>`;
+}).join('');
+
+document.getElementById('dataTable').innerHTML =
+  thead + `<tbody>${tbRows}</tbody>`;
+</script>
+</body>
+</html>
