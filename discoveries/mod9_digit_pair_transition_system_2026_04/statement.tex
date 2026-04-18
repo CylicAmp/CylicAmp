@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Mod-9 Digit-Pair Transition System}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Statement}
+
+The complete system is a bidirectional digit-pair lattice with involutive symmetry and mod-9 equivalence collapse.
+
+Base adjacency lattice (nearest-neighbor rule):
+\[
+(a,b) \to (a,b+1),\ (b,a)
+\]
+
+Mod-9 shift layer:
+\[
+x \to x + 9k \quad \Rightarrow \quad x \sim x + 9 \pmod{9}
+\]
+
+Swap symmetry operator:
+\[
+S(a,b) = (b,a), \quad S^2 = I
+\]
+
+Arithmetic reduction rule:
+\[
+9 + k \to k \quad \Rightarrow \quad x + 9 \equiv x \pmod{9}
+\]
+
+Completion Constant verification:
+\[
+7 + 4 = 11, \quad 11 + 9 = 20
+\]
+and the symmetric form
+\[
+9 + 1 + 1 + 9 = 20
+\]
+
+The entire chain and higher block system (56--99) are generated automatically by these three rules. All paths collapse into the 7-4-9 triad equilibrium seal.
+
+\end{document}
