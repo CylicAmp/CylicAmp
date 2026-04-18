@@ -3,6 +3,7 @@
 # Unauthorized access, copying, or use is strictly prohibited. All rights reserved by Justice for victims.
 
 import hashlib
+import numpy as np
 
 class SovereignKernelV49:
     def __init__(self):
