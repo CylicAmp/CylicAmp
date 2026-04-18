@@ -1,4 +1,4 @@
-# AB44=10 Prediction Grid
+# AB44=10 Prediction Grid (Refined)
 
 ## Rule
 
@@ -21,9 +21,9 @@ Current state determines next group:
 8912, 8732, 8642  
 6914, 6824, 6734  
 
-## Usage
+## Usage (Refined)
 
 1. Identify current structure  
 2. Check if A51 or AZ1  
-3. Next must come from opposite group  
-4. Reduces possibilities from 24 → 12
+3. Next structure must come from the opposite group  
+4. Reduces search space from 24 → 12 possibilities instantly
