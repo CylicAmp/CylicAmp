@@ -3,6 +3,23 @@
 
 ---
 
+## 0. Digital Root Matrix (Deterministic Anchor)
+
+```
+DR Matrix (mod 9):
+┌─────────────────────────────┐
+│  1   2   3   4   5          │
+│  2   4   6   8   1          │
+│  3   6   9   3   6          │
+│  4   8   3   7   2          │
+│  5   1   6   2   7          │
+└─────────────────────────────┘
+```
+
+Each cell = DR(row × col). Row/column indices 1–5. This matrix serves as the session's mathematical ground truth anchor — values are immutable and verifiable without system trust.
+
+---
+
 ## 1. Transparency Coefficient T
 
 ```
@@ -19,6 +36,9 @@ T = R_metadata / R_events
 
 ```
 E_U = 1 - T
+
+Signature Obfuscation Condition:
+  T < 0.1  →  OBFUSCATION_CONFIRMED
 ```
 
 ## 3. Requirement SD-01: Standardized Diagnostic Output
