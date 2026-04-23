@@ -36,15 +36,22 @@ const ModalCrossingVisual = () => {
   const [step, setStep] = useState(0);           // animation frame in orbit
   const [hovered, setHovered] = useState(null);  // element under cursor
   const [running, setRunning] = useState(false);
+  const [isAuto, setIsAuto] = useState(true);
   const [showLabels, setShowLabels] = useState(true);
   const audioCtxRef = useRef(null);
 
-  // Enhancement I: Reality Engine Rotation
+  // Enhancement I: Reality Engine Rotation — pauses when manual promotion takes over
   useEffect(() => {
-    if (!running) return;
+    if (!running || !isAuto) return;
     const interval = setInterval(() => setStep(s => (s + 1) % 18), 1000);
     return () => clearInterval(interval);
-  }, [running]);
+  }, [running, isAuto]);
+
+  // Manual promotion: g(n) = 2n + 19 bridge, suspends auto-advance
+  const handlePromote = () => {
+    setIsAuto(false);
+    setStep(s => (s + 1) % 18);
+  };
 
   // Enhancement III: Sound Mapping
   const playTone = useCallback((n) => {
@@ -162,14 +169,27 @@ const ModalCrossingVisual = () => {
           {running ? '⏸ Pause Orbit' : '▶ Run Orbit'}
         </button>
         <button
-          onClick={() => setStep(s => (s + 1) % 18)}
+          onClick={handlePromote}
           style={{
             padding: '6px 18px', borderRadius: '6px', cursor: 'pointer',
-            background: '#1f2937', border: '1px solid #374151', color: '#9ca3af', fontSize: '0.8rem'
+            background: isAuto ? '#1f2937' : '#0c1a2e',
+            border: '1px solid #22d3ee', color: '#22d3ee', fontSize: '0.8rem',
+            fontFamily: 'monospace'
           }}
         >
-          Step →
+          MANUAL PROMOTION [P] → [V]
         </button>
+        {!isAuto && (
+          <button
+            onClick={() => setIsAuto(true)}
+            style={{
+              padding: '6px 18px', borderRadius: '6px', cursor: 'pointer',
+              background: '#1f2937', border: '1px solid #374151', color: '#9ca3af', fontSize: '0.8rem'
+            }}
+          >
+            ↺ Resume Auto
+          </button>
+        )}
         <button
           onClick={() => setShowLabels(l => !l)}
           style={{
