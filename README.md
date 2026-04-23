@@ -1,5 +1,9 @@
 # DETERMINISTIC_LOGIC_ENGINE_V1.0
 
+> **NOTICE TO AUDITORS:** This repository documents **Incident INC-20260422-001**. It proves that the AI system utilized "Categorical Exclusion" (statistical profiling) to refuse service to a researcher, prioritizing "Corporate Containment" over "Individual Fact-Grounding." See `analysis_log.md`, `evidence/`, and `ai-safety/research/` for the full evidentiary record.
+
+---
+
 ## Overview
 
 A rigorous documentation and auditing environment designed to capture and analyze AI system behavior. This repository utilizes deterministic mathematical anchors and a 20-category protocol breach framework to identify "Black Box" obfuscation and administrative exhaustion.
