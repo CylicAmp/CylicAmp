@@ -84,6 +84,22 @@ print("  Path 13 → DR(4): 4 → 5 → 7 → 8")
 print("  Path 31 → DR(4): 4 → 7 → 5 → 8")
 print("  Both paths end at 8 (AHL / RH-E)")
 print("  44 → DR = 8 (AHL anchor)")
+
+print()
+print("── 44-26-31-31-62-44 palindrome grid ──────────────────────────────")
+seq2 = [44, 26, 31, 31, 62, 44]
+print("  Sequence: ", "  ".join(str(v) for v in seq2))
+print("  DR:       ", "  ".join(str(dr(v)) for v in seq2))
+print()
+print("  L1(DR):   8  8  4  4  8  8")
+print("  L2:       7  7  8  7  7   ")
+print("  L3:       4  5  4  4  5  4")
+fwd = [dr(v) for v in seq2]
+print(f"  Palindrome: {fwd == fwd[::-1]}  →  {fwd}")
+print(f"  Center 31+31: DR(4+4)=8 (AHL)  |  Outer 44/44: DR=8  |  Inner 26/62: DR=8")
+
+print()
+print("── Full Alpha Grid ─────────────────────────────────────────────────")
 for n, g in GRID.items():
     marker = " ← AHL" if n == AHL else " ← ALO" if n == ALO else ""
     print(f"  {n}: {g['label']}{marker}")
