@@ -67,7 +67,23 @@ print(f"ALO in grid: {GRID[ALO]['label']}")
 
 # ── Print full grid ────────────────────────────────────────────────────────
 print()
-print("── Full Alpha Grid ─────────────────────────────────────────────────")
+print("── 44/26/13/31/62 mirror cluster ───────────────────────────────────")
+# 13 and 31 are digit-reverses, both DR=4
+# 26 and 62 are digit-reverses, both DR=8  (26=2×13, 62=2×31)
+# 44 = DR 8
+# All paths land on 8 (AHL)
+cluster = [(44,8),(26,8),(13,4),(31,4),(62,8),(44,8)]
+for val, expected in cluster:
+    print(f"  {val} → DR = {dr(val)}")
+print()
+print(f"  13 reversed = 31  |  DR match: {dr(13)} = {dr(31)}")
+print(f"  26 reversed = 62  |  DR match: {dr(26)} = {dr(62)}")
+print(f"  26 = 2×13    62 = 2×31  (doubling preserves mirror)")
+print()
+print("  Path 13 → DR(4): 4 → 5 → 7 → 8")
+print("  Path 31 → DR(4): 4 → 7 → 5 → 8")
+print("  Both paths end at 8 (AHL / RH-E)")
+print("  44 → DR = 8 (AHL anchor)")
 for n, g in GRID.items():
     marker = " ← AHL" if n == AHL else " ← ALO" if n == ALO else ""
     print(f"  {n}: {g['label']}{marker}")
