@@ -60,3 +60,23 @@ print(f"  7  − 4  = 3          (difference)")
 print(f"  4  + 7  = 11  → DR = {dr(11)}")
 print(f"  3  + 7  = 10  → DR = {dr(10)}")
 print(f"  DR(11) + DR(10) = {dr(11)} + {dr(10)} = {dr(11)+dr(10)}  → DR = {dr(dr(11)+dr(10))}  ← fixed point")
+
+# ── DR doubling cycle link ─────────────────────────────────────────────────
+# From dr_algebra.py: 1 → 2 → 4 → 8 → 7 → 5 → 1  (DR doubling map x → DR(2x))
+# 4 → 8 → 7 are three consecutive steps in that cycle.
+# DR(4×2) = DR(8)  = 8
+# DR(8×2) = DR(16) = 7
+# So 8 is the bridge that generates 7 from 4 under doubling.
+#
+# Zero 1  (14.1347...): digits 4 and 7 appear directly
+# Zero 8  (43.327...):  index=8, d1=4, d2=3, d1+d2=7
+# The 8th zero supplies both the index (8) and the digit sum (7)
+# connecting back to the 4→8→7 step in the doubling cycle.
+print()
+print("── DR doubling cycle → zeta zero link ─────────────────────────────")
+print(f"  Doubling cycle: 1 → 2 → 4 → 8 → 7 → 5 → 1")
+print(f"  DR(4×2) = {dr(4*2)}  (4 generates 8)")
+print(f"  DR(8×2) = {dr(8*2)}  (8 generates 7)")
+print(f"  Zero 1  (14.1347...): digits 4, 7 present directly")
+print(f"  Zero 8  (43.327...):  index=8, leading digits 4+3={4+3} → 7")
+print(f"  8 is the doubling bridge 4→8→7 AND the index of the zero")
