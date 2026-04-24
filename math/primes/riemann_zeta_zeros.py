@@ -50,3 +50,13 @@ print(f"  7  − 4  = 3          (difference)")
 print(f"  4  + 7  = 11  → DR = {dr(11)}")
 print(f"  3  + 7  = 10  → DR = {dr(10)}")
 print(f"  DR(11) + DR(10) = {dr(11)} + {dr(10)} = {dr(11)+dr(10)}  → DR = {dr(dr(11)+dr(10))}  ← fixed point")
+
+# ── Zero 8: 43.3270...  →  d1=4, d2=3, sum=7, feeds into 4-7-3 loop ───────
+print()
+print("── Zero 8: 4-3 feeds into 4-7-3 loop ─────────────────────────────")
+print(f"  43.327073...  →  d1=4, d2=3")
+print(f"  4  + 3  = 7          (sum supplies the 7)")
+print(f"  7  − 4  = 3          (difference)")
+print(f"  4  + 7  = 11  → DR = {dr(11)}")
+print(f"  3  + 7  = 10  → DR = {dr(10)}")
+print(f"  DR(11) + DR(10) = {dr(11)} + {dr(10)} = {dr(11)+dr(10)}  → DR = {dr(dr(11)+dr(10))}  ← fixed point")
