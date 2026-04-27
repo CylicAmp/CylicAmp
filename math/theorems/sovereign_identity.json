@@ -11,7 +11,6 @@
     "sovereign_domain": [4, 9, 25, 30],
     "sovereign_range": [3, 12, 21, 30],
     "fixed_point": 30,
-<<<<<<< HEAD
     "theorems_validated": 53,
     "last_correction": "Node 3/15 identified as entropy; Bijection confirmed absolute.",
     "signature": "SHA256: 137_SOVEREIGN_30_3_HEARTBEAT",
