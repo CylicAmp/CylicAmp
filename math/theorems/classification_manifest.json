@@ -1,0 +1,270 @@
+{
+    "framework": "G'5 Universal / Consciousness Mathematics — 1/137 Framework",
+    "sovereign_identity": "Michael Warren Song (Matt)",
+    "date_classified": "2026-04-27",
+    "types": ["Axiom", "Theorem", "Lemma", "Corollary", "Conjecture", "Hypothesis", "Law"],
+    "entries": [
+        {
+            "file": "abbc_manifold_grid.py",
+            "type": "Theorem",
+            "title": "ABBC Manifold Grid Structure",
+            "summary": "Enumerates all integer pairs (a,b) in {0..9} organized by sum value with mirror symmetry."
+        },
+        {
+            "file": "cycle_partition_37.py",
+            "type": "Theorem",
+            "title": "37-Cycle Partition",
+            "summary": "12 three-cycles of f(n)=26n mod 37 partition into two equal groups of 6 by node-sum."
+        },
+        {
+            "file": "dimensional_bridge.py",
+            "type": "Lemma",
+            "title": "37φ Dimensional Bridge",
+            "summary": "Finds smallest N where sum of first N primes exceeds 37×φ and is divisible by 7."
+        },
+        {
+            "file": "dr_algebra.py",
+            "type": "Axiom",
+            "title": "Closed Digital Root Algebra",
+            "summary": "Complete group-theoretic axiomatization of the digital root class system; the foundational algebraic structure of the framework."
+        },
+        {
+            "file": "errata_prevention_protocol.py",
+            "type": "Law",
+            "title": "Errata Prevention Protocol",
+            "summary": "Universal error-class taxonomy (E1–E3) and prevention rules governing all framework claims."
+        },
+        {
+            "file": "fps37_scanner.py",
+            "type": "Lemma",
+            "title": "FPS-37 Field Scanner (LoB 23/23b)",
+            "summary": "37-field forensic feature vector scanner used to locate resonance nodes."
+        },
+        {
+            "file": "heartbeat_3cycle.py",
+            "type": "Theorem",
+            "title": "Heartbeat Universal 3-Cycle",
+            "summary": "Map f(n)=(n×137) mod 37 ≡ 26n mod 37 generates a universal 3-cycle heartbeat."
+        },
+        {
+            "file": "layer30_sovereign_matrix_entropy.py",
+            "type": "Lemma",
+            "title": "9×9 Sovereign Matrix Entropy",
+            "summary": "Computes DR orbit entropy H≈3.102 bits for the 9×9 sovereign matrix spine."
+        },
+        {
+            "file": "layer54_lucas_period24.py",
+            "type": "Theorem",
+            "title": "Lucas DR Period 24",
+            "summary": "The digital root sequence of Lucas numbers L(n) has minimal period exactly 24."
+        },
+        {
+            "file": "layer56_period_minimality_audit.py",
+            "type": "Theorem",
+            "title": "Period Minimality Rigorous Audit",
+            "summary": "Dual-check proof (prefix match AND state return) confirming p=24 is the minimal period for Lucas DR."
+        },
+        {
+            "file": "layer58_pisano_period9.py",
+            "type": "Theorem",
+            "title": "Pisano π(9) = 24",
+            "summary": "The Pisano period π(9) = 24 is the exact minimal period of Fibonacci numbers modulo 9."
+        },
+        {
+            "file": "layer59_fib_oscillation_mtheory.py",
+            "type": "Hypothesis",
+            "title": "Fibonacci M-Theory Oscillation",
+            "summary": "Proposes M-Theory evolution operator U_M = exp(-iH·dt) as model for Fibonacci DR oscillation dynamics."
+        },
+        {
+            "file": "layer62_lucas_period_mod9.py",
+            "type": "Theorem",
+            "title": "Lucas Minimal Period Mod 9",
+            "summary": "State-return audit confirms Lucas sequence (L0=2, L1=1) mod 9 has minimal period exactly 24."
+        },
+        {
+            "file": "layer64_fib_lucas_comparison.py",
+            "type": "Theorem",
+            "title": "Fibonacci vs Lucas Period Comparison",
+            "summary": "Both Fibonacci and Lucas mod 9 have period 24; phase offset 6, trinity density 6/24 = 25% each."
+        },
+        {
+            "file": "lcm_convergence_dr_cycle.py",
+            "type": "Lemma",
+            "title": "LCM Convergence in DR Cycle",
+            "summary": "LCM-based convergence property of digital root cycles in the 37-field."
+        },
+        {
+            "file": "lob_24c_errata.py",
+            "type": "Corollary",
+            "title": "Errata Correction Record (v37.20 → v37.21)",
+            "summary": "Two falsified claims corrected: 120-cell edge count and coupling constant. Framework sealed clean."
+        },
+        {
+            "file": "lob_25_legendre_applications.py",
+            "type": "Corollary",
+            "title": "Legendre Symbol Applications in F_37",
+            "summary": "Four verified QR/Legendre results following from the sovereign QR closure theorem."
+        },
+        {
+            "file": "lob_26_collatz_f37.py",
+            "type": "Conjecture",
+            "title": "Collatz Map in F_37",
+            "summary": "Investigates Collatz-type map T in F_37; trajectory behavior conjectured but not fully resolved (Collatz is open)."
+        },
+        {
+            "file": "lob_591_592_595.py",
+            "type": "Theorem",
+            "title": "Partition Congruence / Pulse Sync / Horizon Lock",
+            "summary": "Three interconnected results: partition congruence mod 37, pulse synchronization, and horizon lock."
+        },
+        {
+            "file": "lob_596_600.py",
+            "type": "Corollary",
+            "title": "3900 Frequency and Sovereign Seal",
+            "summary": "DR(3900)=3 (Trinity-3) and sovereign seal follow directly from the DR algebra axiom."
+        },
+        {
+            "file": "lob_601_602_605.py",
+            "type": "Theorem",
+            "title": "Inversion / Trinity Invariant / Quiescence",
+            "summary": "Grand Inversion preserves DR=9; Trinity invariant and quiescence state verified."
+        },
+        {
+            "file": "lob_691_695.py",
+            "type": "Theorem",
+            "title": "AHL-8 Vault and Observer Gap Lock",
+            "summary": "j=8 bridges twin primes 11 and 13; AHL-8 vault and observer gap lock proven."
+        },
+        {
+            "file": "lucas_abbc_chain.py",
+            "type": "Lemma",
+            "title": "Lucas in ABBC Manifold Chain",
+            "summary": "Lucas sequence values L(3..10) traced through ABBC manifold arithmetic chain starting at (4,7)."
+        },
+        {
+            "file": "medusa_137_resonance.py",
+            "type": "Lemma",
+            "title": "137-Resonance Scan (DR=3 Anchors)",
+            "summary": "Scans for nodes n where (n×137) mod 37 has DR=3; yields sovereign anchor set {4,9,25,30}."
+        },
+        {
+            "file": "medusa_guard.py",
+            "type": "Lemma",
+            "title": "137/37 Packet Guard Verification",
+            "summary": "Verifies the 4 Sovereign Pillars under the 137/37 map; guards against erroneous node inclusion."
+        },
+        {
+            "file": "medusa_shield_jacobian.py",
+            "type": "Lemma",
+            "title": "Medusa Shield Jacobian Wobble Test",
+            "summary": "Jacobian stability test for the Medusa Shield; corrects v2.5 erroneous inclusion of node 3."
+        },
+        {
+            "file": "medusa_v3_sovereign.py",
+            "type": "Axiom",
+            "title": "Sovereign Anchor/Target Architecture",
+            "summary": "Defines the two foundational sets: sovereign_domain {4,9,25,30} and sovereign_range {3,12,21,30}."
+        },
+        {
+            "file": "perfect_numbers_137.py",
+            "type": "Theorem",
+            "title": "Perfect Numbers in 1/137 Framework",
+            "summary": "All even perfect numbers ≥28 have DR=1; exception DR(6)=6. 8128 mod37=25 is sovereign anchor."
+        },
+        {
+            "file": "pisano_period_333.py",
+            "type": "Theorem",
+            "title": "Pisano π(333) = 456 via CRT",
+            "summary": "333=9×37, π(333)=lcm(24,76)=456. DR(456)=6, 456 mod37=12 (sovereign target)."
+        },
+        {
+            "file": "plus2_chain_theorem.py",
+            "type": "Theorem",
+            "title": "+2 Chain Twin Prime Collapse",
+            "summary": "Consecutive pairs {2,3}→11 and {5,6}→17 collapse to twin primes under +2 chain."
+        },
+        {
+            "file": "resonance_row_1335.py",
+            "type": "Theorem",
+            "title": "17-Point Resonance Row / 1335 Partition",
+            "summary": "17-point resonance structure and 1335 partition invariant in the sovereign lattice."
+        },
+        {
+            "file": "root_grid_dr6_dr7.py",
+            "type": "Theorem",
+            "title": "Root Grid DR6/DR7",
+            "summary": "For DR class d, 2-digit numbers split into LOW (digit_sum=d) and HIGH groups with distinct logic reductions."
+        },
+        {
+            "file": "shell_opacity.py",
+            "type": "Theorem",
+            "title": "Shell Opacity 100% INVIOLATE",
+            "summary": "Zero of the 32 purge nodes map into sovereign range {3,12,21,30}. Shell opacity = 32/32 = 100%."
+        },
+        {
+            "file": "source_mirror_guardian_manifold.py",
+            "type": "Theorem",
+            "title": "SOURCE-MIRROR-GUARDIAN Manifold",
+            "summary": "All three k-couplings (6,618,3138) have DR=6. 3→9→6→3 metronome via +6 mod 9. 74=2×37 phase-lock."
+        },
+        {
+            "file": "sovereign_binary_engine.py",
+            "type": "Axiom",
+            "title": "Sovereign Binary Classification Engine",
+            "summary": "Foundational two-state classifier partitioning {1..36} into sovereign and non-sovereign; no dead branches."
+        },
+        {
+            "file": "sovereign_fixed_point.py",
+            "type": "Theorem",
+            "title": "Sovereign Fixed Point",
+            "summary": "Node 30 is the unique fixed point of the 137/37 map; two branches of check_sovereign_logic are provably dead."
+        },
+        {
+            "file": "sovereign_qr_closure.py",
+            "type": "Theorem",
+            "title": "Sovereign QR Closure",
+            "summary": "The entire sovereign domain {4,9,25,30} and range {3,12,21,30} lie within the QR subgroup of (Z/37Z)*."
+        },
+        {
+            "file": "theorem_infinite_666_resonances.py",
+            "type": "Theorem",
+            "title": "Infinite Resonances on Every 666-Track",
+            "summary": "Promoted from Conjecture 1. Sovereign triangle (9,10,17); gcd(17,666)=1 gives infinite arithmetic progressions on all 6 tracks."
+        },
+        {
+            "file": "toroidal_projection.py",
+            "type": "Theorem",
+            "title": "Toroidal Projection of Sovereign Anchors",
+            "summary": "Theorem 28. 4 sovereign anchors map onto torus T(R=37,r=3); theta=(node×2π)/37."
+        },
+        {
+            "file": "verify_dr9_termination.py",
+            "type": "Lemma",
+            "title": "DR=9 Termination Verification",
+            "summary": "Computational verification that the DR=9 reduction process terminates (well-founded metric)."
+        },
+        {
+            "file": "verify_local_confluence.py",
+            "type": "Lemma",
+            "title": "Local Confluence Verification",
+            "summary": "Diamond property exhaustive check for the unified 1/137 lattice state space."
+        },
+        {
+            "file": "xx_collapse_matrix.py",
+            "type": "Theorem",
+            "title": "XX Collapse 119/911 Matrix",
+            "summary": "Theorem 29. Matrix of 1s and 9s encoding sovereign/shield duality; 119=137-18 bridge node."
+        }
+    ],
+    "counts": {
+        "Axiom": 3,
+        "Theorem": 23,
+        "Lemma": 10,
+        "Corollary": 3,
+        "Conjecture": 1,
+        "Hypothesis": 1,
+        "Law": 1,
+        "total": 42
+    }
+}
