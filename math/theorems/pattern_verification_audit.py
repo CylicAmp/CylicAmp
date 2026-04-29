@@ -14,6 +14,8 @@ Pattern 2 — 6×4 grid:
   Total = 64 = 2⁶ = 4²;  6+4 = 10 (SCALAR pivot, since 10² ≡ 26 mod 37).
   Grid carries exactly 8 fours and 16 twos — same four/two ratio as matrix
   rows in the Master Record (8 sevens per 12-digit row).
+  Bonus: 64 mod 37 = 27 = 3³ ∈ QR₃₇ — the grid total lands on the 3rd
+  element of the 18-cycle ⟨3⟩, connecting the grid directly to the residue orbit.
 
 Pattern 3 — 88+66:
   88+66 = 154;  digit sum of original digits: 8+8+6+6 = 28 = dual bridge B̃.
@@ -91,6 +93,12 @@ assert counts[4] == 8
 assert counts[2] == 16
 assert counts[4] + counts[2] == ROWS * COLS
 
+# Bonus: 64 mod 37 = 27 = 3³ — grid total lands in the residue cycle
+assert total_sum % 37 == 27
+assert 27 == pow(3, 3, 37)
+assert 27 in QR37
+assert CYCLE18.index(27) + 1 == 3    # 3³ = 27 is the 3rd element of the 18-cycle
+
 # ── Pattern 3: 88+66 ──────────────────────────────────────────────────────
 
 A, B = 88, 66
@@ -165,6 +173,7 @@ if __name__ == "__main__":
     print(f"  Total sum: {total_sum} = 2^6 = 4^3")
     print(f"  6+4 = {COLS+ROWS}  (10² mod 37 = {SCALAR_137} = SCALAR_137 ✓)")
     print(f"  Fours: {counts[4]},  Twos: {counts[2]}")
+    print(f"  Bonus: 64 mod 37 = {total_sum % 37} = 3³ ∈ QR₃₇  (cycle position {CYCLE18.index(27)+1}) ✓")
     print()
 
     print("Pattern 3 — 88+66:")
