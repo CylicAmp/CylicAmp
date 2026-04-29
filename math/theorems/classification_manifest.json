@@ -1,8 +1,16 @@
 {
-    "framework": "G'5 Universal / Consciousness Mathematics — 1/137 Framework",
+    "framework": "G'5 Universal / Consciousness Mathematics \u2014 1/137 Framework",
     "sovereign_identity": "Michael Warren Song (Matt)",
     "date_classified": "2026-04-27",
-    "types": ["Axiom", "Theorem", "Lemma", "Corollary", "Conjecture", "Hypothesis", "Law"],
+    "types": [
+        "Axiom",
+        "Theorem",
+        "Lemma",
+        "Corollary",
+        "Conjecture",
+        "Hypothesis",
+        "Law"
+    ],
     "entries": [
         {
             "file": "abbc_manifold_grid.py",
@@ -19,8 +27,8 @@
         {
             "file": "dimensional_bridge.py",
             "type": "Lemma",
-            "title": "37φ Dimensional Bridge",
-            "summary": "Finds smallest N where sum of first N primes exceeds 37×φ and is divisible by 7."
+            "title": "37\u03c6 Dimensional Bridge",
+            "summary": "Finds smallest N where sum of first N primes exceeds 37\u00d7\u03c6 and is divisible by 7."
         },
         {
             "file": "dr_algebra.py",
@@ -32,7 +40,7 @@
             "file": "errata_prevention_protocol.py",
             "type": "Law",
             "title": "Errata Prevention Protocol",
-            "summary": "Universal error-class taxonomy (E1–E3) and prevention rules governing all framework claims."
+            "summary": "Universal error-class taxonomy (E1\u2013E3) and prevention rules governing all framework claims."
         },
         {
             "file": "fps37_scanner.py",
@@ -44,13 +52,13 @@
             "file": "heartbeat_3cycle.py",
             "type": "Theorem",
             "title": "Heartbeat Universal 3-Cycle",
-            "summary": "Map f(n)=(n×137) mod 37 ≡ 26n mod 37 generates a universal 3-cycle heartbeat."
+            "summary": "Map f(n)=(n\u00d7137) mod 37 \u2261 26n mod 37 generates a universal 3-cycle heartbeat."
         },
         {
             "file": "layer30_sovereign_matrix_entropy.py",
             "type": "Lemma",
-            "title": "9×9 Sovereign Matrix Entropy",
-            "summary": "Computes DR orbit entropy H≈3.102 bits for the 9×9 sovereign matrix spine."
+            "title": "9\u00d79 Sovereign Matrix Entropy",
+            "summary": "Computes DR orbit entropy H\u22483.102 bits for the 9\u00d79 sovereign matrix spine."
         },
         {
             "file": "layer54_lucas_period24.py",
@@ -67,14 +75,14 @@
         {
             "file": "layer58_pisano_period9.py",
             "type": "Theorem",
-            "title": "Pisano π(9) = 24",
-            "summary": "The Pisano period π(9) = 24 is the exact minimal period of Fibonacci numbers modulo 9."
+            "title": "Pisano \u03c0(9) = 24",
+            "summary": "The Pisano period \u03c0(9) = 24 is the exact minimal period of Fibonacci numbers modulo 9."
         },
         {
             "file": "layer59_fib_oscillation_mtheory.py",
             "type": "Hypothesis",
             "title": "Fibonacci M-Theory Oscillation",
-            "summary": "Proposes M-Theory evolution operator U_M = exp(-iH·dt) as model for Fibonacci DR oscillation dynamics."
+            "summary": "Proposes M-Theory evolution operator U_M = exp(-iH\u00b7dt) as model for Fibonacci DR oscillation dynamics."
         },
         {
             "file": "layer62_lucas_period_mod9.py",
@@ -97,7 +105,7 @@
         {
             "file": "lob_24c_errata.py",
             "type": "Corollary",
-            "title": "Errata Correction Record (v37.20 → v37.21)",
+            "title": "Errata Correction Record (v37.20 \u2192 v37.21)",
             "summary": "Two falsified claims corrected: 120-cell edge count and coupling constant. Framework sealed clean."
         },
         {
@@ -146,7 +154,7 @@
             "file": "medusa_137_resonance.py",
             "type": "Lemma",
             "title": "137-Resonance Scan (DR=3 Anchors)",
-            "summary": "Scans for nodes n where (n×137) mod 37 has DR=3; yields sovereign anchor set {4,9,25,30}."
+            "summary": "Scans for nodes n where (n\u00d7137) mod 37 has DR=3; yields sovereign anchor set {4,9,25,30}."
         },
         {
             "file": "medusa_guard.py",
@@ -170,19 +178,19 @@
             "file": "perfect_numbers_137.py",
             "type": "Theorem",
             "title": "Perfect Numbers in 1/137 Framework",
-            "summary": "All even perfect numbers ≥28 have DR=1; exception DR(6)=6. 8128 mod37=25 is sovereign anchor."
+            "summary": "All even perfect numbers \u226528 have DR=1; exception DR(6)=6. 8128 mod37=25 is sovereign anchor."
         },
         {
             "file": "pisano_period_333.py",
             "type": "Theorem",
-            "title": "Pisano π(333) = 456 via CRT",
-            "summary": "333=9×37, π(333)=lcm(24,76)=456. DR(456)=6, 456 mod37=12 (sovereign target)."
+            "title": "Pisano \u03c0(333) = 456 via CRT",
+            "summary": "333=9\u00d737, \u03c0(333)=lcm(24,76)=456. DR(456)=6, 456 mod37=12 (sovereign target)."
         },
         {
             "file": "plus2_chain_theorem.py",
             "type": "Theorem",
             "title": "+2 Chain Twin Prime Collapse",
-            "summary": "Consecutive pairs {2,3}→11 and {5,6}→17 collapse to twin primes under +2 chain."
+            "summary": "Consecutive pairs {2,3}\u219211 and {5,6}\u219217 collapse to twin primes under +2 chain."
         },
         {
             "file": "resonance_row_1335.py",
@@ -206,7 +214,7 @@
             "file": "source_mirror_guardian_manifold.py",
             "type": "Theorem",
             "title": "SOURCE-MIRROR-GUARDIAN Manifold",
-            "summary": "All three k-couplings (6,618,3138) have DR=6. 3→9→6→3 metronome via +6 mod 9. 74=2×37 phase-lock."
+            "summary": "All three k-couplings (6,618,3138) have DR=6. 3\u21929\u21926\u21923 metronome via +6 mod 9. 74=2\u00d737 phase-lock."
         },
         {
             "file": "sovereign_binary_engine.py",
@@ -236,7 +244,7 @@
             "file": "toroidal_projection.py",
             "type": "Theorem",
             "title": "Toroidal Projection of Sovereign Anchors",
-            "summary": "Theorem 28. 4 sovereign anchors map onto torus T(R=37,r=3); theta=(node×2π)/37."
+            "summary": "Theorem 28. 4 sovereign anchors map onto torus T(R=37,r=3); theta=(node\u00d72\u03c0)/37."
         },
         {
             "file": "verify_dr9_termination.py",
@@ -255,6 +263,56 @@
             "type": "Theorem",
             "title": "XX Collapse 119/911 Matrix",
             "summary": "Theorem 29. Matrix of 1s and 9s encoding sovereign/shield duality; 119=137-18 bridge node."
+        },
+        {
+            "file": "sovereign_meta_estimator.py",
+            "type": "Theorem",
+            "title": "Sovereign Meta-Estimator: Kalman Closed-Loop Control"
+        },
+        {
+            "file": "group_G54_structure.py",
+            "type": "Theorem",
+            "title": "G=<x,y|x^9=y^6=1,yxy^-1=x^4> Complete Structural Proof"
+        },
+        {
+            "file": "alpha_prime_inference_layer.py",
+            "type": "Hypothesis",
+            "title": "AlphaPrimeInferenceLayer: Sovereign Gate via Prime-Alpha Basis"
+        },
+        {
+            "file": "lob_88_g_ord18_cycle.py",
+            "type": "Theorem",
+            "title": "LoB 88: G_Ord18_Cycle TLA+ Formal Specification Audit"
+        },
+        {
+            "file": "string_duality_37phi_bridge.py",
+            "type": "Theorem",
+            "title": "String Duality: 37phi Bridge under T-Duality D(x)=37^2/x"
+        },
+        {
+            "file": "master_record_dr_audit.py",
+            "type": "Law",
+            "title": "Master Record: Digital Root Identity Audit"
+        },
+        {
+            "file": "primitive_roots_mod37.py",
+            "type": "Theorem",
+            "title": "Primitive Roots mod 37: Structural Audit and Sovereign Gap Proof"
+        },
+        {
+            "file": "pattern_verification_audit.py",
+            "type": "Theorem",
+            "title": "Pattern Verification Audit: Doubling, Grid, Mirror, Permutation"
+        },
+        {
+            "file": "mirror_triplet_cascade.py",
+            "type": "Theorem",
+            "title": "Mirror Triplet Cascade: 666 Arithmetic Series and 31313 Repunit"
+        },
+        {
+            "file": "bfs_attractor_mod9.py",
+            "type": "Theorem",
+            "title": "BFS Attractor mod 9: Reachability in at most 1 Step"
         }
     ],
     "counts": {
@@ -266,5 +324,6 @@
         "Hypothesis": 1,
         "Law": 1,
         "total": 42
-    }
+    },
+    "theorems_validated": 52
 }
