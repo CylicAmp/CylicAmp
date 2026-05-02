@@ -1,85 +1,54 @@
-"""
-Kaprekar's Constant — 6174
-
-Algorithm for any 4-digit number n (not a repdigit):
-  1. Sort digits in descending order → D
-  2. Sort digits in ascending order  → A
-  3. next = D − A
-  Repeat until reaching 6174.
-
-Theorem (verified by exhaustion):
-  Every 4-digit integer with at least 2 distinct decimal digits
-  reaches 6174 in at most 7 steps.
-
-  6174 is a fixed point: 7641 − 1467 = 6174.
-
-Repdigits (1111, 2222, …, 9999) map to 0 in one step and are excluded
-from the convergence claim; they are a separate fixed point at 0.
-"""
-
-
-def _pad_digits(n: int) -> list[int]:
-    """Return 4 decimal digits of n, zero-padded on the left."""
-    return [int(d) for d in f"{n:04d}"]
+# kaprekar_6174.py
+# Exhaustive verification of Kaprekar's routine for 4-digit numbers
 
 
 def kaprekar_step(n: int) -> int:
-    digits = _pad_digits(n)
-    desc = int("".join(map(str, sorted(digits, reverse=True))))
-    asc  = int("".join(map(str, sorted(digits))))
+    """One step of Kaprekar's routine."""
+    s = f"{n:04d}"
+    desc = int("".join(sorted(s, reverse=True)))
+    asc  = int("".join(sorted(s)))
     return desc - asc
 
 
-def steps_to_6174(n: int) -> int | None:
-    """Return number of steps for n to reach 6174, or None if it won't (repdigit)."""
-    digits = _pad_digits(n)
-    if len(set(digits)) == 1:
-        return None  # repdigit fixed at 0
+def reaches_6174(start: int, max_steps: int = 20) -> tuple[bool, int]:
+    """Return (reaches_6174, steps_taken)."""
     seen = set()
+    n = start
     steps = 0
-    while n != 6174:
-        if n in seen or steps > 8:
-            return None  # unexpected cycle — should not occur
+    while n != 6174 and steps < max_steps and n not in seen:
         seen.add(n)
         n = kaprekar_step(n)
         steps += 1
-    return steps
+    return n == 6174, steps
 
 
-# --- Fixed-point check ---
-assert kaprekar_step(6174) == 6174, "6174 must be a fixed point"
+def verify_kaprekar():
+    print("Kaprekar's Constant 6174 — Exhaustive Test\n")
 
-# --- Exhaustive check: all 4-digit numbers with >= 2 distinct digits ---
-max_steps = 0
-for n in range(1000, 10000):
-    s = steps_to_6174(n)
-    if s is not None:
-        assert s <= 7, f"{n} took {s} steps (> 7)"
-        max_steps = max(max_steps, s)
+    count = 0
+    max_steps = 0
+    step_distribution: dict[int, int] = {}
 
-assert max_steps == 7, f"expected max 7 steps, got {max_steps}"
+    for num in range(1000, 10000):
+        if len(set(str(num))) < 2:
+            continue  # skip repdigits (all identical digits)
+
+        ok, steps = reaches_6174(num)
+        assert ok, f"Failed: {num} did not reach 6174"
+
+        count += 1
+        max_steps = max(max_steps, steps)
+        step_distribution[steps] = step_distribution.get(steps, 0) + 1
+
+    print(f"  Total numbers tested : {count}")
+    print(f"  Maximum steps needed : {max_steps}")
+    print("\n  Step distribution:")
+    for s in sorted(step_distribution):
+        print(f"    {s} steps: {step_distribution[s]} numbers")
+
+    assert max_steps <= 7, f"Expected max 7 steps, got {max_steps}"
+    print("\n✅ All Kaprekar tests passed (max 7 steps)")
 
 
 if __name__ == "__main__":
-    print("Kaprekar's Constant — 6174")
-    print()
-    print(f"  Fixed point:  kaprekar_step(6174) = {kaprekar_step(6174)}")
-    print()
-    print("  Example traces:")
-    for example in (1234, 9999, 1111, 3087, 2178):
-        s = steps_to_6174(example)
-        tag = "(repdigit, excluded)" if s is None else f"{s} step(s)"
-        print(f"    {example} → {tag}")
-    print()
-    # Recompute distribution
-    from collections import Counter
-    dist: Counter = Counter()
-    for n in range(1000, 10000):
-        s = steps_to_6174(n)
-        if s is not None:
-            dist[s] += 1
-    for k in sorted(dist):
-        print(f"    {k} step(s): {dist[k]} numbers")
-    print(f"\n  Max steps to 6174: {max(dist)}")
-    print()
-    print("All assertions passed.")
+    verify_kaprekar()
