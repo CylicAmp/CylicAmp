@@ -13,6 +13,7 @@ Covers ten verified findings from the pattern survey:
   H. Tesla 4-bit bend → DR-3 class
   I. Date Coordinates: session date DR chain 2→7→1
   J. Cardano / ω: roots of x³ − 3x − 1 = 0 via cube root of unity
+  K. DR=1 cluster: {c, 37, 73, 2701} and 11g ≡ 44g (mod 9) for 3∣g
 
 DR convention used throughout: DR(n) = (n−1)%9+1 for n>0; DR(0)=0.
 """
@@ -174,6 +175,37 @@ for r in roots:
 omega = complex(-0.5, math.sqrt(3) / 2)   # e^(2πi/3)
 assert abs(omega**2 + omega + 1) < 1e-12
 
+# =============================================================================
+# K. DR=1 cluster and multiplicative identity DR(11g) = DR(44g) for 3∣g
+# =============================================================================
+# DR=1 cluster: c (speed of light m/s), 37, 73, 2701 = 37×73
+c_light = 299_792_458
+assert dr(c_light) == 1   # digit sum 55→10→1
+assert dr(37) == 1
+assert dr(73) == 1
+assert dr(2701) == 1
+assert 37 * 73 == 2701
+
+# Multiplicative identity: 44 − 11 = 33 = 9×(11/3); more directly:
+#   11·3k ≡ 6k (mod 9)  and  44·3k ≡ 6k (mod 9)
+# so 11g ≡ 44g (mod 9) whenever g = 3k.
+# Cycle of 6k mod 9: 6, 3, 9, 6, 3, 9, …  (period 3)
+assert 11 % 9 == 2
+assert 44 % 9 == 8
+assert (11 * 3) % 9 == (44 * 3) % 9 == 6
+
+for k in range(1, 1000):
+    g = 3 * k
+    assert dr(11 * g) == dr(44 * g), f"identity fails at g={g}"
+
+# The 6k mod 9 cycle: 6,3,0,6,3,0,… but DR maps 0→9, giving 6,3,9,6,3,9,…
+expected_dr_cycle = [6, 3, 9]
+for k in range(1, 100):
+    raw = (6 * k) % 9
+    expected = expected_dr_cycle[(k - 1) % 3]
+    actual = raw if raw != 0 else 9
+    assert actual == expected, f"cycle fails at k={k}: got {actual}"
+
 
 if __name__ == "__main__":
     print("Digital-Root Pattern Suite")
@@ -222,6 +254,14 @@ if __name__ == "__main__":
     print(f"   Discriminant = {discriminant},  DR({discriminant}) = {dr(discriminant)}")
     print(f"   Roots: {[f'{r:.6f}' for r in roots]}")
     print(f"   ω = e^(2πi/3) satisfies ω²+ω+1=0  ✓")
+    print()
+
+    print("K. DR=1 cluster and 11g ≡ 44g (mod 9) for 3∣g")
+    print(f"   DR(c=299792458)={dr(c_light)}, DR(37)={dr(37)}, DR(73)={dr(73)}, DR(2701)={dr(2701)}")
+    print(f"   37 × 73 = {37*73}  ✓")
+    print(f"   11 mod 9 = {11%9},  44 mod 9 = {44%9};  11·3k ≡ 44·3k ≡ 6k (mod 9)")
+    print(f"   DR(11g)=DR(44g) verified for g=3k, k=1..999")
+    print(f"   6k DR cycle: {[expected_dr_cycle[(k-1)%3] for k in range(1,10)]}…")
     print()
 
     print("All assertions passed.")
