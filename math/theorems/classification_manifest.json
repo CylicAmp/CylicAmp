@@ -313,17 +313,62 @@
             "file": "bfs_attractor_mod9.py",
             "type": "Theorem",
             "title": "BFS Attractor mod 9: Reachability in at most 1 Step"
+        },
+        {
+            "file": "origami_fold_1_to_9.py",
+            "type": "Theorem",
+            "title": "Origami Fold 1–9: Manhattan Distance Parity Rule and Sovereign Lock"
+        },
+        {
+            "file": "equivalence_24_coupling.py",
+            "type": "Theorem",
+            "title": "24 Coupling Lock: Every Complementary Pair Collapses to DR=6"
+        },
+        {
+            "file": "z2701_37x73_qed.py",
+            "type": "Theorem",
+            "title": "2701 = 37×73 Triangular Encoding and QED δ Connection"
+        },
+        {
+            "file": "layer_trinity_factor_lattice.py",
+            "type": "Theorem",
+            "title": "Layer Trinity N=2,244,220: 9-Channel Orbit and 37-Field Residue Lock"
+        },
+        {
+            "file": "parity_diamond_9x9.py",
+            "type": "Theorem",
+            "title": "9×9 Parity Diamond: Manhattan Boundary, Sovereign Residues E=41, O=40"
+        },
+        {
+            "file": "qed_alpha_zα_structure.py",
+            "type": "Theorem",
+            "title": "QED α Structure: Z·α Scaling, Running Coupling, NRQED Alignment"
+        },
+        {
+            "file": "delta27_heisenberg_neutrino.py",
+            "type": "Theorem",
+            "title": "Delta(27) Discrete Heisenberg Group and Neutrino Flavor Symmetry"
+        },
+        {
+            "file": "arithmetic_progression_37field.py",
+            "type": "Theorem",
+            "title": "Arithmetic Progression Z/37Z: Field Collapse and 1/9 Attractor"
+        },
+        {
+            "file": "displacement_sync_13699631.py",
+            "type": "Theorem",
+            "title": "Displacement State Sync-Point: 13699631 Palindrome 37² Encoding"
         }
     ],
     "counts": {
         "Axiom": 3,
-        "Theorem": 23,
+        "Theorem": 40,
         "Lemma": 10,
         "Corollary": 3,
         "Conjecture": 1,
-        "Hypothesis": 1,
-        "Law": 1,
-        "total": 42
+        "Hypothesis": 2,
+        "Law": 2,
+        "total": 61
     },
-    "theorems_validated": 52
+    "theorems_validated": 61
 }
