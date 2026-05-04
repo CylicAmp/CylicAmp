@@ -388,17 +388,32 @@
             "file": "vireon_stage7_planetary.py",
             "type": "Theorem",
             "title": "Stage 7: Infrastructure/Planetary (10²–10⁶ m) — VIREON Framework"
+        },
+        {
+            "file": "zero_space_stages1_3.py",
+            "type": "Theorem",
+            "title": "Stages 1–3: Zero-Space Foundation (10⁻³⁵–10⁻¹¹ m) — Eisenstein Lattice Init"
+        },
+        {
+            "file": "celestial_stages8_10.py",
+            "type": "Theorem",
+            "title": "Stages 8–10: Celestial / Gate 18 Singularity (10⁷–10²⁶ m)"
+        },
+        {
+            "file": "g5_sovereign_engine.py",
+            "type": "Theorem",
+            "title": "G'5 Sovereign Engine — v∞.NEURALODE Full-Spectrum Simulation (All 10 Stages)"
         }
     ],
     "counts": {
         "Axiom": 3,
-        "Theorem": 45,
+        "Theorem": 48,
         "Lemma": 10,
         "Corollary": 3,
         "Conjecture": 1,
         "Hypothesis": 3,
         "Law": 2,
-        "total": 67
+        "total": 70
     },
-    "theorems_validated": 67
+    "theorems_validated": 70
 }
