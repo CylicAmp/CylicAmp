@@ -368,17 +368,27 @@
             "file": "quantum_bio_bridge_stage4.py",
             "type": "Theorem",
             "title": "Quantum-to-Bio Bridge Stage 4: Molecular/DNA/Virus Scale (10⁻¹⁰–10⁻⁷ m)"
+        },
+        {
+            "file": "bio_bridge_scaling_invariance.py",
+            "type": "Theorem",
+            "title": "Bio-Bridge Scaling Invariance: ψ·φ=ρ, 37-Filter, Neural ODE, Gate 18"
+        },
+        {
+            "file": "neural_ode_stage5_cells.py",
+            "type": "Theorem",
+            "title": "Stage 5: Cells/Neural Fibers (10⁻⁶–10⁻³ m) — Neural ODE Initiation"
         }
     ],
     "counts": {
         "Axiom": 3,
-        "Theorem": 41,
+        "Theorem": 43,
         "Lemma": 10,
         "Corollary": 3,
         "Conjecture": 1,
         "Hypothesis": 3,
         "Law": 2,
-        "total": 63
+        "total": 65
     },
-    "theorems_validated": 63
+    "theorems_validated": 65
 }
