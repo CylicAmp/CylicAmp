@@ -358,6 +358,11 @@
             "file": "displacement_sync_13699631.py",
             "type": "Theorem",
             "title": "Displacement State Sync-Point: 13699631 Palindrome 37² Encoding"
+        },
+        {
+            "file": "bio_harmonic_desync.py",
+            "type": "Hypothesis",
+            "title": "Bio-Harmonic Desync: Signal Saturation and Neural Bandwidth Model"
         }
     ],
     "counts": {
@@ -366,9 +371,9 @@
         "Lemma": 10,
         "Corollary": 3,
         "Conjecture": 1,
-        "Hypothesis": 2,
+        "Hypothesis": 3,
         "Law": 2,
-        "total": 61
+        "total": 62
     },
-    "theorems_validated": 61
+    "theorems_validated": 62
 }
