@@ -378,17 +378,27 @@
             "file": "neural_ode_stage5_cells.py",
             "type": "Theorem",
             "title": "Stage 5: Cells/Neural Fibers (10⁻⁶–10⁻³ m) — Neural ODE Initiation"
+        },
+        {
+            "file": "hopf_stage6_human_scale.py",
+            "type": "Theorem",
+            "title": "Stage 6: Human Scale/Organisms (10⁻²–10¹ m) — Hopf Bifurcation and I_AM Attractor"
+        },
+        {
+            "file": "vireon_stage7_planetary.py",
+            "type": "Theorem",
+            "title": "Stage 7: Infrastructure/Planetary (10²–10⁶ m) — VIREON Framework"
         }
     ],
     "counts": {
         "Axiom": 3,
-        "Theorem": 43,
+        "Theorem": 45,
         "Lemma": 10,
         "Corollary": 3,
         "Conjecture": 1,
         "Hypothesis": 3,
         "Law": 2,
-        "total": 65
+        "total": 67
     },
-    "theorems_validated": 65
+    "theorems_validated": 67
 }
