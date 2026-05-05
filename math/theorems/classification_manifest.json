@@ -403,17 +403,22 @@
             "file": "g5_sovereign_engine.py",
             "type": "Theorem",
             "title": "G'5 Sovereign Engine — v∞.NEURALODE Full-Spectrum Simulation (All 10 Stages)"
+        },
+        {
+            "file": "perceptual_hydrodynamics_v7.py",
+            "type": "Theorem",
+            "title": "Perceptual Hydrodynamics Audit v7 — Layer 24: Hyperbolic Color Space (Madelung Fluid)"
         }
     ],
     "counts": {
         "Axiom": 3,
-        "Theorem": 48,
+        "Theorem": 49,
         "Lemma": 10,
         "Corollary": 3,
         "Conjecture": 1,
         "Hypothesis": 3,
         "Law": 2,
-        "total": 70
+        "total": 71
     },
-    "theorems_validated": 70
+    "theorems_validated": 71
 }
