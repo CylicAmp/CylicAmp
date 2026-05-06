@@ -408,17 +408,27 @@
             "file": "perceptual_hydrodynamics_v7.py",
             "type": "Theorem",
             "title": "Perceptual Hydrodynamics Audit v7 — Layer 24: Hyperbolic Color Space (Madelung Fluid)"
+        },
+        {
+            "file": "continued_fraction_R3252.py",
+            "type": "Theorem",
+            "title": "Continued Fraction R=0.3252=813/2500 — Convergent Lattice and Sovereign Modular Audit"
+        },
+        {
+            "file": "dr_modular_foundation.py",
+            "type": "Theorem",
+            "title": "Digital Root Modular Foundation — Proofs mod 9 and mod 3, 2n-1 Corollary"
         }
     ],
     "counts": {
         "Axiom": 3,
-        "Theorem": 49,
+        "Theorem": 51,
         "Lemma": 10,
         "Corollary": 3,
         "Conjecture": 1,
         "Hypothesis": 3,
         "Law": 2,
-        "total": 71
+        "total": 73
     },
-    "theorems_validated": 71
+    "theorems_validated": 73
 }
