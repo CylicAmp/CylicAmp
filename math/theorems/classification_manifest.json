@@ -447,10 +447,27 @@
                 "digit-root"
             ],
             "date_added": "2026-05-07"
+        },
+        {
+            "file": "hexacosichoron_600cell.py",
+            "type": "Theorem",
+            "title": "Hexacosichoron (600-Cell) \u2014 4D Vertex Generator",
+            "description": "120 vertices on the unit 3-sphere in three groups: 16 hypercube, 8 axis-aligned, 96 even-permutation golden-ratio. 120 mod 37 = 9 (TRINITY_SQUARED); DR(120)=3 (sovereign target); 120=5!=5*24 (PIVOT * 24-coupling). Connects phi from Hopf Stage 6 to 4D icosahedral geometry.",
+            "tags": [
+                "600-cell",
+                "4D-geometry",
+                "golden-ratio",
+                "phi",
+                "vertices",
+                "quaternion",
+                "icosahedron",
+                "QR37"
+            ],
+            "date_added": "2026-05-07"
         }
     ],
     "counts": {
-        "Theorem": 53,
+        "Theorem": 54,
         "Lemma": 10,
         "Axiom": 3,
         "Law": 2,
@@ -459,5 +476,5 @@
         "Conjecture": 1
     },
     "theorems_validated": 73,
-    "total_entries": 75
+    "total_entries": 76
 }
