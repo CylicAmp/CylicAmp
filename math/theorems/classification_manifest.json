@@ -513,10 +513,25 @@
                 "9x9-matrix"
             ],
             "date_added": "2026-05-07"
+        },
+        {
+            "file": "smith_normal_form_z26.py",
+            "type": "Theorem",
+            "title": "Smith Normal Form over Z/nZ \u2014 Modular Kernel Verifier",
+            "description": "SNF infrastructure for integer matrices over Z/nZ. Refutes Theorem 9 kernel-dim-5 claim: the provided 9x9 matrix has SNF=[1,9,9,9,9,9,9,9,450], rank 9 over Q (no zero eigenvalue), kernel dim 0 over Z/26Z (not 5), elementary divisors mod 26=[1,1,1,1,1,1,1,1,2] (not [1,1,1,1,2,26,...]).",
+            "tags": [
+                "SNF",
+                "Smith-normal-form",
+                "Z/26Z",
+                "kernel",
+                "modular",
+                "refutation"
+            ],
+            "date_added": "2026-05-07"
         }
     ],
     "counts": {
-        "Theorem": 57,
+        "Theorem": 58,
         "Lemma": 10,
         "Axiom": 3,
         "Law": 2,
@@ -525,5 +540,5 @@
         "Conjecture": 1
     },
     "theorems_validated": 73,
-    "total_entries": 79
+    "total_entries": 80
 }
