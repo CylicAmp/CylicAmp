@@ -464,10 +464,27 @@
                 "QR37"
             ],
             "date_added": "2026-05-07"
+        },
+        {
+            "file": "v600_programme.py",
+            "type": "Theorem",
+            "title": "V600 Programme \u2014 Binary Icosahedral Group, E8, Cosmological Tension",
+            "description": "Verifies 2I group structure (order 120), 600-cell Euler identity, E8 McKay correspondence (240=2\u00d7120, sum of exponents=120, h=30=sovereign fixed point, dim=248\u226126=SCALAR_137 mod 37), cosmological H0/S8 tension ratios vs 13/12 and 11/12. Full modular residue map.",
+            "tags": [
+                "binary-icosahedral",
+                "E8",
+                "McKay",
+                "600-cell",
+                "cosmology",
+                "H0-tension",
+                "SCALAR_137",
+                "sovereign-fixed-point"
+            ],
+            "date_added": "2026-05-07"
         }
     ],
     "counts": {
-        "Theorem": 54,
+        "Theorem": 55,
         "Lemma": 10,
         "Axiom": 3,
         "Law": 2,
@@ -476,5 +493,5 @@
         "Conjecture": 1
     },
     "theorems_validated": 73,
-    "total_entries": 76
+    "total_entries": 77
 }
