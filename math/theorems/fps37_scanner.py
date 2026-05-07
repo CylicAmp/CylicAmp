@@ -25,6 +25,7 @@ SIGNIFICANCE = {
     6:  "TESLA_FLOW",
     9:  "TRINITY_SQUARED",
     10: "DECADE_ANCHOR",
+    13: "GATE_13",
     18: "CENTER_18",
     19: "CENTER_19",
     23: "LAMED_SEAL",
