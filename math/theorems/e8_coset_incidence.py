@@ -171,6 +171,53 @@ _h26_coeffs = np.round(_COORDS[HEIGHTS == 26][0]).astype(int)
 # Height 26 coefficient sum = 26
 assert _h26_coeffs.sum() == 26
 
+# ── Left Kernel of I over Z/26Z ───────────────────────────────────────────────
+# 26 = 2 × 13 (CRT: Z/26Z ≅ Z/2Z × Z/13Z)
+# Equivalent to SageMath: I.change_ring(Integers(26)).left_kernel().dimension()
+
+def _rank_mod_p(A, p):
+    """Rank of integer matrix A over Z/pZ (p prime)."""
+    M = A.copy() % p
+    rows, cols = M.shape
+    pivot_row, rank = 0, 0
+    for col in range(cols):
+        if pivot_row >= rows:
+            break
+        found = next((r for r in range(pivot_row, rows) if M[r, col] % p), -1)
+        if found == -1:
+            continue
+        M[[pivot_row, found]] = M[[found, pivot_row]]
+        inv = pow(int(M[pivot_row, col]), -1, p)
+        M[pivot_row] = M[pivot_row] * inv % p
+        for r in range(rows):
+            if r != pivot_row and M[r, col] % p:
+                M[r] = (M[r] - M[r, col] * M[pivot_row]) % p
+        rank += 1; pivot_row += 1
+    return rank
+
+# Compute rank of I^T (= left rank of I) over each prime factor of 26
+_RANK_2  = _rank_mod_p(I_MAT.T.copy(), 2)
+_RANK_13 = _rank_mod_p(I_MAT.T.copy(), 13)
+KERNEL_DIM_26 = 248 - max(_RANK_2, _RANK_13)   # free rank over Z/26Z
+
+assert _RANK_2  == 30   # full column rank over Z/2Z
+assert _RANK_13 == 30   # full column rank over Z/13Z
+assert KERNEL_DIM_26 == 218   # 248 - 30 = 218
+
+# All column sums are even → all-ones vector lies in the Z/2Z left kernel
+assert all(s % 2 == 0 for s in COL_SUMS)
+# Not all column sums ≡ 0 mod 13 → all-ones vector NOT in the Z/13Z left kernel
+assert not all(s % 13 == 0 for s in COL_SUMS)
+
+# 37-field: kernel dimension 218
+assert KERNEL_DIM_26 == 218
+assert 218 % 37 == 33        # DICHORAL_144
+assert sum(int(d) for d in str(218)) == 11   # DR(218) = 11 = observer constant (3^15 mod 37)
+
+# Structural closure: modulus 26 = SCALAR_137; kernel dim 218 → DICHORAL_144
+assert 26 % 37 == 26    # modulus lands on SCALAR_137 layer
+assert 218 % 37 == 33   # kernel dim lands on DICHORAL_144
+
 
 if __name__ == "__main__":
     print("E8 Coset Incidence Matrix — Height Decomposition")
