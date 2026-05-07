@@ -43,6 +43,20 @@ assert set(mirror_198) == {189, 198, 819, 891, 918, 981}
 assert len(mirror_198) == 6
 assert all(p % 9 == 0 for p in mirror_198)
 
+# 198-orbit mod 37 forensic audit
+# Residue set {3,4,5,13,19,30} — all six are framework landmarks:
+#   3=TRINITY, 4=sovereign anchor, 5=PIVOT/G'5 void,
+#   13=GATE_13, 19=CENTER_19, 30=sovereign fixed point
+_orbit_residues = {n % 37 for n in mirror_198}
+assert _orbit_residues == {3, 4, 5, 13, 19, 30}
+assert len(_orbit_residues) == 6                    # all distinct
+assert 198 % 37 == 13                               # GATE_13
+assert 891 % 37 == 3                                # TRINITY (sovereign target)
+assert 918 % 37 == 30                               # sovereign fixed point
+assert 819 % 37 == 5                                # PIVOT_PRIME / G'5 void marker
+assert 189 % 37 == 4                                # sovereign anchor
+assert 981 % 37 == 19                               # CENTER_19
+
 # Broader invariant: any multiple of 9 produces a mirror set of multiples of 9
 for base in [9, 18, 27, 36, 45, 99, 108, 117, 126, 135, 144, 162, 189, 198, 234, 279]:
     perms = MirrorSetGenerator.get_invariant_permutations(base)
