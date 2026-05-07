@@ -433,10 +433,24 @@
                 "sequence"
             ],
             "date_added": "2026-05-07"
+        },
+        {
+            "file": "mirror_set_generator.py",
+            "type": "Theorem",
+            "title": "Mirror Set Generator \u2014 9-Invariant Permutation Theorem",
+            "description": "Proves that digit permutations preserve the DR class (mod 9). For n \u2261 0 (mod 9), every permutation has DR=9. Generates the full mirror set and verifies the invariant. Grounds the 143-341 = -198 reflection in the sovereign 9-class.",
+            "tags": [
+                "DR",
+                "9-invariant",
+                "permutation",
+                "mirror-set",
+                "digit-root"
+            ],
+            "date_added": "2026-05-07"
         }
     ],
     "counts": {
-        "Theorem": 52,
+        "Theorem": 53,
         "Lemma": 10,
         "Axiom": 3,
         "Law": 2,
@@ -445,5 +459,5 @@
         "Conjecture": 1
     },
     "theorems_validated": 73,
-    "total_entries": 74
+    "total_entries": 75
 }
