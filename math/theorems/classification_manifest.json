@@ -420,16 +420,17 @@
             "title": "Digital Root Modular Foundation \u2014 Proofs mod 9 and mod 3, 2n-1 Corollary"
         },
         {
-            "file": "digit_column_scanner.py",
+            "file": "golden_path_sequence.py",
             "type": "Theorem",
-            "title": "Digit Column Scanner \u2014 Time-stepped RGB digit pattern system",
-            "description": "Closed deterministic system mapping time t to a digit via RED/GREEN/BLUE column dictionaries (row cycle 8, column cycle 9). Formula: result = 400 + digit*10 + (t-8) + 4.",
+            "title": "Golden Path Sequence \u2014 Eternal Rule",
+            "description": "Closed-form rule generating values for t >= 9 from three 8-row digit cycles (Red, Green, Blue) with column wrap modulus 9. Formula: result = 400 + digit*10 + (t-8) + 4.",
             "tags": [
                 "digit-pattern",
                 "column-cycle",
                 "RGB",
+                "eternal-rule",
                 "deterministic",
-                "time-step"
+                "sequence"
             ],
             "date_added": "2026-05-07"
         }
