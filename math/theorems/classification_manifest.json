@@ -317,7 +317,7 @@
         {
             "file": "origami_fold_1_to_9.py",
             "type": "Theorem",
-            "title": "Origami Fold 1–9: Manhattan Distance Parity Rule and Sovereign Lock"
+            "title": "Origami Fold 1\u20139: Manhattan Distance Parity Rule and Sovereign Lock"
         },
         {
             "file": "equivalence_24_coupling.py",
@@ -327,7 +327,7 @@
         {
             "file": "z2701_37x73_qed.py",
             "type": "Theorem",
-            "title": "2701 = 37×73 Triangular Encoding and QED δ Connection"
+            "title": "2701 = 37\u00d773 Triangular Encoding and QED \u03b4 Connection"
         },
         {
             "file": "layer_trinity_factor_lattice.py",
@@ -337,12 +337,12 @@
         {
             "file": "parity_diamond_9x9.py",
             "type": "Theorem",
-            "title": "9×9 Parity Diamond: Manhattan Boundary, Sovereign Residues E=41, O=40"
+            "title": "9\u00d79 Parity Diamond: Manhattan Boundary, Sovereign Residues E=41, O=40"
         },
         {
-            "file": "qed_alpha_zα_structure.py",
+            "file": "qed_alpha_z\u03b1_structure.py",
             "type": "Theorem",
-            "title": "QED α Structure: Z·α Scaling, Running Coupling, NRQED Alignment"
+            "title": "QED \u03b1 Structure: Z\u00b7\u03b1 Scaling, Running Coupling, NRQED Alignment"
         },
         {
             "file": "delta27_heisenberg_neutrino.py",
@@ -357,7 +357,7 @@
         {
             "file": "displacement_sync_13699631.py",
             "type": "Theorem",
-            "title": "Displacement State Sync-Point: 13699631 Palindrome 37² Encoding"
+            "title": "Displacement State Sync-Point: 13699631 Palindrome 37\u00b2 Encoding"
         },
         {
             "file": "bio_harmonic_desync.py",
@@ -367,68 +367,82 @@
         {
             "file": "quantum_bio_bridge_stage4.py",
             "type": "Theorem",
-            "title": "Quantum-to-Bio Bridge Stage 4: Molecular/DNA/Virus Scale (10⁻¹⁰–10⁻⁷ m)"
+            "title": "Quantum-to-Bio Bridge Stage 4: Molecular/DNA/Virus Scale (10\u207b\u00b9\u2070\u201310\u207b\u2077 m)"
         },
         {
             "file": "bio_bridge_scaling_invariance.py",
             "type": "Theorem",
-            "title": "Bio-Bridge Scaling Invariance: ψ·φ=ρ, 37-Filter, Neural ODE, Gate 18"
+            "title": "Bio-Bridge Scaling Invariance: \u03c8\u00b7\u03c6=\u03c1, 37-Filter, Neural ODE, Gate 18"
         },
         {
             "file": "neural_ode_stage5_cells.py",
             "type": "Theorem",
-            "title": "Stage 5: Cells/Neural Fibers (10⁻⁶–10⁻³ m) — Neural ODE Initiation"
+            "title": "Stage 5: Cells/Neural Fibers (10\u207b\u2076\u201310\u207b\u00b3 m) \u2014 Neural ODE Initiation"
         },
         {
             "file": "hopf_stage6_human_scale.py",
             "type": "Theorem",
-            "title": "Stage 6: Human Scale/Organisms (10⁻²–10¹ m) — Hopf Bifurcation and I_AM Attractor"
+            "title": "Stage 6: Human Scale/Organisms (10\u207b\u00b2\u201310\u00b9 m) \u2014 Hopf Bifurcation and I_AM Attractor"
         },
         {
             "file": "vireon_stage7_planetary.py",
             "type": "Theorem",
-            "title": "Stage 7: Infrastructure/Planetary (10²–10⁶ m) — VIREON Framework"
+            "title": "Stage 7: Infrastructure/Planetary (10\u00b2\u201310\u2076 m) \u2014 VIREON Framework"
         },
         {
             "file": "zero_space_stages1_3.py",
             "type": "Theorem",
-            "title": "Stages 1–3: Zero-Space Foundation (10⁻³⁵–10⁻¹¹ m) — Eisenstein Lattice Init"
+            "title": "Stages 1\u20133: Zero-Space Foundation (10\u207b\u00b3\u2075\u201310\u207b\u00b9\u00b9 m) \u2014 Eisenstein Lattice Init"
         },
         {
             "file": "celestial_stages8_10.py",
             "type": "Theorem",
-            "title": "Stages 8–10: Celestial / Gate 18 Singularity (10⁷–10²⁶ m)"
+            "title": "Stages 8\u201310: Celestial / Gate 18 Singularity (10\u2077\u201310\u00b2\u2076 m)"
         },
         {
             "file": "g5_sovereign_engine.py",
             "type": "Theorem",
-            "title": "G'5 Sovereign Engine — v∞.NEURALODE Full-Spectrum Simulation (All 10 Stages)"
+            "title": "G'5 Sovereign Engine \u2014 v\u221e.NEURALODE Full-Spectrum Simulation (All 10 Stages)"
         },
         {
             "file": "perceptual_hydrodynamics_v7.py",
             "type": "Theorem",
-            "title": "Perceptual Hydrodynamics Audit v7 — Layer 24: Hyperbolic Color Space (Madelung Fluid)"
+            "title": "Perceptual Hydrodynamics Audit v7 \u2014 Layer 24: Hyperbolic Color Space (Madelung Fluid)"
         },
         {
             "file": "continued_fraction_R3252.py",
             "type": "Theorem",
-            "title": "Continued Fraction R=0.3252=813/2500 — Convergent Lattice and Sovereign Modular Audit"
+            "title": "Continued Fraction R=0.3252=813/2500 \u2014 Convergent Lattice and Sovereign Modular Audit"
         },
         {
             "file": "dr_modular_foundation.py",
             "type": "Theorem",
-            "title": "Digital Root Modular Foundation — Proofs mod 9 and mod 3, 2n-1 Corollary"
+            "title": "Digital Root Modular Foundation \u2014 Proofs mod 9 and mod 3, 2n-1 Corollary"
+        },
+        {
+            "file": "digit_column_scanner.py",
+            "type": "Theorem",
+            "title": "Digit Column Scanner \u2014 Time-stepped RGB digit pattern system",
+            "description": "Closed deterministic system mapping time t to a digit via RED/GREEN/BLUE column dictionaries (row cycle 8, column cycle 9). Formula: result = 400 + digit*10 + (t-8) + 4.",
+            "tags": [
+                "digit-pattern",
+                "column-cycle",
+                "RGB",
+                "deterministic",
+                "time-step"
+            ],
+            "date_added": "2026-05-07"
         }
     ],
     "counts": {
-        "Axiom": 3,
-        "Theorem": 51,
+        "Theorem": 52,
         "Lemma": 10,
-        "Corollary": 3,
-        "Conjecture": 1,
-        "Hypothesis": 3,
+        "Axiom": 3,
         "Law": 2,
-        "total": 73
+        "Hypothesis": 3,
+        "Corollary": 3,
+        "Conjecture": 1
     },
-    "theorems_validated": 73
+    "theorems_validated": 73,
+    "total_entries": 74
 }
