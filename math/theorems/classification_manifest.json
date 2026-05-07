@@ -498,10 +498,25 @@
                 "Coxeter"
             ],
             "date_added": "2026-05-07"
+        },
+        {
+            "file": "decimal_trade_extraction.py",
+            "type": "Theorem",
+            "title": "Decimal Trade Extraction Operator T \u2014 Layer 22",
+            "description": "T(n)=n if n<10; T(n)=10 if digit_sum(n)=10 (10-overflow, decimal trade); T(n)=DR(n) otherwise. All 9 trade table entries verified. 10-overflow set [10,100]={19,28,37,46,55,64,73,82,91}. Three 10-overflow entries in 9x9 multiplication table: (4,7)=28, (7,4)=28, (8,8)=64. Correction: 26 IS in QR_MOD37 (SCALAR_137). Kernel dim 5 claim requires unspecified matrix from Layers 1-21.37.",
+            "tags": [
+                "decimal-trade",
+                "10-overflow",
+                "digital-root",
+                "T-operator",
+                "Layer22",
+                "9x9-matrix"
+            ],
+            "date_added": "2026-05-07"
         }
     ],
     "counts": {
-        "Theorem": 56,
+        "Theorem": 57,
         "Lemma": 10,
         "Axiom": 3,
         "Law": 2,
@@ -510,5 +525,5 @@
         "Conjecture": 1
     },
     "theorems_validated": 73,
-    "total_entries": 78
+    "total_entries": 79
 }
