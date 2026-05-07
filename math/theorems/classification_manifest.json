@@ -481,10 +481,27 @@
                 "sovereign-fixed-point"
             ],
             "date_added": "2026-05-07"
+        },
+        {
+            "file": "e8_coset_incidence.py",
+            "type": "Theorem",
+            "title": "E8 Coset Incidence Matrix \u2014 Height Decomposition and 37-Field Audit",
+            "description": "Correct E8 root generator (fixes sympy bug: 84/128 half-integer roots used odd minus-sign convention producing non-integer inner products). Builds 248x30 incidence matrix partitioned by root height. Layer 26=SCALAR_137 contains the unique height-26 root pair; Layer 18=CENTER_18 has 6 elements; Coxeter h=30=sovereign fixed point.",
+            "tags": [
+                "E8",
+                "root-system",
+                "incidence-matrix",
+                "height-decomposition",
+                "SCALAR_137",
+                "CENTER_18",
+                "sympy-bug",
+                "Coxeter"
+            ],
+            "date_added": "2026-05-07"
         }
     ],
     "counts": {
-        "Theorem": 55,
+        "Theorem": 56,
         "Lemma": 10,
         "Axiom": 3,
         "Law": 2,
@@ -493,5 +510,5 @@
         "Conjecture": 1
     },
     "theorems_validated": 73,
-    "total_entries": 77
+    "total_entries": 78
 }
