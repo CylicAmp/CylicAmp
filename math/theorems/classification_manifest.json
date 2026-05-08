@@ -592,6 +592,23 @@
         "refutation"
       ],
       "date_added": "2026-05-08"
+    },
+    {
+      "file": "sovereign_matrix_v3_audit.py",
+      "type": "Theorem",
+      "title": "Sovereign Matrix V3 \u2014 SNF Audit",
+      "description": "Third submitted 9x9 matrix. Generation rule: M[i,j]=DR(row_i*j) with row indices {10,2,3,4,5,6,7,8,9}; literal 10 where product=10. No duplicate rows. Rank=9 (invertible). SNF=[1,9,9,9,9,9,9,9,9]. gcd(9,26)=1 so all factors coprime to 26. Kernel dim Z/26Z=0. Elementary divisors mod 26: all 1. Theorem 9 (kernel dim 5) not realised.",
+      "tags": [
+        "sovereign-matrix",
+        "SNF",
+        "kernel",
+        "Z26Z",
+        "DR-table",
+        "rank-9",
+        "full-rank",
+        "refutation"
+      ],
+      "date_added": "2026-05-08"
     }
   ],
   "counts": {
