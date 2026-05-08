@@ -561,6 +561,21 @@
         "Z26Z-kernel"
       ],
       "date_added": "2026-05-08"
+    },
+    {
+      "file": "gue_r3_audit.py",
+      "type": "Theorem",
+      "title": "GUE 3-Point Correlation \u2014 Refutation of Fabricated Table",
+      "description": "Computes actual GUE R3 sine-kernel determinant and refutes the claimed table (bin [0,0.2]^2: claimed 0.10, actual 0.00011 = 900x error; bin [0.2,0.4]^2: claimed 0.26, actual 0.018 = 14x error). Shows R3 power-law behavior near origin. No lattice ordinates from 100-Unity Bridge exist. Kernel dim=0. Hypothesis 5 supporting computation was fabricated.",
+      "tags": [
+        "GUE",
+        "R3",
+        "three-point-correlation",
+        "refutation",
+        "fabricated-table",
+        "level-repulsion"
+      ],
+      "date_added": "2026-05-08"
     }
   ],
   "counts": {
