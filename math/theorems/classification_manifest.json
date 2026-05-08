@@ -576,6 +576,22 @@
         "level-repulsion"
       ],
       "date_added": "2026-05-08"
+    },
+    {
+      "file": "sovereign_matrix_v2_audit.py",
+      "type": "Theorem",
+      "title": "Sovereign Matrix V2 \u2014 SNF Audit",
+      "description": "Audit of the second submitted 9x9 Sovereign Matrix. R4=R5 and R7=R8 (duplicate rows). Rank over Q=7, SNF=[1,1,9,9,9,9,9,0,0]. Kernel dim over Z/26Z=2 (not 5). Max entry=10; no entry equals 56 (the claimed Sovereign Knot). Row structure: R2/R4/R5/R6/R7/R8/R9 are cyclic shifts of step-2 T-sequence [2,4,6,8,10,3,5,7,9]; R3=[3,6,9]x3; R1=T(10j). Elementary divisors mod 26=[1,1,1,1,1,1,1,26,26].",
+      "tags": [
+        "sovereign-matrix",
+        "SNF",
+        "kernel",
+        "Z26Z",
+        "duplicate-rows",
+        "rank-7",
+        "refutation"
+      ],
+      "date_added": "2026-05-08"
     }
   ],
   "counts": {
