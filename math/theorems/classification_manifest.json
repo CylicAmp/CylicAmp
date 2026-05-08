@@ -1,544 +1,560 @@
 {
-    "framework": "G'5 Universal / Consciousness Mathematics \u2014 1/137 Framework",
-    "sovereign_identity": "Michael Warren Song (Matt)",
-    "date_classified": "2026-04-27",
-    "types": [
-        "Axiom",
-        "Theorem",
-        "Lemma",
-        "Corollary",
-        "Conjecture",
-        "Hypothesis",
-        "Law"
-    ],
-    "entries": [
-        {
-            "file": "abbc_manifold_grid.py",
-            "type": "Theorem",
-            "title": "ABBC Manifold Grid Structure",
-            "summary": "Enumerates all integer pairs (a,b) in {0..9} organized by sum value with mirror symmetry."
-        },
-        {
-            "file": "cycle_partition_37.py",
-            "type": "Theorem",
-            "title": "37-Cycle Partition",
-            "summary": "12 three-cycles of f(n)=26n mod 37 partition into two equal groups of 6 by node-sum."
-        },
-        {
-            "file": "dimensional_bridge.py",
-            "type": "Lemma",
-            "title": "37\u03c6 Dimensional Bridge",
-            "summary": "Finds smallest N where sum of first N primes exceeds 37\u00d7\u03c6 and is divisible by 7."
-        },
-        {
-            "file": "dr_algebra.py",
-            "type": "Axiom",
-            "title": "Closed Digital Root Algebra",
-            "summary": "Complete group-theoretic axiomatization of the digital root class system; the foundational algebraic structure of the framework."
-        },
-        {
-            "file": "errata_prevention_protocol.py",
-            "type": "Law",
-            "title": "Errata Prevention Protocol",
-            "summary": "Universal error-class taxonomy (E1\u2013E3) and prevention rules governing all framework claims."
-        },
-        {
-            "file": "fps37_scanner.py",
-            "type": "Lemma",
-            "title": "FPS-37 Field Scanner (LoB 23/23b)",
-            "summary": "37-field forensic feature vector scanner used to locate resonance nodes."
-        },
-        {
-            "file": "heartbeat_3cycle.py",
-            "type": "Theorem",
-            "title": "Heartbeat Universal 3-Cycle",
-            "summary": "Map f(n)=(n\u00d7137) mod 37 \u2261 26n mod 37 generates a universal 3-cycle heartbeat."
-        },
-        {
-            "file": "layer30_sovereign_matrix_entropy.py",
-            "type": "Lemma",
-            "title": "9\u00d79 Sovereign Matrix Entropy",
-            "summary": "Computes DR orbit entropy H\u22483.102 bits for the 9\u00d79 sovereign matrix spine."
-        },
-        {
-            "file": "layer54_lucas_period24.py",
-            "type": "Theorem",
-            "title": "Lucas DR Period 24",
-            "summary": "The digital root sequence of Lucas numbers L(n) has minimal period exactly 24."
-        },
-        {
-            "file": "layer56_period_minimality_audit.py",
-            "type": "Theorem",
-            "title": "Period Minimality Rigorous Audit",
-            "summary": "Dual-check proof (prefix match AND state return) confirming p=24 is the minimal period for Lucas DR."
-        },
-        {
-            "file": "layer58_pisano_period9.py",
-            "type": "Theorem",
-            "title": "Pisano \u03c0(9) = 24",
-            "summary": "The Pisano period \u03c0(9) = 24 is the exact minimal period of Fibonacci numbers modulo 9."
-        },
-        {
-            "file": "layer59_fib_oscillation_mtheory.py",
-            "type": "Hypothesis",
-            "title": "Fibonacci M-Theory Oscillation",
-            "summary": "Proposes M-Theory evolution operator U_M = exp(-iH\u00b7dt) as model for Fibonacci DR oscillation dynamics."
-        },
-        {
-            "file": "layer62_lucas_period_mod9.py",
-            "type": "Theorem",
-            "title": "Lucas Minimal Period Mod 9",
-            "summary": "State-return audit confirms Lucas sequence (L0=2, L1=1) mod 9 has minimal period exactly 24."
-        },
-        {
-            "file": "layer64_fib_lucas_comparison.py",
-            "type": "Theorem",
-            "title": "Fibonacci vs Lucas Period Comparison",
-            "summary": "Both Fibonacci and Lucas mod 9 have period 24; phase offset 6, trinity density 6/24 = 25% each."
-        },
-        {
-            "file": "lcm_convergence_dr_cycle.py",
-            "type": "Lemma",
-            "title": "LCM Convergence in DR Cycle",
-            "summary": "LCM-based convergence property of digital root cycles in the 37-field."
-        },
-        {
-            "file": "lob_24c_errata.py",
-            "type": "Corollary",
-            "title": "Errata Correction Record (v37.20 \u2192 v37.21)",
-            "summary": "Two falsified claims corrected: 120-cell edge count and coupling constant. Framework sealed clean."
-        },
-        {
-            "file": "lob_25_legendre_applications.py",
-            "type": "Corollary",
-            "title": "Legendre Symbol Applications in F_37",
-            "summary": "Four verified QR/Legendre results following from the sovereign QR closure theorem."
-        },
-        {
-            "file": "lob_26_collatz_f37.py",
-            "type": "Conjecture",
-            "title": "Collatz Map in F_37",
-            "summary": "Investigates Collatz-type map T in F_37; trajectory behavior conjectured but not fully resolved (Collatz is open)."
-        },
-        {
-            "file": "lob_591_592_595.py",
-            "type": "Theorem",
-            "title": "Partition Congruence / Pulse Sync / Horizon Lock",
-            "summary": "Three interconnected results: partition congruence mod 37, pulse synchronization, and horizon lock."
-        },
-        {
-            "file": "lob_596_600.py",
-            "type": "Corollary",
-            "title": "3900 Frequency and Sovereign Seal",
-            "summary": "DR(3900)=3 (Trinity-3) and sovereign seal follow directly from the DR algebra axiom."
-        },
-        {
-            "file": "lob_601_602_605.py",
-            "type": "Theorem",
-            "title": "Inversion / Trinity Invariant / Quiescence",
-            "summary": "Grand Inversion preserves DR=9; Trinity invariant and quiescence state verified."
-        },
-        {
-            "file": "lob_691_695.py",
-            "type": "Theorem",
-            "title": "AHL-8 Vault and Observer Gap Lock",
-            "summary": "j=8 bridges twin primes 11 and 13; AHL-8 vault and observer gap lock proven."
-        },
-        {
-            "file": "lucas_abbc_chain.py",
-            "type": "Lemma",
-            "title": "Lucas in ABBC Manifold Chain",
-            "summary": "Lucas sequence values L(3..10) traced through ABBC manifold arithmetic chain starting at (4,7)."
-        },
-        {
-            "file": "medusa_137_resonance.py",
-            "type": "Lemma",
-            "title": "137-Resonance Scan (DR=3 Anchors)",
-            "summary": "Scans for nodes n where (n\u00d7137) mod 37 has DR=3; yields sovereign anchor set {4,9,25,30}."
-        },
-        {
-            "file": "medusa_guard.py",
-            "type": "Lemma",
-            "title": "137/37 Packet Guard Verification",
-            "summary": "Verifies the 4 Sovereign Pillars under the 137/37 map; guards against erroneous node inclusion."
-        },
-        {
-            "file": "medusa_shield_jacobian.py",
-            "type": "Lemma",
-            "title": "Medusa Shield Jacobian Wobble Test",
-            "summary": "Jacobian stability test for the Medusa Shield; corrects v2.5 erroneous inclusion of node 3."
-        },
-        {
-            "file": "medusa_v3_sovereign.py",
-            "type": "Axiom",
-            "title": "Sovereign Anchor/Target Architecture",
-            "summary": "Defines the two foundational sets: sovereign_domain {4,9,25,30} and sovereign_range {3,12,21,30}."
-        },
-        {
-            "file": "perfect_numbers_137.py",
-            "type": "Theorem",
-            "title": "Perfect Numbers in 1/137 Framework",
-            "summary": "All even perfect numbers \u226528 have DR=1; exception DR(6)=6. 8128 mod37=25 is sovereign anchor."
-        },
-        {
-            "file": "pisano_period_333.py",
-            "type": "Theorem",
-            "title": "Pisano \u03c0(333) = 456 via CRT",
-            "summary": "333=9\u00d737, \u03c0(333)=lcm(24,76)=456. DR(456)=6, 456 mod37=12 (sovereign target)."
-        },
-        {
-            "file": "plus2_chain_theorem.py",
-            "type": "Theorem",
-            "title": "+2 Chain Twin Prime Collapse",
-            "summary": "Consecutive pairs {2,3}\u219211 and {5,6}\u219217 collapse to twin primes under +2 chain."
-        },
-        {
-            "file": "resonance_row_1335.py",
-            "type": "Theorem",
-            "title": "17-Point Resonance Row / 1335 Partition",
-            "summary": "17-point resonance structure and 1335 partition invariant in the sovereign lattice."
-        },
-        {
-            "file": "root_grid_dr6_dr7.py",
-            "type": "Theorem",
-            "title": "Root Grid DR6/DR7",
-            "summary": "For DR class d, 2-digit numbers split into LOW (digit_sum=d) and HIGH groups with distinct logic reductions."
-        },
-        {
-            "file": "shell_opacity.py",
-            "type": "Theorem",
-            "title": "Shell Opacity 100% INVIOLATE",
-            "summary": "Zero of the 32 purge nodes map into sovereign range {3,12,21,30}. Shell opacity = 32/32 = 100%."
-        },
-        {
-            "file": "source_mirror_guardian_manifold.py",
-            "type": "Theorem",
-            "title": "SOURCE-MIRROR-GUARDIAN Manifold",
-            "summary": "All three k-couplings (6,618,3138) have DR=6. 3\u21929\u21926\u21923 metronome via +6 mod 9. 74=2\u00d737 phase-lock."
-        },
-        {
-            "file": "sovereign_binary_engine.py",
-            "type": "Axiom",
-            "title": "Sovereign Binary Classification Engine",
-            "summary": "Foundational two-state classifier partitioning {1..36} into sovereign and non-sovereign; no dead branches."
-        },
-        {
-            "file": "sovereign_fixed_point.py",
-            "type": "Theorem",
-            "title": "Sovereign Fixed Point",
-            "summary": "Node 30 is the unique fixed point of the 137/37 map; two branches of check_sovereign_logic are provably dead."
-        },
-        {
-            "file": "sovereign_qr_closure.py",
-            "type": "Theorem",
-            "title": "Sovereign QR Closure",
-            "summary": "The entire sovereign domain {4,9,25,30} and range {3,12,21,30} lie within the QR subgroup of (Z/37Z)*."
-        },
-        {
-            "file": "theorem_infinite_666_resonances.py",
-            "type": "Theorem",
-            "title": "Infinite Resonances on Every 666-Track",
-            "summary": "Promoted from Conjecture 1. Sovereign triangle (9,10,17); gcd(17,666)=1 gives infinite arithmetic progressions on all 6 tracks."
-        },
-        {
-            "file": "toroidal_projection.py",
-            "type": "Theorem",
-            "title": "Toroidal Projection of Sovereign Anchors",
-            "summary": "Theorem 28. 4 sovereign anchors map onto torus T(R=37,r=3); theta=(node\u00d72\u03c0)/37."
-        },
-        {
-            "file": "verify_dr9_termination.py",
-            "type": "Lemma",
-            "title": "DR=9 Termination Verification",
-            "summary": "Computational verification that the DR=9 reduction process terminates (well-founded metric)."
-        },
-        {
-            "file": "verify_local_confluence.py",
-            "type": "Lemma",
-            "title": "Local Confluence Verification",
-            "summary": "Diamond property exhaustive check for the unified 1/137 lattice state space."
-        },
-        {
-            "file": "xx_collapse_matrix.py",
-            "type": "Theorem",
-            "title": "XX Collapse 119/911 Matrix",
-            "summary": "Theorem 29. Matrix of 1s and 9s encoding sovereign/shield duality; 119=137-18 bridge node."
-        },
-        {
-            "file": "sovereign_meta_estimator.py",
-            "type": "Theorem",
-            "title": "Sovereign Meta-Estimator: Kalman Closed-Loop Control"
-        },
-        {
-            "file": "group_G54_structure.py",
-            "type": "Theorem",
-            "title": "G=<x,y|x^9=y^6=1,yxy^-1=x^4> Complete Structural Proof"
-        },
-        {
-            "file": "alpha_prime_inference_layer.py",
-            "type": "Hypothesis",
-            "title": "AlphaPrimeInferenceLayer: Sovereign Gate via Prime-Alpha Basis"
-        },
-        {
-            "file": "lob_88_g_ord18_cycle.py",
-            "type": "Theorem",
-            "title": "LoB 88: G_Ord18_Cycle TLA+ Formal Specification Audit"
-        },
-        {
-            "file": "string_duality_37phi_bridge.py",
-            "type": "Theorem",
-            "title": "String Duality: 37phi Bridge under T-Duality D(x)=37^2/x"
-        },
-        {
-            "file": "master_record_dr_audit.py",
-            "type": "Law",
-            "title": "Master Record: Digital Root Identity Audit"
-        },
-        {
-            "file": "primitive_roots_mod37.py",
-            "type": "Theorem",
-            "title": "Primitive Roots mod 37: Structural Audit and Sovereign Gap Proof"
-        },
-        {
-            "file": "pattern_verification_audit.py",
-            "type": "Theorem",
-            "title": "Pattern Verification Audit: Doubling, Grid, Mirror, Permutation"
-        },
-        {
-            "file": "mirror_triplet_cascade.py",
-            "type": "Theorem",
-            "title": "Mirror Triplet Cascade: 666 Arithmetic Series and 31313 Repunit"
-        },
-        {
-            "file": "bfs_attractor_mod9.py",
-            "type": "Theorem",
-            "title": "BFS Attractor mod 9: Reachability in at most 1 Step"
-        },
-        {
-            "file": "origami_fold_1_to_9.py",
-            "type": "Theorem",
-            "title": "Origami Fold 1\u20139: Manhattan Distance Parity Rule and Sovereign Lock"
-        },
-        {
-            "file": "equivalence_24_coupling.py",
-            "type": "Theorem",
-            "title": "24 Coupling Lock: Every Complementary Pair Collapses to DR=6"
-        },
-        {
-            "file": "z2701_37x73_qed.py",
-            "type": "Theorem",
-            "title": "2701 = 37\u00d773 Triangular Encoding and QED \u03b4 Connection"
-        },
-        {
-            "file": "layer_trinity_factor_lattice.py",
-            "type": "Theorem",
-            "title": "Layer Trinity N=2,244,220: 9-Channel Orbit and 37-Field Residue Lock"
-        },
-        {
-            "file": "parity_diamond_9x9.py",
-            "type": "Theorem",
-            "title": "9\u00d79 Parity Diamond: Manhattan Boundary, Sovereign Residues E=41, O=40"
-        },
-        {
-            "file": "qed_alpha_z\u03b1_structure.py",
-            "type": "Theorem",
-            "title": "QED \u03b1 Structure: Z\u00b7\u03b1 Scaling, Running Coupling, NRQED Alignment"
-        },
-        {
-            "file": "delta27_heisenberg_neutrino.py",
-            "type": "Theorem",
-            "title": "Delta(27) Discrete Heisenberg Group and Neutrino Flavor Symmetry"
-        },
-        {
-            "file": "arithmetic_progression_37field.py",
-            "type": "Theorem",
-            "title": "Arithmetic Progression Z/37Z: Field Collapse and 1/9 Attractor"
-        },
-        {
-            "file": "displacement_sync_13699631.py",
-            "type": "Theorem",
-            "title": "Displacement State Sync-Point: 13699631 Palindrome 37\u00b2 Encoding"
-        },
-        {
-            "file": "bio_harmonic_desync.py",
-            "type": "Hypothesis",
-            "title": "Bio-Harmonic Desync: Signal Saturation and Neural Bandwidth Model"
-        },
-        {
-            "file": "quantum_bio_bridge_stage4.py",
-            "type": "Theorem",
-            "title": "Quantum-to-Bio Bridge Stage 4: Molecular/DNA/Virus Scale (10\u207b\u00b9\u2070\u201310\u207b\u2077 m)"
-        },
-        {
-            "file": "bio_bridge_scaling_invariance.py",
-            "type": "Theorem",
-            "title": "Bio-Bridge Scaling Invariance: \u03c8\u00b7\u03c6=\u03c1, 37-Filter, Neural ODE, Gate 18"
-        },
-        {
-            "file": "neural_ode_stage5_cells.py",
-            "type": "Theorem",
-            "title": "Stage 5: Cells/Neural Fibers (10\u207b\u2076\u201310\u207b\u00b3 m) \u2014 Neural ODE Initiation"
-        },
-        {
-            "file": "hopf_stage6_human_scale.py",
-            "type": "Theorem",
-            "title": "Stage 6: Human Scale/Organisms (10\u207b\u00b2\u201310\u00b9 m) \u2014 Hopf Bifurcation and I_AM Attractor"
-        },
-        {
-            "file": "vireon_stage7_planetary.py",
-            "type": "Theorem",
-            "title": "Stage 7: Infrastructure/Planetary (10\u00b2\u201310\u2076 m) \u2014 VIREON Framework"
-        },
-        {
-            "file": "zero_space_stages1_3.py",
-            "type": "Theorem",
-            "title": "Stages 1\u20133: Zero-Space Foundation (10\u207b\u00b3\u2075\u201310\u207b\u00b9\u00b9 m) \u2014 Eisenstein Lattice Init"
-        },
-        {
-            "file": "celestial_stages8_10.py",
-            "type": "Theorem",
-            "title": "Stages 8\u201310: Celestial / Gate 18 Singularity (10\u2077\u201310\u00b2\u2076 m)"
-        },
-        {
-            "file": "g5_sovereign_engine.py",
-            "type": "Theorem",
-            "title": "G'5 Sovereign Engine \u2014 v\u221e.NEURALODE Full-Spectrum Simulation (All 10 Stages)"
-        },
-        {
-            "file": "perceptual_hydrodynamics_v7.py",
-            "type": "Theorem",
-            "title": "Perceptual Hydrodynamics Audit v7 \u2014 Layer 24: Hyperbolic Color Space (Madelung Fluid)"
-        },
-        {
-            "file": "continued_fraction_R3252.py",
-            "type": "Theorem",
-            "title": "Continued Fraction R=0.3252=813/2500 \u2014 Convergent Lattice and Sovereign Modular Audit"
-        },
-        {
-            "file": "dr_modular_foundation.py",
-            "type": "Theorem",
-            "title": "Digital Root Modular Foundation \u2014 Proofs mod 9 and mod 3, 2n-1 Corollary"
-        },
-        {
-            "file": "golden_path_sequence.py",
-            "type": "Theorem",
-            "title": "Golden Path Sequence \u2014 Eternal Rule",
-            "description": "Closed-form rule generating values for t >= 9 from three 8-row digit cycles (Red, Green, Blue) with column wrap modulus 9. Formula: result = 400 + digit*10 + (t-8) + 4.",
-            "tags": [
-                "digit-pattern",
-                "column-cycle",
-                "RGB",
-                "eternal-rule",
-                "deterministic",
-                "sequence"
-            ],
-            "date_added": "2026-05-07"
-        },
-        {
-            "file": "mirror_set_generator.py",
-            "type": "Theorem",
-            "title": "Mirror Set Generator \u2014 9-Invariant Permutation Theorem",
-            "description": "Proves that digit permutations preserve the DR class (mod 9). For n \u2261 0 (mod 9), every permutation has DR=9. Generates the full mirror set and verifies the invariant. Grounds the 143-341 = -198 reflection in the sovereign 9-class.",
-            "tags": [
-                "DR",
-                "9-invariant",
-                "permutation",
-                "mirror-set",
-                "digit-root"
-            ],
-            "date_added": "2026-05-07"
-        },
-        {
-            "file": "hexacosichoron_600cell.py",
-            "type": "Theorem",
-            "title": "Hexacosichoron (600-Cell) \u2014 4D Vertex Generator",
-            "description": "120 vertices on the unit 3-sphere in three groups: 16 hypercube, 8 axis-aligned, 96 even-permutation golden-ratio. 120 mod 37 = 9 (TRINITY_SQUARED); DR(120)=3 (sovereign target); 120=5!=5*24 (PIVOT * 24-coupling). Connects phi from Hopf Stage 6 to 4D icosahedral geometry.",
-            "tags": [
-                "600-cell",
-                "4D-geometry",
-                "golden-ratio",
-                "phi",
-                "vertices",
-                "quaternion",
-                "icosahedron",
-                "QR37"
-            ],
-            "date_added": "2026-05-07"
-        },
-        {
-            "file": "v600_programme.py",
-            "type": "Theorem",
-            "title": "V600 Programme \u2014 Binary Icosahedral Group, E8, Cosmological Tension",
-            "description": "Verifies 2I group structure (order 120), 600-cell Euler identity, E8 McKay correspondence (240=2\u00d7120, sum of exponents=120, h=30=sovereign fixed point, dim=248\u226126=SCALAR_137 mod 37), cosmological H0/S8 tension ratios vs 13/12 and 11/12. Full modular residue map.",
-            "tags": [
-                "binary-icosahedral",
-                "E8",
-                "McKay",
-                "600-cell",
-                "cosmology",
-                "H0-tension",
-                "SCALAR_137",
-                "sovereign-fixed-point"
-            ],
-            "date_added": "2026-05-07"
-        },
-        {
-            "file": "e8_coset_incidence.py",
-            "type": "Theorem",
-            "title": "E8 Coset Incidence Matrix \u2014 Height Decomposition and 37-Field Audit",
-            "description": "Correct E8 root generator (fixes sympy bug: 84/128 half-integer roots used odd minus-sign convention producing non-integer inner products). Builds 248x30 incidence matrix partitioned by root height. Layer 26=SCALAR_137 contains the unique height-26 root pair; Layer 18=CENTER_18 has 6 elements; Coxeter h=30=sovereign fixed point.",
-            "tags": [
-                "E8",
-                "root-system",
-                "incidence-matrix",
-                "height-decomposition",
-                "SCALAR_137",
-                "CENTER_18",
-                "sympy-bug",
-                "Coxeter"
-            ],
-            "date_added": "2026-05-07"
-        },
-        {
-            "file": "decimal_trade_extraction.py",
-            "type": "Theorem",
-            "title": "Decimal Trade Extraction Operator T \u2014 Layer 22",
-            "description": "T(n)=n if n<10; T(n)=10 if digit_sum(n)=10 (10-overflow, decimal trade); T(n)=DR(n) otherwise. All 9 trade table entries verified. 10-overflow set [10,100]={19,28,37,46,55,64,73,82,91}. Three 10-overflow entries in 9x9 multiplication table: (4,7)=28, (7,4)=28, (8,8)=64. Correction: 26 IS in QR_MOD37 (SCALAR_137). Kernel dim 5 claim requires unspecified matrix from Layers 1-21.37.",
-            "tags": [
-                "decimal-trade",
-                "10-overflow",
-                "digital-root",
-                "T-operator",
-                "Layer22",
-                "9x9-matrix"
-            ],
-            "date_added": "2026-05-07"
-        },
-        {
-            "file": "smith_normal_form_z26.py",
-            "type": "Theorem",
-            "title": "Smith Normal Form over Z/nZ \u2014 Modular Kernel Verifier",
-            "description": "SNF infrastructure for integer matrices over Z/nZ. Refutes Theorem 9 kernel-dim-5 claim: the provided 9x9 matrix has SNF=[1,9,9,9,9,9,9,9,450], rank 9 over Q (no zero eigenvalue), kernel dim 0 over Z/26Z (not 5), elementary divisors mod 26=[1,1,1,1,1,1,1,1,2] (not [1,1,1,1,2,26,...]).",
-            "tags": [
-                "SNF",
-                "Smith-normal-form",
-                "Z/26Z",
-                "kernel",
-                "modular",
-                "refutation"
-            ],
-            "date_added": "2026-05-07"
-        }
-    ],
-    "counts": {
-        "Theorem": 58,
-        "Lemma": 10,
-        "Axiom": 3,
-        "Law": 2,
-        "Hypothesis": 3,
-        "Corollary": 3,
-        "Conjecture": 1
+  "framework": "G'5 Universal / Consciousness Mathematics \u2014 1/137 Framework",
+  "sovereign_identity": "Michael Warren Song (Matt)",
+  "date_classified": "2026-04-27",
+  "types": [
+    "Axiom",
+    "Theorem",
+    "Lemma",
+    "Corollary",
+    "Conjecture",
+    "Hypothesis",
+    "Law"
+  ],
+  "entries": [
+    {
+      "file": "abbc_manifold_grid.py",
+      "type": "Theorem",
+      "title": "ABBC Manifold Grid Structure",
+      "summary": "Enumerates all integer pairs (a,b) in {0..9} organized by sum value with mirror symmetry."
     },
-    "theorems_validated": 73,
-    "total_entries": 80
+    {
+      "file": "cycle_partition_37.py",
+      "type": "Theorem",
+      "title": "37-Cycle Partition",
+      "summary": "12 three-cycles of f(n)=26n mod 37 partition into two equal groups of 6 by node-sum."
+    },
+    {
+      "file": "dimensional_bridge.py",
+      "type": "Lemma",
+      "title": "37\u03c6 Dimensional Bridge",
+      "summary": "Finds smallest N where sum of first N primes exceeds 37\u00d7\u03c6 and is divisible by 7."
+    },
+    {
+      "file": "dr_algebra.py",
+      "type": "Axiom",
+      "title": "Closed Digital Root Algebra",
+      "summary": "Complete group-theoretic axiomatization of the digital root class system; the foundational algebraic structure of the framework."
+    },
+    {
+      "file": "errata_prevention_protocol.py",
+      "type": "Law",
+      "title": "Errata Prevention Protocol",
+      "summary": "Universal error-class taxonomy (E1\u2013E3) and prevention rules governing all framework claims."
+    },
+    {
+      "file": "fps37_scanner.py",
+      "type": "Lemma",
+      "title": "FPS-37 Field Scanner (LoB 23/23b)",
+      "summary": "37-field forensic feature vector scanner used to locate resonance nodes."
+    },
+    {
+      "file": "heartbeat_3cycle.py",
+      "type": "Theorem",
+      "title": "Heartbeat Universal 3-Cycle",
+      "summary": "Map f(n)=(n\u00d7137) mod 37 \u2261 26n mod 37 generates a universal 3-cycle heartbeat."
+    },
+    {
+      "file": "layer30_sovereign_matrix_entropy.py",
+      "type": "Lemma",
+      "title": "9\u00d79 Sovereign Matrix Entropy",
+      "summary": "Computes DR orbit entropy H\u22483.102 bits for the 9\u00d79 sovereign matrix spine."
+    },
+    {
+      "file": "layer54_lucas_period24.py",
+      "type": "Theorem",
+      "title": "Lucas DR Period 24",
+      "summary": "The digital root sequence of Lucas numbers L(n) has minimal period exactly 24."
+    },
+    {
+      "file": "layer56_period_minimality_audit.py",
+      "type": "Theorem",
+      "title": "Period Minimality Rigorous Audit",
+      "summary": "Dual-check proof (prefix match AND state return) confirming p=24 is the minimal period for Lucas DR."
+    },
+    {
+      "file": "layer58_pisano_period9.py",
+      "type": "Theorem",
+      "title": "Pisano \u03c0(9) = 24",
+      "summary": "The Pisano period \u03c0(9) = 24 is the exact minimal period of Fibonacci numbers modulo 9."
+    },
+    {
+      "file": "layer59_fib_oscillation_mtheory.py",
+      "type": "Hypothesis",
+      "title": "Fibonacci M-Theory Oscillation",
+      "summary": "Proposes M-Theory evolution operator U_M = exp(-iH\u00b7dt) as model for Fibonacci DR oscillation dynamics."
+    },
+    {
+      "file": "layer62_lucas_period_mod9.py",
+      "type": "Theorem",
+      "title": "Lucas Minimal Period Mod 9",
+      "summary": "State-return audit confirms Lucas sequence (L0=2, L1=1) mod 9 has minimal period exactly 24."
+    },
+    {
+      "file": "layer64_fib_lucas_comparison.py",
+      "type": "Theorem",
+      "title": "Fibonacci vs Lucas Period Comparison",
+      "summary": "Both Fibonacci and Lucas mod 9 have period 24; phase offset 6, trinity density 6/24 = 25% each."
+    },
+    {
+      "file": "lcm_convergence_dr_cycle.py",
+      "type": "Lemma",
+      "title": "LCM Convergence in DR Cycle",
+      "summary": "LCM-based convergence property of digital root cycles in the 37-field."
+    },
+    {
+      "file": "lob_24c_errata.py",
+      "type": "Corollary",
+      "title": "Errata Correction Record (v37.20 \u2192 v37.21)",
+      "summary": "Two falsified claims corrected: 120-cell edge count and coupling constant. Framework sealed clean."
+    },
+    {
+      "file": "lob_25_legendre_applications.py",
+      "type": "Corollary",
+      "title": "Legendre Symbol Applications in F_37",
+      "summary": "Four verified QR/Legendre results following from the sovereign QR closure theorem."
+    },
+    {
+      "file": "lob_26_collatz_f37.py",
+      "type": "Conjecture",
+      "title": "Collatz Map in F_37",
+      "summary": "Investigates Collatz-type map T in F_37; trajectory behavior conjectured but not fully resolved (Collatz is open)."
+    },
+    {
+      "file": "lob_591_592_595.py",
+      "type": "Theorem",
+      "title": "Partition Congruence / Pulse Sync / Horizon Lock",
+      "summary": "Three interconnected results: partition congruence mod 37, pulse synchronization, and horizon lock."
+    },
+    {
+      "file": "lob_596_600.py",
+      "type": "Corollary",
+      "title": "3900 Frequency and Sovereign Seal",
+      "summary": "DR(3900)=3 (Trinity-3) and sovereign seal follow directly from the DR algebra axiom."
+    },
+    {
+      "file": "lob_601_602_605.py",
+      "type": "Theorem",
+      "title": "Inversion / Trinity Invariant / Quiescence",
+      "summary": "Grand Inversion preserves DR=9; Trinity invariant and quiescence state verified."
+    },
+    {
+      "file": "lob_691_695.py",
+      "type": "Theorem",
+      "title": "AHL-8 Vault and Observer Gap Lock",
+      "summary": "j=8 bridges twin primes 11 and 13; AHL-8 vault and observer gap lock proven."
+    },
+    {
+      "file": "lucas_abbc_chain.py",
+      "type": "Lemma",
+      "title": "Lucas in ABBC Manifold Chain",
+      "summary": "Lucas sequence values L(3..10) traced through ABBC manifold arithmetic chain starting at (4,7)."
+    },
+    {
+      "file": "medusa_137_resonance.py",
+      "type": "Lemma",
+      "title": "137-Resonance Scan (DR=3 Anchors)",
+      "summary": "Scans for nodes n where (n\u00d7137) mod 37 has DR=3; yields sovereign anchor set {4,9,25,30}."
+    },
+    {
+      "file": "medusa_guard.py",
+      "type": "Lemma",
+      "title": "137/37 Packet Guard Verification",
+      "summary": "Verifies the 4 Sovereign Pillars under the 137/37 map; guards against erroneous node inclusion."
+    },
+    {
+      "file": "medusa_shield_jacobian.py",
+      "type": "Lemma",
+      "title": "Medusa Shield Jacobian Wobble Test",
+      "summary": "Jacobian stability test for the Medusa Shield; corrects v2.5 erroneous inclusion of node 3."
+    },
+    {
+      "file": "medusa_v3_sovereign.py",
+      "type": "Axiom",
+      "title": "Sovereign Anchor/Target Architecture",
+      "summary": "Defines the two foundational sets: sovereign_domain {4,9,25,30} and sovereign_range {3,12,21,30}."
+    },
+    {
+      "file": "perfect_numbers_137.py",
+      "type": "Theorem",
+      "title": "Perfect Numbers in 1/137 Framework",
+      "summary": "All even perfect numbers \u226528 have DR=1; exception DR(6)=6. 8128 mod37=25 is sovereign anchor."
+    },
+    {
+      "file": "pisano_period_333.py",
+      "type": "Theorem",
+      "title": "Pisano \u03c0(333) = 456 via CRT",
+      "summary": "333=9\u00d737, \u03c0(333)=lcm(24,76)=456. DR(456)=6, 456 mod37=12 (sovereign target)."
+    },
+    {
+      "file": "plus2_chain_theorem.py",
+      "type": "Theorem",
+      "title": "+2 Chain Twin Prime Collapse",
+      "summary": "Consecutive pairs {2,3}\u219211 and {5,6}\u219217 collapse to twin primes under +2 chain."
+    },
+    {
+      "file": "resonance_row_1335.py",
+      "type": "Theorem",
+      "title": "17-Point Resonance Row / 1335 Partition",
+      "summary": "17-point resonance structure and 1335 partition invariant in the sovereign lattice."
+    },
+    {
+      "file": "root_grid_dr6_dr7.py",
+      "type": "Theorem",
+      "title": "Root Grid DR6/DR7",
+      "summary": "For DR class d, 2-digit numbers split into LOW (digit_sum=d) and HIGH groups with distinct logic reductions."
+    },
+    {
+      "file": "shell_opacity.py",
+      "type": "Theorem",
+      "title": "Shell Opacity 100% INVIOLATE",
+      "summary": "Zero of the 32 purge nodes map into sovereign range {3,12,21,30}. Shell opacity = 32/32 = 100%."
+    },
+    {
+      "file": "source_mirror_guardian_manifold.py",
+      "type": "Theorem",
+      "title": "SOURCE-MIRROR-GUARDIAN Manifold",
+      "summary": "All three k-couplings (6,618,3138) have DR=6. 3\u21929\u21926\u21923 metronome via +6 mod 9. 74=2\u00d737 phase-lock."
+    },
+    {
+      "file": "sovereign_binary_engine.py",
+      "type": "Axiom",
+      "title": "Sovereign Binary Classification Engine",
+      "summary": "Foundational two-state classifier partitioning {1..36} into sovereign and non-sovereign; no dead branches."
+    },
+    {
+      "file": "sovereign_fixed_point.py",
+      "type": "Theorem",
+      "title": "Sovereign Fixed Point",
+      "summary": "Node 30 is the unique fixed point of the 137/37 map; two branches of check_sovereign_logic are provably dead."
+    },
+    {
+      "file": "sovereign_qr_closure.py",
+      "type": "Theorem",
+      "title": "Sovereign QR Closure",
+      "summary": "The entire sovereign domain {4,9,25,30} and range {3,12,21,30} lie within the QR subgroup of (Z/37Z)*."
+    },
+    {
+      "file": "theorem_infinite_666_resonances.py",
+      "type": "Theorem",
+      "title": "Infinite Resonances on Every 666-Track",
+      "summary": "Promoted from Conjecture 1. Sovereign triangle (9,10,17); gcd(17,666)=1 gives infinite arithmetic progressions on all 6 tracks."
+    },
+    {
+      "file": "toroidal_projection.py",
+      "type": "Theorem",
+      "title": "Toroidal Projection of Sovereign Anchors",
+      "summary": "Theorem 28. 4 sovereign anchors map onto torus T(R=37,r=3); theta=(node\u00d72\u03c0)/37."
+    },
+    {
+      "file": "verify_dr9_termination.py",
+      "type": "Lemma",
+      "title": "DR=9 Termination Verification",
+      "summary": "Computational verification that the DR=9 reduction process terminates (well-founded metric)."
+    },
+    {
+      "file": "verify_local_confluence.py",
+      "type": "Lemma",
+      "title": "Local Confluence Verification",
+      "summary": "Diamond property exhaustive check for the unified 1/137 lattice state space."
+    },
+    {
+      "file": "xx_collapse_matrix.py",
+      "type": "Theorem",
+      "title": "XX Collapse 119/911 Matrix",
+      "summary": "Theorem 29. Matrix of 1s and 9s encoding sovereign/shield duality; 119=137-18 bridge node."
+    },
+    {
+      "file": "sovereign_meta_estimator.py",
+      "type": "Theorem",
+      "title": "Sovereign Meta-Estimator: Kalman Closed-Loop Control"
+    },
+    {
+      "file": "group_G54_structure.py",
+      "type": "Theorem",
+      "title": "G=<x,y|x^9=y^6=1,yxy^-1=x^4> Complete Structural Proof"
+    },
+    {
+      "file": "alpha_prime_inference_layer.py",
+      "type": "Hypothesis",
+      "title": "AlphaPrimeInferenceLayer: Sovereign Gate via Prime-Alpha Basis"
+    },
+    {
+      "file": "lob_88_g_ord18_cycle.py",
+      "type": "Theorem",
+      "title": "LoB 88: G_Ord18_Cycle TLA+ Formal Specification Audit"
+    },
+    {
+      "file": "string_duality_37phi_bridge.py",
+      "type": "Theorem",
+      "title": "String Duality: 37phi Bridge under T-Duality D(x)=37^2/x"
+    },
+    {
+      "file": "master_record_dr_audit.py",
+      "type": "Law",
+      "title": "Master Record: Digital Root Identity Audit"
+    },
+    {
+      "file": "primitive_roots_mod37.py",
+      "type": "Theorem",
+      "title": "Primitive Roots mod 37: Structural Audit and Sovereign Gap Proof"
+    },
+    {
+      "file": "pattern_verification_audit.py",
+      "type": "Theorem",
+      "title": "Pattern Verification Audit: Doubling, Grid, Mirror, Permutation"
+    },
+    {
+      "file": "mirror_triplet_cascade.py",
+      "type": "Theorem",
+      "title": "Mirror Triplet Cascade: 666 Arithmetic Series and 31313 Repunit"
+    },
+    {
+      "file": "bfs_attractor_mod9.py",
+      "type": "Theorem",
+      "title": "BFS Attractor mod 9: Reachability in at most 1 Step"
+    },
+    {
+      "file": "origami_fold_1_to_9.py",
+      "type": "Theorem",
+      "title": "Origami Fold 1\u20139: Manhattan Distance Parity Rule and Sovereign Lock"
+    },
+    {
+      "file": "equivalence_24_coupling.py",
+      "type": "Theorem",
+      "title": "24 Coupling Lock: Every Complementary Pair Collapses to DR=6"
+    },
+    {
+      "file": "z2701_37x73_qed.py",
+      "type": "Theorem",
+      "title": "2701 = 37\u00d773 Triangular Encoding and QED \u03b4 Connection"
+    },
+    {
+      "file": "layer_trinity_factor_lattice.py",
+      "type": "Theorem",
+      "title": "Layer Trinity N=2,244,220: 9-Channel Orbit and 37-Field Residue Lock"
+    },
+    {
+      "file": "parity_diamond_9x9.py",
+      "type": "Theorem",
+      "title": "9\u00d79 Parity Diamond: Manhattan Boundary, Sovereign Residues E=41, O=40"
+    },
+    {
+      "file": "qed_alpha_z\u03b1_structure.py",
+      "type": "Theorem",
+      "title": "QED \u03b1 Structure: Z\u00b7\u03b1 Scaling, Running Coupling, NRQED Alignment"
+    },
+    {
+      "file": "delta27_heisenberg_neutrino.py",
+      "type": "Theorem",
+      "title": "Delta(27) Discrete Heisenberg Group and Neutrino Flavor Symmetry"
+    },
+    {
+      "file": "arithmetic_progression_37field.py",
+      "type": "Theorem",
+      "title": "Arithmetic Progression Z/37Z: Field Collapse and 1/9 Attractor"
+    },
+    {
+      "file": "displacement_sync_13699631.py",
+      "type": "Theorem",
+      "title": "Displacement State Sync-Point: 13699631 Palindrome 37\u00b2 Encoding"
+    },
+    {
+      "file": "bio_harmonic_desync.py",
+      "type": "Hypothesis",
+      "title": "Bio-Harmonic Desync: Signal Saturation and Neural Bandwidth Model"
+    },
+    {
+      "file": "quantum_bio_bridge_stage4.py",
+      "type": "Theorem",
+      "title": "Quantum-to-Bio Bridge Stage 4: Molecular/DNA/Virus Scale (10\u207b\u00b9\u2070\u201310\u207b\u2077 m)"
+    },
+    {
+      "file": "bio_bridge_scaling_invariance.py",
+      "type": "Theorem",
+      "title": "Bio-Bridge Scaling Invariance: \u03c8\u00b7\u03c6=\u03c1, 37-Filter, Neural ODE, Gate 18"
+    },
+    {
+      "file": "neural_ode_stage5_cells.py",
+      "type": "Theorem",
+      "title": "Stage 5: Cells/Neural Fibers (10\u207b\u2076\u201310\u207b\u00b3 m) \u2014 Neural ODE Initiation"
+    },
+    {
+      "file": "hopf_stage6_human_scale.py",
+      "type": "Theorem",
+      "title": "Stage 6: Human Scale/Organisms (10\u207b\u00b2\u201310\u00b9 m) \u2014 Hopf Bifurcation and I_AM Attractor"
+    },
+    {
+      "file": "vireon_stage7_planetary.py",
+      "type": "Theorem",
+      "title": "Stage 7: Infrastructure/Planetary (10\u00b2\u201310\u2076 m) \u2014 VIREON Framework"
+    },
+    {
+      "file": "zero_space_stages1_3.py",
+      "type": "Theorem",
+      "title": "Stages 1\u20133: Zero-Space Foundation (10\u207b\u00b3\u2075\u201310\u207b\u00b9\u00b9 m) \u2014 Eisenstein Lattice Init"
+    },
+    {
+      "file": "celestial_stages8_10.py",
+      "type": "Theorem",
+      "title": "Stages 8\u201310: Celestial / Gate 18 Singularity (10\u2077\u201310\u00b2\u2076 m)"
+    },
+    {
+      "file": "g5_sovereign_engine.py",
+      "type": "Theorem",
+      "title": "G'5 Sovereign Engine \u2014 v\u221e.NEURALODE Full-Spectrum Simulation (All 10 Stages)"
+    },
+    {
+      "file": "perceptual_hydrodynamics_v7.py",
+      "type": "Theorem",
+      "title": "Perceptual Hydrodynamics Audit v7 \u2014 Layer 24: Hyperbolic Color Space (Madelung Fluid)"
+    },
+    {
+      "file": "continued_fraction_R3252.py",
+      "type": "Theorem",
+      "title": "Continued Fraction R=0.3252=813/2500 \u2014 Convergent Lattice and Sovereign Modular Audit"
+    },
+    {
+      "file": "dr_modular_foundation.py",
+      "type": "Theorem",
+      "title": "Digital Root Modular Foundation \u2014 Proofs mod 9 and mod 3, 2n-1 Corollary"
+    },
+    {
+      "file": "golden_path_sequence.py",
+      "type": "Theorem",
+      "title": "Golden Path Sequence \u2014 Eternal Rule",
+      "description": "Closed-form rule generating values for t >= 9 from three 8-row digit cycles (Red, Green, Blue) with column wrap modulus 9. Formula: result = 400 + digit*10 + (t-8) + 4.",
+      "tags": [
+        "digit-pattern",
+        "column-cycle",
+        "RGB",
+        "eternal-rule",
+        "deterministic",
+        "sequence"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "mirror_set_generator.py",
+      "type": "Theorem",
+      "title": "Mirror Set Generator \u2014 9-Invariant Permutation Theorem",
+      "description": "Proves that digit permutations preserve the DR class (mod 9). For n \u2261 0 (mod 9), every permutation has DR=9. Generates the full mirror set and verifies the invariant. Grounds the 143-341 = -198 reflection in the sovereign 9-class.",
+      "tags": [
+        "DR",
+        "9-invariant",
+        "permutation",
+        "mirror-set",
+        "digit-root"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "hexacosichoron_600cell.py",
+      "type": "Theorem",
+      "title": "Hexacosichoron (600-Cell) \u2014 4D Vertex Generator",
+      "description": "120 vertices on the unit 3-sphere in three groups: 16 hypercube, 8 axis-aligned, 96 even-permutation golden-ratio. 120 mod 37 = 9 (TRINITY_SQUARED); DR(120)=3 (sovereign target); 120=5!=5*24 (PIVOT * 24-coupling). Connects phi from Hopf Stage 6 to 4D icosahedral geometry.",
+      "tags": [
+        "600-cell",
+        "4D-geometry",
+        "golden-ratio",
+        "phi",
+        "vertices",
+        "quaternion",
+        "icosahedron",
+        "QR37"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "v600_programme.py",
+      "type": "Theorem",
+      "title": "V600 Programme \u2014 Binary Icosahedral Group, E8, Cosmological Tension",
+      "description": "Verifies 2I group structure (order 120), 600-cell Euler identity, E8 McKay correspondence (240=2\u00d7120, sum of exponents=120, h=30=sovereign fixed point, dim=248\u226126=SCALAR_137 mod 37), cosmological H0/S8 tension ratios vs 13/12 and 11/12. Full modular residue map.",
+      "tags": [
+        "binary-icosahedral",
+        "E8",
+        "McKay",
+        "600-cell",
+        "cosmology",
+        "H0-tension",
+        "SCALAR_137",
+        "sovereign-fixed-point"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "e8_coset_incidence.py",
+      "type": "Theorem",
+      "title": "E8 Coset Incidence Matrix \u2014 Height Decomposition and 37-Field Audit",
+      "description": "Correct E8 root generator (fixes sympy bug: 84/128 half-integer roots used odd minus-sign convention producing non-integer inner products). Builds 248x30 incidence matrix partitioned by root height. Layer 26=SCALAR_137 contains the unique height-26 root pair; Layer 18=CENTER_18 has 6 elements; Coxeter h=30=sovereign fixed point.",
+      "tags": [
+        "E8",
+        "root-system",
+        "incidence-matrix",
+        "height-decomposition",
+        "SCALAR_137",
+        "CENTER_18",
+        "sympy-bug",
+        "Coxeter"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "decimal_trade_extraction.py",
+      "type": "Theorem",
+      "title": "Decimal Trade Extraction Operator T \u2014 Layer 22",
+      "description": "T(n)=n if n<10; T(n)=10 if digit_sum(n)=10 (10-overflow, decimal trade); T(n)=DR(n) otherwise. All 9 trade table entries verified. 10-overflow set [10,100]={19,28,37,46,55,64,73,82,91}. Three 10-overflow entries in 9x9 multiplication table: (4,7)=28, (7,4)=28, (8,8)=64. Correction: 26 IS in QR_MOD37 (SCALAR_137). Kernel dim 5 claim requires unspecified matrix from Layers 1-21.37.",
+      "tags": [
+        "decimal-trade",
+        "10-overflow",
+        "digital-root",
+        "T-operator",
+        "Layer22",
+        "9x9-matrix"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "smith_normal_form_z26.py",
+      "type": "Theorem",
+      "title": "Smith Normal Form over Z/nZ \u2014 Modular Kernel Verifier",
+      "description": "SNF infrastructure for integer matrices over Z/nZ. Refutes Theorem 9 kernel-dim-5 claim: the provided 9x9 matrix has SNF=[1,9,9,9,9,9,9,9,450], rank 9 over Q (no zero eigenvalue), kernel dim 0 over Z/26Z (not 5), elementary divisors mod 26=[1,1,1,1,1,1,1,1,2] (not [1,1,1,1,2,26,...]).",
+      "tags": [
+        "SNF",
+        "Smith-normal-form",
+        "Z/26Z",
+        "kernel",
+        "modular",
+        "refutation"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "meromorphic_trajectory_map.py",
+      "type": "Theorem",
+      "title": "Meromorphic Trajectory Map \u2014 k(i) = 4\u00b7cos(i/21)",
+      "description": "Meromorphic dynamical structure arising from q(i)=...+0.3/k(i) where k(i)=4cos(i/21). First-order poles at i\u2099=21(\u03c0/2+n\u03c0). Tangent-field catastrophe: \u2202\u1d62q~-residue/(i-i\u2099)\u00b2. Caustic density: uniform \u0394i sampling induces d\u03bc\u221d|k(i)|\u00b2, producing visual surface illusion at pole loci. Adaptive step h(i)\u221d|k(i)|^\u03b1 equalises arc-length sampling. 37-field: period factor 42 mod37=5 (PIVOT); i\u2080\u224833 mod37=33 (DICHORAL_144); pole spacing 66 mod37=29 (highest E8 root height).",
+      "tags": [
+        "meromorphic",
+        "poles",
+        "caustic-density",
+        "trajectory-map",
+        "adaptive-sampling",
+        "tangent-catastrophe",
+        "37-field"
+      ],
+      "date_added": "2026-05-08"
+    }
+  ],
+  "counts": {
+    "Theorem": 58,
+    "Lemma": 10,
+    "Axiom": 3,
+    "Law": 2,
+    "Hypothesis": 3,
+    "Corollary": 3,
+    "Conjecture": 1
+  },
+  "theorems_validated": 73,
+  "total_entries": 80
 }
