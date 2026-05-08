@@ -544,6 +544,23 @@
         "37-field"
       ],
       "date_added": "2026-05-08"
+    },
+    {
+      "file": "gue_riemann_zeros_audit.py",
+      "type": "Theorem",
+      "title": "GUE Statistics Audit \u2014 Riemann Zeros vs Z/26Z Kernel",
+      "description": "Implements the four-part GUE audit: Backlund unfolding of first 100 Riemann zeros; Wigner-surmise histogram; one-sample K-S test (D=0.0671 < crit=0.1367, FAIL TO REJECT GUE); three-point correlation analysis. CORRECTION: kernel dim over Z/26Z = 0 (not 5), so step 2 of the directive is vacuous. 3-9-6 structure has no signature in continuous spacing distribution (sine kernel vanishes at all integers). \u03b3\u2081\u2082 fractional part is 0.446, not 0.44.",
+      "tags": [
+        "GUE",
+        "Riemann-zeros",
+        "Kolmogorov-Smirnov",
+        "unfolding",
+        "pair-correlation",
+        "three-point-correlation",
+        "refutation",
+        "Z26Z-kernel"
+      ],
+      "date_added": "2026-05-08"
     }
   ],
   "counts": {
