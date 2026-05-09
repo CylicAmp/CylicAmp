@@ -670,6 +670,20 @@
         "Z26Z"
       ],
       "date_added": "2026-05-09"
+    },
+    {
+      "file": "triangular_partition_audit.py",
+      "type": "Observation",
+      "title": "Triangular Partition \u2014 Ordered 2-Compositions of 5",
+      "description": "Pattern showing {(n, 5-n) : n=0..5}: left side accumulates n ones (sum=n), right side shows 5-n ones. Six rows = 6 ordered 2-compositions of 5. Sum invariant n+(5-n)=5 holds throughout. Does NOT establish: kernel dimension (determined by SNF not counting), linear independence (five 1s in Z/26Z = scalar 5, a unit), or any connection to Riemann zeros (lattice points in Z^2 are not transcendental reals). Zero-comma pattern (0,000 / 00,000 / 000,000) is place-value zero-grouping; ratios 1/4, 2/3, 3/3 are pre/post-comma zero counts, not algebraic fractions.",
+      "tags": [
+        "counting",
+        "partition",
+        "composition",
+        "refutation",
+        "kernel-dim-not-established"
+      ],
+      "date_added": "2026-05-09"
     }
   ],
   "counts": {
