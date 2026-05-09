@@ -653,6 +653,23 @@
         "GUE-declined"
       ],
       "date_added": "2026-05-09"
+    },
+    {
+      "file": "matrix_m_mod37_audit.py",
+      "type": "Refutation",
+      "title": "Matrix M mod 37 \u2014 Fifth Submission (same as entry 80)",
+      "description": "Matrix labeled Matrix M mod 37, presented with checkerboard parity patterns and 23/32 symmetry claims. Computational audit: SNF=[1,9,9,9,9,9,9,9,450], rank=9, kernel Z/26Z=0, 28 asymmetric pairs, det=2152336050 \u2014 six independent identifiers match PROVIDED_M (entry 80) exactly. Since all entries < 37, M mod 37 = M; the label adds no information. Diagonal [10,13,18,16,10,15,12,16,18] exceeds DR/T range but matches entry 80. Parity checkerboard is position-index parity, applies to any grid, no connection to M. 23/32 are decimal digit-reversals; 23-8=15 and 21-3=18 are arithmetic with no defined role in the framework. Kernel remains 0.",
+      "tags": [
+        "PROVIDED_M",
+        "duplicate-submission",
+        "kernel-0",
+        "SNF",
+        "checkerboard",
+        "parity",
+        "refutation",
+        "Z26Z"
+      ],
+      "date_added": "2026-05-09"
     }
   ],
   "counts": {
