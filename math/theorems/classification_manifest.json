@@ -701,6 +701,23 @@
         "690"
       ],
       "date_added": "2026-05-09"
+    },
+    {
+      "file": "apple_energy_audit.py",
+      "type": "Theorem",
+      "title": "Apple Energy Audit \u2014 Atom Count, Vaporization, Pressure Wave",
+      "description": "Atom count 1.75e25 for 180g apple confirmed. TNT equiv 2.69kg confirmed. 33L water heating 11.05MJ confirmed. Vaporization threshold 397.6kJ = 3.5% of 11.26MJ derived from standard thermodynamics (L_vap + c_p), NOT from Jacobian or lattice model. Pressure wave (Hopkinson-Cranz): 4696kPa at 1m, 202kPa at 3m, 18kPa at 10m, 5kPa at 30m, 1kPa at 100m. Three fabricated claims: (1) 3737 lattice: 3737=37*101, no crystallographic or physical lattice with this designation exists; (2) Jacobian prediction model from image: no image in session, no model defined; (3) Discretization Breakdown: real numerical-methods term misapplied; correct physics term is vaporization threshold.",
+      "tags": [
+        "apple",
+        "energy",
+        "thermodynamics",
+        "pressure-wave",
+        "TNT",
+        "refutation",
+        "3737-lattice",
+        "Jacobian"
+      ],
+      "date_added": "2026-05-09"
     }
   ],
   "counts": {
