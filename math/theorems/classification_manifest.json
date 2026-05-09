@@ -609,6 +609,34 @@
         "refutation"
       ],
       "date_added": "2026-05-08"
+    },
+    {
+      "file": "kernel5_construction_audit.py",
+      "type": "Theorem",
+      "title": "Kernel-Dim-5 Construction \u2014 {0,13} Matrix",
+      "description": "First matrix to achieve kernel dim 5 over Z/26Z in this session. M=13*B where B is a 0/1 matrix of rank 4 over Z/2Z. SNF(M)=[13,13,13,13,26,26,26,26,0]=13*SNF(B). Kernel Z/26Z=5; kernel Z/2Z=5; kernel Z/13Z=9 (13 vanishes mod 13). Rank over Q=8 (NOT 4 as code comment states). Table version has R5 transposed giving kernel=4. This is an artificial {0,13} construction unrelated to DR/T-operator framework entries.",
+      "tags": [
+        "kernel-dim-5",
+        "SNF",
+        "Z26Z",
+        "binary-matrix",
+        "13-scaling",
+        "artificial-construction"
+      ],
+      "date_added": "2026-05-09"
+    },
+    {
+      "file": "image_matrix_1000228021_audit.py",
+      "type": "Pending",
+      "title": "Image-Extracted Matrix 1000228021 \u2014 SNF Audit",
+      "description": "Matrix claimed extracted from image 1000228021.jpg. Entries in 0-9 with two zeros at (R8,C4) and (R9,C3). Rank Q=9; kernel Z/2Z=1; kernel Z/13Z=1. SNF computation pending (integer SNF hangs on this matrix). No connection to DR/T-operator structure.",
+      "tags": [
+        "image-matrix",
+        "pending",
+        "rank-9",
+        "kernel-1"
+      ],
+      "date_added": "2026-05-09"
     }
   ],
   "counts": {
