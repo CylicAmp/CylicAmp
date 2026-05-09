@@ -637,6 +637,22 @@
         "kernel-1"
       ],
       "date_added": "2026-05-09"
+    },
+    {
+      "file": "kernel5_generators_audit.py",
+      "type": "Theorem",
+      "title": "Kernel-5 Generators \u2014 {0,13} Matrix over Z/26Z",
+      "description": "Explicit basis for ker(KERNEL5_M) over Z/26Z. Mechanism: ker(13B mod 26)={v: B*v=0 mod 2}. Five generators G1-G5 in {0,1}^9, all verified M*Gi=0 mod 26. Components are integers in {0,1}; categorically incompatible with Riemann zero imaginary parts (transcendental reals). 100-Unity Bridge (56+44=100 on gamma_12) is a scalar identity on one real; cannot map Z/26Z module vectors to a spectral sequence. Decimal Trade Extraction is undefined. GUE audit declined: no ordinate-generating map exists. Kernel=5 belongs to the artificial {0,13} construction, not to PROVIDED_M (Sovereign Matrix, kernel=0).",
+      "tags": [
+        "kernel-dim-5",
+        "kernel-generators",
+        "Z26Z",
+        "F2-null-space",
+        "refutation",
+        "100-unity-bridge",
+        "GUE-declined"
+      ],
+      "date_added": "2026-05-09"
     }
   ],
   "counts": {
