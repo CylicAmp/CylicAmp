@@ -1,5 +1,6 @@
 # dr_pattern_suite.py
-# Clean verification of digital root patterns with assertions
+# Audited with math imports
+import math
 
 def dr(n: int) -> int:
     """Digital root in base 10: dr(n) = 1 + (n-1) mod 9, dr(0)=0"""
@@ -60,11 +61,10 @@ def verify_patterns():
     assert dr(disc) == 9
     print("9. Cardano discriminant DR=9: PASSED")
     
-    # 10. Date example  (2026-05-02 digits: 2+0+2+6+0+5+0+2=17, dr=8)
-    date_sum = 2 + 0 + 2 + 6 + 0 + 5 + 0 + 2
-    assert date_sum == 17
-    assert dr(date_sum) == 8
-    print("10. Date digit sum 17, dr=8: PASSED")
+    # 10. Example coordinate (fixed: 135, dr=9)
+    example = 135
+    assert dr(example) == 9
+    print("10. Example coordinate dr=9: PASSED")
     
     print("\n✅ ALL TESTS PASSED")
 
