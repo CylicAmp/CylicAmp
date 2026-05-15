@@ -16,6 +16,7 @@ Claims:
 """
 
 import math
+from math import isqrt
 from decimal import Decimal, getcontext
 getcontext().prec = 120
 
@@ -40,32 +41,65 @@ def find_period(seq: list) -> int | None:
     return None
 
 
-def class_number_neg(D: int) -> int:
+def class_number(D: int) -> int:
+    """Class number h(D) for fundamental negative discriminant D < 0.
+
+    Uses reduced positive definite binary quadratic forms with
+    strict boundary b > -a.
+
+    >>> class_number(-3)
+    1
+    >>> class_number(-4)
+    1
+    >>> class_number(-7)
+    1
+    >>> class_number(-23)
+    3
+    >>> class_number(-43)
+    1
+    >>> class_number(-163)
+    1
     """
-    Class number h(D) for negative fundamental discriminant D
-    via enumeration of reduced binary quadratic forms ax²+bxy+cy²,
-    D = b²−4ac, |b|≤a≤c, gcd(a,b,c)=1, c>a or b≥0 if a=c.
-    """
-    assert D < 0
+    if D >= 0:
+        raise ValueError("D must be negative")
     h = 0
-    B = int(math.isqrt(-D // 3)) + 1
-    for a in range(1, B + 1):
-        for b in range(-a + 1, a + 1):   # reduced form: -a < b ≤ a (strict lower)
-            if (b * b - D) % (4 * a) != 0:
+    a_max = isqrt(-D // 3) + 1
+    for a in range(1, a_max + 1):
+        for b in range(-a + 1, a + 1):
+            disc = b * b - D
+            if disc % (4 * a) != 0:
                 continue
-            c = (b * b - D) // (4 * a)
-            if c < a:
+            c = disc // (4 * a)
+            if a > c:
                 continue
-            if c == a and b < 0:
-                continue
-            if math.gcd(math.gcd(a, abs(b)), c) != 1:
+            if (b == -a or a == c) and b < 0:
                 continue
             h += 1
     return h
 
 
+def _test_class_number():
+    # Heegner numbers: all 9 discriminants with h=1
+    assert class_number(-3)   == 1
+    assert class_number(-4)   == 1
+    assert class_number(-7)   == 1
+    assert class_number(-8)   == 1
+    assert class_number(-11)  == 1
+    assert class_number(-19)  == 1
+    assert class_number(-43)  == 1   # Heegner (NOT 3; h(-43)=1)
+    assert class_number(-67)  == 1
+    assert class_number(-163) == 1
+    # h=3 examples
+    assert class_number(-23)  == 3
+    assert class_number(-31)  == 3
+    # h=2 example
+    assert class_number(-148) == 2   # h(-4×37)
+    print("  class_number unit tests passed  ✓")
+
+
 def verify():
     print("Ramanujan Modular Equations — Claim Audit\n")
+    _test_class_number()
 
     # ── Claim 1: 19/10101 and "111111 fusion" ────────────────────────────────
     print("=" * 60)
@@ -144,7 +178,7 @@ def verify():
     print("=" * 60)
 
     # Compute class number h(-148) = h(-4×37)
-    h_148 = class_number_neg(-148)
+    h_148 = class_number(-148)
     print(f"\n  Class number h(-4×37) = h(-148) = {h_148}")
     assert h_148 == 2
     print(f"  Reduced forms of discriminant -148: 2 forms")
