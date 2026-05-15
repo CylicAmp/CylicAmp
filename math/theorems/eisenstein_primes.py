@@ -1,5 +1,6 @@
 # eisenstein_primes.py
-# Verification of Eisenstein integer norms in Z[ω]
+# Audited with math imports
+import math
 
 def eisenstein_norm(a: int, b: int) -> int:
     """Norm of a + bω where ω is primitive cube root of unity"""
