@@ -1,0 +1,56 @@
+# kaprekar_6174.py
+# Exhaustive verification of Kaprekar's routine for 4-digit numbers
+
+def kaprekar_step(n: int) -> int:
+    """One step of Kaprekar's routine"""
+    s = f"{n:04d}"
+    desc = int(''.join(sorted(s, reverse=True)))
+    asc = int(''.join(sorted(s)))
+    return desc - asc
+
+
+def reaches_6174(start: int, max_steps: int = 20) -> tuple[bool, int]:
+    """Return (reaches_6174, steps_taken)"""
+    seen = set()
+    n = start
+    steps = 0
+    
+    while n != 6174 and steps < max_steps and n not in seen:
+        seen.add(n)
+        n = kaprekar_step(n)
+        steps += 1
+    
+    return n == 6174, steps
+
+
+def verify_kaprekar():
+    print("Kaprekar's Constant 6174 - Exhaustive Test\n")
+    
+    count = 0
+    max_steps = 0
+    step_distribution = {}
+    
+    for num in range(1000, 10000):
+        digits = set(str(num))
+        if len(digits) < 2:
+            continue
+            
+        reaches, steps = reaches_6174(num)
+        assert reaches, f"Failed: {num} did not reach 6174"
+        
+        count += 1
+        max_steps = max(max_steps, steps)
+        step_distribution[steps] = step_distribution.get(steps, 0) + 1
+    
+    print(f"Total numbers tested: {count}")
+    print(f"Maximum steps required: {max_steps}")
+    print("\nStep distribution:")
+    for s in sorted(step_distribution):
+        print(f"  {s} steps: {step_distribution[s]} numbers")
+    
+    assert max_steps <= 7
+    print("\n✅ All Kaprekar tests passed (max 7 steps)")
+
+
+if __name__ == "__main__":
+    verify_kaprekar()
