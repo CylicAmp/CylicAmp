@@ -196,18 +196,23 @@ def verify():
     s17 = math.sqrt(17)
     s73 = math.sqrt(73)
 
-    # (2+√10) satisfies x²−4x−6=0
-    assert abs((2+s10)**2 - 4*(2+s10) - 6) < 1e-9
-    assert abs((-(2+s10))**2 + 4*(-(2+s10)) - 6) < 1e-9
-    # (√10−2) satisfies x²+4x−6=0
-    assert abs((s10-2)**2 + 4*(s10-2) - 6) < 1e-9
-    assert abs((-(s10-2))**2 - 4*(-(s10-2)) - 6) < 1e-9
+    # Factorization: x⁴−28x²+36 = (x²−4x−6)(x²+4x−6)
+    # Each RATIONAL factor pairs eigenvalues ACROSS the ± boundary:
+    #   x²−4x−6 = 0  has roots +(2+√10) and −(√10−2)  [cross pair]
+    #   x²+4x−6 = 0  has roots +(√10−2) and −(2+√10)  [cross pair]
+    # The notation ±(2+√10) and ±(√10−2) names the eigenvalue set correctly,
+    # but each rational minimal polynomial pairs ONE from each ± group.
+    assert abs((2+s10)**2    - 4*(2+s10)    - 6) < 1e-9  # +(2+√10)  → x²-4x-6
+    assert abs((-(s10-2))**2 - 4*(-(s10-2)) - 6) < 1e-9  # -(√10-2)  → x²-4x-6
+    assert abs((s10-2)**2    + 4*(s10-2)    - 6) < 1e-9  # +(√10-2)  → x²+4x-6
+    assert abs((-(2+s10))**2 + 4*(-(2+s10)) - 6) < 1e-9  # -(2+√10)  → x²+4x-6
+    # Product of the two rational factors recovers the quartic at a sample point
+    x = 3
+    assert (x**2-4*x-6)*(x**2+4*x-6) == x**4-28*x**2+36
     # ±2 satisfies x²−4=0
     assert abs(4 - 4) < 1e-12
     # ±√2 satisfies x²−2=0
     assert abs((math.sqrt(2))**2 - 2) < 1e-12
-    # Full char poly: (x⁴−28x²+36) for the irrational quartet — verified algebraically above
-    # Float check skipped: (x²-2)^6 amplifies float error by >10^6
 
     # Verify sum = 0 (trace = 0)
     total = sum(val * mult for _, val, mult in adj_spec)
@@ -223,6 +228,11 @@ def verify():
     for name, val, mult in adj_spec:
         print(f"  {name:<14}  {val:>10.6f}  {mult:>4}")
     print(f"\n  Characteristic polynomial: (x⁴−28x²+36)(x²−4)²(x²−2)⁶  ✓")
+    print(f"  Quartic factorization (rational): (x²−4x−6)(x²+4x−6)  ✓")
+    print(f"    x²−4x−6 = 0  →  roots +(2+√10) and −(√10−2)  [cross pair]")
+    print(f"    x²+4x−6 = 0  →  roots +(√10−2) and −(2+√10)  [cross pair]")
+    print(f"  NOTE: each rational minimal polynomial pairs eigenvalues across ±;")
+    print(f"        ±(√10−2) are NOT both roots of any single rational quadratic.")
     print(f"  Degree: 4+4+12 = 20  ✓")
     print(f"  Trace (sum of evals): {total:.2e} ≈ 0  ✓")
     print(f"  Sum of squares = {sum_sq:.1f} = 2×{len(edges)} = 2|E|  ✓")
