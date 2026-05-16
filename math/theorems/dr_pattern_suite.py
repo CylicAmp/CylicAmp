@@ -61,10 +61,10 @@ def verify_patterns():
     assert dr(disc) == 9
     print("9. Cardano discriminant DR=9: PASSED")
     
-    # 10. Example coordinate (fixed: 135, dr=9)
-    example = 135
-    assert dr(example) == 9
-    print("10. Example coordinate dr=9: PASSED")
+    # 10. Date coordinate: digit sum of 2026-05-02 = 2+0+2+6+0+5+0+2 = 17 → dr=8
+    example = 17
+    assert dr(example) == 8
+    print("10. Date coordinate dr(17)=8: PASSED")
     
     print("\n✅ ALL TESTS PASSED")
 
