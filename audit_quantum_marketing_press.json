@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-05-26T23:44:40.406392+00:00",
+  "source_url": "mock://quantum_marketing_press",
+  "extracted_metrics": {
+    "baseline_coherence_time": null,
+    "max_coherence_time": 5.5,
+    "qubit_count": 10,
+    "hyperbolic_count": 2,
+    "detected_hyperbole_list": [
+      "unbreakable",
+      "two time dimensions"
+    ],
+    "is_quasi_periodic": false
+  },
+  "test_results": {
+    "suite_passed": false,
+    "failures": [
+      {
+        "test_case": "test_baseline_duration_bounds",
+        "error": "Traceback (most recent call last):\n  File \"/home/user/CylicAmp/pipeline/text_audit_pipeline.py\", line 125, in test_baseline_duration_bounds\n    self.assertIsNotNone(val, \"Baseline coherence time missing from text data.\")\nAssertionError: unexpectedly None : Baseline coherence time missing from text data."
+      },
+      {
+        "test_case": "test_linguistic_rigor_index",
+        "error": "Traceback (most recent call last):\n  File \"/home/user/CylicAmp/pipeline/text_audit_pipeline.py\", line 145, in test_linguistic_rigor_index\n    self.assertLessEqual(\nAssertionError: 2 not less than or equal to 1 : Document failed strict peer-review audit. Hyperbolic load count: 2"
+      }
+    ]
+  }
+}
