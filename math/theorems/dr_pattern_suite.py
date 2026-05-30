@@ -21,10 +21,13 @@ DR convention used throughout: DR(n) = (n−1)%9+1 for n>0; DR(0)=0.
 
 
 def dr(n: int) -> int:
-    """Digital root (1-based for n>0; 0 for n=0)."""
+    """Digital root: DR(0)=0; DR(n)=9 if 9|n else n%9, for n>0.
+    Sign-invariant: DR(n) = DR(|n|)."""
+    n = abs(n)
     if n == 0:
         return 0
-    return (n - 1) % 9 + 1
+    r = n % 9
+    return r if r != 0 else 9
 
 
 # =============================================================================
@@ -187,25 +190,30 @@ assert dr(73) == 1
 assert dr(2701) == 1
 assert 37 * 73 == 2701
 
-# Multiplicative identity: 44 − 11 = 33 = 9×(11/3); more directly:
-#   11·3k ≡ 6k (mod 9)  and  44·3k ≡ 6k (mod 9)
-# so 11g ≡ 44g (mod 9) whenever g = 3k.
-# Cycle of 6k mod 9: 6, 3, 9, 6, 3, 9, …  (period 3)
-assert 11 % 9 == 2
-assert 44 % 9 == 8
-assert (11 * 3) % 9 == (44 * 3) % 9 == 6
-
-for k in range(1, 1000):
+# Triadic identity — algebraic proof (no loop needed):
+#   44 − 11 = 33,  and  33·g ≡ 0 (mod 9) whenever 3|g.
+#   Proof: g = 3k → 33·3k = 99k = 9·11k ≡ 0 (mod 9). ∎
+#   Therefore 11g ≡ 44g (mod 9) → DR(11g) = DR(44g) for all 3|g.
+assert (44 - 11) == 33
+assert 33 % 9 == 6           # 33 ≡ 6 mod 9
+assert (33 * 3) % 9 == 0     # the key collapse: 99 ≡ 0 mod 9
+# Sample check (belt-and-suspenders, not a substitute for the proof above):
+for k in (1, 2, 3, 7, 100, 333):
     g = 3 * k
-    assert dr(11 * g) == dr(44 * g), f"identity fails at g={g}"
+    assert dr(11 * g) == dr(44 * g)
 
-# The 6k mod 9 cycle: 6,3,0,6,3,0,… but DR maps 0→9, giving 6,3,9,6,3,9,…
+# The 6k DR cycle: 6,3,9,6,3,9,… (period 3, follows from 33·3k ≡ 0 mod 9)
 expected_dr_cycle = [6, 3, 9]
-for k in range(1, 100):
+for k in range(1, 10):
     raw = (6 * k) % 9
-    expected = expected_dr_cycle[(k - 1) % 3]
     actual = raw if raw != 0 else 9
-    assert actual == expected, f"cycle fails at k={k}: got {actual}"
+    assert actual == expected_dr_cycle[(k - 1) % 3]
+
+# DR is a multiplicative homomorphism: DR(a×b) = DR(DR(a) × DR(b))
+# This is the general principle behind the {37,73,2701} cluster:
+#   37 ≡ 1, 73 ≡ 1 (mod 9) → product ≡ 1 (mod 9) → DR = 1.
+for a, b in [(37, 73), (2, 5), (4, 7), (9, 9), (6, 6)]:
+    assert dr(a * b) == dr(dr(a) * dr(b)), f"homomorphism fails at {a},{b}"
 
 
 # =============================================================================
@@ -336,12 +344,12 @@ if __name__ == "__main__":
     print(f"   ω = e^(2πi/3) satisfies ω²+ω+1=0  ✓")
     print()
 
-    print("K. DR=1 cluster and 11g ≡ 44g (mod 9) for 3∣g")
+    print("K. DR=1 cluster and triadic identity")
     print(f"   DR(c=299792458)={dr(c_light)}, DR(37)={dr(37)}, DR(73)={dr(73)}, DR(2701)={dr(2701)}")
-    print(f"   37 × 73 = {37*73}  ✓")
-    print(f"   11 mod 9 = {11%9},  44 mod 9 = {44%9};  11·3k ≡ 44·3k ≡ 6k (mod 9)")
-    print(f"   DR(11g)=DR(44g) verified for g=3k, k=1..999")
+    print(f"   37 × 73 = {37*73}  ✓  (37≡73≡1 mod 9, product≡1 mod 9)")
+    print(f"   Triadic identity: 44g−11g=33g≡0 (mod 9) when 3|g  (proof, not loop)")
     print(f"   6k DR cycle: {[expected_dr_cycle[(k-1)%3] for k in range(1,10)]}…")
+    print(f"   Homomorphism: DR(a×b)=DR(DR(a)×DR(b)) verified for 5 pairs")
     print()
 
     print("L. D₄ group algebra — K = ασ + βτ spectral decomposition")
