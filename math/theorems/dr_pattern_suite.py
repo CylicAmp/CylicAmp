@@ -16,6 +16,7 @@ Covers ten verified findings from the pattern survey:
   K. DR=1 cluster: {c, 37, 73, 2701} and 11g ≡ 44g (mod 9) for 3∣g
   L. D₄ group algebra: ℂ[D₄] Wedderburn blocks for K = ασ + βτ
   M. D₄ Class II Hamiltonian: S={r,r⁻¹,s,r²s} — cancellations, M_E, multiplicities
+  N. Engineered motif M=[4,5,6,7,6,5,4,3,4,3,2,1]: gradient word, center of D₄
 
 DR convention used throughout: DR(n) = (n−1)%9+1 for n>0; DR(0)=0.
 """
@@ -355,6 +356,50 @@ assert _n_minus4 == 16
 assert _n_zero   == 96
 assert _n_plus4 + _n_zero + _n_minus4 == 128
 
+# =============================================================================
+# N. Engineered motif M and D₄ word evaluation
+# =============================================================================
+# Proposed Phase-B motif: M = [4,5,6,7,6,5,4,3,4,3,2,1]
+# Gradient lift rule (orientation-preserving subgroup Z₄ ⊂ D₄, abelian):
+#   Δmⱼ > 0  →  r      (exponent +1 mod 4)
+#   Δmⱼ < 0  →  r⁻¹    (exponent -1 mod 4)
+#   Δmⱼ = 0  →  e      (exponent  0)
+# In the abelian Z₄ the word product is just the sum of exponents mod 4.
+# Periodic motif: the 12th gradient is m₀ - m₁₁ (wrap-around).
+
+_motif = [4, 5, 6, 7, 6, 5, 4, 3, 4, 3, 2, 1]
+_n_steps = len(_motif)                                  # 12
+_grads = [_motif[(j+1) % _n_steps] - _motif[j] for j in range(_n_steps)]
+# Exponents: +1 for positive, -1 for negative, 0 for zero step
+_exps = [+1 if d > 0 else (-1 if d < 0 else 0) for d in _grads]
+_word_exp = sum(_exps) % 4          # total word exponent in Z₄
+_prefix4_exp = sum(_exps[:4]) % 4   # first-4-step prefix
+
+# What the word actually evaluates to (naming by exponent mod 4):
+_word_name  = {0: "e", 1: "r", 2: "r²", 3: "r³"}
+_word_full   = _word_name[_word_exp]
+_word_prefix = _word_name[_prefix4_exp]
+
+# --- Center of D₄ ---
+# Z(D₄) = {e, r²}: r² is the unique non-trivial central element.
+# Verify: r² commutes with every generator (r and s).
+# r·r² = r³ = r²·r  ✓  (r commutes with r² trivially in Z₄)
+# s·r²·s⁻¹ = r⁻² = r²  (since r⁻² = r² in Z₄, and s·rᵏ·s = r⁻ᵏ)
+def _d4_conjugate_r2_by_s():
+    """Conjugate r² by s: s·r²·s⁻¹ = r⁻² = r² (in Z₄)."""
+    return (-2) % 4   # r⁻² ≡ r² mod 4
+
+assert _d4_conjugate_r2_by_s() == 2   # r⁻² ≡ r²
+# r²·r² = r⁴ = e
+assert (2 + 2) % 4 == 0
+
+# --- Report what the motif's word actually is ---
+# (The engineered motif targets P₁₂=e and prefix=r², but the actual
+#  computed values are recorded here without override.)
+_motif_grads_summary = _grads        # stored for __main__ print
+_full_word_result   = _word_full
+_prefix_word_result = _word_prefix
+
 
 if __name__ == "__main__":
     print("Digital-Root Pattern Suite")
@@ -428,6 +473,14 @@ if __name__ == "__main__":
     print(f"   1D blocks M_{{A1,A2,B1,B2}} = 0  ✓")
     print(f"   M_E eigenvalues = {[round(v) for v in sorted(_M_E_evals.real)]}  ✓")
     print(f"   64-site spectrum (t=1): +4×{_n_plus4}, 0×{_n_zero}, -4×{_n_minus4} = {_n_plus4+_n_zero+_n_minus4} ✓")
+    print()
+
+    print("N. Engineered motif M=[4,5,6,7,6,5,4,3,4,3,2,1]")
+    print(f"   Gradients (cyclic): {_motif_grads_summary}")
+    print(f"   Exponents: {_exps}")
+    print(f"   12-step word P₁₂  = {_full_word_result}  (claimed: e)")
+    print(f"   4-step prefix word = {_prefix_word_result}  (claimed: r²)")
+    print(f"   Z(D₄) center: r²·r²=e ✓, s·r²·s⁻¹=r² ✓")
     print()
 
     print("All assertions passed.")
