@@ -400,6 +400,54 @@ _motif_grads_summary = _grads        # stored for __main__ print
 _full_word_result   = _word_full
 _prefix_word_result = _word_prefix
 
+# =============================================================================
+# O. D₄ E-representation algebra generation and M_E commutant structure
+# =============================================================================
+# Structural correction to Section M:
+# "Operator lives in non-abelian isotypic ideal" is correct; "pure E-sector
+# with independent copies" is too strong.  The full algebra is End(E^⊕8) ≅
+# M_8(M_2(C)), which does not imply decoupling across multiplicities.
+#
+# Two concrete checks:
+# (1) Burnside density: the 8 E-rep images of D₄ span all of M_2(C).
+# (2) Commutant of M_E in M_4(C): encodes hidden structure from the two zero
+#     modes.  For eigenvalues {-4(×1), 0(×2), +4(×1)}, the commutant is
+#     M_1(C) ⊕ M_2(C) ⊕ M_1(C)  (dim = 1+4+1 = 6).
+
+# --- (1) E-rep spans M_2(C) ---
+_d4_e_reps = [
+    np.eye(2, dtype=int),              # e
+    _r,                                 # r
+    _r @ _r,                            # r²
+    _r @ _r @ _r,                       # r³
+    _s,                                 # s
+    _r @ _s,                            # rs
+    _r @ _r @ _s,                       # r²s
+    _r @ _r @ _r @ _s,                  # r³s
+]
+# Vectorise each 2×2 matrix → column in a 4×8 matrix
+_e_vecs = np.column_stack([m.flatten().astype(float) for m in _d4_e_reps])
+_e_span_rank = np.linalg.matrix_rank(_e_vecs)
+assert _e_span_rank == 4, (
+    f"E-rep should span M_2(C) (dim=4) by Burnside density; got rank {_e_span_rank}"
+)
+
+# --- (2) Commutant of M_E in M_4(C) ---
+# X commutes with M_E  ⟺  (I⊗M_E − M_E^T⊗I) vec(X) = 0
+# M_E is symmetric (each kron(U,U)^T = kron(U^T,U^T) = kron(−U,−U) = kron(U,U))
+_comm_map = np.kron(np.eye(4), _M_E) - np.kron(_M_E.T, np.eye(4))  # 16×16
+_comm_dim = 16 - int(np.round(np.linalg.matrix_rank(_comm_map)))
+# Expected: eigenvalue multiplicities 1,2,1 → commutant dim = 1+4+1 = 6
+assert _comm_dim == 6, (
+    f"Commutant of M_E should be dim 6 (1+M_2+1 from eigenvalue structure), "
+    f"got {_comm_dim}"
+)
+
+# --- M_E² eigenvalues: {(−4)², 0², 0², 4²} = {0,0,16,16} ---
+_M_E_sq = _M_E @ _M_E
+_M_E_sq_evals = sorted(np.linalg.eigvals(_M_E_sq).real)
+assert np.allclose(_M_E_sq_evals, [0, 0, 16, 16], atol=1e-10)
+
 
 if __name__ == "__main__":
     print("Digital-Root Pattern Suite")
@@ -481,6 +529,14 @@ if __name__ == "__main__":
     print(f"   12-step word P₁₂  = {_full_word_result}  (claimed: e)")
     print(f"   4-step prefix word = {_prefix_word_result}  (claimed: r²)")
     print(f"   Z(D₄) center: r²·r²=e ✓, s·r²·s⁻¹=r² ✓")
+    print()
+
+    print("O. D₄ E-rep algebra generation and M_E commutant")
+    print(f"   E-rep images span M_2(C): rank={_e_span_rank}/4  ✓  (Burnside density)")
+    print(f"   Commutant of M_E in M_4(C): dim={_comm_dim}  (= 1+4+1, eigenvalues {{-4,0,0,+4}})")
+    print(f"   M_E² eigenvalues: {[round(v) for v in _M_E_sq_evals]}  (= {{0,0,16,16}})  ✓")
+    print(f"   Conclusion: zero modes occupy a 2D null-space with full M_2(C) commutant;")
+    print(f"   system is partially integrable (not maximally non-abelian in E-sector).")
     print()
 
     print("All assertions passed.")
