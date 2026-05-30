@@ -14,6 +14,7 @@ Covers ten verified findings from the pattern survey:
   I. Date Coordinates: session date DR chain 2→7→1
   J. Cardano / ω: roots of x³ − 3x − 1 = 0 via cube root of unity
   K. DR=1 cluster: {c, 37, 73, 2701} and 11g ≡ 44g (mod 9) for 3∣g
+  L. D₄ group algebra: ℂ[D₄] Wedderburn blocks for K = ασ + βτ
 
 DR convention used throughout: DR(n) = (n−1)%9+1 for n>0; DR(0)=0.
 """
@@ -207,6 +208,85 @@ for k in range(1, 100):
     assert actual == expected, f"cycle fails at k={k}: got {actual}"
 
 
+# =============================================================================
+# L. D₄ group algebra: ℂ[D₄] Wedderburn decomposition for K = ασ + βτ
+# =============================================================================
+# D₄ = ⟨σ,τ | σ⁴=e, τ²=e, τστ=σ⁻¹⟩
+# 5 irreps: A₁,A₂,B₁,B₂ (1D) and E (2D).
+#
+# For K = ασ + βτ, the image in each irrep:
+#   A₁: χ(σ)=+1, χ(τ)=+1  →  K_{A₁} = α + β
+#   A₂: χ(σ)=+1, χ(τ)=−1  →  K_{A₂} = α − β
+#   B₁: χ(σ)=−1, χ(τ)=+1  →  K_{B₁} = −α + β
+#   B₂: χ(σ)=−1, χ(τ)=−1  →  K_{B₂} = −α − β
+#   E:  σ → [[0,−1],[1,0]], τ → [[1,0],[0,−1]]
+#       K_E = [[β,−α],[α,−β]]   eigenvalues ±√(β²−α²)
+
+import numpy as np  # already available in this environment
+
+def _d4_spectrum(alpha: float, beta: float) -> dict:
+    """Return full D₄ group-algebra spectrum for K = α·σ + β·τ."""
+    one_d = {
+        "A1": alpha + beta,
+        "A2": alpha - beta,
+        "B1": -alpha + beta,
+        "B2": -alpha - beta,
+    }
+    K_E = np.array([[beta, -alpha], [alpha, -beta]], dtype=complex)
+    evals_E = np.linalg.eigvals(K_E)
+    return {"1D": one_d, "E_matrix": K_E, "E_eigenvalues": evals_E}
+
+
+def _e_eigenvalues_analytic(alpha: float, beta: float):
+    disc = beta**2 - alpha**2
+    if disc >= 0:
+        return math.sqrt(disc), -math.sqrt(disc)
+    return complex(0, math.sqrt(-disc)), complex(0, -math.sqrt(-disc))
+
+
+# --- Fiber K_E = [[0,1+i],[1-i,0]] has eigenvalues ±√2 ---
+K_fiber = np.array([[0, 1+1j], [1-1j, 0]])
+evals_fiber = np.linalg.eigvals(K_fiber)
+assert np.allclose(sorted(evals_fiber.real), [-math.sqrt(2), math.sqrt(2)], atol=1e-12)
+assert np.allclose(evals_fiber.imag, 0, atol=1e-12)
+
+# --- Verify analytic formula against numpy for several (α,β) pairs ---
+for alpha, beta in [(1, 0), (0, 1), (1, 1), (3, 2), (2, 3)]:
+    spec = _d4_spectrum(alpha, beta)
+    one_d = spec["1D"]
+
+    assert abs(one_d["A1"] - (alpha + beta)) < 1e-12
+    assert abs(one_d["A2"] - (alpha - beta)) < 1e-12
+    assert abs(one_d["B1"] - (-alpha + beta)) < 1e-12
+    assert abs(one_d["B2"] - (-alpha - beta)) < 1e-12
+
+    lam_p, lam_m = _e_eigenvalues_analytic(alpha, beta)
+    numeric = list(spec["E_eigenvalues"])
+    for a in [lam_p, lam_m]:
+        assert min(abs(n - a) for n in numeric) < 1e-10, (
+            f"α={alpha},β={beta}: analytic eigenvalue {a} not found in {numeric}"
+        )
+
+# --- Special regimes ---
+# (i) β=α → E-block eigenvalues = 0 (flat)
+lp, lm = _e_eigenvalues_analytic(1, 1)
+assert abs(lp) < 1e-12 and abs(lm) < 1e-12
+
+# (ii) α=0 → E-block eigenvalues = ±β (pure reflection, real)
+lp, lm = _e_eigenvalues_analytic(0, 3)
+assert abs(lp - 3) < 1e-12 and abs(lm + 3) < 1e-12
+
+# (iii) β=0 → E-block eigenvalues = ±iα (pure rotation, imaginary)
+lp, lm = _e_eigenvalues_analytic(2, 0)
+assert abs(lp - complex(0, 2)) < 1e-12 and abs(lm - complex(0, -2)) < 1e-12
+
+# --- 1D spectrum forms a ℤ/2 × ℤ/2 pattern under (±α) × (±β) ---
+for alpha, beta in [(1, 2), (3, 5)]:
+    vals = sorted([alpha+beta, alpha-beta, -alpha+beta, -alpha-beta])
+    expected = sorted([-alpha-beta, -alpha+beta, alpha-beta, alpha+beta])
+    assert vals == expected
+
+
 if __name__ == "__main__":
     print("Digital-Root Pattern Suite")
     print()
@@ -262,6 +342,16 @@ if __name__ == "__main__":
     print(f"   11 mod 9 = {11%9},  44 mod 9 = {44%9};  11·3k ≡ 44·3k ≡ 6k (mod 9)")
     print(f"   DR(11g)=DR(44g) verified for g=3k, k=1..999")
     print(f"   6k DR cycle: {[expected_dr_cycle[(k-1)%3] for k in range(1,10)]}…")
+    print()
+
+    print("L. D₄ group algebra — K = ασ + βτ spectral decomposition")
+    _ab = [(1, 0), (0, 1), (1, 1), (3, 2)]
+    for _a, _b in _ab:
+        _eig1d = [_a+_b, _a-_b, -_a+_b, -_a-_b]
+        _eig2d = (complex(0, _a) if _a**2 > _b**2
+                  else math.sqrt(_b**2 - _a**2))
+        print(f"   α={_a}, β={_b}: 1D={_eig1d}, E±={_b**2-_a**2}^½")
+    print(f"   Fiber K_E([[0,1+i],[1-i,0]]) eigenvalues = ±{math.sqrt(2):.6f}")
     print()
 
     print("All assertions passed.")
