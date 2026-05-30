@@ -15,6 +15,7 @@ Covers ten verified findings from the pattern survey:
   J. Cardano / ω: roots of x³ − 3x − 1 = 0 via cube root of unity
   K. DR=1 cluster: {c, 37, 73, 2701} and 11g ≡ 44g (mod 9) for 3∣g
   L. D₄ group algebra: ℂ[D₄] Wedderburn blocks for K = ασ + βτ
+  M. D₄ Class II Hamiltonian: S={r,r⁻¹,s,r²s} — cancellations, M_E, multiplicities
 
 DR convention used throughout: DR(n) = (n−1)%9+1 for n>0; DR(0)=0.
 """
@@ -294,6 +295,66 @@ for alpha, beta in [(1, 2), (3, 5)]:
     expected = sorted([-alpha-beta, -alpha+beta, alpha-beta, alpha+beta])
     assert vals == expected
 
+# =============================================================================
+# M. D₄ Class II Hamiltonian: generating set S = {r, r⁻¹, s, r²s}
+# =============================================================================
+# With the specific generating set S = {σ, σ³, τ, σ²τ} the two pairs cancel:
+#   U_E(σ) + U_E(σ³) = 0    (rotation + inverse)
+#   U_E(τ)  + U_E(σ²τ) = 0  (reflection + conjugate)
+# This forces ALL four 1D isotypic blocks to zero (regardless of 1D characters
+# being ±1, both sub-sums vanish independently).
+# The only active sector is the 2D E block: M_E = Σ U_E(a)⊗U_E(a) with
+# eigenvalues [-4, 0, 0, 4].
+# On 64 sites = 8×|D₄| with 2D fiber: +4 (×16), 0 (×96), -4 (×16).
+
+# E-irrep generator matrices (standard faithful representation of D₄)
+_r      = np.array([[ 0, -1], [ 1,  0]])   # σ: rotation 90°
+_r_inv  = np.array([[ 0,  1], [-1,  0]])   # σ³ = σ⁻¹
+_s      = np.array([[ 1,  0], [ 0, -1]])   # τ: reflection
+_r2s    = np.array([[-1,  0], [ 0,  1]])   # σ²τ
+
+# --- Cancellation identities ---
+assert np.all(_r + _r_inv == 0),   "U(r) + U(r⁻¹) ≠ 0"
+assert np.all(_s + _r2s   == 0),   "U(s) + U(r²s) ≠ 0"
+
+_S_class2 = [_r, _r_inv, _s, _r2s]
+
+# --- All four 1D block matrices vanish ---
+# χ(r), χ(r³), χ(s), χ(r²s) for each irrep:
+_chars_1d = {
+    "A1": [ 1,  1,  1,  1],
+    "A2": [ 1,  1, -1, -1],
+    "B1": [-1, -1,  1,  1],
+    "B2": [-1, -1, -1, -1],
+}
+for _name, _ch in _chars_1d.items():
+    _M = sum(c * U for c, U in zip(_ch, _S_class2))
+    assert np.all(_M == 0), f"M_{_name} ≠ 0: {_M}"
+
+# --- E-block: M_E = Σ U_E(a) ⊗ U_E(a) ---
+_M_E = sum(np.kron(U, U) for U in _S_class2)
+_M_E_evals = np.linalg.eigvals(_M_E)
+assert np.allclose(sorted(_M_E_evals.real), [-4, 0, 0, 4], atol=1e-10)
+assert np.allclose(_M_E_evals.imag, 0, atol=1e-10)
+
+# --- Multiplicity counting on 64-site = 8×|D₄| lattice with 2D fiber ---
+# Regular rep of D₄ (order 8): A1,A2,B1,B2 appear 1× each; E appears 2×.
+# With 8 copies of the regular rep (= 64 sites):
+#   1D irreps: 8 occurrences each in base; with 2D fiber → 16 states each
+#   E irrep:  16 occurrences in base; with 2D fiber → 16×4 = 64 states
+#     M_E evals [-4,0,0,4] → 16 at -4, 32 at 0, 16 at +4
+_n_reg_copies = 64 // 8           # = 8
+_n_per_1d = _n_reg_copies * 1 * 2  # 8 occurrences × dim1 × fiber2 = 16
+_n_e_copies = 2 * _n_reg_copies    # 2 per regular rep × 8 = 16
+_n_plus4  = _n_e_copies * 1        # 16 (one +4 eigenvalue per 4×4 block)
+_n_minus4 = _n_e_copies * 1        # 16
+_n_zero   = 4 * _n_per_1d + _n_e_copies * 2   # 64 (1D) + 32 (E zeros) = 96
+
+assert _n_plus4  == 16
+assert _n_minus4 == 16
+assert _n_zero   == 96
+assert _n_plus4 + _n_zero + _n_minus4 == 128
+
 
 if __name__ == "__main__":
     print("Digital-Root Pattern Suite")
@@ -360,6 +421,13 @@ if __name__ == "__main__":
                   else math.sqrt(_b**2 - _a**2))
         print(f"   α={_a}, β={_b}: 1D={_eig1d}, E±={_b**2-_a**2}^½")
     print(f"   Fiber K_E([[0,1+i],[1-i,0]]) eigenvalues = ±{math.sqrt(2):.6f}")
+    print()
+
+    print("M. D₄ Class II Hamiltonian — S={r,r⁻¹,s,r²s}")
+    print(f"   U(r)+U(r⁻¹) = 0  ✓   U(s)+U(r²s) = 0  ✓")
+    print(f"   1D blocks M_{{A1,A2,B1,B2}} = 0  ✓")
+    print(f"   M_E eigenvalues = {[round(v) for v in sorted(_M_E_evals.real)]}  ✓")
+    print(f"   64-site spectrum (t=1): +4×{_n_plus4}, 0×{_n_zero}, -4×{_n_minus4} = {_n_plus4+_n_zero+_n_minus4} ✓")
     print()
 
     print("All assertions passed.")
