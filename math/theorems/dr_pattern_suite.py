@@ -448,6 +448,81 @@ _M_E_sq = _M_E @ _M_E
 _M_E_sq_evals = sorted(np.linalg.eigvals(_M_E_sq).real)
 assert np.allclose(_M_E_sq_evals, [0, 0, 16, 16], atol=1e-10)
 
+# =============================================================================
+# P. Kernel of M_E: explicit basis, D₄ action, and commutant generators
+# =============================================================================
+# The 2D kernel of M_E = 2·kron(r,r) + 2·kron(s,s) consists of vec(X) for
+# 2×2 matrices X satisfying s·X·s = r·X·r (kernel condition).
+# Solution: X must be traceless AND have antisymmetric off-diagonal:
+#   X = a·σ_z + b·[[0,1],[-1,0]]  for any a,b ∈ C.
+# Basis:
+#   k₁ = vec([[0,1],[-1,0]]) = [0,1,-1,0]   (= vec(iσ_y))
+#   k₂ = vec([[1,0],[0,-1]]) = [1,0,0,-1]   (= vec(σ_z))
+
+_k1 = np.array([0., 1.,-1., 0.])   # vec([[0,1],[-1,0]])
+_k2 = np.array([1., 0., 0.,-1.])   # vec([[1,0],[0,-1]])
+
+assert np.allclose(_M_E @ _k1, 0, atol=1e-10), "k₁ not in kernel"
+assert np.allclose(_M_E @ _k2, 0, atol=1e-10), "k₂ not in kernel"
+assert abs(_k1 @ _k2) < 1e-10, "k₁, k₂ should be orthogonal"
+
+# --- D₄ acts on kernel via g⊗g — action is diagonal (abelian Z₂×Z₂ image) ---
+# Claim: every g⊗g preserves {k₁,k₂} and acts diagonally in that basis.
+# This means the non-abelian D₄ reduces to an abelian group on ker(M_E).
+_d4_kron_elems = {
+    "e"  : np.kron(np.eye(2),           np.eye(2)),
+    "r"  : np.kron(_r.astype(float),    _r.astype(float)),
+    "r2" : np.kron((_r@_r).astype(float), (_r@_r).astype(float)),
+    "r3" : np.kron((_r@_r@_r).astype(float), (_r@_r@_r).astype(float)),
+    "s"  : np.kron(_s.astype(float),    _s.astype(float)),
+    "rs" : np.kron((_r@_s).astype(float), (_r@_s).astype(float)),
+    "r2s": np.kron((_r@_r@_s).astype(float), (_r@_r@_s).astype(float)),
+    "r3s": np.kron((_r@_r@_r@_s).astype(float), (_r@_r@_r@_s).astype(float)),
+}
+_K = np.column_stack([_k1/np.sqrt(2), _k2/np.sqrt(2)])   # orthonormal kernel frame
+
+_d4_ker_diags = {}
+for _gname, _gg in _d4_kron_elems.items():
+    _act = _K.T @ _gg @ _K   # 2×2 restricted action
+    # Must be diagonal
+    assert abs(_act[0,1]) < 1e-10 and abs(_act[1,0]) < 1e-10, (
+        f"g={_gname}: D₄ action on kernel should be diagonal, got {_act}"
+    )
+    _d4_ker_diags[_gname] = (round(_act[0,0]), round(_act[1,1]))
+
+# r⊗r acts as diag(+1,−1) = σ_z;  s⊗s acts as diag(−1,+1) = −σ_z on kernel
+assert _d4_ker_diags["r"]  == ( 1,-1), "r⊗r should act as σ_z on kernel"
+assert _d4_ker_diags["s"]  == (-1, 1), "s⊗s should act as -σ_z on kernel"
+assert _d4_ker_diags["rs"] == (-1,-1), "rs⊗rs should act as -I on kernel"
+assert _d4_ker_diags["e"]  == ( 1, 1), "e⊗e should act as I on kernel"
+
+# --- σ_z⊗I and I⊗σ_z do NOT preserve ker(M_E) ---
+_sz_kron_I = np.kron(np.diag([1.,-1.]), np.eye(2))
+_I_kron_sz = np.kron(np.eye(2), np.diag([1.,-1.]))
+assert not np.allclose(_M_E @ (_sz_kron_I @ _k1), 0, atol=1e-10), (
+    "σ_z⊗I maps k₁ OUT of ker(M_E)"
+)
+assert not np.allclose(_M_E @ (_I_kron_sz @ _k1), 0, atol=1e-10), (
+    "I⊗σ_z maps k₁ OUT of ker(M_E)"
+)
+
+# --- Commutant generators on ker(M_E): outer products Pᵢⱼ = kᵢ⊗kⱼᵀ ---
+_P11 = np.outer(_K[:,0], _K[:,0])
+_P12 = np.outer(_K[:,0], _K[:,1])
+_P21 = np.outer(_K[:,1], _K[:,0])
+_P22 = np.outer(_K[:,1], _K[:,1])
+
+for _P, _name in zip([_P11,_P12,_P21,_P22], ["P11","P12","P21","P22"]):
+    assert np.allclose(_M_E @ _P - _P @ _M_E, 0, atol=1e-10), (
+        f"{_name} should commute with M_E"
+    )
+
+# Their restricted actions on ker span all of M₂(C) (standard basis e_ij)
+assert np.allclose(_K.T @ _P11 @ _K, [[1,0],[0,0]], atol=1e-10)
+assert np.allclose(_K.T @ _P12 @ _K, [[0,1],[0,0]], atol=1e-10)
+assert np.allclose(_K.T @ _P21 @ _K, [[0,0],[1,0]], atol=1e-10)
+assert np.allclose(_K.T @ _P22 @ _K, [[0,0],[0,1]], atol=1e-10)
+
 
 if __name__ == "__main__":
     print("Digital-Root Pattern Suite")
@@ -537,6 +612,18 @@ if __name__ == "__main__":
     print(f"   M_E² eigenvalues: {[round(v) for v in _M_E_sq_evals]}  (= {{0,0,16,16}})  ✓")
     print(f"   Conclusion: zero modes occupy a 2D null-space with full M_2(C) commutant;")
     print(f"   system is partially integrable (not maximally non-abelian in E-sector).")
+    print()
+
+    print("P. Kernel of M_E: basis, D₄ action, and commutant generators")
+    print(f"   ker(M_E) = span{{k₁=[0,1,-1,0], k₂=[1,0,0,-1]}} (orthogonal, dim=2)")
+    print(f"   k₁ = vec(iσ_y) = vec([[0,1],[-1,0]]),  k₂ = vec(σ_z) = vec([[1,0],[0,-1]])")
+    print(f"   D₄ image on ker (via g⊗g): {_d4_ker_diags}")
+    print(f"   → All actions diagonal: Z₂×Z₂ image (abelian, not full D₄)")
+    print(f"   r⊗r acts as diag(+1,−1) = σ_z on ker  ✓")
+    print(f"   s⊗s acts as diag(−1,+1) = -σ_z on ker  ✓")
+    print(f"   σ_z⊗I and I⊗σ_z do NOT preserve ker(M_E)  ✓  (proposed T_z/S_z are wrong)")
+    print(f"   Commutant generators P_ij = k_i⊗k_j^T commute with M_E ✓")
+    print(f"   Actions on ker: P11=e11, P12=e12, P21=e21, P22=e22 → span M_2(C) ✓")
     print()
 
     print("All assertions passed.")
