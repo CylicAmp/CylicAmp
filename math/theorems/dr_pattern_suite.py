@@ -523,6 +523,69 @@ assert np.allclose(_K.T @ _P12 @ _K, [[0,1],[0,0]], atol=1e-10)
 assert np.allclose(_K.T @ _P21 @ _K, [[0,0],[1,0]], atol=1e-10)
 assert np.allclose(_K.T @ _P22 @ _K, [[0,0],[0,1]], atol=1e-10)
 
+# =============================================================================
+# Q. H_E(t,δ) perturbation matrix — exact characteristic polynomial
+# =============================================================================
+# H_E is NOT M_E from Section M.  It is a separate 4×4 matrix proposed as an
+# "E-block Hamiltonian":
+#   H_E(t,δ) = [[0,4+t,δ,0],[4+t,0,0,0],[δ,0,0,4-t],[0,0,4-t,0]]
+#
+# Exact characteristic polynomial (no approximation):
+#   λ⁴ − [(4+t)²+(4-t)²+δ²]·λ² + (4+t)²(4-t)² = 0
+#
+# Correction to proposed formula:
+#   "±(4t+δ), ±(4t-δ)" is wrong: at t=0.5, δ=0 gives ±2, actual is ±4.5.
+#   "±((4+t)+δ), ±((4-t)−δ)" is also wrong: splitting is O(δ²), not O(δ).
+#   Exact lower eigenvalue: (4−t)·√(1 − δ²/(2(A−B))) where A=(4+t)², B=(4−t)²,
+#   A−B = 16t. First-order-in-δ correction is identically zero.
+
+def _H_E_perturb(t, d):
+    return np.array([[0,4+t,d,0],[4+t,0,0,0],[d,0,0,4-t],[0,0,4-t,0]], dtype=float)
+
+# Verify exact char poly coefficients via tr(H²) and det(H)
+for _tq, _dq in [(0.5, 0.0), (0.5, 0.1), (4.0, 0.0), (4.0, 0.5)]:
+    _Hq  = _H_E_perturb(_tq, _dq)
+    _Aq  = (4 + _tq) ** 2
+    _Bq  = (4 - _tq) ** 2
+    _trH2q = np.trace(_Hq @ _Hq)
+    _detq  = np.linalg.det(_Hq)
+    assert np.isclose(-_trH2q / 2, -(_Aq + _Bq + _dq**2), rtol=1e-9), \
+        f"λ² coefficient wrong at t={_tq}, δ={_dq}"
+    assert np.isclose(_detq, _Aq * _Bq, atol=1e-8), \
+        f"constant coefficient wrong at t={_tq}, δ={_dq}"
+
+# At δ=0: eigenvalues exactly ±(4+t), ±(4−t)
+for _tq in [0.0, 0.5, 1.0, 2.0, 3.5]:
+    _evq = sorted(np.linalg.eigvalsh(_H_E_perturb(_tq, 0.0)))
+    assert np.allclose(_evq, [-(4+_tq), -(4-_tq), 4-_tq, 4+_tq], atol=1e-10), \
+        f"δ=0 eigenvalues wrong at t={_tq}"
+
+# At t=4 (flat-band condition): det=0 and zero modes survive all δ
+# Char poly at t=4: λ²(λ²−64−δ²)=0  →  eigenvalues {0,0,±√(64+δ²)}
+for _dq in [0.0, 0.1, 0.5, 1.0]:
+    _Hq  = _H_E_perturb(4.0, _dq)
+    assert abs(np.linalg.det(_Hq)) < 1e-9, f"det should be 0 at t=4, δ={_dq}"
+    _evq = sorted(np.linalg.eigvalsh(_Hq))
+    assert abs(_evq[1]) < 1e-9 and abs(_evq[2]) < 1e-9, \
+        f"two zero modes should survive at t=4, δ={_dq}"
+    assert np.isclose(abs(_evq[0]), np.sqrt(64 + _dq**2), rtol=1e-8), \
+        f"outer eigenvalue wrong at δ={_dq}"
+
+# Splitting is O(δ²): eigenvalue ≈ −(4−t)·(1−δ²/(2(A−B))) where A−B=16t
+# Verified via the exact char poly: eigenvalue² = B·(1−δ²/(A−B)) + O(δ⁴)
+_tq, _Aq, _Bq = 0.5, (4.5)**2, (3.5)**2   # A−B = 16·0.5 = 8
+for _dq in [0.05, 0.10, 0.20]:
+    _ev_lower = sorted(np.linalg.eigvalsh(_H_E_perturb(_tq, _dq)))[1]
+    _second_order = -(4 - _tq) * (1 - _dq**2 / (2 * (_Aq - _Bq)))
+    assert abs(_ev_lower - _second_order) < 1e-3, \
+        f"O(δ²) approximation off at δ={_dq}"
+    # First-order error grows as δ (the actual correction is 0 to first order)
+    _first_order_err = abs(_ev_lower - (-(4 - _tq) + _dq))   # error of "(4-t)+δ" claim
+    _second_order_err = abs(_ev_lower - _second_order)
+    # Second-order formula is far better: ratio of errors > 10 for δ≥0.05
+    assert _first_order_err / (_second_order_err + 1e-12) > 10, \
+        f"O(δ²) formula should be ×10 better than O(δ) at δ={_dq}"
+
 
 if __name__ == "__main__":
     print("Digital-Root Pattern Suite")
@@ -612,6 +675,15 @@ if __name__ == "__main__":
     print(f"   M_E² eigenvalues: {[round(v) for v in _M_E_sq_evals]}  (= {{0,0,16,16}})  ✓")
     print(f"   Conclusion: zero modes occupy a 2D null-space with full M_2(C) commutant;")
     print(f"   system is partially integrable (not maximally non-abelian in E-sector).")
+    print()
+
+    print("Q. H_E(t,δ) perturbation matrix — exact characteristic polynomial")
+    print(f"   det(H-λI) = λ⁴ − [(4+t)²+(4-t)²+δ²]λ² + (4+t)²(4-t)²  ✓")
+    print(f"   δ=0: eigenvalues exactly ±(4+t), ±(4-t)  ✓  (verified t∈{{0,0.5,1,2,3.5}})")
+    print(f"   t=4: char poly = λ²(λ²−64−δ²); zero modes survive all δ  ✓")
+    print(f"   Splitting: lower eval ≈ −(4-t)(1−δ²/(32t)); O(δ²), NOT O(δ)  ✓")
+    print(f"   Formula '±(4t+δ)': WRONG (gives ±2 at t=0.5 instead of ±4.5)")
+    print(f"   Formula '±((4+t)±δ)': WRONG (first-order δ correction is zero)")
     print()
 
     print("P. Kernel of M_E: basis, D₄ action, and commutant generators")
