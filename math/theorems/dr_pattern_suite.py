@@ -586,6 +586,52 @@ for _dq in [0.05, 0.10, 0.20]:
     assert _first_order_err / (_second_order_err + 1e-12) > 10, \
         f"O(δ²) formula should be ×10 better than O(δ) at δ={_dq}"
 
+# =============================================================================
+# R. D₄-equivariant perturbation splits zero modes — accidental symmetry proof
+# =============================================================================
+# The document "Sovereign Kernel" (Section V) correctly concludes:
+#   "Without an external locking mechanism, the zero modes remain vulnerable
+#    to D₄-respecting perturbations that break the accidental commutant symmetry."
+# This section makes that explicit.
+#
+# Correction to the document: ker(M_E) has dim=2, not dim=4.
+# (The 4 is the commutant dimension on the kernel, i.e., dim M₂(C) = 4.)
+# Also: the 12-step motif bulk word = r² (not e), per Section N.
+#
+# Explicit D₄-equivariant perturbation:
+#   Q = P₁₁ − P₂₂   (outer-product difference of orthonormal kernel basis vectors)
+#
+# Q is in the commutant of every D₄ group element (verified below).
+# On ker(M_E): Q·k₁/√2 = +k₁/√2, Q·k₂/√2 = −k₂/√2  (acts as σ_z on kernel).
+# On ±4 eigenspaces: Q = 0 (leaves ±4 bands exactly intact).
+#
+# Consequence: M_E + ε·Q has eigenvalues {−4, −ε, +ε, +4} for any ε ∈ ℝ.
+# The zero modes are NOT protected by D₄ symmetry alone.
+
+_Q_split = _P11 - _P22   # D₄-equivariant; acts as σ_z on kernel, 0 on ±4 spaces
+
+# Q commutes with every D₄ group element (g⊗g for all g ∈ D₄)
+for _gname_r, _gg_r in _d4_kron_elems.items():
+    assert np.allclose(_Q_split @ _gg_r - _gg_r @ _Q_split, 0, atol=1e-10), (
+        f"Q should commute with D₄ element {_gname_r}"
+    )
+
+# Q acts as ±1 on the kernel basis vectors, 0 on ±4 eigenvectors
+_u_plus  = np.array([1., 0., 0., 1.]) / np.sqrt(2)   # +4 eigenvector
+_u_minus = np.array([0., 1., 1., 0.]) / np.sqrt(2)   # -4 eigenvector
+assert np.allclose(_Q_split @ _u_plus,  0, atol=1e-10), "Q should annihilate +4 eigenvec"
+assert np.allclose(_Q_split @ _u_minus, 0, atol=1e-10), "Q should annihilate -4 eigenvec"
+assert np.allclose(_Q_split @ _K[:,0], +_K[:,0], atol=1e-10), "Q acts +1 on k₁/√2"
+assert np.allclose(_Q_split @ _K[:,1], -_K[:,1], atol=1e-10), "Q acts -1 on k₂/√2"
+
+# M_E + ε·Q has eigenvalues {−4, −ε, +ε, +4} for any ε ∈ ℝ
+for _eps_r in [0.1, 0.5, 1.0, 2.0]:
+    _M_pert = _M_E + _eps_r * _Q_split
+    _ev_pert = sorted(np.linalg.eigvalsh(_M_pert))
+    assert np.allclose(_ev_pert, [-4, -_eps_r, _eps_r, 4], atol=1e-10), (
+        f"Perturbed eigenvalues wrong at ε={_eps_r}: {_ev_pert}"
+    )
+
 
 if __name__ == "__main__":
     print("Digital-Root Pattern Suite")
@@ -696,6 +742,17 @@ if __name__ == "__main__":
     print(f"   σ_z⊗I and I⊗σ_z do NOT preserve ker(M_E)  ✓  (proposed T_z/S_z are wrong)")
     print(f"   Commutant generators P_ij = k_i⊗k_j^T commute with M_E ✓")
     print(f"   Actions on ker: P11=e11, P12=e12, P21=e21, P22=e22 → span M_2(C) ✓")
+    print()
+
+    print("R. D₄-equivariant perturbation Q=P₁₁−P₂₂ splits zero modes")
+    print(f"   Q commutes with all 8 D₄ elements (g⊗g)  ✓")
+    print(f"   Q·k₁/√2 = +k₁/√2,  Q·k₂/√2 = −k₂/√2  (σ_z on kernel)  ✓")
+    print(f"   Q·u₊ = Q·u₋ = 0  (±4 bands unaffected)  ✓")
+    print(f"   M_E+ε·Q eigenvalues = {{−4, −ε, +ε, +4}} for ε∈{{0.1,0.5,1,2}}  ✓")
+    print(f"   Zero modes are NOT protected by D₄ symmetry alone (accidental symmetry)  ✓")
+    print(f"   Corrections to 'Sovereign Kernel' document:")
+    print(f"     dim ker(M_E) = 2  (not 4; 4 is commutant-on-kernel dim)")
+    print(f"     Motif bulk word P₁₂ = r² (not e; verified in Section N)")
     print()
 
     print("All assertions passed.")
