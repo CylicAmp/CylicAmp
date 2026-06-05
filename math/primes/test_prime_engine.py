@@ -17,7 +17,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from prime_engine import (
     digital_root, is_prime, prime_generator, first_n_primes,
-    grid_label, DR_PRIME_ALLOWED, DR_PROVEN_EMPTY
+    grid_label, DR_PRIME_ALLOWED, DR_PROVEN_EMPTY,
+    twin_prime_generator, prime_count, prime_stats,
 )
 
 
@@ -213,6 +214,63 @@ def test_first_n_primes():
 
 
 # ---------------------------------------------------------------------------
+# 9. Twin prime generator
+# ---------------------------------------------------------------------------
+
+def test_twin_prime_generator_correctness():
+    """Twin pairs match known list up to 200."""
+    known_twins = [
+        (3,5),(5,7),(11,13),(17,19),(29,31),(41,43),(59,61),(71,73),
+        (101,103),(107,109),(137,139),(149,151),(179,181),(191,193),(197,199),
+    ]
+    generated = []
+    for p, p2, *_ in twin_prime_generator(2):
+        if p > 200:
+            break
+        generated.append((p, p2))
+    assert generated == known_twins, f"Twin pairs wrong: {generated}"
+
+
+def test_twin_prime_dr_pairs_theorem():
+    """
+    THEOREM: Twin primes (p,p+2) with p>3 have DR pairs in {(2,4),(5,7),(8,1)}.
+    Verify empirically up to 10000.
+    """
+    allowed = {(2, 4), (5, 7), (8, 1)}
+    violations = []
+    for p, p2, lp, lp2, dr1, dr2 in twin_prime_generator(5):
+        if p > 10000:
+            break
+        if (dr1, dr2) not in allowed:
+            violations.append((p, p2, dr1, dr2))
+    assert not violations, f"DR pair theorem violated: {violations}"
+
+
+# ---------------------------------------------------------------------------
+# 10. prime_count and prime_stats
+# ---------------------------------------------------------------------------
+
+def test_prime_count():
+    assert prime_count(10) == 4,     "π(10)=4"
+    assert prime_count(100) == 25,   "π(100)=25"
+    assert prime_count(1000) == 168, "π(1000)=168"
+
+
+def test_prime_stats():
+    stats = prime_stats(1000)
+    assert stats["count"] == 168,       f"π(1000)={stats['count']}"
+    assert stats["twin_count"] == 35,   f"twin pairs up to 1000={stats['twin_count']}"
+    assert stats["largest_gap"] == 20,  f"largest gap ≤1000={stats['largest_gap']}"
+    assert stats["gap_after"] == 887,   f"largest gap after={stats['gap_after']}"
+    # DR distribution sums to 168
+    total = sum(stats["dr_distribution"].values())
+    assert total == 168, f"DR dist sums to {total}"
+    # Proven empty positions
+    assert stats["dr_distribution"][6] == 0, "DR=6 must be 0"
+    assert stats["dr_distribution"][9] == 0, "DR=9 must be 0"
+
+
+# ---------------------------------------------------------------------------
 # Run all tests
 # ---------------------------------------------------------------------------
 
@@ -230,6 +288,10 @@ if __name__ == "__main__":
         test_generator_reaches_large_prime,
         test_generator_dr_distribution_roughly_uniform,
         test_first_n_primes,
+        test_twin_prime_generator_correctness,
+        test_twin_prime_dr_pairs_theorem,
+        test_prime_count,
+        test_prime_stats,
     ]
 
     passed = 0
