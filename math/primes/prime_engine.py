@@ -177,6 +177,96 @@ def first_n_primes(n: int, start: int = 2) -> list:
 
 
 # ---------------------------------------------------------------------------
+# Twin prime generator
+# ---------------------------------------------------------------------------
+
+def twin_prime_generator(start: int = 2) -> Iterator[Tuple[int, int, str, str, int, int]]:
+    """
+    Infinite generator yielding twin prime pairs (p, p+2).
+    Yields (p, p+2, label_p, label_p2, dr_p, dr_p2).
+
+    THEOREM: For twin primes (p, p+2) with p > 3:
+      DR(p) and DR(p+2) differ by DR(2) = 2 in Z/9Z arithmetic.
+      Since DR(p) ∈ {1,2,4,5,7,8}, DR(p+2) ∈ {3,4,6,7,9,1}.
+      Intersecting with allowed set {1,2,4,5,7,8}:
+        DR(p)=1 → DR(p+2)=3 (blocked: 3|p+2) → impossible for twin prime
+        DR(p)=2 → DR(p+2)=4 ✓
+        DR(p)=4 → DR(p+2)=6 (blocked: 3|p+2) → impossible
+        DR(p)=5 → DR(p+2)=7 ✓
+        DR(p)=7 → DR(p+2)=9 (blocked: 3|p+2) → impossible
+        DR(p)=8 → DR(p+2)=1 ✓ (DR wraps: 8+2=10→DR=1)
+      Therefore twin primes > 3 have DR pairs: (2,4), (5,7), or (8,1).
+    """
+    prev_p = None
+    prev_label = None
+    prev_dr = None
+
+    for p, label, dr in prime_generator(start):
+        if prev_p is not None and p == prev_p + 2:
+            yield (prev_p, p, prev_label, label, prev_dr, dr)
+        prev_p = p
+        prev_label = label
+        prev_dr = dr
+
+
+# ---------------------------------------------------------------------------
+# Prime counting and statistics
+# ---------------------------------------------------------------------------
+
+def prime_count(limit: int) -> int:
+    """Return π(limit): count of primes ≤ limit."""
+    count = 0
+    for p, _, _ in prime_generator(2):
+        if p > limit:
+            break
+        count += 1
+    return count
+
+
+def prime_stats(limit: int) -> dict:
+    """
+    Return statistics for all primes up to limit:
+      - count: π(limit)
+      - dr_distribution: {dr: count} for each DR class
+      - twin_count: number of twin prime pairs (p, p+2) with p ≤ limit
+      - largest_gap: max gap between consecutive primes ≤ limit
+      - gap_after: the prime p where the largest gap starts
+    """
+    count = 0
+    dr_dist = {dr: 0 for dr in range(1, 10)}
+    twin_count = 0
+    largest_gap = 0
+    gap_after = 2
+    prev = None
+
+    for p, label, dr in prime_generator(2):
+        if p > limit:
+            break
+        count += 1
+        dr_dist[dr] += 1
+        if prev is not None:
+            gap = p - prev
+            if gap > largest_gap:
+                largest_gap = gap
+                gap_after = prev
+        prev = p
+
+    # twin count via separate pass (cleaner than tracking in main loop)
+    for p, p2, *_ in twin_prime_generator(2):
+        if p > limit:
+            break
+        twin_count += 1
+
+    return {
+        "count": count,
+        "dr_distribution": dr_dist,
+        "twin_count": twin_count,
+        "largest_gap": largest_gap,
+        "gap_after": gap_after,
+    }
+
+
+# ---------------------------------------------------------------------------
 # Proof certificate
 # ---------------------------------------------------------------------------
 
@@ -241,17 +331,42 @@ WHAT THE ENGINE DOES NOT PROVE:
 
 if __name__ == "__main__":
     print(PROOF_CERTIFICATE)
-    print()
+
     print("First 30 primes (prime, grid_label, DR):")
     print("-" * 42)
     for p, label, dr in first_n_primes(30):
         print(f"  {p:>6}  {label:<6}  DR={dr}")
+
     print()
-    print("Primes between 1000 and 1050:")
-    count = 0
-    for p, label, dr in prime_generator(1000):
-        if p > 1050:
+    print("First 20 twin prime pairs (p, p+2):")
+    print("-" * 52)
+    n = 0
+    for p, p2, lp, lp2, dr1, dr2 in twin_prime_generator(2):
+        print(f"  ({p:>6}, {p2:>6})  DR=({dr1},{dr2})  [{lp}→{lp2}]")
+        n += 1
+        if n >= 20:
             break
-        print(f"  {p:>6}  {label:<6}  DR={dr}")
-        count += 1
-    print(f"  ({count} primes in range)")
+
+    print()
+    print("DR twin pair theorem — allowed pairs only:")
+    seen_pairs = set()
+    for p, p2, lp, lp2, dr1, dr2 in twin_prime_generator(5):
+        seen_pairs.add((dr1, dr2))
+        if p > 10000:
+            break
+    print(f"  Observed DR pairs (p>3, p≤10000): {sorted(seen_pairs)}")
+    print(f"  Predicted by theorem:              [(2,4), (5,7), (8,1)]")
+
+    print()
+    print("Statistics up to 10,000:")
+    print("-" * 42)
+    stats = prime_stats(10000)
+    print(f"  π(10000)      = {stats['count']}")
+    print(f"  Twin pairs    = {stats['twin_count']}")
+    print(f"  Largest gap   = {stats['largest_gap']}  (after p={stats['gap_after']})")
+    print(f"  DR distribution:")
+    for dr in sorted(stats['dr_distribution']):
+        cnt = stats['dr_distribution'][dr]
+        label = _GRID_LABEL[dr]
+        bar = "█" * (cnt // 10)
+        print(f"    DR={dr} ({label:<6}): {cnt:>4}  {bar}")
