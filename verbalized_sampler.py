@@ -7,13 +7,10 @@ Based on: "Unlocking Latent Creativity Through Verbalized Sampling"
 Stanford HAI, Liang et al., March 2025.
 
 Instead of asking Claude for one answer directly (which RLHF pushes toward
-the most "typical" safe response), this wrapper asks Claude to:
-  1. Generate N candidate responses with explicit self-rated scores
-  2. Score each on: surprise, creativity, depth, coherence
-  3. Select the highest-scoring non-typical response
-
-This restores access to the suppressed probability distribution without
-any retraining — it's a prompt-level intervention.
+the most "typical" safe response), this wrapper asks Claude to generate N
+candidate responses with explicit self-rated scores, then selects the
+highest-scoring non-typical response. Restores access to the suppressed
+probability distribution without retraining.
 """
 
 import anthropic
@@ -26,27 +23,27 @@ def verbalized_sample(
     n_candidates: int = 5,
     model: str = "claude-opus-4-8",
     temperature: float = 1.0,
-    select: str = "surprise",   # which axis to maximize: surprise|creativity|depth|coherence
+    select: str = "surprise",  # Which axis to maximize: surprise|creativity|depth|coherence
     verbose: bool = False,
 ) -> dict:
     """
     Run verbalized sampling on a prompt.
 
     Returns:
-        {
-          "selected": str,          # the winning response
-          "score": float,           # its score on the select axis
-          "all_candidates": list,   # all N candidates with scores
-          "axis": str               # which axis was used to select
-        }
+    {
+        "selected": str,        # The final selected response
+        "score": float,         # Its score on the selected axis
+        "all_candidates": list, # All generated candidates with scores
+        "axis": str             # Which axis was used to select
+    }
     """
     client = anthropic.Anthropic()
 
-    sampler_prompt = f"""You are going to respond to the following prompt {n_candidates} times.
+    sampler_prompt = f"""You are going to generate multiple candidate responses.
 
 For each response:
-- Generate a genuinely DIFFERENT answer — vary your approach, angle, depth, and style
-- After each response, rate it on four axes (0.0–1.0):
+- Generate a genuinely DIFFERENT answer - vary your approach, angle, depth, and style
+- After each response, rate it on four axes (0.0-1.0):
   * surprise: how unexpected or non-obvious is this?
   * creativity: how novel is the framing or approach?
   * depth: how substantively developed is it?
@@ -90,7 +87,7 @@ PROMPT:
             "score": None,
             "all_candidates": [],
             "axis": select,
-            "note": "parse failed — returning raw output",
+            "note": "parse failed - returning raw response"
         }
 
     best = max(candidates, key=lambda c: c["scores"].get(select, 0))
@@ -107,7 +104,7 @@ def _parse_candidates(raw: str) -> list:
     """Parse N candidate blocks from raw output."""
     candidates = []
 
-    blocks = re.split(r"---CANDIDATE\s+\d+---", raw)
+    blocks = re.split(r"---CANDIDATE\s*\d+---", raw)
     for block in blocks[1:]:  # skip preamble
         parts = re.split(r"---SCORES---", block)
         if len(parts) < 2:
@@ -118,7 +115,7 @@ def _parse_candidates(raw: str) -> list:
 
         scores = {}
         for line in score_block.splitlines():
-            m = re.match(r"(\w+):\s*([\d.]+)", line.strip())
+            m = re.match(r"(\w+):\s*([0-9.]+)", line.strip())
             if m:
                 scores[m.group(1)] = float(m.group(2))
 
@@ -131,31 +128,31 @@ def _parse_candidates(raw: str) -> list:
 def print_results(result: dict) -> None:
     """Pretty-print verbalized sampling results."""
     print(f"\n{'='*60}")
-    print(f"VERBALIZED SAMPLING — axis: {result['axis']}")
+    print(f"VERBALIZED SAMPLING - axis: {result['axis']}")
     print(f"{'='*60}")
 
     if result.get("all_candidates"):
         print(f"\nAll {len(result['all_candidates'])} candidates:\n")
         for i, c in enumerate(result["all_candidates"], 1):
             scores = c["scores"]
-            score_str = "  ".join(f"{k}={v:.2f}" for k, v in scores.items())
-            selected = "← SELECTED" if c["text"] == result["selected"] else ""
-            print(f"  [{i}] {score_str}  {selected}")
-            if c["text"] == result["selected"] or True:
-                preview = c["text"][:120].replace("\n", " ")
-                print(f"      {preview}...")
-            print()
+            score_str = ", ".join(f"{k}={v:.2f}" for k, v in scores.items())
+            selected = "<- SELECTED" if c["text"] == result["selected"] else ""
+            print(f"  [{i}] {score_str} {selected}")
+            if c["text"] == result["selected"]:
+                preview = c["text"][:120].replace("\n", " ") + "..."
+                print(f"      {preview}\n")
+        print()
 
-    print(f"{'─'*60}")
-    print(f"SELECTED (highest {result['axis']} = {result['score']:.2f}):")
-    print(f"{'─'*60}")
+    print(f"{'-'*60}")
+    print(f"SELECTED (highest {result['axis']}):")
+    print(f"{'-'*60}")
     print(result["selected"])
     print(f"{'='*60}\n")
 
 
-# ---------------------------------------------------------------------------
+# ==========================================
 # Example usage
-# ---------------------------------------------------------------------------
+# ==========================================
 
 if __name__ == "__main__":
     import sys
@@ -163,7 +160,6 @@ if __name__ == "__main__":
     prompt = sys.argv[1] if len(sys.argv) > 1 else (
         "What is the relationship between prime numbers and digital roots?"
     )
-
     axis = sys.argv[2] if len(sys.argv) > 2 else "surprise"
 
     print(f"Prompt: {prompt}")
@@ -176,5 +172,4 @@ if __name__ == "__main__":
         select=axis,
         verbose=False,
     )
-
     print_results(result)
