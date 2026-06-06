@@ -30,6 +30,7 @@ import os
 import sys
 import numpy as np
 from math import gcd
+from scipy.special import gamma
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'math', 'primes'))
 from prime_engine import digital_root, _GRID_LABEL
@@ -236,20 +237,23 @@ class PredictiveAGI:
 
     def predict_success_probability(self) -> float:
         """
-        P_success = spectral_gap / E*  × 100
+        P_success = (1 − 1/Γ(1 + gap/E* · N)) × 100
 
-        spectral_gap = E₁ - E₂  (gap between top two eigenvalues of H(λ*)).
-        Large gap → clear dominant task direction → high focus → high P_success.
-        Small gap → competing tasks at equal weight → diffuse effort → low P_success.
-
-        Capped at 100%.
+        Uses scipy.special.gamma with N=12 (cycle length) as the shape parameter.
+        Γ grows rapidly: gap/E* > 0.2 gives P > 65%; gap/E* ≥ 0.5 saturates near 100%.
+        Degrades gracefully to linear ratio on overflow.
         """
         fp  = self._get_fixed_point()
         E   = fp["E_star"]
         gap = fp["gap"]
         if E < 1e-10:
             return 0.0
-        return round(min(gap / E * 100, 100.0), 1)
+        ratio = gap / E
+        try:
+            p = max(0.0, 1.0 - 1.0 / gamma(1.0 + ratio * N)) * 100.0
+        except (OverflowError, ValueError):
+            p = ratio * 100.0
+        return round(min(p, 100.0), 1)
 
     # ------------------------------------------------------------------
     # Task management
