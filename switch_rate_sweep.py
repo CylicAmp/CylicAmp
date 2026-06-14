@@ -136,3 +136,22 @@ if __name__ == "__main__":
         winner = min(all_means, key=all_means.get)
         print(f'{lab:>18}  {ts_r.mean():>8.0f}  {exp3_r.mean():>10.0f}'
               f'  {rm_r.mean():>8.0f}  {eg_r.mean():>8.0f}  {winner:>12}')
+
+
+# ============================================================
+# ENTROPY-MATCHED MUTATION AUDIT (appended after initial sweep)
+# ============================================================
+# Tests sigma_mut(t) = sigma0 * H(t)/H_max vs fixed ODE-RM and EXP3+mutation.
+#
+# Result (K=20, switch_every=500, 50 seeds):
+#   EXP3+mut (baseline):          1335.9  SE=12.6  (baseline)
+#   Entropy-matched sigma0=0.20:  1365.3  SE=34.8  Z=+0.8  ~same
+#   ODE-RM fixed mu=0.05:         1701.9  SE=41.6  Z=+8.4  LOSES
+#   Entropy-matched sigma0=0.10:  2578.8  SE=53.5  Z=+23   LOSES
+#   Entropy+fixed floor:          2986.5  SE=52.4  Z=+31   LOSES
+#   Entropy-matched sigma0=0.05:  3628.4  SE=57.1  Z=+39   LOSES
+#
+# Why: entropy-matched mutation sets mu≈0 when H is low (agent converged).
+# After a switch, H remains low → mu≈0 → absorbing-corner failure.
+# EXP3's fixed 1% geometric mixing is H-independent and recovers at every step.
+# EXP3+mutation at 1336 remains the empirical leader on ENV-Cv2.
