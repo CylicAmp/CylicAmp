@@ -416,7 +416,7 @@ for name, fn in phi_fns.items():
     # Numerical derivative at h=0.5
     eps_h = 1e-5
     dbdh  = (fn(0.5 + eps_h) - fn(0.5 - eps_h)) / (2*eps_h) * (beta_max_v - beta_min_v)
-    area  = float(np.trapz([beta_min_v + (beta_max_v - beta_min_v)*fn(h) for h in h_vals], h_vals))
+    area  = float(np.trapezoid([beta_min_v + (beta_max_v - beta_min_v)*fn(h) for h in h_vals], h_vals))
     print(f"  {name:>12}  {b0:>8.2f}  {b05:>10.2f}  {b1:>8.2f}  {dbdh:>16.3f}  {area:>18.3f}")
 
 # --- Valve geometry plot ---
