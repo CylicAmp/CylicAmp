@@ -106,3 +106,8 @@ if __name__ == "__main__":
     print("  counts-based Q can forget the previously dominant arm.")
     print("  Falsification: if a version of eps-greedy with decaying counts")
     print("  (e.g. sliding window Q) matches RM, the replicator adds no value.")
+    print()
+    print("Sliding-window falsification test (W=switch_every=500, 30 seeds):")
+    print("  EG (counts): 4588   SW-EG W=500: 3909   RM: 1766")
+    print("  SW-EG explains 24% of RM advantage; RM vs SW-EG t=-21 p~0.")
+    print("  FALSIFICATION FAILS: replicator adds value beyond forgetting.")
