@@ -17,9 +17,9 @@ import numpy as np
 
 
 def digital_root(n):
-    """Digital root 1-9."""
+    """Digital root: 0 for n=0, 1-9 for positive integers (= n mod 9, with 0 mapped to 9)."""
     if n == 0:
-        return 9
+        return 0
     return (n - 1) % 9 + 1
 
 
