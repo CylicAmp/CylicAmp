@@ -77,6 +77,28 @@ for label, f in ops:
 
 
 # ──────────────────────────────────────────────────────────────────────────────
+# 11+7÷7 = 12  (7 cancels itself — cycle disappears)
+# ──────────────────────────────────────────────────────────────────────────────
+
+# When the digit 7 divides itself (7÷7=1), the denominator 7 vanishes.
+# Result is an exact integer: no repeating decimal, no 142857 cycle.
+result_7div7 = Fraction(11) + Fraction(7, 7)
+assert result_7div7 == 12
+assert result_7div7.denominator == 1   # integer — cycle requires unresolved 7
+
+# Contrast: 11+3÷7 = 80/7 (denominator 7 survives → cyclic decimal)
+assert (Fraction(11) + Fraction(3, 7)).denominator == 7
+
+# DR(12) = 3;  12 and 21 are digit reversals, both DR=3
+assert dr(12) == 3
+assert dr(21) == 3
+assert int(str(12)[::-1]) == 21
+
+# The rule: 3÷7 keeps 7 in denominator → 142857 appears.
+#           7÷7 = 1 removes 7 entirely → integer result.
+
+
+# ──────────────────────────────────────────────────────────────────────────────
 # SPLIT-COMPLEMENT: p=7, k=6
 # ──────────────────────────────────────────────────────────────────────────────
 
@@ -156,6 +178,12 @@ if __name__ == "__main__":
         frac_part = f - int(f)
         block = int(frac_part * 10**6)
         print(f"  {label:12s} = {str(f):6s} = {float(f):.10f}  [{block}]")
+
+    print("\n── 11+7÷7 = 12 (7 CANCELS ITSELF) ──")
+    print(f"  11+7÷7  = {result_7div7}  (integer, denominator={result_7div7.denominator})")
+    print(f"  11+3÷7  = {Fraction(11)+Fraction(3,7)}  (cyclic, denominator=7)")
+    print(f"  7÷7=1 removes 7 from denominator → no 142857 cycle")
+    print(f"  DR(12)={dr(12)}, DR(21)={dr(21)}, 12↔21 digit reversal")
 
     print("\n── SPLIT-COMPLEMENT: p=7 (k=6) ──")
     print(f"  10³ mod 7 = {pow(10,3,7)}  ≡ -1 (mod 7)")
