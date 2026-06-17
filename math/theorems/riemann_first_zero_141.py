@@ -9,7 +9,7 @@ Its leading digit string "14134725141..." decomposes as:
 
   [141] [347] [25] [141] [734693790...]
 
-Two sovereign-anchor hits (mod 37 = 30), one heartbeat-orbit element (mod 37 = 14),
+Two elements of {4,9,25,30} (mod 37 = 30), one element of 3-cycle {14,31,29} (mod 37 = 14),
 and the digit sum of the first block "141347" = 20 — the same as α⁻¹ = 137.036.
 
 LAYER 1: DIGIT STRUCTURE  [OBSERVED, not derived]
@@ -18,10 +18,10 @@ LAYER 1: DIGIT STRUCTURE  [OBSERVED, not derived]
   "347" at positions 3-5
 
 LAYER 2: MOD-37 ANALYSIS  [PROVEN]
-  141 mod 37 = 30  (sovereign anchor, from ladder_11_111.py)
-  347 mod 37 = 14  (heartbeat 3-cycle: 14 → 31 → 29 → 14)
-  25  mod 37 = 25  (sovereign anchor: {4,9,25,30})
-  141 mod 37 = 30  (sovereign anchor again)
+  141 mod 37 = 30  (element of {4,9,25,30}, from ladder_11_111.py)
+  347 mod 37 = 14  (3-cycle {14,31,29}: 14 → 31 → 29 → 14)
+  25  mod 37 = 25  (element of {4,9,25,30}: {4,9,25,30})
+  141 mod 37 = 30  (element of {4,9,25,30} again)
 
 LAYER 3: DIGIT SUM LINK TO α⁻¹  [OBSERVED]
   Digit sum of "141347" (first 6 digits of γ₁) = 1+4+1+3+4+7 = 20
@@ -79,30 +79,30 @@ assert BLOCK == [[1,4,1], [3,4,7], [2,5], [1,4,1]]
 # ──────────────────────────────────────────────────────────────────────────────
 
 # Sovereign anchors (from cylicamp_master.py)
-SOVEREIGN_ANCHORS = {4, 9, 25, 30}
+{4, 9, 25, 30}
 
 # Block values as integers
 B141 = 141
 B347 = 347
 B25  = 25
 
-# 141 mod 37 = 30 (sovereign anchor)
+# 141 mod 37 = 30 (element of {4,9,25,30})
 assert B141 % 37 == 30
-assert 30 in SOVEREIGN_ANCHORS
+assert 30 in ({4, 9, 25, 30})
 
-# 347 mod 37 = 14 (heartbeat orbit)
+# 347 mod 37 = 14 (3-cycle {14,31,29})
 assert B347 % 37 == 14
-# 14 is in a heartbeat 3-cycle
+# 14 is in a 3-cycle {14,31,29}
 assert hb(14) == 31
 assert hb(31) == 29
 assert hb(29) == 14    # period 3 confirmed
 
-# 25 mod 37 = 25 (sovereign anchor)
+# 25 mod 37 = 25 (element of {4,9,25,30})
 assert B25 % 37 == 25
-assert 25 in SOVEREIGN_ANCHORS
+assert 25 in ({4, 9, 25, 30})
 
-# Pattern: two sovereign anchors (141≡30, 25≡25) flank a heartbeat element (347≡14)
-# with the sovereign anchor repeated at the end.  [OBSERVED]
+# Pattern: two element of {4,9,25,30}s (141≡30, 25≡25) flank a element of 3-cycle {14,31,29} (347≡14)
+# with the element of {4,9,25,30} repeated at the end.  [OBSERVED]
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -174,7 +174,7 @@ assert dr(1413) == 9    # 1+4+1+3=9
 assert 451 == 11 * 41
 assert 369 == 9  * 41
 
-# 41 = 30 + 11 (sovereign anchor + ladder step, from ladder_11_111.py)
+# 41 = 30 + 11 (element of {4,9,25,30} + ladder step, from ladder_11_111.py)
 assert 30 + 11 == 41
 assert isprime(41)
 assert dr(41) == 5    # twin prime anchor: (41,43), DR pair (5,7)
@@ -236,8 +236,8 @@ assert int(concat_str) == 55577177555
 
 # mod-37 values of the weights
 assert 555 % 37 == 0    # 555 = 15 × 37 (pure multiple of 37)
-assert 771 % 37 == 31   # 31 is in the heartbeat orbit 14→31→29→14
-assert 77  % 37 == 3    # 3 is in the sovereign cycle 30→3→4→30
+assert 771 % 37 == 31   # 31 is in the 3-cycle {14,31,29} 14→31→29→14
+assert 77  % 37 == 3    # 3 is in the orbit {30,3,4} under 26x mod 37 30→3→4→30
 assert 555 % 37 == 0
 
 # DR values
@@ -282,7 +282,7 @@ row_dsums = [(sum([1,4,1]) + sum([9,3,7])),
              (sum([3,4,7]) + sum([3,4,6])),
              (sum([2,5,1]) + sum([4,1,7]))]
 assert row_dsums == [25, 27, 20]
-# 25 is a sovereign anchor! {4,9,25,30}
+# 25 is a element of {4,9,25,30}! {4,9,25,30}
 assert 25 in {4, 9, 25, 30}
 assert dr(row_dsums[0]) == 7    # DR(25)=7
 assert dr(row_dsums[1]) == 9    # DR(27)=9
@@ -314,20 +314,20 @@ assert dr(347) == 5
 G_MOD37 = [v % 37 for v in [141, 347, 251, 417, 346, 937]]
 assert G_MOD37 == [30, 14, 29, 10, 13, 12]
 # mod-37 classification:
-assert 30 in {4, 9, 25, 30}   # 141 ≡ sovereign anchor
-# 14: in heartbeat orbit 14→31→29→14
-# 29: in heartbeat orbit 29→14→31→29  (same orbit as 14!)
+assert 30 in {4, 9, 25, 30}   # 141 ≡ element of {4,9,25,30}
+# 14: in 3-cycle {14,31,29} 14→31→29→14
+# 29: in 3-cycle {14,31,29} 29→14→31→29  (same orbit as 14!)
 assert hb(14) == 31 and hb(31) == 29 and hb(29) == 14
 assert 14 in {14, 31, 29}
 assert 29 in {14, 31, 29}
-# 10: in the SCALAR cycle 26→10→1→26
+# 10: in the order-3 orbit {1,10,26} 26→10→1→26
 assert hb(26) == 10 and hb(10) == 1 and hb(1) == 26
 assert 10 in {26, 10, 1}
-# 13: in heartbeat orbit 13→5→19→13
+# 13: in 3-cycle {14,31,29} 13→5→19→13
 assert hb(13) == 5 and hb(5) == 19 and hb(19) == 13
-# 12: in heartbeat orbit 12→16→9→12 (contains the sovereign anchor 9!)
+# 12: in 3-cycle {14,31,29} 12→16→9→12 (contains the element of {4,9,25,30} 9!)
 assert hb(12) == 16 and hb(16) == 9 and hb(9) == 12
-assert 9 in {4, 9, 25, 30}    # 9 is a sovereign anchor
+assert 9 in {4, 9, 25, 30}    # 9 is a element of {4,9,25,30}
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -341,10 +341,10 @@ if __name__ == "__main__":
     print("\n── DIGIT DECOMPOSITION ──")
     print(f"  γ₁ ≈ 14.134725141734693790...")
     print(f"  Digit string: {''.join(str(d) for d in GAMMA_1_DIGITS[:11])}...")
-    print(f"  Block 0-2:   {GAMMA_1_DIGITS[0:3]}  → 141  (mod 37 = {141%37}, sovereign anchor)")
-    print(f"  Block 3-5:   {GAMMA_1_DIGITS[3:6]}  → 347  (mod 37 = {347%37}, heartbeat orbit)")
-    print(f"  Block 6-7:   {GAMMA_1_DIGITS[6:8]}    → 25   (mod 37 = {25%37}, sovereign anchor)")
-    print(f"  Block 8-10:  {GAMMA_1_DIGITS[8:11]}  → 141  (mod 37 = {141%37}, sovereign anchor)")
+    print(f"  Block 0-2:   {GAMMA_1_DIGITS[0:3]}  → 141  (mod 37 = {141%37}, element of {4,9,25,30})")
+    print(f"  Block 3-5:   {GAMMA_1_DIGITS[3:6]}  → 347  (mod 37 = {347%37}, 3-cycle {14,31,29})")
+    print(f"  Block 6-7:   {GAMMA_1_DIGITS[6:8]}    → 25   (mod 37 = {25%37}, element of {4,9,25,30})")
+    print(f"  Block 8-10:  {GAMMA_1_DIGITS[8:11]}  → 141  (mod 37 = {141%37}, element of {4,9,25,30})")
 
     print("\n── DIGIT SUM LINK TO α⁻¹ ──")
     print(f"  First 6 digits of γ₁: {first_six}  → sum = {sum(first_six)}")
@@ -358,31 +358,31 @@ if __name__ == "__main__":
     print(f"  DR of sums:     {dr_1413}")
 
     print("\n── 41 FAMILY (451 AND 369) ──")
-    print(f"  41 = 30 + 11  (sovereign anchor + ladder step), prime, DR = {dr(41)}")
+    print(f"  41 = 30 + 11  (element of {4,9,25,30} + ladder step), prime, DR = {dr(41)}")
     print(f"  451 = 11 × 41,  DR = {dr(451)},  mod 37 = {451%37}")
     print(f"  369 =  9 × 41,  DR = {dr(369)},  mod 37 = {369%37} ≡ -1")
     print(f"  451 + 369 = {451+369} = 20 × 41")
 
-    print("\n── HEARTBEAT ORBIT CONTAINING 347 ──")
+    print("\n── 3-cycle ORBIT CONTAINING 347 ──")
     print(f"  347 mod 37 = 14")
     print(f"  Orbit: 14 → {hb(14)} → {hb(hb(14))} → {hb(hb(hb(14)))}  (period 3)")
 
     print("\n── PALINDROME WEIGHTS (555-771-77-555) ──")
     print(f"  555 mod 37 = {555%37}  (multiple of 37),   DR = {dr(555)} = DR(141)")
-    print(f"  771 mod 37 = {771%37}  (heartbeat orbit),  DR = {dr(771)}")
-    print(f"   77 mod 37 = {77%37}  (sovereign cycle 30→3→4→30),  DR = {dr(77)} = DR(347)")
+    print(f"  771 mod 37 = {771%37}  (3-cycle {14,31,29}),  DR = {dr(771)}")
+    print(f"   77 mod 37 = {77%37}  (orbit {30,3,4} under 26x mod 37 30→3→4→30),  DR = {dr(77)} = DR(347)")
     print(f"  555 mod 37 = {555%37},  DR = {dr(555)}")
 
     print("\n── 18-DIGIT SYMMETRIC GRID ──")
     print(f"  γ₁ first 18 digits: {''.join(str(d) for d in GAMMA_1_DIGITS[:18])}")
-    print(f"  Row 1 (outer):  141 | 937   digit sums {sum([1,4,1])} + {sum([9,3,7])} = {row_dsums[0]}  (sovereign anchor)")
+    print(f"  Row 1 (outer):  141 | 937   digit sums {sum([1,4,1])} + {sum([9,3,7])} = {row_dsums[0]}  (element of {4,9,25,30})")
     print(f"  Row 2 (mid):    347 | 346   digit sums {sum([3,4,7])} + {sum([3,4,6])} = {row_dsums[1]}  DR=9")
     print(f"  Row 3 (inner):  251 | 417   digit sums {sum([2,5,1])} + {sum([4,1,7])} = {row_dsums[2]}  DR=2=DR(137)")
     print(f"  Total 18-digit sum: {sum(row_dsums)} → DR = {dr(sum(row_dsums))} (identity)")
     print(f"  20+12=32 ↔ 23: DR({32})={dr(32)} = DR({23})={dr(23)} = 5 = DR(347) [digit reversal pair]")
     print(f"  mod-37 of segments: {G_MOD37}")
-    print(f"    141≡30 (sovereign), 347≡14 (heartbeat), 251≡29 (heartbeat)")
-    print(f"    417≡10 (SCALAR cycle), 346≡13 (heartbeat), 937≡12 (contains sovereign 9)")
+    print(f"    141≡30 (orbit element), 347≡14 (3-cycle), 251≡29 (3-cycle)")
+    print(f"    417≡10 (order-3 orbit {1,10,26}), 346≡13 (3-cycle), 937≡12 (contains orbit element 9)")
 
     print()
     print("All assertions passed.")
