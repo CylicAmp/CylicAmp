@@ -8,10 +8,9 @@ The 10-digit sequence 7518248175 is the first 10 decimal digits:
 
 This surfaced as the fractional part of 7775/137 = 56.7518248175...
 
-STRUCTURE:
   7775 = 56 × 137 + 103   → numerator 103, whole part 56
-  digit_sum(7775) = 7+7+7+5 = 26 = SCALAR_137  (= 137 mod 37)
-  103 mod 37 = 29   → 29 is in the heartbeat orbit {14, 31, 29}
+  digit_sum(7775) = 7+7+7+5 = 26 = 137 mod 37 = 10² mod 37
+  103 mod 37 = 29   → 29 is in the 3-cycle {14, 31, 29} under x ↦ 26x (mod 37)
   Split-complement: 7518 + 2481 = 9999 = 10⁴ - 1  (same as 1/137)
 """
 
@@ -29,9 +28,6 @@ def repeating_block(numerator, p, length):
         n %= p
     return ''.join(str(d) for d in digits)
 
-
-SCALAR_137 = 137 % 37   # = 26
-assert SCALAR_137 == 26
 
 # ──────────────────────────────────────────────────────────────────────────────
 # 103/137: THE REPEATING BLOCK
@@ -74,7 +70,7 @@ block_1_137 = repeating_block(1, 137, 8)
 assert block_1_137 == '00729927'
 assert int(block_1_137[:4]) + int(block_1_137[4:]) == 9999
 
-# Every k/137 block satisfies the split-complement: it follows from 10⁴≡-1
+# Every k/137 block satisfies the split-complement: it follows from 10⁴≡-1 (mod 137)
 for k in range(1, 137):
     if k % 137 == 0:
         continue
@@ -89,25 +85,22 @@ for k in range(1, 137):
 
 digit_sum_block = sum(int(d) for d in BLOCK_103)
 assert digit_sum_block == 36    # 7+5+1+8+2+4+8+1 = 36
-assert dr(int(BLOCK_103)) == 9  # DR(75182481) = 9
+assert dr(int(BLOCK_103)) == 9  # digital root of 75182481 = 9
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# 103 IN THE HEARTBEAT ORBIT
+# 103 mod 37 = 29: IN THE 3-CYCLE UNDER x ↦ 26x (mod 37)
 # ──────────────────────────────────────────────────────────────────────────────
 
-# Heartbeat orbit: successive applications of ×SCALAR_137 (mod 37)
-# 14 → 31 → 29 → 14 → ...
-HEARTBEAT_ORBIT = {14, 31, 29}
+# 26 = 137 mod 37 = 10² mod 37.  The orbit of 14 under multiplication by 26:
 assert (26 * 14) % 37 == 31
 assert (26 * 31) % 37 == 29
-assert (26 * 29) % 37 == 14   # cycle closes
+assert (26 * 29) % 37 == 14   # cycle closes: {14, 31, 29}
 
-# 103 mod 37 = 29: 103 lands in the heartbeat orbit
+# 103 mod 37 = 29: 103 lies in this 3-cycle
 assert 103 % 37 == 29
-assert 29 in HEARTBEAT_ORBIT
+assert 29 in {14, 31, 29}
 
-# Also: 103 is prime
 assert isprime(103)
 assert dr(103) == 4   # 1+0+3=4
 
@@ -117,14 +110,12 @@ assert dr(103) == 4   # 1+0+3=4
 # ──────────────────────────────────────────────────────────────────────────────
 
 assert 56 * 137 + 103 == 7775
-assert Fraction(7775, 137) == Fraction(7775, 137)
 assert Fraction(7775, 137) - 56 == Fraction(103, 137)
 
-# digit_sum(7775) = 26 = SCALAR_137
+# digit_sum(7775) = 26 = 137 mod 37
 assert 7 + 7 + 7 + 5 == 26
-assert 26 == SCALAR_137
+assert 26 == 137 % 37
 
-# DR(7775) = DR(26) = 8
 assert dr(7775) == 8
 assert dr(26)   == 8
 
@@ -151,16 +142,16 @@ if __name__ == "__main__":
     print(f"  (holds for ALL k/137 fractions — structural, not coincidental)")
 
     print("\n── DIGITAL ROOT ──")
-    print(f"  digit_sum({BLOCK_103}) = {digit_sum_block}  → DR = {dr(int(BLOCK_103))}")
+    print(f"  digit_sum({BLOCK_103}) = {digit_sum_block}  → digital root = {dr(int(BLOCK_103))}")
 
-    print("\n── 103 IN THE HEARTBEAT ORBIT ──")
-    print(f"  SCALAR_137 = 137 mod 37 = {SCALAR_137}")
-    print(f"  Heartbeat orbit (×26 mod 37): 14 → 31 → 29 → 14")
-    print(f"  103 mod 37 = {103%37}  ∈ {{14, 31, 29}}  ← heartbeat position")
+    print("\n── 103 IN THE 3-CYCLE {{14, 31, 29}} UNDER x ↦ 26x (mod 37) ──")
+    print(f"  26 = 137 mod 37 = 10² mod 37")
+    print(f"  26×14 mod 37 = {(26*14)%37},  26×31 mod 37 = {(26*31)%37},  26×29 mod 37 = {(26*29)%37}")
+    print(f"  103 mod 37 = {103%37}  ∈ {{14, 31, 29}}")
 
     print("\n── 7775/137 = 56 + 103/137 ──")
     print(f"  7775 = 56 × 137 + 103")
-    print(f"  digit_sum(7775) = 7+7+7+5 = {7+7+7+5} = SCALAR_137")
+    print(f"  digit_sum(7775) = 7+7+7+5 = {7+7+7+5} = 137 mod 37")
     print(f"  56.7518248175... decimal matches 10-digit sequence")
 
     print()
