@@ -14,7 +14,7 @@ Verified claims:
   Sovereign gaps   DR=3 absent from primitive roots (sovereign targets safe)
                    DR=7 absent from primitive roots (DR=7 class ⊆ QR₃₇)
   Generator 2      ord₃₇(2) = 36;  2 ≡ 3^{-1} × ... is the minimal generator
-  SCALAR link      2^12 ≡ 26 (mod 37) = SCALAR_137 = 3^6 mod 37
+  SCALAR link      2^12 ≡ 26 (mod 37) = 26 = 3^6 mod 37
 
 DR distribution across the 12 primitive roots:
   DR=1: [10]           DR=2: [20]           DR=4: [13,22]
@@ -75,7 +75,7 @@ QNR37 = frozenset(range(1, 37)) - QR37
 
 ANCHORS = frozenset({4, 9, 25, 30})
 TARGETS = frozenset({3, 12, 21, 30})
-SCALAR_137 = 26
+# 26 = 137 mod 37
 
 
 # ── Compute primitive roots ────────────────────────────────────────────────
@@ -122,9 +122,9 @@ assert not any(g in DR7_VALUES for g in PRIM_ROOTS), "Unexpected: DR=7 value as 
 assert not (ANCHORS & frozenset(PRIM_ROOTS)), "An anchor is a primitive root — unexpected"
 assert not (TARGETS & frozenset(PRIM_ROOTS)), "A target is a primitive root — unexpected"
 
-# 8. Generator 2: ord₃₇(2) = 36, and 2^12 ≡ SCALAR_137 (mod 37)
+# 8. Generator 2: ord₃₇(2) = 36, and 2^12 ≡ 26 (mod 37)
 assert multiplicative_order(2, P) == GROUP_ORDER
-assert pow(2, 12, P) == SCALAR_137    # 2^12 = 26 = SCALAR_137
+assert pow(2, 12, P) == 26    # 2^12 = 26 = 26
 
 # 9. Generator 2 produces all of (Z/37Z)*
 cycle_2 = [pow(2, k, P) for k in range(1, P)]
@@ -149,9 +149,9 @@ assert pr_dr_freq[7] == 0
 assert pr_dr_freq[5] == 2
 assert sorted(g for g in PRIM_ROOTS if dr(g) == 5) == [5, 32]
 
-# 13. SCALAR_137 = 26 is NOT a primitive root (it's in QR₃₇)
-assert SCALAR_137 not in PRIM_ROOTS
-assert SCALAR_137 in QR37
+# 13. # 26 = 137 mod 37
+assert 26 not in PRIM_ROOTS
+assert 26 in QR37
 
 
 if __name__ == "__main__":
@@ -175,7 +175,7 @@ if __name__ == "__main__":
     print(f"  DR=7: (absent) — DR=7 class {{7,16,25,34}} ⊆ QR₃₇")
     print()
     print(f"  ord₃₇(2) = {multiplicative_order(2,P)}  (minimal primitive root)")
-    print(f"  2^12 mod 37 = {pow(2,12,P)} = SCALAR_137 ✓")
+    print(f"  2^12 mod 37 = {pow(2,12,P)} = 26 ✓")
     print(f"  ord₃₇(3) = {multiplicative_order(3,P)}  (not a primitive root — generates QR₃₇ only)")
     print()
     print(f"  Inverse pairing: every g ↔ g⁻¹ both primitive roots ✓")
@@ -185,6 +185,6 @@ if __name__ == "__main__":
     print()
     print(f"  Sovereign anchors {{4,9,25,30}} ∩ primitive roots = ∅ ✓")
     print(f"  Sovereign targets {{3,12,21,30}} ∩ primitive roots = ∅ ✓")
-    print(f"  SCALAR_137={SCALAR_137} ∈ QR₃₇, not a primitive root ✓")
+    print(f"  26={26} ∈ QR₃₇, not a primitive root ✓")
     print()
     print("All assertions passed.")

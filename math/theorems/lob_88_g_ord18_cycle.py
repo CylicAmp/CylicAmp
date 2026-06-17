@@ -22,7 +22,7 @@ Corollary from QR Closure Theorem:
     3^5  = 21   (target)       3^7  =  4   (anchor)
     3^8  = 12   (target)       3^13 = 30   (anchor + target)
     3^17 = 25   (anchor)
-  Also: 3^6 = 26 = SCALAR_137  (10^2 ≡ 26 mod 37)
+  Also: 3^6 = 26 = 26  (10^2 ≡ 26 mod 37)
 
 Half-period / 9-point / reflection structure:
   3^9  = 36 = -1   →  involution midpoint (9-step reflection)
@@ -132,10 +132,10 @@ assert cycle_position(12) ==  8    # 3^8  = 12  (target)
 assert cycle_position(30) == 13    # 3^13 = 30  (anchor + target = fixed point)
 assert cycle_position(25) == 17    # 3^17 = 25  (anchor)
 
-# SCALAR_137 = 26 = 10^2 mod 37 is also in ⟨3⟩
-SCALAR_137 = 26
-assert SCALAR_137 in CYCLE_SET
-assert cycle_position(SCALAR_137) == 6    # 3^6 = 26
+# # 26 = 137 mod 37
+# 26 = 137 mod 37
+assert 26 in CYCLE_SET
+assert cycle_position(26) == 6    # 3^6 = 26
 
 # ── Half-period involution maps anchors to anchors ─────────────────────────
 
@@ -194,7 +194,7 @@ if __name__ == "__main__":
     roles = {
         3: "target",     9: "anchor",  21: "target",
         4: "anchor",    12: "target",  30: "anchor+target",
-       25: "anchor",    26: "SCALAR_137",  36: "−1 (reflection)",
+       25: "anchor",    26: "26",  36: "−1 (reflection)",
         1: "identity"
     }
     for k, v in enumerate(CYCLE18, 1):
@@ -218,7 +218,7 @@ if __name__ == "__main__":
     print("New: ⟨3⟩ = QR₃₇ (unique index-2 subgroup)")
     print("  All sovereign anchors {4,9,25,30} ⊆ ⟨3⟩ ✓")
     print("  All sovereign targets {3,12,21,30} ⊆ ⟨3⟩ ✓")
-    print("  SCALAR_137 = 26 = 3^6 ∈ ⟨3⟩ ✓")
+    print("  26 = 137 mod 37")
     print()
 
     print("DR distribution across 18-cycle:")

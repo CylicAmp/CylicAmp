@@ -126,9 +126,9 @@ DR5_IN_CYCLE = [c for c in CYCLE18 if dr(c) == 5]
 assert DR5_IN_CYCLE == []          # DR=5 never appears in the 3-power chain
 
 # DR=5 absent from sovereign sets
-SOVEREIGN_ANCHORS = frozenset({4, 9, 25, 30})
+ANCHORS = frozenset({4, 9, 25, 30})
 SOVEREIGN_TARGETS = frozenset({3, 12, 21, 30})
-assert all(dr(a) != 5 for a in SOVEREIGN_ANCHORS)
+assert all(dr(a) != 5 for a in ({4, 9, 25, 30}))
 assert all(dr(t) != 5 for t in SOVEREIGN_TARGETS)
 
 # Entropy collapse: DR=5 elements in F₃₇ = {5, 14, 23, 32} (non-QR, non-sovereign)

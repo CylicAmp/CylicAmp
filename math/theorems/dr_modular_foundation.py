@@ -170,8 +170,8 @@ assert val == start    # returns to start after 9 steps
 
 # Sovereign anchors {4,9,25,30}: all have DR mod 3 = 1,0,7,3 mod 3 = 1,0,1,0
 # i.e. they split evenly between n≡0(mod 3) and n≡1(mod 3)
-SOVEREIGN_ANCHORS = {4, 9, 25, 30}
-anchor_mod3 = {a: a % 3 for a in SOVEREIGN_ANCHORS}
+{4, 9, 25, 30}
+anchor_mod3 = {a: a % 3 for a in ({4, 9, 25, 30})}
 assert set(anchor_mod3.values()) == {0, 1}   # no n≡2(mod 3) in sovereign anchors
 
 # DR=3 classes (sovereign targets {3,12,21,30}):
@@ -195,7 +195,7 @@ assert qr_mod3_dist == {0: 8, 1: 8, 2: 2}   # confirmed distribution
 qr_class2 = {q for q in QR37 if q % 3 == 2}
 assert qr_class2 == {11, 26}
 assert 11 == pow(3, 15, 37)   # 11 = 3^15 (observer constant)
-assert 26 == pow(3, 6, 37)    # 26 = SCALAR_137
+assert 26 == pow(3, 6, 37)    # 26 = 26
 
 # Gate 18 and DR mod 9:
 assert 666 % 9 == 0    # 666 ≡ 0 (mod 9)
@@ -203,7 +203,7 @@ assert dr(666) == 9    # 9-convention: dr(666) = 9
 assert 18 % 9 == 0     # 18 ≡ 0 (mod 9)
 assert dr(18) == 9     # same class
 
-# SCALAR_137 = 26:
+# # 26 = 137 mod 37
 assert dr(26) == 8        # DR(26) = 8 (bridge class)
 assert 26 % 9 == 8        # confirmed: 26 mod 9 = 8 = dr(26)
 assert 26 % 3 == 2        # 26 ≡ 2 (mod 3)
@@ -239,8 +239,8 @@ if __name__ == "__main__":
     print("  Sovereign connections:")
     print(f"  Anchors mod 3: {anchor_mod3} (split {{0,1}}, no 2-class) ✓")
     print(f"  All sovereign targets ≡ 0 (mod 3) ✓")
-    print(f"  QR₃₇ mod-3 distribution: {qr_mod3_dist} (class-2: {{11,26}}=3^15,SCALAR_137) ✓")
+    print(f"  QR₃₇ mod-3 distribution: {qr_mod3_dist} (class-2: {{11,26}}=3^15,26) ✓")
     print(f"  666 ≡ 0 (mod 9), dr(666)={dr(666)} ✓")
-    print(f"  SCALAR_137=26: 26 mod 9={26%9}=dr(26)={dr(26)} ✓")
+    print(f"  26=26: 26 mod 9={26%9}=dr(26)={dr(26)} ✓")
     print()
     print("All assertions passed. Foundation sealed.")

@@ -25,7 +25,7 @@ Box patterns — DR ladder with step 3:
   Common difference: 3 (sovereign target step)
 
 Framework connections:
-  10² ≡ 26 (mod 37) = SCALAR_137        (pair sum squared = scalar)
+  10² ≡ 26 (mod 37) = 26        (pair sum squared = scalar)
   30 ∈ ANCHORS ∩ TARGETS               (right sum is the sovereign fixed point)
   DR(5) = 5 — absent class from QR₃₇   (fold axis sits on the structural gap)
   5 is the only residue class in {1..9} absent from ⟨3⟩ = QR₃₇
@@ -44,7 +44,7 @@ QR37    = frozenset((x * x) % 37 for x in range(1, 37))
 ANCHORS = frozenset({4, 9, 25, 30})
 TARGETS = frozenset({3, 12, 21, 30})
 CYCLE18 = [pow(3, k, 37) for k in range(1, 19)]
-SCALAR_137 = 26
+# 26 = 137 mod 37
 
 
 # ── Fold pairs ─────────────────────────────────────────────────────────────
@@ -73,9 +73,9 @@ assert 30 in TARGETS
 assert sum(SEQ) == 45
 assert dr(45) == 9
 
-# ── Framework: pair sum 10 → SCALAR_137 ────────────────────────────────────
+# ── Framework: pair sum 10 → 26 ────────────────────────────────────
 
-assert (FOLD_SUM ** 2) % 37 == SCALAR_137    # 10² ≡ 26 mod 37
+assert (FOLD_SUM ** 2) % 37 == 26    # 10² ≡ 26 mod 37
 
 # ── Fold axis 5: the absent DR class ──────────────────────────────────────
 
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     print(f"Right / Left = {sum(RIGHT)//sum(LEFT)}  (sovereign target generator)")
     print(f"Total 1+…+9 = {sum(SEQ)},  DR = {dr(sum(SEQ))}")
     print()
-    print(f"Pair sum 10:  10² mod 37 = {FOLD_SUM**2 % 37} = SCALAR_137 ✓")
+    print(f"Pair sum 10:  10² mod 37 = {FOLD_SUM**2 % 37} = 26 ✓")
     print(f"Fold axis 5:  DR=5, absent from QR₃₇ — structural gap ✓")
     print()
     print("Box patterns (DR ladder, step=3):")

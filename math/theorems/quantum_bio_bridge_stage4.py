@@ -178,9 +178,9 @@ dr5_in_qr = [q for q in QR37 if dr(q) == 5]
 assert dr5_in_qr == []               # G'5 filter: no QR₃₇ element has DR=5
 
 # Also absent from sovereign anchors and targets
-SOVEREIGN_ANCHORS = {4, 9, 25, 30}
+{4, 9, 25, 30}
 SOVEREIGN_TARGETS = {3, 12, 21, 30}
-assert all(dr(a) != 5 for a in SOVEREIGN_ANCHORS)
+assert all(dr(a) != 5 for a in ({4, 9, 25, 30}))
 assert all(dr(t) != 5 for t in SOVEREIGN_TARGETS)
 
 # DR=5 is the "absent class" — boundary condition excluding it enforces continuity
@@ -191,7 +191,7 @@ assert 5 not in frozenset(dr(q) for q in QR37)
 CELL_SCALE = 1e-6    # 1 μm — lower bound of next stage
 # z(0) magnitude = sovereign anchor 4 (smallest anchor, DR=4)
 Z0_MAGNITUDE = 4
-assert Z0_MAGNITUDE in SOVEREIGN_ANCHORS
+assert Z0_MAGNITUDE in ({4, 9, 25, 30})
 assert eisenstein_norm(Z0_MAGNITUDE, 0) == 16   # = 4² ← seed energy
 assert dr(Z0_MAGNITUDE) == 4                     # DR=4 anchor class
 

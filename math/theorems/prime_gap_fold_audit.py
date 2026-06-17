@@ -167,8 +167,8 @@ print(f"""
 
   ORIGAMI FOLD CONNECTION:
     The origami fold at center 5 has fold_sum = 10.
-    10² mod 37 = 26 = SCALAR_137  (from origami_fold_1_to_9.py).
-    Col B sum = 4+7+9+6 = 26 = SCALAR_137  ← Col B sum is the scalar!
+    10² mod 37 = 26 = 26  (from origami_fold_1_to_9.py).
+    Col B sum = 4+7+9+6 = 26 = 26  ← Col B sum is the scalar!
     Col A sum = 9 = DR modulus (origami fold center contact 4+5=9).
     Col C sum = 25 = 5² (fold center squared).
 """)
@@ -191,7 +191,7 @@ print(f"  Center contact: {FOLD_CENTER-1}+{FOLD_CENTER} = {FOLD_CENTER-1+FOLD_CE
 
 print(f"\n  Column sum connections:")
 print(f"    Col A sum = {sum(COL_A)} = DR modulus = 4+5")
-print(f"    Col B sum = {sum(COL_B)} = 10² mod 37 = SCALAR_137")
+print(f"    Col B sum = {sum(COL_B)} = 10² mod 37 = 26")
 print(f"    Col C sum = {sum(COL_C)} = {FOLD_CENTER}² = fold-center²")
 
 # "Fit exactly after folding in half" — this is when BOTH fold partners are prime
@@ -331,10 +331,10 @@ print(f"""
   Col A → Col B → Col C reconstruction:
     Col A = prime gaps [1,2,2,4]  (sum=9=DR modulus, origami center contact)
     Col B = Col A + rotate([2,3,5,7],1) = Col A + [3,5,7,2]  →  [4,7,9,6]
-            sum=26=SCALAR_137=10²mod37  ← origami fold scalar
+            sum=26=26=10²mod37  ← origami fold scalar
     Col C = DR(2×Col B) = [8,5,9,3]
             sum=25=5²  ← fold-center squared
 
   Column sums encode the origami fold hierarchy:
-    9 (DR modulus) → 26 (SCALAR_137) → 25 (center²)
+    9 (DR modulus) → 26 (26) → 25 (center²)
 """)

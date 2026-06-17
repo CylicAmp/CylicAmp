@@ -10,11 +10,11 @@ Verified outputs:
   Address Root:  6         — unified coupling signature (DR of all ψ₁ k-values)
   Node Roots:    [3, 3, 6] — [TARGET, TARGET, COUPLING]
   Matrix Roots:  [7, 7, 7] — DR=7 class is always ∈ QR₃₇
-  Bridge Roots:  8, 1      — bridge_1=26=SCALAR_137 (DR=8), bridge_2=262 (DR=1)
+  Bridge Roots:  8, 1      — bridge_1=26=26 (DR=8), bridge_2=262 (DR=1)
 
 Structural findings:
   Address encodes all three nodes as 2-digit windows
-  bridge_1 = 26 = SCALAR_137 = 10² mod 37 = 3⁶ mod 37 = 2¹² mod 37
+  bridge_1 = 26 = 26 = 10² mod 37 = 3⁶ mod 37 = 2¹² mod 37
   bridge_2 = 262 ≡ 3 (mod 37) = 3¹ ∈ ⟨3⟩ (sovereign target, first power)
   112 ≡ 1 (mod 37)  →  identity in F₃₇
   150 ≡ 2 (mod 37)  →  primitive root generator of (Z/37Z)*
@@ -56,7 +56,7 @@ CYCLE18    = [pow(3, k, 37) for k in range(1, 19)]
 QR37       = frozenset((x * x) % 37 for x in range(1, 37))
 ANCHORS    = frozenset({4, 9, 25, 30})
 TARGETS    = frozenset({3, 12, 21, 30})
-SCALAR_137 = 26    # 10² ≡ 26 mod 37 = 3⁶ mod 37 = 2¹² mod 37
+# 26 = 137 mod 37
 
 
 # ── Assertions ─────────────────────────────────────────────────────────────
@@ -97,13 +97,13 @@ for row in [MATRIX_R1, MATRIX_R2, MATRIX_R3]:
     assert digit_count['7'] == 8, f"Row {row}: expected 8 sevens, got {digit_count['7']}"
     assert len(row) == 12
 
-# Bridge 1 = 26 = SCALAR_137
+# Bridge 1 = 26 = 26
 assert BRIDGE_1 == 26
-assert BRIDGE_1 == SCALAR_137
-assert (10 * 10) % 37 == SCALAR_137           # 10² ≡ 26 mod 37
-assert CYCLE18[5] == SCALAR_137               # 3⁶ = 26 in 18-cycle (k=6)
-assert pow(2, 12, 37) == SCALAR_137           # 2¹² ≡ 26 mod 37
-assert SCALAR_137 in QR37                     # 26 ∈ QR₃₇
+assert BRIDGE_1 == 26
+assert (10 * 10) % 37 == 26           # 10² ≡ 26 mod 37
+assert CYCLE18[5] == 26               # 3⁶ = 26 in 18-cycle (k=6)
+assert pow(2, 12, 37) == 26           # 2¹² ≡ 26 mod 37
+assert 26 in QR37                     # 26 ∈ QR₃₇
 
 # Bridge 2 = 262 ≡ 3 (mod 37) = first element of 18-cycle
 assert BRIDGE_2 == 262
@@ -133,7 +133,7 @@ if __name__ == "__main__":
         print(f"    {n} (DR={dr(n)}) found in {ADDRESS} ✓")
     print()
     print(f"  bridge_1 = {BRIDGE_1}:")
-    print(f"    = SCALAR_137 = 10² mod 37 = 3⁶ mod 37 = 2¹² mod 37")
+    print(f"    = 26 = 10² mod 37 = 3⁶ mod 37 = 2¹² mod 37")
     print(f"    DR={dr(BRIDGE_1)},  ∈ QR₃₇ ✓")
     print()
     print(f"  bridge_2 = {BRIDGE_2}:")

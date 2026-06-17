@@ -27,7 +27,7 @@ def dr(n):
 
 CYCLE18    = [pow(3, k, 37) for k in range(1, 19)]
 QR37       = frozenset((x * x) % 37 for x in range(1, 37))
-SCALAR_137 = 26
+# 26 = 137 mod 37
 
 # ── 222 and 123 both DR=6 ──────────────────────────────────────────────────
 
@@ -83,9 +83,9 @@ assert dr(23) == 5
 DR5_VALUES = [n for n in range(1, 37) if dr(n) == 5]
 assert not any(v in QR37 for v in DR5_VALUES)     # DR=5 absent from QR₃₇
 
-# ── 10² ≡ SCALAR_137 (mod 37) — pair sum connects to scalar ───────────────
+# ── 10² ≡ 26 (mod 37) — pair sum connects to scalar ───────────────
 
-assert (10 * 10) % 37 == SCALAR_137    # fold pair sum 10 → SCALAR_137
+assert (10 * 10) % 37 == 26    # fold pair sum 10 → 26
 
 
 if __name__ == "__main__":

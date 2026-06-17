@@ -75,7 +75,7 @@ assert E8_ROOTS // 2 == VERTICES
 assert E8_COXETER_H == 30
 
 # E8 dimension = 248; 248 mod 37 = ?
-assert 248 % 37 == 26   # SCALAR_137!  248 = 6*37 + 26
+assert 248 % 37 == 26   # 26!  248 = 6*37 + 26
 
 # ── 4. Cosmological Tension Ratios ──────────────────────────────────────────
 
@@ -100,7 +100,7 @@ assert pow(3, 15, 37) == 11   # 11 is observer constant
 assert 13 + 11 == 24    # GATE_13 + observer = 24-coupling constant
 assert 13 * 11 == 143   # 143 mod 37 = 143 - 3*37 = 143-111 = 32; DR(32)=5 (G'5 void)
 assert 143 % 37 == 32
-assert (143 - 1) % 9 + 1 == 8  # DR(143) = 8 (bridge class, same as SCALAR_137)
+assert (143 - 1) % 9 + 1 == 8  # DR(143) = 8 (bridge class, same as 26)
 
 # ── 5. Modular Residue Map (mod 37) ─────────────────────────────────────────
 
@@ -108,7 +108,7 @@ _sig = {
     0: 'NULL', 1: 'UNITY', 3: 'TRINITY', 5: 'PIVOT', 6: 'TESLA',
     9: 'TRINITY_SQ', 10: 'DECADE', 13: 'GATE_13', 18: 'CENTER_18',
     19: 'CENTER_19', 23: 'LAMED_SEAL', 24: 'V24_BIN_TET',
-    25: 'INV_3', 26: 'SCALAR_137', 30: 'SOV_FIXED',
+    25: 'INV_3', 26: '26', 30: 'SOV_FIXED',
     31: 'PRIME_MIRROR', 33: 'DICHORAL', 36: 'INV_UNITY',
 }
 
@@ -120,14 +120,14 @@ MOD37_MAP = {
     'Bin. tet. V24':  (ORDER_BIN_TET,24,  'V24 coupling'),
     'Dic5':           (ORDER_DIC5,   20,  'FIELD_ELEMENT'),
     'A5 quotient':    (ORDER_QUOTIENT,23, 'LAMED_SEAL'),
-    'E8 dim (248)':   (E8_DIM,       26,  'SCALAR_137'),
+    'E8 dim (248)':   (E8_DIM,       26,  '26'),
     'E8 Coxeter h':   (E8_COXETER_H, 30,  'SOV_FIXED_POINT'),
 }
 
 for label, (n, expected_r, note) in MOD37_MAP.items():
     assert n % 37 == expected_r, f"{label}: {n} mod 37 = {n%37}, expected {expected_r}"
 
-# Critical: E8 dimension 248 ≡ 26 (SCALAR_137) — E8 and 137 are linked
+# Critical: E8 dimension 248 ≡ 26 (26) — E8 and 137 are linked
 assert E8_DIM % 37 == 26
 
 # Critical: E8 Coxeter number h=30 = sovereign fixed point
@@ -157,7 +157,7 @@ if __name__ == "__main__":
     print(f"   Exponents: {E8_EXPONENTS}")
     print(f"   Sum of exponents: {sum(E8_EXPONENTS)} = vertex count  ✓")
     print(f"   Coxeter h = {E8_COXETER_H} = SOVEREIGN FIXED POINT  ✓")
-    print(f"   dim(E8) = {E8_DIM}  →  248 mod 37 = {E8_DIM % 37} = SCALAR_137  ✓")
+    print(f"   dim(E8) = {E8_DIM}  →  248 mod 37 = {E8_DIM % 37} = 26  ✓")
     print()
     print("4. Cosmological Tension Ratios")
     print(f"   H₀ ratio:  {RATIO_H0:.6f}  vs  13/12 = {FRAC_13_12:.6f}  Δ={abs(RATIO_H0-FRAC_13_12):.6f}")

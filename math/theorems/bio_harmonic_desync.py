@@ -53,19 +53,19 @@ assert dr(FREQ_HIGH) == 7                 # DR=7 — same class, decade harmonic
 
 # ── Sovereign alphabet: the grounded residue set ───────────────────────────
 
-SOVEREIGN_ANCHORS = frozenset({4, 9, 25, 30})
-SOVEREIGN_DRS     = frozenset(dr(a) for a in SOVEREIGN_ANCHORS)
+ANCHORS = frozenset({4, 9, 25, 30})
+SOVEREIGN_DRS     = frozenset(dr(a) for a in ({4, 9, 25, 30}))
 assert SOVEREIGN_DRS == {4, 9, 7, 3}     # DR classes of the four anchors
 
 # Logic Leak condition: any residue outside the sovereign set is ungrounded
-def is_logic_leak(R, alphabet=SOVEREIGN_ANCHORS):
+def is_logic_leak(R, alphabet=({4, 9, 25, 30})):
     return R not in alphabet
 
 # Every non-anchor in Z/37Z triggers a logic leak
 leak_nodes = [r for r in range(1, 37) if is_logic_leak(r)]
 assert len(leak_nodes) == 32             # 36 non-zero residues minus 4 anchors
 assert all(is_logic_leak(r) for r in leak_nodes)
-assert not any(is_logic_leak(a) for a in SOVEREIGN_ANCHORS)
+assert not any(is_logic_leak(a) for a in ({4, 9, 25, 30}))
 
 # ── Feedback current model: I_f = I_0 · exp(k · dR/dt) ───────────────────
 
@@ -118,13 +118,13 @@ assert grounded_drs | ungrounded_drs == all_dr_classes   # partition of DR space
 
 # Feedback loop has no fixed point in the ungrounded subspace:
 # f(r) = 26r mod 37 maps leak_nodes; none land in sovereign anchors with period 1
-for r in SOVEREIGN_ANCHORS:
+for r in ({4, 9, 25, 30}):
     assert (26 * r) % 37 in frozenset(range(1, 37))   # stays in F₃₇
 
-# Scalar 137 link: 26 = SCALAR_137 = 10² mod 37
-SCALAR_137 = 26
-assert (10 * 10) % 37 == SCALAR_137
-assert dr(SCALAR_137) == 8                # DR=8 — the bridge class
+# Scalar 137 link: 26 = 26 = 10² mod 37
+# 26 = 137 mod 37
+assert (10 * 10) % 37 == 26
+assert dr(26) == 8                # DR=8 — the bridge class
 
 
 if __name__ == "__main__":
@@ -134,7 +134,7 @@ if __name__ == "__main__":
     print(f"  Frequency ratio: {FREQ_RATIO}× (one decade span)")
     print(f"  DR({FREQ_LOW}) = {dr(FREQ_LOW)},  DR({FREQ_HIGH}) = {dr(FREQ_HIGH)}  (same class)")
     print()
-    print(f"  Sovereign alphabet (grounded): {sorted(SOVEREIGN_ANCHORS)}")
+    print(f"  Sovereign alphabet (grounded): {sorted(({4, 9, 25, 30}))}")
     print(f"  Sovereign DR classes: {sorted(SOVEREIGN_DRS)}")
     print(f"  Ungrounded nodes in Z/37Z: {len(leak_nodes)} / 36")
     print()
@@ -153,6 +153,6 @@ if __name__ == "__main__":
         print(f"  {s['name']:<22} {s['bandwidth']:<28} {s['coherence']}")
     print()
     print(f"  DR space: grounded={sorted(grounded_drs)}, full={sorted(all_dr_classes)}")
-    print(f"  SCALAR_137 = {SCALAR_137} = 10² mod 37,  DR({SCALAR_137}) = {dr(SCALAR_137)}")
+    print(f"  26 = {26} = 10² mod 37,  DR({26}) = {dr(26)}")
     print()
     print("All assertions passed.")

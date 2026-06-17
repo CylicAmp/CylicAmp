@@ -16,7 +16,7 @@ Architecture:
 
 Key discoveries:
   All three k-values have DR(k) = 6 — unified coupling signature.
-  k=618  mod 37 = 26 = SCALAR_137 (10²≡26, the 1/137 residue)
+  k=618  mod 37 = 26 = 26 (10²≡26, the 1/137 residue)
   k=3138 mod 37 = 30 = SOVEREIGN FIXED POINT {4,9,25,30}
   74 = 2×37 → mod 37 = 0, DR = 2 → anchors DR-2 at the modular zero
 
@@ -66,7 +66,7 @@ assert dr(K_SOURCE)   == 6
 assert dr(K_MIRROR)   == 6
 assert dr(K_GUARDIAN) == 6
 
-# k=618 mod 37 = 26 = SCALAR_137
+# k=618 mod 37 = 26 = 26
 assert K_MIRROR % 37 == 26       # 10²≡26 mod 37
 assert 26 in QR37
 
@@ -117,7 +117,7 @@ if __name__ == "__main__":
     print()
     print(f"3-9-6 Metronome (+6): {metronome}")
     print(f"All DR(k) = 6: unified coupling signature ✓")
-    print(f"k=618  mod37={K_MIRROR%37} = SCALAR_137 ✓")
+    print(f"k=618  mod37={K_MIRROR%37} = 26 ✓")
     print(f"k=3138 mod37={K_GUARDIAN%37} = sovereign fixed point ✓")
     print(f"74 = 2×37 → mod37=0  DR=2 → DR-2 phase-lock anchor ✓")
     print(f"Absolute 9 Vacuum: DR(9n)=9 for all n=1..36 ✓")

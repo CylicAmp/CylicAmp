@@ -90,7 +90,7 @@ assert not planck_filter(0)
 # Non-multiples pass
 assert planck_filter(1)
 assert planck_filter(191)      # prime 191 passes
-assert planck_filter(26)       # SCALAR_137 = 26 passes
+assert planck_filter(26)       # # 26 = 137 mod 37
 
 # Passage density: 36/37 ≈ 97.3%
 N_TEST = 370

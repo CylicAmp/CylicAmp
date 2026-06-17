@@ -88,7 +88,7 @@ assert legendre_37(25) == 1   # anchor
 assert legendre_37(30) == 1   # anchor
 assert legendre_37(3)  == 1   # target
 assert legendre_37(5)  == -1  # PIVOT — non-residue
-assert legendre_37(26) == 1   # SCALAR_137 — QR
+assert legendre_37(26) == 1   # 26 — QR
 assert sqrt_mod37(26)  == 10  # 10² ≡ 26 mod 37
 
 # CLASS B: Geometric oracle
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     print()
     print("CLASS A — Legendre oracle:")
     for r, name in [(4,'anchor'), (9,'anchor'), (25,'anchor'), (30,'anchor/target'),
-                     (5,'PIVOT'), (26,'SCALAR_137')]:
+                     (5,'PIVOT'), (26,'26')]:
         L = legendre_37(r)
         s = sqrt_mod37(r)
         print(f"  ({r:2d}|37) = {L:+d}   {name}   sqrt={s}")
