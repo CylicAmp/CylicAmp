@@ -55,26 +55,25 @@ assert 2 * 13 == 26
 # LAYER 2: 37-HUB  [ALL PROVEN]
 # ═══════════════════════════════════════════════════════════════════════════════
 
-SCALAR_137 = 137 % 37              # = 26
-assert SCALAR_137 == 26
-assert dr(26) == 8                 # DR(SCALAR_137) = 8
+assert 137 % 37 == 26
+assert dr(26) == 8                 # DR(137 mod 37) = 8
 
-# ord₃₇(26) = 3: the heartbeat 3-cycle
+# ord₃₇(26) = 3
 assert pow(26, 1, 37) == 26
 assert pow(26, 2, 37) == 10
-assert pow(26, 3, 37) == 1         # returns to identity in 3 steps
+assert pow(26, 3, 37) == 1
 
-# Heartbeat map f(n) = (26n) mod 37
+# Period-3 map: f(n) = (26n) mod 37
 def hb(n): return (26 * n) % 37
 for n in range(1, 37):
-    assert hb(hb(hb(n))) == n      # period-3 for every element
+    assert hb(hb(hb(n))) == n
 
-# SCALAR cycle: 26→10→1→26  (contains the multiplicative identity 1)
+# 3-cycle: 26→10→1→26
 assert hb(26) == 10
 assert hb(10) == 1
 assert hb(1)  == 26
 
-# 137 = SCALAR_137 + 3×37
+# 137 = 26 + 3×37
 assert 26 + 111 == 137
 assert 26 + 3 * 37 == 137
 
@@ -112,11 +111,10 @@ assert 369 % 37 == 36              # ≡ -1 (mod 37)
 assert 370 == 10 * 37              # 369 is one below a multiple of 37
 assert pow(10, 3, 37) == 1         # ord₃₇(10)=3 connects back
 
-# 411 mod 37 = 4 = sovereign anchor (in cycle 30→3→4→30)
+# 411 mod 37 = 4; orbit of 4 under x↦26x mod 37: 4→30→3→4
 assert 411 % 37 == 4
-SOVEREIGN_ANCHORS = {4, 9, 25, 30}
-assert 4 in SOVEREIGN_ANCHORS
-assert hb(30) == 3 and hb(3) == 4 and hb(4) == 30   # cycle confirmed
+assert 4 in {4, 9, 25, 30}
+assert hb(30) == 3 and hb(3) == 4 and hb(4) == 30
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -174,7 +172,7 @@ assert dr(23) == 5                 # DR shifts from 2 → 5 across the running r
 
 # The framework establishes:
 #   1. 137 is structurally special in Z/9Z × Z/37Z arithmetic
-#   2. Its triple 411 sits on a sovereign anchor in the 37-hub
+#   2. Its triple 411 mod 37 = 4, in the orbit {4,30,3} under 26x mod 37
 #   3. Its digits self-encode the triple via running sums
 #   4. The measured α⁻¹ = 137.036 is DR-neutral relative to 137
 #   5. The digit sum of α⁻¹ (to 3dp) is 20 = 3+5+7+0+3+6 [OBSERVED]
@@ -210,14 +208,14 @@ if __name__ == "__main__":
     print(f"  137 = 3×37 + 2×13:            {3*37} + {2*13} = {3*37+2*13}")
 
     print("\n── LAYER 2: 37-HUB ──")
-    print(f"  137 mod 37:                    {137%37}  (SCALAR_137)")
-    print(f"  DR(SCALAR_137):                {dr(26)}")
-    print(f"  ord₃₇(26):                     3  (heartbeat period)")
+    print(f"  137 mod 37:                    {137%37}  (26)")
+    print(f"  DR(26):                {dr(26)}")
+    print(f"  ord₃₇(26):                     3  (period-3 orbit)")
     print(f"  Heartbeat cycle:               26→10→1→26")
     print(f"  137 = 26 + 111:               {26+111}")
     print(f"  248 = 137 + 111:              {137+111}  (dim E₈)")
-    print(f"  248 mod 37:                    {248%37}  (= SCALAR_137)")
-    print(f"  10² mod 37:                    {100%37}  (= SCALAR_137)")
+    print(f"  248 mod 37:                    {248%37}  (= 26)")
+    print(f"  10² mod 37:                    {100%37}  (= 26)")
 
     print("\n── LAYER 3: 369 ──")
     print(f"  DR(3×37 = 111):                {dr(111)}")
@@ -225,7 +223,7 @@ if __name__ == "__main__":
     print(f"  {dr(111)} + {dr(411)} = {dr(111)+dr(411)}  → sequence 3, 6, 9")
     print(f"  {{3,6,9}} = complement of prime DR set {{1,2,4,5,7,8}}")
     print(f"  3→6→3 (doubling flip),  9→9 (fixed)")
-    print(f"  411 mod 37:                    {411%37}  (sovereign anchor)")
+    print(f"  411 mod 37:                    {411%37}  (element of {4,9,25,30})")
     print(f"  369 mod 37:                    {369%37}  ≡ -1 (mod 37)")
     print(f"  370 = 10×37:                   {10*37}")
 
