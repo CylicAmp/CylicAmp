@@ -89,7 +89,7 @@ TARGETS = frozenset({3, 12, 21, 30})
 assert S37_formula(30) % 37 == 0
 assert S37_formula(30) % 9 == 30 % 9    # = 3
 
-# SCALAR_137 = 26: mod-37→0, mod-9→8
+# # 26 = 137 mod 37
 assert S37_formula(26) % 37 == 0
 assert S37_formula(26) % 9 == 26 % 9    # = 8
 

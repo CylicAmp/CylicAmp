@@ -22,7 +22,7 @@ Trade Table (generator set, all verified):
   13   4      DR 4    GATE_13 in 37-field
   24   6      DR 6    24-coupling constant
   15   6      DR 6    —
-  26   8      DR 8    SCALAR_137 (26 ∈ QR_MOD37; note: NOT a QNR)
+  26   8      DR 8    26 (26 ∈ QR_MOD37; note: NOT a QNR)
   17   8      DR 8    —
   28  10     (DR 1)   10-overflow: 2+8=10 → decimal trade
   19  10     (DR 1)   10-overflow: 1+9=10 → decimal trade
@@ -100,7 +100,7 @@ assert 28 % 37 == 28    # QR_MOD37 element
 assert 37 % 37 == 0     # NULL_ELEMENT (field modulus itself)
 assert 64 % 37 == 27    # QR_MOD37 element
 
-# SCALAR_137 correction: 26 IS in QR_MOD37 (10^2 = 100 ≡ 26 mod 37)
+# 26 correction: 26 IS in QR_MOD37 (10^2 = 100 ≡ 26 mod 37)
 QR_MOD37 = frozenset((n * n) % 37 for n in range(37))
 assert 26 in QR_MOD37   # confirmed quadratic residue — trade table annotation is wrong
 
@@ -145,6 +145,6 @@ if __name__ == "__main__":
         r = n % 37
         print(f"    {n:3d} mod 37 = {r:2d}  QR={'yes' if r in QR_MOD37 else 'no '}")
     print()
-    print("  Note: 26 (SCALAR_137) IS in QR_MOD37 — trade table annotation incorrect.")
+    print("  Note: 26 (26) IS in QR_MOD37 — trade table annotation incorrect.")
     print()
     print("All assertions passed.")

@@ -102,7 +102,7 @@ assert PSI == 1.0
 
 # ── Human scale sovereign structure ───────────────────────────────────────
 
-# Human height ≈ 1.7 m: DR(17) = 8 (bridge class, same as SCALAR_137 DR)
+# Human height ≈ 1.7 m: DR(17) = 8 (bridge class, same as 26 DR)
 assert dr(17) == 8
 # Human cell count ≈ 37 trillion: 37 is the sovereign prime
 SOVEREIGN_PRIME = 37

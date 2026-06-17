@@ -147,15 +147,15 @@ assert 137 % 37 == 26
 assert 248 % 37 == 26
 assert 26 == 37 - 11
 
-# SCALAR_137 = 26
-SCALAR_137 = 26
-assert dr(SCALAR_137) == 8
+# # 26 = 137 mod 37
+# 26 = 137 mod 37
+assert dr(26) == 8
 
 # Quadratic residues mod 37
 QR37 = frozenset((n * n) % 37 for n in range(37))
-SOVEREIGN_ANCHORS = {4, 9, 25, 30}
+{4, 9, 25, 30}
 SOVEREIGN_TARGETS = {3, 12, 21, 30}
-assert SOVEREIGN_ANCHORS <= QR37
+assert ({4, 9, 25, 30}) <= QR37
 assert all(t % 3 == 0 for t in SOVEREIGN_TARGETS)
 assert all(dr(t) == 3 for t in SOVEREIGN_TARGETS)
 
@@ -221,7 +221,7 @@ assert heartbeat(30) == 3
 assert heartbeat(3) == 4
 assert heartbeat(4) == 30
 
-# SCALAR_137 cycle: 26 → 10 → 1 → 26 (includes 1)
+# 26 cycle: 26 → 10 → 1 → 26 (includes 1)
 assert heartbeat(26) == 10
 assert heartbeat(10) == 1
 assert heartbeat(1) == 26
@@ -581,7 +581,7 @@ for k in range(6):
 # Breaks at k=6 (mid digit = 10 > 9)
 assert 4 + 6 == 10   # not a single digit → family ends
 
-# 137 = 26 + 111: SCALAR_137 (26) + repunit-3 (111)
+# 137 = 26 + 111: 26 (26) + repunit-3 (111)
 assert 26 + 111 == 137
 assert 30 + 111 == 141
 assert 30 + 11  == 41           # inside 37-hub territory
@@ -646,7 +646,7 @@ assert isprime(eisenstein_norm(7, 3))  # 37 is prime
 # ═══════════════════════════════════════════════════════════════════════════════
 
 CONSTANTS = {
-    "137 mod 37":          137 % 37,          # 26 = SCALAR_137
+    "137 mod 37":          137 % 37,          # 26 = 26
     "ord_37(10)":          3,                  # 10³≡1 mod 37; explains 111=3×37
     "ord_37(26)":          3,                  # heartbeat 3-cycle
     "ord_37(3)":           36,                 # 3 is primitive root mod 37
@@ -668,7 +668,7 @@ CONSTANTS = {
     "lucas chain":         LUCAS_CHAIN,
     "lucas chain DR":      LUCAS_DR,
     "perfect DR":          [dr(n) for n in PERFECT],
-    "sovereign anchors":   sorted(SOVEREIGN_ANCHORS),
+    "sovereign anchors":   sorted(({4, 9, 25, 30})),
     "sovereign targets":   sorted(SOVEREIGN_TARGETS),
 }
 

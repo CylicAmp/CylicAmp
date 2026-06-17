@@ -102,7 +102,7 @@ for k, r in enumerate(rotations, 1):
 
 # ord₃₇(10) = 3: the heartbeat period (proven in cylicamp_master.py)
 assert pow(10, 1, 37) == 10
-assert pow(10, 2, 37) == 26   # = SCALAR_137
+assert pow(10, 2, 37) == 26   # = 26
 assert pow(10, 3, 37) == 1    # period 3
 
 # ord₇(10) = 6: the cyclic period of 1/7

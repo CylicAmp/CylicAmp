@@ -25,7 +25,7 @@ NOTE (SageMath stub): Full coset construction via Weyl group orbit requires Sage
     # (|W(E7)|=2903040) gives |W:H| = 696729600/2903040 = 240 = root count.
 
 37-field connections:
-  Layer 26 = SCALAR_137: unique root space at height 26 mod 37 = 26
+  Layer 26 = 26: unique root space at height 26 mod 37 = 26
   Layer 18 = CENTER_18:  3 root spaces at height 18 (Gate 18 multiplicity)
   Layer 30 wraps to 0:   h=30 is the Coxeter number = sovereign fixed point (mod 37 = 30)
 
@@ -154,8 +154,8 @@ assert COL_SUMS[0] == 8
 assert I_MAT.sum() == 248
 
 # 37-field connections
-assert 26 < COXETER_H              # height 26 = SCALAR_137 is a valid layer
-assert COL_SUMS[26] == 2           # unique root ±α at height 26 → SCALAR_137
+assert 26 < COXETER_H              # height 26 = 26 is a valid layer
+assert COL_SUMS[26] == 2           # unique root ±α at height 26 → 26
 assert COL_SUMS[18] == 6           # 3 positive + 3 negative at height 18 = CENTER_18
 assert COL_SUMS[29] == 2           # highest/lowest root pair (height ±29 = h-1)
 assert COXETER_H % 37 == 30        # h=30 = sovereign fixed point
@@ -214,8 +214,8 @@ assert KERNEL_DIM_26 == 218
 assert 218 % 37 == 33        # DICHORAL_144
 assert sum(int(d) for d in str(218)) == 11   # DR(218) = 11 = observer constant (3^15 mod 37)
 
-# Structural closure: modulus 26 = SCALAR_137; kernel dim 218 → DICHORAL_144
-assert 26 % 37 == 26    # modulus lands on SCALAR_137 layer
+# Structural closure: modulus 26 = 26; kernel dim 218 → DICHORAL_144
+assert 26 % 37 == 26    # modulus lands on 26 layer
 assert 218 % 37 == 33   # kernel dim lands on DICHORAL_144
 
 
@@ -239,17 +239,17 @@ if __name__ == "__main__":
     print(f"  Incidence matrix I: {I_MAT.shape}")
     print(f"  Layer 0  (Cartan h₀):        {COL_SUMS[0]:3d} elements")
     print(f"  Layer 18 (CENTER_18, Gate18): {COL_SUMS[18]:3d} elements (3 pos + 3 neg roots)")
-    print(f"  Layer 26 (SCALAR_137):        {COL_SUMS[26]:3d} elements (unique ±height-26 root)")
+    print(f"  Layer 26 (26):        {COL_SUMS[26]:3d} elements (unique ±height-26 root)")
     print(f"  Layer 29 (highest root ±):    {COL_SUMS[29]:3d} elements")
     print()
-    print(f"  Height-26 root (SCALAR_137 layer):")
+    print(f"  Height-26 root (26 layer):")
     print(f"    root = {_h26_roots[0]}")
     print(f"    simple-root coefficients = {_h26_coeffs.tolist()}")
-    print(f"    height = {_h26_coeffs.sum()} = SCALAR_137 mod 37")
+    print(f"    height = {_h26_coeffs.sum()} = 26 mod 37")
     print()
     print("  37-field layer audit:")
     for layer, sig in [(0,'Cartan/h₀'),(8,'TESLA_FLOW'),(18,'CENTER_18/Gate18'),
-                       (26,'SCALAR_137'),(29,'highest root h-1'),(30,'Coxeter h=sovereign')]:
+                       (26,'26'),(29,'highest root h-1'),(30,'Coxeter h=sovereign')]:
         if layer < 30:
             print(f"    Layer {layer:2d}: {COL_SUMS[layer]} elements  → {sig}")
     print()

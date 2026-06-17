@@ -84,7 +84,7 @@ for k, primes in ENTRY.items():
         assert ord10(p) == k
 
 # 37 and 137 share the digit 37 — one IS the hub, one CONTAINS the hub
-assert 137 % 37 == 26    # SCALAR_137: the heartbeat generator
+assert 137 % 37 == 26    # 26: the heartbeat generator
 assert 137 % 9  == 2     # DR(137) = 2
 assert 37  % 9  == 1     # DR(37)  = 1
 
@@ -153,7 +153,7 @@ if __name__ == "__main__":
     print("\n── SHARED FRAMEWORK ──")
     print(f"  lcm(ord₃₇, ord₁₃₇) = lcm(3,8) = {lcm(3,8)}")
     print(f"  Both 37 and 137 divide 10^24 - 1")
-    print(f"  137 mod 37 = {137%37}  (SCALAR_137, the heartbeat generator)")
+    print(f"  137 mod 37 = {137%37}  (26, the heartbeat generator)")
 
     print()
     print("All assertions passed.")

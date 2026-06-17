@@ -7,7 +7,7 @@ Five structural patterns verified and connected to the sovereign framework.
 
 Pattern 1 — Doubling chain:
   1→2→4→8  (powers of 2: 2⁰→2¹→2²→2³)
-  Connects to: 2 is the minimal primitive root mod 37; 2^12 = SCALAR_137
+  Connects to: 2 is the minimal primitive root mod 37; 2^12 = 26
 
 Pattern 2 — 6×4 grid:
   Four rows of six entries drawn from {2,4}; each row sums to 16 = 2⁴.
@@ -46,7 +46,7 @@ def dr(n):
 
 CYCLE18    = [pow(3, k, 37) for k in range(1, 19)]
 QR37       = frozenset((x * x) % 37 for x in range(1, 37))
-SCALAR_137 = 26
+# 26 = 137 mod 37
 BRIDGE_DUAL = 28    # dual prime bridge from string_duality_37phi_bridge
 
 # ── Pattern 1: Doubling chain ──────────────────────────────────────────────
@@ -57,8 +57,8 @@ assert all(chain[i] * 2 == chain[i+1] for i in range(len(chain)-1)), \
     "Doubling chain broken"
 assert chain == [2**k for k in range(4)]
 
-# Connects to primitive root 2 and SCALAR_137
-assert pow(2, 12, 37) == SCALAR_137    # 2^12 = 26 mod 37
+# Connects to primitive root 2 and 26
+assert pow(2, 12, 37) == 26    # 2^12 = 26 mod 37
 
 # ── Pattern 2: 6×4 grid ────────────────────────────────────────────────────
 
@@ -84,7 +84,7 @@ assert 64 == 2**6 == 4**3
 
 # 6+4 = 10 pivot
 assert COLS + ROWS == 10
-assert (10 * 10) % 37 == SCALAR_137    # 10² ≡ SCALAR_137 mod 37
+assert (10 * 10) % 37 == 26    # 10² ≡ 26 mod 37
 
 # Entry counts: 8 fours, 16 twos
 flat = [v for row in GRID for v in row]
@@ -164,14 +164,14 @@ if __name__ == "__main__":
 
     print("Pattern 1 — Doubling chain:")
     print(f"  {' → '.join(str(v) for v in chain)}")
-    print(f"  2^12 mod 37 = {pow(2,12,37)} = SCALAR_137 ✓")
+    print(f"  2^12 mod 37 = {pow(2,12,37)} = 26 ✓")
     print()
 
     print("Pattern 2 — 6×4 grid:")
     for i, row in enumerate(GRID, 1):
         print(f"  Row {i}: {'-'.join(str(v) for v in row)} = {sum(row)}")
     print(f"  Total sum: {total_sum} = 2^6 = 4^3")
-    print(f"  6+4 = {COLS+ROWS}  (10² mod 37 = {SCALAR_137} = SCALAR_137 ✓)")
+    print(f"  6+4 = {COLS+ROWS}  (10² mod 37 = {26} = 26 ✓)")
     print(f"  Fours: {counts[4]},  Twos: {counts[2]}")
     print(f"  Bonus: 64 mod 37 = {total_sum % 37} = 3³ ∈ QR₃₇  (cycle position {CYCLE18.index(27)+1}) ✓")
     print()

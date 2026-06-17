@@ -33,7 +33,7 @@ Midpoint split: left=1369=37², right=9631 (prime).
 Dissonance (δ_Ω): right=99731 instead of 99631 — a perturbation of +100.
   99631 mod 37 = 27 = 3³ (cycle position 3)
   99731 mod 37 = 16 (DR=7 class ∈ QR₃₇)
-  Delta = 100,  100 mod 37 = 26 = SCALAR_137
+  Delta = 100,  100 mod 37 = 26 = 26
 """
 
 from math import isqrt
@@ -123,7 +123,7 @@ assert delta_Omega == 100
 # Residue analysis of the perturbation
 assert canonical  % 37 == 27          # = 3³ mod 37 (cycle position 3)
 assert dissonance % 37 == 16          # DR=7 class ∈ QR₃₇
-assert delta_Omega % 37 == 26         # = SCALAR_137 = 10² mod 37
+assert delta_Omega % 37 == 26         # = 26 = 10² mod 37
 assert 16 in QR37
 assert 27 in QR37
 assert pow(3, 3, 37) == 27
@@ -152,6 +152,6 @@ if __name__ == "__main__":
     print(f"  Dissonance δ_Ω:")
     print(f"    Canonical  99631 mod 37 = {99631%37} = 3³ (cycle pos 3)")
     print(f"    Dissonant  99731 mod 37 = {99731%37} (DR=7 class ∈ QR₃₇)")
-    print(f"    δ_Ω = +{delta_Omega},  {delta_Omega} mod 37 = {delta_Omega%37} = SCALAR_137 ✓")
+    print(f"    δ_Ω = +{delta_Omega},  {delta_Omega} mod 37 = {delta_Omega%37} = 26 ✓")
     print()
     print("All assertions passed.")

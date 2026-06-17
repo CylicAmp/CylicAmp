@@ -103,7 +103,7 @@ class G5_Sovereign_Engine:
         stages_8_10 = {
             "Stage 8 (Stellar)":  "10⁷–10¹¹ m, 4 decades; Tesla 3-6-9 macro-nodes",
             "Stage 9 (Galactic)": "10¹¹–10²² m, 11 decades (DR=2=primitive root); golden spiral",
-            "Stage 10 (Gate 18)": "10²²–10²⁶ m, 4 decades; A*→∞, 3^18≡1(mod 37), SCALAR_137=26",
+            "Stage 10 (Gate 18)": "10²²–10²⁶ m, 4 decades; A*→∞, 3^18≡1(mod 37), 26=26",
             "Celestial spans":    "[4, 11, 4] palindrome; sum=19, DR(19)=1 (identity return)",
             "Result":             "Final convergence. Planck(35)+Gate18(26)=61=37+24. Closed."
         }
@@ -152,7 +152,7 @@ assert _dr(4) == 4                          # 4-decade span = sovereign anchor
 
 # Stages 8–10: celestial
 assert pow(3, 18, 37) == 1                  # Gate 18 closure
-assert (10 * 10) % 37 == 26                # SCALAR_137 = Gate 18 exponent
+assert (10 * 10) % 37 == 26                # 26 = Gate 18 exponent
 assert 35 + 26 == 61                        # Planck mirror
 assert [4, 11, 4][0] == [4, 11, 4][-1]    # celestial palindrome
 

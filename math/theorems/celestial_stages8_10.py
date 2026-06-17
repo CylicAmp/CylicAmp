@@ -134,9 +134,9 @@ assert dr(666) == 9
 for mu1, mu2 in [(1, 2), (10, 100), (1000, 10000)]:
     assert math.sqrt(mu1) < math.sqrt(mu2)
 
-# Gate 18 exponent: 26 (the SCALAR_137)
+# Gate 18 exponent: 26 (the 26)
 assert STAGE10_HIGH == 26
-assert (10 * 10) % 37 == 26    # 10² ≡ 26 (mod 37) = SCALAR_137
+assert (10 * 10) % 37 == 26    # 10² ≡ 26 (mod 37) = 26
 assert dr(26) == 8              # DR=8 bridge class
 
 # Planck–Gate18 mirror: 35 + 26 = 61
@@ -144,10 +144,10 @@ assert 35 + STAGE10_HIGH == 61
 assert dr(61) == 7              # QR₃₇ DR=7 — the grand closure class
 
 # Asymptotic recognition: framework is self-referential
-# The Gate 18 exponent 26 = SCALAR_137 = 10² mod 37
-# SCALAR_137 was defined at Stage 1 (Planck), emerges again at Stage 10 (Gate 18)
-SCALAR_137 = 26
-assert SCALAR_137 == STAGE10_HIGH
+# The Gate 18 exponent 26 = 26 = 10² mod 37
+# 26 was defined at Stage 1 (Planck), emerges again at Stage 10 (Gate 18)
+# 26 = 137 mod 37
+assert 26 == STAGE10_HIGH
 
 # ── Span accounting across all stages ─────────────────────────────────────
 
@@ -201,7 +201,7 @@ if __name__ == "__main__":
     print(f"    11 = 3^15 mod 37 ∈ QR₃₇ ✓,  DR(11) = {dr(11)} (primitive root class)")
     print()
     print(f"  Stage 10: 3^18 mod 37 = {pow(3,18,37)} ✓ (cycle closed)")
-    print(f"    Gate 18 exponent = {STAGE10_HIGH} = SCALAR_137 = 10² mod 37 ✓")
+    print(f"    Gate 18 exponent = {STAGE10_HIGH} = 26 = 10² mod 37 ✓")
     print(f"    Planck(35) + Gate18(26) = {35+STAGE10_HIGH} = 61 (prime, DR={dr(61)} ∈ QR₃₇) ✓")
     print(f"    Limit cycle A* = √μ → ∞: asymptotic recognition ✓")
     print()

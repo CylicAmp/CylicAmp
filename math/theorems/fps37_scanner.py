@@ -6,7 +6,7 @@ FPS-37 Scanner — LoB 23 / 23b
 Bug fixed: has_sqrt previously used perfect squares {0,1,4,9,16,25,36}.
 Correct quadratic residues mod 37 = 19 values:
   {0,1,3,4,7,9,10,11,12,16,21,25,26,27,28,30,33,34,36}
-Residue 26 (SCALAR_137) is a QR: 10^2 = 100 ≡ 26 (mod 37). Confirmed True.
+Residue 26 (26) is a QR: 10^2 = 100 ≡ 26 (mod 37). Confirmed True.
 """
 
 import math
@@ -30,7 +30,7 @@ SIGNIFICANCE = {
     19: "CENTER_19",
     23: "LAMED_SEAL",
     25: "INV_3",
-    26: "SCALAR_137",
+    26: "26",
     31: "PRIME_MIRROR",
     33: "DICHORAL_144",
     36: "INVERSE_UNITY",
@@ -102,7 +102,7 @@ def field_scan_37(value, label="input"):
 
 # QR count
 assert len(QR_MOD37) == 19
-assert 26 in QR_MOD37          # SCALAR_137 has a square root mod 37
+assert 26 in QR_MOD37          # 26 has a square root mod 37
 assert 10**2 % 37 == 26        # 10 is the sqrt: 100 ≡ 26 (mod 37)
 
 # is_square != has_sqrt (now distinct)
@@ -140,7 +140,7 @@ assert int(math.floor(psi_232)) % 37 == 5   # Pivot
 assert field_scan_37(227)['residue'] == 5
 assert field_scan_37(232)['residue'] == 10
 assert field_scan_37(191)['significance'] == "TESLA_FLOW"
-assert field_scan_37(137)['significance'] == "SCALAR_137"
+assert field_scan_37(137)['significance'] == "26"
 assert field_scan_37(137)['has_sqrt'] == True
 assert field_scan_37(142857)['significance'] == "NULL_ELEMENT"
 
