@@ -169,6 +169,12 @@ print("""
     |T ∩ [1,N]| ~ 2C₂ · N / log²(N)   as N → ∞
     where C₂ = ∏_{p>2} p(p-2)/(p-1)² ≈ 0.6601...
 
+  KNOWN (Zhang 2013): infinitely many prime pairs with gap < 70,000,000.
+    First unconditional proof that prime gaps stay bounded — a landmark.
+    Improved to gap ≤ 246 by Maynard-Tao / Polymath8b (2014).
+    Conditional on Elliott-Halberstam: gap ≤ 16.
+    Gap = 2 (TPC) remains OPEN. Parity problem is the key obstruction.
+
   TPC ↔ lim inf_{N→∞}  |T ∩ [1,N]| · log²(N) / N  >  0
 
   Set theory says: an infinite set has no maximum.
