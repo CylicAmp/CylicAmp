@@ -139,3 +139,28 @@ dr_floors = [dr(f) for f in floors]
 print(f"  floors: {floors}")
 print(f"  DRs:    {dr_floors}")
 print(f"  sum of DRs: {sum(dr_floors)}  DR={dr(sum(dr_floors))}")
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# WAVE PROPERTIES OF THE FIRST ZERO
+# ──────────────────────────────────────────────────────────────────────────────
+
+import math
+
+gamma1 = ZEROS[0]
+
+# Each zero ρ = 1/2 + iγ contributes wave amplitude 2√x / |ρ|
+# |ρ₁| = sqrt(1/4 + γ₁²)
+rho1_abs = math.sqrt(0.25 + gamma1**2)
+
+print()
+print("Wave properties of the first zero:")
+print(f"  γ₁         = {gamma1:.15f}")
+print(f"  |ρ₁|       = sqrt(1/4 + γ₁²) = {rho1_abs:.10f}")
+print(f"  |ρ₁|²      = {rho1_abs**2:.6f}  ≈ 200")
+print(f"  10√2       = {10*math.sqrt(2):.10f}")
+print(f"  diff       = {rho1_abs - 10*math.sqrt(2):.2e}")
+print(f"  floor(100√2) = {math.floor(100*math.sqrt(2))}  (sovereign anchor — ladder_11_111.py)")
+print(f"  Frequency  = γ₁/(2π) = {gamma1/(2*math.pi):.6f} cycles per unit of log(x)")
+print(f"  Period     = 2π/γ₁   = {2*math.pi/gamma1:.6f} units of log(x) per cycle")
+print(f"  γ₁ is the fundamental frequency — the lowest note of the prime music")
