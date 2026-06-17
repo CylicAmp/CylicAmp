@@ -72,6 +72,31 @@ for r in rotations:
 
 
 # ──────────────────────────────────────────────────────────────────────────────
+# SPLIT-COMPLEMENT PROPERTY: first half + second half = 999
+# ──────────────────────────────────────────────────────────────────────────────
+
+# PROOF:
+#   142857 = 999 × 143  →  142857 ≡ 0 (mod 999)
+#   Every rotation k×142857 ≡ 0 (mod 999)
+#   For any 6-digit R = C×10³ + D:
+#     10³ ≡ 1 (mod 999)  →  C×10³ + D ≡ C + D (mod 999)
+#   Therefore C + D ≡ 0 (mod 999)
+#   C and D are both < 999, so C + D = 999 exactly.
+
+assert 10**3 % 999 == 1    # 1000 ≡ 1 (mod 999) — the key step
+
+for r in rotations:
+    s = str(r).zfill(6)
+    C, D = int(s[:3]), int(s[3:])
+    assert C + D == 999
+    assert r % 999 == 0    # follows from 142857 = 999×143
+
+# ×7 property: rotation k × 142857 × 7 = k × 999999
+for k, r in enumerate(rotations, 1):
+    assert r * 7 == 999999 * k
+
+
+# ──────────────────────────────────────────────────────────────────────────────
 # 37-HUB CONNECTION
 # ──────────────────────────────────────────────────────────────────────────────
 
