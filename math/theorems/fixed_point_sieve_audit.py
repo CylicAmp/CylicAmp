@@ -241,9 +241,24 @@ print("""
 
   CHEN'S THEOREM (1973):
     Infinitely many primes p with p+2 prime OR semiprime (2 factors).
-    Closest proven result to TPC.
     The semiprime gap: eliminates 3-prime factors but not 2-prime products.
     TPC requires: eliminate the semiprime case entirely.
+
+  ZHANG'S THEOREM (2013):
+    Infinitely many prime pairs with gap < 70,000,000.
+    First proof that prime gaps don't grow to infinity — the "bounded
+    gaps" breakthrough. Uses Goldston-Pintz-Yildirim sieve + deep
+    analysis of the distribution of primes in arithmetic progressions.
+
+  POLYMATH / MAYNARD (2013-2014):
+    Rapid improvement via Maynard's multidimensional sieve.
+    Current proven bound: infinitely many prime pairs with gap ≤ 246.
+    The "parity problem" is the fundamental obstruction between 246 and 2.
+
+  STATUS LADDER (gap target):
+    gap ≤ 246    PROVEN (Maynard-Tao / Polymath8b, 2014)
+    gap ≤ 16     conditional on Elliott-Halberstam conjecture
+    gap = 2      OPEN — the Twin Prime Conjecture
 """)
 
 # Count p+2 categories
