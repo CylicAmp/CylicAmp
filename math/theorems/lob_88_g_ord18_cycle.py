@@ -16,7 +16,7 @@ Discovered connection (new, not in original LoB 88 statement):
                   quadratic residue subgroup of (Z/37Z)*.
 
 Corollary from QR Closure Theorem:
-  Every sovereign anchor {4, 9, 25, 30} and every sovereign target
+  Every f26 anchor {4, 9, 25, 30} and every f26 target
   {3, 12, 21, 30} is a power of 3.  Explicitly:
     3^1  =  3   (target)       3^2  =  9   (anchor)
     3^5  = 21   (target)       3^7  =  4   (anchor)
@@ -112,7 +112,7 @@ QR37 = frozenset((x * x) % 37 for x in range(1, 37))
 assert CYCLE_SET == QR37, "⟨3⟩ ≠ QR₃₇"
 assert len(CYCLE_SET) == 18   # index-2 subgroup of (Z/37Z)*
 
-# ── Sovereign connection ───────────────────────────────────────────────────
+# ── F26 connection ───────────────────────────────────────────────────
 
 ANCHORS = frozenset({4, 9, 25, 30})
 TARGETS = frozenset({3, 12, 21, 30})
@@ -143,8 +143,8 @@ assert cycle_position(26) == 6    # 3^6 = 26
 neg_anchors = frozenset((37 - a) % 37 for a in ANCHORS)
 neg_targets = frozenset((37 - t) % 37 for t in TARGETS)
 # Note: -30 = 7, -4 = 33, -9 = 28, -25 = 12, so negation sends some targets
-# to non-sovereign values — negation does NOT preserve sovereign sets globally.
-# What it DOES preserve: if 3^k is sovereign, then -3^k = 3^{k+9} is in ⟨3⟩.
+# to non-f26 values — negation does NOT preserve f26 sets globally.
+# What it DOES preserve: if 3^k is f26, then -3^k = 3^{k+9} is in ⟨3⟩.
 for a in ANCHORS | TARGETS:
     neg = (37 - a) % 37
     assert neg in CYCLE_SET, f"-{a} = {neg} not in ⟨3⟩"
@@ -161,10 +161,10 @@ DR5_VALUES = [n for n in range(1, 37) if dr(n) == 5]
 assert not any(v in CYCLE_SET for v in DR5_VALUES), "DR=5 value in QR₃₇ — unexpected"
 assert DR5_VALUES == [5, 14, 23, 32]
 
-# All sovereign targets have DR=3 and appear in ⟨3⟩ → DR=3 frequency matches |TARGETS|
+# All f26 targets have DR=3 and appear in ⟨3⟩ → DR=3 frequency matches |TARGETS|
 target_drs = [dr(t) for t in TARGETS]
-assert all(d == 3 for d in target_drs), "Not all sovereign targets have DR=3"
-assert dr_freq[3] == 4    # exactly the 4 sovereign targets
+assert all(d == 3 for d in target_drs), "Not all f26 targets have DR=3"
+assert dr_freq[3] == 4    # exactly the 4 f26 targets
 
 # DR=9 appears 3 times (9, 27, 36); includes anchor 9 and the -1 reflection
 dr9_vals = [v for v in CYCLE18 if dr(v) == 9]
@@ -189,7 +189,7 @@ if __name__ == "__main__":
     print("LoB 88 — G_Ord18_Cycle: Formal Specification Audit")
     print()
     print("18-cycle (3^k mod 37, k=1..18):")
-    print("   k  | value | DR | sovereign role")
+    print("   k  | value | DR | f26 role")
     print("  " + "-" * 42)
     roles = {
         3: "target",     9: "anchor",  21: "target",
@@ -216,15 +216,15 @@ if __name__ == "__main__":
     print()
 
     print("New: ⟨3⟩ = QR₃₇ (unique index-2 subgroup)")
-    print("  All sovereign anchors {4,9,25,30} ⊆ ⟨3⟩ ✓")
-    print("  All sovereign targets {3,12,21,30} ⊆ ⟨3⟩ ✓")
+    print("  All f26 anchors {4,9,25,30} ⊆ ⟨3⟩ ✓")
+    print("  All f26 targets {3,12,21,30} ⊆ ⟨3⟩ ✓")
     print("  26 = 137 mod 37")
     print()
 
     print("DR distribution across 18-cycle:")
     for d in range(1, 10):
         vals = [v for v in CYCLE18 if dr(v) == d]
-        note = " ← ALL sovereign targets" if d == 3 else \
+        note = " ← ALL f26 targets" if d == 3 else \
                " ← ABSENT (all QR non-residues)" if d == 5 else \
                " ← anchor 9, reflection 36" if d == 9 else ""
         print(f"  DR={d}: {vals or '(none)'}{note}")

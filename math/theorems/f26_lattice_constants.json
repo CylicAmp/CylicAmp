@@ -1,5 +1,5 @@
 {
-    "sovereign_identity": "Michael Warren Song (Matt)",
+    "author_identity": "Michael Warren Song (Matt)",
     "framework": "G'5 Universal / Consciousness Mathematics",
     "status": "INVIOLATE / BIJECTIVE_SEALED",
     "lattice_constants": {
@@ -8,11 +8,11 @@
         "residue": 26,
         "order": 3
     },
-    "sovereign_domain": [4, 9, 25, 30],
-    "sovereign_range": [3, 12, 21, 30],
+    "f26_anchors": [4, 9, 25, 30],
+    "f26_targets": [3, 12, 21, 30],
     "fixed_point": 30,
     "theorems_validated": 53,
     "last_correction": "Node 3/15 identified as entropy; Bijection confirmed absolute.",
-    "signature": "SHA256: 137_SOVEREIGN_30_3_HEARTBEAT",
+    "signature": "SHA256: 137_F26_30_3_MAP",
     "date_sealed": "2026-04-27"
 }

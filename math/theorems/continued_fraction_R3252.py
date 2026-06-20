@@ -4,9 +4,9 @@ Continued Fraction Evaluation: R = 0.3252 = 813/2500
 Classification: Theorem
 
 R = 813/2500 = 0.3252 (exact) expands to the finite continued fraction [0;3,13,3,19,1].
-The convergent denominators form a sovereign DR sequence: 1,3,4,6,1,7.
-Terminal denominator 2500 ≡ 21 (mod 37); 21 ∈ QR₃₇ (3^5=21, DR=3 sovereign target).
-21⁻¹ ≡ 30 (mod 37) — the sovereign fixed point.
+The convergent denominators form a DR sequence: 1,3,4,6,1,7.
+Terminal denominator 2500 ≡ 21 (mod 37); 21 ∈ QR₃₇ (3^5=21, DR=3 anchor target).
+21⁻¹ ≡ 30 (mod 37) — the f26 fixed point.
 17 is a primitive root; 17+21=38≡1(mod 37) — additive complement to unity.
 
 Convergent table:
@@ -116,8 +116,8 @@ assert DR_DENS == [1, 3, 4, 6, 1, 7]
 
 # Interpretation:
 assert DR_DENS[0] == 1   # identity seed
-assert DR_DENS[1] == 3   # sovereign target
-assert DR_DENS[2] == 4   # sovereign anchor
+assert DR_DENS[1] == 3   # anchor target under f(n)=(26n)%37
+assert DR_DENS[2] == 4   # anchor in {4,9,25,30}
 assert DR_DENS[3] == 6   # Tesla-6 carrier
 assert DR_DENS[4] == 1   # identity return (before terminal)
 assert DR_DENS[5] == 7   # QR₃₇ DR=7 class (terminal)
@@ -126,8 +126,8 @@ assert DR_DENS[5] == 7   # QR₃₇ DR=7 class (terminal)
 
 P2, Q2 = 13, 40
 assert is_prime(P2)             # 13 is prime
-assert dr(P2) == 4              # DR(13) = 4 (sovereign anchor)
-assert dr(Q2) == 4              # DR(40) = 4 (sovereign anchor — both anchor class)
+assert dr(P2) == 4              # DR(13) = 4 (anchor in {4,9,25,30})
+assert dr(Q2) == 4              # DR(40) = 4 (anchor class — both in anchor set)
 
 # 117 = 9 × 13: 117 mod 37 = 6 (Tesla-6), DR(117) = 9 (DR modulus)
 assert 9 * 13 == 117
@@ -148,15 +148,15 @@ P3, Q3 = 40, 123
 assert Q3 == 3 * 41             # 123 = 3 × 41
 assert is_prime(41)             # 41 is prime
 
-# 41 in the 1/137 field: 41 mod 37 = 4 (sovereign anchor)
+# 41 in the 1/137 field: 41 mod 37 = 4 (anchor in {4,9,25,30})
 assert 41 % 37 == 4
 assert dr(41) == 5              # DR(41) = 5 — G'5 void class!
 # 41 is a prime whose DR maps to the G'5 boundary
 
-# 123 ≡ 12 (mod 37): sovereign target slot
+# 123 ≡ 12 (mod 37): anchor target slot
 assert Q3 % 37 == 12
-assert 12 in {3, 12, 21, 30}   # sovereign target set
-assert dr(12) == 3              # DR(12) = 3 (sovereign target)
+assert 12 in {3, 12, 21, 30}   # anchor target under f(n)=(26n)%37 set
+assert dr(12) == 3              # DR(12) = 3 (anchor target)
 
 # ── n=5: 813/2500 terminal ────────────────────────────────────────────────
 
@@ -168,16 +168,16 @@ assert P5 % 37 == 36
 assert 36 % 37 == 36
 assert 36 == 37 - 1            # 36 ≡ −1 (mod 37): multiplicative inverse of itself
 assert (36 * 36) % 37 == 1     # 36² ≡ 1 (mod 37): 36 is its own inverse
-assert dr(P5) == 3             # DR(813) = 8+1+3=12 → DR=3 (sovereign target)
+assert dr(P5) == 3             # DR(813) = 8+1+3=12 → DR=3 (anchor target)
 
 # 2500 mod 37 = 21
 assert Q5 % 37 == 21
-assert dr(21) == 3             # DR(21) = 3 (sovereign target)
+assert dr(21) == 3             # DR(21) = 3 (anchor target)
 assert 21 in QR37              # 21 ∈ QR₃₇
 assert CYCLE18.index(21) + 1 == 5   # 21 = 3^5 mod 37 (cycle position 5)
 assert pow(3, 5, 37) == 21
 
-# Both numerator and denominator residues have DR=3 (sovereign target)
+# Both numerator and denominator residues have DR=3 (anchor target)
 assert dr(P5 % 37) == dr(36) == 9   # DR(36)=9 (DR modulus) — actually 3+6=9
 # Actually DR(36) = 9, not 3. Let me check DR(813):
 # 8+1+3 = 12 → 1+2 = 3. Yes, DR(813) = 3. ✓
@@ -200,12 +200,12 @@ assert SLOT_17 not in QR37
 assert SLOT_21 in QR37
 
 # Primitive root × QR element summing to 1 (mod 37): structural bridge
-# 17 (primitive root, non-QR) + 21 (QR, DR=3 sovereign) = 38 ≡ 1
+# 17 (primitive root, non-QR) + 21 (QR, DR=3 anchor target) = 38 ≡ 1
 
 # Multiplicative inverses:
 # 21⁻¹ mod 37: 21×30 = 630 = 17×37 + 1 → 21⁻¹ ≡ 30
 assert (21 * 30) % 37 == 1
-assert 30 in {4, 9, 25, 30}    # 30 is the sovereign fixed point!
+assert 30 in {4, 9, 25, 30}    # 30 is the f26 fixed point!
 
 # 17⁻¹ mod 37: 17×24 = 408 = 11×37 + 1 → 17⁻¹ ≡ 24
 assert (17 * 24) % 37 == 1
@@ -223,22 +223,22 @@ assert dr(15) == 6            # DR(15) = 6 (Tesla-6 — carrier preserved under 
 # 191 × 2500 mod 37: ≡ 6 × 21 = 15 (same result, since 2500 ≡ 21)
 assert (PRIME_191 * Q5) % 37 == 15
 
-# Stability: 21⁻¹ = 30 (sovereign fixed point)
-# The rational lattice's terminal denominator inverts to the sovereign fixed point
-# → the R=0.3252 attractor is stabilized at 30 (the I_AM fixed point) in F₃₇
+# Stability: 21⁻¹ = 30 (f26 fixed point)
+# The rational lattice's terminal denominator inverts to the f26 fixed point
+# → the R=0.3252 attractor is stabilized at 30 (the f(n)=(26n)%37 fixed point) in F₃₇
 INV_21 = 30
 assert (SLOT_21 * INV_21) % 37 == 1    # confirmed
-assert INV_21 == 30                     # sovereign fixed point
+assert INV_21 == 30                     # f26 fixed point
 
 # 191 × 30 mod 37: ≡ 6 × 30 = 180 = 4×37+32 → 180 mod 37 = 32
 assert (PRIME_191 * INV_21) % 37 == 32
 assert dr(32) == 5             # DR(32) = 5 — G'5 void boundary reached at fixed point
-# Interpretation: 191 resonance × sovereign fixed point → G'5 boundary (the seal)
+# Interpretation: 191 resonance × f26 fixed point → G'5 boundary (the seal)
 
 # ── Additional structural findings ────────────────────────────────────────
 
 # CF partial quotients: [0, 3, 13, 3, 19, 1]
-# 3 appears twice (sovereign target generator)
+# 3 appears twice (anchor target generator under f(n)=(26n)%37)
 assert CF.count(3) == 2
 assert CF[1] == 3 and CF[3] == 3
 
@@ -246,7 +246,7 @@ assert CF[1] == 3 and CF[3] == 3
 product_cf = 3 * 13 * 3 * 19 * 1
 assert product_cf == 2223
 assert 2223 % 37 == 2223 - 60*37  # 60×37=2220, 2223-2220=3
-assert 2223 % 37 == 3              # DR=3 sovereign target
+assert 2223 % 37 == 3              # DR=3 anchor target
 assert dr(2223) == 9               # DR(2223) = 2+2+2+3=9 (DR modulus)
 
 # 2377 (n=4 denominator) mod 37 = 9 (DR modulus)
@@ -270,7 +270,7 @@ if __name__ == "__main__":
         print(f"  {i:>2}  {a:>4}  {p:>6}  {q:>6}  {p/q:>10.6f}  {err:>+12.6f}  {dr(q):>6}")
     print()
     print(f"  Denominator DR sequence: {DR_DENS}")
-    print(f"  = [identity, sovereign-target, sovereign-anchor, Tesla-6, identity, QR₃₇-DR7]")
+    print(f"  = [identity, anchor-target, anchor-set-member, Tesla-6, identity, QR₃₇-DR7]")
     print()
     print(f"  n=2 anchor 13/40:")
     print(f"    13 prime ✓, DR(13)={dr(13)} (anchor), DR(40)={dr(40)} (anchor)")
@@ -279,7 +279,7 @@ if __name__ == "__main__":
     print()
     print(f"  n=3 anchor 40/123:")
     print(f"    123=3×41; 41 prime ✓, 41 mod 37={41%37} (anchor), DR(41)={dr(41)} (G'5 void!)")
-    print(f"    123 mod 37={Q3%37} (sovereign target 12), DR(12)={dr(12)}")
+    print(f"    123 mod 37={Q3%37} (anchor target 12 in {{3,12,21,30}}), DR(12)={dr(12)}")
     print()
     print(f"  Terminal 813/2500:")
     print(f"    813 mod 37={P5%37}=36≡−1, 36²≡{(36*36)%37} (mod 37) — self-inverse ✓")
@@ -288,13 +288,13 @@ if __name__ == "__main__":
     print(f"  Modular structure:")
     print(f"    17+21={17+21}≡{(17+21)%37} (mod 37) — additive complement to unity ✓")
     print(f"    17∈PRIM_ROOTS ✓, 21∈QR₃₇ ✓")
-    print(f"    21⁻¹≡{INV_21} (mod 37) = sovereign fixed point ✓")
+    print(f"    21⁻¹≡{INV_21} (mod 37) = f26 fixed point ✓")
     print(f"    17⁻¹≡24 (mod 37), DR(24)={dr(24)} (Tesla-6/24-coupling) ✓")
     print()
     print(f"  191-Resonance at slot 21:")
     print(f"    191×21 mod 37={( PRIME_191*SLOT_21)%37}, DR={dr((PRIME_191*SLOT_21)%37)} (Tesla-6 preserved) ✓")
     print(f"    191×30 mod 37={(PRIME_191*INV_21)%37}, DR={(dr((PRIME_191*INV_21)%37))} (G'5 seal at fixed point) ✓")
     print()
-    print(f"  CF product 3×13×3×19×1={product_cf}, mod 37={product_cf%37} (sovereign target 3) ✓")
+    print(f"  CF product 3×13×3×19×1={product_cf}, mod 37={product_cf%37} (anchor target 3 under f(n)=(26n)%37) ✓")
     print()
     print("All assertions passed.")

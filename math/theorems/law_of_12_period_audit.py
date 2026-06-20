@@ -5,7 +5,7 @@ Law of 12 — Two Distinct Phenomena
 Two sequences both have DR values in {3,6,9}, but different periods.
 
 Phenomenon 1: dr(12·k) for k=1,2,3,...
-  — defined in sovereign_dr_matrix_audit.py
+  — defined in dr_matrix_9x9_audit.py
   — period 3: [3,6,9,3,6,9,...]
   — reason: 12≡3 mod 9; dr(3k) cycles {3,6,9} with period 3
 

@@ -33,11 +33,11 @@ Hadronic vacuum polarization contributions to Δα_{had}^(5):
   pQCD        (>12.00 GeV):    121.67×10⁻⁴
   Total:                        180.0×10⁻⁴
 
-Sovereign framework connection:
+F₃₇ framework connection:
   α⁻¹ = 137.036 ≈ 137 = 26 + 111 = 26 + 111
   10² ≡ 26 (mod 37) = 26;  111 = 3×37
   DR(137) = 2 (primitive root DR class)
-  3α ≈ 0.02189 — the "3" is the sovereign target generator
+  3α ≈ 0.02189 — the "3" is the DR=3 anchor target generator
   δ = α/(2π) ≈ 1.16×10⁻³ — Schwinger term, first QED loop correction
 """
 
@@ -123,8 +123,8 @@ assert (10 * 10) % 37 == 26          # 10² ≡ 26 mod 37
 assert 3 * 37 == 111
 assert 26 + 111 == 137               # 26 + 111 = 137 = α⁻¹ integer
 assert dr(137) == 2                           # primitive root DR class
-assert dr(3) == 3                             # sovereign target DR
-# 3 in 3α is the sovereign target generator
+assert dr(3) == 3                             # DR=3 anchor target
+# 3 in 3α is the DR=3 anchor target generator
 
 
 if __name__ == "__main__":
@@ -155,7 +155,7 @@ if __name__ == "__main__":
         print(f"    {region:12s}: {val*1e4:7.2f}×10⁻⁴")
     print(f"    {'Total':12s}: {total_had*1e4:7.2f}×10⁻⁴")
     print()
-    print(f"  Sovereign link: 26 + 111 = {26+111} = α⁻¹  (26 + 3×37)")
-    print(f"  DR(137) = {dr(137)} (primitive root class),  DR(3) = {dr(3)} (sovereign target)")
+    print(f"  F₃₇ link: 26 + 111 = {26+111} = α⁻¹  (26 + 3×37)")
+    print(f"  DR(137) = {dr(137)} (primitive root class),  DR(3) = {dr(3)} (anchor target, DR=3)")
     print()
     print("All assertions passed.")

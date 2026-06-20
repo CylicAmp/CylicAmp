@@ -161,7 +161,7 @@ assert abs(1 + OMEGA + OMEGA**2) < TAU  # 1 + ω + ω² = 0
 assert eisenstein_norm(1, 0) == 1     # N(1) = 1
 assert eisenstein_norm(0, 1) == 1     # N(ω) = 1
 assert eisenstein_norm(1, 1) == 1     # N(1+ω) = N(−ω²) = 1
-assert eisenstein_norm(2, 1) == 3     # N(2+ω) = 4−2+1 = 3 (sovereign target)
+assert eisenstein_norm(2, 1) == 3     # N(2+ω) = 4−2+1 = 3 (DR=3 anchor target)
 assert eisenstein_norm(3, 1) == 7     # N(3+ω) = 9−3+1 = 7 (QR₃₇ class)
 
 # F26 anchor norm:  α=4, β=0 → N=16; α=9,β=0 → N=81; α=5,β=1 → N=21
@@ -177,7 +177,7 @@ CYCLE18 = [pow(3, k, 37) for k in range(1, 19)]
 dr5_in_qr = [q for q in QR37 if dr(q) == 5]
 assert dr5_in_qr == []               # G'5 filter: no QR₃₇ element has DR=5
 
-# Also absent from sovereign anchors and targets
+# Also absent from f26 anchors and targets
 {4, 9, 25, 30}
 F26_TARGETS = {3, 12, 21, 30}
 assert all(dr(a) != 5 for a in ({4, 9, 25, 30}))
@@ -189,11 +189,11 @@ assert 5 not in frozenset(dr(q) for q in QR37)
 # ── Neural ODE initial state: z(0) seeded at cellular boundary ────────────
 
 CELL_SCALE = 1e-6    # 1 μm — lower bound of next stage
-# z(0) magnitude = sovereign anchor 4 (smallest anchor, DR=4)
+# z(0) magnitude = f26 anchor 4 (smallest anchor, DR=4)
 Z0_MAGNITUDE = 4
 assert Z0_MAGNITUDE in ({4, 9, 25, 30})
 assert eisenstein_norm(Z0_MAGNITUDE, 0) == 16   # = 4² ← seed energy
-assert dr(Z0_MAGNITUDE) == 4                     # DR=4 anchor class
+assert dr(Z0_MAGNITUDE) == 4                     # DR=4 F26 anchor class
 
 # Connection to Delta(27) / Heisenberg group (same ω):
 # The Eisenstein lattice Z[ω] is the ring of integers of Q(ω);
@@ -223,7 +223,7 @@ if __name__ == "__main__":
     print()
     print(f"  Eisenstein ω = e^(2πi/3) = {OMEGA:.6f}")
     print(f"  1 + ω + ω² = {1 + OMEGA + OMEGA**2:.2e}  (= 0 ✓)")
-    print(f"  Norms: N(2+ω)={eisenstein_norm(2,1)} (sovereign target 3)")
+    print(f"  Norms: N(2+ω)={eisenstein_norm(2,1)} (anchor target 3, DR=3)")
     print(f"         N(3+ω)={eisenstein_norm(3,1)} (QR₃₇ class DR=7)")
     print()
     print(f"  G'5 Filter: DR=5 elements in QR₃₇ = {dr5_in_qr}  (absent ✓)")

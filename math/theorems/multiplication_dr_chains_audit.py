@@ -31,7 +31,7 @@ def dr(n: int) -> int:
     return 0 if n == 0 else 1 + (n - 1) % 9
 
 
-def sovereign_row(n: int) -> list:
+def dr_mult_row(n: int) -> list:
     """DR multiplication table row n: [dr(n*j) for j in 1..9]."""
     return [dr(n * j) for j in range(1, 10)]
 
@@ -147,10 +147,10 @@ def verify():
     assert dr_sum == 23
     print(f"\n  Sum of terminal DRs: {'+'.join(str(terminal_dr[n]) for n in [2,3,4,5])} = {dr_sum}  (prime 23)  ✓")
 
-    # ── Sovereign matrix connection ───────────────────────────────────────────
-    print("\nSovereign matrix connection: first j in row n where DR(n×j) = terminal DR:")
+    # ── DR multiplication matrix connection ───────────────────────────────────
+    print("\nDR multiplication matrix connection: first j in row n where DR(n×j) = terminal DR:")
     for n in [2, 3, 4, 5]:
-        row = sovereign_row(n)
+        row = dr_mult_row(n)
         target = terminal_dr[n]
         first_j = next(j + 1 for j, v in enumerate(row) if v == target)
         print(f"  Row {n}: {row}  →  DR={target} first at j={first_j}  (n×{first_j}={n*first_j})")
@@ -161,7 +161,7 @@ def verify():
     # For seed 3: n=3, first j with DR=9 is j=3 (3×3=9). Chain uses j=6 (3×6=18).
     # Both hit DR=9; chain uses second occurrence (j=6 > n=3).
     assert dr(3 * 3) == 9 and dr(3 * 6) == 9
-    first_j_beyond_n = {n: next(j + 1 for j, v in enumerate(sovereign_row(n)) if v == terminal_dr[n] and j + 1 > n)
+    first_j_beyond_n = {n: next(j + 1 for j, v in enumerate(dr_mult_row(n)) if v == terminal_dr[n] and j + 1 > n)
                          for n in [3, 4]}
     assert first_j_beyond_n[3] == 6   # 3×6=18, DR=9
     assert first_j_beyond_n[4] == 6   # 4×6=24, DR=6

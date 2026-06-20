@@ -9,7 +9,7 @@ limit cycle radius becomes infinite — Gate 18 collapse, asymptotic recognition
 
 Stage 8 — Planetary Systems / Stars (10⁷ to 10¹¹ m, 4 decades):
   Tesla 3-6-9 harmonic: macro-scale stellar nodes.
-  Span = 4 decades → sovereign anchor 4. Same span as Stage 7.
+  Span = 4 decades → f26 anchor 4. Same span as Stage 7.
 
 Stage 9 — Galactic / Large-Scale Structure (10¹¹ to 10²² m, 11 decades):
   φ (golden ratio) governs galaxy formation spiral structure.
@@ -26,7 +26,7 @@ Span summary across all ten stages:
   Stages 4–7:  13 decades (bio-to-planetary bridge)
   Stages 8–10: 19 decades (stellar to singularity)
   Total gap:    5 decades (inter-stage boundaries)
-  Grand total: 61 decades = 37 + 24 (sovereign prime + 24-coupling)
+  Grand total: 61 decades = 37 + 24 (f26 prime + 24-coupling)
 """
 
 import math
@@ -57,10 +57,10 @@ QR37 = frozenset((x * x) % 37 for x in range(1, 37))
 STAGE8_LOW, STAGE8_HIGH = 7, 11
 STAGE8_SPAN = STAGE8_HIGH - STAGE8_LOW    # 4 decades
 assert STAGE8_SPAN == 4
-assert dr(4) == 4              # sovereign anchor — same as Stage 7
+assert dr(4) == 4              # f26 anchor — same as Stage 7
 
 # Tesla 3-6-9 harmonic: stellar nodes
-assert dr(3) == 3   # sovereign target
+assert dr(3) == 3   # f26 target
 assert dr(6) == 6   # Tesla-6 carrier
 assert dr(9) == 9   # DR modulus
 assert 3 + 6 + 9 == 18    # gate 18 sum (consistent through all stages)
@@ -100,7 +100,7 @@ assert abs(golden_spiral_b - 0.306) < 0.001
 FUSION = P_PLASTIC * PHI
 assert abs(FUSION - 2.143) < 0.001
 
-# Resonance C carrier: C + φ = 3 (sovereign target)
+# Resonance C carrier: C + φ = 3 (f26 target)
 assert abs(C_RES + PHI - 3.0) < 0.001
 
 # Galactic scale: Milky Way diameter ≈ 10²¹ m (fits in Stage 9)
@@ -120,7 +120,7 @@ assert 11 in QR37              # 11 is a QR₃₇ element (since order of 3 is 1
 STAGE10_LOW, STAGE10_HIGH = 22, 26
 STAGE10_SPAN = STAGE10_HIGH - STAGE10_LOW   # 4 decades
 assert STAGE10_SPAN == 4
-assert dr(4) == 4   # sovereign anchor — Stage 10 mirrors Stage 8
+assert dr(4) == 4   # f26 anchor — Stage 10 mirrors Stage 8
 
 # Gate 18 closure: 3^18 ≡ 1 (mod 37)
 assert pow(3, 18, 37) == 1
@@ -197,7 +197,7 @@ if __name__ == "__main__":
     print(f"    18φ = {stellar_pulse:.4f} ≈ 29 (prime, DR={dr(29)} = DR(191)) ✓")
     print()
     print(f"  Stage 9: Golden spiral b = ln(φ)/(π/2) = {golden_spiral_b:.4f}")
-    print(f"    Fusion F=P·φ = {FUSION:.4f},  C+φ = {C_RES+PHI:.4f} ≈ 3 (sovereign target)")
+    print(f"    Fusion F=P·φ = {FUSION:.4f},  C+φ = {C_RES+PHI:.4f} ≈ 3 (f26 target)")
     print(f"    11 = 3^15 mod 37 ∈ QR₃₇ ✓,  DR(11) = {dr(11)} (primitive root class)")
     print()
     print(f"  Stage 10: 3^18 mod 37 = {pow(3,18,37)} ✓ (cycle closed)")

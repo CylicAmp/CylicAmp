@@ -15,11 +15,11 @@ Verified outputs:
 Structural findings:
   Address encodes all three nodes as 2-digit windows
   bridge_1 = 26 = 26 = 10² mod 37 = 3⁶ mod 37 = 2¹² mod 37
-  bridge_2 = 262 ≡ 3 (mod 37) = 3¹ ∈ ⟨3⟩ (sovereign target, first power)
+  bridge_2 = 262 ≡ 3 (mod 37) = 3¹ ∈ ⟨3⟩ (DR=3 anchor target, first power)
   112 ≡ 1 (mod 37)  →  identity in F₃₇
   150 ≡ 2 (mod 37)  →  primitive root generator of (Z/37Z)*
   DR=7 values {7,16,25,34} are ALL quadratic residues mod 37
-    (25 is sovereign anchor; all four lie in ⟨3⟩ = QR₃₇)
+    (25 is f26 anchor; all four lie in ⟨3⟩ = QR₃₇)
 """
 
 from collections import Counter
@@ -70,13 +70,13 @@ assert root_bridge_2  == 1,       f"Bridge 2 root: {root_bridge_2}"
 
 # Address root = 6 = unified coupling signature
 assert root_address == 6
-K_COUPLINGS = [6, 618, 3138]    # SOURCE-MIRROR-GUARDIAN
+K_COUPLINGS = [6, 618, 3138]    # SOURCE-MIRROR-CHANNEL
 assert all(dr(k) == 6 for k in K_COUPLINGS)
 
 # Node roots: first two = TARGET (DR=3), third = COUPLING (DR=6)
 assert roots_nodes[0] == 3 and roots_nodes[1] == 3   # 48, 57 → TARGET DR
 assert roots_nodes[2] == 6                             # 69     → COUPLING DR
-assert 3 == dr(3)    # 3 is the primary sovereign target
+assert 3 == dr(3)    # 3 is the primary DR=3 anchor target
 
 # Address encodes all three nodes as consecutive 2-digit windows
 addr_str = str(ADDRESS)
@@ -89,7 +89,7 @@ assert all(r == 7 for r in roots_matrix)
 DR7_VALUES = [n for n in range(1, 37) if dr(n) == 7]
 assert DR7_VALUES == [7, 16, 25, 34]
 assert all(v in QR37 for v in DR7_VALUES), "DR=7 values not all in QR₃₇"
-assert 25 in ANCHORS    # sovereign anchor among DR=7 values
+assert 25 in ANCHORS    # f26 anchor among DR=7 values
 
 # Matrix rows dominated by digit 7 (8 of 12 digits in each row)
 for row in [MATRIX_R1, MATRIX_R2, MATRIX_R3]:
@@ -137,7 +137,7 @@ if __name__ == "__main__":
     print(f"    DR={dr(BRIDGE_1)},  ∈ QR₃₇ ✓")
     print()
     print(f"  bridge_2 = {BRIDGE_2}:")
-    print(f"    ≡ {BRIDGE_2 % 37} (mod 37) = 3¹ = sovereign target 3")
+    print(f"    ≡ {BRIDGE_2 % 37} (mod 37) = 3¹ = anchor target 3 (DR=3)")
     print(f"    DR={dr(BRIDGE_2)},  112 mod37={112%37} (identity),  150 mod37={150%37} (prim root 2)")
     print()
     print(f"  DR=7 class {DR7_VALUES}: ALL ∈ QR₃₇  (25 ∈ ANCHORS)")

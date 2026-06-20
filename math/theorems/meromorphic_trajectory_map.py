@@ -30,7 +30,7 @@ This maintains ‖γ'(i)‖·h(i) ≈ const, equalising arc-length sampling dens
   Period of k: T = 21·2π = 42π;  42 mod 37 = 5 = PIVOT_PRIME
   First pole:  i₀ = 21π/2 ≈ 32.987;  round(i₀) = 33 mod 37 = 33 (DICHORAL_144)
   Pole spacing: 21π ≈ 65.97;  66 mod 37 = 29 (highest E8 root height)
-  k-amplitude:  4;  4 mod 37 = 4 (sovereign anchor)
+  k-amplitude:  4;  4 mod 37 = 4 (f26 anchor)
   k-period divisor: 21;  DR(21) = 3 (TRINITY)
 
 Classification: Theorem
@@ -205,7 +205,7 @@ if __name__ == "__main__":
     print("  37-field signature:")
     print(f"    Period factor: 21  →  DR(21) = {DR(21)} (TRINITY)")
     print(f"    Full period:   42  →  42 mod 37 = {42%37} (PIVOT_PRIME)")
-    print(f"    Amplitude:      4  →  DR(4)  = {DR(4)} (sovereign anchor)")
+    print(f"    Amplitude:      4  →  DR(4)  = {DR(4)} (f26 anchor)")
     print(f"    i₀ ≈ 32.99   →  round = {_i0_round}  →  mod37 = {_i0_round%37} (DICHORAL_144)")
     print(f"    Pole spacing ≈ 66  →  66 mod 37 = {66%37} (highest E8 root height)")
     print()

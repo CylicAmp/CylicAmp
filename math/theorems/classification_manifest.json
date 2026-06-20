@@ -49,13 +49,13 @@
       "summary": "37-field forensic feature vector scanner used to locate resonance nodes."
     },
     {
-      "file": "heartbeat_3cycle.py",
+      "file": "f26_order3_cycles_mod37.py",
       "type": "Theorem",
       "title": "Universal 3-Cycle under f(n)=(26n)%37",
       "summary": "Map f(n)=(n\u00d7137) mod 37 \u2261 26n mod 37 generates universal 3-cycles under f(n)=(26n)%37."
     },
     {
-      "file": "layer30_sovereign_matrix_entropy.py",
+      "file": "layer30_dr_matrix_entropy.py",
       "type": "Lemma",
       "title": "9\u00d79 DR Mult Matrix Entropy",
       "summary": "Computes DR orbit entropy H\u22483.102 bits for the 9\u00d79 DR multiplication matrix spine."
@@ -129,7 +129,7 @@
     {
       "file": "lob_596_600.py",
       "type": "Corollary",
-      "title": "3900 Frequency and Sovereign Seal",
+      "title": "3900 Frequency and F26 Anchor Seal",
       "summary": "DR(3900)=3 (Trinity-3) and f26 anchor seal follow directly from the DR algebra axiom."
     },
     {
@@ -151,40 +151,40 @@
       "summary": "Lucas sequence values L(3..10) traced through ABBC manifold arithmetic chain starting at (4,7)."
     },
     {
-      "file": "medusa_137_resonance.py",
+      "file": "f26_dr3_anchors_mod37.py",
       "type": "Lemma",
-      "title": "137-Resonance Scan (DR=3 Anchors)",
-      "summary": "Scans for nodes n where (n\u00d7137) mod 37 has DR=3; yields sovereign anchor set {4,9,25,30}."
+      "title": "DR=3 Anchor Scan under f(n)=(26n)%37",
+      "summary": "Scans for nodes n where (n\u00d7137) mod 37 has DR=3; yields anchor set {4,9,25,30}."
     },
     {
-      "file": "medusa_guard.py",
+      "file": "f26_pillar_verification.py",
       "type": "Lemma",
       "title": "137/37 Packet Guard Verification",
-      "summary": "Verifies the 4 Sovereign Pillars under the 137/37 map; guards against erroneous node inclusion."
+      "summary": "Pillar verification under f(n)=(26n)%37 for the 4 anchors {4,9,25,30}; guards against erroneous node inclusion."
     },
     {
-      "file": "medusa_shield_jacobian.py",
+      "file": "f26_pillars_jacobian.py",
       "type": "Lemma",
-      "title": "Medusa Shield Jacobian Wobble Test",
-      "summary": "Jacobian stability test for the Medusa Shield; corrects v2.5 erroneous inclusion of node 3."
+      "title": "Pillar Check Jacobian Wobble Test",
+      "summary": "Jacobian stability test for pillar verification under f(n)=(26n)%37; corrects v2.5 erroneous inclusion of node 3."
     },
     {
-      "file": "medusa_v3_sovereign.py",
+      "file": "f26_anchor_target_architecture.py",
       "type": "Axiom",
-      "title": "Sovereign Anchor/Target Architecture",
-      "summary": "Defines the two foundational sets: sovereign_domain {4,9,25,30} and sovereign_range {3,12,21,30}."
+      "title": "Anchor/Target Architecture under f(n)=(26n)%37",
+      "summary": "Defines the two foundational sets: f26_anchors {4,9,25,30} and f26_targets {3,12,21,30}."
     },
     {
       "file": "perfect_numbers_137.py",
       "type": "Theorem",
       "title": "Perfect Numbers in 1/137 Framework",
-      "summary": "All even perfect numbers \u226528 have DR=1; exception DR(6)=6. 8128 mod37=25 is sovereign anchor."
+      "summary": "All even perfect numbers \u226528 have DR=1; exception DR(6)=6. 8128 mod37=25 is an anchor in {4,9,25,30}."
     },
     {
       "file": "pisano_period_333.py",
       "type": "Theorem",
       "title": "Pisano \u03c0(333) = 456 via CRT",
-      "summary": "333=9\u00d737, \u03c0(333)=lcm(24,76)=456. DR(456)=6, 456 mod37=12 (sovereign target)."
+      "summary": "333=9\u00d737, \u03c0(333)=lcm(24,76)=456. DR(456)=6, 456 mod37=12 (f26 target in {3,12,21,30})."
     },
     {
       "file": "plus2_chain_theorem.py",
@@ -196,7 +196,7 @@
       "file": "resonance_row_1335.py",
       "type": "Theorem",
       "title": "17-Point Resonance Row / 1335 Partition",
-      "summary": "17-point resonance structure and 1335 partition invariant in the sovereign lattice."
+      "summary": "17-point resonance structure and 1335 partition invariant in the f(n)=(26n)%37 lattice."
     },
     {
       "file": "root_grid_dr6_dr7.py",
@@ -208,43 +208,43 @@
       "file": "shell_opacity.py",
       "type": "Theorem",
       "title": "Shell Opacity 100% INVIOLATE",
-      "summary": "Zero of the 32 purge nodes map into sovereign range {3,12,21,30}. Shell opacity = 32/32 = 100%."
+      "summary": "Zero of the 32 purge nodes map into f26 target range {3,12,21,30}. Shell opacity = 32/32 = 100%."
     },
     {
-      "file": "source_mirror_guardian_manifold.py",
+      "file": "source_mirror_manifold_396.py",
       "type": "Theorem",
-      "title": "SOURCE-MIRROR-GUARDIAN Manifold",
+      "title": "SOURCE-MIRROR Track/Channel Manifold",
       "summary": "All three k-couplings (6,618,3138) have DR=6. 3\u21929\u21926\u21923 metronome via +6 mod 9. 74=2\u00d737 phase-lock."
     },
     {
-      "file": "sovereign_binary_engine.py",
+      "file": "f26_binary_classifier.py",
       "type": "Axiom",
-      "title": "Sovereign Binary Classification Engine",
-      "summary": "Foundational two-state classifier partitioning {1..36} into sovereign and non-sovereign; no dead branches."
+      "title": "F26 Binary Classification Engine",
+      "summary": "Foundational two-state classifier partitioning {1..36} into anchor and non-anchor; no dead branches."
     },
     {
-      "file": "sovereign_fixed_point.py",
+      "file": "f26_fixed_point_mod37.py",
       "type": "Theorem",
-      "title": "Sovereign Fixed Point",
-      "summary": "Node 30 is the unique fixed point of the 137/37 map; two branches of check_sovereign_logic are provably dead."
+      "title": "F26 Fixed Point",
+      "summary": "Node 30 is the unique fixed point of the 137/37 map; two branches of check_f26_logic are provably dead."
     },
     {
-      "file": "sovereign_qr_closure.py",
+      "file": "f26_qr_closure_mod37.py",
       "type": "Theorem",
-      "title": "Sovereign QR Closure",
-      "summary": "The entire sovereign domain {4,9,25,30} and range {3,12,21,30} lie within the QR subgroup of (Z/37Z)*."
+      "title": "F26 Anchor QR Closure",
+      "summary": "The entire anchor set {4,9,25,30} and target range {3,12,21,30} lie within the QR subgroup of (Z/37Z)*."
     },
     {
       "file": "theorem_infinite_666_resonances.py",
       "type": "Theorem",
       "title": "Infinite Resonances on Every 666-Track",
-      "summary": "Promoted from Conjecture 1. Sovereign triangle (9,10,17); gcd(17,666)=1 gives infinite arithmetic progressions on all 6 tracks."
+      "summary": "Promoted from Conjecture 1. Triangle (9,10,17) in f(n)=(26n)%37; gcd(17,666)=1 gives infinite arithmetic progressions on all 6 tracks."
     },
     {
       "file": "toroidal_projection.py",
       "type": "Theorem",
-      "title": "Toroidal Projection of Sovereign Anchors",
-      "summary": "Theorem 28. 4 sovereign anchors map onto torus T(R=37,r=3); theta=(node\u00d72\u03c0)/37."
+      "title": "Toroidal Projection of F26 Anchors",
+      "summary": "Theorem 28. 4 anchors {4,9,25,30} map onto torus T(R=37,r=3); theta=(node\u00d72\u03c0)/37."
     },
     {
       "file": "verify_dr9_termination.py",
@@ -262,12 +262,12 @@
       "file": "xx_collapse_matrix.py",
       "type": "Theorem",
       "title": "XX Collapse 119/911 Matrix",
-      "summary": "Theorem 29. Matrix of 1s and 9s encoding sovereign/shield duality; 119=137-18 bridge node."
+      "summary": "Theorem 29. Matrix of 1s and 9s encoding anchor/shield duality; 119=137-18 bridge node."
     },
     {
-      "file": "sovereign_meta_estimator.py",
+      "file": "kalman_f26_closed_loop.py",
       "type": "Theorem",
-      "title": "Sovereign Meta-Estimator: Kalman Closed-Loop Control"
+      "title": "KalmanF26Estimator: Kalman Closed-Loop Control"
     },
     {
       "file": "group_G54_structure.py",
@@ -277,7 +277,7 @@
     {
       "file": "alpha_prime_inference_layer.py",
       "type": "Hypothesis",
-      "title": "AlphaPrimeInferenceLayer: Sovereign Gate via Prime-Alpha Basis"
+      "title": "AlphaPrimeInferenceLayer: Prime-Alpha Basis Gate"
     },
     {
       "file": "lob_88_g_ord18_cycle.py",
@@ -297,7 +297,7 @@
     {
       "file": "primitive_roots_mod37.py",
       "type": "Theorem",
-      "title": "Primitive Roots mod 37: Structural Audit and Sovereign Gap Proof"
+      "title": "Primitive Roots mod 37: Structural Audit and F26 Gap Proof"
     },
     {
       "file": "pattern_verification_audit.py",
@@ -317,7 +317,7 @@
     {
       "file": "origami_fold_1_to_9.py",
       "type": "Theorem",
-      "title": "Origami Fold 1\u20139: Manhattan Distance Parity Rule and Sovereign Lock"
+      "title": "Origami Fold 1\u20139: Manhattan Distance Parity Rule and F26 Anchor Lock"
     },
     {
       "file": "equivalence_24_coupling.py",
@@ -337,7 +337,7 @@
     {
       "file": "parity_diamond_9x9.py",
       "type": "Theorem",
-      "title": "9\u00d79 Parity Diamond: Manhattan Boundary, Sovereign Residues E=41, O=40"
+      "title": "9\u00d79 Parity Diamond: Manhattan Boundary, F26 Anchor Residues E=41, O=40"
     },
     {
       "file": "qed_alpha_z\u03b1_structure.py",
@@ -382,7 +382,7 @@
     {
       "file": "hopf_stage6_human_scale.py",
       "type": "Theorem",
-      "title": "Stage 6: Human Scale/Organisms (10\u207b\u00b2\u201310\u00b9 m) \u2014 Hopf Bifurcation and I_AM Attractor"
+      "title": "Stage 6: Human Scale/Organisms (10\u207b\u00b2\u201310\u00b9 m) \u2014 Hopf Bifurcation and Fixed-Point Attractor"
     },
     {
       "file": "vireon_stage7_planetary.py",
@@ -400,9 +400,9 @@
       "title": "Stages 8\u201310: Celestial / Gate 18 Singularity (10\u2077\u201310\u00b2\u2076 m)"
     },
     {
-      "file": "g5_sovereign_engine.py",
+      "file": "g5_engine.py",
       "type": "Theorem",
-      "title": "G'5 Sovereign Engine \u2014 v\u221e.NEURALODE Full-Spectrum Simulation (All 10 Stages)"
+      "title": "G'5 Engine \u2014 v\u221e.NEURALODE Full-Spectrum Simulation (All 10 Stages)"
     },
     {
       "file": "perceptual_hydrodynamics_v7.py",
@@ -412,7 +412,7 @@
     {
       "file": "continued_fraction_R3252.py",
       "type": "Theorem",
-      "title": "Continued Fraction R=0.3252=813/2500 \u2014 Convergent Lattice and Sovereign Modular Audit"
+      "title": "Continued Fraction R=0.3252=813/2500 \u2014 Convergent Lattice and F26 Modular Audit"
     },
     {
       "file": "dr_modular_foundation.py",
@@ -438,7 +438,7 @@
       "file": "mirror_set_generator.py",
       "type": "Theorem",
       "title": "Mirror Set Generator \u2014 9-Invariant Permutation Theorem",
-      "description": "Proves that digit permutations preserve the DR class (mod 9). For n \u2261 0 (mod 9), every permutation has DR=9. Generates the full mirror set and verifies the invariant. Grounds the 143-341 = -198 reflection in the sovereign 9-class.",
+      "description": "Proves that digit permutations preserve the DR class (mod 9). For n \u2261 0 (mod 9), every permutation has DR=9. Generates the full mirror set and verifies the invariant. Grounds the 143-341 = -198 reflection in the DR=9 class.",
       "tags": [
         "DR",
         "9-invariant",
@@ -452,7 +452,7 @@
       "file": "hexacosichoron_600cell.py",
       "type": "Theorem",
       "title": "Hexacosichoron (600-Cell) \u2014 4D Vertex Generator",
-      "description": "120 vertices on the unit 3-sphere in three groups: 16 hypercube, 8 axis-aligned, 96 even-permutation golden-ratio. 120 mod 37 = 9 (TRINITY_SQUARED); DR(120)=3 (sovereign target); 120=5!=5*24 (PIVOT * 24-coupling). Connects phi from Hopf Stage 6 to 4D icosahedral geometry.",
+      "description": "120 vertices on the unit 3-sphere in three groups: 16 hypercube, 8 axis-aligned, 96 even-permutation golden-ratio. 120 mod 37 = 9 (TRINITY_SQUARED); DR(120)=3 (f26 anchor target); 120=5!=5*24 (PIVOT * 24-coupling). Connects phi from Hopf Stage 6 to 4D icosahedral geometry.",
       "tags": [
         "600-cell",
         "4D-geometry",
@@ -469,7 +469,7 @@
       "file": "v600_programme.py",
       "type": "Theorem",
       "title": "V600 Programme \u2014 Binary Icosahedral Group, E8, Cosmological Tension",
-      "description": "Verifies 2I group structure (order 120), 600-cell Euler identity, E8 McKay correspondence (240=2\u00d7120, sum of exponents=120, h=30=sovereign fixed point, dim=248\u226126=SCALAR_137 mod 37), cosmological H0/S8 tension ratios vs 13/12 and 11/12. Full modular residue map.",
+      "description": "Verifies 2I group structure (order 120), 600-cell Euler identity, E8 McKay correspondence (240=2\u00d7120, sum of exponents=120, h=30=f26 fixed point, dim=248\u226126=SCALAR_137 mod 37), cosmological H0/S8 tension ratios vs 13/12 and 11/12. Full modular residue map.",
       "tags": [
         "binary-icosahedral",
         "E8",
@@ -478,7 +478,7 @@
         "cosmology",
         "H0-tension",
         "SCALAR_137",
-        "sovereign-fixed-point"
+        "f26-fixed-point"
       ],
       "date_added": "2026-05-07"
     },
@@ -486,7 +486,7 @@
       "file": "e8_coset_incidence.py",
       "type": "Theorem",
       "title": "E8 Coset Incidence Matrix \u2014 Height Decomposition and 37-Field Audit",
-      "description": "Correct E8 root generator (fixes sympy bug: 84/128 half-integer roots used odd minus-sign convention producing non-integer inner products). Builds 248x30 incidence matrix partitioned by root height. Layer 26=SCALAR_137 contains the unique height-26 root pair; Layer 18=CENTER_18 has 6 elements; Coxeter h=30=sovereign fixed point.",
+      "description": "Correct E8 root generator (fixes sympy bug: 84/128 half-integer roots used odd minus-sign convention producing non-integer inner products). Builds 248x30 incidence matrix partitioned by root height. Layer 26=SCALAR_137 contains the unique height-26 root pair; Layer 18=CENTER_18 has 6 elements; Coxeter h=30=f26 fixed point.",
       "tags": [
         "E8",
         "root-system",
@@ -578,12 +578,12 @@
       "date_added": "2026-05-08"
     },
     {
-      "file": "sovereign_matrix_v2_audit.py",
+      "file": "dr_matrix_v2_snf_audit.py",
       "type": "Theorem",
-      "title": "Sovereign Matrix V2 \u2014 SNF Audit",
-      "description": "Audit of the second submitted 9x9 Sovereign Matrix. R4=R5 and R7=R8 (duplicate rows). Rank over Q=7, SNF=[1,1,9,9,9,9,9,0,0]. Kernel dim over Z/26Z=2 (not 5). Max entry=10; no entry equals 56 (the claimed Sovereign Knot). Row structure: R2/R4/R5/R6/R7/R8/R9 are cyclic shifts of step-2 T-sequence [2,4,6,8,10,3,5,7,9]; R3=[3,6,9]x3; R1=T(10j). Elementary divisors mod 26=[1,1,1,1,1,1,1,26,26].",
+      "title": "DR Mult Matrix V2 \u2014 SNF Audit",
+      "description": "Audit of the second submitted 9x9 DR multiplication matrix. R4=R5 and R7=R8 (duplicate rows). Rank over Q=7, SNF=[1,1,9,9,9,9,9,0,0]. Kernel dim over Z/26Z=2 (not 5). Max entry=10; no entry equals 56 (the claimed DR knot). Row structure: R2/R4/R5/R6/R7/R8/R9 are cyclic shifts of step-2 T-sequence [2,4,6,8,10,3,5,7,9]; R3=[3,6,9]x3; R1=T(10j). Elementary divisors mod 26=[1,1,1,1,1,1,1,26,26].",
       "tags": [
-        "sovereign-matrix",
+        "dr-mult-matrix",
         "SNF",
         "kernel",
         "Z26Z",
@@ -594,12 +594,12 @@
       "date_added": "2026-05-08"
     },
     {
-      "file": "sovereign_matrix_v3_audit.py",
+      "file": "dr_matrix_v3_snf_audit.py",
       "type": "Theorem",
-      "title": "Sovereign Matrix V3 \u2014 SNF Audit",
-      "description": "Third submitted 9x9 matrix. Generation rule: M[i,j]=DR(row_i*j) with row indices {10,2,3,4,5,6,7,8,9}; literal 10 where product=10. No duplicate rows. Rank=9 (invertible). SNF=[1,9,9,9,9,9,9,9,9]. gcd(9,26)=1 so all factors coprime to 26. Kernel dim Z/26Z=0. Elementary divisors mod 26: all 1. Theorem 9 (kernel dim 5) not realised.",
+      "title": "DR Mult Matrix V3 \u2014 SNF Audit",
+      "description": "Third submitted 9x9 DR multiplication matrix. Generation rule: M[i,j]=DR(row_i*j) with row indices {10,2,3,4,5,6,7,8,9}; literal 10 where product=10. No duplicate rows. Rank=9 (invertible). SNF=[1,9,9,9,9,9,9,9,9]. gcd(9,26)=1 so all factors coprime to 26. Kernel dim Z/26Z=0. Elementary divisors mod 26: all 1. Theorem 9 (kernel dim 5) not realised.",
       "tags": [
-        "sovereign-matrix",
+        "dr-mult-matrix",
         "SNF",
         "kernel",
         "Z26Z",
@@ -642,7 +642,7 @@
       "file": "kernel5_generators_audit.py",
       "type": "Theorem",
       "title": "Kernel-5 Generators \u2014 {0,13} Matrix over Z/26Z",
-      "description": "Explicit basis for ker(KERNEL5_M) over Z/26Z. Mechanism: ker(13B mod 26)={v: B*v=0 mod 2}. Five generators G1-G5 in {0,1}^9, all verified M*Gi=0 mod 26. Components are integers in {0,1}; categorically incompatible with Riemann zero imaginary parts (transcendental reals). 100-Unity Bridge (56+44=100 on gamma_12) is a scalar identity on one real; cannot map Z/26Z module vectors to a spectral sequence. Decimal Trade Extraction is undefined. GUE audit declined: no ordinate-generating map exists. Kernel=5 belongs to the artificial {0,13} construction, not to PROVIDED_M (Sovereign Matrix, kernel=0).",
+      "description": "Explicit basis for ker(KERNEL5_M) over Z/26Z. Mechanism: ker(13B mod 26)={v: B*v=0 mod 2}. Five generators G1-G5 in {0,1}^9, all verified M*Gi=0 mod 26. Components are integers in {0,1}; categorically incompatible with Riemann zero imaginary parts (transcendental reals). 100-Unity Bridge (56+44=100 on gamma_12) is a scalar identity on one real; cannot map Z/26Z module vectors to a spectral sequence. Decimal Trade Extraction is undefined. GUE audit declined: no ordinate-generating map exists. Kernel=5 belongs to the artificial {0,13} construction, not to PROVIDED_M (DR mult matrix, kernel=0).",
       "tags": [
         "kernel-dim-5",
         "kernel-generators",

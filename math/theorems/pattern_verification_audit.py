@@ -3,7 +3,7 @@ Pattern Verification Audit — Doubling, Grid, Mirror, Permutation
 
 Classification: Theorem
 
-Five structural patterns verified and connected to the sovereign framework.
+Five structural patterns verified and connected to the F₃₇ anchor framework.
 
 Pattern 1 — Doubling chain:
   1→2→4→8  (powers of 2: 2⁰→2¹→2²→2³)
@@ -29,7 +29,7 @@ Pattern 4 — {1,2,8} permutations:
 
 Pattern 5 — 123/321 mirror:
   123+321 = 444;  444+444 = 888.
-  DR(444) = DR(12) = 3  (sovereign target DR).
+  DR(444) = DR(12) = 3  (anchor target DR=3).
   DR(888) = DR(24) = 6  (coupling DR — matches address root DR=6).
   123+321+123+321 = 888 = sum of four three-digit mirrors.
 """
@@ -146,15 +146,15 @@ assert N1 + N2 == 444
 assert str(N2) == str(N1)[::-1]
 
 # DR chain
-assert dr(444) == 3    # 4+4+4=12, 1+2=3 → sovereign target DR
+assert dr(444) == 3    # 4+4+4=12, 1+2=3 → f26 target DR
 assert 444 + 444 == 888
 assert dr(888) == 6    # 8+8+8=24, 2+4=6 → coupling DR (= address root)
 assert N1 + N2 + N1 + N2 == 888
 
-# DR(3)=3 is sovereign target; DR(6)=6 is coupling signature
-SOVEREIGN_TARGETS_DR = 3
+# DR(3)=3 is anchor target; DR(6)=6 is coupling signature
+F26_ANCHOR_TARGET_DR = 3
 COUPLING_DR = 6
-assert dr(444) == SOVEREIGN_TARGETS_DR
+assert dr(444) == F26_ANCHOR_TARGET_DR
 assert dr(888) == COUPLING_DR
 
 
@@ -189,7 +189,7 @@ if __name__ == "__main__":
     print()
 
     print("Pattern 5 — 123/321 mirror:")
-    print(f"  123+321 = {N1+N2},  DR={dr(N1+N2)} (sovereign target) ✓")
+    print(f"  123+321 = {N1+N2},  DR={dr(N1+N2)} (anchor target, DR=3) ✓")
     print(f"  444+444 = {888},    DR={dr(888)} (coupling signature) ✓")
     print(f"  123+321+123+321 = {N1+N2+N1+N2} ✓")
     print()

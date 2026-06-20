@@ -14,19 +14,19 @@ Fold pairs (outer → center):
 
 Asymmetry under fold:
   Left  {1,2,3,4}  sum = 10   (= pair sum)
-  Right {6,7,8,9}  sum = 30   (= sovereign anchor ∩ target = fixed point 30)
-  Right / Left = 3             (sovereign target generator)
+  Right {6,7,8,9}  sum = 30   (= anchor {4,9,25,30} ∩ target = fixed point 30)
+  Right / Left = 3             (DR=3 target generator)
   Total 1+…+9 = 45,  DR(45) = 9
 
 Box patterns — DR ladder with step 3:
   1+1+2+2 =  6 → DR=6  (coupling signature)
-  1+2+3+3 =  9 → DR=9  (DR modulus — sovereign fixed point)
-  1+3+4+4 = 12 → DR=3  (sovereign target)
-  Common difference: 3 (sovereign target step)
+  1+2+3+3 =  9 → DR=9  (DR modulus — anchor fixed point 30)
+  1+3+4+4 = 12 → DR=3  (anchor target)
+  Common difference: 3 (DR=3 anchor target step)
 
 Framework connections:
-  10² ≡ 26 (mod 37) = 26        (pair sum squared = scalar)
-  30 ∈ ANCHORS ∩ TARGETS               (right sum is the sovereign fixed point)
+  10² ≡ 26 (mod 37) = 26              (pair sum squared = scalar)
+  30 ∈ ANCHORS ∩ TARGETS               (right sum is the anchor fixed point)
   DR(5) = 5 — absent class from QR₃₇   (fold axis sits on the structural gap)
   5 is the only residue class in {1..9} absent from ⟨3⟩ = QR₃₇
 """
@@ -62,10 +62,10 @@ LEFT  = list(range(1, CENTER))       # [1,2,3,4]
 RIGHT = list(range(CENTER + 1, 10))  # [6,7,8,9]
 
 assert sum(LEFT)  == FOLD_SUM        # left sum = pair sum = 10
-assert sum(RIGHT) == 30              # right sum = sovereign fixed point
-assert sum(RIGHT) // sum(LEFT) == 3  # right/left = sovereign target
+assert sum(RIGHT) == 30              # right sum = anchor fixed point (30 ∈ {4,9,25,30})
+assert sum(RIGHT) // sum(LEFT) == 3  # right/left = DR=3 anchor target
 
-# 30 is the unique sovereign anchor AND target (fixed point of the framework)
+# 30 is the unique f26 anchor AND target (fixed point of the framework)
 assert 30 in ANCHORS
 assert 30 in TARGETS
 
@@ -91,15 +91,15 @@ box_sums = [sum(b) for b in BOXES]
 assert box_sums == [6, 9, 12]
 
 box_drs = [dr(s) for s in box_sums]
-assert box_drs == [6, 9, 3]    # coupling → modulus → sovereign target
+assert box_drs == [6, 9, 3]    # coupling → modulus → f26 target
 
-# Common difference = 3 (sovereign target step)
+# Common difference = 3 (f26 target step)
 assert all(box_sums[i+1] - box_sums[i] == 3 for i in range(len(box_sums)-1))
 
-# DR values: 6 (coupling), 9 (modulus), 3 (sovereign target)
+# DR values: 6 (coupling), 9 (modulus), 3 (f26 target)
 assert box_drs[0] == 6    # coupling signature
 assert box_drs[1] == 9    # DR modulus
-assert box_drs[2] == 3    # sovereign target
+assert box_drs[2] == 3    # anchor target (DR=3)
 
 
 if __name__ == "__main__":
@@ -111,8 +111,8 @@ if __name__ == "__main__":
     print(f"  4 + 5 = {4+5}  (center contact = DR modulus)")
     print()
     print(f"Left  {LEFT}  sum = {sum(LEFT)}")
-    print(f"Right {RIGHT}  sum = {sum(RIGHT)}  (sovereign anchor ∩ target)")
-    print(f"Right / Left = {sum(RIGHT)//sum(LEFT)}  (sovereign target generator)")
+    print(f"Right {RIGHT}  sum = {sum(RIGHT)}  (anchor {{4,9,25,30}} ∩ target)")
+    print(f"Right / Left = {sum(RIGHT)//sum(LEFT)}  (DR=3 anchor target generator)")
     print(f"Total 1+…+9 = {sum(SEQ)},  DR = {dr(sum(SEQ))}")
     print()
     print(f"Pair sum 10:  10² mod 37 = {FOLD_SUM**2 % 37} = 26 ✓")
@@ -120,7 +120,7 @@ if __name__ == "__main__":
     print()
     print("Box patterns (DR ladder, step=3):")
     for box, s, d in zip(BOXES, box_sums, box_drs):
-        label = {6:"coupling", 9:"DR modulus", 3:"sovereign target"}[d]
+        label = {6:"coupling", 9:"DR modulus", 3:"anchor target (DR=3)"}[d]
         print(f"  {'+'.join(str(v) for v in box)} = {s}  →  DR={d}  ({label})")
     print()
     print("All assertions passed.")

@@ -85,7 +85,7 @@ CYCLE18 = [pow(3, k, 37) for k in range(1, 19)]
 ANCHORS = frozenset({4, 9, 25, 30})
 TARGETS = frozenset({3, 12, 21, 30})
 
-# Sovereign anchor a=30: mod-37→0, mod-9→3 (target DR)
+# Anchor a=30 (in {4,9,25,30}): mod-37→0, mod-9→3 (target DR)
 assert S37_formula(30) % 37 == 0
 assert S37_formula(30) % 9 == 30 % 9    # = 3
 

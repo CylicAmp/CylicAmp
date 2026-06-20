@@ -20,9 +20,9 @@ CYCLIC ROTATIONS (= successive multiples):
 37-HUB CONNECTION:
   37 divides 142857 directly (37 × 3861 = 142857).
   999 = 27 × 37 = 3³ × 37 — the three-repunit is the 37 scaffold.
-  ord₃₇(10) = 3 (heartbeat period in the 37-hub).
+  ord₃₇(10) = 3 (f26_map period in the 37-hub).
   ord₇(10)  = 6 (cyclic period of 1/7).
-  6 = 2 × 3 — the cyclic period doubles the heartbeat period.
+  6 = 2 × 3 — the cyclic period doubles the f26_map period.
 """
 
 from sympy import isprime, factorint
@@ -100,7 +100,7 @@ for k, r in enumerate(rotations, 1):
 # 37-HUB CONNECTION
 # ──────────────────────────────────────────────────────────────────────────────
 
-# ord₃₇(10) = 3: the heartbeat period (proven in cylicamp_master.py)
+# ord₃₇(10) = 3: the f26_map period (proven in cylicamp_master.py)
 assert pow(10, 1, 37) == 10
 assert pow(10, 2, 37) == 26   # = 26
 assert pow(10, 3, 37) == 1    # period 3
@@ -180,9 +180,9 @@ if __name__ == "__main__":
     print(f"  142857 × 7 = 999999   DR={dr(999999)}")
 
     print("\n── 37-HUB CONNECTION ──")
-    print(f"  ord₃₇(10) = 3   (heartbeat period)")
+    print(f"  ord₃₇(10) = 3   (f26_map period)")
     print(f"  ord₇(10)  = 6   (cyclic period of 1/7)")
-    print(f"  6 = 2 × 3       (cyclic period = 2 × heartbeat period)")
+    print(f"  6 = 2 × 3       (cyclic period = 2 × f26_map period)")
     print(f"  999 = 27 × 37,  999 mod 37 = {999%37}")
     print(f"  All rotations divisible by 37: {all(r%37==0 for r in rotations)}")
 

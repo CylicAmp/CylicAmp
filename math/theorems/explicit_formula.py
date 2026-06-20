@@ -105,7 +105,7 @@ for n in range(1, 11):
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# FRAMEWORK: ZEROS NEAR SOVEREIGN ANCHORS AND 37-HUB
+# FRAMEWORK: ZEROS NEAR F26_MATRIX ANCHORS AND 37-HUB
 # ──────────────────────────────────────────────────────────────────────────────
 
 print()

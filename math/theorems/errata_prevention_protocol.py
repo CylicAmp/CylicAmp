@@ -33,7 +33,7 @@ LEGENDRE ORACLE (production-ready)
   - Is residue r a QR mod 37?
   - What is its square root?
   - Is the map multiplier (26) QR? (yes, sqrt=10)
-  - Are all sovereign anchors/targets QR? (yes — Sovereign QR Closure Theorem)
+  - Are all f26 anchors/targets QR? (yes — F26 QR Closure Theorem)
 """
 
 import math

@@ -63,7 +63,7 @@ assert TIER_STATUS[6]  == 'EXTENDED'  # 240 ≡ 18 (non-QR)
 assert TIER_STATUS[7]  == 'NATIVE'    # 280 ≡ 21 (QR)
 assert TIER_STATUS[8]  == 'EXTENDED'  # 320 ≡ 24 (non-QR)
 assert TIER_STATUS[9]  == 'NATIVE'    # 360 ≡ 27 (QR)
-assert TIER_STATUS[10] == 'NATIVE'    # 400 ≡ 30 (QR, sovereign anchor)
+assert TIER_STATUS[10] == 'NATIVE'    # 400 ≡ 30 (QR, f26 anchor)
 assert TIER_STATUS[11] == 'NATIVE'    # 440 ≡ 33 (QR)
 assert TIER_STATUS[12] == 'NATIVE'    # 480 ≡ 36 (QR, inverse unity)
 

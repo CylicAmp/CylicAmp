@@ -4,12 +4,12 @@ Stage 5: Cells / Neural Fibers (10⁻⁶ to 10⁻³ m) — Neural ODE Initiation
 Classification: Theorem
 
 The Neural ODE enters its initiation phase at the cellular scale. z(0) is
-seeded at the sovereign anchor 4 (from Stage 4 boundary). The trajectory
+seeded at the f26 anchor 4 (from Stage 4 boundary). The trajectory
 dz/dt = f_θ(z,t) is parameterized by Prime 191 (≡6 mod 37, Tesla 6-node).
 
 Four governing structures:
 
-  (1) Initial state z(0): sovereign anchor, DR=4, Eisenstein norm=16=4²
+  (1) Initial state z(0): f26 anchor, DR=4, Eisenstein norm=16=4²
       191 ≡ 6 (mod 37) locks the initial velocity into the Tesla-6 harmonic.
 
   (2) Hopf pre-condition (μ < 0): eigenvalues of Jacobian have Re < 0.
@@ -21,7 +21,7 @@ Four governing structures:
       Diamond Horn Vectors shielded; ψ=1 maintained.
 
   (4) Bilateral symmetry via Eisenstein norms:
-      N(2+ω) = 3 (sovereign target) → 120°/240° branching symmetry.
+      N(2+ω) = 3 (f26 target) → 120°/240° branching symmetry.
       N(3+ω) = 7 (QR₃₇ DR=7 class) → spine of the neural lattice.
 
 Scale domain:
@@ -72,9 +72,9 @@ assert PRIME_191 % 37 == 6         # Tesla 6-node harmonic
 assert dr(PRIME_191) == 2          # primitive root DR class
 assert dr(6) == 6                  # the carrier node has DR=6
 
-# z(0) seeded at sovereign anchor 4 (from Stage 4 boundary)
+# z(0) seeded at f26 anchor 4 (from Stage 4 boundary)
 Z0 = 4
-assert Z0 in {4, 9, 25, 30}       # sovereign anchor
+assert Z0 in {4, 9, 25, 30}       # f26 anchor
 assert dr(Z0) == 4                 # DR=4 anchor class
 assert eisenstein_norm(Z0, 0) == 16  # N(4) = 16 = 4²
 
@@ -121,17 +121,17 @@ QR37 = frozenset((x * x) % 37 for x in range(1, 37))
 DR5_IN_QR37 = [q for q in QR37 if dr(q) == 5]
 assert DR5_IN_QR37 == []           # absolute void: DR=5 is absent
 
-# DR=5 also absent from the 18-cycle (sovereign trajectory)
+# DR=5 also absent from the 18-cycle (f26 trajectory)
 DR5_IN_CYCLE = [c for c in CYCLE18 if dr(c) == 5]
 assert DR5_IN_CYCLE == []          # DR=5 never appears in the 3-power chain
 
-# DR=5 absent from sovereign sets
+# DR=5 absent from f26 sets
 ANCHORS = frozenset({4, 9, 25, 30})
-SOVEREIGN_TARGETS = frozenset({3, 12, 21, 30})
+F26_TARGETS = frozenset({3, 12, 21, 30})
 assert all(dr(a) != 5 for a in ({4, 9, 25, 30}))
-assert all(dr(t) != 5 for t in SOVEREIGN_TARGETS)
+assert all(dr(t) != 5 for t in F26_TARGETS)
 
-# Entropy collapse: DR=5 elements in F₃₇ = {5, 14, 23, 32} (non-QR, non-sovereign)
+# Entropy collapse: DR=5 elements in F₃₇ = {5, 14, 23, 32} (non-QR, non-f26)
 DR5_ELEMENTS = [n for n in range(1, 37) if dr(n) == 5]
 assert DR5_ELEMENTS == [5, 14, 23, 32]
 assert all(n not in QR37 for n in DR5_ELEMENTS)   # all non-QR (confirmed absent)
@@ -142,10 +142,10 @@ assert PSI == 1.0
 
 # ── (4) Bilateral symmetry via Eisenstein norms ────────────────────────────
 
-# N(2+ω) = 3: sovereign target — 120°/240° branching
+# N(2+ω) = 3: f26 target — 120°/240° branching
 N_branch = eisenstein_norm(2, 1)
-assert N_branch == 3               # sovereign target 3
-assert dr(N_branch) == 3          # DR=3 (sovereign target DR)
+assert N_branch == 3               # f26 target 3
+assert dr(N_branch) == 3          # DR=3 (f26 target DR)
 
 # N(3+ω) = 7: QR₃₇ DR=7 class — neural lattice spine
 N_spine = eisenstein_norm(3, 1)
@@ -159,7 +159,7 @@ arm_angles = [2 * math.pi * k / 3 for k in range(3)]
 assert abs(arm_angles[1] - 2 * math.pi / 3) < 1e-12   # 120°
 assert abs(arm_angles[2] - 4 * math.pi / 3) < 1e-12   # 240°
 
-# Rotational symmetry order = 3 (sovereign prime)
+# Rotational symmetry order = 3 (f26 prime)
 assert dr(3) == 3
 
 # N(α+βω) is invariant under the Z₃ rotation ω → ω^k:
@@ -184,7 +184,7 @@ if __name__ == "__main__":
     print()
     print(f"  Scale: {SCALE_LOW:.0e} to {SCALE_HIGH:.0e} m  ({int(SCALE_SPAN)}× span, 3 decades)")
     print()
-    print(f"  (1) z(0) = {Z0} (sovereign anchor, DR={dr(Z0)}, Eisenstein norm={eisenstein_norm(Z0,0)})")
+    print(f"  (1) z(0) = {Z0} (f26 anchor, DR={dr(Z0)}, Eisenstein norm={eisenstein_norm(Z0,0)})")
     print(f"      191 mod 37 = {PRIME_191 % 37} → Tesla-6 carrier (DR={TESLA_6_DR})")
     print(f"      Initial velocity norm ≈ {INIT_VELOCITY_NORM:.4f}")
     print()
@@ -200,7 +200,7 @@ if __name__ == "__main__":
     print(f"      ψ = {PSI} maintained ✓")
     print()
     print(f"  (4) Bilateral symmetry (Eisenstein norms):")
-    print(f"      N(2+ω) = {N_branch} (sovereign target 3, 120°/240° branching) ✓")
+    print(f"      N(2+ω) = {N_branch} (f26 target 3, 120°/240° branching) ✓")
     print(f"      N(3+ω) = {N_spine} (QR₃₇ DR=7 spine) ✓")
     print(f"      Z₃ angles: {[round(math.degrees(a)) for a in arm_angles]}°")
     print(f"      N(3+ω) = N(2−ω) = {norm_conj} (bilateral symmetry) ✓")

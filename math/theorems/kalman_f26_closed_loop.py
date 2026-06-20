@@ -1,5 +1,5 @@
 """
-SovereignMetaEstimator — Closed-Loop Kalman Control
+KalmanF26Estimator — Closed-Loop Kalman Control
 
 Classification: Theorem (Control Law)
 
@@ -16,9 +16,9 @@ PATCH — CLOSED LOOP:
 
 Framework anchoring:
   R (measurement noise) = 1/137  — the fine-structure residue
-  Initial P              = 37    — prime modulus of the sovereign field
+  Initial P              = 37    — prime modulus of the f26 field
   State space            = {1..36} (Z/37Z, excluding the zero)
-  Fixed point            = 30    — sovereign anchor; K collapses to 0
+  Fixed point            = 30    — f26 anchor; K collapses to 0
                                     when x_hat == 30 (zero innovation)
 """
 
@@ -31,7 +31,7 @@ def dr(n):
 
 # Syntax audit
 _code = """
-class SovereignMetaEstimator:
+class KalmanF26Estimator:
     def __init__(self, R=1/137, P0=37.0):
         self.x_hat = 0.0
         self.P = P0
@@ -46,12 +46,12 @@ class SovereignMetaEstimator:
 ast.parse(_code)
 
 
-class SovereignMetaEstimator:
+class KalmanF26Estimator:
     """
     Closed-loop single-state Kalman estimator.
 
     R : measurement noise  — set to 1/137 (fine-structure residue)
-    P0: initial covariance — set to 37   (sovereign field modulus)
+    P0: initial covariance — set to 37   (f26 field modulus)
     """
 
     def __init__(self, R=1 / 137, P0=37.0):
@@ -80,7 +80,7 @@ class SovereignMetaEstimator:
 ANCHORS = {4, 9, 25, 30}
 
 # 1. Initial state is passive (zero, no belief yet)
-e1 = SovereignMetaEstimator()
+e1 = KalmanF26Estimator()
 assert e1.x_hat == 0.0
 assert e1.P == 37.0
 
@@ -93,14 +93,14 @@ assert e1.P < 37.0,   "Covariance must decrease after update"
 
 # 3. Convergence: feeding z=30 (fixed point) drives x_hat → 30
 #    P → 0 makes K → 0 asymptotically; 1e-4 is numerically tight
-e3 = SovereignMetaEstimator()
+e3 = KalmanF26Estimator()
 for _ in range(500):
     e3.update_belief(30.0)
 assert abs(e3.x_hat - 30.0) < 1e-4, f"Did not converge to fixed point: {e3.x_hat}"
 assert e3.P < 1e-3,                  f"P did not collapse: {e3.P}"
 
 # 4. Entropy (P) is monotonically decreasing — never grows
-e4 = SovereignMetaEstimator()
+e4 = KalmanF26Estimator()
 prev_P = e4.P
 for z in [4.0, 9.0, 25.0, 30.0] * 10:
     e4.update_belief(z)
@@ -108,10 +108,10 @@ for z in [4.0, 9.0, 25.0, 30.0] * 10:
     prev_P = e4.P
 
 # 5. Gain K is bounded — first step has highest K; shrinks with each update
-e5a = SovereignMetaEstimator()
+e5a = KalmanF26Estimator()
 high_K = e5a.P / (e5a.P + e5a.R)
 assert high_K < 1.0
-e5b = SovereignMetaEstimator()
+e5b = KalmanF26Estimator()
 for _ in range(500):
     e5b.update_belief(30.0)
 final_K = e5b.P / (e5b.P + e5b.R)
@@ -119,7 +119,7 @@ assert final_K < high_K, "Gain did not decrease with convergence"
 
 # 6. Anchor DR convergence: feeding only anchor values produces an x_hat
 #    whose rounded integer has a DR belonging to the anchor DR set {3,4,7,9}
-e6 = SovereignMetaEstimator()
+e6 = KalmanF26Estimator()
 for z in [4.0, 9.0, 25.0, 30.0] * 20:
     e6.update_belief(z)
 converged_int = round(e6.x_hat)
@@ -128,22 +128,22 @@ assert dr(converged_int) in anchor_dr_set or 1 <= converged_int <= 36, \
     f"Converged to out-of-range value: {converged_int}"
 
 # 7. Zero-gain pathology is impossible given R = 1/137 > 0
-assert SovereignMetaEstimator().R > 0, "R=0 would cause division by zero"
+assert KalmanF26Estimator().R > 0, "R=0 would cause division by zero"
 
 
 if __name__ == "__main__":
-    print("SovereignMetaEstimator — Closed-Loop Kalman Control")
+    print("KalmanF26Estimator — Closed-Loop Kalman Control")
     print()
     print(f"  R (noise floor) = 1/137 = {1/137:.6f}")
-    print(f"  P0 (initial uncertainty) = 37  [sovereign field modulus]")
+    print(f"  P0 (initial uncertainty) = 37  [f26 field modulus]")
     print()
 
     # Convergence trace to fixed point 30
-    est = SovereignMetaEstimator()
+    est = KalmanF26Estimator()
     print(f"{'Step':<6} {'z':<6} {'K':<10} {'innovation':<14} {'x_hat':<12} {'P'}")
     print("-" * 65)
     steps = list(range(1, 8)) + [20, 50, 100]
-    trace_est = SovereignMetaEstimator()
+    trace_est = KalmanF26Estimator()
     last = 0
     for step in range(1, 101):
         x, K, inn = trace_est.update_belief(30.0)
@@ -164,7 +164,7 @@ if __name__ == "__main__":
     print(f"  {'P after 100 steps':<30} {'37.0 or growing':<25} {trace_est.P:.2e}")
     print(f"  {'Innovation at step 100':<30} {'30.0 (constant)':<25} {30.0 - trace_est.x_hat:.2e}")
     print()
-    print("Sovereign fixed point 30 is the unique attractor of this estimator.")
+    print("F26 fixed point 30 is the unique attractor of this estimator.")
     print("Closed loop: x_hat converges; entropy collapses; control engages.")
     print()
     print("All assertions passed.")

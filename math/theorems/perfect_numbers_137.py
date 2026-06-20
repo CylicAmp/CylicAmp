@@ -28,7 +28,7 @@ QR mod 37 analysis:
   6   mod 37 = 6   → NOT QR  (6 is outlier in both DR and QR)
   28  mod 37 = 28  → QR ✓
   496 mod 37 = 15  → NOT QR
-  8128 mod 37 = 25 → QR ✓  (25 is a SOVEREIGN ANCHOR)
+  8128 mod 37 = 25 → QR ✓  (25 is in anchor set {4,9,25,30})
 
 Mersenne prime DR and QR:
   3:   DR=3, mod37=3,  QR ✓
@@ -89,8 +89,8 @@ assert all(n % 9 == 1 for n in PERFECT[1:])
 assert 6 % 37 not in QR_MOD37          # 6 is NOT QR — outlier in both measures
 assert 28 % 37 in QR_MOD37             # 28 mod 37 = 28, QR
 assert 496 % 37 not in QR_MOD37        # 496 mod 37 = 15, NOT QR
-assert 8128 % 37 in QR_MOD37           # 8128 mod 37 = 25, QR — sovereign anchor!
-assert 8128 % 37 == 25                  # 25 is sovereign anchor {4,9,25,30}
+assert 8128 % 37 in QR_MOD37           # 8128 mod 37 = 25, QR — anchor set {4,9,25,30}!
+assert 8128 % 37 == 25                  # 25 is in anchor set {4,9,25,30}
 
 # Mersenne primes QR
 assert 3 in QR_MOD37 and 7 in QR_MOD37 and 16 in QR_MOD37
@@ -108,7 +108,7 @@ if __name__ == "__main__":
     print()
     print("DR pattern:", [dr(n) for n in PERFECT])
     print("All N ≥ 28 → DR=1:", all(dr(n)==1 for n in PERFECT[1:]))
-    print("8128 mod 37 = 25 = sovereign anchor {4,9,25,30} ✓")
+    print("8128 mod 37 = 25 ∈ anchor set {4,9,25,30} ✓")
     print()
     print("Mersenne primes:")
     for m in MERSENNE_PRIMES:

@@ -27,7 +27,7 @@ NOTE (SageMath stub): Full coset construction via Weyl group orbit requires Sage
 37-field connections:
   Layer 26 = 26: unique root space at height 26 mod 37 = 26
   Layer 18 = CENTER_18:  3 root spaces at height 18 (Gate 18 multiplicity)
-  Layer 30 wraps to 0:   h=30 is the Coxeter number = sovereign fixed point (mod 37 = 30)
+  Layer 30 wraps to 0:   h=30 is the Coxeter number = f26 fixed point (mod 37 = 30)
 
 Classification: Theorem
 """
@@ -100,7 +100,7 @@ BASIS_HEIGHTS = (
 # ── 248 × 30 Incidence Matrix ─────────────────────────────────────────────────
 # Column j = layer j; layer 0 = Cartan; layers 1-29 = height classes
 
-COXETER_H = 30   # Coxeter number = sovereign fixed point
+COXETER_H = 30   # Coxeter number = f26 fixed point
 
 I_MAT = np.zeros((248, COXETER_H), dtype=int)
 for row, h in enumerate(BASIS_HEIGHTS):
@@ -158,7 +158,7 @@ assert 26 < COXETER_H              # height 26 = 26 is a valid layer
 assert COL_SUMS[26] == 2           # unique root ±α at height 26 → 26
 assert COL_SUMS[18] == 6           # 3 positive + 3 negative at height 18 = CENTER_18
 assert COL_SUMS[29] == 2           # highest/lowest root pair (height ±29 = h-1)
-assert COXETER_H % 37 == 30        # h=30 = sovereign fixed point
+assert COXETER_H % 37 == 30        # h=30 = f26 fixed point
 
 # Sum of E8 exponents = 120 = vertex count of 600-cell (confirmed)
 E8_EXPONENTS = [1, 7, 11, 13, 17, 19, 23, 29]
@@ -223,7 +223,7 @@ if __name__ == "__main__":
     print("E8 Coset Incidence Matrix — Height Decomposition")
     print()
     print(f"  Roots: {len(ROOTS)}  (type-1: 112, type-2: 128, all norm²=2)")
-    print(f"  Simple roots: 8,  Coxeter h = {COXETER_H} (sovereign fixed point mod 37)")
+    print(f"  Simple roots: 8,  Coxeter h = {COXETER_H} (f26 fixed point mod 37)")
     print()
     print("  Cartan matrix connected pairs (1-indexed):")
     edges = sorted((i+1,j+1) for i in range(8) for j in range(i+1,8) if CARTAN[i,j]==-1)
@@ -249,7 +249,7 @@ if __name__ == "__main__":
     print()
     print("  37-field layer audit:")
     for layer, sig in [(0,'Cartan/h₀'),(8,'TESLA_FLOW'),(18,'CENTER_18/Gate18'),
-                       (26,'26'),(29,'highest root h-1'),(30,'Coxeter h=sovereign')]:
+                       (26,'26'),(29,'highest root h-1'),(30,'Coxeter h=f26')]:
         if layer < 30:
             print(f"    Layer {layer:2d}: {COL_SUMS[layer]} elements  → {sig}")
     print()

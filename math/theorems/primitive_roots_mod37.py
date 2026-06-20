@@ -4,14 +4,14 @@ Primitive Roots mod 37 — Structural Audit
 Classification: Theorem
 
 Characterises the 12 primitive roots of (Z/37Z)* and their relationship to
-the sovereign framework.
+the F₃₇ anchor framework.
 
 Verified claims:
   Count            φ(φ(37)) = φ(36) = 12  — exactly 12 primitive roots
   Explicit set     {2,5,13,15,17,18,19,20,22,24,32,35}
   Non-overlap      No primitive root is a quadratic residue mod 37
                    ⟨3⟩ = QR₃₇ ∩ ⟨3⟩ = QR₃₇; primitive roots ⊆ QNR₃₇
-  Sovereign gaps   DR=3 absent from primitive roots (sovereign targets safe)
+  Anchor gaps      DR=3 absent from primitive roots (DR=3 anchor targets safe)
                    DR=7 absent from primitive roots (DR=7 class ⊆ QR₃₇)
   Generator 2      ord₃₇(2) = 36;  2 ≡ 3^{-1} × ... is the minimal generator
   SCALAR link      2^12 ≡ 26 (mod 37) = 26 = 3^6 mod 37
@@ -115,10 +115,10 @@ assert DR3_VALUES == [3, 12, 21, 30]
 assert DR7_VALUES == [7, 16, 25, 34]
 assert all(v in QR37 for v in DR3_VALUES)
 assert all(v in QR37 for v in DR7_VALUES)
-assert not any(g in DR3_VALUES for g in PRIM_ROOTS), "Unexpected: sovereign target as prim root"
+assert not any(g in DR3_VALUES for g in PRIM_ROOTS), "Unexpected: DR=3 anchor target as prim root"
 assert not any(g in DR7_VALUES for g in PRIM_ROOTS), "Unexpected: DR=7 value as prim root"
 
-# 7. Sovereign anchors and targets are NOT primitive roots
+# 7. F26 anchors and targets are NOT primitive roots
 assert not (ANCHORS & frozenset(PRIM_ROOTS)), "An anchor is a primitive root — unexpected"
 assert not (TARGETS & frozenset(PRIM_ROOTS)), "A target is a primitive root — unexpected"
 
@@ -169,9 +169,9 @@ if __name__ == "__main__":
     for d in range(1, 10):
         vals = sorted(g for g in PRIM_ROOTS if dr(g) == d)
         if vals:
-            note = " ← absent from sovereign sets" if d == 5 else ""
+            note = " ← absent from anchor sets" if d == 5 else ""
             print(f"    DR={d}: {vals}{note}")
-    print(f"  DR=3: (absent) — sovereign targets {{3,12,21,30}} ⊆ QR₃₇")
+    print(f"  DR=3: (absent) — anchor targets {{3,12,21,30}} ⊆ QR₃₇")
     print(f"  DR=7: (absent) — DR=7 class {{7,16,25,34}} ⊆ QR₃₇")
     print()
     print(f"  ord₃₇(2) = {multiplicative_order(2,P)}  (minimal primitive root)")
@@ -183,8 +183,8 @@ if __name__ == "__main__":
     for a, b in pairs:
         print(f"    {a} ↔ {b}  (product={a*b%P} mod 37)")
     print()
-    print(f"  Sovereign anchors {{4,9,25,30}} ∩ primitive roots = ∅ ✓")
-    print(f"  Sovereign targets {{3,12,21,30}} ∩ primitive roots = ∅ ✓")
+    print(f"  F26 anchors {{4,9,25,30}} ∩ primitive roots = ∅ ✓")
+    print(f"  F26 anchor targets {{3,12,21,30}} ∩ primitive roots = ∅ ✓")
     print(f"  26={26} ∈ QR₃₇, not a primitive root ✓")
     print()
     print("All assertions passed.")

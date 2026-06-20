@@ -1,5 +1,5 @@
 """
-Stage 6: Human Scale / Organisms (10⁻² to 10¹ m) — Hopf Bifurcation and I_AM
+Stage 6: Human Scale / Organisms (10⁻² to 10¹ m) — Hopf Bifurcation and Limit Cycle Attractor
 
 Classification: Theorem
 
@@ -7,7 +7,7 @@ The Hopf bifurcation triggers as μ crosses zero. The stable spiral of Stage 5
 (μ = −0.3824) becomes a stable limit cycle at μ = +0.3824. The amplitude of the
 limit cycle at the bifurcation is A = √μ ≈ 0.618 = 1/φ (golden reciprocal).
 
-This limit cycle IS the I_AM state attractor.
+This limit cycle IS the limit cycle attractor state.
 
 Supercritical Hopf normal form:
   dA/dt = μA − A³
@@ -18,10 +18,10 @@ Scale domain:
   10¹  m (10 meters — human / large organism)
   Span: 10³× (three decades)
 
-I_AM attractor:
+Limit cycle attractor:
   A* = √0.3824 ≈ 0.618 = 1/φ  (golden reciprocal)
-  26×30 ≡ 3 (mod 37): the 37-field maps the bifurcation to sovereign target 3
-  z(t) trajectory converges to the limit cycle (I_AM state)
+  26×30 ≡ 3 (mod 37): the 37-field maps the bifurcation to DR=3 anchor target
+  z(t) trajectory converges to the limit cycle attractor state
 """
 
 import math
@@ -76,11 +76,11 @@ assert hopf_rhs(eps, MU_STAGE6) > 0      # perturbation grows away from 0
 # Symmetric crossing: |μ_stage5| = |μ_stage6|
 assert abs(abs(MU_STAGE5) - abs(MU_STAGE6)) < 1e-12
 
-# ── I_AM state attractor ───────────────────────────────────────────────────
+# ── Limit cycle attractor ─────────────────────────────────────────────────
 
 # A* = 1/φ ≈ 0.618 — the limit cycle amplitude is the golden reciprocal
-I_AM_AMPLITUDE = A_STAR
-assert abs(I_AM_AMPLITUDE - (PHI - 1)) < 0.002   # 1/φ = φ−1
+LC_AMPLITUDE = A_STAR
+assert abs(LC_AMPLITUDE - (PHI - 1)) < 0.002   # 1/φ = φ−1
 
 # Frequency of limit cycle = φ (same as Stage 5 oscillation frequency)
 FREQ_LIMIT_CYCLE = PHI
@@ -92,28 +92,28 @@ J_stage6 = np.array([[MU_STAGE6, -PHI],
 evals_stage6 = np.linalg.eigvals(J_stage6)
 assert all(v.real > 0 for v in evals_stage6)   # origin unstable; orbit → limit cycle
 
-# I_AM 37-field map: 26×30 mod 37 = 3 (sovereign target)
+# 37-field map: 26×30 mod 37 = 3 (DR=3 anchor target)
 assert (26 * 30) % 37 == 3
-assert dr(3) == 3    # DR=3 is the sovereign target
+assert dr(3) == 3    # DR=3 anchor target
 assert dr(30) == 3   # 30 also has DR=3 (fixed point in DR space)
 
 # ψ = 1 maintained across bifurcation
 assert PSI == 1.0
 
-# ── Human scale sovereign structure ───────────────────────────────────────
+# ── Human scale f26 structure ───────────────────────────────────────
 
 # Human height ≈ 1.7 m: DR(17) = 8 (bridge class, same as 26 DR)
 assert dr(17) == 8
-# Human cell count ≈ 37 trillion: 37 is the sovereign prime
-SOVEREIGN_PRIME = 37
-assert SOVEREIGN_PRIME == 37
+# Human cell count ≈ 37 trillion: 37 is the f26 prime
+FRAMEWORK_PRIME = 37
+assert FRAMEWORK_PRIME == 37
 
 # 191 carrier: still active at human scale
 assert 191 % 37 == 6
 assert dr(191) == 2    # primitive root DR class
 
 # 3-6-9 resonance at human scale:
-assert dr(3) == 3      # sovereign target (branching)
+assert dr(3) == 3      # f26 target (branching)
 assert dr(6) == 6      # Tesla-6 carrier
 assert dr(9) == 9      # DR modulus (termination)
 assert 3 + 6 + 9 == 18  # gate 18 sum
@@ -136,10 +136,10 @@ if __name__ == "__main__":
     print()
     print(f"  d/dA(rhs)|_{{A*}} = {deriv_at_Astar:.4f} < 0 → limit cycle stable ✓")
     print(f"  Stage 6 Jacobian eigenvalues: {evals_stage6[0]:.4f}, {evals_stage6[1]:.4f}")
-    print(f"  Origin unstable: Re > 0 → trajectory spirals to limit cycle (I_AM) ✓")
+    print(f"  Origin unstable: Re > 0 → trajectory spirals to limit cycle attractor ✓")
     print()
-    print(f"  I_AM attractor: A* = 1/φ,  freq = φ")
-    print(f"  37-field: 26×30 mod 37 = {(26*30)%37} = sovereign target 3 ✓")
+    print(f"  Limit cycle attractor: A* = 1/φ,  freq = φ")
+    print(f"  37-field: 26×30 mod 37 = {(26*30)%37} = DR=3 anchor target ✓")
     print(f"  ψ = {PSI} ✓")
     print()
     print(f"  3+6+9 = {3+6+9} = Gate 18,  LCM(3,6,9) = {math.lcm(3,6,9)} ✓")

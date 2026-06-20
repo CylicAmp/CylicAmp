@@ -1,7 +1,7 @@
 """
-Medusa Shield v2.5 + Jacobian Wobble Test
+F26 Pillar Verification v2.5 + Jacobian Wobble Test
 
-SHIELD: True Sovereign Pillars = {4, 9, 25, 30}
+SHIELD: True anchor set {4,9,25,30} = {4, 9, 25, 30}
   Node 3 was erroneously included in v2.5 — it maps to residue 4 (DR=4).
   Node 3 is a residue (output of node 30), not an input anchor.
 
@@ -19,11 +19,11 @@ def dr(n):
     return (n - 1) % 9 + 1 if n > 0 else 0
 
 
-def medusa_shield(node):
+def f26_pillar_check(node):
     res = (node * 137) % 37
     d = dr(res)
     if node in PILLARS and d == 3:
-        return f"Node {node} [SUCCESS]: Sovereign Pillar Authenticated."
+        return f"Node {node} [SUCCESS]: F26 Anchor Pillar Authenticated."
     elif d == 3:
         return f"Node {node} [ISOLATE]: DR=3 detected, not a Pillar. Possible Mimicry."
     else:
@@ -51,11 +51,11 @@ s = jacobian_wobble_test.__wrapped__ if hasattr(jacobian_wobble_test, '__wrapped
 
 
 if __name__ == "__main__":
-    print("=== SHIELD v2.5 (corrected) ===")
-    print(medusa_shield(15))   # old false pillar -> ALERT
-    print(medusa_shield(22))   # trojan -> ALERT
-    print(medusa_shield(30))   # true pillar -> SUCCESS
-    print(medusa_shield(4))    # true pillar (was missing) -> SUCCESS
+    print("=== F26 PILLAR CHECK v2.5 (corrected) ===")
+    print(f26_pillar_check(15))   # old false pillar -> ALERT
+    print(f26_pillar_check(22))   # trojan -> ALERT
+    print(f26_pillar_check(30))   # true pillar -> SUCCESS
+    print(f26_pillar_check(4))    # true pillar (was missing) -> SUCCESS
     print()
     jacobian_wobble_test()
     print()

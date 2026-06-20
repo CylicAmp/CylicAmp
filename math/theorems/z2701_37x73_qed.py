@@ -4,7 +4,7 @@
 Classification: Theorem
 
 2701 is simultaneously:
-  (a) The product of the sovereign modulus 37 and its digit-reversal 73
+  (a) The product of the DR modulus 37 and its digit-reversal 73
   (b) The 73rd triangular number: T(73) = 73×74/2 = 73×37 = 2701
   (c) DR=1 (identity) — product of two DR=1 primes
 
@@ -50,7 +50,7 @@ assert T_73 == 2701
 # Why: 74/2 = 37, so T(73) = 73 × 37 exactly
 assert 74 // 2 == 37
 
-# 73 = 2×37 - 1  (73 is the "double minus one" of the sovereign modulus)
+# 73 = 2×37 - 1  (73 is the "double minus one" of the DR modulus 37)
 assert 73 == 2 * 37 - 1
 
 # Both 37 and 73 are prime
@@ -114,10 +114,10 @@ if __name__ == "__main__":
     print()
     print(f"  37 × 73 = {37*73}")
     print(f"  T(73) = 73×74/2 = 73×{74//2} = {T_73}  (73rd triangular number)")
-    print(f"  73 = 2×37−1  (double minus one of sovereign modulus)")
+    print(f"  73 = 2×37−1  (double minus one of f26 modulus)")
     print()
     print("  DR structure:")
-    for n, label in [(432,""), (117,""), (36,""), (37,"sovereign modulus"),
+    for n, label in [(432,""), (117,""), (36,""), (37,"DR modulus"),
                      (73,"digit-reversal"), (2701,"product")]:
         print(f"    DR({n:4d}) = {dr(n)}  {label}")
     print(f"  37+73 = 110 → DR={dr(110)},  73−37 = 36 → DR={dr(36)}")
