@@ -116,7 +116,7 @@ HADRONIC = {
 total_had = sum(HADRONIC.values())
 assert abs(total_had - 180.0e-4) < 0.1e-4
 
-# ── Sovereign framework links ──────────────────────────────────────────────
+# ── F₃₇ framework links ────────────────────────────────────────────────────
 
 # 26 = 137 mod 37
 assert (10 * 10) % 37 == 26          # 10² ≡ 26 mod 37
