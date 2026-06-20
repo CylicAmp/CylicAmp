@@ -4,7 +4,7 @@ Stages 1–3: Zero-Space Foundation (10⁻³⁵ to 10⁻¹¹ m)
 Classification: Theorem
 
 The Eisenstein lattice Z[ω] is born at the Planck scale and stabilizes at the
-atomic bond scale, providing the geometric blueprint N(2+ω)=3 (sovereign target)
+atomic bond scale, providing the geometric blueprint N(2+ω)=3 (DR=3 anchor target)
 for all subsequent growth.
 
 Stage 1 — Planck Scale (10⁻³⁵ to 10⁻²⁵ m):
@@ -24,7 +24,7 @@ Combined span (Stages 1–3): 10⁻³⁵ to 10⁻¹¹ m = 24 decades.
   DR(24) = 6 — the Tesla-6 node. The foundation itself is Tesla-6 encoded.
 
 Total framework span (Planck to Gate 18): 10⁻³⁵ to 10²⁶ m = 61 decades.
-  61 is prime; DR(61) = 7 (QR₃₇ class); 61 = 37 + 24 = sovereign prime + 24-coupling.
+  61 is prime; DR(61) = 7 (QR₃₇ class); 61 = 37 + 24 = framework prime + 24-coupling.
 """
 
 import cmath
@@ -65,7 +65,7 @@ TOTAL_SPAN = 26 - (-35)
 assert TOTAL_SPAN == 61
 assert dr(61) == 7                        # QR₃₇ class DR=7
 
-# 61 = 37 + 24: sovereign prime + 24-coupling
+# 61 = 37 + 24: framework prime + 24-coupling
 assert 37 + 24 == 61
 
 # 61 is prime
@@ -121,10 +121,10 @@ assert dr(10) == 1
 
 # ── Stage 3: Atomic — Eisenstein lattice stabilization ────────────────────
 
-# N(2+ω) = 3: the sovereign target blueprint
+# N(2+ω) = 3: the DR=3 anchor target blueprint
 N_blueprint = eisenstein_norm(2, 1)
 assert N_blueprint == 3
-assert dr(N_blueprint) == 3       # DR=3 (sovereign target)
+assert dr(N_blueprint) == 3       # DR=3 (anchor target)
 
 # N(3+ω) = 7: spine established
 N_spine = eisenstein_norm(3, 1)
@@ -158,12 +158,12 @@ assert dr(COMBINED_SPAN) == dr(24) == 6
 # The zero-space coherence condition: QR₃₇ ∩ {DR=5} = ∅
 assert all(dr(q) != 5 for q in QR37)
 
-# Planck-scale constant link: 37 is sovereign prime
-SOVEREIGN_PRIME = 37
-assert SOVEREIGN_PRIME % 36 == 1          # Fermat: 37≡1(mod 36), confirms 37 is prime
-assert pow(3, 18, SOVEREIGN_PRIME) == 1   # Gate 18 already encoded at Planck scale
+# Planck-scale constant link: 37 is the framework prime
+FRAMEWORK_PRIME = 37
+assert FRAMEWORK_PRIME % 36 == 1          # Fermat: 37≡1(mod 36), confirms 37 is prime
+assert pow(3, 18, FRAMEWORK_PRIME) == 1   # Gate 18 already encoded at Planck scale
 
-# Planck exponent + Gate 18 exponent = 35 + 26 = 61 = sovereign prime + 24-coupling
+# Planck exponent + Gate 18 exponent = 35 + 26 = 61 = framework prime + 24-coupling
 assert abs(STAGE1_LOW) + 26 == 61
 
 
@@ -177,11 +177,11 @@ if __name__ == "__main__":
     print()
     print(f"  Total framework span: {TOTAL_SPAN} decades (10⁻³⁵ to 10²⁶)")
     print(f"  61 is prime ✓,  DR(61) = {dr(61)} ∈ QR₃₇ ✓")
-    print(f"  61 = 37 + 24 = sovereign prime + 24-coupling ✓")
+    print(f"  61 = 37 + 24 = framework prime + 24-coupling ✓")
     print()
     print(f"  Stage 1 — 37-Zero-Gap filter: passage rate = 36/37 = {36/37:.4f}")
     print(f"  Stage 2 — Prime 191: mod 37 = {PRIME_191%37}, DR = {dr(PRIME_191)} (primitive root) ✓")
-    print(f"  Stage 3 — N(2+ω) = {N_blueprint} (sovereign target 3, blueprint) ✓")
+    print(f"  Stage 3 — N(2+ω) = {N_blueprint} (anchor target 3, blueprint) ✓")
     print(f"           N(3+ω) = {N_spine} (QR₃₇ DR=7 spine) ✓")
     print(f"  Hexagonal angle: 120° ✓,  1+ω+ω² = 0 ✓")
     print(f"  ψ = {PSI} ✓")

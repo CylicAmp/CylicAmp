@@ -10,7 +10,7 @@ S = {0, 2, 3, 6, 8}   — 5 attractor residues
 T = {1, 4, 5, 7}       — 4 residues outside S
 
 Framework connection:
-  Move +3 adds the sovereign target DR (3 is the primary target, 3¹ mod 37).
+  Move +3 adds the f(n)=(26n)%37 anchor target DR (3 is the primary target, 3¹ mod 37).
   Move +2 adds the primitive root DR (2 is the minimal primitive root mod 37).
   Together {+2, +3} generate all of Z/9Z from any starting point (gcd(2,3)=1,
   so their span covers Z/9Z), but any single step from T already lands in S.
@@ -41,7 +41,7 @@ from collections import deque
 
 S = frozenset({0, 2, 3, 6, 8})     # attractor set
 T = frozenset({1, 4, 5, 7})        # residues outside S
-MOVES = (2, 3)                      # +2 (primitive root DR), +3 (sovereign target DR)
+MOVES = (2, 3)                      # +2 (primitive root DR), +3 (anchor target DR under f(n)=(26n)%37)
 MOD = 9
 
 
@@ -105,8 +105,8 @@ assert all(d <= 2 for d, _ in results.values()), "Some residue needs > 2 steps"
 # Completeness: every residue in T is handled
 assert frozenset(OPTIMAL.keys()) == T
 
-# Move semantics: +3 = sovereign target DR, +2 = primitive root DR
-assert 3 % MOD == 3     # 3 is the primary sovereign target (3¹ mod 37)
+# Move semantics: +3 = anchor target DR under f(n)=(26n)%37, +2 = primitive root DR
+assert 3 % MOD == 3     # 3 is the primary anchor target (3¹ mod 37) under f(n)=(26n)%37
 assert 2 % MOD == 2     # 2 is the minimal primitive root mod 37
 
 # Every element of T has at least one move that lands in S

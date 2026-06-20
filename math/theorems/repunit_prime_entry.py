@@ -12,7 +12,7 @@ KEY ENTRY POINTS:
   k=8: 137  enters  (10^8 - 1 = 99999999 = 3² × 11 × 73 × 101 × 137)
 
 137 is the α⁻¹ integer.  37 is the hub.  Both appear in 10^k - 1.
-ord₃₇(10) = 3 (the heartbeat period).
+ord₃₇(10) = 3 (the 3-cycle period under f(n)=(26n)%37).
 ord₁₃₇(10) = 8.
 """
 
@@ -39,17 +39,17 @@ assert (10**3 - 1) % 37 == 0
 assert ord10(37) == 3
 assert factorint(10**3 - 1) == {3: 3, 37: 1}
 
-# k=5: 41 enters  (41 = 30 + 11, sovereign anchor + ladder step)
+# k=5: 41 enters  (41 = 30 + 11, F26 anchor + ladder step)
 assert (10**5 - 1) % 41 == 0
 assert ord10(41) == 5
-assert 41 == 30 + 11   # sovereign anchor + ladder step
+assert 41 == 30 + 11   # F26 anchor + ladder step
 assert isprime(41)
 assert dr(41) == 5     # twin prime anchor DR
 
 # k=6: 7 enters  (cyclic number 142857 = (10^6-1)/7)
 assert (10**6 - 1) % 7 == 0
 assert ord10(7) == 6
-assert 6 == 2 * 3      # doubles the 37 heartbeat period
+assert 6 == 2 * 3      # doubles the 37 3-cycle period under f(n)=(26n)%37
 assert (10**6 - 1) // 7 == 142857
 
 # k=8: 137 enters  (α⁻¹ integer)
@@ -84,7 +84,7 @@ for k, primes in ENTRY.items():
         assert ord10(p) == k
 
 # 37 and 137 share the digit 37 — one IS the hub, one CONTAINS the hub
-assert 137 % 37 == 26    # 26: the heartbeat generator
+assert 137 % 37 == 26    # 26: the f(n)=(26n)%37 generator
 assert 137 % 9  == 2     # DR(137) = 2
 assert 37  % 9  == 1     # DR(37)  = 1
 
@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
     print("\n── KEY ENTRY POINTS ──")
     print(f"  ord₃₇(10)  = {ord10(37)}   → 37  enters at k=3  (the hub)")
-    print(f"  ord₄₁(10)  = {ord10(41)}   → 41  enters at k=5  (30+11, sovereign+ladder)")
+    print(f"  ord₄₁(10)  = {ord10(41)}   → 41  enters at k=5  (30+11, F26 anchor+ladder)")
     print(f"  ord₇(10)   = {ord10(7)}   → 7   enters at k=6  (doubles 37 period)")
     print(f"  ord₁₃₇(10) = {ord10(137)}   → 137 enters at k=8  (α⁻¹ integer)")
 
@@ -153,7 +153,7 @@ if __name__ == "__main__":
     print("\n── SHARED FRAMEWORK ──")
     print(f"  lcm(ord₃₇, ord₁₃₇) = lcm(3,8) = {lcm(3,8)}")
     print(f"  Both 37 and 137 divide 10^24 - 1")
-    print(f"  137 mod 37 = {137%37}  (26, the heartbeat generator)")
+    print(f"  137 mod 37 = {137%37}  (26, the f(n)=(26n)%37 generator)")
 
     print()
     print("All assertions passed.")

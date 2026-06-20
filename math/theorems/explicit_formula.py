@@ -14,8 +14,8 @@ Truncated to the first N zeros, this approximates π(x).
 
 FRAMEWORK CONNECTION:
   γ₁ = 14.134725141734693790...  (analyzed in riemann_first_zero_141.py)
-  γ₃ ≈ 25.01   → floor = 25  (sovereign anchor)
-  γ₄ ≈ 30.42   → floor = 30  (sovereign anchor)
+  γ₃ ≈ 25.01   → floor = 25  (anchor set {4,9,25,30})
+  γ₄ ≈ 30.42   → floor = 30  (anchor set {4,9,25,30})
   γ₆ ≈ 37.59   → floor = 37  (the 37-hub)
 """
 
@@ -35,8 +35,8 @@ def dr(n):
 ZEROS = [
     14.134725141734693790,   # γ₁  — analyzed in riemann_first_zero_141.py
     21.022039638771554993,   # γ₂
-    25.010857580145688763,   # γ₃  floor=25 (sovereign anchor)
-    30.424876125859513210,   # γ₄  floor=30 (sovereign anchor)
+    25.010857580145688763,   # γ₃  floor=25 (anchor set {4,9,25,30})
+    30.424876125859513210,   # γ₄  floor=30 (anchor set {4,9,25,30})
     32.935061587739189690,   # γ₅
     37.586178158825671257,   # γ₆  floor=37 (the 37-hub)
     40.918719012147495187,   # γ₇
@@ -110,21 +110,21 @@ for n in range(1, 11):
 
 print()
 print("Zeros near framework constants:")
-SOVEREIGN = {4, 9, 25, 30}
+F26_ANCHORS = {4, 9, 25, 30}
 for k, gamma in enumerate(ZEROS, 1):
     f = int(gamma)
     tag = ""
-    if f in SOVEREIGN:     tag = f"  ← floor={f} sovereign anchor"
+    if f in F26_ANCHORS:   tag = f"  ← floor={f} anchor set {{4,9,25,30}}"
     if f == 37:            tag = f"  ← floor={f} the 37-hub"
-    if f == 14:            tag = f"  ← floor={f} heartbeat orbit (14→31→29→14)"
+    if f == 14:            tag = f"  ← floor={f} 3-cycles under f(n)=(26n)%37 (14→31→29→14)"
     if abs(gamma - 14.134725141734693790) < 0.001:
         tag += "  [141 family in digits]"
     print(f"  γ_{k:2d} = {gamma:.6f}{tag}")
 
 print()
-print(f"  Sovereign anchors {{4,9,25,30}}")
-print(f"  γ₃ floor = {int(ZEROS[2])}  (25 ∈ sovereign)  δ = {ZEROS[2]-25:.6f}")
-print(f"  γ₄ floor = {int(ZEROS[3])}  (30 ∈ sovereign)  δ = {ZEROS[3]-30:.6f}")
+print(f"  Anchor set {{4,9,25,30}}")
+print(f"  γ₃ floor = {int(ZEROS[2])}  (25 ∈ {{4,9,25,30}})  δ = {ZEROS[2]-25:.6f}")
+print(f"  γ₄ floor = {int(ZEROS[3])}  (30 ∈ {{4,9,25,30}})  δ = {ZEROS[3]-30:.6f}")
 print(f"  γ₆ floor = {int(ZEROS[5])}  (37 = hub)        δ = {ZEROS[5]-37:.6f}")
 
 
@@ -160,7 +160,7 @@ print(f"  |ρ₁|       = sqrt(1/4 + γ₁²) = {rho1_abs:.10f}")
 print(f"  |ρ₁|²      = {rho1_abs**2:.6f}  ≈ 200")
 print(f"  10√2       = {10*math.sqrt(2):.10f}")
 print(f"  diff       = {rho1_abs - 10*math.sqrt(2):.2e}")
-print(f"  floor(100√2) = {math.floor(100*math.sqrt(2))}  (sovereign anchor — ladder_11_111.py)")
+print(f"  floor(100√2) = {math.floor(100*math.sqrt(2))}  (anchor set {{4,9,25,30}} — ladder_11_111.py)")
 print(f"  Frequency  = γ₁/(2π) = {gamma1/(2*math.pi):.6f} cycles per unit of log(x)")
 print(f"  Period     = 2π/γ₁   = {2*math.pi/gamma1:.6f} units of log(x) per cycle")
 print(f"  γ₁ is the fundamental frequency — the lowest note of the prime music")

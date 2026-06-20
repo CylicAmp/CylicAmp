@@ -11,7 +11,7 @@ by three interlocking structures:
 
   (2) Bio-Harmonic THz Mapping: DNA vibrational modes sit in the THz window
       (0.1–10 THz). The resonance map is f(THz) = ψ · Φ₁₉₁ where Φ₁₉₁ is
-      the sovereign projection of the prime 191 in F₃₇.
+      the F₃₇ projection of the prime 191 in F₃₇ (anchor class DR=2).
 
   (3) Eisenstein Coordinate System: α + βω, ω = e^(2πi/3), grounds molecular
       vibrations in the same cubic lattice used by Delta(27)/H(F₃). The Eisenstein

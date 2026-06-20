@@ -276,7 +276,7 @@ def verify():
     C_Align = √5 − 1/13  ≈ {C_align:.7f}
   Do not use "C_Align" for the matrix predicate — name it separately,
   e.g. "G-alignment condition" or "collapse-stable set", and state it
-  in the integer sovereign DR context, not the binary F_2 context.
+  in the integer DR context under f(n)=(26n)%37, not the binary F_2 context.
     """)
 
     print("All assertions passed.")

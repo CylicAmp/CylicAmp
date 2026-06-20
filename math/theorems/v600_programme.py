@@ -55,7 +55,7 @@ assert VERTICES - EDGES + FACES - CELLS == 0
 # ── 3. E8 Root System and McKay Correspondence ───────────────────────────────
 
 E8_ROOTS      = 240
-E8_COXETER_H  = 30          # sovereign fixed point!
+E8_COXETER_H  = 30          # fixed point of anchor set {4,9,25,30}!
 E8_RANK       = 8
 E8_DIM        = 248
 
@@ -71,7 +71,7 @@ assert all(math.gcd(e, E8_COXETER_H) == 1        # exponents are coprime to h=30
 assert E8_ROOTS == 2 * VERTICES
 assert E8_ROOTS // 2 == VERTICES
 
-# E8 Coxeter number = sovereign fixed point
+# E8 Coxeter number = anchor set fixed point (30 ∈ {4,9,25,30})
 assert E8_COXETER_H == 30
 
 # E8 dimension = 248; 248 mod 37 = ?
@@ -121,7 +121,7 @@ MOD37_MAP = {
     'Dic5':           (ORDER_DIC5,   20,  'FIELD_ELEMENT'),
     'A5 quotient':    (ORDER_QUOTIENT,23, 'LAMED_SEAL'),
     'E8 dim (248)':   (E8_DIM,       26,  '26'),
-    'E8 Coxeter h':   (E8_COXETER_H, 30,  'SOV_FIXED_POINT'),
+    'E8 Coxeter h':   (E8_COXETER_H, 30,  'F26_FIXED_POINT'),
 }
 
 for label, (n, expected_r, note) in MOD37_MAP.items():
@@ -156,7 +156,7 @@ if __name__ == "__main__":
     print(f"   Roots: {E8_ROOTS} = 2 × {VERTICES} vertices  ✓")
     print(f"   Exponents: {E8_EXPONENTS}")
     print(f"   Sum of exponents: {sum(E8_EXPONENTS)} = vertex count  ✓")
-    print(f"   Coxeter h = {E8_COXETER_H} = SOVEREIGN FIXED POINT  ✓")
+    print(f"   Coxeter h = {E8_COXETER_H} = ANCHOR FIXED POINT (30 ∈ {{4,9,25,30}})  ✓")
     print(f"   dim(E8) = {E8_DIM}  →  248 mod 37 = {E8_DIM % 37} = 26  ✓")
     print()
     print("4. Cosmological Tension Ratios")

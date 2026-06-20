@@ -1,5 +1,5 @@
 """
-Heartbeat Theorem: Universal 3-Cycle Under the 137/37 Map
+3-Cycles Under the 137/37 Map: Universal Order-3 Theorem
 
 The map  f(n) = (n × 137) mod 37  is equivalent to  f(n) = (26n) mod 37
 since 137 mod 37 = 26.
@@ -8,11 +8,11 @@ Core result:
   ord₃₇(26) = 3   i.e.  26³ ≡ 1 (mod 37)
 
 Consequence: EVERY non-zero node returns to itself in exactly 3 steps.
-The heartbeat is not a special property of node 30 — it is universal.
+The 3-cycles under f(n)=(26n)%37 are not a special property of node 30 — they are universal.
 
 The 36 non-zero residues partition into exactly 12 disjoint 3-cycles.
 Node 30 belongs to the cycle: 30 → 3 → 4 → 30
-  — this cycle contains two Sovereign Anchors (30 and 3, both DR=3).
+  — this cycle contains two anchor set {4,9,25,30} members (30 and 3, both DR=3).
 
 Proof of ord₃₇(26) = 3:
   26¹ mod 37 = 26
@@ -30,7 +30,7 @@ def f(n):
 
 
 # Verify multiplicative order
-assert f(f(f(30))) == 30, "Node 30 heartbeat failed"
+assert f(f(f(30))) == 30, "Node 30 f26_map failed"
 assert (26 ** 3) % 37 == 1, "ord37(26) != 3"
 assert (26 ** 1) % 37 != 1
 assert (26 ** 2) % 37 != 1
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     print(f"  26² mod 37 = {26**2 % 37}")
     print(f"  26³ mod 37 = {26**3 % 37}  ← returns to 1")
     print()
-    print("Node 30 heartbeat:")
+    print("Node 30 cycle under f(n)=(26n)%37:")
     n = 30
     for i in range(3):
         res = f(n)

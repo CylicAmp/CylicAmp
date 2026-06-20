@@ -78,7 +78,7 @@ for a in range(37):
     assert S37_formula(a) % 9 == a % 9, \
         f"Attractor broken: S37 mod 9 = {S37_formula(a)%9}, a mod 9 = {a%9}"
 
-# ── Key anchors: mod-37 null, mod-9 sovereign ────────────────────────────
+# ── Key anchors: mod-37 null, mod-9 anchor set {4,9,25,30} ──────────────
 
 QR37    = frozenset((x * x) % 37 for x in range(1, 37))
 CYCLE18 = [pow(3, k, 37) for k in range(1, 19)]

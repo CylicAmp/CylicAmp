@@ -1,9 +1,9 @@
-# math/theorems/sovereign_dr_matrix_audit.py
+# math/theorems/dr_matrix_9x9_audit.py
 """
-Sovereign DR Matrix — Period-24 Fibonacci/Lucas DRs — Law of 12 — Checkerboard
-================================================================================
+DR Multiplication Matrix — Period-24 Fibonacci/Lucas DRs — Law of 12 — Checkerboard
+======================================================================================
 Sections:
-  A. 9×9 Sovereign DR matrix: M[i][j] = dr(i*j) for i,j ∈ {1..9}
+  A. 9×9 DR matrix: M[i][j] = dr(i*j) for i,j ∈ {1..9}
   B. Fibonacci period-24 DR sequence (F0 adjusted: 0→DR 9)
   C. Lucas period-24 DR sequence
   D. Law of 12: multiples of 12 have DRs ∈ {3,6,9}
@@ -18,14 +18,14 @@ def dr(n: int) -> int:
     return 0 if n == 0 else 1 + (n - 1) % 9
 
 
-# ── A. 9×9 Sovereign DR matrix ───────────────────────────────────────────────
+# ── A. 9×9 DR matrix ─────────────────────────────────────────────────────────
 
-SOVEREIGN = [
+DR_MULT_MATRIX = [
     [dr(i * j) for j in range(1, 10)]
     for i in range(1, 10)
 ]
 
-SOVEREIGN_EXPECTED = [
+DR_MULT_MATRIX_EXPECTED = [
     [1, 2, 3, 4, 5, 6, 7, 8, 9],
     [2, 4, 6, 8, 1, 3, 5, 7, 9],
     [3, 6, 9, 3, 6, 9, 3, 6, 9],
@@ -104,15 +104,15 @@ def is_odd_number(n: int) -> bool:
 
 
 def verify():
-    print("Sovereign DR Matrix — Period-24 DRs — Law of 12 — Checkerboard\n")
+    print("DR Multiplication Matrix — Period-24 DRs — Law of 12 — Checkerboard\n")
 
-    # ── A. Sovereign DR matrix ────────────────────────────────────────────────
+    # ── A. 9×9 DR matrix ──────────────────────────────────────────────────────
     print("=" * 70)
-    print("A. 9×9 Sovereign DR matrix  M[i][j] = dr(i·j),  i,j ∈ {1..9}")
+    print("A. 9×9 DR matrix  M[i][j] = dr(i·j),  i,j ∈ {1..9}")
     print("=" * 70)
 
-    assert SOVEREIGN == SOVEREIGN_EXPECTED, \
-        f"Mismatch:\nComputed:\n{SOVEREIGN}\nExpected:\n{SOVEREIGN_EXPECTED}"
+    assert DR_MULT_MATRIX == DR_MULT_MATRIX_EXPECTED, \
+        f"Mismatch:\nComputed:\n{DR_MULT_MATRIX}\nExpected:\n{DR_MULT_MATRIX_EXPECTED}"
 
     print("\n  M[i][j] = dr(i·j):")
     print(f"  {'j':>3}", end="")
@@ -121,36 +121,36 @@ def verify():
     print()
     print("  " + "-" * 39)
     for i in range(1, 10):
-        row = SOVEREIGN[i - 1]
+        row = DR_MULT_MATRIX[i - 1]
         print(f"  i={i} |", end="")
         for v in row:
             print(f"{v:>4}", end="")
         print()
 
     # Row 3: all multiples of 3 → DRs cycle {3,6,9}
-    assert SOVEREIGN[2] == [3, 6, 9, 3, 6, 9, 3, 6, 9]
+    assert DR_MULT_MATRIX[2] == [3, 6, 9, 3, 6, 9, 3, 6, 9]
     # Row 6: same pattern
-    assert SOVEREIGN[5] == [6, 3, 9, 6, 3, 9, 6, 3, 9]
+    assert DR_MULT_MATRIX[5] == [6, 3, 9, 6, 3, 9, 6, 3, 9]
     # Row 9: all 9s
-    assert SOVEREIGN[8] == [9] * 9
+    assert DR_MULT_MATRIX[8] == [9] * 9
     # Column 9 (j=9): all 9s
-    assert [SOVEREIGN[i][8] for i in range(9)] == [9] * 9
+    assert [DR_MULT_MATRIX[i][8] for i in range(9)] == [9] * 9
     # Main diagonal: dr(i²) for i=1..9
-    diag = [SOVEREIGN[i][i] for i in range(9)]
+    diag = [DR_MULT_MATRIX[i][i] for i in range(9)]
     assert diag == [dr((i + 1) ** 2) for i in range(9)]
     # Matrix is symmetric: dr(i·j) = dr(j·i)
     for i in range(9):
         for j in range(9):
-            assert SOVEREIGN[i][j] == SOVEREIGN[j][i]
+            assert DR_MULT_MATRIX[i][j] == DR_MULT_MATRIX[j][i]
 
-    print(f"\n  Row 3 (multiples of 3): {SOVEREIGN[2]}  (cycle 3,6,9)  ✓")
-    print(f"  Row 9: {SOVEREIGN[8]}  (all 9)  ✓")
-    print(f"  Column 9: {[SOVEREIGN[i][8] for i in range(9)]}  (all 9)  ✓")
+    print(f"\n  Row 3 (multiples of 3): {DR_MULT_MATRIX[2]}  (cycle 3,6,9)  ✓")
+    print(f"  Row 9: {DR_MULT_MATRIX[8]}  (all 9)  ✓")
+    print(f"  Column 9: {[DR_MULT_MATRIX[i][8] for i in range(9)]}  (all 9)  ✓")
     print(f"  Diagonal: {diag}  = [dr(i²)]  ✓")
     print(f"  Symmetric (dr(i·j)=dr(j·i))  ✓")
 
     # DR=9 positions: i=9 (all), j=9 (all), and wherever i*j ≡ 0 mod 9
-    dr9_cells = [(i + 1, j + 1) for i in range(9) for j in range(9) if SOVEREIGN[i][j] == 9]
+    dr9_cells = [(i + 1, j + 1) for i in range(9) for j in range(9) if DR_MULT_MATRIX[i][j] == 9]
     # row 9 (9 cells) + col 9 (8 non-overlap) + {(3,3),(3,6),(6,3),(6,6)} = 21
     print(f"  DR=9 cells: {len(dr9_cells)}  "
           f"(row 9: 9, col 9: 8 new, (3,3)(3,6)(6,3)(6,6): 4 → 21)")

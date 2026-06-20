@@ -244,7 +244,7 @@ for g in range(2, ZHANG_BOUND - 5, 2):
 #  plus DR=3 (the only prime-DR divisible by 3, exclusive to p=3)
 #
 #  Perfect numbers: DR ∈ {6,1,1,1}
-#  8128 mod 37 = 25 — sovereign anchor in the 37-hub heartbeat cycle
+#  8128 mod 37 = 25 — anchor set {4,9,25,30} in the 37-hub, 3-cycles under f(n)=(26n)%37
 
 # Verify the root: (Z/9Z)× = PRIME_DR
 Z9_units = {n for n in range(1, 10) if __import__('math').gcd(n, 9) == 1}
@@ -277,7 +277,7 @@ for L in range(1, 6):
 
 assert TWIN_ANCHOR_DR <= all_23_drs   # {2,5,8} all appear in {2,3}-digit prime DRs
 
-# Perfect number 8128 connects to sovereign anchor
+# Perfect number 8128 connects to anchor set {4,9,25,30}
 assert 8128 % 37 == 25
 assert 25 in {(n*n) % 37 for n in range(37)}   # 25 is QR mod 37
 
@@ -377,7 +377,7 @@ if __name__ == "__main__":
     print(f"  Doubling orbit: 1→2→4→8→7→5→1 (period 6) → Mersenne DR cycle")
     print(f"  Mersenne DRs {{1,4}} ∩ twin anchor DRs {{2,5,8}} = ∅")
     print(f"  {{2,3}}-digit prime DRs contain twin anchor set {{2,5,8}}")
-    print(f"  Perfect number 8128 mod 37 = 25 (sovereign anchor in 37-hub)")
+    print(f"  Perfect number 8128 mod 37 = 25 (anchor set {{4,9,25,30}} in 37-hub)")
     print(f"  37 ≡ 1 (mod 9): transparent to DR arithmetic")
 
     print("\n── SECTION F: SYNTHESIS ──")
