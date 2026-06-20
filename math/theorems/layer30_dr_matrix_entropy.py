@@ -1,7 +1,7 @@
 """
-1/137 Framework — Layer 30: 9×9 F26 Matrix and DR Orbit Entropy
+1/137 Framework — Layer 30: 9×9 DR Multiplication Matrix and DR Orbit Entropy
 
-9×9 F26_MATRIX MATRIX
+9×9 DR MULTIPLICATION MATRIX
   Two forms:
   (A) Raw form: spine column = 11r (not DR-reduced)
   (B) DR form:  spine column = DR(11r) = DR(2r)  [since 11 ≡ 2 mod 9]
@@ -106,7 +106,7 @@ assert sorted(spine_dr) == list(range(1, 10))
 
 
 if __name__ == "__main__":
-    print("1/137 Layer 30 — 9×9 F26 Matrix + DR Orbit Entropy")
+    print("1/137 Layer 30 — 9×9 DR Multiplication Matrix + DR Orbit Entropy")
     print()
     print("Raw form (spine = 11r):")
     print(M_raw)

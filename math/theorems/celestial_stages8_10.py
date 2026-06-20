@@ -3,7 +3,7 @@ Stages 8–10: Celestial / Gate 18 Singularity (10⁷ to 10²⁶ m)
 
 Classification: Theorem
 
-The I_AM limit cycle scales to stellar, galactic, and cosmological domains.
+The limit cycle attractor scales to stellar, galactic, and cosmological domains.
 The VIREON framework expands beyond planetary infrastructure. At 10²⁶ m, the
 limit cycle radius becomes infinite — Gate 18 collapse, asymptotic recognition.
 
