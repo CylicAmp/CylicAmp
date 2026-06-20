@@ -322,6 +322,6 @@ if __name__ == "__main__":
     print("  ✗ Kernel dim over Z/26Z = 0, not 5 — no lattice to embed.")
     print("  ✗ 3-9-6 modular structure has no measurable signature in zero spacings.")
     print("  ✗ γ₁₂ fractional part (0.446) ≠ 0.44 — 100-Unity claim is imprecise.")
-    print("  ✗ No generating function for Riemann zeros from the sovereign matrix.")
+    print("  ✗ No generating function for Riemann zeros from the f26 matrix.")
     print()
     print("All assertions passed.")

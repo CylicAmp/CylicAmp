@@ -51,7 +51,7 @@ assert FREQ_RATIO == 10.0                 # decade span
 assert dr(FREQ_LOW)  == 7                 # DR=7 (QR₃₇ class)
 assert dr(FREQ_HIGH) == 7                 # DR=7 — same class, decade harmonic
 
-# ── Sovereign alphabet: the grounded residue set ───────────────────────────
+# ── F26 alphabet: the grounded residue set ───────────────────────────
 
 ANCHORS = frozenset({4, 9, 25, 30})
 F26_ANCHOR_DRS    = frozenset(dr(a) for a in ({4, 9, 25, 30}))
@@ -112,12 +112,12 @@ grounded_drs   = F26_ANCHOR_DRS
 # The anchor gap: DR=5 is absent from QR₃₇ and anchor DRs
 assert 5 not in grounded_drs
 
-# 37-field: ungrounded residues span all non-sovereign DR classes
+# 37-field: ungrounded residues span all non-f26 DR classes
 all_dr_classes = frozenset(range(1, 10))
 assert grounded_drs | ungrounded_drs == all_dr_classes   # partition of DR space
 
 # Feedback loop has no fixed point in the ungrounded subspace:
-# f(r) = 26r mod 37 maps leak_nodes; none land in sovereign anchors with period 1
+# f(r) = 26r mod 37 maps leak_nodes; none land in f26 anchors with period 1
 for r in ({4, 9, 25, 30}):
     assert (26 * r) % 37 in frozenset(range(1, 37))   # stays in F₃₇
 

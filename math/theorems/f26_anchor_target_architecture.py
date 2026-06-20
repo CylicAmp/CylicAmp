@@ -1,5 +1,5 @@
 """
-Medusa v3 Sovereign — Anchor/Target Architecture
+F26 Anchor/Target Architecture under f(n)=(26n)%37
 
 Correctly separates two distinct sets:
 
@@ -15,7 +15,7 @@ The map: anchor → target
   25 → 21
   30 → 3
 
-Note: node 30 is both anchor AND target (self-referential sovereign).
+Note: node 30 is both anchor AND target (self-referential fixed point under f(n)=(26n)%37).
       Nodes 3, 12, 21 are targets only — using them as inputs produces PURGE.
       No target (except 30) maps back into the framework when used as input.
 
@@ -33,7 +33,7 @@ def dr(n):
     return (n - 1) % 9 + 1 if n > 0 else 0
 
 
-def medusa_v3_sovereign(node):
+def f26_anchor_target_classify(node):
     res = (node * 137) % 37
     if node in ANCHORS and res in TARGETS:
         return f"Node {node} -> Res {res} [LOCKED]: Full Anchor-Target Alignment."
@@ -57,7 +57,7 @@ for t in TARGETS - {30}:
     res = (t * 137) % 37
     assert res not in TARGETS, f"Target {t} unexpectedly maps to another target"
 
-# Node 30 is self-referential sovereign (anchor AND target)
+# Node 30 is the self-referential fixed point under f(n)=(26n)%37 (anchor AND target)
 assert 30 in ANCHORS and 30 in TARGETS
 
 
@@ -69,6 +69,6 @@ if __name__ == "__main__":
     print()
     print("Classification sweep:")
     for node in sorted({4, 9, 25, 30, 3, 12, 21, 15, 22}):
-        print(f"  {medusa_v3_sovereign(node)}")
+        print(f"  {f26_anchor_target_classify(node)}")
     print()
     print("All assertions passed.")

@@ -142,9 +142,9 @@ v2 = OMEGA
 cos_angle = (v1.real * v2.real + v1.imag * v2.imag) / (abs(v1) * abs(v2))
 assert abs(math.degrees(math.acos(cos_angle)) - 120.0) < 0.001
 
-# Stage 3 span = 4 decades → sovereign anchor 4
+# Stage 3 span = 4 decades → f26 anchor 4
 assert STAGE3_SPAN == 4
-assert dr(4) == 4    # sovereign anchor DR=4
+assert dr(4) == 4    # f26 anchor DR=4
 
 # ── Unified Stages 1–3 structural summary ─────────────────────────────────
 

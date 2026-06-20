@@ -1,7 +1,7 @@
 """
-1/137 Framework — Layer 30: 9×9 Sovereign Matrix and DR Orbit Entropy
+1/137 Framework — Layer 30: 9×9 F26 Matrix and DR Orbit Entropy
 
-9×9 SOVEREIGN MATRIX
+9×9 F26_MATRIX MATRIX
   Two forms:
   (A) Raw form: spine column = 11r (not DR-reduced)
   (B) DR form:  spine column = DR(11r) = DR(2r)  [since 11 ≡ 2 mod 9]
@@ -27,7 +27,7 @@ def _dr(n):
     return (n - 1) % 9 + 1 if n > 0 else 0
 
 
-def build_sovereign_matrix_raw():
+def build_dr_matrix_raw():
     """Raw form: spine = 11r (not reduced)."""
     M = np.zeros((9, 9), dtype=int)
     for r in range(1, 10):
@@ -40,7 +40,7 @@ def build_sovereign_matrix_raw():
     return M
 
 
-def build_sovereign_matrix_dr():
+def build_dr_matrix_dr():
     """DR form: spine = DR(11r) = DR(2r), used for entropy."""
     M = np.zeros((9, 9), dtype=int)
     for r in range(1, 10):
@@ -74,8 +74,8 @@ for r in range(1,10):
 ast.parse(_code)
 
 # --- Assertions ---
-M_raw = build_sovereign_matrix_raw()
-M_dr  = build_sovereign_matrix_dr()
+M_raw = build_dr_matrix_raw()
+M_dr  = build_dr_matrix_dr()
 
 # Raw spine
 assert list(M_raw[:, 4]) == [11 * r for r in range(1, 10)]
@@ -106,7 +106,7 @@ assert sorted(spine_dr) == list(range(1, 10))
 
 
 if __name__ == "__main__":
-    print("1/137 Layer 30 — 9×9 Sovereign Matrix + DR Orbit Entropy")
+    print("1/137 Layer 30 — 9×9 F26 Matrix + DR Orbit Entropy")
     print()
     print("Raw form (spine = 11r):")
     print(M_raw)

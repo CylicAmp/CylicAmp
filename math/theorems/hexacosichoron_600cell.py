@@ -5,7 +5,7 @@ Hexacosichoron (600-Cell) — 4D Regular Polytope Vertex Generator
 The 600-cell is the 4D analog of the icosahedron.
 
 Element counts and 37-field residues:
-  120 vertices  → 120 mod 37 = 9  (TRINITY_SQUARED);  DR(120) = 3  (sovereign target)
+  120 vertices  → 120 mod 37 = 9  (TRINITY_SQUARED);  DR(120) = 3  (f26 target)
   720 edges     → 720 mod 37 = 17 (prime field element)
  1200 faces     → 1200 mod 37 = 16 (QR₃₇;  4² mod 37)
   600 cells     → 600 mod 37 = 8;  DR(600) = 6 (Tesla-6)
@@ -20,7 +20,7 @@ Framework connections:
   φ = (1+√5)/2  — golden ratio;  A* = 1/φ ≈ 0.618 at Hopf bifurcation (Stage 6)
   120 = 5! = 5 × 24   — PIVOT_PRIME × 24-coupling constant
   600 mod 37 = 8       — DR = 6, Tesla-6 carrier frequency
-  1200 mod 37 = 16     — QR₃₇ element (sovereign square 4²)
+  1200 mod 37 = 16     — QR₃₇ element (f26 square 4²)
   198-orbit residues {3,4,5,13,19,30} include 4 (dimension) and 5 (PIVOT)
 
 Classification: Theorem
@@ -126,7 +126,7 @@ assert 1200 % 37 == 16  # faces    → QR₃₇ (4² mod 37)
 
 # DR of element counts
 _dr = lambda n: (n - 1) % 9 + 1
-assert _dr(120)  == 3   # TRINITY — sovereign target
+assert _dr(120)  == 3   # TRINITY — f26 target
 assert _dr(600)  == 6   # Tesla-6
 assert _dr(720)  == 9   # 9-stabilizer
 assert _dr(1200) == 3   # TRINITY again
@@ -158,7 +158,7 @@ if __name__ == "__main__":
     print()
     print(f"  120 = 5! = 5 × 24  (PIVOT × 24-coupling)")
     print(f"  120 mod 37 = 9 = TRINITY_SQUARED")
-    print(f"  DR(120) = 3 = TRINITY (sovereign target)")
+    print(f"  DR(120) = 3 = TRINITY (f26 target)")
     print()
     print("  Coordinate values (absolute):", [round(c, 4) for c in coord_abs])
     print()

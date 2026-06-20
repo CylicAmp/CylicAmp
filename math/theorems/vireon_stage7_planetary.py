@@ -180,7 +180,7 @@ assert abs(v1 + v2 + v3) < 1e-10   # 1 + ω + ω² = 0
 def eisenstein_norm(a, b):
     return a*a - a*b + b*b
 
-# N(2+ω) = 3: sovereign target — 120°/240° branching preserved at planetary scale
+# N(2+ω) = 3: f26 target — 120°/240° branching preserved at planetary scale
 assert eisenstein_norm(2, 1) == 3
 # N(3+ω) = 7: QR₃₇ DR=7 spine — also preserved
 assert eisenstein_norm(3, 1) == 7
@@ -201,12 +201,12 @@ if __name__ == "__main__":
     print("Stage 7: Infrastructure / Planetary (10² to 10⁶ m) — VIREON Framework")
     print()
     print(f"  Scale: 1e+02 to 1e+06 m  ({int(SCALE_SPAN):.0e}× span, 4 decades)")
-    print(f"  4 decades → sovereign anchor 4 (DR={dr(4)}) ✓")
+    print(f"  4 decades → anchor set {{4,9,25,30}} element 4 (DR={dr(4)}) ✓")
     print()
     print("  (1) VIREON carrier multiples of C = 1.3824:")
-    print(f"      3C = {mult3:.3f} ≈ 4  (DR={dr(4)}, sovereign anchor) ✓")
+    print(f"      3C = {mult3:.3f} ≈ 4  (DR={dr(4)}, anchor set {{4,9,25,30}}) ✓")
     print(f"      6C = {mult6:.3f} ≈ 8  (DR={dr(8)}, bridge class)")
-    print(f"      9C = {mult9:.3f} ≈ 12 (DR={dr(12)}, sovereign target) ✓")
+    print(f"      9C = {mult9:.3f} ≈ 12 (DR={dr(12)}, DR=3 target) ✓")
     print(f"      18C = {mult18:.3f} ≈ 25 (DR={dr(25)}, QR₃₇) ✓")
     print(f"      3+6+9 = {3+6+9} = Gate 18,  LCM = {math.lcm(3,6,9)},  3×6×9 = {3*6*9},  DR(162) = {dr(162)}")
     print()
@@ -223,7 +223,7 @@ if __name__ == "__main__":
     print("  (4) Bilateral symmetry Stage 6 ↔ Stage 7:")
     print(f"      Stage 6 center exponent: {STAGE6_CENTER_EXP}")
     print(f"      Stage 7 center exponent: {STAGE7_CENTER_EXP}")
-    print(f"      Sum of centers: {sum_centers}, int = {int(sum_centers)} (sovereign target) ✓")
+    print(f"      Sum of centers: {sum_centers}, int = {int(sum_centers)} (DR=3 target) ✓")
     print(f"      Span product: 10^{SPAN_PRODUCT_EXP}, DR({SPAN_PRODUCT_EXP}) = {dr(SPAN_PRODUCT_EXP)} ∈ QR₃₇ ✓")
     print(f"      Both carry 191 ≡ 6 (mod 37): bilateral resonance ✓")
     print()

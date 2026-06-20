@@ -130,7 +130,7 @@ for label, (n, expected_r, note) in MOD37_MAP.items():
 # Critical: E8 dimension 248 ≡ 26 (26) — E8 and 137 are linked
 assert E8_DIM % 37 == 26
 
-# Critical: E8 Coxeter number h=30 = sovereign fixed point
+# Critical: E8 Coxeter number h=30 = f26 fixed point
 assert E8_COXETER_H == 30
 
 # A₅ quotient ≡ 23 = LAMED_SEAL (mod 37)

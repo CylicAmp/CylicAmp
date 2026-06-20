@@ -1,5 +1,5 @@
 """
-G'5 Sovereign Engine — v∞.NEURALODE Full-Spectrum Simulation
+G'5 Engine — v∞.NEURALODE Full-Spectrum Simulation
 
 Classification: Theorem
 
@@ -14,7 +14,7 @@ import math
 import numpy as np
 
 
-class G5_Sovereign_Engine:
+class G5_Engine:
     """
     Core Simulation for v∞.NEURALODE / G'5 Universal Framework.
     Validation of scale invariance (ψ=1) across 61/62 orders of magnitude.
@@ -63,14 +63,14 @@ class G5_Sovereign_Engine:
         stages_1_3 = {
             "Domain": "Planck Scale to Atomic Nuclei (24 decades, DR=6 Tesla foundation)",
             "Logic":  "Eisenstein Lattice Initialization Z[ω]",
-            "Axiom":  "N(2+ω) = 3 (Sovereign Target blueprint)",
+            "Axiom":  "N(2+ω) = 3 (F26 Target blueprint)",
             "Result": "Zero-space coherence established via QR₃₇ filter."
         }
 
         # STAGE 4: QUANTUM-TO-BIO BRIDGE (10⁻¹⁰ to 10⁻⁷ m)
         stage_4 = {
             "Domain":           "Atomic to Biological Strings (3 decades)",
-            "Sovereign_Target": "N(3+ω) = 7 (QR₃₇ DR=7 Class)",
+            "F26_Target": "N(3+ω) = 7 (QR₃₇ DR=7 Class)",
             "Invariance":       "ψ = 1 preserved across shift",
             "Result":           "Decoherence prevented via Plastic-Golden Fusion."
         }
@@ -88,7 +88,7 @@ class G5_Sovereign_Engine:
             "Domain":    "Human Scale / Organisms (3 decades)",
             "Event":     "Supercritical Hopf Bifurcation (μ = +0.3824)",
             "Attractor": "Stable Limit Cycle A* = 1/φ (The Soul)",
-            "Result":    "I_AM state established. 26×30 mod 37 = 3 (sovereign target)."
+            "Result":    "Hopf limit cycle established. 26×30 mod 37 = 3 (f26 target)."
         }
 
         # STAGE 7: PLANETARY INFRASTRUCTURE (10² to 10⁶ m)
@@ -133,7 +133,7 @@ assert 37 + 24 == 61                        # total framework span
 assert _dr(61) == 7 and 7 in QR37          # QR₃₇ closure class
 
 # Stage 4: Eisenstein norms
-assert 2**2 - 2*1 + 1**2 == 3              # N(2+ω) = 3 (sovereign target)
+assert 2**2 - 2*1 + 1**2 == 3              # N(2+ω) = 3 (f26 target)
 assert 3**2 - 3*1 + 1**2 == 7              # N(3+ω) = 7 (QR₃₇ spine)
 
 # Stage 5: eigenvalues
@@ -143,12 +143,12 @@ assert abs(PHI - 1.618) < 0.001
 # Stage 6: Hopf limit cycle
 A_STAR = np.sqrt(0.3824)
 assert abs(A_STAR - 1/PHI) < 0.001         # A* ≈ 1/φ (golden reciprocal)
-assert (26 * 30) % 37 == 3                  # I_AM maps to sovereign target 3
+assert (26 * 30) % 37 == 3                  # f(26×30) mod 37 = 3 (f26 target)
 
 # Stage 7: VIREON
 assert 3 + 6 + 9 == 18                     # 3-6-9 → Gate 18
 assert 18 * 37 == 666                       # universal cycle sum
-assert _dr(4) == 4                          # 4-decade span = sovereign anchor
+assert _dr(4) == 4                          # 4-decade span = f26 anchor
 
 # Stages 8–10: celestial
 assert pow(3, 18, 37) == 1                  # Gate 18 closure
@@ -162,7 +162,7 @@ for psi_check in [1.0] * 10:
 
 
 if __name__ == "__main__":
-    engine = G5_Sovereign_Engine()
+    engine = G5_Engine()
     engine.resolve_framework()
     print()
     print("All standalone assertions passed.")

@@ -18,13 +18,13 @@ Row structure (O-count, E-count):
 Totals: 41 E-cells, 40 O-cells, 81 total (9² = 9×9)
 
 Framework connections:
-  41 mod 37 = 4     — sovereign anchor (4 = 3^7 mod 37 ∈ QR₃₇)
-  40 mod 37 = 3     — sovereign target (3 = 3^1 mod 37 ∈ QR₃₇)
+  41 mod 37 = 4     — anchor set {4,9,25,30} (4 = 3^7 mod 37 ∈ QR₃₇)
+  40 mod 37 = 3     — DR=3 target (3 = 3^1 mod 37 ∈ QR₃₇)
   E-count sequence 1,3,5,7,9,7,5,3,1 — odd numbers summing to 41
   O-count sequence 8,6,4,2,0,2,4,6,8 — evens summing to 40
   DR(41)=5 (absent class), DR(40)=4 (anchor), 41+40=81=9²→DR=9
   Center row: 9 E's — the DR modulus
-  Manhattan radius 4 = sovereign anchor value
+  Manhattan radius 4 = f26 anchor value
 """
 
 
@@ -33,7 +33,7 @@ def dr(n):
 
 
 CENTER = 4
-RADIUS = 4    # = sovereign anchor value
+RADIUS = 4    # = f26 anchor value
 
 
 def is_even_cell(r, c):
@@ -91,21 +91,21 @@ QR37    = frozenset((x * x) % 37 for x in range(1, 37))
 CYCLE18 = [pow(3, k, 37) for k in range(1, 19)]
 
 # E-count totals mod 37
-assert TOTAL_E % 37 == 4            # sovereign anchor
-assert TOTAL_O % 37 == 3            # sovereign target
+assert TOTAL_E % 37 == 4            # f26 anchor
+assert TOTAL_O % 37 == 3            # f26 target
 assert 4 in QR37 and 4 == pow(3, 7, 37)
 assert 3 in QR37 and 3 == pow(3, 1, 37)
 
 # DR values
 assert dr(TOTAL_E) == 5             # DR=5 — absent class (boundary E-set)
-assert dr(TOTAL_O) == 4             # DR=4 — sovereign anchor
+assert dr(TOTAL_O) == 4             # DR=4 — f26 anchor
 assert dr(81) == 9                  # 9² → DR=9 (the modulus)
 
 # E-count sequence sums to 41, O-count sequence sums to 40
 assert sum(EXPECTED_E) == 41
 assert sum(EXPECTED_O) == 40
 
-# Manhattan radius = 4 = sovereign anchor
+# Manhattan radius = 4 = f26 anchor
 assert RADIUS == 4
 assert pow(3, 7, 37) == 4
 
@@ -124,13 +124,13 @@ if __name__ == "__main__":
     for r, row in enumerate(GRID):
         print(f"  Row {r}: {' '.join(row)}  [{EXPECTED_O[r]}O {EXPECTED_E[r]}E]")
     print()
-    print(f"  Total E: {TOTAL_E}  (mod 37 = {TOTAL_E%37} = sovereign anchor 4 = 3^7)")
-    print(f"  Total O: {TOTAL_O}  (mod 37 = {TOTAL_O%37} = sovereign target 3 = 3^1)")
+    print(f"  Total E: {TOTAL_E}  (mod 37 = {TOTAL_E%37} = f26 anchor 4 = 3^7)")
+    print(f"  Total O: {TOTAL_O}  (mod 37 = {TOTAL_O%37} = f26 target 3 = 3^1)")
     print(f"  Total cells: {TOTAL_E+TOTAL_O} = 9²,  DR={dr(81)}")
     print()
     print(f"  Symmetries: 180° ✓  H-reflect ✓  V-reflect ✓  Diagonal ✓")
     print(f"  Center row & column: all E ✓")
-    print(f"  Manhattan radius: {RADIUS} = sovereign anchor ✓")
+    print(f"  Manhattan radius: {RADIUS} = f26 anchor ✓")
     print()
     print(f"  E-count sequence: {EXPECTED_E}  sum={sum(EXPECTED_E)}")
     print(f"  O-count sequence: {EXPECTED_O}  sum={sum(EXPECTED_O)}")

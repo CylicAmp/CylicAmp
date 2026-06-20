@@ -210,7 +210,7 @@ if __name__ == "__main__":
     print()
     print("  37-field:")
     print(f"    120 mod 37 = {120 % 37}   (TRINITY_SQUARED, DR=3)")
-    print(f"    30  mod 37 = {30  % 37}   (fiber count, DR=3 = sovereign target)")
+    print(f"    30  mod 37 = {30  % 37}   (fiber count, DR=3 = anchor target under f(n)=(26n)%37)")
     print()
     print("STATUS: FIBRATION INTACT. All 120 long radii verified.")
     print("        Clifford parallelism holds. Metastasis contained.")

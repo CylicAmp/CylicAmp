@@ -18,7 +18,7 @@ Application — 333 = 9 × 37, gcd(9,37) = 1:
 Framework connections:
   333 = 9 × 37  — joins both core moduli of the 1/137 framework
   456 mod 9  = 6  (DR=6, coupling signature, matches all k-DR values)
-  456 mod 37 = 456 - 12×37 = 456 - 444 = 12  (sovereign target)
+  456 mod 37 = 456 - 12×37 = 456 - 444 = 12  (f26 target)
   456 mod 24 = 0  (exact multiple of Lucas/Fib period)
   456 mod 76 = 0  (exact multiple of π(37))
   gcd(24, 76) = 4  (the shared factor binding the two periods)
@@ -82,7 +82,7 @@ assert pi333 == 456                   # direct computation confirms
 
 # Framework connections
 assert 456 % 9  == 6    # DR=6, coupling signature
-assert 456 % 37 == 12   # sovereign target {3,12,21,30}
+assert 456 % 37 == 12   # DR=3 target set {3,12,21,30}
 assert 456 % 24 == 0    # exact multiple of Layer 58 period
 assert 456 % 76 == 0    # exact multiple of pi(37)
 
@@ -110,7 +110,7 @@ if __name__ == "__main__":
     print()
     print("Framework connections:")
     print(f"  456 mod 9  = {456%9}  (DR=6, coupling signature)")
-    print(f"  456 mod 37 = {456%37}  (sovereign target)")
+    print(f"  456 mod 37 = {456%37}  (DR=3 target)")
     print(f"  456 mod 24 = {456%24}  (exact multiple of pi(9))")
     print(f"  456 mod 76 = {456%76}  (exact multiple of pi(37))")
     print(f"  DR(456)    = {dr(456)}  (unified k-coupling)")

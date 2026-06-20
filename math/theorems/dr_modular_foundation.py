@@ -29,7 +29,7 @@ COROLLARY (2n−1 rule):
 
 This proof is the axiomatic foundation for:
   - the DR algebra (dr_algebra.py)
-  - the 81-pair grid and 9×9 sovereign matrix
+  - the 81-pair grid and 9×9 f26 matrix
   - the 2n−1 skip rule
   - all DR-based claims throughout the framework
 """
@@ -166,23 +166,23 @@ for _ in range(9):
     val = dr(2 * val - 1)
 assert val == start    # returns to start after 9 steps
 
-# ── Connection to sovereign framework ─────────────────────────────────────
+# ── Connection to f26 framework ─────────────────────────────────────
 
-# Sovereign anchors {4,9,25,30}: all have DR mod 3 = 1,0,7,3 mod 3 = 1,0,1,0
+# F26 anchors {4,9,25,30}: all have DR mod 3 = 1,0,7,3 mod 3 = 1,0,1,0
 # i.e. they split evenly between n≡0(mod 3) and n≡1(mod 3)
 {4, 9, 25, 30}
 anchor_mod3 = {a: a % 3 for a in ({4, 9, 25, 30})}
-assert set(anchor_mod3.values()) == {0, 1}   # no n≡2(mod 3) in sovereign anchors
+assert set(anchor_mod3.values()) == {0, 1}   # no n≡2(mod 3) in f26 anchors
 
-# DR=3 classes (sovereign targets {3,12,21,30}):
-SOVEREIGN_TARGETS = {3, 12, 21, 30}
-assert all(t % 3 == 0 for t in SOVEREIGN_TARGETS)   # all ≡ 0 (mod 3)
-assert all(dr(t) == 3 for t in SOVEREIGN_TARGETS)   # all have DR=3
+# DR=3 classes (f26 targets {3,12,21,30}):
+F26_TARGETS = {3, 12, 21, 30}
+assert all(t % 3 == 0 for t in F26_TARGETS)   # all ≡ 0 (mod 3)
+assert all(dr(t) == 3 for t in F26_TARGETS)   # all have DR=3
 
-# mod-3 projection of the sovereign targets (not the 18-cycle elements):
-# Sovereign targets {3,12,21,30}: all ≡ 0 (mod 3) — this is exact
-assert all(t % 3 == 0 for t in SOVEREIGN_TARGETS)
-assert all(dr(t) == 3 for t in SOVEREIGN_TARGETS)
+# mod-3 projection of the f26 targets (not the 18-cycle elements):
+# F26 targets {3,12,21,30}: all ≡ 0 (mod 3) — this is exact
+assert all(t % 3 == 0 for t in F26_TARGETS)
+assert all(dr(t) == 3 for t in F26_TARGETS)
 
 QR37 = frozenset((x * x) % 37 for x in range(1, 37))
 # QR₃₇ elements are residues mod 37, not integers; mod-3 distribution is mixed
@@ -236,9 +236,9 @@ if __name__ == "__main__":
     print(f"  Each step = +2 (mod 9) ✓")
     print(f"  Period = 9: returns to start after 9 applications ✓")
     print()
-    print("  Sovereign connections:")
+    print("  F26 connections:")
     print(f"  Anchors mod 3: {anchor_mod3} (split {{0,1}}, no 2-class) ✓")
-    print(f"  All sovereign targets ≡ 0 (mod 3) ✓")
+    print(f"  All f26 targets ≡ 0 (mod 3) ✓")
     print(f"  QR₃₇ mod-3 distribution: {qr_mod3_dist} (class-2: {{11,26}}=3^15,26) ✓")
     print(f"  666 ≡ 0 (mod 9), dr(666)={dr(666)} ✓")
     print(f"  26=26: 26 mod 9={26%9}=dr(26)={dr(26)} ✓")

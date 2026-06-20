@@ -5,14 +5,14 @@ Classification: Theorem
 
 Every pair (a, b) with a+b=24 has DR(a)+DR(b) reducing to 6 — the coupling
 signature. 24 is the unique product 2³×3 = 8×3, linking the cube of the
-minimal primitive root (2) to the sovereign target (3). Its mirror pair
+minimal primitive root (2) to the f26 target (3). Its mirror pair
 (22,2) and (23,1) demonstrate the compensation principle.
 
 Verified claims:
   DR(222) = DR(123) = 6                   (both digit sums = 6)
   22+2 = 23+1 = 24                        (compensation: +1 base, -1 addend)
   DR(24) = 6                              (coupling signature)
-  24 = 2³×3 = 2×12 = 2×(3^8 mod 37)     (primitive root × sovereign target)
+  24 = 2³×3 = 2×12 = 2×(3^8 mod 37)     (primitive root × f26 target)
   All 23 pairs (a, 24-a): DR(a)+DR(24-a) → 6   (universal coupling lock)
   22 = 2×11 = 2×(3^15 mod 37)            (both factors in QR₃₇)
   23 is prime, DR(23)=5                   (absent class — the gap)
@@ -54,7 +54,7 @@ assert dr(24) == 6
 
 assert 24 == 2**3 * 3
 assert 24 == 2 * 12
-assert pow(3, 8, 37) == 12    # 12 = sovereign target at cycle position 8
+assert pow(3, 8, 37) == 12    # 12 = f26 target at cycle position 8
 assert 12 in QR37
 
 # ── Universal coupling lock: every pair (a, 24-a) has DR sum → 6 ──────────
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     print(f"  DR(222) = {dr(222)},  DR(123) = {dr(123)}  (both = 6 ✓)")
     print(f"  22+2 = {22+2},  23+1 = {23+1}  (compensation ✓)")
     print(f"  DR(24) = {dr(24)}  (coupling signature)")
-    print(f"  24 = 2³×3 = 2×12,  12 = 3^8 mod 37 (sovereign target) ✓")
+    print(f"  24 = 2³×3 = 2×12,  12 = 3^8 mod 37 (f26 target) ✓")
     print()
     print("  All pairs (a, 24-a) — DR coupling lock:")
     for a in range(1, 13):

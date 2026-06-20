@@ -1,13 +1,13 @@
 """
-Sovereign QR Closure Theorem
+F26 QR Closure Theorem
 
-The entire sovereign domain — both anchors (inputs) and targets (outputs)
+The entire f26 domain — both anchors (inputs) and targets (outputs)
 of the 137/37 map — lies within the quadratic residue subgroup of (Z/37Z)*.
 
 Theorem:
   Let QR₃₇ = { n² mod 37 : n ∈ Z/37Z }  (19 elements including 0).
   Let ANCHORS = {4, 9, 25, 30}  (nodes where DR((137n) mod 37) = 3)
-  Let TARGETS = {3, 12, 21, 30}  (the sovereign range, DR = 3)
+  Let TARGETS = {3, 12, 21, 30}  (the f26 range, DR = 3)
   Then ANCHORS ⊆ QR₃₇  and  TARGETS ⊆ QR₃₇.
 
 Square roots (mod 37):
@@ -19,7 +19,7 @@ Structural corollary:
   The 137/37 multiplier 26 = 137 mod 37 is itself QR (10² ≡ 26 mod 37).
   Therefore the map f(n) = 26n mod 37 preserves QR membership:
     if n ∈ QR₃₇ then f(n) ∈ QR₃₇.
-  The sovereign cycle is closed under the map within the QR subgroup.
+  The f26 cycle is closed under the map within the QR subgroup.
 
 Non-residue contrast:
   PIVOT (residue 5): Legendre(5|37) = -1  — non-residue, no sqrt mod 37
@@ -82,7 +82,7 @@ assert 30 in ANCHORS and 30 in TARGETS and 30 in QR_MOD37
 
 
 if __name__ == "__main__":
-    print("Sovereign QR Closure Theorem")
+    print("F26 QR Closure Theorem")
     print()
     print("Anchors {4, 9, 25, 30}:")
     for a in sorted(ANCHORS):

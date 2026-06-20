@@ -154,10 +154,10 @@ assert dr(26) == 8
 # Quadratic residues mod 37
 QR37 = frozenset((n * n) % 37 for n in range(37))
 {4, 9, 25, 30}
-SOVEREIGN_TARGETS = {3, 12, 21, 30}
+F26_TARGETS = {3, 12, 21, 30}
 assert ({4, 9, 25, 30}) <= QR37
-assert all(t % 3 == 0 for t in SOVEREIGN_TARGETS)
-assert all(dr(t) == 3 for t in SOVEREIGN_TARGETS)
+assert all(t % 3 == 0 for t in F26_TARGETS)
+assert all(dr(t) == 3 for t in F26_TARGETS)
 
 # 666 cascade: 666→18→9
 assert 666 % 9 == 0 and dr(666) == 9
@@ -189,11 +189,11 @@ assert 7 + 1 == 2**3
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# SECTION 5: HEARTBEAT 3-CYCLE (137 mod 37 = 26, ord₃₇(26) = 3)
+# SECTION 5: f26_map 3-CYCLE (137 mod 37 = 26, ord₃₇(26) = 3)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# Heartbeat map: f(n) = (137 × n) mod 37 = (26n) mod 37
-def heartbeat(n):
+# f26_map: f(n) = (137 × n) mod 37 = (26n) mod 37
+def f26_map(n):
     return (26 * n) % 37
 
 # ord₃₇(26) = 3
@@ -204,27 +204,27 @@ assert pow(26, 3, 37) == 1
 
 # Every non-zero element returns in exactly 3 steps
 for n in range(1, 37):
-    assert heartbeat(heartbeat(heartbeat(n))) == n
+    assert f26_map(f26_map(f26_map(n))) == n
 
 # Exactly 12 disjoint 3-cycles partition {1..36}
 seen = set()
 cycles = []
 for start in range(1, 37):
     if start not in seen:
-        cycle = [start, heartbeat(start), heartbeat(heartbeat(start))]
+        cycle = [start, f26_map(start), f26_map(f26_map(start))]
         seen.update(cycle)
         cycles.append(cycle)
 assert len(cycles) == 12
 
-# Sovereign anchor cycle: 30 → 3 → 4 → 30
-assert heartbeat(30) == 3
-assert heartbeat(3) == 4
-assert heartbeat(4) == 30
+# f26 anchor cycle ( 30 → 3 → 4 → 30
+assert f26_map(30) == 3
+assert f26_map(3) == 4
+assert f26_map(4) == 30
 
 # 26 cycle: 26 → 10 → 1 → 26 (includes 1)
-assert heartbeat(26) == 10
-assert heartbeat(10) == 1
-assert heartbeat(1) == 26
+assert f26_map(26) == 10
+assert f26_map(10) == 1
+assert f26_map(1) == 26
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -256,7 +256,7 @@ assert  6 % 37 not in QR37   # 6 is NOT QR — outlier in both DR and QR
 assert 28 % 37 in QR37
 assert 496 % 37 not in QR37
 assert 8128 % 37 in QR37
-assert 8128 % 37 == 25        # 25 is sovereign anchor ✓
+assert 8128 % 37 == 25        # 25 is f26 anchor ✓
 
 # Mersenne prime DR and QR
 assert dr(3) == 3 and  3 % 37 in QR37
@@ -648,7 +648,7 @@ assert isprime(eisenstein_norm(7, 3))  # 37 is prime
 CONSTANTS = {
     "137 mod 37":          137 % 37,          # 26 = 26
     "ord_37(10)":          3,                  # 10³≡1 mod 37; explains 111=3×37
-    "ord_37(26)":          3,                  # heartbeat 3-cycle
+    "ord_37(26)":          3,                  # f26_map 3-cycle
     "ord_37(3)":           36,                 # 3 is primitive root mod 37
     "111 = 3×37":          True,
     "666 = 18×37":         True,
@@ -656,7 +656,7 @@ CONSTANTS = {
     "DR(111)":             dr(111),            # 3
     "DR(666)":             dr(666),            # 9
     "DR(37)":              dr(37),             # 1
-    "8128 mod 37":         8128 % 37,          # 25 — sovereign anchor
+    "8128 mod 37":         8128 % 37,          # 25 — f26 anchor
     "N_palin mod 37":      N_PALIN % 37,       # 32 = 37−5
     "twin DR pairs":       sorted(VALID_DR),
     "all-same labels":     [zc_label(n) for n in [4, 8, 12]],
@@ -668,8 +668,8 @@ CONSTANTS = {
     "lucas chain":         LUCAS_CHAIN,
     "lucas chain DR":      LUCAS_DR,
     "perfect DR":          [dr(n) for n in PERFECT],
-    "sovereign anchors":   sorted(({4, 9, 25, 30})),
-    "sovereign targets":   sorted(SOVEREIGN_TARGETS),
+    "f26 anchors":   sorted(({4, 9, 25, 30})),
+    "f26 targets":   sorted(F26_TARGETS),
 }
 
 assert CONSTANTS["137 mod 37"]  == 26

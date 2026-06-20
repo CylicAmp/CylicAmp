@@ -33,10 +33,10 @@ Circulant mass matrix (Delta(27)-symmetric ansatz):
   Eigenvalues: λ_k = a + ω^k·b + ω^(2k)·c  for k=0,1,2
   Diagonalized exactly by F_3.
 
-Sovereign connection:
-  ω = e^(2πi/3) — the cube root of unity; 3 is the sovereign target
-  |Delta(27)| = 27 = 3³  (cube of the sovereign prime)
-  The 3-cycle x corresponds to 3-fold sovereign target structure
+F26 connection:
+  ω = e^(2πi/3) — the cube root of unity; 3 is the f26 target
+  |Delta(27)| = 27 = 3³  (cube of the f26 prime)
+  The 3-cycle x corresponds to 3-fold f26 target structure
 """
 
 import numpy as np
@@ -116,13 +116,13 @@ expected_evals = [a + b * OMEGA**k + c * OMEGA**(2*k) for k in [0, 2, 1]]
 actual_evals   = np.diag(D)
 assert allclose(actual_evals, expected_evals), "Eigenvalue formula mismatch"
 
-# ── Sovereign connection ───────────────────────────────────────────────────
+# ── F26 connection ───────────────────────────────────────────────────
 
 def dr(n):
     return (n - 1) % 9 + 1 if n > 0 else 0
 
 assert dr(27) == 9     # 27 = 3³, DR=9 (the DR modulus)
-assert dr(3)  == 3     # sovereign target
+assert dr(3)  == 3     # f26 target
 assert 27 == 3**3      # |Delta(27)| = 3³
 
 
@@ -154,6 +154,6 @@ if __name__ == "__main__":
     print(f"  F_3 diagonalizes M_circ exactly ✓")
     print()
     print(f"  |Delta(27)| = 27 = 3³,  DR(27) = {dr(27)} (DR modulus)")
-    print(f"  Sovereign target 3 generates the group order ✓")
+    print(f"  F26 target 3 generates the group order ✓")
     print()
     print("All assertions passed.")

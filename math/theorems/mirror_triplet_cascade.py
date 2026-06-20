@@ -1,5 +1,5 @@
 """
-Mirror Triplet Arithmetic — Sovereign DR Cascade
+Mirror Triplet Arithmetic — DR Cascade under f(n)=(26n)%37
 
 Classification: Theorem
 
@@ -27,7 +27,7 @@ Repunit 111,111,111 — the "31313" structure:
   "31313" encodes: 3 ones, 1 (identity separator), 3 ones, 1, 3 ones
   Digit sum = 9 (three groups of 3 = 3×3 = 9)
   111,111,111 = 9  × 12,345,679   (DR=9 factor pair; note: digit 8 is absent)
-  111,111,111 = 37 × 3,003,003    (divisible by sovereign modulus 37)
+  111,111,111 = 37 × 3,003,003    (divisible by f26 modulus 37)
   111,111,111 = 111 × 1,001,001 = 3×37 × 3×333,667
 
 DR-additive triples (a + b = DR(a+b)):
@@ -35,7 +35,7 @@ DR-additive triples (a + b = DR(a+b)):
   (3, 4, 7)  →  3+4=7           (exact)
   (7, 8, 6)  →  DR(7+8)=DR(15)=6  (DR reduction)
   (2, 5, 7)  →  2+5=7           (exact)
-  Closing identity: 3×3 = 9  (sovereign target squared = DR modulus)
+  Closing identity: 3×3 = 9  (f26 target squared = DR modulus)
 
 Complementary pair: 4+5=9 = DR modulus  (4 and 5 are DR-complements to 9)
 """
@@ -73,7 +73,7 @@ assert all(diff == 666 for diff in diffs), f"Step ≠ 666: {diffs}"
 
 STEP = 666
 assert STEP == 6 * 111
-assert STEP == 18 * 37    # sovereign modulus 37 factor
+assert STEP == 18 * 37    # DR modulus 37 factor
 
 # ── DR cascade: 666 → 18 → 9 ──────────────────────────────────────────────
 
@@ -98,7 +98,7 @@ assert sum(int(ch) for ch in str(R9)) == 9    # digit sum = 9
 # Divisibility
 assert R9 % 9 == 0
 assert R9 // 9 == 12_345_679    # note: digit 8 is absent in quotient
-assert R9 % 37 == 0             # sovereign modulus divides the repunit
+assert R9 % 37 == 0             # DR modulus 37 divides the repunit
 assert R9 // 37 == 3_003_003
 
 # 111 = 3×37 is the building block
@@ -126,12 +126,12 @@ for a, b, c in DR_TRIPLES:
 
 # ── Closing identity ───────────────────────────────────────────────────────
 
-assert 3 * 3 == 9        # sovereign target squared = DR modulus
+assert 3 * 3 == 9        # DR=3 target squared = DR modulus
 assert 4 + 5 == 9        # complementary pair summing to 9
 
 
 if __name__ == "__main__":
-    print("Mirror Triplet Arithmetic — Sovereign DR Cascade")
+    print("Mirror Triplet Arithmetic — DR Cascade under f(n)=(26n)%37")
     print()
     print("Mirror sums (abc + cba = 2b × 111):")
     for d, expected in TRIPLETS:
@@ -146,7 +146,7 @@ if __name__ == "__main__":
     print(f"  Three-block [111][111][111]  →  '31313' structure")
     print(f"  Digit sum = 9 = 3×3  (three groups of three 1s)")
     print(f"  111,111,111 = 9 × {R9//9}   (digit 8 absent in quotient)")
-    print(f"  111,111,111 = 37 × {R9//37}  (sovereign modulus divides repunit)")
+    print(f"  111,111,111 = 37 × {R9//37}  (DR modulus 37 divides repunit)")
     print(f"  111 = 3 × 37  (building block)")
     print()
     print("DR-additive triples  (a + b →[DR]→ c):")
@@ -155,6 +155,6 @@ if __name__ == "__main__":
         dr_note = f"DR({raw})={dr(raw)}" if raw > 9 else f"{raw}"
         print(f"  {a} + {b} = {dr_note} = {c}")
     print()
-    print(f"Closing identities:  3×3 = {3*3},  4+5 = {4+5}")
+    print(f"Closing identities:  3×3 = {3*3} (DR=3 target squared),  4+5 = {4+5}")
     print()
     print("All assertions passed.")
