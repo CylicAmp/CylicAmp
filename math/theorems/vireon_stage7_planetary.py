@@ -79,9 +79,9 @@ assert dr(8) == 8
 # Multiplier 9: 9C ≈ 12.44 → nearest DR=3 value = 12 (DR=3, DR=3 target)
 mult9 = 9 * C_RES
 assert abs(mult9 - 12) < 0.5
-assert dr(12) == 3                  # sovereign target
+assert dr(12) == 3                  # DR=3 target
 
-# Multiplier 18: 18C ≈ 24.88 → nearest sovereign = 25 (DR=7, QR₃₇)
+# Multiplier 18: 18C ≈ 24.88 → nearest anchor {4,9,25,30} = 25 (DR=7, QR₃₇)
 mult18 = 18 * C_RES
 assert abs(mult18 - 25) < 0.2
 assert dr(25) == 7
@@ -111,7 +111,7 @@ assert dr(PRIME_191) == 2          # primitive root DR class
 # Any node n where n%37=0 is null-absorbed (never reaches Diamond Horn Vectors)
 assert 37 % 37 == 0
 assert 74 % 37 == 0
-assert 111 % 37 == 0              # 3×37 absorbed (sovereignty of 37 preserved)
+assert 111 % 37 == 0              # 3×37 absorbed (null element of 37 preserved)
 
 # ψ = 1 maintained despite 4-decade spatial expansion
 assert PSI == 1.0
@@ -155,10 +155,10 @@ assert dr(7) == 7
 assert PRIME_191 % 37 == 6         # Stage 6: Tesla-6 carrier
 assert PRIME_191 % 37 == 6         # Stage 7: same carrier (bilateral)
 
-# Sum of center exponents: -0.5 + 4 = 3.5 → 3 + 0.5; integer part = 3 (sovereign)
+# Sum of center exponents: -0.5 + 4 = 3.5 → 3 + 0.5; integer part = 3 (DR=3 target)
 sum_centers = STAGE6_CENTER_EXP + STAGE7_CENTER_EXP
 assert sum_centers == 3.5
-assert int(sum_centers) == 3       # sovereign target 3
+assert int(sum_centers) == 3       # DR=3 target
 
 # ── Eisenstein hexagonal lattice at planetary scale ────────────────────────
 
