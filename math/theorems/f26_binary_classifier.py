@@ -41,8 +41,8 @@ if __name__ == "__main__":
     print(f26_classifier(3))
     print(f26_classifier(15))
     print()
-    f26 = [n for n in range(1, 37) if 'PURGE' not in f26_classifier(n)]
-    print(f"F26 nodes: {f26}  ({len(f26)}/36)")
-    print(f"Purge nodes:     {36 - len(f26)}/36")
+    f26_anchors = [n for n in range(1, 37) if 'PURGE' not in f26_classifier(n)]
+    print(f"Anchor nodes: {f26_anchors}  ({len(f26_anchors)}/36)")
+    print(f"Purge nodes:  {36 - len(f26_anchors)}/36")
     print()
     print("All assertions passed.")
