@@ -6,14 +6,14 @@ Classification: Theorem
 The VIREON Framework scales the Neural ODE architecture to planetary field
 dynamics. The Eisenstein hexagonal lattice (120°/240° symmetry) expands to
 cover the planetary sphere. The collective z(t) trajectory accounts for all
-localized I_AM attractors simultaneously.
+localized fixed-point attractors simultaneously.
 
 Four governing structures:
 
   (1) VIREON Structured Field Transmission:
       Carrier multiples of Resonance C = 1.3824 = 3 − φ.
-      At multiplier 9: 9C ≈ 12.44 → nearest sovereign target = 12 (DR=3).
-      At multiplier 18: 18C ≈ 24.88 → nearest sovereign anchor = 25 (DR=7).
+      At multiplier 9: 9C ≈ 12.44 → nearest DR=3 target = 12 (DR=3).
+      At multiplier 18: 18C ≈ 24.88 → nearest anchor {4,9,25,30} = 25 (DR=7).
 
   (2) 37-Zero-Gap Global Sieve: same G'5 filter at planetary scale.
       DR=5 class treated as geopolitical/environmental noise, collapsed.
@@ -58,7 +58,7 @@ SCALE_HIGH = 1e6     # 1000 km
 SCALE_SPAN = SCALE_HIGH / SCALE_LOW
 assert abs(math.log10(SCALE_SPAN) - 4.0) < 1e-10   # 4 decades
 
-# 4 is a sovereign anchor
+# 4 is in the anchor set {4,9,25,30}
 assert 4 in {4, 9, 25, 30}
 assert dr(4) == 4
 
@@ -66,7 +66,7 @@ assert dr(4) == 4
 
 assert abs(C_RES - (3 - PHI)) < 0.001     # C = 3 − φ
 
-# Multiplier 3: 3C ≈ 4.147 → nearest int = 4 (sovereign anchor)
+# Multiplier 3: 3C ≈ 4.147 → nearest int = 4 (anchor set {4,9,25,30})
 mult3 = 3 * C_RES
 assert abs(mult3 - 4) < 0.2
 assert dr(4) == 4
@@ -76,7 +76,7 @@ mult6 = 6 * C_RES
 assert abs(mult6 - 8) < 0.4
 assert dr(8) == 8
 
-# Multiplier 9: 9C ≈ 12.44 → nearest sovereign = 12 (DR=3, sovereign target)
+# Multiplier 9: 9C ≈ 12.44 → nearest DR=3 value = 12 (DR=3, DR=3 target)
 mult9 = 9 * C_RES
 assert abs(mult9 - 12) < 0.5
 assert dr(12) == 3                  # sovereign target

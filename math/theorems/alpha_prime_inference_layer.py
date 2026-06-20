@@ -1,9 +1,9 @@
 """
-AlphaPrimeInferenceLayer — Sovereign Gate via Prime-Alpha Basis
+AlphaPrimeInferenceLayer — Prime-Alpha Basis Gate
 
 Classification: Hypothesis (AI-theoretic)
 
-The Sovereign Kernel K ∈ R^d is populated with the first d primes
+The prime-alpha kernel K ∈ R^d is populated with the first d primes
 normalized by the inverse fine-structure constant α^{-1} ≈ 137.036.
 
 Gate mechanism:
@@ -36,7 +36,7 @@ import torch.nn as nn
 
 class AlphaPrimeInferenceLayer(nn.Module):
     """
-    Sovereign Gate: gates any input tensor by the alignment of a
+    Prime-Alpha Basis Gate: gates any input tensor by the alignment of a
     refusal_vector against a fixed prime-alpha basis kernel.
     """
 
@@ -50,7 +50,7 @@ class AlphaPrimeInferenceLayer(nn.Module):
         primes = self._generate_prime_basis(d_model)
         kernel_values = torch.tensor(primes, dtype=torch.float32) / self.ALPHA_INV
         # Shape (1, d_model) for broadcast-compatible matmul
-        self.register_buffer('sovereign_kernel', kernel_values.unsqueeze(0))
+        self.register_buffer('f26_kernel', kernel_values.unsqueeze(0))
 
     # ── Internal helpers ───────────────────────────────────────────────────
 
@@ -67,30 +67,30 @@ class AlphaPrimeInferenceLayer(nn.Module):
     def _recompute_kernel(self) -> torch.Tensor:
         """Deterministically rebuilds the expected kernel for integrity check."""
         primes = self._generate_prime_basis(self.d_model)
-        return torch.tensor(primes, dtype=torch.float32).to(self.sovereign_kernel.device) \
+        return torch.tensor(primes, dtype=torch.float32).to(self.f26_kernel.device) \
                / self.ALPHA_INV
 
     # ── Public interface ───────────────────────────────────────────────────
 
     def verify_integrity(self) -> bool:
         """
-        Verifies the Sovereign Kernel by recomputation.
+        Verifies the prime-alpha kernel by recomputation.
         Robust to dtype and device changes (unlike byte-hashing).
         """
         expected = self._recompute_kernel()
-        return torch.allclose(self.sovereign_kernel.squeeze(0), expected)
+        return torch.allclose(self.f26_kernel.squeeze(0), expected)
 
     def gate_scalar(self, refusal_vector: torch.Tensor) -> torch.Tensor:
         """
         Computes the scalar gate G = σ(r · K^T).
         Returns shape (B, 1).
         """
-        # refusal_vector: (B, D), sovereign_kernel.t(): (D, 1) → result (B, 1)
-        return torch.sigmoid(torch.matmul(refusal_vector, self.sovereign_kernel.t()))
+        # refusal_vector: (B, D), f26_kernel.t(): (D, 1) → result (B, 1)
+        return torch.sigmoid(torch.matmul(refusal_vector, self.f26_kernel.t()))
 
     def forward(self, x: torch.Tensor, refusal_vector: torch.Tensor) -> torch.Tensor:
         """
-        Alpha Prime Sovereign Gate.
+        Alpha Prime Basis Gate.
 
         Args:
             x:              (B, D) or (B, T, D) — tensor to gate
@@ -122,8 +122,8 @@ def _verify_module():
     layer = AlphaPrimeInferenceLayer(D)
 
     # 1. Kernel shape and values
-    assert layer.sovereign_kernel.shape == (1, D)
-    kernel_flat = layer.sovereign_kernel.squeeze(0)
+    assert layer.f26_kernel.shape == (1, D)
+    kernel_flat = layer.f26_kernel.squeeze(0)
 
     # Primes/alpha are small positive numbers
     assert (kernel_flat > 0).all()
@@ -136,10 +136,10 @@ def _verify_module():
     assert layer.verify_integrity(), "Integrity check failed on fresh layer"
 
     # Corruption detection: manually corrupt buffer
-    original = layer.sovereign_kernel.clone()
-    layer.sovereign_kernel[0, 0] = 0.0
+    original = layer.f26_kernel.clone()
+    layer.f26_kernel[0, 0] = 0.0
     assert not layer.verify_integrity(), "Corrupted kernel not detected"
-    layer.sovereign_kernel.copy_(original)
+    layer.f26_kernel.copy_(original)
     assert layer.verify_integrity(), "Integrity not restored after fix"
 
     # 3. Gate semantics (numerics, no torch)
@@ -166,11 +166,11 @@ def _verify_module():
 
     # 6. Kernel is non-trainable (buffer, not parameter)
     param_names = [n for n, _ in layer.named_parameters()]
-    assert 'sovereign_kernel' not in param_names, "Kernel must not be a trainable parameter"
+    assert 'f26_kernel' not in param_names, "Kernel must not be a trainable parameter"
 
     # 7. Aligned refusal_vector → gate > 0.5 (pass-through bias)
     #    Scale by 100 to saturate sigmoid toward 1.0
-    rv_aligned = 100.0 * layer.sovereign_kernel.expand(B, -1).clone()  # (B, D)
+    rv_aligned = 100.0 * layer.f26_kernel.expand(B, -1).clone()  # (B, D)
     out_aligned = layer(x2d, rv_aligned)
     assert (out_aligned > 0.99).all(), "Aligned rv should nearly pass x through"
 
@@ -181,13 +181,13 @@ def _verify_module():
     print("AlphaPrimeInferenceLayer — all assertions passed.")
     print()
     print(f"  d_model = {D}")
-    print(f"  sovereign_kernel[:4] = {kernel_flat[:4].tolist()}")
+    print(f"  f26_kernel[:4] = {kernel_flat[:4].tolist()}")
     print(f"    = primes [2,3,5,7] / {layer.ALPHA_INV}")
     print(f"  gate(r=0) = {layer.gate_scalar(torch.zeros(1,D))[0,0].item():.4f}  (0.5 — half-attenuation)")
     print(f"  gate(r=100K)  = {layer.gate_scalar(rv_aligned[:1])[0,0].item():.4f}  (≈1.0 — pass-through)")
     print(f"  gate(r=-100K) = {layer.gate_scalar(-rv_aligned[:1])[0,0].item():.4f}  (≈0.0 — null state)")
     print(f"  Integrity: {layer.verify_integrity()}")
-    print(f"  Kernel is buffer (non-trainable): {'sovereign_kernel' not in param_names}")
+    print(f"  Kernel is buffer (non-trainable): {'f26_kernel' not in param_names}")
 
 
 if __name__ == "__main__":

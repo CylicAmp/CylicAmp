@@ -25,8 +25,8 @@ System states:
   Logic Leak      — bandwidth diverted to conflict resolution, harmonic distortion
   Signal Saturation — 100% locked in recursive loop, stochastic noise / spikes
 
-Sovereign framework connection:
-  {A,B,C,D} corresponds to the four sovereign anchors {4,9,25,30}
+Anchor set {4,9,25,30} connection:
+  {A,B,C,D} corresponds to the four anchor nodes {4,9,25,30}
   Any residue outside this set is "ungrounded" in the 37-field sense.
   DR(R) ∉ {DR(4), DR(9), DR(25), DR(30)} = {4, 9, 7, 3} triggers the leak.
 
@@ -54,10 +54,10 @@ assert dr(FREQ_HIGH) == 7                 # DR=7 — same class, decade harmonic
 # ── Sovereign alphabet: the grounded residue set ───────────────────────────
 
 ANCHORS = frozenset({4, 9, 25, 30})
-SOVEREIGN_DRS     = frozenset(dr(a) for a in ({4, 9, 25, 30}))
-assert SOVEREIGN_DRS == {4, 9, 7, 3}     # DR classes of the four anchors
+F26_ANCHOR_DRS    = frozenset(dr(a) for a in ({4, 9, 25, 30}))
+assert F26_ANCHOR_DRS == {4, 9, 7, 3}    # DR classes of the four anchors
 
-# Logic Leak condition: any residue outside the sovereign set is ungrounded
+# Logic Leak condition: any residue outside the anchor set is ungrounded
 def is_logic_leak(R, alphabet=({4, 9, 25, 30})):
     return R not in alphabet
 
@@ -103,13 +103,13 @@ assert len(STATES) == 3
 assert STATES[0]["name"] == "Homeostasis"
 assert STATES[2]["name"] == "Signal Saturation"
 
-# ── Sovereign framework connection ─────────────────────────────────────────
+# ── Anchor set {4,9,25,30} framework connection ────────────────────────────
 
-# The 33 ungrounded nodes map to DR classes not in SOVEREIGN_DRS
+# The 33 ungrounded nodes map to DR classes not in F26_ANCHOR_DRS
 ungrounded_drs = frozenset(dr(r) for r in leak_nodes)
-grounded_drs   = SOVEREIGN_DRS
+grounded_drs   = F26_ANCHOR_DRS
 
-# The sovereign gap: DR=5 is absent from QR₃₇ and sovereign DRs
+# The anchor gap: DR=5 is absent from QR₃₇ and anchor DRs
 assert 5 not in grounded_drs
 
 # 37-field: ungrounded residues span all non-sovereign DR classes
@@ -134,8 +134,8 @@ if __name__ == "__main__":
     print(f"  Frequency ratio: {FREQ_RATIO}× (one decade span)")
     print(f"  DR({FREQ_LOW}) = {dr(FREQ_LOW)},  DR({FREQ_HIGH}) = {dr(FREQ_HIGH)}  (same class)")
     print()
-    print(f"  Sovereign alphabet (grounded): {sorted(({4, 9, 25, 30}))}")
-    print(f"  Sovereign DR classes: {sorted(SOVEREIGN_DRS)}")
+    print(f"  Anchor set {{4,9,25,30}} (grounded): {sorted(({4, 9, 25, 30}))}")
+    print(f"  Anchor DR classes: {sorted(F26_ANCHOR_DRS)}")
     print(f"  Ungrounded nodes in Z/37Z: {len(leak_nodes)} / 36")
     print()
     print("  Feedback current I_f = I_0 · exp(k · dR/dt):")
@@ -152,7 +152,7 @@ if __name__ == "__main__":
     for s in STATES:
         print(f"  {s['name']:<22} {s['bandwidth']:<28} {s['coherence']}")
     print()
-    print(f"  DR space: grounded={sorted(grounded_drs)}, full={sorted(all_dr_classes)}")
+    print(f"  DR space: grounded (anchor)={sorted(grounded_drs)}, full={sorted(all_dr_classes)}")
     print(f"  26 = {26} = 10² mod 37,  DR({26}) = {dr(26)}")
     print()
     print("All assertions passed.")

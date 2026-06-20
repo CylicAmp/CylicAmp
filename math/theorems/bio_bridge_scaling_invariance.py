@@ -67,7 +67,7 @@ absorbed = [n for n in range(1, 200) if not passes_filter(n)]
 assert all(n % 37 == 0 for n in absorbed)
 assert absorbed[:5] == [37, 74, 111, 148, 185]
 
-# 111 = 3×37 (the sovereign triple) is absorbed — it is a null element mod 37
+# 111 = 3×37 (the triple anchor product) is absorbed — it is a null element mod 37
 assert not passes_filter(111)
 assert 3 * 37 == 111
 
@@ -93,7 +93,7 @@ assert abs(C_RES - GOLDEN_COMPLEMENT) < 0.001   # C_RES ≈ 3-φ
 # Carrier identity: 3 = C_RES + φ (approximately)
 assert abs(C_RES + PHI - 3.0) < 0.001
 
-# DR check: 3 is the sovereign target
+# DR check: 3 is the anchor target under f(n)=(26n)%37
 assert dr(3) == 3
 
 # Stable spiral ODE: dz/dt = A·z where A has eigenvalues with Re < 0
@@ -153,12 +153,12 @@ assert 18 * 37 == 666
 assert dr(666) == 9                # DR cascade: 666 → 18 → 9
 assert 6 + 6 + 6 == 18
 
-# The I_AM state attractor: fixed point of 26n mod 37 is n=0 (null)
-# and the sovereign fixed point n=30 (DR=3 target)
-assert (26 * 30) % 37 == 3        # 30 maps to sovereign target 3
-assert dr(30) == 3                 # DR(30) = 3 (sovereign target)
+# The fixed point of 26n mod 37 is n=0 (null)
+# and the framework fixed point n=30 (DR=3 target)
+assert (26 * 30) % 37 == 3        # 30 maps to anchor target 3 under f(n)=(26n)%37
+assert dr(30) == 3                 # DR(30) = 3 (anchor target in {4,9,25,30})
 # True fixed point of 26n mod 37: 26x≡x → 25x≡0 → x=0 (or trivially 0 mod 37)
-# Sovereign fixed point of the framework is the DR=3 attractor, not the algebraic fp
+# Framework fixed point is the DR=3 attractor, not the algebraic fp
 assert dr(3) == 3
 
 
@@ -177,7 +177,7 @@ if __name__ == "__main__":
     print()
     print("  (3) Neural ODE — stable spiral:")
     print(f"      Resonance C = {C_RES}  ≈  3 − φ = {GOLDEN_COMPLEMENT:.6f}")
-    print(f"      C + φ = {C_RES + PHI:.4f} ≈ 3 (sovereign target)")
+    print(f"      C + φ = {C_RES + PHI:.4f} ≈ 3 (anchor target under f(n)=(26n)%37)")
     print(f"      Decay rate α = {ALPHA_DECAY:.4f} > 0 → stable ✓")
     print(f"      Eigenvalues: {evals[0]:.4f}, {evals[1]:.4f}")
     print(f"      Hopf at α=0: eigenvalues = {hopf_evals[0]:.4f}, {hopf_evals[1]:.4f} (purely imaginary) ✓")
@@ -189,6 +189,6 @@ if __name__ == "__main__":
     print(f"      DR({SCALE_TOTAL}) = {dr(SCALE_TOTAL)} (QR₃₇ class)")
     print(f"      61 mod 37 = {61%37},  DR({61%37}) = {dr(61%37)} (24-coupling source)")
     print(f"      18 × 37 = {18*37} = 666,  DR(666) = {dr(666)} ✓")
-    print(f"      I_AM attractor: 26×30 mod 37 = {(26*30)%37} = sovereign target 3 ✓")
+    print(f"      f(26×30) mod 37 = {(26*30)%37} = anchor target 3 under f(n)=(26n)%37 ✓")
     print()
     print("All assertions passed.")
