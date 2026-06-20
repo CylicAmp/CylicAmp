@@ -91,10 +91,10 @@ assert abs(E_X - math.log(3/4)) < 1e-15
 assert E_X < 0    # negative: contraction in expectation
 
 # Verify the two series exactly
-series_1 = sum(1/2**k for k in range(1, 100))    # → 1
-series_2 = sum(k/2**k for k in range(1, 100))    # → 2
-assert abs(series_1 - 1) < 1e-10    # 100-term truncation; tail < 1e-28
-assert abs(series_2 - 2) < 1e-10    # tail ≈ 103/2^100 < 1e-28
+series_1 = math.fsum(1/2**k for k in range(1, 100))    # compensated sum → exact
+series_2 = math.fsum(k/2**k for k in range(1, 100))    # compensated sum → exact
+assert abs(series_1 - 1) < 1e-25    # tail: 1/2^100 ≈ 7.9e-31
+assert abs(series_2 - 2) < 1e-25    # tail: ~103/2^99 ≈ 1.6e-28
 
 E_X_series = math.log(3) * series_1 - math.log(2) * series_2
 assert abs(E_X_series - E_X) < 1e-12
