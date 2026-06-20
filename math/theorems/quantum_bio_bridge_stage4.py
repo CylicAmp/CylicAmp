@@ -36,7 +36,7 @@ Plastic-Golden Fusion:
 
 Φ₁₉₁:
   191 is prime; 191 mod 37 = 6; DR(191) = 2 (primitive root DR class)
-  191 mod 9 = 2; 191 is the sovereign resonance anchor at DR=2.
+  191 mod 9 = 2; 191 is the DR=2 resonance anchor in F₃₇.
 
 G'5 Filter:
   DR=5 is the absent class in QR₃₇ — it appears in no power of 3 mod 37.
@@ -45,7 +45,7 @@ G'5 Filter:
 
 Neural ODE initial state z(0):
   z(0) is set at the lower boundary of the next stage (10⁻⁶ m = 1 μm, cell scale).
-  The Eisenstein norm evaluated at the Sovereign anchor provides the seed magnitude.
+  The Eisenstein norm evaluated at the anchor set {4,9,25,30} provides the seed magnitude.
 """
 
 import cmath
@@ -133,7 +133,7 @@ import numpy as np
 SL2_example = np.array([[1, 1], [0, 1]], dtype=float)   # shear, det=1
 assert abs(np.linalg.det(SL2_example) - 1.0) < 1e-12
 
-# ── Φ₁₉₁: sovereign resonance anchor ─────────────────────────────────────
+# ── Φ₁₉₁: DR=2 resonance anchor in F₃₇ ──────────────────────────────────
 
 PHI_191  = 191
 assert PHI_191 % 37 == 6              # 191 mod 37 = 6 (source of DR=6 coupling)
@@ -164,9 +164,9 @@ assert eisenstein_norm(1, 1) == 1     # N(1+ω) = N(−ω²) = 1
 assert eisenstein_norm(2, 1) == 3     # N(2+ω) = 4−2+1 = 3 (sovereign target)
 assert eisenstein_norm(3, 1) == 7     # N(3+ω) = 9−3+1 = 7 (QR₃₇ class)
 
-# Sovereign anchor norm:  α=4, β=0 → N=16; α=9,β=0 → N=81; α=5,β=1 → N=21
+# F26 anchor norm:  α=4, β=0 → N=16; α=9,β=0 → N=81; α=5,β=1 → N=21
 assert eisenstein_norm(4, 0) == 16    # = 4² (anchor squared)
-assert eisenstein_norm(3, 0) == 9     # = 3² (sovereign target squared)
+assert eisenstein_norm(3, 0) == 9     # = 3² (DR=3 target squared)
 
 # ── G'5 Filter: DR=5 is absent from QR₃₇ ─────────────────────────────────
 
@@ -179,9 +179,9 @@ assert dr5_in_qr == []               # G'5 filter: no QR₃₇ element has DR=5
 
 # Also absent from sovereign anchors and targets
 {4, 9, 25, 30}
-SOVEREIGN_TARGETS = {3, 12, 21, 30}
+F26_TARGETS = {3, 12, 21, 30}
 assert all(dr(a) != 5 for a in ({4, 9, 25, 30}))
-assert all(dr(t) != 5 for t in SOVEREIGN_TARGETS)
+assert all(dr(t) != 5 for t in F26_TARGETS)
 
 # DR=5 is the "absent class" — boundary condition excluding it enforces continuity
 assert 5 not in frozenset(dr(q) for q in QR37)

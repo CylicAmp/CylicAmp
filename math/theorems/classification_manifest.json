@@ -51,14 +51,14 @@
     {
       "file": "heartbeat_3cycle.py",
       "type": "Theorem",
-      "title": "Heartbeat Universal 3-Cycle",
-      "summary": "Map f(n)=(n\u00d7137) mod 37 \u2261 26n mod 37 generates a universal 3-cycle heartbeat."
+      "title": "Universal 3-Cycle under f(n)=(26n)%37",
+      "summary": "Map f(n)=(n\u00d7137) mod 37 \u2261 26n mod 37 generates universal 3-cycles under f(n)=(26n)%37."
     },
     {
       "file": "layer30_sovereign_matrix_entropy.py",
       "type": "Lemma",
-      "title": "9\u00d79 Sovereign Matrix Entropy",
-      "summary": "Computes DR orbit entropy H\u22483.102 bits for the 9\u00d79 sovereign matrix spine."
+      "title": "9\u00d79 DR Mult Matrix Entropy",
+      "summary": "Computes DR orbit entropy H\u22483.102 bits for the 9\u00d79 DR multiplication matrix spine."
     },
     {
       "file": "layer54_lucas_period24.py",
@@ -112,7 +112,7 @@
       "file": "lob_25_legendre_applications.py",
       "type": "Corollary",
       "title": "Legendre Symbol Applications in F_37",
-      "summary": "Four verified QR/Legendre results following from the sovereign QR closure theorem."
+      "summary": "Four verified QR/Legendre results following from the anchor set {4,9,25,30} QR closure theorem."
     },
     {
       "file": "lob_26_collatz_f37.py",
@@ -130,7 +130,7 @@
       "file": "lob_596_600.py",
       "type": "Corollary",
       "title": "3900 Frequency and Sovereign Seal",
-      "summary": "DR(3900)=3 (Trinity-3) and sovereign seal follow directly from the DR algebra axiom."
+      "summary": "DR(3900)=3 (Trinity-3) and f26 anchor seal follow directly from the DR algebra axiom."
     },
     {
       "file": "lob_601_602_605.py",

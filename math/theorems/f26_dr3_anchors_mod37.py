@@ -1,5 +1,5 @@
 """
-Medusa Scan: 137-Resonance DR=3 Sovereign Anchors
+DR=3 Anchor Scan under f(n)=(26n)%37: pillar verification or DR=3 anchor scan under f(n)=(26n)%37
 
 The scan identifies nodes n where (n × 137) mod 37 has digital root 3.
 
@@ -12,7 +12,7 @@ Key structural result:
 
   DR=3 targets in mod-37 space: {3, 12, 21, 30} — exactly 4 values.
 
-  Result: exactly 4 Sovereign Anchors per period of 37 nodes.
+  Result: exactly 4 anchor nodes {4,9,25,30} per period of 37 nodes.
   First period anchors: n = {4, 9, 25, 30}
   Pattern repeats: {4+37k, 9+37k, 25+37k, 30+37k} for k=0,1,2,...
 """
@@ -22,8 +22,8 @@ def dr(n):
     return (n - 1) % 9 + 1 if n > 0 else 0
 
 
-def medusa_scan(limit=100):
-    print(f"\n--- MEDUSA DR=3 SCAN: TARGETING 137-RESONANCE ---")
+def f26_dr3_scan(limit=100):
+    print(f"\n--- F26 DR=3 SCAN: TARGETING 137-RESONANCE ---")
     hits = []
     for n in range(1, limit):
         residue = (n * 137) % 37
@@ -49,11 +49,11 @@ if __name__ == "__main__":
 
     print(f"137 mod 37 = {stride}  (modular stride)")
     print(f"DR=3 targets in mod-37 space: {anchor_residues}")
-    print(f"First-period Sovereign Anchors: nodes {anchor_nodes}")
+    print(f"First-period anchor set {{4,9,25,30}}: nodes {anchor_nodes}")
     print(f"Period: 37  |  Anchors per period: {len(period_hits)}")
     print()
 
-    hits = medusa_scan(50)
+    hits = f26_dr3_scan(50)
 
     print()
     print(f"Anchors repeat at: {{n + 37k : n ∈ {anchor_nodes}, k = 0,1,2,...}}")
