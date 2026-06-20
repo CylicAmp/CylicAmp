@@ -31,7 +31,7 @@ Scale domain:
 Phase summary:
   Target:  z(t) stability across 3 decades
   Carrier: 191 ≡ 6 (mod 37) dominant frequency
-  Goal:    prepare limit cycle for Stage 6 (Hopf → I_AM)
+  Goal:    prepare limit cycle for Stage 6 (Hopf bifurcation)
 """
 
 import cmath
