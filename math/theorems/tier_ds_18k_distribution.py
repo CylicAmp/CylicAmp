@@ -181,6 +181,50 @@ assert {T(k) for k in range(1, 56)} == {14, 23, 32, 41}
 
 
 # ──────────────────────────────────────────────────────────────────────────────
+# RESIDUE STRUCTURE MOD 7  [CORRECTION — T(k) mod p is NOT uniform]
+# ──────────────────────────────────────────────────────────────────────────────
+#
+# The 7 tier values are 14 + 9j for j = 0..6.
+# Since 9 ≡ 2 (mod 7) and gcd(2, 7) = 1:
+#   T_j mod 7 = (14 + 9j) mod 7 = (0 + 2j) mod 7
+# This cycles through all 7 residues before repeating (period 7 in j).
+#
+# Consequence: T(k) mod 7 is FULLY DETERMINED by which tier k belongs to.
+# Chi-square vs uniform null (expected = 1369/7 ≈ 195.6): χ² ≈ 1220.
+# T(k) mod p is structured — not random — for all p, because T(k) lies in
+# the AP {14, 23, 32, ...} and each tier value has a unique residue mod 7.
+#
+# HIERARCHY:
+#   T(k) mod 9  → constant 5, entropy = 0              [absolute constraint]
+#   T(k) mod p  → follows tier counts, χ² >> critical  [structured]
+#   DS(n) mod p for general n, p > 5  → uniform         [distinct from T(k)]
+#   DS(18k) mod 7 → {2,4,6,1} only (multiples of 9),  χ² = 2967  [also structured]
+#
+# The uniformity of DS(n) mod p applies to general n, not to n = 18k.
+
+from collections import Counter as _Counter
+import math as _math
+
+# T(k) mod 7: each tier value has a unique residue
+for j, tv in enumerate(sorted(TIER_NAMES)):
+    assert tv % 7 == (2 * j) % 7, f"AP mod-7 formula failed at tier {tv}"
+
+# Chi-square for T(k) mod 7 vs uniform (expected = 1369/7)
+_counts_mod7 = _Counter(T(k) % 7 for k in range(1, 1370))
+_exp = 1369 / 7
+_chi2 = sum((_counts_mod7[r] - _exp)**2 / _exp for r in range(7))
+assert abs(_chi2 - 1220) < 1, f"chi2 = {_chi2:.1f}, expected ≈ 1220"
+assert _chi2 > 100    # extreme deviation: T(k) mod 7 is not uniform
+
+# DS(18k) mod 7: only multiples of 9, so residues ⊆ {9%7,18%7,27%7,36%7} = {2,4,6,1}
+_ds_mod7 = {ds(18*k) % 7 for k in range(1, 1370)}
+assert _ds_mod7 == {1, 2, 4, 6}    # residues 0, 3, 5 never appear
+
+# T(k) mod 9: constant 5 (proved above, entropy = 0)
+assert all(T(k) % 9 == 5 for k in range(1, 1370))
+
+
+# ──────────────────────────────────────────────────────────────────────────────
 # OUTPUT
 # ──────────────────────────────────────────────────────────────────────────────
 
@@ -225,6 +269,19 @@ if __name__ == "__main__":
     print("\n── GAMMA UNIQUENESS ──")
     print(f"  k=1111, n=19998: DS(n)={ds(n_gamma)}, DS(n-4)={ds(n_gamma-4)}, T={ds(n_gamma)+ds(n_gamma-4)}")
     print(f"  Unique Gamma in k=1..1369: {gamma_ks}")
+
+    print("\n── RESIDUE STRUCTURE MOD 7  [CORRECTION] ──")
+    print("  T(k) mod 7 is NOT uniform — determined by tier membership.")
+    print("  AP formula: T_j mod 7 = (2j) mod 7  for j = 0..6 (tier index)")
+    print(f"  {'Tier':8}  {'T':>3}  {'T mod 7':>7}  {'Count':>6}")
+    for j, tv in enumerate(sorted(TIER_NAMES)):
+        print(f"  {TIER_NAMES[tv]:8}  {tv:>3}  {tv%7:>7}  {counts[tv]:>6}")
+    print(f"  Chi-square vs uniform: {_chi2:.1f}  (χ²_crit(6,0.001) ≈ 22.5)")
+    print("  DS(18k) mod 7 residues: {1,2,4,6} only — multiples of 9 mod 7")
+    print("  Hierarchy:")
+    print("    T(k) mod 9  → constant 5, entropy 0             [absolute]")
+    print("    T(k) mod p  → tier-structured, χ² >> critical   [structured]")
+    print("    DS(n) mod p for general n, p>5 → uniform        [distinct from T(k)]")
 
     print()
     print("All assertions passed.")
