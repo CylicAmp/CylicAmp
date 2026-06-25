@@ -18,7 +18,7 @@ Vertex groups (all on the unit 3-sphere, |v| = 1):
 
 Framework connections:
   φ = (1+√5)/2  — golden ratio;  A* = 1/φ ≈ 0.618 at Hopf bifurcation (Stage 6)
-  120 = 5! = 5 × 24   — PIVOT_PRIME × 24-coupling constant
+  120 = 5! = 5 × 24   — residue_5 × 24-coupling constant
   600 mod 37 = 8       — DR = 6, Tesla-6 carrier frequency
   1200 mod 37 = 16     — QR₃₇ element (f26 square 4²)
   198-orbit residues {3,4,5,13,19,30} include 4 (dimension) and 5 (PIVOT)
@@ -131,7 +131,7 @@ assert _dr(600)  == 6   # Tesla-6
 assert _dr(720)  == 9   # 9-stabilizer
 assert _dr(1200) == 3   # TRINITY again
 
-# 120 = 5! = 5 × 24 (PIVOT_PRIME × 24-coupling)
+# 120 = 5! = 5 × 24 (residue_5 × 24-coupling)
 assert 120 == math.factorial(5)
 assert 120 == 5 * 24
 

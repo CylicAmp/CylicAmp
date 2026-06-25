@@ -32,7 +32,7 @@ Trade Table (generator set, all verified):
 37-field: 10-overflow numbers mod 37
   19 mod 37 = 19 = CENTER_19
   28 mod 37 = 28 ∈ QR_MOD37
-  37 mod 37 = 0  = NULL_ELEMENT (37 itself is the field modulus)
+  37 mod 37 = 0  = residue_0 (37 itself is the field modulus)
   64 mod 37 = 27 ∈ QR_MOD37
 
 9×9 T-Matrix: M[i][j] = T(i*j) for i,j in {1,...,9}
@@ -97,7 +97,7 @@ for n in range(10, 200):
 # 37-field: 10-overflow residues
 assert 19 % 37 == 19    # CENTER_19
 assert 28 % 37 == 28    # QR_MOD37 element
-assert 37 % 37 == 0     # NULL_ELEMENT (field modulus itself)
+assert 37 % 37 == 0     # residue_0 (field modulus itself)
 assert 64 % 37 == 27    # QR_MOD37 element
 
 # 26 correction: 26 IS in QR_MOD37 (10^2 = 100 ≡ 26 mod 37)
