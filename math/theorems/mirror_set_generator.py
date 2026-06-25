@@ -53,7 +53,7 @@ assert len(_orbit_residues) == 6                    # all distinct
 assert 198 % 37 == 13                               # GATE_13
 assert 891 % 37 == 3                                # TRINITY (f26 target)
 assert 918 % 37 == 30                               # f26 fixed point
-assert 819 % 37 == 5                                # PIVOT_PRIME / G'5 void marker
+assert 819 % 37 == 5                                # residue_5 / G'5 void marker
 assert 189 % 37 == 4                                # f26 anchor
 assert 981 % 37 == 19                               # CENTER_19
 

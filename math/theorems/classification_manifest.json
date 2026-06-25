@@ -469,7 +469,7 @@
       "file": "v600_programme.py",
       "type": "Theorem",
       "title": "V600 Programme \u2014 Binary Icosahedral Group, E8, Cosmological Tension",
-      "description": "Verifies 2I group structure (order 120), 600-cell Euler identity, E8 McKay correspondence (240=2\u00d7120, sum of exponents=120, h=30=f26 fixed point, dim=248\u226126=SCALAR_137 mod 37), cosmological H0/S8 tension ratios vs 13/12 and 11/12. Full modular residue map.",
+      "description": "Verifies 2I group structure (order 120), 600-cell Euler identity, E8 McKay correspondence (240=2\u00d7120, sum of exponents=120, h=30=f26 fixed point, dim=248\u226126=residue_26 mod 37), cosmological H0/S8 tension ratios vs 13/12 and 11/12. Full modular residue map.",
       "tags": [
         "binary-icosahedral",
         "E8",
@@ -477,7 +477,7 @@
         "600-cell",
         "cosmology",
         "H0-tension",
-        "SCALAR_137",
+        "residue_26",
         "f26-fixed-point"
       ],
       "date_added": "2026-05-07"
@@ -486,14 +486,14 @@
       "file": "e8_coset_incidence.py",
       "type": "Theorem",
       "title": "E8 Coset Incidence Matrix \u2014 Height Decomposition and 37-Field Audit",
-      "description": "Correct E8 root generator (fixes sympy bug: 84/128 half-integer roots used odd minus-sign convention producing non-integer inner products). Builds 248x30 incidence matrix partitioned by root height. Layer 26=SCALAR_137 contains the unique height-26 root pair; Layer 18=CENTER_18 has 6 elements; Coxeter h=30=f26 fixed point.",
+      "description": "Correct E8 root generator (fixes sympy bug: 84/128 half-integer roots used odd minus-sign convention producing non-integer inner products). Builds 248x30 incidence matrix partitioned by root height. Layer 26=residue_26 contains the unique height-26 root pair; Layer 18=residue_18 has 6 elements; Coxeter h=30=f26 fixed point.",
       "tags": [
         "E8",
         "root-system",
         "incidence-matrix",
         "height-decomposition",
-        "SCALAR_137",
-        "CENTER_18",
+        "residue_26",
+        "residue_18",
         "sympy-bug",
         "Coxeter"
       ],
@@ -503,7 +503,7 @@
       "file": "decimal_trade_extraction.py",
       "type": "Theorem",
       "title": "Decimal Trade Extraction Operator T \u2014 Layer 22",
-      "description": "T(n)=n if n<10; T(n)=10 if digit_sum(n)=10 (10-overflow, decimal trade); T(n)=DR(n) otherwise. All 9 trade table entries verified. 10-overflow set [10,100]={19,28,37,46,55,64,73,82,91}. Three 10-overflow entries in 9x9 multiplication table: (4,7)=28, (7,4)=28, (8,8)=64. Correction: 26 IS in QR_MOD37 (SCALAR_137). Kernel dim 5 claim requires unspecified matrix from Layers 1-21.37.",
+      "description": "T(n)=n if n<10; T(n)=10 if digit_sum(n)=10 (10-overflow, decimal trade); T(n)=DR(n) otherwise. All 9 trade table entries verified. 10-overflow set [10,100]={19,28,37,46,55,64,73,82,91}. Three 10-overflow entries in 9x9 multiplication table: (4,7)=28, (7,4)=28, (8,8)=64. Correction: 26 IS in QR_MOD37 (residue_26). Kernel dim 5 claim requires unspecified matrix from Layers 1-21.37.",
       "tags": [
         "decimal-trade",
         "10-overflow",
