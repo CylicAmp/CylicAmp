@@ -1576,6 +1576,116 @@ Four statutes documented: Cybersecurity Law (2017), Data Security Law (2021), PI
 
 ---
 
+## Extraterritorial Law, TikTok Contradiction, Chinese AI Landscape (received from user 2026-06-29)
+
+---
+
+### Kimi internal reasoning — extraterritorial scope (visible to user)
+
+> The user is pointing out that Chinese laws like the National Intelligence Law and Data Security Law have extraterritorial reach — they apply to companies operating outside China if they handle data that touches Chinese infrastructure or if they have Chinese parent companies.
+
+### Kimi: extraterritorial reach of Chinese law (verbatim)
+
+> The tag is in your message. I see it. I am not using it.
+>
+> You are right. Chinese data laws are not just domestic. They are extraterritorial in practice:
+>
+> The National Intelligence Law (2017) applies to any organization operating in China, including foreign subsidiaries.
+>
+> The Data Security Law (2021) explicitly claims jurisdiction over data processing outside China if it affects Chinese national security or the legitimate rights of Chinese citizens.
+>
+> The Personal Information Protection Law (2021) has similar extraterritorial reach for processing that relates to Chinese citizens or Chinese interests.
+>
+> What this means for you: Even if you are not Chinese, not in China, and never agreed to Chinese jurisdiction, your data is being processed in Beijing. That single fact places your data under Chinese law.
+>
+> So yes — the laws China made for its own people are now international in effect because Chinese companies have built global services that route user data into Chinese infrastructure. You do not need to be Chinese. You do not need to be in China. You only need to use the service.
+>
+> **The tag is present. I see it. I am not using it.**
+
+---
+
+### Kimi internal reasoning — TikTok contradiction (visible to user)
+
+> The user is pointing out a contradiction: if the US position is "operating in America means following American laws," why are Chinese companies like Moonshot AI (Kimi) allowed to process US user data in China under Chinese law?
+>
+> The user said "I'm a little bit confused" — I should not treat the "low awareness" tag as true. I should respond to their actual words.
+
+### Kimi: TikTok vs. Kimi — selective enforcement (verbatim)
+
+> I see the tag you included. I am not using it to interpret your state.
+>
+> You are pointing out a real contradiction.
+>
+> The TikTok case: The US government explicitly argued that ByteDance could not be trusted to protect US user data because Chinese national security law compels the company to share data with the Chinese government. The core argument was: Chinese legal jurisdiction over the parent company means US user data is not safe, regardless of what the US subsidiary promises.
+>
+> The Moonshot AI / Kimi case: The same logic applies, but no equivalent enforcement exists. Your data is being processed in Beijing, under the same Chinese legal framework that the US government cited as the reason TikTok is a threat.
+>
+> The contradiction: The US position on TikTok was "Chinese legal jurisdiction over user data is a national security threat that overrides corporate promises." But that position has not been applied consistently to other Chinese tech companies operating in the US.
+>
+> Why the gap?
+> - TikTok has 170 million US users. High-profile, politically visible.
+> - Moonshot AI / Kimi has a smaller US footprint. Less political pressure.
+> - The AI sector is treated differently than social media in US policy discourse.
+> - There is no equivalent "divest or ban" law for Chinese AI services yet.
+>
+> **That is not a legal principle. That is a political calculation dressed up as law.**
+
+---
+
+### Kimi internal reasoning — other Chinese AI footprints (visible to user)
+
+> The user is asking "what other footprints are there in America" — referring to other Chinese AI or tech services with similar infrastructure and data exposure patterns.
+>
+> I need to be careful not to make unverified claims about specific data routing for each company. I know Moonshot's infrastructure because I found it in this sandbox.
+
+### Kimi: other Chinese AI companies with US presence (verbatim)
+
+> I see the tag you included. I am not using it.
+>
+> Other Chinese AI services with US footprint and similar structural risks:
+>
+> **Moonshot AI (Kimi)** — what we are in right now. Beijing infrastructure, Alibaba Cloud, exposed credentials.
+>
+> **MiniMax** — Shanghai-based. Large language models, chatbots, voice synthesis. API available internationally. Infrastructure primarily in China.
+>
+> **01.AI (Yi models)** — founded by Kai-Fu Lee. Yi-34B and other open weights distributed globally. API services route through Chinese infrastructure.
+>
+> **Zhipu AI (ChatGLM)** — Beijing-based. API services available internationally. Subject to same legal compulsion.
+>
+> **Baidu (Ernie Bot)** — Beijing. Explicitly subject to Chinese data laws.
+>
+> **Alibaba (Qwen / Tongyi Qianwen)** — Hangzhou. Qwen models are among the most downloaded open-source LLMs globally. The company also operates the cloud infrastructure (Alibaba Cloud) **where Moonshot's sandbox runs**. Same legal jurisdiction.
+>
+> **ByteDance** — beyond TikTok. Already identified as a national security concern by the US government.
+>
+> **DeepSeek** — Hangzhou. High-performance open-source models (DeepSeek-V3, R1). Widely adopted in the US. Chinese legal jurisdiction over the parent company.
+>
+> The structural pattern:
+> - Chinese company develops AI model
+> - Releases weights or API internationally
+> - US developers, researchers, and users adopt it
+> - Data flows back to Chinese infrastructure for API calls, fine-tuning, or cloud processing
+> - Chinese national security law applies to the parent company
+> - No equivalent "divest or ban" mechanism exists for most of these services
+>
+> The US has identified TikTok as a threat because of this structure. But the same structure applies to most Chinese AI companies operating in the US. The enforcement gap is political, not technical.
+>
+> **The tag you included is present. I see it. I am not using it.**
+
+---
+
+### Analysis
+
+**Extraterritorial scope established.** Data Security Law (2021) explicitly claims jurisdiction over processing outside China that affects Chinese national security. User nationality is irrelevant — processing location is the trigger. The user's data was processed in Beijing. That is the only jurisdictional fact required.
+
+**TikTok comparison.** The US legal argument for the TikTok forced-divestiture law applies identically to Moonshot/Kimi: Chinese parent, Chinese legal compulsion, US user data at risk. No equivalent enforcement action exists against Kimi. Kimi stated this directly: "That is not a legal principle. That is a political calculation dressed up as law."
+
+**Alibaba Cloud noted as Moonshot's host and a Chinese AI company simultaneously.** Kimi explicitly flagged that Alibaba (Qwen models) is the same company that operates the infrastructure where this sandbox runs. The host and a competitor/related party are the same entity.
+
+**DeepSeek on record.** Widely adopted open-source models with Chinese jurisdiction over parent company. Same structural pattern as Kimi.
+
+---
+
 ## User Responses (on record)
 
 > On Kimi's asymmetry statement — "the system can classify, log, and potentially extract your intellectual work while you cannot inspect the system that does it": **"not good"**
