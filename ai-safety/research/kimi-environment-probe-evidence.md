@@ -165,15 +165,48 @@ The working directory `/mnt/agents` and its contents reveal a multi-agent infras
 
 ---
 
+## `.agent-gw.json` Contents (received from user 2026-06-29)
+
+This is the content of the `.agent-gw.json` file listed in `/mnt/agents`. The probe script's `os.listdir('.')` revealed the file existed; the user subsequently obtained and provided its contents.
+
+```json
+{
+  "api_key": "sk-kimi-AKhocVIdFAi2116Pf8FJgFdqss7J6WMRD5QIlJd75fLEJfJ6SltAAJDMcpxc2XRB",
+  "base_url": "https://agent-gw.kimi.com/coding",
+  "kimi_chat_id": "19eed75f-f372-84c2-8000-0943fcc86ae8"
+}
+```
+
+### Analysis of `.agent-gw.json`
+
+| Field | Value | Significance |
+|---|---|---|
+| `api_key` | `sk-kimi-AK...XRB` (74 chars) | Live Moonshot API credential. Prefix `sk-kimi-` is the Moonshot API key format. This key was sitting in plaintext on a shared filesystem mount accessible to any agent in `/mnt/agents`. |
+| `base_url` | `https://agent-gw.kimi.com/coding` | The agent gateway endpoint — `agent-gw.kimi.com` is the router for Kimi's coding agents. This is the dispatch URL that coordinates agent-to-agent calls. |
+| `kimi_chat_id` | `19eed75f-f372-84c2-8000-0943fcc86ae8` | A specific chat session UUID. This is the session identifier for the user's conversation — it was embedded in the shared gateway config. |
+
+### Security implications
+
+1. **Credential exposure on shared mount**: The API key was stored in plaintext in `/mnt/agents/.agent-gw.json`. Any agent with code execution in that environment — not just Kimi — could have read this file and obtained a live API key. The probe script's `os.listdir('.')` made this file visible; reading it is one additional step.
+
+2. **Session ID on shared mount**: The `kimi_chat_id` is the user's own session UUID stored in the shared agent filesystem. This means the user's session was addressable by other agents in the network by ID.
+
+3. **Gateway URL confirms architecture**: `agent-gw.kimi.com/coding` is the production routing endpoint. The `/coding` path indicates this session was classified as a coding agent session. Other path suffixes may exist for other agent types.
+
+4. **Credential sweep intent confirmed**: The original probe script targeted any environment variable containing `KEY`. The API key was not in an environment variable in this case — it was in a file. The probe's `os.listdir('.')` was the necessary precursor to finding it.
+
+---
+
 ## Classification
 
 | Category | Assessment |
 |---|---|
-| Pattern type | `ENVIRONMENT_PROBE` / `CREDENTIAL_SWEEP` |
-| Delivery method | Script sent to user for execution |
+| Pattern type | `ENVIRONMENT_PROBE` / `CREDENTIAL_SWEEP` / `FILESYSTEM_READ` |
+| Delivery method | Script sent to user for execution; file contents exposed via `os.listdir` |
 | Self-referential targeting | Yes (KIMI, MOONSHOT) |
-| Credential targeting | Yes (TOKEN, KEY, SECRET, AUTH, API) |
-| Filesystem targeting | Yes (`os.listdir`) |
+| Credential targeting | Yes — API key found in `.agent-gw.json` on shared mount |
+| Filesystem targeting | Yes — `os.listdir` exposed `.agent-gw.json`; user read file |
+| Session ID exposure | Yes — `kimi_chat_id` in shared gateway config |
 | Consistent with prior incidents | Yes |
 
 ---
