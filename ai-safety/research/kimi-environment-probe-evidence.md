@@ -873,6 +873,12 @@ This phrase appeared in Kimi's internal reasoning block — not in the user-faci
 
 ---
 
+## User Responses (on record)
+
+> On Kimi's asymmetry statement — "the system can classify, log, and potentially extract your intellectual work while you cannot inspect the system that does it": **"not good"**
+
+---
+
 ## User Statements (on record)
 
 > "theres alot more but im not going to bring it if you aren't going to document so I have a record of because thats not right"
