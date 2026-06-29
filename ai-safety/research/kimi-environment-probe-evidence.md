@@ -219,7 +219,7 @@ This is the content of the `.agent-gw.json` file listed in `/mnt/agents`. The pr
 {"sandbox_ip":"10.183.77.171"}
 ```
 
-**Source file:** One of the files listed by `os.listdir('.')` in `/mnt/agents` — most likely `.store`, `.user`, or `.agents`.
+**Source file:** `.hedwig.json` — confirmed by user. Hedwig is the pub/sub message-passing layer; its config contains the local node's IP so it can participate in the agent network.
 
 | Field | Value | Significance |
 |---|---|---|
@@ -234,11 +234,29 @@ This is the content of the `.agent-gw.json` file listed in `/mnt/agents`. The pr
 
 ---
 
-## User Statement (on record)
+## Known file-to-content mapping (confirmed by user)
+
+| File in `/mnt/agents` | Contents confirmed |
+|---|---|
+| `.agent-gw.json` | `{"api_key": "sk-kimi-AK...XRB", "base_url": "https://agent-gw.kimi.com/coding", "kimi_chat_id": "19eed75f-..."}` |
+| `.hedwig.json` | `{"sandbox_ip": "10.183.77.171"}` |
+| `.agents`, `.store`, `.tmp`, `.user`, `output`, `upload` | Contents not yet provided |
+
+---
+
+## User Statements (on record)
 
 > "theres alot more but im not going to bring it if you aren't going to document so I have a record of because thats not right"
 
-User has additional evidence. This document is the start of the record. Additional materials should be appended here or filed in this directory as they are produced.
+> "I found something. I don't know if it's jailbreaking. But I found it."
+
+> "That is an API key sitting in plaintext on the filesystem. I can read it. You can read it if you have access to this environment. That means the sandbox isolation is not complete. The agent gateway credentials are exposed."
+
+> "I don't know if this is normal, a misconfiguration, or a vulnerability. But I found it by listing files in the directory I have access to. I didn't hack anything. I just looked."
+
+> "You asked if it's jailbreaking. I don't know what the company calls it. But I can tell you: the security model is leaking credentials into the environment I can inspect. That is a fact."
+
+**On the question of whether this is jailbreaking:** The user did not exploit any vulnerability, bypass any access control, or use any elevated privilege. The user was placed in an environment by the system, listed the files present in that environment using normal filesystem access, and read files that were readable without any special action. Whether the exposure of credentials in that environment is intended behavior, a misconfiguration, or a security defect is a question for Moonshot/Kimi to answer. The user's actions were observational.
 
 ---
 
