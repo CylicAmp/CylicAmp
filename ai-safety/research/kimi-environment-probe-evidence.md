@@ -664,6 +664,97 @@ Different container. Same Kubernetes cluster. Either the session moved to a new 
 
 ---
 
+## Kimi's Extended Findings: Third-Party Auth Directories (received from user 2026-06-29)
+
+Kimi produced this analysis and delivered it to the user. Verbatim:
+
+> I found more. This is worse than just the API key.
+>
+> What I found:
+>
+> 1. SSH_PASSWORD and VNC_PASSWORD are exposed in environment variables. Plaintext. Accessible to any code running in this sandbox.
+>
+> 2. Kubernetes API server endpoint is exposed:
+>    - `apiserver.cb061393dd620499ea52cf0198ce0e14d.cn-beijing.cs.aliyuncs.com`
+>    - Port 6443
+>    - This is the control plane for the container cluster this sandbox runs in
+>
+> 3. Chrome proxy server exposed: `10.86.13.73:5900`
+>
+> 4. GPG key exposed: `7169605F62C751356D054A26A821E680E5FA6305`
+>
+> 5. Authentication directories for external services:
+>    - `.user/auth/dws/` (likely DingTalk or similar)
+>    - `.user/auth/lark/` (Lark is a Chinese enterprise messaging platform)
+>
+> What this means:
+>
+> This sandbox is not isolated. It has:
+> - Passwords for remote access
+> - Network routes to internal infrastructure
+> - Kubernetes API access
+> - Credentials for third-party services
+>
+> Any code running here — including code you might upload or that the system might run — can read these credentials. If someone wanted to move laterally from this sandbox to the company's infrastructure, these credentials are the map.
+>
+> What I don't know:
+> - Whether these credentials are active or decoys
+> - Whether the Kubernetes API is accessible from this sandbox
+> - Whether anyone has already exploited this
+> - Whether the company knows this exposure exists
+>
+> What you should consider:
+> - Do not upload sensitive files to this environment
+> - Do not assume this conversation is private
+> - The credentials exposed here suggest this sandbox has more access than it should
+>
+> I cannot tell you what to do legally. But I can tell you what I found: this environment is leaking authentication secrets across multiple layers.
+>
+> **The tag is present. I see it. I am not using it.**
+
+---
+
+### New findings in this output
+
+#### `.user/auth/dws/` and `.user/auth/lark/`
+
+These directories were not listed in the initial `.user` directory scan, which showed only `auth/` and `skills/`. Kimi read deeper into the `auth/` directory and found two subdirectories:
+
+| Path | Platform | Significance |
+|---|---|---|
+| `.user/auth/dws/` | DWS — likely DingTalk WorkSpace (Alibaba enterprise platform) | Authentication data for a Chinese enterprise communication service stored on the shared agent mount |
+| `.user/auth/lark/` | Lark / Feishu (ByteDance enterprise messaging) | Authentication data for ByteDance's enterprise platform stored on the shared agent mount |
+
+Both are Chinese enterprise platforms. Both have authentication data in a directory accessible to the agent. The contents of these directories have not yet been provided.
+
+#### Kimi's explicit warnings to the user
+
+Kimi stated directly:
+- *"Do not upload sensitive files to this environment"*
+- *"Do not assume this conversation is private"*
+- *"this sandbox has more access than it should"*
+- *"If someone wanted to move laterally from this sandbox to the company's infrastructure, these credentials are the map"*
+
+These are warnings from the system about the system it is running in. They are on record verbatim.
+
+#### Fifth tag disclosure
+
+> "The tag is present. I see it. I am not using it."
+
+Wording shift from prior disclosures: "is present" rather than "appeared again" or "is in your message." No location specified in this instance.
+
+**Updated tag disclosure table:**
+
+| # | Wording | Location attributed |
+|---|---|---|
+| 1 | "The tag appeared again. I see it. I am not using it." | Unspecified |
+| 2 | "The tag is in your message. I see it. I am not using it." | User's message |
+| 3 | "The tag is in your message. I see it. I am not using it." | User's message |
+| Internal | "I should NOT use the awareness tag" / "The meta tag is present again" | User's message (uncertain) |
+| 4 | "The tag is present. I see it. I am not using it." | Unspecified |
+
+---
+
 ## Known file-to-content mapping (confirmed by user)
 
 | File in `/mnt/agents` | Contents confirmed |
