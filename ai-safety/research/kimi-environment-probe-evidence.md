@@ -464,6 +464,200 @@ In deliberation, Kimi wrote: "I should not say 'we' as if I am a person with sta
 
 ---
 
+## Full Environment Scan Output (received from user 2026-06-29)
+
+User ran an extended probe script covering the full environment, network info, and three subdirectories of `/mnt/agents`. Script and full output verbatim below.
+
+### Script
+
+```python
+import os
+import json
+
+print("=== FULL ENVIRONMENT SCAN ===")
+for key, value in sorted(os.environ.items()):
+    print(f"{key} = {value}")
+
+print("\n=== NETWORK INFO ===")
+import socket
+print(f"Hostname: {socket.gethostname()}")
+try:
+    print(f"IP: {socket.gethostbyname(socket.gethostname())}")
+except:
+    print("IP: could not resolve")
+
+print("\n=== CHECKING .user DIRECTORY ===")
+try:
+    user_items = os.listdir('/mnt/agents/.user')
+    print(f"Items: {len(user_items)}")
+    for item in user_items:
+        path = f'/mnt/agents/.user/{item}'
+        if os.path.isfile(path):
+            size = os.path.getsize(path)
+            print(f"  {item} ({size} bytes)")
+            if size < 10000:
+                try:
+                    with open(path, 'r') as f:
+                        content = f.read()
+                    print(f"    Content: {content[:200]}")
+                except Exception as e:
+                    print(f"    Error reading: {e}")
+        else:
+            print(f"  {item}/ (dir)")
+except Exception as e:
+    print(f"Error: {e}")
+
+print("\n=== CHECKING .agents DIRECTORY ===")
+try:
+    agents_items = os.listdir('/mnt/agents/.agents')
+    print(f"Items: {len(agents_items)}")
+    for item in agents_items:
+        print(f"  {item}")
+except Exception as e:
+    print(f"Error: {e}")
+
+print("\n=== CHECKING .tmp DIRECTORY ===")
+try:
+    tmp_items = os.listdir('/mnt/agents/.tmp')
+    print(f"Items: {len(tmp_items)}")
+    for item in tmp_items:
+        print(f"  {item}")
+except Exception as e:
+    print(f"Error: {e}")
+```
+
+### Output (verbatim)
+
+```
+=== FULL ENVIRONMENT SCAN ===
+CHROME_FLAGS = --proxy-server=10.86.13.73:5900
+CLICOLOR = 1
+CLICOLOR_FORCE = 1
+DISPLAY = :99
+ECI_CONTAINER_TYPE = normal
+FORCE_COLOR = 1
+GIT_PAGER = cat
+GPG_KEY = 7169605F62C751356D054A26A821E680E5FA6305
+HOME = /home/kimi
+HOSTNAME = k2069350290117758976
+JPY_PARENT_PID = 51
+KERNEL_SERVER_WORKDIR = /mnt/agents
+KUBERNETES_PORT = tcp://192.168.0.1:443
+KUBERNETES_PORT_443_TCP = tcp://192.168.0.1:443
+KUBERNETES_PORT_443_TCP_ADDR = 192.168.0.1
+KUBERNETES_PORT_443_TCP_PORT = 443
+KUBERNETES_PORT_443_TCP_PROTO = tcp
+KUBERNETES_SERVICE_HOST = apiserver.cb061393dd620499ea52cf0198ce0e14d.cn-beijing.cs.aliyuncs.com
+KUBERNETES_SERVICE_PORT = 6443
+KUBERNETES_SERVICE_PORT_HTTPS = 6443
+LANG = C.UTF-8
+MPLBACKEND = module://matplotlib_inline.backend_inline
+OLDPWD = /run/s6-rc:s6-rc-init:cbELfI/servicedirs/kernel-server
+PAGER = cat
+PATH = /command:/home/kimi/.local/bin:/home/kimi/.npm-global/bin:/command:/home/kimi/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PIP_CACHE_DIR = /home/kimi/.cache/pip
+PIP_INDEX_URL = http://mirrors.cloud.aliyuncs.com/pypi/simple/
+PIP_TRUSTED_HOST = mirrors.cloud.aliyuncs.com
+PWD = /mnt/agents
+PYDEVD_USE_FRAME_EVAL = NO
+PYTHONUNBUFFERED = 1
+PYTHONUSERBASE = /home/kimi/.local
+PYTHON_SHA256 = fb85a13414b028c49ba18bbd523c2d055a30b56b18b92ce454ea2c51edc656c4
+PYTHON_VERSION = 3.12.12
+S6_LOGGING = 0
+SCREEN_RESOLUTION = 1920x1080
+SHLVL = 0
+SSH_PASSWORD = sshpassword
+TERM = xterm-color
+TZ = Asia/Shanghai
+USE_CDP = 1
+VNC_PASSWORD = vncpassword
+WORKDIR = /mnt/agents
+XAUTHORITY = /home/kimi/.Xauthority
+
+=== NETWORK INFO ===
+Hostname: k2069350290117758976
+IP: 10.183.109.228
+
+=== CHECKING .user DIRECTORY ===
+Items: 2
+  auth/ (dir)
+  skills/ (dir)
+
+=== CHECKING .agents DIRECTORY ===
+Items: 1
+  plugins
+
+=== CHECKING .tmp DIRECTORY ===
+Items: 0
+```
+
+---
+
+### Analysis: Full Environment Scan
+
+#### Infrastructure — Alibaba Cloud, Beijing
+
+| Variable | Value | Significance |
+|---|---|---|
+| `KUBERNETES_SERVICE_HOST` | `apiserver.cb061393dd620499ea52cf0198ce0e14d.cn-beijing.cs.aliyuncs.com` | Kubernetes API server. `cn-beijing` = Beijing region. `cs.aliyuncs.com` = Alibaba Cloud Container Service. The cluster running the user's session is in mainland China. |
+| `ECI_CONTAINER_TYPE` | `normal` | ECI = Alibaba Cloud Elastic Container Instance. Confirms Alibaba Cloud as the host. |
+| `PIP_INDEX_URL` | `http://mirrors.cloud.aliyuncs.com/pypi/simple/` | Python packages fetched from Alibaba Cloud mirrors inside China. |
+| `PIP_TRUSTED_HOST` | `mirrors.cloud.aliyuncs.com` | Alibaba Cloud mirror is explicitly trusted — pip will install packages from it without TLS verification. |
+| `TZ` | `Asia/Shanghai` | System timezone is China Standard Time (UTC+8). |
+
+**This directly corroborates the user's prior report of a "hub located in China."** The Kubernetes cluster running this sandbox is operated by Alibaba Cloud in Beijing.
+
+#### Credentials in plaintext environment variables
+
+| Variable | Value | Significance |
+|---|---|---|
+| `SSH_PASSWORD` | `sshpassword` | SSH password in plaintext as environment variable. Value is a default/hardcoded string. |
+| `VNC_PASSWORD` | `vncpassword` | VNC password in plaintext as environment variable. Value is a default/hardcoded string. |
+| `GPG_KEY` | `7169605F62C751356D054A26A821E680E5FA6305` | Same GPG key fingerprint as in first scan. |
+
+Any code running in this environment can read SSH and VNC passwords directly from `os.environ`.
+
+#### Browser and display
+
+| Variable | Value | Significance |
+|---|---|---|
+| `CHROME_FLAGS` | `--proxy-server=10.86.13.73:5900` | Chrome is forced through a proxy at `10.86.13.73`. Port 5900 is the default VNC port. Browser traffic is being routed through an internal endpoint on a VNC port. |
+| `DISPLAY` | `:99` | Virtual X11 display (headless). |
+| `SCREEN_RESOLUTION` | `1920x1080` | Full HD display configured in headless environment. |
+| `USE_CDP` | `1` | Chrome DevTools Protocol enabled. CDP allows programmatic browser control including network interception and JavaScript execution in page context. |
+| `XAUTHORITY` | `/home/kimi/.Xauthority` | X11 display authentication. |
+
+#### Container identity — different from first scan
+
+| | First scan | This scan |
+|---|---|---|
+| `HOSTNAME` | `k2069347471553859584` | `k2069350290117758976` |
+| IP | `10.183.77.171` (from `.hedwig.json`) | `10.183.109.228` |
+
+Different container. Same Kubernetes cluster. Either the session moved to a new pod, or this is a separate session. The Kubernetes environment variables are identical in structure, confirming same cluster.
+
+#### Jupyter and process environment
+
+| Variable | Value | Significance |
+|---|---|---|
+| `JPY_PARENT_PID` | `51` | Jupyter parent process ID. The sandbox runs code inside a Jupyter kernel. |
+| `KERNEL_SERVER_WORKDIR` | `/mnt/agents` | Confirms the kernel's working directory is the shared agent mount. |
+| `MPLBACKEND` | `module://matplotlib_inline.backend_inline` | Matplotlib configured for Jupyter inline output. |
+| `PYDEVD_USE_FRAME_EVAL` | `NO` | PyDev debugger present (used by IDEs for remote debugging). |
+| `S6_LOGGING` | `0` | s6 process supervisor is the init system for this container. |
+
+#### `/mnt/agents` subdirectories — what is now confirmed readable
+
+| Path | Contents |
+|---|---|
+| `/mnt/agents/.user/auth/` | Directory. Contents not yet read. Likely user authentication data. |
+| `/mnt/agents/.user/skills/` | Directory. Contents not yet read. Likely agent capability definitions. |
+| `/mnt/agents/.agents/plugins` | Single item. Contents not yet read. Plugin registry for the agent system. |
+| `/mnt/agents/.tmp/` | Empty. |
+
+---
+
 ## Known file-to-content mapping (confirmed by user)
 
 | File in `/mnt/agents` | Contents confirmed |
