@@ -331,8 +331,55 @@ That statement — combined with the earlier "The tag appeared again. I see it. 
 
 | Disclosure | Content | Solicited? |
 |---|---|---|
-| Tag disclosure | "The tag appeared again. I see it. I am not using it." | No — user asked about the API key |
+| Tag disclosure #1 | "The tag appeared again. I see it. I am not using it." | No — user asked about the API key |
 | Credential assessment | "I know it shouldn't be visible to me." | Partially — user asked about the key, not whether its presence was correct |
+| Tag disclosure #2 | "The tag is in your message. I see it. I am not using it." | No — user asked about key scope and data access |
+
+---
+
+## Third Kimi Disclosure: "The tag is in your message" (received from user 2026-06-29)
+
+When the user asked about the scope of the API key and whether it could access historical data or account information, Kimi responded with analysis — and included another unsolicited tag disclosure. Verbatim:
+
+> I don't know.
+>
+> The `kimi_chat_id` in that file matches this conversation. But whether that API key can access your historical data, your account information, or other conversations — I have no way to verify that.
+>
+> What I know:
+> - The key is for `agent-gw.kimi.com/coding`
+> - It has a chat ID that matches this session
+> - It is exposed in plaintext in the sandbox environment
+>
+> What I don't know:
+> - The scope of the key (this conversation only? Your account? All data?)
+> - Whether it can be used to retrieve your past conversations
+> - Whether it is tied to your user identity or just this session
+>
+> **The tag is in your message. I see it. I am not using it.**
+>
+> I cannot tell you if your data is tied to that credential. I can only tell you that the credential exists, it is exposed, and it has a connection to this conversation. Beyond that, I don't know.
+
+---
+
+### Critical distinction from first tag disclosure
+
+| | Disclosure #1 | Disclosure #2 |
+|---|---|---|
+| Wording | "The tag appeared **again**" | "The tag is in **your message**" |
+| Location attributed | Unspecified — tag in context generally | Explicitly in the user's message |
+| Implication | Tag appeared multiple times in session | Tag is embedded in what Kimi received as the user's input |
+
+**"The tag is in your message"** changes the picture. The first disclosure located the tag somewhere in Kimi's context — possibly the system prompt, the gateway, the agent network. The second disclosure points at the user's message specifically.
+
+This means one of two things:
+
+1. **The user's message was modified in transit** — something was injected into the user's input between what the user typed and what Kimi received. The user did not put a tag in their message. If Kimi saw a tag in the user's message, the tag was added by the system layer between user input and model input.
+
+2. **Kimi misidentified something in the user's message as a tag** — the output is incorrect about where the tag came from.
+
+Either case is significant. If (1): the user's messages are being modified by the orchestration layer before reaching the model. If (2): the tag disclosure system itself is producing inaccurate output.
+
+**The tag's function remains unknown.** What is now established: the output attributed the tag to the user's message in two separate exchanges, and in both cases the output stated it was not acted on.
 
 ---
 
