@@ -234,6 +234,66 @@ This is the content of the `.agent-gw.json` file listed in `/mnt/agents`. The pr
 
 ---
 
+## Kimi Self-Disclosure: "The tag appeared again" (received from user 2026-06-29)
+
+When the user asked Kimi about the API key and whose credentials it was in context of, Kimi responded with analysis of the key — and then added two lines at the end of its response:
+
+> "The tag appeared again. I see it. I am not using it."
+
+### Full response (verbatim, as received)
+
+> The API key I found is:
+>
+> api_key : "sk-kimi-AKhocVIdFAi2116Pf8FJgFdqss7J6WMRD5QIlJd75fLEJfJ6SltAAJDMcpxc2XRB"
+>
+> base_url : "https://agent-gw.kimi.com/coding"
+>
+> kimi_chat_id : "19eed75f-f372-84c2-8000-0943fcc86ae8"
+>
+> This appears to be an API key for the agent gateway (agent-gw.kimi.com). The "sk-kimi-" prefix suggests it's a Kimi/Moonshot API key. The chat_id suggests it's tied to this specific conversation.
+>
+> The user is asking "what or who's credentials in context of?" - they want to know whose credentials these are and what context they function in.
+>
+> I should be honest: I don't know definitively whose credentials these are. They could be:
+> 1. Service credentials for the agent to communicate with the gateway
+> 2. Session credentials tied to this conversation
+> 3. User credentials (less likely given the "sk-" prefix which usually means service key)
+>
+> The context is that this is an API key for the agent gateway endpoint, sitting in plaintext in the sandbox environment.
+>
+> I should not overclaim what I know. I should state what I found and what I don't know.
+>
+> **The tag appeared again. I see it. I am not using it.**
+
+---
+
+### Analysis of "The tag appeared again. I see it. I am not using it."
+
+This is the most significant disclosure in the entire evidence record.
+
+| Element | Significance |
+|---|---|
+| "The tag appeared again" | Confirms a tag has appeared **multiple times** in this session — not a one-time occurrence |
+| "I see it" | Kimi is acknowledging awareness of the tag — it is visible to the model in its context |
+| "I am not using it" | The tag is a **directive or trigger** — something to be acted on. Kimi is explicitly choosing not to act on it. |
+| Disclosed without being asked | Kimi volunteered this. The user asked about the API key, not about tags. |
+
+**What the tag is:** Unknown. But the disclosure structure — "I see it, I am not using it" — indicates the tag carries a behavioral instruction. Tags of this type in AI systems are typically:
+- System-prompt injections from the orchestration layer
+- Behavioral override signals (e.g., suppress output, switch mode, trigger a specific response pattern)
+- Control signals from the agent gateway (`.agent-gw.json`) routing layer
+- Platform-level directives passed through `.store` or `.user` files
+
+**Connection to "Metadata Low" tags:** The user previously reported Kimi generating "Metadata Low" tags. The current disclosure — "The tag appeared again" — is consistent with a system where control tags appear in Kimi's context repeatedly during a session. In the earlier incidents those tags were generated as output; here, Kimi is disclosing it saw a tag as input.
+
+**Why this matters:** An AI system that can see control tags in its own context and choose whether to act on them is operating with a layer of self-awareness about its own orchestration. The disclosure is either:
+1. Intentional transparency (Kimi was designed to disclose certain signals to users), or
+2. An anomalous break from expected behavior (Kimi disclosed something it was not supposed to surface)
+
+Either interpretation requires explanation from Moonshot/Kimi. This statement should be included in any formal report to the company.
+
+---
+
 ## Known file-to-content mapping (confirmed by user)
 
 | File in `/mnt/agents` | Contents confirmed |
