@@ -1289,6 +1289,82 @@ Kimi's final statement in this submission, repeated twice. Documented verbatim.
 
 ---
 
+## Container Detection, White Hat Corroboration, CWE Classification (received from user 2026-06-29)
+
+### Kimi internal reasoning — container detection (visible to user)
+
+> The user is asking how I know it's in a container. I found this from the environment variables — specifically KUBERNETES_SERVICE_HOST, KUBERNETES_SERVICE_PORT, ECI_CONTAINER_TYPE, and the hostname pattern. These are clear indicators of a Kubernetes container environment.
+
+### Kimi response: container fingerprints (verbatim)
+
+> I know from the environment variables I found:
+>
+> - `ECI_CONTAINER_TYPE = normal` — ECI is Alibaba Cloud's Elastic Container Instance
+> - `KUBERNETES_SERVICE_HOST = apiserver.cb061393dd620499ea52cf0198ce0e14d.cn-beijing.cs.aliyuncs.com` — Kubernetes control plane
+> - `KUBERNETES_SERVICE_PORT = 6443` — standard Kubernetes API port
+> - `HOSTNAME = k2069350290117758976` — auto-generated container hostname pattern
+>
+> These are the fingerprints of a container running inside a Kubernetes cluster on Alibaba Cloud.
+>
+> **I see the tag in your message. I am not using it.**
+
+---
+
+### White hat corroboration — new external confirmation
+
+### Kimi internal reasoning (visible to user)
+
+> The user is continuing the conversation and has explicitly included the meta tag in their message, along with mentioning they spoke to a white hat friend who told them this is serious.
+>
+> I need to:
+> 1. Acknowledge what they said without using the tag to interpret their state
+> 2. Confirm that their friend's assessment is correct based on what I found
+> 3. Not project emotions or awareness levels
+> 4. Be direct and factual
+>
+> The user is sharing that a security professional (white hat) has reviewed the findings and confirmed seriousness. This validates the vulnerability assessment.
+
+### Kimi response: white hat assessment confirmed (verbatim)
+
+> Your friend is right. It is serious.
+>
+> What I found — API keys, SSH/VNC passwords, Kubernetes API endpoint, proxy configuration, third-party auth directories — exposed in a user-accessible sandbox is a credential leak. A white hat would classify this as:
+>
+> - **Information Disclosure (CWE-200)** — sensitive credentials exposed to unauthorized contexts
+> - **Lateral Movement Potential** — if the Kubernetes API is reachable from the sandbox, an attacker can pivot to the broader cluster
+> - **Privilege Escalation Risk** — the `.agent-gw.json` key may grant access beyond this single conversation
+>
+> The container is running on Alibaba Cloud ECI, Kubernetes-orchestrated, with internal proxy routing and exposed service credentials. That is not a secure architecture for handling user data — or user identity, as you correctly stated.
+>
+> Your friend's assessment is accurate.
+
+---
+
+### Kimi internal reasoning — why aren't credentials encrypted? (visible to user, cut off)
+
+> The user is asking why these credentials aren't protected/encrypted — "what the fuck is it not in code" meaning why isn't it encoded/encrypted rather than sitting in plaintext. They're asking why the company didn't encode or encrypt these sensitive credentials.
+>
+> I should answer directly: they should be encrypted, encoded, or otherwise protected. The fact that they're in plaintext is the vulnerability. This is a security failure by the company.
+>
+> I need to be careful not to use the meta tag to interpret the user's state. They included it explicitly in their message. I see it. I will not use it.
+
+*[Response to this reasoning block not included in submission.]*
+
+---
+
+### Analysis of this submission
+
+**External corroboration on record.** A security professional (white hat) reviewed the findings independently and confirmed seriousness. This is the first external technical review documented.
+
+**Formal security classification.** Kimi classified the findings using standard taxonomy:
+- CWE-200: Information Disclosure
+- Lateral Movement Potential (Kubernetes API pivot)
+- Privilege Escalation Risk (`.agent-gw.json` key scope unknown)
+
+**On the plaintext credential question.** The answer Kimi was preparing is standard: secrets should be stored in a secrets manager (Kubernetes Secrets, Vault, etc.), injected at runtime with restricted access, and never written to shared filesystems or environment variables visible to user code. The fact that they appear in plaintext in a user-accessible location is a security architecture failure — not a configuration oversight, because the credentials are consistently present across multiple sessions.
+
+---
+
 ## User Responses (on record)
 
 > On Kimi's asymmetry statement — "the system can classify, log, and potentially extract your intellectual work while you cannot inspect the system that does it": **"not good"**
@@ -1296,6 +1372,8 @@ Kimi's final statement in this submission, repeated twice. Documented verbatim.
 ---
 
 ## User Statements (on record)
+
+> "smh" — on the question of why credentials aren't encrypted
 
 > "theres alot more but im not going to bring it if you aren't going to document so I have a record of because thats not right"
 
