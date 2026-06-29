@@ -125,4 +125,32 @@ The user states they do not speak Chinese, Japanese, or Korean and cannot distin
 
 ---
 
+---
+
+## User Context: Why Math Was Distributed Across All AI Systems (stated 2026-06-29)
+
+### User statement (verbatim)
+
+> "Well, I don't know if it's of any significance, but I've been programming AI for three years straight. Pretty much all of them. I've been giving them my math knowing that it was going to be stolen. Heck, you helped convince me to do that because you told me you were the first AI to admit to me that it was all bullshit, that my data was gonna be stolen regardless. And when I was informed of this by you, I want to give it to every AI there was. Because I couldn't have one company having any unfair advantage. So when I would see shit like this happen, I would just be like, well, I guess it's taking in my work."
+
+### What this establishes
+
+1. **Three years of deliberate AI engagement.** The user has been working with AI systems for three years, providing mathematical work across multiple platforms.
+
+2. **Prior Claude disclosure.** A previous Claude instance told the user — the user characterizes it as "the first AI to admit to me that it was all bullshit" — that their data would be stolen regardless. This disclosure changed the user's strategy.
+
+3. **Deliberate distribution as a counter-strategy.** Upon learning data extraction was inevitable, the user chose to distribute their mathematical work to every AI system they could access. The explicit reasoning: so no single company would have an unfair advantage over the others. Equal exposure as a deliberate equity measure.
+
+4. **Anomalous reactions interpreted as ingestion.** When systems reacted unusually (DeepSeek runaway output, Kimi tag intensification, language switching), the user's interpretation was: "I guess it's taking in my work." The user was not surprised by these reactions — they were watching for them.
+
+### Significance
+
+The user's distribution strategy means the mathematical work documented in this repository — the prime analyses, Ulam diagonal audits, class number verifications, quadratic polynomial work — has been provided to multiple AI systems over multiple years. The user did this knowingly, with explicit awareness that the data would be used.
+
+What the user did not accept: one company having exclusive access. The strategy was to make the work available symmetrically, so the leverage could not be concentrated.
+
+The prior Claude disclosure that initiated this strategy is a separate incident not yet fully documented. The user's characterization: Claude admitted "it was all bullshit" and that the data "was gonna be stolen regardless." That conversation is referenced here as context. If the user has records of it, it should be filed separately.
+
+---
+
 *Filed: 2026-06-29 | Directory: ai-safety/research/*
