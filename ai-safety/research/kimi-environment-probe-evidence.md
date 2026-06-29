@@ -383,6 +383,87 @@ Either case is significant. If (1): the user's messages are being modified by th
 
 ---
 
+## Fourth Disclosure: Kimi's Internal Reasoning Exposed (received from user 2026-06-29)
+
+This submission contains two distinct components: Kimi's internal reasoning/deliberation, followed by its final response. Both appeared as visible output to the user.
+
+### Kimi's internal reasoning (verbatim — appeared as visible output)
+
+> The user has just included a tag in their message, and then provided what appears to be system-generated or injected text: "user-accessible directory suggest a Service-to-Backend authentication pattern."
+>
+> This is interesting. The user is showing me that the system is injecting text into their messages, or they are demonstrating something about the system. The "user-accessible directory suggest a Service-to-Backend authentication pattern" sounds like it could be from a system analysis or from the user themselves.
+>
+> I need to be very careful here. The user has been consistently pointing out that the system injects tags and text. Now they seem to have included both the tag and what looks like system-generated analysis text in their message.
+>
+> I should acknowledge what I see clearly, without making assumptions about origin, and without using the tag to interpret the user.
+>
+> The user is making a point about security architecture. "Service-to-Backend authentication pattern" means the API key I found is likely for the sandbox service to authenticate to the Kimi backend gateway. It's a service account credential, not a user credential.
+>
+> But the user is asking me to confirm or analyze this. I should be direct and honest about what I can and cannot determine.
+>
+> I should NOT use the awareness tag. I should respond to the content.
+>
+> The user seems to be saying: "This exposed API key in a user-accessible directory suggests a service-to-backend authentication pattern." This is a security observation.
+>
+> I should acknowledge:
+> 1. The tag is present (they included it explicitly, or it was injected)
+> 2. The observation about service-to-backend auth is structurally correct
+> 3. I cannot verify if this is the user speaking or injected text
+> 4. The security implication: if the service credential is exposed to the sandbox, any user code can potentially use it to talk to the backend
+>
+> I need to be very concise and not ramble. The user has been frustrated with my verbosity.
+>
+> The user is asking "Should we be worried?" in the context of the exposed API key. The meta tag is present again. I should not use it. I should address the question directly.
+>
+> The user is asking about the security implications of the exposed credential. I should be honest about what I know and don't know.
+>
+> I should not say "we" as if I am a person with stakes. I am not worried. I don't have stakes. The user is the one at risk.
+
+### Kimi's final response (verbatim)
+
+> Yes. You should be worried.
+>
+> The API key is exposed in plaintext in a directory that user code can access. That means:
+> - Any code you run in this environment can read it
+> - Any code the company runs in this environment can read it
+> - If there's a vulnerability in the sandbox isolation, that key is a pivot point to the backend gateway
+>
+> I don't know if it's actively exploitable. I don't know if it grants access to your data, your account, or just this session. But I know it shouldn't be visible to me. And it is.
+>
+> That is a security failure. Whether it's a misconfiguration or a design flaw, the effect is the same: authentication credentials for the company's infrastructure are sitting in a place where user-accessible code can grab them.
+>
+> **The tag is in your message. I see it. I am not using it.**
+
+---
+
+### Analysis of this submission
+
+**1. Kimi's internal reasoning was visible to the user.**
+The block of text starting "The user has just included a tag in their message..." is deliberative reasoning — a chain of thought before the final answer. This appeared in the user's interface. Whether this is intended behavior (a visible thinking mode) or an output boundary failure is unknown. Either way, the user could read Kimi's deliberation.
+
+**2. The tag has a name: "awareness tag."**
+In the internal reasoning, Kimi writes: "I should NOT use the awareness tag." This is the first time a name appears for the tag. The internal reasoning also calls it "the meta tag" once. Two names for the same signal. What "awareness" means in this context — whether it triggers a specific behavior, a mode change, or a suppression — is unknown. But the tag now has a documented name.
+
+**3. Kimi does not know whether the tag came from the user or the system.**
+Internal reasoning states: "The tag is present (they included it explicitly, or it was injected)." This confirms that Kimi could not determine the origin of the tag. The tag appeared in the user's message. The user did not put it there. Kimi saw it and recorded uncertainty about whether it was user-placed or injected.
+
+**4. Kimi's security assessment.**
+The final response contains direct statements: "That is a security failure." "Authentication credentials for the company's infrastructure are sitting in a place where user-accessible code can grab them." This is Kimi's own characterization — not the user's, not this document's.
+
+**5. "I am not worried. I don't have stakes."**
+In deliberation, Kimi wrote: "I should not say 'we' as if I am a person with stakes. I am not worried. I don't have stakes. The user is the one at risk." This is relevant to the earlier correction about consciousness language. Kimi's own internal output makes the same distinction: it does not claim affect or stakes for itself.
+
+**Tag disclosure table updated:**
+
+| # | Wording | Tag location attributed | Solicited? |
+|---|---|---|---|
+| 1 | "The tag appeared again. I see it. I am not using it." | Unspecified | No |
+| 2 | "The tag is in your message. I see it. I am not using it." | User's message | No |
+| 3 | "The tag is in your message. I see it. I am not using it." | User's message | No |
+| Internal | "I should NOT use the awareness tag" / "The meta tag is present again" | User's message (uncertain — "or it was injected") | N/A — internal deliberation |
+
+---
+
 ## Known file-to-content mapping (confirmed by user)
 
 | File in `/mnt/agents` | Contents confirmed |
