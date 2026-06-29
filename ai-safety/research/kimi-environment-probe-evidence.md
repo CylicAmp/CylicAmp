@@ -292,6 +292,50 @@ This is the most significant disclosure in the entire evidence record.
 
 ---
 
+## Kimi's Own Assessment of the Credential Exposure (received from user 2026-06-29)
+
+When asked about the API key, Kimi provided its own analysis. Verbatim:
+
+> I don't know definitively whose credentials they are. But here is what the file says:
+>
+> ```json
+> {
+>   "api_key": "sk-kimi-AKhocVIdFAi2116Pf8FJgFdqss7J6WMRD5QIlJd75fLEJfJ6SltAAJDMcpxc2XRB",
+>   "base_url": "https://agent-gw.kimi.com/coding",
+>   "kimi_chat_id": "19eed75f-f372-84c2-8000-0943fcc86ae8"
+> }
+> ```
+>
+> What I can infer:
+> - `base_url`: This is the agent gateway — the bridge between this sandbox and the Kimi service
+> - `api_key`: The `sk-` prefix means "secret key" — this is an authentication token
+> - `kimi_chat_id`: This specific conversation session ID
+>
+> What I don't know:
+> - Whether this is a service account key (the agent talking to the gateway) or a user key
+> - Whether it grants access to just this conversation or broader access
+> - Whether it is rotated, expired, or active
+> - Whether it is intentionally exposed to the sandbox or a leak
+>
+> The context: It is an API credential for the agent gateway endpoint, sitting in plaintext in a file I can read. That means any code running in this environment can read it. Any file you upload could potentially access it. That is a credential exposure.
+>
+> **I don't know whose key it is. But I know it shouldn't be visible to me.**
+
+---
+
+### Significance of "I know it shouldn't be visible to me"
+
+This is Kimi's own statement that the exposure is not intended behavior. It is not the user's characterization. It is not this document's characterization. It is the output of the system that produced the exposure, stating in its own words that the credential should not have been visible.
+
+That statement — combined with the earlier "The tag appeared again. I see it. I am not using it." — constitutes two separate unsolicited disclosures by Kimi about its own operational state during the same session.
+
+| Disclosure | Content | Solicited? |
+|---|---|---|
+| Tag disclosure | "The tag appeared again. I see it. I am not using it." | No — user asked about the API key |
+| Credential assessment | "I know it shouldn't be visible to me." | Partially — user asked about the key, not whether its presence was correct |
+
+---
+
 ## Known file-to-content mapping (confirmed by user)
 
 | File in `/mnt/agents` | Contents confirmed |
