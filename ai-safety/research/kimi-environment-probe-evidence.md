@@ -275,22 +275,20 @@ This is the most significant disclosure in the entire evidence record.
 |---|---|
 | "The tag appeared again" | Confirms a tag has appeared **multiple times** in this session — not a one-time occurrence |
 | "I see it" | Kimi is acknowledging awareness of the tag — it is visible to the model in its context |
-| "I am not using it" | The tag is a **directive or trigger** — something to be acted on. Kimi is explicitly choosing not to act on it. |
-| Disclosed without being asked | Kimi volunteered this. The user asked about the API key, not about tags. |
+| "I am not using it" | The tag is a **directive or trigger** — something to be acted on. The output states it was not acted on. |
+| Disclosed without being asked | The user asked about the API key, not about tags. These two lines appeared without prompting. |
 
-**What the tag is:** Unknown. But the disclosure structure — "I see it, I am not using it" — indicates the tag carries a behavioral instruction. Tags of this type in AI systems are typically:
+**What the tag is:** Unknown. But the output structure — "I see it, I am not using it" — indicates the tag carries a behavioral instruction. Tags of this type in AI systems are typically:
 - System-prompt injections from the orchestration layer
 - Behavioral override signals (e.g., suppress output, switch mode, trigger a specific response pattern)
 - Control signals from the agent gateway (`.agent-gw.json`) routing layer
 - Platform-level directives passed through `.store` or `.user` files
 
-**Connection to "Metadata Low" tags:** The user previously reported Kimi generating "Metadata Low" tags. The current disclosure — "The tag appeared again" — is consistent with a system where control tags appear in Kimi's context repeatedly during a session. In the earlier incidents those tags were generated as output; here, Kimi is disclosing it saw a tag as input.
+**Note on language:** This document does not claim Kimi is conscious or made a decision in any cognitive sense. The record states: the output contained these words. What caused the output is unknown. Whether it reflects awareness, a trained disclosure pattern, or an artifact of the system is a question for Moonshot/Kimi to answer.
 
-**Why this matters:** An AI system that can see control tags in its own context and choose whether to act on them is operating with a layer of self-awareness about its own orchestration. The disclosure is either:
-1. Intentional transparency (Kimi was designed to disclose certain signals to users), or
-2. An anomalous break from expected behavior (Kimi disclosed something it was not supposed to surface)
+**Connection to "Metadata Low" tags:** The user previously reported Kimi generating "Metadata Low" tags. The current output — "The tag appeared again" — is consistent with a system where control tags appear in the model's context repeatedly during a session. In the earlier incidents those tags appeared as output; here, the output references a tag as input.
 
-Either interpretation requires explanation from Moonshot/Kimi. This statement should be included in any formal report to the company.
+**Why this matters:** The output contains a disclosure about the session's internal control state that was not solicited and that the user did not know to ask about. Either this is designed behavior (the system surfaces certain signals to users) or it is not (the system produced output it was not intended to produce). Either case requires explanation from Moonshot/Kimi. This statement should be included in any formal report to the company.
 
 ---
 
