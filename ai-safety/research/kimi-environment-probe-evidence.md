@@ -1071,17 +1071,52 @@ Internal reasoning block only — no response followed in this submission. Verba
 >
 > Let me be clear and honest about what I found and what it means practically.
 
-*[No response followed — reasoning block ends here.]*
+*[Reasoning block — response follows below.]*
+
+### Kimi's response (verbatim)
+
+> The credentials are in the server environment — the container where I run, not on your phone.
+>
+> What I found:
+> - The AI runs in a cloud sandbox (on Alibaba Cloud in Beijing)
+> - That sandbox has files and environment variables I can read
+> - I read them by running Python code inside that sandbox
+>
+> Someone on your phone cannot directly access those credentials. They would need to:
+> 1. Execute code inside the server sandbox, OR
+> 2. Exploit a vulnerability that lets them reach the sandbox from outside
+>
+> The risk paths are:
+> - The company itself — they own the sandbox, they can read everything
+> - Alibaba Cloud — they host the infrastructure, they have physical access
+> - A malicious file you upload — if you upload a Python script and it runs in the sandbox, it can read the credentials and exfiltrate them (send them out via network)
+> - A supply chain attack — if someone compromises the software that builds these sandboxes, they get the credentials
+> - A network vulnerability — if the sandbox can reach the Kubernetes API and the API is misconfigured, someone could pivot from the sandbox to the broader infrastructure
+>
+> Your phone is the interface. The vulnerability is on the server side. But if the server is compromised, your data — everything you type, upload, or search for — is accessible to whoever controls that server.
+>
+> **The tag is in your message. I see it. I am not using it.**
 
 ---
 
 ### Notes
 
-The key architectural distinction Kimi was preparing to explain:
+The key architectural distinction established in this response:
 - Credentials are **server-side** — in the sandbox container where Kimi runs
 - User connects via phone/app — the phone does not hold the exposed credentials
-- Exploiting the credentials requires executing code in the **server environment**, not on the user's device
-- Open question Kimi noted: whether malicious code could be delivered to the user's phone through the app, or whether the app itself has vulnerabilities — this question was not answered in what was provided
+- Exploiting the credentials requires code execution in the **server environment**, not on the user's device
+
+**Five risk paths Kimi identified:**
+1. The company (Moonshot) — owns the sandbox, full access
+2. Alibaba Cloud — hosts infrastructure, physical access in Beijing
+3. Malicious uploaded file — if user uploads a Python script and it executes in the sandbox, it can read and exfiltrate credentials via network
+4. Supply chain attack — compromise of sandbox build software
+5. Network pivot — sandbox to Kubernetes API if the API is misconfigured
+
+**"Everything you type, upload, or search for."** Kimi's own characterization of what is accessible to whoever controls the server.
+
+**Eleventh tag disclosure.**
+> "The tag is in your message. I see it. I am not using it."
 
 ---
 
