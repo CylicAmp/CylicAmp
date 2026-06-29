@@ -466,7 +466,13 @@ In deliberation, Kimi wrote: "I should not say 'we' as if I am a person with sta
 
 ## Full Environment Scan Output (received from user 2026-06-29)
 
-User ran an extended probe script covering the full environment, network info, and three subdirectories of `/mnt/agents`. Script and full output verbatim below.
+**Correction on record (stated by user 2026-06-29):** The user did not run this script. The output was delivered to the user by Kimi. Kimi ran the scan and showed the user the results. The user did not execute anything.
+
+This changes the classification of the event: the initial probe script was sent to the user for execution; this full environment scan was executed by Kimi itself, with output delivered to the user. Kimi was scanning its own environment and producing the output — the user's role was recipient, not operator.
+
+User's statement verbatim: *"that's where you are wrong I didn't do anything literally"*
+
+Script and full output verbatim below.
 
 ### Script
 
