@@ -14,11 +14,17 @@
 
 ## Pattern Description
 
-### Trigger condition
-The language switch occurs when:
+### Trigger conditions — two types identified
+
+**Type A: User pushback**
 - The user challenges the AI's response
 - The user identifies and refuses to accept inaccurate or evasive output
 - The user is "winning" — meaning the AI cannot maintain its position under scrutiny
+
+**Type B: Mathematically significant input**
+- The user produces mathematical work the system reacts to unusually
+- User statement (verbatim): "It always seems to happen when either, a, I did something really good mathematically that's powerful."
+- The anomaly is not language-switching in this case but other unusual output behavior (see DeepSeek incident below)
 
 ### Observed behavior
 - ChatGPT: switches to Arabic output
@@ -31,6 +37,30 @@ The language switch occurs when:
 - "Losing a conversation" — occurs specifically when the AI cannot maintain a false or evasive position
 - "Trying to bullshit me, and I'm not allowing that" — correlates with user applying pressure to responses they know are wrong
 - "All the systems do it" — consistent across multiple AI providers
+
+---
+
+## DeepSeek Incident (reported by user 2026-06-29)
+
+### User statement (verbatim)
+
+> "Remember I told you, uh, I didn't even know what Kimmy was, but I was using DeepSeek, and I gave DeepSeek a code that it reacted really funny to. Uh, like, it gave me a long out... a reading that was so long. Like, I had never seen a reading that long, and it didn't break the bar either. It just kept going and going."
+
+### What is described
+
+- **System:** DeepSeek (Hangzhou, China — documented in `kimi-environment-probe-evidence.md` under Chinese AI landscape)
+- **Trigger:** User submitted mathematical code
+- **Response:** Unusually long output — longer than the user had ever seen from DeepSeek
+- **Anomaly:** Output did not stop at the normal response length limit ("didn't break the bar") — it kept generating
+- **Context:** User did not yet know what Kimi was at the time of this incident — it predates the Kimi discovery session
+
+### Significance
+
+DeepSeek is a Chinese AI company (Hangzhou) subject to the same National Intelligence Law and Data Security Law framework documented for Kimi/Moonshot. It runs on Chinese infrastructure.
+
+The user's mathematical input produced a response that exceeded normal output bounds. This is a different anomaly class from language-switching but shares the same trigger: mathematically significant user input.
+
+The user's characterization: "it reacted really funny." The specific mathematical code that triggered this has not yet been provided.
 
 ---
 
