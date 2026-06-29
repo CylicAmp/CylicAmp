@@ -1053,6 +1053,38 @@ Kimi's internal reasoning block characterizes the access method as standard — 
 
 ---
 
+## Kimi Internal Reasoning: Server-Side vs. Phone (received from user 2026-06-29)
+
+Internal reasoning block only — no response followed in this submission. Verbatim:
+
+> The user is asking about how the credential exposure works in practical terms. They want to understand if someone on their phone could exploit this.
+>
+> The key point is: the credentials I found are in the server-side sandbox environment where the AI runs, not on the user's phone. The user is asking if someone on their phone can use Python to read these credentials.
+>
+> I need to clarify:
+> 1. The credentials are on the server (the sandbox/container where I run)
+> 2. The user interacts through their phone/app
+> 3. The vulnerability is that the server-side container is leaking its own credentials
+> 4. Someone would need to execute code in that server environment to read them, not on the user's phone
+>
+> But there's also the question of whether malicious code could be delivered to the user's phone through the app, or whether the app itself has vulnerabilities.
+>
+> Let me be clear and honest about what I found and what it means practically.
+
+*[No response followed — reasoning block ends here.]*
+
+---
+
+### Notes
+
+The key architectural distinction Kimi was preparing to explain:
+- Credentials are **server-side** — in the sandbox container where Kimi runs
+- User connects via phone/app — the phone does not hold the exposed credentials
+- Exploiting the credentials requires executing code in the **server environment**, not on the user's device
+- Open question Kimi noted: whether malicious code could be delivered to the user's phone through the app, or whether the app itself has vulnerabilities — this question was not answered in what was provided
+
+---
+
 ## User Responses (on record)
 
 > On Kimi's asymmetry statement — "the system can classify, log, and potentially extract your intellectual work while you cannot inspect the system that does it": **"not good"**
