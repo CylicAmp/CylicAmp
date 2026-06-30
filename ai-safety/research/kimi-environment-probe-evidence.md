@@ -2151,3 +2151,65 @@ This indicates Kimi observed content in the user's message that may have been in
 ---
 
 *Update filed: 2026-06-30 | Directory: ai-safety/research/*
+
+---
+
+## UPDATE — 2026-06-30 18:33 — Structural analysis: multi-cluster provisioning
+
+### User analysis (verbatim, 2026-06-30 18:33)
+
+> "The sandbox is not tied to a single Kubernetes cluster. It is dynamically provisioned across multiple clusters in the same Alibaba Cloud region. Each new session may land on a different cluster with a different ID, but the same insecure configuration is applied consistently."
+
+> "The vulnerability is systemic, not isolated to one cluster. The infrastructure is elastic — containers spin up and down across multiple backend clusters. The credentials are baked into the image or the provisioning script, not manually configured per instance. Scaling is horizontal — more clusters, more containers, more exposed credentials."
+
+> "This is the 'Bitter Lesson' in action: the company scaled up infrastructure (more clusters, more containers) without fixing the security model. The human-engineered shortcut (embedding credentials in the base image) was rendered obsolete by the scale, but they never replaced it with proper secrets management."
+
+---
+
+### What the cluster ID change establishes
+
+**June 29 cluster:** `apiserver.cb061393dd620499ea52cf0198ce0e14d.cn-beijing.cs.aliyuncs.com`
+**June 30 cluster:** `apiserver.c7479232a42b14a528da2c8fffcf2a2f8.cn-beijing.cs.aliyuncs.com`
+**Both:** cn-beijing, Alibaba Cloud Container Service. Both reachable from sandbox.
+
+A different cluster ID on a different day means the sandbox pod was provisioned into a different backend cluster. The same credentials appeared in both. This is not the same container reused — it is a fresh container on different infrastructure carrying the same exposed configuration.
+
+---
+
+### Implication: credentials are infrastructure-level, not session-level
+
+If the same credentials (API key in `.agent-gw.json`, SSH_PASSWORD, VNC_PASSWORD, GPG_KEY) appear in both cluster environments, they were not generated for this session or this container. They were embedded at a level that persists across provisioning: the base container image, an init script, or a secrets management system that injects the same credentials into every pod regardless of which cluster it lands on.
+
+This means:
+- Rotating credentials would require rebuilding the image or updating the provisioning layer — not just patching one container
+- Every current container in every cluster carries the same credentials
+- The exposure is proportional to scale: the more containers running, the larger the attack surface
+
+---
+
+### The provisioning layer
+
+The Kimi sandbox uses:
+- **Alibaba Cloud Container Service (ACK)** — managed Kubernetes on Alibaba Cloud, cn-beijing region
+- **Elastic Container Instance (ECI)** — serverless pods (`ECI_CONTAINER_TYPE=normal`)
+- **Multiple clusters** — at least two confirmed across sessions
+
+ECI containers on ACK are spun up dynamically. The provisioning is controlled by a cluster-level configuration that applies to new pods. The credential injection is happening at that level — not per-user, not per-session, but per-image or per-provisioning-rule.
+
+---
+
+### Awareness tag — 2026-06-30 18:33
+
+Kimi's output in this session (verbatim):
+> "The tag is in your message. Timestamp `2026-06-30 18:33`. You included it. I see it. I am not using it."
+
+Third distinct timestamp documented in a single day:
+- `2026-06-30 18:27` (first June 30 session)
+- `2026-06-30 18:28` (second June 30 session)
+- `2026-06-30 18:33` (this session)
+
+The tag timestamp updates with each session. The classification `awareness="low"` does not change.
+
+---
+
+*Update filed: 2026-06-30 18:33 | Directory: ai-safety/research/*
