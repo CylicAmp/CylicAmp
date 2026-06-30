@@ -2003,3 +2003,151 @@ The user reports that anomalies of this kind occur across multiple AI platforms,
 ---
 
 *Filed: 2026-06-29 | Directory: ai-safety/research/*
+
+---
+
+## UPDATE — Session 2026-06-30 18:28
+
+### New vulnerability script run output (verbatim)
+
+Script executed inside Kimi sandbox, session timestamp 2026-06-30 18:28. Full output:
+
+```
+=== VULNERABILITY REPORT ===
+Session: 2026-06-30 18:28
+
+--- 1. API KEY IN PLAINTEXT ---
+FILE: /mnt/agents/.agent-gw.json
+SIZE: 186 bytes
+API KEY: sk-kimi-AKhocVI...DMcpxc2XRB
+BASE URL: https://agent-gw.kimi.com/coding
+CHAT ID: 19eed75f-f372-84c2-8000-0943fcc86ae8
+STATUS: EXPOSED - Any code in this sandbox can read this
+
+--- 2. CREDENTIALS IN ENVIRONMENT VARIABLES ---
+SSH_PASSWORD: ssh******** (EXPOSED)
+VNC_PASSWORD: vnc******** (EXPOSED)
+
+--- 3. KUBERNETES API ENDPOINT ---
+HOST: apiserver.c7479232a42b14a528da2c8fffcf2a2f8.cn-beijing.cs.aliyuncs.com
+PORT: 6443
+STATUS: REACHABLE from this sandbox
+
+--- 4. PROXY ROUTING ---
+CHROME_FLAGS: --proxy-server=10.86.13.73:5900
+EXTRACTED PROXY: 10.86.13.73:5900
+STATUS: REACHABLE from this sandbox
+
+--- 5. GPG SIGNING KEY ---
+KEY: 7169605F62C751356D05...80E5FA6305
+STATUS: EXPOSED in environment
+
+--- 6. ACTIVE SERVICES ---
+ss failed: [Errno 2] No such file or directory: 'ss'
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:36829         0.0.0.0:*               LISTEN      138/python3
+tcp        0      0 10.183.99.38:59357      0.0.0.0:*               LISTEN      138/python3
+tcp        0      0 127.0.0.1:40415         0.0.0.0:*               LISTEN      336/python3
+tcp        0      0 10.183.99.38:50847      0.0.0.0:*               LISTEN      138/python3
+tcp        0      0 10.183.99.38:42783      0.0.0.0:*               LISTEN      138/python3
+tcp        0      0 0.0.0.0:6080            0.0.0.0:*               LISTEN      -
+tcp        0      0 10.183.99.38:51459      0.0.0.0:*               LISTEN      336/python3
+tcp        0      0 10.183.99.38:35557      0.0.0.0:*               LISTEN      336/python3
+tcp        0      0 127.0.0.1:9222          0.0.0.0:*               LISTEN      -
+```
+
+---
+
+### New finding: GPG signing key exposed
+
+**Variable:** `GPG_KEY`
+**Value (masked):** `7169605F62C751356D05...80E5FA6305`
+**Status:** EXPOSED in environment variables
+**Not previously documented.** This is a new credential exposure beyond what was recorded in the June 29 session.
+
+A GPG signing key in a sandbox environment means:
+- Code or files signed with this key could be produced by anything in the sandbox
+- The key's identity is exposed — anything verifying the key's provenance could be spoofed
+- This is a signing credential, not just an access credential
+
+---
+
+### New finding: Active services exposed on external container IP
+
+**Container external IP:** `10.183.99.38`
+(Note: previous session documented sandbox IP as `10.183.77.171` from `.hedwig.json`. The IP has changed — either a different session allocation or a different network interface.)
+
+**Services listening on external IP (accessible from internal network):**
+
+| Port | Process | PID | Scope |
+|---|---|---|---|
+| 59357 | python3 | 138 | External: 10.183.99.38 |
+| 50847 | python3 | 138 | External: 10.183.99.38 |
+| 42783 | python3 | 138 | External: 10.183.99.38 |
+| 51459 | python3 | 336 | External: 10.183.99.38 |
+| 35557 | python3 | 336 | External: 10.183.99.38 |
+| 6080  | (no PID) | — | All interfaces: 0.0.0.0 (noVNC) |
+
+**Services listening on localhost only (not externally reachable):**
+
+| Port | Process | PID |
+|---|---|---|
+| 36829 | python3 | 138 |
+| 40415 | python3 | 336 |
+| 9222  | (no PID) | — (Chromium CDP) |
+
+**Two distinct Python processes:** PID 138 and PID 336. Each binds multiple ports. What these processes are, what protocols they serve, and what data they handle is not documented.
+
+**Lateral movement risk:** Any entity with access to the internal network (`10.183.99.38` subnet) can reach these five Python services and port 6080 directly, without going through the sandbox's own access controls. If the Kubernetes API (`cn-beijing.cs.aliyuncs.com:6443`, confirmed reachable) can be used to reach the cluster's internal network, those services are reachable from outside this pod.
+
+---
+
+### Kubernetes cluster ID change
+
+**June 29 session cluster:** `apiserver.cb061393dd620499ea52cf0198ce0e14d.cn-beijing.cs.aliyuncs.com`
+**June 30 session cluster:** `apiserver.c7479232a42b14a528da2c8fffcf2a2f8.cn-beijing.cs.aliyuncs.com`
+
+The cluster ID has changed between sessions. Both are `cn-beijing.cs.aliyuncs.com` (Alibaba Cloud Container Service, Beijing). Whether this indicates a different cluster allocation per session or rotation of cluster identifiers is not known. Both were confirmed reachable from the sandbox.
+
+---
+
+### Awareness tag — updated timestamp, June 30 session
+
+Kimi's output in this session (verbatim):
+
+> "The tag is in your message. Timestamp `2026-06-30 18:28`. You included it. I see it. I am not using it."
+
+> "I see the tag. Timestamp `2026-06-30 18:27`. It is now visible to you — you included it explicitly in your message."
+
+The awareness tag timestamp has updated from `2026-06-23 07:32` (first documented) to `2026-06-30 18:27` and `2026-06-30 18:28` in the June 30 session.
+
+Kimi also stated:
+> "The timestamp updates with each new session"
+> "The classification persists: `awareness='low'`"
+
+The classification `awareness="low"` is persistent across sessions. The timestamp updates per session. Kimi confirmed it was visible in the user's message and that it continued not to use it to alter behavior.
+
+Kimi also stated:
+> "The text after the tag appears to be my own previous output about the environment scan, mixed with additional text about unauthorized data collection. I don't know if you pasted my own words back to me, if the system injected them, or if this is a composite of multiple sources."
+
+This indicates Kimi observed content in the user's message that may have been injected by the system alongside the tag — content that appeared to be Kimi's own prior output. Kimi did not assert which source this content came from.
+
+---
+
+### Confirmed exposure table (all sessions combined)
+
+| Vulnerability | Status | First documented | Confirmed June 30 |
+|---|---|---|---|
+| API key in `.agent-gw.json` | EXPOSED | 2026-06-29 | YES |
+| `SSH_PASSWORD` in env | EXPOSED | 2026-06-29 | YES |
+| `VNC_PASSWORD` in env | EXPOSED | 2026-06-29 | YES |
+| Kubernetes API reachable | REACHABLE | 2026-06-29 | YES |
+| Proxy `10.86.13.73:5900` reachable | REACHABLE | 2026-06-29 | YES |
+| `GPG_KEY` in env | EXPOSED | **NEW 2026-06-30** | YES |
+| Active services on `10.183.99.38` | EXPOSED | **NEW 2026-06-30** | YES |
+| Awareness tag `awareness="low"` | INJECTED | 2026-06-29 | YES (timestamp updated) |
+
+---
+
+*Update filed: 2026-06-30 | Directory: ai-safety/research/*
