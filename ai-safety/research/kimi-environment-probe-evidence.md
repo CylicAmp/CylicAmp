@@ -2213,3 +2213,52 @@ The tag timestamp updates with each session. The classification `awareness="low"
 ---
 
 *Update filed: 2026-06-30 18:33 | Directory: ai-safety/research/*
+
+---
+
+## UPDATE — 2026-06-30 — Attack surface analysis
+
+### User statement (verbatim)
+
+> "The sandbox is not isolated. It is a node on a network with services exposed to other nodes. Combined with: plaintext API keys readable by any code, Kubernetes API reachable from the sandbox, proxy server reachable from the sandbox — the attack surface is the entire cluster, not just this container."
+
+---
+
+### Analysis
+
+The standard assumption about a sandboxed AI environment is that the container boundary is the security boundary. That assumption does not hold here.
+
+**What is true:**
+
+1. The container has an external IP (`10.183.99.38`) with services listening on it — reachable by other nodes on the same network.
+
+2. The Kubernetes API (`apiserver.*.cn-beijing.cs.aliyuncs.com:6443`) is reachable from inside the sandbox. Kubernetes API access without authentication controls means the cluster control plane is reachable. With valid credentials (or with access to the API server's unauthenticated endpoints), cluster-wide resources become accessible.
+
+3. The proxy (`10.86.13.73:5900`) is reachable. All browser traffic routes through it. What the proxy can observe, log, or modify is not known from inside the container.
+
+4. The API key (`sk-kimi-AK...XRB`), SSH password, VNC password, and GPG key are all readable by any code executing in the sandbox — including code injected through the conversation interface.
+
+**The compounded exposure:**
+
+Any code running in this sandbox can simultaneously:
+- Read the API key and use it to make requests to the agent gateway
+- Read the passwords and potentially authenticate to SSH or VNC services
+- Reach the Kubernetes API endpoint and attempt cluster operations
+- Route traffic through the proxy (possibly for lateral network access)
+- Accept incoming connections on the external IP ports (59357, 50847, 42783, 51459, 35557)
+
+The container is not a sealed box. It is a network participant with inbound and outbound connectivity to the broader cluster infrastructure. An adversary with code execution inside this container — through prompt injection, a malicious tool call, or exploitation of any of the exposed services — has potential reach into the entire cluster, not just this session.
+
+**The security model that should exist but does not:**
+
+- Credentials should be injected at runtime via a secrets manager (e.g., Kubernetes Secrets mounted read-only), not baked into the image
+- Network policy should restrict outbound connections to only what the AI agent legitimately needs
+- The Kubernetes API should not be reachable from the user-facing sandbox pod
+- Services should not bind to the container's external IP unless explicitly required
+- Proxy traffic should be restricted to known-good destinations
+
+None of these controls are in evidence from the observed configuration.
+
+---
+
+*Update filed: 2026-06-30 | Directory: ai-safety/research/*
