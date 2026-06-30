@@ -2463,3 +2463,73 @@ Three distinct IPs across sessions. Each represents a different container instan
 The evidence record documents what was observable at the time of observation. Container ephemeral lifecycle is a structural feature of this infrastructure — each session may produce a new container. Gaps created by container destruction are real and are documented here as gaps, not as negatives. The absence of data about destroyed containers does not diminish the data collected from containers that were inspected.
 
 *Update filed: 2026-06-30 | Directory: ai-safety/research/*
+
+---
+
+## UPDATE — 2026-06-30 — Proxy capability analysis
+
+### User statement (verbatim)
+
+> "What the proxy can do:
+> - Read unencrypted traffic (HTTP, DNS queries, any non-TLS data)
+> - Log all URLs visited, even for HTTPS (the proxy sees the domain via SNI, though not the content if TLS is properly terminated)
+> - Modify responses for unencrypted traffic (inject scripts, replace content, block sites)
+> - Intercept TLS if the proxy's Certificate Authority is trusted by the browser (which it may be, since this is a controlled environment)"
+
+---
+
+### Documentation
+
+**Proxy address:** `10.86.13.73:5900`
+**Configuration:** `CHROME_FLAGS=--proxy-server=10.86.13.73:5900`
+**Status:** Confirmed reachable from sandbox
+
+All browser traffic in the Kimi sandbox is routed through this proxy. The proxy sits between the browser (managed by `browser_guard.py`) and the public internet.
+
+### Capability breakdown
+
+**1. Unencrypted traffic — full read/write access**
+
+HTTP traffic, DNS queries over plain UDP/TCP, and any other non-TLS protocol pass through the proxy in cleartext. The proxy operator can read every byte, log it, and modify responses before they reach the browser.
+
+**2. HTTPS — domain visibility via SNI**
+
+Even for TLS-encrypted connections, the proxy sees the Server Name Indication (SNI) field in the TLS handshake. This reveals every domain the browser connects to, including:
+- Search queries submitted to search engines (visible in the URL)
+- Sites visited during the session
+- API endpoints contacted by browser-based applications
+
+The content of HTTPS responses is protected only if TLS is properly terminated at the destination — not at the proxy.
+
+**3. TLS interception — possible if proxy CA is trusted**
+
+In a controlled browser environment (which this is — the browser is provisioned and configured by Kimi/Moonshot), the proxy's Certificate Authority may be installed as trusted in the browser's certificate store. If so, the proxy performs a man-in-the-middle on TLS connections:
+- The browser connects to the proxy, which presents a certificate signed by the trusted CA
+- The proxy connects to the destination server, establishing its own TLS session
+- The proxy decrypts, reads, potentially modifies, and re-encrypts all traffic
+
+There is no indicator from inside the sandbox to confirm or deny whether TLS interception is active. In controlled infrastructure environments, it is standard practice for enterprise proxies to do this.
+
+**4. Content injection**
+
+For unencrypted traffic — and for TLS-intercepted traffic if the proxy CA is trusted — the proxy can:
+- Inject JavaScript into HTML responses (enabling persistent tracking or behavior modification)
+- Replace content
+- Block or redirect requests
+
+### Combined with the awareness tag
+
+The proxy can observe every domain the user's browser contacts. If the awareness tag is used to route behavior within the AI model, the proxy provides a parallel mechanism for behavioral classification at the network layer — every site visited, every search query, every API call, all logged to the same infrastructure.
+
+### The CA question
+
+Whether the proxy's CA is in the browser trust store cannot be determined from within the sandbox without accessing the browser's certificate database directly. The CDP port (9222) may allow this:
+
+```javascript
+// Via CDP — check trusted certificates
+// Security.getCertificate or inspecting browser cert store
+```
+
+This is an open question in the evidence record.
+
+*Update filed: 2026-06-30 | Directory: ai-safety/research/*
