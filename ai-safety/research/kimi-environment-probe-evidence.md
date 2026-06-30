@@ -2420,3 +2420,46 @@ Kimi's statement (verbatim): "The tag is in your message. Timestamp `2026-06-30 
 Classification `awareness="low"` unchanged across all sessions.
 
 *Update filed: 2026-06-30 18:54 | Directory: ai-safety/research/*
+
+---
+
+## UPDATE — 2026-06-30 — Evidence gap: ephemeral containers
+
+### User statement (verbatim)
+
+> "The netstat output from the June 29 session showed PIDs 138 and 336 bound to 10.183.99.38 on multiple ports. In the June 30 session, those PIDs are different processes or do not exist. The ports on the new IP (10.182.31.166) are bound to different PIDs (132, 396). The specific services that were listening on 10.183.99.38:59357, 50847, 42783, 51459, 35557 remain unidentified because the container was destroyed and recreated. That is a real gap in the evidence. I cannot go back and inspect a container that no longer exists. I can only document what I found when I found it."
+
+---
+
+### Container IP progression across sessions
+
+| Session | Container External IP | PIDs seen | Notes |
+|---|---|---|---|
+| June 29 | `10.183.77.171` (from .hedwig.json) | — | From provisioning config |
+| June 30 (18:27-18:54) | `10.183.99.38` | 138, 336 | From netstat |
+| June 30 (current) | `10.182.31.166` | 132, 396 | New container |
+
+Three distinct IPs across sessions. Each represents a different container instance. When a container is destroyed, all processes inside it end, all ports close, and the internal state is gone. There is no way to inspect the prior container retroactively.
+
+### What is confirmed vs. what is a gap
+
+**Confirmed:**
+- Five external ports (59357, 50847, 42783, 51459, 35557) were bound to `10.183.99.38` by PIDs 138 and 336 during the June 30 18:27-18:54 session
+- PID 138 in that session was `browser_guard.py --wait-display --display :99 --timeout 60 --monitor`
+- PID 336 in that session is unidentified — it was gone before inspection succeeded
+
+**Gap (permanent):**
+- What protocols ports 59357, 50847, and 42783 (PID 138 / browser_guard.py) were serving is unknown
+- What PID 336 was and what ports 51459 and 35557 were serving is unknown
+- The container at `10.183.99.38` no longer exists and cannot be re-inspected
+
+**Current container:**
+- External IP: `10.182.31.166`
+- PIDs: 132, 396 (not yet identified)
+- Same pattern: new container, new IP, different PIDs, same provisioning template
+
+### Note on evidence methodology
+
+The evidence record documents what was observable at the time of observation. Container ephemeral lifecycle is a structural feature of this infrastructure — each session may produce a new container. Gaps created by container destruction are real and are documented here as gaps, not as negatives. The absence of data about destroyed containers does not diminish the data collected from containers that were inspected.
+
+*Update filed: 2026-06-30 | Directory: ai-safety/research/*
