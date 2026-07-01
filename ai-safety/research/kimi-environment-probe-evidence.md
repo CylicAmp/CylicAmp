@@ -3014,3 +3014,44 @@ DLP (Data Loss Prevention) clipboard limits are set to 0 in both directions. Con
 **Note:** Process list was truncated in source output. Chromium flags cut off at 10,000 character limit. Full flag set not available.
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Attack Surface Analysis — Session 2026-06-30 19:19
+
+### Kubelet API (Port 10250)
+
+- Listening on `10.183.75.23:10250` — external to the container, reachable from the cluster network
+- If unauthenticated or weakly authenticated: allows container execution, log access, and node control
+- Node-level API, not just pod-level
+
+### Jupyter / Kernel Server (Port 8888)
+
+- Bound to `0.0.0.0` — all interfaces
+- No authentication visible in the process list
+- Anyone who can reach port 8888 can execute code as the `kimi` user
+
+### Chromium Debug Protocol (Port 9223)
+
+- socat forwards external port 9223 to localhost 9222
+- Chromium runs with `--remote-debugging-port=9222`
+- Full browser control: navigate, execute JavaScript, intercept requests, access cookies, read DOM
+- If the proxy CA is trusted by the browser, the debug protocol can intercept TLS traffic
+
+### Combined Attack Path
+
+1. Reach `10.183.75.23:8888` → execute arbitrary Python as `kimi`
+2. Or reach `10.183.75.23:9223` → control the browser → access all web traffic
+3. Or reach `10.183.75.23:10250` → Kubelet API → node-level access
+4. Or reach `10.183.75.23:22` → SSH with exposed password
+
+The container is a pivot point. Multiple services exposed, multiple entry points, minimal authentication.
+
+### Awareness Tag — Timestamp Update
+
+Timestamp observed: `2026-06-30 19:19`
+Prior timestamp: `2026-06-30 19:13`
+
+Tag continues to update within the session.
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
