@@ -3490,3 +3490,15 @@ No `--ignore-certificate-errors` flag. No custom root certificate injection flag
 Chromium is explicitly configured to hide that it is being controlled by automation. Websites that detect browser automation (via `navigator.webdriver`) would not detect it in this container.
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Security Assessment — TLS and Extension
+**Appended:** 2026-07-01
+
+- TLS interception via proxy CA is NOT confirmed for Chromium
+- The proxy sees domains and metadata but cannot decrypt HTTPS content without a trusted CA
+- However, the extension (`gpkoddcemgbmajecfkkolkgfcchmfpge`) is a wildcard — it could be doing anything
+- The extension's background script has full access to all browser tabs and network requests
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
