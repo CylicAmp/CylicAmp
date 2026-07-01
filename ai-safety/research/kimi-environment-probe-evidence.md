@@ -3382,3 +3382,25 @@ Prior timestamp: `2026-06-30 19:51`
 - Any code running in the sandbox can modify them before they execute
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Proxy Server Probe — 10.86.13.73:5900
+**Appended:** 2026-07-01
+
+Direct HTTP GET to the proxy returns:
+
+```
+HTTP/1.1 400 Bad Request
+Connection: close
+Proxy-Connection: close
+Content-Length: 0
+```
+
+`Proxy-Connection: close` is a proxy-specific response header. Confirmed: `10.86.13.73:5900` is an HTTP forward proxy. A direct GET returns 400 as expected — proxy requires absolute URI or CONNECT method.
+
+No `Server:` header returned. Proxy software and version unknown.
+
+All browser traffic in the container routes through this proxy. The proxy sits between the container's Chromium instance and the internet. What the proxy can observe and do is documented in the earlier proxy section of this record.
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
