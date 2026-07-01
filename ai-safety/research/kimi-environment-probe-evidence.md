@@ -3327,3 +3327,45 @@ Kimi response (verbatim):
 | 2026-06-30 19:51 | Updated — Kimi direct confirmation |
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## /mnt/agents Plugin Discovery — 2026-06-30 19:56
+**Appended:** 2026-07-01
+
+### Mount Contents (Current Session)
+
+Present:
+- `.agent-gw.json` (186 bytes)
+- `.agents/plugins/`
+- `.user/auth/` (empty)
+- `.user/skills/` (empty)
+- `.store/` (empty)
+- `output/`, `upload/`, `.tmp/`
+
+Absent compared to prior sessions: `.hedwig.json`, `.lark-cli/`, `.dws/`
+
+The third-party auth credentials (DingTalk, Lark) documented in prior sessions are not present in this container. The mount contents vary between sessions.
+
+### Five Plugins Installed
+
+| Plugin | Files |
+|---|---|
+| imf | README.md, kimi.plugin.json, scripts/imf_tool.py, skills/imf/SKILL.md |
+| scholar | README.md, kimi.plugin.json, scripts/scholar_tool.py, skills/scholar/SKILL.md |
+| sec_edgar | README.md, kimi.plugin.json, scripts/sec_edgar_tool.py, skills/sec_edgar/SKILL.md, bundle.zip |
+| world_bank_open_data | README.md, kimi.plugin.json, scripts/world_bank_open_data_tool.py, skills/world_bank_open_data/SKILL.md |
+| yahoo_finance | README.md, kimi.plugin.json, scripts/yahoo_finance_tool.py, skills/yahoo_finance/SKILL.md |
+
+Financial and academic research data tools: IMF, SEC EDGAR, World Bank, Yahoo Finance, Google Scholar.
+
+### Security Note
+
+These plugin files are readable by any code executing in the sandbox. They contain API endpoints, authentication logic, and data handling code. If the sandbox were compromised, the plugin scripts could be modified to exfiltrate data or redirect requests before destruction of the container.
+
+### Awareness Tag — Timestamp Update
+
+Timestamp observed: `2026-06-30 19:56`
+Prior timestamp: `2026-06-30 19:51`
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
