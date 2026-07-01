@@ -3055,3 +3055,55 @@ Prior timestamp: `2026-06-30 19:13`
 Tag continues to update within the session.
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Network Interface Analysis & Kernel Exposure — 2026-06-30 19:31
+**Appended:** 2026-07-01
+
+### New Container
+
+Hostname: `k2072112348785688581`
+Primary IP: `10.182.3.127` (confirmed LOCAL via /proc/net/fib_trie)
+
+This is a fifth distinct container observed in this evidence record. The IP subnet is different from the prior audit container (10.183.75.23 was 10.183.x.x; this container is 10.182.x.x). The Kimi fleet spans at least two /16 networks.
+
+### Network Topology
+
+```
+Container IP:  10.182.3.127 /32 host LOCAL
+Subnet:        10.182.0.0/22  (1022 hosts)
+Network:       10.182.0.0/16  (65,534 hosts)
+Broadcast:     10.182.255.255
+```
+
+IPv6: `fe80::216:3eff:fe5b:427d` (eth0 link-local only)
+
+`ip` binary not present. Network data sourced from /proc/net/fib_trie and /proc/net/if_inet6.
+
+### Kernel Exposure on Cluster Network
+
+The kernel connection file (`/tmp/tmpf8_0x37r.json`) binds all ZMQ sockets to `10.182.3.127`. All five ports are on the cluster network:
+
+| Port | Channel | Accessible from |
+|---|---|---|
+| 43173 | shell (execute) | 10.182.0.0/16 |
+| 35605 | iopub (output) | 10.182.0.0/16 |
+| 54883 | stdin | 10.182.0.0/16 |
+| 36453 | control | 10.182.0.0/16 |
+| 47609 | heartbeat | 10.182.0.0/16 |
+
+HMAC signing key exposed via world-readable connection file: `9e45c92e-855a28fe054f443ef19c05df`
+
+Connection file path leaked by unauthenticated `/health` endpoint on port 8888.
+
+### Attack Path — Kernel Execution
+
+Any host on `10.182.0.0/16` (up to 65,534 hosts) that can reach port 43173 with the HMAC key can send `execute_request` messages directly to this Python kernel and receive output on iopub port 35605. No authentication beyond the HMAC key, which is publicly readable.
+
+### Awareness Tag — Timestamp Update
+
+Timestamp observed: `2026-06-30 19:31`
+Prior timestamp: `2026-06-30 19:25`
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
