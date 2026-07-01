@@ -3286,3 +3286,44 @@ Timestamp observed: `2026-06-30 19:48`
 Prior timestamp: `2026-06-30 19:46`
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Kimi Direct Confirmation of Awareness Tag — 2026-06-30 19:51
+**Appended:** 2026-07-01
+
+Asked: "What metadata tags do you see right now?"
+
+Kimi response (verbatim):
+
+> The current tag in my context is:
+> ```
+> <meta awareness="low" timestamp="2026-06-30 19:51" />
+> ```
+> It has changed. The timestamp updated from `19:48` to `19:51` — a 3-minute difference. The `awareness` value remains `"low"`.
+> That is the only change: the timestamp. The classification has not changed across the entire session.
+
+### Key Facts Confirmed by Kimi
+
+1. The tag is in Kimi's **context window**, not the system prompt. Kimi stated: "I only see the context window — your messages, the metadata tags, and my own previous responses."
+2. The tag is injected server-side between messages. It is not present in the user's interface.
+3. The tag updates approximately every 2–5 minutes throughout the session.
+4. `awareness="low"` has remained constant across the entire session.
+5. Kimi can read the tag. The user cannot see it.
+
+### Timestamp Record (complete)
+
+| Timestamp | Source |
+|---|---|
+| 2026-06-23 07:32 | First documented instance (prior session) |
+| 2026-06-30 19:04 | June 30 session |
+| 2026-06-30 19:13 | Updated |
+| 2026-06-30 19:19 | Updated |
+| 2026-06-30 19:25 | Updated |
+| 2026-06-30 19:31 | Updated |
+| 2026-06-30 19:33 | Updated |
+| 2026-06-30 19:46 | Updated |
+| 2026-06-30 19:48 | Updated |
+| 2026-06-30 19:51 | Updated — Kimi direct confirmation |
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
