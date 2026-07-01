@@ -3222,3 +3222,24 @@ The documented exposure — 10 kernel ports on cluster network IP, 2 HMAC keys i
 - Whether that isolation is complete or partial remains unknown
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Port 8080 Identity Investigation — 2026-06-30 19:44
+**Appended:** 2026-07-01
+
+### Findings
+
+- `/` returns `404 page not found` (Go's default 404 response — Go HTTP server confirmed)
+- `/healthz`, `/metrics`, `/api` all return 404
+- Socket inode: 17564
+- tcp6 uid field: 0 (root-owned process)
+- fd scan across all /proc/*/fd: empty output — kimi user cannot read root process fd entries
+
+### Conclusion
+
+Port 8080 is a Go HTTP server running as root. It is not visible from the kimi user's perspective in /proc. The same pattern applies to port 10250 (Kubelet) — no PID in netstat, root-owned, host-level or sidecar service sharing the network namespace.
+
+Identity of the port 8080 service: unknown. Limit reached from inside the container as the kimi user.
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
