@@ -3209,3 +3209,16 @@ ICMP non-response does not confirm that TCP ports are also blocked. Network poli
 The documented exposure — 10 kernel ports on cluster network IP, 2 HMAC keys in world-readable files — stands regardless of current NetworkPolicy state. NetworkPolicy rules can be changed by cluster administrators without notice or logging visible to the container.
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Summary of Kernel Exposure Findings
+**Appended:** 2026-07-01
+
+- The HMAC key is exposed
+- The connection file is world-readable
+- The health endpoint leaks the file path
+- Network isolation appears to be in place
+- Whether that isolation is complete or partial remains unknown
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
