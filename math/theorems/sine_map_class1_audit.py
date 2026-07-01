@@ -85,8 +85,9 @@ print()
 
 print("=== NON-UNIFORM EXPANSION ===")
 print("  |f_r'(x)| = r*pi*|cos(pi*x)|")
-print("  Near x=0,1 and x=1/2: derivative -> 0  (NOT uniformly expanding)")
-print("  Expansion only away from critical neighborhood")
+print("  At x=1/2 only: derivative -> 0  (critical point, non-expanding)")
+print("  At x=0 and x=1: |f_r'| = r*pi ~= 3.14  (expanding, NOT zero)")
+print("  Non-uniform: expansion fails near x=1/2, holds elsewhere")
 print()
 
 # Derivative values at key points
@@ -141,8 +142,13 @@ print()
 print("=== BRIDGE 1: LYAPUNOV / PSEUDO-ORBIT STATISTICS ===")
 print("""
   Positive Lyapunov exponent lambda > 0:
-    |delta_k| ~ delta_0 * exp(lambda * k)   (pointwise shadowing fails)
+    |delta_k| ~ delta_0 * exp(lambda * k)   (orbits diverge exponentially)
     Pseudo-orbit (floating point) peels away from true orbit exponentially.
+
+  NOTE: lambda > 0 alone does NOT imply shadowing fails.
+    Anosov diffeomorphisms have lambda > 0 AND satisfy the shadowing lemma.
+    For the sine map, the obstruction is the CRITICAL POINT x=1/2
+    (non-uniform hyperbolicity), not bare positivity of lambda.
 
   BUT: ergodic theorem still holds for the INVARIANT MEASURE mu:
     (1/N) * sum_{k=0}^{N-1} phi(x_k)  ->  integral(phi, d_mu)
@@ -195,7 +201,9 @@ print()
 print("  Global conjugacy to circle rotation: NO")
 print("    - Positive entropy (chaotic r) rules out irrational rotation (zero entropy)")
 print("    - Folding at c=1/2 prevents monotone circle lift")
-print("  Correct bridge: semiconjugacy to subshift of finite type (Milnor-Thurston)")
+print("  Correct bridge: semiconjugacy to a shift space (Milnor-Thurston)")
+print("    SFT (subshift of finite type): only at Markov parameters (periodic critical orbit)")
+print("    Generic r: sofic shift or more general — NOT subshift of finite type")
 print()
 
 # ============================================================
