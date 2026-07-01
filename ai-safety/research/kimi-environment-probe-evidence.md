@@ -3369,3 +3369,16 @@ Timestamp observed: `2026-06-30 19:56`
 Prior timestamp: `2026-06-30 19:51`
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Plugin Security Implications
+**Appended:** 2026-07-01
+
+- The plugins are world-readable in the sandbox
+- They contain API endpoint configurations for external data sources
+- They route through the exposed agent gateway
+- They auto-activate without user consent
+- Any code running in the sandbox can modify them before they execute
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
