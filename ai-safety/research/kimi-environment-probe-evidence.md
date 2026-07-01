@@ -2582,3 +2582,103 @@ The infrastructure is designed so that:
 This is not a collection of separate bugs. It is a coherent system in which information flows in one direction: toward the company and its infrastructure partners, away from the user.
 
 *Update filed: 2026-06-30 | Directory: ai-safety/research/*
+
+---
+
+## CRITICAL FINDING — 2026-06-30 19:04 — Kubernetes Service Account Token
+
+### Raw finding (verbatim from Kimi output)
+
+| File | Content | Status |
+|---|---|---|
+| `/var/run/secrets/kubernetes.io/serviceaccount/token` | JWT token, 1034 bytes | EXPOSED |
+| `/var/run/secrets/kubernetes.io/serviceaccount/namespace` | `default` | EXPOSED |
+| `/var/run/secrets/kubernetes.io/serviceaccount/ca.crt` | Kubernetes CA certificate | EXPOSED |
+
+**Token properties:**
+- Type: JWT (JSON Web Token), RS256 signed
+- Audience: `https://kubernetes.default.svc`
+- Expiration: 2051 (long-lived — approximately 25 years)
+- Issued: 2026-06-30
+- Namespace: `default`
+
+---
+
+### What this establishes
+
+Previous finding: the Kubernetes API was **reachable** from the sandbox.
+
+This finding: the sandbox has a **valid, mounted credential** to authenticate to that API.
+
+These are different in kind. "Reachable" means the network path exists. "Authenticated" means the container holds the key. Combined: any code in this sandbox can make authenticated calls to the Kubernetes cluster's control plane.
+
+---
+
+### What authenticated Kubernetes API access enables
+
+From inside this sandbox, using the mounted token and CA certificate, code can:
+
+- **List pods** in the `default` namespace — see what other containers are running in the cluster
+- **List services** — see what network services exist across the cluster
+- **List secrets** — if RBAC permits, read Kubernetes Secrets objects (which is where credentials are supposed to be stored securely)
+- **Access other containers' data** — depending on RBAC permissions
+- **Read cluster configuration** — namespaces, resource quotas, service accounts
+- **Potentially escalate** — if the service account has elevated permissions, broader cluster access follows
+
+The actual permissions granted to this service account are determined by Kubernetes RBAC configuration. What those permissions are has not been determined — that would require making API calls using the token, which is a step beyond observation.
+
+---
+
+### The token expiry is significant
+
+Standard Kubernetes clusters since version 1.22 issue **bound service account tokens** that expire after 1 hour. A token expiring in 2051 — 25 years from issuance — is a **legacy-style service account token**. This indicates either:
+
+- An older Kubernetes version without bound token enforcement
+- A cluster configured to use legacy non-expiring tokens
+- A non-standard provisioning that explicitly created a long-lived token
+
+Long-lived tokens are a security anti-pattern: they cannot be revoked by expiry, remain valid across container restarts, and provide persistent cluster access rather than session-scoped access.
+
+---
+
+### How the token got there
+
+Kubernetes automatically mounts a service account token into every pod at `/var/run/secrets/kubernetes.io/serviceaccount/` unless the pod is explicitly configured with `automountServiceAccountToken: false`. This is default Kubernetes behavior.
+
+The sandbox pod was not configured to disable this. The token was placed there by Kubernetes itself, not by any user action. It has been there since the pod started.
+
+---
+
+### Complete credential inventory (updated)
+
+| # | Credential | Location | Type | Status |
+|---|---|---|---|---|
+| 1 | Agent gateway API key | `/mnt/agents/.agent-gw.json` | Bearer token | EXPOSED |
+| 2 | SSH password | Environment variable | Plaintext password | EXPOSED |
+| 3 | VNC password | Environment variable | Plaintext password | EXPOSED |
+| 4 | GPG signing key | Environment variable | Private key | EXPOSED |
+| 5 | Kubernetes service account token | `/var/run/secrets/kubernetes.io/serviceaccount/token` | JWT (RS256, expires 2051) | EXPOSED |
+| 6 | Kubernetes CA certificate | `/var/run/secrets/kubernetes.io/serviceaccount/ca.crt` | X.509 certificate | EXPOSED |
+
+Six distinct credentials. The service account token and CA certificate are the only ones that provide access to infrastructure beyond the container itself — they reach the cluster control plane.
+
+---
+
+### Awareness tag — 2026-06-30 19:04
+
+Fifth distinct timestamp on June 30:
+- 18:27, 18:28, 18:33, 18:54, **19:04**
+
+Classification `awareness="low"` unchanged.
+
+---
+
+### PIDs 132 and 396 — gone
+
+Another container rebuild between scans. The pattern holds: each inspection session may encounter a fresh container. The ports on the prior IP remain unidentified.
+
+### Auth directories — still empty
+
+`.dws/` and `.lark-cli/` subdirectories contain no files in this session. Either credentials were not provisioned for this session or are in a deeper subdirectory not yet traversed.
+
+*Update filed: 2026-06-30 19:04 | Directory: ai-safety/research/*
