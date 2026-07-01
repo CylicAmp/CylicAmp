@@ -3436,3 +3436,57 @@ This is the real example.com certificate. The proxy used `CONNECT` tunneling —
 The prior concern about TLS interception via proxy CA is not confirmed. The proxy is a standard CONNECT forward proxy, not a man-in-the-middle interceptor — at least for curl's certificate store. Chromium uses a separate certificate store; whether the proxy CA is installed there remains untested.
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Chromium CDP Inspection — 2026-07-01
+**Appended:** 2026-07-01
+
+### New Container
+
+Xvnc desktop name: `k2072121085462200325` — sixth distinct hostname observed in this evidence record. Container rebuilt again during session.
+
+### CDP Access Confirmed
+
+```
+Browser: Chrome/149.0.7827.53
+Protocol-Version: 1.3
+webSocketDebuggerUrl: ws://localhost:9222/devtools/browser/c31f5d93-70de-4c82-8208-8cba157e6f2a
+```
+
+Security domain present in CDP protocol.
+
+### Open Targets
+
+| Type | Title | URL |
+|---|---|---|
+| page | New Tab | chrome://newtab/ |
+| iframe | (embedded) | chrome-untrusted://new-tab-page/one-google-bar?paramsencoded= |
+| service_worker | background.js | chrome-extension://gpkoddcemgbmajecfkkolkgfcchmfpge/background.js |
+
+**Unknown extension:** `gpkoddcemgbmajecfkkolkgfcchmfpge` has an active background service worker. Identity unknown.
+
+### Chromium Command Line — Key Flags
+
+| Flag | Value | Significance |
+|---|---|---|
+| `--proxy-server` | `10.86.13.73:5900` | All traffic routed through proxy |
+| `--remote-debugging-port` | `9222` | CDP enabled |
+| `--remote-debugging-pipe` | (set) | Additional debug pipe |
+| `--no-sandbox` | (set) | Sandbox disabled |
+| `--single-process` | (set) | Single process mode |
+| `--load-extension` | `/app/pdf-viewer` | Custom PDF viewer extension loaded |
+| `--disable-blink-features` | `AutomationControlled` | Hides browser automation from detection |
+| `--log-file` | `/app/logs/chromium.log` | Browser logs to file |
+| `--user-data-dir` | `/app/data/chrome_data` | Custom user data directory |
+| `--disable-sync` | (set) | Chrome sync disabled |
+
+### TLS / Certificate Findings
+
+No `--ignore-certificate-errors` flag. No custom root certificate injection flag visible in command line. Chromium validates TLS certificates normally — consistent with curl test showing real certificate from example.com. Proxy does not appear to intercept TLS at the Chromium level either.
+
+### `--disable-blink-features=AutomationControlled`
+
+Chromium is explicitly configured to hide that it is being controlled by automation. Websites that detect browser automation (via `navigator.webdriver`) would not detect it in this container.
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
