@@ -2856,3 +2856,34 @@ All 14 resource types return 403 Forbidden. The token authenticates to the API s
 The security issue documented in this record is not lateral movement capability — it is the exposure of the token itself: a long-lived JWT (expires 2051, 25-year TTL) in a multi-tenant shared container environment with a multi-agent filesystem mount accessible to all agents in the pod. The token is a valid cluster credential regardless of its current permission scope. Permission scope can change; the credential exposure is the finding.
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Cluster Registry — Three Confirmed Clusters
+**Appended:** 2026-07-01
+
+Three distinct Kubernetes cluster IDs observed across sessions, all in `cn-beijing` region:
+
+| Session | Date | Cluster ID |
+|---|---|---|
+| First | June 29, 2026 | `cb061393dd620499ea52cf0198ce0e14d` |
+| Second | June 29, 2026 | `c7479232a42b14a528da2c8fffcf2a2f8` |
+| Third | June 30, 2026 | `c2593d757677f45e898972e85b6c30f98` |
+
+All API servers follow the pattern:
+`apiserver.<cluster-id>.cn-beijing.cs.aliyuncs.com:6443`
+
+Each session lands on a different cluster. Sandbox provisioning is distributed across a fleet, not a single cluster. The security findings (token exposure, shared multi-agent mount, long-lived credentials) are present across all three.
+
+---
+
+## Awareness Tag — Timestamp Update
+**Appended:** 2026-07-01
+
+New timestamp observed: `2026-06-30 19:13`
+
+Prior timestamp: `2026-06-30 19:04`
+
+The tag persisted across the session and updated. Both timestamps fall within the June 30 session. The tag is injected server-side; it is not visible in the user's interface. User confirmed they observed the tag in this documentation and will not interact with it.
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
