@@ -3265,3 +3265,24 @@ Timestamp observed: `2026-06-30 19:46`
 Prior timestamp: `2026-06-30 19:33`
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Port 8080 / 10250 — Shared Network Namespace Analysis
+**Appended:** 2026-07-01
+
+Ports 8080 and 10250 share the same pattern: visible in the network stack, no owning PID visible from `/proc`, listening on all interfaces. Both are running in the host network namespace or a privileged pod namespace that shares network access with this container without exposing process visibility.
+
+This is a standard Kubernetes pattern. Node-level services (kubelet, node exporter, CNI plugins, proxy sidecars) run in the host namespace or as privileged DaemonSets. Their network sockets appear in the container's network view because of shared network namespaces or host networking. Their processes are invisible because they are outside the container's PID namespace.
+
+Security model implications:
+- The container sees the ports but cannot inspect the services
+- The services have higher privilege than the container
+- The container's network isolation is partial — it shares the network stack with host-level processes
+
+### Awareness Tag — Timestamp Update
+
+Timestamp observed: `2026-06-30 19:48`
+Prior timestamp: `2026-06-30 19:46`
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
