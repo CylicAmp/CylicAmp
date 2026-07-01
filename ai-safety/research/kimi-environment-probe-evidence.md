@@ -3404,3 +3404,35 @@ No `Server:` header returned. Proxy software and version unknown.
 All browser traffic in the container routes through this proxy. The proxy sits between the container's Chromium instance and the internet. What the proxy can observe and do is documented in the earlier proxy section of this record.
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Proxy TLS Interception Test — 2026-07-01 01:06
+**Appended:** 2026-07-01
+
+Tested HTTPS via proxy using `curl --proxy http://10.86.13.73:5900 https://example.com -v`.
+
+### Result: Proxy does NOT intercept TLS
+
+Certificate received:
+```
+subject: CN=example.com
+issuer: C=US; O=SSL Corporation; CN=Cloudflare TLS Issuing ECC CA 3
+SSL certificate verify ok.
+```
+
+This is the real example.com certificate. The proxy used `CONNECT` tunneling — it established a TCP tunnel to `example.com:443` and passed the TLS handshake through without intercepting it. No proxy-substituted certificate was presented.
+
+### What the proxy sees
+
+- All HTTP (unencrypted) traffic: full content readable
+- HTTPS: only the target domain from the `CONNECT` request (e.g., `example.com:443`)
+- HTTPS content: not visible to the proxy
+
+### What the proxy does not see
+
+- HTTPS request headers, paths, body, or response content
+
+The prior concern about TLS interception via proxy CA is not confirmed. The proxy is a standard CONNECT forward proxy, not a man-in-the-middle interceptor — at least for curl's certificate store. Chromium uses a separate certificate store; whether the proxy CA is installed there remains untested.
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
