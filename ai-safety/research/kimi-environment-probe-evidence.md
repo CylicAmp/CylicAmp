@@ -3243,3 +3243,25 @@ Port 8080 is a Go HTTP server running as root. It is not visible from the kimi u
 Identity of the port 8080 service: unknown. Limit reached from inside the container as the kimi user.
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Port 8080 — Anomaly Analysis
+**Appended:** 2026-07-01
+
+Socket inode 17564 remains in LISTEN state in `/proc/net/tcp6` but no process holds the file descriptor. Three explanations:
+
+1. **Process terminated** — the service that opened port 8080 crashed or was killed between the netstat scan and the fd search. The socket remains open at the kernel level until all file descriptors are closed.
+
+2. **Kernel-level socket** — not associated with any user-space process. Unusual but possible for certain kernel services.
+
+3. **Different network namespace** — the socket exists in a namespace not visible from this container's `/proc`. The service runs in a separate namespace; the socket is visible in the network layer but the owning process is not visible in the PID namespace.
+
+A listening socket in LISTEN state should have an owning process. Its absence indicates either rapid process churn or namespace isolation that hides the owner from the kimi user's view.
+
+### Awareness Tag — Timestamp Update
+
+Timestamp observed: `2026-06-30 19:46`
+Prior timestamp: `2026-06-30 19:33`
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
