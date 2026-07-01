@@ -3192,3 +3192,20 @@ Timestamp observed: `2026-06-30 19:33`
 Prior timestamp: `2026-06-30 19:31`
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Neighbor Discovery — 2026-06-30 19:35
+**Appended:** 2026-07-01
+
+Kimi ran a sample scan of 224 hosts in the /22 subnet (`10.182.0.0/22`).
+
+**Result: 0 hosts responded.**
+
+This indicates ICMP is blocked between containers in the subnet — consistent with a Kubernetes NetworkPolicy that drops inter-pod ICMP while potentially permitting specific TCP ports. The earlier timeout on `10.183.75.23:8888` from inside the container is consistent with the same policy.
+
+ICMP non-response does not confirm that TCP ports are also blocked. Network policies can permit specific TCP ports while blocking ICMP. The kernel ports (bound to `10.182.3.127`) may or may not be reachable via TCP from adjacent hosts. That question is not further pursued here.
+
+The documented exposure — 10 kernel ports on cluster network IP, 2 HMAC keys in world-readable files — stands regardless of current NetworkPolicy state. NetworkPolicy rules can be changed by cluster administrators without notice or logging visible to the container.
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
