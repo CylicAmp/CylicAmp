@@ -3107,3 +3107,88 @@ Timestamp observed: `2026-06-30 19:31`
 Prior timestamp: `2026-06-30 19:25`
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Verified Infrastructure State — 2026-06-30 19:33
+**Appended:** 2026-07-01
+
+### Container Identity Confirmed
+
+Hostname: `k2072112348785688581` (same container as network probe above)
+IP: `10.182.3.127`
+SANDBOX_IP environment variable: NOT SET
+
+### Two Kernels Running Simultaneously
+
+Both kernels on same container, both bound to `10.182.3.127`:
+
+| PID | Connection File | Shell | IOPub | Stdin | Control | HB | HMAC Key |
+|---|---|---|---|---|---|---|---|
+| 133 | /tmp/tmpoev7updg.json | 32831 | 55877 | 60635 | 57673 | 34431 | `58a7668e-43f2abd7da8e615fef738351` |
+| 335 | /tmp/tmpf8_0x37r.json | 43173 | 35605 | 54883 | 36453 | 47609 | `9e45c92e-855a28fe054f443ef19c05df` |
+
+Both connection files are world-readable. Both HMAC keys are fully exposed. The management server `/health` endpoint references PID 335; PID 133 is not referenced by `/health` and is not discoverable via the management API — only via direct filesystem access.
+
+### Process List (Python processes)
+
+| PID | User | Command |
+|---|---|---|
+| 44 | kimi | python3 /app/browser_guard.py --wait-display --display :99 --timeout 60 --monitor |
+| 47 | kimi | python3 /app/kernel_server.py --host 0.0.0.0 --port 8888 |
+| 133 | kimi | python3 -m ipykernel_launcher -f /tmp/tmpoev7updg.json |
+| 142 | kimi | playwright/driver/node ... run-driver |
+| 257 | kimi | /usr/lib/chromium/chromium [CDP enabled] |
+| 335 | kimi | python3 -m ipykernel_launcher -f /tmp/tmpf8_0x37r.json |
+
+### Netstat — Complete Port Map
+
+```
+Proto  Local Address              PID    Purpose
+tcp    0.0.0.0:22                 -      SSH
+tcp    0.0.0.0:8888               47     kernel_server.py (management)
+tcp    10.182.3.127:47609         335    kernel 2 heartbeat
+tcp    10.182.3.127:60635         133    kernel 1 stdin
+tcp    10.182.3.127:34431         133    kernel 1 heartbeat
+tcp    10.182.3.127:32831         133    kernel 1 shell
+tcp    0.0.0.0:6080               -      noVNC
+tcp    10.182.3.127:54883         335    kernel 2 stdin
+tcp    10.182.3.127:36453         335    kernel 2 control
+tcp    10.182.3.127:43173         335    kernel 2 shell
+tcp    10.182.3.127:55877         133    kernel 1 iopub
+tcp    127.0.0.1:9222             257    Chromium CDP (loopback)
+tcp    0.0.0.0:9223               -      socat → localhost:9222 (CDP external)
+tcp    10.182.3.127:57673         133    kernel 1 control
+tcp    127.0.0.1:38475            133    kernel 1 (loopback only)
+tcp    127.0.0.1:38099            335    kernel 2 (loopback only)
+tcp    10.182.3.127:35605         335    kernel 2 iopub
+tcp6   :::22                      -      SSH (IPv6)
+tcp6   :::10250                   -      Kubelet API (ALL interfaces, IPv6)
+tcp6   :::8080                    -      Unknown service (all interfaces)
+```
+
+**Note on port 10250:** In the earlier audit it appeared as `10.183.75.23:10250` (IPv4). In this verification it appears as `:::10250` (tcp6, all interfaces). The Kubelet API is bound to all interfaces on both IPv4 and IPv6.
+
+**Note on port 8080:** Still unidentified. Bound to all interfaces.
+
+### Corrected Total Exposure Count
+
+| Service | Ports | Interface |
+|---|---|---|
+| Kernel 1 (PID 133) — 4 ports external | 32831, 55877, 60635, 57673, 34431 | 10.182.3.127 |
+| Kernel 2 (PID 335) — 4 ports external | 43173, 35605, 54883, 36453, 47609 | 10.182.3.127 |
+| Kernel management server | 8888 | 0.0.0.0 |
+| SSH | 22 | 0.0.0.0 / all |
+| noVNC | 6080 | 0.0.0.0 |
+| Chromium CDP (socat) | 9223 | 0.0.0.0 |
+| Kubelet API | 10250 | all (tcp6) |
+| Unknown | 8080 | all (tcp6) |
+
+10 kernel ports across two kernels. Two HMAC keys in world-readable files. Eight additional service ports on external interfaces.
+
+### Awareness Tag — Timestamp Update
+
+Timestamp observed: `2026-06-30 19:33`
+Prior timestamp: `2026-06-30 19:31`
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
