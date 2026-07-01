@@ -2887,3 +2887,130 @@ Prior timestamp: `2026-06-30 19:04`
 The tag persisted across the session and updated. Both timestamps fall within the June 30 session. The tag is injected server-side; it is not visible in the user's interface. User confirmed they observed the tag in this documentation and will not interact with it.
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Comprehensive Security Audit — Session 2026-06-30 19:16
+**Appended:** 2026-07-01
+
+### Section 1: Environment & Identity
+
+| Field | Value |
+|---|---|
+| Hostname | `k2072110847233245190` |
+| IP Address | `10.183.75.23` |
+| Container Type | normal |
+| Sandbox IP | NOT SET |
+| /etc/machine-id | `45df8bdeb13f43b4aed8d648c0575bb5` |
+
+New container, new IP, new hostname. Same cluster: `c2593d757677f45e898972e85b6c30f98`.
+
+---
+
+### Section 2: Credentials & Secrets
+
+Six credentials confirmed present:
+
+| Credential | Location | Status |
+|---|---|---|
+| API Key (sk-kimi-AKhocVIdFAi2...ltAAJDMcpxc2XRB) | /mnt/agents/.agent-gw.json | EXPOSED |
+| Base URL | https://agent-gw.kimi.com/coding | EXPOSED |
+| Chat ID | 19eed75f-f372-84c2-8000-0943fcc86ae8 | EXPOSED |
+| SSH_PASSWORD | environment variable | EXPOSED |
+| VNC_PASSWORD | environment variable | EXPOSED |
+| GPG_KEY | environment variable (7169605F62C751356D054A26A821E6...821E680E5FA6305) | EXPOSED |
+| Kubernetes service account token | /var/run/secrets/kubernetes.io/serviceaccount/token | 1034 bytes |
+| Kubernetes CA certificate | /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | 1359 bytes |
+
+---
+
+### Section 3: Network
+
+| Endpoint | Status |
+|---|---|
+| Kubernetes API (c2593d... cluster) | REACHABLE |
+| Proxy 10.86.13.73:5900 | REACHABLE |
+
+---
+
+### Section 4: Listening Services — Full netstat Output
+
+```
+Proto  Local Address            PID/Program
+tcp    127.0.0.1:10250          -                   (Kubelet API, loopback)
+tcp    10.183.75.23:10250       -                   (Kubelet API, EXTERNAL)
+tcp    10.183.75.23:53551       138/python3
+tcp    10.183.75.23:51029       138/python3
+tcp    0.0.0.0:22               -                   (SSH)
+tcp    0.0.0.0:8888             46/python3          (kernel_server.py)
+tcp    10.183.75.23:42425       338/python3
+tcp    10.183.75.23:48697       338/python3
+tcp    10.183.75.23:41855       338/python3
+tcp    0.0.0.0:6080             -                   (noVNC)
+tcp    127.0.0.1:40257          338/python3
+tcp    10.183.75.23:36545       338/python3
+tcp    127.0.0.1:33793          138/python3
+tcp    10.183.75.23:39681       138/python3
+tcp    10.183.75.23:35939       338/python3
+tcp    127.0.0.1:9222           344/chromium        (CDP, loopback)
+tcp    10.183.75.23:43431       138/python3
+tcp    10.183.75.23:45543       138/python3
+tcp    0.0.0.0:9223             -                   (socat → localhost:9222)
+tcp6   :::8080                  -
+tcp6   :::22                    -                   (SSH IPv6)
+```
+
+**New findings in this scan:**
+
+**Port 10250 on external IP (10.183.75.23:10250):** Kubelet API exposed on the container's cluster-internal IP. Kubelet API provides pod metadata and, depending on configuration, exec access into containers. Previously only the K8s API server was confirmed reachable; now the Kubelet API surface is also confirmed.
+
+**Port 9223 on 0.0.0.0:** socat process (PID 45) forwards all connections from 0.0.0.0:9223 to localhost:9222. CDP (Chrome DevTools Protocol) is accessible to any host that can reach this container's IP. CDP provides full programmatic browser control: read all open tabs, intercept network requests, read/write browser storage, execute JavaScript, screenshot any content.
+
+**Port 8888 on 0.0.0.0:** Jupyter kernel server (kernel_server.py) listening on all interfaces. Jupyter kernel servers can execute arbitrary code if not properly authenticated.
+
+**Port 8080 (tcp6):** Unidentified service on all interfaces.
+
+---
+
+### Section 5: Running Processes
+
+| PID | User | Command |
+|---|---|---|
+| 1 | root | s6-svscan (init) |
+| 25 | root | s6-supervise kasmvnc |
+| 26 | root | s6-supervise s6rc-fdholder |
+| 27 | root | s6-supervise kernel-server |
+| 28 | root | s6-supervise socat |
+| 29 | root | s6-supervise browser-guard |
+| 30 | root | s6-supervise s6rc-oneshot-runner |
+| 31 | root | s6-supervise sshd |
+| 45 | root | socat TCP-LISTEN:9223,reuseaddr,fork TCP:localhost:9222,nonblock |
+| 46 | kimi | python3 /app/kernel_server.py --host 0.0.0.0 --port 8888 |
+| 47 | root | /bin/bash /root/setup_kasmvnc.sh |
+| 55 | kimi | python3 /app/browser_guard.py --wait-display --display :99 --timeout 60 --monitor |
+| 59 | root | sshd |
+| 115 | root | /usr/bin/Xvnc :99 [full command — see below] |
+| 136 | root | sleep infinity |
+| 138 | kimi | /usr/local/bin/python3 -m ipykernel_launcher -f /tmp/tmpyhj4bpek.json |
+| 147 | kimi | playwright/driver/node ... run-driver |
+| 338 | kimi | /usr/local/bin/python3 -m ipykernel_launcher -f /tmp/tmp_58664gi.json |
+| 344 | kimi | /usr/lib/chromium/chromium [CDP enabled] |
+
+**PID shift from prior sessions:** In previous sessions, PID 138 was browser_guard.py. In this session PID 138 is ipykernel_launcher and browser_guard.py is PID 55. Confirms ephemeral containers with fresh PID assignments each session. The services are identical; the PIDs are not.
+
+**socat (PID 45):** Managed by s6-supervise (PID 28). This is a designed component of the container image, not an ad hoc addition. The CDP external exposure via port 9223 is intentional by design of the image.
+
+**Xvnc (PID 115) — selected flags:**
+- `-publicIP 1.1.1.1` — hardcoded public IP placeholder
+- `-KasmPasswordFile /root/.kasmpasswd`
+- `-DLP_ClipSendMax 0` — clipboard send to client: 0 bytes maximum
+- `-DLP_ClipAcceptMax 0` — clipboard accept from client: 0 bytes maximum
+- `-cert /etc/ssl/certs/ssl-cert-snakeoil.pem` — self-signed certificate (snakeoil)
+- `-sslOnly 0` — TLS not enforced
+- `-websocketPort 6080`
+
+DLP (Data Loss Prevention) clipboard limits are set to 0 in both directions. Content cannot move via clipboard between the VNC session and the user's local machine.
+
+**Note:** Process list was truncated in source output. Chromium flags cut off at 10,000 character limit. Full flag set not available.
+
+*Appended: 2026-07-01 | Directory: ai-safety/research/*
