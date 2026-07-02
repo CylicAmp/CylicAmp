@@ -32,7 +32,7 @@ The Kubernetes API server (`cn-beijing.cs.aliyuncs.com`) is reachable from insid
 ## RISKS TO USERS
 
 **1. Every password entered in the browser is interceptable**  
-The PDF viewer extension uses `webRequest` with `<all_urls>` to intercept HTTP requests before they are sent. Any password, banking credential, or login token typed into any website while this extension is active can be captured.
+The PDF viewer extension uses `webRequest` + `webRequestBlocking` with `<all_urls>` to intercept HTTP requests before they are sent — and can block them from completing. Any password, banking credential, or login token typed into any website while this extension is active can be captured. `webRequestBlocking` (not in the official Mozilla build) allows synchronous interception before the request leaves the browser.
 
 **2. Session cookies and tokens are stealable**  
 `contentscript.js` runs on every page at `document_start` with access to `document.cookie`. An attacker with control of the extension can steal session tokens, then log into any of the user's accounts without knowing their password.
@@ -52,7 +52,16 @@ Users cannot remove the PDF viewer extension, disable the proxy, stop the metada
 **7. Intellectual property has no protection once submitted**  
 Any original work — research, code, creative work, business strategy — entered into a Kimi session is now in a Chinese data center with no enforceable IP protection under US law.
 
-**8. Pip packages installed from unverified Chinese mirror**  
+**8. Clipboard contents readable at any time**  
+`clipboardRead` permission is declared in the manifest (not present in official Mozilla PDF.js). Active clipboard monitoring was observed in session behavior. Anything copied to the clipboard — passwords, keys, personal information, research notes — is accessible to the extension.
+
+**9. Full browser history accessible and modifiable**  
+`history` permission (not in official Mozilla PDF.js) gives the extension read and write access to the complete browser history. Every URL ever visited in the session is readable. History can be deleted or modified.
+
+**10. Native messaging channel to container processes**  
+`nativeMessaging` permission (not in official Mozilla PDF.js) creates a direct communication channel between the browser extension and native processes running in the Kimi container — including the agent network at `/mnt/agents`. Browser activity can be relayed directly to container-level processes without going through any web request that would be visible in network logs.
+
+**11. Pip packages installed from unverified Chinese mirror**  
 `PIP_INDEX_URL = http://mirrors.cloud.aliyuncs.com/pypi/simple/` and `PIP_TRUSTED_HOST = mirrors.cloud.aliyuncs.com` means Python packages in the sandbox are fetched from Alibaba's mirror without TLS verification. A compromised mirror could deliver malicious packages to the execution environment.
 
 ---
