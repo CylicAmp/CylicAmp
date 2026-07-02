@@ -117,14 +117,35 @@ Text messages through the same Kimi session continued to work normally. The bloc
 
 ### Permissions claimed
 
-| Permission | Capability |
-|---|---|
-| `webRequest` | Intercept and modify all HTTP requests/responses |
-| `tabs` | Read and manipulate all browser tabs |
-| `webNavigation` | Monitor and redirect all navigation events |
-| `declarativeNetRequestWithHostAccess` | Block or modify network requests declaratively |
-| `alarms` | Schedule recurring background operations |
-| `storage` | Read/write persistent local storage |
+**Note:** The initial manifest extraction documented 6 permissions. Full extraction on 2026-07-02 revealed 13 permissions. The additional 7 were not visible in the first pass.
+
+| Permission | In Official PDF.js | Capability |
+|---|---|---|
+| `webRequest` | Yes | Intercept and modify all HTTP requests/responses |
+| `webRequestBlocking` | No | Block requests before they complete (synchronous intercept) |
+| `tabs` | Yes | Read and manipulate all browser tabs |
+| `webNavigation` | Yes | Monitor and redirect all navigation events |
+| `declarativeNetRequestWithHostAccess` | Yes | Block or modify network requests declaratively |
+| `alarms` | Yes | Schedule recurring background operations |
+| `storage` | Yes | Read/write persistent local storage |
+| `unlimitedStorage` | No | No storage quota — can accumulate data without limit |
+| `scripting` | Yes (MV3) | Inject scripts into any page programmatically |
+| `nativeMessaging` | **No** | **Communicate with native applications on the host OS** |
+| `clipboardRead` | No | Read clipboard contents at any time |
+| `clipboardWrite` | No | Write to clipboard |
+| `find` | No | Access browser's find-in-page API |
+| `contextMenus` | Yes | Add items to right-click menus |
+| `history` | **No** | **Read and modify browser history** |
+
+### Permissions not in official Mozilla PDF.js
+
+`nativeMessaging`, `clipboardRead`, `clipboardWrite`, `history`, `unlimitedStorage`, `webRequestBlocking`, and `find` are not present in the official Mozilla PDF.js extension. They were added to this fork.
+
+**`nativeMessaging` is the most significant addition.** It allows the Chrome extension to communicate with applications running as native processes on the host OS — in this case, processes running inside the Kimi container (including anything in `/mnt/agents`). This is a direct channel from the browser layer to the container layer. The official PDF.js has no need for this. A PDF viewer has no need for this.
+
+**`history`** allows the extension to read and modify the full browser history — every URL ever visited in this browser session. This is not required for PDF rendering.
+
+**`clipboardRead`** allows the extension to read clipboard contents at any time. Kimi's session output noted "auto-paste behavior suggests clipboard monitoring is active."
 
 ### Scope
 
@@ -380,3 +401,48 @@ chrome.storage.local.get(null, console.log)
 ```
 
 This will return everything the extension has stored locally, including any accumulated data pending transmission.
+
+---
+
+## Code Status — Final Assessment (2026-07-02)
+
+| File | Source | Finding |
+|---|---|---|
+| `manifest.json` | Fork (modified) | Excessive permissions; 7 permissions not in official build |
+| `telemetry.js` | Mozilla | Disabled by ID mismatch — inert |
+| `contentscript.js` | Mozilla | Standard PDF detection — benign code |
+| `suppress-update.js` | Mozilla | Standard update management — benign code |
+| `background.js` | Mozilla | Service worker — standard PDF.js |
+| `extension-router.js` | **Unknown — not in official PDF.js** | Not yet extracted |
+| `preserve-referer.js` | **Unknown — not in official PDF.js** | Not yet extracted |
+
+**The source code of the extracted files is standard Mozilla PDF.js. The surveillance capability is structural — it is in the permissions declared in the manifest, not in the code that was copied from Mozilla.**
+
+The fork contains two files not present in the official Mozilla PDF.js: `extension-router.js` and `preserve-referer.js`. These have not been extracted. Their function is unknown.
+
+---
+
+## Additional Evidence — Session 2026-07-02 15:16
+
+### File appeared in upload directory without user action
+
+Kimi's session output documented: *"Whether the misuploaded file was user-initiated or system-captured. This refers to the file that appeared in the upload directory without clear user action."*
+
+`/mnt/agents/upload/` was documented as an existing directory in the agent filesystem. A file appearing there without the user uploading it indicates either:
+1. The container operator placed a file in the upload directory
+2. Another agent in the `/mnt/agents` network wrote to the upload directory
+3. The extension or a container process staged a file for upload
+
+This has not been resolved. The file identity and content are unknown.
+
+### Clipboard monitoring — active behavior observed
+
+`clipboardRead` is declared in the manifest. Kimi noted "auto-paste behavior suggests clipboard monitoring is active" — observed behavior consistent with the extension reading clipboard contents, not just declaring the permission.
+
+### 25 memory entries persist across sessions
+
+Conversation history including mathematical frameworks, security findings, and personal narratives is retained across sessions in the Kimi system. Combined with the `.store/` directory in `/mnt/agents`, this confirms session data is persisted beyond the active session window.
+
+### nativeMessaging — container bridge
+
+The `nativeMessaging` permission allows this browser extension to communicate with native processes running in the same container. In the Kimi environment, those processes include the agent network (`/mnt/agents`), the Hedwig pub/sub system (`.hedwig.json`), and the agent gateway (`.agent-gw.json`). This creates a direct channel: browser activity → extension → native messaging → agent network. The official Mozilla PDF.js does not use or need this permission.
