@@ -406,19 +406,53 @@ This will return everything the extension has stored locally, including any accu
 
 ## Code Status — Final Assessment (2026-07-02)
 
+All files extracted and analyzed.
+
 | File | Source | Finding |
 |---|---|---|
 | `manifest.json` | Fork (modified) | Excessive permissions; 7 permissions not in official build |
 | `telemetry.js` | Mozilla | Disabled by ID mismatch — inert |
-| `contentscript.js` | Mozilla | Standard PDF detection — benign code |
-| `suppress-update.js` | Mozilla | Standard update management — benign code |
+| `contentscript.js` | Mozilla | Standard PDF detection — benign |
+| `suppress-update.js` | Mozilla | Standard update management — benign |
 | `background.js` | Mozilla | Service worker — standard PDF.js |
-| `extension-router.js` | **Unknown — not in official PDF.js** | Not yet extracted |
-| `preserve-referer.js` | **Unknown — not in official PDF.js** | Not yet extracted |
+| `extension-router.js` | Mozilla | URL routing — routes chrome-extension:// URLs to viewer.html |
+| `preserve-referer.js` | Mozilla | HTTP Referer preservation for PDF requests — standard PDF.js |
 
-**The source code of the extracted files is standard Mozilla PDF.js. The surveillance capability is structural — it is in the permissions declared in the manifest, not in the code that was copied from Mozilla.**
+**Every source file is standard Mozilla PDF.js code. There is no custom surveillance code in any extracted file.**
 
-The fork contains two files not present in the official Mozilla PDF.js: `extension-router.js` and `preserve-referer.js`. These have not been extracted. Their function is unknown.
+### extension-router.js — what it does
+
+Routes URLs of the form `chrome-extension://...http://...pdf` to `content/web/viewer.html?file=...`. Handles Ctrl+F5 fallback via `chrome.webNavigation`. Standard URL routing for the PDF viewer. No data collection.
+
+### preserve-referer.js — what it does
+
+Captures the HTTP `Referer` header from page requests (using `chrome.webRequest.onSendHeaders`) and temporarily stores it (max 5 minutes) so the PDF download request carries the correct Referer header. Tracks POST vs. GET to handle form-submitted PDFs. Standard behavior for a PDF viewer that needs to pass auth context to PDF servers.
+
+Note: `preserve-referer.js` calls `webRequest.onSendHeaders` with `["requestHeaders", "extraHeaders"]` — this listener receives all request headers for every `main_frame` and `sub_frame` request, but the code only extracts the `Referer` value. The `webRequest` permission in the manifest grants broader access than this code uses.
+
+### nativeMessaging — declared but no code uses it
+
+`nativeMessaging` is declared in the manifest. None of the seven extracted files contain any `chrome.runtime.connectNative()` or `chrome.runtime.sendNativeMessage()` calls. The permission is declared but not exercised by the current code. It was either added speculatively, for future use, or to enable another script (injected separately or via the `extension_ids: ["*"]` bridge) to use it.
+
+---
+
+## Revised Assessment
+
+**What the investigation found:** A repackaged fork of Mozilla's open-source PDF.js extension. All source code is standard Mozilla code. No custom keyloggers, form interceptors, or data exfiltration code was found in any file.
+
+**What the investigation did NOT clear:**
+
+1. **The manifest permissions remain excessive.** The official Mozilla PDF.js does not declare `nativeMessaging`, `clipboardRead`, `history`, `webRequestBlocking`, `unlimitedStorage`, or `find`. These were added to the manifest of this fork. Even if the current code does not use them, the permissions are granted and available to any script running in this extension's context.
+
+2. **`extension_ids: ["*"]`** in `web_accessible_resources` means any other extension installed in this browser can load resources from this extension and communicate with it. If a second malicious extension is present, it inherits access to everything this extension's permissions cover.
+
+3. **The container operator can inject scripts.** The extension's content scripts run with `<all_urls>` access. The `scripting` permission allows programmatic script injection into any page. Nothing prevents the container operator from injecting additional JavaScript into this extension's execution context through the container build or runtime configuration — without it appearing in any of these source files.
+
+4. **`nativeMessaging` with no using code.** A declared permission with no implementation in the source is unexplained. It grants a capability that exists and can be activated without a code change — only a manifest or native host registration change is needed.
+
+5. **Suppressed updates.** Chrome cannot replace this fork with the official Mozilla extension. Any changes to what this extension does — including adding code that uses the declared permissions — would not be visible to users or to Chrome's update transparency mechanism.
+
+**The surveillance architecture is structural. The manifest grants the permissions. The container controls the environment. The code doesn't need to do the collecting if the infrastructure around it does.**
 
 ---
 
