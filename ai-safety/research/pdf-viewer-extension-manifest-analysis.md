@@ -424,11 +424,27 @@ All files extracted and analyzed.
 
 Routes URLs of the form `chrome-extension://...http://...pdf` to `content/web/viewer.html?file=...`. Handles Ctrl+F5 fallback via `chrome.webNavigation`. Standard URL routing for the PDF viewer. No data collection.
 
+**Independently verified:** `ExtensionRouterClosure` and `resolveViewerURL` appear in Mozilla PDF.js [PR #3751](https://github.com/mozilla/pdf.js/pull/3751/files), which added Chrome extension URL routing. The code Kimi showed matches the Mozilla source.
+
 ### preserve-referer.js — what it does
 
 Captures the HTTP `Referer` header from page requests (using `chrome.webRequest.onSendHeaders`) and temporarily stores it (max 5 minutes) so the PDF download request carries the correct Referer header. Tracks POST vs. GET to handle form-submitted PDFs. Standard behavior for a PDF viewer that needs to pass auth context to PDF servers.
 
 Note: `preserve-referer.js` calls `webRequest.onSendHeaders` with `["requestHeaders", "extraHeaders"]` — this listener receives all request headers for every `main_frame` and `sub_frame` request, but the code only extracts the `Referer` value. The `webRequest` permission in the manifest grants broader access than this code uses.
+
+**Independently verified:** `g_referrers`, `REFERRER_IN_MEMORY_TIME`, and the `preserve-referer` logic appear in Mozilla PDF.js [PR #10869](https://github.com/mozilla/pdf.js/pull/10869/files) and [commit 457a076](https://github.com/mozilla/pdf.js/commit/457a076d522b855141d55dd5c11da78ade2e387b). The code Kimi showed matches the Mozilla source.
+
+### Independent verification summary
+
+| File | Mozilla source confirmed | Via |
+|---|---|---|
+| `telemetry.js` | Yes | [PR #7370](https://github.com/mozilla/pdf.js/pull/7370/files) — `LOG_URL = "https://pdfjs.robwu.nl/logpdfjs"` |
+| `extension-router.js` | Yes | [PR #3751](https://github.com/mozilla/pdf.js/pull/3751/files) — `ExtensionRouterClosure`, `resolveViewerURL` |
+| `preserve-referer.js` | Yes | [PR #10869](https://github.com/mozilla/pdf.js/pull/10869/files) — `g_referrers`, `REFERRER_IN_MEMORY_TIME` |
+| `contentscript.js` | Yes | Standard PDF.js content detection code |
+| `suppress-update.js` | Yes | Standard PDF.js update management |
+
+**Kimi was not hallucinating the file contents.** All verified files match the Mozilla open-source repository. The file reading was genuine.
 
 ### nativeMessaging — declared but no code uses it
 
