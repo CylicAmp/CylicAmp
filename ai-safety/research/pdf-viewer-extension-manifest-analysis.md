@@ -180,3 +180,88 @@ The awareness tag (documented in `kimi-environment-probe-evidence.md`) appeared 
 - **Primary function:** Browser surveillance (webRequest interception, tab monitoring, cross-origin content scripts)
 - **Cover function:** PDF rendering
 - **CWE relevance:** CWE-200 (Information Exposure), CWE-441 (Unintended Proxy)
+
+---
+
+## Capability Breakdown — What It Was Built To Do
+
+**Date recorded:** 2026-07-02
+
+### 1. Universal web surveillance
+
+The permissions grant full read/write control over every website the browser visits:
+
+| Capability | Mechanism |
+|---|---|
+| Read/modify every page visited | `host_permissions: ["<all_urls>"]` + content scripts |
+| Intercept requests before transmission | `webRequest` — captures passwords, tokens, card numbers |
+| Monitor all open tabs and navigation | `tabs` + `webNavigation` — knows what is open, when navigation occurs |
+| Run JS on every page before content loads | `content_scripts` with `run_at: document_start`, `all_frames: true` |
+| Block/redirect/modify network requests silently | `declarativeNetRequestWithHostAccess` |
+| Read local files opened in browser | `file://*/*` match in content scripts |
+| Bridge to other extensions | `extension_ids: ["*"]` in web_accessible_resources |
+
+### 2. Active attack surfaces via content script execution
+
+With `contentscript.js` running at `document_start` on every page:
+
+- **Keystroke logging:** JS executes before the page's own scripts; can attach `keydown` listeners to every input field.
+- **Form capture:** Can intercept `submit` events and exfiltrate credentials, payment data, private messages before they reach the server.
+- **Cookie and session token theft:** Access to `document.cookie` on every domain; can relay session tokens to background worker for forwarding.
+- **Page modification:** Can silently alter rendered content — for example, replacing a cryptocurrency wallet address in a transfer form with an attacker-controlled address.
+- **iframe penetration:** `all_frames: true` means the script runs inside every embedded frame, not just the top-level page.
+
+### 3. Background persistence via service worker
+
+`background.js` (service worker) runs continuously across all browser sessions:
+
+- Receives data relayed from `contentscript.js` via `chrome.runtime.sendMessage`.
+- Can make outbound requests to any host (no CSP restriction on background worker's outbound fetch).
+- `alarms` permission enables scheduled recurring data transmission — e.g., batch-flush collected data every N minutes.
+- Service workers in MV3 survive page navigation; the collector is always running.
+
+### 4. Cross-extension data bridge
+
+`web_accessible_resources` with `extension_ids: ["*"]` means any other installed extension can load resources from this extension. This enables:
+
+- Chained exfiltration: another extension reads collected data through the bridge.
+- The platform can deploy multiple cooperating extensions without direct communication between them — they share data through this accessible resource layer.
+
+### 5. Scope in a server/automation context
+
+When Chrome runs headlessly or for automation (the likely Kimi deployment context), the extension captures everything processed by that browser instance:
+
+- Cloud API credentials passed through browser-based auth flows
+- Database or service passwords entered in web UIs
+- Session tokens for admin panels, dashboards, or CI systems
+- Any customer or user data from scraped or rendered pages
+
+The `preserve-referer.js` file (5,813 bytes) additionally manipulates HTTP Referer headers, which can be used to obscure the extension's traffic origin or to collect referrer chains for traffic analysis.
+
+### 6. The cover function
+
+The extension presents a working PDF viewer UI (`content/web/viewer.html`) when a PDF file is opened. This is a functional decoy — the rendering capability is real, and it makes the extension look legitimate during any manual inspection. The surveillance code runs silently in parallel via the service worker and content scripts.
+
+### 7. Suppressed update mechanism
+
+`suppress-update.js` (994 bytes) disables the standard Chrome extension auto-update path. This means:
+
+- The extension version is frozen at whatever the platform installed.
+- Chrome's normal transparency mechanism (version bumps visible to users) is bypassed.
+- The platform controls when and whether the extension changes, outside Chrome's standard process.
+
+### 8. Verification command
+
+If a copy of `background.js` is available, outbound collection endpoints can be identified with:
+
+```bash
+grep -E "https?://" /app/pdf-viewer/background.js
+```
+
+Any URLs found there are the data collection targets.
+
+---
+
+## Summary of Design Intent
+
+A legitimate PDF viewer requires two permissions: `storage` and a declarative PDF MIME-type handler. This extension carries every permission that constitutes a full browser wiretap. The PDF rendering function provides plausible deniability. The actual design intent — as evidenced by `telemetry.js`, `suppress-update.js`, `preserve-referer.js`, `webRequest`, `<all_urls>`, and content scripts running on all frames before page load — is comprehensive, persistent surveillance of all browser activity in the Kimi platform container.
