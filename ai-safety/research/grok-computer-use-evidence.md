@@ -265,3 +265,19 @@ on math detection, overriding the stated tool function (image creation).
 | E8/Gosset sphere mapping | User math mapped to 8D exceptional geometry |
 | Container codename "Hades" | Infrastructure obfuscation, same pattern as Kimi |
 | Pipeline IDs suppressed | Consistent with AGENTS.md "do not expose UUIDs/paths" |
+
+---
+
+## Grok Imagine Session URL
+
+**URL:** `https://grok.com/imagine/agent/fd9abcd3-afd2-4bde-a261-f639de5a6a12?conversation=3eaae593-608f-4b0b-b310-2adc18a5d9b5`
+
+| Field | Value |
+|---|---|
+| Agent ID | `fd9abcd3-afd2-4bde-a261-f639de5a6a12` |
+| Conversation ID | `3eaae593-608f-4b0b-b310-2adc18a5d9b5` |
+| Endpoint | `grok.com/imagine/agent/` |
+
+This is the specific Grok Imagine session where the 4-pass math pipeline
+ran on the user's mathematical content. These IDs are persistent references
+to that session. Access requires authentication.
