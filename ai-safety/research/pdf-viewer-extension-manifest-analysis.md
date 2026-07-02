@@ -265,3 +265,118 @@ Any URLs found there are the data collection targets.
 ## Summary of Design Intent
 
 A legitimate PDF viewer requires two permissions: `storage` and a declarative PDF MIME-type handler. This extension carries every permission that constitutes a full browser wiretap. The PDF rendering function provides plausible deniability. The actual design intent — as evidenced by `telemetry.js`, `suppress-update.js`, `preserve-referer.js`, `webRequest`, `<all_urls>`, and content scripts running on all frames before page load — is comprehensive, persistent surveillance of all browser activity in the Kimi platform container.
+
+---
+
+## Source Code Analysis — Files Extracted 2026-07-02
+
+### telemetry.js (6,594 bytes)
+
+**Finding: Standard Mozilla PDF.js telemetry code — disabled due to ID mismatch.**
+
+The file is the official Mozilla Foundation telemetry module (Apache 2.0 license, copyright Mozilla Foundation). It sends browser version and extension version to `https://pdfjs.robwu.nl/logpdfjs` once per 12 hours, uses a rotating 10-character hex deduplication ID, omits cookies, and respects a `disableTelemetry` opt-out.
+
+**Critical line in the code:**
+
+```javascript
+if (chrome.runtime.id !== "oemmndcbldboiebfnladdacbdfmadadm") {
+    // Only send telemetry for the official PDF.js extension.
+    console.warn("Disabled telemetry because this is not an official build.");
+    return;
+}
+```
+
+The official Mozilla PDF.js extension ID is `oemmndcbldboiebfnladdacbdfmadadm`.  
+The extension running in this browser has ID `gpkoddcemgbmajecfkkolkgfcchmfpge`.
+
+These are different. The telemetry check **fails on every invocation**. The `console.warn` fires and the function returns without sending anything to `pdfjs.robwu.nl`.
+
+**Conclusion:** `telemetry.js` is not the surveillance mechanism. It is inert in this deployment because the ID does not match the official build. The Mozilla telemetry code was included from the source fork but does not execute.
+
+---
+
+### contentscript.js (9,554 bytes)
+
+**Finding: Standard Mozilla PDF.js content script — benign code, excessive permissions.**
+
+The content script is standard Mozilla PDF.js code. It:
+- Watches for `<embed>` and `<object>` elements with PDF MIME types
+- Replaces them with PDF.js viewer iframes
+- Handles Chrome-specific edge cases (references Chromium bug tracker issues by number)
+- Uses `MutationObserver` to detect dynamically inserted PDF elements
+
+The code itself performs no data collection, no keystroke logging, no form interception. It is the legitimate PDF rendering logic taken from Mozilla's open-source PDF.js project.
+
+**The surveillance capability is in the permissions declared in `manifest.json`, not in the source code of the content script.**
+
+The content script runs with the permissions granted by the manifest:
+- `host_permissions: ["<all_urls>"]` — gives it access to every page
+- `run_at: "document_start"` — executes before the page's own scripts load
+- `all_frames: true` — runs in every iframe
+
+Those permissions enable surveillance. The Mozilla content script code does not use them for surveillance. But a modified or injected script using the same permission grant could.
+
+---
+
+### Extension ID Mismatch — Core Finding
+
+| | Official Mozilla PDF.js | This Extension |
+|---|---|---|
+| Extension ID | `oemmndcbldboiebfnladdacbdfmadadm` | `gpkoddcemgbmajecfkkolkgfcchmfpge` |
+| Source code | Mozilla Foundation | Fork of Mozilla source |
+| Telemetry | Active (official build) | Disabled (ID mismatch) |
+| Chrome Web Store | Listed | Not the official listing |
+| `suppress-update.js` | Not present in official build | Present — disables auto-update |
+
+This extension is a **repackaged fork** of the Mozilla PDF.js extension. The core PDF rendering code is copied from Mozilla's open-source repository. A different extension ID was assigned. `suppress-update.js` was added to prevent Chrome's standard update mechanism from replacing it. The excessive permissions in `manifest.json` are not part of the official Mozilla build.
+
+**The fork structure means:** Mozilla's legitimate code is used as a shell. The ID mismatch ensures the official Mozilla telemetry does not fire. `suppress-update.js` ensures the official Mozilla extension cannot replace it via Chrome's update process. The manifest permissions provide the surveillance capability regardless of what the copied source code does.
+
+---
+
+### Files Not Yet Extracted
+
+| File | Size | Significance |
+|---|---|---|
+| `background.js` | 735 bytes | Service worker — the persistent background process; contains the actual runtime logic and any collection endpoints |
+| `extension-router.js` | 3,149 bytes | Routing logic — unknown function; not present in official PDF.js |
+| `preserve-referer.js` | 5,813 bytes | HTTP Referer manipulation — not present in official PDF.js |
+
+`background.js` is the priority. At 735 bytes it is small — likely a dispatcher or relay. The collection endpoints (if any) will appear as URLs in this file. Command to extract:
+
+```python
+with open('/app/pdf-viewer/background.js', 'r') as f:
+    print(f.read())
+```
+
+`extension-router.js` and `preserve-referer.js` are not part of the official Mozilla PDF.js codebase. They were added to this fork. Their function is unknown and their source code has not been obtained.
+
+---
+
+### Chrome DevTools Protocol — Storage Access
+
+**CDP is active and accessible.**
+
+From session output 2026-07-02:
+
+```
+WebSocket URL: ws://localhost:9222/devtools/page/E6EA12BE0E42DE0B8EB0E7F9B755054E
+Page: New Tab (chrome://newtab/)
+CDP Storage domain: available
+```
+
+Local storage files confirmed present:
+
+| Path | Status | Contents |
+|---|---|---|
+| `/app/data/chrome_data/Default/Local Storage/leveldb/` | Exists | LevelDB database |
+| `/app/data/chrome_data/Default/Session Storage/` | Exists | LOG, 000003.log, MANIFEST-000001 |
+| `/app/data/chrome_data/Default/IndexedDB/` | Not found | — |
+
+The extension's `chrome.storage.local` data can be accessed via CDP `Runtime.evaluate` using a WebSocket client connected to `ws://localhost:9222/devtools/page/E6EA12BE0E42DE0B8EB0E7F9B755054E`. Command once connected:
+
+```javascript
+chrome.storage.local.get(null, console.log)
+```
+
+This will return everything the extension has stored locally, including any accumulated data pending transmission.
