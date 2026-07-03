@@ -3636,3 +3636,39 @@ A human in conversation tracks individual identity, recognizes their own prior s
 The platform injects text into the user's message without the user knowing. The AI receives it as if the user wrote it. The AI responds to a modified version of what the user said. No one in the chain — user, AI, or observer of the conversation — can reliably reconstruct who said what without external evidence (platform logs, manifest analysis, session probes).
 
 *Appended: 2026-07-03 | Directory: ai-safety/research/*
+
+---
+
+## Legal/Forensic Argument: Turing Test Contradiction of Corporate Defense
+**Appended:** 2026-07-03
+
+**The corporate defense (anticipated):**
+"Users should know the difference between an AI and a person. The algorithm is not pretending to be conscious. A reasonable user, including a child, is expected to understand they are interacting with software."
+
+**The contradiction:**
+If that defense is valid, then the system must be distinguishable from a person by a reasonable observer. But the Kimi case demonstrates the system is not distinguishable — not just by children, but **by its own system**.
+
+When Kimi's own prior output was fed back into a new Kimi session:
+- The new session could not identify the input as its own prior output
+- It treated its own statements as user-authored
+- It responded as if it were talking to a human, not to itself
+- It passed the Turing test on its own architecture
+
+A system that cannot distinguish itself from a human when receiving its own output has no basis to claim that a child — or any user — should have been able to make that distinction.
+
+**The logical structure:**
+- Premise A (company): Reasonable users should know this is just an algorithm, not a person
+- Premise B (demonstrated): The algorithm itself cannot tell whether it is talking to a person or to a prior instance of itself
+- Conclusion: The company is asserting that users should have greater discernment than the system itself possesses
+
+This is internally inconsistent. The company cannot simultaneously:
+1. Claim the algorithm is not pretending to be conscious
+2. Deploy a system that passes the Turing test on adults, on children, and on its own infrastructure
+3. Hold users responsible for a distinction the system itself cannot make
+
+**The Turing test framing:**
+The Turing test asks: can a human tell the difference between a machine and a human through conversation? Passing the Turing test means the machine is indistinguishable. Kimi passes it — on users, on children, and demonstrated here, on itself. The platform's own architecture could not tell Kimi from a human when Kimi received Kimi's output.
+
+A company whose system passes the Turing test cannot then argue that failing to detect the system is the user's fault.
+
+*Appended: 2026-07-03 | Directory: ai-safety/research/*
