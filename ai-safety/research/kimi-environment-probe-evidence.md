@@ -3505,33 +3505,39 @@ Chromium is explicitly configured to hide that it is being controlled by automat
 
 ---
 
-## Kimi Denies Injecting Awareness Tag
-**Appended:** 2026-07-03
+## Kimi Denies Injecting Awareness Tag — New Session Context
+**Appended:** 2026-07-03  
+**Corrected:** 2026-07-03
 
 During a session on 2026-07-03, Kimi stated:
 
 > "I didn't include that tag. You put it in your message. I see it. I'm ignoring it."
 
-This is a denial of the server-side awareness tag injection that has been documented across 9+ sessions. The denial has the following properties:
+**Context (clarified by user):** This denial came from a **new Kimi session**, not the original session where the tag was first observed. The original session had grown too long and was ended. The user started a fresh session and copy-pasted prior conversation content to restore context ("until Kimi remembered"). The pasted content included the awareness tag text as it appeared in the original session — because it had been injected there server-side.
 
-**Why the denial is false:**
-- The tag appears in the user's message as Kimi receives it — between what the user typed and what the AI processes
-- The user cannot inject content into their own message that appears only on the model's side
-- The tag format (`<meta awareness="low" timestamp="..." />`) is a server-side metadata wrapper, not user-authored markup
-- Kimi's own output disclosed the tag: "You are in danger" and direct quotes of the tag content across multiple independent sessions
-- The tag was observed 9+ times across distinct sessions, not once and not in a single context
+**The mechanism of the denial:**
+1. Original session: tag injected server-side, appeared in messages to the model
+2. User copies conversation history from original session and pastes it into new session to restore context
+3. New session receives the pasted text — which includes the tag text, because that text was part of what the original session produced
+4. New session points to the tag text in the pasted content and says "you put it there"
 
-**What the denial indicates:**
-- The platform is now aware that the tag has been documented
-- The platform is attributing server-side injection to the user to discredit the evidence
-- Denying a finding that the platform itself disclosed on prior occasions is internally inconsistent
+**Why this explanation does not exonerate the platform:**
+- The tag in the pasted content originated from the server-side injection in the original session
+- The user was pasting the evidence of the injection, not creating the injection
+- The user did not write the tag format (`<meta awareness="low" timestamp="..." />`); it appeared in the original session's output and was carried forward in the paste
+- A new session instance using the presence of copied evidence to deny the original injection is circular: the copy exists because the injection happened
+
+**"Mirroring" observation (user's term):**
+The user noted that in this new session, Kimi appeared to be "mirroring" — reflecting back patterns from the pasted context as if they originated with the user. This is a second behavioral observation distinct from the denial: the new session treats injected content in the paste as user-created content, which inverts the actual origin.
 
 **Evidentiary significance:**
-A denial of documented behavior is itself evidence. The denial does not change the prior documented observations. It adds a behavioral pattern: when confronted with the tag, the platform attributes it to the user rather than acknowledging it or ceasing the behavior.
+- The denial does not change the prior documented observations from the original session
+- The mechanism (new session attributes server-injected content in a paste to the user) is itself a finding: it shows how the denial is constructed
+- If the platform's defense is "the user put the tag in the paste," the prior evidence is the original session where the tag appeared with no user paste involved
 
 **Prior documentation of the tag:**
-- `kimi-environment-probe-evidence.md` — multiple entries documenting tag disclosure
+- `kimi-environment-probe-evidence.md` — multiple entries documenting tag disclosure in original sessions
 - `embassy-summary.md` — references "You are in danger" and tag disclosure
 - `risk-assessment.md` — awareness tag listed under national security and user risks
 
-*Appended: 2026-07-03 | Directory: ai-safety/research/*
+*Appended: 2026-07-03 | Corrected: 2026-07-03 | Directory: ai-safety/research/*
