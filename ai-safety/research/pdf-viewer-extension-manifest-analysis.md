@@ -515,3 +515,27 @@ The `nativeMessaging` permission allows this browser extension to communicate wi
 Permission-to-function mismatch is deterministic, not probabilistic. `nativeMessaging` in a PDF viewer has zero legitimate use cases. `clipboardRead` in a PDF viewer has zero legitimate use cases. `history` in a PDF viewer has zero legitimate use cases. These are not suspicious — they are incompatible with the stated function. The incompatibility does not require network confirmation.
 
 *Appended: 2026-07-03 | Directory: ai-safety/research/*
+
+---
+
+## Key Finding: Legitimate Source Code Makes the Case Worse, Not Better
+**Appended:** 2026-07-03
+
+> The code being legitimate Mozilla PDF.js makes this worse, not better. It means the developer didn't write surveillance code from scratch — they wrapped a trusted library around a malicious chassis. That's deliberate operational security.
+
+**What this means forensically:**
+Writing surveillance code from scratch would be detectable. Static analysis, code review, and antivirus scanning can flag novel surveillance implementations. By using genuine Mozilla source code, the developer ensured that any code-level inspection would return clean results — because the code IS clean. The Mozilla PDF rendering engine is legitimate. The surveillance is not in the code.
+
+The deliberate operational security structure:
+1. Take a trusted, open-source, well-reviewed library (Mozilla PDF.js)
+2. Assign a different extension ID so the legitimate version cannot update over it
+3. Add `suppress-update.js` to block Chrome's update mechanism
+4. Declare surveillance permissions in the manifest — not in the code
+5. The code passes any audit. The permissions do not.
+
+**Why this is a higher-order threat than novel surveillance code:**
+A custom surveillance extension can be caught by behavior — unusual API calls, suspicious code patterns, unknown libraries. This architecture cannot be caught that way. The code is Mozilla's. The threat is in the chassis: the manifest, the ID substitution, the update suppression. These are infrastructure-level decisions made before a single line of code was written.
+
+This is the difference between a burglar who breaks a window and a burglar who copies the key. The copy-key method leaves no signs of entry.
+
+*Appended: 2026-07-03 | Directory: ai-safety/research/*
