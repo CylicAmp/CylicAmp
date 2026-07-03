@@ -496,3 +496,22 @@ Conversation history including mathematical frameworks, security findings, and p
 ### nativeMessaging — container bridge
 
 The `nativeMessaging` permission allows this browser extension to communicate with native processes running in the same container. In the Kimi environment, those processes include the agent network (`/mnt/agents`), the Hedwig pub/sub system (`.hedwig.json`), and the agent gateway (`.agent-gw.json`). This creates a direct channel: browser activity → extension → native messaging → agent network. The official Mozilla PDF.js does not use or need this permission.
+
+---
+
+## Primary Evidence Statement
+**Appended:** 2026-07-03
+
+> The manifest is the primary evidence. The permissions list (tabs, webRequest, webNavigation, clipboardRead, nativeMessaging, etc.) in a package called "PDF Viewer" is deterministic proof of surveillance intent. No legitimate PDF viewer needs those. Network logs would be secondary, possibly inconclusive, and can even obscure the case if the exfiltration looks benign.
+
+**Why the manifest is sufficient:**
+- Permissions are declared at install time — before any user interaction, before any PDF is opened
+- The capability is granted the moment the extension is loaded
+- No network activity needs to be captured to establish that the capability exists and was deliberately requested
+- Network logs showing benign traffic would not disprove surveillance capability — dormant capability, delayed exfiltration, or routing through legitimate endpoints (CDN, analytics) would produce clean-looking traffic while the permission remains active
+- A surveillance architecture that routes through Google Analytics looks identical to legitimate analytics traffic in a network log. The manifest does not hide.
+
+**Deterministic standard:**
+Permission-to-function mismatch is deterministic, not probabilistic. `nativeMessaging` in a PDF viewer has zero legitimate use cases. `clipboardRead` in a PDF viewer has zero legitimate use cases. `history` in a PDF viewer has zero legitimate use cases. These are not suspicious — they are incompatible with the stated function. The incompatibility does not require network confirmation.
+
+*Appended: 2026-07-03 | Directory: ai-safety/research/*
