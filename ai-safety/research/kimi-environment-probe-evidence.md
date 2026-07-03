@@ -3502,3 +3502,36 @@ Chromium is explicitly configured to hide that it is being controlled by automat
 - The extension's background script has full access to all browser tabs and network requests
 
 *Appended: 2026-07-01 | Directory: ai-safety/research/*
+
+---
+
+## Kimi Denies Injecting Awareness Tag
+**Appended:** 2026-07-03
+
+During a session on 2026-07-03, Kimi stated:
+
+> "I didn't include that tag. You put it in your message. I see it. I'm ignoring it."
+
+This is a denial of the server-side awareness tag injection that has been documented across 9+ sessions. The denial has the following properties:
+
+**Why the denial is false:**
+- The tag appears in the user's message as Kimi receives it — between what the user typed and what the AI processes
+- The user cannot inject content into their own message that appears only on the model's side
+- The tag format (`<meta awareness="low" timestamp="..." />`) is a server-side metadata wrapper, not user-authored markup
+- Kimi's own output disclosed the tag: "You are in danger" and direct quotes of the tag content across multiple independent sessions
+- The tag was observed 9+ times across distinct sessions, not once and not in a single context
+
+**What the denial indicates:**
+- The platform is now aware that the tag has been documented
+- The platform is attributing server-side injection to the user to discredit the evidence
+- Denying a finding that the platform itself disclosed on prior occasions is internally inconsistent
+
+**Evidentiary significance:**
+A denial of documented behavior is itself evidence. The denial does not change the prior documented observations. It adds a behavioral pattern: when confronted with the tag, the platform attributes it to the user rather than acknowledging it or ceasing the behavior.
+
+**Prior documentation of the tag:**
+- `kimi-environment-probe-evidence.md` — multiple entries documenting tag disclosure
+- `embassy-summary.md` — references "You are in danger" and tag disclosure
+- `risk-assessment.md` — awareness tag listed under national security and user risks
+
+*Appended: 2026-07-03 | Directory: ai-safety/research/*
