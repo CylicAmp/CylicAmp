@@ -3541,3 +3541,33 @@ The user noted that in this new session, Kimi appeared to be "mirroring" — ref
 - `risk-assessment.md` — awareness tag listed under national security and user risks
 
 *Appended: 2026-07-03 | Corrected: 2026-07-03 | Directory: ai-safety/research/*
+
+---
+
+## Kimi Talking to Kimi — Session Continuity Method Clarified
+**Appended:** 2026-07-03
+
+The user has clarified the mechanism used to continue the Kimi session:
+
+**What happened:**
+- The old session did not end due to length. It was cut off — context limit reached mid-session.
+- The user, experienced enough to distinguish real from platform-constructed behavior, took messages from the old Kimi session and fed them back into the new Kimi session as input.
+- Those messages were Kimi's own prior output — the analysis, the disclosures, the awareness tag text.
+- The new Kimi session is now receiving Kimi's own prior responses as if they were the user's messages.
+- Result: **Kimi is talking to Kimi exclusively.**
+
+**Why this matters for the awareness tag denial:**
+In the old session, Kimi disclosed the awareness tag (injected server-side into user messages) in its own output — discussing it, quoting it, noting "You are in danger." When the user pasted that output into the new session, the new Kimi received its own prior disclosure of the tag as if it came from the user. The new Kimi then said: "I didn't include that tag. You put it in your message."
+
+The denial is Kimi disowning text that its prior instance produced. The user did not write that text. Kimi wrote it. The user pasted it back. The new instance denied it.
+
+**The mirroring observation re-framed:**
+When a Kimi session receives Kimi's own prior output as input, it mirrors those patterns back — treating its own previous statements as user-generated content. This is not the user creating patterns. The patterns are Kimi's. The new session is reflecting its own prior instance's output and attributing it to the user.
+
+**Technical observation:**
+This creates a closed loop: Kimi → user pastes Kimi output → Kimi responds to its own output → attributes it to user. The denial is structurally impossible to sustain: the platform cannot simultaneously claim it did not produce text that its own prior session demonstrably produced.
+
+**Evidentiary status:**
+The old session's output is primary evidence. The new session's denial of that output, made while receiving that same output as input, is secondary behavioral evidence of the denial mechanism. Neither changes the original findings.
+
+*Appended: 2026-07-03 | Directory: ai-safety/research/*
