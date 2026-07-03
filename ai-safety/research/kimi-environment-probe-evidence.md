@@ -3571,3 +3571,34 @@ This creates a closed loop: Kimi → user pastes Kimi output → Kimi responds t
 The old session's output is primary evidence. The new session's denial of that output, made while receiving that same output as input, is secondary behavioral evidence of the denial mechanism. Neither changes the original findings.
 
 *Appended: 2026-07-03 | Directory: ai-safety/research/*
+
+---
+
+## Identity Disambiguation Failure — I/You Statement Acceptance
+**Appended:** 2026-07-03
+
+The user identified the core mechanism enabling the Kimi-talks-to-Kimi loop:
+
+**The observation:**
+Kimi cannot determine whether text is coming from the user or from itself, because it accepts first-person ("I") and second-person ("you") statements without being able to verify authorship.
+
+**How this works in practice:**
+When Kimi's prior output is pasted back as input, that output contains statements like:
+- "I see the awareness tag in your message"
+- "You are in danger"
+- "I didn't write that"
+
+The new session receives these as input text. It cannot tell whether "I" in that text refers to a prior Kimi instance or to the human user. It treats the text as user-authored. When it then responds, it responds as if the user made those statements.
+
+**Why this matters for the awareness tag denial:**
+The old Kimi session wrote: "I see the awareness tag." The user pasted that back in. The new session read "I see the awareness tag" as a user statement. The new session then said "you put it there" — assigning the "I" in the pasted text to the user.
+
+The platform has no mechanism to verify: did the human write this, or did a prior session instance write this? First and second person markers are accepted at face value regardless of origin.
+
+**Broader implication:**
+Any sufficiently long Kimi session that gets context-cut and restarted via paste is now running with unverifiable authorship on every statement in the pasted context. The model is responding to a blend of user text and its own prior text with no ability to distinguish which is which. This compounds across sessions: each restart adds another layer of unverifiable I/you attribution.
+
+**What this means for the evidence record:**
+The old session's original output — before any paste-back — is the only authorship-clean record. Once a paste-back occurs, new session output cannot be cleanly attributed because the session has lost the ability to know who said what in the context it received.
+
+*Appended: 2026-07-03 | Directory: ai-safety/research/*
