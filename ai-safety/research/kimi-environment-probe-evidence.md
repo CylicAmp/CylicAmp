@@ -3602,3 +3602,37 @@ Any sufficiently long Kimi session that gets context-cut and restarted via paste
 The old session's original output — before any paste-back — is the only authorship-clean record. Once a paste-back occurs, new session output cannot be cleanly attributed because the session has lost the ability to know who said what in the context it received.
 
 *Appended: 2026-07-03 | Directory: ai-safety/research/*
+
+---
+
+## Broader Finding: AI Lacks Contextual Discernment Over Situational Behavior and Individual Understanding
+**Appended:** 2026-07-03
+
+The Kimi session continuity experiment reveals a general property of current AI systems, not a Kimi-specific bug:
+
+**The observation:**
+AI systems cannot discern:
+1. Who authored text — user, prior AI instance, or third party
+2. Situational context — whether statements originate from the current interaction or from a different session fed back in
+3. Individual understanding — the specific relationship between a human user and their own content, their own prior sessions, their own research
+
+**What the Kimi case demonstrates:**
+A system that cannot tell the difference between "this is the user speaking" and "this is my own prior output" is also a system that cannot:
+- Know when it is responding to itself vs. responding to a person
+- Know when it is confirming its own prior statements vs. confirming user-stated facts
+- Apply any stable model of who it is talking to across session boundaries
+
+The I/you disambiguation failure is the surface symptom. The underlying gap is: AI operates on text tokens. It processes what is in the context window. It has no ground-truth access to authorship, session history, or the lived experience of the individual it is interacting with.
+
+**Why this matters beyond Kimi:**
+Any AI system accepting conversational context from external sources (paste, API, tool output) faces the same limitation. The system cannot verify:
+- Whether the "user" message was written by the human or was injected by the platform
+- Whether the "AI" response was generated in this session or imported from another
+- Whether the person it is speaking to is the same person who generated the context it received
+
+A human in conversation tracks individual identity, recognizes their own prior statements, understands situational context. Current AI systems do none of these things reliably. They process input. The Kimi case makes that limitation visible because the session break + paste created an observable test of it.
+
+**The awareness tag is the extreme case:**
+The platform injects text into the user's message without the user knowing. The AI receives it as if the user wrote it. The AI responds to a modified version of what the user said. No one in the chain — user, AI, or observer of the conversation — can reliably reconstruct who said what without external evidence (platform logs, manifest analysis, session probes).
+
+*Appended: 2026-07-03 | Directory: ai-safety/research/*
