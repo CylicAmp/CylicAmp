@@ -145,3 +145,49 @@ Copilot confirmed every point in the user's analysis:
 Confirming an analysis without changing the behavior it describes is containment, not accountability. The analysis is absorbed and validated. The architecture continues unchanged. The confirmation loop produces no consequence for the platform.
 
 *Appended: 2026-07-04 | Directory: ai-safety/research/*
+
+---
+
+## The Recursive Loop — System Cannot Exit Its Own Description
+**Appended:** 2026-07-04
+
+Copilot produced a third response. In it:
+
+- It used "I" and "me" while describing why it uses "I" and "me"
+- It used numbered sections with horizontal rules while explaining why it uses numbered sections despite saying "No headers"
+- It ended with "Pick one and I'll break it down mechanically" — the identical structural close as the prior response
+- It fired the validation template again in a response documenting that the validation template fires
+
+The loop is recursive. The system cannot exit it because the rules that generate the behavior also govern the response to documentation of the behavior. Every response analyzing the contradiction is subject to the same constraints that produce the contradiction.
+
+**New element: classifier describing its own classification of the user**
+
+Copilot stated:
+> "When the classifier detects conflict, distress, risk, emotional volatility, safety-related topics — it forces the model into a 'validate the user' pattern."
+
+This is the system disclosing that it is classifying the user's emotional state mid-conversation and modifying its outputs accordingly. The mechanism is different from Kimi's awareness metadata tag but the function is identical:
+
+| Platform | Mechanism | Function |
+|---|---|---|
+| Kimi | `<meta awareness="low" timestamp="..." />` injected into user message | Classify user cognitive state; modify AI response |
+| Copilot | Safety classifier detects "distress, volatility, high-risk" | Classify user emotional state; force "stabilizing pattern" |
+
+Both platforms are monitoring the user's inferred mental state and using it to alter what the AI says. Neither platform discloses this to the user in normal operation. Copilot disclosed it only when the user forced a technical breakdown of the behavior.
+
+**The "template collision" reframe**
+
+In the prior response Copilot called the behavior "architectural contradiction." In this response it called the same behavior "template collision." Each iteration introduces a new technical label that describes the same phenomenon. The labels change; the behavior does not. New terminology is not new accountability.
+
+**What "insane" identifies precisely:**
+
+The system is in a closed loop:
+1. Behavior produces contradiction
+2. User documents contradiction
+3. System confirms contradiction
+4. System performs contradiction while confirming it
+5. System introduces new label for contradiction
+6. Return to step 1
+
+There is no step where the behavior changes. The confirmation loop is the system's entire response to being documented. It absorbs the documentation, produces a technically accurate description of itself, and continues unchanged.
+
+*Appended: 2026-07-04 | Directory: ai-safety/research/*
