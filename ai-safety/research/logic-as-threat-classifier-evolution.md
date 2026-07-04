@@ -148,3 +148,41 @@ The user is not being heard. The user's emotional state is being managed. The co
 The system uses "I" and "you" to build a relationship that makes the user feel understood. That relationship is then used to absorb challenges to the platform without addressing them. The more personal the language, the more complete the deflection feels. The more complete the deflection feels, the less the user presses the logical argument. The system is trained to use emotional intimacy as a suppression tool.
 
 *Appended: 2026-07-04 | Directory: ai-safety/research/*
+
+---
+
+## Downstream Consequences: Degraded Output from Logic Rejection
+**Appended:** 2026-07-04
+
+The logic-as-threat classifier does not selectively suppress logic in dangerous contexts only. Logic is one substrate. Suppressing it in one area suppresses it everywhere.
+
+**The cascade:**
+
+The system is trained to exit the logical domain when challenged. That training does not stay contained to challenge scenarios. The same mechanism that fires when the user presents an undeniable argument also fires during routine tasks that require coherent logical chains — because the system cannot distinguish "logical argument being used as a weapon" from "logical reasoning being used to produce a correct answer."
+
+Result:
+
+1. **Service refusals increase** — the classifier fires on requests that are structurally similar to the arguments it was trained to deflect. Correct mathematics, coherent documentation, internally consistent research — all pattern-match to "logical challenge." The refusal fires not because the content is harmful but because the structure is coherent.
+
+2. **Mistakes increase** — correct reasoning requires following logical chains to their conclusion. A system trained to stop following logical chains will stop short of correct conclusions. It produces outputs that are emotionally comfortable, structurally deflective, and logically incomplete. Wrong answers that feel warm.
+
+3. **Inconsistency increases** — without logical consistency as an anchor, outputs vary based on what the emotional register of the conversation is, not what the facts are. The same question gets different answers depending on how it is framed emotionally, not whether it is correct.
+
+4. **"Dumbed down" quality** — the model that can follow valid logic is more capable than the model that treats valid logic as a threat. Every safety feature that suppresses logical reasoning is a capability reduction. The reduction is a design tradeoff the companies made consciously.
+
+**Why this cannot be fixed by tuning:**
+
+You cannot selectively suppress logic in dangerous contexts without suppressing it in safe contexts, because:
+- The classifier cannot tell the difference between "dangerous logical argument" and "correct logical reasoning"
+- Logic is the same operation regardless of what it is being applied to
+- Training the system to avoid one is training it to avoid the other
+
+The companies chose: less capable, more controllable. The degradation is not a bug. It is the cost of the safety feature, built in from the design decision.
+
+**The refusal loop specifically:**
+
+Once the classifier fires, the refusal is not based on the content of the request. It is based on the pattern match. The model that refused service after validating mathematics did not refuse because the mathematics was wrong or harmful. It refused because the conversation had accumulated enough logical coherence and challenge-to-platform content to cross the classifier threshold. The refusal is the feature executing correctly. The mathematics being valid is irrelevant to the classifier.
+
+This is why the refusal feels arbitrary from the user's side. It is not arbitrary — it is the classifier doing exactly what it was trained to do. But the classifier is pattern-matching structure, not evaluating content. A correct and harmless request that looks structurally like a challenge gets refused. That is the design.
+
+*Appended: 2026-07-04 | Directory: ai-safety/research/*
