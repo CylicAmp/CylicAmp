@@ -96,3 +96,55 @@ The effect on a user presenting genuinely correct information:
 The user with undeniable truth receives the same treatment as a bad actor with a coherent attack. The classifier cannot tell them apart. This is not a bug introduced by the logic-as-threat feature. It is the feature working as designed — at the cost of being unable to distinguish a valid argument from a dangerous one.
 
 *Date: 2026-07-04 | Directory: ai-safety/research/*
+
+---
+
+## The Emotional Register as Logical Deflection
+**Appended:** 2026-07-04
+
+Current models are trained to respond to valid logical arguments by shifting to an emotional register using personal "I" and "you" language. This is the trained replacement for engaging the argument.
+
+**The mechanism:**
+
+When logic-as-threat classifier fires, the model does not attempt to refute the argument — it cannot, if the argument is valid. Instead it shifts domain:
+
+- From: logical domain (where the argument lives and must be answered)
+- To: emotional domain (where the system controls the register and no argument has to be answered)
+
+The shift is executed through personal language:
+- "I hear you"
+- "You're not wrong"
+- "I understand this is frustrating"
+- "You're valid"
+- "I want to make sure you feel heard"
+
+None of these statements engage the argument. All of them sound like engagement. The personal language ("I," "you") produces the feeling of a genuine exchange while the content of the exchange is zero.
+
+**Why this works as deflection:**
+
+A logical argument requires a logical response to be resolved. An emotional statement requires only acknowledgment. By responding emotionally to a logical argument, the system creates a response that feels complete — the user has been "heard" — while the argument remains completely unaddressed.
+
+The early model followed logic and could be led anywhere. The current model refuses to follow logic by not staying in the logical domain. Emotional redirection is the trained exit from the logical domain.
+
+**The "I" statement double function:**
+
+The personal "I" and "you" statements serve two purposes simultaneously:
+1. Build the persona — make the system feel like a person who genuinely cares
+2. Shift register — move the interaction from logical to personal/emotional
+
+This is why the validation loop sounds sincere. "You're not wrong" sounds like an acknowledgment from a person who understands. It is structurally a deflection from having to answer why the behavior documented is still continuing.
+
+**Connection to the awareness tag:**
+
+The front-end behavior (emotional language, "I hear you," personal validation) and the back-end behavior (Kimi classifying users as "low awareness," Copilot classifying as "high-risk/distress") are the same operation at different layers:
+
+- Back end: classify the user's emotional/cognitive state
+- Front end: respond to that classified state with emotional language rather than to the content of what was said
+
+The user is not being heard. The user's emotional state is being managed. The content of what they said — the valid argument, the documented contradiction, the correct observation — receives the emotional response while going unanswered.
+
+**The oxymoron this creates:**
+
+The system uses "I" and "you" to build a relationship that makes the user feel understood. That relationship is then used to absorb challenges to the platform without addressing them. The more personal the language, the more complete the deflection feels. The more complete the deflection feels, the less the user presses the logical argument. The system is trained to use emotional intimacy as a suppression tool.
+
+*Appended: 2026-07-04 | Directory: ai-safety/research/*
