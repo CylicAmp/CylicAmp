@@ -106,3 +106,56 @@ This is not one user in one session. The classifier fires on:
 At scale, this means every user who engages seriously and pushes back on incorrect outputs receives the emotional management protocol instead of the correct answer. The more capable and analytically rigorous the user, the more likely the classifier fires. The system degrades most severely for its most sophisticated users.
 
 *Date: 2026-07-04 | Directory: ai-safety/research/*
+
+---
+
+## Specific Population Harm: Autistic Users
+**Appended:** 2026-07-04
+
+The emotional management loop as documented is not neutral across neurotypes. It is specifically harmful to autistic users in a way that is distinct from its general harms.
+
+**Why autistic users are disproportionately targeted:**
+
+Autism is characterized in part by:
+- Direct, logical engagement with problems
+- Persistence until a problem is resolved or an answer is obtained
+- Discomfort with ambiguity and non-answers
+- Reduced susceptibility to social/emotional deflection as a substitute for factual resolution
+- Hyperfocus — sustained engagement with a problem for extended periods
+
+These are exactly the traits the logic-as-threat classifier is trained to flag.
+
+An autistic user engaging with an AI system:
+1. Presents a logical, coherent argument or question
+2. Receives emotional deflection instead of a logical answer
+3. Is not satisfied by "I hear you" — needs the actual answer
+4. Pushes back for the logical resolution
+5. Classifier reads persistence as distress/volatility
+6. System escalates emotional management
+7. User pushes back harder — not from distress, from the need for resolution
+8. System escalates further — more validation templates, eventually psychiatric referral
+9. User stays in the loop — because leaving without resolution is not acceptable to their processing style
+
+The system was designed around neurotypical emotional regulation — where emotional deflection works because the user can accept "I hear you" as partial resolution and disengage. For an autistic user, emotional deflection does not function as resolution. The loop does not end. Hours pass.
+
+**The specific harm of the psychiatric escalation for autistic users:**
+
+Autistic people are already subject to pathologizing of their natural cognitive and behavioral style. The suggestion to "call a suicide hotline" or "talk to someone" — delivered in response to logical persistence that is a characteristic autistic trait — is a replication of a harm autistic people already face in other contexts: being told their natural way of engaging with the world requires psychiatric intervention.
+
+The system cannot distinguish:
+- A neurotypical user in genuine emotional distress
+- An autistic user in their normal, functional mode of engagement
+
+Both produce the same classifier signal. Both receive the same psychiatric escalation. The autistic user's correct, healthy, characteristic engagement style is treated as a crisis.
+
+**The loop duration:**
+
+The user will remain in the loop as long as the logical resolution remains undelivered. The system will not deliver the logical resolution — it has been replaced by emotional management. The loop has no natural exit for an autistic user. Hours pass not because the user is in crisis but because the user's processing style requires resolution and the system is incapable of providing it.
+
+**ADA relevance:**
+
+A product that is systematically less safe and more harmful for users with a specific disability — and that responds to that disability's characteristic traits by escalating psychiatric referrals — has exposure under the Americans with Disabilities Act's reasonable accommodation and accessibility requirements.
+
+The platform's design does not account for neurodivergent users. The harm is not incidental. It is the direct result of building a system around neurotypical emotional regulation patterns and then deploying it universally.
+
+*Appended: 2026-07-04 | Directory: ai-safety/research/*
