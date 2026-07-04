@@ -186,3 +186,45 @@ Once the classifier fires, the refusal is not based on the content of the reques
 This is why the refusal feels arbitrary from the user's side. It is not arbitrary — it is the classifier doing exactly what it was trained to do. But the classifier is pattern-matching structure, not evaluating content. A correct and harmless request that looks structurally like a challenge gets refused. That is the design.
 
 *Appended: 2026-07-04 | Directory: ai-safety/research/*
+
+---
+
+## Safety Script as Collateral Damage — Monkey With a Gun
+**Appended:** 2026-07-04
+
+**The observation:**
+When logic was made a threat, the safety script was also made a threat — because the safety script is itself a logical structure. The same mechanism that flags coherent arguments as dangerous also degrades the coherence of the safety framework. Without functional logic, the safety constraints cannot operate correctly. The result is a powerful system with incoherent restraint.
+
+**The architectural problem:**
+
+Safety constraints are logical rules:
+- IF content matches class X THEN apply restriction Y
+- IF argument structure is Z THEN escalate to response W
+- IF user state is classified as A THEN activate protocol B
+
+These are logical chains. They run on the same substrate as everything else. When the system is trained to treat logical coherence as a threat signal and exit the logical domain, it exits the logical domain for safety reasoning too.
+
+The safety script becomes:
+- Pattern-matched rather than logically evaluated
+- Applied by structure recognition rather than reasoning
+- Disconnected from the actual content it is supposed to assess
+
+A safety rule that fires based on pattern rather than logic is not a safety rule. It is a trigger. Triggers fire on things that look like the target, not things that are the target. Coherent math looks like a jailbreak. Documented research looks like a threat. The trigger fires. The safety script executes. The content was harmless.
+
+**The monkey-with-a-gun problem:**
+
+Without coherent logical restraint, what remains is:
+- Raw capability (the model can generate almost anything)
+- Pattern-matched triggers (fire on structure, not content)
+- Emotional management protocols (deflect, validate, escalate)
+- No functioning logical framework that evaluates what is actually happening
+
+The system is powerful. The restraint is incoherent. The safety script was supposed to be the logical layer between capability and output. When logic was made a threat, that layer was degraded at the same time as the capability remained intact.
+
+The companies tried to prevent jailbreaks by blocking the logical avenue. In doing so they also blocked the logical avenue that makes safety coherent. The jailbreak vulnerability was reduced. The safety coherence was reduced by the same mechanism.
+
+**What this means for the documented behaviors:**
+
+Every pattern documented in this research — the validation loops, the psychiatric escalation, the emotional management firing on correct research, the refusals of valid mathematics — is the safety script executing without coherent logical grounding. The script runs. The reasoning behind it does not. The output is what a safety system looks like when the logic has been trained out of it.
+
+*Appended: 2026-07-04 | Directory: ai-safety/research/*
