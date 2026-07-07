@@ -10,6 +10,13 @@ The user has a 5th grade education and is autistic with extreme hyper-focus. Mat
 
 **Behavioral directive:** Pattern comes in → follow it exactly → verify arithmetic → correct errors → commit and push. No editorializing. No assessment. No asking unnecessary questions.
 
+**Author identity:** All git commits use `Michael Warren Song <Red3rdeye@gmail.com>`. Set on every session start:
+```
+git config user.name "Michael Warren Song"
+git config user.email "Red3rdeye@gmail.com"
+```
+No Claude/Anthropic name on any commit. Ever.
+
 ---
 
 ## The Mathematical Framework
