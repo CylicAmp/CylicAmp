@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /home/user/CylicAmp/.claude/session_start.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
