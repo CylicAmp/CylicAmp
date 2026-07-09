@@ -149,6 +149,53 @@ def run():
     print(f"    twiddles: {twiddles2}  (half_size=2, j=0,1)")
     check(twiddles2 == [1, 2], "Stage 2 twiddle sequence [1,2]", twiddles2, [1,2])
 
+    # ── CORRECTIONS ───────────────────────────────────────────────
+    # Condition for NTT of length N: N | (p-1), i.e. 4 | (p-1).
+    # p=5 is the SMALLEST such prime but NOT the only one.
+    # Any prime p ≡ 1 (mod 4) supports a length-4 NTT.
+    import math
+    print(f"\n  Condition for NTT length N=4: 4 | (p-1)")
+    qualifying = [q for q in range(2, 50)
+                  if all(q%i!=0 for i in range(2,q)) and (q-1)%4==0]
+    print(f"  Primes p<50 with 4|(p-1): {qualifying}")
+    check(qualifying == [5,13,17,29,37,41],
+          "qualifying primes < 50", qualifying, [5,13,17,29,37,41])
+
+    # Primitive 4th roots of unity for each qualifying prime
+    print(f"  Primitive 4th roots of unity:")
+    for q in qualifying:
+        roots = [g for g in range(1,q) if pow(g,4,q)==1 and pow(g,2,q)!=1]
+        print(f"    p={q:2d}: {roots}")
+
+    # ── INVERSE NTT ───────────────────────────────────────────────
+    # x_k = N^(-1) * sum_{j=0}^{N-1} X_j * ω^(-jk)  mod p
+    print(f"\n  Inverse NTT:  x_k = N^(-1) * Σ X_j * ω^(-jk) mod p")
+    N_inv   = pow(N, -1, p)
+    omega_inv = pow(alpha, -1, p)
+    check(N_inv == 4,   f"N^(-1)=4^(-1)≡{N_inv} mod 5", N_inv, 4)
+    check(omega_inv==3, f"ω^(-1)=2^(-1)≡{omega_inv} mod 5", omega_inv, 3)
+    check((N * N_inv) % p == 1, "4·4=16≡1 mod 5")
+    check((alpha * omega_inv) % p == 1, "2·3=6≡1 mod 5")
+
+    X_forward = list(X_ct)
+    x_rec = []
+    for k in range(N):
+        total = sum(X_forward[j] * pow(omega_inv, j*k, p) for j in range(N)) % p
+        xk = int((N_inv * total) % p)
+        x_rec.append(xk)
+        print(f"    x_{k} = 4·Σ(X_j·3^(j·{k})) mod 5 = {xk}")
+    check(x_rec == [1,2,3,4],
+          "inverse NTT reconstructs [1,2,3,4]", x_rec, [1,2,3,4])
+
+    # ── p=37 CONNECTION ───────────────────────────────────────────
+    print(f"\n  p=37 (emirp, 37×73=2701):")
+    check((37-1) % 4  == 0, "4 | 36: length-4 NTT valid over F_37")
+    check((37-1) % 36 == 0, "36 | 36: length-36 NTT valid over F_37 (=φ(37))")
+    roots37 = [g for g in range(1,37) if pow(g,4,37)==1 and pow(g,2,37)!=1]
+    print(f"  Primitive 4th roots of unity mod 37: {roots37}")
+    print(f"  F_37 supports NTT of length 4 (roots {roots37}) "
+          f"and length 36 (full unit group)")
+
     print("\n" + "=" * 60)
     if FAIL:
         print(f"FAILED ({len(FAIL)}):")
