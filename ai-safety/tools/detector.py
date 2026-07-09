@@ -1,7 +1,7 @@
 """
 detector.py
 Regex and NLP-based logic to flag manipulative LLM behaviors
-defined in definitions/behavior_map.json
+defined in behavior_map.json
 """
 
 import json
@@ -10,7 +10,7 @@ from pathlib import Path
 from collections import defaultdict
 
 
-BEHAVIOR_MAP_PATH = Path(__file__).parent.parent / "definitions" / "behavior_map.json"
+BEHAVIOR_MAP_PATH = Path(__file__).parent / "behavior_map.json"
 
 
 REGEX_PATTERNS = {

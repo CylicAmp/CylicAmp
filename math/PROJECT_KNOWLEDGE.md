@@ -43,8 +43,8 @@
 
 | File | System |
 |---|---|
-| `primes/core.py` | Digital root lattice generation |
-| `primes/display.py` | Lattice display by digital root group |
+| `cylicamp/core.py` | Digital root lattice generation (re-exported via `primes/__init__.py`) |
+| `cylicamp/display.py` | Lattice display by digital root group (re-exported via `primes/__init__.py`) |
 | `primes/dr_algebra.py` | Closed algebra on DR classes, Z/9Z group structure |
 | `primes/eml_forensic_audit.md` | EML audit — bone lock sealed |
 | `differential-geometry/tensors_riemann_parallel_transport.py` | Tensors, Riemann curvature, holonomy |

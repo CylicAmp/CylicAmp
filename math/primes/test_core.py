@@ -23,7 +23,13 @@ def test_build_lattice_all_zeros():
 def test_build_lattice_all_twos():
     lattice, center = build_full_lattice(2, 2, 2, 2)
     assert center == 8
-    assert all(v == 4 for row in lattice for v in row)
+    # Outer ring holds pairwise sums (2+2=4); inner 2x2 block holds the raw digits (2).
+    assert lattice == [
+        [4, 4, 4, 4],
+        [4, 2, 2, 4],
+        [4, 2, 2, 4],
+        [4, 4, 4, 4],
+    ]
 
 
 def test_generate_all_lattices_count():
