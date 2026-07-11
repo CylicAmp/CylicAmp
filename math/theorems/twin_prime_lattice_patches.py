@@ -303,11 +303,11 @@ def run_verification() -> bool:
     if extensions:
         print(f"  First 5 extensions: {extensions[:5]}")
         print(f"  Last  5 extensions: {extensions[-5:]}")
-    print(f"\n  Note: 96 = 8 × 12 (AHL × sovereign target).
-  The {count} valid extensions are exactly the 3! = 6 permutations of {{18,27,36}}.
-  18+27+36 = 81 = 9²,  DR(81)=9.
-  Permutation (18,27,36) gives new col sums [30,51,72] → DR=[3,6,9] with
-  30 ∈ sovereign range — the constellation (29,30,31) is a twin prime pair.")
+    print(f"\n  Note: 96 = 8 x 12 (AHL x sovereign target).")
+    print(f"  The {count} valid extensions are exactly the 3! = 6 permutations of {{18,27,36}}.")
+    print(f"  18+27+36 = 81 = 9^2,  DR(81)=9.")
+    print(f"  Permutation (18,27,36) gives new col sums [30,51,72] -> DR=[3,6,9]")
+    print(f"  with 30 in sovereign range: the constellation (29,30,31) is a twin prime pair.")
 
     # ------------------------------------------------------------------
     # Polymath / bounds connection
