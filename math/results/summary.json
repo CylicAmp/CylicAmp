@@ -1,0 +1,179 @@
+{
+  "limit": 1000000,
+  "total_primes": 78498,
+  "cubic_residues_mod37": [
+    1,
+    6,
+    8,
+    10,
+    11,
+    14,
+    23,
+    26,
+    27,
+    29,
+    31,
+    36
+  ],
+  "theorems": {
+    "T1_ring_homomorphism": {
+      "test": "ring_homomorphism",
+      "pairs_tested": 10000,
+      "additive_violations": 0,
+      "multiplicative_violations": 0,
+      "confirmed": true
+    },
+    "T2_emirp_dr_invariance": {
+      "test": "emirp_dr_invariance",
+      "unique_pairs": 5592,
+      "dr_violations": 0,
+      "diff_dr_violations": 0,
+      "confirmed": true
+    },
+    "T3_palindromic_sovereign_exclusion": {
+      "test": "palindromic_sovereign_exclusion",
+      "total_palindromic_primes": 113,
+      "sovereign_violations_p_gt_3": 0,
+      "dr_distribution": {
+        "1": 18,
+        "2": 22,
+        "3": 1,
+        "4": 17,
+        "5": 18,
+        "7": 20,
+        "8": 17
+      },
+      "chi_distribution_p_gt_3": {
+        "-1": 56,
+        "1": 55
+      },
+      "cubic_residue_mod37_col1": {
+        "False": 30,
+        "True": 25
+      },
+      "confirmed": true
+    },
+    "T4_dr_mod37_orthogonality": {
+      "test": "dr_mod37_orthogonality",
+      "emirp_pairs": 5592,
+      "same_mod37_pct": 6.473533619456366,
+      "dr_collapse_pct": 100.0,
+      "mod37_chi2": 68.01564875257085,
+      "mod37_df": 35,
+      "mod37_Z": 3.946124794480807,
+      "most_enriched_residue": 8,
+      "most_depleted_residue": 36
+    },
+    "T5_multiplicative_closure_col1": {
+      "test": "multiplicative_closure_col1",
+      "pairs_tested": 5592,
+      "violations": 0,
+      "product_dr_distribution": {
+        "1": 1888,
+        "4": 1819,
+        "7": 1885
+      },
+      "confirmed": true
+    },
+    "T6_cubic_residue_split": {
+      "test": "cubic_residue_split_mod37",
+      "col1_palindromic_primes_gt3": 55,
+      "cubic_residues": 25,
+      "non_cubic_residues": 30,
+      "divisible_by_37": 0,
+      "expected_fraction_1_over_3": 18.33,
+      "actual_cr_fraction": 0.4545
+    }
+  },
+  "emirp_stats": {
+    "unique_pairs": 5592,
+    "dr_distribution": {
+      "1": 957,
+      "2": 904,
+      "4": 916,
+      "5": 969,
+      "7": 915,
+      "8": 931
+    },
+    "product_dr_distribution": {
+      "1": 1888,
+      "4": 1819,
+      "7": 1885
+    },
+    "mod37_distribution": [
+      1,
+      286,
+      306,
+      317,
+      312,
+      313,
+      323,
+      318,
+      352,
+      308,
+      268,
+      257,
+      333,
+      336,
+      322,
+      326,
+      309,
+      323,
+      285,
+      331,
+      281,
+      320,
+      303,
+      338,
+      337,
+      324,
+      277,
+      266,
+      321,
+      328,
+      316,
+      301,
+      322,
+      315,
+      347,
+      309,
+      253
+    ],
+    "mod37_chi2": 68.01564875257085,
+    "mod37_Z": 3.946124794480807,
+    "same_mod37_pct": 6.473533619456366
+  },
+  "palindromic_prime_stats": {
+    "count": 113,
+    "dr_distribution": {
+      "1": 18,
+      "2": 22,
+      "3": 1,
+      "4": 17,
+      "5": 18,
+      "7": 20,
+      "8": 17
+    },
+    "chi_distribution": {
+      "-1": 56,
+      "1": 55
+    },
+    "only_sovereign_palindromic_prime": 3
+  },
+  "twin_prime_stats": {
+    "count": 8168,
+    "midpoint_dr_distribution": {
+      "3": 2651,
+      "6": 2788,
+      "9": 2729
+    },
+    "all_midpoints_sovereign": true,
+    "forbidden_mod37_r1": 0,
+    "forbidden_mod37_r36": 0
+  },
+  "chebyshev_bias": {
+    "pi_mod3_1": 39231,
+    "pi_mod3_2": 39266,
+    "bias_toward_col2": 35
+  }
+}
