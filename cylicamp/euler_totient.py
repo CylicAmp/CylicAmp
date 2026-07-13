@@ -11,8 +11,13 @@ Key properties:
   - General formula:  φ(n) = n ∏_{p|n} (1 − 1/p)
 
 φ(37) = 36  — the 37-field has 36 non-zero residues (37 is prime).
+
+RSA connection:
+  n = p·q  →  φ(n) = (p−1)(q−1)
+  Private key d = e⁻¹ mod φ(n)
 """
 
+import math
 import sympy
 
 
@@ -60,5 +65,79 @@ def demonstrate() -> None:
         print(f"  φ({m}×{n}) = φ({m*n}) = {lhs}  |  φ({m})×φ({n}) = {rhs}  {'✓' if lhs == rhs else '✗'}")
 
 
+def totient_product_formula(n: int) -> int:
+    """
+    Compute φ(n) using the product formula without sympy:
+      φ(n) = n · ∏_{p|n} (1 − 1/p)
+    """
+    result = n
+    p = 2
+    temp = n
+    while p * p <= temp:
+        if temp % p == 0:
+            while temp % p == 0:
+                temp //= p
+            result -= result // p
+        p += 1
+    if temp > 1:
+        result -= result // temp
+    return result
+
+
+def rsa_demo(p: int = 61, q: int = 53) -> None:
+    """
+    Demonstrate RSA key generation using φ(n) = (p−1)(q−1).
+
+    Steps:
+      1. n = p·q
+      2. φ(n) = (p−1)(q−1)
+      3. Choose public exponent e coprime to φ(n)
+      4. Private key d = e⁻¹ mod φ(n)
+    """
+    print("\n--- RSA Key Generation Demo ---")
+    print(f"  Primes: p={p}, q={q}")
+    n = p * q
+    phi_n = (p - 1) * (q - 1)
+    print(f"  n = p·q = {n}")
+    print(f"  φ(n) = (p−1)(q−1) = {p-1}·{q-1} = {phi_n}")
+
+    # Choose e: common choice is 65537; find smallest valid e otherwise
+    for e_candidate in [65537, 17, 13, 7, 5, 3]:
+        if math.gcd(e_candidate, phi_n) == 1:
+            e = e_candidate
+            break
+
+    d = pow(e, -1, phi_n)
+    print(f"  Public key:  (e={e}, n={n})")
+    print(f"  Private key: (d={d}, n={n})")
+
+    # Verify: e·d ≡ 1 (mod φ(n))
+    check = (e * d) % phi_n
+    print(f"  Verify e·d mod φ(n) = {check} (should be 1): {'✓' if check == 1 else '✗'}")
+
+    # Mini encrypt/decrypt
+    m = 42
+    c = pow(m, e, n)
+    m2 = pow(c, d, n)
+    print(f"  Encrypt m={m}: c = m^e mod n = {c}")
+    print(f"  Decrypt c={c}: m = c^d mod n = {m2}  {'✓' if m2 == m else '✗'}")
+
+
 if __name__ == "__main__":
     demonstrate()
+
+    # Product formula cross-check
+    print("\n--- Product formula vs sympy cross-check ---")
+    mismatches = []
+    for n in range(1, 41):
+        pf = totient_product_formula(n)
+        sp = int(sympy.totient(n))
+        if pf != sp:
+            mismatches.append((n, pf, sp))
+    if mismatches:
+        for n, pf, sp in mismatches:
+            print(f"  MISMATCH φ({n}): product={pf}, sympy={sp}")
+    else:
+        print("  All φ(1..40) match between product formula and sympy ✓")
+
+    rsa_demo()
