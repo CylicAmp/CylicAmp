@@ -34,6 +34,7 @@ from medusa_v3_sovereign import medusa_v3_sovereign, ANCHORS, TARGETS
 from abcabc_mod37_orbit import abcabc_theorem, compute_orbit
 from lucas_abbc_chain import lucas_seq
 from sovereign_qr_closure import legendre
+from heartbeat_3cycle import f as heartbeat_step
 
 
 def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
@@ -91,6 +92,10 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     orbit_qr = {r: legendre(r) for r in seed_orbit}
     orbit_all_nonqr = all(v == -1 for v in orbit_qr.values())
 
+    # Step 12: Heartbeat — trace the 3-cycle from seed residue
+    r = seed_cell["mod37"]
+    heartbeat = [r, heartbeat_step(r), heartbeat_step(heartbeat_step(r)), heartbeat_step(heartbeat_step(heartbeat_step(r)))]
+
     print(f"Seed:              {seed}")
     print(f"Meta multiplier:   {multiplier}")
     print(f"Field threshold:   {angle_mod:.4f}")
@@ -105,6 +110,7 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     print(f"ABCABC orbit pos:  {orbit_position} (0 = orbit start)")
     print(f"Lucas orbit hits:  {lucas_orbit_hits}")
     print(f"Orbit QR status:   {orbit_qr}  all non-QR: {orbit_all_nonqr}")
+    print(f"Heartbeat 3-cycle: {heartbeat[0]} -> {heartbeat[1]} -> {heartbeat[2]} -> {heartbeat[3]}")
 
     return {
         "seed": seed,
