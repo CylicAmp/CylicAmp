@@ -32,6 +32,7 @@ if _THEOREMS_DIR not in sys.path:
 from cascade_8_13_24 import build_cascade
 from medusa_v3_sovereign import medusa_v3_sovereign, ANCHORS, TARGETS
 from abcabc_mod37_orbit import abcabc_theorem, compute_orbit
+from lucas_abbc_chain import lucas_seq
 
 
 def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
@@ -81,6 +82,10 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     abcabc_orbit = compute_orbit()
     orbit_position = abcabc_orbit.index(seed_cell["mod37"]) if seed_cell["mod37"] in abcabc_orbit else -1
 
+    # Step 10: Lucas sequence — L(6)=18 is in the seed's orbit (18,24,32)
+    lucas = lucas_seq(4, 8)  # L(3)..L(10)
+    lucas_orbit_hits = [(i+3, v) for i, v in enumerate(lucas) if v % 37 in seed_orbit]
+
     print(f"Seed:              {seed}")
     print(f"Meta multiplier:   {multiplier}")
     print(f"Field threshold:   {angle_mod:.4f}")
@@ -93,6 +98,7 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     print(f"Cascade orbit hits:{len(cascade_orbit_hits)}/37  {cascade_orbit_hits}")
     print(f"Sovereign status:  {sovereign_status}")
     print(f"ABCABC orbit pos:  {orbit_position} (0 = orbit start)")
+    print(f"Lucas orbit hits:  {lucas_orbit_hits}")
 
     return {
         "seed": seed,
