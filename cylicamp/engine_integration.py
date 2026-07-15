@@ -33,6 +33,7 @@ from cascade_8_13_24 import build_cascade
 from medusa_v3_sovereign import medusa_v3_sovereign, ANCHORS, TARGETS
 from abcabc_mod37_orbit import abcabc_theorem, compute_orbit
 from lucas_abbc_chain import lucas_seq
+from sovereign_qr_closure import legendre
 
 
 def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
@@ -86,6 +87,10 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     lucas = lucas_seq(4, 8)  # L(3)..L(10)
     lucas_orbit_hits = [(i+3, v) for i, v in enumerate(lucas) if v % 37 in seed_orbit]
 
+    # Step 11: QR classification of seed orbit — all three orbit nodes mod 37
+    orbit_qr = {r: legendre(r) for r in seed_orbit}
+    orbit_all_nonqr = all(v == -1 for v in orbit_qr.values())
+
     print(f"Seed:              {seed}")
     print(f"Meta multiplier:   {multiplier}")
     print(f"Field threshold:   {angle_mod:.4f}")
@@ -99,6 +104,7 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     print(f"Sovereign status:  {sovereign_status}")
     print(f"ABCABC orbit pos:  {orbit_position} (0 = orbit start)")
     print(f"Lucas orbit hits:  {lucas_orbit_hits}")
+    print(f"Orbit QR status:   {orbit_qr}  all non-QR: {orbit_all_nonqr}")
 
     return {
         "seed": seed,
