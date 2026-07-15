@@ -25,6 +25,12 @@ from meta_engine import MetaEngine
 from field_simulation import Field, Packet
 from ulam_spiral import classify as ulam_classify
 
+_THEOREMS_DIR = os.path.join(_HERE, "..", "math", "theorems")
+if _THEOREMS_DIR not in sys.path:
+    sys.path.insert(0, _THEOREMS_DIR)
+
+from cascade_8_13_24 import build_cascade
+
 
 def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     # Step 1: meta_evolve_lane produces multiplier sequence from seed
@@ -60,6 +66,12 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     # Step 6: Classify seed through Ulam/GF(37) framework
     seed_cell = ulam_classify(seed)
 
+    # Step 7: Cascade — seed residue mod 37 is 24, which is in the {8,13,24} base.
+    # Run the cascade and score how many of its 37 elements share the seed's orbit.
+    cascade, _, _ = build_cascade([8, 13, 24])
+    seed_orbit = set(seed_cell["orbit_137"] or [])
+    cascade_orbit_hits = [v for v in cascade if v % 37 in seed_orbit]
+
     print(f"Seed:              {seed}")
     print(f"Meta multiplier:   {multiplier}")
     print(f"Field threshold:   {angle_mod:.4f}")
@@ -69,6 +81,7 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     print(f"Seed DR:           {seed_cell['dr']}")
     print(f"Seed mod 37:       {seed_cell['mod37']}  (sovereign: {seed_cell['sovereign']})")
     print(f"Seed 137-orbit:    {seed_cell['orbit_137']}")
+    print(f"Cascade orbit hits:{len(cascade_orbit_hits)}/37  {cascade_orbit_hits}")
 
     return {
         "seed": seed,
