@@ -19,6 +19,10 @@ for _p in (_PROJECT_ROOT, _PRIMES_DIR):
         sys.path.insert(0, _p)
 
 from cylicamp.trajectory import TrajectoryGenerator
+from cylicamp.provenance import (
+    Claim, Derivation, Domain, Evidence, InferenceStep,
+    Modality, Provenance, SourceType
+)
 from cylicamp.insights import InsightEngine
 from cylicamp.duality import DualityVerifier
 from meta_engine import MetaEngine
@@ -96,6 +100,24 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     r = seed_cell["mod37"]
     heartbeat = [r, heartbeat_step(r), heartbeat_step(heartbeat_step(r)), heartbeat_step(heartbeat_step(heartbeat_step(r)))]
 
+    # Step 13: Provenance — attach source tracking to the orbit claim
+    from datetime import datetime, timezone
+    orbit_claim = Claim(
+        proposition=f"Seed {seed} has 137-map orbit {tuple(sorted(seed_orbit))} mod 37",
+        domain=Domain.MATHEMATICS,
+        modality=Modality.ASSERTION,
+        entities=[str(seed), "GF(37)", "137-map"],
+        predicates=["orbit_under", "mod37"],
+        provenance=Provenance(
+            source_id="cylicamp/engine_integration",
+            source_type=SourceType.INTERNAL_DERIVATION,
+            retrieval_method="heartbeat_step * 3",
+            timestamp=datetime.now(timezone.utc),
+            hash=str(hash(tuple(sorted(seed_orbit)))),
+            citation="CylicAmp pipeline — user-originated framework",
+        ),
+    )
+
     print(f"Seed:              {seed}")
     print(f"Meta multiplier:   {multiplier}")
     print(f"Field threshold:   {angle_mod:.4f}")
@@ -111,6 +133,7 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     print(f"Lucas orbit hits:  {lucas_orbit_hits}")
     print(f"Orbit QR status:   {orbit_qr}  all non-QR: {orbit_all_nonqr}")
     print(f"Heartbeat 3-cycle: {heartbeat[0]} -> {heartbeat[1]} -> {heartbeat[2]} -> {heartbeat[3]}")
+    print(f"Provenance:        {orbit_claim.provenance.source_type.name} | {orbit_claim.provenance.citation}")
 
     return {
         "seed": seed,
