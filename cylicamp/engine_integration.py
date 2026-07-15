@@ -30,6 +30,7 @@ if _THEOREMS_DIR not in sys.path:
     sys.path.insert(0, _THEOREMS_DIR)
 
 from cascade_8_13_24 import build_cascade
+from medusa_v3_sovereign import medusa_v3_sovereign, ANCHORS, TARGETS
 
 
 def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
@@ -72,6 +73,9 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     seed_orbit = set(seed_cell["orbit_137"] or [])
     cascade_orbit_hits = [v for v in cascade if v % 37 in seed_orbit]
 
+    # Step 8: Sovereign classification of seed residue
+    sovereign_status = medusa_v3_sovereign(seed_cell["mod37"])
+
     print(f"Seed:              {seed}")
     print(f"Meta multiplier:   {multiplier}")
     print(f"Field threshold:   {angle_mod:.4f}")
@@ -82,6 +86,7 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     print(f"Seed mod 37:       {seed_cell['mod37']}  (sovereign: {seed_cell['sovereign']})")
     print(f"Seed 137-orbit:    {seed_cell['orbit_137']}")
     print(f"Cascade orbit hits:{len(cascade_orbit_hits)}/37  {cascade_orbit_hits}")
+    print(f"Sovereign status:  {sovereign_status}")
 
     return {
         "seed": seed,
