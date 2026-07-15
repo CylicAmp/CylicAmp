@@ -31,6 +31,7 @@ if _THEOREMS_DIR not in sys.path:
 
 from cascade_8_13_24 import build_cascade
 from medusa_v3_sovereign import medusa_v3_sovereign, ANCHORS, TARGETS
+from abcabc_mod37_orbit import abcabc_theorem, compute_orbit
 
 
 def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
@@ -76,6 +77,10 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     # Step 8: Sovereign classification of seed residue
     sovereign_status = medusa_v3_sovereign(seed_cell["mod37"])
 
+    # Step 9: ABCABC orbit — seed residue is the orbit start (residue 24)
+    abcabc_orbit = compute_orbit()
+    orbit_position = abcabc_orbit.index(seed_cell["mod37"]) if seed_cell["mod37"] in abcabc_orbit else -1
+
     print(f"Seed:              {seed}")
     print(f"Meta multiplier:   {multiplier}")
     print(f"Field threshold:   {angle_mod:.4f}")
@@ -87,6 +92,7 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     print(f"Seed 137-orbit:    {seed_cell['orbit_137']}")
     print(f"Cascade orbit hits:{len(cascade_orbit_hits)}/37  {cascade_orbit_hits}")
     print(f"Sovereign status:  {sovereign_status}")
+    print(f"ABCABC orbit pos:  {orbit_position} (0 = orbit start)")
 
     return {
         "seed": seed,
