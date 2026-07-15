@@ -1,0 +1,120 @@
+{
+  "seed": 246,
+  "multiplier": 8,
+  "field_threshold": 0.9499999999999997,
+  "insight_score": 104832.0,
+  "spectrum_status": "FAIL",
+  "stability_ratio": 0.0,
+  "seed_dr": 3,
+  "seed_mod37": 24,
+  "seed_orbit": [
+    18,
+    24,
+    32
+  ],
+  "meta_history": [
+    {
+      "step": 1,
+      "multiplier": 3,
+      "cycle_state": [
+        8,
+        6,
+        10,
+        9,
+        7,
+        11
+      ],
+      "max_value": 92,
+      "final_state": 244,
+      "analysis": {
+        "seed": 246,
+        "digital_root": 3,
+        "factors": [
+          1,
+          2,
+          3,
+          6,
+          41,
+          82,
+          123,
+          246
+        ],
+        "cycle": [
+          29,
+          23,
+          35,
+          3,
+          26,
+          1
+        ],
+        "rule_multiplier": 7
+      }
+    },
+    {
+      "step": 2,
+      "multiplier": 5,
+      "cycle_state": [
+        2,
+        5,
+        6,
+        9,
+        10,
+        11
+      ],
+      "max_value": 94,
+      "final_state": 313,
+      "analysis": {
+        "seed": 244,
+        "digital_root": 1,
+        "factors": [
+          1,
+          2,
+          4,
+          61,
+          122,
+          244
+        ],
+        "cycle": [
+          18,
+          13,
+          23,
+          21,
+          34,
+          7
+        ],
+        "rule_multiplier": 3
+      }
+    },
+    {
+      "step": 3,
+      "multiplier": 8,
+      "cycle_state": [
+        6,
+        3,
+        9,
+        4,
+        8,
+        1
+      ],
+      "max_value": 87,
+      "final_state": 268,
+      "analysis": {
+        "seed": 313,
+        "digital_root": 7,
+        "factors": [
+          1,
+          313
+        ],
+        "cycle": [
+          3,
+          33,
+          10,
+          22,
+          18,
+          32
+        ],
+        "rule_multiplier": 5
+      }
+    }
+  ]
+}
