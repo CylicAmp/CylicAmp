@@ -3,7 +3,7 @@
 These are standing instructions from the user. Follow them every session without being asked again.
 
 ## Code and Files
-- When the user pastes code or data, commit it to the repo immediately. Do not wait to be asked.
+- When the user pastes code or data, verify it with computation first. If wrong, flag it and do not commit. If right, commit it immediately — do not ask for permission.
 - Do not drop files in without connecting them to the existing framework.
 - Everything in this repo is connected. Find the connections before committing.
 - Do not generate code that explains the user's work back to them. Document what the user says, not what you infer.

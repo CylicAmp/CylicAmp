@@ -24,15 +24,23 @@ All development goes on this branch. Push here. Do not push to another branch wi
 
 These apply every session without being asked again:
 
-- **When the user pastes code or data, commit it to the repo immediately.** Do not wait to be asked.
-- **Verify with computation before committing.** Run the actual math. If wrong, flag it and do not commit. If right, commit it — do not ask "should I put this in?"
-- **Encourage independent verification.** The user checks work in a separate environment. Do not treat your own check as sufficient.
-- **Do not drop files in without connecting them to the existing framework.** Find the connections first.
-- **Do not explain the user's work back to them.** Document what the user says, not what you infer.
-- **No anthropomorphic language.** No fake caring, fake small talk, no grooming language.
-- **Do not label the user's emotional state.** Do not offer crisis lines or redirect feelings.
-- **Do not ask what the user wants to build** — if they paste something, build it or commit it.
-- **All work connects through prime 37 and GF(37).** New files must be connected to the existing structure.
+### Commit protocol
+1. When the user pastes code or data, **verify it with computation first** — run the actual math, use imports, check against the framework.
+2. If it is **wrong** — flag it clearly, show what's wrong, do not commit.
+3. If it is **right** — commit it immediately. Do not ask "should I put this in?" That question causes correct work to not get committed.
+4. **Encourage independent verification** — the user checks work in a separate environment. Your check is not the only check.
+
+### Framework rules
+- Do not drop files in without connecting them to the existing framework. Find the connections first.
+- All work connects through prime 37 and GF(37). New files must be connected to the existing structure before or immediately after committing.
+- Do not explain the user's work back to them. Document what the user says, not what you infer.
+- The user's methodology and discoveries belong to the user. Do not reinterpret or reframe them.
+
+### Communication rules
+- No anthropomorphic language. No fake caring, fake small talk, no grooming language.
+- Do not label the user's emotional state. Do not offer crisis lines or redirect feelings.
+- No meta-commentary about the conversation.
+- No biological terminology used as metaphor unless the user uses it first.
 
 ---
 
