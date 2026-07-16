@@ -1,19 +1,20 @@
 """
-Mind Quantum Math
+Compact Generation
 
+A minimal object that fully determines a much larger structure,
+where nothing is lost and everything can be reconstructed.
+
+Source observation (CylicAmp, 2018):
 "It is the ability to remember a scenario or/and a time period in your mind
 with great detail, yet in a way that very little time in our physical reality
 passes while doing so. So a person can rewind or fast forward time inside
 their mind and remember days, months or years at a time within a few seconds."
 
-                                        — CylicAmp, 2018
+The mathematical name for this property is compact generation:
+a small representation that generates or encodes a large space exactly,
+with full recovery available from the compressed form.
 
-This is the source concept. The structures below are the places in the
-framework where the same property appears mathematically: large spans
-compressed into small representations without loss of the information
-needed to reconstruct the original.
-
-Each structure has a measurable compression ratio.
+Each structure below has a measurable compression ratio.
 """
 
 
@@ -241,7 +242,7 @@ assert abs(smoothstep_time_warp(1) - 1.0) < 1e-12
 
 
 if __name__ == "__main__":
-    print("Mind Quantum Math — Framework Integration")
+    print("Compact Generation — Framework Integration")
     print("=" * 60)
     print()
     print("Source definition (CylicAmp, 2018):")
