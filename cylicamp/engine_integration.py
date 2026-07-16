@@ -135,15 +135,42 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     print(f"Heartbeat 3-cycle: {heartbeat[0]} -> {heartbeat[1]} -> {heartbeat[2]} -> {heartbeat[3]}")
     print(f"Provenance:        {orbit_claim.provenance.source_type.name} | {orbit_claim.provenance.citation}")
 
-    return {
+    output = {
         "seed": seed,
         "multiplier": multiplier,
         "field_threshold": angle_mod,
         "insight_score": insight_score,
-        "stability": result,
+        "spectrum_status": result["Status"],
+        "stability_ratio": result["Stability_Ratio"],
+        "seed_dr": seed_cell["dr"],
+        "seed_mod37": seed_cell["mod37"],
+        "seed_sovereign": seed_cell["sovereign"],
+        "seed_orbit": list(sorted(seed_orbit)),
+        "cascade_orbit_hits_count": len(cascade_orbit_hits),
+        "cascade_orbit_hits": cascade_orbit_hits,
+        "sovereign_status": sovereign_status,
+        "abcabc_orbit_position": orbit_position,
+        "lucas_orbit_hits": lucas_orbit_hits,
+        "orbit_qr": {str(k): v for k, v in orbit_qr.items()},
+        "orbit_all_nonqr": orbit_all_nonqr,
+        "heartbeat_3cycle": heartbeat,
+        "provenance": {
+            "source_id": orbit_claim.provenance.source_id,
+            "source_type": orbit_claim.provenance.source_type.name,
+            "citation": orbit_claim.provenance.citation,
+            "timestamp": orbit_claim.provenance.timestamp.isoformat(),
+        },
         "meta_history": history,
         "seed_ulam": seed_cell,
     }
+
+    import json as _json
+    _out_path = os.path.join(_PROJECT_ROOT, "pipeline_output.json")
+    with open(_out_path, "w") as _f:
+        _json.dump(output, _f, indent=2, default=str)
+    print(f"Output saved → {_out_path}")
+
+    return output
 
 
 if __name__ == "__main__":

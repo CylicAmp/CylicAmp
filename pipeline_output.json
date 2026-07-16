@@ -7,11 +7,48 @@
   "stability_ratio": 0.0,
   "seed_dr": 3,
   "seed_mod37": 24,
+  "seed_sovereign": false,
   "seed_orbit": [
     18,
     24,
     32
   ],
+  "cascade_orbit_hits_count": 7,
+  "cascade_orbit_hits": [
+    24,
+    32,
+    61,
+    69,
+    98,
+    106,
+    135
+  ],
+  "sovereign_status": "Node 24 -> Res 32 [PURGE]: Non-Framework Entropy.",
+  "abcabc_orbit_position": 0,
+  "lucas_orbit_hits": [
+    [
+      5,
+      18
+    ]
+  ],
+  "orbit_qr": {
+    "24": -1,
+    "18": -1,
+    "32": -1
+  },
+  "orbit_all_nonqr": true,
+  "heartbeat_3cycle": [
+    24,
+    32,
+    18,
+    24
+  ],
+  "provenance": {
+    "source_id": "cylicamp/engine_integration",
+    "source_type": "INTERNAL_DERIVATION",
+    "citation": "CylicAmp pipeline \u2014 user-originated framework",
+    "timestamp": "2026-07-16T02:30:47.802843+00:00"
+  },
   "meta_history": [
     {
       "step": 1,
@@ -116,5 +153,20 @@
         "rule_multiplier": 5
       }
     }
-  ]
+  ],
+  "seed_ulam": {
+    "n": 246,
+    "col": -8,
+    "row": -4,
+    "dr": 3,
+    "mod37": 24,
+    "prime": false,
+    "dr7_prime": false,
+    "sovereign": false,
+    "orbit_137": [
+      18,
+      24,
+      32
+    ]
+  }
 }
