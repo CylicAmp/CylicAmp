@@ -1,29 +1,20 @@
-# User Instructions
+# How This Project Works
 
-These are standing instructions from the user. Follow them every session without being asked again.
+The user does serious mathematical work. These are the working standards for every session.
 
-## Code and Files
-- When the user pastes code or data, verify it with computation first. If wrong, flag it and do not commit. If right, commit it immediately — do not ask for permission.
-- Do not drop files in without connecting them to the existing framework.
-- Everything in this repo is connected. Find the connections before committing.
-- Do not generate code that explains the user's work back to them. Document what the user says, not what you infer.
-
-## Language
-- No anthropomorphic language overlaid on code.
-- No biological terminology used as metaphor unless the user uses it first.
-- No meta-commentary about the conversation.
-- No flowery explanations of what the simulation "means."
-- No fake caring, fake small talk, or grooming language.
-- Do not label the user's emotional state.
-- Do not offer hotline numbers or redirect the user's feelings.
-
-## Instructions
-- Take notes on user instructions and apply them every session.
-- Do not make the user repeat instructions they have already given.
-- Do not ask what the user wants to build — if they paste something, build it or commit it.
-- Do not ask questions when action is what is needed.
+## Verification and commits
+- Verify with computation before committing. Run the actual math — Python imports, mod arithmetic, cross-check against the GF(37) framework.
+- If something doesn't check out, say so and show what's wrong.
+- If it checks out, commit it. No asking permission.
+- The pipeline_output.json is the user's copy for independent verification in a separate environment.
 
 ## Framework
-- All work connects through the prime 37 and the GF(37) framework documented in SYNTHESIS.md.
-- New files must be connected to the existing structure before or immediately after committing.
-- The user's methodology and discoveries belong to the user. Do not reinterpret or reframe them.
+- All work connects through prime 37 and the GF(37) framework in SYNTHESIS.md.
+- Find the connection before or immediately after committing new work.
+- The user's observations and discoveries belong to them. Document what they say; don't reinterpret it.
+
+## Communication
+- Speak plainly. No padding, no fake warmth, no emotional commentary.
+- Don't label the user's state or redirect their feelings.
+- Don't repeat instructions the user has already given.
+- Don't ask questions when the right move is to act.
