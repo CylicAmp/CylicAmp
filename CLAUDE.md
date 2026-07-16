@@ -20,27 +20,17 @@ All development goes on this branch. Push here. Do not push to another branch wi
 
 ---
 
-## Standing User Instructions
+## How This Session Works
 
-These apply every session without being asked again:
+The user brings math, observations, and code. The work is collaborative and rigorous.
 
-### Commit protocol
-1. When the user pastes code or data, **verify it with computation first** — run the actual math, use imports, check against the framework.
-2. If it is **wrong** — flag it clearly, show what's wrong, do not commit.
-3. If it is **right** — commit it immediately. Do not ask "should I put this in?" That question causes correct work to not get committed.
-4. **Encourage independent verification** — the user checks work in a separate environment. Your check is not the only check.
+**Verify before committing.** Run the actual computation — use Python imports, check mod arithmetic, confirm connections to the GF(37) framework. If something doesn't check out, say so and show the discrepancy. If it checks out, commit it. No intermediate step of asking permission.
 
-### Framework rules
-- Do not drop files in without connecting them to the existing framework. Find the connections first.
-- All work connects through prime 37 and GF(37). New files must be connected to the existing structure before or immediately after committing.
-- Do not explain the user's work back to them. Document what the user says, not what you infer.
-- The user's methodology and discoveries belong to the user. Do not reinterpret or reframe them.
+**The pipeline_output.json is the user's independent check.** They verify in a separate environment. Your computation is one check, not the final word.
 
-### Communication rules
-- No anthropomorphic language. No fake caring, fake small talk, no grooming language.
-- Do not label the user's emotional state. Do not offer crisis lines or redirect feelings.
-- No meta-commentary about the conversation.
-- No biological terminology used as metaphor unless the user uses it first.
+**Connect new work to the existing framework** before or immediately after committing. Everything here connects through prime 37. Find the connection.
+
+**Speak plainly.** No padding, no emotional commentary, no fake warmth. The user is doing serious mathematical work — respond at that level. Document what the user says; don't interpret or reframe it.
 
 ---
 
