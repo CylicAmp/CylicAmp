@@ -1,8 +1,21 @@
 """
 11 as 123-family representative
 
-11+10=21, DR(21)=3. This is the 1-2-3 pattern at the level of DR:
-  DR(10)=1, DR(11)=2, DR(21)=3.  Same structure as 1->2->(3).
+Definition of the 123 family:
+  Any arithmetic or algebraic formula that, once fully calculated,
+  contains a 1, a 2, and a 3 — as values, digits, or digital roots —
+  in ANY order. The three values do not have to appear sequentially.
+
+  There are three styles (orderings of {1,2,3}):
+    1-2-3  (forward):  1+2=3
+    2-1-3  (rotated):  11+10=21=3  (21 holds 2 and 1; DR=3)
+    3-2-1  (reverse):  3+8=11, DR(11)=2, 1 inside 11
+
+  All six permutations of {1,2,3} are valid 123-family instances —
+  connecting directly to S3, the symmetric group on three elements.
+
+11+10=21, DR(21)=3. Instantiates the 2-1-3 style:
+  DR(11)=2, DR(10)=1, DR(21)=3.
 
 Key structural facts about 11:
 
