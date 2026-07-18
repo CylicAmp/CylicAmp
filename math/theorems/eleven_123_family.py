@@ -36,6 +36,15 @@ Anti-diagonal sums (r+c = const):
   d=7: [2]           sum=2   DR=2
 
 DR sequence: 1-2-5-1-2 | 2-6-2
+
+The split at position 5 is structural — the diagonal lines peak at 4 elements
+(d=4, full row count), then the EXIT SIDE begins at d=5 with exactly 3 remaining:
+  Entry side (d=0..4): element counts 1,2,3,4,4 -> DRs 1,2,5,1,2 -> sum=11
+  Exit  side (d=5..7): element counts 3,2,1     -> DRs 2,6,2     -> sum=10
+
+The 6 comes from d=6: values [9,6], 9+6=15, DR(15)=6.
+Two different colors in the image mark the two groups (11 and 10).
+
   First 5 DRs sum = 1+2+5+1+2 = 11
   Last  3 DRs sum = 2+6+2     = 10
   Total:              11+10   = 21, DR(21) = 3
