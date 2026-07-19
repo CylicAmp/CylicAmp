@@ -9,11 +9,21 @@ Core formula:
   f_mid(p, p+2) = (137 × midpoint) mod 37
   where midpoint = (p + p+2) / 2 = p + 1
 
-Structural theorem (proved below):
-  For every twin prime pair (p, p+2) with p > 3,
-  midpoint ≡ 0 (mod 3), therefore DR(midpoint) ∈ {3, 6, 9}.
-  All terminal DRs are Tesla values — this is guaranteed by the
-  arithmetic of twin primes, not coincidence.
+Structural laws (proved — not observed):
+
+  Law 1: mid_dr = dr_p + 1  for all twin prime pairs (p, p+2)
+    Proof: p > 3 → p ≡ 2 (mod 3) → DR(p) ∈ {2,5,8} (never 9)
+           DR(p+1) = DR(p)+1 holds whenever DR(p) ≠ 9. □
+    Verified: holds for all 20 pairs including (3,5).
+
+  Law 2: terminal_dr + dr_q = 10  for all twin prime pairs with p ≥ 5
+    Proof: p = 6k−1 for integer k ≥ 1 (all primes > 3 are ≡ ±1 mod 6;
+           p ≡ 1 would make p+2 ≡ 0 mod 3, not prime).
+           terminal_dr = DR(12k),  dr_q = DR(6k+1).
+           k≡1(mod 3): DR(3k)=3, DR(6k+1)=7 → sum=10 ✓
+           k≡2(mod 3): DR(3k)=6, DR(6k+1)=4 → sum=10 ✓
+           k≡0(mod 3): DR(3k)=9, DR(6k+1)=1 → sum=10 ✓  □
+    Exception: (3,5) → sum=13 (p=3 does not fit 6k−1 form).
 
 137-Field connection:
   137 ≡ 26 (mod 37)  [from seed_191_137_bridge.py]
@@ -21,10 +31,12 @@ Structural theorem (proved below):
   The 137 seed acts as a projection from twin prime midpoints
   into the 37-field.
 
-Framework intersections found:
-  (41, 43) → f_mid = 19  ← 19-Center seal (Easter 2026: 93 mod 37 = 19)
-  (59, 61) → f_mid =  6  ← Tesla flow (191 mod 37 = 6)
-  (29, 31) → f_mid =  3  ← Tesla triad
+Framework intersections (first 20 pairs):
+  (29,  31) → f_mid =  3  ← Tesla triad
+  (41,  43) → f_mid = 19  ← 19-Center seal (Easter 2026: 93 mod 37 = 19)
+  (59,  61) → f_mid =  6  ← Tesla flow (191 mod 37 = 6)
+  (137,139) → f_mid = 36  ← inverse unity (36 ≡ −1 mod 37); self-referential
+  (191,193) → f_mid = 34  ← Seed 191 appears as its own twin prime
 
 © 2026 Michael Warren Song. All Rights Reserved.
 """
@@ -65,31 +77,36 @@ def is_twin_prime_pair(p: int) -> bool:
 
 # ── Structural proof ──────────────────────────────────────────────────────
 
-def tesla_lock_proof(p: int) -> dict:
+def verify_laws(p: int) -> dict:
     """
-    Prove that DR(midpoint) ∈ {3,6,9} for twin prime pair (p, p+2), p > 3.
+    Verify both structural laws for twin prime pair (p, p+2).
 
-    Proof:
-      p cannot ≡ 1 (mod 3): then p+2 ≡ 0 (mod 3) → p+2 divisible by 3,
-        not prime (since p+2 > 3).
-      p cannot ≡ 0 (mod 3): then p divisible by 3, not prime (since p > 3).
-      Therefore p ≡ 2 (mod 3), i.e. p ≡ -1 (mod 3).
-      midpoint = p+1 ≡ 0 (mod 3).
-      DR(n) ∈ {3,6,9} for all n divisible by 3. □
+    Law 1: DR(midpoint) = DR(p) + 1  (all p)
+    Law 2: DR(sum) + DR(p+2) = 10    (p ≥ 5)
     """
-    assert p > 3,                           "Proof requires p > 3"
-    assert is_twin_prime_pair(p),           f"({p},{p+2}) not twin prime pair"
-    assert p % 3 == 2,                      "p not ≡ 2 (mod 3)"
-    mid = p + 1
-    assert mid % 3 == 0,                    "midpoint not divisible by 3"
-    assert digital_root(mid) in TESLA,      "DR(midpoint) not Tesla"
+    assert is_twin_prime_pair(p), f"({p},{p+2}) not twin prime pair"
+    mid   = p + 1
+    total = p + (p + 2)
+    chain = dr_chain(total)
+    term  = chain[-1]
+    dp    = digital_root(p)
+    dq    = digital_root(p + 2)
+    dm    = digital_root(mid)
+
+    law1 = dm == dp + 1
+    law2 = (term + dq == 10) if p >= 5 else None   # (3,5) is exception
+
+    assert law1, f"Law 1 failed for p={p}: mid_dr={dm}, dr_p+1={dp+1}"
+    if law2 is not None:
+        assert law2, f"Law 2 failed for p={p}: term={term}, dr_q={dq}"
 
     return {
-        'p_mod_3':      p % 3,
-        'midpoint':     mid,
-        'mid_mod_3':    mid % 3,
-        'mid_dr':       digital_root(mid),
-        'tesla_lock':   True,
+        'p_mod_3':   p % 3,
+        'mid_dr':    dm,
+        'dr_p_plus1': dp + 1,
+        'law1':      law1,
+        'term_plus_drq': term + dq if p >= 5 else None,
+        'law2':      law2,
     }
 
 
@@ -199,11 +216,10 @@ def run(pairs=None, limit=None):
     lattice = build_twin_prime_lattice(pairs)
     hits    = framework_intersections(lattice)
 
-    # Verify tesla lock for p > 3
+    # Verify both structural laws
     for row in lattice:
         p = row['pair'][0]
-        if p > 3:
-            tesla_lock_proof(p)
+        verify_laws(p)
 
     print("=" * 65)
     print("  TWIN PRIME LATTICE — MSW Framework")
@@ -239,7 +255,10 @@ def run(pairs=None, limit=None):
         print(f"  {str(row['pair']):<12} {row['dr_chain']}")
     print()
 
-    print("  ALL TESLA LOCKS VERIFIED")
+    print("  STRUCTURAL LAWS VERIFIED")
+    print("  Law 1: mid_dr = dr_p + 1  — holds for all 20 pairs")
+    print("  Law 2: terminal_dr + dr_q = 10  — holds for all p ≥ 5")
+    print("  (3,5) exception: p=3 does not fit 6k−1 form")
     print("=" * 65)
 
     return lattice
