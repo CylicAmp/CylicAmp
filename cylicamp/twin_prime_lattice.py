@@ -9,6 +9,9 @@ Core formula:
   f_mid(p, p+2) = (137 × midpoint) mod 37
   where midpoint = (p + p+2) / 2 = p + 1
 
+Note on terminal_dr: terminal_dr = DR(p + q) = DR(p + p+2) = DR(2p+2).
+  This is the iterated digit sum of the pair sum, reduced to one digit.
+
 Structural laws (proved — not observed):
 
   Law 1: mid_dr = dr_p + 1  for all twin prime pairs (p, p+2)
@@ -24,6 +27,17 @@ Structural laws (proved — not observed):
            k≡2(mod 3): DR(3k)=6, DR(6k+1)=4 → sum=10 ✓
            k≡0(mod 3): DR(3k)=9, DR(6k+1)=1 → sum=10 ✓  □
     Exception: (3,5) → sum=13 (p=3 does not fit 6k−1 form).
+
+  Law 3: last digit of p×q ∈ {3, 9}  for all twin prime pairs with p > 5
+    Proof: p > 5 prime ⟹ p ends in {1,3,7,9}.
+           If last(p)=3 then last(p+2)=5, so p+2 divisible by 5 — not prime.
+           If last(p)=5 then p divisible by 5 — not prime (p>5).
+           So last(p) ∈ {1, 7, 9} for p > 5 twin primes.
+           last(p)=1 ⟹ last(q)=3 ⟹ last(p×q) = 1×3 mod 10 = 3
+           last(p)=7 ⟹ last(q)=9 ⟹ last(p×q) = 7×9 mod 10 = 3
+           last(p)=9 ⟹ last(q)=1 ⟹ last(p×q) = 9×1 mod 10 = 9
+           ∴ last(p×q) ∈ {3,9} ⊂ Tesla {3,6,9}. Tesla lock on product. □
+    Exception: (3,5) last=5; (5,7) last=5.
 
 137-Field connection:
   137 ≡ 26 (mod 37)  [from seed_191_137_bridge.py]
@@ -79,34 +93,44 @@ def is_twin_prime_pair(p: int) -> bool:
 
 def verify_laws(p: int) -> dict:
     """
-    Verify both structural laws for twin prime pair (p, p+2).
+    Verify all three structural laws for twin prime pair (p, p+2).
 
     Law 1: DR(midpoint) = DR(p) + 1  (all p)
     Law 2: DR(sum) + DR(p+2) = 10    (p ≥ 5)
+    Law 3: last digit of p×(p+2) ∈ {3,9}  (p > 5)
     """
     assert is_twin_prime_pair(p), f"({p},{p+2}) not twin prime pair"
+    q     = p + 2
     mid   = p + 1
-    total = p + (p + 2)
+    total = p + q
     chain = dr_chain(total)
     term  = chain[-1]
     dp    = digital_root(p)
-    dq    = digital_root(p + 2)
+    dq    = digital_root(q)
     dm    = digital_root(mid)
 
     law1 = dm == dp + 1
     law2 = (term + dq == 10) if p >= 5 else None   # (3,5) is exception
+    last_prod = (p * q) % 10
+    law3 = (last_prod in {3, 9}) if p > 5 else None  # (3,5),(5,7) exceptions
 
     assert law1, f"Law 1 failed for p={p}: mid_dr={dm}, dr_p+1={dp+1}"
     if law2 is not None:
         assert law2, f"Law 2 failed for p={p}: term={term}, dr_q={dq}"
+    if law3 is not None:
+        assert law3, f"Law 3 failed for p={p}: last(p×q)={last_prod} not in {{3,9}}"
 
     return {
-        'p_mod_3':   p % 3,
-        'mid_dr':    dm,
-        'dr_p_plus1': dp + 1,
-        'law1':      law1,
+        'p_mod_3':       p % 3,
+        'mid_dr':        dm,
+        'dr_p_plus1':    dp + 1,
+        'law1':          law1,
         'term_plus_drq': term + dq if p >= 5 else None,
-        'law2':      law2,
+        'law2':          law2,
+        'last_p':        p % 10,
+        'last_q':        q % 10,
+        'last_pxq':      last_prod,
+        'law3':          law3,
     }
 
 
@@ -149,8 +173,9 @@ def harmonic_summation(p: int, q: int) -> dict:
     """Full harmonic analysis of a prime pair (p, q)."""
     total  = p + q
     mid    = total // 2
-    chain  = dr_chain(total)
+    chain  = dr_chain(total)   # terminal_dr = DR(p+q)
     fm     = f_mid(mid)
+    prod   = p * q
 
     return {
         "pair":        (p, q),
@@ -158,12 +183,41 @@ def harmonic_summation(p: int, q: int) -> dict:
         "dr_p":        digital_root(p),
         "dr_q":        digital_root(q),
         "dr_chain":    chain,
-        "terminal_dr": chain[-1],
+        "terminal_dr": chain[-1],      # DR(p+q) = DR(2p+2)
         "midpoint":    mid,
         "mid_dr":      digital_root(mid),
         "f_mid":       fm,
         "f_mid_class": classify_f_mid(fm),
         "tesla_lock":  chain[-1] in TESLA,
+        "last_p":      p % 10,
+        "last_q":      q % 10,
+        "last_pxq":    prod % 10,
+        "product_tesla": prod % 10 in TESLA,
+    }
+
+
+def last_digit_analysis(lattice: list) -> dict:
+    """
+    Tabulate last-digit patterns across the lattice.
+
+    Law 3 proved: for p > 5, last(p×q) ∈ {3,9} ⊂ Tesla {3,6,9}.
+
+    Pattern key:
+      last(p)=1 → last(q)=3 → last(p×q)=3
+      last(p)=7 → last(q)=9 → last(p×q)=3
+      last(p)=9 → last(q)=1 → last(p×q)=9
+    """
+    counts = {}
+    for row in lattice:
+        pattern = (row['last_p'], row['last_q'], row['last_pxq'])
+        counts[pattern] = counts.get(pattern, 0) + 1
+
+    all_tesla = all(row['product_tesla'] or row['pair'][0] <= 5
+                    for row in lattice)
+    return {
+        'pattern_counts':     counts,
+        'all_product_tesla':  all_tesla,
+        'law3_verified':      all_tesla,
     }
 
 
@@ -213,10 +267,11 @@ def run(pairs=None, limit=None):
     elif limit is not None:
         pairs = find_twin_primes(limit)
 
-    lattice = build_twin_prime_lattice(pairs)
-    hits    = framework_intersections(lattice)
+    lattice  = build_twin_prime_lattice(pairs)
+    hits     = framework_intersections(lattice)
+    ld_stats = last_digit_analysis(lattice)
 
-    # Verify both structural laws
+    # Verify all three structural laws
     for row in lattice:
         p = row['pair'][0]
         verify_laws(p)
@@ -237,9 +292,10 @@ def run(pairs=None, limit=None):
               f"{row['f_mid']:>6}  {row['f_mid_class']}{marker}")
     print()
 
-    print("  STRUCTURAL THEOREM")
+    print("  STRUCTURAL THEOREMS")
     print("  All twin prime midpoints (p>3) ≡ 0 (mod 3)")
     print("  → DR(midpoint) ∈ {3,6,9} is guaranteed — Tesla lock by proof")
+    print("  terminal_dr = DR(p+q) = DR(2p+2)")
     print()
 
     print(f"  137-FIELD INTERSECTIONS  (f_mid = 137×mid mod 37)")
@@ -255,10 +311,26 @@ def run(pairs=None, limit=None):
         print(f"  {str(row['pair']):<12} {row['dr_chain']}")
     print()
 
+    print("  LAST DIGIT ANALYSIS (Law 3)")
+    print(f"  {'Pair':<12} {'last_p':>6} {'last_q':>6} {'last_p×q':>9}  Tesla?")
+    print("  " + "-" * 42)
+    for row in lattice:
+        tesla = "Tesla ✓" if row['product_tesla'] else ("exception" if row['pair'][0] <= 5 else "✗")
+        print(f"  {str(row['pair']):<12} {row['last_p']:>6} {row['last_q']:>6} "
+              f"{row['last_pxq']:>9}  {tesla}")
+    print()
+    print("  Pattern table (last_p, last_q) → last(p×q):")
+    for (lp, lq, lpq), cnt in sorted(ld_stats['pattern_counts'].items()):
+        tesla = "Tesla" if lpq in TESLA else ""
+        print(f"    ({lp},{lq}) → {lpq}  {tesla}  [×{cnt}]")
+    print(f"  All products Tesla (p>5): {ld_stats['law3_verified']}")
+    print()
+
     print("  STRUCTURAL LAWS VERIFIED")
-    print("  Law 1: mid_dr = dr_p + 1  — holds for all 20 pairs")
+    print("  Law 1: mid_dr = dr_p + 1  — holds for all pairs")
     print("  Law 2: terminal_dr + dr_q = 10  — holds for all p ≥ 5")
-    print("  (3,5) exception: p=3 does not fit 6k−1 form")
+    print("  Law 3: last(p×q) ∈ {3,9} ⊂ Tesla  — holds for all p > 5")
+    print("  Exceptions: (3,5) Law 2; (3,5),(5,7) Law 3 — small primes only")
     print("=" * 65)
 
     return lattice
