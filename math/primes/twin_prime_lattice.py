@@ -48,3 +48,28 @@ def process_twin_prime_lattice(twin_pairs):
 
 
 T_pairs = [(11, 13), (17, 19), (29, 31), (41, 43), (59, 61), (71, 73)]
+
+
+def build_dataframe(twin_pairs=None):
+    import pandas as pd
+    if twin_pairs is None:
+        twin_pairs = T_pairs
+    results = process_twin_prime_lattice(twin_pairs)
+    rows = []
+    for (p, q), r in results.items():
+        rows.append({
+            "p":            p,
+            "q":            q,
+            "sum":          r["sum"],
+            "dr_p":         r["dr_p"],
+            "dr_q":         r["dr_q"],
+            "dr_chain":     r["dr_chain"],
+            "terminal_dr":  r["terminal_dr"],
+            "midpoint":     r["midpoint"],
+            "mid_dr":       r["mid_dr"],
+            "f_mid":        r["f_mid"],
+        })
+    return pd.DataFrame(rows)
+
+
+df_twin_primes = build_dataframe()
