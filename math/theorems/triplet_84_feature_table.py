@@ -201,3 +201,22 @@ if __name__ == '__main__':
         print(f"  {t}: sum={s}({tag(s)}) prod={p} mod37={p%37}({tag(p%37)})")
     print()
     print("All assertions passed.")
+
+
+# ── 147: Left Column Chain ───────────────────────────────────────────────────
+
+# 147 mod37=36 (orbit of 11), DR=3 (ST arch)
+assert 147 % 37 == 36 and 36 in ORBIT_11
+assert dr(147) == 3
+
+# Chain: 1+4=5 (A51), 5+7=12 (ST) = (123)
+assert 1 + 4 == 5
+assert 5 + 7 == 12 and 12 in SOVEREIGN_TARGETS
+assert int(str(12)[0]) == 1 and int(str(12)[1]) == 2 and dr(12) == 3
+
+# Cumulative path 1->5->12: LL-O -> A51 -> ST
+assert [1, 1+4, 1+4+7] == [1, 5, 12]
+assert [dr(s) for s in [1,5,12]] == [1, 5, 3]
+
+# Product: 1*4*7=28, complement of SA=9 in GF(37)
+assert 1*4*7 == 28 and 28 + 9 == 37
