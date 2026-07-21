@@ -79,11 +79,11 @@ class XBotDetector:
 
         digital_roots = []
         for value in data:
-            # Calculate digital root
-            dr = abs(value)  # Handle negative values
-            while dr >= 10:
-                dr = sum(int(digit) for digit in str(dr))
-            digital_roots.append(dr)
+            dr = abs(int(value))
+            if dr == 0:
+                digital_roots.append(0)
+            else:
+                digital_roots.append(1 + (dr - 1) % 9)
 
         # Count distribution
         root_counts = Counter(digital_roots)
@@ -173,7 +173,7 @@ class XBotDetector:
         mean_diff = np.mean(differences)
         variance = np.var(differences)
 
-        if variance < mean_diff * 0.1:  # Low variance = likely artificial
+        if mean_diff != 0 and variance < abs(mean_diff) * 0.1:
             return {
                 'is_near_arithmetic': True,
                 'mean_difference': mean_diff,
@@ -265,14 +265,14 @@ class XBotDetector:
         Calculate overall bot probability from indicators
         """
 
-        # Weighted combination of indicators
+        # Weighted combination of indicators (weights sum to 1.0)
         weights = {
-            'flux_suppression': 0.3,      # FLUX avoidance is strong indicator
-            'artificial_clustering': 0.25, # Clustering indicates artificial patterns
-            'uniformity_violation': 0.2,   # Non-uniform distribution
-            'spine_violation': 0.15,       # Spine pattern violations
-            'arithmetic_progression': 0.15, # Too regular patterns
-            'artificial_timing': 0.1       # Temporal regularity
+            'flux_suppression':      0.30,
+            'artificial_clustering': 0.25,
+            'uniformity_violation':  0.20,
+            'spine_violation':       0.10,
+            'arithmetic_progression':0.10,
+            'artificial_timing':     0.05,
         }
 
         weighted_score = sum(indicators.get(key, 0) * weight
