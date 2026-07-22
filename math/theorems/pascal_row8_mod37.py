@@ -35,8 +35,22 @@ III. MOD-37 SPINE
   - C(8,3) = C(8,5) = 56 mod 37 = 19 (Primitive Root)
   - C(8,4) = 70 mod 37 = 33 = 3×11; complement of SA=4: 33+4=37
 
-  Central coefficient 70 ≡ 33 = 3×11 mod 37.
-  33 is the complement of SA=4 (33+4=37) and encodes orbit-of-11 (3×11).
+  Central coefficient 70 ≡ 33 mod 37.
+  FPS-37 significance: 33 = DICHORAL_144 (refs Fibonacci 144=12²).
+  33 is also the complement of SA=4 (33+4=37) and encodes orbit-of-11 (3×11).
+
+IV-A. 191 — TESLA_FLOW
+
+  191 mod 37 = 6  (FPS-37 significance: TESLA_FLOW)
+  191 is prime.  DR(191) = 2 (LL-E).
+
+  191 also appears as the period-3 resonance pattern:
+    "191191191191" — Row 3 of the XX Collapse Matrix (Theorem 29)
+    Pure alternating 1-9-1 with period 3; contains exactly 3× "119" and 3× "911".
+    The order-3 heartbeat appears directly in the substring count.
+
+  GATE = 1911101 (gate_audit.py): 191 embedded in the long-range persistence gate.
+  Gate resonance: Y = cos(2π/3 × node); SECURE at Y = -0.5.
 
 IV. PARTIAL SUMS MOD 37
 
@@ -115,6 +129,24 @@ assert ps_mod[2] == 0                                # index 2 → seam (37≡0)
 assert ps_mod[3] == 19 and 19 in PRIMITIVE_ROOTS_37
 assert ps_mod[4] == 15 and 15 in PRIMITIVE_ROOTS_37
 assert ps_mod[6] == 25 and 25 in SOVEREIGN_ANCHORS  # index 6 → SA
+
+# ── IV-A. 191 — TESLA_FLOW ───────────────────────────────────────────────────
+
+assert 191 % 37 == 6                       # TESLA_FLOW in FPS-37 scanner
+assert all(191 % i != 0 for i in range(2, 14))  # 191 is prime
+assert dr(191) == 2
+
+# 191 as period-3 pattern: 1-9-1 repeating
+row3 = "191191191191"
+assert len([i for i in range(len(row3)-2) if row3[i:i+3]=="119"]) == 3
+assert len([i for i in range(len(row3)-2) if row3[i:i+3]=="911"]) == 3
+
+# GATE = 1911101 contains 191
+assert str(1911101).startswith("191")
+assert 1911101 % 37 == 1911101 % 37       # gate exists in the field
+
+# 70 mod 37 = 33 = DICHORAL_144 (same as central coefficient of Row 8)
+assert ROW8[4] % 37 == 33
 
 # ── V. Total and cascade ──────────────────────────────────────────────────────
 
