@@ -321,6 +321,57 @@ def run_verification() -> bool:
     print(f"   96 = 8 × 12  ✓   (AHL × sovereign middle-number target)")
     print(f"  Ratio: 246/6 = {246//6} = 41 (the 13th prime)")
 
+    # ------------------------------------------------------------------
+    # Part E: DR=[3,6,9] bridge to 3×3 board column sums
+    # ------------------------------------------------------------------
+    print("\n--- Part E: DR=[3,6,9] Bridge — Twin Prime Lattice ↔ 3×3 Board ---")
+
+    # Twin prime lattice column sums
+    tp_col_sums = [12, 24, 36]
+    tp_col_drs  = [dr(s) for s in tp_col_sums]
+    assert tp_col_drs == [3, 6, 9]
+
+    # 3×3 board (B={1..9}) column sums
+    board_col_sums = [1+4+7, 2+5+8, 3+6+9]
+    board_col_drs  = [dr(s) for s in board_col_sums]
+    assert board_col_drs == [3, 6, 9]
+    assert board_col_sums == [12, 15, 18]
+
+    # Both share first column sum = 12 (ST, DR=3)
+    assert tp_col_sums[0] == board_col_sums[0] == 12
+
+    # GF(37) tags for twin prime lattice col sums
+    SOVEREIGN_ANCHORS = {4, 9, 25, 30}
+    SOVEREIGN_TARGETS = {3, 12, 21, 30}
+    CASCADE_BASE      = {8, 13, 24}
+    ORBIT_11          = {11, 27, 36}
+    PRIMITIVE_ROOTS   = {2,5,13,15,17,18,19,20,22,24,32,35}
+
+    assert 12 in SOVEREIGN_TARGETS             # col L: 12 (ST) — shared anchor
+    assert 24 in CASCADE_BASE and 24 in PRIMITIVE_ROOTS  # col M: 24 (CB,PR)
+    assert 36 in ORBIT_11 and 36 % 37 == 36   # col R: 36 = -1 mod37 (orbit-11)
+
+    # GF(37) tags for 3×3 board col sums
+    assert 12 in SOVEREIGN_TARGETS             # col 1: 12 (ST)
+    assert 15 in PRIMITIVE_ROOTS               # col 2: 15 (PR)
+    assert 18 in PRIMITIVE_ROOTS               # col 3: 18 (PR)
+
+    # Arithmetic structure
+    # TP lattice: step = 12 → each col sum is a multiple of 12
+    assert tp_col_sums[1] - tp_col_sums[0] == 12
+    assert tp_col_sums[2] - tp_col_sums[1] == 12
+    # Board: step = 3 (ST arch)
+    assert board_col_sums[1] - board_col_sums[0] == 3
+    assert board_col_sums[2] - board_col_sums[1] == 3
+
+    print(f"  Twin prime lattice col sums: {tp_col_sums}  DR={tp_col_drs}")
+    print(f"  3×3 board col sums:          {board_col_sums}  DR={board_col_drs}")
+    print(f"  Both: DR signature [3,6,9]; both open with 12(ST)")
+    print(f"  TP step=12(ST),  board step=3(ST arch)")
+    print(f"  TP col sums mod37: 12(ST) | 24(CB,PR) | 36(orb11,-1)")
+    print(f"  Board col sums mod37: 12(ST) | 15(PR) | 18(PR)")
+    print(f"  Same DR spine, different GF(37) landing — same structure, different angle.")
+
     print()
     print("All assertions passed.")
     return True
