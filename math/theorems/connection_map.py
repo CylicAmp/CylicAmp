@@ -1821,6 +1821,49 @@ assert frozenset({3,12,30}) <= ST                                   # 3 ST nodes
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 49: dark_sector_algebra.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   The Legendre symbol (n/37) produces a clean visible/dark sector partition:
+#
+#   VISIBLE (QR, χ=+1): SA={4,9,25,30}, ST={3,12,21,30}, ORBIT_11={11,27,36}
+#   DARK    (NQR, χ=−1): PR={2,5,13,15,17,18,19,20,22,24,32,35}, CB={8,13,24},
+#                         TESLA_FLOW=6
+#
+#   Key theorem: PR ⊂ NQR (all primitive roots are dark).
+#     Proof: QR form a subgroup of order 18; primitive roots have order 36.
+#     No element of order 36 can lie in a subgroup of order 18. □
+#
+#   Prime gap residues mod 37 land on named nodes:
+#     gap≡4 → SA (visible), gap≡12 → ST (visible),
+#     gap≡8 → CB (dark),    gap≡6  → TESLA_FLOW (dark), gap≡2 → PR (dark)
+#
+#   SCALAR_137=26 is visible (QR): the 137-map multiplier lives in the
+#   visible sector. SA∩ST={30} is visible.
+#
+#   → sovereign_qr_closure: same QR structure; Legendre symbols on SA/ST/orbit nodes.
+#   → medusa_v3_sovereign: SA and ST entirely visible; CB entirely dark.
+#   → heartbeat_3cycle: orbit nodes {3,4,30} all QR; dark sector orbit carries {18,24,32}.
+#   → cascade_8_13_24: CB={8,13,24} entirely dark (NQR); cascade base = dark generator.
+#   → primitive_root_test: PR=dark sector; all 12 primitive roots are NQR.
+#   → two_group_split: visible/dark split interacts with Group A/B split.
+#   → intersection_cycle_theorem: sovereign cycle (3,4,30) all visible.
+#   → twin_prime_gf37: twin prime gap≡2∈PR (dark); gap≡4∈SA (visible anchor).
+
+_QR49  = frozenset(n for n in range(1,37) if pow(n,18,37)==1)
+_NQR49 = frozenset(n for n in range(1,37) if pow(n,18,37)==36)
+assert SA <= _QR49                         # SA entirely visible
+assert ST <= _QR49                         # ST entirely visible
+assert ORBIT_11 <= _QR49                   # ORBIT_11 entirely visible
+assert PR <= _NQR49                        # PR entirely dark
+assert CB <= _NQR49                        # CB entirely dark
+assert TESLA_FLOW in _NQR49               # TESLA_FLOW dark
+assert SCALAR_137 in _QR49               # 137-map multiplier visible
+assert 30 in _QR49                        # SA∩ST intersection node is visible
+assert len(_QR49) == len(_NQR49) == 18   # even 18/18 split
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
 #
@@ -2060,6 +2103,10 @@ MASTER_CONNECTIONS = {
                                    "medusa_v3_sovereign","sovereign_qr_closure",
                                    "primitive_root_test","cascade_8_13_24",
                                    "abcabc_mod37_orbit"],
+    "dark_sector_algebra":        ["sovereign_qr_closure","medusa_v3_sovereign",
+                                   "heartbeat_3cycle","cascade_8_13_24",
+                                   "primitive_root_test","two_group_split",
+                                   "intersection_cycle_theorem","twin_prime_gf37"],
 }
 
 
