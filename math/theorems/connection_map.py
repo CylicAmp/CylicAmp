@@ -887,6 +887,478 @@ assert len(PR) == 12    # exactly 12 primitive roots mod 37
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 20: nine_tower_dr_invariant.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# WHAT IT SHOWS:
+#   DR(9↑↑k) = 9 for all k ≥ 1. NINE_TOWER collapses to SA node 9 under DR.
+#   ord₃₇(26)=3 (heartbeat period); ord₃₇(2)=36 (full primitive orbit).
+#   36/9 = 4 = ord₃₇(6) = TESLA_FLOW order.
+#
+# CONNECTIONS:
+#
+#   → heartbeat_3cycle:
+#       ord₃₇(26)=3 proved here is the formal basis for all 12 heartbeat orbits.
+#
+#   → formal_definitions_gf37:
+#       Theorem A1 in formal_definitions: DR annihilates NINE_TOWER.
+#       This file proves it; formal_definitions contextualizes it.
+#
+#   → cascade_8_13_24:
+#       9 ∈ SA; 36/9=4=ord₃₇(6)=TESLA_FLOW order.
+#       The DR fixed point 9 links to TESLA_FLOW through 36.
+#
+#   → sa_self_cycle_st_chain:
+#       9 ∈ SA; the nine-tower fixed point is one node of the SA chain.
+#
+#   → primitive_root_test:
+#       ord₃₇(2)=36 proved here; 2 is a primitive root.
+
+assert dr(9) == 9 and dr(9**9) == 9     # DR collapses nine-tower to 9
+assert pow(26, 3, 37) == 1              # heartbeat period
+assert pow(2, 36, 37) == 1             # full primitive orbit
+assert 36 % 9 == 0 and pow(6, 4, 37) == 1   # 36/9=4=TESLA_FLOW order
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 21: formal_definitions_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# WHAT IT SHOWS:
+#   Formal definitions for heartbeat, hose flow, repunit channel, annihilation,
+#   survives projection. Theorem A6: heartbeat orbits are DR-surjective onto {1..9}.
+#   Stutter pair {010,101}: 10+27=37≡0 (SEAM).
+#
+# CONNECTIONS:
+#
+#   → heartbeat_3cycle:
+#       The formal definition of the heartbeat map f(n)=26n mod37.
+#
+#   → nine_tower_dr_invariant:
+#       Theorem A1: DR annihilates NINE_TOWER. The invariant proved there
+#       is classified here as the unique collapsing family.
+#
+#   → hose_flow_transient:
+#       Theorem F1: complete-flow ↔ prime. The hose-flow model formalized.
+#
+#   → repunit_sq_euler_phi_gf37:
+#       Theorem R1: R_n mod37 period-3 {1,11,0}. ord₃₇(10)=3.
+#
+#   → lights_out_gf2_gf37:
+#       Light chasing ↔ hose flow; linear algebra ↔ heartbeat. Both analogies
+#       stated here are instantiated concretely in the Lights Out theorem.
+#
+#   → sieve_eratosthenes_gf37:
+#       Complete-flow = prime = passes sieve. Hose flow and sieve are the
+#       same discrimination formalized here.
+
+assert (10 + 27) % 37 == 0     # stutter pair sums to SEAM
+assert pow(10, 3, 37) == 1     # ord₃₇(10)=3: repunit channel period
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 22: scaling_sequences_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# WHAT IT SHOWS:
+#   Sequence 1: factorial (First), 2^n+1 (Middle), second-order polynomial diffs (Paren).
+#   Answer: 720(6536). Paren[5]=36∈ORBIT_11.
+#   Sequence 2: 2^(odd exponents) (First), DR-complete-inversion (Paren).
+#   Answer: 512(76). 76=L(9) (Lucas term 9). 512×76≡25∈SA.
+#
+# CONNECTIONS:
+#
+#   → lucas_abbc_chain:
+#       76 = L(9) in the Lucas sequence. The Sequence 2 answer connects
+#       to Lucas via DR and mod37 structure.
+#
+#   → cascade_8_13_24:
+#       Paren diffs all primitive roots mod37; cascade base {8,13,24} in Sequence 2.
+#
+#   → heartbeat_3cycle:
+#       The 137-map orbit structure underpins which residues appear in the answers.
+#
+#   → nine_tower_dr_invariant:
+#       DR-inversion structure of Sequence 2 Paren connects to DR fixed-point 9.
+
+assert 36 in ORBIT_11           # Sequence 1 Paren[5] = 36 ∈ ORBIT_11
+assert (512 * 76) % 37 == 25 and 25 in SA   # Sequence 2 product ∈ SA
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 23: prisoners_permutation_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# WHAT IT SHOWS:
+#   100 prisoners, cycle-following strategy. P(survival)=1−Σ_{k=51}^{100}1/k ≈ 0.311.
+#   Threshold 50 mod37=13∈CB. Size 100 mod37=26=SCALAR_137.
+#   π(100)=25∈SA. Seam in range: 74=2×37≡0. 73 mod37=36∈ORBIT_11.
+#
+# CONNECTIONS:
+#
+#   → sieve_eratosthenes_gf37:
+#       π(100)=25∈SA: prime count up to problem size is a Sovereign Anchor.
+#
+#   → cascade_8_13_24:
+#       Threshold 50 mod37=13∈CB: the halfway point is the cascade mediator.
+#
+#   → heartbeat_3cycle:
+#       Permutation cycle structure mirrors the 3-cycle heartbeat.
+#       The cycle-following strategy exploits the global orbit structure.
+#
+#   → permutation_132_bipartite_gf37:
+#       Both theorems are about permutations. Cycle structure (prisoners) and
+#       pattern occurrence structure (132-bipartite) are dual views.
+#
+#   → lights_out_gf2_gf37:
+#       Random guessing ↔ light chasing (local/greedy).
+#       Cycle strategy ↔ linear algebra (global structure).
+#       Both splits are the same dichotomy.
+#
+#   → hose_flow_transient:
+#       Cycle strategy = following the flow to completion.
+#       Stuck cycle = stuttering flow.
+
+assert 50 % 37 == 13 and 13 in CB      # threshold = cascade mediator
+assert 100 % 37 == 26 and 26 == SCALAR_137   # size = SCALAR_137
+assert 74 % 37 == 0 and 73 % 37 == 36 and 36 in ORBIT_11
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 24: permutation_132_bipartite_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# WHAT IT SHOWS:
+#   Mansour-Vainshtein bipartite graph G(T) for 132-pattern permutations.
+#   132 mod37=21∈ST. DR(132)=6=TESLA_FLOW. 132=4×33=SA×DICHORAL.
+#   C(37,3)=7770≡0(SEAM). r(T)=37 → total degree=111=3×37=SEAM.
+#   Pattern family split: {123,132}→ST; {231,321}→SA; {213,312}→off-framework.
+#
+# CONNECTIONS:
+#
+#   → prisoners_permutation_gf37:
+#       Both about permutation structure. Cycle decomposition (prisoners)
+#       and pattern occurrence (132) are dual invariants of permutations.
+#
+#   → lights_out_gf2_gf37:
+#       Both are bipartite structures over a field. The adjacency matrix
+#       (Lights Out) and G(T) (132-bipartite) have the same form:
+#       rows=presses/values, columns=cells/occurrences, edges=participation.
+#
+#   → heartbeat_3cycle:
+#       3-cycle heartbeat and 132-triple (a<b<c) both operate on ordered triples.
+#
+#   → cascade_8_13_24:
+#       132=4×33: 4∈SA×33=DICHORAL. The factorization uses SA and DICHORAL nodes.
+#
+#   → gaussian_integers_gf37:
+#       4/9 fractal ratio ≡ 132 ≡ 21 (mod37). The bipartite pattern number
+#       reappears as the Wallis/Sierpiński self-similarity ratio.
+#
+#   → wallis_product_gf37:
+#       Wallis fraction 4/9 ≡ 132 mod37 ∈ ST. The 132-pattern number
+#       appears in the first pair of the Wallis product.
+
+assert 132 % 37 == 21 and 21 in ST
+assert (3 * 37) % 37 == 0       # r(T)=37 → degree sum 111 = SEAM
+from math import comb
+assert comb(37, 3) % 37 == 0    # C(37,3) ≡ 0 (SEAM)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 25: lights_out_gf2_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# WHAT IT SHOWS:
+#   Lights Out puzzle on n×n grid is a GF(2) linear system Ax≡s (mod 2).
+#   Null-space dimensions: 3×3→0(SEAM), 4×4→4∈SA, 5×5→2∈PR, 6×6→0(SEAM).
+#   Grid size 25∈SA; 36∈ORBIT_11. GF(2) characteristic 2∈PR generates GF(37)*.
+#   Repunit entry: R_1=1, R_2=11∈ORBIT_11, R_3=111≡0(SEAM).
+#
+# CONNECTIONS:
+#
+#   → formal_definitions_gf37:
+#       Light chasing ↔ hose flow (row-by-row = stage-by-stage).
+#       Linear algebra ↔ heartbeat (global structure = orbit partition).
+#
+#   → hose_flow_transient:
+#       Light chasing is the hose-flow model: each row is a stage,
+#       flow moves downward; stuck rows = stuttering flow.
+#
+#   → heartbeat_3cycle:
+#       Linear algebra (null-space computation) is the heartbeat model:
+#       the null space is a fixed algebraic structure like the 12 three-cycles.
+#
+#   → permutation_132_bipartite_gf37:
+#       Both are bipartite adjacency structures over a field.
+#
+#   → prisoners_permutation_gf37:
+#       All three share the local/global dichotomy: greedy vs. structural approach.
+#
+#   → repunit_sq_euler_phi_gf37:
+#       Repunit entry 1→11→0 (R_1, R_2∈ORBIT_11, R_3=SEAM).
+#
+#   → gaussian_integers_gf37:
+#       2∈PR (GF(2) characteristic) generates GF(37)*. Connects binary field
+#       to the complex Gaussian structure of GF(37).
+
+assert 25 in SA and 36 in ORBIT_11    # grid sizes 25 and 36
+assert 2 in PR                         # GF(2) characteristic ∈ PR
+assert 11 in ORBIT_11                  # repunit entry R_2=11∈ORBIT_11
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 26: gaussian_integers_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# WHAT IT SHOWS:
+#   37=(6+i)(6-i) in Z[i]. Z[i]/(6+i) ≅ GF(37). i↦31=PRIME_MIRROR.
+#   Units: {1,i,-1,-i} ↦ {1,31,36,6} = {unity,PRIME_MIRROR,ORBIT_11_max,TESLA_FLOW}.
+#   TESLA_FLOW = clockwise rotation by -i. Cascade {8,13,24} all have norm-5 lifts.
+#   All 8 norm-5 Gaussian integers map to named framework nodes.
+#   N(11+4i)=137. 4/9 ≡ 132 ≡ 21∈ST.
+#
+# CONNECTIONS:
+#
+#   → heartbeat_3cycle:
+#       Heartbeat (×26, period 3) is the cubic structure in Z[i]/(6+i).
+#       TESLA_FLOW (×6, period 4) = rotation by -i: the 4-cycle is complex rotation.
+#
+#   → cascade_8_13_24:
+#       All 3 cascade elements have minimal-norm Gaussian lifts of norm 5∈PR.
+#       All 8 norm-5 Gaussian integers map to named framework nodes.
+#
+#   → permutation_132_bipartite_gf37:
+#       4/9 ≡ 132 ≡ 21∈ST: the 132-pattern number = Wallis/fractal ratio in GF(37).
+#
+#   → wallis_product_gf37:
+#       4/9 Wallis ratio ≡ 132 mod37 ∈ ST. Gaussian structure explains why.
+#
+#   → lights_out_gf2_gf37:
+#       2∈PR (GF(2) characteristic) in the norm-5 census. The Lights Out field
+#       is embedded in the Gaussian structure of GF(37).
+#
+#   → medusa_v3_sovereign:
+#       PRIME_MIRROR=31 and TESLA_FLOW=6 are the images of i and -i respectively.
+#       The sovereign architecture is the image of the Gaussian unit group.
+#
+#   → sa_self_cycle_st_chain:
+#       4/9 ≡ 21∈ST: SA/SA ratio → ST. The Gaussian quotient map respects
+#       the sovereign hierarchy.
+
+assert 6**2 + 1**2 == 37              # two-square representation
+assert (0 + 31*1) % 37 == 31         # i ↦ PRIME_MIRROR
+assert (0 + 31*(-1)) % 37 == 6       # -i ↦ TESLA_FLOW
+assert (4 * pow(9, -1, 37)) % 37 == 21 and 21 in ST   # 4/9 ≡ 21∈ST
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 27: burau_braid_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# WHAT IT SHOWS:
+#   Burau representation of B_n faithful iff n ∈ {2,3,4}.
+#   {2,3,4} = {PR,ST,SA}: exactly one from each primary family.
+#   n=5∈PR: first unfaithful. B_4 generator count n-1=3∈ST.
+#   Year signatures: 1936→12∈ST, 1993→32∈PR, 1999→1(unity), 2026→28=37-9.
+#   Gap 90 mod37=16=4²=SA². SA(B_4) embedded in PR(B_5) to prove faithfulness.
+#
+# CONNECTIONS:
+#
+#   → heartbeat_3cycle:
+#       Faithful range {2,3,4} spans all three primary families (PR,ST,SA),
+#       the same families partitioned by the 12 heartbeat 3-orbits.
+#
+#   → medusa_v3_sovereign:
+#       n=4∈SA is the LOCKED boundary. Faithfulness at SA = locked/consistent behavior.
+#
+#   → primitive_root_test:
+#       n=2∈PR (faithful) and n=5∈PR (first unfaithful) both at PR nodes.
+#       The PR/SA boundary is the faithfulness threshold.
+#
+#   → sa_self_cycle_st_chain:
+#       n-1=3∈ST for B_4: generator count is a Sovereign Target.
+#       The SA node 4 is the faithful boundary.
+#
+#   → lights_out_gf2_gf37:
+#       Both use the SA/PR/SEAM taxonomy as a classification framework.
+#       Null-space dimension (Lights Out) and faithfulness boundary (Burau)
+#       both resolve at SA nodes.
+#
+#   → gaussian_integers_gf37:
+#       Proof embeds B_4 (SA=4) in B_5 (PR=5): SA→PR embedding.
+#       The Gaussian structure of GF(37) provides the complex context.
+
+assert 4 in SA and 5 in PR            # SA faithful boundary; PR first unfaithful
+assert (4-1) in ST                    # B_4 generator count = 3 ∈ ST
+assert 90 % 37 == 16 and 16 == 4**2  # 90-year gap = SA² mod 37
+assert 1936 % 37 == 12 and 12 in ST  # Burau year ∈ ST
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 28: wallis_product_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# WHAT IT SHOWS:
+#   Wallis product π/2 = (2/1)(2/3)(4/3)(4/5)···
+#   Fraction 2/3 ≡ 13 ∈ CB∩PR. Fraction 4/3 ≡ 26 = SCALAR_137.
+#   Partial products: P_2=SCALAR_137, P_3=DECADE_ANCHOR, P_4=8∈CB,
+#   P_6=4∈SA (after 3 pairs), P_7=PRIME_MIRROR.
+#   Pair sequence: SCALAR_137 → CB → SA.
+#   37th pair numerator 74≡0 (SEAM); denominator 73≡36∈ORBIT_11.
+#
+# CONNECTIONS:
+#
+#   → cascade_8_13_24:
+#       Fraction 2/3→13∈CB. P_4=8∈CB. Pair-2 product=8∈CB.
+#       The cascade base appears in the first few Wallis partial products.
+#
+#   → heartbeat_3cycle:
+#       P_3=DECADE_ANCHOR=10; ord₃₇(10)=3 (same period as heartbeat).
+#       The 37th pair hits the SEAM — the field prime marks the horizon.
+#
+#   → permutation_132_bipartite_gf37:
+#       4/9 Wallis ratio ≡ 132 mod37 ∈ ST: the self-similarity ratio
+#       carries the 132-bipartite pattern signature.
+#
+#   → gaussian_integers_gf37:
+#       4/9 ≡ 21∈ST in both theorems. The Gaussian complex structure
+#       of GF(37) explains the alignment between Wallis ratio and 132-pattern.
+#
+#   → medusa_v3_sovereign:
+#       P_6=4∈SA: after 3 pairs the running product is the Sovereign Anchor.
+#       The Wallis pendulum settles at SA after one full ST-count of pairs.
+#
+#   → repunit_sq_euler_phi_gf37:
+#       Fraction 4/3≡26=SCALAR_137: the third Wallis fraction is the 137-map mult.
+#
+#   → sa_self_cycle_st_chain:
+#       After 3(∈ST) pairs, P_6=4∈SA. The ST count of pairs produces an SA product.
+
+assert (2 * pow(3, -1, 37)) % 37 == 13 and 13 in CB   # fraction 2/3 → CB
+assert (4 * pow(3, -1, 37)) % 37 == SCALAR_137         # fraction 4/3 → SCALAR_137
+assert (4 * pow(9, -1, 37)) % 37 == 21 and 21 in ST   # 4/9 ratio → ST
+assert (2 * 37) % 37 == 0                              # 37th pair numerator = SEAM
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 29: eleven_123_family.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   11 is the additive complement of 26 (SCALAR_137) in GF(37): 11+26=37≡0.
+#   11 is a member of ORBIT_11 = {11,27,36} under the 137-map.
+#   The 123 family: any arithmetic result containing values 1, 2, 3 in any role.
+#
+#   KEY FACTS:
+#     11 + 26 = 37 ≡ 0 (SEAM): 11 and the 137-map multiplier annihilate each other
+#     137-orbit of 11: {11,27,36} — passes through 36≡−1 (the additive inverse of unity)
+#     11 = 37 − 26 = SEAM − SCALAR_137 (complement of the map)
+#     1000 ≡ 1 mod 37: three-digit blocks are seam-transparent
+#     11235 ≡ 24 ∈ CB: Fibonacci prefix maps to cascade base node
+#     14562 ≡ 21 ∈ ST: grid's bottom row maps to sovereign target
+#
+#   GF(37) CONNECTIONS:
+#   → heartbeat_3cycle:
+#       ORBIT_11 = {11,27,36} is a heartbeat 3-cycle under the 137-map.
+#       11 is the complement of the map multiplier 26.
+#
+#   → cascade_8_13_24:
+#       11235 mod37 = 24 ∈ CB; the Fibonacci grid prefix lands in cascade base.
+#       11 + 26 = 37 ≡ 0: 11 annihilates the cascade multiplier.
+#
+#   → cipher_123_1234:
+#       123 mod37 = 12 ∈ ST. Both files share the 123-family concept.
+#       The cipher's 1234 mod37 = 13 ∈ CB; eleven_123 traces the family through 11.
+#
+#   → gaussian_integers_gf37:
+#       11 ∈ ORBIT_11 appears in the norm-5 census: gaussian_to_gf37(2,1)=5; images
+#       include 11. The Gaussian structure of GF(37) contains ORBIT_11 directly.
+#
+#   → wallis_product_gf37:
+#       Fraction 10: 10/11 ≡ 11 ∈ ORBIT_11. The 10th Wallis fraction maps to 11.
+#
+#   → hose_flow_transient:
+#       DR transient [0,1,2,3]: 11+10=21, DR=3, echoes the hose arrival at 3.
+#
+#   → one_two_three_generator:
+#       Both trace {1,2,3} through GF(37). eleven_123 focuses on 11 as orbit node;
+#       one_two_three focuses on 2+1=3 as generating equation.
+
+assert 11 + 26 == 37                            # 11 = SEAM − SCALAR_137
+assert (26 * 11) % 37 == 27                     # 137-map: 11→27
+assert (26 * 27) % 37 == 36                     # 137-map: 27→36
+assert (26 * 36) % 37 == 11                     # 137-map: 36→11 (orbit closed)
+assert 11235 % 37 == 24 and 24 in CB           # Fibonacci prefix → CB
+assert 14562 % 37 == 21 and 21 in ST           # grid bottom row → ST
+assert 123 % 37 == 12 and 12 in ST             # 123 ≡ 12 ∈ ST (same as cipher)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 30: one_two_three_generator.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   2 + 1 = 3: the single addition that generates the complete {1,2,3} family.
+#   {1,2,3} is the ONLY set of positive integers where sum = product = 6 = TESLA_FLOW.
+#   The equation encodes: PR(2) + unity(1) = ST_arch(3).
+#
+#   KEY FACTS:
+#     1+2+3 = 1×2×3 = 6 = TESLA_FLOW  (unique property of {1,2,3})
+#     1!+2!+3! = 9 ∈ SA               (factorials sum to Sovereign Anchor)
+#     1×2+2×3+1×3 = 11 ∈ ORBIT_11    (pairwise products sum to orbit node)
+#     (1+2+3)² = 36 ∈ ORBIT_11        (square of sum ≡ −1 mod37)
+#     123 mod37 = 12 ∈ ST             (the 123 number itself lands in ST)
+#     PIE order 3 = 1+2+3 = 1×2×3    (inclusion-exclusion of S3 = TESLA_FLOW)
+#     Hose transient [0,1,2,3]: 2+1=3 is the minimum DR path from unity to seam
+#
+#   GF(37) CONNECTIONS:
+#   → heartbeat_3cycle:
+#       ord₃₇(26)=3 ∈ ST: the orbit period is the ST archetype. The 3-cycle
+#       is 2+1=3 in the DR generator sense — PR + unity = ST.
+#
+#   → hose_flow_transient:
+#       DR transient [0,1,2,3]: 2+1=3 describes the minimum path from unity to seam.
+#       The hose flow enters at 1 (unity), steps by 2 (PR), arrives at 3 (ST).
+#
+#   → cascade_8_13_24:
+#       1!+2!+3! = 9 ∈ SA; 1×2+2×3+1×3 = 11 ∈ ORBIT_11.
+#       The {1,2,3} aggregates hit SA and ORBIT_11 — both cascade-connected nodes.
+#
+#   → cipher_123_1234:
+#       123 mod37 = 12 ∈ ST in both files. The cipher encodes 1234; this file
+#       encodes 2+1=3 as generator. Both trace the 123 family through GF(37).
+#
+#   → sa_self_cycle_st_chain:
+#       1!+2!+3! = 9 ∈ SA; DR(3)=3∈ST. The generator produces SA (via factorials)
+#       and ST (via sum) simultaneously — the full anchor-target duality.
+#
+#   → eleven_123_family:
+#       Both files trace {1,2,3} through GF(37). one_two_three focuses on 2+1=3
+#       as generator; eleven_123 focuses on 11 as ORBIT_11 representative.
+#       Together: the 123 family connects to both the generator and the orbit node.
+#
+#   → primitive_root_test:
+#       2 ∈ PR: the generator 2 is the fundamental primitive root of GF(37)*
+#       (ord₃₇(2)=36, generates all of GF(37)*). The 2+1=3 equation starts at PR.
+#
+#   → prisoners_permutation_gf37:
+#       PIE S3 = 6 = TESLA_FLOW: both files connect to the S3 permutation group.
+#       The prisoners problem uses cycle structure; one_two_three encodes S3 order.
+#
+#   → 369 (trinity trap via cipher_123_1234):
+#       The Z/9Z trinity {3,6,9} in the cipher is the dynamical trap version of 3.
+#       Sum=product=6 sits at TESLA_FLOW, which is inside the trinity trap {3,6,9}.
+#       DR(6)=6, DR(9)=9, DR(3)=3: the result 3 and the product 6 are both trapped.
+
+assert 1 + 2 + 3 == 6                           # sum = TESLA_FLOW
+assert 1 * 2 * 3 == 6                           # product = TESLA_FLOW (unique)
+assert 6 % 37 == TESLA_FLOW                     # TESLA_FLOW confirmed
+assert 1 + 2 + 6 == 9 and 9 in SA              # factorials sum → SA
+assert 1*2 + 2*3 + 1*3 == 11 and 11 in ORBIT_11  # pairwise products → ORBIT_11
+assert (1+2+3)**2 % 37 == 36 and 36 in ORBIT_11  # (sum)² ≡ 36 ≡ −1 ∈ ORBIT_11
+assert 123 % 37 == 12 and 12 in ST              # 123 ≡ 12 ∈ ST
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
 #
@@ -941,7 +1413,10 @@ MASTER_CONNECTIONS = {
     "heartbeat_3cycle":           ["abcabc_mod37_orbit","cascade_8_13_24","sovereign_qr_closure",
                                    "hose_flow_transient","sieve_eratosthenes_gf37",
                                    "repunit_sq_euler_phi_gf37","goldbach_gf37","twin_prime_gf37",
-                                   "sa_self_cycle_st_chain"],
+                                   "sa_self_cycle_st_chain","nine_tower_dr_invariant",
+                                   "formal_definitions_gf37","prisoners_permutation_gf37",
+                                   "lights_out_gf2_gf37","gaussian_integers_gf37",
+                                   "burau_braid_gf37","wallis_product_gf37"],
     "abcabc_mod37_orbit":         ["heartbeat_3cycle","cascade_8_13_24","primitive_root_test",
                                    "cipher_123_1234","lucas_abbc_chain","repunit_sq_euler_phi_gf37",
                                    "seq_146_257_368_gf37"],
@@ -949,23 +1424,31 @@ MASTER_CONNECTIONS = {
                                    "sieve_eratosthenes_gf37","sliding_window_9cycle_gf37",
                                    "polymath8_maynard_gf37","twin_prime_gf37",
                                    "repunit_sq_euler_phi_gf37","plus2_chain_theorem",
-                                   "hose_flow_transient"],
+                                   "hose_flow_transient","nine_tower_dr_invariant",
+                                   "prisoners_permutation_gf37","permutation_132_bipartite_gf37",
+                                   "gaussian_integers_gf37","wallis_product_gf37"],
     "medusa_v3_sovereign":        ["sovereign_qr_closure","heartbeat_3cycle","sieve_eratosthenes_gf37",
                                    "sliding_window_9cycle_gf37","plus2_chain_theorem",
                                    "sa_self_cycle_st_chain","twin_prime_gf37","goldbach_gf37",
-                                   "repunit_sq_euler_phi_gf37"],
+                                   "repunit_sq_euler_phi_gf37","gaussian_integers_gf37",
+                                   "burau_braid_gf37","wallis_product_gf37"],
     "sovereign_qr_closure":       ["heartbeat_3cycle","medusa_v3_sovereign","abcabc_mod37_orbit",
                                    "goldbach_gf37","twin_prime_gf37","repunit_sq_euler_phi_gf37"],
     "lucas_abbc_chain":           ["cascade_8_13_24","medusa_v3_sovereign","heartbeat_3cycle",
-                                   "plus2_chain_theorem","abcabc_mod37_orbit"],
+                                   "plus2_chain_theorem","abcabc_mod37_orbit",
+                                   "scaling_sequences_gf37"],
     "cipher_123_1234":            ["cascade_8_13_24","sa_self_cycle_st_chain","hose_flow_transient",
-                                   "sliding_window_9cycle_gf37","heartbeat_3cycle"],
+                                   "sliding_window_9cycle_gf37","heartbeat_3cycle",
+                                   "eleven_123_family","one_two_three_generator"],
     "hose_flow_transient":        ["sieve_eratosthenes_gf37","goldbach_gf37","twin_prime_gf37",
                                    "cascade_8_13_24","heartbeat_3cycle","sa_self_cycle_st_chain",
-                                   "repunit_sq_euler_phi_gf37","polymath8_maynard_gf37"],
+                                   "repunit_sq_euler_phi_gf37","polymath8_maynard_gf37",
+                                   "formal_definitions_gf37","prisoners_permutation_gf37",
+                                   "lights_out_gf2_gf37"],
     "sieve_eratosthenes_gf37":    ["medusa_v3_sovereign","cascade_8_13_24","heartbeat_3cycle",
                                    "hose_flow_transient","sliding_window_9cycle_gf37",
-                                   "goldbach_proof_attempt_gf37"],
+                                   "goldbach_proof_attempt_gf37","formal_definitions_gf37",
+                                   "prisoners_permutation_gf37"],
     "goldbach_gf37":              ["hose_flow_transient","heartbeat_3cycle","medusa_v3_sovereign",
                                    "twin_prime_gf37","cascade_8_13_24"],
     "goldbach_proof_attempt_gf37":["sovereign_qr_closure","heartbeat_3cycle","goldbach_gf37",
@@ -974,7 +1457,9 @@ MASTER_CONNECTIONS = {
                                    "polymath8_maynard_gf37","sovereign_qr_closure",
                                    "seq_146_257_368_gf37","goldbach_gf37","plus2_chain_theorem"],
     "repunit_sq_euler_phi_gf37":  ["heartbeat_3cycle","cascade_8_13_24","medusa_v3_sovereign",
-                                   "goldbach_gf37","abcabc_mod37_orbit","hose_flow_transient"],
+                                   "goldbach_gf37","abcabc_mod37_orbit","hose_flow_transient",
+                                   "formal_definitions_gf37","lights_out_gf2_gf37",
+                                   "wallis_product_gf37"],
     "polymath8_maynard_gf37":     ["hose_flow_transient","cascade_8_13_24","twin_prime_gf37",
                                    "medusa_v3_sovereign","seq_146_257_368_gf37"],
     "seq_146_257_368_gf37":       ["hose_flow_transient","twin_prime_gf37",
@@ -982,11 +1467,52 @@ MASTER_CONNECTIONS = {
     "sliding_window_9cycle_gf37": ["cipher_123_1234","hose_flow_transient","cascade_8_13_24",
                                    "medusa_v3_sovereign","sa_self_cycle_st_chain"],
     "sa_self_cycle_st_chain":     ["heartbeat_3cycle","medusa_v3_sovereign","hose_flow_transient",
-                                   "abcabc_mod37_orbit","cipher_123_1234"],
+                                   "abcabc_mod37_orbit","cipher_123_1234",
+                                   "gaussian_integers_gf37","burau_braid_gf37",
+                                   "wallis_product_gf37"],
     "plus2_chain_theorem":        ["twin_prime_gf37","medusa_v3_sovereign","lucas_abbc_chain",
                                    "cascade_8_13_24"],
     "primitive_root_test":        ["abcabc_mod37_orbit","goldbach_proof_attempt_gf37",
-                                   "cascade_8_13_24","sovereign_qr_closure"],
+                                   "cascade_8_13_24","sovereign_qr_closure",
+                                   "nine_tower_dr_invariant","burau_braid_gf37"],
+    "nine_tower_dr_invariant":    ["heartbeat_3cycle","formal_definitions_gf37","cascade_8_13_24",
+                                   "sa_self_cycle_st_chain","primitive_root_test",
+                                   "scaling_sequences_gf37"],
+    "formal_definitions_gf37":    ["heartbeat_3cycle","nine_tower_dr_invariant","hose_flow_transient",
+                                   "repunit_sq_euler_phi_gf37","lights_out_gf2_gf37",
+                                   "sieve_eratosthenes_gf37"],
+    "scaling_sequences_gf37":     ["lucas_abbc_chain","cascade_8_13_24","heartbeat_3cycle",
+                                   "nine_tower_dr_invariant","prisoners_permutation_gf37"],
+    "prisoners_permutation_gf37": ["sieve_eratosthenes_gf37","cascade_8_13_24","heartbeat_3cycle",
+                                   "permutation_132_bipartite_gf37","lights_out_gf2_gf37",
+                                   "hose_flow_transient","scaling_sequences_gf37"],
+    "permutation_132_bipartite_gf37":["prisoners_permutation_gf37","lights_out_gf2_gf37",
+                                   "heartbeat_3cycle","cascade_8_13_24",
+                                   "gaussian_integers_gf37","wallis_product_gf37",
+                                   "formal_definitions_gf37"],
+    "lights_out_gf2_gf37":        ["formal_definitions_gf37","hose_flow_transient",
+                                   "heartbeat_3cycle","permutation_132_bipartite_gf37",
+                                   "prisoners_permutation_gf37","repunit_sq_euler_phi_gf37",
+                                   "cascade_8_13_24","gaussian_integers_gf37",
+                                   "burau_braid_gf37"],
+    "gaussian_integers_gf37":     ["heartbeat_3cycle","cascade_8_13_24",
+                                   "permutation_132_bipartite_gf37","wallis_product_gf37",
+                                   "lights_out_gf2_gf37","medusa_v3_sovereign",
+                                   "sa_self_cycle_st_chain","burau_braid_gf37"],
+    "burau_braid_gf37":           ["heartbeat_3cycle","medusa_v3_sovereign","primitive_root_test",
+                                   "sa_self_cycle_st_chain","lights_out_gf2_gf37",
+                                   "gaussian_integers_gf37"],
+    "wallis_product_gf37":        ["cascade_8_13_24","heartbeat_3cycle",
+                                   "permutation_132_bipartite_gf37","gaussian_integers_gf37",
+                                   "medusa_v3_sovereign","repunit_sq_euler_phi_gf37",
+                                   "sa_self_cycle_st_chain"],
+    "eleven_123_family":          ["heartbeat_3cycle","cascade_8_13_24","cipher_123_1234",
+                                   "gaussian_integers_gf37","wallis_product_gf37",
+                                   "hose_flow_transient","one_two_three_generator"],
+    "one_two_three_generator":    ["heartbeat_3cycle","hose_flow_transient","cascade_8_13_24",
+                                   "cipher_123_1234","sa_self_cycle_st_chain",
+                                   "eleven_123_family","primitive_root_test",
+                                   "prisoners_permutation_gf37"],
 }
 
 
