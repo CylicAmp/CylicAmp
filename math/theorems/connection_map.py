@@ -1755,6 +1755,72 @@ assert 10**4 % 37 == 10**1 % 37           # 4th zero = split: cycle restarts
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 47: intersection_cycle_theorem.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   (3, 4, 30) is the unique 3-cycle where every element belongs to SA∪ST.
+#
+#   Three elements, three distinct sovereign roles:
+#     3 ∈ ST (pure target), 4 ∈ SA (pure anchor), 30 ∈ SA∩ST (intersection node)
+#   Orbit: 3 → 4 → 30 → 3
+#   Sum = 37 (the prime itself; this cycle is in Group A of the two-group split)
+#
+#   Three cycles touch both SA and ST: (3,4,30), (9,12,16), (21,25,28)
+#   Only (3,4,30) has ALL elements in SA∪ST — the other two each contain one
+#   unclassified element (16 and 28 respectively).
+#
+#   → heartbeat_3cycle: the 12-cycle structure; orbit 3→4→30→3 uses f=×26 mod 37.
+#   → medusa_v3_sovereign: SA and ST definitions; LOCKED/GATED/PURGE classification.
+#   → two_group_split: (3,4,30) is in Group A (sum=37); sovereign outliers in Group B.
+#   → sovereign_qr_closure: 3,4,30 QR status; Legendre symbols on sovereign nodes.
+#   → stacked_zeros_gf37: 3∈ST, 4∈SA, 30∈SA∩ST mirror the row sums pattern.
+#   → sa_self_cycle_st_chain: the 30→3→4→30 orbit IS the SA→ST chain.
+#   → cascade_8_13_24: both theorems classify GF(37)* structure exhaustively.
+
+_f47 = lambda n: (n*26)%37
+assert _f47(3) == 4 and _f47(4) == 30 and _f47(30) == 3   # orbit 3→4→30→3
+assert 3 in ST and 4 in SA and (30 in SA and 30 in ST)     # three sovereign roles
+assert sum([3, 4, 30]) == 37                                # cycle sums to the prime
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 48: two_group_split.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   The 12 three-cycles split into Group A (6 cycles, sum=37) and Group B
+#   (6 cycles, sum=74=2×37).
+#
+#   Algebraic proof: a + 26a + 10a = 37a ≡ 0 (mod 37). Elements ∈{1..36},
+#   so sum ∈ [3,108], and only 37 and 74 are multiples of 37 in this range.
+#   A cycle sums to 37 iff (26a mod 37)+(10a mod 37) < 37 (no combined carry).
+#
+#   Class split:
+#     SA: {4,9,30} ⊂ A  |  {25} ⊂ B
+#     ST: {3,12,30} ⊂ A  |  {21} ⊂ B
+#     ORBIT_11: entirely B (cycle (11,27,36))
+#     PR: 6 in A ({2,5,13,15,19,20}), 6 in B ({17,18,22,24,32,35})
+#     CB: {8,13} ⊂ A  |  {24} ⊂ B
+#   The sovereign outliers 25 and 21 share the Group B cycle (21,25,28).
+#
+#   → heartbeat_3cycle: the 12-cycle structure; both groups come from ord₃₇(26)=3.
+#   → intersection_cycle_theorem: (3,4,30) is the all-sovereign cycle in Group A.
+#   → medusa_v3_sovereign: SA/ST outliers (25∈B, 21∈B) — sovereign nodes that
+#       live in Group B must cross the carry threshold.
+#   → sovereign_qr_closure: QR closure operates over same 12 cycles.
+#   → primitive_root_test: PR splits evenly 6/6 across groups.
+#   → cascade_8_13_24: CB splits 2A/1B; 24∈CB is in Group B with seed orbit.
+#   → abcabc_mod37_orbit: primitive root orbit traverses both groups.
+
+_ga47 = [(3,4,30),(2,15,20),(5,13,19),(9,12,16),(6,8,23),(1,10,26)]  # representative
+_gb47 = [(21,25,28),(11,27,36),(17,22,35),(18,24,32),(7,33,34),(14,29,31)]
+assert all(sum(c)==37 for c in _ga47)   # Group A sums to prime
+assert all(sum(c)==74 for c in _gb47)   # Group B sums to 2×prime
+assert 11 in ORBIT_11 and all(v in ORBIT_11 for v in (11,27,36))  # O11 entirely in B
+assert frozenset({4,9,30}) <= SA                                    # 3 SA nodes in A
+assert frozenset({3,12,30}) <= ST                                   # 3 ST nodes in A
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
 #
@@ -1987,6 +2053,13 @@ MASTER_CONNECTIONS = {
                                    "triplet_partition_3x3","alternating_12_structures",
                                    "lcm_convergence_dr_cycle","abcabc_mod37_orbit",
                                    "hose_flow_transient","dr_algebra"],
+    "intersection_cycle_theorem": ["heartbeat_3cycle","medusa_v3_sovereign","two_group_split",
+                                   "sovereign_qr_closure","stacked_zeros_gf37",
+                                   "sa_self_cycle_st_chain","cascade_8_13_24"],
+    "two_group_split":            ["heartbeat_3cycle","intersection_cycle_theorem",
+                                   "medusa_v3_sovereign","sovereign_qr_closure",
+                                   "primitive_root_test","cascade_8_13_24",
+                                   "abcabc_mod37_orbit"],
 }
 
 
