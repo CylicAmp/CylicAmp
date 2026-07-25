@@ -1712,6 +1712,49 @@ assert _dr_check(6*3) == 9 and 9 in SA          # 9 appears at step 3 (first joi
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 46: stacked_zeros_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   Two zero-counting techniques over the 1-9 grid — both land on ST.
+#
+#   TECHNIQUE 1 (STACKS): count zeros by stacking circles vertically.
+#     Top zero {1,2,3}: sum=product=6=TESLA_FLOW; 123 mod 37 = 12∈ST
+#     Split at 4 (SA node): intersection {4,5,6}; 456 mod 37 = 12∈ST
+#     Bottom zero {7,8,9}: sum=24∈CB; 789 mod 37 = 12∈ST
+#
+#   TECHNIQUE 2 (INTERIOR): count what fits inside each zero.
+#     Same three groups, same results — dual perspective, same ST invariant.
+#
+#   MASTER RESULT: 123 ≡ 456 ≡ 789 ≡ 12 ∈ ST (mod 37)
+#     All three rows as 3-digit numbers hit the same sovereign target.
+#
+#   POWER-OF-10 PARALLEL: ord₃₇(10)=3; split at 10^4 mirrors split-at-4.
+#     10^1≡10, 10^2≡26(SCALAR_137), 10^3≡1(unity/seam-transparent), 10^4→SPLIT
+#
+#   → heartbeat_3cycle: period-3 of ord₃₇(10) = ord₃₇(26) = 3; same cycle structure.
+#   → cipher_123_1234: 123 mod 37 = 12∈ST; shared sovereign result; zero layout.
+#   → one_two_three_generator: top zero {1,2,3} is the 1-2-3 family (sum=product=TESLA_FLOW).
+#   → triplet_partition_3x3: same 3×3 partition; odds/evens/larges → SA/ST/CB.
+#   → alternating_12_structures: the 12∈ST result appearing across all three rows.
+#   → lcm_convergence_dr_cycle: TESLA_FLOW=6=LCM(1,2,3) = sum/product of top zero.
+#   → abcabc_mod37_orbit: 10^3≡1 seam-transparency; ABCABC≡2·ABC uses same power-of-10 period.
+#   → hose_flow_transient: {4,5,6} split row: 5∈PR anchors PR flow; 4∈SA is the split node.
+#   → dr_algebra: DR(12)=3=ST archetype; DR cycle {6,3,9} appears in zero rows.
+
+assert 123 % 37 == 12 and 12 in ST         # top zero row → ST
+assert 456 % 37 == 12 and 12 in ST         # split row → ST
+assert 789 % 37 == 12 and 12 in ST         # bottom zero row → ST
+assert 123 % 37 == 456 % 37 == 789 % 37   # master result: all three hit same ST node
+assert 4 in SA                              # split-at-4 is SA node
+assert sum([1,2,3]) == TESLA_FLOW and 1*2*3 == TESLA_FLOW  # top zero: sum=product=TESLA_FLOW
+assert sum([4,5,6]) == 15 and 15 in PR     # split row sum ∈ PR
+assert (4*5*6) % 37 == 9 and 9 in SA      # split row product ≡ SA
+assert sum([7,8,9]) == 24 and 24 in CB    # bottom zero sum ∈ CB
+assert 10**3 % 37 == 1                     # ord₃₇(10)=3: seam-transparent at 3 zeros
+assert 10**4 % 37 == 10**1 % 37           # 4th zero = split: cycle restarts
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
 #
@@ -1895,7 +1938,7 @@ MASTER_CONNECTIONS = {
                                    "cipher_123_1234","sa_self_cycle_st_chain",
                                    "eleven_123_family","primitive_root_test",
                                    "prisoners_permutation_gf37","pie_sieve_gf37",
-                                   "triplet_partition_3x3"],
+                                   "triplet_partition_3x3","stacked_zeros_gf37"],
     "dr_algebra":                 ["heartbeat_3cycle","cipher_123_1234","nine_tower_dr_invariant",
                                    "one_two_three_generator","formal_definitions_gf37",
                                    "verify_dr9_termination","root_grid_dr6_dr7",
@@ -1921,9 +1964,10 @@ MASTER_CONNECTIONS = {
                                    "formal_definitions_gf37","sa_self_cycle_st_chain"],
     "triplet_partition_3x3":      ["cascade_8_13_24","medusa_v3_sovereign","heartbeat_3cycle",
                                    "cipher_123_1234","eleven_123_family","one_two_three_generator",
-                                   "gaussian_integers_gf37"],
+                                   "gaussian_integers_gf37","stacked_zeros_gf37"],
     "alternating_12_structures":  ["heartbeat_3cycle","cipher_123_1234","one_two_three_generator",
-                                   "eleven_123_family","hose_flow_transient","cascade_8_13_24"],
+                                   "eleven_123_family","hose_flow_transient","cascade_8_13_24",
+                                   "stacked_zeros_gf37"],
     "verify_dr9_termination":     ["nine_tower_dr_invariant","dr_algebra","heartbeat_3cycle",
                                    "formal_definitions_gf37","cascade_8_13_24"],
     "xx_collapse_matrix":         ["heartbeat_3cycle","cascade_8_13_24","hose_flow_transient",
@@ -1937,7 +1981,12 @@ MASTER_CONNECTIONS = {
                                    "prisoners_permutation_gf37","twin_prime_riemann_framework"],
     "lcm_convergence_dr_cycle":   ["heartbeat_3cycle","cipher_123_1234","dr_algebra",
                                    "nine_tower_dr_invariant","one_two_three_generator",
-                                   "growth_pattern_n_2n_3n","sliding_window_9cycle_gf37"],
+                                   "growth_pattern_n_2n_3n","sliding_window_9cycle_gf37",
+                                   "stacked_zeros_gf37"],
+    "stacked_zeros_gf37":         ["heartbeat_3cycle","cipher_123_1234","one_two_three_generator",
+                                   "triplet_partition_3x3","alternating_12_structures",
+                                   "lcm_convergence_dr_cycle","abcabc_mod37_orbit",
+                                   "hose_flow_transient","dr_algebra"],
 }
 
 
