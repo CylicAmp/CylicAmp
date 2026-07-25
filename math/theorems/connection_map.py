@@ -1359,6 +1359,359 @@ assert 123 % 37 == 12 and 12 in ST              # 123 ≡ 12 ∈ ST
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 31: dr_algebra.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   The 9×9 = 81-entry Cayley table of (Z/9Z, +).
+#   Generators = {1,2,4,5,7,8} = the doubling orbit = non-trinity elements.
+#   Non-generators = {3,6,9} = subgroup <3> = the trinity trap.
+#   DR as group homomorphism: Z → Z/9Z; period = 9.
+#
+#   → heartbeat_3cycle: ord₃₇(26)=3; the 3-cycle is inside the trinity trap.
+#   → cipher_123_1234: trinity {3,6,9} = the non-generating subgroup of Z/9Z.
+#   → nine_tower_dr_invariant: DR(9^k)=9; 9 is the fixed point of Z/9Z.
+#   → one_two_three_generator: generators {1,2,4,5,7,8}; {1,2,3} spans both.
+#   → formal_definitions_gf37: DR group structure is the formal definition.
+#   → verify_dr9_termination: 9×9 cyclic grid row-DRs all=9 (uses Cayley structure).
+#   → root_grid_dr6_dr7: span=81=9² is a consequence of Z/9Z periodicity.
+
+def _dr_check(n): return (n-1)%9+1 if n>0 else 0
+# Z/9Z: 9 is the identity (acts as 0); generators span the whole group
+_gen_orbit = set()
+_x = 1
+for _i in range(6): _gen_orbit.add(_x); _x = _dr_check(2*_x)
+assert _gen_orbit == {1,2,4,5,7,8}            # doubling orbit = generators
+_sub3 = {9}
+_x = 3
+while _x not in _sub3: _sub3.add(_x); _x = _dr_check(_x+3)
+assert _sub3 == {3,6,9}                        # subgroup <3> = trinity trap
+assert 81 == 9**2                              # 9×9 = 81 table entries
+assert 81 % 37 == 7                            # 81 ≡ 7 mod 37
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 32: dr_ring_homomorphism_emirp_palindrome.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   DR is a RING homomorphism Z → Z/9Z: DR(a×b)=DR(DR(a)×DR(b)).
+#   Emirp pairs (p, rev(p)) collapse to a SINGLE point in DR space.
+#   Palindromic primes >3 have DR ∈ {1,2,4,5,7,8} — sovereign-free.
+#   Three independent filters: Z/9Z (palindromes), Z/37Z (reversals), Z/3Z (columns).
+#
+#   → heartbeat_3cycle: DR(9×9)=DR(81)=9∈SA; ring homomorphism preserves SA.
+#   → twin_prime_gf37: emirp DR-blind; Z=+2.93 enrichment at r=8 visible only in Z/37Z.
+#   → medusa_v3_sovereign: palindromic primes avoid DR∈{3,6,9}; sovereign-free.
+#   → gaussian_integers_gf37: the three filters (Z/9Z, Z/37Z, Z/3Z) are orthogonal.
+#   → dr_algebra: ring homomorphism extends the group homomorphism of Z/9Z.
+#   → twin_prime_riemann_framework: emirp enrichment at r=8; chi_{-3} column structure.
+#   → cipher_123_1234: trinity {3,6,9} = the excluded DR set for palindromic primes.
+
+assert _dr_check(9*9) == _dr_check(81) == 9   # DR ring: 9×9→9∈SA
+assert _dr_check(17*23) == _dr_check(_dr_check(17)*_dr_check(23))  # multiplicative
+assert _dr_check(37+73) == _dr_check(_dr_check(37)+_dr_check(73))  # additive
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 33: root_grid_dr6_dr7.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   For every DR class d (1–9): span of 2-digit members = 81 = 9².
+#   Logic Reduction = 2 × digit_sum (LR formula).
+#   Universal property: the 9² span holds for ALL nine DR classes.
+#
+#   → dr_algebra: 81=9² span is the spatial footprint of Z/9Z in 2-digit space.
+#   → nine_tower_dr_invariant: 9² as the universal span — the 9-squared invariant.
+#   → dr_ring_homomorphism_emirp_palindrome: 2-digit DR mapping; ring structure.
+#   → cipher_123_1234: DR classes 1–9 partition {10..99} exactly.
+
+_two_digit_span_ok = all(
+    max(n for n in range(10,100) if _dr_check(n)==d) -
+    min(n for n in range(10,100) if _dr_check(n)==d) == 81
+    for d in range(1,10)
+)
+assert _two_digit_span_ok                      # span=81=9² for all DR classes
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 34: growth_pattern_n_2n_3n.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   Row n: values n, 2n, 3n. GF(37) period = 37. DR period = 9.
+#   LCM(9, 37) = 333 — the full cycle for both periods simultaneously.
+#   Row 37: n=37, 2n=74, 3n=111 — ALL THREE ≡ 0 (SEAM).
+#   Row 13: n≡13∈CB, 2n≡26=SCALAR_137, 3n≡2∈PR.
+#
+#   → heartbeat_3cycle: period-37 in GF(37); row 37 hits seam simultaneously.
+#   → cascade_8_13_24: row 13: n≡13∈CB, 2n≡SCALAR_137, 3n≡2∈PR.
+#   → hose_flow_transient: row 37 hits seam (complete flow); 3n=111=3×37≡0.
+#   → abcabc_mod37_orbit: ABCABC=2·ABC uses the 3n→2n structure.
+#   → formal_definitions_gf37: DR period=9, GF(37) period=37; LCM=333.
+#   → dr_algebra: LCM(9,37)=333 = the meeting of Z/9Z and GF(37) cycles.
+
+from math import lcm as _lcm
+assert _lcm(9,37) == 333                       # full cycle = LCM of both periods
+assert 37%37==0 and 74%37==0 and 111%37==0    # row 37: all three hit SEAM
+assert 13%37==13 and 13 in CB                  # row 13: n∈CB
+assert 26%37==SCALAR_137                       # row 13: 2n≡SCALAR_137
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 35: twin_prime_riemann_framework.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   χ₋₃(6n) = 0 at every twin prime midpoint — FORCED zero, structural.
+#   The twin prime constellation (-1, 0, +1) is locked: zero exceptions possible.
+#   Im(ρ₆) ≈ 37.5862 — the 6th non-trivial Riemann zero is GF(37)+0.59.
+#   CDT theorem (arXiv:2408.15403): L(2,χ₋₃) ≠ 0 proven; s=1 gap remains open.
+#   Three orthogonal non-uniformity signals sharing modulus 37.
+#
+#   → twin_prime_gf37: chi_{-3} structure is the underlying reason for twin prime mod-37 shape.
+#   → heartbeat_3cycle: midpoints 6n; every 6n≡0 mod 3; χ₋₃=0 at sovereign midpoints.
+#   → sieve_eratosthenes_gf37: all primes >3 are 6n±1; sieve forces the structure.
+#   → sovereign_qr_closure: forbidden residues r=1,36 at midpoints; QR classification.
+#   → medusa_v3_sovereign: r=36∈ORBIT_11; forbidden residues connect to sovereign nodes.
+#   → dr_ring_homomorphism_emirp_palindrome: emirp enrichment; chi_{-3} column structure.
+#   → ulam_spiral: prime distribution in spiral; orbit prime counts by GF(37) class.
+
+assert (6*1)%3 == 0                            # midpoint 6n always ≡0 mod 3
+assert 37*1 % 37 == 0                          # r=37 is SEAM
+assert 36 in ORBIT_11                          # forbidden r=36 is orbit-11
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 36: cycle_partition_37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   The 12 three-cycles of f=26n partition into Group A (node-sum=37≡0, 6 cycles)
+#   and Group B (node-sum=74≡0, 6 cycles). Both sums are multiples of 37 — SEAM.
+#   ORBIT_11={11,27,36} and SEED_ORBIT={18,24,32} are both Group B (sum=74≡0).
+#   Proof: for any cycle {n, 26n mod 37, 10n mod 37}: sum = 37k for k∈{1,2}.
+#
+#   → heartbeat_3cycle: these ARE the 12 three-cycles; partition classifies them.
+#   → cascade_8_13_24: SEED_ORBIT={18,24,32} is Group B (24∈CB); sum=74≡0.
+#   → eleven_123_family: ORBIT_11={11,27,36} is Group B; 11+27+36=74≡0.
+#   → primitive_root_test: ord₃₇(26)=3; all cycles have length 3.
+#   → abcabc_mod37_orbit: 26n structure; 1+26+10=37≡0 is the cycle-sum proof.
+#   → lob_26_collatz_f37: Collatz cycles [1,3,9] vs 3-cycles of 137-map; zero fixed points.
+
+assert (1+26+10) % 37 == 0                     # cycle multipliers sum to 0 mod 37
+assert (11+27+36) % 37 == 0                    # ORBIT_11 sum = 74 ≡ 0
+assert (18+24+32) % 37 == 0                    # SEED_ORBIT sum = 74 ≡ 0
+assert 74 % 37 == 0 and 37 % 37 == 0          # both group sums are SEAM
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 37: pie_sieve_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   PIE (Inclusion-Exclusion) sieve for π(100): opens at SA(25), closes at SA(25).
+#   PIE running totals trace SA→PR→orbit-11→ST→SA through the field.
+#   ⌊100/210⌋=0: PIE drops to ZERO at size 4 — seam encounter.
+#   All 15 subset products of {2,3,5,7} land on named framework nodes.
+#   S1=S3=TESLA_FLOW=6; the alternating PIE levels share the same residue.
+#
+#   → sieve_eratosthenes_gf37: PIE is inclusion-exclusion alternative to iteration sieve.
+#   → prisoners_permutation_gf37: both give π(100)=25∈SA by different counting methods.
+#   → cascade_8_13_24: subset product 2×3×5=30∈SA∩ST; product 2×5=10=DECADE_ANCHOR.
+#   → medusa_v3_sovereign: PIE opens and closes on SA=25; running sum traces sovereign nodes.
+#   → one_two_three_generator: PIE S3 order=6=TESLA_FLOW=1+2+3=1×2×3.
+#   → hose_flow_transient: PIE drops to zero (SEAM) at size-4 term.
+
+assert (100//210) == 0                         # PIE contribution = SEAM at size 4
+_pie_products = {2,3,5,7,6,10,14,15,21,35,30,42,70,105,210}
+assert (2*3*5*7) % 37 == 25 and 25 in SA      # full product = SA
+assert (2*3*5) % 37 == 30 and 30 in SA        # 3-product = SA∩ST
+assert (2*5) % 37 == 10 and 10 == DECADE_ANCHOR  # 2-product = DECADE_ANCHOR
+assert (3*5*7) % 37 == 31 and 31 == PRIME_MIRROR  # 3-product = PRIME_MIRROR
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 38: lob_26_collatz_f37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   The Collatz map T restricted to F₃₇:
+#     T(x) = 19x mod 37  (x even, since 2⁻¹≡19)
+#     T(x) = 3x+1 mod 37 (x odd)
+#   Exactly 3 cycles: {0} (fixed point=SEAM, len 1), {1→4→2} (len 3), {long cycle} (len 9).
+#   Cycle lengths [1,3,9] = unity, ST-arch, SA.
+#   13 elements in cycles; 24 basin nodes (24∈CB).
+#
+#   → heartbeat_3cycle: cycle lengths [1,3,9]; the 3-cycle {1→4→2} contains 4∈SA.
+#   → cycle_partition_37: cycle counting in F₃₇; fixed point at {0}=SEAM.
+#   → cascade_8_13_24: exactly 24 basin nodes and 24∈CB.
+#   → formal_definitions_gf37: SEAM as fixed point (T(0)=0); annihilation at 0.
+#   → sa_self_cycle_st_chain: {1→4→2}: SA node 4 is in the length-3 cycle.
+
+assert (2*19)%37 == 1                          # 2⁻¹≡19 mod 37
+_T = lambda x: (x*19)%37 if x%2==0 else (3*x+1)%37
+assert _T(0) == 0                              # SEAM is fixed point
+assert _T(1)==4 and _T(4)==2 and _T(2)==1     # {1→4→2} 3-cycle (4∈SA)
+assert 4 in SA                                 # SA node in 3-cycle
+# basin nodes: 37 - 13 cycle elements = 24
+assert 37 - (1+3+9) == 24 and 24 in CB       # 24 basin nodes ∈ CB
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 39: triplet_partition_3x3.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   {1..9} has 280 unordered 3-block partitions; 14 have all sums in framework nodes.
+#   Target partition: {1,3,5}→9∈SA (ALL ODD), {2,4,6}→12∈ST (ALL EVEN), {7,8,9}→24∈CB.
+#   ODDS → SA, EVENS → ST, LARGES → CB: one node from each primary class.
+#   14 framework partitions fall into 4 types: {8,13,24}=CB, {9,12,24}, {11,13,21}, {12,12,21}.
+#
+#   → cascade_8_13_24: Type I sums={8,13,24}=CB exactly; CB appears as partition sum type.
+#   → medusa_v3_sovereign: {9,12,24}=SA+ST+CB; all three anchor classes in one partition.
+#   → heartbeat_3cycle: 14/280=1/20; 14=2×7; framework partitions via 137-orbit structure.
+#   → cipher_123_1234: odds {1,3,5}→9∈SA; evens {2,4,6}→12∈ST; trinity/doubling split.
+#   → eleven_123_family: Type III sums={11,13,21}=ORBIT_11+CB+ST; orbit-11 in partition.
+#   → one_two_three_generator: {1,3,5} odds sum=9∈SA; {2,4,6} evens sum=12∈ST; parity→class.
+#   → gaussian_integers_gf37: prod({2,4,6})=48≡11∈ORBIT_11; Gaussian norm connection.
+
+assert sum([1,3,5]) == 9 and 9 in SA          # odds → SA
+assert sum([2,4,6]) == 12 and 12 in ST        # evens → ST
+assert sum([7,8,9]) == 24 and 24 in CB        # larges → CB
+assert (2*4*6) % 37 == 11 and 11 in ORBIT_11 # even product → ORBIT_11
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 40: alternating_12_structures.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   Sequences alternating digits 1 and 2: seq1 (121212...) and seq2 (212121...).
+#   Both sequences hit SEAM (≡0 mod 37) at digit-lengths 6,12,18... (multiples of 6).
+#   Both orbits contain 12∈ST. seq2 orbit contains 27∈ORBIT_11 and 11∈ORBIT_11.
+#   1221≡0 (SEAM); 2112≡3∈ST; 9+9+9=27→ORBIT_11 via digit cascade.
+#
+#   → heartbeat_3cycle: period-6 seam hits = 2×ord₃₇(26); 12∈ST in both orbits.
+#   → cipher_123_1234: alternating 1-2 are the first two members of {1,2,3}; 12∈ST shared.
+#   → one_two_three_generator: seed digits 1 and 2; the 2+1=3 equation initiates the family.
+#   → eleven_123_family: seq2 orbit contains {27,11}⊂ORBIT_11; 9+9+9=27→orbit-11.
+#   → hose_flow_transient: 1221≡0=SEAM arrival; 1221=1×37×33=seam multiple.
+#   → cascade_8_13_24: 2112≡3∈ST; 3 is the ST archetype (DR=3).
+
+assert 1221 % 37 == 0                          # 1221 ≡ 0 = SEAM
+assert 2112 % 37 == 3 and 3 in ST             # 2112 ≡ 3 ∈ ST
+assert (9+9+9) == 27 and 27 in ORBIT_11       # 9+9+9=27∈ORBIT_11
+_seq1_6 = int('121212')
+_seq2_6 = int('212121')
+assert _seq1_6 % 37 == 0 and _seq2_6 % 37 == 0  # both hit SEAM at length 6
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 41: verify_dr9_termination.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   The 9×9 cyclic grid (rows = cyclic shifts of [1..9]) has ALL row sums = 45, DR=9.
+#   The DR=9 invariant is stable under cyclic shifts — a well-founded termination metric.
+#   Deviation sequence [1,3,7,9,9,1,3,7]: final DR=7; finite state space = 48 = 2×24.
+#
+#   → nine_tower_dr_invariant: DR=9 invariant; 9 is the fixed point of Z/9Z.
+#   → dr_algebra: 9×9 cyclic grid rows ARE the Z/9Z Cayley table rows; row-DR=9.
+#   → heartbeat_3cycle: deviation DR sequence [1,3,7,9,...] contains ST arches.
+#   → formal_definitions_gf37: well-founded DR termination metric is a formal property.
+#   → cascade_8_13_24: 48 finite states = 2×24; 24∈CB.
+
+assert sum(range(1,10)) == 45                  # row sum of [1..9] = 45
+assert _dr_check(45) == 9                      # DR(45) = 9 — row invariant
+assert 48 == 2 * 24 and 24 in CB              # 48 states = 2×24∈CB
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 42: xx_collapse_matrix.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   Matrix of 1s and 9s encoding the 119/911 sovereign-shield duality.
+#   119 = 137 − 18: exhaust-phi class (137-map − SEED_ORBIT node).
+#   Row 3 ("191191191191"): exactly 3×"119" and 3×"911" — the order-3 heartbeat in string form.
+#   Rows 1–3: digit-sum=44, DR=8=AHL; Row 4 breaks pattern (entropy row).
+#   119 mod 37 = 8 ∈ CB.
+#
+#   → heartbeat_3cycle: row 3 has 3 of each substring — order-3 heartbeat is literal.
+#   → cascade_8_13_24: 119≡8∈CB; 119 is the cascade-base entry of the shield.
+#   → hose_flow_transient: 119=137−18; 137-map minus SEED_ORBIT node; exhaust class.
+#   → eleven_123_family: digit sum 44, DR=8; 11 is the complement of 26 in the matrix context.
+
+assert 119 % 37 == 8 and 8 in CB              # 119 ≡ 8 ∈ CB
+assert 137 - 18 == 119                         # 119 = 137-map − SEED_ORBIT node
+assert _dr_check(44) == 8                      # row digit-sum DR = AHL
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 43: perfect_496_dr_structure.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   496 = 2⁴ × 31 (third perfect number; Mersenne prime 31=2⁵−1).
+#   All 10 factors of 496 have DR ∈ {1,2,4,5,7,8} — sovereign-free.
+#   Mersenne orbit (DR values of 2^k−1, k=1..6): {1,3,7,6,4,9} — period 6.
+#   Doubling orbit ∩ Mersenne orbit = {1,4,7} = COL1 = chi_{-3}=+1 class.
+#   All perfect numbers after 6 have DR=1 (identity).
+#
+#   → heartbeat_3cycle: Mersenne orbit {1,3,7,6,4,9} has period 6=2×ord₃₇(26).
+#   → cipher_123_1234: Mersenne orbit contains all of trinity {3,6,9}; doubling orbit avoids it.
+#   → dr_ring_homomorphism_emirp_palindrome: perfect number DR pattern; DR ring invariant.
+#   → dr_algebra: Mersenne and doubling orbits are dual sequences in Z/9Z Cayley structure.
+#   → sovereign_qr_closure: 31∈PR; 16=4²∈SA-squared; QR structure of Mersenne factors.
+#   → nine_tower_dr_invariant: DR(2^k−1) shift rule; period 6 connects to 9-tower DR.
+#   → twin_prime_riemann_framework: intersection {1,4,7}=COL1=chi_{-3}=+1 class.
+
+assert 31 == 2**5 - 1                          # 31 is Mersenne prime
+assert 496 == 2**4 * 31                        # third perfect number
+_mersenne_drs = [_dr_check(2**k - 1) for k in range(1,7)]
+assert set(_mersenne_drs) == {1,3,4,6,7,9}    # Mersenne orbit covers both halves
+_doubling_drs = [_dr_check(2**k) for k in range(1,7)]
+assert set(_doubling_drs) == {1,2,4,5,7,8}    # doubling orbit = non-trinity generators
+assert set(_mersenne_drs) & set(_doubling_drs) == {1,4,7}  # intersection = COL1
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 44: ulam_spiral.py  (math/primes/ulam_spiral.py)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   The Ulam spiral mapped through the GF(37) framework.
+#   Each cell classified by: prime/composite, DR, residue mod 37, 137-orbit.
+#   SEED_ORBIT={18,24,32} has 6 primes in the spiral — the lowest orbit prime count.
+#   Orbit {5,19,13} has 12 primes — the richest orbit.
+#   Sovereign anchors {4,9,25,30} visible in spiral as low-prime-density nodes.
+#
+#   → heartbeat_3cycle: 137-orbit structure classifies every spiral cell into 12 orbits.
+#   → medusa_v3_sovereign: SA nodes {4,9,25,30} visible as composite-dense regions.
+#   → cascade_8_13_24: SEED_ORBIT={18,24,32} has lowest prime count (24∈CB).
+#   → sieve_eratosthenes_gf37: Ulam spiral is prime sieve made visual; same primes.
+#   → twin_prime_gf37: twin prime diagonals in the spiral; visual mod-37 structure.
+#   → prisoners_permutation_gf37: π(100)=25∈SA; spiral counts agree with prisoners result.
+#   → twin_prime_riemann_framework: prime distribution in spiral; chi_{-3} column structure.
+
+assert (26*18)%37 == 24 and (26*24)%37 == 32 and (26*32)%37 == 18  # SEED_ORBIT is 3-cycle
+assert 18 in CB or 24 in CB                    # orbit contains CB node 24
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 45: lcm_convergence_dr_cycle.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   LCM(1,2,3)=6; LCM(1,2,3,9)=18. The DR cycle of 6n is {6,3,9} — period 3.
+#   9 (odd) joins the 1-2-3 group only at multiples of 18 (every 3rd step of 6n)
+#   because 9 is odd and the group requires divisibility by 2.
+#   The period-3 DR cycle {6,3,9} = the TESLA_FLOW→ST_arch→SA fixed point.
+#
+#   → heartbeat_3cycle: DR cycle of 6n has period 3 = ord₃₇(26); both are 3-cycles.
+#   → cipher_123_1234: {3,6,9} is the trinity subgroup of Z/9Z; LCM encodes its period.
+#   → dr_algebra: the {6,3,9} cycle is the orbit of TESLA_FLOW=6 under DR-addition by 6.
+#   → nine_tower_dr_invariant: 9 is the fixed point; it enters the LCM cycle at step 3.
+#   → one_two_three_generator: LCM(1,2,3)=6=TESLA_FLOW; the 1-2-3 group meets at 6.
+#   → growth_pattern_n_2n_3n: 6n row sequence; LCM period connects to n/2n/3n periods.
+#   → sliding_window_9cycle_gf37: sliding window DR cycle = {3,6,9}; same trinity period.
+
+from math import lcm as _lcm2
+assert _lcm2(1,2,3) == 6 and 6 == TESLA_FLOW   # 1-2-3 group meets at TESLA_FLOW
+assert _lcm2(1,2,3,9) == 18                     # 9 joins at 18 (3 steps of 6n)
+_dr6n_cycle = [_dr_check(6*i) for i in range(1,4)]
+assert _dr6n_cycle == [6,3,9]                   # DR cycle: TESLA_FLOW→ST_arch→SA
+assert _dr_check(6*3) == 9 and 9 in SA          # 9 appears at step 3 (first join)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
 #
@@ -1416,46 +1769,63 @@ MASTER_CONNECTIONS = {
                                    "sa_self_cycle_st_chain","nine_tower_dr_invariant",
                                    "formal_definitions_gf37","prisoners_permutation_gf37",
                                    "lights_out_gf2_gf37","gaussian_integers_gf37",
-                                   "burau_braid_gf37","wallis_product_gf37"],
+                                   "burau_braid_gf37","wallis_product_gf37",
+                                   "cycle_partition_37","triplet_partition_3x3",
+                                   "alternating_12_structures","verify_dr9_termination",
+                                   "xx_collapse_matrix","twin_prime_riemann_framework",
+                                   "pie_sieve_gf37","lob_26_collatz_f37",
+                                   "dr_algebra","growth_pattern_n_2n_3n",
+                                   "perfect_496_dr_structure","ulam_spiral"],
     "abcabc_mod37_orbit":         ["heartbeat_3cycle","cascade_8_13_24","primitive_root_test",
                                    "cipher_123_1234","lucas_abbc_chain","repunit_sq_euler_phi_gf37",
-                                   "seq_146_257_368_gf37"],
+                                   "seq_146_257_368_gf37","cycle_partition_37","growth_pattern_n_2n_3n"],
     "cascade_8_13_24":            ["heartbeat_3cycle","abcabc_mod37_orbit","cipher_123_1234",
                                    "sieve_eratosthenes_gf37","sliding_window_9cycle_gf37",
                                    "polymath8_maynard_gf37","twin_prime_gf37",
                                    "repunit_sq_euler_phi_gf37","plus2_chain_theorem",
                                    "hose_flow_transient","nine_tower_dr_invariant",
                                    "prisoners_permutation_gf37","permutation_132_bipartite_gf37",
-                                   "gaussian_integers_gf37","wallis_product_gf37"],
+                                   "gaussian_integers_gf37","wallis_product_gf37",
+                                   "cycle_partition_37","triplet_partition_3x3",
+                                   "pie_sieve_gf37","lob_26_collatz_f37",
+                                   "growth_pattern_n_2n_3n","ulam_spiral","xx_collapse_matrix"],
     "medusa_v3_sovereign":        ["sovereign_qr_closure","heartbeat_3cycle","sieve_eratosthenes_gf37",
                                    "sliding_window_9cycle_gf37","plus2_chain_theorem",
                                    "sa_self_cycle_st_chain","twin_prime_gf37","goldbach_gf37",
                                    "repunit_sq_euler_phi_gf37","gaussian_integers_gf37",
-                                   "burau_braid_gf37","wallis_product_gf37"],
+                                   "burau_braid_gf37","wallis_product_gf37",
+                                   "twin_prime_riemann_framework","triplet_partition_3x3",
+                                   "pie_sieve_gf37","ulam_spiral","dr_ring_homomorphism_emirp_palindrome"],
     "sovereign_qr_closure":       ["heartbeat_3cycle","medusa_v3_sovereign","abcabc_mod37_orbit",
-                                   "goldbach_gf37","twin_prime_gf37","repunit_sq_euler_phi_gf37"],
+                                   "goldbach_gf37","twin_prime_gf37","repunit_sq_euler_phi_gf37",
+                                   "twin_prime_riemann_framework","perfect_496_dr_structure"],
     "lucas_abbc_chain":           ["cascade_8_13_24","medusa_v3_sovereign","heartbeat_3cycle",
                                    "plus2_chain_theorem","abcabc_mod37_orbit",
                                    "scaling_sequences_gf37"],
     "cipher_123_1234":            ["cascade_8_13_24","sa_self_cycle_st_chain","hose_flow_transient",
                                    "sliding_window_9cycle_gf37","heartbeat_3cycle",
-                                   "eleven_123_family","one_two_three_generator"],
+                                   "eleven_123_family","one_two_three_generator",
+                                   "alternating_12_structures","triplet_partition_3x3",
+                                   "dr_algebra","perfect_496_dr_structure"],
     "hose_flow_transient":        ["sieve_eratosthenes_gf37","goldbach_gf37","twin_prime_gf37",
                                    "cascade_8_13_24","heartbeat_3cycle","sa_self_cycle_st_chain",
                                    "repunit_sq_euler_phi_gf37","polymath8_maynard_gf37",
                                    "formal_definitions_gf37","prisoners_permutation_gf37",
-                                   "lights_out_gf2_gf37"],
+                                   "lights_out_gf2_gf37","growth_pattern_n_2n_3n",
+                                   "pie_sieve_gf37","alternating_12_structures","xx_collapse_matrix"],
     "sieve_eratosthenes_gf37":    ["medusa_v3_sovereign","cascade_8_13_24","heartbeat_3cycle",
                                    "hose_flow_transient","sliding_window_9cycle_gf37",
                                    "goldbach_proof_attempt_gf37","formal_definitions_gf37",
-                                   "prisoners_permutation_gf37"],
+                                   "prisoners_permutation_gf37","twin_prime_riemann_framework",
+                                   "pie_sieve_gf37","ulam_spiral"],
     "goldbach_gf37":              ["hose_flow_transient","heartbeat_3cycle","medusa_v3_sovereign",
-                                   "twin_prime_gf37","cascade_8_13_24"],
+                                   "twin_prime_gf37","cascade_8_13_24","goldbach_proof_attempt_gf37"],
     "goldbach_proof_attempt_gf37":["sovereign_qr_closure","heartbeat_3cycle","goldbach_gf37",
-                                   "primitive_root_test","sieve_eratosthenes_gf37"],
+                                   "primitive_root_test","sieve_eratosthenes_gf37","twin_prime_gf37"],
     "twin_prime_gf37":            ["heartbeat_3cycle","hose_flow_transient","medusa_v3_sovereign",
                                    "polymath8_maynard_gf37","sovereign_qr_closure",
-                                   "seq_146_257_368_gf37","goldbach_gf37","plus2_chain_theorem"],
+                                   "seq_146_257_368_gf37","goldbach_gf37","plus2_chain_theorem",
+                                   "twin_prime_riemann_framework","ulam_spiral"],
     "repunit_sq_euler_phi_gf37":  ["heartbeat_3cycle","cascade_8_13_24","medusa_v3_sovereign",
                                    "goldbach_gf37","abcabc_mod37_orbit","hose_flow_transient",
                                    "formal_definitions_gf37","lights_out_gf2_gf37",
@@ -1463,29 +1833,39 @@ MASTER_CONNECTIONS = {
     "polymath8_maynard_gf37":     ["hose_flow_transient","cascade_8_13_24","twin_prime_gf37",
                                    "medusa_v3_sovereign","seq_146_257_368_gf37"],
     "seq_146_257_368_gf37":       ["hose_flow_transient","twin_prime_gf37",
-                                   "polymath8_maynard_gf37","abcabc_mod37_orbit"],
+                                   "polymath8_maynard_gf37","abcabc_mod37_orbit",
+                                   "heartbeat_3cycle","cascade_8_13_24","medusa_v3_sovereign",
+                                   "primitive_root_test","eleven_123_family",
+                                   "sliding_window_9cycle_gf37"],
     "sliding_window_9cycle_gf37": ["cipher_123_1234","hose_flow_transient","cascade_8_13_24",
-                                   "medusa_v3_sovereign","sa_self_cycle_st_chain"],
+                                   "medusa_v3_sovereign","sa_self_cycle_st_chain",
+                                   "heartbeat_3cycle","nine_tower_dr_invariant",
+                                   "seq_146_257_368_gf37","lcm_convergence_dr_cycle"],
     "sa_self_cycle_st_chain":     ["heartbeat_3cycle","medusa_v3_sovereign","hose_flow_transient",
                                    "abcabc_mod37_orbit","cipher_123_1234",
                                    "gaussian_integers_gf37","burau_braid_gf37",
-                                   "wallis_product_gf37"],
+                                   "wallis_product_gf37","lob_26_collatz_f37","triplet_partition_3x3"],
     "plus2_chain_theorem":        ["twin_prime_gf37","medusa_v3_sovereign","lucas_abbc_chain",
-                                   "cascade_8_13_24"],
+                                   "cascade_8_13_24","heartbeat_3cycle","eleven_123_family",
+                                   "cipher_123_1234","sieve_eratosthenes_gf37","sovereign_qr_closure"],
     "primitive_root_test":        ["abcabc_mod37_orbit","goldbach_proof_attempt_gf37",
                                    "cascade_8_13_24","sovereign_qr_closure",
-                                   "nine_tower_dr_invariant","burau_braid_gf37"],
+                                   "nine_tower_dr_invariant","burau_braid_gf37","cycle_partition_37"],
     "nine_tower_dr_invariant":    ["heartbeat_3cycle","formal_definitions_gf37","cascade_8_13_24",
                                    "sa_self_cycle_st_chain","primitive_root_test",
-                                   "scaling_sequences_gf37"],
+                                   "scaling_sequences_gf37","verify_dr9_termination",
+                                   "dr_algebra","root_grid_dr6_dr7"],
     "formal_definitions_gf37":    ["heartbeat_3cycle","nine_tower_dr_invariant","hose_flow_transient",
                                    "repunit_sq_euler_phi_gf37","lights_out_gf2_gf37",
-                                   "sieve_eratosthenes_gf37"],
+                                   "sieve_eratosthenes_gf37","growth_pattern_n_2n_3n",
+                                   "verify_dr9_termination","lob_26_collatz_f37"],
     "scaling_sequences_gf37":     ["lucas_abbc_chain","cascade_8_13_24","heartbeat_3cycle",
-                                   "nine_tower_dr_invariant","prisoners_permutation_gf37"],
+                                   "nine_tower_dr_invariant","prisoners_permutation_gf37",
+                                   "repunit_sq_euler_phi_gf37","formal_definitions_gf37"],
     "prisoners_permutation_gf37": ["sieve_eratosthenes_gf37","cascade_8_13_24","heartbeat_3cycle",
                                    "permutation_132_bipartite_gf37","lights_out_gf2_gf37",
-                                   "hose_flow_transient","scaling_sequences_gf37"],
+                                   "hose_flow_transient","scaling_sequences_gf37",
+                                   "pie_sieve_gf37","ulam_spiral"],
     "permutation_132_bipartite_gf37":["prisoners_permutation_gf37","lights_out_gf2_gf37",
                                    "heartbeat_3cycle","cascade_8_13_24",
                                    "gaussian_integers_gf37","wallis_product_gf37",
@@ -1508,11 +1888,56 @@ MASTER_CONNECTIONS = {
                                    "sa_self_cycle_st_chain"],
     "eleven_123_family":          ["heartbeat_3cycle","cascade_8_13_24","cipher_123_1234",
                                    "gaussian_integers_gf37","wallis_product_gf37",
-                                   "hose_flow_transient","one_two_three_generator"],
+                                   "hose_flow_transient","one_two_three_generator",
+                                   "cycle_partition_37","triplet_partition_3x3",
+                                   "alternating_12_structures"],
     "one_two_three_generator":    ["heartbeat_3cycle","hose_flow_transient","cascade_8_13_24",
                                    "cipher_123_1234","sa_self_cycle_st_chain",
                                    "eleven_123_family","primitive_root_test",
-                                   "prisoners_permutation_gf37"],
+                                   "prisoners_permutation_gf37","pie_sieve_gf37",
+                                   "triplet_partition_3x3"],
+    "dr_algebra":                 ["heartbeat_3cycle","cipher_123_1234","nine_tower_dr_invariant",
+                                   "one_two_three_generator","formal_definitions_gf37",
+                                   "verify_dr9_termination","root_grid_dr6_dr7",
+                                   "dr_ring_homomorphism_emirp_palindrome","growth_pattern_n_2n_3n",
+                                   "perfect_496_dr_structure","lcm_convergence_dr_cycle"],
+    "dr_ring_homomorphism_emirp_palindrome":["heartbeat_3cycle","twin_prime_gf37",
+                                   "medusa_v3_sovereign","gaussian_integers_gf37",
+                                   "dr_algebra","twin_prime_riemann_framework","cipher_123_1234"],
+    "root_grid_dr6_dr7":          ["dr_algebra","nine_tower_dr_invariant",
+                                   "dr_ring_homomorphism_emirp_palindrome","cipher_123_1234"],
+    "growth_pattern_n_2n_3n":     ["heartbeat_3cycle","cascade_8_13_24","hose_flow_transient",
+                                   "abcabc_mod37_orbit","formal_definitions_gf37","dr_algebra"],
+    "twin_prime_riemann_framework":["twin_prime_gf37","heartbeat_3cycle",
+                                   "sieve_eratosthenes_gf37","sovereign_qr_closure",
+                                   "medusa_v3_sovereign","dr_ring_homomorphism_emirp_palindrome",
+                                   "ulam_spiral","perfect_496_dr_structure"],
+    "cycle_partition_37":         ["heartbeat_3cycle","cascade_8_13_24","eleven_123_family",
+                                   "primitive_root_test","abcabc_mod37_orbit","lob_26_collatz_f37"],
+    "pie_sieve_gf37":             ["sieve_eratosthenes_gf37","prisoners_permutation_gf37",
+                                   "cascade_8_13_24","medusa_v3_sovereign","one_two_three_generator",
+                                   "hose_flow_transient"],
+    "lob_26_collatz_f37":         ["heartbeat_3cycle","cycle_partition_37","cascade_8_13_24",
+                                   "formal_definitions_gf37","sa_self_cycle_st_chain"],
+    "triplet_partition_3x3":      ["cascade_8_13_24","medusa_v3_sovereign","heartbeat_3cycle",
+                                   "cipher_123_1234","eleven_123_family","one_two_three_generator",
+                                   "gaussian_integers_gf37"],
+    "alternating_12_structures":  ["heartbeat_3cycle","cipher_123_1234","one_two_three_generator",
+                                   "eleven_123_family","hose_flow_transient","cascade_8_13_24"],
+    "verify_dr9_termination":     ["nine_tower_dr_invariant","dr_algebra","heartbeat_3cycle",
+                                   "formal_definitions_gf37","cascade_8_13_24"],
+    "xx_collapse_matrix":         ["heartbeat_3cycle","cascade_8_13_24","hose_flow_transient",
+                                   "eleven_123_family"],
+    "perfect_496_dr_structure":   ["heartbeat_3cycle","cipher_123_1234",
+                                   "dr_ring_homomorphism_emirp_palindrome","dr_algebra",
+                                   "sovereign_qr_closure","nine_tower_dr_invariant",
+                                   "twin_prime_riemann_framework"],
+    "ulam_spiral":                ["heartbeat_3cycle","medusa_v3_sovereign","cascade_8_13_24",
+                                   "sieve_eratosthenes_gf37","twin_prime_gf37",
+                                   "prisoners_permutation_gf37","twin_prime_riemann_framework"],
+    "lcm_convergence_dr_cycle":   ["heartbeat_3cycle","cipher_123_1234","dr_algebra",
+                                   "nine_tower_dr_invariant","one_two_three_generator",
+                                   "growth_pattern_n_2n_3n","sliding_window_9cycle_gf37"],
 }
 
 
