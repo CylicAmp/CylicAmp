@@ -2683,6 +2683,41 @@ assert frozenset({3,12}).issubset(set(_QR62))  and frozenset({3,12}).isdisjoint(
 assert frozenset({4,9}).issubset(set(_NQR62))  and frozenset({4,9}).isdisjoint(set(_QR62))
 
 
+# ── THEOREM 63: primitive_root_invariants_gf37.py ─────────────────────────────
+#   12 primitive roots = 4 complete NQR orbits: DARK_A, {5,13,19}, {17,22,35}, SEED_ORBIT.
+#   Non-PR NQR orbits = {6,8,23}(TESLA_FLOW,ord4) and {14,29,31}(PRIME_MIRROR,ord4).
+#   Universal invariants: g^9∈{TESLA_FLOW,PRIME_MIRROR}; g^6∈ORBIT_11; g^12∈IC; g^18=36.
+#   2×2 table: (g^6=27,g^9=31)→DARK_A; (g^6=27,g^9=6)→{17,22,35};
+#              (g^6=11,g^9=31)→SEED_ORBIT; (g^6=11,g^9=6)→{5,13,19}.
+#   g^3 cross-map: g^9=PRIME_MIRROR → g^3∈{6,8,23}; g^9=TESLA_FLOW → g^3∈{14,29,31}.
+#   Subgroup chain: {1}<H=<26><QR<G; 12 orbits = cosets of H in G.
+#   Connections:
+#   → primitive_root_test: the 12 primitive roots identified and characterized.
+#   → sylow_subgroup_gf37: non-PR NQR contain Sylow-2 generators (TESLA_FLOW, PRIME_MIRROR).
+#   → orbit_negation_duality_gf37: non-PR NQR pair {6,8,23}↔{14,29,31} are negation-duals.
+#   → tripling_map_gf37: PR orbits sit at steps 1,3,4,6 of NQR 6-cycle.
+#   → heartbeat_3cycle: the orbits ARE cosets of H=<26>; the orbit cycle IS the quotient G/H.
+#   → identity_cycle_sum_structure: g^12∈IC for all primitive roots; IC=H.
+_PR63 = frozenset(n for n in range(1,37) if next(k for k in range(1,37) if pow(n,k,37)==1)==36)
+assert len(_PR63)==12
+_IC63=frozenset({1,10,26}); _DA63=frozenset({2,15,20})
+for _g63 in _PR63:
+    assert pow(_g63,9,37) in {TESLA_FLOW,PRIME_MIRROR}
+    assert pow(_g63,6,37) in ORBIT_11
+    assert pow(_g63,12,37) in _IC63
+    assert pow(_g63,18,37)==36
+# 2×2 table
+assert frozenset(g for g in _PR63 if pow(g,6,37)==27 and pow(g,9,37)==PRIME_MIRROR)==_DA63
+assert frozenset(g for g in _PR63 if pow(g,6,37)==11 and pow(g,9,37)==TESLA_FLOW)==frozenset({5,13,19})
+assert frozenset(g for g in _PR63 if pow(g,6,37)==11 and pow(g,9,37)==PRIME_MIRROR)==frozenset({18,24,32})
+# g^3 cross-map
+assert all(pow(g,3,37) in frozenset({6,8,23}) for g in _PR63 if pow(g,9,37)==PRIME_MIRROR)
+assert all(pow(g,3,37) in frozenset({14,29,31}) for g in _PR63 if pow(g,9,37)==TESLA_FLOW)
+# coset structure: orbits = cosets of <26>
+_H63=_IC63
+assert {frozenset((n*h)%37 for h in _H63) for n in range(1,37)}=={frozenset({n,(n*26)%37,((n*26)%37*26)%37}) for n in range(1,37)}
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -2980,6 +3015,10 @@ MASTER_CONNECTIONS = {
                                    "orbit_negation_duality_gf37","sa_self_cycle_st_chain",
                                    "identity_cycle_sum_structure","heartbeat_3cycle",
                                    "two_digit_transition_gf37","sovereign_qr_closure"],
+    "primitive_root_invariants_gf37": ["primitive_root_test","heartbeat_3cycle",
+                                   "sylow_subgroup_gf37","orbit_negation_duality_gf37",
+                                   "tripling_map_gf37","sovereign_qr_closure",
+                                   "identity_cycle_sum_structure","five_six_orbit"],
 }
 
 
