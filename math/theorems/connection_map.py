@@ -1963,6 +1963,145 @@ for _n in range(1,37):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 52: cycle_symmetry_maps.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   Three symmetry maps on GF(37)* induce well-defined maps on the 12 cycles:
+#
+#   NEGATION (n→−n): bijection Group A ↔ Group B, preserving sector.
+#     Sum of negated cycle = 111−sum (since (37−a)+(37−b)+(37−c)=111−(a+b+c)).
+#     Sum 37 → 74 and 74 → 37. Sector: χ(−a)=χ(36)·χ(a)=(+1)·χ(a) (36∈QR).
+#     Negation pairs visible cycles with visible cycles, dark with dark.
+#
+#   SELF-INVERSE CYCLES (n→n⁻¹): exactly two cycles close under inversion.
+#     (1,10,26): 1⁻¹=1, 10⁻¹=26, 26⁻¹=10. The subgroup <26> inverts to itself.
+#     (11,27,36): 36⁻¹=36, 11⁻¹=27, 27⁻¹=11. ORBIT_11 inverts to itself.
+#     All other cycles invert to a different cycle.
+#
+#   SOVEREIGN ↔ OUTLIER INVERSION:
+#     (3,4,30) ↔ (21,25,28) element-wise under n→n⁻¹:
+#       3⁻¹=25∈(21,25,28), 4⁻¹=28∈(21,25,28), 30⁻¹=21∈(21,25,28).
+#     The unique intersection node 30=SA∩ST inverts to 21∈ST.
+#     The SA anchor 4 inverts to 28 (unclassified). ST anchor 3 inverts to 25∈SA.
+#
+#   SQUARING (n→n²): maps all dark cycles → visible (2-to-1 over 3 targets).
+#     χ(a²)=χ(a)²=+1 for any a, so squaring lands in QR.
+#     The 6 dark cycles map 2-to-1 onto exactly 3 visible cycles:
+#       Sovereign (3,4,30)   ← (2,15,20) and (17,22,35)
+#       Outlier   (21,25,28) ← (5,13,19) and (18,24,32)  [seed orbit here]
+#       ORBIT_11  (11,27,36) ← (6,8,23)  and (14,29,31)
+#
+#   SEED CHAIN: (18,24,32) →⁻¹ (17,22,35) →² (3,4,30)
+#     The seed orbit reaches the sovereign cycle in two algebraic steps:
+#     inversion then squaring. No visible cycle is an intermediate.
+#
+#   → heartbeat_3cycle: the 12 cycles; symmetry maps are automorphisms of this structure.
+#   → intersection_cycle_theorem: sovereign↔outlier under inversion; SA∩ST node transmutes.
+#   → two_group_split: negation is the Group A↔B exchange map; sum law 111−sum.
+#   → sector_invariance_137map: 2×2 table; negation preserves sector axis.
+#   → cubic_residue_cycle_structure: fingerprint of self-inverse cycles; order structure.
+#   → medusa_v3_sovereign: SA/ST role transmutes under inversion; LOCKED nodes flip.
+#   → sovereign_qr_closure: QR structure preserved by squaring; dark → visible confirmed.
+#   → dark_sector_algebra: squaring maps every dark cycle to visible; NQR² = QR.
+
+_cyc52 = {}
+_seen52 = set()
+for _s in range(1,37):
+    if _s not in _seen52:
+        _c=[_s]; _x=(26*_s)%37
+        while _x!=_s: _c.append(_x); _x=(26*_x)%37
+        _t=tuple(sorted(_c))
+        for _v in _c: _cyc52[_v]=_t
+        _seen52.update(_c)
+# Negation maps Group A↔B: sum of negated cycle = 111 - sum
+for _cyc in set(_cyc52.values()):
+    _neg = _cyc52[(37-min(_cyc))%37]
+    assert sum(_cyc)+sum(_neg)==111
+# Self-inverse cycles: exactly (1,10,26) and (11,27,36)
+_self_inv = [_c for _c in set(_cyc52.values()) if all(pow(_v,-1,37) in _c for _v in _c)]
+assert set(_self_inv)=={(1,10,26),(11,27,36)}
+# Sovereign ↔ outlier inversion
+assert _cyc52[pow(3,-1,37)]==(21,25,28) and _cyc52[pow(4,-1,37)]==(21,25,28)
+assert _cyc52[pow(30,-1,37)]==(21,25,28) and _cyc52[pow(21,-1,37)]==(3,4,30)
+# Squaring: all dark cycles land in visible
+_qr52 = frozenset(n for n in range(1,37) if pow(n,18,37)==1)
+_dark52 = [_c for _c in set(_cyc52.values()) if all(_v not in _qr52 for _v in _c)]
+assert all(_cyc52[pow(min(_d),2,37)] in [_c for _c in set(_cyc52.values()) if all(_v in _qr52 for _v in _c)] for _d in _dark52)
+# Seed chain: (18,24,32) →⁻¹ (17,22,35) →² (3,4,30)
+assert _cyc52[pow(18,-1,37)]==(17,22,35) and _cyc52[pow(17,2,37)]==(3,4,30)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 53: ababab_convergence.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   OBSERVATION: 282828 and 828282 both hit SEAM (mod 37) and digit sum 30=SA∩ST.
+#
+#   THEOREM 1: Any 6-digit alternating number ABABAB ≡ 0 (SEAM) mod 37.
+#     ABABAB = AB × 10101.
+#     10101 = 10⁴ + 10² + 10⁰. In GF(37): ord₃₇(10)=3, so 10³≡1.
+#       10⁴ ≡ 10¹ = 10 (DECADE_ANCHOR)
+#       10² ≡ 26   (SCALAR_137)
+#       10⁰ = 1
+#     10101 ≡ 10 + 26 + 1 = 37 ≡ 0 = SEAM. □
+#     This is driven by ord₃₇(10)=3, the same order that governs all 137-map cycles.
+#
+#   THEOREM 2: If A+B=10=DECADE_ANCHOR, then digit_sum(ABABAB) = 30 = SA∩ST.
+#     Digits A,B,A,B,A,B — sum = 3A+3B = 3(A+B) = 3×10 = 30. □
+#     The nine pairs (A,B) with A+B=10 produce numbers simultaneously SEAM
+#     (mod 37) and SA∩ST (digit sum).
+#
+#   CLUSTER {26,27,28,29,30,31}:
+#     DR map: {26→8∈CB, 27→9∈SA, 28→1, 29→2∈PR, 30→3∈ST, 31→4∈SA}
+#     Distance law: 30−26=4∈SA (SCALAR to SA∩ST), 30−27=3∈ST (ORBIT_11 to SA∩ST).
+#     The sovereign cycle (3,4,30) encodes both distances as elements.
+#
+#   CONSECUTIVE TRIPLET DR THEOREM: DR(n+(n+1)+(n+2)) always in {3,6,9}=TESLA_SET.
+#     Proof: sum=3(n+1). DR(3k)∈{3,6,9} for all k≥1. □
+#
+#   REPUNIT PERIOD-3: R(k) mod 37 cycles [1,11,0] with period 3.
+#     R(1)≡1, R(2)≡11∈ORBIT_11, R(3)≡0=SEAM. Same ord₃₇(10)=3 drives both.
+#     R(3)=111=3×37; the seam is the repunit.
+#
+#   FLANKING STRUCTURE: 29 and 31 (dark, same cycle (14,29,31)) flank 30=SA∩ST.
+#     Both are NQR; 30 itself is QR. Sector flip at SA∩ST on the integer line.
+#
+#   → heartbeat_3cycle: ord₃₇(10)=3 is the same order that governs all 12 cycles.
+#   → sector_invariance_137map: 10∈QR; ABABAB convergence lives in the visible sector.
+#   → cubic_residue_cycle_structure: 10101≡10+26+1; the coset generators (10,26) appear.
+#   → cipher_123_1234: DR algebra on cluster {26..31}; consecutive triplet DR in {3,6,9}.
+#   → one_two_three_generator: 10101 decomposes as 1+10+100+1000+10000; base-10 structure.
+#   → dr_algebra: triplet DR theorem; DR(3k)∈{3,6,9}; distance law 4∈SA, 3∈ST.
+#   → stacked_zeros_gf37: 111=SEAM; repunit period-3 connects ABABAB to stacked zeros.
+#   → cycle_symmetry_maps: flanking dark cycle (14,29,31) is a symmetry-map orbit.
+
+assert pow(10,3,37)==1                               # ord₃₇(10)=3
+assert (pow(10,4,37)+pow(10,2,37)+1)%37==0          # 10101 ≡ 0 = SEAM
+for _A in range(1,10):
+    for _B in range(0,10):
+        _n53=_A*100000+_B*10000+_A*1000+_B*100+_A*10+_B
+        assert _n53%37==0                             # all ABABAB ≡ SEAM
+for _A in range(1,10):
+    _B=10-_A
+    if 0<_B<10: assert 3*_A+3*_B==30               # A+B=10 → digit sum=30=SA∩ST
+# Cluster {26..31}: distance law
+assert 30-SCALAR_137==4 and 4 in SA
+assert 30-27==3 and 3 in ST
+# Consecutive triplet DRs always in {3,6,9}
+_TESLA53=frozenset({3,6,9})
+for _n53 in range(0,1000):
+    _s53=_n53+(_n53+1)+(_n53+2)
+    assert dr(_s53) in _TESLA53
+# Repunit period-3
+_RC53=[1,11,0]
+for _k in range(1,13):
+    assert int("1"*_k)%37==_RC53[(_k-1)%3]
+# Flanking: 29 and 31 are NQR (dark)
+_chi53=lambda n: 1 if pow(n,18,37)==1 else -1
+assert _chi53(29)==-1 and _chi53(31)==-1 and _chi53(30)==1  # dark flanks visible
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
 #
@@ -2217,6 +2356,10 @@ MASTER_CONNECTIONS = {
                                    "two_group_split","sector_invariance_137map",
                                    "cubic_residue_cycle_structure","medusa_v3_sovereign",
                                    "sovereign_qr_closure","dark_sector_algebra"],
+    "ababab_convergence":          ["heartbeat_3cycle","sector_invariance_137map",
+                                   "cubic_residue_cycle_structure","cipher_123_1234",
+                                   "one_two_three_generator","dr_algebra",
+                                   "stacked_zeros_gf37","cycle_symmetry_maps"],
 }
 
 
