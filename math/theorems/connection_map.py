@@ -2248,6 +2248,84 @@ assert 100%37==SCALAR_137                                    # 99 = SCALAR_137-1
 assert 2+3==5 and 5 in PR and 5+4==9 and 9 in SA           # sovereign staircase
 
 
+# THEOREM 56: palindrome_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   GENERAL COEFFICIENT RULE:
+#     pair_coeff(k,n) = (10^k + 10^(n-1-k)) mod 37
+#     Power class of exponent e = e mod 3.
+#     Same power class → coefficient ∈ DARK_A = {2,15,20} (NQR)
+#     Different power class → coefficient ∈ ORBIT_11 = {11,27,36} (QR)
+#     DARK_A = {1+1, 10+10, 26+26} mod 37 = self-sums of identity cycle.
+#     DARK_A triple sum: 2+15+20 = 37 ≡ SEAM.
+#
+#   PALINDROME LENGTHS:
+#     3-digit ABA:     pair(0,2)=27∈ORBIT_11; center=10=DECADE_ANCHOR.
+#                      ABA ≡ 27A + 10B (mod 37).
+#     4-digit ABBA:    pair(0,3)=2∈DARK_A; pair(1,2)=36∈ORBIT_11.
+#                      ABBA ≡ 2A + 36B (mod 37).
+#     5-digit ABCBA:   pairs=11,11∈ORBIT_11; center=26=SCALAR_137.
+#                      ABCBA ≡ 11(A+B) + 26C (mod 37).
+#     6-digit ABCCBA:  pairs=27,20,27; middle pair∈DARK_A, outer∈ORBIT_11.
+#                      ABCCBA ≡ 27(A+C) + 20B (mod 37).
+#     7-digit ABCDCBA: pairs=2,36,36; outer∈DARK_A; center=1.
+#     8-digit ABCDDCBA: pairs=11,11,15,11; third pair∈DARK_A.
+#
+#   SEAM CONDITIONS:
+#     ABBA  ≡ 0 iff B ≡ 2A. Connects to Z/9Z doubling cycle (THEOREM 54).
+#     ABCBA ≡ 0 iff C = A+B. Connects to sovereign staircase (THEOREM 55).
+#     ABCCBA ≡ 0 iff A+C = 2B (B = arithmetic mean of A,C).
+#
+#   STAIRCASE SEAM PALINDROMES:
+#     1221≡0 (ABBA, B=2A), 12321≡0 (ABCBA, C=A+B), 123321≡0 (ABCCBA, A+C=2B).
+#     Each step deepens the palindrome by one layer; each ≡ SEAM.
+#
+#   SQUARED REPUNIT CYCLE:
+#     R(n)² mod 37 cycles {1, 10, 0} = {identity, DECADE_ANCHOR, SEAM}, period 3.
+#     R(1)²=1, R(2)²=121≡10, R(3)²=12321≡0. Matches ord₃₇(10)=3.
+#
+#   → heartbeat_3cycle: power classes 0,1,2 are exactly the 137-map orbit {1,10,26}.
+#   → identity_cycle_sum_structure: DARK_A = self-sums of identity cycle; ORBIT_11 = cross-sums.
+#   → ababab_convergence: ABABAB≡0; the period-3 repunit cycle drives the squared-repunit period.
+#   → five_six_orbit: ABBA SEAM B=2A invokes doubling cycle; TESLA_FLOW B=6 is the outlier.
+#   → cipher_123_1234: ABCBA SEAM C=A+B is the sovereign staircase; 1+2=3, 1+2+3=6.
+#   → dr_algebra: staircase palindromes 1221,12321,123321 have DR=6,9,3 (TESLA_SET).
+#   → sector_invariance_137map: ORBIT_11 coefficients are QR; DARK_A coefficients are NQR.
+#   → repunit_sq_euler_phi_gf37: R(n)² cycle {1,10,0} is the repunit-squared result.
+
+def _pair_coeff56(k, n):
+    return (pow(10,k,37) + pow(10,n-1-k,37)) % 37
+
+DARK_A = frozenset({2,15,20})
+assert 2+15+20==37                                           # DARK_A triple sum = SEAM
+for _da in DARK_A: assert pow(_da,18,37)==36                # all dark (NQR: Legendre=-1)
+
+# General rule: same class → DARK_A; diff class → ORBIT_11
+for _n56 in range(3,10):
+    for _k56 in range(_n56//2):
+        _c56 = _pair_coeff56(_k56, _n56)
+        if _k56%3 == (_n56-1-_k56)%3:
+            assert _c56 in DARK_A, f"n={_n56} k={_k56}: {_c56} not in DARK_A"
+        else:
+            assert _c56 in ORBIT_11, f"n={_n56} k={_k56}: {_c56} not in ORBIT_11"
+
+# Specific lengths
+assert _pair_coeff56(0,3)==27 and _pair_coeff56(0,4)==2 and _pair_coeff56(1,4)==36
+assert _pair_coeff56(0,5)==11 and _pair_coeff56(1,5)==11 and pow(10,2,37)==SCALAR_137
+assert _pair_coeff56(0,6)==27 and _pair_coeff56(1,6)==20 and _pair_coeff56(2,6)==27
+
+# SEAM conditions
+assert 1221%37==0 and 2442%37==0 and 3663%37==0 and 4884%37==0  # ABBA B=2A
+assert 12321%37==0 and 13431%37==0 and 21312%37==0              # ABCBA C=A+B
+assert 123321%37==0 and 135531%37==0                             # ABCCBA A+C=2B
+
+# Squared repunit cycle {1,DECADE_ANCHOR,0} period 3
+def _repunit56(n): return (10**n-1)//9
+assert _repunit56(1)**2%37==1 and _repunit56(2)**2%37==DECADE_ANCHOR and _repunit56(3)**2%37==0
+for _n56r in range(1,10):
+    assert _repunit56(_n56r)**2%37==[1,DECADE_ANCHOR,0][(_n56r-1)%3]
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -2517,6 +2595,10 @@ MASTER_CONNECTIONS = {
                                    "five_six_orbit","sector_invariance_137map",
                                    "cipher_123_1234","dr_algebra",
                                    "repunit_sq_euler_phi_gf37","sa_self_cycle_st_chain"],
+    "palindrome_gf37":             ["heartbeat_3cycle","identity_cycle_sum_structure",
+                                   "ababab_convergence","five_six_orbit",
+                                   "cipher_123_1234","dr_algebra",
+                                   "sector_invariance_137map","repunit_sq_euler_phi_gf37"],
 }
 
 
