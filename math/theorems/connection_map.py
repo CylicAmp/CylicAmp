@@ -2326,6 +2326,81 @@ for _n56r in range(1,10):
     assert _repunit56(_n56r)**2%37==[1,DECADE_ANCHOR,0][(_n56r-1)%3]
 
 
+# THEOREM 57: two_digit_transition_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   FOUR TRANSITION OPERATORS on a 2-digit number xy (each digit ±1):
+#     Op(++): Δ = +10+1 = +11 ∈ ORBIT_11
+#     Op(+-): Δ = +10-1 = +9  ∈ SA
+#     Op(-+): Δ = -10+1 = -9 ≡ 28 ∈ OUTLIER_SOVEREIGN {21,25,28}
+#     Op(--): Δ = -10-1 = -11 ≡ 26 = SCALAR_137 ∈ IDENTITY_CYCLE
+#   Every elementary digit-pair transition produces a sovereign GF(37) value.
+#
+#   SIGN CONVENTION: 0−1=(−1) borrow; 1−0=(+1) carry.
+#
+#   SEAM PAIRINGS:
+#     Op(++) + Op(--) = 11+26 = 37 ≡ SEAM.
+#     Op(+-) + Op(-+) = 9+28  = 37 ≡ SEAM.
+#     All four together: 74 ≡ SEAM.
+#
+#   PRODUCTS OF SEAM PAIRS:
+#     11 × 26 = 286 ≡ 27 ∈ ORBIT_11.
+#      9 × 28 = 252 ≡ 30 = SA∩ST.
+#
+#   Op(+-) GENERATES ST CHAIN: 3→12→21→30=SA∩ST→exits(2∈DARK_A).
+#     The ST chain {3,12,21,30} is the orbit of 3 under Op(+-) (Δ=+9).
+#
+#   EXAMPLE TRANSITIONS:
+#     12 ++(1) → 23: 12∈ST escapes ST; DR(23)=5∈PR.
+#     21 +-(1) → 30: 21∈ST reaches SA∩ST (position 3 and 4 in ST chain).
+#
+#   DIGIT-SUM CHAIN 1→2→4→6:
+#     19(∈PR):         digit sum=10=DECADE_ANCHOR. DR=1. →double→2.
+#     11(∈ORBIT_11):   digit sum=2.                DR=2. →double→4.
+#     213(≡28∈OUTLIER): digit sum=6=TESLA_FLOW.   Terminates.
+#     Chain sectors: IDENTITY_CYCLE → DARK_A → SA → TESLA_FLOW.
+#
+#   2+1+3=6 DECOMPOSITION: 2(DARK_A)+1(unit)+3(ST)=TESLA_FLOW.
+#     1+3=4∈SA → 2+4=6: DARK_A + SA = TESLA_FLOW.
+#
+#   ADJACENT DOUBLING-CYCLE SUMS: {1+2=3∈ST, 2+4=6=TESLA_FLOW, 4+8=12∈ST,
+#     8+7=15∈PR, 7+5=12∈ST, 5+1=6=TESLA_FLOW}. TESLA_FLOW at pairs (2,4) and (5,1).
+#
+#   → heartbeat_3cycle: Op(--) Δ=26=SCALAR_137 = the 137-map multiplier; orbit period-3.
+#   → identity_cycle_sum_structure: Op(--)=SCALAR_137 ∈ IDENTITY_CYCLE; pairwise sums give ORBIT_11.
+#   → five_six_orbit: ST chain 3→12→21→30 under Op(+-); Z/9Z doubling drives digit-sum chain.
+#   → palindrome_gf37: DARK_A element 2 appears in both palindrome coefficients and digit chain.
+#   → ababab_convergence: 10101≡SEAM; Op(++) delta=11, Op(--) delta=26, their product=27∈ORBIT_11.
+#   → sa_self_cycle_st_chain: Op(+-) Δ=9=SA_anchor generates the ST chain exactly.
+#   → sector_invariance_137map: Op(++) visible (QR), Op(--) visible, Op(+-) visible, Op(-+) dark QR check.
+#   → cipher_123_1234: 2+1+3=6=TESLA_FLOW; Z/9Z doubling chain 1→2→4; TESLA_SET {3,6,9}.
+
+_OP57_PP = 11; _OP57_PM = 9; _OP57_MP = 28; _OP57_MM = 26   # 26=SCALAR_137
+assert _OP57_PP in ORBIT_11 and _OP57_PM in SA and _OP57_MP in {21,25,28} and _OP57_MM==SCALAR_137
+assert (_OP57_PP + _OP57_MM) % 37 == 0    # SEAM pair
+assert (_OP57_PM + _OP57_MP) % 37 == 0    # SEAM pair
+assert (_OP57_PP * _OP57_MM) % 37 == 27 and 27 in ORBIT_11
+assert (_OP57_PM * _OP57_MP) % 37 == 30 and 30 in SA and 30 in ST
+# Op(+-) generates ST chain
+_x57 = 3
+for _expected57 in [3, 12, 21, 30, 2]:
+    assert _x57 == _expected57
+    _x57 = (_x57 + 9) % 37
+# Specific user transitions
+assert 12 + 11 == 23 and 12 in ST
+assert 21 +  9 == 30 and 21 in ST and 30 in SA and 30 in ST
+# Digit-sum chain
+assert dr(1+9)==1 and dr(1+1)==2 and 2+1+3==TESLA_FLOW
+assert 19 in PR and 11 in ORBIT_11 and 213%37==28 and 28 in {21,25,28}
+# 2+1+3 decomposition
+assert 2 in {2,15,20} and 3 in ST and 1+3==4 and 4 in SA and 2+4==TESLA_FLOW
+# Adjacent doubling-cycle sums
+_dc57=[1,2,4,8,7,5]
+_adj57=[_dc57[i]+_dc57[(i+1)%6] for i in range(6)]
+assert _adj57==[3,6,12,15,12,6]
+assert _adj57.count(TESLA_FLOW)==2
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -2599,6 +2674,10 @@ MASTER_CONNECTIONS = {
                                    "ababab_convergence","five_six_orbit",
                                    "cipher_123_1234","dr_algebra",
                                    "sector_invariance_137map","repunit_sq_euler_phi_gf37"],
+    "two_digit_transition_gf37":   ["heartbeat_3cycle","identity_cycle_sum_structure",
+                                   "five_six_orbit","ababab_convergence",
+                                   "sa_self_cycle_st_chain","sector_invariance_137map",
+                                   "cipher_123_1234","palindrome_gf37"],
 }
 
 
