@@ -2832,6 +2832,34 @@ assert (19+11)%37==30 and 30 in SA and 30 in ST
 assert pow(10,2,37)==SCALAR_137 and pow(10,3,37)==1
 
 
+# ── THEOREM 67: digit_seq_dr_coverage_gf37.py ────────────────────────────────
+#   {1,2,3,4} base sum=10; removal of d gives DR=10-d for d=1..4 → {6,7,8,9}.
+#   Fibonacci triple (a,b,a+b): sum=2(a+b); single-digit constraint (a+b≤9) covers DR={1,3,4,5,6,7,8,9}.
+#   DR=2 GAP: requires a+b≡1(mod9); min=10 (two-digit c) or a=0(SEAM).
+#   Outlier bridge: any triple (a,b,28) with a+b=28 gives DR=2 (56=2×28, DR(56)=2).
+#   User sequences mod 37: 212≡27∈ORBIT_11; 124≡1234≡235≡13∈CB; 123≡234≡12∈ST;
+#     246≡24∈CB∩SEED_ORBIT [pipeline seed]; 347≡325→PM_orbit; 437≡30∈SA∩ST.
+#   SEAM stride: 111=3×37; adding 111 preserves mod 37. 235-124=111; 234-123=111.
+#   Powers of 10: all in IC={1,10,26}; period 3.
+#   Connections:
+#   → cipher_123_1234: 1234≡13∈CB; same conclusion, now extended to all removal subsets.
+#   → plus9_scatter_map_gf37: outlier 28=-9; triple (a,b,28) is SEAM-exit row.
+#   → heartbeat_3cycle: 111=SEAM_STRIDE=3×37; mod37 coincidences trace SEAM.
+#   → lucas_abbc_chain: (a,b,a+b) triples ARE the Fibonacci recurrence.
+#   → cascade_8_13_24: 246=pipeline seed≡24∈CB∩SEED; Fibonacci triple landing in CB.
+assert 234%37==12 and 12 in ST
+assert 124%37==13 and 13 in CB
+assert 235%37==13 and 13 in CB
+assert 246%37==24 and 24 in CB and 24 in SEED_ORBIT
+assert 437%37==30 and 30 in SA and 30 in ST
+assert 235-124==111 and 111%37==0    # SEAM stride
+_fib_dr = lambda a,b: dr(2*(a+b))
+_covered67 = {_fib_dr(a,b) for a in range(1,10) for b in range(1,10) if a+b<=9}
+assert _covered67 == frozenset({1,3,4,5,6,7,8,9})   # DR=2 missing
+assert dr(2*28)==2 and 28 in OUTLIER_SOV              # outlier bridge to DR=2
+assert pow(10,3,37)==1                                 # period 3 in IC
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3145,6 +3173,10 @@ MASTER_CONNECTIONS = {
                                    "cascade_8_13_24","orbit_negation_duality_gf37",
                                    "heartbeat_3cycle","identity_cycle_sum_structure",
                                    "primitive_root_invariants_gf37","medusa_v3_sovereign"],
+    "digit_seq_dr_coverage_gf37": ["cipher_123_1234","plus9_scatter_map_gf37",
+                                   "heartbeat_3cycle","lucas_abbc_chain",
+                                   "cascade_8_13_24","dr_algebra",
+                                   "sovereign_triple_plus9_gf37","identity_cycle_sum_structure"],
 }
 
 
