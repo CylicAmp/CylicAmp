@@ -2652,6 +2652,37 @@ assert 4+2==TESLA_FLOW and 4 in SA and 2 in DARK_A
 assert 1+DECADE_ANCHOR==11 and 11 in ORBIT_11
 
 
+# ── THEOREM 62: permutation_cycle_notation_gf37.py ───────────────────────────
+#   π = (1,3,7,8,6,12)(2,5,11,10,9,4) in orbit-index cycle notation.
+#   Orbits 1..12 numbered by ascending minimum element.
+#   QR cycle indices {1,3,6,7,8,12} sum = 37 = SEAM (exact).
+#   NQR cycle indices {2,4,5,9,10,11} sum = 41 ≡ 4 ∈ SA.
+#   SA×NQR cross-duality: SA_small={4,9}⊂NQR_indices; ST_small={3,12}⊂QR_indices.
+#   Products: QR∏≡34∈anti-sovereign; NQR∏≡10=DECADE_ANCHOR∈IC.
+#   Connections:
+#   → tripling_map_gf37: this is the cycle-notation form of that theorem.
+#   → orbit_sector_geometry_gf37: the 6+6 split is (1,3,7,8,6,12) vs (2,5,11,10,9,4).
+#   → sa_self_cycle_st_chain: SA labels the NQR cycle; ST labels the QR cycle.
+#   → identity_cycle_sum_structure: QR sum=SEAM; NQR sum≡SA_anchor.
+#   → orbit_negation_duality_gf37: negation-dual pairs sit 3 steps apart.
+#   → sovereign_qr_closure: QR orbits at steps 1,2,6 in QR cycle are sovereign.
+_ORBITS62 = sorted([frozenset({s,(s*26)%37,((s*26)%37*26)%37}) for s in range(1,37)
+                    if s==min(frozenset({s,(s*26)%37,((s*26)%37*26)%37}))], key=min)
+_IDX62 = {o:i+1 for i,o in enumerate(_ORBITS62)}
+_PERM62 = {i+1: _IDX62[frozenset((x*3)%37 for x in _ORBITS62[i])] for i in range(12)}
+_QR62=[1,3,7,8,6,12]; _NQR62=[2,5,11,10,9,4]
+for _c62 in [_QR62,_NQR62]:
+    for _i62 in range(6): assert _PERM62[_c62[_i62]]==_c62[(_i62+1)%6]
+assert sum(_QR62)==37==37   # SEAM
+assert sum(_NQR62)%37==4 and 4 in SA
+from math import prod as _prod62
+assert _prod62(_QR62)%37==34 and 34 in frozenset({7,33,34})
+assert _prod62(_NQR62)%37==DECADE_ANCHOR
+# cross-duality
+assert frozenset({3,12}).issubset(set(_QR62))  and frozenset({3,12}).isdisjoint(set(_NQR62))
+assert frozenset({4,9}).issubset(set(_NQR62))  and frozenset({4,9}).isdisjoint(set(_QR62))
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -2945,6 +2976,10 @@ MASTER_CONNECTIONS = {
                                    "heartbeat_3cycle","sylow_subgroup_gf37",
                                    "identity_cycle_sum_structure","sa_self_cycle_st_chain",
                                    "cascade_8_13_24","two_digit_transition_gf37"],
+    "permutation_cycle_notation_gf37": ["tripling_map_gf37","orbit_sector_geometry_gf37",
+                                   "orbit_negation_duality_gf37","sa_self_cycle_st_chain",
+                                   "identity_cycle_sum_structure","heartbeat_3cycle",
+                                   "two_digit_transition_gf37","sovereign_qr_closure"],
 }
 
 
