@@ -2762,6 +2762,42 @@ assert _S3_64 == frozenset({1,10,26}) | frozenset({7,33,34}) | frozenset({9,12,1
 assert len(_S3_64) == 9
 
 
+# ── THEOREM 65: sovereign_triple_plus9_gf37.py ───────────────────────────────
+#   Sovereign Triple O1∪O2∪O3 = {3,4,30}∪{9,12,16}∪{21,25,28} contains all SA and ST.
+#   chi(26)=1: SCALAR_137 is QR; √SCALAR_137=27∈ORBIT_11.
+#   +9 action (9∈SA): SA elements exit the triple; ST\SA elements stay.
+#   Exits: 4→CB, 9→SEED_ORBIT, 25→anti-sovereign, 30→DARK_A.
+#   SEAM EXIT: 28=−9 mod 37; 28+9≡0=SEAM. Unique SEAM-exit node.
+#   Non-SA, non-ST extras: {16,28}: 16→25(SA,stays), 28→SEAM.
+#   Repunit: 111+222−9−333≡28 (the outlier/SEAM-exit node).
+#   27+27≡17∈PR orbit; 9+36≡8∈CB; 9+28=37=SEAM.
+#   Connections:
+#   → medusa_v3_sovereign: SA elements scatter to CB/SEED/anti-sov/DARK_A under SA shift.
+#   → heartbeat_3cycle: sovereign triple = union of 3 QR orbits; +9 crosses orbit boundaries.
+#   → tripling_map_gf37: O1 and O3 are steps 1 and 5 of QR 6-cycle; O2 is step 2.
+#   → cascade_8_13_24: 4+9=13∈CB; 9+36=8∈CB; SA shift lands in Cascade Base.
+#   → orbit_order_structure_gf37: O1 order-18; O2 order-9; O3 order-18 (mixed classes).
+#   → orbit_negation_duality_gf37: √SCALAR_137=27∈ORBIT_11; 9+28=37 (negation pair).
+_T65_O1=frozenset({3,4,30}); _T65_O2=frozenset({9,12,16}); _T65_O3=frozenset({21,25,28})
+_T65_TRIPLE=_T65_O1|_T65_O2|_T65_O3
+assert SA.issubset(_T65_TRIPLE) and ST.issubset(_T65_TRIPLE)
+assert pow(SCALAR_137,18,37)==1                        # chi(26)=1: SCALAR_137 is QR
+assert pow(27,2,37)==SCALAR_137 and 27 in ORBIT_11     # sqrt(26)=27∈ORBIT_11
+# SA elements exit the triple under +9
+assert all((x+9)%37 not in _T65_TRIPLE for x in SA)
+# ST\SA elements stay
+_T65_ST_pure=ST-SA
+assert all((x+9)%37 in _T65_TRIPLE for x in _T65_ST_pure)
+# SEAM exit: 28 = -9 mod 37
+assert (-9)%37==28 and (28+9)%37==0 and 28 in _T65_O3
+# Repunit encoding
+assert (111+222-9-333)%37==28
+# Arithmetic
+assert (27+27)%37==17 and 17 in frozenset({17,22,35})
+assert (9+36)%37==8 and 8 in CB
+assert 9+28==37
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3067,6 +3103,10 @@ MASTER_CONNECTIONS = {
                                    "primitive_root_invariants_gf37","tripling_map_gf37",
                                    "heartbeat_3cycle","five_six_orbit",
                                    "identity_cycle_sum_structure","sovereign_qr_closure"],
+    "sovereign_triple_plus9_gf37": ["medusa_v3_sovereign","heartbeat_3cycle",
+                                   "tripling_map_gf37","cascade_8_13_24",
+                                   "orbit_order_structure_gf37","orbit_negation_duality_gf37",
+                                   "sovereign_qr_closure","sa_self_cycle_st_chain"],
 }
 
 
