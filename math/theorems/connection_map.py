@@ -2213,6 +2213,10 @@ MASTER_CONNECTIONS = {
                                    "sector_invariance_137map","dark_sector_algebra",
                                    "two_group_split","medusa_v3_sovereign",
                                    "abcabc_mod37_orbit","sovereign_qr_closure"],
+    "cycle_symmetry_maps":         ["heartbeat_3cycle","intersection_cycle_theorem",
+                                   "two_group_split","sector_invariance_137map",
+                                   "cubic_residue_cycle_structure","medusa_v3_sovereign",
+                                   "sovereign_qr_closure","dark_sector_algebra"],
 }
 
 
