@@ -2183,6 +2183,72 @@ assert (11*DECADE_ANCHOR)%37==36 and 36 in ORBIT_11
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 55: identity_cycle_sum_structure.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   THEOREM 1: Pairwise sums of the identity cycle {1,10,26} = ORBIT_11 exactly.
+#     1+10=11∈ORBIT_11, 1+26=27∈ORBIT_11, 10+26=36∈ORBIT_11.
+#     All three C(3,2)=3 pairwise sums of <26> are precisely ORBIT_11.
+#
+#   THEOREM 2: Triple sum = SEAM.
+#     1+10+26 = 37 ≡ 0 = SEAM.
+#
+#   ABA PALINDROME:
+#     ABA = A×101+B×10. 101 ≡ 26+1 = 27∈ORBIT_11 (pairwise sum 10²+10⁰).
+#     ABA ≡ 27A+10B (mod 37).
+#     ABAB = A×1010+B×101. 1010 ≡ 1+10 = 11∈ORBIT_11 (pairwise sum 10³+10¹).
+#     ABAB ≡ 11A+27B (mod 37). Both coefficients ∈ ORBIT_11.
+#
+#   ABA CYCLE (period 3 along staircase path):
+#     0-0-0≡SEAM, 0-1-0≡DECADE, 1-0-1≡27∈ORBIT_11,
+#     1-1-1≡SEAM, 1-2-1≡DECADE, 2-1-2≡27∈ORBIT_11.
+#     Exception: 1-9-1=191≡TESLA_FLOW (B=9 breaks {0,DECADE,27} cycle).
+#
+#   DR PALINDROME 434: DR(31)=4, DR(30)=3, DR(31)=4 → 434≡27∈ORBIT_11.
+#   DR SEQUENCE 234: DR(29)=2, DR(30)=3, DR(31)=4 → 234≡12∈ST, DR(234)=9∈SA.
+#
+#   GROWING SET CONVERGENCE AT DEPTH 3:
+#     {28}→{28,29}→{28,29,30=SA∩ST}  (integer sequence reaches SA∩ST)
+#     {1}→{1,11∈ORBIT_11}→{1,11,111≡SEAM}  (repunit sequence reaches SEAM)
+#
+#   99 = SCALAR_137-1 ≡ 25∈SA. DR(99)=9∈SA. Doubly sovereign.
+#
+#   SOVEREIGN STAIRCASE: 2→(+3∈ST)→5→(+4∈SA)→9∈SA. Sum of steps = 9.
+#
+#   → heartbeat_3cycle: identity cycle <26>={1,10,26} is the core orbit; pairwise sums generate ORBIT_11.
+#   → cycle_symmetry_maps: identity cycle and ORBIT_11 are the two self-inverse cycles.
+#   → cubic_residue_cycle_structure: identity cycle = the subgroup of cubic residues of order 3.
+#   → ababab_convergence: ABABAB≡0 because A and B each accumulate 1+10+26=SEAM.
+#   → five_six_orbit: ABA(1,9)=191≡TESLA_FLOW; ABA(4,3)=434≡ORBIT_11 (the DR palindrome).
+#   → sector_invariance_137map: {1,10,26} are all visible (QR); ORBIT_11 is visible.
+#   → cipher_123_1234: Z/9Z staircase; the sovereign staircase 2+3+4=9.
+#   → dr_algebra: DR of 434=4+3+4=11∈ORBIT_11; DR(234)=9∈SA; DR(99)=9∈SA.
+#   → repunit_sq_euler_phi_gf37: growing repunit set {1,11,111}: depth-3 SEAM matches repunit period.
+#   → sa_self_cycle_st_chain: 99=9×11=SA×ORBIT_11; 100≡SCALAR_137; sovereign arithmetic.
+
+_IC55 = frozenset({1,10,26})
+assert {1+10, 1+26, 10+26} == ORBIT_11                      # pairwise sums = ORBIT_11
+assert (1+10+26)%37==0                                       # triple sum = SEAM
+assert 101%37==27 and 27 in ORBIT_11
+assert 1010%37==11 and 11 in ORBIT_11
+for _A55 in range(10):
+    for _B55 in range(10):
+        assert (_A55*100+_B55*10+_A55)%37==(27*_A55+10*_B55)%37
+        assert (_A55*1000+_B55*100+_A55*10+_B55)%37==(11*_A55+27*_B55)%37
+# ABA cycle
+_sc55=[(0,0),(0,1),(1,0),(1,1),(1,2),(2,1)]
+_cyc55=[0,DECADE_ANCHOR,27]
+for _i55,(_A55,_B55) in enumerate(_sc55):
+    assert (27*_A55+10*_B55)%37==_cyc55[_i55%3]
+assert 191%37==TESLA_FLOW                                    # B=9 exception
+assert 434%37==27 and 27 in ORBIT_11                         # DR palindrome 434
+assert 234%37==12 and 12 in ST and dr(234)==9 and 9 in SA   # ascending DR sequence
+assert 99%37==25 and 25 in SA and dr(99)==9 and 9 in SA     # doubly sovereign
+assert 100%37==SCALAR_137                                    # 99 = SCALAR_137-1
+assert 2+3==5 and 5 in PR and 5+4==9 and 9 in SA           # sovereign staircase
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
 #
@@ -2446,6 +2512,11 @@ MASTER_CONNECTIONS = {
                                    "ababab_convergence","cipher_123_1234",
                                    "dr_algebra","cubic_residue_cycle_structure",
                                    "intersection_cycle_theorem","two_group_split"],
+    "identity_cycle_sum_structure":["heartbeat_3cycle","cycle_symmetry_maps",
+                                   "cubic_residue_cycle_structure","ababab_convergence",
+                                   "five_six_orbit","sector_invariance_137map",
+                                   "cipher_123_1234","dr_algebra",
+                                   "repunit_sq_euler_phi_gf37","sa_self_cycle_st_chain"],
 }
 
 
