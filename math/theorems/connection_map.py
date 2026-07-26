@@ -1864,6 +1864,53 @@ assert len(_QR49) == len(_NQR49) == 18   # even 18/18 split
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 50: sector_invariance_137map.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   The 137-map f(n)=26n mod 37 preserves the Legendre symbol:
+#     χ(f(n)) = χ(26n) = χ(26)·χ(n) = (+1)·χ(n) = χ(n)
+#   because SCALAR_137=26 is a quadratic residue (χ(26)=+1).
+#
+#   Consequence: every 3-cycle is sector-homogeneous — all three elements are
+#   QR (visible) or all three are NQR (dark). Zero mixed cycles exist.
+#
+#   The 12 cycles admit a 2×2 classification by two INDEPENDENT binary axes:
+#     Sector:  visible (all QR) vs dark (all NQR)      → 6 each
+#     Group:   A (sum=37)       vs B (sum=74)           → 6 each
+#   Exactly 3 cycles per cell in the 2×2 table.
+#
+#   Visible × A: (1,10,26), (3,4,30), (9,12,16)
+#   Visible × B: (7,33,34), (11,27,36), (21,25,28)
+#   Dark    × A: (2,15,20), (5,13,19), (6,8,23)
+#   Dark    × B: (14,29,31), (17,22,35), (18,24,32)
+#
+#   Seed orbit (18,24,32): dark × B  |  Sovereign cycle (3,4,30): visible × A
+#   ORBIT_11 (11,27,36):  visible × B
+#
+#   → dark_sector_algebra: QR/NQR partition; χ(26)=+1 is the locking key.
+#   → two_group_split: second axis of the 2×2; independent of sector.
+#   → heartbeat_3cycle: all 12 cycles; sector × group = full 2×2 table.
+#   → intersection_cycle_theorem: sovereign cycle is visible×A — uniquely placed.
+#   → sovereign_qr_closure: Legendre symbols on orbit nodes; sector invariance.
+#   → medusa_v3_sovereign: SA/ST visible; CB dark — sector map matches class map.
+
+_chi50 = lambda n: 1 if pow(n%37, 18, 37)==1 else -1
+assert _chi50(SCALAR_137) == 1           # 26 is visible: the locking condition
+assert _chi50(10) == 1                   # two-step multiplier also visible
+assert all(_chi50((n*26)%37)==_chi50(n) for n in range(1,37))  # sector preserved
+# Every cycle sector-homogeneous
+_cycles50 = []
+_seen50 = set()
+for _s in range(1,37):
+    if _s not in _seen50:
+        _c=[_s]; _x=(26*_s)%37
+        while _x!=_s: _c.append(_x); _x=(26*_x)%37
+        _cycles50.append(tuple(sorted(_c))); _seen50.update(_c)
+for _cyc in _cycles50:
+    assert len(set(_chi50(v) for v in _cyc))==1   # all same sector
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
 #
@@ -2107,6 +2154,9 @@ MASTER_CONNECTIONS = {
                                    "heartbeat_3cycle","cascade_8_13_24",
                                    "primitive_root_test","two_group_split",
                                    "intersection_cycle_theorem","twin_prime_gf37"],
+    "sector_invariance_137map":   ["dark_sector_algebra","two_group_split",
+                                   "heartbeat_3cycle","intersection_cycle_theorem",
+                                   "sovereign_qr_closure","medusa_v3_sovereign"],
 }
 
 
