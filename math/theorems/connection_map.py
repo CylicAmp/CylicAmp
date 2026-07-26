@@ -2718,6 +2718,50 @@ _H63=_IC63
 assert {frozenset((n*h)%37 for h in _H63) for n in range(1,37)}=={frozenset({n,(n*26)%37,((n*26)%37*26)%37}) for n in range(1,37)}
 
 
+# ── THEOREM 64: orbit_order_structure_gf37.py ─────────────────────────────────
+#   8 homogeneous orbits (all elements same order) + 4 non-homogeneous.
+#   Non-homogeneous ↔ contains exactly one 4th root of unity (Sylow-2 element).
+#   4th roots of unity = {1,6,31,36} = {id, TESLA_FLOW, PRIME_MIRROR, −1}.
+#   Each of the 4 Sylow-2 elements lives in a DISTINCT non-homogeneous orbit:
+#     1  → IDENTITY_CYCLE {1,10,26}   orders {1,3,3}
+#     6  → {6,8,23}                   orders {4,12,12}
+#     36 → ORBIT_11 {11,27,36}        orders {2,6,6}
+#     31 → {14,29,31}                 orders {4,12,12}
+#   Homogeneous order classes:
+#     order 36: DARK_A, {5,13,19}, {17,22,35}, SEED_ORBIT (4 PR orbits)
+#     order 18: {3,4,30}, OUTLIER_SOV={21,25,28}
+#     order 9: {7,33,34}, {9,12,16} (= Sylow-3 minus IDENTITY_CYCLE)
+#   Squaring map on QR orbits:
+#     {3,4,30}→{9,12,16}; {21,25,28}→{7,33,34}; {9,12,16}↔{7,33,34} (2-cycle)
+#     ORBIT_11→IDENTITY_CYCLE; IDENTITY_CYCLE→IDENTITY_CYCLE (fixed)
+#   Sylow-3 = IDENTITY_CYCLE ∪ {7,33,34} ∪ {9,12,16} (three complete orbits).
+#   Connections:
+#   → sylow_subgroup_gf37: Sylow-2={1,6,31,36} meets the non-homogeneous orbits.
+#   → orbit_negation_duality_gf37: negation-dual pairs {6,8,23}↔{14,29,31} both non-hom.
+#   → primitive_root_invariants_gf37: all PR orbits are homogeneous order-36.
+#   → tripling_map_gf37: squaring is ×3^6=SCALAR_137; order 18→9 halving.
+#   → heartbeat_3cycle: IDENTITY_CYCLE fixed under squaring = kernel of squaring map.
+#   → five_six_orbit: ord(TESLA_FLOW)=4 = # non-homogeneous orbits.
+_SQ64 = lambda o: frozenset(pow(x,2,37) for x in o)
+assert _SQ64(frozenset({3,4,30}))   == frozenset({9,12,16})
+assert _SQ64(frozenset({21,25,28})) == frozenset({7,33,34})
+assert _SQ64(frozenset({9,12,16}))  == frozenset({7,33,34})
+assert _SQ64(frozenset({7,33,34}))  == frozenset({9,12,16})
+assert _SQ64(ORBIT_11)              == frozenset({1,10,26})
+assert _SQ64(frozenset({1,10,26}))  == frozenset({1,10,26})
+_FR64 = frozenset(n for n in range(1,37) if pow(n,4,37)==1)
+assert _FR64 == frozenset({1,TESLA_FLOW,PRIME_MIRROR,36})
+# each non-homogeneous orbit contains exactly one 4th root
+_ORB64 = lambda n: frozenset({n,(n*26)%37,((n*26)%37*26)%37})
+_NON_HOM64 = [_ORB64(1), _ORB64(6), _ORB64(11), _ORB64(14)]
+for _o64 in _NON_HOM64:
+    assert len(_o64 & _FR64) == 1
+# Sylow-3: three orbits of order dividing 9
+_S3_64 = frozenset(n for n in range(1,37) if pow(n,9,37)==1)
+assert _S3_64 == frozenset({1,10,26}) | frozenset({7,33,34}) | frozenset({9,12,16})
+assert len(_S3_64) == 9
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3019,6 +3063,10 @@ MASTER_CONNECTIONS = {
                                    "sylow_subgroup_gf37","orbit_negation_duality_gf37",
                                    "tripling_map_gf37","sovereign_qr_closure",
                                    "identity_cycle_sum_structure","five_six_orbit"],
+    "orbit_order_structure_gf37":  ["sylow_subgroup_gf37","orbit_negation_duality_gf37",
+                                   "primitive_root_invariants_gf37","tripling_map_gf37",
+                                   "heartbeat_3cycle","five_six_orbit",
+                                   "identity_cycle_sum_structure","sovereign_qr_closure"],
 }
 
 
