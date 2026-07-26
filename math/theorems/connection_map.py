@@ -2856,7 +2856,7 @@ assert 235-124==111 and 111%37==0    # SEAM stride
 _fib_dr = lambda a,b: dr(2*(a+b))
 _covered67 = {_fib_dr(a,b) for a in range(1,10) for b in range(1,10) if a+b<=9}
 assert _covered67 == frozenset({1,3,4,5,6,7,8,9})   # DR=2 missing
-assert dr(2*28)==2 and 28 in OUTLIER_SOV              # outlier bridge to DR=2
+assert dr(2*28)==2 and 28 in frozenset({21,25,28})     # outlier bridge to DR=2
 assert pow(10,3,37)==1                                 # period 3 in IC
 
 
