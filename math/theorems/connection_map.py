@@ -2798,6 +2798,40 @@ assert (9+36)%37==8 and 8 in CB
 assert 9+28==37
 
 
+# ── THEOREM 66: plus9_scatter_map_gf37.py ────────────────────────────────────
+#   "O1+9==O2? False" is correct boolean but wrong question.
+#   Every image of the sovereign triple under +9 lands in a NAMED framework set.
+#   O1+9={2,12,13}={DARK_A_min,ST,CB}; O2+9={18,21,25}={SEED,ST,SA}; O3+9={0,30,34}={SEAM,SA∩ST,anti-sov}.
+#   Two steps: O3+18={2,6,9}={DARK_A_min,TESLA_FLOW,SA}; O2+18={27,30,34}={ORBIT_11,SA∩ST,anti-sov}.
+#   ORBIT_11 shift: O1+27={20,30,31}={DARK_A,SA∩ST,PRIME_MIRROR}; O2+27={2,6,36}={DARK_A_min,TESLA_FLOW,-1}.
+#   O3+18 and O2+27 both contain {DARK_A_min(2),TESLA_FLOW(6)}: two paths, same anchor pair.
+#   4-step SEAM chain: 1→10→19→28→SEAM (IC→IC→PR→OUTLIER_SOV→SEAM).
+#   Cross-orbit: 19+11=30∈SA∩ST (PR_orbit_element + ORBIT_11_min = SA∩ST).
+#   Decimal: 10^2≡SCALAR_137; 100+9+1+9-119=0(SEAM); 10+1+9-20=0.
+#   Connections:
+#   → sovereign_triple_plus9_gf37: this theorem extends the single-step analysis to multi-step.
+#   → tripling_map_gf37: 4-step chain crosses PR orbit; tripling generates PR subgroup.
+#   → cascade_8_13_24: O1+9={CB,ST,DARK_A_min}; CB appears in the immediate +9 scatter.
+#   → orbit_negation_duality_gf37: O3+18 and O2+27 share {DARK_A_min,TESLA_FLOW}; dual paths to same pair.
+#   → heartbeat_3cycle: 10^1=DECADE_ANCHOR, 10^2=SCALAR_137, 10^3=1; decimal powers trace IC.
+_T66_O1=frozenset({3,4,30}); _T66_O2=frozenset({9,12,16}); _T66_O3=frozenset({21,25,28})
+def _sh66(o,k): return frozenset((x+k)%37 for x in o)
+assert _sh66(_T66_O1,9)==frozenset({2,12,13})
+assert _sh66(_T66_O2,9)==frozenset({18,21,25})
+assert _sh66(_T66_O3,9)==frozenset({0,30,34})
+assert _sh66(_T66_O3,18)==frozenset({2,TESLA_FLOW,9})
+assert _sh66(_T66_O1,27)==frozenset({20,30,PRIME_MIRROR})
+assert _sh66(_T66_O2,27)==frozenset({2,TESLA_FLOW,36})
+assert frozenset({2,TESLA_FLOW}).issubset(_sh66(_T66_O3,18))
+assert frozenset({2,TESLA_FLOW}).issubset(_sh66(_T66_O2,27))
+# 4-step SEAM chain
+for _a,_b in [(1,10),(10,19),(19,28),(28,0)]: assert (_a+9)%37==_b
+# cross-orbit
+assert (19+11)%37==30 and 30 in SA and 30 in ST
+# decimal powers
+assert pow(10,2,37)==SCALAR_137 and pow(10,3,37)==1
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3107,6 +3141,10 @@ MASTER_CONNECTIONS = {
                                    "tripling_map_gf37","cascade_8_13_24",
                                    "orbit_order_structure_gf37","orbit_negation_duality_gf37",
                                    "sovereign_qr_closure","sa_self_cycle_st_chain"],
+    "plus9_scatter_map_gf37":     ["sovereign_triple_plus9_gf37","tripling_map_gf37",
+                                   "cascade_8_13_24","orbit_negation_duality_gf37",
+                                   "heartbeat_3cycle","identity_cycle_sum_structure",
+                                   "primitive_root_invariants_gf37","medusa_v3_sovereign"],
 }
 
 
