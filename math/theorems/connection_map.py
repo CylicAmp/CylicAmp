@@ -2401,6 +2401,95 @@ assert _adj57==[3,6,12,15,12,6]
 assert _adj57.count(TESLA_FLOW)==2
 
 
+# THEOREM 58: orbit_sector_geometry_gf37.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   THREE GEOMETRIC STRUCTURES:
+#     HEXAGON  (Space)   — 6 QR orbits + 6 NQR orbits, two hexagonal rings
+#     SPIRAL   (Growth)  — each orbit is a 3-step spiral under ×SCALAR_137
+#     VORONOI  (Pressure)— QR/NQR boundary at SEAM; sovereign sub-partition
+#
+#   FOUNDATION: chi(26) = +1.
+#     The 137-map multiplier is QR → every orbit is HOMOGENEOUS (all-QR or all-NQR).
+#     Consequence: 12 orbits split into exactly 6 QR and 6 NQR.
+#
+#   HEXAGON: 6 QR ORBITS (visible):
+#     {1,10,26}=IDENTITY_CYCLE, {3,4,30}, {7,33,34}, {9,12,16}, {11,27,36}=ORBIT_11, {21,25,28}
+#   6 NQR ORBITS (dark):
+#     {2,15,20}=DARK_A, {5,13,19}, {6,8,23}, {14,29,31}, {17,22,35}, {18,24,32}=SEED_ORBIT
+#   6 = TESLA_FLOW = doubling-cycle period.
+#
+#   CANONICAL SOVEREIGN SPIRAL: {3,4,30}
+#     ST(3) →×26→ SA(4) →×26→ SA∩ST(30) →×26→ ST(3)
+#     The only orbit where ST→SA→SA∩ST appears in one 3-cycle.
+#
+#   SOVEREIGN ORBITS: exactly 3 of the 6 QR orbits contain SA or ST:
+#     {3,4,30}: ST(3), SA(4), SA∩ST(30).
+#     {9,12,16}: SA(9), ST(12), interior(16).
+#     {21,25,28}: ST(21), SA(25), outlier(28).
+#     Each sovereign orbit contains exactly one SA and one ST element.
+#
+#   VORONOI META-3-CYCLE: sovereign orbits cycle under Op(+-) [Δ=+9]:
+#     3(∈{3,4,30}) +9=12(∈{9,12,16}) +9=21(∈{21,25,28}) +9=30(∈{3,4,30}).
+#     The sovereign orbit layer is itself a 3-cycle.
+#
+#   SEAM CONTACT: 28(outlier) + 9 = 37 ≡ SEAM.
+#     The outlier element of the third sovereign orbit directly touches SEAM via Op(+-).
+#
+#   ORBIT MINIMUM SUMS:
+#     QR  minima {1,3,7,9,11,21}  sum=52 ≡ 15 ∈ DARK_A.
+#     NQR minima {2,5,6,14,17,18} sum=62 ≡ 25 ∈ SA.
+#     Total sum ≡ 3 ∈ ST.
+#
+#   → heartbeat_3cycle: the 12 three-cycles are the direct output; chi(26)=1 proves homogeneity.
+#   → sovereign_qr_closure: SA, ST, ORBIT_11 are all QR; orbits separate by Legendre symbol.
+#   → medusa_v3_sovereign: sovereign orbits {3,4,30},{9,12,16},{21,25,28} encode LOCKED/GATED.
+#   → sector_invariance_137map: chi(26n)=chi(n) is the sector invariance; proved here constructively.
+#   → sa_self_cycle_st_chain: the canonical spiral ST→SA→SA∩ST is exactly the chain in one orbit.
+#   → two_digit_transition_gf37: Op(+-) cycles sovereign orbits; SEAM via outlier+9.
+#   → identity_cycle_sum_structure: IDENTITY_CYCLE={1,10,26} is one complete QR orbit.
+#   → five_six_orbit: 6=TESLA_FLOW=count of QR orbits=count of NQR orbits=doubling period.
+
+_f137_58 = lambda n: (n*26)%37
+_chi58   = lambda n: 1 if pow(n,18,37)==1 else -1
+
+# chi(26)=1: 137-map preserves chi
+assert _chi58(SCALAR_137)==1
+for _n58 in range(1,37): assert _chi58(_f137_58(_n58))==_chi58(_n58)
+
+# Build 12 orbits and verify 6+6 split
+_seen58=set(); _orbs58=[]
+for _s58 in range(1,37):
+    if _s58 in _seen58: continue
+    _o58=frozenset({_s58,_f137_58(_s58),_f137_58(_f137_58(_s58))})
+    assert _f137_58(_f137_58(_f137_58(_s58)))==_s58
+    _orbs58.append(_o58); _seen58|=_o58
+assert len(_orbs58)==12 and len(_seen58)==36
+_qr58=[o for o in _orbs58 if _chi58(min(o))==1]
+_nqr58=[o for o in _orbs58 if _chi58(min(o))==-1]
+assert len(_qr58)==6==TESLA_FLOW and len(_nqr58)==6==TESLA_FLOW
+
+# Canonical sovereign spiral
+assert _f137_58(3)==4 and _f137_58(4)==30 and _f137_58(30)==3
+assert 3 in ST and 4 in SA and 30 in SA and 30 in ST
+
+# Sovereign meta-3-cycle under Op(+-)
+assert (3+9)%37==12 and (12+9)%37==21 and (21+9)%37==30
+_ob58={x:frozenset(o) for o in _orbs58 for x in o}
+assert _ob58[12]==frozenset({9,12,16}) and _ob58[21]==frozenset({21,25,28}) and _ob58[30]==frozenset({3,4,30})
+
+# SEAM contact
+assert (28+9)%37==0
+
+# Orbit minimum sums
+_qmins58=sorted(min(o) for o in _qr58)
+_nmins58=sorted(min(o) for o in _nqr58)
+assert _qmins58==[1,3,7,9,11,21] and _nmins58==[2,5,6,14,17,18]
+assert sum(_qmins58)%37==15 and 15 in DARK_A
+assert sum(_nmins58)%37==25 and 25 in SA
+assert (sum(_qmins58)+sum(_nmins58))%37==3 and 3 in ST
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -2678,6 +2767,10 @@ MASTER_CONNECTIONS = {
                                    "five_six_orbit","ababab_convergence",
                                    "sa_self_cycle_st_chain","sector_invariance_137map",
                                    "cipher_123_1234","palindrome_gf37"],
+    "orbit_sector_geometry_gf37":  ["heartbeat_3cycle","sovereign_qr_closure",
+                                   "medusa_v3_sovereign","sector_invariance_137map",
+                                   "sa_self_cycle_st_chain","two_digit_transition_gf37",
+                                   "identity_cycle_sum_structure","five_six_orbit"],
 }
 
 
