@@ -2611,6 +2611,47 @@ assert SA.issubset(_QR60) and ST.issubset(_QR60) and ORBIT_11.issubset(_QR60)
 assert SYLOW2_60 & SYLOW3_60 == frozenset({1})
 
 
+# ── THEOREM 61: tripling_map_gf37.py ─────────────────────────────────────────
+#   ord₃₇(3)=18; <3>=QR subgroup; 3^6=26=SCALAR_137; 3^9=36=−1.
+#   ×3 permutes the 6 QR orbits as a single 6-cycle:
+#     {3,4,30}→{9,12,16}→{11,27,36}→{7,33,34}→{21,25,28}→{1,10,26}→cycle
+#   ×3 permutes the 6 NQR orbits as a single 6-cycle:
+#     {2,15,20}→{6,8,23}→{18,24,32}→{17,22,35}→{14,29,31}→{5,13,19}→cycle
+#   Negation-dual pairs are 3 steps apart in each 6-cycle.
+#   Sum [7,9,5,2,3,1,8,6,6]=47≡10=DECADE_ANCHOR.
+#   Fibonacci: F(6)=8∈CB, F(8)=21∈ST, F(3)+F(6)=10=DECADE_ANCHOR.
+#   Connections:
+#   → orbit_sector_geometry_gf37: the 6-cycle visits all 6 QR orbits in one chain.
+#   → orbit_negation_duality_gf37: dual pairs are steps k and k+3 in the 6-cycle.
+#   → heartbeat_3cycle: 3^6=SCALAR_137 connects tripling to the 137-map inner cycle.
+#   → sylow_subgroup_gf37: <3>=QR subgroup=order-18 subgroup; 3∈Sylow-3 chain.
+#   → identity_cycle_sum_structure: IDENTITY_CYCLE is step 6 of QR 6-cycle.
+#   → sa_self_cycle_st_chain: 3×(F(6)-1)=21∈ST; SA(4)+DARK_A(2)=TESLA_FLOW.
+#   → cascade_8_13_24: F(6)=8∈CB is the Fibonacci anchor for the three-chain.
+#   → two_digit_transition_gf37: 1+DECADE_ANCHOR=11∈ORBIT_11 (NQR step-2 orbit).
+_ORBITS61 = [frozenset({3,4,30}),frozenset({9,12,16}),frozenset({11,27,36}),
+             frozenset({7,33,34}),frozenset({21,25,28}),frozenset({1,10,26})]
+for _i61 in range(6):
+    assert frozenset((x*3)%37 for x in _ORBITS61[_i61])==_ORBITS61[(_i61+1)%6]
+# negation duality: steps k and k+3 are negation-duals
+for _i61 in range(3):
+    assert frozenset((37-x)%37 for x in _ORBITS61[_i61])==_ORBITS61[_i61+3]
+# sum invariant
+assert sum([7,9,5,2,3,1,8,6,6])%37==DECADE_ANCHOR
+# Fibonacci anchors
+def _f61(n):
+    a,b=1,1
+    if n<=2: return 1
+    for _ in range(n-2): a,b=b,(a+b)%37
+    return b
+assert _f61(6)==8 and 8 in CB and _f61(8)==21 and 21 in ST
+assert _f61(3)+_f61(6)==DECADE_ANCHOR
+assert _f61(4)*(_f61(6)-_f61(1)*_f61(2))==21 and 21 in ST
+assert _f61(4)*_f61(6)//_f61(3)**2==TESLA_FLOW
+assert 4+2==TESLA_FLOW and 4 in SA and 2 in DARK_A
+assert 1+DECADE_ANCHOR==11 and 11 in ORBIT_11
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -2900,6 +2941,10 @@ MASTER_CONNECTIONS = {
                                    "five_six_orbit","sovereign_qr_closure",
                                    "identity_cycle_sum_structure","two_digit_transition_gf37",
                                    "orbit_sector_geometry_gf37"],
+    "tripling_map_gf37":           ["orbit_sector_geometry_gf37","orbit_negation_duality_gf37",
+                                   "heartbeat_3cycle","sylow_subgroup_gf37",
+                                   "identity_cycle_sum_structure","sa_self_cycle_st_chain",
+                                   "cascade_8_13_24","two_digit_transition_gf37"],
 }
 
 
