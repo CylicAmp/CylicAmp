@@ -2102,6 +2102,87 @@ assert _chi53(29)==-1 and _chi53(31)==-1 and _chi53(30)==1  # dark flanks visibl
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# THEOREM 54: five_six_orbit.py
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   OBSERVATION: 11÷2=5.5. The integers flanking 5.5 are 5 and 6.
+#     5 + 6 = 11 ∈ ORBIT_11  (sum)
+#     5 × 6 = 30 = SA∩ST     (product)
+#
+#   THEOREM 1: TESLA_FLOW(6) × 5 = SA∩ST(30).
+#     χ(6)=−1 (dark), χ(5)=−1 (dark, PR): dark × dark = visible (χ(30)=+1).
+#     Sum 6+5=11∈ORBIT_11 (visible). Same pair generates both sovereign nodes.
+#
+#   THEOREM 2: (SA∩ST)² ≡ ST; flankers multiply to ORBIT_11.
+#     30² ≡ 12 ∈ ST (mod 37).
+#     29×31 = 30²−1 ≡ 11 ∈ ORBIT_11 (mod 37). [difference-of-squares]
+#     12−11=1: the ST and ORBIT_11 images are adjacent integers.
+#     29 and 31 are dark (NQR), same cycle (14,29,31).
+#
+#   THEOREM 3: Z/9Z doubling cycle 1,2,4,8,7,5 (period 6).
+#     TESLA_SET={3,6,9} closed under ×2; DOUBLING={1,2,4,5,7,8} the 6-cycle.
+#     DECADE(10)÷2=5 (integer exact): anchor halves to last step before 1.
+#     7→5 under doubling (DR(7×2)=5); 5→1 under doubling (DR(5×2)=1).
+#
+#   THEOREM 4: 0↔9 units digit swap preserves DR.
+#     DR(10k)=DR(10k+9)=k for k=1..9. [+9 is a DR no-op]
+#
+#   CONCATENATED TRIPLET THEOREM:
+#     n(n+1)(n+2) as 6-digit number ≡ 28 (mod 37) for ALL n.
+#     [10101·n+102; 10101≡SEAM; 102≡28; 28 in outlier sovereign cycle]
+#     DRs of these numbers cycle through {6,9,3}=TESLA_SET.
+#     Special: 282930 both halves digit-sum to 12∈ST.
+#
+#   SA∩ST ORBIT:
+#     3×30=90≡16∈cycle(9,12,16); DR(90)=9∈SA
+#     3×30+DECADE=100≡SCALAR_137(26)
+#     30÷2=15∈PR; DR(15)=6=TESLA_FLOW
+#     11×DECADE=110≡36∈ORBIT_11
+#
+#   HALVING CHAIN: 11→{5,6}→30=SA∩ST→ST(3)  and  11→{5,6}→6=TESLA_FLOW→ST(3)
+#     Both paths from ORBIT_11 element 11 terminate at ST.
+#     Second level: 5→{2,3}: 2+3=5∈PR, 2×3=6=TESLA_FLOW.
+#
+#   → heartbeat_3cycle: ORBIT_11 is a key cycle; 5+6=11∈ORBIT_11 from dark pair.
+#   → dark_sector_algebra: dark×dark=visible (χ product); PR×TESLA_FLOW=SA∩ST.
+#   → sector_invariance_137map: the 5,6 dark pair lands in visible nodes.
+#   → cycle_symmetry_maps: 29×31≡11 via difference-of-squares; flanker dark cycle.
+#   → ababab_convergence: concatenated triplets ≡28; 10101≡SEAM; same base-10 structure.
+#   → cipher_123_1234: Z/9Z doubling cycle; TESLA_SET closed; DR algebra.
+#   → dr_algebra: 0↔9 swap; DR(10k+9)=DR(10k); digital root invariance under +9.
+#   → cubic_residue_cycle_structure: 30²≡12∈ST; order-18 arithmetic of SA∩ST.
+#   → intersection_cycle_theorem: SA∩ST(30) as product and square target.
+#   → two_group_split: cycle(9,12,16) [Group A, 3×30 lands here]; 3×30+10=SCALAR_137.
+
+_chi54 = lambda n: 1 if pow(n,18,37)==1 else -1
+# THEOREM 1
+assert TESLA_FLOW*5==30 and 30 in SA and 30 in ST
+assert 5+TESLA_FLOW==11 and 11 in ORBIT_11
+assert _chi54(TESLA_FLOW)==-1 and _chi54(5)==-1 and _chi54(30)==1
+# THEOREM 2
+assert pow(30,2,37)==12 and 12 in ST
+assert (29*31)%37==11 and 11 in ORBIT_11
+assert pow(30,2,37)-(29*31)%37==1     # 12-11=1
+# THEOREM 3
+_dc54=[1,2,4,8,7,5]
+for _i,_v in enumerate(_dc54):
+    assert dr(_v*2)==_dc54[(_i+1)%6]
+assert frozenset({3,6,9})|frozenset({1,2,4,5,7,8})==frozenset(range(1,10))
+assert DECADE_ANCHOR//2==5 and dr(7*2)==5 and dr(5*2)==1
+# THEOREM 4
+for _k in range(1,10): assert dr(10*_k)==dr(10*_k+9)==_k
+# Concatenated triplet theorem
+assert 10101%37==0 and 102%37==28
+for _n in range(10,90):
+    assert (_n*10000+(_n+1)*100+(_n+2))%37==28
+# SA∩ST orbit
+assert (3*30)%37==16 and dr(90)==9 and 9 in SA
+assert (3*30+DECADE_ANCHOR)%37==SCALAR_137
+assert 30//2==15 and 15 in PR and dr(15)==TESLA_FLOW
+assert (11*DECADE_ANCHOR)%37==36 and 36 in ORBIT_11
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
 #
@@ -2360,6 +2441,11 @@ MASTER_CONNECTIONS = {
                                    "cubic_residue_cycle_structure","cipher_123_1234",
                                    "one_two_three_generator","dr_algebra",
                                    "stacked_zeros_gf37","cycle_symmetry_maps"],
+    "five_six_orbit":              ["heartbeat_3cycle","dark_sector_algebra",
+                                   "sector_invariance_137map","cycle_symmetry_maps",
+                                   "ababab_convergence","cipher_123_1234",
+                                   "dr_algebra","cubic_residue_cycle_structure",
+                                   "intersection_cycle_theorem","two_group_split"],
 }
 
 
