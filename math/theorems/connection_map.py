@@ -2860,6 +2860,49 @@ assert dr(2*28)==2 and 28 in frozenset({21,25,28})     # outlier bridge to DR=2
 assert pow(10,3,37)==1                                 # period 3 in IC
 
 
+# ── THEOREM 68: tripling_6cycle_gf37.py ──────────────────────────────────────
+#   ord₃₇(3)=18; (×3)^6 ≡ ×26 = 137-map. The 12 non-zero 137-orbits split into
+#   exactly two disjoint 6-cycles under ×3.
+#   CYCLE 1 (contains IC): O1→O2→ORBIT_11→ANTI_SOV→O3→IC→O1
+#   CYCLE 2 (contains DARK_A): DARK_A→TF_ORB→SEED→PR_17→PM_ORB→PR_5→DARK_A
+#   Hand-checkable: 3→9→27→7→21→26→4 (min elements, each step ×3 mod 37).
+#   Key connection: 3^6≡26=SCALAR_137; the tripling 6-cycle IS the 137-map on orbits.
+#   Connections:
+#   → heartbeat_3cycle: ord₃₇(26)=3; (×3)^6=(×26) ties tripling to 137-map directly.
+#   → orbit_order_structure_gf37: homogeneous/non-homogeneous split; ANTI_SOV appears in cycle 1.
+#   → sovereign_triple_plus9_gf37: O1,O2,O3 all appear in cycle 1; SEAM-exit 28∈O3 at pos 4.
+#   → cascade_8_13_24: CB={8,13,24}; 24∈SEED_ORBIT at cycle 2 pos 2.
+#   → sovereign_qr_closure: IC∈cycle 1 pos 5; all IC elements are QR.
+_T68_t = lambda x: (x*3)%37
+_T68_torb = lambda orb: frozenset(_T68_t(x) for x in orb)
+_T68_O1 = frozenset({3,4,30}); _T68_O2 = frozenset({9,12,16})
+_T68_ANTI = frozenset({7,33,34}); _T68_O3 = frozenset({21,25,28})
+_T68_IC = frozenset({1,10,26})
+_T68_TF = frozenset({6,8,23}); _T68_SEED = frozenset({18,24,32})
+_T68_PR17 = frozenset({17,22,35}); _T68_PM = frozenset({14,29,31})
+_T68_PR5 = frozenset({5,13,19}); _T68_DA = frozenset({2,15,20})
+# cycle 1
+assert _T68_torb(_T68_O1) == _T68_O2
+assert _T68_torb(_T68_O2) == ORBIT_11
+assert _T68_torb(ORBIT_11) == _T68_ANTI
+assert _T68_torb(_T68_ANTI) == _T68_O3
+assert _T68_torb(_T68_O3) == _T68_IC
+assert _T68_torb(_T68_IC) == _T68_O1
+# cycle 2
+assert _T68_torb(_T68_DA) == _T68_TF
+assert _T68_torb(_T68_TF) == _T68_SEED
+assert _T68_torb(_T68_SEED) == _T68_PR17
+assert _T68_torb(_T68_PR17) == _T68_PM
+assert _T68_torb(_T68_PM) == _T68_PR5
+assert _T68_torb(_T68_PR5) == _T68_DA
+# key fact
+assert pow(3,6,37) == SCALAR_137
+assert (_T68_O1 | _T68_O2 | ORBIT_11 | _T68_ANTI | _T68_O3 | _T68_IC).isdisjoint(
+       _T68_DA | _T68_TF | _T68_SEED | _T68_PR17 | _T68_PM | _T68_PR5)
+assert (_T68_O1 | _T68_O2 | ORBIT_11 | _T68_ANTI | _T68_O3 | _T68_IC |
+        _T68_DA | _T68_TF | _T68_SEED | _T68_PR17 | _T68_PM | _T68_PR5) == frozenset(range(1,37))
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3177,6 +3220,10 @@ MASTER_CONNECTIONS = {
                                    "heartbeat_3cycle","lucas_abbc_chain",
                                    "cascade_8_13_24","dr_algebra",
                                    "sovereign_triple_plus9_gf37","identity_cycle_sum_structure"],
+    "tripling_6cycle_gf37":       ["heartbeat_3cycle","orbit_order_structure_gf37",
+                                   "sovereign_triple_plus9_gf37","tripling_map_gf37",
+                                   "cascade_8_13_24","sovereign_qr_closure",
+                                   "primitive_root_invariants_gf37","plus9_scatter_map_gf37"],
 }
 
 
