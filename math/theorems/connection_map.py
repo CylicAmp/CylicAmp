@@ -3000,6 +3000,22 @@ for pair in [(5,7),(11,13),(17,19),(29,31),(41,43),(71,73)]:
 assert pow(6, 4, 37) == 1 and pow(6, 1, 37) == TESLA_FLOW  # TESLA_FLOW ord=4
 
 
+# ── THEOREM 72: open_closed_grid_theorem.py ───────────────────────────────────
+# closed system (nine 1s) → sum=9∈SA; open sequence 1-2345678-1 → sum=37=THE PRIME
+_T72_closed_sum = 9 * 1
+assert _T72_closed_sum == 9 and 9 in SA          # closed sum ∈ SA (sovereign anchor, frozen)
+_T72_open_seq = [1, 2, 3, 4, 5, 6, 7, 8, 1]
+_T72_open_sum = sum(_T72_open_seq)
+assert _T72_open_sum == 37                        # open sum = THE PRIME
+_T72_interior = sum(range(1, 9))
+assert _T72_interior == 36 and 36 in ORBIT_11    # interior 1+…+8 = 36 ∈ ORBIT_11 (≡-1 mod37)
+assert _T72_interior + 1 == 37                   # one boundary 1 → prime
+assert 37 % 37 == SEAM                           # prime collapses to SEAM (completion)
+assert 28 * 2 == 56 and 56 + 1 == 57            # closed doubling lands one short; gap forces open
+IC = frozenset({1, 10, 26})
+assert (0 if 37 == 0 else 1 + (37 - 1) % 9) == 1 and 1 in IC  # DR(37)=1 ∈ IC
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3333,6 +3349,10 @@ MASTER_CONNECTIONS = {
                                    "medusa_v3_sovereign","five_six_orbit",
                                    "dr_algebra","twin_prime_gf37",
                                    "emirp_dr_c0_eisenstein","cascade_8_13_24"],
+    "open_closed_grid_theorem":   ["medusa_v3_sovereign","cascade_8_13_24",
+                                   "heartbeat_3cycle","dr_algebra",
+                                   "sovereign_qr_closure","abcabc_mod37_orbit",
+                                   "emirp_dr_c0_eisenstein","cipher_123_1234"],
 }
 
 
