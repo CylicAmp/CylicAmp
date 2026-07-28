@@ -2903,6 +2903,36 @@ assert (_T68_O1 | _T68_O2 | ORBIT_11 | _T68_ANTI | _T68_O3 | _T68_IC |
         _T68_DA | _T68_TF | _T68_SEED | _T68_PR17 | _T68_PM | _T68_PR5) == frozenset(range(1,37))
 
 
+# ── THEOREM 69: sofia_germain_prime_gf37.py ───────────────────────────────────
+#   p = 2618163402417 × 2^21290 − 1  (largest known Sofia Germain prime)
+#   q = 2p+1 (safe prime)
+#   k=2618163402417 ≡ 11∈ORBIT_11;  n=21290, n mod 36=14, 2^14≡30∈SA∩ST;
+#   p ≡ 11×30−1=329≡33∈ANTI_SOV;  q≡2×33+1=67≡30∈SA∩ST={30}.
+#   DR(p)=DR(q)=8∈CB (both prime and safe prime share digital root in CB).
+#   n mod 37=15∈DARK_A: the exponent itself lives in the primitive-root orbit.
+#   One-line: ORBIT_11 × SA∩ST − 1 = ANTI_SOV; safe prime maps back to SA∩ST.
+#   Connections:
+#   → orbit_order_structure_gf37: ANTI_SOV is squaring image of OUTLIER_SOV (T64).
+#   → sovereign_triple_plus9_gf37: SA∩ST={30} is sovereign intersection pivot.
+#   → tripling_6cycle_gf37: Cycle 1 sends ORBIT_11 → ANTI_SOV in 3 tripling steps.
+#   → cascade_8_13_24: DR(p)=DR(q)=8∈CB.
+#   → primitive_root_invariants_gf37: ord₃₇(2)=36; exponent reduction n mod36=14.
+_T69_k37  = 2618163402417 % 37
+_T69_pow2 = pow(2, 21290, 37)
+_T69_p37  = (_T69_k37 * _T69_pow2 - 1) % 37
+_T69_q37  = (2 * _T69_p37 + 1) % 37
+assert _T69_k37  == 11 and 11 in ORBIT_11
+assert _T69_pow2 == 30 and 30 in SA and 30 in ST
+assert _T69_p37  == 33 and 33 in frozenset({7,33,34})  # ANTI_SOV
+assert _T69_q37  == 30 and 30 in SA and 30 in ST       # SA∩ST singleton
+assert 21290 % 37 == 15 and 15 in frozenset({2,15,20}) # n∈DARK_A
+assert pow(2618163402417, 1, 9) == 0                   # k≡0 mod9
+assert 21290 % 6 == 2                                   # 2^n ≡ 4 mod9 → p≡8≡CB
+_T69_p9 = (0 * pow(2,21290,9) - 1) % 9
+assert _T69_p9 == 8 and 8 in CB
+assert (2*8+1)%9 == 8 and 8 in CB                       # DR(q)=8∈CB
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3224,6 +3254,10 @@ MASTER_CONNECTIONS = {
                                    "sovereign_triple_plus9_gf37","tripling_map_gf37",
                                    "cascade_8_13_24","sovereign_qr_closure",
                                    "primitive_root_invariants_gf37","plus9_scatter_map_gf37"],
+    "sofia_germain_prime_gf37":   ["orbit_order_structure_gf37","sovereign_triple_plus9_gf37",
+                                   "cascade_8_13_24","primitive_root_invariants_gf37",
+                                   "tripling_6cycle_gf37","heartbeat_3cycle",
+                                   "medusa_v3_sovereign","sa_self_cycle_st_chain"],
 }
 
 
