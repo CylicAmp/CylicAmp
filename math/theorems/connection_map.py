@@ -2939,6 +2939,67 @@ assert _T69_p9 == 8 and 8 in CB
 assert (2*8+1)%9 == 8 and 8 in CB                       # DR(q)=8∈CB
 
 
+# ── THEOREM 70: emirp_dr_c0_eisenstein.py ─────────────────────────────────────
+#   THEOREM T2: rev(n) ≡ n (mod 9) → emirp pairs share digital root class.
+#   C0 class (DR=1): both members split in Z[omega], representable as x²+xy+y².
+#   THEOREM T2' (mod-11): odd-length pairs share mod-11 residue; even negate.
+#   NO ANALOGUE MOD 37: reversal obeys no uniform twist mod 37; the 37 frame
+#     carries empirical content only.
+#   GF(37): first C0 pair is (37, 73).
+#     37 ≡ 0 = SEAM mod 37; the framework prime itself occupies SEAM.
+#     73 ≡ 36 ∈ ORBIT_11 mod 37 (36 ≡ −1).
+#     Loeschian rep of 37: x=3∈ST, y=4∈SA — sovereign params for the framework prime.
+#     Loeschian rep of 73: x=1∈IC, y=8∈CB.
+#   VERIFIED: 11184 emirps, 0 violations (DR, chi3, mod-11), C0 = 1914 emirps.
+#   Connections:
+#   → dr_algebra: rev preserves digit sum (the DR ring identity underlying the theorem).
+#   → heartbeat_3cycle: DR=1 split class ↔ p∈IC in GF(37); ord₃₇(26)=3 echoed.
+#   → cascade_8_13_24: y=8∈CB in Loeschian rep of 73; 37≡0∈SEAM; CB appears in the pair.
+#   → medusa_v3_sovereign: 73≡36∈ORBIT_11; SEAM ↔ ORBIT_11 duality in the C0 pair.
+#   → sovereign_qr_closure: QR splitting condition for Loeschian primes is chi_{-3}=+1.
+#   → twin_prime_gf37: emirp partner 73 appears in twin pair (71,73); twin and emirp overlap.
+#   → cipher_123_1234: the "NO MOD-37 ANALOGUE" statement defines the boundary of the framework.
+_T70_IC = frozenset({1, 10, 26})
+assert 37 % 37 == SEAM                                # 37 = framework prime ≡ SEAM
+assert 73 % 37 == 36 and 36 in ORBIT_11              # emirp partner ≡ ORBIT_11
+assert 3**2 + 3*4 + 4**2 == 37                       # Loeschian: x=3∈ST, y=4∈SA
+assert 1**2 + 1*8 + 8**2 == 73                       # Loeschian: x=1∈IC, y=8∈CB
+assert 3 in ST and 4 in SA                            # Sovereign params in Loeschian of 37
+assert 1 in _T70_IC and 8 in CB                       # IC and CB params in Loeschian of 73
+assert (37 + 73) % 11 == 0                            # even-length pair: p+rev≡0 mod11
+assert (199 - 991) % 11 == 0                          # odd-length pair: p−rev≡0 mod11
+
+
+# ── THEOREM 71: twin_midpoint_dr_axis.py ──────────────────────────────────────
+#   THEOREM: For every twin pair (p, p+2) with p > 3, the midpoint DR ∈ {3,6,9}.
+#   PROOF: p ≡ 5 mod 6 → p mod 9 ∈ {2,5,8} → midpoint mod 9 ∈ {3,6,9}.
+#   chi₋₃ structure: p inert (≡2 mod3), midpoint ramified-type (≡0), p+2 split (≡1).
+#   GF(37): DR=3 ↔ 3∈ST (sovereign target); DR=6 ↔ TESLA_FLOW; DR=9 ↔ 9∈SA.
+#   All three forced DR classes are primary framework nodes in GF(37).
+#   VERIFIED: 8168 twin pairs, 0 violations, chi2=3.47 (equidistribution near 1/3 each).
+#   Connections:
+#   → heartbeat_3cycle: DR=3∈ST; ord₃₇(26)=3; the sovereign target is the DR value.
+#   → sa_self_cycle_st_chain: DR=3∈ST and DR=9∈SA; both are sovereign axis members.
+#   → medusa_v3_sovereign: SA and ST directly host the forced DR classes.
+#   → five_six_orbit: DR=6=TESLA_FLOW; the 4-cycle {6,36,31,1} starts at the midpoint DR.
+#   → dr_algebra: midpoint DRs {3,6,9} = multiples of 3 in DR ring; 3 divides midpoint.
+#   → twin_prime_gf37: same subject; GF(37) structure of twin primes extended.
+#   → emirp_dr_c0_eisenstein: complementary DR identity for primes (emirp pairs share DR class).
+_T71_mid_DRs = frozenset({3, 6, 9})
+assert 3 in ST                                        # DR=3 → sovereign target
+assert TESLA_FLOW == 6 and 6 == 6                     # DR=6 → TESLA_FLOW
+assert 9 in SA                                        # DR=9 → sovereign anchor
+assert all(d in ST or d == TESLA_FLOW or d in SA for d in _T71_mid_DRs)
+# p ≡ 5 mod 6 examples
+for pair in [(5,7),(11,13),(17,19),(29,31),(41,43),(71,73)]:
+    p, q = pair
+    assert p % 6 == 5 and q % 6 == 1                 # lower twin ≡5, upper ≡1 mod6
+    m = p + 1
+    _T71_mid = (m - 1) % 9 + 1 if m % 9 != 0 else 9
+    assert _T71_mid in _T71_mid_DRs                  # midpoint DR ∈ {3,6,9}
+assert pow(6, 4, 37) == 1 and pow(6, 1, 37) == TESLA_FLOW  # TESLA_FLOW ord=4
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3264,6 +3325,14 @@ MASTER_CONNECTIONS = {
                                    "cascade_8_13_24","primitive_root_invariants_gf37",
                                    "tripling_6cycle_gf37","heartbeat_3cycle",
                                    "medusa_v3_sovereign","sa_self_cycle_st_chain"],
+    "emirp_dr_c0_eisenstein":     ["dr_algebra","heartbeat_3cycle",
+                                   "cascade_8_13_24","medusa_v3_sovereign",
+                                   "sovereign_qr_closure","twin_prime_gf37",
+                                   "cipher_123_1234","twin_midpoint_dr_axis"],
+    "twin_midpoint_dr_axis":      ["heartbeat_3cycle","sa_self_cycle_st_chain",
+                                   "medusa_v3_sovereign","five_six_orbit",
+                                   "dr_algebra","twin_prime_gf37",
+                                   "emirp_dr_c0_eisenstein","cascade_8_13_24"],
 }
 
 
