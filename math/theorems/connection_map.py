@@ -3069,6 +3069,28 @@ assert _T74_chain==[3,6,12,24,11]   # doubling: ST→TESLA→ST→CB→ORBIT_11
 assert 3+3+6+6+12-12==18 and 18 in SEED_ORBIT  # doubling-and-cancellation=SEED
 
 
+# ── THEOREM 75: affine_fixed_point_gf37.py ────────────────────────────────────
+# GF(37) primality → unique fixed point for every non-translation affine map
+from math import gcd as _gcd
+assert all(_gcd(a-1,37)==1 for a in range(37) if a!=1)  # prime = invertible
+# Census
+_T75_counts = {1:0, 0:0, 37:0}
+for _a in range(37):
+    for _b in range(37):
+        _fps = sum(1 for x in range(37) if (_a*x+_b)%37==x)
+        if _fps in _T75_counts: _T75_counts[_fps]+=1
+        else: _T75_counts[_fps]=1
+assert _T75_counts[1]==1332 and _T75_counts[0]==36 and _T75_counts[37]==1
+# Pure-multiplicative maps fix only SEAM
+assert all([x for x in range(37) if (a*x)%37==x]==[0] for a in [26,2,3,6,10])
+# f(3n+1): fixed point 18∈SEED
+assert (3*18+1)%37==18 and 18 in SEED_ORBIT
+# f(2n+1): fixed point 36∈ORBIT_11
+assert (2*36+1)%37==36 and 36 in ORBIT_11
+# Structural: a=3∈ST, b=1∈IC → x*=18∈SEED
+assert 3 in ST and 1 in IC
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3414,6 +3436,10 @@ MASTER_CONNECTIONS = {
                                    "medusa_v3_sovereign","open_closed_grid_theorem",
                                    "primitive_root_test","five_six_orbit",
                                    "dr_algebra","sequential_morph_transform"],
+    "affine_fixed_point_gf37":   ["heartbeat_3cycle","primitive_root_test",
+                                   "medusa_v3_sovereign","cascade_8_13_24",
+                                   "sovereign_qr_closure","abcabc_mod37_orbit",
+                                   "repdigit_framework_lattice","lucas_abbc_chain"],
 }
 
 
