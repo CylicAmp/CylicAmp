@@ -3048,6 +3048,27 @@ assert sum(list(_T73_orbit[7])[0:3]) == 11 and 11 in ORBIT_11  # iter 7 row1=11�
 assert sum(list(_T73_orbit[7])[3:6]) == 11 and 11 in ORBIT_11  # iter 7 row2=11∈ORBIT_11
 
 
+# ── THEOREM 74: repdigit_framework_lattice.py ─────────────────────────────────
+# ord₃₇(10)=3; every ddd≡0=SEAM; sign partition separates ST from -SA
+SEED_ORBIT = frozenset({18, 24, 32})
+assert pow(10, 3, 37) == 1 and all(pow(10,k,37)!=1 for k in [1,2])
+assert all(int(str(d)*3)%37==0 for d in range(1,10))   # triple-repdigit=SEAM
+assert 11%37==11 and 11 in ORBIT_11   # 11→ORBIT_11
+assert 55%37==18 and 18 in SEED_ORBIT  # 55→SEED (hidden 5 emerges at double level)
+assert 77%37==3  and 3  in ST          # 77→ST  (hidden 7 emerges at double level)
+assert 99%37==25 and 25 in SA          # 99→SA  (9 stays sovereign)
+_T74_pos_sum = 1+2+3+6
+_T74_neg_sum = 4+5+7+8+9
+assert _T74_pos_sum==12 and 12 in ST
+assert (37-_T74_neg_sum%37) in SA    # neg sum ≡ -4≡-SA
+assert abs(_T74_pos_sum-_T74_neg_sum)==21 and 21 in ST
+_T74_R=[3,5,7,2,4,8,1,5,2]
+assert sum(_T74_R)==37               # result sum = THE PRIME
+_T74_chain=[3*(2**k)%37 for k in range(5)]
+assert _T74_chain==[3,6,12,24,11]   # doubling: ST→TESLA→ST→CB→ORBIT_11
+assert 3+3+6+6+12-12==18 and 18 in SEED_ORBIT  # doubling-and-cancellation=SEED
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3389,6 +3410,10 @@ MASTER_CONNECTIONS = {
                                    "heartbeat_3cycle","five_six_orbit",
                                    "cascade_8_13_24","medusa_v3_sovereign",
                                    "dr_algebra","abcabc_mod37_orbit"],
+    "repdigit_framework_lattice": ["heartbeat_3cycle","cascade_8_13_24",
+                                   "medusa_v3_sovereign","open_closed_grid_theorem",
+                                   "primitive_root_test","five_six_orbit",
+                                   "dr_algebra","sequential_morph_transform"],
 }
 
 
