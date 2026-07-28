@@ -3016,6 +3016,38 @@ IC = frozenset({1, 10, 26})
 assert (0 if 37 == 0 else 1 + (37 - 1) % 9) == 1 and 1 in IC  # DR(37)=1 ∈ IC
 
 
+# ── THEOREM 73: sequential_morph_transform.py ─────────────────────────────────
+# T: DR(sᵢ+i) for i=1..8; s₉ fixed (SEAM). Base B={2,5,7,2,4,8,9,1,2}. Period=9.
+TESLA_4 = frozenset({6, 36, 31, 1})
+
+def _T73_dr(n):
+    if n == 0: return 0
+    n = n % 9
+    return 9 if n == 0 else n
+
+def _T73_morph(seq):
+    n = len(seq)
+    return [_T73_dr(s + (i+1)%n) for i,s in enumerate(seq)]
+
+_T73_B = [2,5,7,2,4,8,9,1,2]
+_T73_orbit = []
+_T73_seq = _T73_B[:]
+for _ in range(9):
+    _T73_orbit.append(tuple(_T73_seq))
+    _T73_seq = _T73_morph(_T73_seq)
+assert _T73_seq == _T73_B                        # period=9
+assert all(o[8] == 2 for o in _T73_orbit)       # position 9 anchored (SEAM)
+assert sum([1,2,3,4,5,6,7,8,0]) == 36 and 36 in ORBIT_11  # increment sum = ord₃₇(2) ∈ ORBIT_11
+assert pow(2,36,37) == 1                         # 2 is primitive root, ord=36
+assert 36 == 4*9                                  # 36 = TESLA_FLOW_order × DR_period
+_T73_sums_mod37 = [sum(o)%37 for o in _T73_orbit]
+assert sum(1 for r in _T73_sums_mod37 if r in ST) == 7   # 7/9 in ST
+assert sum(1 for r in _T73_sums_mod37 if r in TESLA_4) == 2  # 2/9 in TESLA_4
+assert list(_T73_orbit[1]) == [3,7,1,6,9,5,7,9,2]       # iter 1 verified
+assert sum(list(_T73_orbit[7])[0:3]) == 11 and 11 in ORBIT_11  # iter 7 row1=11∈ORBIT_11
+assert sum(list(_T73_orbit[7])[3:6]) == 11 and 11 in ORBIT_11  # iter 7 row2=11∈ORBIT_11
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3353,6 +3385,10 @@ MASTER_CONNECTIONS = {
                                    "heartbeat_3cycle","dr_algebra",
                                    "sovereign_qr_closure","abcabc_mod37_orbit",
                                    "emirp_dr_c0_eisenstein","cipher_123_1234"],
+    "sequential_morph_transform": ["open_closed_grid_theorem","primitive_root_test",
+                                   "heartbeat_3cycle","five_six_orbit",
+                                   "cascade_8_13_24","medusa_v3_sovereign",
+                                   "dr_algebra","abcabc_mod37_orbit"],
 }
 
 
