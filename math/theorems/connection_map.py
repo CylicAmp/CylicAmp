@@ -3217,6 +3217,33 @@ assert pow(2, 37, 37) == 2                                   # Fermat's little t
 assert (pow(2, 37, 37) - 2) % 37 == 0                       # K(37) ≡ 0 = SEAM
 
 
+# ── THEOREM 83: kervaire_addend_chain_gf37.py ─────────────────────────────────
+# Chain [2,4,8,16,32,12,4,2]: first 5 partial sums = Kervaire dims [2,6,14,30,62].
+# Ghost step 6: +12∈ST instead of +64≡27∈ORBIT_11 → cumsum=74=2×37≡SEAM.
+# Step 7: +4∈SA → 78≡4∈SA. Step 8: +2∈PR → 80≡6=TESLA_FLOW.
+# Ghost tail [12,4,2] sums to 18∈SEED_ORBIT (= ∑Kervaire dims mod 37, T81).
+# Outer pairs 2+4=4+2=6=TESLA_FLOW; inner [8,16,32,12]≡31∈T4; 31+6=37=PRIME.
+# DR sequence [2,6,5,3,8,2,6,8]; SEAM-mirror: DR[step6]=DR[step1]=2, DR[step7]=DR[step2]=6.
+# First four DR [2,6,5,3]: sum=16=2^4; product=180≡32∈SEED. All-DR sum≡3∈ST; prod≡8∈CB.
+import math as _math3
+_t83_partials = [2, 6, 14, 30, 62, 74, 78, 80]
+_t83_mods = [x % 37 for x in _t83_partials]
+assert _t83_mods == [2, 6, 14, 30, 25, 0, 4, 6]
+assert _t83_partials[:5] == [2**j-2 for j in range(2,7)]    # Kervaire dims
+assert _t83_partials[5] == 2 * 37                            # SEAM = 2×PRIME
+assert _t83_mods[7] == TESLA_FLOW                            # returns to TESLA_FLOW
+def _dr83(n):
+    while n >= 10: n = sum(int(c) for c in str(n))
+    return n
+_t83_dr = [_dr83(x) for x in _t83_partials]
+assert _t83_dr == [2, 6, 5, 3, 8, 2, 6, 8]
+assert _t83_dr[5] == _t83_dr[0] == 2                        # SEAM mirror: step6=step1
+assert _t83_dr[6] == _t83_dr[1] == 6                        # step7=step2
+assert sum(_t83_dr[:4]) == 16 == 2**4                        # sum of first 4 DR = 2^4
+assert _math3.prod(_t83_dr[:4]) % 37 == 32 and 32 in SEED_ORBIT  # product ≡ SEED
+assert _math3.prod(_t83_dr) % 37 == 8 and 8 in CB           # all-DR product ∈ CB
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3594,6 +3621,10 @@ MASTER_CONNECTIONS = {
                                    "cascade_8_13_24","abcabc_mod37_orbit",
                                    "heartbeat_3cycle","multi_layer_obstruction_gf37",
                                    "medusa_v3_sovereign","sovereign_qr_closure"],
+    "kervaire_addend_chain_gf37":  ["kervaire_ghost_gf37","ghost_kervaire_chain_gf37",
+                                   "cascade_8_13_24","medusa_v3_sovereign",
+                                   "heartbeat_3cycle","abcabc_mod37_orbit",
+                                   "multi_layer_obstruction_gf37","cipher_123_1234"],
 }
 
 
