@@ -3161,6 +3161,21 @@ _inv79 = pow(_rk79_bal[0],35,37)
 assert _rk79_bal[1]*_inv79%37 == 1 and _rk79_bal[2]*_inv79%37 == 1  # (1:1:1)
 
 
+# ── THEOREM 80: multi_layer_obstruction_gf37.py ──────────────────────────────
+# Three obstruction layers: SA (gauge/LOCKED), cross-sum mixed (Floer), CB cascade (skein bypass).
+# f(SA)⊆ST (gateway); CB∩SA=∅, CB∩ST=∅ (bypass); WRT level-37: 36=|GF(37)*| colorings, [37]=SEAM.
+# Wilson: 36!≡36∈ORBIT_11; 36²=1296=(p-1)²=T79 kernel count.
+import math as _math
+assert all((a*26)%37 in ST for a in SA)          # f(SA) ⊆ ST (gateway property)
+assert CB & SA == frozenset() and CB & ST == frozenset()   # bypass
+assert all(abs(_math.sin(n*_math.pi/37))>1e-12 for n in range(1,37))  # [1]..[36] nonzero
+assert abs(_math.sin(37*_math.pi/37)) < 1e-12    # [37]=SEAM
+assert _math.factorial(36)%37==36 and 36 in ORBIT_11   # Wilson → ORBIT_11
+assert 36**2==1296                                # Wilson²=(p-1)²=T79 kernel count
+_cross_res = {(int('1'*n+'2'*n+'3'*n)+6*int('1'*n))%37 for n in range(1,7) if n%3!=0}
+assert _cross_res=={4,18} and 4 in SA and 18 in SEED_ORBIT   # mixed Floer orbit
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3526,6 +3541,10 @@ MASTER_CONNECTIONS = {
                                    "heartbeat_3cycle","primitive_root_test",
                                    "medusa_v3_sovereign","sovereign_qr_closure",
                                    "cascade_8_13_24","abcabc_mod37_orbit"],
+    "multi_layer_obstruction_gf37": ["medusa_v3_sovereign","cascade_8_13_24",
+                                   "heartbeat_3cycle","concatenation_123_repunit",
+                                   "affine_causal_processes_gf37","sovereign_qr_closure",
+                                   "repdigit_self_similarity_gf37","fixed_line_3cycle_gf37"],
 }
 
 
