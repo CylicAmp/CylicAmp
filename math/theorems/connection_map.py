@@ -3127,6 +3127,18 @@ for _n77 in range(1, 7):
         assert _nm == 0 and _gm == 0   # SEAM collapse
 
 
+# ── THEOREM 78: repdigit_self_similarity_gf37.py ───────────────────────────────
+# Repunit self-similarity: R_{n+3}≡R_n mod 37; comma-leading-block=residue.
+# Repunit prime factorizations: R_4=O11×O11≡1; R_5=SA×ST≡O11; R_7=CB×inv(CB)≡1.
+# ⟨11⟩=IC∪ORBIT_11 (order-6 subgroup); ORBIT_11×ORBIT_11⊆IC (coset×coset→subgroup).
+assert all(int('1'*(n+3))%37==int('1'*n)%37 for n in range(1,15))   # R_{n+3}≡R_n
+assert 11*101==int('1'*4) and 101%37==27 and (11*27)%37==1   # R_4=ORBIT_11 pair
+assert 41*271==int('1'*5) and 41%37==4 and 271%37==12 and (4*12)%37==11  # R_5=SA×ST→O11
+assert 239*4649==int('1'*7) and 4649%37==24 and 24 in CB and (17*24)%37==1  # R_7=CB pair
+_IC_set = frozenset({1,10,26})
+assert all((a*b)%37 in _IC_set for a in ORBIT_11 for b in ORBIT_11)  # O11×O11⊆IC
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3484,6 +3496,10 @@ MASTER_CONNECTIONS = {
                                    "sequential_morph_transform","open_closed_grid_theorem",
                                    "cascade_8_13_24","abcabc_mod37_orbit",
                                    "affine_fixed_point_gf37","primitive_root_test"],
+    "repdigit_self_similarity_gf37": ["concatenation_123_repunit","repdigit_framework_lattice",
+                                   "heartbeat_3cycle","abcabc_mod37_orbit",
+                                   "primitive_root_test","sovereign_qr_closure",
+                                   "cascade_8_13_24","affine_fixed_point_gf37"],
 }
 
 
