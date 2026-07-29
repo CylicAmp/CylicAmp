@@ -3244,6 +3244,26 @@ assert _math3.prod(_t83_dr[:4]) % 37 == 32 and 32 in SEED_ORBIT  # product ≡ S
 assert _math3.prod(_t83_dr) % 37 == 8 and 8 in CB           # all-DR product ∈ CB
 
 
+# ── THEOREM 84: mersenne_seam_kervaire_gf37.py ────────────────────────────────
+# Mersenne-SEAM theorem: S_k=2^{k+1}-2=K_{k+1} ≡ 0 (mod p) iff p=2^k-1 (Mersenne prime).
+# p=31 (Mersenne): SEAM at S_5=62=K_6 (included Kervaire dim, last-but-one).
+# p=127 (Mersenne): SEAM at S_7=254=K_8 (FIRST EXCLUDED dim, HHR boundary).
+# p=37 (non-Mersenne): no S_k≡0 for k=1..35; S(36)≡0 by Fermat (THEOREM 82).
+# Ghost step j=6 gives ghost=12∈ST=f(9), 9∈SA: unique ST ghost among j=2..9.
+# SEED-shifted continuation: cumsum(j)=K(j+1)+18 (exact); mod 37 = K(j+1)+SEED_node.
+# SEAM in continuation at j=21 (ord₃₇(2)=36; 2^{22}≡21 mod 37→K(22)+18≡SEAM).
+def _S(k): return 2**(k+1)-2
+for _k in [2,3,5,7]:
+    _pm = 2**_k-1
+    assert _S(_k) % _pm == 0 and _S(_k) == 2*_pm      # S_k=2p for Mersenne prime
+assert all(_S(_k)%37!=0 for _k in range(1,36))         # p=37: no early SEAM
+assert _S(36)%37==0                                     # k=36: Fermat-SEAM (T82)
+assert _S(7)==254 and 254==2*127 and 254%(2**8-2)==0    # p=127: SEAM at first excluded K_8
+_g6=(-(2**6-2))%37; assert _g6==12 and 12 in ST        # ghost j=6 ∈ ST
+assert (26*9)%37==12 and 9 in SA                        # ghost=f(9), 9∈SA
+assert sum(1 for j in range(2,10) if (-(2**j-2))%37 in ST)==1  # unique ST ghost
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3625,6 +3645,10 @@ MASTER_CONNECTIONS = {
                                    "cascade_8_13_24","medusa_v3_sovereign",
                                    "heartbeat_3cycle","abcabc_mod37_orbit",
                                    "multi_layer_obstruction_gf37","cipher_123_1234"],
+    "mersenne_seam_kervaire_gf37": ["kervaire_addend_chain_gf37","kervaire_ghost_gf37",
+                                   "ghost_kervaire_chain_gf37","medusa_v3_sovereign",
+                                   "abcabc_mod37_orbit","heartbeat_3cycle",
+                                   "primitive_root_test","fixed_line_3cycle_gf37"],
 }
 
 
