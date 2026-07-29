@@ -3191,6 +3191,32 @@ assert (8*14)%37==1                                             # mutual inverse
 assert pow(2,8,37)==34 and (34-2)%37==32 and 32 in SEED_ORBIT   # first excluded
 
 
+# ── THEOREM 82: ghost_kervaire_chain_gf37.py ──────────────────────────────────
+# Ghost Kervaire chain: groups (2,4),(6,7),(14,16),(30,32),(62,12,4,2).
+# Partial sums [6,13,30,62,80] ≡ [6,13,30,25,6] mod 37 — cycle closes at TESLA_FLOW=6.
+# Gaps [7,17,32,18]: sum=74=2×37≡SEAM; 7+17=24∈CB∩SEED; 32+18≡13∈CB; 24+13=37=PRIME.
+# Ghost increments 7+18=25∈SA; cross-pairs 7+32≡2∈PR, 17+18=35∈PR.
+# Sum of partial sums 191≡6=TESLA_FLOW; product≡18∈SEED_ORBIT (=∑Kervaire dims mod 37).
+# Fermat-SEAM identity: K(37)=2^37-2≡0=SEAM by Fermat's little theorem; first SEAM at j=37.
+_t82_partials = [6, 13, 30, 62, 80]
+_t82_mods = [s % 37 for s in _t82_partials]
+assert _t82_mods == [6, 13, 30, 25, 6]
+assert _t82_mods[0] == _t82_mods[-1] == TESLA_FLOW          # cycle closes
+assert 6 in frozenset({6,36,31,1}) and 13 in CB and 30 in SA and 25 in SA
+_t82_gaps = [_t82_partials[i+1]-_t82_partials[i] for i in range(4)]
+assert _t82_gaps == [7, 17, 32, 18]
+assert sum(_t82_gaps) == 74 and 74 % 37 == 0                # SEAM
+assert (7+17) == 24 and 24 in CB and 24 in SEED_ORBIT
+assert (32+18) % 37 == 13 and 13 in CB
+assert (24+13) == 37                                         # PRIME → SEAM
+assert (7+18) % 37 == 25 and 25 in SA                       # ghost increments ∈ SA
+assert (7+32) % 37 == 2 and 2 in PR                         # cross-pair 1 ∈ PR
+assert (17+18) % 37 == 35 and 35 in PR                      # cross-pair 2 ∈ PR
+assert sum(_t82_partials) % 37 == TESLA_FLOW                 # sum of partials = TESLA_FLOW
+assert pow(2, 37, 37) == 2                                   # Fermat's little theorem
+assert (pow(2, 37, 37) - 2) % 37 == 0                       # K(37) ≡ 0 = SEAM
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3564,6 +3590,10 @@ MASTER_CONNECTIONS = {
                                    "repdigit_framework_lattice","fixed_line_3cycle_gf37",
                                    "concatenation_123_repunit","multi_layer_obstruction_gf37",
                                    "abcabc_mod37_orbit","medusa_v3_sovereign"],
+    "ghost_kervaire_chain_gf37":   ["kervaire_ghost_gf37","fixed_line_3cycle_gf37",
+                                   "cascade_8_13_24","abcabc_mod37_orbit",
+                                   "heartbeat_3cycle","multi_layer_obstruction_gf37",
+                                   "medusa_v3_sovereign","sovereign_qr_closure"],
 }
 
 
