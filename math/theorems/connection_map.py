@@ -3139,6 +3139,28 @@ _IC_set = frozenset({1,10,26})
 assert all((a*b)%37 in _IC_set for a in ORBIT_11 for b in ORBIT_11)  # O11×O11⊆IC
 
 
+# ── THEOREM 79: fixed_line_3cycle_gf37.py ────────────────────────────────────
+# Pure 3-cycle process matrix: det(I-A)=uvw-rst; fixed line iff uvw≡rst.
+# Right kernel (rv:rs:uv); left kernel (st:ut:uv); 1369=p² solvable b-vectors.
+# (p-1)²=1296 directions, each hit (p-1)³=46656 times (uniform on P²(GF(37))∩all-nonzero).
+# Diagonal balance: kernel=(1:1:1) iff r=u, s=v, t=w.
+def _det79(r,s,t,u,v,w): return (u*v*w - r*s*t) % 37
+def _rk79(r,s,u,v): return (r*v%37, r*s%37, u*v%37)
+def _lk79(s,t,u,v): return (s*t%37, u*t%37, u*v%37)
+_r79,_s79,_t79,_u79,_v79 = 2,3,4,1,6
+_w79 = _r79*_s79*_t79*pow(_u79*_v79,35,37)%37
+assert _det79(_r79,_s79,_t79,_u79,_v79,_w79) == 0         # seam: uvw=rst
+_rk79v = _rk79(_r79,_s79,_u79,_v79)
+_lk79v = _lk79(_s79,_t79,_u79,_v79)
+assert all(c != 0 for c in _rk79v) and all(c != 0 for c in _lk79v)
+assert 36**2 == 1296 and 36**3 == 46656 and 37**2 == 1369  # GF(37) specifics
+_r79b,_s79b,_t79b = 5,7,11   # diagonal balance: r=u, s=v, t=w
+assert _det79(_r79b,_s79b,_t79b,_r79b,_s79b,_t79b) == 0
+_rk79_bal = _rk79(_r79b,_s79b,_r79b,_s79b)   # (rv:rs:uv)=(r²s:rs²:r²s²/...
+_inv79 = pow(_rk79_bal[0],35,37)
+assert _rk79_bal[1]*_inv79%37 == 1 and _rk79_bal[2]*_inv79%37 == 1  # (1:1:1)
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3500,6 +3522,10 @@ MASTER_CONNECTIONS = {
                                    "heartbeat_3cycle","abcabc_mod37_orbit",
                                    "primitive_root_test","sovereign_qr_closure",
                                    "cascade_8_13_24","affine_fixed_point_gf37"],
+    "fixed_line_3cycle_gf37":       ["affine_causal_processes_gf37","affine_fixed_point_gf37",
+                                   "heartbeat_3cycle","primitive_root_test",
+                                   "medusa_v3_sovereign","sovereign_qr_closure",
+                                   "cascade_8_13_24","abcabc_mod37_orbit"],
 }
 
 
