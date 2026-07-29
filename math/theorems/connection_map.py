@@ -3107,6 +3107,26 @@ assert all((s1*s2)%37 != 0 for s1 in ST for s2 in ST)
 assert pow(10, 2, 37) == SCALAR_137
 
 
+# ── THEOREM 77: concatenation_123_repunit.py ───────────────────────────────────
+# N_n = (1^n)(2^n)(3^n) in decimal; group-sum = 6*R_n = TESLA_FLOW * R_n
+# GF(37) period-3: N_n ≡ 12∈ST or SEAM; cross-sum {SEED,SA,SEAM} all framework
+def _T77_N(n): return int('1'*n+'2'*n+'3'*n)
+def _T77_R(n): return int('1'*n)
+# Digit triplet properties
+assert 1+2+3 == 6 and 6 in TESLA_4   # sum=product=TESLA_FLOW
+assert 1*2+2*3+1*3 == 11 and 11 in ORBIT_11  # pairwise product sum ∈ ORBIT_11
+assert 123 % 37 == 12 and 12 in ST   # concatenation ≡ ST
+assert 666 == 18*37 and 18 in SEED_ORBIT  # triple-seam = SEED × PRIME
+# Period-3 law
+for _n77 in range(1, 7):
+    _nm = _T77_N(_n77) % 37
+    _gm = (6*_T77_R(_n77)) % 37
+    if _n77 % 3 != 0:
+        assert _nm == 12 and 12 in ST
+    else:
+        assert _nm == 0 and _gm == 0   # SEAM collapse
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3460,6 +3480,10 @@ MASTER_CONNECTIONS = {
                                    "primitive_root_test","medusa_v3_sovereign",
                                    "cascade_8_13_24","sovereign_qr_closure",
                                    "repdigit_framework_lattice","abcabc_mod37_orbit"],
+    "concatenation_123_repunit":   ["repdigit_framework_lattice","heartbeat_3cycle",
+                                   "sequential_morph_transform","open_closed_grid_theorem",
+                                   "cascade_8_13_24","abcabc_mod37_orbit",
+                                   "affine_fixed_point_gf37","primitive_root_test"],
 }
 
 
