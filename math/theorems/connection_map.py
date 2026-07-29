@@ -3176,6 +3176,21 @@ _cross_res = {(int('1'*n+'2'*n+'3'*n)+6*int('1'*n))%37 for n in range(1,7) if n%
 assert _cross_res=={4,18} and 4 in SA and 18 in SEED_ORBIT   # mixed Floer orbit
 
 
+# ── THEOREM 81: kervaire_ghost_gf37.py ───────────────────────────────────────
+# Kervaire invariant one dimensions {2,6,14,30,62,126}={2^j-2:j=2..7}.
+# Mod-37 table: 2^3=8∈CB, 2^5=32∈SEED, 2^6=27∈O11; first excluded 2^8≡34 (non-fw), n≡32∈SEED.
+# Four statistics: ∑exps=27∈O11; ∑dims≡18∈SEED; ∏exps=7!≡8∈CB; ∏dims≡3∈ST.
+# Ghost equation (T79 solvability): 1/p=1/37 b-vectors stable; 8×14≡1 (CB inverse = dim-14).
+import math as _math2
+_kdims = [2**j-2 for j in range(2,8)]
+assert sum(range(2,8))==27 and 27 in ORBIT_11                   # ∑exps ∈ ORBIT_11
+assert sum(_kdims)%37==18 and 18 in SEED_ORBIT                  # ∑dims ≡ SEED
+assert _math2.factorial(7)%37==8 and 8 in CB                    # 7!≡8∈CB
+assert _math2.prod(d%37 for d in _kdims)%37==3 and 3 in ST      # ∏dims ≡ ST
+assert (8*14)%37==1                                             # mutual inverses
+assert pow(2,8,37)==34 and (34-2)%37==32 and 32 in SEED_ORBIT   # first excluded
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3545,6 +3560,10 @@ MASTER_CONNECTIONS = {
                                    "heartbeat_3cycle","concatenation_123_repunit",
                                    "affine_causal_processes_gf37","sovereign_qr_closure",
                                    "repdigit_self_similarity_gf37","fixed_line_3cycle_gf37"],
+    "kervaire_ghost_gf37":         ["cascade_8_13_24","heartbeat_3cycle",
+                                   "repdigit_framework_lattice","fixed_line_3cycle_gf37",
+                                   "concatenation_123_repunit","multi_layer_obstruction_gf37",
+                                   "abcabc_mod37_orbit","medusa_v3_sovereign"],
 }
 
 
