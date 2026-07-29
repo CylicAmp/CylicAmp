@@ -3091,6 +3091,22 @@ assert (2*36+1)%37==36 and 36 in ORBIT_11
 assert 3 in ST and 1 in IC
 
 
+# ── THEOREM 76: affine_causal_processes_gf37.py ───────────────────────────────
+# Every affine 3-party process over GF(37) is causally ordered; linearity obstructs.
+# det(N_eff) = -1 + bg*B2C2 + ab*A1B1 + ag*A2C1 + abg*(A1B2C1+A2B1C2)
+# Four conditions (all zero): A1B1=0, A2C1=0, B2C2=0, cubic=0 → det=-1≠0.
+# Over GF(37) prime: A1B1=0 ⟺ A1=SEAM or B1=SEAM (no zero divisors).
+_T76_pairwise = (2*37-1)**3
+assert _T76_pairwise == 389017
+# All-four count = 295705 (verified by full enumeration in theorem file)
+# 97200 = P²(2P-3)+1 per exclusive-first party; 3×97200+3×1368+1 = 295705
+assert 3*(37**2*(2*37-3)+1) + 3*(37**2-1) + 1 == 295705
+# ST × ST never contains SEAM (prime → no zero divisors)
+assert all((s1*s2)%37 != 0 for s1 in ST for s2 in ST)
+# ⌸ operator: long branch coefficient = SCALAR_137
+assert pow(10, 2, 37) == SCALAR_137
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # THE MASTER CONNECTION: EVERYTHING THROUGH PRIME 37
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3440,6 +3456,10 @@ MASTER_CONNECTIONS = {
                                    "medusa_v3_sovereign","cascade_8_13_24",
                                    "sovereign_qr_closure","abcabc_mod37_orbit",
                                    "repdigit_framework_lattice","lucas_abbc_chain"],
+    "affine_causal_processes_gf37": ["affine_fixed_point_gf37","heartbeat_3cycle",
+                                   "primitive_root_test","medusa_v3_sovereign",
+                                   "cascade_8_13_24","sovereign_qr_closure",
+                                   "repdigit_framework_lattice","abcabc_mod37_orbit"],
 }
 
 
