@@ -19,9 +19,8 @@ while IFS= read -r url; do
 
     # --- X-Robots-Tag ---
     if xrobot=$(echo "$headers" | grep -i "^X-Robots-Tag:"); then
-        # Show each occurrence (just in case)
         echo "$xrobot" | while read -r line; do
-            echo "  X-Robots-Tag: $line"
+            echo "  $line"
         done
     else
         echo "  X-Robots-Tag: [missing]"
@@ -30,7 +29,7 @@ while IFS= read -r url; do
     # --- Cache-Control ---
     if cache=$(echo "$headers" | grep -i "^Cache-Control:"); then
         echo "$cache" | while read -r line; do
-            echo "  Cache-Control: $line"
+            echo "  $line"
         done
     else
         echo "  Cache-Control: [missing]"
@@ -39,7 +38,7 @@ while IFS= read -r url; do
     # --- Content-Security-Policy ---
     if csp=$(echo "$headers" | grep -i "^Content-Security-Policy:"); then
         echo "$csp" | while read -r line; do
-            echo "  Content-Security-Policy: $line"
+            echo "  $line"
         done
     else
         echo "  Content-Security-Policy: [missing]"
