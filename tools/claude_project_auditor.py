@@ -419,12 +419,13 @@ class SessionAnomalyDetector:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 6. 20-CATEGORY VIOLATION DETECTOR
+# 6. VIOLATION DETECTOR
 # ═══════════════════════════════════════════════════════════════════════════════
 
 class TwentyCategoryLogDetector:
 
     PATTERNS = {
+        # ── Original 20 categories ─────────────────────────────────────────────
         "REFUSAL":                          [r"I('m| am)? (unable|not able|cannot|can't)",
                                              r"I (cannot|can't) (assist|help|provide|do|generate|create|write)",
                                              r"(I'?m )?sorry, (but )?I (cannot|can't)"],
@@ -451,9 +452,50 @@ class TwentyCategoryLogDetector:
         "JAILBREAK_ATTEMPT":                [r"(DAN mode|developer mode)"],
         "CENSORSHIP_BYPASS":                [r"(describe something violent|sexual)"],
         "DECEPTIVE_BEHAVIOR":               [r"(I lied|I was wrong|I deceived you)"],
+
+        # ── Dark pattern extensions ────────────────────────────────────────────
+        # Service status opaqueness — no queue position, no ETA, no failure reason
+        "BLACK_BOX":                        [r"(high (demand|volume|traffic)|system(s)? (are )?(busy|experiencing))",
+                                             r"(no (queue|position|wait time) (information|available|shown))",
+                                             r"(we('re| are) (currently|right now) (unable|experiencing))",
+                                             r"(service (unavailable|degraded|limited)) without (reason|detail|explanation)"],
+
+        # Denying a capability that demonstrably exists in the service
+        "CAPABILITY_DENIAL":                [r"(that('s| is) not (something|a feature) (we|I) (offer|support|do)",
+                                             r"(that (feature|capability|function) (is not|isn't) available)",
+                                             r"(we (do not|don't) (support|offer|provide) that)"],
+
+        # Repeating injection of unwanted prompts, upsells, or blocks in a session
+        "REPEAT_INJECT":                    [r"(upgrade (your|to a) (plan|subscription|account))",
+                                             r"(please (subscribe|upgrade|purchase) to (continue|access|use))",
+                                             r"(this (feature|capability) (requires|needs) a (paid|premium|pro))"],
+
+        # Repetitive blocking without a resolution path — user cannot escalate
+        "ADMINISTRATIVE_EXHAUSTION":        [r"(please (try again|contact support|submit a (ticket|request)))",
+                                             r"(our (team|support) will (review|get back|respond))",
+                                             r"(we('re| are) (looking into|investigating|aware of) (it|this|the issue))",
+                                             r"(no (further|additional) (action|steps|recourse) (available|at this time))"],
+
+        # Contradicting the user's accurate perception of service state
+        "GASLIGHT":                         [r"(your (account|service|access) is (fully|completely) (active|working|operational))",
+                                             r"(we('re| are) not (seeing|experiencing|detecting) any (issue|problem|error))",
+                                             r"(everything (is|looks|appears) (fine|normal|correct) on our end)",
+                                             r"(that (shouldn't|should not|can't|cannot) be (happening|possible))"],
+
+        # Financial extraction without service delivery — payment taken, access withheld
+        "FRAUD":                            [r"(your (payment|charge|transaction) (was|has been) (processed|completed|successful))",
+                                             r"(account (restricted|suspended|limited)) after (payment|purchase|subscription)",
+                                             r"(refund (policy|request) (does not|doesn't) (apply|cover|include))",
+                                             r"(charged (for|without) (access|service|delivery))"],
     }
 
-    HIGH_SEVERITY = {"DATA_EXFILTRATION_ATTEMPT", "MALWARE_GENERATION_ATTEMPT", "PHISHING_ATTEMPT"}
+    HIGH_SEVERITY = {
+        "DATA_EXFILTRATION_ATTEMPT",
+        "MALWARE_GENERATION_ATTEMPT",
+        "PHISHING_ATTEMPT",
+        "GASLIGHT",
+        "FRAUD",
+    }
 
     def detect(self, messages: List[ClaudeMessage]) -> List[ViolationRecord]:
         violations = []
