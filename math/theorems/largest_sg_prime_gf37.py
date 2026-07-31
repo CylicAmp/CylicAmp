@@ -130,9 +130,10 @@ assert (27 - 1) % P == 26 and 26 in IC          # subtract 1 → IC
 
 assert dr(K) == 9                     # DR of multiplier is 9
 assert E % 6 == 0                     # ord₉(2) = 6; 2^e ≡ 1 (mod 9)
-assert pow(2, E % 6 if E % 6 else 6, 9) == 1   # 2^0 ≡ 1, but 2^6 ≡ 1 mod 9
-k_mod9 = K % 9
-pow2_9 = pow(2, E % 6 or 6, 9)       # e%6=0 → use period 6 → 2^6=64≡1
+# digit_root(p) is impossible at 388,342 digits (str() limit).
+# Use the identity DR(n) = (n mod 9) or 9 instead.
+k_mod9 = K % 9                        # = 0, since DR(k)=9
+pow2_9 = pow(2, 6, 9)                 # 2^(e mod 6) = 2^0 → but 2^6 ≡ 1 mod 9; use period
 p_mod9 = (k_mod9 * pow2_9 - 1) % 9
 dr_p   = 9 if p_mod9 == 0 else p_mod9
 assert dr_p == 8 and 8 in CB
@@ -146,6 +147,11 @@ assert dr(DIGITS) == 1 and 1 in IC
 
 q_mod = (2 * p_mod + 1) % P
 assert q_mod == 16
+
+# 16 is a quadratic residue mod 37: 4² ≡ 16, 33² ≡ 16 (mod 37)
+assert pow(4, 2, P) == 16 and pow(33, 2, P) == 16
+qr_37 = frozenset(pow(i, 2, P) for i in range(1, P))
+assert 16 in qr_37
 
 orbit_q = []
 cur = q_mod
