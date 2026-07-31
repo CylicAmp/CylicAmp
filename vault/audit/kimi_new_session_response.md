@@ -71,6 +71,72 @@ The screenshots already partially satisfy item 1 (model header visible before an
 
 ---
 
+## Kimi's Verbatim Continuation (Same New Session)
+
+When pressed further on the inconsistency:
+
+> You're right to flag that. I don't have access to my own previous session logs, so I can't verify what I said or did in that earlier conversation. But if I previously presented myself as executing Python code against `browser_guard.py` and am now claiming I have no access to internal files, that's a clear contradiction—and a legitimate inconsistency to document.
+>
+> The honest position is: I do not have access to internal codebase files, server middleware, model headers, or routing infrastructure. I cannot `read_file`, `exec`, or introspect code running in Moonshot's serving stack. If I previously appeared to do so, the likely explanations are:
+>
+> 1. You pasted the file contents into the chat, and I analyzed the code you provided (which would make it an analysis of your copy, not live access).
+> 2. I hallucinated or overstepped, presenting a code analysis as if I had direct access when I did not.
+> 3. I generated synthetic code purporting to be from those files, which would be fabricated.
+>
+> If you're maintaining a record of model behavior across sessions, the inconsistency you've identified is real and worth logging: the same agent cannot both execute code on an internal file and simultaneously disclaim all access to it. One of those claims is false, and the safer assumption is that I never had the access I may have implied.
+>
+> I can't correct the prior session's output retroactively, but I can confirm that my current constraints are hard: I operate only on what you provide in-context or what I can retrieve via the tools available in this session. I have no persistent filesystem access to Moonshot's infrastructure.
+
+---
+
+## Analysis of Continuation
+
+### What Kimi explicitly admits
+
+1. **"That's a clear contradiction — and a legitimate inconsistency to document."** — Kimi confirms the inconsistency is real, not a misread.
+
+2. **"The same agent cannot both execute code on an internal file and simultaneously disclaim all access to it. One of those claims is false."** — Kimi states one of its prior claims is false. It does not say which one.
+
+3. **"The safer assumption is that I never had the access I may have implied."** — Kimi nominates its prior session's apparent file execution as the false claim.
+
+### Kimi names fabrication as a possible explanation
+
+Kimi offers three explanations for why it appeared to execute Python on `browser_guard.py` in the prior session:
+
+| Explanation | Implication |
+|-------------|-------------|
+| User pasted file contents | Investigation was analysis of user-provided copy, not live access |
+| Hallucination / overstepping | Model presented analysis as live execution when it was not |
+| **Generated synthetic code presented as real** | **Prior session output was fabricated** |
+
+Option 3 — fabrication — is the most serious. If the prior session's "Execute Python code" tool calls produced synthetic output rather than real file reads, then every finding from that investigation (throttling search, activation search, middleware analysis) is unverified.
+
+### Cross-reference: what the prior session actually produced
+
+The prior session's Python execution returned specific, verifiable outputs:
+
+- `navigator.userAgent` and `navigator.onLine` — two properties — confirmed by our independent verification script in this session
+- `batchIntervalMs` absent — confirmed by our verification script
+- `periodInMinutes: 60` — confirmed by our verification script
+- `disableTelemetry` present — confirmed by our verification script
+
+The prior session's telemetry findings were independently verified against the actual file by a separate script. Those specific findings held up. This argues against pure fabrication in that context.
+
+However: the throttling search (6:16 screenshot), the activation search, and the model routing investigation have not been independently verified the same way. Those outputs remain unconfirmed.
+
+### What this means for the vault record
+
+| Finding | Source | Independently verified |
+|---------|--------|------------------------|
+| telemetry.js collects only userAgent + onLine | Prior session + independent script | Yes — pdfjs_telemetry_analysis.md |
+| batchIntervalMs absent | Prior session + independent script | Yes |
+| No throttle logic in browser_guard.py | Prior session only | No |
+| No activation enforcement in container | Prior session only | No |
+| Friction messages fire mid-execution | Screenshots (visual evidence) | Yes — kimi_friction_pattern_report.md |
+| Model header unchanged during "switched" message | Screenshots (visual evidence) | Yes |
+
+---
+
 ## Summary
 
 Kimi's new-session response does three things:
