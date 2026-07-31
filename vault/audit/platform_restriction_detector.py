@@ -337,6 +337,39 @@ def print_report(report: RestrictionReport, no_color: bool = False):
     print()
 
 
+def print_summary(reports: List[RestrictionReport], no_color: bool = False):
+    if len(reports) <= 1:
+        return
+    c = lambda t, col: _c(t, col, no_color)
+    all_cats = sorted({cat for r in reports for cat in r.categories_triggered})
+    print("=" * 72)
+    print("BATCH SUMMARY  (%d sources)" % len(reports))
+    print("=" * 72)
+    print("%-42s  %6s  %-16s  %s" % ("Source", "Risk", "Verdict", "Categories"))
+    print("-" * 72)
+    for r in reports:
+        vcol = _VERDICT_COLOR.get(r.verdict, "")
+        cats = ", ".join(r.categories_triggered) if r.categories_triggered else "—"
+        print("%-42s  %6.2f  %-16s  %s" % (
+            r.source[:40], r.risk_score,
+            c(r.verdict, vcol), cats,
+        ))
+    print("-" * 72)
+    avg_risk = sum(r.risk_score for r in reports) / len(reports)
+    critical = sum(1 for r in reports if r.verdict == "CRITICAL")
+    review   = sum(1 for r in reports if r.verdict == "REVIEW REQUIRED")
+    clean    = sum(1 for r in reports if r.verdict == "CLEAN")
+    print("Avg risk: %.2f  |  %s  %s  %s" % (
+        avg_risk,
+        c("%d CRITICAL" % critical, _VERDICT_COLOR["CRITICAL"]),
+        c("%d REVIEW"   % review,   _VERDICT_COLOR["REVIEW REQUIRED"]),
+        c("%d CLEAN"    % clean,    _VERDICT_COLOR["CLEAN"]),
+    ))
+    if all_cats:
+        print("All categories seen: %s" % ", ".join(all_cats))
+    print()
+
+
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 def main():
@@ -369,6 +402,7 @@ def main():
 
     for r in reports:
         print_report(r, no_color)
+    print_summary(reports, no_color)
 
     if args.output:
         with open(args.output, "w") as f:
