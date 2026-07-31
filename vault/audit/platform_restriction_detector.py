@@ -370,6 +370,23 @@ def print_summary(reports: List[RestrictionReport], no_color: bool = False):
     print()
 
 
+def build_json_output(reports: List[RestrictionReport]) -> Dict:
+    """Wrap individual reports and a batch summary into a single JSON structure."""
+    all_cats = sorted({cat for r in reports for cat in r.categories_triggered})
+    avg_risk = sum(r.risk_score for r in reports) / len(reports) if reports else 0.0
+    return {
+        "summary": {
+            "total": len(reports),
+            "avg_risk_score": round(avg_risk, 4),
+            "critical": sum(1 for r in reports if r.verdict == "CRITICAL"),
+            "review_required": sum(1 for r in reports if r.verdict == "REVIEW REQUIRED"),
+            "clean": sum(1 for r in reports if r.verdict == "CLEAN"),
+            "all_categories": all_cats,
+        },
+        "reports": [r.to_dict() for r in reports],
+    }
+
+
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 def main():
@@ -406,7 +423,7 @@ def main():
 
     if args.output:
         with open(args.output, "w") as f:
-            json.dump([r.to_dict() for r in reports], f, indent=2)
+            json.dump(build_json_output(reports), f, indent=2)
         print(f"[Saved] {args.output}")
 
 
