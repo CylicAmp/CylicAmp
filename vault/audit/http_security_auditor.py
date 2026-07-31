@@ -265,6 +265,26 @@ def print_summary(reports: List[URLReport], no_color: bool = False):
         print("Average score: %.1f/%d" % (avg, reports[0].max_possible))
 
 
+def build_json_output(reports: List[URLReport]) -> Dict:
+    """Wrap individual reports and a batch summary into a single JSON structure."""
+    avg_score = sum(r.total_score for r in reports) / len(reports) if reports else 0.0
+    verdicts = [r.verdict for r in reports]
+    return {
+        "summary": {
+            "total": len(reports),
+            "avg_score": round(avg_score, 4),
+            "max_possible": reports[0].max_possible if reports else 0,
+            "excellent": verdicts.count("EXCELLENT"),
+            "good":      verdicts.count("GOOD"),
+            "fair":      verdicts.count("FAIR"),
+            "poor":      verdicts.count("POOR"),
+            "critical":  verdicts.count("CRITICAL"),
+            "all_missing": sorted({h for r in reports for h in r.missing_headers}),
+        },
+        "reports": [r.to_dict() for r in reports],
+    }
+
+
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 def main():
@@ -294,7 +314,7 @@ def main():
 
     if args.output:
         with open(args.output, "w") as f:
-            json.dump([r.to_dict() for r in reports], f, indent=2)
+            json.dump(build_json_output(reports), f, indent=2)
         print("\n[Saved] %s" % args.output)
 
 
