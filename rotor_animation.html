@@ -185,7 +185,7 @@ button.on    { color: #4ab0e0; border-color: #2a6080; }
   <button id="b-pp" class="on">PAUSE</button>
   <button id="b-rst">RESET</button>
   <button id="b-tr">TRACE</button>
-  <input type="text" id="i-path" value="00000" maxlength="5" spellcheck="false" title="arm path: one digit (0–3) per level">
+  <input type="text" id="i-path" value="0000" maxlength="4" spellcheck="false" title="suffix for levels 1–4 (digits 0–3); level 0 varies across all 4 arms">
 </div>
 
 <script>
@@ -200,10 +200,10 @@ let running = true;
 let tracing = false;
 let prev    = null;
 
-// Trace trail — follows tracePath through the arm tree
-const TRAIL_CAP = 1200;
-let trail     = [];
-let tracePath = [0, 0, 0, 0, 0];   // arm index (0–3) at each level
+// 4 simultaneous trails — arm i traces path [i, ...traceSuffix]
+const TRAIL_CAP  = 900;
+let trails      = [[], [], [], []];
+let traceSuffix = [0, 0, 0, 0];    // arm index at levels 1–4
 
 // Colors by angular velocity ω = i−1, for arm index i:
 //   arm 0 → ω = −1  (retrograde, clockwise)
@@ -223,7 +223,7 @@ function resize() {
   canvas.width = canvas.height = s;
 }
 resize();
-window.addEventListener('resize', () => { resize(); trail = []; });
+window.addEventListener('resize', () => { resize(); trails = [[], [], [], []]; });
 
 // Count total segments for depth L
 function segCount(L) {
@@ -258,18 +258,23 @@ function rotor(d, lvl) {
   }
 }
 
-// ── Closed-form: endpoint for an arbitrary arm path ───────────────────────
-// α_j = Σ_{k=0}^{j} θ(tracePath[k], t)  where θ(i,t) = π/2 + t·(i−1)
-// Each level adds its arm's independent rotation to the cumulative world angle.
-function pathEndpoint(cx, cy, d0) {
+// ── Closed-form: endpoint for an explicit arm path ────────────────────────
+// α_j = Σ_{k=0}^{j} θ(path[k], t)  where θ(i,t) = π/2 + t·(i−1)
+function pathEndpoint(cx, cy, d0, path) {
   let x = cx, y = cy, cumAng = 0;
-  const L = Math.min(tracePath.length, maxL);
+  const L = Math.min(path.length, maxL);
   for (let j = 0; j < L; j++) {
-    cumAng += Math.PI / 2 + t * (tracePath[j] - 1);
+    cumAng += Math.PI / 2 + t * (path[j] - 1);
     x += (d0 / Math.pow(2, j)) * Math.cos(cumAng);
     y += (d0 / Math.pow(2, j)) * Math.sin(cumAng);
   }
   return [x, y];
+}
+
+// Extract raw RGBA values from ARM_COLOR strings for trail drawing
+function armRGB(i) {
+  const m = ARM_COLOR[i].match(/[\d.]+/g);
+  return [+m[0], +m[1], +m[2]];
 }
 
 function frame(now) {
@@ -304,26 +309,31 @@ function frame(now) {
   ctx.moveTo(0, cy); ctx.lineTo(S, cy);
   ctx.stroke();
 
-  // ── Trail ────────────────────────────────────────────────────────────────
-  if (tracing && trail.length > 1) {
+  // ── Trails (one per arm) ─────────────────────────────────────────────────
+  if (tracing) {
     ctx.shadowBlur = 0;
-    ctx.lineWidth  = 1.0;
-    for (let i = 1; i < trail.length; i++) {
-      const alpha = (i / trail.length) * 0.55;
-      ctx.strokeStyle = `rgba(74,176,224,${alpha.toFixed(3)})`;
+    ctx.lineWidth  = 0.9;
+    for (let arm = 0; arm < 4; arm++) {
+      const tr = trails[arm];
+      if (tr.length < 2) continue;
+      const [r, g, b] = armRGB(arm);
+      for (let i = 1; i < tr.length; i++) {
+        const alpha = (i / tr.length) * 0.6;
+        ctx.strokeStyle = `rgba(${r},${g},${b},${alpha.toFixed(3)})`;
+        ctx.beginPath();
+        ctx.moveTo(tr[i - 1][0], tr[i - 1][1]);
+        ctx.lineTo(tr[i][0],     tr[i][1]);
+        ctx.stroke();
+      }
+      // Leading dot
+      const [lx, ly] = tr[tr.length - 1];
+      ctx.fillStyle   = `rgba(${r},${g},${b},0.95)`;
+      ctx.shadowColor = `rgba(${r},${g},${b},0.6)`;
+      ctx.shadowBlur  = 9;
       ctx.beginPath();
-      ctx.moveTo(trail[i - 1][0], trail[i - 1][1]);
-      ctx.lineTo(trail[i][0],     trail[i][1]);
-      ctx.stroke();
+      ctx.arc(lx, ly, 2.2, 0, 2 * Math.PI);
+      ctx.fill();
     }
-    // Leading point
-    const [lx, ly] = trail[trail.length - 1];
-    ctx.shadowColor = 'rgba(74,176,224,0.8)';
-    ctx.shadowBlur  = 10;
-    ctx.fillStyle   = '#a8dcf5';
-    ctx.beginPath();
-    ctx.arc(lx, ly, 2.5, 0, 2 * Math.PI);
-    ctx.fill();
     ctx.shadowBlur = 0;
   }
 
@@ -333,11 +343,14 @@ function frame(now) {
   rotor(d0, 0);
   ctx.restore();
 
-  // Collect trace
+  // Collect 4 traces — arm i follows [i, ...traceSuffix]
   if (tracing) {
-    const pt = pathEndpoint(cx, cy, d0);
-    trail.push(pt);
-    if (trail.length > TRAIL_CAP) trail.shift();
+    for (let arm = 0; arm < 4; arm++) {
+      const path = [arm, ...traceSuffix];
+      const pt   = pathEndpoint(cx, cy, d0, path);
+      trails[arm].push(pt);
+      if (trails[arm].length > TRAIL_CAP) trails[arm].shift();
+    }
   }
 
   // ── HUD update ───────────────────────────────────────────────────────────
@@ -361,7 +374,7 @@ document.getElementById('r-spd').addEventListener('input', function() {
 document.getElementById('r-dep').addEventListener('input', function() {
   maxL = +this.value;
   document.getElementById('v-dep').textContent = maxL;
-  trail = [];
+  trails = [[], [], [], []];
 });
 document.getElementById('b-pp').addEventListener('click', function() {
   running = !running;
@@ -369,18 +382,18 @@ document.getElementById('b-pp').addEventListener('click', function() {
   this.classList.toggle('on', running);
   if (running) prev = null;
 });
-document.getElementById('b-rst').addEventListener('click', () => { t = 0; trail = []; });
+document.getElementById('b-rst').addEventListener('click', () => { t = 0; trails = [[], [], [], []]; });
 document.getElementById('b-tr').addEventListener('click', function() {
   tracing = !tracing;
   this.classList.toggle('on', tracing);
-  if (!tracing) trail = [];
+  if (!tracing) trails = [[], [], [], []];
 });
 
 document.getElementById('i-path').addEventListener('input', function() {
-  // keep only digits 0–3, max 5 chars
-  const clean = this.value.replace(/[^0-3]/g, '').slice(0, 5);
-  this.value  = clean;
-  tracePath   = clean.padEnd(5, '0').split('').map(Number);
-  trail = [];
+  // suffix for levels 1–4; keep only digits 0–3, max 4 chars
+  const clean  = this.value.replace(/[^0-3]/g, '').slice(0, 4);
+  this.value   = clean;
+  traceSuffix  = clean.padEnd(4, '0').split('').map(Number);
+  trails = [[], [], [], []];
 });
 </script>
