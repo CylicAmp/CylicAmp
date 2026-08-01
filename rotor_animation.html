@@ -186,6 +186,12 @@ button.on    { color: #4ab0e0; border-color: #2a6080; }
   <button id="b-rst">RESET</button>
   <button id="b-tr">TRACE</button>
   <input type="text" id="i-path" value="0000" maxlength="4" spellcheck="false" title="suffix for levels 1–4 (digits 0–3); level 0 varies across all 4 arms">
+  <div class="div"></div>
+  <div class="cg">
+    <span class="clbl">fade</span>
+    <input type="range" id="r-fade" min="0.2" max="8" step="0.1" value="2.5">
+    <span class="cval" id="v-fade">2.5s</span>
+  </div>
 </div>
 
 <script>
@@ -202,7 +208,7 @@ let prev    = null;
 
 // 4 simultaneous trails — each point is [x, y, alpha]
 // alpha decays with half-life HALF_LIFE seconds; points below ALPHA_FLOOR are pruned
-const HALF_LIFE  = 2.5;   // seconds for alpha to halve
+let HALF_LIFE  = 2.5;   // seconds for alpha to halve — controlled by slider
 const ALPHA_FLOOR = 0.02;
 let trails      = [[], [], [], []];
 let traceSuffix = [0, 0, 0, 0];    // arm index at levels 1–4
@@ -396,6 +402,11 @@ document.getElementById('b-tr').addEventListener('click', function() {
   tracing = !tracing;
   this.classList.toggle('on', tracing);
   if (!tracing) trails = [[], [], [], []];
+});
+
+document.getElementById('r-fade').addEventListener('input', function() {
+  HALF_LIFE = +this.value;
+  document.getElementById('v-fade').textContent = HALF_LIFE.toFixed(1) + 's';
 });
 
 document.getElementById('i-path').addEventListener('input', function() {
