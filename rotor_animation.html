@@ -296,10 +296,25 @@ function drawRibbon(cx, cy, d0, dt) {
   const RDEPTH = Math.min(maxL, 8);
   const outer  = [];   // outermost point per arm
 
-  // ── Tip trails (decay before computing new outer tips) ───────────────
+  // ── Tip trails + mesh ────────────────────────────────────────────────
   const decay = Math.pow(0.5, dt / HALF_LIFE);
-  ctx.lineWidth = 0.7;
   ctx.shadowBlur = 0;
+
+  // Mesh weft: envelope polygon at each past time step (drawn first, below warp)
+  const meshLen = Math.min(...[0,1,2,3].map(i => ribbonTrails[i].length));
+  ctx.lineWidth = 0.5;
+  for (let k = 0; k < meshLen; k++) {
+    const a = Math.min(...[0,1,2,3].map(i => ribbonTrails[i][k][2]));
+    ctx.strokeStyle = `rgba(255,80,170,${(a * 0.28).toFixed(3)})`;
+    ctx.beginPath();
+    ctx.moveTo(ribbonTrails[0][k][0], ribbonTrails[0][k][1]);
+    for (let i = 1; i < 4; i++) ctx.lineTo(ribbonTrails[i][k][0], ribbonTrails[i][k][1]);
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  // Mesh warp: individual arm tip trails over time
+  ctx.lineWidth = 0.7;
   for (let i = 0; i < 4; i++) {
     const tr = ribbonTrails[i];
     const [r, g, b] = armRGB(i);
