@@ -1,111 +1,289 @@
 """
-G5 Solver V14.0 — D7 Temporal Resolver.
+G5 Solver V14.0 — Layered pipeline evaluator for the GF(37) framework.
 
-Integrates trajectory, insight, and duality layers into a single
-unified report with structural, temporal, and harmony checks.
+Terminology mapping (speculative → neutral):
+  THz purity        → baseline_score       (field simulation threshold)
+  Insight score     → aggregate_score      (InsightEngine weighted output)
+  Duality spectrum  → consistency_check    (stability_index vs. threshold)
+  Stability ratio   → stability_index      (DualityVerifier SSR)
+  Cosmic harmony    → compatibility_check  (aggregate mod P in harmonic class)
+  D7 Gamma purity   → threshold_profile    (D7 orbit proximity gap)
+  Temporal fidelity → dynamic_threshold    (seed residue class check)
 
-Checks performed:
-  1. ULTRAOMNI Weighted Insight (Schläfli-modulated)
-  2. THz & Duality Synthesis (SSR + POE_THz)
-  3. D7 Temporal Resolution (gamma gap vs PHI threshold)
-  4. Integrity & Harmony (halt, DAC, 3φ cosmic bound)
+Pipeline stages (single responsibility per stage):
+  Input
+    → Feature scoring      (aggregate_score, InsightEngine)
+    → Baseline estimation  (baseline_score, field simulation threshold)
+    → Consistency check    (stability_index ≥ STABILITY_HALT_THRESHOLD)
+    → Constraint check     (seed_residue ∉ D7 unclassified orbit)
+    → Authority check      (seed_residue ∈ SA∪ST)
+    → Compatibility check  (aggregate_score mod 37 ∈ harmonic resonance class)
+    → Structured report
 """
-
+from __future__ import annotations
 import math
+from dataclasses import dataclass
+from enum import Enum, auto
 
-from cylicamp.trajectory import TrajectoryGenerator
-from cylicamp.insights import InsightEngine, SCHLÄFLI_CONSTANT, MODULAR_CONSTANT
-from cylicamp.duality import DualityVerifier, QFM_REQUIRED
+# ── GF(37) constants ──────────────────────────────────────────────────────────
+P: int       = 37
+PHI: float   = (1 + math.sqrt(5)) / 2   # golden ratio ≈ 1.6180 ({5,3}/{3,5} Platonic)
+THREE_PHI    = 3.0 * PHI                 # ≈ 4.854 (reference bound)
 
-# --- SOLVER CONSTANTS ---
-PHI = (1 + math.sqrt(5)) / 2          # Golden ratio ≈ 1.6180
-REQUIRED_UNMODULATED_STABILITY = 0.30  # POE halt threshold
-D7_GAMMA_GAP_THRESHOLD = QFM_REQUIRED * PHI  # ~1.6180 — minimum D7 resolution
-THREE_PHI_BOUND = 3.0 * PHI            # Cosmic harmony ceiling ≈ 4.854
+IC         = frozenset({1, 10, 26})
+SA         = frozenset({4, 9, 25, 30})
+ST         = frozenset({3, 12, 21, 30})
+CB         = frozenset({8, 13, 24})
+ORBIT_11   = frozenset({11, 27, 36})
+SEED_ORBIT = frozenset({18, 24, 32})
+BASIN_Y    = frozenset({17, 22, 35})
+PR         = frozenset({2, 5, 13, 15, 17, 18, 19, 20, 22, 24, 32, 35})
+ALL_NAMED  = IC | SA | ST | CB | ORBIT_11 | SEED_ORBIT | BASIN_Y | PR
+
+# D7 orbit: each element is exactly 1 step from a named class
+# 7→8∈CB, 33→32∈SEED_ORBIT, 34→35∈BASIN_Y
+D7_ORBIT   = frozenset({7, 33, 34})
+
+# Harmonic resonance classes (ORBIT_11 ∪ SA ∪ PR)
+HARMONIC   = ORBIT_11 | SA | PR
+
+# ── Solver constants ──────────────────────────────────────────────────────────
+# Framework coverage: fraction of GF(37)* residues in any named class
+# Range [0, 1]. Current value: 26/36 ≈ 0.7222
+FRAMEWORK_COVERAGE: float = len(ALL_NAMED) / (P - 1)
+
+# Schläfli reference: φ (golden ratio), ground truth for {5,3}/{3,5} solids
+# V+E+F of dodecahedron/icosahedron ≡ 25 ∈ SA (mod 37)
+SCHLÄFLI_CONSTANT: float = PHI   # ≈ 1.6180
+
+# Stability halt threshold: stability_index must exceed this to remain ACTIVE
+# Range (0, 1). Tunable.
+STABILITY_HALT_THRESHOLD: float = 0.30
+
+# D7 threshold profile: minimum normalized distance from D7 orbit to nearest
+# named class (= 1/P ≈ 0.027; each D7 element is exactly 1 step away)
+D7_THRESHOLD_PROFILE: float = 1 / P
 
 
-def run_g5(steps: int = 50, multiplier: float = 1.0) -> dict:
+# ── Enums ─────────────────────────────────────────────────────────────────────
+class ConsistencyStatus(Enum):
+    """Stage: does stability_index meet the halt threshold?"""
+    PASS = auto()
+    FAIL = auto()
+
+class DynamicThresholdStatus(Enum):
+    """Stage: is seed_residue outside the unclassified D7 orbit?"""
+    STABLE     = auto()
+    UNRESOLVED = auto()
+
+class HaltStatus(Enum):
+    """Stage: should the pipeline halt?"""
+    ACTIVE = auto()
+    HALTED = auto()
+
+class AuthorityStatus(Enum):
+    """Stage: is seed_residue in the sovereign set SA∪ST?"""
+    SOVEREIGN     = auto()
+    NON_SOVEREIGN = auto()
+
+class CompatibilityStatus(Enum):
+    """Stage: does aggregate_score mod P land in a harmonic class?"""
+    HARMONIOUS = auto()
+    DISSONANT  = auto()
+
+
+# ── Typed report ──────────────────────────────────────────────────────────────
+@dataclass
+class PipelineReport:
     """
-    Run the full G5 pipeline and return a structured report dict.
+    Typed output of the G5 Solver evaluation pipeline.
+
+    Fields
+    ------
+    aggregate_score : float
+        InsightEngine weighted score. Unbounded, > 0.
+    baseline_score : float
+        Field simulation mean threshold (POE baseline). Range [0, 1].
+    stability_index : float
+        DualityVerifier SSR. Range [0, 1].
+    seed_residue : int
+        seed mod 37. Range [0, 36].
+    aggregate_mod_p : int
+        aggregate_score % P. Used for class membership in compatibility check.
+    consistency_status : ConsistencyStatus
+        PASS if stability_index ≥ STABILITY_HALT_THRESHOLD.
+    threshold_profile_gap : float
+        Reference gap for D7 orbit proximity (= D7_THRESHOLD_PROFILE ≈ 0.027).
+    dynamic_threshold_status : DynamicThresholdStatus
+        STABLE if seed_residue ∉ D7_ORBIT.
+    halt_status : HaltStatus
+        ACTIVE if consistency_status is PASS, else HALTED.
+    authority_status : AuthorityStatus
+        SOVEREIGN if seed_residue ∈ SA∪ST.
+    authority_detail : str
+        Human-readable residue classification.
+    compatibility_status : CompatibilityStatus
+        HARMONIOUS if aggregate_mod_p ∈ ORBIT_11 ∪ SA ∪ PR.
+    compatibility_detail : str
+        Which harmonic class matched (or why not).
     """
-    # --- Trajectory ---
-    tg = TrajectoryGenerator()
-    trajectory = tg.generate_trajectory(steps=steps)
-    energy_spectrum = [abs(x) + abs(y) for x, y in trajectory]
+    aggregate_score:        float
+    baseline_score:         float
+    stability_index:        float
+    seed_residue:           int
+    aggregate_mod_p:        int
+    consistency_status:     ConsistencyStatus
+    threshold_profile_gap:  float
+    dynamic_threshold_status: DynamicThresholdStatus
+    halt_status:            HaltStatus
+    authority_status:       AuthorityStatus
+    authority_detail:       str
+    compatibility_status:   CompatibilityStatus
+    compatibility_detail:   str
 
-    # --- Insight layer ---
-    ie = InsightEngine(multiplier=multiplier)
-    raw_data = [int(e * 1000) for e in energy_spectrum]
-    filtered = ie.apply_modular_filter(raw_data)
-    insight_score = ie.calculate_weighted_insights(filtered)
+    @property
+    def all_checks_pass(self) -> bool:
+        """True iff every validation stage passes."""
+        return (
+            self.consistency_status       is ConsistencyStatus.PASS
+            and self.dynamic_threshold_status is DynamicThresholdStatus.STABLE
+            and self.halt_status          is HaltStatus.ACTIVE
+            and self.authority_status     is AuthorityStatus.SOVEREIGN
+            and self.compatibility_status is CompatibilityStatus.HARMONIOUS
+        )
 
-    # --- Duality layer ---
-    dv = DualityVerifier()
-    duality = dv.verify_duality_spectrum(energy_spectrum, REQUIRED_UNMODULATED_STABILITY)
-    stability_ratio = duality["Stability_Ratio"]
 
-    # --- THz baseline (unmodulated raw ratio) ---
-    raw_stable = sum(
-        1 for e in energy_spectrum
-        if dv.is_dr_7_prime(int(abs(e) * 1000))
+# ── Evaluation pipeline ───────────────────────────────────────────────────────
+def evaluate(
+    aggregate_score:  float,
+    stability_index:  float,
+    baseline_score:   float,
+    seed_residue:     int,
+) -> PipelineReport:
+    """
+    Run the G5 Solver evaluation pipeline.
+
+    Parameters
+    ----------
+    aggregate_score : float
+        Weighted insight score from InsightEngine. Unbounded, > 0.
+    stability_index : float
+        Duality stability ratio from DualityVerifier. Range [0, 1].
+    baseline_score : float
+        Field simulation mean threshold. Range [0, 1].
+    seed_residue : int
+        seed mod 37. Drives authority and D7 checks.
+
+    Returns
+    -------
+    PipelineReport
+        Fully populated report with all stage results.
+    """
+    # Stage: consistency
+    c_pass   = stability_index >= STABILITY_HALT_THRESHOLD
+    c_status = ConsistencyStatus.PASS if c_pass else ConsistencyStatus.FAIL
+
+    # Stage: dynamic threshold (D7 constraint)
+    d7_ok    = seed_residue not in D7_ORBIT
+    dt_status = DynamicThresholdStatus.STABLE if d7_ok else DynamicThresholdStatus.UNRESOLVED
+
+    # Stage: halt
+    h_status = HaltStatus.ACTIVE if c_pass else HaltStatus.HALTED
+
+    # Stage: authority
+    dac_pass = seed_residue in (SA | ST)
+    a_status = AuthorityStatus.SOVEREIGN if dac_pass else AuthorityStatus.NON_SOVEREIGN
+
+    def _class_name(r: int) -> str:
+        for name, s in [('IC', IC), ('SA', SA), ('ST', ST), ('CB', CB),
+                        ('ORBIT_11', ORBIT_11), ('SEED_ORBIT', SEED_ORBIT),
+                        ('BASIN_Y', BASIN_Y), ('PR', PR)]:
+            if r in s:
+                return name
+        return 'unclassified'
+
+    a_detail = (
+        f"{seed_residue} ∈ {'SA' if seed_residue in SA else 'ST'}"
+        if dac_pass
+        else f"{seed_residue} ∉ SA∪ST  [{_class_name(seed_residue)}]"
     )
-    thz_baseline_stability = raw_stable / len(energy_spectrum) if energy_spectrum else 0.0
 
-    # --- D7 temporal resolution ---
-    d7_temporal_requirement = QFM_REQUIRED * PHI
-    temporal_stability_status = (
-        "RESOLVED" if thz_baseline_stability >= d7_temporal_requirement
-        else "UNRESOLVED"
+    # Stage: compatibility (3φ harmonic resonance)
+    agg_mod_p   = int(aggregate_score) % P
+    compat_pass = agg_mod_p in HARMONIC
+    cp_status   = (CompatibilityStatus.HARMONIOUS if compat_pass
+                   else CompatibilityStatus.DISSONANT)
+
+    if compat_pass:
+        cls = ('ORBIT_11' if agg_mod_p in ORBIT_11
+               else 'SA'  if agg_mod_p in SA
+               else 'PR')
+        cp_detail = f"{agg_mod_p} ∈ {cls}"
+    else:
+        cp_detail = f"{agg_mod_p} ∉ ORBIT_11∪SA∪PR  [{_class_name(agg_mod_p)}]"
+
+    return PipelineReport(
+        aggregate_score=aggregate_score,
+        baseline_score=baseline_score,
+        stability_index=stability_index,
+        seed_residue=seed_residue,
+        aggregate_mod_p=agg_mod_p,
+        consistency_status=c_status,
+        threshold_profile_gap=D7_THRESHOLD_PROFILE,
+        dynamic_threshold_status=dt_status,
+        halt_status=h_status,
+        authority_status=a_status,
+        authority_detail=a_detail,
+        compatibility_status=cp_status,
+        compatibility_detail=cp_detail,
     )
 
-    # --- Integrity checks ---
-    structural_status = "STABLE" if stability_ratio >= REQUIRED_UNMODULATED_STABILITY else "UNSTABLE"
-    halt_check = "PASS" if stability_ratio >= REQUIRED_UNMODULATED_STABILITY else "HALT"
-    dac_check_status = "AUTHORIZED" if insight_score >= QFM_REQUIRED else "UNAUTHORIZED"
-    harmony_check_status = (
-        "IN BOUND" if insight_score <= THREE_PHI_BOUND * 1e6
-        else "OUT OF BOUND"
-    )
 
-    return {
-        "insight_score": insight_score,
-        "stability_ratio": stability_ratio,
-        "thz_baseline_stability": thz_baseline_stability,
-        "structural_status": structural_status,
-        "d7_temporal_requirement": d7_temporal_requirement,
-        "temporal_stability_status": temporal_stability_status,
-        "halt_check": halt_check,
-        "dac_check_status": dac_check_status,
-        "harmony_check_status": harmony_check_status,
-    }
+def format_report(r: PipelineReport) -> str:
+    """Return the formatted G5 Solver output block."""
+    sep = "=" * 50
+    hr  = "-" * 35
+    return "\n".join([
+        sep,
+        "      G5 SOLVER V14.0: D7 TEMPORAL RESOLVER       ",
+        sep,
+        f"Framework Coverage  (QFM): {FRAMEWORK_COVERAGE:.6f}",
+        f"Stability Halt Threshold:  {STABILITY_HALT_THRESHOLD:.4f}",
+        hr,
+        f"1. Aggregate Score: {r.aggregate_score:>16,.2f}",
+        f"   Schläfli Constant:         {SCHLÄFLI_CONSTANT:.4f}",
+        f"   Score mod 37 = {r.aggregate_mod_p}  {_fw(r.aggregate_mod_p)}",
+        hr,
+        "2. Consistency Analysis",
+        f"   Stability Index  (SSR):    {r.stability_index:.4f}",
+        f"   Baseline Score:            {r.baseline_score:.4f}",
+        f"   CONSISTENCY STATUS:        {r.consistency_status.name}",
+        hr,
+        "3. Threshold Profile Analysis",
+        f"   D7 Profile Gap:            {r.threshold_profile_gap:.4f}",
+        f"   DYNAMIC STATUS:            {r.dynamic_threshold_status.name}",
+        hr,
+        "4. VALIDATION CHECKS",
+        f"   Halt Check:                {r.halt_status.name}",
+        f"   Authority Check  (DAC):    {r.authority_status.name}  [{r.authority_detail}]",
+        f"   Compatibility (3φ ref):  {r.compatibility_status.name}  [{r.compatibility_detail}]",
+        sep,
+    ])
 
 
-def print_report(report: dict) -> None:
-    print("\n==================================================")
-    print(f"      G5 SOLVER V14.0: D7 TEMPORAL RESOLVER       ")
-    print("==================================================")
-    print(f"Structural Axiom QFM (Required Fidelity): {QFM_REQUIRED:.6f}")
-    print(f"Unmodulated POE (Halt Threshold): {REQUIRED_UNMODULATED_STABILITY:.4f}")
-    print("-" * 35)
-    print(f"1. ULTRAOMNI Weighted Insight: {report['insight_score']:,.2f}")
-    print(f"   Schläfli Modulator Applied: {SCHLÄFLI_CONSTANT:.4f}")
-    print("-" * 35)
-    print(f"2. THz & Duality Synthesis")
-    print(f"   Stability Ratio (SSR): {report['stability_ratio']:.4f}")
-    print(f"   THz Baseline Stability (POE_THz): {report['thz_baseline_stability']:.4f}")
-    print(f"   STRUCTURAL STATUS: {report['structural_status']}")
-    print("-" * 35)
-    print(f"3. D7 Temporal Resolution")
-    print(f"   D7 Gamma Gap Requirement: {report['d7_temporal_requirement']:.4f}")
-    print(f"   TEMPORAL STABILITY STATUS: {report['temporal_stability_status']}")
-    print("-" * 35)
-    print(f"4. INTEGRITY & HARMONY CHECKS")
-    print(f"   Structural Halt Check: {report['halt_check']}")
-    print(f"   Decisional Authority Check (DAC): {report['dac_check_status']}")
-    print(f"   Cosmic Harmony Check (3\u03c6 Bound): {report['harmony_check_status']}")
-    print("==================================================")
+def _fw(r: int) -> str:
+    classes = [n for n, s in [('IC', IC), ('SA', SA), ('ST', ST), ('CB', CB),
+                               ('ORBIT_11', ORBIT_11), ('SEED_ORBIT', SEED_ORBIT),
+                               ('BASIN_Y', BASIN_Y), ('PR', PR)] if r in s]
+    return f"[{', '.join(classes)}]" if classes else "[—]"
 
 
 if __name__ == "__main__":
-    report = run_g5()
-    print_report(report)
+    report = evaluate(
+        aggregate_score=104832.0,
+        stability_index=0.0,
+        baseline_score=0.9500,
+        seed_residue=24,
+    )
+    print(format_report(report))
+    print(f"\nAll checks pass: {report.all_checks_pass}")
