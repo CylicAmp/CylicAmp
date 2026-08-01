@@ -39,6 +39,7 @@ from abcabc_mod37_orbit import abcabc_theorem, compute_orbit
 from lucas_abbc_chain import lucas_seq
 from sovereign_qr_closure import legendre
 from heartbeat_3cycle import f as heartbeat_step
+from cylicamp.g5_solver import evaluate as g5_evaluate, format_report as g5_format
 
 
 def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
@@ -135,6 +136,16 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     print(f"Heartbeat 3-cycle: {heartbeat[0]} -> {heartbeat[1]} -> {heartbeat[2]} -> {heartbeat[3]}")
     print(f"Provenance:        {orbit_claim.provenance.source_type.name} | {orbit_claim.provenance.citation}")
 
+    # Step 14: G5 Solver report
+    g5 = g5_evaluate(
+        aggregate_score=insight_score,
+        stability_index=result["Stability_Ratio"],
+        baseline_score=angle_mod,
+        seed_residue=seed_cell["mod37"],
+    )
+    print()
+    print(g5_format(g5))
+
     output = {
         "seed": seed,
         "multiplier": multiplier,
@@ -162,6 +173,17 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
         },
         "meta_history": history,
         "seed_ulam": seed_cell,
+        "g5_solver": {
+            "aggregate_mod_p": g5.aggregate_mod_p,
+            "consistency_status": g5.consistency_status.name,
+            "dynamic_threshold_status": g5.dynamic_threshold_status.name,
+            "halt_status": g5.halt_status.name,
+            "authority_status": g5.authority_status.name,
+            "authority_detail": g5.authority_detail,
+            "compatibility_status": g5.compatibility_status.name,
+            "compatibility_detail": g5.compatibility_detail,
+            "all_checks_pass": g5.all_checks_pass,
+        },
     }
 
     import json as _json
