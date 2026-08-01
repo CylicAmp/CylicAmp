@@ -186,6 +186,7 @@ button.on    { color: #4ab0e0; border-color: #2a6080; }
   <button id="b-rst">RESET</button>
   <button id="b-tr">TRACE</button>
   <input type="text" id="i-path" value="0000" maxlength="4" spellcheck="false" title="suffix for levels 1–4 (digits 0–3); level 0 varies across all 4 arms">
+  <button id="b-rb">RIBBON</button>
   <div class="div"></div>
   <div class="cg">
     <span class="clbl">fade</span>
@@ -212,6 +213,7 @@ let HALF_LIFE  = 2.5;   // seconds for alpha to halve — controlled by slider
 const ALPHA_FLOOR = 0.02;
 let trails      = [[], [], [], []];
 let traceSuffix = [0, 0, 0, 0];    // arm index at levels 1–4
+let ribbonMode  = false;
 
 // Colors by angular velocity ω = i−1, for arm index i:
 //   arm 0 → ω = −1  (retrograde, clockwise)
@@ -277,6 +279,77 @@ function pathEndpoint(cx, cy, d0, path) {
     y += (d0 / Math.pow(2, j)) * Math.sin(cumAng);
   }
   return [x, y];
+}
+
+// ── Ribbon: cumulative-rotation envelope ──────────────────────────────────
+// Uses the ORIGINAL Processing model where rotations accumulate within the loop:
+//   Θ_i(t) = Σ_{m=0}^{i} (π/2 + t·(m−1))
+// Each arm's envelope points lie on a radial line in direction Θ_i.
+function cumulAngle(i) {
+  let th = 0;
+  for (let m = 0; m <= i; m++) th += Math.PI / 2 + t * (m - 1);
+  return th;
+}
+
+function drawRibbon(cx, cy, d0) {
+  const RDEPTH = Math.min(maxL, 8);
+  const outer  = [];   // outermost point per arm
+
+  // ── Arm spines (radial lines, all depths) ────────────────────────────
+  ctx.lineWidth = 0.8;
+  ctx.shadowBlur = 0;
+  for (let i = 0; i < 4; i++) {
+    const th = cumulAngle(i);
+    const [ri, gi, bi] = armRGB(i);
+    let x = cx, y = cy, d = d0;
+
+    ctx.strokeStyle = `rgba(${ri},${gi},${bi},0.35)`;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    for (let L = 0; L < RDEPTH; L++) {
+      x += d * Math.cos(th);
+      y += d * Math.sin(th);
+      ctx.lineTo(x, y);
+      d /= 2;
+    }
+    ctx.stroke();
+    outer.push([x, y, i]);
+
+    // depth tick marks
+    x = cx; y = cy; d = d0;
+    ctx.fillStyle = `rgba(${ri},${gi},${bi},0.55)`;
+    for (let L = 0; L < RDEPTH; L++) {
+      x += d * Math.cos(th);
+      y += d * Math.sin(th);
+      ctx.beginPath();
+      ctx.arc(x, y, Math.max(0.8, 2.5 - L * 0.3), 0, 2 * Math.PI);
+      ctx.fill();
+      d /= 2;
+    }
+  }
+
+  // ── Outer envelope polygon (connecting the 4 arm tips) ───────────────
+  ctx.strokeStyle = 'rgba(255, 80, 170, 0.75)';
+  ctx.lineWidth   = 1.3;
+  ctx.shadowColor = 'rgba(255, 80, 170, 0.4)';
+  ctx.shadowBlur  = 8;
+  ctx.beginPath();
+  ctx.moveTo(outer[0][0], outer[0][1]);
+  for (let k = 1; k < 4; k++) ctx.lineTo(outer[k][0], outer[k][1]);
+  ctx.closePath();
+  ctx.stroke();
+
+  // Outer tip glows
+  ctx.shadowBlur = 10;
+  for (const [ox, oy, i] of outer) {
+    const [ri, gi, bi] = armRGB(i);
+    ctx.fillStyle   = `rgba(${ri},${gi},${bi},0.9)`;
+    ctx.shadowColor = `rgba(${ri},${gi},${bi},0.5)`;
+    ctx.beginPath();
+    ctx.arc(ox, oy, 3, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+  ctx.shadowBlur = 0;
 }
 
 // Extract raw RGBA values from ARM_COLOR strings for trail drawing
@@ -345,6 +418,9 @@ function frame(now) {
     ctx.shadowBlur = 0;
   }
 
+  // ── Ribbon ───────────────────────────────────────────────────────────────
+  if (ribbonMode) drawRibbon(cx, cy, d0);
+
   // ── Rotor ────────────────────────────────────────────────────────────────
   ctx.save();
   ctx.translate(cx, cy);
@@ -402,6 +478,11 @@ document.getElementById('b-tr').addEventListener('click', function() {
   tracing = !tracing;
   this.classList.toggle('on', tracing);
   if (!tracing) trails = [[], [], [], []];
+});
+
+document.getElementById('b-rb').addEventListener('click', function() {
+  ribbonMode = !ribbonMode;
+  this.classList.toggle('on', ribbonMode);
 });
 
 document.getElementById('r-fade').addEventListener('input', function() {
