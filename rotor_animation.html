@@ -213,7 +213,8 @@ let HALF_LIFE  = 2.5;   // seconds for alpha to halve — controlled by slider
 const ALPHA_FLOOR = 0.02;
 let trails      = [[], [], [], []];
 let traceSuffix = [0, 0, 0, 0];    // arm index at levels 1–4
-let ribbonMode  = false;
+let ribbonMode   = false;
+let ribbonTrails = [[], [], [], []];   // tip trail per arm, same [x,y,alpha] format
 
 // Colors by angular velocity ω = i−1, for arm index i:
 //   arm 0 → ω = −1  (retrograde, clockwise)
@@ -291,9 +292,26 @@ function cumulAngle(i) {
   return th;
 }
 
-function drawRibbon(cx, cy, d0) {
+function drawRibbon(cx, cy, d0, dt) {
   const RDEPTH = Math.min(maxL, 8);
   const outer  = [];   // outermost point per arm
+
+  // ── Tip trails (decay before computing new outer tips) ───────────────
+  const decay = Math.pow(0.5, dt / HALF_LIFE);
+  ctx.lineWidth = 0.7;
+  ctx.shadowBlur = 0;
+  for (let i = 0; i < 4; i++) {
+    const tr = ribbonTrails[i];
+    const [r, g, b] = armRGB(i);
+    for (let k = 1; k < tr.length; k++) {
+      const a = tr[k][2];
+      ctx.strokeStyle = `rgba(${r},${g},${b},${(a * 0.65).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.moveTo(tr[k-1][0], tr[k-1][1]);
+      ctx.lineTo(tr[k][0],   tr[k][1]);
+      ctx.stroke();
+    }
+  }
 
   // ── Arm spines (radial lines, all depths) ────────────────────────────
   ctx.lineWidth = 0.8;
@@ -339,7 +357,7 @@ function drawRibbon(cx, cy, d0) {
   ctx.closePath();
   ctx.stroke();
 
-  // Outer tip glows
+  // Outer tip glows + update trails
   ctx.shadowBlur = 10;
   for (const [ox, oy, i] of outer) {
     const [ri, gi, bi] = armRGB(i);
@@ -348,6 +366,13 @@ function drawRibbon(cx, cy, d0) {
     ctx.beginPath();
     ctx.arc(ox, oy, 3, 0, 2 * Math.PI);
     ctx.fill();
+
+    // decay existing, prune, append current tip
+    const aged = ribbonTrails[i]
+      .map(p => [p[0], p[1], p[2] * decay])
+      .filter(p => p[2] > ALPHA_FLOOR);
+    aged.push([ox, oy, 1.0]);
+    ribbonTrails[i] = aged;
   }
   ctx.shadowBlur = 0;
 }
@@ -419,7 +444,7 @@ function frame(now) {
   }
 
   // ── Ribbon ───────────────────────────────────────────────────────────────
-  if (ribbonMode) drawRibbon(cx, cy, d0);
+  if (ribbonMode) drawRibbon(cx, cy, d0, dt);
 
   // ── Rotor ────────────────────────────────────────────────────────────────
   ctx.save();
@@ -473,7 +498,7 @@ document.getElementById('b-pp').addEventListener('click', function() {
   this.classList.toggle('on', running);
   if (running) prev = null;
 });
-document.getElementById('b-rst').addEventListener('click', () => { t = 0; trails = [[], [], [], []]; });
+document.getElementById('b-rst').addEventListener('click', () => { t = 0; trails = [[], [], [], []]; ribbonTrails = [[], [], [], []]; });
 document.getElementById('b-tr').addEventListener('click', function() {
   tracing = !tracing;
   this.classList.toggle('on', tracing);
@@ -483,6 +508,7 @@ document.getElementById('b-tr').addEventListener('click', function() {
 document.getElementById('b-rb').addEventListener('click', function() {
   ribbonMode = !ribbonMode;
   this.classList.toggle('on', ribbonMode);
+  if (!ribbonMode) ribbonTrails = [[], [], [], []];
 });
 
 document.getElementById('r-fade').addEventListener('input', function() {
