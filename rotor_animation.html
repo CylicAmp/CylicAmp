@@ -81,6 +81,20 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
 }
 
+#i-path {
+  background: none;
+  border: 1px solid #1a2e3a;
+  color: #4ab0e0;
+  padding: 3px 7px;
+  border-radius: 2px;
+  font: 11px/1 'Courier New', Courier, monospace;
+  letter-spacing: 0.22em;
+  width: 60px;
+  outline: none;
+  text-align: center;
+}
+#i-path:focus { border-color: #4ab0e0; }
+
 .div { width: 1px; height: 18px; background: #1a2e3a; flex-shrink: 0; }
 
 button {
@@ -171,6 +185,7 @@ button.on    { color: #4ab0e0; border-color: #2a6080; }
   <button id="b-pp" class="on">PAUSE</button>
   <button id="b-rst">RESET</button>
   <button id="b-tr">TRACE</button>
+  <input type="text" id="i-path" value="00000" maxlength="5" spellcheck="false" title="arm path: one digit (0–3) per level">
 </div>
 
 <script>
@@ -185,9 +200,10 @@ let running = true;
 let tracing = false;
 let prev    = null;
 
-// Trace trail for the all-zeros arm path endpoint
+// Trace trail — follows tracePath through the arm tree
 const TRAIL_CAP = 1200;
-let trail = [];
+let trail     = [];
+let tracePath = [0, 0, 0, 0, 0];   // arm index (0–3) at each level
 
 // Colors by angular velocity ω = i−1, for arm index i:
 //   arm 0 → ω = −1  (retrograde, clockwise)
@@ -242,18 +258,16 @@ function rotor(d, lvl) {
   }
 }
 
-// ── Closed-form: all-zeros arm path endpoint ───────────────────────────────
-// In the corrected independent model, arm i_k=0 at each level contributes
-// θ(0,t) = π/2−t. Cumulative angle at level j:
-//   α_j = Σ_{k=0}^{j} θ(0,t) = (j+1)·(π/2−t)
-// This matches the general closed-form α_j = (j+1)π/2 + t·Σ(i_k−1) with all i_k=0.
-function zeroEndpoint(cx, cy, d0) {
-  let x = cx, y = cy;
-  for (let j = 0; j < maxL; j++) {
-    const d   = d0 / Math.pow(2, j);
-    const ang = (j + 1) * (Math.PI / 2 - t);
-    x += d * Math.cos(ang);
-    y += d * Math.sin(ang);
+// ── Closed-form: endpoint for an arbitrary arm path ───────────────────────
+// α_j = Σ_{k=0}^{j} θ(tracePath[k], t)  where θ(i,t) = π/2 + t·(i−1)
+// Each level adds its arm's independent rotation to the cumulative world angle.
+function pathEndpoint(cx, cy, d0) {
+  let x = cx, y = cy, cumAng = 0;
+  const L = Math.min(tracePath.length, maxL);
+  for (let j = 0; j < L; j++) {
+    cumAng += Math.PI / 2 + t * (tracePath[j] - 1);
+    x += (d0 / Math.pow(2, j)) * Math.cos(cumAng);
+    y += (d0 / Math.pow(2, j)) * Math.sin(cumAng);
   }
   return [x, y];
 }
@@ -321,7 +335,7 @@ function frame(now) {
 
   // Collect trace
   if (tracing) {
-    const pt = zeroEndpoint(cx, cy, d0);
+    const pt = pathEndpoint(cx, cy, d0);
     trail.push(pt);
     if (trail.length > TRAIL_CAP) trail.shift();
   }
@@ -360,5 +374,13 @@ document.getElementById('b-tr').addEventListener('click', function() {
   tracing = !tracing;
   this.classList.toggle('on', tracing);
   if (!tracing) trail = [];
+});
+
+document.getElementById('i-path').addEventListener('input', function() {
+  // keep only digits 0–3, max 5 chars
+  const clean = this.value.replace(/[^0-3]/g, '').slice(0, 5);
+  this.value  = clean;
+  tracePath   = clean.padEnd(5, '0').split('').map(Number);
+  trail = [];
 });
 </script>
