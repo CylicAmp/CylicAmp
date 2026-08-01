@@ -113,6 +113,24 @@ button.on    { color: #4ab0e0; border-color: #2a6080; }
   transition: color 0.3s;
 }
 #formula.lit { color: #2e4a5a; }
+
+/* ── Legend ──────────────────────────────────────── */
+#legend {
+  position: fixed;
+  bottom: 70px;
+  left: 18px;
+  font-size: 9.5px;
+  line-height: 2.1;
+  letter-spacing: 0.07em;
+}
+.leg-row { display: flex; align-items: center; gap: 8px; }
+.leg-swatch {
+  width: 22px; height: 2px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+.leg-label { color: #2e4a5a; }
+.leg-val   { color: #4a6070; font-variant-numeric: tabular-nums; }
 </style>
 
 <canvas id="c"></canvas>
@@ -122,6 +140,13 @@ button.on    { color: #4ab0e0; border-color: #2a6080; }
   <div class="hud-row"><span class="hud-key">cycle</span><span class="hud-val" id="h-cyc">0.0000</span></div>
   <div class="hud-row"><span class="hud-key">depth L</span><span class="hud-val" id="h-dep">5</span></div>
   <div class="hud-row"><span class="hud-key">segs</span><span class="hud-val" id="h-seg">1364</span></div>
+</div>
+
+<div id="legend">
+  <div class="leg-row"><span class="leg-swatch" style="background:#d64f38"></span><span class="leg-label">arm 0 &nbsp;</span><span class="leg-val">ω = −1</span></div>
+  <div class="leg-row"><span class="leg-swatch" style="background:#8a9ca8"></span><span class="leg-label">arm 1 &nbsp;</span><span class="leg-val">ω =  0</span></div>
+  <div class="leg-row"><span class="leg-swatch" style="background:#3cb4e8"></span><span class="leg-label">arm 2 &nbsp;</span><span class="leg-val">ω = +1</span></div>
+  <div class="leg-row"><span class="leg-swatch" style="background:#8c52ec"></span><span class="leg-label">arm 3 &nbsp;</span><span class="leg-val">ω = +2</span></div>
 </div>
 
 <div id="formula">
@@ -164,15 +189,16 @@ let prev    = null;
 const TRAIL_CAP = 1200;
 let trail = [];
 
-// Colors indexed by depth from root (0 = root/longest, 5 = leaf/shortest)
-// Root arms recede into depth; leaf arms surface as bright cyan-white.
-const DEPTH_COLOR = [
-  'rgba(26,  61,106, 0.80)',   // 0: deep navy
-  'rgba(44, 111,170, 0.82)',   // 1: ocean blue
-  'rgba(61, 154,216, 0.85)',   // 2: mid cyan
-  'rgba(110,196,238, 0.88)',   // 3: light cyan
-  'rgba(170,220,245, 0.92)',   // 4: pale cyan
-  'rgba(220,242,255, 0.95)',   // 5: near white
+// Colors by angular velocity ω = i−1, for arm index i:
+//   arm 0 → ω = −1  (retrograde, clockwise)
+//   arm 1 → ω =  0  (fixed, no rotation)
+//   arm 2 → ω = +1  (prograde)
+//   arm 3 → ω = +2  (fast prograde)
+const ARM_COLOR = [
+  'rgba(214, 79, 56, 0.88)',   // ω=−1: red-orange
+  'rgba(138,156,168, 0.75)',   // ω= 0: cool grey
+  'rgba( 60,180,232, 0.88)',   // ω=+1: cyan
+  'rgba(140, 82,236, 0.88)',   // ω=+2: violet
 ];
 const DEPTH_WIDTH = [2.6, 1.8, 1.2, 0.8, 0.52, 0.34];
 
@@ -191,20 +217,20 @@ function segCount(L) {
 // ── Recursive rotor (corrected independent-arm model) ─────────────────────
 // save/restore INSIDE the loop: each arm's rotation θ(i,t) = π/2 + t(i−1)
 // is independent of the others at the same level. This matches the closed-form
-// α_j = Σ_{k=0}^{j} θ(i_k,t) exactly for all arm paths, not just the 0-path.
+// α_j = Σ_{k=0}^{j} θ(i_k,t) exactly for all arm paths.
+// Color is by arm index i (= angular velocity ω+1); width is by depth.
 function rotor(d, lvl) {
   if (d <= 9 || lvl >= maxL) return;
-  const idx    = Math.min(lvl, DEPTH_COLOR.length - 1);
+  const lw     = DEPTH_WIDTH[Math.min(lvl, DEPTH_WIDTH.length - 1)];
   const isLeaf = (d / 2 <= 9 || lvl + 1 >= maxL);
-  const col    = DEPTH_COLOR[idx];
-  const lw     = DEPTH_WIDTH[idx];
 
   for (let i = 0; i < 4; i++) {
+    const ac = ARM_COLOR[i];
     ctx.save();                                // pushMatrix — isolate this arm
     ctx.rotate(Math.PI / 2 + t * (i - 1));   // independent: θ(i,t), no accumulation
-    ctx.strokeStyle = col;
+    ctx.strokeStyle = ac;
     ctx.lineWidth   = lw;
-    ctx.shadowColor = col;
+    ctx.shadowColor = ac;
     ctx.shadowBlur  = isLeaf ? 7 : 2;
     ctx.beginPath();
     ctx.moveTo(0, 0);
