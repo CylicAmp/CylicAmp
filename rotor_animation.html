@@ -188,37 +188,39 @@ function segCount(L) {
   return L < 1 ? 0 : Math.round(4 * (Math.pow(4, L) - 1) / 3);
 }
 
-// ── Recursive rotor (faithful Processing translation) ──────────────────────
-// Rotations ACCUMULATE within the loop at each level (no save/restore per arm).
-// The ctx.save/restore is only around translate+recursion, preserving
-// rotation accumulation across arm iterations at each level.
+// ── Recursive rotor (corrected independent-arm model) ─────────────────────
+// save/restore INSIDE the loop: each arm's rotation θ(i,t) = π/2 + t(i−1)
+// is independent of the others at the same level. This matches the closed-form
+// α_j = Σ_{k=0}^{j} θ(i_k,t) exactly for all arm paths, not just the 0-path.
 function rotor(d, lvl) {
   if (d <= 9 || lvl >= maxL) return;
-  const idx  = Math.min(lvl, DEPTH_COLOR.length - 1);
+  const idx    = Math.min(lvl, DEPTH_COLOR.length - 1);
   const isLeaf = (d / 2 <= 9 || lvl + 1 >= maxL);
-  ctx.strokeStyle = DEPTH_COLOR[idx];
-  ctx.lineWidth   = DEPTH_WIDTH[idx];
-  ctx.shadowColor = DEPTH_COLOR[idx];
-  ctx.shadowBlur  = isLeaf ? 7 : 2;
+  const col    = DEPTH_COLOR[idx];
+  const lw     = DEPTH_WIDTH[idx];
 
   for (let i = 0; i < 4; i++) {
-    // Cumulative: each rotate() adds to current transform, not absolute
-    ctx.rotate(Math.PI / 2 + t * (i - 1));
+    ctx.save();                                // pushMatrix — isolate this arm
+    ctx.rotate(Math.PI / 2 + t * (i - 1));   // independent: θ(i,t), no accumulation
+    ctx.strokeStyle = col;
+    ctx.lineWidth   = lw;
+    ctx.shadowColor = col;
+    ctx.shadowBlur  = isLeaf ? 7 : 2;
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.lineTo(d, 0);
     ctx.stroke();
-    ctx.save();
     ctx.translate(d, 0);
     rotor(d / 2, lvl + 1);
-    ctx.restore();
+    ctx.restore();                             // popMatrix — next arm starts fresh
   }
 }
 
 // ── Closed-form: all-zeros arm path endpoint ───────────────────────────────
-// Following arm i=0 at every level, the Processing accumulation gives
-// cumulative angle at level j = (j+1)·(π/2 − t).
-// This matches the user's closed-form: α_j = Σ_{k=0}^{j} θ(0,t) = (j+1)(π/2−t).
+// In the corrected independent model, arm i_k=0 at each level contributes
+// θ(0,t) = π/2−t. Cumulative angle at level j:
+//   α_j = Σ_{k=0}^{j} θ(0,t) = (j+1)·(π/2−t)
+// This matches the general closed-form α_j = (j+1)π/2 + t·Σ(i_k−1) with all i_k=0.
 function zeroEndpoint(cx, cy, d0) {
   let x = cx, y = cy;
   for (let j = 0; j < maxL; j++) {
