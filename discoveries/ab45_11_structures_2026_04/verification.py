@@ -1,4 +1,4 @@
-print("AB45=11 Structures – All 24 Valid Versions\n")
+print("AB45=11 Structures – All Valid Versions\n")
 
 pairs = [(2,9),(3,8),(4,7),(5,6)]
 structures = []
