@@ -1,6 +1,5 @@
 \documentclass{article}
 \usepackage{amsmath}
-\usepackage{amssymb}
 
 \title{Mod-9 Digit-Pair Transition System}
 \date{April 2026}
@@ -11,37 +10,14 @@
 
 \section{Statement}
 
-The complete system is a bidirectional digit-pair lattice with involutive symmetry and mod-9 equivalence collapse.
+The mod-9 digit-pair transition system governs all adjacency and swap transitions over the digit-pair lattice $[11, 99]$ in three layers:
 
-Base adjacency lattice (nearest-neighbor rule):
-\[
-(a,b) \to (a,b+1),\ (b,a)
-\]
+\begin{enumerate}
+\item \textbf{Adjacency Lattice}: $S \to S+1$ (linear) or $(d_1,d_2) \to (d_2,d_1)$ (mirror swap)
+\item \textbf{Swap Symmetry}: Every pair $(d_1,d_2)$ has mirror $(d_2,d_1)$; both share the same digital root
+\item \textbf{Mod-9 Collapse}: All transitions preserve the digital root under mod-9 reduction
+\end{enumerate}
 
-Mod-9 shift layer:
-\[
-x \to x + 9k \quad \Rightarrow \quad x \sim x + 9 \pmod{9}
-\]
-
-Swap symmetry operator:
-\[
-S(a,b) = (b,a), \quad S^2 = I
-\]
-
-Arithmetic reduction rule:
-\[
-9 + k \to k \quad \Rightarrow \quad x + 9 \equiv x \pmod{9}
-\]
-
-Completion Constant verification:
-\[
-7 + 4 = 11, \quad 11 + 9 = 20
-\]
-and the symmetric form
-\[
-9 + 1 + 1 + 9 = 20
-\]
-
-The entire chain and higher block system (56--99) are generated automatically by these three rules. All paths collapse into the 7-4-9 triad equilibrium seal.
+The Completion Constant 20 is verified by $7+4=11+9=20$ and $9+1+1+9=20$.
 
 \end{document}

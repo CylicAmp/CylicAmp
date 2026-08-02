@@ -1,40 +1,29 @@
 \documentclass{article}
 \usepackage{amsmath}
 
+\title{Analysis: 360 Milestone Overlay}
+\date{April 2026}
+
 \begin{document}
 
-\title{Analysis of the 360 Milestone}
 \maketitle
 
-\section{Position in 81-Grid}
-$360 \mod 81 = 36$. Rough center at row $\sim5$, column $\sim5$. Best coordinate fit is $(3,6)$ and $(6,3)$ where $a+b=9$ (digital root 9 container).
-
 \section{Totient Boundary}
-At $k=34$: $\Sigma\phi = 360$ (geometric completion).
-At $k=35$: $\Sigma\phi = 384$ with increment $\phi(35)=24$.
+$\sum_{k=1}^{34}\varphi(k) = 360$ exactly. This is the 360 milestone — the point at which the cumulative totient sum reaches 360.
 
-\section{Jump Structure}
-\[
-360 \to 384 \quad (+24),\quad
-384 \to 396 \quad (+12),\quad
-396 \to 432 \quad (+36)
-\]
-Pattern: $24=2\times12$, $36=3\times12$. Total gap $72=8\times9$.
+\section{Ratio to 432}
+$360 = \frac{5}{6} \times 432$. The gap is $72 = 8 \times 9$, closing at $k=37$ where $\sum_{k=1}^{37}\varphi(k)=432$.
 
-\section{Digital Root Path}
-$24 \to$ DR 6 (bridge)
-$12 \to$ DR 3 (generator)
-$36 \to$ DR 9 (container)
+\section{Modular Constants}
+$360 \bmod 81 = 36$, $360 \bmod 37 = 27$.
 
-Sequence $6 \to 3 \to 9$ traces the completion path.
+\section{Grid Coordinates}
+The $\bigstar$ positions at $(3,6)$ and $(6,3)$ are the only off-diagonal cells with $\mathrm{DR}=9$ in the upper-left $6\times6$ quadrant. The $\blacklozenge$ at $(4,4)$ marks the diagonal intersection point.
 
-\section{Circle Completion}
-$360^\circ \equiv 27 \pmod{37}$ where $27=3^3=3\times9$ (triple generator inside container).
+\section{Jump Sequence}
+$360 \xrightarrow{+24} 384 \xrightarrow{+12} 396 \xrightarrow{+36} 432$ traces the completion path from the 360 milestone to 432 in three deterministic steps.
 
-\section{Synthesis}
-360 at $k=34$ is the geometric full-circle point with DR=9 container position.
-The final transformation of gap 72 closes exactly at 432 ($k=37$), the algebraic master container.
-
-The 9×9 overlay and all modular relations align precisely with the bridge-generator-container cycle.
+\section{Integration}
+The 360 milestone overlay supplies the coordinate engine and jump sequence for the G'5 Sovereign Kernel's deterministic recurrence layer.
 
 \end{document}

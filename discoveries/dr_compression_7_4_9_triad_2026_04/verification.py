@@ -1,7 +1,9 @@
 def dr(n):
     while n >= 10:
         n = sum(int(d) for d in str(n))
-    return n
+    return n if n != 0 else 9
+
+print("DR Compression – 7-4-9 Triad Verification\n")
 
 chains = {
     "Origin (162)": 162,
@@ -11,9 +13,11 @@ chains = {
     "Simple Triple (13)": 13
 }
 
-print("Digital Root Compression Verification\n")
-for name, value in chains.items():
-    d = dr(value)
-    mod9 = value % 9
-    target = mod9 if mod9 != 0 else 9
-    print(f"{name:20} → DR = {d} (mod 9 = {mod9}) → Target {target}")
+for name, val in chains.items():
+    print(f"{name}: DR({val}) = {dr(val)}")
+
+print("\n7-4-9 Triad check:")
+print(f"DR(7) = {dr(7)}")
+print(f"DR(4) = {dr(4)}")
+print(f"DR(9) = {dr(9)}")
+print(f"Sum = {dr(7)+dr(4)+dr(9)}")

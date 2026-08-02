@@ -1,21 +1,16 @@
 # Mod-9 Digit-Pair Transition System
 
-Formalization of the complete mod-9 / digit-transition system derived from the 7-4-9 triad, 360 Milestone Overlay, and Completion Constant 20.
+Original formalization of the three-layer mod-9 digit-pair transition system governing the adjacency lattice from 11 to 99.
 
-## System Overview
-The full structure consists of three interacting layers:
-- Layer 1: Nearest-neighbor adjacency lattice on digit pairs (11 → 55)
-- Layer 2: Involutive swap symmetry (a,b) ↔ (b,a) with fixed points aa
-- Layer 3: Mod-9 equivalence collapse (n ∼ n + 9k) with 9 → 9
+## Three Layers
+1. **Adjacency Lattice** — transitions by +1 (linear) or digit swap (mirror) from 11 through 55
+2. **Swap Symmetry** — every pair (d1,d2) has mirror (d2,d1); both share the same DR
+3. **Mod-9 Collapse** — all transitions preserve digital root under mod-9 reduction
 
-Global invariants:
-- Fixed diagonal: 11, 22, 33, 44, 55, 66, 77, 88, 99
-- Swap orbits: {67,76}, {78,87}, {89,98}
-- Modular collapse classes: {1,10,19,…}, {2,11,20,…}, …
+## Core Constants
+- Completion Constant 20: 7+4=11+9=20 and 9+1+1+9=20
+- Global invariant: DR is preserved across all adjacency and swap transitions
 
-Final formal result:
-A bidirectional digit-pair lattice with involutive symmetry and mod-9 equivalence collapse.
+This system is the foundation for the 9×9 State Matrix [11,99] and the deterministic recurrence in the G'5 Sovereign Kernel.
 
-This system directly extends the Digital Root Compression discovery and supplies the explicit, checkable transition rules that power the D7 Dual Harmonic layer in the G'5 Sovereign Kernel.
-
-See statement.tex, analysis.tex, and verification.py for the complete formal specification and automated checks.
+See statement.tex, analysis.tex, and verification.py for the formal definition and automated checks.

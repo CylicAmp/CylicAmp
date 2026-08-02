@@ -1,14 +1,15 @@
-# 360 Milestone Overlay on 9×9 Grid
+# 360 Milestone Overlay on the 9×9 DR Grid
 
-Original discovery positioning 360 as the geometric completion point within the cyclic 9×9 grid system.
+Original discovery of the 360 milestone overlay on the 9×9 digital root grid, establishing the exact coordinate positions of the Euler totient boundary and triadic anchors.
 
 ## Core Results
-- 360 mod 81 = 36
-- Optimal coordinate pair: (3,6) and (6,3) with digital root 9 container
-- Σφ(k) reaches exactly 360 at k=34
-- Jump sequence from 360 to 432: +24 → +12 → +36 (digital root path 6→3→9)
-- Precise overlay marks on the 9×9 grid at DR=9 positions
-- Full circle return: 360° ≡ 27 mod 37 (3³, generator × container)
-- Final gap 72 (8×9) closes the transformation to algebraic master container at 432
+- Σφ(1..34) = 360 exactly — the totient boundary
+- 360 = 5/6 of 432; gap 72 = 8×9
+- Jump sequence: 360 → 384 → 396 → 432 (+24, +12, +36)
+- ★ marker at grid positions (3,6) and (6,3): DR = 9
+- ◆ marker at (4,4): DR = 8
+- DR=9 coordinate pairs: all (a,b) where a+b=9, for a,b in 1..8
 
-The pattern demonstrates the bridge-generator-container cycle completing exactly at the 360 milestone.
+This overlay connects the totient boundary directly to the mod-9 grid and supplies the coordinate engine for the G'5 Sovereign Kernel.
+
+See statement.tex, analysis.tex, and grid_overlay.py.

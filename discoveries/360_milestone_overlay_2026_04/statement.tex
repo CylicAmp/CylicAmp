@@ -2,7 +2,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
-\title{360 Milestone Overlay on the 9×9 Grid}
+\title{360 Milestone Overlay on the 9$\times$9 DR Grid}
 \date{April 2026}
 
 \begin{document}
@@ -11,35 +11,18 @@
 
 \section{Statement}
 
-Let $\Sigma\phi(n) = \sum_{k=1}^{n} \phi(k)$ denote the cumulative sum of Euler's totient function.
+The Euler totient boundary $\sum_{k=1}^{34}\varphi(k) = 360$ overlays onto the $9\times9$ digital root grid at the following marked positions:
 
-At $n=34$, $\Sigma\phi(34) = 360$.
+\begin{itemize}
+\item $\bigstar$ at $(3,6)$ and $(6,3)$: $\mathrm{DR}(3+6)=9$
+\item $\blacklozenge$ at $(4,4)$: $\mathrm{DR}(4+4)=8$
+\end{itemize}
 
-This value satisfies:
+Jump sequence from the 360 milestone:
 \[
-360 \equiv 36 \pmod{81}
+360 \xrightarrow{+24} 384 \xrightarrow{+12} 396 \xrightarrow{+36} 432
 \]
 
-The position 36 fits the coordinate pair $(a,b) = (3,6)$ or $(6,3)$ where $a+b=9$ (digital root 9 container).
-
-On the 9×9 cyclic grid, 360 marks the milestone positions with digital root 9. The overlay is:
-
-\[
-\begin{array}{ccccccccc}
-2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 1 \\
-3 & 4 & 5 & 6 & 7 & 8 & 9 & 1 & 2 \\
-4 & 5 & 6 & 7 & 8 & \star9 & 1 & 2 & 3 \\
-5 & 6 & 7 & \blacklozenge8 & 9 & 1 & 2 & 3 & 4 \\
-6 & 7 & 8 & 9 & 1 & 2 & 3 & 4 & 5 \\
-7 & 8 & \star9 & 1 & 2 & 3 & 4 & 5 & 6 \\
-8 & 9 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
-9 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
-1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9
-\end{array}
-\]
-
-Additionally, $360 \equiv 27 \pmod{37}$ where $27 = 3^3$ completes the circle.
-
-The sequence continues to the algebraic container at 432 with gap 72 ($=8\times9$).
+Gap: $432 - 360 = 72 = 8 \times 9$.
 
 \end{document}

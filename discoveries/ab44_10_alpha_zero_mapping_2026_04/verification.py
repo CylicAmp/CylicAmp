@@ -1,4 +1,3 @@
-# Digit to Alpha label mapping
 digit_to_label = {
     1: "ALO", 2: "ALE", 3: "AHO", 4: "AHE",
     5: "A51", 6: "BLE", 7: "BLO", 8: "BHE", 9: "BHO"

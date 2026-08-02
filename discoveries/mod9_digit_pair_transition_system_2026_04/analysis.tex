@@ -1,59 +1,23 @@
 \documentclass{article}
 \usepackage{amsmath}
 
+\title{Analysis: Mod-9 Digit-Pair Transition System}
+\date{April 2026}
+
 \begin{document}
 
-\title{Analysis of the Mod-9 Digit-Pair Transition System}
 \maketitle
 
-\section{1. Base Chain (State Lattice)}
-\[
-11 \to 12 \to 21 \to 22 \to 23 \to 32 \to 33 \to 34 \to 43 \to 44 \to 45 \to 54 \to 55
-\]
+\section{Layer 1: Adjacency Lattice}
+Transitions proceed by $+1$ (linear) or digit swap (mirror) through the chain $11 \to 12 \to 21 \to 22 \to \cdots \to 55$.
 
-\section{2. Mod-9 Shift Layer}
-\[
-T(n) = n + 9k \quad \Rightarrow \quad n \sim n + 9 \pmod{9}
-\]
+\section{Layer 2: Swap Symmetry}
+For every pair $(d_1, d_2)$, the mirror $(d_2, d_1)$ exists and both carry the same digital root. This creates a closed symmetric lattice.
 
-\section{3. Transition Rules}
-Directed path with symmetry:
-\[
-n \to n+1 \quad (\text{digit-pair encoding}) \quad \text{and} \quad ab \leftrightarrow ba
-\]
+\section{Layer 3: Mod-9 Collapse}
+All transitions preserve $\mathrm{DR}(n) = n \bmod 9$ (with 9 replacing 0). The global invariant classes are determined by DR value.
 
-\section{4. Higher Block System (56--99)}
-Fixed points: 66, 77, 88, 99
-Swap pairs: $67 \leftrightarrow 76$, $89 \leftrightarrow 98$
-
-\section{5. Arithmetic Rules}
-\[
-9 + k \to k \quad \Rightarrow \quad x + 9 \equiv x \pmod{9}
-\]
-
-\section{6. Key Expression Clusters}
-\[
-9+1+1+9 = 20 \quad \to \quad 2
-\]
-\[
-9+11+9 = 29 \quad \to \quad 2
-\]
-
-\section{7--9. System Structure}
-Three layers:
-\begin{itemize}
-\item Layer 1: Adjacency lattice $11 \to 55$
-\item Layer 2: Swap symmetry with fixed diagonal
-\item Layer 3: Mod-9 collapse
-\end{itemize}
-
-Global invariants: fixed diagonal and swap orbits.
-
-Final formal result:
-\[
-\text{A bidirectional digit-pair lattice with involutive symmetry and mod-9 equivalence collapse}
-\]
-
-This structure is fully consistent with the 7-4-9 triad, Completion Constant 20, and the 360 Milestone Overlay.
+\section{Completion Constant}
+$7 + 4 = 11 + 9 = 20$ and $9 + 1 + 1 + 9 = 20$. Both expressions confirm the Completion Constant 20 embedded in the transition system.
 
 \end{document}
