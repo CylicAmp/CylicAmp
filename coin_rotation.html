@@ -1,0 +1,534 @@
+<title>Coin Rotation Paradox</title>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #07080f;
+  color: #c0bcb0;
+  font-family: system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  gap: 1rem;
+}
+
+.eyebrow {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #38405a;
+}
+
+.stage {
+  border: 1px solid #14192a;
+  line-height: 0;
+  position: relative;
+}
+
+canvas { display: block; }
+
+.counters {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+.counter { display: flex; flex-direction: column; gap: 0.12rem; }
+
+.c-label {
+  font-size: 0.57rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #38405a;
+}
+
+.c-val {
+  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
+  font-size: 2rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: #c0bcb0;
+}
+
+.c-val.green { color: #38c85a; }
+
+.c-sub {
+  font-size: 0.52rem;
+  color: #28304a;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.divider {
+  font-family: ui-monospace, monospace;
+  font-size: 1.4rem;
+  color: #1c2234;
+  align-self: center;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  background: transparent;
+  border: 1px solid #1c2234;
+  color: #c0bcb0;
+  padding: 0.4rem 0.9rem;
+  font-family: ui-monospace, 'Courier New', monospace;
+  font-size: 0.67rem;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition: border-color 0.12s;
+}
+
+button:hover { border-color: #38405a; }
+
+.sl-group { display: flex; align-items: center; gap: 0.5rem; }
+
+.sl-label {
+  font-size: 0.57rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #38405a;
+}
+
+input[type=range] { accent-color: #d4a843; width: 85px; }
+
+.note {
+  font-size: 0.67rem;
+  color: #38405a;
+  text-align: center;
+  max-width: 380px;
+  line-height: 1.7;
+}
+
+.note em { font-style: normal; color: #38c85a; }
+.note s { opacity: 0.45; }
+</style>
+
+<p class="eyebrow">Coin Rotation Paradox &nbsp;·&nbsp; π appears four times per orbit</p>
+
+<div class="stage"><canvas id="c"></canvas></div>
+
+<div class="counters">
+  <div class="counter">
+    <span class="c-label">Orbit</span>
+    <span class="c-val" id="ov">0.00</span>
+    <span class="c-sub">revolution</span>
+  </div>
+  <span class="divider">×2=</span>
+  <div class="counter">
+    <span class="c-label">Actual Spins</span>
+    <span class="c-val green" id="sv">0.00</span>
+    <span class="c-sub">orbit × 2 = 4π halves</span>
+  </div>
+</div>
+
+<div class="controls">
+  <button id="pb">PLAY</button>
+  <button id="rb">RESET</button>
+  <label class="sl-group">
+    <span class="sl-label">Speed</span>
+    <input type="range" id="spd" min="0.3" max="4" step="0.1" value="1.5">
+  </label>
+</div>
+
+<p class="note">
+  <em>4 × π</em> per orbit — two from rolling, two from the curved path.<br>
+  Nine digits · nine orbits · <em>18 spins</em> · <em>4 × 6 = 24</em>
+</p>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+
+const SIZE = Math.min(520, window.innerWidth - 32, window.innerHeight - 260);
+canvas.width = canvas.height = SIZE;
+const cx = SIZE / 2, cy = SIZE / 2;
+const R  = SIZE / 7.8;
+
+const PALETTE = [
+  '#e85858', '#e88038', '#d4c02c', '#48c060',
+  '#28b8b4', '#3090d4', '#6068d0', '#a840cc', '#cc3898'
+];
+
+// Cardioid for each of 9 points evenly spaced on rolling circle
+const N_PTS = 900;
+const cardioids = PALETTE.map((_, k) => {
+  const θk = Math.PI + k * (2 * Math.PI / 9);
+  return Array.from({length: N_PTS + 1}, (_, i) => {
+    const φ = (i / N_PTS) * 2 * Math.PI;
+    return [
+      cx + 2 * R * Math.cos(φ) + R * Math.cos(θk + 2 * φ),
+      cy + 2 * R * Math.sin(φ) + R * Math.sin(θk + 2 * φ)
+    ];
+  });
+});
+
+let phi = 0, speed = 1.5, paused = true, last = null;
+const MAX_PHI = 9 * 2 * Math.PI;
+
+// Equation glow state — each spikes to 1.0 on activation, decays to 0
+const eqGlow    = [0, 0, 0, 0];
+let eqActive    = -1;
+let lastOrbitDone  = 0;
+let orbitFlashSeq  = -1;   // which step of the orbit-lap flash is playing
+let orbitFlashTs   = 0;
+
+// ── Background: 9 rings, 9 spokes, center pie ──────────────────────────────
+function drawBackground() {
+  const outerR = SIZE * 0.455;
+
+  // 9 concentric rings (same palette as the 9 orbit traces)
+  for (let k = 0; k < 9; k++) {
+    const r = R * 0.52 + k * (outerR * 0.94 - R * 0.52) / 8;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+    ctx.strokeStyle = PALETTE[k] + '1c';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // 9 radial spokes
+  for (let k = 0; k < 9; k++) {
+    const angle = -Math.PI / 2 + k * (2 * Math.PI / 9);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(
+      cx + outerR * 0.88 * Math.cos(angle),
+      cy + outerR * 0.88 * Math.sin(angle)
+    );
+    ctx.strokeStyle = PALETTE[k] + '28';
+    ctx.lineWidth = 0.6;
+    ctx.stroke();
+  }
+
+  // Digit labels 1–9 at spoke tips (two rounds: red outer, blue inner)
+  for (let k = 0; k < 9; k++) {
+    const angle = -Math.PI / 2 + k * (2 * Math.PI / 9);
+    const lr = outerR * 0.955;
+    ctx.font = 'bold 11px ui-monospace, monospace';
+    ctx.fillStyle = PALETTE[k] + 'cc';
+    ctx.textAlign   = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(k + 1, cx + lr * Math.cos(angle), cy + lr * Math.sin(angle));
+  }
+
+  // Center pie — 9 colored sectors inside the fixed circle
+  const pieR = R * 0.76;
+  for (let k = 0; k < 9; k++) {
+    const s = -Math.PI / 2 + k * (2 * Math.PI / 9);
+    const e = -Math.PI / 2 + (k + 1) * (2 * Math.PI / 9);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, pieR, s, e);
+    ctx.closePath();
+    ctx.fillStyle   = PALETTE[k] + '55';
+    ctx.fill();
+    ctx.strokeStyle = '#07080f';
+    ctx.lineWidth   = 0.5;
+    ctx.stroke();
+  }
+}
+
+// ── Quarter-orbit π markers on the orbit ring ──────────────────────────────
+function drawQuarterMarkers(phiMod) {
+  const orbitRing = 2 * R;
+  for (let q = 0; q < 4; q++) {
+    const angle   = q * Math.PI / 2;
+    const mx      = cx + orbitRing * Math.cos(angle);
+    const my      = cy + orbitRing * Math.sin(angle);
+    const reached = phiMod >= q * Math.PI / 2;
+
+    // Tick mark perpendicular to orbit ring
+    const tx = Math.cos(angle + Math.PI / 2) * 5;
+    const ty = Math.sin(angle + Math.PI / 2) * 5;
+    ctx.beginPath();
+    ctx.moveTo(mx - tx, my - ty);
+    ctx.lineTo(mx + tx, my + ty);
+    ctx.strokeStyle = reached ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.18)';
+    ctx.lineWidth   = 1.5;
+    ctx.stroke();
+
+    // π label pointing outward
+    const lo = 15;
+    ctx.font          = '9px serif';
+    ctx.fillStyle     = reached ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.18)';
+    ctx.textAlign     = 'center';
+    ctx.textBaseline  = 'middle';
+    ctx.fillText('π', mx + Math.cos(angle) * lo, my + Math.sin(angle) * lo);
+  }
+}
+
+// ── Equation overlay: animated glow per quarter, sequential lap flash ──────
+const EQNS = ['2 = 29 = 9', '1 = 19 = 1', '1 = 91 = 1', '9 = 92 = 2'];
+
+function drawEquations(phiMod, dt) {
+  const active = phiMod < 0.001 ? -1 : Math.min(3, Math.floor(phiMod / (Math.PI / 2)));
+
+  // Detect quarter transition — spike that equation's glow
+  if (active !== eqActive) {
+    if (active >= 0) eqGlow[active] = 1.0;
+    eqActive = active;
+  }
+
+  // Decay all glows each frame
+  for (let i = 0; i < 4; i++) {
+    eqGlow[i] = Math.max(0, eqGlow[i] - dt * 4.5);
+  }
+
+  ctx.font         = '10px ui-monospace, monospace';
+  ctx.textAlign    = 'left';
+  ctx.textBaseline = 'top';
+
+  EQNS.forEach((eq, i) => {
+    const isActive = (i === active);
+    const g        = eqGlow[i];
+    // Glow interpolates from dim blue toward bright white-blue
+    const alpha = isActive ? 0.82 + g * 0.15 : 0.20 + g * 0.62;
+    const rv    = Math.round(80  + g * 175);
+    const gv    = Math.round(125 + g * 130);
+    ctx.fillStyle = (isActive || g > 0.02)
+      ? `rgba(${rv},${gv},255,${alpha.toFixed(3)})`
+      : 'rgba(55,90,200,0.20)';
+    ctx.fillText(eq, 8, 8 + i * 14);
+  });
+
+  ctx.font         = '10px ui-monospace, monospace';
+  ctx.fillStyle    = 'rgba(220,80,80,0.55)';
+  ctx.textAlign    = 'left';
+  ctx.textBaseline = 'bottom';
+  ctx.fillText('4 × 6 = 24', 8, SIZE - 8);
+}
+
+// ── Main draw ──────────────────────────────────────────────────────────────
+function draw(dt) {
+  ctx.clearRect(0, 0, SIZE, SIZE);
+
+  const phiMod    = phi % (2 * Math.PI);
+  const orbitF    = phi / (2 * Math.PI);
+  const orbitDone = Math.floor(orbitF);
+  const progress  = phiMod / (2 * Math.PI);
+  const pIdx      = Math.min(Math.floor(progress * N_PTS), N_PTS);
+  const rx        = cx + 2 * R * Math.cos(phi);
+  const ry        = cy + 2 * R * Math.sin(phi);
+
+  // Static background structure
+  drawBackground();
+
+  // Dashed center-orbit ring
+  ctx.save();
+  ctx.setLineDash([3, 8]);
+  ctx.beginPath();
+  ctx.arc(cx, cy, 2 * R, 0, 2 * Math.PI);
+  ctx.strokeStyle = 'rgba(180,140,50,0.14)';
+  ctx.lineWidth   = 1;
+  ctx.stroke();
+  ctx.restore();
+
+  // Quarter π markers
+  drawQuarterMarkers(phiMod);
+
+  // Ghost cardioids (completed orbits)
+  if (orbitDone > 0) {
+    ctx.lineWidth = 0.8;
+    for (let k = 0; k < 9; k++) {
+      ctx.beginPath();
+      const c = cardioids[k];
+      ctx.moveTo(c[0][0], c[0][1]);
+      for (let i = 1; i <= N_PTS; i++) ctx.lineTo(c[i][0], c[i][1]);
+      ctx.closePath();
+      ctx.strokeStyle = PALETTE[k] + '42';
+      ctx.stroke();
+    }
+  }
+
+  // Live cardioid traces (current orbit)
+  if (pIdx > 0) {
+    ctx.lineWidth = 1.4;
+    for (let k = 0; k < 9; k++) {
+      ctx.beginPath();
+      const c = cardioids[k];
+      ctx.moveTo(c[0][0], c[0][1]);
+      for (let i = 1; i <= pIdx; i++) ctx.lineTo(c[i][0], c[i][1]);
+      ctx.strokeStyle = PALETTE[k];
+      ctx.stroke();
+    }
+  }
+
+  // Fixed circle fill
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, 0, 2 * Math.PI);
+  ctx.fillStyle = 'rgba(212,168,67,0.06)';
+  ctx.fill();
+
+  // Cyan contact arc on fixed circle
+  if (phiMod > 0.001) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, phiMod, false);
+    ctx.strokeStyle = 'rgba(0,215,245,0.45)';
+    ctx.lineWidth   = 3.5;
+    ctx.stroke();
+  }
+
+  // Fixed circle stroke
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, 0, 2 * Math.PI);
+  ctx.strokeStyle = '#d4a843';
+  ctx.lineWidth   = 1.8;
+  ctx.stroke();
+
+  // Rolling circle fill
+  ctx.beginPath();
+  ctx.arc(rx, ry, R, 0, 2 * Math.PI);
+  ctx.fillStyle = 'rgba(139,189,206,0.07)';
+  ctx.fill();
+
+  // Orange contact arc on rolling circle
+  // In rolling circle's local frame, contacted arc: from (π+phiMod) to (π+2·phiMod)
+  if (orbitDone > 0) {
+    ctx.beginPath();
+    ctx.arc(rx, ry, R, 0, 2 * Math.PI);
+    ctx.strokeStyle = 'rgba(228,88,36,0.2)';
+    ctx.lineWidth   = 3.2;
+    ctx.stroke();
+  }
+  if (phiMod > 0.001) {
+    ctx.beginPath();
+    ctx.arc(rx, ry, R, Math.PI + phiMod, Math.PI + 2 * phiMod, false);
+    ctx.strokeStyle = 'rgba(228,88,36,0.62)';
+    ctx.lineWidth   = 3.5;
+    ctx.stroke();
+  }
+
+  // Diameter mark (shows rotation like ink on coin)
+  const dAng = Math.PI + phi;
+  ctx.beginPath();
+  ctx.moveTo(rx + R * 0.88 * Math.cos(dAng), ry + R * 0.88 * Math.sin(dAng));
+  ctx.lineTo(rx - R * 0.88 * Math.cos(dAng), ry - R * 0.88 * Math.sin(dAng));
+  ctx.strokeStyle = 'rgba(139,189,206,0.22)';
+  ctx.lineWidth   = 1;
+  ctx.stroke();
+
+  // Rolling circle stroke
+  ctx.beginPath();
+  ctx.arc(rx, ry, R, 0, 2 * Math.PI);
+  ctx.strokeStyle = '#8bbdce';
+  ctx.lineWidth   = 1.8;
+  ctx.stroke();
+
+  // Spoke: rolling center → contact point
+  ctx.beginPath();
+  ctx.moveTo(rx, ry);
+  ctx.lineTo(rx + R * Math.cos(Math.PI + phi), ry + R * Math.sin(Math.PI + phi));
+  ctx.strokeStyle = 'rgba(0,215,245,0.38)';
+  ctx.lineWidth   = 1.2;
+  ctx.stroke();
+
+  // 9 colored dots on rolling circle
+  for (let k = 0; k < 9; k++) {
+    const θ = Math.PI + k * (2 * Math.PI / 9) + 2 * phi;
+    ctx.beginPath();
+    ctx.arc(rx + R * Math.cos(θ), ry + R * Math.sin(θ), 2.8, 0, 2 * Math.PI);
+    ctx.fillStyle = PALETTE[k];
+    ctx.fill();
+  }
+
+  // Fixed circle center dot
+  ctx.beginPath();
+  ctx.arc(cx, cy, 3.5, 0, 2 * Math.PI);
+  ctx.fillStyle = '#d4a843';
+  ctx.fill();
+
+  // Rolling circle center dot
+  ctx.beginPath();
+  ctx.arc(rx, ry, 2.5, 0, 2 * Math.PI);
+  ctx.fillStyle = '#8bbdce';
+  ctx.fill();
+
+  // Contact point glow
+  const cpx = cx + R * Math.cos(phi);
+  const cpy = cy + R * Math.sin(phi);
+  ctx.shadowColor = '#00d8f8';
+  ctx.shadowBlur  = 14;
+  ctx.beginPath();
+  ctx.arc(cpx, cpy, 4, 0, 2 * Math.PI);
+  ctx.fillStyle = '#e8f8ff';
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // Equation overlay (animated glow)
+  drawEquations(phiMod, dt);
+
+  document.getElementById('ov').textContent = orbitF.toFixed(2);
+  document.getElementById('sv').textContent = (orbitF * 2).toFixed(2);
+}
+
+function tick(ts) {
+  if (!last) last = ts;
+  const dt = Math.min((ts - last) / 1000, 0.05);
+  last = ts;
+
+  if (!paused && phi < MAX_PHI) {
+    phi += speed * dt;
+    if (phi >= MAX_PHI) {
+      phi = MAX_PHI;
+      paused = true;
+      document.getElementById('pb').textContent = 'REPLAY';
+    }
+  }
+
+  // Orbit-lap flash: when an orbit completes, fire all 4 equations in sequence
+  const orbitDone = Math.floor(phi / (2 * Math.PI));
+  if (orbitDone > lastOrbitDone && orbitDone > 0) {
+    lastOrbitDone = orbitDone;
+    orbitFlashSeq = 0;
+    orbitFlashTs  = ts;
+    eqGlow[0]     = 1.0;
+  }
+  if (orbitFlashSeq >= 0) {
+    const step = Math.floor((ts - orbitFlashTs) / 110); // one step per 110 ms
+    while (orbitFlashSeq < step && orbitFlashSeq < 3) {
+      orbitFlashSeq++;
+      eqGlow[orbitFlashSeq] = 0.88;
+    }
+    if (step >= 4) orbitFlashSeq = -1;
+  }
+
+  draw(dt);
+  requestAnimationFrame(tick);
+}
+
+document.getElementById('pb').addEventListener('click', () => {
+  if (phi >= MAX_PHI) {
+    phi = 0;
+    document.getElementById('pb').textContent = 'PAUSE';
+    paused = false;
+  } else {
+    paused = !paused;
+    document.getElementById('pb').textContent = paused ? 'PLAY' : 'PAUSE';
+  }
+});
+
+document.getElementById('rb').addEventListener('click', () => {
+  phi = 0; paused = true; lastOrbitDone = 0;
+  eqGlow.fill(0); eqActive = -1; orbitFlashSeq = -1;
+  document.getElementById('pb').textContent = 'PLAY';
+  draw(0);
+});
+
+document.getElementById('spd').addEventListener('input', e => { speed = +e.target.value; });
+
+draw(0);
+requestAnimationFrame(tick);
+</script>
