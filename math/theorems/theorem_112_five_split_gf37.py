@@ -16,7 +16,7 @@ def run():
 
     # --- Named orbit classes ---
     IC        = {1, 10, 26}          # cube roots of unity; f-fixed set
-    SA        = {4, 9, 25, 30}       # sovereign anchors (DR=1 or DR=9 residues)
+    SA        = {4, 9, 25, 30}       # sovereign anchors; DRs are 4, 9, 7, 3 respectively
     ST        = {3, 12, 21, 30}      # sovereign targets (DR=3)
     CB        = {8, 13, 24}          # cascade base {8,13,24}
     ORBIT_11  = {11, 27, 36}
