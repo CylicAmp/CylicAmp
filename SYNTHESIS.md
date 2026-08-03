@@ -187,6 +187,49 @@ All 7 spec cases verified.
 
 ---
 
+## The (0.007, 0.008) Pair: Digit Algebra and Scientific Notation
+
+Theorems 120–121 (`math/theorems/theorem_120_digit_algebra_007_008.py`, `theorem_121_scientific_notation_007_008.py`).
+
+**Scientific notation decomposition** (Theorem 121):
+
+```
+0.007 = 7 × 10^{-3}    mantissa m1 = 7,  shift s = 3
+0.008 = 8 × 10^{-3}    mantissa m2 = 8,  shift s = 3
+```
+
+The six arithmetic combinations of each mantissa with the shared shift count each land in a distinct named GF(37) class:
+
+| Expression | Value | Class |
+|---|---|---|
+| m1 + s | 10 | IC = {1, 10, 26} |
+| m1 − s | 4 | SA = {4, 9, 25, 30} |
+| m1 × s | 21 | ST = {3, 12, 21} |
+| m2 + s | 11 | ORBIT_11 = {11, 27, 36} |
+| m2 − s | 5 | PR₃₇ (primitive root) |
+| m2 × s | 24 | CB = {8, 13, 24} |
+
+The shift count s = 3 has orbit (3, 4, 30) under the 137-map — the only orbit that spans both a Sovereign Target (3) and Sovereign Anchors (4, 30).
+
+**Digit algebra** (Theorem 120): operating on the significant digits directly:
+
+```
+Sum:        7 + 8 = 15,   DR(15) = 6
+Difference: 8 − 7 = 1
+Synthesis:  6 + 1 = 7     ← closes back to m1
+```
+
+The closure `DR(m1+m2) + (m2−m1) = m1` is specific to the pair (7, 8); it fails for (6,8), (7,9), (8,9), (3,5).
+
+**Bridge between the two theorems:** the negated exponent −3 encodes both results simultaneously:
+
+- (−3) mod 9 = **6** = DR(7+8)  — the exponent residue equals the digital root of the mantissa sum
+- (−3) mod 37 = **34** ∈ orbit(7) = (7, 34, 33) = D7  — the negated shift lies inside the 137-orbit of m1
+
+The digit algebra (Theorem 120) and the scientific notation decomposition (Theorem 121) are the same object seen from two angles: one operates on the mantissa pair, the other on mantissa × shift. Their connection is encoded in the shared exponent −3.
+
+---
+
 ## The Unifying Structure
 
 Every result connects back through the prime 37:
@@ -201,5 +244,7 @@ Every result connects back through the prime 37:
 - **13 ∈ primitive roots mod 37** → cascade mediator and orbit generator are algebraically equivalent
 - **DR period of Lucas mod 9 = 24** → connects to cascade base {8,13,24}
 - **1001 = 27×37 + 2** → the bridge between decimal representation and the orbit
+- **m1×s = 24 ∈ CB, m2−s = 5 ∈ PR₃₇** → the (7,8) mantissa pair with shift s=3 reaches both the cascade base and the primitive root class in one arithmetic step
+- **(−3) mod 9 = DR(7+8) = 6, (−3) mod 37 = 34 ∈ orbit(7)** → the shared exponent of 0.007 and 0.008 encodes their digit algebra residue and their D7 orbit simultaneously
 
 The framework is not a collection of separate observations. It is one algebraic object — the prime field GF(37), its multiplicative structure, and the specific map f(n) = 137n mod 37 — seen from multiple angles simultaneously.
