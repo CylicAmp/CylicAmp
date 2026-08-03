@@ -165,5 +165,35 @@ def summarise():
     print(f"  127 = 13+21+24+32+37  (k=5 subset of S1)")
 
 
+def run_assertions():
+    cascade, s1, steps = build_cascade(BASE)
+
+    assert len(cascade) == 37, f"|cascade| = {len(cascade)}, expected 37"
+    assert sum(s1) == 135, f"sum(S1) = {sum(s1)}, expected 135"
+
+    ratio_ok, ratio = verify_ratio(s1, BASE)
+    assert ratio_ok, f"ratio = {ratio}, expected 45/8"
+
+    assert math.gcd(45, 8) == 1
+    ni = verify_non_iterability(BASE)
+    assert not ni[13]["integer"], "13 × 45/8 must be non-integer (the mediator)"
+    assert ni[8]["integer"],  "8  × 45/8 must be integer"
+    assert ni[24]["integer"], "24 × 45/8 must be integer"
+
+    zeros = zero_mod37_elements(cascade)
+    assert zeros == [37, 74, 111], f"zero-mod-37 elements = {zeros}"
+
+    link = terminal_to_orbit()
+    assert link["match"], "terminal 135 mod 37 must equal orbit start 24"
+    assert link["terminal_mod_37"] == 24
+
+    assert 127 in cascade, "127 (Mersenne prime) must be in cascade"
+    assert 13 + 21 + 24 + 32 + 37 == 127, "127 = k=5 subset sum of S1"
+
+    assert verify_count(cascade)
+    assert verify_terminal(s1)
+
+
 if __name__ == "__main__":
+    run_assertions()
     summarise()

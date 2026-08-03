@@ -116,5 +116,20 @@ def summarise():
     print(f"\n  All verified: {all(v.get('ok', False) for v in res.values())}")
 
 
+def run_assertions():
+    res = verify_all()
+    for label, info in res.items():
+        assert info.get("ok", False), f"Verification failed: {label} → {info}"
+
+    # Explicit spot-checks
+    assert digital_root(26) == 8,     "DR(|11-37|) = DR(26) = 8"
+    assert digital_root(digit_sum(48)) == 3, "DR(DS(48)) = 3"
+    assert digital_root(digit_sum(407)) == 2, "DR(DS(407)) = 2"
+    assert 297 % 37 == 1,             "297 mod 37 = 1 (orbit identity)"
+    assert 7 * 17 * 31 == 3689,       "3689 = 7 × 17 × 31"
+    assert all(p in ORBIT for p in [7, 17, 31]), "7, 17, 31 all in ×2 mod 37 orbit"
+
+
 if __name__ == "__main__":
+    run_assertions()
     summarise()

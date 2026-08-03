@@ -147,5 +147,33 @@ def summarise():
     print(f"  30 ≡ -7 (mod 37): {30 == (-7) % 37}")
 
 
+def run_assertions():
+    assert len(CYCLE) == 18, f"ord_37(3) = {len(CYCLE)}, expected 18"
+    assert CYCLE[-1] == 1,   "3^18 must be ≡ 1 (mod 37)"
+    assert CYCLE[8]  == 36,  f"3^9 = {CYCLE[8]}, expected 36 (≡ -1)"
+
+    assert verify_qr_equality(), "<3> must equal the set of quadratic residues mod 37"
+
+    for label, (expected, computed, ok) in verify_power_assignments().items():
+        assert ok, f"Power assignment failed: {label}: computed {computed}, expected {expected}"
+
+    for k, a, b, s in verify_mirror_involution():
+        assert s == 0, f"3^{k} + 3^{k+9} ≡ {s} (mod 37), expected 0"
+
+    mem = dr_membership_in_qr()
+    assert mem[5]["fully_qnr"], "DR=5 values must be entirely excluded from QR_37"
+    assert mem[3]["fully_qr"],  "DR=3 values must be entirely in QR_37"
+    assert mem[7]["fully_qr"],  "DR=7 values must be entirely in QR_37"
+    # No other DR class is fully in QR_37 (besides 3 and 7)
+    for dr in range(1, 10):
+        if dr not in (3, 7):
+            assert not mem[dr]["fully_qr"], \
+                f"DR={dr} should not be fully in QR_37"
+
+    assert 137 % 37 == pow(3, 6, 37), "137 mod 37 must equal 3^6 mod 37"
+    assert (7 + 23) % 37 == pow(3, 13, 37), "7+23=30 must equal 3^13 mod 37"
+
+
 if __name__ == "__main__":
+    run_assertions()
     summarise()

@@ -187,5 +187,31 @@ def summarise():
     print(f"  {m37['note']}")
 
 
+def run_assertions():
+    assert is_prime_deterministic(P), "Goldilocks prime p = 2^64 - 2^32 + 1 must be prime"
+    assert verify_pm1_factorization(), \
+        "p-1 must factor as 2^32 × 3 × 5 × 17 × 257 × 65537"
+    assert two_adic_valuation(P - 1) == 32, \
+        f"v_2(p-1) = {two_adic_valuation(P-1)}, expected 32"
+
+    from math import prod
+    assert 3 * 5 * 17 * 257 * 65537 == prod(FERMAT_PRIMES.values()) * 3
+
+    # Primitive root g=7
+    def is_prim_root_goldilocks(g):
+        pm1 = P - 1
+        for q in {2, 3, 5, 17, 257, 65537}:
+            if pow(g, pm1 // q, P) == 1:
+                return False
+        return True
+    assert is_prim_root_goldilocks(7), "7 must be a primitive root mod Goldilocks prime"
+
+    # Fermat prime identities
+    for name, val in FERMAT_PRIMES.items():
+        exp = 2 ** (2 ** (["F1","F2","F3","F4"].index(name) + 1))
+        assert val == exp + 1, f"{name} = {val}, expected {exp}+1"
+
+
 if __name__ == "__main__":
+    run_assertions()
     summarise()
