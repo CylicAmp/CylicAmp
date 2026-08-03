@@ -127,5 +127,29 @@ def summarise():
     print(f"  is_primitive_root(7, p) = {ok}  (smallest primitive root = 7)")
 
 
+def run_assertions():
+    assert is_primitive_root(2, 37)[0], "2 must be a primitive root mod 37"
+    assert pow(2, 18, 37) == 36, "2^18 mod 37 must be 36 (≡ -1)"
+    assert pow(2, 12, 37) == 26, "2^12 mod 37 must be 26 (≠ 1)"
+
+    assert is_primitive_root(3, 31)[0], "3 must be a primitive root mod 31"
+    assert pow(3, 15, 31) == 30, "3^15 mod 31 must be 30 (≡ -1)"
+    assert pow(3, 10, 31) == 25, "3^10 mod 31 must be 25"
+    assert pow(3,  6, 31) == 16, "3^6  mod 31 must be 16"
+
+    from sympy import totient
+    roots_37 = all_primitive_roots(37)
+    assert len(roots_37) == totient(36) == 12, \
+        f"|PR(37)| = {len(roots_37)}, expected φ(36)=12"
+    assert roots_37 == [2, 5, 13, 15, 17, 18, 19, 20, 22, 24, 32, 35]
+
+    p_gold = 2**64 - 2**32 + 1
+    assert is_primitive_root(7, p_gold)[0], "7 must be a primitive root mod Goldilocks prime"
+    pf_gold = sorted(prime_factors(p_gold - 1))
+    assert pf_gold == [2, 3, 5, 17, 257, 65537], \
+        f"Goldilocks p-1 prime factors = {pf_gold}"
+
+
 if __name__ == "__main__":
+    run_assertions()
     summarise()

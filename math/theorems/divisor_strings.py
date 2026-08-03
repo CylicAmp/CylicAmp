@@ -94,5 +94,24 @@ def summarise():
     print(f"Retracted claim: 'all multiples of 11 contain 111' — FALSE under this definition")
 
 
+def run_assertions():
+    palins = find_palindromes()
+    assert len(palins) == 22, f"palindrome count = {len(palins)}, expected 22"
+
+    primes = [(n, s) for n, s in palins if classify(n) == "prime"]
+    comps  = [(n, s) for n, s in palins if classify(n) != "prime"]
+    assert len(primes) == 21, f"prime palindromes = {len(primes)}, expected 21"
+    assert len(comps)  == 1,  f"composite palindromes = {len(comps)}, expected 1"
+
+    n93, s93 = comps[0]
+    assert n93 == 93,      f"sole composite palindrome = {n93}, expected 93"
+    assert s93 == "1331",  f"93's divisor string = '{s93}', expected '1331'"
+    assert 93 % 37 == 19,  "93 mod 37 must be 19"
+
+    assert 37 in [n for n, _ in palins], "37 must be in the palindrome list"
+    assert 11**3 == 1331, "1331 = 11³"
+
+
 if __name__ == "__main__":
+    run_assertions()
     summarise()

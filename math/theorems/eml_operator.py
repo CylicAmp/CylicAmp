@@ -94,5 +94,18 @@ def summarise():
     print(f"  eml(1, -1) → {'undefined (ln of negative)'}")
 
 
+def run_assertions():
+    for x, info in verify_identity_exp().items():
+        assert info["ok"], f"eml({x}, 1) = {info['eml(x,1)']}, expected exp({x}) = {info['exp(x)']}"
+
+    e_check = verify_identity_e()
+    assert e_check["ok"], f"eml(1,1) = {e_check['eml(1,1)']}, expected e = {e_check['e']}"
+
+    for (x, y), info in verify_non_commutativity().items():
+        assert not info["commutes"], \
+            f"eml({x},{y}) should NOT equal eml({y},{x}) but both = {info['eml(x,y)']}"
+
+
 if __name__ == "__main__":
+    run_assertions()
     summarise()
