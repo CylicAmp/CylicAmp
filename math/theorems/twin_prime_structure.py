@@ -60,6 +60,56 @@ CONNECTION TO THE FRAMEWORK:
     DR(6n) cycles through {6,3,9,6,3,9,...} as n increases.
     The sovereign range {3,12,21,30} corresponds to n ≡ 2 (mod 3),
     i.e. DR(6n) = 3 — exactly the case n=2 giving middle number 12.
+
+THEOREM 5: Euler's polynomial and Rabinowitsch's theorem.
+
+  The polynomial f(n) = n^2 + n + 41 takes prime values for all
+  n = 0, 1, ..., 39.  At n = 40 it fails: f(40) = 41^2.
+
+  Algebraic identity at first failure:
+    f(40) = 40·41 + 41 = 41(40 + 1) = 41^2.
+
+  Discriminant: Δ = 1 - 4·41 = -163.
+
+  Rabinowitsch (1913): n^2 + n + q is prime for all n = 0,...,q-2
+  if and only if the imaginary quadratic field Q(√(1-4q)) has class
+  number 1.  For q = 41 this gives Q(√-163), whose class number 1 is
+  established by Heegner–Stark–Baker.
+
+  The six primes q for which this holds are: 2, 3, 5, 11, 17, 41.
+  These are exactly the primes (D+1)/4 where D ∈ {7,11,19,43,67,163}
+  are Heegner numbers.
+
+  GF(37) connections:
+    (a) 41 ≡ 4 (mod 37) — the constant term is a sovereign anchor
+        ({4, 9, 25, 30}).
+    (b) f(n) ≡ n^2 + n + 4 (mod 37).  The discriminant mod 37 is
+        1 - 16 = -15 ≡ 22 (mod 37), and Legendre(22, 37) = -1.
+        Therefore f(n) ≡ 0 (mod 37) has no solution: the prime 37
+        never divides any value of Euler's polynomial.
+    (c) The six special primes {2,3,5,11,17,41}: only 41 reduces mod 37
+        to a sovereign anchor.
+
+THEOREM 6: CRT mod 333 structure of twin prime pairs.
+
+  The composite modulus M = 333 = 9 × 37 unifies digital root (mod 9)
+  and field structure (mod 37) via the Chinese Remainder Theorem.
+
+  CRT reconstruction formula (verified: 37^{-1} ≡ 1 mod 9, 9^{-1} ≡ 33 mod 37):
+    CRT(r_9, r_37) = 37·r_9 + 297·r_37  (mod 333).
+
+  For any twin prime pair (p, p+2):
+    CRT(p+2) ≡ CRT(p) + 2  (mod 333)  [since 2 < 333].
+
+  Key example — the pair (431, 433):
+    431 ≡ 24 (mod 37): seed orbit {18, 24, 32}.
+    433 ≡ 26 (mod 37): the 137-map multiplier (137 mod 37 = 26).
+    432 ≡ 25 (mod 37): sovereign anchor {4, 9, 25, 30}.
+    DR(432) = 9.
+    CRT(431) = 98,  CRT(433) = 100,  CRT(432) = 99 (midpoint).
+
+  (431, 433) is the first twin prime pair whose GF(37) residues land
+  on {seed orbit node, 137-map multiplier} simultaneously.
 """
 
 
@@ -141,6 +191,56 @@ def run_verification() -> bool:
         print(f"  ({p:>4}, {q:>4})  middle={middle:>4}=6×{n}  DR={dr(middle)}")
     print(f"  Sovereign range {{3,12,21,30}} = middle numbers where DR=3")
     print(f"  (11,13) → middle=12 ∈ sovereign range, DR(12)=3")
+
+    # ------------------------------------------------------------------
+    # Theorem 5: Euler's polynomial and Rabinowitsch
+    # ------------------------------------------------------------------
+    print("\n--- Theorem 5: Euler's polynomial f(n) = n^2 + n + 41 ---")
+    f = lambda n: n*n + n + 41
+    euler_primes = [f(n) for n in range(40)]
+    assert all(is_prime(v) for v in euler_primes), "Some f(n) is not prime for n in 0..39"
+    print(f"  f(n) prime for all n = 0,...,39: verified ({len(euler_primes)} values).")
+    assert f(40) == 41**2, f"f(40) = {f(40)}, expected 41^2 = {41**2}"
+    assert f(41) == 41 * 43, f"f(41) = {f(41)}, expected 41*43 = {41*43}"
+    print(f"  f(40) = {f(40)} = 41^2  (composite, algebraic identity: 41*(40+1))")
+    print(f"  f(41) = {f(41)} = 41*43  (composite)")
+    assert 41 % 37 == 4, "41 mod 37 must equal 4 (sovereign anchor)"
+    print(f"  41 mod 37 = {41 % 37}  (sovereign anchor {{4,9,25,30}})")
+    hits_37 = [n for n in range(37) if f(n) % 37 == 0]
+    assert hits_37 == [], f"f(n) divisible by 37 at n={hits_37}"
+    print(f"  f(n) ≡ 0 (mod 37) has no solution: 37 never divides f(n).  ✓")
+
+    # ------------------------------------------------------------------
+    # Theorem 6: CRT mod 333 structure
+    # ------------------------------------------------------------------
+    print("\n--- Theorem 6: CRT mod 333 structure of twin prime pairs ---")
+    M = 333  # 9 * 37
+
+    def crt_333(n):
+        r9, r37 = n % 9, n % 37
+        return (37 * r9 + 297 * r37) % M
+
+    for p, q in twin_pairs:
+        assert crt_333(q) == (crt_333(p) + 2) % M, \
+            f"CRT difference ≠ 2 for pair ({p},{q})"
+    print(f"  CRT(p+2) ≡ CRT(p) + 2 (mod 333): verified for all "
+          f"{len(twin_pairs)} pairs below 1000.")
+
+    # Key example: (431, 433)
+    assert is_prime(431) and is_prime(433)
+    assert 431 % 37 == 24,  f"431 mod 37 = {431 % 37}, expected 24"
+    assert 433 % 37 == 26,  f"433 mod 37 = {433 % 37}, expected 26"
+    assert 432 % 37 == 25,  f"432 mod 37 = {432 % 37}, expected 25"
+    assert dr(432) == 9,    f"DR(432) = {dr(432)}, expected 9"
+    assert crt_333(431) == 98
+    assert crt_333(433) == 100
+    assert crt_333(432) == 99
+    print(f"  (431, 433): GF(37) residues = (24, 26)")
+    print(f"    431 ≡ 24 (mod 37): seed orbit {{18,24,32}}")
+    print(f"    433 ≡ 26 (mod 37): 137-map multiplier")
+    print(f"    432 ≡ 25 (mod 37): sovereign anchor {{4,9,25,30}},  DR=9")
+    print(f"    CRT images: (98, 100),  midpoint CRT(432) = 99")
+    print(f"  First twin prime pair whose GF(37) residues = (seed, 137-mult).  ✓")
 
     print()
     print("All assertions passed.")
