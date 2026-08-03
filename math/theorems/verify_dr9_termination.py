@@ -46,6 +46,13 @@ deviation_seq = [1, 3, 7, 9, 9, 1, 3, 7]
 dev_drs = [digital_root(x) for x in deviation_seq]
 ab_states = 24 * 2  # AB44 + AB45
 
+assert np.all(row_drs == 9), "DR=9 row invariant failed"
+assert stable_dr, "DR stability under shifts failed"
+assert ab_states == 48, f"AB44+AB45 state count = {ab_states}, expected 48"
+assert dev_drs[-1] == 7, f"Final deviation DR = {dev_drs[-1]}, expected 7"
+assert dev_drs == [digital_root(x) for x in deviation_seq]
+
+
 if __name__ == "__main__":
     print("Grid shape:", grid.shape)
     print("All row DRs:", row_drs.tolist())
@@ -54,7 +61,4 @@ if __name__ == "__main__":
     print("Final deviation DR:", dev_drs[-1])
     print("Total finite states (AB44+AB45):", ab_states)
     print("Termination verified: DR=9 invariant + finite state space")
-
-    assert np.all(row_drs == 9), "DR=9 row invariant failed"
-    assert stable_dr, "DR stability under shifts failed"
     print("\nAll assertions passed.")

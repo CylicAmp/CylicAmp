@@ -118,5 +118,30 @@ def summarise():
     print(f"  r_n = 2^{{{dlog}+n}} mod 37")
 
 
+def run_assertions():
+    assert FACTOR_MOD == 2, f"1001 mod 37 = {FACTOR_MOD}, expected 2"
+    assert 37 * 27 + 2 == 1001
+
+    vpr = verify_primitive_root()
+    assert vpr["order"] == 36, f"ord_37(2) = {vpr['order']}, expected 36"
+    assert vpr["is_prim_root"]
+    assert vpr["2^18_mod37"] == 36, "2^18 must be ≡ -1 ≡ 36 (mod 37)"
+    assert vpr["2^36_mod37"] == 1,  "2^36 must be ≡ 1 (mod 37)"
+
+    assert (2 * INV2) % MOD == 1, f"2·{INV2} mod 37 must be 1"
+    assert pow(2, 29, MOD) == R0,  f"2^29 mod 37 = {pow(2,29,MOD)}, expected {R0}"
+
+    orbit = compute_orbit()
+    assert len(set(orbit)) == 36, f"orbit size = {len(set(orbit))}, expected 36"
+    assert set(orbit) == set(range(1, MOD)), "orbit must cover all of (Z/37Z)*"
+
+    for abc in [123, 456, 100, 999, 37]:
+        _, lhs, rhs, ok = abcabc_theorem(abc)
+        assert ok, f"ABCABC theorem failed for abc={abc}: {lhs} ≠ {rhs}"
+
+    assert verify_1001_congruence()["1001 mod 37"] == 2
+
+
 if __name__ == "__main__":
+    run_assertions()
     summarise()
