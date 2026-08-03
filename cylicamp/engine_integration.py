@@ -40,6 +40,8 @@ from lucas_abbc_chain import lucas_seq
 from sovereign_qr_closure import legendre
 from heartbeat_3cycle import f as heartbeat_step
 from cylicamp.g5_solver import evaluate as g5_evaluate, format_report as g5_format
+from theorem_120_digit_algebra_007_008 import A as _T120_M1, B as _T120_M2, digital_root as _dr
+from theorem_121_scientific_notation_007_008 import s as _T121_S
 
 
 def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
@@ -101,6 +103,21 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     r = seed_cell["mod37"]
     heartbeat = [r, heartbeat_step(r), heartbeat_step(heartbeat_step(r)), heartbeat_step(heartbeat_step(heartbeat_step(r)))]
 
+    # Step 14: Theorem 120/121 — (0.007, 0.008) digit pair maps to seed orbit
+    # m1=7 (from 0.007), m2=8 (from 0.008), s=3 (shared decimal shift)
+    _m1, _m2, _s = _T120_M1, _T120_M2, _T121_S
+    t120_t121 = {
+        "s_eq_seed_dr":           _s == seed_cell["dr"],
+        "m2_times_s":             _m2 * _s,                     # 24
+        "m2_times_s_eq_seed_mod37": _m2 * _s == seed_cell["mod37"],
+        "m1_plus_m2_plus_s":      _m1 + _m2 + _s,              # 18
+        "orbit_18_check":         _m1 + _m2 + _s in seed_orbit,
+        "m2_times_s_plus_1":      _m2 * (_s + 1),              # 32
+        "orbit_32_check":         _m2 * (_s + 1) in seed_orbit,
+        "dr_seed_mod37":          _dr(seed_cell["mod37"]),      # 6
+        "dr_matches_t120":        _dr(seed_cell["mod37"]) == _dr(_m1 + _m2),
+    }
+
     # Step 13: Provenance — attach source tracking to the orbit claim
     from datetime import datetime, timezone
     orbit_claim = Claim(
@@ -135,6 +152,12 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     print(f"Orbit QR status:   {orbit_qr}  all non-QR: {orbit_all_nonqr}")
     print(f"Heartbeat 3-cycle: {heartbeat[0]} -> {heartbeat[1]} -> {heartbeat[2]} -> {heartbeat[3]}")
     print(f"Provenance:        {orbit_claim.provenance.source_type.name} | {orbit_claim.provenance.citation}")
+    print(f"T120/121 (0.007/0.008 → seed): "
+          f"s={_s}=DR(seed):{t120_t121['s_eq_seed_dr']}  "
+          f"m2*s={t120_t121['m2_times_s']}=seed%37:{t120_t121['m2_times_s_eq_seed_mod37']}  "
+          f"m1+m2+s={t120_t121['m1_plus_m2_plus_s']}∈orbit:{t120_t121['orbit_18_check']}  "
+          f"m2*(s+1)={t120_t121['m2_times_s_plus_1']}∈orbit:{t120_t121['orbit_32_check']}  "
+          f"DR(seed%37)={t120_t121['dr_seed_mod37']}=DR(m1+m2):{t120_t121['dr_matches_t120']}")
 
     # Step 14: G5 Solver report
     g5 = g5_evaluate(
@@ -165,6 +188,7 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
         "orbit_qr": {str(k): v for k, v in orbit_qr.items()},
         "orbit_all_nonqr": orbit_all_nonqr,
         "heartbeat_3cycle": heartbeat,
+        "t120_t121": t120_t121,
         "provenance": {
             "source_id": orbit_claim.provenance.source_id,
             "source_type": orbit_claim.provenance.source_type.name,
