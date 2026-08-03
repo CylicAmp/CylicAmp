@@ -43,11 +43,22 @@
     18,
     24
   ],
+  "t120_t121": {
+    "s_eq_seed_dr": true,
+    "m2_times_s": 24,
+    "m2_times_s_eq_seed_mod37": true,
+    "m1_plus_m2_plus_s": 18,
+    "orbit_18_check": true,
+    "m2_times_s_plus_1": 32,
+    "orbit_32_check": true,
+    "dr_seed_mod37": 6,
+    "dr_matches_t120": true
+  },
   "provenance": {
     "source_id": "cylicamp/engine_integration",
     "source_type": "INTERNAL_DERIVATION",
     "citation": "CylicAmp pipeline \u2014 user-originated framework",
-    "timestamp": "2026-08-03T10:35:16.029825+00:00"
+    "timestamp": "2026-08-03T20:46:43.407076+00:00"
   },
   "meta_history": [
     {
