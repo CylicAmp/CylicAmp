@@ -61,6 +61,7 @@ After every run it saves a complete JSON to `pipeline_output.json` — this is t
 | 11 | `math/theorems/sovereign_qr_closure.py` | Legendre symbol on orbit nodes |
 | 12 | `math/theorems/heartbeat_3cycle.py` | Heartbeat 3-cycle from seed residue |
 | 13 | `cylicamp/provenance.py` | Provenance tracking — source of every claim |
+| 14 | `math/theorems/theorem_120/121` | T120/121 digit pair (0.007, 0.008) → seed orbit |
 
 ### Reference Output (seed=246)
 
@@ -80,6 +81,7 @@ ABCABC orbit pos:  0  (orbit start)
 Lucas orbit hits:  [(5, 18)]
 Orbit QR status:   {24: -1, 18: -1, 32: -1}  all non-QR: True
 Heartbeat 3-cycle: 24 -> 32 -> 18 -> 24
+T120/121 (0.007/0.008 → seed): s=3=DR(seed):True  m2*s=24=seed%37:True  m1+m2+s=18∈orbit:True  m2*(s+1)=32∈orbit:True  DR(seed%37)=6=DR(m1+m2):True
 ```
 
 ---
@@ -92,7 +94,7 @@ Heartbeat 3-cycle: 24 -> 32 -> 18 -> 24
 - `pipeline_output.json` — last pipeline run, full JSON, user's verification copy
 
 ### Cylicamp modules (`cylicamp/`)
-- `engine_integration.py` — pipeline spine, 13 steps
+- `engine_integration.py` — pipeline spine, 14 steps
 - `trajectory.py` — PHI/PSI spiral trajectory
 - `insights.py` — InsightEngine with modular filter
 - `duality.py` — DualityVerifier
