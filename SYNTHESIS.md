@@ -112,7 +112,7 @@ All verified (`math/theorems/eleven_thirtyseven_ops.py`):
 | 11 − 37 = −26 → DR(26) | 8 | cascade base element |
 | 11 + 37 = 48 → DR(DS(48)) | 3 | \|B\| = 3 base elements |
 | 11 × 37 = 407 → DR(DS(407)) | 2 | orbit generator |
-| 297 mod 37 | 1 | orbit identity (1/37 = 0.027027...) |
+| 297 mod 37 | 1 | orbit identity (1/37 = 0.027027..., period 3, ord₃₇(10) = 3) |
 | 37 ÷ 11 = 3.363636... | repeating "36" | φ(37) = 36 |
 | 3689 = 7 × 17 × 31 | all in ×2 orbit | 0.11 − 37 = −36.89 |
 
@@ -244,6 +244,7 @@ Every result connects back through the prime 37:
 - **13 ∈ primitive roots mod 37** → cascade mediator and orbit generator are algebraically equivalent
 - **DR period of Lucas mod 9 = 24** → connects to cascade base {8,13,24}
 - **1001 = 27×37 + 2** → the bridge between decimal representation and the orbit
+- **ord₃₇(10) = 3, ord₃₇(26) = 3, 10 × 26 ≡ 1 (mod 37)** → decimal period generator and 137-map multiplier are multiplicative inverses; repeating block 027 has DR = 9
 - **m1×s = 24 ∈ CB, m2−s = 5 ∈ PR₃₇** → the (7,8) mantissa pair with shift s=3 reaches both the cascade base and the primitive root class in one arithmetic step
 - **(−3) mod 9 = DR(7+8) = 6, (−3) mod 37 = 34 ∈ orbit(7)** → the shared exponent of 0.007 and 0.008 encodes their digit algebra residue and their D7 orbit simultaneously
 
