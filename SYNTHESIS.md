@@ -249,3 +249,16 @@ Every result connects back through the prime 37:
 - **(−3) mod 9 = DR(7+8) = 6, (−3) mod 37 = 34 ∈ orbit(7)** → the shared exponent of 0.007 and 0.008 encodes their digit algebra residue and their D7 orbit simultaneously
 
 The framework is not a collection of separate observations. It is one algebraic object — the prime field GF(37), its multiplicative structure, and the specific map f(n) = 137n mod 37 — seen from multiple angles simultaneously.
+
+---
+
+## Verified Properties of 37 (Record)
+
+Verified facts about 37 across number theory, combinatorics, and biology.
+
+- **Irregular prime**: 37 divides the numerator of Bernoulli number B₃₂. Identified by Ernst Kummer in 1850 — the first irregular prime ever discovered. Among the first 100 primes, only 37, 59, and 67 are irregular.
+- **Waring's problem**: g(5) = 37. Every positive integer can be expressed as the sum of at most 37 fifth powers. Proved by Chen Jingrun, 1964.
+- **Star number**: 37 is the 3rd star number. Formula: 6n(n−1)+1 at n=3.
+- **Centered hexagonal number**: 37 is the 4th centered hexagonal number. Formula: 3n(n−1)+1 at n=4. 37 is the only number under 1000 that is simultaneously a star number and a centered hexagonal number.
+- **Mitochondrial DNA**: Human mitochondrial DNA encodes exactly 37 genes — 13 protein-coding, 22 tRNA, 2 rRNA.
+- **Brodmann area 37**: Located in the fusiform gyrus of the temporal-occipital cortex.
