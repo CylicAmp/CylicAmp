@@ -69,6 +69,30 @@ CYCLE STRUCTURE
   exactly once — a complete traversal of (ℤ/37ℤ)×.
   The 9-algebra sequence (k=0..8) visits 9 of those 36 residues.
 
+THE MISSING 9: SA ELEMENT UNREACHABLE BY DOUBLING
+===================================================
+
+  SA = {4, 9, 25, 30}. The doubling sequence hits three of these:
+    4  at k= 2  (Quaternions ℍ, within the nine algebras)
+    25 at k=10  (beyond the nine)
+    30 at k=14  (beyond)
+    9  at k=16  (requires 16 doublings — the LAST and DEEPEST SA element)
+
+  9 is doubly unreachable:
+  (i)  Not a power of 2 in integers (2³=8, 2⁴=16; 9 sits between them).
+       Therefore 9 can NEVER be a Cayley-Dickson dimension.
+  (ii) In GF(37) the doubling sequence reaches 9 only at k=16,
+       past every named algebra and past a full half-cycle (36/2 = 18).
+
+  9 is the SA-step Δ: the Op(+−) operator with Δ=+9 drives the entire
+  sovereign chain  3 → 12 → 21 → 30  (Theorem 58).
+  So the element that governs sovereign structure is the one SA element
+  the Cayley-Dickson doubling cannot reach directly.
+
+  Additional: k=16 is the k-index where 9 first appears, and 16 = dim(Sedenions),
+  the algebra at index k=4 where zero divisors first appear.
+  9+28 ≡ 0 mod 37: the outlier node 28 steps to SEAM through the missing 9.
+
 GF(37) CONNECTIONS (summary)
 =============================
 
@@ -139,6 +163,18 @@ def run_assertions():
     # Full cycle: 2^36 ≡ 1 mod 37 and order is exactly 36
     cycle = [pow(2, k, P) for k in range(36)]
     assert len(set(cycle)) == 36  # visits all nonzero residues exactly once
+
+    # The missing 9: SA positions in doubling sequence
+    sa_positions = {t: next(k for k in range(36) if pow(2,k,P)==t) for t in SA}
+    assert sa_positions[4]  == 2          # ℍ, within the nine
+    assert sa_positions[25] == 10         # first beyond nine
+    assert sa_positions[30] == 14
+    assert sa_positions[9]  == 16         # last SA element, deepest
+    # 9 is not a power of 2 in integers
+    import math
+    assert not math.log2(9).is_integer()
+    # 9 = SA-step and connects to SEAM via outlier 28
+    assert (9 + 28) % P == 0
 
     print("All assertions passed.")
 
