@@ -155,6 +155,7 @@ def analyze(n):
         print(f"    complement {comp} as number → {comp_n} mod 37 = {comp_n%P}  orbit={orbit_of(comp_n%P)}")
 
     propagate_theme(n)
+    full_spectrum(n)
 
     return {
         'n': n, 'digits': ds, 'mirror': mir, 'complement': comp,
@@ -175,6 +176,75 @@ def find_themes(ds):
     if a * b == c: themes.append(('prod', f"{a}×{b}={c}"))
     if b * c == a: themes.append(('prod', f"{b}×{c}={a}"))
     return themes
+
+
+def full_spectrum(n):
+    """
+    Score ALL complement arrangements by deviation from the original theme.
+    deviation = |a+b−c| for sum theme (or analogous for diff/prod).
+    Range: 0 (perfect — same rule as original) → max (maximally opposed).
+    """
+    from itertools import permutations
+    from collections import defaultdict, Counter
+
+    ds = digits_of(n)
+    comp = complement_9(ds)
+    themes = find_themes(ds)
+
+    if not themes or len(comp) < 3:
+        return
+
+    # Prefer a sum theme; fall back to whatever is present
+    primary = next((t for t in themes if t[0] == 'sum'), themes[0])
+    theme_type, theme_label = primary
+
+    print(f"\n  {'─'*54}")
+    print(f"  FULL SPECTRUM [{theme_label}]")
+
+    entries = []
+    for perm in permutations(comp, 3):
+        a, b, c = perm
+        if theme_type == 'sum':
+            dev = abs(a + b - c)
+        elif theme_type == 'diff':
+            dev = abs(abs(a - b) - c)
+        else:  # prod
+            dev = abs(a * b - c)
+        num = int(''.join(map(str, perm)))
+        r = num % P
+        orb = orbit_of(r)
+        cross = cross_classes(r)
+        entries.append((dev, perm, num, r, orb, cross))
+
+    by_dev = defaultdict(list)
+    for e in entries:
+        by_dev[e[0]].append(e)
+
+    max_dev = max(by_dev)
+
+    print(f"  dev=0 aligned [{theme_label}]  →  dev={max_dev} maximally opposed")
+    print(f"\n  {'dev':>4}  {'n':>5}  {'SA':>4}  {'ST':>4}  {'CB':>4}  top orbit")
+    print(f"  {'─'*52}")
+
+    for dev in sorted(by_dev):
+        group = by_dev[dev]
+        sa = sum(1 for e in group if e[3] in SA)
+        st = sum(1 for e in group if e[3] in ST)
+        cb = sum(1 for e in group if e[3] in CB)
+        top = Counter(e[4] for e in group).most_common(1)[0][0]
+        tag = '  ◀ ALIGNED' if dev == 0 else ('  ◀ OPPOSED' if dev == max_dev else '')
+        print(f"  {dev:>4}  {len(group):>5}  {sa:>4}  {st:>4}  {cb:>4}  {top:<24}{tag}")
+
+    # Detail: perfect alignment only
+    if 0 in by_dev:
+        print(f"\n  ── Perfect alignment ──")
+        for dev, perm, num, r, orb, cross in sorted(by_dev[0], key=lambda x: x[2]):
+            cs = '+'.join(cross) if cross else '—'
+            rule = (f"{perm[0]}+{perm[1]}={perm[2]}" if theme_type == 'sum'
+                    else f"{perm[0]}-{perm[1]}={perm[2]}")
+            print(f"    {num:>8}  mod37={r:>2}  {orb:<22}  {cs:<10}  {rule}")
+
+    return by_dev
 
 
 def propagate_theme(n):
