@@ -154,10 +154,81 @@ def analyze(n):
         comp_n = int(''.join(map(str, comp)))
         print(f"    complement {comp} as number → {comp_n} mod 37 = {comp_n%P}  orbit={orbit_of(comp_n%P)}")
 
+    propagate_theme(n)
+
     return {
         'n': n, 'digits': ds, 'mirror': mir, 'complement': comp,
         'mod37': mod37, 'dr': dr_val, 'digit_sum': digit_sum,
     }
+
+
+def find_themes(ds):
+    """All arithmetic rules satisfied by ordered triple ds=[a,b,c]."""
+    a, b, c = ds[0], ds[1], ds[2]
+    themes = []
+    if a + b == c: themes.append(('sum',  f"{a}+{b}={c}"))
+    if b + c == a: themes.append(('sum',  f"{b}+{c}={a}"))
+    if a + c == b: themes.append(('sum',  f"{a}+{c}={b}"))
+    if a - b == c > 0: themes.append(('diff', f"{a}-{b}={c}"))
+    if b - a == c > 0: themes.append(('diff', f"{b}-{a}={c}"))
+    if c - b == a > 0: themes.append(('diff', f"{c}-{b}={a}"))
+    if a * b == c: themes.append(('prod', f"{a}×{b}={c}"))
+    if b * c == a: themes.append(('prod', f"{b}×{c}={a}"))
+    return themes
+
+
+def propagate_theme(n):
+    """
+    Find all numbers from the complement of n's digits (in {1..9})
+    that satisfy the same arithmetic themes as n.
+    Returns dict of theme_label → list of matching (triple, number, mod37, orbit).
+    """
+    from itertools import permutations
+    ds = digits_of(n)
+    comp = complement_9(ds)
+    themes = find_themes(ds)
+
+    print(f"\n  {'─'*54}")
+    print(f"  THEME PROPAGATION: {n} → complement {comp}")
+    print(f"  Themes: {[t[1] for t in themes]}")
+
+    all_matches = []
+    for theme_type, label in themes:
+        matches = []
+        for perm in permutations(comp, 3):
+            a, b, c = perm
+            hit = (
+                (theme_type == 'sum'  and a + b == c) or
+                (theme_type == 'diff' and a - b == c > 0) or
+                (theme_type == 'prod' and a * b == c)
+            )
+            if hit:
+                num = int(''.join(map(str, perm)))
+                r = num % P
+                orb = orbit_of(r)
+                cross = cross_classes(r)
+                matches.append((perm, num, r, orb, cross))
+
+        if matches:
+            print(f"\n  Theme [{label}] — {len(matches)} neighbors:")
+            print(f"    {'number':>8}  {'mod37':>5}  {'orbit':<20}  {'cross'}")
+            for perm, num, r, orb, cross in matches:
+                cs = '+'.join(cross) if cross else '—'
+                rule = f"{perm[0]}+{perm[1]}={perm[2]}" if theme_type=='sum' else f"{perm[0]}-{perm[1]}={perm[2]}"
+                print(f"    {num:>8}  {r:>5}  {orb:<20}  {cs:<14}  {rule}")
+            all_matches.extend(matches)
+
+    # Summary
+    if all_matches:
+        from collections import Counter
+        orbit_freq = Counter(m[3] for m in all_matches)
+        sa_hits = [(m[1], m[2]) for m in all_matches if m[2] in SA]
+        st_hits = [(m[1], m[2]) for m in all_matches if m[2] in ST]
+        print(f"\n  SA hits: {sa_hits}")
+        print(f"  ST hits: {st_hits}")
+        print(f"  Orbit freq: {dict(orbit_freq.most_common())}")
+
+    return all_matches
 
 
 def batch_analyze(numbers):
