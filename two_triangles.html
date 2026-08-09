@@ -9,8 +9,8 @@
   --border:    #182435;
   --text:      #a8bcc8;
   --dim:       #2e4a5a;
-  --A:         #36b4e0;   /* Triangle A — 7s — ORBIT_11 — cyan */
-  --B:         #c89030;   /* Triangle B — 6s — IC — amber */
+  --A:         #c89030;   /* Triangle A — 4s — D7 — amber */
+  --B:         #36b4e0;   /* Triangle B — 1/2/3 — cyan */
   --seam:      #8090a0;
   --A-glow:    rgba(54,180,224,0.18);
   --B-glow:    rgba(200,144,48,0.18);
@@ -163,23 +163,23 @@ button.active-b { color: var(--B); border-color: var(--B); }
   <div class="hud-row"><span class="hud-key">δ phase</span><span class="hud-val dim" id="h-phase">0.0°</span></div>
   <div class="hud-row"><span class="hud-key">speed A</span><span class="hud-val a" id="h-sa">1.00×</span></div>
   <div class="hud-row"><span class="hud-key">speed B</span><span class="hud-val b" id="h-sb">0.62×</span></div>
-  <div class="hud-row"><span class="hud-key">667+776</span><span class="hud-val dim">≡ 0 mod 37</span></div>
-  <div class="hud-row"><span class="hud-key">676+767</span><span class="hud-val dim">≡ 0 mod 37</span></div>
-  <div class="hud-row"><span class="hud-key">666</span><span class="hud-val dim">= 37 × 18</span></div>
-  <div class="hud-row"><span class="hud-key">777</span><span class="hud-val dim">= 37 × 21</span></div>
+  <div class="hud-row"><span class="hud-key">414</span><span class="hud-val dim">≡ 7 ∈ D7</span></div>
+  <div class="hud-row"><span class="hud-key">123414321</span><span class="hud-val dim">≡ 7 ∈ D7</span></div>
+  <div class="hud-row"><span class="hud-key">ring sum</span><span class="hud-val dim">18 ∈ SEED_ORB</span></div>
+  <div class="hud-row"><span class="hud-key">1234</span><span class="hud-val dim">≡ 13 ∈ NQR_5</span></div>
 </div>
 
 <!-- Reading: top and bottom row 3-digit numbers -->
 <div id="reading">
   <div class="reading-row">
-    <span class="digit-str" id="r-top">767</span>
-    <span class="r-mod" id="r-top-mod">≡27</span>
-    <span class="orbit-pill orbit-O11" id="r-top-orb">ORBIT_11</span>
+    <span class="digit-str" id="r-top">414</span>
+    <span class="r-mod" id="r-top-mod">≡7</span>
+    <span class="orbit-pill orbit-O11" id="r-top-orb">D7</span>
   </div>
   <div class="reading-row">
-    <span class="digit-str" id="r-bot">676</span>
-    <span class="r-mod" id="r-bot-mod">≡10</span>
-    <span class="orbit-pill orbit-IC" id="r-bot-orb">IC</span>
+    <span class="digit-str" id="r-bot">243</span>
+    <span class="r-mod" id="r-bot-mod">≡21</span>
+    <span class="orbit-pill orbit-IC" id="r-bot-orb">OUTLIER_ORB</span>
   </div>
 </div>
 
@@ -188,14 +188,14 @@ button.active-b { color: var(--B); border-color: var(--B); }
 <!-- Controls -->
 <div id="ctrl">
   <div class="ctrl-group">
-    <span class="ctrl-label a">▲ 7</span>
+    <span class="ctrl-label a">▲ 4</span>
     <input type="range" class="a" id="sa" min="0" max="30" value="10" step="1">
     <span class="ctrl-val" id="sa-v">1.0×</span>
     <button id="dir-a">CW</button>
   </div>
   <div class="ctrl-sep"></div>
   <div class="ctrl-group">
-    <span class="ctrl-label b">▲ 6</span>
+    <span class="ctrl-label b">▲ 1·2·3</span>
     <input type="range" class="b" id="sb" min="0" max="30" value="6" step="1">
     <span class="ctrl-val" id="sb-v">0.6×</span>
     <button id="dir-b">CW</button>
@@ -206,11 +206,10 @@ button.active-b { color: var(--B); border-color: var(--B); }
 
 <!-- Theorem note -->
 <div id="theorem">
-  Theorem 145 · GF(37)<br>
-  popcount 0 → SEAM<br>
-  popcount 1 → IC = {1, 10, 26}<br>
-  popcount 2 → ORBIT_11 = −IC<br>
-  popcount 3 → SEAM
+  Theorem 147 · GF(37)<br>
+  ring: 1−4−2−4−3−4<br>
+  414 ≡ 123414321 ≡ 7 ∈ D7<br>
+  5·1234·<span style="color:#c89030">1</span>·4321·5
 </div>
 
 <script>
@@ -226,8 +225,10 @@ resize();
 window.addEventListener('resize', resize);
 
 // ── State ──────────────────────────────────────────
-let phaseA = 90;   // Triangle A start angle (degrees): top vertex
-let phaseB = 30;   // Triangle B start angle
+// phaseA=30 puts 4s at 30°,150°,270° — flanking the top node at 90°
+// phaseB=90 puts the "1" vertex at 90° (top), so top reads 4-1-4 = 414
+let phaseA = 30;   // Triangle A: the 4-triangle
+let phaseB = 90;   // Triangle B: the 1-2-3-triangle
 let speedA = 1.0;  // degrees per frame (×some scale)
 let speedB = 0.62;
 let dirA = 1;      // +1 = CW, -1 = CCW
@@ -269,11 +270,34 @@ pauseBtn.addEventListener('click', () => {
 });
 
 // ── GF(37) helpers ─────────────────────────────────
-const IC11 = { 1: 'IC', 10: 'IC', 26: 'IC', 11: 'ORBIT_11', 27: 'ORBIT_11', 36: 'ORBIT_11' };
+const ORBIT_MAP = {
+  1:'IC', 10:'IC', 26:'IC',
+  3:'SOVEREIGN_SPIRAL', 4:'SOVEREIGN_SPIRAL', 30:'SOVEREIGN_SPIRAL',
+  7:'D7', 33:'D7', 34:'D7',
+  9:'SA_ORB', 12:'SA_ORB', 16:'SA_ORB',
+  11:'ORBIT_11', 27:'ORBIT_11', 36:'ORBIT_11',
+  21:'OUTLIER_ORB', 25:'OUTLIER_ORB', 28:'OUTLIER_ORB',
+  2:'DARK_A', 15:'DARK_A', 20:'DARK_A',
+  5:'NQR_5', 13:'NQR_5', 19:'NQR_5',
+  6:'TESLA_ORB', 8:'TESLA_ORB', 23:'TESLA_ORB',
+  14:'NQR_14', 29:'NQR_14', 31:'NQR_14',
+  17:'NQR_17', 22:'NQR_17', 35:'NQR_17',
+  18:'SEED_ORB', 24:'SEED_ORB', 32:'SEED_ORB',
+};
 function orbitOf(n) {
   const r = ((n % 37) + 37) % 37;
   if (r === 0) return 'SEAM';
-  return IC11[r] || '?';
+  return ORBIT_MAP[r] || '?';
+}
+function orbitColor(name) {
+  const m = {
+    'D7':'#c89030', 'IC':'#36b4e0', 'ORBIT_11':'#7090e0',
+    'SOVEREIGN_SPIRAL':'#e06030', 'OUTLIER_ORB':'#a060d0',
+    'NQR_5':'#50c870', 'SEED_ORB':'#e0b030', 'SEAM':'#8090a0',
+    'SA_ORB':'#60d0c0', 'NQR_14':'#d070a0', 'NQR_17':'#80a0e0',
+    'TESLA_ORB':'#70e060', 'DARK_A':'#b08060',
+  };
+  return m[name] || '#a8bcc8';
 }
 
 function angDiff(a, b) {
@@ -282,18 +306,14 @@ function angDiff(a, b) {
   return d;
 }
 
-function getDigit(hexAngleDeg, pA, pB) {
-  const dA = Math.min(
-    angDiff(hexAngleDeg, pA),
-    angDiff(hexAngleDeg, pA + 120),
-    angDiff(hexAngleDeg, pA + 240)
-  );
-  const dB = Math.min(
-    angDiff(hexAngleDeg, pB),
-    angDiff(hexAngleDeg, pB + 120),
-    angDiff(hexAngleDeg, pB + 240)
-  );
-  return dA <= dB ? 7 : 6;
+// Returns {digit, whichB} — digit=4 for A-vertex, digit=1/2/3 for B-vertex index 0/1/2
+function getNodeInfo(hexAngleDeg, pA, pB) {
+  const dA = Math.min(angDiff(hexAngleDeg, pA), angDiff(hexAngleDeg, pA+120), angDiff(hexAngleDeg, pA+240));
+  const dists = [angDiff(hexAngleDeg, pB), angDiff(hexAngleDeg, pB+120), angDiff(hexAngleDeg, pB+240)];
+  const minB = Math.min(...dists);
+  const whichB = dists.indexOf(minB);
+  if (dA <= minB) return { digit: 4, which: -1 };
+  return { digit: whichB + 1, which: whichB };  // 1, 2, or 3
 }
 
 // Hex node angles (degrees), 0=top going CW
@@ -325,25 +345,24 @@ function drawTriangle(cx, cy, r, phase, color, glow) {
 
 function drawNode(cx, cy, digit, r_ring, angleDeg) {
   const [x, y] = toXY(cx, cy, r_ring, angleDeg);
-  const isA = digit === 7;
-  const col = isA ? '#36b4e0' : '#c89030';
-  const bg  = isA ? 'rgba(54,180,224,0.12)' : 'rgba(200,144,48,0.12)';
+  const isA = digit === 4;
+  const col = isA ? '#c89030' : '#36b4e0';
+  const bg  = isA ? 'rgba(200,144,48,0.12)' : 'rgba(54,180,224,0.12)';
+  const radius = isA ? 24 : 20;
 
-  // Node circle
   ctx.beginPath();
-  ctx.arc(x, y, 22, 0, 2 * Math.PI);
+  ctx.arc(x, y, radius, 0, 2 * Math.PI);
   ctx.fillStyle = bg;
   ctx.fill();
   ctx.strokeStyle = col;
-  ctx.lineWidth = 1;
+  ctx.lineWidth = isA ? 1.5 : 1;
   ctx.shadowColor = col;
-  ctx.shadowBlur = 8;
+  ctx.shadowBlur = isA ? 12 : 7;
   ctx.stroke();
   ctx.shadowBlur = 0;
 
-  // Digit label
   ctx.fillStyle = col;
-  ctx.font = 'bold 22px Courier New';
+  ctx.font = `bold ${isA ? 24 : 20}px Courier New`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(String(digit), x, y);
@@ -362,39 +381,32 @@ function drawHexRing(cx, cy, r) {
 }
 
 // ── Update HUD ─────────────────────────────────────
-function orbitClass(name) {
-  if (name === 'IC') return 'orbit-IC';
-  if (name === 'ORBIT_11') return 'orbit-O11';
-  return 'orbit-SEAM';
-}
-function digitColor(name) {
-  if (name === 'IC') return '#c89030';
-  if (name === 'ORBIT_11') return '#36b4e0';
-  return '#8090a0';
-}
-
 function updateHUD(digits) {
-  // Top "row": nodes 5, 0, 1 → hundreds, tens, ones
-  const top = digits[5] * 100 + digits[0] * 10 + digits[1];
-  const bot = digits[4] * 100 + digits[3] * 10 + digits[2];
+  // top row: nodes 5,0,1  bottom row: nodes 2,3,4
+  const top = digits[5]*100 + digits[0]*10 + digits[1];
+  const bot = digits[2]*100 + digits[3]*10 + digits[4];
   const topR = ((top % 37) + 37) % 37;
   const botR = ((bot % 37) + 37) % 37;
   const topOrb = orbitOf(top);
   const botOrb = orbitOf(bot);
+  const tc = orbitColor(topOrb);
+  const bc = orbitColor(botOrb);
 
-  document.getElementById('r-top').textContent = String(top);
-  document.getElementById('r-top').style.color = digitColor(topOrb);
+  const rt = document.getElementById('r-top');
+  rt.textContent = String(top);
+  rt.style.color = tc;
   document.getElementById('r-top-mod').textContent = '≡' + topR;
   const tpill = document.getElementById('r-top-orb');
   tpill.textContent = topOrb;
-  tpill.className = 'orbit-pill ' + orbitClass(topOrb);
+  tpill.style.cssText = `color:${tc};border-color:${tc};background:${tc}18`;
 
-  document.getElementById('r-bot').textContent = String(bot);
-  document.getElementById('r-bot').style.color = digitColor(botOrb);
+  const rb = document.getElementById('r-bot');
+  rb.textContent = String(bot);
+  rb.style.color = bc;
   document.getElementById('r-bot-mod').textContent = '≡' + botR;
   const bpill = document.getElementById('r-bot-orb');
   bpill.textContent = botOrb;
-  bpill.className = 'orbit-pill ' + orbitClass(botOrb);
+  bpill.style.cssText = `color:${bc};border-color:${bc};background:${bc}18`;
 
   const delta = ((phaseA - phaseB) % 360 + 360) % 360;
   document.getElementById('h-phase').textContent = delta.toFixed(1) + '°';
@@ -435,36 +447,43 @@ function draw() {
   // Triangle A (7s, cyan) — in front
   drawTriangle(cx, cy, R_TRI, phaseA, '#36b4e0', 'rgba(54,180,224,0.06)');
 
-  // Compute digits and draw nodes
-  const digits = HEX.map(a => getDigit(a, phaseA, phaseB));
+  // Compute node info and draw
+  const nodeInfos = HEX.map(a => getNodeInfo(a, phaseA, phaseB));
+  const digits = nodeInfos.map(n => n.digit);
   for (let i = 0; i < 6; i++) {
     drawNode(cx, cy, digits[i], R_RING, HEX[i]);
   }
 
-  // Center: show if SEAM state
-  const top = digits[5] * 100 + digits[0] * 10 + digits[1];
-  if (top % 37 === 0) {
+  // Center: show 414 / current reading label
+  const top3 = digits[5]*100 + digits[0]*10 + digits[1];
+  const topOrb = orbitOf(top3);
+  const topR = ((top3 % 37) + 37) % 37;
+  if (top3 === 414) {
+    ctx.fillStyle = 'rgba(200,144,48,0.18)';
+    ctx.beginPath(); ctx.arc(cx, cy, 30, 0, 2*Math.PI); ctx.fill();
+    ctx.fillStyle = '#c89030';
+    ctx.font = 'bold 11px Courier New';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('D7', cx, cy);
+  } else if (topR === 0) {
     ctx.fillStyle = 'rgba(128,144,160,0.15)';
-    ctx.beginPath();
-    ctx.arc(cx, cy, 28, 0, 2 * Math.PI);
-    ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, 30, 0, 2*Math.PI); ctx.fill();
     ctx.fillStyle = '#8090a0';
     ctx.font = '10px Courier New';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillText('SEAM', cx, cy);
   }
 
   // Triangle vertex markers
   for (let k = 0; k < 3; k++) {
     const [ax, ay] = toXY(cx, cy, R_TRI, phaseA + k * 120);
-    ctx.beginPath(); ctx.arc(ax, ay, 4, 0, 2 * Math.PI);
-    ctx.fillStyle = '#36b4e0'; ctx.shadowColor = '#36b4e0'; ctx.shadowBlur = 8;
+    ctx.beginPath(); ctx.arc(ax, ay, 4, 0, 2*Math.PI);
+    ctx.fillStyle = '#c89030'; ctx.shadowColor = '#c89030'; ctx.shadowBlur = 8;
     ctx.fill(); ctx.shadowBlur = 0;
 
     const [bx, by] = toXY(cx, cy, R_TRI, phaseB + k * 120);
-    ctx.beginPath(); ctx.arc(bx, by, 4, 0, 2 * Math.PI);
-    ctx.fillStyle = '#c89030'; ctx.shadowColor = '#c89030'; ctx.shadowBlur = 8;
+    ctx.beginPath(); ctx.arc(bx, by, 4, 0, 2*Math.PI);
+    ctx.fillStyle = '#36b4e0'; ctx.shadowColor = '#36b4e0'; ctx.shadowBlur = 8;
     ctx.fill(); ctx.shadowBlur = 0;
   }
 
