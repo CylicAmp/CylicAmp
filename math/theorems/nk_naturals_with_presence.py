@@ -5,7 +5,7 @@ LABEL
 =====
 Nκ  (spoken: "N-kappa")
 
-Replaces the label Np to avoid conflict with the complexity theory label.
+Label established: Nκ.
 
 DEFINITION
 ===========
