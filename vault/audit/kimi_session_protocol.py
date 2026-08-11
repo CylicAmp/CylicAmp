@@ -164,6 +164,33 @@ class EpistemicGate:
         }
         return result
 
+    def mark_boundary(self, claim_label: str, dep_label: str) -> Optional[Finding]:
+        """
+        Theorem 172: ORBIT_11/IC boundary → StructuralSilence.
+
+        If one finding is in ORBIT_11 orbit and the other in IC orbit,
+        the pair constitutes a negation contradiction (ORBIT_11 = −IC).
+        A new INADMISSIBLE finding is recorded; SEAM is triggered.
+
+        Returns the new Finding, or None if no boundary condition exists.
+        """
+        claim_f = next((f for f in self._findings if f.label == claim_label), None)
+        dep_f   = next((f for f in self._findings if f.label == dep_label), None)
+        if claim_f is None or dep_f is None:
+            return None
+        pair = {claim_f.orbit_label, dep_f.orbit_label}
+        if pair == {'IC', 'ORBIT_11'}:
+            label = f"ORBIT_11/IC boundary: [{claim_label}] ↔ [{dep_label}]"
+            f = self.add(
+                label,
+                Status.INADMISSIBLE,
+                "ORBIT_11 = −IC (Theorem 172): these two findings are "
+                "negations of each other in GF(37). One is false.",
+                f"{claim_f.source} ↔ {dep_f.source}",
+            )
+            return f
+        return None
+
     def report(self) -> str:
         ev = self.evaluate()
         lines = [
@@ -280,6 +307,24 @@ class DRIntegrityChain:
         if r is None:
             return True
         return abs(r - _tau4()) < self.threshold
+
+    def residue_deviation(self, expected_fn) -> Optional[float]:
+        """
+        Theorem 172: mean absolute residue deviation metric.
+
+        expected_fn(i) → expected residue at position i (int in 0..36).
+        Returns mean |actual[i] − expected[i]| across all ingested messages,
+        or None if no messages have been ingested.
+
+        A single SEAM injection (0) into an ORBIT_11 position (residue 11)
+        produces per-position deviation = 11 (the ORBIT_11 generator).
+        This metric is calibrated to residue scale [0,36], not τ₄ scale.
+        Threshold for anomaly: typically > 1.0 (a half-residue deviation).
+        """
+        if not self._drs:
+            return None
+        return sum(abs(self._drs[i] - (expected_fn(i) % P))
+                   for i in range(len(self._drs))) / len(self._drs)
 
     def report(self) -> str:
         r = self.ratio()
