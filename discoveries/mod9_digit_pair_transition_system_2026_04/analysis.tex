@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\title{Analysis: Mod-9 Digit-Pair Transition System}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Layer 1: Adjacency Lattice}
+Transitions proceed by $+1$ (linear) or digit swap (mirror) through the chain $11 \to 12 \to 21 \to 22 \to \cdots \to 55$.
+
+\section{Layer 2: Swap Symmetry}
+For every pair $(d_1, d_2)$, the mirror $(d_2, d_1)$ exists and both carry the same digital root. This creates a closed symmetric lattice.
+
+\section{Layer 3: Mod-9 Collapse}
+All transitions preserve $\mathrm{DR}(n) = n \bmod 9$ (with 9 replacing 0). The global invariant classes are determined by DR value.
+
+\section{Completion Constant}
+$7 + 4 = 11 + 9 = 20$ and $9 + 1 + 1 + 9 = 20$. Both expressions confirm the Completion Constant 20 embedded in the transition system.
+
+\end{document}

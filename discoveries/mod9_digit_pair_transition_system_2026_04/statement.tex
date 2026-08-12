@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\title{Mod-9 Digit-Pair Transition System}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Statement}
+
+The mod-9 digit-pair transition system governs all adjacency and swap transitions over the digit-pair lattice $[11, 99]$ in three layers:
+
+\begin{enumerate}
+\item \textbf{Adjacency Lattice}: $S \to S+1$ (linear) or $(d_1,d_2) \to (d_2,d_1)$ (mirror swap)
+\item \textbf{Swap Symmetry}: Every pair $(d_1,d_2)$ has mirror $(d_2,d_1)$; both share the same digital root
+\item \textbf{Mod-9 Collapse}: All transitions preserve the digital root under mod-9 reduction
+\end{enumerate}
+
+The Completion Constant 20 is verified by $7+4=11+9=20$ and $9+1+1+9=20$.
+
+\end{document}

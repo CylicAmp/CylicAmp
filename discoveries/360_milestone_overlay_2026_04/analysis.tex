@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\title{Analysis: 360 Milestone Overlay}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Totient Boundary}
+$\sum_{k=1}^{34}\varphi(k) = 360$ exactly. This is the 360 milestone — the point at which the cumulative totient sum reaches 360.
+
+\section{Ratio to 432}
+$360 = \frac{5}{6} \times 432$. The gap is $72 = 8 \times 9$, closing at $k=37$ where $\sum_{k=1}^{37}\varphi(k)=432$.
+
+\section{Modular Constants}
+$360 \bmod 81 = 36$, $360 \bmod 37 = 27$.
+
+\section{Grid Coordinates}
+The $\bigstar$ positions at $(3,6)$ and $(6,3)$ are the only off-diagonal cells with $\mathrm{DR}=9$ in the upper-left $6\times6$ quadrant. The $\blacklozenge$ at $(4,4)$ marks the diagonal intersection point.
+
+\section{Jump Sequence}
+$360 \xrightarrow{+24} 384 \xrightarrow{+12} 396 \xrightarrow{+36} 432$ traces the completion path from the 360 milestone to 432 in three deterministic steps.
+
+\section{Integration}
+The 360 milestone overlay supplies the coordinate engine and jump sequence for the G'5 Sovereign Kernel's deterministic recurrence layer.
+
+\end{document}

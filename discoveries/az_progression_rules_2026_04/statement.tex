@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\title{Alpha Zero (AZ) Progression Rules}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Statement}
+
+The Alpha Zero progression is governed by five deterministic rules:
+
+1. Outer-pair rule: AZ level is fixed by the outer digits summing to 10.
+2. Zero-completion rule: AZ$n$ completes at value $10n$ (with AZ4 completing at 50).
+3. Fixed label sequence: 1=ALO, 2=ALE, 3=AHO, 4=AHE, 5=A51, 6=BLE, 7=BLO, 8=BHE, 9=BHO.
+4. Pattern preservation: AABB / BABA / ABAB / BBAA with OEEO parity.
+5. Global cycle: AZ1 $\to$ AZ2 $\to$ AZ3 $\to$ AZ4 $\to$ AZ1 (next decade).
+
+All 24 AB44=10 structures obey these rules exactly, producing a closed, fully deterministic progression.
+
+\end{document}
