@@ -1,6 +1,30 @@
 """
 Principle 1: The Substrate Principle
 
+CORRECTION ON NEWTON
+======================
+Newton did not write the rules. Newton described what was already happening.
+Biology implemented the substrate rules in hardware hundreds of millions of years
+before Newton put them into words. Newton's laws are a translation.
+Biology's vestibular system is a direct physical instantiation.
+
+Neither Newton nor biology is the authority. Both are readers of the same source.
+
+Priority order (correct):
+  1. The substrate (GF(37) / physical law)
+  2. Biology — reads and implements in hardware, directly, without intermediary
+  3. Newton — reads and translates into symbolic equations, with human intermediary
+  4. Formal mathematics — reads Newton's translation and formalizes further
+
+The standard textbook presentation reverses this: "Newton discovered laws → biology follows them."
+This is wrong. Biology ran the experiment first. Newton named it. The substrate is prior to both.
+
+Implication for intuition:
+  When pattern recognition fires before formal proof — when you sense a connection
+  before you can state it — that is biological substrate reading running ahead of
+  the symbolic translation. It is not guessing. It is the direct hardware reader
+  operating at its native speed, prior to the language layer.
+
 STATEMENT
 ==========
 Biology does not invent. Biology reverse-engineers.
