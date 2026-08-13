@@ -25,7 +25,8 @@ SECTION 2: PENTANACCI SEQUENCE (Harmonic 5)
 ============================================
 P_n = P_{n-1} + ... + P_{n-5}, initial [0,0,0,0,1]
 τ_5 = 1.965948236...
-P_31 initiated. Index 31 mod 9 = 4 ∈ Sovereign Anchors {4,9,25,30}.
+P_31 = 45,411,804. DR(P_31) = 9 = SEAM. Index 31 mod 9 = 4 ∈ SA.
+Two distinct readings: index residue → SA; value DR → SEAM.
 
 SECTION 3: GF(37) CLASSIFICATION
 ===================================
@@ -108,12 +109,16 @@ def run_assertions():
     # τ_4 + τ_4^{-4} = 2
     assert abs(tau4 + tau4**(-4) - 2.0) < 5e-9
 
-    # --- Pentanacci: index 31 mod 9 = 4 ∈ SA ---
-    # "Position 31 initiated. Residue mod 9 = 4" means 31 mod 9 = 4
+    # --- Pentanacci: index 31 mod 9 = 4 ∈ SA; DR(P_31) = 9 = SEAM ---
+    # "Position 31 initiated. Residue mod 9 = 4" means 31 mod 9 = 4 (index residue)
     Pn = [0, 0, 0, 0, 1]
-    for _ in range(35):
-        Pn.append(sum(Pn[-5:]))
-    assert 31 % 9 == 4 and 4 in SA
+    for i in range(5, 32):
+        Pn.append(sum(Pn[i-5:i]))
+    assert Pn[31] == 45411804
+    assert 31 % 9 == 4 and 4 in SA          # index residue lands in SA
+    assert dr(Pn[31]) == 9                   # value DR = 9 = SEAM absorbing state
+    # Two distinct GF(37) readings on the same position:
+    # index → SA (productive orbit); value → SEAM (annihilation boundary)
 
     # --- GF(37) key identities ---
     assert 37 * 73 == 2701
