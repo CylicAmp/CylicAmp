@@ -26,7 +26,11 @@ from cylicamp.session_protocol import (
 # ── HTML text extractor ───────────────────────────────────────────────────────
 
 class _TextExtractor(HTMLParser):
-    SKIP_TAGS = {"script", "style", "head", "meta", "link", "noscript"}
+    # Only paired (non-void) tags that contain no useful text
+    SKIP_TAGS = {"script", "style", "head", "noscript"}
+    # Void elements: never have closing tags, so excluded from counter logic
+    VOID_TAGS = {"meta", "link", "br", "hr", "img", "input", "area",
+                 "base", "col", "embed", "param", "source", "track", "wbr"}
 
     def __init__(self):
         super().__init__()
@@ -34,11 +38,13 @@ class _TextExtractor(HTMLParser):
         self.segments: List[str] = []
 
     def handle_starttag(self, tag, attrs):
-        if tag.lower() in self.SKIP_TAGS:
+        t = tag.lower()
+        if t in self.SKIP_TAGS:
             self._skip += 1
 
     def handle_endtag(self, tag):
-        if tag.lower() in self.SKIP_TAGS:
+        t = tag.lower()
+        if t in self.SKIP_TAGS:
             self._skip = max(0, self._skip - 1)
 
     def handle_data(self, data):
