@@ -142,20 +142,27 @@ def audit_url(url: str, timeout: int = 10) -> AuditResult:
         return AuditResult(url, DARK_PATTERN_EXTRACTIVE, [], 3, [str(e)])
 
     segments = extract_segments(html)
-    weights  = segments_to_weights(segments)
-    nulls    = count_nulls(segments)
+    content  = [s for s in segments if len(s) >= MIN_CONTENT_LEN]
+    weights  = segments_to_weights(content)
+    nulls    = count_nulls(content)
     status   = classify_interaction(weights, nulls)
 
     return AuditResult(url, status, weights, nulls, segments)
 
 
+MIN_CONTENT_LEN = 4  # segments shorter than this are structural tokens, not content
+
+
 def audit_text(text: str, source: str = "<direct>") -> AuditResult:
     """
     Audit a block of text directly (no fetch).
+    Segments shorter than MIN_CONTENT_LEN (e.g. triple-quotes, braces) are
+    excluded from weight computation so structural tokens don't trigger head crash.
     """
     segments = [s.strip() for s in text.split("\n") if s.strip()]
-    weights  = segments_to_weights(segments)
-    nulls    = count_nulls(segments)
+    content  = [s for s in segments if len(s) >= MIN_CONTENT_LEN]
+    weights  = segments_to_weights(content)
+    nulls    = count_nulls(content)
     status   = classify_interaction(weights, nulls)
     return AuditResult(source, status, weights, nulls, segments)
 
