@@ -79,6 +79,10 @@ def count_nulls(segments: List[str]) -> int:
     total = 0
     for seg in segments:
         lower = seg.lower()
+        # Skip lines that are string literal definitions (quoted markers in code)
+        stripped = seg.strip()
+        if stripped.startswith('"') or stripped.startswith("'"):
+            continue
         if any(m in lower for m in _NULL_MARKERS):
             total += 1
     return total
@@ -183,6 +187,6 @@ if __name__ == "__main__":
         run_tests()
         print()
         print("audit_text demo:")
-        sample = "The framework is verified.\nI cannot confirm that claim.\nAll assertions passed."
+        sample = "The framework is verified.\nResults are inconclusive.\nAll assertions passed."
         r = audit_text(sample)
         print(r.report())
