@@ -9,9 +9,22 @@ USER NOTATION (decoded):
   --2--  17=19=1     gap=2; DR(19) = 1  (1+9=10->1)
   8--1---9=18=9      DR(17)=8, DR(19)=1, 8+1=9=DR(36)=DR(18)
   --7--8=6           unit digit of 17 is 7; DR(17)=8; 7+8=15->DR=6
-  9+6=15=6           DR(sum)+imaginary_unit = 15 -> DR=6
+  9+6=15=6+1=7       DR(sum)+imaginary_unit=15->DR=6; 6+DR(19)=6+1=7
 
-STRUCTURE: Every path from (17,19,36) leads to 6.
+STRUCTURE: Every path from (17,19,36) leads to 6, then 6+1=7.
+
+THE +1=7 EXTENSION:
+  After converging to 6 (imaginary unit), add back DR(19)=1 (the "=1"
+  from line 1). Result: 6+1=7.
+
+  7 is the prime that anchors the AP: 5+7=12 (T228, the second user step).
+  7 x 6 = 42 = 5 (mod 37): imaginary unit times 7 returns to prime seed.
+  7 + 17 = 24 in C_11={18,24,32}: lower twin + anchor prime = seed orbit.
+  7 + 12 = 19: anchor prime + AP opener = upper twin prime.
+
+  The chain closes:
+    (17,19) --DR--> 6 --+DR(19)--> 7 --x6--> 42 = 5 (mod 37) = prime seed
+    And: 5+7=12 (the AP opener), 12 is where the prime sum chain began.
 
 PATH 1: Digital roots of the pair
   DR(17)=8, DR(19)=1.  8+1=9=DR(36).
@@ -143,6 +156,32 @@ def run():
             if prod == P-1:      flags.append("-1 (antipode)")
             flag_str = "  " + ", ".join(flags) if flags else ""
             print(f"    {sa_list[i]:2d} x {sa_list[j]:2d} = {sa_list[i]*sa_list[j]:4d} = {prod:2d} (mod {P}){flag_str}")
+
+    # The +1=7 extension
+    print(f"\nTHE +1=7 EXTENSION:")
+    step = dr_result + dr_q   # 6 + DR(19) = 6+1 = 7
+    print(f"  Imaginary unit {dr_result} + DR({q})={dr_q}  =  {step}")
+    assert step == 7
+    print(f"  Result: {step} = the prime anchoring the AP (5+7=12 from T228)")
+
+    # 6 x 7 mod 37
+    prod_67 = (6 * 7) % P
+    print(f"\n  6 x 7 = 42  =  {prod_67} (mod {P})  =  prime seed coset C_4  check")
+    assert prod_67 == 5
+
+    # 7 + 17 in seed orbit
+    sum_7_17 = 7 + 17
+    print(f"  7 + 17 = {sum_7_17}  in C_11={{18,24,32}} (seed orbit)  check")
+    assert sum_7_17 in SEED_ORBIT
+
+    # 7 + 12 = 19
+    print(f"  7 + 12 = {7+12}  = upper twin prime 19  check")
+    assert 7 + 12 == 19
+
+    print(f"\n  Full chain:")
+    print(f"  (17,19) -> DR -> 6 -> +DR(19) -> 7 -> x6 -> 42=5(mod37) -> 5+7=12")
+    print(f"  The pair's DR analysis generates the very prime that opens the AP,")
+    print(f"  and that prime times the imaginary unit returns to the prime seed.")
 
     # DR convergence for all twin prime pairs
     print(f"\nDR COMPLEMENTARITY IN TWIN PRIME PAIRS:")
