@@ -75,6 +75,20 @@ H. THE ALL-PRIME DR TRIPLET {5, 1, 4}:
   DR(SA element) = 4.
   5+1+4 = 10 in H. The sum of the three grid DRs is in H.
   5*1*4 = 20 mod 37 = 20 in C_2 (the coset of G(3,1)).
+  NOTE: 5, 1, 4 are the DR values as integers; 5*1*4=20 is integer arithmetic.
+  The row products {8, 6, 27} are cubic residues mod 37 -- a separate claim.
+
+I. ENSEMBLE CLOSURE (ALL 9 ROWS):
+  The (b-s) values across all three grids:
+    G(3,1): b-s = 2
+    G(1,9): b-s = 1-9 = -8 ≡ 29 (mod 37)
+    G(7,3): b-s = 4
+  Product: 2 * 29 * 4 = 232 ≡ 10 (mod 37)  10 in H.
+  Each grid contributes (b-s)^3 to its row product.
+  Product of all 9 rows = [(b-s)_1 * (b-s)_2 * (b-s)_3]^3 = 10^3 mod 37.
+  ord_37(10) = 3, so 10^3 = 1 (mod 37) = identity.
+  The product of all 9 three-digit primes across all three grids is 1 in GF(37)*.
+================================================================================
 ================================================================================
 """
 
@@ -229,12 +243,35 @@ def run():
     assert sum([733,373,337])//P == 39 and 39%P == 2
 
     # H: DR triplet
-    print(f"\nH. THE ALL-PRIME DR TRIPLET {{5, 1, 4}}:")
+    print(f"\nH. THE ALL-PRIME DR TRIPLET {{5, 1, 4}} (integer arithmetic on DR values):")
     dr_sum = 5+1+4
     dr_prod = 5*1*4
     print(f"  5+1+4 = {dr_sum} in H:{dr_sum in H_SET}  check")
     print(f"  5x1x4 = {dr_prod} mod{P}={dr_prod%P}  in C_2:{dr_prod%P in [2,15,20]}  check")
     assert dr_sum in H_SET and dr_prod % P == 20
+    print(f"  [5,1,4 are DR integers; row products {{8,6,27}} are cubic residues -- separate claims]")
+
+    # I: Ensemble closure
+    print(f"\nI. ENSEMBLE CLOSURE (ALL 9 ROWS):")
+    bs_diffs = [(b - s) % P for b, s, _ in grids]
+    print(f"  (b-s) values: {[b-s for b,s,_ in grids]} mod {P} = {bs_diffs}")
+    ens_prod = 1
+    for d in bs_diffs:
+        ens_prod = (ens_prod * d) % P
+    print(f"  Product of (b-s) values: {bs_diffs[0]}x{bs_diffs[1]}x{bs_diffs[2]} = "
+          f"{(2*29*4)} mod{P} = {ens_prod} in H:{ens_prod in H_SET}  check")
+    assert ens_prod in H_SET
+
+    # product of all 9 rows
+    all9 = 1
+    for b, s, rows in grids:
+        for row in rows:
+            all9 = (all9 * (row % P)) % P
+    print(f"  Product of all 9 rows mod{P} = {all9}  (= {ens_prod}^3 = 10^3 = 1 mod{P})")
+    assert all9 == 1
+    assert pow(ens_prod, 3, P) == 1
+    print(f"  ord_{P}(10) = 3: 10^3 = {pow(10,3,P)} mod{P} = 1 (identity)  check")
+    print(f"  All 9 primes across 3 grids multiply to the identity in GF({P})*  check")
 
     print(f"\nAll verifications passed.")
 
