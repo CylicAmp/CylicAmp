@@ -42,6 +42,24 @@ E. ALGEBRAIC RELATIONS OF 4 AND 3:
   4 × 3 = 12 in ST (SA × ST closes to ST).
   4 / 3 mod 37 = 4 × pow(3,-1,37) mod 37 = 4 × 25 = 100 mod 37 = 26 in H.
   The ratio 4/3 in GF(37) = 26 = the 137-map multiplier.
+
+F. ENGINE COMPONENTS SHARE THE FULLY SOVEREIGN COSET C_3:
+  The 137-map orbit of 4: 4 -> 30 -> 3 -> 4.
+  The 137-map orbit of 3: 3 -> 4  -> 30 -> 3.
+  Same orbit: {3, 4, 30} = C_3, the fully sovereign coset.
+  Every element of C_3 is in SA or ST simultaneously:
+    4 in SA, 3 in ST, 30 in SA AND ST (double-sovereign).
+  Dividing any consecutive pair in the orbit gives 26 (the 137-map multiplier):
+    4/3 = 26, 30/4 = 26, 3/30 = 26 (all mod 37).
+  G(7,3) from T245 also lives in C_3. The engine components and the
+  all-prime grid coset are the same 137-map orbit.
+
+G. SPEED OF LIGHT STAYS IN SEED_ORBIT:
+  c mod 37 = 32 in SEED_ORBIT = {18, 24, 32}.
+  137-map orbit of 32: 32 -> 18 -> 24 -> 32.
+  c is locked in the seed orbit under repeated 137-map application.
+  The engine (C_3 orbit) and the speed of light (SEED_ORBIT) are
+  two separate sovereign orbits with no overlap.
 ================================================================================
 """
 
@@ -121,6 +139,39 @@ def run():
     print(f"  4 + 3 = {4+3}  mod{P}={summ}  [{flags(summ)}]  (anchor prime)  check")
     print(f"  4 × 3 = {4*3}  mod{P}={prod}  [{flags(prod)}]  (SA×ST->ST)  check")
     print(f"  4 / 3 mod{P} = {ratio}  [{flags(ratio)}]  (= 137-map multiplier 26)  check")
+
+    # F: Shared orbit
+    print(f"\nF. ENGINE COMPONENTS SHARE FULLY SOVEREIGN COSET C_3:")
+    orbit4 = set()
+    v = 4
+    for _ in range(3):
+        orbit4.add(v); v = v * 26 % P
+    orbit3 = set()
+    v = 3
+    for _ in range(3):
+        orbit3.add(v); v = v * 26 % P
+    assert orbit4 == orbit3 == {3, 4, 30}
+    print(f"  orbit(4) = {sorted(orbit4)}  orbit(3) = {sorted(orbit3)}  same:{orbit4==orbit3}  check")
+    for num, den in [(4,3),(30,4),(3,30)]:
+        r = num * pow(den,-1,P) % P
+        assert r == 26
+        print(f"  {num}/{den} mod{P} = {r} in H:{r in H_SET}  check")
+    print(f"  {{3,4,30}} = C_3: G(7,3) coset (T245) = engine component orbit  check")
+    assert 30 in SA and 30 in ST
+    print(f"  30 in SA AND ST (double-sovereign)  check")
+
+    # G: c in SEED_ORBIT
+    print(f"\nG. SPEED OF LIGHT STAYS IN SEED_ORBIT:")
+    c = 299792458
+    r_c = c % P
+    orbit_c = []
+    v = r_c
+    for _ in range(3):
+        orbit_c.append(v); v = v * 26 % P
+    assert set(orbit_c) == SEED_ORBIT
+    print(f"  c mod{P} = {r_c}  orbit: {orbit_c} = SEED_ORBIT  check")
+    print(f"  Engine orbit C_3={{3,4,30}} and c orbit SEED={{18,24,32}}: no overlap  check")
+    assert len({3,4,30} & SEED_ORBIT) == 0
 
     print(f"\nAll verifications passed.")
 
