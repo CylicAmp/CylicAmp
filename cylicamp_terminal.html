@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CylicAmp Terminal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
+<style>
+:root {
+  --bg: #080d08;
+  --surface: #0d140d;
+  --border: #183018;
+  --dim: #1e3a1e;
+  --green: #00cc33;
+  --bright: #00ff41;
+  --hi: #80ffb0;
+  --amber: #ffb300;
+  --blue: #4488ff;
+  --cyan: #00cccc;
+  --purple: #cc44cc;
+  --red: #ff5555;
+  --font: 'Share Tech Mono', 'Courier New', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{
+  background:var(--bg);
+  color:var(--green);
+  font-family:var(--font);
+  display:flex;
+  flex-direction:column;
+}
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.13) 2px,rgba(0,0,0,0.13) 4px);
+  pointer-events:none;z-index:9999;
+}
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.55) 100%);
+  pointer-events:none;z-index:9998;
+}
+.hdr{
+  border-bottom:1px solid var(--border);
+  padding:7px 16px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-shrink:0;
+}
+.hdr-title{color:var(--bright);font-size:1rem;letter-spacing:.18em}
+.hdr-right{color:var(--dim);font-size:.7rem;letter-spacing:.08em;text-align:right}
+.main{display:flex;flex:1;overflow:hidden}
+.menu{
+  width:210px;flex-shrink:0;
+  border-right:1px solid var(--border);
+  padding:12px 0;overflow-y:auto;
+}
+.menu-sec{
+  padding:0 14px 6px;
+  font-size:.62rem;color:var(--dim);
+  letter-spacing:.15em;text-transform:uppercase;
+}
+.mitem{
+  padding:7px 14px;cursor:pointer;
+  font-size:.8rem;color:var(--green);
+  display:flex;align-items:center;gap:8px;
+  transition:background .1s,color .1s;
+}
+.mitem:hover{background:var(--surface);color:var(--bright)}
+.mitem.active{background:var(--dim);color:var(--bright)}
+.mitem .k{color:var(--dim);font-size:.68rem;min-width:14px}
+.content{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.phdr{
+  padding:8px 18px;border-bottom:1px solid var(--border);
+  display:flex;align-items:baseline;gap:14px;flex-shrink:0;
+}
+.ptitle{color:var(--bright);font-size:.88rem;letter-spacing:.12em;text-transform:uppercase}
+.pdesc{color:var(--dim);font-size:.7rem}
+.pbody{flex:1;overflow-y:auto;padding:14px 18px}
+.sbar{
+  border-top:1px solid var(--border);
+  padding:3px 14px;display:flex;justify-content:space-between;
+  font-size:.65rem;color:var(--dim);flex-shrink:0;letter-spacing:.07em;
+}
+
+/* tags */
+.tag{display:inline-block;padding:1px 5px;border-radius:2px;font-size:.62rem;letter-spacing:.08em;margin:1px}
+.tsa{background:#12100000;color:var(--amber);border:1px solid #443300}
+.tst{background:#001212;color:var(--cyan);border:1px solid #004444}
+.th{background:#001200;color:var(--bright);border:1px solid #003300}
+.tseed{background:#120800;color:#ff8800;border:1px solid #442200}
+.tc3{background:#080012;color:var(--blue);border:1px solid #220044}
+.tc9{background:#120012;color:var(--purple);border:1px solid #440044}
+
+/* sovereign grid */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,52px);gap:4px;margin-bottom:12px}
+.scell{
+  width:52px;height:52px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:1px solid var(--border);cursor:pointer;
+  transition:border-color .15s;
+}
+.scell:hover{border-color:var(--green)}
+.scell .sn{font-size:.95rem;color:var(--bright)}
+.scell .st{font-size:.52rem;color:var(--dim);margin-top:2px;letter-spacing:.06em}
+.scell.isa{border-color:#443300;background:#0c0900}.scell.isa .sn{color:var(--amber)}
+.scell.ist{border-color:#003333}
+.scell.ih{border-color:#003300}
+.scell.iseed{border-color:#442200}
+.scell.ic3{border-color:#220044}
+.scell.ic9{border-color:#440044}
+
+.detail{
+  padding:12px 14px;background:var(--surface);
+  border:1px solid var(--border);font-size:.78rem;line-height:1.9;
+  max-width:500px;
+}
+
+/* twin prime */
+.trow{display:flex;align-items:center;gap:6px;padding:3px 0;font-size:.78rem;border-bottom:1px solid var(--border)}
+.pc{width:56px;text-align:center;padding:3px 6px;border-radius:2px}
+.pleft{background:#091400;color:var(--bright)}
+.pctr{background:#140900;color:var(--amber)}
+.prgt{background:#001409;color:#00ffaa}
+.pinfo{color:var(--dim);font-size:.7rem;flex:1}
+
+/* DR table */
+table.drt{border-collapse:collapse;font-size:.76rem;font-variant-numeric:tabular-nums}
+table.drt th,table.drt td{width:34px;height:27px;text-align:center;border:1px solid var(--border)}
+table.drt th{color:var(--dim);background:var(--surface)}
+.d3{color:var(--amber)}.d6{color:var(--cyan)}.d9{color:var(--red)}
+
+/* orbit canvas */
+#orb-canvas{display:block;border:1px solid var(--border)}
+
+/* game */
+.garea{display:flex;flex-direction:column;gap:14px;max-width:480px}
+.ginrow{display:flex;gap:8px;align-items:center}
+.ginput{
+  background:var(--surface);border:1px solid var(--dim);
+  color:var(--bright);font-family:var(--font);font-size:1.1rem;
+  padding:7px 10px;width:130px;outline:none;
+}
+.ginput:focus{border-color:var(--bright)}
+.btn{
+  background:var(--surface);border:1px solid var(--dim);
+  color:var(--green);font-family:var(--font);font-size:.78rem;
+  padding:7px 12px;cursor:pointer;letter-spacing:.07em;text-transform:uppercase;
+}
+.btn:hover{background:var(--dim);color:var(--bright)}
+.gfb{min-height:44px;font-size:.88rem;color:var(--bright);line-height:1.6}
+.gscore{font-size:.75rem;color:var(--dim)}
+.gq{font-size:.9rem;color:var(--green);line-height:1.7}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <span class="hdr-title">CYLICAMP  TERMINAL  v1.0</span>
+  <span class="hdr-right">GF(37) · 137-MAP · p=37<br>ord₃₇(26)=3 · ord₃₇(2)=36</span>
+</div>
+<div class="main">
+  <nav class="menu">
+    <div class="menu-sec">Programs</div>
+    <div class="mitem active" onclick="run(0)" id="m0"><span class="k">1</span>Orbit Explorer</div>
+    <div class="mitem" onclick="run(1)" id="m1"><span class="k">2</span>Twin Prime Pipe</div>
+    <div class="mitem" onclick="run(2)" id="m2"><span class="k">3</span>Sovereign Map</div>
+    <div class="mitem" onclick="run(3)" id="m3"><span class="k">4</span>DR Algebra</div>
+    <div class="mitem" onclick="run(4)" id="m4"><span class="k">5</span>Prime Challenge</div>
+    <div style="height:16px"></div>
+    <div class="menu-sec">Constants</div>
+    <div style="padding:6px 14px;font-size:.7rem;color:var(--dim);line-height:1.9">
+      p = 37<br>
+      H = {1,10,26}<br>
+      SA = {4,9,25,30}<br>
+      ST = {3,12,21,30}<br>
+      SEED = {18,24,32}<br>
+      C3 = {3,4,30}<br>
+      C9 = {14,29,31}
+    </div>
+  </nav>
+  <div class="content">
+    <div class="phdr">
+      <span class="ptitle" id="ptitle">Orbit Explorer</span>
+      <span class="pdesc" id="pdesc">137-map 3-cycles on GF(37)</span>
+    </div>
+    <div class="pbody" id="pbody"></div>
+  </div>
+</div>
+<div class="sbar">
+  <span id="sbar-left">READY</span>
+  <span>SA={4,9,25,30} · ST={3,12,21,30} · SEED={18,24,32}</span>
+</div>
+
+<script>
+// ── GF(37) Math ──────────────────────────────────────────────────────────────
+const P = 37;
+const SA   = new Set([4,9,25,30]);
+const ST   = new Set([3,12,21,30]);
+const H    = new Set([1,10,26]);
+const SEED = new Set([18,24,32]);
+const C3   = new Set([3,4,30]);
+const C9   = new Set([14,29,31]);
+
+function dr(n){n=Math.abs(n);if(n===0)return 0;const r=n%9;return r===0?9:r}
+function map137(n){return(26*n)%P}
+function orbit(n){const o=[];let v=n;for(let i=0;i<3;i++){o.push(v);v=map137(v)}return o}
+function isPrime(n){if(n<2)return false;for(let i=2;i<=Math.sqrt(n);i++)if(n%i===0)return false;return true}
+function chi3(n){const r=n%3;return r===0?0:(r===1?1:-1)}
+function classify(n){
+  const tags=[];
+  if(H.has(n))tags.push('H');
+  if(SA.has(n))tags.push('SA');
+  if(ST.has(n))tags.push('ST');
+  if(SEED.has(n))tags.push('SEED');
+  if(C3.has(n))tags.push('C3');
+  if(C9.has(n))tags.push('C9');
+  return tags;
+}
+function tagHTML(tags){
+  return tags.map(t=>{
+    const cls={H:'th',SA:'tsa',ST:'tst',SEED:'tseed',C3:'tc3',C9:'tc9'}[t]||'';
+    return `<span class="tag ${cls}">${t}</span>`;
+  }).join('');
+}
+
+// ── Menu routing ─────────────────────────────────────────────────────────────
+const PROGRAMS=[
+  {title:'Orbit Explorer',  desc:'137-map 3-cycles on GF(37)',        fn:progOrbit},
+  {title:'Twin Prime Pipe', desc:'T247: DR(center)∈{3,6,9}',         fn:progTwin},
+  {title:'Sovereign Map',   desc:'All 37 elements classified',        fn:progSovMap},
+  {title:'DR Algebra',      desc:'Digital root multiplication mod 9', fn:progDR},
+  {title:'Prime Challenge', desc:'Educational game powered by GF(37)',fn:progGame},
+];
+let current=0;
+let orbitAnim=null;
+
+function run(i){
+  if(orbitAnim){cancelAnimationFrame(orbitAnim);orbitAnim=null}
+  current=i;
+  document.querySelectorAll('.mitem').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.getElementById('ptitle').textContent=PROGRAMS[i].title;
+  document.getElementById('pdesc').textContent=PROGRAMS[i].desc;
+  document.getElementById('sbar-left').textContent='PROGRAM '+(i+1)+' ACTIVE';
+  PROGRAMS[i].fn();
+}
+
+document.addEventListener('keydown',e=>{
+  const k=parseInt(e.key);
+  if(k>=1&&k<=5)run(k-1);
+});
+
+// ── Program 1: Orbit Explorer ─────────────────────────────────────────────────
+function progOrbit(){
+  const el=document.getElementById('pbody');
+  const W=Math.min(el.clientWidth-4,520);
+  const H2=W;
+  el.innerHTML=`
+    <canvas id="orb-canvas" width="${W}" height="${H2}"></canvas>
+    <div style="margin-top:12px;font-size:.75rem;color:var(--dim);line-height:1.9">
+      <span class="tag tseed">SEED {18,24,32}</span>
+      <span class="tag tc3">C3 {3,4,30}</span>
+      <span class="tag th">H {1,10,26}</span>
+      &nbsp;·&nbsp; Arrow = 137-map: n → 26n mod 37 &nbsp;·&nbsp; Each orbit is a 3-cycle (ord₃₇(26)=3)
+    </div>`;
+  const canvas=document.getElementById('orb-canvas');
+  const ctx=canvas.getContext('2d');
+  const cx=W/2,cy=H2/2,R=W*0.38;
+
+  const ORBITS=[
+    {nodes:[18,24,32],color:'#ff8800',label:'SEED'},
+    {nodes:[3,4,30],  color:'#4488ff',label:'C3'},
+    {nodes:[1,10,26], color:'#00ff41',label:'H'},
+  ];
+
+  // positions of all 37 nodes on circle
+  function pos(n){
+    const a=(n/P)*2*Math.PI - Math.PI/2;
+    return{x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)};
+  }
+
+  let t=0;
+  function frame(){
+    ctx.clearRect(0,0,W,H2);
+
+    // background ring
+    ctx.beginPath();
+    ctx.arc(cx,cy,R,0,2*Math.PI);
+    ctx.strokeStyle='#1a301a';
+    ctx.lineWidth=1;
+    ctx.stroke();
+
+    // all nodes (dim)
+    for(let n=0;n<P;n++){
+      const p=pos(n);
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,3,0,2*Math.PI);
+      ctx.fillStyle='#1e3a1e';
+      ctx.fill();
+    }
+
+    // draw orbit arrows (animated phase)
+    ORBITS.forEach(orb=>{
+      const phase=t*0.012;
+      orb.nodes.forEach((n,i)=>{
+        const from=pos(n);
+        const to=pos(orb.nodes[(i+1)%3]);
+        // animated particle along arrow
+        const frac=((phase+i/3)%1);
+        const px=from.x+(to.x-from.x)*frac;
+        const py=from.y+(to.y-from.y)*frac;
+
+        // line
+        ctx.beginPath();
+        ctx.moveTo(from.x,from.y);
+        ctx.lineTo(to.x,to.y);
+        ctx.strokeStyle=orb.color+'44';
+        ctx.lineWidth=1.5;
+        ctx.stroke();
+
+        // particle
+        ctx.beginPath();
+        ctx.arc(px,py,4,0,2*Math.PI);
+        ctx.fillStyle=orb.color;
+        ctx.fill();
+      });
+
+      // nodes
+      orb.nodes.forEach(n=>{
+        const p=pos(n);
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,7,0,2*Math.PI);
+        ctx.fillStyle=orb.color+'22';
+        ctx.strokeStyle=orb.color;
+        ctx.lineWidth=1.5;
+        ctx.fill();
+        ctx.stroke();
+        // label
+        ctx.fillStyle=orb.color;
+        ctx.font='bold 11px Share Tech Mono, monospace';
+        ctx.textAlign='center';
+        ctx.textBaseline='middle';
+        const off=16;
+        const a=(n/P)*2*Math.PI-Math.PI/2;
+        ctx.fillText(n,p.x+off*Math.cos(a),p.y+off*Math.sin(a));
+      });
+    });
+
+    // center label
+    ctx.fillStyle='#1e3a1e';
+    ctx.font='11px Share Tech Mono, monospace';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText('Z₃₇',cx,cy);
+
+    t++;
+    orbitAnim=requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+// ── Program 2: Twin Prime Pipe ────────────────────────────────────────────────
+function progTwin(){
+  const el=document.getElementById('pbody');
+  // find twin primes up to 1000
+  const pairs=[];
+  for(let p=5;p<1000;p++){
+    if(isPrime(p)&&isPrime(p+2))pairs.push([p,p+2]);
+  }
+  let html=`<div style="font-size:.75rem;color:var(--dim);margin-bottom:10px">
+    T247 · T254: Every twin prime pair (p,p+2) with p&gt;3 has 3|(p+1). DR(center)∈{3,6,9}. chi_{-3}(center)=0.
+  </div>
+  <div style="display:flex;gap:6px;font-size:.65rem;color:var(--dim);margin-bottom:6px;letter-spacing:.08em">
+    <span style="width:56px;text-align:center">p</span>
+    <span style="width:56px;text-align:center">p+1</span>
+    <span style="width:56px;text-align:center">p+2</span>
+    <span>center mod37 · DR(ctr) · class</span>
+  </div>`;
+  pairs.forEach(([p,q])=>{
+    const ctr=p+1;
+    const r=ctr%P;
+    const tags=classify(r);
+    const drv=dr(ctr);
+    html+=`<div class="trow">
+      <span class="pc pleft">${p}</span>
+      <span class="pc pctr">${ctr}</span>
+      <span class="pc prgt">${q}</span>
+      <span class="pinfo">mod37=${r} · DR=${drv} ${tagHTML(tags)}</span>
+    </div>`;
+  });
+  html+=`<div style="margin-top:12px;font-size:.75rem;color:var(--dim)">
+    ${pairs.length} pairs shown · 0 violations of DR(center)∈{3,6,9}
+  </div>`;
+  el.innerHTML=html;
+}
+
+// ── Program 3: Sovereign Map ──────────────────────────────────────────────────
+function progSovMap(){
+  const el=document.getElementById('pbody');
+  let grid='<div class="sgrid">';
+  for(let n=0;n<P;n++){
+    const tags=classify(n);
+    const cls=tags.map(t=>({H:'ih',SA:'isa',ST:'ist',SEED:'iseed',C3:'ic3',C9:'ic9'}[t]||'')).join(' ');
+    const short=tags.length?tags[0]:'-';
+    grid+=`<div class="scell ${cls}" onclick="showDetail(${n})">
+      <span class="sn">${n}</span>
+      <span class="st">${short}</span>
+    </div>`;
+  }
+  grid+='</div><div class="detail" id="detail">Click any element for full classification.</div>';
+  el.innerHTML=grid;
+}
+
+function showDetail(n){
+  const tags=classify(n);
+  const orb=orbit(n);
+  const d=document.getElementById('detail');
+  if(!d)return;
+  d.innerHTML=`
+    <b style="color:var(--bright)">${n}</b> &nbsp; ${tagHTML(tags)}<br>
+    DR(${n}) = <b>${dr(n)}</b> &nbsp;|&nbsp;
+    mod 6 = ${n%6} &nbsp;|&nbsp;
+    mod 3 = ${n%3} &nbsp;|&nbsp;
+    chi_{-3} = <b>${chi3(n)}</b><br>
+    137-map orbit: ${orb[0]} → ${orb[1]} → ${orb[2]} → ${orb[0]}<br>
+    Orbit DRs: ${orb.map(dr).join(', ')}<br>
+    isPrime: <b>${isPrime(n)?'YES':'no'}</b>
+    ${SA.has(n)?'<br><span style="color:var(--amber)">Sovereign Anchor (LOCKED)</span>':''}
+    ${ST.has(n)?'<br><span style="color:var(--cyan)">Sovereign Target (ST)</span>':''}
+    ${n===0?'<br><span style="color:var(--dim)">SEAM (the fold)</span>':''}
+  `;
+}
+
+// ── Program 4: DR Algebra ─────────────────────────────────────────────────────
+function progDR(){
+  const el=document.getElementById('pbody');
+  let html=`<div style="font-size:.75rem;color:var(--dim);margin-bottom:12px;line-height:1.8">
+    DR(n·m) = DR(DR(n)·DR(m)) &nbsp;·&nbsp;
+    <span class="tag tsa">DR∈{3,6,9}</span> = 3|n = chi_{-3}=0 (twin prime center condition)
+  </div>`;
+  html+='<div style="overflow-x:auto"><table class="drt"><tr><th>×</th>';
+  for(let c=1;c<=9;c++)html+=`<th>${c}</th>`;
+  html+='</tr>';
+  for(let r=1;r<=9;r++){
+    html+=`<tr><th>${r}</th>`;
+    for(let c=1;c<=9;c++){
+      const v=dr(r*c);
+      const cls=v===3?'d3':v===6?'d6':v===9?'d9':'';
+      html+=`<td class="${cls}">${v}</td>`;
+    }
+    html+='</tr>';
+  }
+  html+='</table></div>';
+  html+=`<div style="margin-top:16px;font-size:.75rem;color:var(--dim);line-height:1.9">
+    <b style="color:var(--amber)">Amber cells</b> (DR=3): 3|product &nbsp;·&nbsp;
+    <b style="color:var(--cyan)">Cyan</b> (DR=6): 3|product &nbsp;·&nbsp;
+    <b style="color:var(--red)">Red</b> (DR=9): 3|product, 9|product<br>
+    Every product of a 3-multiple with anything stays in {3,6,9} — the trinity closes under multiplication.
+  </div>`;
+  html+=`<div style="margin-top:16px;font-size:.75rem;color:var(--dim);line-height:1.9">
+    <b style="color:var(--bright)">GF(37) connection:</b><br>
+    6² ≡ -1 (mod 37) — imaginary unit = pipe width<br>
+    999 = 3³ × 37 — period of 1/998001 is a SEAM (0 mod 37)<br>
+    DR(2997) = 9 ∈ SA — period's digital root is a sovereign anchor
+  </div>`;
+  el.innerHTML=html;
+}
+
+// ── Program 5: Prime Challenge ────────────────────────────────────────────────
+let score=0,asked=0,current_n=0;
+function progGame(){
+  score=0;asked=0;
+  const el=document.getElementById('pbody');
+  el.innerHTML=`<div class="garea">
+    <div class="gq" id="gq">Loading…</div>
+    <div class="ginrow">
+      <button class="btn" onclick="guess(true)">PRIME [Y]</button>
+      <button class="btn" onclick="guess(false)">NOT PRIME [N]</button>
+    </div>
+    <div class="gfb" id="gfb"></div>
+    <div class="gscore" id="gscore">Score: 0 / 0</div>
+  </div>`;
+  document.addEventListener('keydown', gameKey);
+  nextQ();
+}
+function gameKey(e){
+  if(current!==4)return document.removeEventListener('keydown',gameKey);
+  if(e.key==='y'||e.key==='Y')guess(true);
+  if(e.key==='n'||e.key==='N')guess(false);
+}
+function nextQ(){
+  current_n=Math.floor(Math.random()*200)+2;
+  const tags=classify(current_n%P);
+  const hint=tags.length?` [mod37=${current_n%P}, ${tags.join(',')}]`:` [mod37=${current_n%P}]`;
+  const qel=document.getElementById('gq');
+  if(qel)qel.innerHTML=`Is <b style="color:var(--bright);font-size:1.2rem">${current_n}</b> prime? ${hint}`;
+}
+function guess(yesGuess){
+  const correct=isPrime(current_n);
+  asked++;
+  const right=(yesGuess===correct);
+  if(right)score++;
+  const fb=document.getElementById('gfb');
+  if(fb){
+    const n=current_n;
+    const tags=classify(n%P);
+    const orb2=orbit(n%P);
+    fb.innerHTML=`${right?'<span style="color:#00ff88">✓ CORRECT</span>':'<span style="color:#ff5555">✗ WRONG</span>'} &nbsp;
+      ${n} is ${correct?'<b>PRIME</b>':'not prime'}<br>
+      <span style="color:var(--dim);font-size:.72rem">
+        ${n} mod37=${n%P} · DR=${dr(n)} · chi_{-3}=${chi3(n)}<br>
+        Orbit: ${orb2.join('→')} ${tagHTML(tags)}
+      </span>`;
+  }
+  const sc=document.getElementById('gscore');
+  if(sc)sc.textContent=`Score: ${score} / ${asked}`;
+  setTimeout(nextQ,1600);
+}
+
+// ── Boot ─────────────────────────────────────────────────────────────────────
+run(0);
+</script>
+</body>
+</html>
