@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 """
 ================================================================================
-THEOREM 258: Rule 30 Mersenne Records — Sum = 137, Classified by GF(37)
+THEOREM 258: Rule 30 Mersenne Records — Classified by GF(37)
 ================================================================================
 
 RULE 30 SETUP:
-  Single live cell at center of width W = 2T+3 grid, evolved T=1024 steps.
+  Single live cell at center of width W = 2T+3 grid.
   Update rule: cell[i] = left[i] XOR (center[i] OR right[i])
 
 RIGHT EDGE RUN RECORDS:
   Define runR(t) = length of the maximal run of 1s ending at the right
   light-cone boundary (position c+t) at time t.
 
-  Every run-length record occurs at t = 2^k - 1 (Mersenne times):
+  Every run-length record occurs at t = 2^k - 1 (Mersenne times).
+  Verified for T=1024 (k=0..10) and T=4096 (k=0..12).
 
   k  | t=2^k-1 | run length | GF(37) class
   ───┼─────────┼────────────┼─────────────────
@@ -27,18 +28,18 @@ RIGHT EDGE RUN RECORDS:
   8  | 255     | 24         | SEED
   9  | 511     | 25         | SA
   10 | 1023    | 27         | -H (cube root of -1, T257)
+  11 | 2047    | 29         | C9
+  12 | 4095    | 34         | —  (-3 mod 37)
 
 KEY RESULT:
+  All records occur at Mersenne times t = 2^k - 1. Verified k=0..12.
+
+NUMERICAL RESULT (k=0..10, T=1024):
   Σ (run lengths) = 1+3+4+6+7+9+15+16+24+25+27 = 137
-
-  137 mod 37 = 26 = the 137-map multiplier (26n mod 37).
-
-  The sum of Rule 30's right-edge run-length records equals the defining
-  constant of the GF(37) framework.
-
-SECONDARY RESULT:
-  Sum of consecutive length differences = 2+1+2+1+2+6+1+8+1+2 = 26.
-  These are the increments between records.
+  137 mod 37 = 26 = the 137-map multiplier.
+  Sum of consecutive differences = 26.
+  NOTE: sum grows beyond 137 for larger T. At T=4096: sum=200, mod37=15.
+  The 137 result is specific to the first 11 records (k=0..10).
 
 LEFT EDGE:
   Only 2 records in 1024 steps: t=0 (len=1), t=1 (len=3).
