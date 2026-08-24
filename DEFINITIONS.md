@@ -203,6 +203,22 @@ GF(37) fixed-point examples:
 
 ---
 
+## OCB Quantum Process Layer
+
+**Reference**: Oreshkov, Costa, Brukner (2012) — quantum correlations with no causal order.
+
+A process matrix W describes correlations between local quantum operations without assuming a definite causal order. Validity condition: L[W] = W (a fixed-point condition — direct instance of Phys = Fix(C∘E)).
+
+GF(37) connections:
+- Classical causal bound 3/4: numerator 3 ∈ ST, denominator 4 ∈ SA
+- Legendre(2/37) = 36 ∈ NEG_H: 2 is QNR mod 37; √2 has no GF(37) representative
+- Quantum switch amplitude 1/√2 is transcendental to GF(37) → quantum switch ∉ GF(37) fixed-point set, consistent with Phys ⊊ Math
+- Z₂ causal symmetry {1, 36} = ⟨−1⟩ ⊂ ⟨11⟩; 36 ∈ NEG_H
+- Choi dimension for d = ord₃₇(11) = 6: 6² = 36 ∈ NEG_H; 6⁴ mod 37 = 1 ∈ IC
+- Normalization denominator for d=2 qubits: d² = 4 ∈ SA
+
+---
+
 ## Pipeline Reference Output (seed = 246)
 
 Seed mod 37 = 24 ∈ SEED
