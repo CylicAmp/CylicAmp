@@ -133,6 +133,29 @@ Deviation = |T[−1]/T[−2] − τ₄|
 
 ---
 
+## ⟨11⟩ — Order-6 Subgroup
+
+**ord₃₇(11) = 6**
+
+⟨11⟩ = IC ∪ NEG_H = {1, 10, 11, 26, 27, 36} — the unique subgroup of order 6 in GF(37)*.
+
+Power sequence:
+- 11¹ = 11 ∈ NEG_H
+- 11² = 10 ∈ IC
+- 11³ = 36 ∈ NEG_H  (= −1 mod 37)
+- 11⁴ = 26 ∈ IC  (= 137-map multiplier)
+- 11⁵ = 27 ∈ NEG_H
+- 11⁶ = 1 ∈ IC  (identity)
+
+Subgroup structure ⟨11⟩ ≅ ℤ₆:
+- Index-2 subgroup: IC = ⟨11²⟩ = {1,10,26} ≅ ℤ₃  (cube roots of +1)
+- Coset: NEG_H = 11·IC = {11,27,36}  (cube roots of −1)
+- 26 = 11⁴: the 137-map multiplier is the 4th power of 11
+- The 137-map orbit ⟨26⟩ = IC = ⟨11²⟩: the 137-map lives inside ⟨11⟩ as its index-2 subgroup
+- All six elements are QR
+
+---
+
 ## QR/QNR Partition
 
 Quadratic residues mod 37 (18 elements): {1,3,4,7,9,10,11,12,16,21,25,26,27,28,30,33,34,36}
