@@ -43,6 +43,43 @@ Formula: n mod 9, except DR = 9 when 9 divides n.
 
 Examples: DR(18) = 9, DR(24) = 6, DR(37) = 1, DR(100) = 1.
 
+### Digital Root Transition Matrix — Spectral Structure
+
+The map x ↦ x + DR(x) (reduced into {1,...,9}) is encoded by a 9×9 matrix T with transitions:
+
+    1→2,  2→4,  3→6,  4→8,  5→1,  6→3,  7→5,  8→7,  9→9
+
+**Eigenvalues** (all on the unit circle, spectral radius ρ(T) = 1):
+
+    λ = 1           (multiplicity 3)
+    λ = e^{±iπ/3}  = ½ ± i√3/2
+    λ = e^{±i2π/3} = −½ ± i√3/2
+    λ = −1          (multiplicity 2)
+
+**Three λ=1 invariant subspaces (attractors):**
+
+| Subspace | Elements | Structure |
+|----------|----------|-----------|
+| F | {1, 2, 4, 5, 7, 8} | 6-cycle: 1→2→4→8→7→5→1 |
+| O | {3, 6} | 2-cycle: 3↔6 |
+| S | {9} | Fixed point: 9→9 (9-Lock) |
+
+These three subspaces are orthogonal and exhaust the λ=1 generalized eigenspace. Every trajectory eventually enters one and remains there.
+
+**F = {1,2,4,5,7,8} is the repeating digit set of 1/7 = 0.142857...** — the same elements, same residue class.
+
+### Twin Prime Chamber ↔ Spectral Partition
+
+The tripartite spectral partition F / O / S maps exactly onto the twin prime DR structure:
+
+| Spectral class | DR values | Twin prime role |
+|----------------|-----------|-----------------|
+| F = {1,2,4,5,7,8} | 6-cycle attractor | **Wall DRs** — all twin prime walls (p and q) have DR ∈ F |
+| O = {3,6} | 2-cycle | **C3 and C6 center DRs** — centers of C3 (DR=3) and C6 (DR=6) pairs |
+| S = {9} | Fixed point (9-Lock) | **C9 center DR** — centers of C9 pairs hit the permanent 9-Lock |
+
+The DR disjointness theorem (twin prime walls have DR ∉ {3,6,9}; centers have DR ∈ {3,6,9}) is the spectral statement: walls live in F, centers live in O∪S. The chamber classification C3/C6/C9 is the decomposition of the center DR into the O and S attractors.
+
 ---
 
 ## DR Spiral — GF(37) Structure
