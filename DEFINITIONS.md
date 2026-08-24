@@ -113,14 +113,75 @@ Verified: 761 zeros out of n=1..5000 = 15.2%.
 
 ---
 
-## Ramanujan Tau Function
+## Ramanujan Tau Function — η^24 and GF(37)
 
-**τ(n)** = coefficient of qⁿ in the expansion of q · ∏(1−qⁿ)²⁴
+**Definition**:
+
+    Δ(q) = q · η(q)^24 = q · ∏_{n≥1} (1 − q^n)^{24} = Σ_{n≥1} τ(n) q^n
+
+Δ(q) is the unique cusp form of weight 12 for SL₂(ℤ). τ(n) are its Fourier coefficients.
 
 First values: τ(1)=1, τ(2)=−24, τ(3)=252, τ(4)=−1472, τ(5)=4830.
 
-τ(37) mod 37 = 31. 37 is not a tau-zero.
-Verified: 88 zeros mod 37 out of n=1..5000 = 1.76%.
+### Exponent 24 = CASCADE ∩ SEED
+
+The only free parameter in the construction is the exponent 24:
+
+    24 ∈ CASCADE = {8, 13, 24}   (generates all 37 GF elements)
+    24 ∈ SEED    = {18, 24, 32}  (137-map orbit of reference seed 246)
+
+Node 24 is the **unique element in both CASCADE and SEED simultaneously**.
+
+### Weight 12 ∈ ST
+
+    weight(Δ) = 12 ∈ ST = {3, 12, 21, 30}   (DR=3, Sovereign Target)
+
+ST is the unique monochromatic named set: DR(n) = 3 for all n ∈ ST.
+Note: 24 = 2 × weight.
+
+### τ(2) = −24: Coefficient Equals Exponent
+
+    τ(2) = −24
+    |τ(2)| = 24 = the exponent in η(q)^24
+
+The magnitude of the first non-trivial coefficient equals the exponent.
+
+    τ(2) mod 37 = 13 ∈ CASCADE   (same named set as the exponent 24)
+
+### Key τ(n) mod 37 Values
+
+| n | τ(n) mod 37 | Named set |
+|---|-------------|-----------|
+| 1 | 1 | IC (identity) |
+| 2 | 13 | CASCADE |
+| 3 | 30 | SA ∩ ST (double-sovereign) |
+| 4 | 8 | CASCADE |
+| 8 | 9 | SA |
+| 9 | 21 | ST |
+| 10 | 1 | IC |
+| 11 | 36 | NEG_H |
+| 12 | 18 | SEED |
+
+τ(3) mod 37 = 30 ∈ SA∩ST: the double-sovereign (only element in both SA and ST).
+
+### τ(37) — The Prime Index
+
+    τ(37) = −182213314
+    τ(37) mod 37 = 31
+    DR(31) = 4 ∈ SA   (Sovereign Anchor — LOCKED)
+
+### 691 — Ramanujan Congruence Prime
+
+Ramanujan's congruence: τ(n) ≡ σ₁₁(n) (mod 691) for all n.
+
+    691 mod 37 = 25 ∈ SA   (Sovereign Anchor — LOCKED)
+
+The Ramanujan congruence prime reduces to a Sovereign Anchor mod 37.
+
+### Named Set Hit Rate
+
+τ(n) mod 37, n = 1..100: **53 of 100** residues land in a named GF(37) set.
+No τ(n) ≡ 0 (mod 37) for n = 1..100 (no SEAM hits in this range).
 
 ---
 
