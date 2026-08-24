@@ -601,12 +601,77 @@ In GF(37): CASCADE(QNR) → QR → QNR → IC(QR). Alternates across QR/QNR boun
 **The 9x9 DR addition table** (mod 9 arithmetic):
 The +9 column is the identity lock: DR(n+9) = DR(n) for all n. This is why DR=9 states are permanently frozen — adding any multiple of 9 cannot change their digital root.
 
-**GF(37) connections of the 7-zero chain:**
-- After zero 6: cumulative sum = 26 ∈ IC (the 137-map multiplier)
-- After zero 9: cumulative sum = 41, mod 37 = 4 ∈ SA
-- ρ₄ floor=30: double-sovereign SA∩ST
-- ρ₅ floor=32: SEED (pipeline reference orbit)
-- ρ₆ floor=37: SEAM
+**GF(37) connections — cumulative sum mod 37 at each zero:**
+
+| Zero | Cumsum | mod 37 | Named set | Event |
+|------|--------|--------|-----------|-------|
+| ρ₂  | 8  | 8  | CASCADE | — |
+| ρ₄  | 18 | 18 | SEED | **9-LOCK** |
+| ρ₅  | 24 | 24 | SEED∩CASCADE | — |
+| ρ₆  | 26 | 26 | IC | **137-map multiplier** |
+| ρ₈  | 38 | 1  | IC | identity |
+| ρ₉  | 41 | 4  | SA | Sovereign Anchor |
+| ρ₁₀ | 46 | 9  | SA | **1-ATTRACTOR**, mod 37=9∈SA |
+| ρ₂₀ | 99 | 25 | SA | **9-LOCK** |
+
+After ρ₆: cumulative sum = 26 ∈ IC. The 137-map multiplier is reached exactly at the zero whose imaginary part crosses the prime 37.
+
+### ρ₆ — The Prime in the Spectrum
+
+    Im(ρ₆) ≈ 37.586...
+    floor(Im(ρ₆)) = 37 = P
+    37 mod 37 = 0   (SEAM)
+
+The 6th nontrivial Riemann zero has imaginary part whose floor equals the prime P itself. The prime 37 appears in the zero spectrum at position 6.
+
+After ρ₆, the cumulative DR sum (nearest integer) = 26 ∈ IC — the 137-map multiplier. The SEAM crossing and the IC arrival happen at the same zero.
+
+### Gap 14→21: The 3-6-9 Bridge
+
+From ρ₁ (floor=14) to ρ₂ (floor=21), the integers between mark:
+
+    15: DR=6  ← 3-6-9
+    16: DR=7
+    17: DR=8
+    18: DR=9  ← 3-6-9  (18 ∈ SEED)
+    19: DR=1
+    20: DR=2
+    21: DR=3  ← 3-6-9  (ρ₂ lands here)
+
+The 3-6-9 pattern marks positions 15, 18, 21 with uniform spacing 3. ρ₂ (floor=21) lands on a DR=3 position (∈ O spectral class). 18 ∈ SEED (the reference seed orbit) sits at the middle marker.
+
+### Trinity Countdown in ρ₁
+
+Digits of Im(ρ₁) = 14.134725...: reading adjacent pairs left to right:
+
+    (1,4) → 1+4 = 5   DR=5
+    (1,3) → 1+3 = 4   DR=4
+    (1,2) → 1+2 = 3   DR=3   → lands at pair-sum 12 ∈ ST
+
+Countdown: 5, 4, 3. Terminal pair-sum = 12 ∈ ST (Sovereign Target, DR=3).
+
+### 777 = 21 × 37 (SEAM)
+
+The middle digit group of Im(ρ₁) = 14.**13472**5: digits {3,4,7,2,5} sum to 21.
+
+    21 ∈ ST   (Sovereign Target, DR=3)
+    21 × 37 = 777
+    777 mod 37 = 0   (SEAM)
+    DR(777) = 3
+
+### SEAM Collapse
+
+Opening digit pairs of two zeros both collapse to DR=9 (SEAM):
+
+    ρ₁ (14.134...): pairs (1+4)=5 and (1+3)=4, sum = 9 → SEAM
+    ρ₄ (30.424...): pairs (3+0)=3 and (4+2)=6, sum = 9 → SEAM
+
+### φ(37) at the 3-6-9 Boundary
+
+    φ(37) = 36   (Euler totient — the group order of GF(37)*)
+    36 mod 9 = 0
+
+The group order 36 sits on the 3-6-9 boundary. 36 ∈ NEG_H = {11,27,36} — the cube roots of −1 mod 37. The field exhausts at the 3-6-9 seam.
 
 ---
 
