@@ -248,6 +248,64 @@ Radicand 3 ∈ ST (Sovereign Target, DR=3).
 
 ---
 
+## Cyclic Number 142857 — Decimal Structure and GF(37)
+
+### Core: 10 and 26 Are Inverses in GF(37)*
+
+    10 × 26 ≡ 1 (mod 37)
+
+The decimal shift operator (×10) and the 137-map multiplier (×26) are **multiplicative inverses** in GF(37)*. Applying one then the other returns to the starting element.
+
+Both operators generate IC = {1, 10, 26}, but in opposite directions:
+
+    Decimal orbit (×10): 1 → 10 → 26 → 1
+    137-map orbit (×26): 1 → 26 → 10 → 1
+
+IC is a 3-cycle under both. They are inverse maps on the same orbit.
+
+### Period Hierarchy
+
+The repeating decimal period of 1/p equals ord₁₀(p):
+
+    ord₁₀(37) = 3  →  period(1/37) = 3 = |IC|
+    ord₁₀(7)  = 6  →  period(1/7)  = 6 = |⟨11⟩|
+
+The two periods correspond to the two levels of the subgroup chain IC ⊂ ⟨11⟩:
+
+    IC (order 3) → period(1/37) = 3
+    ⟨11⟩ (order 6) → period(1/7) = 6
+    lcm(3, 6) = 6 = ord₃₇(11)
+
+### 142857 — The Cyclic Number
+
+1/7 = 0.142857142857... (period 6, repeating block = 142857)
+
+    999999 = 3³ × 7 × 11 × 13 × 37   (exact factorization)
+    37 | 999999  because ord₃₇(10) = 3  →  10³ ≡ 1  →  37 | 10⁶−1
+    37 | 142857  (since 7 × 142857 = 999999)
+
+    142857 mod 37 = 0   (SEAM)
+
+All six cyclic rotations {142857, 285714, 428571, 571428, 714285, 857142} reduce to 0 mod 37. Every rotation lands on the SEAM.
+
+### Digit Sum Connections
+
+    1/7 cycle {1,4,2,8,5,7}: digit sum = 27 ∈ NEG_H = {11, 27, 36}
+    1/37 repeating block = 027: value = 27 ∈ NEG_H
+
+Both fractions produce 27 ∈ NEG_H. 27 = 11⁵ mod 37 (from the ⟨11⟩ power sequence). DR(27) = 9 → 9-Lock.
+
+### 37 as Centered Hexagonal Number
+
+    37 = 1 + 6 + 12 + 18   (centered hexagonal / star number)
+
+Consistent with 37 ≡ 1 mod 3 (Loeschian structure) and 37 = (−7)² + (−7)(3) + 3².
+
+    T(37) = 37 × 38 / 2 = 703
+    DR(703) = 1 ∈ IC   (identity of the 137-map orbit)
+
+---
+
 ## 18-Step Ladder
 
 n(k) = 18k
