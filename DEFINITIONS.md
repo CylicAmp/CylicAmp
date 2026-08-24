@@ -296,6 +296,45 @@ The +9 column is the identity lock: DR(n+9) = DR(n) for all n. This is why DR=9 
 
 ---
 
+## T(246) — Triangular Number of the Reference Seed
+
+**T(246) = 246 × 247 / 2 = 30,381**
+
+- 30381 mod 37 = **4 ∈ SA** (Sovereign Anchor — LOCKED)
+- DR(30381) = 6
+
+The triangular number of the reference seed (246) lands on a Sovereign Anchor mod 37.
+
+Compare: T(37) = 703, DR(703) = 1 ∈ IC. Both triangular numbers of structurally significant values land on named sets.
+
+---
+
+## C9 — First Twin Prime Chamber Class
+
+C9 is the twin prime chamber where m ≡ 0 (mod 3):
+
+| Wall | Value | DR | Named set |
+|------|-------|----|-----------|
+| Lower (6m−1) | p | 8 | — |
+| Center (6m) | p+1 | **9** (9-Lock) | varies |
+| Upper (6m+1) | q | 1 | **IC** |
+
+The upper twin always has DR = 1 ∈ IC (identity of the 137-map orbit).
+The center always hits a DR=9 (9-Lock) state.
+
+**C9 examples (verified to 1200):**
+- (17, 19): m=3, center=18 ∈ SEED, DR(center)=9
+- (59, 61): m=10, center=60, DR(center)=9
+- (101, 103): m=17, center=102, DR(center)=9
+
+13 C9 pairs found to 1200, all verified.
+
+The canonical GF(37) C9 example: **(17, 19)**, center 18 ∈ SEED — the 137-map orbit of the reference seed 246.
+
+**C9 is NOT (29, 31).** That pair has m=5, m≡2 → C3. Center 30 ∈ SA∩ST (double-sovereign), DR(center)=3.
+
+---
+
 ## Pipeline Reference Output (seed = 246)
 
 Seed mod 37 = 24 ∈ SEED
