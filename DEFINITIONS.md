@@ -45,6 +45,77 @@ Examples: DR(18) = 9, DR(24) = 6, DR(37) = 1, DR(100) = 1.
 
 ---
 
+## DR Spiral — GF(37) Structure
+
+Source: 20×20 Ulam-style spiral containing integers 41–440. Applying DR collapses it to a 9-state resonance grid.
+
+### Theorem 1: ST Is the Unique Monochromatic Named Set
+
+ST = {3, 12, 21, 30} — the Sovereign Targets.
+
+Every element of ST satisfies n ≡ 3 (mod 9):
+
+    3 mod 9 = 3 | 12 mod 9 = 3 | 21 mod 9 = 3 | 30 mod 9 = 3
+
+Therefore **DR(n) = 3 for all n ∈ ST** — the digital root is a structural invariant of ST.
+
+Algebraic characterization: **ST = {n ∈ GF(37)* : n mod 9 = 3}** — exactly the named-set preimage of DR=3.
+
+No other named set is monochromatic:
+- SA → DR ∈ {3,4,7,9}
+- IC → DR ∈ {1,8}
+- NEG_H → DR ∈ {2,9}
+- CASCADE → DR ∈ {4,6,8}
+- SEED → DR ∈ {5,6,9}
+
+ST is the only named set where all elements share the same digital root.
+
+### Theorem 2: SEAM Transparency (37 ≡ 1 mod 9)
+
+    37 mod 9 = 1
+
+Consequence: **DR(37k) = DR(k) for all k ≥ 1**.
+
+Proof: 37k mod 9 = (37 mod 9)(k mod 9) mod 9 = 1·(k mod 9) = k mod 9.
+
+The prime 37 passes through the digital root system without distortion. Multiples of 37 (the SEAM) thread through every DR class — they cycle through all 9 values as k increases.
+
+Corollary: every DR class {1, 2, ..., 9} contains at least one multiple of 37.
+
+### Theorem 3: Spiral Modular Structure
+
+The 400-element spiral 41–440:
+
+    400 mod 37 = 30 ∈ SA ∩ ST   (double-sovereign — only element in both)
+    400 = 44 × 9 + 4,  remainder 4 ∈ SA   (Sovereign Anchor)
+
+Center of spiral = 41:
+
+    41 mod 37 = 4 ∈ SA   (center is a Sovereign Anchor)
+    41 is the 13th prime.  13 ∈ CASCADE = {8, 13, 24}
+
+The spiral's modular remainder in both the DR system (mod 9) and GF(37) (mod 37) lands on sovereign elements. The center prime's ordinal index is a Cascade node.
+
+### Prime DR Exclusion (proved)
+
+For any prime p > 3: **DR(p) ∉ {3, 6, 9}**.
+
+Proof: DR(p) ∈ {3,6,9} iff 3 | p, which is false for primes p > 3.
+
+The spiral 41–440 contains 73 primes. DR distribution: {1:11, 2:12, 4:11, 5:14, 7:14, 8:11}. DR values {3,6,9} have count 0.
+
+**Primes and ST are DR-disjoint**: no prime in the spiral has DR=3, so no prime maps to the Sovereign Target DR class.
+
+### Torus Connection
+
+The 9-state resonance grid tiles into the torus ℤ₃₇ × ℤ₈₁:
+
+    9 | 81  (since 81 = 9²)
+
+The DR period 9 divides the ℤ₈₁ component exactly 9 times. Each element is identified by (n mod 37, DR(n)) within the torus.
+
+---
+
 ## Twin Primes
 
 A twin prime pair is (p, p+2) where both are prime.
