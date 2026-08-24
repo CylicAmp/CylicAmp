@@ -202,6 +202,52 @@ Because 37 ≡ 1 mod 3: all 37 residues of GF(37) appear as Loeschian norms.
 
 ---
 
+## Mathematical Constants — GF(37) Decimal Structure
+
+**Method**: take the first 10 digits after the decimal point of a constant, sum them, reduce mod 37.
+
+### Headline: √3 Sum = 37
+
+    √3 = 1.7320508075...
+    First 10 decimal digits: 7, 3, 2, 0, 5, 0, 8, 0, 7, 5
+    Sum = 37 = the prime
+
+    Sum mod 37 = 0   (SEAM — on the exact seam of the field)
+    DR(37) = 1 ∈ IC  (identity of the 137-map orbit)
+
+√3 is the only standard constant whose first-10 digit sum equals 37 exactly.
+
+**Why √3 and 37**: 37 is a Loeschian prime — it splits in ℤ[ω]:
+
+    37 = (−7)² + (−7)(3) + 3²   where ω = e^{2πi/3}
+
+√3 = 2 · Im(ω) generates ℤ[ω] over ℤ. The prime 37 carries an imprint of
+√3 in its decimal expansion: the first 10 digits sum to the prime itself.
+
+Radicand 3 ∈ ST (Sovereign Target, DR=3).
+
+### Summary Table
+
+| Constant | First-10 Sum | Sum mod 37 | Named set | DR |
+|----------|-------------|------------|-----------|-----|
+| π        | 41          | 4          | **SA**    | 5  |
+| e        | 49          | 12         | **ST**    | 4  |
+| φ        | 53          | 16         | —         | 8  |
+| √2       | 31          | 31         | —         | 4  |
+| **√3**   | **37**      | **0 (SEAM)** | PRIME   | 1  |
+| ln 2     | 44          | 7          | —         | 8  |
+| γ        | 52          | 15         | —         | 7  |
+| G (Catalan) | 54       | 17         | —         | **9 (9-Lock)** |
+| ζ(3)     | 28          | 28         | —         | 1  |
+
+- π → SA (Sovereign Anchor, LOCKED)
+- e → ST (Sovereign Target, DR=3)
+- √3 → SEAM (mod 37 = 0); DR = 1 ∈ IC
+- Catalan → DR = 9 (permanent 9-Lock)
+- ζ(3) → DR = 1 ∈ IC (same DR as √3)
+
+---
+
 ## 18-Step Ladder
 
 n(k) = 18k
