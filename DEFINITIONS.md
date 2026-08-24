@@ -54,6 +54,35 @@ Every twin prime pair with p > 3 has the form:
 - q = 6m + 1
 - **m = (p+1)/6** (this is what m means — always)
 
+### Tripartite χ_{-3} Structure (exact theorem)
+
+Every twin prime pair straddles the χ_{-3} = 0 seam:
+
+    χ_{-3}(p) = −1  |  χ_{-3}(p+1) = 0  |  χ_{-3}(p+2) = +1
+
+The left wall is always in the χ_{-3} = −1 class. This is an exact modular theorem, not a statistical claim: p = 6m−1 ≡ 2 (mod 3), so χ_{-3}(p) = −1 with no exceptions.
+
+### Center Classification: C3 / C6 / C9
+
+The center of every twin prime pair is 6m. DR(6m) is determined by m mod 3:
+
+| m mod 3 | Center class | DR(p) | DR(q) | Upper DR → Named set |
+|---------|-------------|-------|-------|----------------------|
+| 0 | **C9** | 8 | 1 | IC |
+| 1 | **C6** | 5 | 7 | QR |
+| 2 | **C3** | 2 | 4 | SA |
+
+The center class completely determines the DR values of both twin primes.
+
+**DR disjointness**: twin prime walls always have DR ∉ {3,6,9}; centers always have DR ∈ {3,6,9}. Center and walls are DR-disjoint (proved).
+
+GF(37) examples:
+- (17,19): m=3, m≡0 → **C9**, center 18 ∈ SEED, DR(center)=9 (9-Lock)
+- (11,13): m=2, m≡2 → **C3**, center 12 ∈ ST, DR(center)=3
+- (29,31): m=5, m≡2 → **C3**, center 30 ∈ SA∩ST (double-sovereign)
+
+### DR QR/QNR Split (proved)
+
 The DR pair (DR(p), DR(q)) is determined entirely by m mod 3:
 
 | m mod 3 | DR(p) | DR(q) | Count to 10⁶ |
@@ -62,8 +91,10 @@ The DR pair (DR(p), DR(q)) is determined entirely by m mod 3:
 | 1 | 5 | 7 | 2,788 |
 | 2 | 2 | 4 | 2,651 |
 
+DR(p) ∈ {2,5,8}: all QNR mod 37. DR(q) ∈ {1,4,7}: all QR mod 37.
+
 Total twin prime pairs to 10⁶: 8,169 (including special pair (3,5)).
-This is a proven congruence identity, not an estimate.
+These are proven congruence identities, not estimates.
 
 ---
 
