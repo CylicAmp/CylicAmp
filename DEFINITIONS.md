@@ -335,6 +335,60 @@ The canonical GF(37) C9 example: **(17, 19)**, center 18 ∈ SEED — the 137-ma
 
 ---
 
+## Primes to 137 — Cumulative Sum Structure
+
+The 33 primes from 2 through 137 (inclusive):
+
+    Σ(all 33) = 1988
+    Σ(first 32, excluding 137) = 1851
+
+**Central fact**: 137 mod 37 = **26 ∈ IC** — the prime that names the map equals the map's own multiplier mod P. The 137-map f(n) = 137n mod 37 = 26n mod 37: the prime 137 IS 26 in GF(37).
+
+**33 = 3 × 11**, where 3 ∈ ST and 11 ∈ NEG_H (the ⟨11⟩ generator). The count of primes in this set factors through two named-set elements.
+
+### GF(37) Final Step — Addition in ⟨11⟩
+
+    1851 mod 37 = 1 ∈ IC   (IC identity — sum of first 32 primes)
+    1988 mod 37 = 27 ∈ NEG_H
+
+Adding the 33rd prime (137 ≡ 26 mod 37) to the 32-prime running total (≡ 1 mod 37):
+
+    1 + 26 = 27  (in GF(37))
+
+All three values 1, 26, 27 lie inside ⟨11⟩ = IC ∪ NEG_H:
+- 1 = 11⁶ ∈ IC (identity)
+- 26 = 11⁴ ∈ IC (137-map multiplier)
+- 27 = 11⁵ ∈ NEG_H
+
+### Digit Sum Path of 1988: IC → IC → SEED → IC
+
+Digits of 1988 = {1, 9, 8, 8}. Running cumulative digit sum:
+
+    1 → 10 → 18 → 26
+    IC   IC   SEED  IC
+
+Terminal value 26 ∈ IC — the 137-map multiplier. The digit sum path of the total visits SEED (the reference seed orbit) and ends at the 137-map multiplier.
+
+### Node 24 Connection
+
+    24 (CASCADE∩SEED node) + 26 (137-map multiplier) = 50
+    50 mod 37 = 13 ∈ CASCADE
+
+### Cumulative Sum Milestones (mod 37)
+
+| Index | Prime | Cumsum | mod 37 | Named set |
+|-------|-------|--------|--------|-----------|
+| 9  | 23 | 100 = 10² | **26 ∈ IC** | Square sum milestone = 137-map multiplier |
+| 24 | 89 | 963   | **1 ∈ IC**  | At CASCADE∩SEED index → IC identity |
+| 25 | 97 | 1060  | **24 ∈ SEED∩CASCADE** | Sum finds the node whose index just passed |
+| 29 | 109 | 1480 | **0 (SEAM)** | Cumulative sum crosses the SEAM |
+| 32 | 131 | 1851 | **1 ∈ IC**  | Penultimate: IC identity restored |
+| 33 | 137 | 1988 | **27 ∈ NEG_H** | Final step into ⟨11⟩ coset |
+
+The index-24/25 pair: at prime index 24 (= the CASCADE∩SEED node), cumsum ≡ 1 ∈ IC. At index 25, cumsum ≡ 24 ∈ SEED∩CASCADE — the sum finds the node whose index it just passed.
+
+---
+
 ## Pipeline Reference Output (seed = 246)
 
 Seed mod 37 = 24 ∈ SEED
