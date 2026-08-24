@@ -133,6 +133,53 @@ Deviation = |T[−1]/T[−2] − τ₄|
 
 ---
 
+## QR/QNR Partition
+
+Quadratic residues mod 37 (18 elements): {1,3,4,7,9,10,11,12,16,21,25,26,27,28,30,33,34,36}
+Quadratic non-residues mod 37 (18 elements): {2,5,6,8,13,14,15,17,18,19,20,22,23,24,29,31,32,35}
+
+Every named GF(37) set is QR-homogeneous (no mixed sets):
+- ALL QR: IC, SA, ST, NEG_H
+- ALL QNR: SEED, CASCADE
+
+The 137-map preserves QR/QNR character. Proof: Legendre(26/37) = 1 (26 is QR, since 10² ≡ 26 mod 37), so (26x/37) = (26/37)(x/37) = (x/37). Zero boundary crossings verified.
+
+---
+
+## Fixed-Point Formulation
+
+**Phys = Fix(C∘E)**
+
+Let M = admissible mathematical structures, I_e = empirically established invariants.
+
+Selection operator: S_{I_e}(O) = O if O satisfies I_e, else ∅.
+Physical structures: Phys = Fix(S_{I_e}) = {O ∈ M : S_{I_e}(O) = O}.
+
+Bidirectional closure:
+- E: M → I (observation/measurement map)
+- C: I → M (constraint-selection map)
+- T = C∘E: M → M
+
+Central condition: **C(E(X)) ≅ X** (isomorphism, not literal equality).
+
+Corrected residue condition: Φ_f(R_f(O)) ≅ Φ_e(R_e(O)), where Φ_f, Φ_e map into a common invariant space.
+
+In this framework: Φ = DR (digital root). The common invariant space is {1,...,9}.
+
+Key consequence:
+- Phys ⊆ Math does NOT imply Phys = Math.
+- Phys = Math ⟺ ∀X ∈ M, C(E(X)) ≅ X (every structure is a fixed point).
+- In GF(37): 18 of 36 nonzero elements are named fixed points. Phys ⊊ Math.
+
+GF(37) fixed-point examples:
+- c = 299792458: E(c) = 32 → SEED
+- π[:3] = 314: E(314) = 18 → SEED
+- 691 (Ramanujan congruence prime): E(691) = 25 → SA
+- Selberg level 4: E(4) = 4 → SA
+- τ(37) mod 37 = 31: DR(31) = 4 → SA
+
+---
+
 ## Pipeline Reference Output (seed = 246)
 
 Seed mod 37 = 24 ∈ SEED
