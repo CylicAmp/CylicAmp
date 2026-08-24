@@ -219,6 +219,52 @@ GF(37) connections:
 
 ---
 
+## Riemann Zero DR Chain
+
+The imaginary parts of the nontrivial Riemann zeros, rounded to nearest integer, produce digital roots. These DRs are absorbed into a running cumulative sum. The chain has two behaviors:
+
+**1-Attractor**: when the cumulative DR sum hits DR=1, the chain resolves.
+**9-Lock**: when the cumulative DR sum hits DR=9 (multiple of 9), the feedback loop freezes permanently (DR(9n)=9 for all n — proved).
+
+**DR table (nearest integer method):**
+
+| Zero | Im | Nearest int | DR |
+|------|----|-------------|----|
+| ρ₁  | 14.135 | 14 | 5 |
+| ρ₂  | 21.022 | 21 | 3 |
+| ρ₃  | 25.011 | 25 | 7 |
+| ρ₄  | 30.425 | 30 | 3 |
+| ρ₅  | 32.935 | 33 | 6 |
+| ρ₆  | 37.586 | 38 | 2 |
+| ρ₇  | 40.919 | 41 | 5 |
+| ρ₈  | 43.327 | 43 | 7 |
+| ρ₉  | 48.005 | 48 | 3 |
+| ρ₁₀ | 49.774 | 50 | 5 |
+
+**Cumulative DR sum — trap-points to ρ₂₀:**
+- ρ₄: sum=18, DR=**9** → 9-LOCK
+- ρ₁₀: sum=46, DR=**1** → 1-ATTRACTOR
+- ρ₁₁: sum=54, DR=**9** → 9-LOCK
+- ρ₁₇: sum=81, DR=**9** → 9-LOCK
+- ρ₁₈: sum=90, DR=**9** → 9-LOCK
+- ρ₂₀: sum=99, DR=**9** → 9-LOCK
+
+**7-zero feedback chain (unreduced=26, reduced=8):**
+Path: 8 → 7 → 5 → 1 (terminates at 1-Attractor in 3 steps).
+In GF(37): CASCADE(QNR) → QR → QNR → IC(QR). Alternates across QR/QNR boundary, terminates in IC.
+
+**The 9x9 DR addition table** (mod 9 arithmetic):
+The +9 column is the identity lock: DR(n+9) = DR(n) for all n. This is why DR=9 states are permanently frozen — adding any multiple of 9 cannot change their digital root.
+
+**GF(37) connections of the 7-zero chain:**
+- After zero 6: cumulative sum = 26 ∈ IC (the 137-map multiplier)
+- After zero 9: cumulative sum = 41, mod 37 = 4 ∈ SA
+- ρ₄ floor=30: double-sovereign SA∩ST
+- ρ₅ floor=32: SEED (pipeline reference orbit)
+- ρ₆ floor=37: SEAM
+
+---
+
 ## Pipeline Reference Output (seed = 246)
 
 Seed mod 37 = 24 ∈ SEED
