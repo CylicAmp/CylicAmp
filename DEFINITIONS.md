@@ -768,6 +768,59 @@ The index-24/25 pair: at prime index 24 (= the CASCADE∩SEED node), cumsum ≡ 
 
 ---
 
+## Monte Carlo — Prime Stream Distribution
+
+**File:** `math/theorems/monte_carlo_prime_streams.py`
+
+### Phase 1: Sieve Census (primes ≤ 10,000,000)
+
+664,577 primes in the F-class. Distribution across the 6 prime streams:
+
+| Stream | Count | % | GF(37) hit rate |
+|--------|-------|---|-----------------|
+| DR=1 | 110,772 | 16.67% | 66.6% |
+| DR=2 | 110,835 | 16.68% | 66.6% |
+| DR=4 | 110,743 | 16.66% | 66.7% |
+| DR=5 | 110,760 | 16.67% | 66.6% |
+| DR=7 | 110,679 | 16.65% | 66.7% |
+| DR=8 | 110,788 | 16.67% | 66.7% |
+
+- **Chi-squared = 0.12** (critical value at p=0.05: 11.07) → streams are statistically uniform
+- **Mirror pairs balanced to 4 decimal places**: 1↔8 ratio=0.9999, 2↔7 ratio=1.0014, 4↔5 ratio=0.9998
+- **GF(37) named-set hit rate: 66.7% uniform across all streams** — the named sets tile the F-class evenly
+
+### Chebyshev Bias
+
+    QNR streams {2,5,8}: 332,383
+    QR  streams {1,4,7}: 332,194
+    Bias toward QNR: +189
+
+The QNR class (lower twin prime DRs) leads the QR class by +189 out of 664,577 primes. Tiny (0.028%) but in the direction predicted by the χ₋₃ structure: lower twins favor the QNR column, consistent with Chebyshev's bias and GRH predictions.
+
+### Phase 2: Monte Carlo Large Prime Sampling
+
+Random primes sampled via Miller-Rabin across three ranges (n=600 per range):
+
+| Range | Chi² | QNR bias |
+|-------|------|----------|
+| 10¹² | 2.860 | +6 |
+| 10¹⁵ | 8.320 | −16 |
+| 10¹⁸ | 6.220 | 0 |
+
+All chi-squared values below the critical threshold of 11.07 — uniform distribution holds at 10¹², 10¹⁵, and 10¹⁸. QNR bias fluctuates at small sample size (n=600), consistent with noise rather than systematic signal at these scales.
+
+### Phase 3: Group Law Verification
+
+    DR(p × q) = DR(DR(p) × DR(q))  for all prime pairs
+
+9,810 tests. **0 violations.** The F-class = (Z/9Z)* group homomorphism holds exactly. The cross-currents (2×5=1, 4×7=1, 8×8=1) are exact group-law collisions, not approximations.
+
+### Structural Summary
+
+The 6 prime streams are asymptotically uniform (Dirichlet's theorem confirmed computationally). The Chebyshev QNR bias is real and in the predicted direction. The GF(37) named-set coverage is uniform across all streams — the framework's named sets tile the F-class without favoring any stream. The group law is exact.
+
+---
+
 ## Pipeline Reference Output (seed = 246)
 
 Seed mod 37 = 24 ∈ SEED
