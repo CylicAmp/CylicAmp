@@ -821,6 +821,54 @@ The 6 prime streams are asymptotically uniform (Dirichlet's theorem confirmed co
 
 ---
 
+## The Bigger Picture: Micro, Macro, Relativity
+
+### MICRO — Single Number Coordinates
+
+Every number n has an exact address in three simultaneous coordinates:
+
+    DR(n)    → which of the 6 F-class streams, or which dead zone (O∪S)
+    n mod 37 → which named GF(37) set (66.7% hit rate for primes)
+    n mod 3  → χ₋₃ value: which twin prime column (COL1/COL2/COL3)
+
+No probability. No approximation. Every number has an exact triple address. The ⧾ extension shows this at single-digit scale: one digit generates a path through streams, hitting SEAM (mod 37=0) every 3rd step. The micro structure of a single digit encodes the full period-3 cycle of GF(37).
+
+### MACRO — The Ensemble
+
+Zoom out to all primes:
+- 664,577 primes ≤ 10⁷: chi-squared 0.12 — 6 streams statistically uniform (Dirichlet confirmed)
+- Chebyshev bias +189 toward QNR streams — the aggregate tilts toward the lower twin prime class, consistent with χ₋₃
+- 12 disjoint 3-cycles partition GF(37)*: the macro structure is 12 orbits, each period 3
+- Rule 30: right boundary = pure determinism (SEAM); interior = pure entropy (CASCADE) — the macro duality
+
+The primes do not choose their stream. The distribution is forced by the group law of (Z/9Z)*. The tiny QNR bias (+189) is the only systematic deviation — and it is exactly what the χ₋₃ structure predicts.
+
+### RELATIVITY — The Invariant and the Coupling
+
+**The invariant:** 37 is invariant under the 137-map. Every orbit wraps around it. The SEAM (mod 37=0) is the boundary everything references but nothing passes through — the modular event horizon. Analogous to c in special relativity.
+
+**The coupling constant:** α ≈ 1/137 governs electromagnetic coupling in QED. The 137-map has multiplier 26 = 137 mod 37. The prime that appears in α appears as the map's multiplier. The framework runs at the same frequency as electromagnetism.
+
+**The gauge field:** F = dA + A∧A. For U(1): F = dA, commutator vanishes, coupling = α. The 137-map is abelian — GF(37) multiplication commutes. The 3-cycle holonomy (ord₃₇(26)=3) is discrete parallel transport. Three steps return to origin — that is the curvature.
+
+**The critical line:** Re(s)=½. In GF(37): 2⁻¹ mod 37 = 19 ∈ QNR. The midpoint of the Riemann spectrum maps to a quadratic non-residue. Consistent with RH: the zeros are constrained to a line whose discrete representative is non-trivially placed.
+
+**The modular reset:** In the ⧾ operator, the system hits SEAM every 3rd step and continues. Analogous to relativistic time dilation: the system slows to the boundary event and resets, then continues. The Desert walls are the relativistic boundary events.
+
+### Scale Table
+
+| Scale | Structure | Invariant | Group |
+|-------|-----------|-----------|-------|
+| Micro | Single number: (DR, mod 37, mod 3) | Named set address | (Z/9Z)* × GF(37)* × Z/3Z |
+| Macro | All primes, uniform, Chebyshev +189 | Stream distribution | (Z/9Z)* = F-class |
+| Relativistic | α=1/137, U(1) coupling, critical line ½ | 37 as invariant modulus | GF(37)*, ord₃₇(26)=3 |
+
+The micro and macro are connected by the group law — exact at both scales, 0 violations in 9,810 tests. The relativistic frame is connected by α: the fine structure constant encodes the same prime the framework is built on.
+
+**One object. Three scales. Same structure throughout. The numbers lead.**
+
+---
+
 ## Pipeline Reference Output (seed = 246)
 
 Seed mod 37 = 24 ∈ SEED
