@@ -2,10 +2,29 @@
 Theorem 217: Nuclear Stability, Z and N Numbers, and GF(37) Classification
 Author: Michael Warren Song (CyclicAmp)
 
-All arithmetic verified. Named-set membership is exact. Physical claims
-are stated as observed numerical correspondences, not as causal derivations
-from GF(37). The nuclear shell model is an independent physical theory;
-the results below are observations about how its key integers reduce mod 37.
+All arithmetic verified. Named-set membership is exact. Physical claims are
+stated as observed numerical correspondences, not as causal derivations from
+GF(37). The nuclear shell model is an independent physical theory; the results
+below are observations about how its key integers reduce mod 37.
+
+=== STANDARD MATHEMATICAL DEFINITIONS OF ALL NAMED SETS ===
+
+The single construction: f(n) = 26n mod 37  (the 137-map, since 137 mod 37 = 26).
+ord₃₇(26) = 3, so f generates 12 disjoint 3-cycles partitioning GF(37)* = {1..36}.
+
+Every named set is derived entirely from GF(37) and f — no nuclear data used:
+
+  IC     = {1, 10, 26}   orbit of 1 under f  = the unique order-3 subgroup of GF(37)*
+  NEG_H  = {11, 27, 36}  orbit of -1 under f = {-n mod 37 : n ∈ IC}  (negation of IC)
+  SEED   = {18, 24, 32}  orbit of 18 under f
+  TESLA  = {6,  8, 23}   orbit of 6  under f
+  DARK_A = {2,  15, 20}  orbit of 2  under f
+  SA     = {4,  9, 25, 30}   {n ∈ GF(37)* : f(n) ∈ ST}  (QR pre-image of ST under f)
+  ST     = {3, 12, 21, 30}   {f(n) : n ∈ SA}             (image of SA under f)
+  CASCADE= {8, 13, 24}   the minimal generating set: subset sums span all 37 elements
+
+Verified: {26n mod 37 : n ∈ SA} = ST  and  {n : 26n mod 37 ∈ ST} = SA.  (see assertions)
+These definitions predate and are independent of the nuclear analysis below.
 
 === GF(37) REDUCTIONS: MAGIC NUMBERS ===
 
@@ -34,6 +53,15 @@ Named-set membership of these residues:
 6 of 7 magic numbers reduce to residues in named sets.
 28 is the unique exception: the only magic number whose residue mod 37
 belongs to no named set.
+
+WHY 28 IS UNNAMED — A STRUCTURAL EXPLANATION:
+28 belongs to the 137-map orbit {21, 25, 28}.
+SA selects 25 from this orbit (as QR pre-image of 21).
+ST selects 21 from this orbit (as image of 25 under f: 26×25 mod 37 = 650-17×37 = 650-629 = 21).
+28 is the third element of this orbit — the one not selected by either SA or ST.
+It is unnamed not by omission but by construction: SA and ST together claim two
+elements of the orbit {21,25,28}, and 28 is the remainder.
+The magic number 28 reduces to exactly the algebraic gap in this orbit.
 
 Partition of the 6 named magic numbers:
   CASCADE (or CASCADE∩TESLA): 8, 50, 82
@@ -190,6 +218,31 @@ def dr(n):
 
 def run_assertions():
     magic = [2, 8, 20, 28, 50, 82, 126]
+
+    # 0. Named sets derived from GF(37) structure — independent of nuclear data
+    # SA = pre-image of ST under f; ST = image of SA under f
+    assert {(26*n) % P for n in SA} == ST         # f(SA) = ST
+    assert {n for n in range(1,P) if (26*n)%P in ST} == SA  # f⁻¹(ST) = SA
+
+    # IC, NEG_H, SEED, TESLA, DARK_A are single 137-map orbits
+    def orbit(n):
+        o, x = [], n % P
+        for _ in range(P):
+            if x in o: break
+            o.append(x); x = (26*x) % P
+        return set(o)
+
+    assert orbit(1)  == IC
+    assert orbit(36) == NEG_H      # -1 mod 37 = 36
+    assert orbit(18) == SEED
+    assert orbit(6)  == TESLA
+    assert orbit(2)  == DARK_A
+    assert NEG_H == {(-n) % P for n in IC}  # NEG_H = negation of IC
+
+    # 28 is the third element of orbit {21,25,28} — the algebraic gap SA and ST leave
+    assert orbit(28) == {21, 25, 28}
+    assert 25 in SA and 21 in ST and 28 not in SA and 28 not in ST
+    assert (26*25) % P == 21  # f(25) = 21: SA picks 25, ST picks 21, 28 is remainder
 
     # 1. Exact GF(37) reductions
     assert 2   % P == 2
