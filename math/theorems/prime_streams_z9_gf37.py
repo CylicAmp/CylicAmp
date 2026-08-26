@@ -34,12 +34,14 @@ TWO DISTINCT STREAM STRUCTURES [P]
 ================================================================================
 
 HARMONIC MIRRORS (additive complements, sum=9):
-  Stream 1 ↔ Stream 8  (1+8=9)  QR ↔ QNR  upper twin ↔ lower twin (m≡0)
-  Stream 2 ↔ Stream 7  (2+7=9)  QNR ↔ QR  lower twin ↔ upper twin (m≡1)
-  Stream 4 ↔ Stream 5  (4+5=9)  QR ↔ QNR  upper twin ↔ lower twin (m≡2)
+  Stream 1 ↔ Stream 8  (1+8=9)  QR ↔ QNR  upper twin(m≡0) ↔ lower twin(m≡0)
+  Stream 2 ↔ Stream 7  (2+7=9)  QNR ↔ QR  lower twin(m≡2) ↔ upper twin(m≡1)
+  Stream 4 ↔ Stream 5  (4+5=9)  QR ↔ QNR  upper twin(m≡2) ↔ lower twin(m≡1)
 
-  Every mirror pair is (lower twin DR, upper twin DR) — the twin prime
-  QR/QNR split expressed as additive complements to 9.
+  Each mirror pair contains one QNR DR (lower twin class) and one QR DR
+  (upper twin class) — the twin prime QR/QNR split expressed as additive
+  complements to 9. Pair (1,8) is within one m-class (m≡0). Pairs (2,7)
+  and (4,5) each cross m-classes: one element from m≡2, one from m≡1.
 
 MAGNETIC CROSS-CURRENTS (multiplicative inverses mod 9):
   2 × 5 = 10 ≡ 1 mod 9  →  Stream 1  (2 and 5 are inverses)
