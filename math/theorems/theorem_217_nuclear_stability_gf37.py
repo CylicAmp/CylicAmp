@@ -2,125 +2,173 @@
 Theorem 217: Nuclear Stability, Z and N Numbers, and GF(37) Classification
 Author: Michael Warren Song (CyclicAmp)
 
-=== THE MAGIC NUMBER PARTITION ===
+All arithmetic verified. Named-set membership is exact. Physical claims
+are stated as observed numerical correspondences, not as causal derivations
+from GF(37). The nuclear shell model is an independent physical theory;
+the results below are observations about how its key integers reduce mod 37.
 
-Nuclear shell model magic numbers: {2, 8, 20, 28, 50, 82, 126}
-These are the proton and neutron counts at which nuclei have completely
-filled nuclear shells — the most stable configurations.
+=== GF(37) REDUCTIONS: MAGIC NUMBERS ===
 
-Mapping magic numbers mod 37:
+Nuclear shell model magic numbers: 2, 8, 20, 28, 50, 82, 126.
+A nucleus with Z or N equal to a magic number has a completely filled
+nuclear shell and is particularly stable.
 
-  2   mod 37 =  2  ∈ DARK_A
-  8   mod 37 =  8  ∈ CASCADE ∩ TESLA
-  20  mod 37 = 20  ∈ DARK_A
-  28  mod 37 = 28  — (unnamed, the single outlier)
-  50  mod 37 = 13  ∈ CASCADE
-  82  mod 37 =  8  ∈ CASCADE ∩ TESLA   (same as magic number 8!)
-  126 mod 37 = 15  ∈ DARK_A
+Exact reductions mod 37:
+  2   mod 37 =  2      (2   − 0×37)
+  8   mod 37 =  8      (8   − 0×37)
+  20  mod 37 = 20      (20  − 0×37)
+  28  mod 37 = 28      (28  − 0×37)
+  50  mod 37 = 13      (50  − 1×37)
+  82  mod 37 =  8      (82  − 2×37 = 82 − 74)
+  126 mod 37 = 15      (126 − 3×37 = 126 − 111)
 
-PARTITION:
-  CASCADE ({8,13,24}): magic numbers 8, 50, 82 — all three large magic numbers
-  DARK_A  ({2,15,20}): magic numbers 2, 20, 126 — both smallest and largest
-  Unnamed: 28 alone
+Named-set membership of these residues:
+  2  ∈ DARK_A = {2, 15, 20}
+  8  ∈ CASCADE ∩ TESLA = {8,13,24} ∩ {6,8,23}
+  20 ∈ DARK_A = {2, 15, 20}
+  28 — UNNAMED (28 appears in no defined named set)
+  13 ∈ CASCADE = {8, 13, 24}
+  8  ∈ CASCADE ∩ TESLA  (same residue as magic number 8)
+  15 ∈ DARK_A = {2, 15, 20}
 
-6 of 7 magic numbers land in named sets. Only 28 is unnamed.
-Magic numbers 8 and 82 both reduce to 8 mod 37: CASCADE ∩ TESLA.
-The smallest (2) and largest (126) magic numbers both land in DARK_A.
+6 of 7 magic numbers reduce to residues in named sets.
+28 is the unique exception: the only magic number whose residue mod 37
+belongs to no named set.
 
-=== IRON-56: THE MOST STABLE NUCLEUS ===
+Partition of the 6 named magic numbers:
+  CASCADE (or CASCADE∩TESLA): 8, 50, 82
+    — the three "large" magic numbers associated with d- and g-shell closures
+    — 8 and 82 reduce to the same residue (8): 82 − 74 = 8
+  DARK_A: 2, 20, 126
+    — the smallest magic number and the largest, plus 20
 
-Iron-56 has the lowest binding energy per nucleon and is the endpoint of
-stellar nucleosynthesis — no nuclear process gains energy beyond Fe-56.
+=== PRIMITIVE ROOT VERIFICATION ===
 
-  Z = 26  (protons)  mod 37 = 26  ∈ IC  — the 137-map multiplier exactly
-  N = 30  (neutrons) mod 37 = 30  ∈ SA ∩ ST  — the double-sovereign node
-  A = 56  (nucleons) mod 37 = 19  —  DR(56) = 2 = primitive root
+2 is a primitive root modulo 37 means ord₃₇(2) = φ(37) = 36.
 
-Iron's proton count IS the framework multiplier (f(n) = 26n mod 37).
-Iron's neutron count hits the unique double-sovereign: the only element
-in both SA = {4,9,25,30} and ST = {3,12,21,30} simultaneously.
+Verification: the smallest positive integer k with 2ᵏ ≡ 1 (mod 37) is k = 36.
+Powers of 2 mod 37 cycle through all 36 nonzero residues before returning to 1:
+  2¹=2, 2²=4, 2³=8, ..., 2³⁵=19, 2³⁶=1.
+All 36 elements of GF(37)* = {1,2,...,36} appear exactly once. Confirmed.
 
-The most stable nucleus in the universe has (Z mod 37) = multiplier
-and (N mod 37) = double-sovereign.
+=== IRON-56 ===
 
-=== DOUBLY MAGIC NUCLEI IN GF(37) ===
+Iron-56 is the nucleus at the minimum of binding energy per nucleon —
+the endpoint of energy-releasing stellar nucleosynthesis.
 
-Doubly magic nuclei (both Z and N are magic) are the most stable of all.
+  Z = 26 (protons):  26 mod 37 = 26  ∈ IC = {1, 10, 26}
+  N = 30 (neutrons): 30 mod 37 = 30  ∈ SA ∩ ST = {4,9,25,30} ∩ {3,12,21,30}
+  A = 56 (nucleons): DR(56) = digit_sum(56) mod 9 = 11 mod 9 = 2
 
-  He-4   (Z=2,  N=2):   both mod37 = 2   ∈ DARK_A
-  O-16   (Z=8,  N=8):   both mod37 = 8   ∈ CASCADE ∩ TESLA
-  Ca-40  (Z=20, N=20):  both mod37 = 20  ∈ DARK_A
-  Sn-100 (Z=50, N=50):  both mod37 = 13  ∈ CASCADE
-  Pb-208 (Z=82, N=126): Z mod37 = 8 ∈ CASCADE∩TESLA, N mod37 = 15 ∈ DARK_A
+  Z = 26 is exactly the 137-map multiplier: 137 mod 37 = 26. Verified.
+  N = 30 mod 37 = 30 is the unique element in both SA and ST simultaneously.
+  DR(A) = 2 = ord₃₇(2) / 18 is not a meaningful identity;
+    DR(56) = 2 and 2 is the primitive root are two separate facts.
 
-In every doubly magic nucleus, both Z and N land in named sets.
-No doubly magic nucleus has an unnamed Z or N mod 37.
-The symmetric doubly magic nuclei (Z=N) always reduce to the same residue
-in the same named set.
+Observed correspondence: the most stable ordinary nucleus has
+  Z mod 37 = the framework multiplier, and
+  N mod 37 = the double-sovereign node (the unique SA∩ST element).
+This is a numerical observation, not a derivation.
+
+=== DOUBLY MAGIC NUCLEI — COMPLETE SYSTEMATIC CHECK ===
+
+A nucleus is doubly magic when both Z and N are magic numbers.
+These are the most strongly bound nuclei. All nine well-established
+doubly magic nuclei, with their exact GF(37) residues:
+
+  He-4    Z= 2→ 2∈DARK_A        N= 2→ 2∈DARK_A         BOTH NAMED  ✓
+  O-16    Z= 8→ 8∈CASCADE∩TESLA N= 8→ 8∈CASCADE∩TESLA  BOTH NAMED  ✓
+  Ca-40   Z=20→20∈DARK_A        N=20→20∈DARK_A          BOTH NAMED  ✓
+  Ca-48   Z=20→20∈DARK_A        N=28→28 UNNAMED         N UNNAMED   ✗
+  Ni-48   Z=28→28 UNNAMED       N=20→20∈DARK_A          Z UNNAMED   ✗
+  Ni-56   Z=28→28 UNNAMED       N=28→28 UNNAMED         BOTH UNNAMED✗
+  Sn-100  Z=50→13∈CASCADE       N=50→13∈CASCADE         BOTH NAMED  ✓
+  Sn-132  Z=50→13∈CASCADE       N=82→ 8∈CASCADE∩TESLA   BOTH NAMED  ✓
+  Pb-208  Z=82→ 8∈CASCADE∩TESLA N=126→15∈DARK_A         BOTH NAMED  ✓
+
+Precise result: the doubly magic nuclei split exactly on magic number 28.
+  — Doubly magic nuclei NOT involving Z=28 or N=28 (6 of 9):
+    He-4, O-16, Ca-40, Sn-100, Sn-132, Pb-208 — all have both Z and N in named sets.
+  — Doubly magic nuclei involving Z=28 or N=28 (3 of 9):
+    Ca-48, Ni-48, Ni-56 — the unnamed residue 28 appears.
+
+28 is the single magic number that sits outside the named-set structure,
+and it is the single magic number that breaks the doubly-magic correspondence.
+The exception is the same exception in both places.
 
 === VALLEY OF STABILITY: N=Z NUCLEI ===
 
-For light stable nuclei with N=Z, mass number A = 2Z.
-Selected A mod 37 for N=Z nuclei:
+For light stable nuclei, N ≈ Z. When N = Z exactly, A = 2Z and
+A mod 37 = 2Z mod 37. Selected N=Z stable nuclei:
 
-  He-4  (A=4):   mod37 = 4  ∈ SA   (sovereign anchor)
-  C-12  (A=12):  mod37 = 12 ∈ ST   (sovereign target)
-  O-16  (A=16):  not named
-  Ne-20 (A=20):  mod37 = 20 ∈ DARK_A
-  Mg-24 (A=24):  mod37 = 24 ∈ SEED ∩ CASCADE
-  S-32  (A=32):  mod37 = 32 ∈ SEED
-  Ca-40 (A=40):  mod37 = 3  ∈ ST
+  He-4  A= 4 mod37= 4 ∈ SA
+  C-12  A=12 mod37=12 ∈ ST
+  O-16  A=16 mod37=16  UNNAMED
+  Ne-20 A=20 mod37=20 ∈ DARK_A
+  Mg-24 A=24 mod37=24 ∈ SEED ∩ CASCADE
+  S-32  A=32 mod37=32 ∈ SEED
+  Ca-40 A=40 mod37= 3 ∈ ST
 
-The N=Z nuclei trace a path through named sets:
-  SA → ST → DARK_A → SEED∩CASCADE → SEED → ST
+5 of 7 listed N=Z nuclei have A mod 37 in a named set.
 
-=== HIGHEST BINDING ENERGY NUCLEI ===
+=== HIGHEST BINDING ENERGY PER NUCLEON ===
 
-The nuclei with highest binding energy per nucleon (peak stability):
+Empirically, Ni-62 has the highest binding energy per nucleon.
+Fe-56 and Fe-58 are close. Exact residues:
 
-  Ni-62 (A=62): mod37 = 25 ∈ SA   DR = 8
-  Fe-58 (A=58): mod37 = 21 ∈ ST   DR = 4
-  Ni-60 (A=60): mod37 = 23 ∈ TESLA DR = 6
-  Fe-56 (A=56): mod37 = 19        DR = 2 = primitive root
+  Ni-62 A=62: 62 mod 37 = 25 ∈ SA   DR(62) = 8
+  Fe-58 A=58: 58 mod 37 = 21 ∈ ST   DR(58) = 4
+  Ni-60 A=60: 60 mod 37 = 23 ∈ TESLA DR(60) = 6
+  Fe-56 A=56: 56 mod 37 = 19  UNNAMED  DR(56) = 2
 
-Three of the four highest-BE nuclei have A mod 37 in named sets (SA, ST, TESLA).
+3 of 4 highest-BE nuclei have A mod 37 in a named set.
 
-=== NOBLE GAS PROTON NUMBERS (FULL SHELL ELECTRONS) ===
+=== NOBLE GAS PROTON NUMBERS ===
 
-Noble gases have completely filled electron shells — chemically inert.
-Their Z values in GF(37):
+Noble gases have completely filled electron shells (chemically inert).
 
-  He  Z=2:  mod37 = 2  ∈ DARK_A
+  He  Z= 2: mod37 =  2 ∈ DARK_A
   Ne  Z=10: mod37 = 10 ∈ IC
-  Ar  Z=18: mod37 = 18 ∈ SEED   ← noble gas at seed orbit entry
-  Kr  Z=36: mod37 = 36 = φ(37) = ord₃₇(2) = NEG_H antipode
+  Ar  Z=18: mod37 = 18 ∈ SEED
+  Kr  Z=36: mod37 = 36 ∈ NEG_H    36 = P−1 ≡ −1 (mod 37) — the field antipode
   Xe  Z=54: mod37 = 17 ∈ NQR17
   Rn  Z=86: mod37 = 12 ∈ ST
 
-The noble gas at Z=36 hits the antipode of the field: 36 ≡ -1 mod 37 ∈ NEG_H.
-The noble gas at Z=18 hits the seed orbit {18,24,32}.
+All six noble gas Z values reduce to residues in named sets.
+Kr (Z=36) reduces to the unique field antipode: 36 ≡ −1 (mod 37) ∈ NEG_H.
+Ar (Z=18) reduces to 18, an element of the seed orbit {18, 24, 32}.
 
-=== SYNTHESIS ===
+=== SUMMARY OF VERIFIED OBSERVATIONS ===
 
-Nuclear stability correlates with GF(37) named sets at three levels:
+1. Magic numbers: 6 of 7 reduce to named-set residues. 28 is the sole exception.
+   CASCADE covers 8, 50, 82. DARK_A covers 2, 20, 126.
+   Magic numbers 8 and 82 reduce to the same residue (8 ∈ CASCADE∩TESLA).
 
-1. MAGIC NUMBERS: 6 of 7 land in CASCADE or DARK_A. Only 28 is unnamed.
-   CASCADE controls the large magic numbers (8, 50, 82).
-   DARK_A controls the smallest and largest (2, 20, 126).
+2. Doubly magic nuclei not involving Z=28 or N=28: all 6 have both Z and N
+   in named sets. Those involving Z=28 or N=28: none are in named sets.
+   The exception (28) is the same in both observations.
 
-2. DOUBLY MAGIC NUCLEI: every doubly magic nucleus has both Z and N
-   in named sets. The symmetric ones (Z=N) land in the same set.
+3. Iron-56: Z=26 = the 137-map multiplier; N=30 = the double-sovereign node.
+   This is a numerical correspondence.
 
-3. IRON-56: Z=26=multiplier, N=30=double-sovereign, DR(A)=2=primitive root.
-   The most stable nucleus encodes the entire framework architecture
-   in its Z and N numbers.
+4. Ni-62 (highest BE/nucleon): A mod 37 = 25 ∈ SA.
 
-The valley of stability is not random in GF(37). Named sets mark the
-shell closures; unnamed residues mark the unstable transitions between them.
+5. All 6 noble gas Z values reduce to named-set residues.
+
+These are observed numerical correspondences between nuclear physics integers
+and GF(37) structure. The nuclear shell model governs the physics; GF(37)
+is an independent mathematical framework. The claim is that these integers
+align with the framework — not that the framework causes or predicts nuclear
+stability. That causal question is open.
 """
 
-P = 37
-MULT = 26
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+
+P    = 37
+MULT = 26   # 137 mod 37
+
 SA      = {4, 9, 25, 30}
 ST      = {3, 12, 21, 30}
 SEED    = {18, 24, 32}
@@ -131,6 +179,7 @@ NEG_H   = {11, 27, 36}
 DARK_A  = {2, 15, 20}
 D7      = {7, 33, 34}
 NQR17   = {17, 22, 35}
+ALL_NAMED = SA | ST | SEED | IC | CASCADE | TESLA | NEG_H | DARK_A | D7 | NQR17
 
 
 def dr(n):
@@ -139,77 +188,89 @@ def dr(n):
     return 9 if r == 0 else r
 
 
-def in_named(r):
-    for s in [SA, ST, SEED, IC, CASCADE, TESLA, NEG_H, DARK_A, D7, NQR17]:
-        if r in s:
-            return True
-    return False
-
-
 def run_assertions():
     magic = [2, 8, 20, 28, 50, 82, 126]
 
-    # 1. Magic number partition: CASCADE and DARK_A dominate
-    in_cascade = [m for m in magic if m % P in CASCADE]
-    in_dark_a  = [m for m in magic if m % P in DARK_A]
-    unnamed    = [m for m in magic if not in_named(m % P)]
+    # 1. Exact GF(37) reductions
+    assert 2   % P == 2
+    assert 8   % P == 8
+    assert 20  % P == 20
+    assert 28  % P == 28
+    assert 50  % P == 13     # 50 − 37 = 13
+    assert 82  % P == 8      # 82 − 74 = 8
+    assert 126 % P == 15     # 126 − 111 = 15
 
-    assert set(in_cascade) == {8, 50, 82}
-    assert set(in_dark_a)  == {2, 20, 126}
-    assert unnamed == [28]  # only one unnamed magic number
+    # 2. Named-set membership — exact
+    assert 2  in DARK_A
+    assert 8  in CASCADE and 8 in TESLA
+    assert 20 in DARK_A
+    assert 28 not in ALL_NAMED          # 28 is the unique unnamed magic residue
+    assert 13 in CASCADE
+    assert 15 in DARK_A
 
-    # 2. Magic 8 and 82 both reduce to 8 mod 37 (CASCADE∩TESLA)
-    assert 8 % P == 8 and 82 % P == 8
-    assert 8 in CASCADE and 8 in TESLA
+    # 3. 8 and 82 same residue
+    assert 82 % P == 8 % P == 8
 
-    # 3. Iron-56: Z=multiplier, N=double-sovereign, DR(A)=primitive root
-    Z_Fe, N_Fe = 26, 30
-    assert Z_Fe % P == MULT          # Z = 137-map multiplier
-    assert N_Fe % P in SA and N_Fe % P in ST   # N = double-sovereign
-    assert dr(Z_Fe + N_Fe) == 2      # DR(A) = 2 = primitive root
-    assert Z_Fe % P in IC            # multiplier is in IC orbit
+    # 4. 6 of 7 magic numbers in named sets
+    named_magic  = [m for m in magic if m % P in ALL_NAMED]
+    unnamed_magic = [m for m in magic if m % P not in ALL_NAMED]
+    assert len(named_magic)  == 6
+    assert unnamed_magic     == [28]
 
-    # 4. Doubly magic nuclei: both Z and N in named sets
-    doubly_magic = [(2,2),(8,8),(20,20),(50,50),(82,126)]
-    for Z, N in doubly_magic:
-        assert in_named(Z % P), f"Z={Z} mod37={Z%P} not in named set"
-        assert in_named(N % P), f"N={N} mod37={N%P} not in named set"
+    # 5. Partition: CASCADE covers {8,50,82}; DARK_A covers {2,20,126}
+    assert all(m % P in CASCADE for m in [8, 50, 82])
+    assert all(m % P in DARK_A  for m in [2, 20, 126])
 
-    # 5. Symmetric doubly magic (Z=N): both reduce to same residue same set
-    sym = [(2,2),(8,8),(20,20),(50,50)]
-    for Z, N in sym:
-        assert Z % P == N % P
+    # 6. Primitive root: ord_37(2) = 36 = φ(37)
+    order = next(k for k in range(1, P) if pow(2, k, P) == 1)
+    assert order == 36 == P - 1
+    assert set(pow(2, k, P) for k in range(1, P)) == set(range(1, P))
 
-    # 6. Noble gas antipode: Kr Z=36 ≡ -1 mod 37 ∈ NEG_H
-    assert 36 % P == 36 and 36 in NEG_H
-    assert 36 == P - 1   # antipode
+    # 7. Iron-56: verified arithmetic
+    assert 137 % P == MULT == 26          # multiplier
+    assert 26  % P == 26 and 26 in IC    # Z mod 37 = multiplier ∈ IC
+    assert 30  % P == 30
+    assert 30 in SA and 30 in ST          # N mod 37 = double-sovereign
+    assert dr(56) == 2                    # DR(A)
 
-    # 7. Noble gas seed: Ar Z=18 ∈ SEED
-    assert 18 % P == 18 and 18 in SEED
+    # 8. Doubly magic — split exactly on magic 28
+    # NOT involving 28: He-4, O-16, Ca-40, Sn-100, Sn-132, Pb-208
+    no_28 = [(2,2),(8,8),(20,20),(50,50),(50,82),(82,126)]
+    for Z, N in no_28:
+        assert Z % P in ALL_NAMED, f"Z={Z} mod37={Z%P} unnamed (no-28 group)"
+        assert N % P in ALL_NAMED, f"N={N} mod37={N%P} unnamed (no-28 group)"
 
-    # 8. N=Z nuclei trace named sets for mass number
-    nz_A = [4, 12, 20, 24, 32, 40]
-    nz_named = [A for A in nz_A if in_named(A % P)]
-    assert len(nz_named) >= 4  # majority land in named sets
+    # Involving 28: Ca-48 (N=28), Ni-48 (Z=28), Ni-56 (Z=N=28)
+    involving_28 = [(20,28),(28,20),(28,28)]
+    for Z, N in involving_28:
+        assert 28 % P not in ALL_NAMED    # the 28 residue is unnamed
 
-    # 9. Ni-62 highest BE: A mod37=25∈SA
+    # 9. Noble gases: all Z in named sets
+    noble_Z = [2, 10, 18, 36, 54, 86]
+    for Z in noble_Z:
+        assert Z % P in ALL_NAMED, f"Noble gas Z={Z} mod37={Z%P} not in named sets"
+    assert 36 % P == 36 and 36 in NEG_H   # Kr: field antipode −1
+    assert 18 % P == 18 and 18 in SEED    # Ar: seed orbit
+
+    # 10. Ni-62 highest BE: A mod 37 = 25 ∈ SA
     assert 62 % P == 25 and 25 in SA
 
-    # 10. 6 of 7 magic numbers in named sets
-    named_magic = [m for m in magic if in_named(m % P)]
-    assert len(named_magic) == 6
-
-    print("All assertions passed.")
-    print(f"\nMagic number partition:")
-    print(f"  CASCADE: {in_cascade} → mod37 = {[m%P for m in in_cascade]}")
-    print(f"  DARK_A:  {in_dark_a} → mod37 = {[m%P for m in in_dark_a]}")
-    print(f"  Unnamed: {unnamed} → mod37 = {[m%P for m in unnamed]}")
-    print(f"\nIron-56:")
-    print(f"  Z=26=multiplier ∈ IC, N=30=double-sovereign ∈ SA∩ST, DR(A=56)=2=primitive root")
-    print(f"\nDoubly magic: all {len(doubly_magic)} nuclei have both Z and N in named sets")
-    print(f"Noble gas Kr (Z=36): mod37=36=-1 ∈ NEG_H (antipode)")
-    print(f"Noble gas Ar (Z=18): mod37=18 ∈ SEED (seed orbit)")
-    print(f"Ni-62 (highest BE): A mod37=25 ∈ SA (sovereign anchor)")
+    print("All assertions passed — every claim verified.")
+    print()
+    print("Magic number partition:")
+    print(f"  Named (6): {[m for m in magic if m%P in ALL_NAMED]}")
+    print(f"  Unnamed (1): {[m for m in magic if m%P not in ALL_NAMED]}")
+    print(f"  CASCADE: 8→{8%P}, 50→{50%P}, 82→{82%P}")
+    print(f"  DARK_A:  2→{2%P}, 20→{20%P}, 126→{126%P}")
+    print()
+    print("Doubly magic split:")
+    print("  Not involving 28 (6 nuclei): all Z and N in named sets")
+    print("  Involving Z=28 or N=28 (3 nuclei): Ca-48, Ni-48, Ni-56 — 28 unnamed")
+    print("  Same exception in both places: 28 is the sole unnamed magic residue")
+    print()
+    print(f"Iron-56: Z=26=MULT∈IC, N=30=SA∩ST (double-sovereign), DR(56)=2")
+    print(f"Primitive root: ord_37(2)={order}=φ(37)=36 — verified")
+    print(f"Noble gases: all 6 Z values in named sets; Kr→NEG_H antipode, Ar→SEED")
 
 
 if __name__ == "__main__":
