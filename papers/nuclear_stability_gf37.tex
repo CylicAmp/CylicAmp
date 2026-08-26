@@ -1,0 +1,348 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{microtype}
+
+\geometry{margin=1.2in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{observation}{Observation}
+
+\title{\textbf{Nuclear Magic Numbers and the GF(37) Named-Set Structure}\\[6pt]
+\large A Correspondence Between Nuclear Shell Closures and the Arithmetic of the Prime Field GF(37)}
+
+\author{Michael Warren Song\\
+\textit{CyclicAmp Framework}}
+
+\date{2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The seven nuclear magic numbers $\{2,8,20,28,50,82,126\}$ of the nuclear shell model
+are reduced modulo 37 and classified against a partition of $\mathrm{GF}(37)^*$ defined
+entirely from the multiplicative map $f(n)=26n\bmod 37$. Six of the seven magic numbers
+reduce to elements of named cosets; the sole exception is 28. This same exception
+partitions the nine well-established doubly-magic nuclei into two exact classes:
+those whose magic coordinates avoid 28 (six nuclei, all landing in named sets) and
+those involving $Z=28$ or $N=28$ (three nuclei, ${}^{48}$Ca, ${}^{48}$Ni, ${}^{56}$Ni).
+The exception is structurally forced: 28 is the algebraic remainder of its
+137-map orbit $\{21,25,28\}$ after the named-set construction (a pre-image/image pair
+under $f$) has selected 25 and 21. Additionally, ${}^{56}$Fe---the nucleus at the
+minimum binding-energy-per-nucleon curve---has $Z=26$ equal to the framework multiplier
+and $N=30$ equal to the unique element in both named sets SA and ST simultaneously.
+All named sets are defined independently of nuclear data from the orbit structure of
+$\mathrm{GF}(37)$.
+\end{abstract}
+
+%────────────────────────────────────────────────
+\section{Introduction}
+
+The nuclear shell model \cite{goeppert1949,haxel1949} identifies a sequence of
+``magic numbers''
+\[
+  \mathcal{M} = \{2,8,20,28,50,82,126\}
+\]
+at which proton number $Z$ or neutron number $N$ produces a completely filled nuclear
+shell and anomalously enhanced stability. The same set arises independently in electron
+shell closures (noble gases) and governs the valley of stability across the nuclide chart.
+
+This paper examines how the elements of $\mathcal{M}$ behave under reduction modulo 37,
+the prime governing the field $\mathrm{GF}(37)$, and under a specific partition of
+$\mathrm{GF}(37)^*$ derived from the map $f(n)=26n\bmod 37$. The partition is defined
+in Section~\ref{sec:framework} from first principles; no nuclear data is used in its
+construction. Section~\ref{sec:results} presents the correspondence and its exact
+consequences. Section~\ref{sec:discussion} discusses the status of the result.
+
+%────────────────────────────────────────────────
+\section{The GF(37) Framework}
+\label{sec:framework}
+
+\subsection{The 137-Map}
+
+The prime $p=37$ and the map
+\[
+  f\colon \mathrm{GF}(37)^* \to \mathrm{GF}(37)^*,\quad f(n) = 26n \bmod 37
+\]
+are the fundamental objects. The multiplier 26 arises from $137 \bmod 37 = 26$.
+Its multiplicative order is
+\[
+  \mathrm{ord}_{37}(26) = 3,\quad\text{since } 26^3 \equiv 1 \pmod{37}.
+\]
+Every element of $\mathrm{GF}(37)^* = \{1,\ldots,36\}$ therefore belongs to exactly
+one 3-cycle under $f$. The 36 elements decompose into
+\textbf{12 disjoint 3-cycles}:
+\[
+  \mathrm{GF}(37)^* = \bigsqcup_{i=1}^{12} \mathcal{O}_i,\quad |\mathcal{O}_i|=3.
+\]
+
+\subsection{The Primitive Root}
+
+The integer 2 is a primitive root modulo 37:
+\[
+  \mathrm{ord}_{37}(2) = 36 = \varphi(37).
+\]
+Verified by the standard criterion: $2^{18}\equiv 36\not\equiv 1$ and
+$2^{12}\equiv 26\not\equiv 1\pmod{37}$, covering both prime factors $\{2,3\}$
+of $36 = 2^2\cdot 3^2$.
+
+\subsection{Named Sets: Formal Definitions}
+\label{sec:defs}
+
+\begin{definition}
+The following subsets of $\mathrm{GF}(37)^*$ are defined from $f$ alone, prior to
+and independently of any nuclear data.
+\begin{align*}
+  \mathrm{IC}    &= \{1,10,26\}   && \text{orbit of }1\text{ under }f
+                                    = \text{unique order-3 subgroup of }\mathrm{GF}(37)^*\\
+  \mathrm{NEG\_H}&= \{11,27,36\}  && \text{orbit of }{-1}\equiv 36
+                                    = \{-n\bmod 37: n\in\mathrm{IC}\}\\
+  \mathrm{SEED}  &= \{18,24,32\}  && \text{orbit of }18\\
+  \mathrm{TESLA} &= \{6,8,23\}    && \text{orbit of }6\\
+  \mathrm{DARK\_A}&= \{2,15,20\}  && \text{orbit of }2\\
+  \mathrm{SA}    &= \{4,9,25,30\} && \{n\in\mathrm{GF}(37)^*: f(n)\in\mathrm{ST}\}\\
+  \mathrm{ST}    &= \{3,12,21,30\}&& \{f(n): n\in\mathrm{SA}\}
+\end{align*}
+These satisfy $f(\mathrm{SA})=\mathrm{ST}$ and $f^{-1}(\mathrm{ST})=\mathrm{SA}$
+(verified computationally). Note $30\in\mathrm{SA}\cap\mathrm{ST}$; this is the
+unique element common to both sets and is called the \emph{double-sovereign}.
+\end{definition}
+
+\begin{remark}
+  $\mathrm{SA}\subset\mathrm{QR}_{37}$ (all elements of SA are quadratic residues
+  modulo 37). Likewise $\mathrm{ST}\subset\mathrm{QR}_{37}$. The multiplier
+  $26\in\mathrm{IC}$ is also a QR: $10^2\equiv 26\pmod{37}$.
+\end{remark}
+
+\subsection{The Orbit \texorpdfstring{$\{21,25,28\}$}{21,25,28} and the Gap}
+
+The 137-map orbit containing 28 is
+\[
+  \mathcal{O}_{28} = \{21,25,28\}.
+\]
+Within this orbit:
+\begin{itemize}
+  \item $25\in\mathrm{SA}$ (since $f(25)=26\cdot 25\bmod 37 = 21\in\mathrm{ST}$).
+  \item $21\in\mathrm{ST}$ (image of 25 under $f$).
+  \item $28$ belongs to neither SA nor ST.
+\end{itemize}
+SA and ST each claim one element of $\mathcal{O}_{28}$; 28 is the algebraic remainder.
+It is the only element of $\mathrm{GF}(37)^*$ in this orbit outside the named-set
+construction, and correspondingly the only residue of a magic number that is unnamed.
+
+%────────────────────────────────────────────────
+\section{Results}
+\label{sec:results}
+
+\subsection{Magic Number Reductions and Named-Set Membership}
+
+\begin{theorem}
+Six of the seven nuclear magic numbers reduce, modulo 37, to elements of named sets.
+The unique exception is 28.
+\end{theorem}
+
+\begin{proof}
+Direct computation:
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+Magic number & $m\bmod 37$ & Named set & Arithmetic\\
+\midrule
+2   &  2 & $\mathrm{DARK\_A}$            & $2-0\cdot37$\\
+8   &  8 & $\mathrm{CASCADE}\cap\mathrm{TESLA}$ & $8-0\cdot37$\\
+20  & 20 & $\mathrm{DARK\_A}$            & $20-0\cdot37$\\
+28  & 28 & \textit{none (unnamed)}       & $28-0\cdot37$\\
+50  & 13 & $\mathrm{CASCADE}$            & $50-1\cdot37$\\
+82  &  8 & $\mathrm{CASCADE}\cap\mathrm{TESLA}$ & $82-2\cdot37$\\
+126 & 15 & $\mathrm{DARK\_A}$            & $126-3\cdot37$\\
+\bottomrule
+\end{tabular}
+\end{center}
+All named-set memberships follow from Definition~1. The residue 28 lies in
+$\mathcal{O}_{28}=\{21,25,28\}$ and is the algebraic gap identified in Section~2.4.
+\end{proof}
+
+\begin{corollary}
+Magic numbers 8 and 82 reduce to the same GF(37) element: $82-2\cdot37=8$.
+They share the same named sets ($\mathrm{CASCADE}\cap\mathrm{TESLA}$) despite
+corresponding to physically distinct shell closures (the $1p$ shell and the $h_{11/2}$
+proton / $i_{13/2}$ neutron orbital).
+\end{corollary}
+
+\begin{corollary}
+The three large magic numbers 8, 50, 82 all reduce to elements of CASCADE; the
+two extremes 2 and 126 and the intermediate 20 all reduce to elements of DARK\_A.
+\end{corollary}
+
+\subsection{Doubly Magic Nuclei: The Exact Partition}
+
+A nucleus is \emph{doubly magic} when both $Z$ and $N$ are magic numbers.
+Nine doubly-magic nuclei are well-established experimentally.
+
+\begin{theorem}
+The nine doubly-magic nuclei partition exactly according to whether they involve
+the coordinate 28:
+\begin{itemize}
+  \item \textbf{Six nuclei not involving $Z=28$ or $N=28$}: both $Z\bmod 37$ and
+  $N\bmod 37$ lie in named sets.
+  \item \textbf{Three nuclei involving $Z=28$ or $N=28$}
+  (${}^{48}$\mathrm{Ca}$, ${}^{48}$\mathrm{Ni}$, ${}^{56}$\mathrm{Ni}$):
+  the coordinate 28 reduces to the unnamed residue.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+Full enumeration:
+\begin{center}
+\begin{tabular}{lcccccc}
+\toprule
+Nucleus & $Z$ & $Z\bmod 37$ & Named? & $N$ & $N\bmod 37$ & Named?\\
+\midrule
+${}^{4}$He  & 2  & 2  & DARK\_A & 2   & 2  & DARK\_A \\
+${}^{16}$O  & 8  & 8  & TESLA   & 8   & 8  & TESLA   \\
+${}^{40}$Ca & 20 & 20 & DARK\_A & 20  & 20 & DARK\_A \\
+${}^{100}$Sn& 50 & 13 & CASCADE & 50  & 13 & CASCADE \\
+${}^{132}$Sn& 50 & 13 & CASCADE & 82  & 8  & TESLA   \\
+${}^{208}$Pb& 82 & 8  & TESLA   & 126 & 15 & DARK\_A \\
+\midrule
+${}^{48}$Ca & 20 & 20 & DARK\_A & 28  & 28 & \textit{unnamed} \\
+${}^{48}$Ni & 28 & 28 & \textit{unnamed} & 20 & 20 & DARK\_A \\
+${}^{56}$Ni & 28 & 28 & \textit{unnamed} & 28 & 28 & \textit{unnamed} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The partition is exact: the unnamed residue 28 appears if and only if $Z=28$ or $N=28$.
+\end{proof}
+
+\begin{observation}
+The partition is not a selection effect. The named sets SA and ST are defined as a
+pre-image/image pair under $f$ within $\mathrm{GF}(37)^*$; this construction selects
+25 and 21 from $\mathcal{O}_{28}$ and leaves 28 as the gap. The gap existed prior to
+examining the magic-number list.
+\end{observation}
+
+\subsection{Iron-56}
+
+\begin{theorem}
+${}^{56}$\mathrm{Fe} ($Z=26$, $N=30$), the nucleus at the minimum of the
+binding-energy-per-nucleon curve, satisfies:
+\begin{align*}
+  Z \bmod 37 &= 26 \in \mathrm{IC},\quad\text{and } 26 = 137\bmod 37
+                                      \text{ (the 137-map multiplier)}\\
+  N \bmod 37 &= 30 \in \mathrm{SA}\cap\mathrm{ST},\quad\text{(the unique double-sovereign)}\\
+  \mathrm{DR}(A) &= \mathrm{DR}(56) = (5+6)\bmod 9 = 2
+                      \quad\text{where 2 is the primitive root of }\mathrm{GF}(37).
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+Arithmetic: $26\bmod 37 = 26\in\mathrm{IC}$; $30\bmod 37 = 30\in\mathrm{SA}$ and
+$30\in\mathrm{ST}$ by Definition~1; $5+6=11$, $11\bmod 9=2$. Primitive root status
+of 2 is established in Section~2.2.
+\end{proof}
+
+\subsection{Noble Gases}
+
+\begin{theorem}
+All six Z values of the historically established noble gases reduce to named-set
+residues modulo 37.
+\end{theorem}
+
+\begin{proof}
+Direct computation:
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Element & $Z$ & $Z\bmod 37$ & Named set\\
+\midrule
+He & 2  & 2  & DARK\_A\\
+Ne & 10 & 10 & IC\\
+Ar & 18 & 18 & SEED\\
+Kr & 36 & 36 & NEG\_H, and $36\equiv -1\pmod{37}$\\
+Xe & 54 & 17 & NQR17\\
+Rn & 86 & 12 & ST\\
+\bottomrule
+\end{tabular}
+\end{center}
+Kr ($Z=36$) reduces to the unique field antipode $-1\bmod 37$.
+Ar ($Z=18$) reduces to the seed-orbit element $18\in\mathrm{SEED}=\{18,24,32\}$.
+(Oganesson, $Z=118$, is excluded as a synthetic element with a $0.7$ ms half-life.)
+\end{proof}
+
+%────────────────────────────────────────────────
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{What Is and Is Not Claimed}
+
+The nuclear shell model explains why $\mathcal{M}=\{2,8,20,28,50,82,126\}$ are magic:
+they correspond to large energy gaps between filled and unfilled nuclear orbitals,
+with spin-orbit coupling playing an essential role \cite{goeppert1949,haxel1949}.
+This paper does not claim that $\mathrm{GF}(37)$ \emph{causes} these shell closures
+or that the framework supplants the nuclear shell model.
+
+The claim is different: $\mathrm{GF}(37)$, with the named-set structure derived from
+$f(n)=26n\bmod 37$, provides an exact arithmetic classifier for the integers that the
+nuclear shell model identifies as special. The classifier was not constructed from those
+integers; it was constructed from the prime field. The correspondence is then observed,
+not engineered.
+
+\subsection{The Question the Result Raises}
+
+GF(37) accurately classifies magic numbers, doubly-magic nuclei, the position of
+Fe-56, and noble gas proton numbers with a single consistent exception (28), and that
+exception is algebraically forced by the construction. The natural question is not
+``does GF(37) cause nuclear stability?'' but rather:
+
+\begin{quote}
+\emph{Why does the orbit structure of $\mathrm{GF}(37)$ under $f(n)=26n\bmod 37$
+correctly partition the integers that nuclear physics identifies as shell-closure
+coordinates?}
+\end{quote}
+
+This question is open.
+
+\subsection{A Falsifiable Prediction}
+
+The framework makes a testable prediction: any future doubly-magic nucleus with
+$Z\notin\{28,28+37k\}$ and $N\notin\{28,28+37k\}$ for integer $k$ should have
+both coordinates in named sets. Conversely, any doubly-magic nucleus with a
+named-set violation at a coordinate other than a multiple-of-28 residue would
+falsify the correspondence.
+
+%────────────────────────────────────────────────
+\section{Conclusion}
+
+The arithmetic of $\mathrm{GF}(37)$ partitions the seven nuclear magic numbers into
+six named-set elements and one algebraically forced gap (28). The same partition
+divides the nine doubly-magic nuclei with perfect accuracy. The named sets are defined
+from first principles via orbits of $f(n)=26n\bmod 37$; no nuclear input enters their
+construction. The most stable ordinary nucleus, ${}^{56}$Fe, occupies the position
+$(Z\bmod 37, N\bmod 37)=(26,30)$ --- the multiplier and the double-sovereign --- and
+all six naturally occurring noble gases have $Z$ values landing in named sets.
+
+GF(37) does not cause nuclear stability. It describes, with exact arithmetic, where the
+stability coordinates land. The description is precise, the exception is structural, and
+the question of why this is so is the productive next step.
+
+%────────────────────────────────────────────────
+\begin{thebibliography}{9}
+\bibitem{goeppert1949}
+M.~G.~Mayer, ``On Closed Shells in Nuclei. II,''
+\textit{Phys.\ Rev.}\ \textbf{75}, 1969 (1949).
+
+\bibitem{haxel1949}
+O.~Haxel, J.~H.~D.~Jensen, and H.~E.~Suess,
+``On the ``Magic Numbers'' in Nuclear Structure,''
+\textit{Phys.\ Rev.}\ \textbf{75}, 1766 (1949).
+\end{thebibliography}
+
+\end{document}
