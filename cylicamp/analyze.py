@@ -51,25 +51,68 @@ ZETA_ZEROS = [14.134725, 21.022040, 25.010858, 30.424876, 32.935062,
 
 # Known physical and mathematical constants — checked automatically
 CONSTANTS = {
-    299_792_458:  "c (speed of light, m/s)",
-    137:          "α⁻¹ integer part (inverse fine structure constant)",
-    1618:         "φ×1000 (golden ratio ×1000)",
-    1729:         "Hardy-Ramanujan number (smallest taxicab number)",
-    6674:         "G×10¹¹ (gravitational constant ×10¹¹)",
-    6626:         "h×10³⁴ (Planck constant ×10³⁴)",
-    1380:         "k_B×10²³ (Boltzmann constant ×10²³)",
-    6022:         "N_A×10²³ (Avogadro ×10²³)",
-    2718:         "e×1000 (Euler's number ×1000)",
-    3141:         "π×1000",
-    1414:         "√2×1000",
-    1732:         "√3×1000",
-    2236:         "√5×1000",
+    # Speed of light and electromagnetic
+    299_792_458:  "c (speed of light, m/s, exact)",
+    137:          "α⁻¹ integer part (fine structure constant⁻¹ ≈ 137.036)",
+    # Fine structure constant digits
+    1370:         "α⁻¹ × 10 (137.0...)",
+    # Planck units
+    6626:         "h × 10³⁴ (Planck constant)",
+    1054:         "ħ × 10³⁴ (reduced Planck constant)",
+    # Gravity
+    6674:         "G × 10¹¹ (gravitational constant)",
+    # Thermodynamics
+    1380:         "k_B × 10²³ (Boltzmann constant)",
+    6022:         "N_A × 10²³ (Avogadro number)",
+    # Mathematical constants
+    1618:         "φ × 1000 (golden ratio)",
+    2718:         "e × 1000 (Euler's number)",
+    3141:         "π × 1000",
+    3141592:      "π × 10⁶",
+    1414:         "√2 × 1000",
+    1732:         "√3 × 1000",
+    2236:         "√5 × 1000",
+    # Euler-Mascheroni
+    5772:         "γ_EM × 10⁴ (Euler-Mascheroni constant)",
+    # Feigenbaum constants
+    4669:         "δ_F × 1000 (Feigenbaum bifurcation constant)",
+    2502:         "α_F × 1000 (Feigenbaum reduction constant)",
+    # Hardy-Ramanujan / taxicab
+    1729:         "Hardy-Ramanujan (smallest taxicab: 1³+12³=9³+10³)",
+    # Perfect numbers
+    6:            "perfect number (1st)",
+    28:           "perfect number (2nd)",
     496:          "perfect number (3rd)",
     8128:         "perfect number (4th)",
-    28:           "perfect number (2nd)",
-    6:            "perfect number (1st)",
+    33550336:     "perfect number (5th)",
+    # Mersenne primes (M_p = 2^p - 1)
+    3:            "Mersenne prime M_2",
+    7:            "Mersenne prime M_3",
+    31:           "Mersenne prime M_5",
+    127:          "Mersenne prime M_7",
+    8191:         "Mersenne prime M_13",
+    # Identities
     1:            "multiplicative identity",
-    0:            "additive identity / SEAM",
+    0:            "additive identity / SEAM (f(0)=0 forever)",
+    # Atomic / nuclear
+    1836:         "m_p/m_e (proton-to-electron mass ratio, integer part)",
+    # Noble gas Z values
+    2:            "He (noble gas Z=2, nuclear magic)",
+    10:           "Ne (noble gas Z=10)",
+    18:           "Ar (noble gas Z=18)",
+    36:           "Kr (noble gas Z=36)",
+    54:           "Xe (noble gas Z=54)",
+    86:           "Rn (noble gas Z=86)",
+    # Iron
+    26:           "Fe (iron Z=26 = MULT, the 137-map multiplier)",
+    56:           "Fe-56 (most stable nucleus by binding energy per nucleon)",
+    # Primes of note
+    2:            "first prime / He Z",
+    17:           "prime in NQR17 orbit",
+    19:           "prime, UNNAMED residue",
+    23:           "prime in TESLA orbit",
+    37:           "THE prime — the modulus",
+    41:           "prime, r=4 (SA blind prediction instance)",
 }
 
 # Fibonacci numbers up to 1000 for auto-detection
