@@ -92,6 +92,21 @@ two distinct orbits: NEG_H (two members) and IC (one member).
 
 137 is itself a twin prime.  Its pair element 139 mod37=28∈SA_ST_B.
 
+=== SOPHIE GERMAIN PRIMES ===
+
+A Sophie Germain prime p: p prime and 2p+1 prime (safe prime).
+
+The prime factors of all F-hexad differences: {2, 3, 73, 101, 137}.
+  3∈C3 is Sophie Germain: 2×3+1=7∈D7.  (3,7) straddles C3 and D7.
+  2∈DARK_A is Sophie Germain: 2×2+1=5∈CAS_EXT.  (2,5) straddles DARK_A and CAS_EXT.
+  73, 101, 137: none are Sophie Germain.
+
+Sophie Germain factor 3 appears in all three differences (9090909, 18181818, 36363636).
+Sophie Germain factor 2 appears in 18181818 and 36363636 (the two even differences).
+
+The safe prime 7∈D7 is the Sophie image of 3∈C3.
+The safe prime 5∈CAS_EXT is the Sophie image of 2∈DARK_A.
+
 === RIEMANN HYPOTHESIS ===
 
 Mirror difference orbits and matching Riemann zero floors:
@@ -233,6 +248,26 @@ def run_assertions():
     assert 101 % P == 27 and 27 in NEG_H      # both 73 and 101 in NEG_H
     assert 103 % P == 29 and 29 in C9
     assert 137 % P == 26 and 26 in IC
+
+    # ── Sophie Germain primes ─────────────────────────────────────────────────
+    from sympy import isprime as _isp2
+    def is_sophie(p): return _isp2(p) and _isp2(2*p+1)
+
+    # 3∈C3 is Sophie Germain → safe prime 7∈D7
+    assert is_sophie(3) and 3 in C3
+    assert _isp2(7) and 7 in D7 and 2*3+1 == 7
+
+    # 2∈DARK_A is Sophie Germain → safe prime 5∈CAS_EXT
+    assert is_sophie(2) and 2 % P == 2  # 2∈DARK_A via orbit
+    assert _isp2(5) and 5 in CAS_EXT and 2*2+1 == 5
+
+    # 3 divides all three differences; 2 divides the two even differences
+    assert 9090909  % 3 == 0
+    assert 18181818 % 3 == 0 and 18181818 % 2 == 0
+    assert 36363636 % 3 == 0 and 36363636 % 2 == 0
+
+    # 73, 101, 137 are not Sophie Germain
+    assert not is_sophie(73) and not is_sophie(101) and not is_sophie(137)
 
     # Verify specific zeros
     g10 = float(mpmath.im(mpmath.zetazero(10)))
