@@ -49,6 +49,46 @@ NAMED = {
 ZETA_ZEROS = [14.134725, 21.022040, 25.010858, 30.424876, 32.935062,
               37.586178, 40.918719, 43.327073, 48.005151, 49.773832]
 
+# Known physical and mathematical constants — checked automatically
+CONSTANTS = {
+    299_792_458:  "c (speed of light, m/s)",
+    137:          "α⁻¹ integer part (inverse fine structure constant)",
+    1618:         "φ×1000 (golden ratio ×1000)",
+    1729:         "Hardy-Ramanujan number (smallest taxicab number)",
+    6674:         "G×10¹¹ (gravitational constant ×10¹¹)",
+    6626:         "h×10³⁴ (Planck constant ×10³⁴)",
+    1380:         "k_B×10²³ (Boltzmann constant ×10²³)",
+    6022:         "N_A×10²³ (Avogadro ×10²³)",
+    2718:         "e×1000 (Euler's number ×1000)",
+    3141:         "π×1000",
+    1414:         "√2×1000",
+    1732:         "√3×1000",
+    2236:         "√5×1000",
+    496:          "perfect number (3rd)",
+    8128:         "perfect number (4th)",
+    28:           "perfect number (2nd)",
+    6:            "perfect number (1st)",
+    1:            "multiplicative identity",
+    0:            "additive identity / SEAM",
+}
+
+# Fibonacci numbers up to 1000 for auto-detection
+FIBONACCI = set()
+a, b = 0, 1
+while a <= 10000:
+    FIBONACCI.add(a)
+    a, b = b, a + b
+
+# Triangular numbers up to 10000
+TRIANGULAR = {n*(n+1)//2 for n in range(200)}
+
+# Perfect numbers
+PERFECT = {6, 28, 496, 8128, 33550336}
+
+# Nuclear magic numbers
+MAGIC_NUCLEAR = {2, 8, 20, 28, 50, 82, 126}
+MAGIC_NEW     = {32, 34, 40}
+
 
 def dr(n):
     n = abs(int(n))
@@ -186,6 +226,28 @@ def analyze(n):
 
     # Gauge holonomy connection (T215)
     print(f"  Gauge holonomy: Z/3Z class = {orb_len % 3}  (0=trivial, closes in {orb_len} steps)")
+
+    # Known constant / sequence recognition
+    tags = []
+    if n in CONSTANTS:
+        tags.append(CONSTANTS[n])
+    if n in FIBONACCI and n > 1:
+        tags.append("Fibonacci")
+    if n in TRIANGULAR and n > 0:
+        tags.append(f"triangular T({int((-1+(1+8*n)**0.5)//2)})")
+    if n in PERFECT:
+        tags.append("perfect number")
+    if n in MAGIC_NUCLEAR:
+        tags.append("nuclear magic number")
+    if n in MAGIC_NEW:
+        tags.append("confirmed new subshell closure")
+    # prime index of n connects back through framework
+    if pidx and pidx <= 200:
+        pidx_r = pidx % P
+        pidx_sets = [name for name, s in NAMED.items() if pidx_r in s] or ["UNNAMED"]
+        tags.append(f"prime #{pidx} → #{pidx} mod37={pidx_r} ∈ {','.join(pidx_sets)}")
+    if tags:
+        print(f"  Known:         = {' | '.join(tags)}")
 
     print()
     return {
