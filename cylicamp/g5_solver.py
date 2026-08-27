@@ -64,6 +64,11 @@ STABILITY_HALT_THRESHOLD: float = 0.30
 # named class (= 1/P ≈ 0.027; each D7 element is exactly 1 step away)
 D7_THRESHOLD_PROFILE: float = 1 / P
 
+# Cage integrity index: D7 envelope evaluated at h=7 (first D7 orbit element).
+# E(7) = (1 + cos(7π/12)) / 2 ≈ 0.3706.
+# scaled_insight = (floor(aggregate_score) mod 37) / 37 must meet this.
+REQUIRED_INTEGRITY_INDEX: float = 0.5 * (1.0 + math.cos(math.pi * 7 / 12.0))
+
 
 # ── Enums ─────────────────────────────────────────────────────────────────────
 class ConsistencyStatus(Enum):
@@ -278,6 +283,28 @@ def _fw(r: int) -> str:
     return f"[{', '.join(classes)}]" if classes else "[—]"
 
 
+def cage_integrity_check(scaled_insight: float, integrity_ratio: float):
+    """
+    Cage Integrity Check (T226).
+
+    Parameters
+    ----------
+    scaled_insight : float
+        (floor(aggregate_score) mod 37) / 37.
+    integrity_ratio : float
+        Passed through unchanged; not used in the pass/fail decision.
+
+    Returns
+    -------
+    (status: str, integrity_ratio: float)
+    """
+    if scaled_insight >= REQUIRED_INTEGRITY_INDEX:
+        status = "CAGE INTEGRITY PASS: Insight exceeds power source requirement."
+    else:
+        status = "CAGE INTEGRITY FAIL: Insufficient insight to stabilize environment."
+    return status, integrity_ratio
+
+
 if __name__ == "__main__":
     report = evaluate(
         aggregate_score=104832.0,
@@ -287,3 +314,8 @@ if __name__ == "__main__":
     )
     print(format_report(report))
     print(f"\nAll checks pass: {report.all_checks_pass}")
+
+    scaled = (int(104832.0) % P) / P
+    ci_status, _ = cage_integrity_check(scaled, 0.0)
+    print(f"\nCage Integrity: scaled_insight={scaled:.4f}  threshold={REQUIRED_INTEGRITY_INDEX:.4f}")
+    print(f"  {ci_status}")

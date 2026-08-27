@@ -58,7 +58,7 @@
     "source_id": "cylicamp/engine_integration",
     "source_type": "INTERNAL_DERIVATION",
     "citation": "CylicAmp pipeline \u2014 user-originated framework",
-    "timestamp": "2026-08-24T03:43:48.609031+00:00"
+    "timestamp": "2026-08-27T11:36:56.744707+00:00"
   },
   "meta_history": [
     {
@@ -190,5 +190,12 @@
     "compatibility_status": "HARMONIOUS",
     "compatibility_detail": "11 \u2208 ORBIT_11",
     "all_checks_pass": false
+  },
+  "cage_integrity": {
+    "aggregate_residue": 11,
+    "scaled_insight": 0.2972972972972973,
+    "required_integrity_index": 0.3705904774487397,
+    "integrity_ratio": 0.0,
+    "status": "CAGE INTEGRITY FAIL: Insufficient insight to stabilize environment."
   }
 }
