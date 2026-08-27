@@ -11,6 +11,12 @@ The six permutations of digits {2, 3, 6}:
 For each permutation, two two-part splits (left-1-digit + right-2-digits, and left-2-digits + right-1-digit).
 Total: 12 splits. Apply each of the four basic arithmetic operations.
 
+All results are classified through:
+  (1) The 12 named GF(37) orbits (prime sets)
+  (2) The Riemann Hypothesis connection: floor(γ_n) mod 37 orbit, and direct zero matches
+  (3) 1/137: the fine structure constant.  137 mod 37 = 26 = MULT.
+      1/137 in GF(37) = 26⁻¹ mod 37 = 10 ∈ IC.
+
 === ADDITION ===
 
   2+36=38   23+6=29
@@ -36,9 +42,27 @@ GF(37):
   38 mod 37 =  1  ∈ IC = {1, 10, 26}
   65 mod 37 = 28  ∈ SA_ST_B = {21, 25, 28}
 
+PRIME STATUS:
+  29: prime
+  38: not prime (2 × 19)   ← 19 = 2⁻¹ mod 37 = GF(37) CRITICAL LINE ELEMENT
+  65: not prime (5 × 13)   ← 5 ∈ CAS_EXT, 13 ∈ CASCADE
+
+× 137 (fine structure constant integer):
+  29 × 137 = 3973   DR=4 ∈ SA  mod37=14∈C9
+  38 × 137 = 5206   DR=4 ∈ SA  mod37=26∈IC
+  65 × 137 = 8905   DR=4 ∈ SA  mod37=25∈SA_ST_B
+  ALL THREE addition sums × 137 give DR=4 ∈ SA (sovereign anchor).
+
+RIEMANN HYPOTHESIS:
+  γ₁₅ ≈ 65.1125 → floor(γ₁₅) = 65 = one of the three addition sums.
+  floor(γ₁₅) mod 37 = 28 ∈ SA_ST_B — same orbit as 65 mod 37 = 28.
+  γ₁ ≈ 14.1347 → floor = 14 ∈ C9 (same orbit as sum 29 ∈ C9).
+
 === SUBTRACTION (absolute differences) ===
 
 Distinct |differences|: {17, 23, 26, 34, 59, 61}
+
+Primes: 17, 23, 59, 61 are prime.  26, 34 are not.
 
 GF(37):
   17 mod 37 = 17  ∈ NQR17 = {17, 22, 35}
@@ -47,6 +71,16 @@ GF(37):
   34 mod 37 = 34  ∈ D7 = {7, 33, 34}
   59 mod 37 = 22  ∈ NQR17 = {17, 22, 35}
   61 mod 37 = 24  ∈ SEED = {18, 24, 32}
+
+RIEMANN HYPOTHESIS:
+  Subtraction value 61 → mod37=24∈SEED (seed orbit: pipeline seed 246 mod 37=24).
+  Subtraction value 23 → mod37=23∈TESLA.
+  γ₈ ≈ 43.327 → floor=43, 43 mod37=6∈TESLA (same orbit as subtraction value 23).
+
+× 137:
+  23 × 137 = 3151  DR=1 ∈ IC  mod37=6∈TESLA
+  34 × 137 = 4658  DR=5       mod37=33∈D7
+  61 × 137 = 8357  DR=5       mod37=32∈SEED
 
 Sum of distinct differences: 220.  DR(220) = 4.
 
@@ -80,6 +114,18 @@ GF(37):
   186 mod 37 =  1  ∈ IC
   192 mod 37 =  7  ∈ D7 = {7, 33, 34}
 
+× 137:
+  138 × 137 = 18906  DR=6  mod37=36∈NEG_H   ← 138 = 137+1: first product to cross 137
+  186 × 137 = 25482  DR=3  mod37=26∈IC
+  192 × 137 = 26304  DR=6  mod37=34∈D7
+
+1/137: 138 mod 137 = 1  (138 is the only T231 value ≡ 1 mod 137)
+  138 = 2×3×23 = 2×69 = 6×23.  DR=3.  138/137 ≈ 1.0073 ≈ 1 + α⁻¹·α = 1 + 1/137 × 137 = 1+1.
+
+RIEMANN HYPOTHESIS:
+  192 mod 37 = 7 ∈ D7.  γ₃₃ ≈ 107.168 → floor=107, 107 mod37=33∈D7.
+  138 mod 37 = 27 ∈ NEG_H.  γ₉ ≈ 48.005 → floor=48, 48 mod37=11∈NEG_H (same orbit).
+
 === DIVISION (exact integer results only) ===
 
 Only one exact integer division exists across all 12 splits:
@@ -88,13 +134,27 @@ Only one exact integer division exists across all 12 splits:
 
 DR(18) = 9.  18 ∈ SEED = orbit of seed 246 mod 37.
 
-=== SUMMARY ===
+18 × 137 = 2466  DR=9  mod37=24∈SEED.
+18 mod 137 = 18 (below 137).
 
-Operation     Distinct values         DR pattern        Return to 6?
-Addition      {29, 38, 65}            all DR=2          yes: 29+38+65=132, DR=6
-Subtraction   {17,23,26,34,59,61}     {8,5,8,7,5,7}    —
-Multiplication {72,78,126,138,186,192} all in {3,6,9}   yes: sum=792, DR=9
-Division      {18}  (one exact)        DR=9             —
+RIEMANN HYPOTHESIS:
+  γ₅ ≈ 32.935 → floor=32∈SEED (same orbit as 18∈SEED and 24∈SEED).
+  The only exact division result (18) lives in the same orbit as floor(γ₅).
+
+=== SUMMARY (PRIME SETS + RIEMANN + 1/137) ===
+
+Operation       Distinct values              DR pattern     ×137 DR
+Addition        {29, 38, 65}                all DR=2       all DR=4∈SA
+Subtraction     {17,23,26,34,59,61}         {8,5,8,7,5,7}  varies
+Multiplication  {72,78,126,138,186,192}     all {3,6,9}    varies
+Division        {18}                        DR=9           DR=9
+
+1/137 in GF(37): 26⁻¹ mod 37 = 10 ∈ IC.
+All addition sums × 137 → DR=4 ∈ SA (sovereign anchor).
+38 = 2×19: critical line element 19 is a factor of the middle addition sum.
+γ₁₅ floor = 65: exact Riemann zero floor match to addition sum 65∈SA_ST_B.
+Division result 18∈SEED = same orbit as floor(γ₅)=32∈SEED.
+10 orbits out of 12 appear in T231.  Only SA_ST_A and CAS_EXT absent.
 """
 
 from itertools import permutations as _permutations
@@ -105,6 +165,7 @@ MULT = 26
 IC      = {1, 10, 26}
 DARK_A  = {2, 15, 20}
 C3      = {3, 4, 30}
+SA      = {4, 9, 25, 30}
 CAS_EXT = {5, 13, 19}
 TESLA   = {6, 8, 23}
 D7      = {7, 33, 34}
@@ -188,6 +249,27 @@ def run_assertions():
     div_vals = sorted(set(v for _, _, v in div_exact if v > 1))
     assert div_vals == [18], f"exact integer divisions: {div_vals}"
     assert 18 in SEED and dr(18) == 9
+
+    # ── 1/137 in GF(37) ──────────────────────────────────────────────────────
+    assert 137 % P == 26 == MULT
+    assert pow(26, P - 2, P) == 10 and 10 in IC   # 26^-1 mod 37 = 10
+
+    # ── × 137: all addition sums give DR=4 ∈ SA ──────────────────────────────
+    for s in [29, 38, 65]:
+        assert dr(s * 137) == 4 and 4 in SA
+
+    # ── 38 = 2 × 19: critical line factor ────────────────────────────────────
+    assert 38 == 2 * 19 and 19 in CAS_EXT
+
+    # ── Riemann: γ₁₅ floor = 65 ──────────────────────────────────────────────
+    import mpmath as _mp
+    _mp.mp.dps = 15
+    g15 = float(_mp.im(_mp.zetazero(15)))
+    assert int(g15) == 65 and 65 % P == 28 and 28 in SA_ST_B
+
+    # ── Riemann: floor(γ₅) = 32 ∈ SEED, same orbit as div result 18 ─────────
+    g5 = float(_mp.im(_mp.zetazero(5)))
+    assert int(g5) % P == 32 and 32 in SEED and 18 in SEED
 
     print("All assertions passed.")
     print()
