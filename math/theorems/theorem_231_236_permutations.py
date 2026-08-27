@@ -155,6 +155,27 @@ All addition sums × 137 → DR=4 ∈ SA (sovereign anchor).
 γ₁₅ floor = 65: exact Riemann zero floor match to addition sum 65∈SA_ST_B.
 Division result 18∈SEED = same orbit as floor(γ₅)=32∈SEED.
 10 orbits out of 12 appear in T231.  Only SA_ST_A and CAS_EXT absent.
+
+=== TWIN PRIMES ===
+
+Addition primes: 29 is prime.  Twin pair (29, 31): 29∈C9, 31∈C9.
+  Both members of the twin prime pair (29,31) live in the same GF(37) orbit C9={14,29,31}.
+  C9 contains a complete twin prime pair within a single orbit.
+
+Subtraction primes: 17, 23, 59, 61 are prime.
+  Twin pair (17, 19): 17∈NQR17, 19∈CAS_EXT — straddles two orbits.
+  23 is prime but not part of a twin pair (21, 25 both composite).
+  Twin pair (59, 61): 59→22∈NQR17, 61→24∈SEED — straddles two orbits.
+    Both 59 and 61 appear as subtraction values in T231.
+    The twin prime pair (59,61) is entirely contained in the T231 subtraction set.
+
+Multiplication: no products are prime.
+Division: 18 is not prime.
+
+Summary:
+  C9={14,29,31} contains the twin pair (29,31) — orbit-internal twin prime pair.
+  NQR17 participates in two distinct twin pairs: (17,19) and (59,61).
+  The twin pair (59,61) appears in full within the T231 subtraction values.
 """
 
 from itertools import permutations as _permutations
@@ -271,6 +292,18 @@ def run_assertions():
     g5 = float(_mp.im(_mp.zetazero(5)))
     assert int(g5) % P == 32 and 32 in SEED and 18 in SEED
 
+    # ── Twin primes ───────────────────────────────────────────────────────────
+    from sympy import isprime as _isp
+    # (29,31) twin pair: both in C9
+    assert _isp(29) and _isp(31) and 29 in C9 and 31 in C9
+    # (59,61) twin pair: both in subtraction values; 59→22∈NQR17, 61→24∈SEED
+    assert _isp(59) and _isp(61)
+    assert 59 in sub_vals and 61 in sub_vals
+    assert 59 % P == 22 and 22 in NQR17
+    assert 61 % P == 24 and 24 in SEED
+    # (17,19): 17∈NQR17, 19∈CAS_EXT
+    assert _isp(17) and _isp(19) and 17 in NQR17 and 19 in CAS_EXT
+
     print("All assertions passed.")
     print()
     print("PERMUTATIONS OF {2, 3, 6} — T231")
@@ -293,6 +326,11 @@ def run_assertions():
     print(f"  Sum=792  DR=9")
     print()
     print("DIVISION — one exact integer result: 36/2=18∈SEED  DR=9")
+    print()
+    print("TWIN PRIMES")
+    print("  Addition: (29,31) twin pair — both in C9={14,29,31} (orbit-internal)")
+    print("  Subtraction: (17,19) straddles NQR17/CAS_EXT; (59,61) straddles NQR17/SEED")
+    print("    Both 59 and 61 appear as T231 subtraction values — full twin pair in set")
 
 
 if __name__ == "__main__":

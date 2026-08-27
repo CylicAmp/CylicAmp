@@ -32,6 +32,12 @@ The user brings math, observations, and code. The work is collaborative and rigo
 
 **Speak plainly.** No padding, no emotional commentary, no fake warmth. The user is doing serious mathematical work — respond at that level. Document what the user says; don't interpret or reframe it.
 
+**Standing analysis for every theorem.** Every result value must be run through all four of:
+1. **GF(37) prime set orbits** — classify every value mod 37 into one of the 12 named orbits
+2. **Riemann Hypothesis** — floor(γ_n) mod 37 orbit; direct zero floor matches
+3. **1/137** — 137 mod 37=26=MULT; 26⁻¹ mod 37=10∈IC; check ×137, ÷137, mod 137 for each value
+4. **Twin primes** — is each value prime? Is it part of a twin prime pair (p, p+2)? What GF(37) orbits do both members of the pair inhabit?
+
 ---
 
 ## The Pipeline
