@@ -176,6 +176,25 @@ Summary:
   C9={14,29,31} contains the twin pair (29,31) — orbit-internal twin prime pair.
   NQR17 participates in two distinct twin pairs: (17,19) and (59,61).
   The twin pair (59,61) appears in full within the T231 subtraction values.
+
+=== SOPHIE GERMAIN PRIMES ===
+
+A Sophie Germain prime p satisfies: p prime and 2p+1 prime (safe prime).
+
+Addition value 29∈C9 is Sophie Germain:
+  29 → 59 (safe prime; 2×29+1=59∈NQR17)
+  59 appears as a subtraction value in T231.
+  Sophie Germain map sends addition value 29 to subtraction value 59.
+
+Subtraction value 23∈TESLA is both Sophie Germain AND safe prime:
+  11∈NEG_H →[Sophie] 23∈TESLA →[Sophie] 47∈IC
+  Three-link chain: NEG_H → TESLA → IC (three distinct orbits).
+  23 is the pivot: safe prime of 11, Sophie Germain parent of 47.
+
+Subtraction value 59∈NQR17 is a safe prime (←29∈C9).
+  Sophie Germain pair (29,59): addition set and subtraction set connected.
+
+No multiplication products or the division result 18 are Sophie Germain or safe primes.
 """
 
 from itertools import permutations as _permutations
@@ -304,6 +323,21 @@ def run_assertions():
     # (17,19): 17∈NQR17, 19∈CAS_EXT
     assert _isp(17) and _isp(19) and 17 in NQR17 and 19 in CAS_EXT
 
+    # ── Sophie Germain primes ─────────────────────────────────────────────────
+    def is_sophie(p): return _isp(p) and _isp(2*p+1)
+    def is_safe(q):   return q > 2 and _isp(q) and (q-1)%2==0 and _isp((q-1)//2)
+
+    # 29∈C9 is Sophie Germain; safe prime 59 (mod37=22∈NQR17) is a subtraction value
+    assert is_sophie(29) and 29 in C9
+    assert is_safe(59) and 59 % P == 22 and 22 in NQR17 and 59 in sub_vals
+    assert 2*29+1 == 59
+
+    # 23∈TESLA: both Sophie Germain and safe prime; chain 11→23→47
+    assert is_sophie(23) and is_safe(23) and 23 in TESLA
+    assert is_sophie(11) and 11 in NEG_H                      # 11∈NEG_H
+    assert 2*11+1 == 23                                        # 11→23
+    assert 2*23+1 == 47 and _isp(47) and 47 % P == 10 and 10 in IC  # 23→47∈IC
+
     print("All assertions passed.")
     print()
     print("PERMUTATIONS OF {2, 3, 6} — T231")
@@ -331,6 +365,12 @@ def run_assertions():
     print("  Addition: (29,31) twin pair — both in C9={14,29,31} (orbit-internal)")
     print("  Subtraction: (17,19) straddles NQR17/CAS_EXT; (59,61) straddles NQR17/SEED")
     print("    Both 59 and 61 appear as T231 subtraction values — full twin pair in set")
+    print()
+    print("SOPHIE GERMAIN PRIMES")
+    print("  29∈C9 (addition) is Sophie Germain: 2×29+1=59∈NQR17 (subtraction value)")
+    print("  Sophie map connects addition value 29 → subtraction value 59")
+    print("  23∈TESLA (subtraction) is both Sophie Germain and safe prime:")
+    print("    chain: 11∈NEG_H →[Sophie]→ 23∈TESLA →[Sophie]→ 47∈IC")
 
 
 if __name__ == "__main__":
