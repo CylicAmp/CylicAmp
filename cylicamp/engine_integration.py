@@ -39,7 +39,13 @@ from abcabc_mod37_orbit import abcabc_theorem, compute_orbit
 from lucas_abbc_chain import lucas_seq
 from sovereign_qr_closure import legendre
 from heartbeat_3cycle import f as heartbeat_step
-from cylicamp.g5_solver import evaluate as g5_evaluate, format_report as g5_format
+from cylicamp.g5_solver import (
+    evaluate as g5_evaluate,
+    format_report as g5_format,
+    cage_integrity_check,
+    REQUIRED_INTEGRITY_INDEX,
+    P as _P,
+)
 from theorem_120_digit_algebra_007_008 import A as _T120_M1, B as _T120_M2, digital_root as _dr
 from theorem_121_scientific_notation_007_008 import s as _T121_S
 
@@ -169,6 +175,18 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     print()
     print(g5_format(g5))
 
+    # Step 15: Cage Integrity Check (T226)
+    _agg_residue = int(insight_score) % _P
+    _scaled_insight = _agg_residue / _P
+    _integrity_ratio = result["Stability_Ratio"]
+    cage_status, _integrity_ratio_out = cage_integrity_check(_scaled_insight, _integrity_ratio)
+    print()
+    print(f"Cage Integrity Check (T226):")
+    print(f"  aggregate residue:       {_agg_residue} / {_P}  = {_scaled_insight:.4f}")
+    print(f"  REQUIRED_INTEGRITY_INDEX = {REQUIRED_INTEGRITY_INDEX:.4f}  [E(7)]")
+    print(f"  integrity_ratio:         {_integrity_ratio_out:.4f}  (passed through)")
+    print(f"  {cage_status}")
+
     output = {
         "seed": seed,
         "multiplier": multiplier,
@@ -207,6 +225,13 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
             "compatibility_status": g5.compatibility_status.name,
             "compatibility_detail": g5.compatibility_detail,
             "all_checks_pass": g5.all_checks_pass,
+        },
+        "cage_integrity": {
+            "aggregate_residue": _agg_residue,
+            "scaled_insight": _scaled_insight,
+            "required_integrity_index": REQUIRED_INTEGRITY_INDEX,
+            "integrity_ratio": _integrity_ratio_out,
+            "status": cage_status,
         },
     }
 
