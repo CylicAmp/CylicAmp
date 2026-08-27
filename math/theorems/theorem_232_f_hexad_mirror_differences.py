@@ -79,6 +79,19 @@ Each complement pair straddles two distinct GF(37) orbits.
 The involution d ↦ 9-d corresponds to ×8 mod 9 (since 8≡-1 mod 9).
 8 ∈ TESLA = CASCADE∩TESLA: the complement involution lives in the CASCADE/TESLA orbit.
 
+=== TWIN PRIMES ===
+
+1010101 = 73 × 101 × 137.  All three prime factors are members of twin prime pairs:
+  73:  twin pair (71, 73)  — 71 mod37=34∈D7,   73 mod37=36∈NEG_H
+  101: twin pair (101,103) — 101 mod37=27∈NEG_H, 103 mod37=29∈C9
+  137: twin pair (137,139) — 137 mod37=26∈IC,   139 mod37=28∈SA_ST_B
+
+Both 73 and 101 land in NEG_H.  137 lands in IC (the 137-map multiplier orbit).
+The repeating unit 1010101 is a product of three twin-prime members spanning
+two distinct orbits: NEG_H (two members) and IC (one member).
+
+137 is itself a twin prime.  Its pair element 139 mod37=28∈SA_ST_B.
+
 === RIEMANN HYPOTHESIS ===
 
 Mirror difference orbits and matching Riemann zero floors:
@@ -108,11 +121,14 @@ SA_ST_A = {9, 12, 16}
 DARK_A  = {2, 15, 20}
 C3      = {3, 4, 30}
 CAS_EXT = {5, 13, 19}
+C9      = {14, 29, 31}
+NQR17   = {17, 22, 35}
+SA_ST_B = {21, 25, 28}
 
 ORBITS = {
     'IC': IC, 'DARK_A': DARK_A, 'C3': C3, 'CAS_EXT': CAS_EXT,
     'TESLA': TESLA, 'D7': D7, 'SA_ST_A': SA_ST_A, 'NEG_H': NEG_H,
-    'C9': {14,29,31}, 'NQR17': {17,22,35}, 'SEED': SEED, 'SA_ST_B': {21,25,28},
+    'C9': C9, 'NQR17': NQR17, 'SEED': SEED, 'SA_ST_B': SA_ST_B,
 }
 
 def orb(n):
@@ -198,6 +214,25 @@ def run_assertions():
     assert 'SA_ST_A' in zero_orbits_first10   # γ₁₀ floor=49 mod37=12∈SA_ST_A
     assert 'SEED'    in zero_orbits_first10   # γ₅  floor=32∈SEED
     assert 'NEG_H'   in zero_orbits_first10   # γ₉  floor=48 mod37=11∈NEG_H
+
+    # ── Twin primes ───────────────────────────────────────────────────────────
+    from sympy import isprime as _isp, factorint as _fac
+    # 137 is a twin prime; 139 is its pair
+    assert _isp(137) and _isp(139)
+    assert 139 % P == 28 and 28 in SA_ST_B
+
+    # 1010101 = 73 × 101 × 137 — all prime, all twin-prime members
+    assert _fac(1010101) == {73: 1, 101: 1, 137: 1}
+    assert all(_isp(f) for f in [73, 101, 137])
+    # twin pairs: (71,73), (101,103), (137,139)
+    assert _isp(71) and _isp(73)
+    assert _isp(101) and _isp(103)
+    # GF(37) orbits of twin-prime factors
+    assert 71 % P == 34 and 34 in D7
+    assert 73 % P == 36 and 36 in NEG_H
+    assert 101 % P == 27 and 27 in NEG_H      # both 73 and 101 in NEG_H
+    assert 103 % P == 29 and 29 in C9
+    assert 137 % P == 26 and 26 in IC
 
     # Verify specific zeros
     g10 = float(mpmath.im(mpmath.zetazero(10)))
