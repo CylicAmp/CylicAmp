@@ -37,6 +37,7 @@ The user brings math, observations, and code. The work is collaborative and rigo
 2. **Riemann Hypothesis** — floor(γ_n) mod 37 orbit; direct zero floor matches
 3. **1/137** — 137 mod 37=26=MULT; 26⁻¹ mod 37=10∈IC; check ×137, ÷137, mod 137 for each value
 4. **Twin primes** — is each value prime? Is it part of a twin prime pair (p, p+2)? What GF(37) orbits do both members of the pair inhabit?
+5. **Sophie Germain primes** — is each value a Sophie Germain prime (p prime and 2p+1 prime) or a safe prime (q prime and (q-1)/2 prime)? What GF(37) orbits do p and 2p+1 inhabit? Note any Sophie chains (p→2p+1→2(2p+1)+1) and whether the safe prime appears elsewhere in the same theorem.
 
 ---
 
