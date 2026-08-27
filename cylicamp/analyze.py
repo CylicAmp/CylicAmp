@@ -82,6 +82,18 @@ def is_prime(n):
     return True
 
 
+def prime_index(n):
+    """Return k such that n is the k-th prime (1-indexed). None if not prime."""
+    if not is_prime(n):
+        return None
+    count, candidate = 0, 2
+    while candidate <= n:
+        if is_prime(candidate):
+            count += 1
+        candidate += 1
+    return count
+
+
 def prime_type(n):
     types = []
     if is_prime(n):
@@ -146,6 +158,7 @@ def analyze(n):
     orb_len = len(orb)
     members = membership(r)
     ptypes = prime_type(n)
+    pidx  = prime_index(n)
     c3 = chi3(n)
     zn, zv, zd = nearest_zeta(n)
     hol = holonomy_class(n)
@@ -159,7 +172,10 @@ def analyze(n):
     print(f"  137-map orbit  = {orb}  (period {orb_len})")
     print(f"  Holonomy class = {hol}")
     print(f"  χ₋₃(n)        = {c3:+d}")
-    print(f"  Primality      = {', '.join(ptypes) if ptypes else 'composite'}")
+    prime_str = ', '.join(ptypes) if ptypes else 'composite'
+    if pidx:
+        prime_str += f'  [prime #{pidx}]'
+    print(f"  Primality      = {prime_str}")
     print(f"  Nearest ζ zero = γ_{zn} = {zv:.6f}  (distance {zd:.6f})")
 
     # DR symmetric pair check (center 34)
