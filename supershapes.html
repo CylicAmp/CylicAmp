@@ -1,0 +1,316 @@
+<title>Supershapes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap">
+<style>
+:root {
+  --bg: #060608;
+  --accent: #c8ff3e;
+  --text: #dde0f0;
+  --muted: #3a3e50;
+  --bmuted: #6a6e82;
+  --mono: 'DM Mono', 'Courier New', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body { background: var(--bg); color: var(--text); font-family: var(--mono); }
+canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: block; cursor: grab; }
+canvas:active { cursor: grabbing; }
+
+#sel {
+  position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
+  z-index: 10; display: flex; flex-direction: column; gap: 0; pointer-events: all;
+}
+.sb {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--mono); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); padding: 5px 0; text-align: left;
+  transition: color 0.15s; white-space: nowrap; display: flex; align-items: center; gap: 6px;
+}
+.sb-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--muted); flex-shrink: 0; transition: background 0.15s;
+}
+.sb:hover { color: var(--bmuted); }
+.sb:hover .sb-dot { background: var(--bmuted); }
+.sb.on { color: var(--accent); }
+.sb.on .sb-dot { background: var(--accent); }
+
+#info {
+  position: fixed; bottom: 32px; left: 0; right: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  pointer-events: none; z-index: 10;
+}
+#sname { font-size: 17px; font-weight: 500; letter-spacing: 0.07em; color: var(--text); }
+#sparams { font-size: 9px; letter-spacing: 0.15em; color: var(--muted); }
+
+#pbar {
+  position: fixed; bottom: 0; left: 0; height: 1px;
+  background: var(--accent); width: 0; z-index: 20; opacity: 0.45;
+}
+</style>
+
+<canvas id="c"></canvas>
+<div id="sel"></div>
+<div id="info"><div id="sname"></div><div id="sparams"></div></div>
+<div id="pbar"></div>
+
+<script>
+const SHAPES = [
+  { name: '5-Point Starfish',  p1:[5.0, 0.20, 1.70, 1.70], p2:[5.0, 0.20, 1.70, 1.70] },
+  { name: 'Flat Starfish',     p1:[5.0, 0.20, 1.70, 1.70], p2:[2.0, 1.00, 1.00, 1.00] },
+  { name: 'Sea Urchin',        p1:[8.0, 0.40, 0.50, 0.50], p2:[8.0, 0.40, 0.50, 0.50] },
+  { name: '6-Petal Flower',    p1:[6.0,60.00,55.00,30.00], p2:[6.0,250.0,100.0,100.0] },
+  { name: '7-Petal Blossom',   p1:[7.0, 0.30, 1.00, 1.00], p2:[1.0, 1.00, 1.00, 1.00] },
+  { name: 'Hexagonal Crystal', p1:[6.0,100.0,100.0,100.0], p2:[2.0,100.0,100.0,100.0] },
+  { name: 'Octahedral Gem',    p1:[4.0,100.0,100.0,100.0], p2:[4.0,100.0,100.0,100.0] },
+  { name: 'Ribbed Clamshell',  p1:[10., 1.00, 1.00, 1.00], p2:[2.0,10.00,10.00,10.00] },
+  { name: 'Asymmetric Shell',  p1:[3.0,60.00,55.00,30.00], p2:[1.0, 0.50, 1.00, 1.00] },
+];
+
+const U = 80, V = 40;
+
+function sf(a, m, n1, n2, n3) {
+  const t = m * a / 4;
+  const c = Math.pow(Math.abs(Math.cos(t)), n2);
+  const s = Math.pow(Math.abs(Math.sin(t)), n3);
+  const sum = c + s;
+  if (!sum || !isFinite(sum)) return 0;
+  const r = Math.pow(sum, -1 / n1);
+  return isFinite(r) ? r : 0;
+}
+
+function buildVerts(p1, p2) {
+  const [m1,a1,b1,c1] = p1, [m2,a2,b2,c2] = p2;
+  const arr = [];
+  for (let j = 0; j <= V; j++) {
+    const phi = -Math.PI / 2 + Math.PI * j / V;
+    const r2 = sf(phi, m2, a2, b2, c2);
+    const cp = Math.cos(phi), sp = Math.sin(phi);
+    for (let i = 0; i <= U; i++) {
+      const th = -Math.PI + 2 * Math.PI * i / U;
+      const r1 = sf(th, m1, a1, b1, c1);
+      arr.push(r1*Math.cos(th)*r2*cp, r1*Math.sin(th)*r2*cp, r2*sp);
+    }
+  }
+  let maxR = 0;
+  for (let i = 0; i < arr.length; i += 3) {
+    const r = Math.sqrt(arr[i]**2 + arr[i+1]**2 + arr[i+2]**2);
+    if (r > maxR) maxR = r;
+  }
+  if (maxR > 0) { const sc = 1.8/maxR; for (let i=0;i<arr.length;i++) arr[i]*=sc; }
+  return new Float32Array(arr);
+}
+
+// Static face index pairs
+const FACES = [];
+for (let j = 0; j < V; j++) {
+  for (let i = 0; i < U; i++) {
+    const a = j*(U+1)+i, b=a+1, c=a+(U+1), d=c+1;
+    FACES.push(a*3, c*3, b*3);
+    FACES.push(b*3, c*3, d*3);
+  }
+}
+
+const allVerts = SHAPES.map(s => buildVerts(s.p1, s.p2));
+const nF = FACES.length / 3;
+const nV = (U+1)*(V+1);
+
+// Morph state
+let srcVerts = new Float32Array(allVerts[0]);
+let tgtVerts = allVerts[0];
+let curVerts = new Float32Array(allVerts[0]);
+let morphT = 1, morphStart = 0;
+const MORPH_DUR = 1100;
+let curIdx = 0;
+
+function setShape(idx, animate) {
+  tgtVerts = allVerts[idx];
+  if (animate) {
+    srcVerts = new Float32Array(curVerts);
+    morphT = 0; morphStart = performance.now();
+  } else {
+    curVerts.set(tgtVerts);
+    srcVerts = new Float32Array(tgtVerts);
+    morphT = 1;
+  }
+  curIdx = idx;
+  updateUI(idx);
+  document.querySelectorAll('.sb').forEach((b,i)=>b.classList.toggle('on', i===idx));
+}
+
+function updateUI(idx) {
+  const s = SHAPES[idx];
+  document.getElementById('sname').textContent = s.name;
+  const fmt = p => '['+p.map(v=>v.toFixed(2)).join(', ')+']';
+  document.getElementById('sparams').textContent = 'θ '+fmt(s.p1)+'   φ '+fmt(s.p2);
+}
+
+// Build selector
+const sel = document.getElementById('sel');
+SHAPES.forEach((s,i) => {
+  const btn = document.createElement('button');
+  btn.className = 'sb';
+  const dot = document.createElement('span'); dot.className = 'sb-dot';
+  btn.appendChild(dot);
+  btn.appendChild(document.createTextNode(s.name));
+  btn.onclick = () => setShape(i, true);
+  sel.appendChild(btn);
+});
+setShape(0, false);
+
+// Canvas
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+function resize() { cv.width = window.innerWidth; cv.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+
+// Drag rotation
+let rotX = 0, rotY = 0, autoRY = 0;
+let dragging = false, lastX, lastY;
+cv.addEventListener('mousedown', e => { dragging=true; lastX=e.clientX; lastY=e.clientY; });
+window.addEventListener('mouseup', () => { dragging=false; });
+window.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  rotY += (e.clientX-lastX)*0.009; rotX += (e.clientY-lastY)*0.009;
+  lastX=e.clientX; lastY=e.clientY;
+});
+cv.addEventListener('touchstart', e => {
+  dragging=true; lastX=e.touches[0].clientX; lastY=e.touches[0].clientY;
+  e.preventDefault();
+}, {passive:false});
+window.addEventListener('touchend', ()=>{dragging=false;});
+window.addEventListener('touchmove', e => {
+  if (!dragging) return;
+  rotY+=(e.touches[0].clientX-lastX)*0.009; rotX+=(e.touches[0].clientY-lastY)*0.009;
+  lastX=e.touches[0].clientX; lastY=e.touches[0].clientY;
+});
+
+// Lighting (world space, fixed)
+const LX=0.58, LY=0.70, LZ=0.42; // already normalized ~unit
+// Accent color: 200,255,62  Dark: 10,15,28
+function shadeColor(t) {
+  const r = 10+Math.round(190*t), g = 15+Math.round(240*t), b = 28+Math.round(0*t);
+  // Shift: dark=deep blue, bright=chartreuse
+  // deep: rgb(10,15,28), bright: rgb(200,255,62)
+  const ri = Math.round(10 + 190*t);
+  const gi = Math.round(15 + 240*t);
+  const bi = Math.round(28 - 28*t);
+  return (ri<<16)|(gi<<8)|bi;
+}
+
+// Precompute color table
+const COLOR_TABLE = new Array(256);
+for (let i=0;i<256;i++) {
+  const t = i/255;
+  const ri = Math.round(10+190*t);
+  const gi = Math.round(15+240*t);
+  const bi = Math.round(28-28*t);
+  COLOR_TABLE[i] = `rgb(${ri},${gi},${bi})`;
+}
+
+function eio(t) { return t<0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+// Working arrays
+const rotVX = new Float32Array(nV);
+const rotVY = new Float32Array(nV);
+const rotVZ = new Float32Array(nV);
+const projX = new Float32Array(nV);
+const projY = new Float32Array(nV);
+
+const faceZ   = new Float32Array(nF);
+const faceLit = new Float32Array(nF);
+const faceOrder = new Int32Array(nF);
+
+let lastAdvance = 0;
+const ADV_INT = 7000;
+const pbar = document.getElementById('pbar');
+
+function frame(now) {
+  requestAnimationFrame(frame);
+
+  if (lastAdvance === 0) lastAdvance = now;
+
+  // Morph update
+  if (morphT < 1) {
+    morphT = Math.min((now-morphStart)/MORPH_DUR, 1);
+    const t = eio(morphT);
+    for (let i=0;i<curVerts.length;i++) curVerts[i] = srcVerts[i]+(tgtVerts[i]-srcVerts[i])*t;
+  }
+
+  // Auto-advance
+  if (now-lastAdvance > ADV_INT) {
+    lastAdvance = now;
+    setShape((curIdx+1)%SHAPES.length, true);
+  }
+  pbar.style.width = (Math.min((now-lastAdvance)/ADV_INT,1)*100)+'%';
+
+  // Rotation
+  if (!dragging) autoRY += 0.005;
+  const ry = rotY+autoRY, rx = rotX;
+  const cry=Math.cos(ry), sry=Math.sin(ry);
+  const crx=Math.cos(rx), srx=Math.sin(rx);
+
+  const W=cv.width, H=cv.height;
+  const cx=W/2, cy2=H/2;
+  const scale = Math.min(W,H)*0.42;
+  const camZ = 4.5;
+
+  // Transform vertices
+  for (let k=0; k<nV; k++) {
+    const bi=k*3;
+    let x=curVerts[bi], y=curVerts[bi+1], z=curVerts[bi+2];
+    // Rotate Y
+    const x2=x*cry+z*sry, z2=-x*sry+z*cry; x=x2; z=z2;
+    // Rotate X
+    const y3=y*crx-z*srx, z3=y*srx+z*crx; y=y3; z=z3;
+    rotVX[k]=x; rotVY[k]=y; rotVZ[k]=z;
+    const dz=z+camZ;
+    const f=scale/Math.max(dz,0.01);
+    projX[k]=cx+x*f; projY[k]=cy2-y*f;
+  }
+
+  // Compute face z, normal, lighting
+  for (let f=0; f<nF; f++) {
+    const fi=f*3;
+    const ai=FACES[fi]/3, ci2=FACES[fi+1]/3, bi=FACES[fi+2]/3;
+    const ax=rotVX[ai],ay=rotVY[ai],az=rotVZ[ai];
+    const bx=rotVX[bi],by=rotVY[bi],bz=rotVZ[bi];
+    const cx3=rotVX[ci2],cy3=rotVY[ci2],cz3=rotVZ[ci2];
+    // Normal = (B-A) × (C-A)
+    const e1x=bx-ax, e1y=by-ay, e1z=bz-az;
+    const e2x=cx3-ax, e2y=cy3-ay, e2z=cz3-az;
+    const nx=e1y*e2z-e1z*e2y, ny=e1z*e2x-e1x*e2z, nz=e1x*e2y-e1y*e2x;
+    const nl=Math.sqrt(nx*nx+ny*ny+nz*nz);
+    let lit=0.1;
+    if (nl>1e-6) lit=Math.max(0,(nx/nl)*LX+(ny/nl)*LY+(nz/nl)*LZ)*0.82+0.1;
+    faceZ[f]=(az+bz+cz3)/3;
+    faceLit[f]=lit;
+    faceOrder[f]=f;
+  }
+
+  // Sort back to front
+  // Use a simple typed sort
+  const order = Array.from(faceOrder);
+  order.sort((a,b) => faceZ[a]-faceZ[b]);
+
+  // Draw
+  ctx.fillStyle='#060608';
+  ctx.fillRect(0,0,W,H);
+
+  for (let fi=0; fi<nF; fi++) {
+    const f=order[fi];
+    const idx=f*3;
+    const ai=FACES[idx]/3, ci2=FACES[idx+1]/3, bi=FACES[idx+2]/3;
+    const ci=Math.min(255, Math.round(faceLit[f]*faceLit[f]*255));
+    ctx.beginPath();
+    ctx.moveTo(projX[ai], projY[ai]);
+    ctx.lineTo(projX[ci2], projY[ci2]);
+    ctx.lineTo(projX[bi], projY[bi]);
+    ctx.closePath();
+    ctx.fillStyle=COLOR_TABLE[ci];
+    ctx.fill();
+  }
+}
+
+requestAnimationFrame(frame);
+</script>
