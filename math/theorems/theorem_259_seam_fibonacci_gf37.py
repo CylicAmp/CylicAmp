@@ -10,7 +10,7 @@ Fibonacci mod 37 — central results:
   Pisano period π(37) = 76 = 4 × 19; 76 mod 37 = 2 ∈ DARK_A
   CAS_EXT = {5,13,19}: F(5)=5∈CAS_EXT, F(7)=13∈CAS_EXT, α(37)=19∈CAS_EXT
     The full CAS_EXT orbit appears as Fibonacci values and as the entry point itself.
-  DNA Fibonacci pair: F(8)=21∈SA_ST_B, F(9)=34∈D7, F(10)=55≡18∈SEED
+  Fibonacci pair F(8)=21∈SA_ST_B, F(9)=34∈D7, F(10)=55≡18∈SEED
     F(9)-F(8)=13∈CAS_EXT=F(7): the backward Fibonacci step stays in CAS_EXT
   R30 fixed points in Fibonacci: R30(F(5)=5)=5, R30(F(8)=21)=21
   5 is NQR mod 37: √5 and φ=(1+√5)/2 do not exist in GF(37), only in GF(37²)
@@ -153,8 +153,7 @@ print(f"  F(7) = 13 ∈ CAS_EXT")
 print(f"  α(37) = 19 ∈ CAS_EXT  (entry point, where 37 first divides F(n))")
 print(f"  The complete orbit CAS_EXT is indexed by the Fibonacci sequence at n=5,7,19")
 
-# ── Part 4: DNA Fibonacci pair F(8)=21, F(9)=34 ──────────────────────────────
-# Cited in IT³ framework as DNA dimensions (34×21 angstroms = F_9 × F_8)
+# ── Part 4: Fibonacci pair F(8)=21, F(9)=34 ──────────────────────────────────
 # F(8)=21∈SA_ST_B, F(9)=34∈D7, F(10)=55≡18∈SEED
 # F(9)-F(8)=13∈CAS_EXT: backward Fibonacci step = F(7), stays in CAS_EXT
 
@@ -164,8 +163,8 @@ assert fib_full[10] == 55 and fib_mod[10] == 18 and orbit_of(18) == "SEED"
 assert fib_full[9] - fib_full[8] == 13 == fib_full[7]
 assert orbit_of(13) == "CAS_EXT"
 
-print(f"\nPart 4 PASS: DNA Fibonacci pair F(8)=21∈SA_ST_B, F(9)=34∈D7")
-print(f"  F(10) = 55 mod37 = 18 ∈ SEED: Fibonacci step from DNA pair lands in SEED")
+print(f"\nPart 4 PASS: Fibonacci pair F(8)=21∈SA_ST_B, F(9)=34∈D7")
+print(f"  F(10) = 55 mod37 = 18 ∈ SEED: Fibonacci step from F(8),F(9) lands in SEED")
 print(f"  F(9)-F(8) = 13 = F(7) ∈ CAS_EXT: backward step recovers F(7)∈CAS_EXT")
 print(f"  SA_ST_B → D7 → SEED: orbit trajectory of three consecutive Fibonacci terms")
 
@@ -195,8 +194,7 @@ assert rule30(34) % 37 == 18 and orbit_of(18) == "SEED"  # same as F(10) mod 37
 
 # ── Part 6: φ and √5 in GF(37) ───────────────────────────────────────────────
 # 5 is NQR mod 37: (5|37) = -1
-# → √5 ∉ GF(37); φ = (1+√5)/2 ∉ GF(37); both live in GF(37²)
-# IT³ framework claims φ as structural; φ has no representation in the base field
+# √5 ∉ GF(37); φ = (1+√5)/2 ∉ GF(37); both live in GF(37²)
 
 assert legendre(5) == -1
 sqrts5 = [x for x in range(37) if pow(x, 2, 37) == 5]
@@ -206,13 +204,7 @@ print(f"\nPart 6 PASS: φ = (1+√5)/2 ∉ GF(37)")
 print(f"  (5|37) = {legendre(5)}: 5 is NQR mod 37")
 print(f"  x² ≡ 5 mod 37 has no solution in GF(37)")
 print(f"  √5 and φ exist only in GF(37²), not in the base field")
-
-# IT³ cascade: 1+2=3, 2+3=5 (trivially true; just consecutive Fibonacci sums)
-assert 1 + 2 == 3
-assert 2 + 3 == 5
-print(f"  IT³ cascade: 1+2=3 and 2+3=5 are trivial consecutive integer equalities")
-print(f"  These hold because F(n)+F(n+1)=F(n+2): the defining Fibonacci recursion")
-print(f"  GF(37) orbits of cascade values 1,2,3,5: IC,DARK_A,C3,CAS_EXT")
+print(f"  Fibonacci values 1,2,3,5 in GF(37): IC,DARK_A,C3,CAS_EXT")
 
 # ── Part 7: Fibonacci orbit sequence (F(1)..F(19)) ───────────────────────────
 
@@ -243,7 +235,7 @@ print(f"  Quotient 259/37 = 7 ∈ D7; DR(259) = 7 ∈ D7")
 print(f"  α(37) = 19 ∈ CAS_EXT: 37 first divides F(19) = 4181 = 37×113")
 print(f"  π(37) = 76 = 4×19; 76 mod 37 = 2 ∈ DARK_A")
 print(f"  CAS_EXT = {{5,13,19}}: complete orbit as F(5)=5, F(7)=13, α(37)=19")
-print(f"  DNA pair: F(8)=21∈SA_ST_B, F(9)=34∈D7, F(10)=55≡18∈SEED")
+print(f"  F(8)=21∈SA_ST_B, F(9)=34∈D7, F(10)=55≡18∈SEED")
 print(f"  R30 fixed: R30(5)=5 (CAS_EXT), R30(21)=21 (SA_ST_B)")
 print(f"  5 NQR mod 37: φ and √5 not in GF(37), only in GF(37²)")
 print(f"  2n+1=519∈IC; (n-1)/2=129∈SEED; R30(259)=390∈DARK_A")
