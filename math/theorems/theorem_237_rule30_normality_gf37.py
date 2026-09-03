@@ -298,6 +298,91 @@ def run_assertions():
     print()
     print(f"k=10 most over-represented: 509 mod37=28 ∈ SA_ST_B (Sophie Germain; safe prime 1019 ∈ DARK_A)")
     print(f"k=10 least frequent:        211 mod37=26 ∈ IC      (137-map fixes IC)")
+    print()
+    tie_correction()
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TIE CORRECTION (added after independent re-verification)
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# The measured quantities above re-verify exactly: density 0.5060 at N=20000,
+# mean runs 2.011/1.964, max runs 13/14, chi2/df = 1.0168 at k=10, and the full
+# chi2 table. Those stand.
+#
+# The EXTREME-BLOCK ORBIT INFERENCE does not. At k=10 the maximum count (33) is
+# a THREE-WAY TIE, and the minimum count (7) is a TWO-WAY TIE:
+#
+#   k=10 max, count 33:   183 -> 35 ∈ NQR17
+#                         409 ->  2 ∈ DARK_A
+#                         509 -> 28 ∈ SA_ST_B      <- the one originally reported
+#
+#   k=10 min, count  7:   211 -> 26 ∈ IC          <- the one originally reported
+#                         521 ->  3 ∈ C3
+#
+# The original claim — "the most over-represented block has its binary value in
+# the most active-biased regular orbit" — selected 509 from a three-way tie.
+# The tie also contains DARK_A, which this same theorem identifies as the MOST
+# INACTIVE-biased orbit. The tie therefore spans both ends of the bias scale,
+# so the orbit assignment of the maximum carries no information. Under T282 this
+# is post-hoc label-fit: no possible outcome could have counted as a miss,
+# because a tie member exists in orbits on both sides of the hypothesis.
+#
+# STATUS CHANGE:
+#   k=10 max orbit inference  ->  WITHDRAWN (selection from an unbroken tie)
+#   k=10 min orbit inference  ->  WITHDRAWN (selection from an unbroken tie)
+#   k=9  max (91 -> NQR17)    ->  STANDS. Verified as a genuine 1-way maximum.
+#   k=8  max                  ->  2-way tie (117->TESLA, 157->SA_ST_A); no claim made.
+#   chi2 / density / runs     ->  STAND. Re-verified to 3-4 decimals.
+#
+# The arithmetic about 509 and 211 is all correct and stays: 509 is prime and
+# Sophie Germain (1019 prime), 211 is prime and is not. What is withdrawn is
+# only the inference that their ORBITS explain their block frequencies.
+#
+# Separate note on a 0-bit statement: "the 137-map keeps 509's orbit SA_ST_B"
+# and "the 137-map fixes IC" are true but forced — EVERY orbit is preserved by
+# the 137-map, since that is what makes it an orbit. These sentences describe
+# the definition, not a property of 509 or 211.
+
+def center_col_fast(n_steps):
+    """Bitwise Rule 30 center column. Same convention as center_col():
+    the value is recorded AFTER each step."""
+    W = 2 * n_steps + 5
+    mask = (1 << W) - 1
+    c = W // 2
+    row = 1 << c
+    col = bytearray(n_steps)
+    for i in range(n_steps):
+        row = ((row << 1) ^ (row | (row >> 1))) & mask
+        col[i] = (row >> c) & 1
+    return col
+
+
+def tie_correction(col=None):
+    """Recompute the k=8,9,10 extremes and report the FULL tie sets."""
+    if col is None:
+        col = center_col_fast(20000)
+    print("TIE CORRECTION — full extreme sets (not single representatives):")
+    for k in (8, 9, 10):
+        m = (1 << k) - 1
+        cnt = {}
+        v = 0
+        for idx in range(len(col)):
+            v = ((v << 1) | col[idx]) & m
+            if idx >= k - 1:
+                cnt[v] = cnt.get(v, 0) + 1
+        freq = {b: cnt.get(b, 0) for b in range(1 << k)}
+        mx, mn = max(freq.values()), min(freq.values())
+        top = sorted(b for b in freq if freq[b] == mx)
+        bot = sorted(b for b in freq if freq[b] == mn)
+        print(f"  k={k}: max={mx} ({len(top)}-way tie) "
+              f"{[(b, b % 37, orb(b)) for b in top]}")
+        print(f"       min={mn} ({len(bot)}-way tie) "
+              f"{[(b, b % 37, orb(b)) for b in bot[:4]]}"
+              f"{' ...' if len(bot) > 4 else ''}")
+    print()
+    print("  k=10 max and min are BOTH ties -> orbit inferences WITHDRAWN.")
+    print("  k=9 max (91 -> NQR17) is a genuine 1-way maximum -> STANDS.")
 
 
 if __name__ == "__main__":
