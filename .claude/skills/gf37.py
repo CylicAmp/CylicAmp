@@ -164,8 +164,19 @@ def rule30(n, bits=8):
 
 
 def factor(n):
-    f, d = {}, 2
-    n = abs(n)
+    """
+    Prime factorization. A negative n carries a -1 key so the product of
+    the returned factors equals n; abs() is not applied silently. Same
+    rule as dr(): a function must not return something that disagrees
+    with its input.
+    """
+    if n == 0:
+        raise ValueError("factor(0) is undefined")
+    f = {}
+    if n < 0:
+        f[-1] = 1
+        n = -n
+    d = 2
     while d * d <= n:
         while n % d == 0:
             f[d] = f.get(d, 0) + 1
@@ -174,6 +185,14 @@ def factor(n):
     if n > 1:
         f[n] = f.get(n, 0) + 1
     return f
+
+
+def factor_product(f):
+    """Reconstruct n from factor(n). Used to assert round-tripping."""
+    v = 1
+    for b, e in f.items():
+        v *= b ** e
+    return v
 
 
 # ── Riemann zeros: first 30 imaginary parts, for the standing RH check ──
