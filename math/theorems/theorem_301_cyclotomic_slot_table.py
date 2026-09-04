@@ -41,10 +41,19 @@ ord_p(137) = d, or else p | d (the 2s in rows 2, 4, 8 and the 3 in row 6).
 it is the slot the framework uses.
 
 ════════════════════════════════════════════════════════════════════════════
-THE FRAMEWORKS THAT WERE AVAILABLE
+OTHER ROWS OF THE SAME TABLE
 ════════════════════════════════════════════════════════════════════════════
-A framework built on orbits of size k needs ord_p(137) = k, so its admissible
-prime set is the factor list of Phi_k(137):
+CORRECTION TO AN EARLIER FRAMING: these were called "frameworks that were
+available", which gives them a status they do not have. Nobody built them,
+and 37 was not selected off a menu. A k-orbit picture over F_p needs
+ord_p(137) = k, hence p | Phi_k(137); for k=3 the primes are small and
+include 37, and 137 = 26 (mod 37) is a root of Phi_3. That is why the plate
+is drawn in F_37. The rows below are other values of Phi_k, not unused
+alternatives.
+
+The counterfactual in the next section is still mathematically real — it
+says what WOULD hold at even k — but it describes the arithmetic, not a
+choice anyone made.
 
     k    admissible primes         orbit counts (p-1)/k
     2    3, 23                     1, 11
@@ -81,12 +90,46 @@ It does not single out k = 3. k = 5 was equally available and would have
 given 20 orbits at p = 101, with 10 antipodal pairs and a Z/20Z quotient.
 
 ════════════════════════════════════════════════════════════════════════════
+THIS AUDIT IS USE 1 ONLY  (T299 split, generalized to all d)
+════════════════════════════════════════════════════════════════════════════
+Everything above evaluates Phi_d in Z[x] at 137 and factors the result.
+That is Use 1. It computes no class numbers and no traces.
+
+Use 2 for general d is the ring Z[x]/(Phi_d) = Z[zeta_d], of degree phi(d).
+Elliptic CM requires an imaginary quadratic ring, i.e. degree 2:
+
+    d    phi(d)   Q(zeta_d)              elliptic CM?
+    1      1      Q                      no
+    2      1      Q                      no
+    3      2      Q(sqrt(-3))            YES
+    4      2      Q(i)                   YES
+    5      4      degree-4 cyclotomic    no
+    6      2      Q(sqrt(-3))            YES  (same field as d=3)
+    7      6      degree-6 cyclotomic    no
+   >=5     >=4    higher cyclotomic      no
+
+So Use 2 yields elliptic CM for exactly two fields, Q(sqrt(-3)) and Q(i).
+For d >= 5 (d != 6) the ring has degree >= 4 and belongs to abelian
+varieties, not elliptic curves. Nothing in the Use-1 table above touches it.
+
+This also closes T300's completeness claim. The imaginary quadratic orders
+of class number one are the nine Heegner discriminants
+
+    -3, -4, -7, -8, -11, -19, -43, -67, -163
+
+and only -3 and -4 carry units beyond +-1 (six and four respectively). Hence
+n in {2, 4, 6} exactly, which is why T300's list {5, 17, 37} is complete.
+
+════════════════════════════════════════════════════════════════════════════
 WHAT THIS SETTLES
 ════════════════════════════════════════════════════════════════════════════
-The framework's admissible set is one row of an infinite table. Its size
-(three primes) is unremarkable — d=5 also has three, d=9 has three, d=12
-has three. Its parity (odd k) is the one property that matters, because
-that is what keeps the antipodal structure alive.
+The row the framework occupies is one row of an infinite table. Its size
+(three primes) is unremarkable — d=5, d=9 and d=12 also have three. The
+parity of k is the one property that matters, because that is what keeps the
+antipodal structure alive.
+
+Same split as before: Use 1 factors integers, Use 2 builds rings. This
+theorem is entirely Use 1.
 """
 
 from sympy import factorint, isprime, n_order, cyclotomic_poly, Poly
@@ -210,12 +253,15 @@ def run():
     print("  37 is one of three primes in the d=3 slot. The slot is not")
     print("  distinguished; it is the slot the framework uses.")
 
-    print("\n--- Part 3: the frameworks that were available ---")
-    print(f"  {'k':>3}  {'admissible primes':<28} orbit counts (p-1)/k")
+    print("\n--- Part 3: other rows of the same table ---")
+    print("  (These are other values of Phi_k, not unused alternatives.")
+    print("   A k-orbit picture needs ord_p(137)=k, hence p | Phi_k(137);")
+    print("   for k=3 the primes are small and include 37.)")
+    print(f"  {'k':>3}  {'primes with ord=k':<28} orbit counts (p-1)/k")
     for k in (2, 3, 4, 5, 6):
         ps = admissible(k)
         oc = [(p - 1) // k for p in ps]
-        mark = '   <- chosen' if k == 3 else ''
+        mark = '   <- the row in use' if k == 3 else ''
         print(f"  {k:>3}  {str(ps):<28} {oc}{mark}")
 
     prof = verify_parity_constraint()
@@ -231,15 +277,34 @@ def run():
         print(f"  {k:>3} {p:>8} {str(inside):>10} {tot:>8} {selfa:>10}  {s}")
     print("\n  T283, T284, T286 antipodal-closure, T289 twist pairs and T296's")
     print("  180-degree rotation ALL require k odd. k=3 is the smallest odd")
-    print("  k > 1 — a genuine constraint the framework satisfies.")
-    print("  It does not single out k=3: k=5 was equally available and gives")
-    print("  20 orbits at p=101 with 10 antipodal pairs and a Z/20Z quotient.")
+    print("  k > 1 — a genuine constraint the arithmetic satisfies here.")
+    print("  This is a fact about even k, not about a choice anyone made:")
+    print("  at k=5 the same structure appears, 10 pairs at p=101.")
+
+    print("\n--- Part 5: this audit is USE 1 only (T299 split, all d) ---")
+    print("  Everything above evaluates Phi_d at 137 and factors it.")
+    print("  Use 2 is the ring Z[x]/(Phi_d) = Z[zeta_d], of degree phi(d).")
+    print("  Elliptic CM needs degree 2:")
+    print(f"    {'d':>3} {'phi(d)':>7}  {'field':<22} elliptic CM?")
+    from sympy import totient
+    for d in (1, 2, 3, 4, 5, 6, 7):
+        ph = int(totient(d))
+        fld = {1: 'Q', 2: 'Q', 3: 'Q(sqrt(-3))', 4: 'Q(i)',
+               6: 'Q(sqrt(-3))'}.get(d, f'degree-{ph} cyclotomic')
+        print(f"    {d:>3} {ph:>7}  {fld:<22} {'YES' if d in (3,4,6) else 'no'}")
+    print("  Exactly two fields: Q(sqrt(-3)) and Q(i). For d >= 5 (d != 6)")
+    print("  the degree is >= 4 — abelian varieties, not elliptic curves.")
+    print("\n  This also closes T300: the class-number-one imaginary quadratic")
+    print("  discriminants are -3,-4,-7,-8,-11,-19,-43,-67,-163, and only")
+    print("  -3 and -4 carry units beyond +-1 (six and four). Hence n in")
+    print("  {2,4,6} exactly, so T300's list {5,17,37} is complete.")
 
     print("\n" + "=" * 76)
-    print("  The admissible set is one row of an infinite table. Three primes")
-    print("  is unremarkable (d=5, d=9, d=12 also have three). The parity of k")
-    print("  is the one property that matters, because it keeps the antipodal")
-    print("  structure alive.")
+    print("  The row in use is one row of an infinite table. Three primes is")
+    print("  unremarkable (d=5, d=9, d=12 also have three). The parity of k is")
+    print("  the one property that matters, because it keeps the antipodal")
+    print("  structure alive.  Use 1 factors integers; Use 2 builds rings.")
+    print("  This theorem is entirely Use 1.")
     print("=" * 76)
     print("\nAll T301 assertions passed.")
 
