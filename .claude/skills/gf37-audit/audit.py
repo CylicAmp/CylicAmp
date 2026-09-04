@@ -94,9 +94,14 @@ def audit(n, seen_residues=None):
         A(f"                          orbits {[G.orbit(v) for v in cyc]}")
 
     # ── Step 4 ──────────────────────────────────────────────────────────
-    A(f"  [4] DR                = {G.dr(n)}   basin = {G.dr_basin(n)}")
-    A(f"      DR mod 3 = {G.dr(n)%3}, n mod 3 = {n%3}  "
-      f"(equal: {G.dr(n)%3 == n%3})")
+    if n >= 0:
+        A(f"  [4] DR                = {G.dr(n)}   basin = {G.dr_basin(n)}")
+        A(f"      DR mod 3 = {G.dr(n)%3}, n mod 3 = {n%3}  "
+          f"(equal: {G.dr(n)%3 == n%3})")
+    else:
+        A(f"  [4] DR                = undefined for n < 0")
+        A(f"      mod 9             = {G.mod9(n)}   "
+          f"(signed class; DR is not defined here)")
 
     # ── Step 5 ──────────────────────────────────────────────────────────
     A(f"  [5] mod 2,3,6,9       = {n%2}, {n%3}, {n%6}, {n%9}")
