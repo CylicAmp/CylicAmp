@@ -103,6 +103,53 @@ CAS_EXT, via 819 mod 37 = 5 and 819/37 = 22.135135... with repeating block
     rather than dropped, per the T290 practice of keeping misses.
 
 ════════════════════════════════════════════════════════════════════════════
+THE CLEANEST DERIVATION: Phi_3(10) = 111
+════════════════════════════════════════════════════════════════════════════
+IC does not need 137 at all. It follows from the framework's own SEAM value:
+
+    Phi_3(10) = 10^2 + 10 + 1 = 111 = 3 x 37
+    37 | 111,  and  10 != 1 (mod 37)
+    =>  ord_37(10) = 3
+    =>  <10> = {1, 10, 26} = IC
+
+One line, no 137. The 111 = 3 x 37 already recorded in the framework IS
+Phi_3 evaluated at 10.
+
+And 137 contributes nothing further: 137 = 26 = 10^2 (mod 37), and
+<10^2> = <10> because gcd(2, ord(10)) = gcd(2, 3) = 1. Verified equal.
+
+TWO SEPARATE Phi_3 EVALUATIONS ARE IN PLAY, both Use 1 (T299):
+    Phi_3(137) = 18907 = 7 x 37 x 73   -> the admissible set   (T292)
+    Phi_3(10)  =   111 = 3 x 37        -> ord_37(10) = 3, IC
+Different bases, different outputs. Neither computes a trace.
+
+WHY 37 CAN AND 5 CANNOT. If p != 3 divides Phi_3(n) with n != 1 (mod p),
+then ord_p(n) = 3, so 3 | (p-1), so p = 1 (mod 3). Hence Phi_3(n) is never
+0 mod 5: 5 = 2 (mod 3), 3 does not divide 4, and F_5* has no element of
+order 3. Verified by exhaustion over n = 0..p-1 for p = 5, 11, 17 (no zero)
+and p = 7, 13, 37 (zero present). At p=37 the zeros sit at n = 10 and 26 —
+the two primitive cube roots.
+
+EISENSTEIN NORM FORM. Phi_3(n) = N(n - omega) where N(a,b) = a^2 - ab + b^2.
+A rational prime is such a norm iff it is 3 or = 1 (mod 3); verified with no
+mismatch for every prime through 47. Each admissible prime is itself a norm:
+
+    7 = N(1,3),   37 = N(3,7) = N(-7,-3),   73 = N(1,9)
+
+so factoring 18907 over Z is factoring the Eisenstein integer (137 - omega).
+This is a genuine link between the two uses that T299 did not name: they
+share the NORM map, not merely a root. Traces still require CM on top —
+the norm gives pi * conj(pi), the trace gives pi + conj(pi). The norm form
+and the CM form are the same equation:
+
+    p = a^2 - ab + b^2   =>   4p = (2a-b)^2 + 3b^2
+    CM: 4p = L^2 + 27M^2,  matching L = 2a - b and b = 3M.
+    p=37: (a,b) = (7,3) -> L = 11, M = 1, traces {+-1, +-10, +-11}.  Checks.
+
+The Gaussian split 37 = 1^2 + 6^2 with 37 = 1 (mod 4) is a separate law and
+does not interact with any of the above.
+
+════════════════════════════════════════════════════════════════════════════
 IC HAS A THIRD DESCRIPTION
 ════════════════════════════════════════════════════════════════════════════
 T299 gave IC two names: the cube roots of unity mu_3, and the reduction of
@@ -260,6 +307,66 @@ def verify_cas_ext_negative():
     return counts, chi2, exp
 
 
+def eisenstein_norm(a, b):
+    return a * a - a * b + b * b
+
+
+def verify_phi3_at_10():
+    """IC follows from Phi_3(10) = 111 with no reference to 137."""
+    assert 10 ** 2 + 10 + 1 == 111 == 3 * 37
+    assert 111 % P == 0 and 10 % P != 1
+    assert order_mod(10, P) == 3
+    assert {pow(10, i, P) for i in range(3)} == ORBITS['IC'] == {1, 10, 26}
+
+    # 137 adds nothing: 137 = 10^2 and <10^2> = <10> since gcd(2,3)=1
+    assert 137 % P == pow(10, 2, P) == 26
+    assert {pow(26, i, P) for i in range(3)} == {pow(10, i, P) for i in range(3)}
+
+    # the two Use-1 evaluations
+    assert 137 ** 2 + 137 + 1 == 18907 == 7 * 37 * 73
+
+    # p | Phi_3(n), n != 1  =>  p = 1 mod 3.  5 is excluded, 37 is not.
+    for q, expect_zero in ((5, False), (11, False), (17, False),
+                           (7, True), (13, True), (37, True)):
+        zeros = [n for n in range(q) if (n * n + n + 1) % q == 0]
+        assert bool(zeros) == expect_zero, f"p={q}: zeros {zeros}"
+        if expect_zero:
+            assert (q - 1) % 3 == 0
+        else:
+            assert (q - 1) % 3 != 0
+    assert [n for n in range(P) if (n * n + n + 1) % P == 0] == [10, 26]
+    return True
+
+
+def verify_eisenstein_norm():
+    """Phi_3(n) = N(n - omega); a prime is a norm iff it is 3 or 1 mod 3."""
+    vals = {eisenstein_norm(a, b) for a in range(-40, 41) for b in range(-40, 41)}
+    for q in [x for x in range(2, 48) if is_prime_int(x)]:
+        assert (q in vals) == (q == 3 or q % 3 == 1), f"p={q}"
+    assert eisenstein_norm(-7, -3) == 37
+    for q, (a, b) in ((7, (1, 3)), (37, (3, 7)), (73, (1, 9))):
+        assert eisenstein_norm(a, b) == q
+    # Phi_3(n) = N(n,-1)
+    for n in range(1, 20):
+        assert n * n + n + 1 == eisenstein_norm(n, -1)
+    # norm form and CM form are the same equation at p=37
+    a, b = 7, 3
+    L, M = 2 * a - b, b // 3
+    assert 4 * 37 == L * L + 27 * M * M == (2 * a - b) ** 2 + 3 * b * b
+    assert L == 11 and M == 1
+    return True
+
+
+def is_prime_int(n):
+    if n < 2:
+        return False
+    if n < 4:
+        return True
+    if n % 2 == 0:
+        return False
+    return all(n % i for i in range(3, int(n ** 0.5) + 1, 2))
+
+
 def verify_ic_third_name():
     ic = {pow(10, i, P) for i in range(3)}
     assert ic == ORBITS['IC'] == {1, 10, 26}
@@ -325,8 +432,35 @@ def run():
     print(f"      CAS_EXT = {counts['CAS_EXT']}, every orbit gets 2 or 3.")
     print("\n  VERDICT: FALSIFIED. Kept rather than dropped (T290 practice).")
 
+    verify_phi3_at_10()
+    verify_eisenstein_norm()
+    print("\n--- Part 5: the cleanest derivation — Phi_3(10) = 111 ---")
+    print(f"  Phi_3(10) = 10^2+10+1 = 111 = 3 x 37")
+    print(f"  37 | 111 and 10 != 1 (mod 37)  =>  ord_37(10) = "
+          f"{order_mod(10, P)}  =>  <10> = {sorted(ORBITS['IC'])} = IC")
+    print("  One line, no 137. The framework's 111 IS Phi_3 at 10.")
+    print(f"\n  137 = {137%P} = 10^2 (mod 37), and <10^2> = <10> since")
+    print(f"  gcd(2, ord(10)) = gcd(2,3) = 1. So 137 adds nothing here.")
+    print("\n  Two Use-1 evaluations, both in play:")
+    print(f"    Phi_3(137) = 18907 = 7 x 37 x 73  -> admissible set (T292)")
+    print(f"    Phi_3(10)  =   111 = 3 x 37       -> ord_37(10)=3, IC")
+    print("\n  Why 5 cannot: p | Phi_3(n) with n != 1 forces 3 | p-1.")
+    for q in (5, 11, 17, 7, 13, 37):
+        z = [n for n in range(q) if (n * n + n + 1) % q == 0]
+        print(f"    p={q:>2}  p%3={q%3}  3|p-1={str((q-1)%3==0):>5}  zeros: {z}")
+    print("\n  Eisenstein norm: Phi_3(n) = N(n-omega), N(a,b)=a^2-ab+b^2.")
+    print("  A prime is a norm iff it is 3 or 1 mod 3 (checked through 47).")
+    print("    7 = N(1,3)   37 = N(3,7) = N(-7,-3)   73 = N(1,9)")
+    print("  So factoring 18907 IS factoring the Eisenstein integer 137-omega.")
+    print("  Norm form and CM form coincide: p = a^2-ab+b^2 => 4p=(2a-b)^2+3b^2,")
+    print("  and 4p = L^2+27M^2 with L = 2a-b, b = 3M. At p=37: (7,3) -> L=11,")
+    print("  M=1, traces {+-1,+-10,+-11}. The two uses share the NORM map —")
+    print("  a link T299 did not name. Traces still need CM: the norm gives")
+    print("  pi*conj(pi), the trace gives pi+conj(pi).")
+    print("  The Gaussian split 37 = 1^2+6^2 is a separate law.")
+
     ic = verify_ic_third_name()
-    print("\n--- Part 5: IC's third description ---")
+    print("\n--- Part 6: IC's third description ---")
     print(f"  IC = <10> = {{10^0, 10^1, 10^2}} mod 37 = {sorted(ic)}")
     print("  T299 gave two names: mu_3 (cube roots of unity), and the")
     print("  reduction of Z[omega]*. This is the third: the decimal shift group.")
