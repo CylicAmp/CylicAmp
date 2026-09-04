@@ -85,13 +85,30 @@ def block(k):
     return f"{(k % P * 1000) // P % 1000:03d}"
 
 
+def mod9(n):
+    """Signed-safe residue mod 9. Defined for every integer."""
+    return n % 9
+
+
 def dr(n):
-    """Digital root."""
-    n = abs(n)
+    """
+    Digital root, defined only for n >= 0.
+
+    Raises on negatives rather than taking abs(): DR is the repeated
+    digit sum of a non-negative integer, and abs() makes it disagree with
+    the modular class. DR(-8) via abs() is 8, while -8 = 1 (mod 9), and
+    printing both columns for the same value is a contradiction, not a
+    fact. For signed input use mod9().
+    """
+    if n < 0:
+        raise ValueError(
+            f"dr() is undefined for negative input ({n}); "
+            f"use mod9({n}) = {mod9(n)} for the signed class")
     return 9 if n and n % 9 == 0 else n % 9
 
 
 def dr_basin(n):
+    """Basin of the digital root. Non-negative input only (see dr)."""
     d = dr(n)
     if d in (3, 6, 9):
         return 'Trinity'
