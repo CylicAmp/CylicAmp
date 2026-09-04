@@ -17,9 +17,13 @@ nines. 819 and 1221 pad to 000819 and 001221, which is the whole display.
     1221 = 3 x 11 x 37 = 11 x 111
 
 37 divides 999999, so in EVERY factor pair of 999999 it divides one side or
-the other. There are 17 such pairs with both parts > 100. "1221 contains 37"
-is therefore forced and carries no information beyond 37 | 999999 — the same
-zero-bit pattern flagged in T282.
+the other. 999999 has 64 divisors, hence 32 unordered factor pairs, of which
+17 have both parts > 100. "1221 contains 37" is therefore forced and carries
+no information beyond 37 | 999999 — the same zero-bit pattern flagged in T282.
+
+(Correction: the commit message for this theorem's first commit stated "all
+160 of them" for the pair count. The correct figure is 32. The 17 figure was
+right. The code below prints the true counts.)
 
 ════════════════════════════════════════════════════════════════════════════
 WHAT IS LOAD-BEARING: 26 = 10^2 (mod 37)
@@ -146,11 +150,15 @@ def verify_pair():
 def verify_37_forced():
     """37 | 999999, so it divides one side of EVERY factor pair."""
     n = 999999
-    pairs = [(a, n // a) for a in range(1, int(n ** 0.5) + 1) if n % a == 0]
+    divs = [d for d in range(1, n + 1) if n % d == 0]
+    assert len(divs) == 64, f"{len(divs)} divisors"      # 4*2*2*2*2
+    pairs = [(a, n // a) for a in divs if a * a <= n]
+    assert len(pairs) == 32, f"{len(pairs)} pairs"
     for a, b in pairs:
         assert a % 37 == 0 or b % 37 == 0, f"({a},{b}) has no 37"
     big = [(a, b) for a, b in pairs if a > 100 and b > 100]
-    return len(pairs), len(big)
+    assert len(big) == 17, f"{len(big)} big pairs"
+    return len(divs), len(pairs), len(big)
 
 
 # ─── Part 2: 26 = 10^2 and orbits as shift triples ─────────────────────────
@@ -198,7 +206,7 @@ def run():
     print("=" * 76)
 
     verify_pair()
-    npairs, nbig = verify_37_forced()
+    ndivs, npairs, nbig = verify_37_forced()
     print("\n--- Part 1: the 819/1221 pair, and what it is not ---")
     print(f"  819 x 1221 = {819*1221} = 10^6 - 1")
     print(f"  1/819  = 0.{expand(819,12)}...")
@@ -206,9 +214,10 @@ def run():
     print("  a*b = 10^n-1  =>  1/a = 0.(b padded to n). Fully general.")
     print(f"  999999 = {factor(999999)}")
     print(f"  1221 = 3 x 11 x 37 = 11 x 111;  819 = 3^2 x 7 x 13")
-    print(f"\n  37 divides 999999, so it divides one side of all {npairs} factor")
-    print(f"  pairs ({nbig} with both parts > 100). '1221 contains 37' is forced")
-    print("  and carries no information beyond 37 | 999999.  (T282)")
+    print(f"\n  999999 has {ndivs} divisors -> {npairs} unordered factor pairs,")
+    print(f"  {nbig} of them with both parts > 100. 37 divides one side of every")
+    print("  single one. '1221 contains 37' is forced and carries no")
+    print("  information beyond 37 | 999999.  (T282)")
 
     verify_shift_identity()
     print("\n--- Part 2: LOAD-BEARING — the multiplier is 10^2 ---")
