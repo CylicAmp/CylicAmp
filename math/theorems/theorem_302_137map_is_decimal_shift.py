@@ -67,6 +67,42 @@ The entire orbit partition therefore has a purely decimal description. It is
 the same partition, not a second one.
 
 ════════════════════════════════════════════════════════════════════════════
+RECORDED NEGATIVE: 819 -> CAS_EXT CARRIES NO STRUCTURE
+════════════════════════════════════════════════════════════════════════════
+Tested claim: that the pair (819, 1221) is meaningfully associated with
+CAS_EXT, via 819 mod 37 = 5 and 819/37 = 22.135135... with repeating block
+135, whose rotation class {135, 351, 513} is CAS_EXT.
+
+(a) The decimal route adds nothing. block(k) is a function of k mod 37 only,
+    so "819/37 has block 135" and "819 = 5 (mod 37)" are one statement. This
+    is the Part-3 correspondence applied, not an independent observation.
+
+        819 mod 37 = 5,  block(5) = 135,  block(819 mod 37) == block(5)
+
+(b) Miss condition, stated before computing: if CAS_EXT is distinguished, it
+    should be over-represented among the 32 factor pairs of 999999 when each
+    pair is classified by the orbit of its non-SEAM member. (Exactly one
+    member of each pair is divisible by 37, verified for all 32.)
+
+    RESULT — distribution over the 12 orbits:
+
+        IC       3      TESLA    2      C9       2
+        DARK_A   3      D7       3      NQR17    3
+        C3       3      SA_ST_A  2      SEED     3
+        CAS_EXT  3      NEG_H    3      SA_ST_B  2
+
+        n = 32, expected 32/12 = 2.667
+        chi^2 = 1.00,  df = 11,  chi^2/df = 0.091
+
+    Every orbit receives two or three. CAS_EXT receives 3 against an
+    expectation of 2.667. The statistic is far below 1, i.e. the spread is
+    flatter than a random assignment would typically give.
+
+    VERDICT: FALSIFIED. 819 lands in CAS_EXT the way 693 lands in NEG_H and
+    429 lands in NQR17 — one draw from a uniform spread. Recorded here
+    rather than dropped, per the T290 practice of keeping misses.
+
+════════════════════════════════════════════════════════════════════════════
 IC HAS A THIRD DESCRIPTION
 ════════════════════════════════════════════════════════════════════════════
 T299 gave IC two names: the cube roots of unity mu_3, and the reduction of
@@ -191,6 +227,39 @@ def verify_rotation_classes():
     return rows
 
 
+def verify_cas_ext_negative():
+    """
+    FALSIFIED: 819 -> CAS_EXT is not structure.
+    Classify each of the 32 factor pairs of 999999 by the orbit of its
+    non-SEAM member; the distribution is flat.
+    """
+    # (a) the decimal route is the same statement as the residue
+    assert block(819 % P) == block(5) == '135'
+    assert 819 % P == 5 and orb(5) == 'CAS_EXT'
+    for k in range(1, P):
+        assert block(k) == block(k % P)          # depends on k mod 37 only
+
+    n = 999999
+    divs = [d for d in range(1, n + 1) if n % d == 0]
+    pairs = [(a, n // a) for a in divs if a * a <= n]
+    assert len(pairs) == 32
+
+    counts = {name: 0 for name in ORBITS}
+    for a, b in pairs:
+        assert (a % P == 0) != (b % P == 0), f"({a},{b}) SEAM count wrong"
+        ns = a if a % P else b
+        counts[orb(ns)] += 1
+
+    assert sum(counts.values()) == 32
+    assert counts['CAS_EXT'] == 3
+    assert set(counts.values()) == {2, 3}        # every orbit gets 2 or 3
+
+    exp = 32 / 12
+    chi2 = sum((c - exp) ** 2 / exp for c in counts.values())
+    assert abs(chi2 - 1.00) < 0.01, f"chi2 = {chi2}"
+    return counts, chi2, exp
+
+
 def verify_ic_third_name():
     ic = {pow(10, i, P) for i in range(3)}
     assert ic == ORBITS['IC'] == {1, 10, 26}
@@ -238,8 +307,26 @@ def run():
         print(f"  {name:>9}  {str(ks):<14} {' '.join(bs)}")
     print("  Verified: within each orbit the three blocks are mutual rotations.")
 
+    counts, chi2, exp = verify_cas_ext_negative()
+    print("\n--- Part 4: RECORDED NEGATIVE — 819 -> CAS_EXT is not structure ---")
+    print("  Claim tested: (819,1221) is meaningfully tied to CAS_EXT via")
+    print("  819 mod 37 = 5 and 819/37 = 22.135135..., block 135.")
+    print(f"\n  (a) block(k) is a function of k mod 37 only, so 'block 135'")
+    print(f"      and '819 = 5 (mod 37)' are one statement.")
+    print(f"      block(819 mod 37) = block(5) = {block(5)}")
+    print("\n  (b) Miss condition set before computing: CAS_EXT should be")
+    print("      over-represented among the 32 factor pairs of 999999,")
+    print("      classified by the orbit of the non-SEAM member.")
+    print(f"\n      {'orbit':>9} {'count':>6}")
+    for name in sorted(counts, key=lambda t: min(ORBITS[t])):
+        print(f"      {name:>9} {counts[name]:>6}")
+    print(f"\n      n = 32, expected {exp:.3f} per orbit")
+    print(f"      chi^2 = {chi2:.2f}, df = 11, chi^2/df = {chi2/11:.3f}")
+    print(f"      CAS_EXT = {counts['CAS_EXT']}, every orbit gets 2 or 3.")
+    print("\n  VERDICT: FALSIFIED. Kept rather than dropped (T290 practice).")
+
     ic = verify_ic_third_name()
-    print("\n--- Part 4: IC's third description ---")
+    print("\n--- Part 5: IC's third description ---")
     print(f"  IC = <10> = {{10^0, 10^1, 10^2}} mod 37 = {sorted(ic)}")
     print("  T299 gave two names: mu_3 (cube roots of unity), and the")
     print("  reduction of Z[omega]*. This is the third: the decimal shift group.")
