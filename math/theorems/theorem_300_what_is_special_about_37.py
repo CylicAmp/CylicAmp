@@ -24,24 +24,53 @@ it is a property of 36.
 TIER B — TRUE FOR {7, 37, 73} AND NO OTHER PRIME.               (T292)
 ════════════════════════════════════════════════════════════════════════════
     ord_p(137) = 3, i.e. 137 reduces to a primitive cube root of unity.
-    Forced by 137^3 - 1 = 2^3 x 17 x (7 x 37 x 73), with the 136 branch
-    excluded because 137 = 1 (mod 2) and (mod 17).
+
+    Cleanest form of the argument (sharper than T292's branch check):
+        x^3 - 1 = Phi_1(x) * Phi_3(x) = (x-1)(x^2+x+1)
+        137^3 - 1 = Phi_1(137) * Phi_3(137) = 136 x 18907
+    A prime dividing Phi_d(a) has ord_p(a) = d unless p | d. Here d = 3,
+    so the sole possible exception is p = 3, and 3 does not divide 18907.
+    Therefore every prime factor of Phi_3(137) = 18907 = 7 x 37 x 73 has
+    order exactly 3, and Phi_1(137) = 136 = 2^3 x 17 is by definition the
+    order-1 part. No separate branch check is needed.
 
 This is the only tier where the number 137 does any work at all.
 
 ════════════════════════════════════════════════════════════════════════════
-TIER C — UNIQUE TO 37 AMONG ALL PRIMES
+TIER C — A SECOND, INDEPENDENT LIST THAT ALSO CONTAINS 37
 ════════════════════════════════════════════════════════════════════════════
-THE RESULT. Let R be the CM ring of a family of curves, n = |R^*| the number
-of units. The reduction of R^* modulo a prime above p has order n; the n-th
-powers in F_p^* form a subgroup of order (p-1)/gcd(n, p-1). These two
-subgroups coincide iff
+CORRECTION TO AN EARLIER FRAMING: the three tiers are NOT a refinement
+chain. Tier B and Tier C are unrelated conditions producing different lists:
+
+    Tier B  ord_p(137) = 3   ->  {7, 37, 73}
+    Tier C  p = n^2 + 1      ->  {5, 17, 37}
+    intersection             ->  {37}
+
+Tier C does not pick out {7, 37, 73}; only 37 lies on both lists. 7 and 73
+are prime factors of Phi_3(137) — Use 1 of Phi_3 (T299) — and have nothing
+to do with unit counts. The correct statement is that 37 is the unique prime
+satisfying BOTH conditions, which are independent.
+
+THE RESULT. Let R be the CM ring of a family of curves, n = |R^*|. When
+mu_n is in F_p^*, the reduced unit group IS mu_n, of order n; the n-th
+powers form a subgroup of order (p-1)/gcd(n, p-1). In a cyclic group there
+is exactly one subgroup of each order, so these coincide iff their orders
+agree:
 
     n * gcd(n, p-1) = p - 1.
 
-When n | p-1 the gcd is n and the condition collapses to
+This FORCES n | (p-1); there is no second branch. Put d = gcd(n, p-1). The
+hypothesis is p-1 = nd, and then
+
+    d = gcd(n, p-1) = gcd(n, nd) = n     since n divides nd,
+
+so d = n, hence n | (p-1) and
 
     p - 1 = n^2,     i.e.     p = n^2 + 1.
+
+(Earlier phrasing presented n | p-1 as an added assumption. It is a
+consequence. Verified exhaustively: no (n, p) with n < 60, p < 20000
+satisfies the condition without n | p-1.)
 
 So for each CM family there is AT MOST ONE prime where the reduced unit
 group is the n-th power subgroup, and it is n^2 + 1.
@@ -73,9 +102,11 @@ cyclic-group order arithmetic — with the CM families supplying only n.
 A NEAR-MISS, FLAGGED SO IT IS NOT LATER READ AS STRUCTURE
 ════════════════════════════════════════════════════════════════════════════
 17 is the Gaussian member of the list above, and 17 also divides 137 - 1
-(136 = 2^3 x 17), where it appears as the excluded branch in T292.
-Those are unrelated. 17 | 136 because 137 = 1 (mod 17) — a fact about 137.
-The list membership is a fact about 4^2+1. Two different reasons, one numeral.
+= Phi_1(137) = 136 = 2^3 x 17.
+Those are unrelated. 17 | 136 because 137 = 1 (mod 17) — a fact about 137,
+living in Phi_1, not Phi_3. The list membership is a fact about 4^2+1.
+Two different reasons, one numeral. Note also that 17 does NOT divide
+18907 = Phi_3(137), so it never enters the Tier-B story at all.
 
 ════════════════════════════════════════════════════════════════════════════
 WHAT 137 DOES AND DOES NOT DO
@@ -155,11 +186,42 @@ def verify_tier_b():
     valid = [p for p in range(2, 200) if is_prime(p) and 137 % p
              and order_mod(137, p) == 3]
     assert valid == [7, 37, 73], f"{valid}"
-    assert 137 ** 3 - 1 == 136 * 18907
-    assert 18907 == 7 * 37 * 73
-    for p in (2, 17):                      # the excluded 136 branch
-        assert 137 % p == 1 and order_mod(137, p) == 1
+    # cyclotomic factorization: x^3-1 = Phi_1 * Phi_3
+    phi1, phi3 = 137 - 1, 137 ** 2 + 137 + 1
+    assert 137 ** 3 - 1 == phi1 * phi3 == 136 * 18907
+    assert phi3 == 18907 == 7 * 37 * 73
+    # p | Phi_3(a) => ord = 3 unless p | 3; and 3 does not divide 18907
+    assert 18907 % 3 != 0
+    for p in (7, 37, 73):
+        assert order_mod(137, p) == 3
+    # Phi_1 carries exactly the order-1 primes
+    for p in (2, 17):
+        assert phi1 % p == 0 and 137 % p == 1 and order_mod(137, p) == 1
+    assert 18907 % 17 != 0, "17 must not divide Phi_3(137)"
     return valid
+
+
+def verify_tiers_independent():
+    """Tier B and Tier C are different lists meeting only at 37."""
+    tier_b = [p for p in range(2, 200) if is_prime(p) and 137 % p
+              and order_mod(137, p) == 3]
+    tier_c = [n * n + 1 for n, _, _, _ in CM_FAMILIES if is_prime(n * n + 1)]
+    assert tier_b == [7, 37, 73]
+    assert tier_c == [5, 17, 37]
+    assert sorted(set(tier_b) & set(tier_c)) == [37]
+    return tier_b, tier_c
+
+
+def verify_no_second_branch(nmax=60, pmax=20000):
+    """n*gcd(n,p-1) = p-1 forces n | p-1 and p-1 = n^2."""
+    for n in range(2, nmax):
+        for p in range(3, pmax):
+            if not is_prime(p):
+                continue
+            if coincidence(n, p):
+                assert (p - 1) % n == 0, f"n={n}, p={p}: n does not divide p-1"
+                assert p - 1 == n * n, f"n={n}, p={p}: p-1 != n^2"
+    return True
 
 
 # ─── Tier C: p = n^2 + 1, one prime per CM family ───────────────────────────
@@ -227,16 +289,32 @@ def run():
     valid = verify_tier_b()
     print("\n--- TIER B: true for {7, 37, 73} and no other prime ---")
     print(f"  ord_p(137) = 3  =>  p in {valid}")
-    print(f"  137^3 - 1 = 136 x 18907;  18907 = 7 x 37 x 73")
-    print(f"  136 = 2^3 x 17 excluded: 137 = 1 mod 2 and mod 17, order 1.")
+    print("  x^3-1 = Phi_1(x)*Phi_3(x);  137^3-1 = 136 x 18907")
+    print("  p | Phi_d(a) => ord_p(a) = d unless p | d. Here d=3, and")
+    print(f"  3 does not divide 18907, so every prime factor of")
+    print(f"  Phi_3(137) = 18907 = 7 x 37 x 73 has order exactly 3.")
+    print("  Phi_1(137) = 136 = 2^3 x 17 is by definition the order-1 part;")
+    print("  no separate branch check is needed.")
     print("  This is the ONLY tier where the number 137 does any work.")
 
     tc = verify_tier_c()
     checks = verify_directly()
-    print("\n--- TIER C: unique to 37 among ALL primes ---")
-    print("  Reduced CM unit group (order n) = n-th powers (order")
-    print("  (p-1)/gcd(n,p-1))  iff  n * gcd(n,p-1) = p-1.")
-    print("  With n | p-1 this collapses to  p - 1 = n^2,  i.e.  p = n^2 + 1.")
+    tier_b, tier_c = verify_tiers_independent()
+    verify_no_second_branch()
+    print("\n--- TIER C: a second, INDEPENDENT list that also contains 37 ---")
+    print(f"  Tier B  ord_p(137) = 3  ->  {tier_b}")
+    print(f"  Tier C  p = n^2 + 1     ->  {tier_c}")
+    print(f"  intersection            ->  {sorted(set(tier_b) & set(tier_c))}")
+    print("  NOT a refinement chain. Tier C does not pick out {7,37,73};")
+    print("  7 and 73 are prime factors of Phi_3(137) (Use 1, T299) and have")
+    print("  nothing to do with unit counts. 37 is the unique prime on BOTH.")
+    print("\n  mu_n (order n) = n-th powers (order (p-1)/gcd(n,p-1)) iff their")
+    print("  orders agree — a cyclic group has one subgroup per order. So")
+    print("      n * gcd(n, p-1) = p - 1.")
+    print("  This FORCES n | p-1: with d = gcd(n,p-1) and p-1 = nd,")
+    print("      d = gcd(n, nd) = n   since n | nd,")
+    print("  hence p - 1 = n^2, i.e. p = n^2 + 1. No second branch.")
+    print("  (Verified: no (n,p), n<60, p<20000, satisfies it without n | p-1.)")
     print("\n  CM unit-group sizes are exactly 2, 4, 6, so the list is complete:")
     print(f"\n  {'n':>3} {'ring':>10} {'j':>6} {'family':>11} {'p = n^2+1':>10}")
     for n, (ring, j, label, p) in sorted(tc.items()):
@@ -248,11 +326,12 @@ def run():
         n, u, npow = checks[p]
         print(f"    p={p:>2}, n={n}: units {u}")
         print(f"              {n}th powers {npow}   equal={u == npow}")
-    print("\n  ==> 37 is the EISENSTEIN MEMBER OF A THREE-ELEMENT LIST.")
-    print("  That is the precise sense in which 37 is distinguished, and the")
-    print("  only sense surviving the T297/T299 audit. It explains T288 and")
-    print("  is Tier-A in character: cyclic-group order arithmetic, with the")
-    print("  CM families supplying only the value of n.")
+    print("\n  ==> 37 is the EISENSTEIN MEMBER OF A THREE-ELEMENT LIST,")
+    print("      and the unique prime lying on both the Tier-B and Tier-C")
+    print("      lists, which are produced by unrelated conditions.")
+    print("  It explains T288 and is Tier-A in character: cyclic-group order")
+    print("  arithmetic, with the CM families supplying only the value of n.")
+    print("  Neither computation factors 18907, and neither is a trace formula.")
 
     verify_near_miss()
     print("\n--- NEAR-MISS, flagged ---")
