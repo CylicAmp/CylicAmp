@@ -93,16 +93,27 @@ which is EXACTLY Rule 90 (new[i] = left XOR right). So the literal discrete
 Laplacian over GF(2) exists inside the elementary CA family — it is a
 different rule from Rule 30.
 
-    Rule 90 == second difference mod 2       all 2^8 states, exact
+    exhaustive over all 256 ECA: rule 90 is the ONLY one equal to
+      u[i-1] + u[i+1] mod 2 on every state
     Rule 90 additive                          65536/65536 pairs
     Rule 30 additive                           3106/65536 pairs  -> not linear
+    exactly 8 of 256 ECA are GF(2)-linear: {0,60,90,102,150,170,204,240};
+      30 is not among them
+    rule 150 = l XOR c XOR r = l+c+r mod 2 (the other natural stencil)
 
-Rule 30 = l XOR (c OR r); OR is not GF(2)-linear. A Laplacian is a linear
-second difference. So the claim is not literal, and it is not even a good
-structural match, because the role it would have to share is linearity.
+TWO WORDINGS, TIGHT, SO THIS DOES NOT OVERSHOOT:
+    - The elementary CA whose local polynomial equals Delta over GF(2) is
+      rule 90, uniquely.
+    - Rule 30 is a well-defined local CA rule. It is not that operator.
 
-Rule 30 is a literal local CA rule. That is what it is. Nothing is lost by
-saying so.
+SCOPE. Nearest-neighbour ECA on a line or cycle, over GF(2). This is NOT the
+Hodge Laplacian d.delta + delta.d, and NOT Delta over R. The grading is
+non-negotiable inside that scope and licenses nothing outside it: "rule 90 is
+the Laplacian" in general is itself a Level-1 claim.
+
+CLAUDE.md's standing analysis runs rule 30 on every value. That step is
+unchanged and should stay unchanged — it is a literal local rule on a
+bitstring. Cut 1 removes only the Laplacian label on top of it.
 
 ════════════════════════════════════════════════════════════════════════════
 HOW THE CUTS COMPOSE
@@ -133,12 +144,19 @@ THE AUDIT TEST, asked in order:
        implication — and is that claim about the target, or about the map
        between targets?
 
-RELATION TO THE EXISTING SCREENS. forced-check grades a property by scope
-(Tier A every p = 1 mod 3, Tier B {7,37,73}, Tier C only 37). miss-test grades
-whether a test could have come back negative. These cuts grade the third
-axis — how strong the IDENTIFICATION is. All three are independent: a Tier C
-property can still be a Level 1 correspondence, and a test that can fail can
-still be measuring a role rather than an operator.
+RELATION TO THE EXISTING SCREENS — THREE AXES THAT DO NOT STACK
+    axis                    grades                              lives in
+    Tier A/B/C              scope of a number or property       forced-check, T300
+    correspondence L1/2/3   strength of a map between domains   these cuts, T305
+    test can fail           whether a measurement is operational the test itself,
+                                                                 not its label
+
+Independence is the point, and it is asserted below, not asserted in prose:
+no axis is a function of any other across the recorded claims. A Tier C
+property can still be a Level 1 correspondence. A test that can fail can still
+be measuring a role rather than an operator. If a Tier A stamp is ever allowed
+to upgrade a Level 1 identification, or a falsifiable test is allowed to
+pretend it measured Delta, the cuts have been collapsed back into one word.
 """
 
 import itertools
@@ -177,11 +195,41 @@ def laplacian_mod2(s):
                  for i in range(n))
 
 
+def eca(num):
+    """Wolfram-numbered elementary CA local rule."""
+    return lambda l, c, r: (num >> (l * 4 + c * 2 + r)) & 1
+
+
 def verify_rule90_is_laplacian():
-    """Rule 90 IS the discrete Laplacian over GF(2), on every state."""
-    for s in itertools.product((0, 1), repeat=N):
+    """Rule 90 is the UNIQUE ECA equal to Delta over GF(2). Exhaustive."""
+    states = list(itertools.product((0, 1), repeat=N))
+    hits = [r for r in range(256)
+            if all(ca_step(eca(r), s) == laplacian_mod2(s) for s in states)]
+    assert hits == [90], f"expected only rule 90, got {hits}"
+    for s in states:
         assert ca_step(rule90, s) == laplacian_mod2(s), s
-    return 2 ** N
+    # rule 150 is the other natural stencil: l + c + r
+    for s in states:
+        assert ca_step(eca(150), s) == tuple(
+            (s[(i - 1) % N] + s[i] + s[(i + 1) % N]) % 2 for i in range(N))
+    return 2 ** N, hits
+
+
+def linear_ecas():
+    """Which of the 256 ECA are GF(2)-linear? Rule 30 must not be."""
+    out = []
+    for num in range(256):
+        f = eca(num)
+        if f(0, 0, 0) != 0:
+            continue
+        if all(ca_step(f, tuple(x ^ y for x, y in zip(a, b)))
+               == tuple(x ^ y for x, y in zip(ca_step(f, a), ca_step(f, b)))
+               for a in itertools.product((0, 1), repeat=4)
+               for b in itertools.product((0, 1), repeat=4)):
+            out.append(num)
+    assert out == [0, 60, 90, 102, 150, 170, 204, 240], out
+    assert 30 not in out and 90 in out and 150 in out
+    return out
 
 
 def additivity_rate(rule):
@@ -258,6 +306,61 @@ NATIVE_VS_CORRESPONDENCE = [
     ('first-order allocation', 'KKT theorem given L and feasible set', 2),
 ]
 
+# (claim, tier A/B/C, correspondence level 1/2/3, can the test come back negative)
+GRADED_CLAIMS = [
+    ('ord_37(27)=6, six 6-cycles',        'C', 3, True),
+    ('"that 6-cycle is discrete curl"',   'C', 1, False),
+    ('antipodal pairing exists',          'A', 3, True),
+    ('"DARK_A occupancy is neg. div."',   'C', 1, False),
+    ('m != +-1 mod p for twin midpoints', 'A', 3, True),
+    ('ord_p(137)=3 => p in {7,37,73}',    'B', 3, True),
+    ('"Sigma verification is Stokes"',    'A', 1, False),
+    ('rule 90 = Delta over GF(2)',        'A', 3, True),
+    ('"rule 30 is the discrete Laplacian"','A', 1, True),
+    ('37 unique with ord_p(10)=3',        'C', 3, True),
+    ('"security is a functor to ext.calc"','A', 1, False),
+    ('p = n^2+1 for CM unit count n',     'C', 3, True),
+]
+
+
+def verify_axes_independent():
+    """No axis is a function of any other across the recorded claims."""
+    tier = [c[1] for c in GRADED_CLAIMS]
+    lvl  = [c[2] for c in GRADED_CLAIMS]
+    fals = [c[3] for c in GRADED_CLAIMS]
+
+    def determines(x, y):
+        """Does knowing x pin down y? (i.e. is y a function of x)"""
+        m = {}
+        for a, b in zip(x, y):
+            if m.setdefault(a, b) != b:
+                return False
+        return True
+
+    pairs = {}
+    for na, a in (('tier', tier), ('level', lvl), ('falsifiable', fals)):
+        for nb, b in (('tier', tier), ('level', lvl), ('falsifiable', fals)):
+            if na == nb:
+                continue
+            d = determines(a, b)
+            assert not d, f"{na} determines {nb} — the axes have collapsed"
+            pairs[(na, nb)] = d
+
+    # and every level appears at more than one tier, in both directions
+    from collections import defaultdict
+    by_lvl = defaultdict(set)
+    for _, t, l, _ in GRADED_CLAIMS:
+        by_lvl[l].add(t)
+    assert len(by_lvl[1]) > 1 and len(by_lvl[3]) > 1, by_lvl
+    # a falsifiable claim that is still only Level 1
+    assert any(f and l == 1 for _, _, l, f in GRADED_CLAIMS)
+    # a Tier A claim that is only Level 1
+    assert any(t == 'A' and l == 1 for _, t, l, _ in GRADED_CLAIMS)
+    # a Tier C claim that is Level 3
+    assert any(t == 'C' and l == 3 for _, t, l, _ in GRADED_CLAIMS)
+    return dict(by_lvl), pairs
+
+
 LEVEL2_NOT_FUNCTOR = ['cut in an attack graph', 'Galois connection in abs. int.']
 LEVEL2_CAN_BE_FUNCTOR = ['cell complex -> cochain complex']
 
@@ -267,16 +370,22 @@ def run():
     print("T305 — Four Orthogonal Cuts for Grading a Claim")
     print("=" * 76)
 
-    states = verify_rule90_is_laplacian()
+    states, hits = verify_rule90_is_laplacian()
+    lin = linear_ecas()
     ok30, ok90, tot = verify_rule30_not_linear()
     print("\n--- Cut 1, worked case: 'Rule 30 is the discrete Laplacian' ---")
     print("  over GF(2):  u[i-1] - 2u[i] + u[i+1]  =  u[i-1] + u[i+1]   (-2 = 0)")
-    print(f"  that is Rule 90 exactly — verified on all {states} states of an "
-          f"{N}-cell ring")
+    print(f"  that is rule 90 — and exhaustively over all 256 ECA, rule 90 is")
+    print(f"  the ONLY one equal to it on every state ({states} states, {N}-cell ring)")
+    print(f"  GF(2)-linear ECA: {lin} — 30 is not among them")
+    print(f"  rule 150 = l XOR c XOR r = l+c+r mod 2, the other natural stencil")
     print(f"  additivity   Rule 90: {ok90}/{tot}    Rule 30: {ok30}/{tot}")
     print("  Rule 30 = l XOR (c OR r); OR is not GF(2)-linear.")
     print("  => the claim is not literal, and the role (linear second")
     print("     difference) is not shared either. Rule 30 is a local CA rule.")
+    print("  SCOPE: nearest-neighbour ECA on a line/cycle over GF(2). Not the")
+    print("  Hodge Laplacian d.delta+delta.d, not Delta over R. 'Rule 90 is the")
+    print("  Laplacian' in general would itself be a Level-1 claim.")
 
     cycles = verify_27_is_six_cycle()
     print("\n--- Cut 1, the literal side ---")
@@ -311,8 +420,16 @@ def run():
     print("  'Sigma verification is Stokes'            L1 ok; fails Cut 3")
     print("  'Security is a functor to exterior calc'  fails Cut 4; not even L2")
 
-    print("\n  Independent of forced-check (scope: Tier A/B/C) and of")
-    print("  miss-test (could the test have failed). Three separate axes.")
+    by_lvl, _ = verify_axes_independent()
+    print("\n--- three axes, asserted independent (not asserted in prose) ---")
+    print(f"  {'claim':<38}{'tier':<6}{'level':<7}test can fail")
+    for name, t, l, f in GRADED_CLAIMS:
+        print(f"  {name:<38}{t:<6}L{l:<6}{f}")
+    print(f"\n  levels seen at more than one tier: "
+          f"L1 at {sorted(by_lvl[1])}, L3 at {sorted(by_lvl[3])}")
+    print("  no axis is a function of any other — checked pairwise, all 6 ways.")
+    print("  A Tier A stamp does not upgrade a Level 1 identification, and a")
+    print("  falsifiable test does not thereby measure Delta.")
     print("\nAll T305 assertions passed.")
 
 
