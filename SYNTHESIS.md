@@ -1,6 +1,6 @@
-# CylicAmp Framework: Complete Mathematical Synthesis
+# CylicAmp GF(37): Complete Mathematical Synthesis
 
-Everything in this framework connects through one prime: **37**.
+Everything in GF(37) connects through one prime: **37**.
 
 ---
 
@@ -248,7 +248,7 @@ Every result connects back through the prime 37:
 - **m1×s = 24 ∈ CB, m2−s = 5 ∈ PR₃₇** → the (7,8) mantissa pair with shift s=3 reaches both the cascade base and the primitive root class in one arithmetic step
 - **(−3) mod 9 = DR(7+8) = 6, (−3) mod 37 = 34 ∈ orbit(7)** → the shared exponent of 0.007 and 0.008 encodes their digit algebra residue and their D7 orbit simultaneously
 
-The framework is not a collection of separate observations. It is one algebraic object — the prime field GF(37), its multiplicative structure, and the specific map f(n) = 137n mod 37 — seen from multiple angles simultaneously.
+The GF(37) is not a collection of separate observations. It is one algebraic object — the prime field GF(37), its multiplicative structure, and the specific map f(n) = 137n mod 37 — seen from multiple angles simultaneously.
 
 ---
 

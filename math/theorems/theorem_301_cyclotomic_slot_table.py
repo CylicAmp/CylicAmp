@@ -23,7 +23,7 @@ THE TABLE FOR a = 137
     d   Phi_d(137)                  factorization
     1                        136    2^3 x 17
     2                        138    2 x 3 x 23
-    3                      18907    7 x 37 x 73          <- the framework
+    3                      18907    7 x 37 x 73          <- GF(37)
     4                      18770    2 x 5 x 1877
     5                  354865621    11 x 101 x 319411
     6                      18633    3 x 6211
@@ -38,7 +38,7 @@ Every order claim checked: each prime factor p of Phi_d(137) has
 ord_p(137) = d, or else p | d (the 2s in rows 2, 4, 8 and the 3 in row 6).
 
 37 is one of three primes in the d=3 slot. The slot is not distinguished;
-it is the slot the framework uses.
+it is the slot GF(37) uses.
 
 ════════════════════════════════════════════════════════════════════════════
 OTHER ROWS OF THE SAME TABLE
@@ -84,7 +84,7 @@ the pairing of T283 collapses entirely.
 
 So T283, T284, T286's antipodal-closure, T289's twist pairs and T296's
 180-degree rotation all require k odd. k = 3 is the smallest odd k > 1.
-That is a genuine structural constraint the framework satisfies.
+That is a genuine structural constraint GF(37) satisfies.
 
 It does not single out k = 3. k = 5 was equally available and would have
 given 20 orbits at p = 101, with 10 antipodal pairs and a Z/20Z quotient.
@@ -123,7 +123,7 @@ n in {2, 4, 6} exactly, which is why T300's list {5, 17, 37} is complete.
 ════════════════════════════════════════════════════════════════════════════
 WHAT THIS SETTLES
 ════════════════════════════════════════════════════════════════════════════
-The row the framework occupies is one row of an infinite table. Its size
+The row GF(37) occupies is one row of an infinite table. Its size
 (three primes) is unremarkable — d=5, d=9 and d=12 also have three. The
 parity of k is the one property that matters, because that is what keeps the
 antipodal structure alive.
@@ -178,7 +178,7 @@ def verify_partition(limit=2000):
     return limit
 
 
-# ─── Part 2: the framework's row ────────────────────────────────────────────
+# ─── Part 2: GF(37)'s row ────────────────────────────────────────────
 
 def verify_framework_row():
     assert phi(3) == 18907
@@ -247,11 +247,11 @@ def run():
     print(f"  factor indexed by its own order. Zero misses.")
 
     fw = verify_framework_row()
-    print("\n--- Part 2: the framework's row ---")
+    print("\n--- Part 2: GF(37)'s row ---")
     print(f"  Phi_3(137) = 18907 = 7 x 37 x 73   ->  admissible {fw}")
     print(f"  Phi_1(137) = 136 = 2^3 x 17, and 17 does NOT divide 18907.")
     print("  37 is one of three primes in the d=3 slot. The slot is not")
-    print("  distinguished; it is the slot the framework uses.")
+    print("  distinguished; it is the slot GF(37) uses.")
 
     print("\n--- Part 3: other rows of the same table ---")
     print("  (These are other values of Phi_k, not unused alternatives.")

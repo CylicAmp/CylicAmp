@@ -25,7 +25,7 @@ For each outer digit A (1–9), the ten palindromes A0A through A9A:
 
 2. Every group contains exactly one SEAM (A×111)
 
-3. Adjacent pair sums rotate through framework orbits
+3. Adjacent pair sums rotate through GF(37) orbits
 
 4. Total sums of each group:
    A=1: 1460 mod37=17  NQR_17

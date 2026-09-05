@@ -32,7 +32,7 @@ that x(-1) is the antipodal map with order 2. B is their composite:
 
     B = (x -1) o (x 10),   ord_37(27) = lcm(3, 2) = 6.
 
-Both factors already had names in the framework. B is the first object that
+Both factors already had names in GF(37). B is the first object that
 needs both.
 
 ════════════════════════════════════════════════════════════════════════════
@@ -206,7 +206,7 @@ def run():
     print(f"  ord(10) = {G.order_mod(10,P)} (shift, T302);  "
           f"ord(-1) = {G.order_mod(P-1,P)} (antipodal, T283)")
     print(f"  ord(27) = {G.order_mod(27,P)} = lcm(3,2)")
-    print("  B is the first framework object requiring both factors.")
+    print("  B is the first GF(37) object requiring both factors.")
 
     g = verify_operator_group()
     print("\n--- Part 3: <27> is the operator group, again ---")

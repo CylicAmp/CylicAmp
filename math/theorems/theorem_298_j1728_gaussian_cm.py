@@ -44,7 +44,7 @@ and the four associates +-pi, +-i*pi give traces +-2L, +-2M.
 If p = 3 (mod 4), p stays inert in Z[i], the curve is supersingular, t = 0,
 #E = p+1. Verified at p = 7, 11, 19, 23.
 
-Across the framework's admissible set (T292):
+Across GF(37)'s admissible set (T292):
     p= 7 (3 mod 4)  SUPERSINGULAR   t = 0
     p=37 (1 mod 4)  ordinary        37 = 1^2+6^2   t in {+-2, +-12}
     p=73 (1 mod 4)  ordinary        73 = 3^2+8^2   t in {+-6, +-16}

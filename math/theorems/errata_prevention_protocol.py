@@ -1,7 +1,7 @@
 """
 Errata Prevention Protocol — MWS v37.21+
 
-Three classes of errors found in this framework:
+Three classes of errors found in GF(37):
   E1: Geometric incidence claim from memory (120-cell cells/edge: 4 → 3)
   E2: QR membership claimed without computation (5 is QR → false, Legendre=-1)
   E3: Duplicate structural fields (is_square == has_sqrt before LoB 23b fix)
@@ -29,7 +29,7 @@ CLASS C — STRUCTURAL FIELD DUPLICATION
   Audit hook: compute pairwise equality of field values across all 37 residues.
 
 LEGENDRE ORACLE (production-ready)
-  Covers all framework-critical checks:
+  Covers all GF(37)-critical checks:
   - Is residue r a QR mod 37?
   - What is its square root?
   - Is the map multiplier (26) QR? (yes, sqrt=10)

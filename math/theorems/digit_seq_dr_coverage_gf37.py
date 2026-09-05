@@ -66,7 +66,7 @@ PIPELINE SEED CONNECTION:
   437 mod 37 = 30 ∈ SA∩ST — the (4,3,7) Fibonacci triple lands on sovereign intersection.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA             = frozenset({4, 9, 25, 30})
 ST             = frozenset({3, 12, 21, 30})

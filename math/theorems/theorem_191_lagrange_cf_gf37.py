@@ -24,7 +24,7 @@ TOTIENT-BALANCED PERIOD PAIRS
 Any period pair (a, b) with a·b = 36 = φ(37) generates a
 "totient-balanced" periodic continued fraction.
 
-All GF(37) framework pairs with a·b = φ(37):
+All GF(37) pairs with a·b = φ(37):
   (3, 12): ST × ST   [sovereign target × sovereign target]
   (4,  9): SA × SA   [sovereign anchor × sovereign anchor]
   (6,  6): TESLA²    [TESLA_FLOW squared]

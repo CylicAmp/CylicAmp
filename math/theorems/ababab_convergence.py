@@ -53,7 +53,7 @@ REPUNIT CONVERGENCE (connected):
   R(3) = 111 = 3×37 — the same ord₃₇(10)=3 that drives ABABAB convergence.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ST         = frozenset({3, 12, 21, 30})
@@ -102,7 +102,7 @@ CLUSTER = {26, 27, 28, 29, 30, 31}
 assert 30 - SCALAR_137 == 4 and 4 in SA
 assert 30 - 27 == 3 and 3 in ST
 
-# DR of cluster spells out framework classes
+# DR of cluster spells out named sets
 assert dr(26) == 8  and 8 in CB
 assert dr(27) == 9  and 9 in SA
 assert dr(28) == 1

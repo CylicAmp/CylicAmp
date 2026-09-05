@@ -13,7 +13,7 @@ Seed DR:           3
 Seed mod 37:       24  (sovereign: False)
 Seed 137-orbit:    (18, 24, 32)
 Cascade orbit hits: 7/37  [24, 32, 61, 69, 98, 106, 135]
-Sovereign status:  Node 24 -> Res 32 [PURGE]: Non-Framework Entropy
+Sovereign status:  Node 24 -> Res 32 [PURGE]: res not in ST
 ABCABC orbit pos:  0  (orbit start)
 Lucas orbit hits:  [(5, 18)]  — L(5)=18 is in the seed orbit
 Orbit QR status:   {24: -1, 18: -1, 32: -1}  all non-QR: True

@@ -64,7 +64,7 @@ PRIMARY FINDING — MULTIPLIER '26' AT POSITION 19 (CRITICAL LINE):
 
 SECONDARY FINDING — '32' AT POSITION 19 IN γ₃:
   γ₃ (floor=25∈SA): substring '32' (∈SEED) appears at position 19.
-  Two consecutive framework zeros (γ₂, γ₃) both have sovereign substrings at position 19.
+  Two consecutive SA_ST_SEED zeros (γ₂, γ₃) both have sovereign substrings at position 19.
   γ₂: '26' (multiplier) at 19. γ₃: '32' (SEED) at 19.
   Position 19 = critical line = Fibonacci SEAM index.
 
@@ -80,7 +80,7 @@ CRITICAL LINE POSITION 19 RECURRENCE:
   '26' at pos 19: γ₂ (floor∈ST).
   '32' at pos 19: γ₃ (floor∈SA).
   Position 19 = critical line appears to attract sovereign digit substrings in the
-  two consecutive framework-floor zeros. This extends T212's proof that 19 is a
+  two consecutive SA_ST_SEED-floor zeros. This extends T212's proof that 19 is a
   fixed point of the functional equation in GF(37).
 
 === PART IV: 18-STEP LADDER → CASCADE THROUGH COMMUTATION ===
@@ -101,7 +101,7 @@ ST = {3, 12, 21, 30}
 SEED = {18, 24, 32}
 cascade = {8, 13, 24}
 SG26 = {1, 10, 26}
-framework = SA | ST | SEED
+SA_ST_SEED = SA | ST | SEED
 
 
 def ds(n):
@@ -154,7 +154,7 @@ def run_assertions():
     # 6. γ₂ digit string contains '26' at position 19
     gamma2_str = "2102203963877155499262847959389690277733"
     assert gamma2_str[19:21] == '26', f"pos 19-20: '{gamma2_str[19:21]}'"
-    assert int('26') % P == 26 and 26 not in framework   # multiplier, not in framework
+    assert int('26') % P == 26 and 26 not in SA_ST_SEED   # multiplier, not in SA_ST_SEED
 
     # 7. γ₃ digit string contains '32' at position 19
     gamma3_str = "2501085758014568876321379099256282181866"

@@ -2,7 +2,7 @@
 Zeno Spatial-Temporal Scaling Law
 f(n) = 100 · (0.5)^(n-1)
 
-Framework: Each step halves the previous value. The system never reaches zero
+GF(37): Each step halves the previous value. The system never reaches zero
 but converges to a finite total — a Zeno architecture encoding a finite
 information horizon despite infinite steps.
 

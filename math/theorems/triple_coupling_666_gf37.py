@@ -13,7 +13,7 @@ Since 2, 9, 37 are pairwise coprime, their product equals their LCM:
 
 666 is the smallest positive integer simultaneously divisible by the
 primitive root, the DR modulus, and the prime — the three structural
-constants of the framework.
+constants of GF(37).
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -69,7 +69,7 @@ the identity 666 = T(φ(p)) = lcm(primitive_root_of_p, φ(p)/2, p) holds only fo
 
 import math
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ST         = frozenset({3, 12, 21, 30})

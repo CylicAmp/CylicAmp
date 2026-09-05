@@ -22,7 +22,7 @@ USAGE:
 import sys
 import mpmath
 
-# ── GF(37) framework constants ───────────────────────────────────────────────
+# ── GF(37) constants ───────────────────────────────────────────────
 
 P    = 37
 MULT = 26   # 137 mod 37 — the 137-map multiplier

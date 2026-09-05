@@ -1,7 +1,7 @@
 """
 CylicAmp Comprehensive Prime Analysis
 ======================================
-Covers all six theorems from the DR / chi_{-3} / GF(37) framework:
+Covers all six theorems from the DR / chi_{-3} / GF(37):
 
   1. Ring Homomorphism   — DR preserves + and ×
   2. Emirp DR Invariance — DR(p) = DR(rev(p))

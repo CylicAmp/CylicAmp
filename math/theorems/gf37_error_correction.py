@@ -12,7 +12,7 @@ Original encode bug (fixed here):
   are proportional to a single value (only 1 independent condition out of 4).
   The corrected syndrome uses evaluation at distinct points: C(2^j) = Σᵢ c[i] * (2^j)^i.
 
-Framework connection (test "deterministic_addition"):
+GF(37) connection (test "deterministic_addition"):
   496 mod 37 = 15 = 2^13 mod 37  (primitive root, non-QR)
   640 mod 37 = 11 = 2^30 mod 37  (QR, = secondary modulus)
   1136 mod 37 = 26 = 137 mod 37  (the 137-map multiplier)
@@ -132,9 +132,9 @@ class TestRunner:
         bch_encoded = self.bch.generate_bch_code([1, 0, 1])
         results["bch_gf2"] = len(bch_encoded) == 4
 
-        # Framework structure tests
+        # GF(37) structure tests
         results["self_replication"] = len([3, 6, 3, 6]) == 4
-        # Framework connection: 496%37=15 (prim root) + 640%37=11 (secondary mod) = 1136%37=26 (137-map mult)
+        # GF(37) connection: 496%37=15 (prim root) + 640%37=11 (secondary mod) = 1136%37=26 (137-map mult)
         results["deterministic_addition"] = (
             496 + 640 == 1136 and
             496 % 37 == 15 and 640 % 37 == 11 and 1136 % 37 == 26 and
@@ -184,7 +184,7 @@ syns_err = [sum(enc_err[i] * pow(pow(2, j, 37), i, 37) for i in range(10)) % 37
             for j in range(1, 5)]
 assert not all(s == 0 for s in syns_err)
 
-# 496+640=1136 framework connection
+# 496+640=1136 GF(37) connection
 assert 496 + 640 == 1136
 assert 496 % 37 == 15 and pow(2, 13, 37) == 15   # primitive root
 assert 640 % 37 == 11                               # secondary modulus
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     runner = TestRunner()
     runner.validate_all()
     print()
-    print("Framework connection in deterministic_addition:")
+    print("GF(37) connection in deterministic_addition:")
     print(f"  496 mod 37 = {496%37} = 2^13 mod 37  (primitive root, non-QR)")
     print(f"  640 mod 37 = {640%37} = 2^30 mod 37  (QR, secondary modulus)")
     print(f" 1136 mod 37 = {1136%37} = 137 mod 37  (137-map multiplier)")

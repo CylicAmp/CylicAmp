@@ -58,7 +58,7 @@ THE THREE-STRUCTURE CORRESPONDENCE:
   All three emerge from a single fact: chi(26)=1 and ord₃₇(26)=3.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA           = frozenset({4, 9, 25, 30})
 ST           = frozenset({3, 12, 21, 30})

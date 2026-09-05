@@ -32,7 +32,7 @@ TRINITY IN GF(37) AS ACTUAL ELEMENTS:
   EXACT INTEGER SUMS LAND IN FRAMEWORK:
     3+6=9: 9∈SA (exact in Z; also 9∈SA in GF(37))
     3+9=12: 12∈ST (mod37; DR(12)=3 consistent with DR table 3+9=3)
-    6+9=15: 15∈g^1 (not framework; DR(15)=6 consistent with DR table 6+9=6)
+    6+9=15: 15∈g^1 (not GF(37); DR(15)=6 consistent with DR table 6+9=6)
     6+6=12: 12∈ST (mod37; DR=3 consistent with DR table 6+6=3)
     3+3=6: 6∈g^3 (exact; DR=6 consistent with DR table 3+3=6)
     9+9=18: 18∈SEED (mod37; DR(18)=9 consistent with DR table 9+9=9)

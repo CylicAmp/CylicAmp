@@ -29,7 +29,7 @@ WHY SCALAR_137=26 MATTERS:
   cycles are sector-homogeneous. Had the 137-map used an NQR multiplier,
   every step would flip the sector and cycles would alternate dark-visible.
   The fact that 137 ≡ 26 (mod 37) and 26 ∈ QR is what makes the sovereign
-  framework possible: SA and ST can both live entirely in the visible sector
+  GF(37) possible: SA and ST can both live entirely in the visible sector
   because the orbiting map that connects them is visible-preserving.
 
   More precisely: 10 = 26² mod 37 (the two-step multiplier) is also QR.
@@ -43,7 +43,7 @@ ADDITIONAL STRUCTURE:
     (From a·b·c = a³ and χ(a³) = χ(a), so χ(b)·χ(c) = 1.)
 """
 
-# ── Framework constants ────────────────────────────────────────────────────────
+# ── Constants ────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ST         = frozenset({3, 12, 21, 30})

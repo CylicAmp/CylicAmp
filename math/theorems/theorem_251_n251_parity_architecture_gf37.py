@@ -1,6 +1,6 @@
 """
 T251: n=251 — Parity Architecture of the Twin Prime Field
-GF(37) framework — 137-map f(x) = 26x mod 37
+GF(37) — 137-map f(x) = 26x mod 37
 
 n=251 is prime; 251 mod 37 = 29 ∈ C9 = {14, 29, 31}
 

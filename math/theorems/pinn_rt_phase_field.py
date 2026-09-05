@@ -4,7 +4,7 @@
 THEOREM 256: Discrete Phase-Field Correspondence
 ================================================================================
 
-The GF(37)/137-map framework is a discrete two-phase dynamical system whose
+The GF(37)/137-map GF(37) is a discrete two-phase dynamical system whose
 structure maps exactly onto the PINN formulation for two-phase Navier-Stokes
 (Rayleigh-Taylor class problems).
 
@@ -224,7 +224,7 @@ def run():
     print(f"dynamical system. chi_{{-3}} is the discrete phase field. The twin")
     print(f"prime pipe is the interface. The 137-map is the flow operator.")
     print(f"The three PINN residuals (phase advection, continuity, momentum)")
-    print(f"correspond exactly to the three closure properties of the framework.")
+    print(f"correspond exactly to the three closure properties of GF(37).")
 
 
 if __name__ == "__main__":

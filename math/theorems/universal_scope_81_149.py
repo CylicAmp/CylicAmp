@@ -14,9 +14,9 @@ USER STATEMENT (mathematical fields):
   Topology / Set Theory / Category Theory / Information Theory /
   Numerical Analysis / Game Theory.
 
-  This is the scope within which the GF(37) framework operates.
+  This is the scope within which the GF(37) operates.
   Every connection documented in T222-T236 draws from one or more of these
-  domains; the framework itself is inter-disciplinary by structure.
+  domains; GF(37) itself is inter-disciplinary by structure.
 
 USER COMPUTATION:
   81+68=149

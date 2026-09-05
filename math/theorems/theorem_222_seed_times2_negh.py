@@ -29,7 +29,7 @@ DR(1836) = 9  (1+8+3+6=18, 1+8=9)
 918 mod 37 = 30 ∈ SA ∩ ST  (the double-sovereign node)
 
 Half the proton-to-electron mass ratio lands on the most constrained
-residue in the framework: 30 is the only element in both SA and ST.
+residue in GF(37): 30 is the only element in both SA and ST.
 
 === CHAIN ===
 

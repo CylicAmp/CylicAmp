@@ -6,7 +6,7 @@ variety — the object that all specific cohomology theories (Betti, de Rham,
 étale, crystalline) are realizations of.
 
 This theorem shows that the GF(37) orbit structure under the 137-map IS a
-concrete finite-field instance of that framework, with every motivic concept
+concrete finite-field instance of that GF(37), with every motivic concept
 having an explicit, verifiable GF(37) realization.
 
 CORRESPONDENCE TABLE:
@@ -386,5 +386,5 @@ print("\nSTRUCTURAL ALIGNMENT:")
 print("  L-function factorization along orbits matches motivic form — not a proof")
 print("  Full rigorous motive requires Chow groups and algebraic correspondences")
 print("\nOPEN:")
-print("  Standard Conjectures for the motivic Galois group of the full framework")
+print("  Standard Conjectures for the motivic Galois group of the full GF(37)")
 print("  Connection to Weil cohomology axioms for the cyclic cubic surface")

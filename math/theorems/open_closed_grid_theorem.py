@@ -3,7 +3,7 @@ Open/Closed System Grid Theorem — THEOREM 72
 
 SOURCE: Observation that closed systems (same digit repeating) cannot generate
 complexity beyond their own factor, while open systems (sequential digit filling)
-naturally produce the framework prime.
+naturally produce 37.
 
 THE GRID:
   A 3×3 grid begins as a closed system: nine 1s.
@@ -30,7 +30,7 @@ THEOREM (Open System Sum = 37).
 GF(37) CONNECTIONS:
   • Closed system sum = 9 ∈ SA: the sovereign anchor — locked, cannot evolve.
   • Interior sum = 36 ∈ ORBIT_11: 36 ≡ -1 mod 37, the maximum before reset.
-  • Open system sum = 37 = THE PRIME: the complete sequence generates the framework.
+  • Open system sum = 37 = THE PRIME: the complete sequence generates GF(37).
   • SEAM = 0 = 37 mod 37: the prime collapses to SEAM — completion, not origin.
   • The boundary 1s are not walls. They are the bookends that make expansion possible.
 
@@ -49,7 +49,7 @@ NATURAL LAW:
   only appears when the full sequence is permitted to complete.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ORBIT_11   = frozenset({11, 27, 36})

@@ -54,7 +54,7 @@ SEED-SHIFTED KERVAIRE CONTINUATION.
   Since 18 ∈ SEED_ORBIT, the continuation generates:
     cumsum(j) ≡ K(j+1) + SEED_node  (mod 37).
   The Kervaire recurrence orbit from THEOREM 82 is SHIFTED BY 18∈SEED.
-  Framework hits in the continuation (j=6..15):
+  GF(37) hits in the continuation (j=6..15):
     j=7:  K(8)+18 ≡ 13 ∈ CB
     j=9:  K(10)+18 ≡  4 ∈ SA
     j=11: K(12)+18 ≡  5 ∈ PR
@@ -65,7 +65,7 @@ SEED-SHIFTED KERVAIRE CONTINUATION.
   K(j)≡19 iff 2^j≡21 (mod 37). The orbit of 2 mod 37 hits 21 at j=? (check below).
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 import math
 
@@ -170,7 +170,7 @@ for j in range(6, 20):
     kj1 = 2**(j+1) - 2   # K_{j+1}
     assert cs == kj1 + SEED_NODE   # exact equality (not just mod 37)
 
-# Framework hits in the SEED-shifted sequence
+# GF(37) hits in the SEED-shifted sequence
 _seed_hits = {}
 for j in range(6, 36):
     cs_mod = continuation_cumsum(j) % P
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     print("SEED-SHIFTED CONTINUATION after S_8=80≡TESLA_FLOW:")
     print(f"  cumsum(j) = K(j+1) + {SEED_NODE} (exact), ≡ K(j+1)+SEED_node (mod 37)")
     print()
-    print(f"  {'j':>3} | cumsum | K(j+1)+18 | mod37 | framework")
+    print(f"  {'j':>3} | cumsum | K(j+1)+18 | mod37 | GF(37)")
     for j in range(6,16):
         cs = continuation_cumsum(j)
         print(f"  {j:>3} | {cs:>7} | {2**(j+1)-2+SEED_NODE:>9} | {cs%P:>5} | {fw(cs)}")

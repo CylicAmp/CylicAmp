@@ -13,7 +13,7 @@ THE ISOMORPHISM
 
 Realize Z/36Z as the vertices of a REGULAR 36-GON. Then multiplication by
 2^k is rotation by k x (360/36) = 10k degrees. Every multiplicative map in
-the framework becomes a rotation, and its order becomes the rotation order.
+GF(37) becomes a rotation, and its order becomes the rotation order.
 
 ════════════════════════════════════════════════════════════════════════════
 THE THREE NAMED MAPS ARE ROTATIONS

@@ -1,7 +1,7 @@
 """
 Theorem 224: Unified Field Architecture — Void to Geometric Morphogenesis
 
-Source: user framework connecting metric ground state, atomic generators,
+Source: user GF(37) connecting metric ground state, atomic generators,
 prime convergence, FvK buckling, and the digital fold conservation loop.
 
 STRUCTURE:

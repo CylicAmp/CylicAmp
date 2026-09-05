@@ -8,7 +8,7 @@ The dimensional matrix D has rank 3, nullity 2.
 The null space basis gives Re = rho*v*L/mu and Ma = v/c_s.
 Over F_37 the rank and nullity are preserved, and the null vectors
 map as -1 -> 36 (mod 37), revealing structural resonance with the
-GF(37) framework.
+GF(37).
 """
 
 import sys

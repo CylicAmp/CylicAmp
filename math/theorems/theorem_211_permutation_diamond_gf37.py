@@ -3,7 +3,7 @@ Theorem 211: {1,3,7} Permutation Diamond and 11-Ladder in GF(37)
 Author: Michael Warren Song (CyclicAmp)
 
 DISCOVERY ENGINE: script explorer.py runs three analyses.
-This theorem records the GF(37) framework connections found in each.
+This theorem records the GF(37) SA_ST_SEED connections found in each.
 
 === ANALYSIS 1: {1,3,7} PERMUTATION DIAMOND ===
 
@@ -33,7 +33,7 @@ PRIMALITY STRATIFIES BY GF(37) COSET:
   PRIMALITY PARTITIONS EXACTLY ALONG THE <26>-KERNEL vs FRAMEWORK/MULTIPLIER LINE.
 
 137 IS THE MAP ITSELF:
-  The prime 137 generates the entire framework through f(n) = 137n mod 37 = 26n mod 37.
+  The prime 137 generates the entire SA_ST_SEED through f(n) = 137n mod 37 = 26n mod 37.
   137 ≡ 26 (mod 37): the prime is its own multiplier mod P.
   DR(137) = 2 = DR of primitive root. digit_sum(137) = 11 = P-multiplier.
 
@@ -96,7 +96,7 @@ SEED = {18, 24, 32}
 SG26 = {1, 10, 26}
 KEYINV = frozenset({21, 25, 28})
 CASCADE = {8, 13, 24}
-framework = SA | ST | SEED
+SA_ST_SEED = SA | ST | SEED
 
 
 def is_prime(n):
@@ -144,7 +144,7 @@ def run_assertions():
     # 5. Prime residues: {multiplier, SA, ST}
     prime_residues = {n % P for n in primes}
     assert prime_residues == {26, 25, 21}
-    assert 26 not in framework  # multiplier (not framework)
+    assert 26 not in SA_ST_SEED  # multiplier (not SA_ST_SEED)
     assert 25 in SA
     assert 21 in ST
 
@@ -173,7 +173,7 @@ def run_assertions():
         expected = (ladder_drs[i] - 2) % 9 or 9
         assert ladder_drs[i + 1] == expected
 
-    # 10. 11-Ladder GF(37) residues: key framework hits
+    # 10. 11-Ladder GF(37) residues: key SA_ST_SEED hits
     ladder_residues = {11 * k % P for k in range(9, 19)}
     assert 13 in ladder_residues and 13 in CASCADE    # cascade hit at 11×18
     assert 32 in ladder_residues and 32 in SEED       # SEED hit at 11×13

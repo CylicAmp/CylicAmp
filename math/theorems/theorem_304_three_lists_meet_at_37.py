@@ -34,7 +34,7 @@ Since the decimal period of 1/p is exactly ord_p(10), this says: 37 is the
 only prime whose reciprocal repeats with period 3. Verified by direct search
 over every prime below 200000 — one hit, p = 37.
 
-That single fact carries the entire decimal side of the framework:
+That single fact carries the entire decimal side of GF(37):
     period 3          -> 1/37 = 0.027027...           (T302)
     999 = 27 x 37     -> block(k) = 27k               (T303)
     1001 = 27x37 + 2  -> ABCABC = 2 ABC (mod 37)      (SYNTHESIS)
@@ -49,7 +49,7 @@ WHY L1 AND L3 TOUCH: 10 AND 26 ARE THE TWO CUBE ROOTS
 
 mu_3 = IC = {1, 10, 26} has exactly two primitive elements. The decimal shift
 is one; the 137-map is the other; they are mutual inverses and each other's
-square. The framework's two independent-looking generators are the two roots
+square. The GF(37)'s two independent-looking generators are the two roots
 of one quadratic. Any base a with a = 10 or 26 (mod 37) produces the same
 orbit structure — 137 is one choice, 10 is the other, and nothing else at
 p = 37 is available.
@@ -107,7 +107,7 @@ allowed — 37 | m constrains neither twin).
 
 Residues 1 and 36 are the identity of IC and the antipode in NEG_H, i.e.
 mu_2 = {+-1} inside mu_6. That is a true statement and it is NOT evidence of
-framework structure: m = +-1 mod p is forbidden at EVERY prime p. It belongs
+orbit structure: m = +-1 mod p is forbidden at EVERY prime p. It belongs
 in Tier A of the T300 classification. Its only real consequence is
 bookkeeping — IC and NEG_H have 2 live residues each instead of 3, and a
 chi-square over the 12 orbits must scale expectations by live residue count
@@ -123,7 +123,7 @@ SUMMARY OF THE PAN-OUT
     L1 n L2 n L3 = {37}
 
 L3 alone already pins 37 uniquely. L1 and L2 are then two further, unrelated
-reasons the same prime reappears. The framework is one field seen through
+reasons the same prime reappears. The GF(37) is one field seen through
 three inputs — base 10, the constant 137, and the Eisenstein CM ring — that
 happen to agree at exactly one prime.
 """
@@ -272,7 +272,7 @@ def run():
     print("  NOT:    5,13,19 in CAS_EXT is the orbit of 5, not independent.")
 
     mids, seam = verify_tier_a_obstruction()
-    print("\n--- twin-midpoint obstruction: Tier A, not framework ---")
+    print("\n--- twin-midpoint obstruction: Tier A, not GF(37) ---")
     print(f"  m = +-1 mod p forbidden at p = 7, 11, 13, 37, 73 alike: verified")
     print(f"  at p=37: residue 1 -> 0 hits, residue 36 -> 0, SEAM -> {seam}")
     print("  IC and NEG_H therefore hold 2 live residues, not 3.")

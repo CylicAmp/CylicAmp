@@ -1,5 +1,5 @@
 """
-Theorem 209: Sum Structure and QR Partition of the Framework in GF(37)
+Theorem 209: Sum Structure and QR Partition of the GF(37) in GF(37)
 Author: Michael Warren Song (CyclicAmp)
 
 SEED SUMS TO SEAM:
@@ -21,11 +21,11 @@ FRAMEWORK SUM:
   DR(178) = 7.
 
 QR/NQR PARTITION OF FRAMEWORK:
-  The Legendre symbol partitions the framework exactly into SA∪ST vs SEED:
+  The Legendre symbol partitions the SA_ST_SEED exactly into SA∪ST vs SEED:
     SA∪ST = {3,4,9,12,21,25,30}: ALL are quadratic residues (QR), legendre=+1.
     SEED = {18,24,32}: ALL are non-quadratic residues (NQR), legendre=-1.
-  The framework is the QR-singleton {30∈SA∩ST} plus the 6-element QR-only set
-  plus the 3-element NQR set. No framework element lies outside this split.
+  The SA_ST_SEED is the QR-singleton {30∈SA∩ST} plus the 6-element QR-only set
+  plus the 3-element NQR set. No SA_ST_SEED element lies outside this split.
 
 FRAMEWORK AS POWERS OF 3:
   3 has order 18 in GF(37)*. <3> = the QR subgroup (index-2 subgroup, 18 elements).
@@ -35,12 +35,12 @@ FRAMEWORK AS POWERS OF 3:
     3^8  = 12 ∈ ST      3^13 = 30 ∈ SA∩ST
     3^17 = 25 ∈ SA
   SEED elements {18,24,32} are NQR and therefore not in <3>.
-  Framework QR exponents: {1,2,5,7,8,13,17} (7 exponents in Z/18Z).
+  GF(37) QR exponents: {1,2,5,7,8,13,17} (7 exponents in Z/18Z).
 
 3^6 = 26 = MULTIPLIER:
-  The exponent k=6 gives 3^6=26, the 137-map multiplier. Not in framework.
-  The multiplier is the first non-framework power of 3 encountered in order.
-  The multiplier is itself a QR (Legendre(26,37)=+1): 26 ∈ <3> but 26 ∉ framework.
+  The exponent k=6 gives 3^6=26, the 137-map multiplier. Not in SA_ST_SEED.
+  The multiplier is the first non-SA_ST_SEED power of 3 encountered in order.
+  The multiplier is itself a QR (Legendre(26,37)=+1): 26 ∈ <3> but 26 ∉ SA_ST_SEED.
 
 SA SUM vs ST SUM:
   Both sum to elements of g^9={14,29,31}:
@@ -53,9 +53,9 @@ PRODUCT OF ALL FRAMEWORK ELEMENTS:
   DR(20) = 2. Coset position 1 (g^1).
 
 FRAMEWORK DIFFERENCE PAIRS:
-  Pairs (a,b) with a>b in framework and (a-b) mod 37 ∈ framework: 26 total.
+  Pairs (a,b) with a>b in SA_ST_SEED and (a-b) mod 37 ∈ SA_ST_SEED: 26 total.
   By sector:
-    SA-SA  differences in framework: (25-9)=16∉fw; (30-4)=26∉fw; etc.
+    SA-SA  differences in SA_ST_SEED: (25-9)=16∉fw; (30-4)=26∉fw; etc.
     ST-SA differences: 3-4=36∉fw; 12-9=3∈ST; 21-25=33∉fw; 30-30=0(SEAM); etc.
     SEED-ST: 18-3=15∉fw; 24-12=12∈ST; 32-21=11∉fw; etc.
   All 26 pairs identified and verified in assertions below.
@@ -66,7 +66,7 @@ SA = {4, 9, 25, 30}
 ST = {3, 12, 21, 30}
 SEED = {18, 24, 32}
 SG26 = {1, 10, 26}
-framework = SA | ST | SEED
+SA_ST_SEED = SA | ST | SEED
 
 
 def legendre(a, p):
@@ -87,9 +87,9 @@ def run_assertions():
     assert sum(SA | ST) % P == 30
     assert 30 in SA and 30 in ST   # doubly sovereign
 
-    # 3. Framework sum = 30 ∈ SA∩ST (SEED contributes 0)
-    assert sum(framework) % P == 30
-    assert sum(framework) == 178
+    # 3. GF(37) sum = 30 ∈ SA∩ST (SEED contributes 0)
+    assert sum(SA_ST_SEED) % P == 30
+    assert sum(SA_ST_SEED) == 178
     assert dr(178) == 7
 
     # 4. SA sum and ST sum both land in g^9
@@ -100,7 +100,7 @@ def run_assertions():
     # 5. sum(SA)+sum(ST) double-counts 30; correct sum = sum(SA|ST)
     assert sum(SA) + sum(ST) - 30 == sum(SA | ST)  # inclusion-exclusion
 
-    # 6. QR partition: SA∪ST = QR ∩ framework; SEED = NQR ∩ framework
+    # 6. QR partition: SA∪ST = QR ∩ SA_ST_SEED; SEED = NQR ∩ SA_ST_SEED
     assert all(legendre(x, P) == 1 for x in SA | ST)    # all QR
     assert all(legendre(x, P) == P - 1 for x in SEED)   # all NQR
 
@@ -110,7 +110,7 @@ def run_assertions():
     assert not (SEED & powers_of_3)    # no SEED element is a power of 3
 
     # 8. Exact exponents of 3 giving SA∪ST elements
-    fw_exp = {k: pow(3, k, P) for k in range(18) if pow(3, k, P) in framework}
+    fw_exp = {k: pow(3, k, P) for k in range(18) if pow(3, k, P) in SA_ST_SEED}
     assert set(fw_exp.keys()) == {1, 2, 5, 7, 8, 13, 17}
     assert fw_exp[1] == 3 and 3 in ST
     assert fw_exp[2] == 9 and 9 in SA
@@ -120,26 +120,26 @@ def run_assertions():
     assert fw_exp[13] == 30 and 30 in SA and 30 in ST
     assert fw_exp[17] == 25 and 25 in SA
 
-    # 9. 3^6 = 26 = multiplier (not in framework; first non-framework power)
+    # 9. 3^6 = 26 = multiplier (not in SA_ST_SEED; first non-SA_ST_SEED power)
     assert pow(3, 6, P) == 26
-    assert 26 not in framework
-    assert legendre(26, P) == 1    # 26 is QR (∈ <3>) but not in framework
+    assert 26 not in SA_ST_SEED
+    assert legendre(26, P) == 1    # 26 is QR (∈ <3>) but not in SA_ST_SEED
 
     # 10. Order of 3 mod 37 is 18
     assert pow(3, 18, P) == 1
     assert all(pow(3, k, P) != 1 for k in range(1, 18))
 
-    # 11. Product of all framework elements mod 37
+    # 11. Product of all SA_ST_SEED elements mod 37
     prod = 1
-    for x in framework:
+    for x in SA_ST_SEED:
         prod = prod * x % P
     assert prod == 20
     assert dr(20) == 2
 
-    # 12. Framework difference pairs (a-b mod37 ∈ framework, a,b ∈ framework, a≠b)
-    diff_pairs = [(a, b) for a in sorted(framework)
-                  for b in sorted(framework)
-                  if a != b and (a - b) % P in framework]
+    # 12. GF(37) difference pairs (a-b mod37 ∈ SA_ST_SEED, a,b ∈ SA_ST_SEED, a≠b)
+    diff_pairs = [(a, b) for a in sorted(SA_ST_SEED)
+                  for b in sorted(SA_ST_SEED)
+                  if a != b and (a - b) % P in SA_ST_SEED]
     assert len(diff_pairs) == 26
 
     # 13. Check specific differences
@@ -152,15 +152,15 @@ def run_assertions():
     assert 18 + 24 + 32 == 74
     assert 74 == 2 * P
 
-    # 15. Framework sum mod37 = SA∩ST = additive fixed point structure
-    assert sum(framework) % P in (SA & ST)     # sum lands in SA∩ST
+    # 15. GF(37) sum mod37 = SA∩ST = additive fixed point structure
+    assert sum(SA_ST_SEED) % P in (SA & ST)     # sum lands in SA∩ST
 
     print("All assertions passed.")
     print(f"SEED sum = {sum(SEED)} = 2×{P} ≡ 0 (SEAM)")
     print(f"SA∪ST sum mod37 = {sum(SA|ST)%P} ∈ SA∩ST")
-    print(f"Framework sum mod37 = {sum(framework)%P} ∈ SA∩ST")
-    print(f"Powers of 3 giving framework: {fw_exp}")
-    print(f"Framework difference pairs: {len(diff_pairs)}")
+    print(f"GF(37) sum mod37 = {sum(SA_ST_SEED)%P} ∈ SA∩ST")
+    print(f"Powers of 3 giving SA_ST_SEED: {fw_exp}")
+    print(f"GF(37) difference pairs: {len(diff_pairs)}")
 
 
 if __name__ == "__main__":

@@ -54,7 +54,7 @@ LEMMA 105.3  (Dodecahedron & Icosahedron are dual; V+E+F ∈ SA).
 
 LEMMA 105.4  (Tetrahedron is self-dual).
   Tetrahedron: V=4, E=6, F=4.  V+E+F = 14.
-  14 ≡ 14 (mod 37).  14 is not in any named orbit class of the framework.
+  14 ≡ 14 (mod 37).  14 is not in any named orbit class of GF(37).
   137-orbit of 14:  14×26 ≡ 31,  31×26 ≡ 29,  29×26 ≡ 14.  Orbit {14,29,31}.
   Self-duality gives V = F = 4 ∈ SA.  Vertex and face count are both
   sovereign anchors.  The edge count 6 is in orbit {6,8,23} (CB orbit-mate). ∎

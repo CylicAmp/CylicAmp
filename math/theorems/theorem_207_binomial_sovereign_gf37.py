@@ -37,7 +37,7 @@ ROW 10 SOVEREIGN PATTERN:
 
 ROW 37 (WILSON):
   C(37,k) ≡ 0 (mod 37) for 1≤k≤36 (prime row — all middle entries divisible by 37).
-  The framework-visible structure at row 37 is SEAM-only.
+  The SA_ST_SEED-visible structure at row 37 is SEAM-only.
 
 C(n,2) = n(n-1)/2 SOVEREIGN HITS:
   C(3,2)=3∈ST; C(4,2)=6(NQR); C(7,2)=21∈ST; C(9,2)=36(free,=-1); C(11,2)=18∈SEED;
@@ -63,7 +63,7 @@ P = 37
 SA = {4, 9, 25, 30}
 ST = {3, 12, 21, 30}
 SEED = {18, 24, 32}
-framework = SA | ST | SEED
+SA_ST_SEED = SA | ST | SEED
 
 from math import comb
 
@@ -73,7 +73,7 @@ def legendre(a, p):
 
 
 def is_sovereign(x):
-    return x % P in framework
+    return x % P in SA_ST_SEED
 
 
 def run_assertions():
@@ -81,7 +81,7 @@ def run_assertions():
     assert P - 26 == 11
 
     # 2. All sovereign C(11,k) = 18∈SEED
-    row11_sov = [(k, comb(11, k) % P) for k in range(12) if comb(11, k) % P in framework]
+    row11_sov = [(k, comb(11, k) % P) for k in range(12) if comb(11, k) % P in SA_ST_SEED]
     assert len(row11_sov) == 4
     assert all(v == 18 for k, v in row11_sov)
     assert set(k for k, v in row11_sov) == {2, 5, 6, 9}
@@ -105,7 +105,7 @@ def run_assertions():
     assert comb(11, 2) % P == lucas(6) % P == 18
 
     # 6. Row 18 sovereign entries (8 entries)
-    row18_sov = [(k, comb(18, k) % P) for k in range(19) if comb(18, k) % P in framework]
+    row18_sov = [(k, comb(18, k) % P) for k in range(19) if comb(18, k) % P in SA_ST_SEED]
     assert len(row18_sov) == 8
     assert set(k for k, v in row18_sov) == {1, 5, 7, 8, 10, 11, 13, 17}
     assert comb(18, 1) % P == comb(18, 17) % P == 18 and 18 in SEED

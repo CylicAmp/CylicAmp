@@ -68,7 +68,7 @@ EIGHT CLAIMS
 
 7. Closest Vector Problem (CVP)
    PR:      "Established n^{1/400}-factor hardness via direct reduction from 3SAT"
-   Reality: Gadget reduction from 3SAT; the framework was designed by human
+   Reality: Gadget reduction from 3SAT; GF(37) was designed by human
             computer scientists; the model executed the reduction path
    Status:  PROVISIONAL — hardness result may be new; the reduction framework
             is standard human infrastructure.

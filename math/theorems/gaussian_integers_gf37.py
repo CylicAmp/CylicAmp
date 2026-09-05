@@ -11,7 +11,7 @@ The Gaussian integer structure exposes the complex geometry hidden in GF(37):
   - TESLA_FLOW (×6 in GF(37)) = clockwise rotation by −i in Z[i]
   - Heartbeat (×26 in GF(37)) = a cubic structure with period 3
   - All three cascade base elements {8,13,24} have minimal-norm lifts of norm 5 ∈ PR
-  - All 8 Gaussian integers of norm 5 map to named framework nodes
+  - All 8 Gaussian integers of norm 5 map to named named residues
   - The constant 137 appears as N(11+4i), lifting cascade node 24
   - The 4/9 fractal ratio ≡ 132 ≡ 21 ∈ ST (the 132-bipartite pattern number)
 
@@ -84,7 +84,7 @@ PART IV — ALL NORM-5 GAUSSIAN INTEGERS: COMPLETE FRAMEWORK COVERAGE
     −2+ i  → 29  (SEAM-complement of 8: 8+29 = 37 ≡ 0)
     −2− i  →  4 ∈ SA
 
-  Every image is a named framework node or its SEAM-complement.
+  Every image is a named named residue or its SEAM-complement.
   The norm-5 circle covers: CASCADE_BASE (all 3), SA (1 node), SCALAR_137,
   ORBIT_11, DICHORAL_144, and the SEAM-complement of a cascade node.
 
@@ -209,7 +209,7 @@ expected = {
 }
 assert norm5_images == expected
 
-# Framework coverage
+# GF(37) coverage
 assert expected[(2, 1)] == DICHORAL_144
 assert expected[(1, 2)] == SCALAR_137
 assert expected[(-1,-2)] in ORBIT_11

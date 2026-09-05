@@ -2,7 +2,7 @@
 11 ↔ 37 OPERATIONAL ENCODING
 =========================================================================
 
-Arithmetic observations connecting 11 and 37 to the orbit framework.
+Arithmetic observations connecting 11 and 37 to the orbit GF(37).
 
 All verified computationally:
 

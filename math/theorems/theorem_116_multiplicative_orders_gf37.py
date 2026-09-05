@@ -46,7 +46,7 @@ KEY STRUCTURAL FACTS
 
   (A) ord₃₇(26) = 3.
       The 137-map f(n)=26n mod 37 has period 3. All orbits are 3-cycles.
-      This is the algebraic reason every orbit in the framework has length 3.
+      This is the algebraic reason every orbit in GF(37) has length 3.
 
   (B) SEED_ORBIT {18,24,32} ⊂ PR.
       The seed orbit of the reference run (seed=246, 246 mod 37=24) consists
@@ -135,7 +135,7 @@ def run():
     # ---------------------------------------------------------------
     # PART 3 — Order profiles of named classes
     # ---------------------------------------------------------------
-    print("\n--- Part 3: Order profiles of named framework classes ---")
+    print("\n--- Part 3: Order profiles of named named sets ---")
     named = [
         ('IC',       IC),
         ('SA',       SA),

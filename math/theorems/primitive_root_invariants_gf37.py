@@ -54,7 +54,7 @@ SUBGROUP CHAIN AND ORBIT COSET STRUCTURE:
   The 12 orbits ARE the cosets of H in G: orbit(n) = n · <26> = {n, 26n, 26²n}.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA             = frozenset({4, 9, 25, 30})
 ST             = frozenset({3, 12, 21, 30})

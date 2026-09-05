@@ -39,7 +39,7 @@ CUBE ROTATION GROUP ORDER = CASCADE∩SEED NODE [V]
 The rotation symmetry group of the cube ≅ S₄ (symmetric group on 4 elements).
 |S₄| = 24 = CASCADE∩SEED — the unique intersection node.
 
-24 appears across the framework:
+24 appears across GF(37):
   24 ∈ CASCADE = {8,13,24} (prime sieve generator set)
   24 ∈ SEED    = {18,24,32} (137-map orbit of seed 246)
   24 = exponent in η^24 (Ramanujan tau, weight-12 modular form)
@@ -146,7 +146,7 @@ def run():
     assert math.factorial(4) == 24   # |S₄|=4!=24
     print(f"\n|S₄| = {math.factorial(4)} = CASCADE∩SEED (unique intersection)  check")
 
-    # 24 across the framework
+    # 24 across GF(37)
     assert 24 in CASCADE
     assert 24 in SEED
     assert 888 // 24 == P

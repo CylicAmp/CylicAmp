@@ -1,6 +1,6 @@
 """
 LCM Convergence and Digital Root Cycle
-Master Kimchi — Little Wood 37 Framework
+Master Kimchi — Little Wood 37 GF(37)
 
 Results:
   LCM(1,2,3)   = 6   — 1-2-3 group meets every 6n

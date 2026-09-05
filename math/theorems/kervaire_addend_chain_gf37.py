@@ -6,7 +6,7 @@ USER INPUT: Chain [2, 4, 8, 16, 32, 12, 4, 2] → cumulative sum 80.
   Last three: 12, 4, 2.
 
 PARTIAL SUMS.
-  Step | Addend | Cumsum | Mod 37 | Framework
+  Step | Addend | Cumsum | Mod 37 | GF(37)
   ─────────────────────────────────────────────
     1  |   2    |    2   |   2    | PR
     2  |   4    |    6   |   6    | TESLA_4 (= TESLA_FLOW)
@@ -58,7 +58,7 @@ FIRST FOUR DIGITAL ROOTS: [2, 6, 5, 3].
   These are the DRs of the first four Kervaire dimensions (2, 6, 14, 30).
   Sum:     2 + 6 + 5 + 3 = 16 = 2^4  (the 4th addend in the chain).
   Product: 2 × 6 × 5 × 3 = 180 ≡ 32 ∈ SEED_ORBIT (mod 37).
-  Framework: 2∈PR, 6∈TESLA_4, 5∈PR, 3∈ST.
+  GF(37): 2∈PR, 6∈TESLA_4, 5∈PR, 3∈ST.
 
 ALL-DR STATISTICS.
   Sum of all DR:     2+6+5+3+8+2+6+8 = 40 ≡ 3 ∈ ST (mod 37).
@@ -66,7 +66,7 @@ ALL-DR STATISTICS.
   [Sum lands in ST; product lands in CB — mirroring the gauge/cascade split.]
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ST         = frozenset({3, 12, 21, 30})
@@ -106,7 +106,7 @@ _kdiffs = [KERVAIRE_DIMS[i] - KERVAIRE_DIMS[i-1] for i in range(1, 5)]
 _kdiffs = [KERVAIRE_DIMS[0]] + _kdiffs   # [2, 4, 8, 16, 32]
 assert _kdiffs == ADDENDS[:5]             # Kervaire first diffs = chain prefix
 
-# ── Mod-37 framework membership ───────────────────────────────────────────────
+# ── Mod-37 GF(37) membership ───────────────────────────────────────────────
 
 assert MODS[0] == 2 and 2 in PR               # step 1: PR
 assert MODS[1] == 6 == TESLA_FLOW and 6 in TESLA_4  # step 2: TESLA_FLOW
@@ -201,7 +201,7 @@ if __name__ == "__main__":
             if n in s: return nm
         return '—'
 
-    print(f"{'Step':>4} | {'Addend':>6} | {'CumSum':>6} | {'Mod37':>5} | Framework")
+    print(f"{'Step':>4} | {'Addend':>6} | {'CumSum':>6} | {'Mod37':>5} | GF(37)")
     print("-" * 50)
     for i, (a, ps) in enumerate(zip(ADDENDS, PARTIALS)):
         print(f"  {i+1:>2} | {a:>6} | {ps:>6} | {ps%P:>5} | {fw(ps)}")

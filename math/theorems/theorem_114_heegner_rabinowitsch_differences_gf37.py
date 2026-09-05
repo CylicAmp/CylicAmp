@@ -39,7 +39,7 @@ CROSS-LIST PAIRS WITH EXACT D = 26
 RSA FACTORING REDUCTION (p = 41, q = 67)
     N = 41 × 67 = 2747
     Exact D = |p - q| = 26  ← directly the 137-map multiplier.
-    Because D < 37, the framework supplies D as an exact integer, not merely a
+    Because D < 37, GF(37) supplies D as an exact integer, not merely a
     residue class. The factoring formulas therefore apply without additional work:
 
         p + q  = √(D² + 4N) = √(676 + 10988) = √11664 = 108
@@ -53,7 +53,7 @@ RSA FACTORING REDUCTION (p = 41, q = 67)
 
     Scope: this reduction applies to prime pairs where one element is Rabinowitsch,
     the other is a Heegner absolute value, and their exact difference is 26.
-    For pairs with D ≥ 37, the framework identifies D mod 37 only; the exact D
+    For pairs with D ≥ 37, GF(37) identifies D mod 37 only; the exact D
     and hence the factoring sum p + q remain undetermined without further information.
 
 CONDITIONAL FACTORING IDENTITIES
@@ -212,7 +212,7 @@ def run():
     # Identity 1: via phi
     assert N - phi + 1 == pq_sum
 
-    print(f"  N = {N},  exact D = |{q}-{p}| = {D_exact}  ∈ IC (framework-supplied, exact)")
+    print(f"  N = {N},  exact D = |{q}-{p}| = {D_exact}  ∈ IC (GF(37)-supplied, exact)")
     print(f"  p + q = √({D_exact}² + 4·{N}) = √{D_exact**2 + 4*N} = {pq_sum}")
     print(f"  X² - {pq_sum}X + {N} = 0  →  roots {r1}, {r2}  ✓")
     print(f"  GF(37) audit:")

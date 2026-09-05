@@ -120,7 +120,7 @@ That is the precise condition under which "Math = Phys" would hold.
 GF(37) INSTANTIATION
 ================================================================================
 
-The GF(37) framework is a concrete instance of Fix(C∘E):
+The GF(37) is a concrete instance of Fix(C∘E):
 
     M = mathematical structures indexed by the prime 37
         (orbit sets, 137-map, QR/QNR partition, CRT tower)
@@ -162,7 +162,7 @@ PHYS = MATH CONDITION:
     fixed point of C∘E. That would mean every integer n satisfies:
     DR(n mod 37) ∈ {4,9,25,30} ∪ {3,12,21,30} ∪ ...
     This is false: e.g. n=2 → 2 mod 37 = 2, not in any named set.
-    Therefore Phys ⊊ Math in this framework.
+    Therefore Phys ⊊ Math in GF(37).
 ================================================================================
 """
 
@@ -263,7 +263,7 @@ def run():
     print(f"  Example non-fixed-point: 2 mod 37 = 2 → not in any named set")
     assert 2 not in ALL_NAMED
     print(f"  Phys = Math would require all 36 elements to be named. False.  check")
-    print(f"  Therefore: Phys ⊊ Math in this framework  check")
+    print(f"  Therefore: Phys ⊊ Math in GF(37)  check")
 
     # Residue condition correction via DR
     print(f"\nCorrected residue condition  Φ_f(R_f(O)) ≅ Φ_e(R_e(O)):")

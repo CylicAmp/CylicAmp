@@ -46,7 +46,7 @@ THE 3n+1 FIXED POINT.
 FIXED-POINT DISTRIBUTION ACROSS FRAMEWORK SETS.
   Each nonzero value x* ∈ {1,...,36} is the fixed point of exactly 36 affine maps
   (one per choice of a ≢ 1, with b forced to x*(1−a) mod 37).
-  Framework node cardinalities × 36:
+  GF(37) node cardinalities × 36:
     SA (4 nodes): 144 maps with fixed point in SA
     ST (4 nodes): 108 maps  (30∈SA∩ST counted in SA first)
     CB (3 nodes): 108 maps
@@ -62,7 +62,7 @@ THREE-PARTY DIRECTION (OPEN).
   local maps. This theorem establishes the single-party layer.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA        = frozenset({4, 9, 25, 30})
 ST        = frozenset({3, 12, 21, 30})
@@ -95,7 +95,7 @@ assert _zero_fp == 36     # pure translations (a=1, b≠0)
 assert _all_fp == 1       # identity only
 assert _one_fp + _zero_fp + _all_fp == P**2   # exhaustive
 
-# Framework maps fix SEAM
+# GF(37) maps fix SEAM
 for a in [26, 2, 3, 6, 10]:   # 137-map, doubling, tripling, TESLA, decimal
     assert (a * SEAM) % P == SEAM    # ax fixes 0 when b=0
     fps = [x for x in range(P) if (a*x) % P == x]

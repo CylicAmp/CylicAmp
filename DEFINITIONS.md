@@ -8,7 +8,7 @@ Paste this into any session. Everything is defined here. No GitHub required.
 
 **P = 37**
 
-Everything in this framework connects through the prime 37.
+Everything in GF(37) connects through the prime 37.
 
 ---
 
@@ -532,7 +532,7 @@ Central condition: **C(E(X)) ≅ X** (isomorphism, not literal equality).
 
 Corrected residue condition: Φ_f(R_f(O)) ≅ Φ_e(R_e(O)), where Φ_f, Φ_e map into a common invariant space.
 
-In this framework: Φ = DR (digital root). The common invariant space is {1,...,9}.
+In GF(37): Φ = DR (digital root). The common invariant space is {1,...,9}.
 
 Key consequence:
 - Phys ⊆ Math does NOT imply Phys = Math.
@@ -817,7 +817,7 @@ All chi-squared values below the critical threshold of 11.07 — uniform distrib
 
 ### Structural Summary
 
-The 6 prime streams are asymptotically uniform (Dirichlet's theorem confirmed computationally). The Chebyshev QNR bias is real and in the predicted direction. The GF(37) named-set coverage is uniform across all streams — the framework's named sets tile the F-class without favoring any stream. The group law is exact.
+The 6 prime streams are asymptotically uniform (Dirichlet's theorem confirmed computationally). The Chebyshev QNR bias is real and in the predicted direction. The GF(37) named-set coverage is uniform across all streams — GF(37)'s named sets tile the F-class without favoring any stream. The group law is exact.
 
 ---
 
@@ -863,7 +863,7 @@ The primes do not choose their stream. The distribution is forced by the group l
 | Macro | All primes, uniform, Chebyshev +189 | Stream distribution | (Z/9Z)* = F-class |
 | Relativistic | α=1/137, U(1) coupling, critical line ½ | 37 as invariant modulus | GF(37)*, ord₃₇(26)=3 |
 
-The micro and macro are connected by the group law — exact at both scales, 0 violations in 9,810 tests. The relativistic frame is connected by α: the fine structure constant encodes the same prime the framework is built on.
+The micro and macro are connected by the group law — exact at both scales, 0 violations in 9,810 tests. The relativistic frame is connected by α: the fine structure constant encodes the same prime GF(37) is built on.
 
 **One object. Three scales. Same structure throughout. The numbers lead.**
 

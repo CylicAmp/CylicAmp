@@ -126,7 +126,7 @@ class GroupFramework:
         print()
 
     def _test_integrated_equations(self):
-        print("--- 8. Integrated Framework Equations ---")
+        print("--- 8. Integrated GF(37) Equations ---")
 
         dr_296 = digital_root(296)
         mod_11_val = self.X % 11
@@ -181,6 +181,6 @@ assert pow(20, 3, 37) == 8
 
 
 if __name__ == "__main__":
-    framework = GroupFramework("23572481523")
-    framework.run_tests()
+    engine = GroupFramework("23572481523")
+    engine.run_tests()
     print("\nAll assertions passed.")

@@ -1,7 +1,7 @@
 """
-Mathematical Category Index — CylicAmp Framework
+Mathematical Category Index — CylicAmp GF(37)
 
-Categories used in this framework:
+Categories used in GF(37):
   Axiom       — accepted without proof, foundational
   Postulate   — assumed truth specific to this system
   Definition  — establishes precise meaning of a term

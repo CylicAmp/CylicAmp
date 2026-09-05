@@ -57,7 +57,7 @@ CoT: emitting w_t writes a discrete snapshot into the KV cache.
 GF(37): the 137-map orbit writes 3 snapshots {r, 26r, 26²r} mod 37.
   Later theorems read them by: set membership (SA, ST, SEED, IC, ...).
 
-The named sets are the KV cache of the framework: addressable, inspectable,
+The named sets are the KV cache of GF(37): addressable, inspectable,
 stably referenceable across all theorems without consuming orbit steps.
 
 === FACTORIZATION AND THE CHAIN RULE OVER ORBITS ===
@@ -87,7 +87,7 @@ CoT: each wₜ pins continuous state to a semantic coordinate that
      subsequent attention can index.
 
 GF(37): each named set is a semantic coordinate. Knowing n mod 37 ∈ SA
-     pins the entire subsequent framework: LOCKED in Medusa, DR∈{4,9,7,3},
+     pins the entire subsequent GF(37): LOCKED in Medusa, DR∈{4,9,7,3},
      holonomy class determined.
 
 CoT error compounding: a single off-manifold token shifts the entire
@@ -95,7 +95,7 @@ CoT error compounding: a single off-manifold token shifts the entire
 
 GF(37) analog: a single wrong orbit step is fatal. If f(n) lands outside
      the expected coset, the holonomy class changes and all subsequent
-     set memberships flip. The framework has no implicit backtracking —
+     set memberships flip. The GF(37) has no implicit backtracking —
      the orbit is a left-to-right trace.
 
 === LIMITS THAT FOLLOW FROM THE SAME TOPOLOGY ===

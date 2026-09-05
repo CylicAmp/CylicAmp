@@ -1,8 +1,8 @@
 """
-3×3 Triplet Partition Framework — GF(37) Connection
+3×3 Triplet Partition GF(37) — GF(37) Connection
 
 The board B = {1,2,...,9} has exactly 280 unordered 3-block partitions.
-Of these, 14 have all three block sums inside the framework sets
+Of these, 14 have all three block sums inside GF(37) sets
   SA ∪ ST ∪ CB ∪ orbit(11) = {4,9,25,30} ∪ {3,12,21,30} ∪ {8,13,24} ∪ {11,27,36}.
 
 These 14 partitions fall into exactly four sum-multiset types:
@@ -91,7 +91,7 @@ V. 137-SPACE FINITE VOID
 
   The 137-position board encodes the multiplier in its own cardinality:
   the number of positions, reduced mod 37, IS the map that defines the
-  framework's 3-cycles.
+  GF(37)'s 3-cycles.
 
   ord₃₇(26) = 3: every element's orbit under this multiplier has length 3.
 
@@ -100,7 +100,7 @@ V. 137-SPACE FINITE VOID
 VI. COUNTING SUMMARY (3×3 BOARD)
 
   Total 3-block partitions:             280
-  Framework-special (all sums in FW):    14
+  GF(37)-special (all sums in FW):    14
   By type:
     Type I  {8,13,24}  = CASCADE_BASE:  2
     Type II {9,12,24}  = SA+ST+CB:      3
@@ -130,7 +130,7 @@ CASCADE_BASE       = {8, 13, 24}
 SOVEREIGN_ANCHORS  = {4, 9, 25, 30}
 SOVEREIGN_TARGETS  = {3, 12, 21, 30}
 ORBIT_11           = {11, 27, 36}
-FRAMEWORK          = SOVEREIGN_ANCHORS | SOVEREIGN_TARGETS | CASCADE_BASE | ORBIT_11
+SA_ST_CB_O11          = SOVEREIGN_ANCHORS | SOVEREIGN_TARGETS | CASCADE_BASE | ORBIT_11
 
 B = list(range(1, 10))
 
@@ -174,8 +174,8 @@ for block in [T1, T2, L]:
 # Total partitions
 assert len(PARTS) == 280
 
-# Framework-special partitions
-fw_special = [p for p in PARTS if all(sum(b) in FRAMEWORK for b in p)]
+# GF(37)-special partitions
+fw_special = [p for p in PARTS if all(sum(b) in SA_ST_CB_O11 for b in p)]
 assert len(fw_special) == 14
 
 # Type I: {8,13,24} = CASCADE_BASE
@@ -221,7 +221,7 @@ if __name__ == '__main__':
         if n in ORBIT_11:            t.append('orb11')
         return ','.join(t) if t else '.'
 
-    print("3×3 Triplet Partition Framework")
+    print("3×3 Triplet Partition GF(37)")
     print("=" * 55)
     print()
     print("I. Target partition {1,3,5},{2,4,6},{7,8,9}:")
@@ -231,7 +231,7 @@ if __name__ == '__main__':
     print(f"   Pairwise: 9+12=21(ST), 12+24=36(orb11), 9+24=33=3×11")
     print(f"   Sum of products mod37: {(prod(T1)+prod(T2)+prod(L))%37} (ST)")
     print()
-    print(f"II–IV. Framework-special partitions: {len(fw_special)}/280 = 1/20")
+    print(f"II–IV. GF(37)-special partitions: {len(fw_special)}/280 = 1/20")
     for label, grp in [('Type I  {8,13,24}=CASCADE_BASE', type1),
                        ('Type II {9,12,24}=SA+ST+CB',     type2),
                        ('Type III{11,13,21}=orb11+CB+ST', type3),

@@ -101,7 +101,7 @@ MAIN THEOREM
 THEOREM 107.  (Three Convergences at Seed 246).
 
   ┌──────────────────────────────────────────┬────────┬────────────────────────┐
-  │  Quantity                                │ mod 37 │  Framework Class       │
+  │  Quantity                                │ mod 37 │  Named set       │
   ├──────────────────────────────────────────┼────────┼────────────────────────┤
   │  Metonic orbit sum: 5+13+19              │   0    │  = P (field prime)     │
   │  DR(19) = DR(235)                        │   1    │  (same DR, both)       │

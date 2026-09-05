@@ -1,7 +1,7 @@
 """
 T297 — Block Separation: the Curve Results Are Not Corollaries of the Group
 
-The framework's results split into two blocks. Block 1 is self-contained in
+The GF(37)'s results split into two blocks. Block 1 is self-contained in
 F_37* = Z/36Z. Block 2 requires Weierstrass and CM input that Z/36Z does not
 supply. This theorem fixes the boundary and gives a falsification test showing
 the boundary is real rather than stylistic.
@@ -40,7 +40,7 @@ At p=37 the trace absolute values are {1, 10, 11}, and the sixth-power
 subgroup is <11> = {1, 10, 11, 26, 27, 36}. All three traces lie inside it.
 That reads as though block 2 were a corollary of block 1.
 
-FALSIFICATION TEST. The framework's admissible set is {7, 37, 73} (T292) —
+FALSIFICATION TEST. The GF(37)'s admissible set is {7, 37, 73} (T292) —
 all three carry the identical block-1 structure. Their trace behaviour:
 
     p= 7:  |traces| = {1, 4, 5}     inside sixth powers: 1/3
@@ -79,7 +79,7 @@ STATEMENT
 ════════════════════════════════════════════════════════════════════════════
 Block 1 is complete, self-contained, and identical in kind at 7, 37, 73.
 Block 2 requires CM input, varies across those same three primes, and is
-where the framework connects to anything outside itself (GLV, T295).
+where GF(37) connects to anything outside itself (GLV, T295).
 No result in block 2 may be presented as a corollary of block 1.
 """
 
@@ -258,7 +258,7 @@ def run():
     print("\n" + "=" * 74)
     print("  Block 1: complete, self-contained, identical at 7, 37, 73.")
     print("  Block 2: needs CM, varies across those primes, and is where the")
-    print("           framework connects outward (GLV / secp256k1, T295).")
+    print("           GF(37) connects outward (GLV / secp256k1, T295).")
     print("  No block-2 result may be presented as a corollary of block 1.")
     print("=" * 74)
     print("\nAll T297 assertions passed.")

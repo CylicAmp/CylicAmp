@@ -9,7 +9,7 @@ KERVAIRE INVARIANT ONE: SETUP.
   The complete existence set: n ∈ {2, 6, 14, 30, 62, 126} = {2^j − 2 : j = 2,...,7}.
 
 GF(37) MOD-37 TABLE.
-  j | 2^j mod 37 | framework   | n=2^j−2 mod 37 | framework | exists
+  j | 2^j mod 37 | GF(37)   | n=2^j−2 mod 37 | GF(37) | exists
   ──────────────────────────────────────────────────────────────────────
   2 |  4         | SA          |  2             | PR(base)  | YES
   3 |  8         | CB          |  6  TESLA_FLOW | T4        | YES
@@ -19,13 +19,13 @@ GF(37) MOD-37 TABLE.
   7 | 17         | PR          | 15             | PR        | YES
   8 | 34         | —           | 32             | SEED_ORBIT| NO (excluded)
 
-  Three of the six included exponents give 2^j ∈ named framework sets:
+  Three of the six included exponents give 2^j ∈ named named sets:
     j=3 → 2^3 = 8 ∈ CB          (cascade base)
     j=5 → 2^5 = 32 ∈ SEED_ORBIT (pipeline seed orbit)
     j=6 → 2^6 ≡ 27 ∈ ORBIT_11  (orbit-11 subgroup)
-  The first excluded exponent (j=8) gives 2^8 ≡ 34 — non-framework.
+  The first excluded exponent (j=8) gives 2^8 ≡ 34 — unnamed.
 
-FOUR ARITHMETIC STATISTICS (all hitting framework nodes mod 37).
+FOUR ARITHMETIC STATISTICS (all hitting named residues mod 37).
   Sum of exponents:    2+3+4+5+6+7        = 27  ∈ ORBIT_11 = {11,27,36}
   Sum of dimensions:   2+6+14+30+62+126   = 240 ≡ 18 ∈ SEED_ORBIT = {18,24,32}
   Product of exponents: 2×3×4×5×6×7      = 7!  ≡  8 ∈ CB = {8,13,24}
@@ -41,7 +41,7 @@ FOUR ARITHMETIC STATISTICS (all hitting framework nodes mod 37).
   reduces to the CB anchor that generates the TESLA_FLOW orbit.
 
 MUTUAL INVERSE: 8 ↔ 14 IN GF(37).
-  8 ∈ CB (cascade base, first Kervaire exponent to hit a framework node via 2^3=8).
+  8 ∈ CB (cascade base, first Kervaire exponent to hit a named residue via 2^3=8).
   14 = n at j=4 (the Kervaire dimension 14).
   8 × 14 = 112 = 3×37 + 1 ≡ 1 (mod 37):  8 and 14 are mutual inverses in GF(37)*.
   Every CB element (8,13,24) has a GF(37)-inverse. The inverse of 8 is the dimension 14.
@@ -50,9 +50,9 @@ FIRST EXCLUDED DIMENSION.
   j=8: n = 2^8 − 2 = 254. 254 mod 37 = 32 ∈ SEED_ORBIT.
   2^8 mod 37 = 34. ord(34) = 9 (order 9 in GF(37)*).
   The shift: at j=7 (last included), 2^7 ≡ 17 ∈ PR (order 36 = full primitive root).
-  At j=8 (first excluded), 2^8 ≡ 34 (order 9, not in PR, not in any framework set).
+  At j=8 (first excluded), 2^8 ≡ 34 (order 9, not in PR, not in any named sets).
   The SEED_ORBIT "transfer": 2^5 = 32 ∈ SEED_ORBIT (dimension j=5 exists);
-  at j=8, the DIMENSION 254 ≡ 32 ∈ SEED_ORBIT (while 2^8 is non-framework).
+  at j=8, the DIMENSION 254 ≡ 32 ∈ SEED_ORBIT (while 2^8 is unnamed).
 
 GHOST EQUATION — GF(37) INTERPRETATION.
   From non-uniformly elliptic PDE theory (De Filippis-Mingioni): a "ghost equation"
@@ -80,7 +80,7 @@ SPECTRAL DIMENSION CHAIN.
   The six allowed Kervaire dimensions collectively encode the SEED anchor of the pipeline.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ST         = frozenset({3, 12, 21, 30})
@@ -113,7 +113,7 @@ assert 2 % P == 2 and 2 in PR
 assert pow(2, 3, P) == 8 and 8 in CB
 assert (8 - 2) % P == 6 and 6 == TESLA_FLOW and TESLA_FLOW in TESLA_4
 
-# j=4: 2^4=16 (non-framework), n=14; 14 is mutual inverse of 8∈CB
+# j=4: 2^4=16 (unnamed), n=14; 14 is mutual inverse of 8∈CB
 assert pow(2, 4, P) == 16 and 16 not in SA | ST | CB | ORBIT_11 | IC | SEED_ORBIT | TESLA_4 | PR
 assert (16 - 2) % P == 14
 assert (8 * 14) % P == 1   # 8∈CB and 14 are mutual inverses
@@ -130,7 +130,7 @@ assert (27 - 2) % P == 25 and 25 in SA
 assert pow(2, 7, P) == 17 and 17 in PR
 assert (17 - 2) % P == 15 and 15 in PR
 
-# First excluded (j=8): 2^8≡34 (non-framework), n≡32∈SEED_ORBIT
+# First excluded (j=8): 2^8≡34 (unnamed), n≡32∈SEED_ORBIT
 assert pow(2, 8, P) == 34
 assert 34 not in SA | ST | CB | ORBIT_11 | IC | SEED_ORBIT | TESLA_4 | PR
 assert (34 - 2) % P == 32 and 32 in SEED_ORBIT
@@ -199,7 +199,7 @@ if __name__ == "__main__":
     print()
     print("KERVAIRE DIMENSIONS: {2^j − 2 : j = 2,...,7}")
     print()
-    print(f"{'j':>2} | {'2^j mod 37':>10} | {'framework':>10} | {'n mod 37':>8} | {'framework':>10} | exists")
+    print(f"{'j':>2} | {'2^j mod 37':>10} | {'GF(37)':>10} | {'n mod 37':>8} | {'GF(37)':>10} | exists")
     print(f"{'─'*2}-+-{'─'*10}-+-{'─'*10}-+-{'─'*8}-+-{'─'*10}-+-------")
     def fw(n):
         for s,name in [(SA,'SA'),(ST,'ST'),(CB,'CB'),(ORBIT_11,'O11'),

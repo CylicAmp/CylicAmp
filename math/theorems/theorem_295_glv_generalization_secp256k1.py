@@ -18,10 +18,10 @@ WHAT 137 ACTUALLY IS
     IC = {1, 10, 26} = mu_3(F_37),  the group of cube roots of unity.
 
 The two primitive roots satisfy the cyclotomic polynomial x^2 + x + 1:
-    10^2 + 10 + 1 = 111 = 3 x 37     <- the framework's SEAM value
+    10^2 + 10 + 1 = 111 = 3 x 37     <- GF(37)'s SEAM value
     26^2 + 26 + 1 = 703 = 19 x 37
 Both vanish mod 37 by construction. The 111 = 3 x 37 result already recorded
-in the framework is the minimal polynomial of the multiplier evaluated at 10.
+in GF(37) is the minimal polynomial of the multiplier evaluated at 10.
 
 ════════════════════════════════════════════════════════════════════════════
 THE GENERALIZATION
@@ -59,7 +59,7 @@ generalizes, it generalized decades ago, and it is called GLV.
 THE INVERSION — ANOMALOUS IS FATAL, NOT INTERESTING
 ════════════════════════════════════════════════════════════════════════════
 T288 and T293 singled out p=37's anomalous curve (#E = p, trace t = 1) as the
-distinguishing feature of the framework's prime. In cryptography that exact
+distinguishing feature of GF(37)'s prime. In cryptography that exact
 property is a total break.
 
 Anomalous curves fall to Smart's attack (1997), independently Satoh-Araki and
@@ -72,7 +72,7 @@ The property T293 proved unique to p=37 among {7,37,73} is precisely the
 property a cryptographic curve must be verified NOT to have. Curve selection
 explicitly tests for it.
 
-So the framework's most distinctive elliptic-curve feature does not scale to
+So GF(37)'s most distinctive elliptic-curve feature does not scale to
 security — it is the disqualifying condition. What scales is the mu_3
 endomorphism structure, which is orthogonal to it.
 
@@ -182,7 +182,7 @@ def run():
     print("\n--- Part 1: 137 mod 37 = 26 is a primitive cube root of unity ---")
     print(f"  primitive cube roots mod 37: {roots}")
     print(f"  IC = {{1, 10, 26}} = mu_3(F_37)")
-    print(f"  10^2+10+1 = 111 = 3 x 37   <- the framework's SEAM value")
+    print(f"  10^2+10+1 = 111 = 3 x 37   <- GF(37)'s SEAM value")
     print(f"  26^2+26+1 = 703 = 19 x 37")
     print("  The 137-map has order 3 because 26 is a cube root of unity.")
     print("  Nothing else about 137 matters.")

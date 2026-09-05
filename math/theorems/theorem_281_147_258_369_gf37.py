@@ -1,7 +1,7 @@
 """
 T281: The 147/258/369 grid in GF(37)
 
-Source: User's dimensional matrix framework.
+Source: User's dimensional matrix GF(37).
 Grid: 3×3 lattice {1..9} read as row triples 147, 258, 369.
 Anchor pattern: 3−4=1, 3−7=4, 3−10=7 (gaps from birthday number 3).
 

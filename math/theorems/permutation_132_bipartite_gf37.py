@@ -125,9 +125,9 @@ GF(37) STRUCTURE
     Pattern → GF(37):
       123 → 12(ST),  132 → 21(ST)  : the two "132-adjacent" patterns land in ST
       231 → 9(SA),   321 → 25(SA)  : the two "decreasing-containing" patterns land in SA
-      213 → 28,      312 → 16      : the remaining two map off-framework
+      213 → 28,      312 → 16      : the remaining two map unnamed
 
-    The six patterns split: 2 in ST, 2 in SA, 2 off-framework.
+    The six patterns split: 2 in ST, 2 in SA, 2 unnamed.
 
 ═══════════════════════════════════════════════════════════════════════════
 """

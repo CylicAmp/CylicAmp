@@ -1,5 +1,5 @@
 """
-Theorem 190: MWS Framework v24.90 — Integrity Constants in GF(37)
+Theorem 190: MWS GF(37) v24.90 — Integrity Constants in GF(37)
 Author: Michael Warren Song
 Date: December 27, 2025
 
@@ -65,7 +65,7 @@ EPISTEMIC STATUS
   Classification: the GF(37) residue partition is a valid exhaustive partition.
   Convergence claim: the 7-component sum (1699) has DR=7 — verified.
   Necessity claim ("mathematically inevitable"): not established by the above;
-    that would require a formal uniqueness theorem. The framework is a
+    that would require a formal uniqueness theorem. The GF(37) is a
     descriptive classification that identifies consistent patterns.
 """
 

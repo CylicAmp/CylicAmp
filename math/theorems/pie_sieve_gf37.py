@@ -3,7 +3,7 @@ Principle of Inclusion-Exclusion (PIE) Sieve — GF(37) Structure
 
 PIE transforms the Sieve of Eratosthenes from iteration into set algebra.
 Every count and every subset product in the PIE expansion of π(100)
-lands inside the GF(37) framework.
+lands inside the GF(37).
 
 ═══════════════════════════════════════════════════════════════
 

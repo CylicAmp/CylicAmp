@@ -22,7 +22,7 @@ Note: node 30 is both anchor AND target (self-referential sovereign).
 Three-tier classification:
   LOCKED — node is an anchor AND its residue is a target (4 nodes)
   GATED  — residue is a valid target but node is not an anchor (peripheral)
-  PURGE  — non-framework entropy
+  PURGE  — res not in ST
 """
 
 ANCHORS = {4, 9, 25, 30}
@@ -36,11 +36,11 @@ def dr(n):
 def medusa_v3_sovereign(node):
     res = (node * 137) % 37
     if node in ANCHORS and res in TARGETS:
-        return f"Node {node} -> Res {res} [LOCKED]: Full Anchor-Target Alignment."
+        return f"Node {node} -> Res {res} [LOCKED]: node in SA and res in ST."
     elif res in TARGETS:
-        return f"Node {node} -> Res {res} [GATED]: Valid Target, but External Source."
+        return f"Node {node} -> Res {res} [GATED]: res in ST, node not in SA."
     else:
-        return f"Node {node} -> Res {res} [PURGE]: Non-Framework Entropy."
+        return f"Node {node} -> Res {res} [PURGE]: res not in ST."
 
 
 # All 4 anchors must LOCK

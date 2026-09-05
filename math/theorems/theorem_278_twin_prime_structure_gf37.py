@@ -5,7 +5,7 @@ Corrects the 2025 Claude translation which:
   (1) imported Hardy-Littlewood Conjecture B (π₂(x) ≈ C₂·x/(log x)²) as a
       "derivation" — it is an unproved conjecture from 1923, external to this work;
   (2) introduced "7D recognition symmetry" — a fabricated phrase with no
-      content in the GF(37) framework;
+      content in the GF(37);
   (3) implied C₂ = 0.6601618... was derived here — it was not.
 
 === WHAT IS PROVED (structural conditions on all twin prime pairs) ===
@@ -37,15 +37,15 @@ Corrects the 2025 Claude translation which:
    C9 = {14,29,31}: this pair exhausts the non-14 elements of C9.
    Midpoint 30 ∈ C3 — birthday orbit.
 
-6. (137,139) PAIR — framework prime as twin member
+6. (137,139) PAIR — 37 as twin member
    137 mod 37 = 26 ∈ IC (the 137-map multiplier).
    139 mod 37 = 28 ∈ SA_ST_B.
-   The prime 137 that defines the entire GF(37) framework appears as the
+   The prime 137 that defines the entire GF(37) appears as the
    lower member of a twin prime pair. Midpoint 138 ≡ 27 ∈ NEG_H.
 
 7. C₂ CONSTANT ENCODING
    Twin prime constant C₂ = 0.6601618... (Hardy-Littlewood 1923).
-   C₂ is external to this framework — not derived here.
+   C₂ is external to GF(37) — not derived here.
    Leading 7 digits 6601618 mod 37 = 4 ∈ C3 (birthday orbit).
    The constant that appears in the density conjecture carries the birthday orbit
    in its decimal head — but this is an encoding observation, not a derivation.
@@ -53,7 +53,7 @@ Corrects the 2025 Claude translation which:
 === WHAT IS NOT PROVED ===
 
 The conjecture π₂(x) ≈ C₂·x/(log x)² (Hardy-Littlewood Conjecture B, 1923)
-is NOT proved here. The GF(37) framework proves necessary structural conditions.
+is NOT proved here. The GF(37) proves necessary structural conditions.
 Extension of L(s,χ₋₃) non-vanishing from s=2 to s=1 remains an open problem.
 """
 
@@ -220,7 +220,7 @@ for (o1,o2),cnt in sorted(sharing, key=lambda x:-x[1]):
 print(f"  C9↔C9 is driven by (29,31) repeating across GF(37) periods")
 print(f"  Part 5 PASS")
 
-# ── Part 6: (137,139) pair — framework prime as twin member ───────────────────
+# ── Part 6: (137,139) pair — 37 as twin member ───────────────────
 
 print("\nPart 6: (137,139) pair — 137≡26∈IC, the 137-map multiplier")
 
@@ -244,7 +244,7 @@ print("\nPart 7: C₂ constant encoding (external, not derived here)")
 C2_LEAD7 = 6601618  # Hardy-Littlewood twin prime constant leading 7 digits
 assert C2_LEAD7 % 37 == 4 and 4 in ORBITS["C3"]
 
-print(f"  C₂ = 0.6601618... (Hardy-Littlewood 1923, not derived in this framework)")
+print(f"  C₂ = 0.6601618... (Hardy-Littlewood 1923, not derived in GF(37))")
 print(f"  C₂ lead7: {C2_LEAD7} mod 37 = {C2_LEAD7%37} ∈ C3 (birthday orbit)")
 print(f"  C3 = {{3,4,30}}: birthday March 3=3/3; 4=birthday day² mod 37")
 print(f"  Note: C₂ is a product over all odd primes; GF(37) encodes one prime's role")
@@ -280,6 +280,6 @@ print(f"  χ₋₃ triple: (−1,0,+1) — forced, not probabilistic")
 print(f"  Imaginary unit gate: n≢±6 mod37; 2 forbidden per period")
 print(f"  Midpoint 3-cycle: TESLA→C3→SA_ST_A; period sum 18∈SEED")
 print(f"  Forbidden midpoints: {{1∈IC, 36∈NEG_H}}")
-print(f"  Exceptional: (29,31)∈C9; (137,139) with 137≡26∈IC (framework prime)")
+print(f"  Exceptional: (29,31)∈C9; (137,139) with 137≡26∈IC (37)")
 print(f"  C₂ lead7=6601618≡4∈C3 (birthday orbit) — encoding, not derivation")
 print(f"  Hardy-Littlewood Conjecture B remains open; GF(37) proves structure only")

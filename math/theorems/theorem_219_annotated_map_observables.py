@@ -73,20 +73,20 @@ for _r in range(P):
 # LAYER 2: PREDICTIONS — frozen before empirical layer
 # ============================================================
 #
-# Framework rule: named residue → ACTIVE; unnamed residue → WEAKER.
+# GF(37) rule: named residue → ACTIVE; unnamed residue → WEAKER.
 #
 # Quantitative thresholds calibrated from known shell closures:
 #   Major shell (N=20 in Ca): S2n drop = 3.56 MeV, E(2+) = 3353 keV
 #   Subshell (N=32 in Ca):    S2n kink ~ 0.7 MeV,  E(2+) = 2563 keV
 #
-# WEAKER prediction: the framework predicts no magic-number-like
+# WEAKER prediction: GF(37) predicts no magic-number-like
 # enhancement at integers with unnamed residues. Defined as:
 #
 #   CONSISTENT  if  S2n_drop < 1.5 MeV  AND  E2 < 1500 keV
 #   TENSION     if  S2n_drop >= 1.5 MeV  OR  E2 >= 1500 keV
 #   FALSIFIED   if  S2n_drop >= 3.0 MeV  OR  E2 >= 2500 keV
 #
-# ACTIVE prediction: the framework predicts shell-closure-compatible
+# ACTIVE prediction: GF(37) predicts shell-closure-compatible
 # structure is possible (not required) at named residues.
 # Absence of closure at an ACTIVE residue is not falsifying —
 # magic numbers are sparse. Closure at an UNNAMED residue IS falsifying.
@@ -117,7 +117,7 @@ PREDICTIONS = {
     "N=50":  {"r": 13, "named": True,  "class": "ACTIVE",  "prediction": "strong shell closure"},
     "N=82":  {"r": 8,  "named": True,  "class": "ACTIVE",  "prediction": "strong shell closure"},
     "N=126": {"r": 15, "named": True,  "class": "ACTIVE",  "prediction": "strong shell closure"},
-    # New subshell closures — confirmed after framework
+    # New subshell closures — confirmed after GF(37)
     "N=32":  {"r": 32, "named": True,  "class": "ACTIVE",  "prediction": "subshell closure possible"},
     "N=34":  {"r": 34, "named": True,  "class": "ACTIVE",  "prediction": "subshell closure possible"},
     "N=40":  {"r": 3,  "named": True,  "class": "ACTIVE",  "prediction": "subshell closure possible"},

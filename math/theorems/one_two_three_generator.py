@@ -3,7 +3,7 @@
 
 The single addition 2+1=3 generates the complete {1,2,3} family.
 {1,2,3} is the only set of positive integers where sum = product.
-Both equal 6 (TESLA_FLOW). The family appears across every layer of the framework.
+Both equal 6 (TESLA_FLOW). The family appears across every layer of GF(37).
 
 ═══════════════════════════════════════════════════════════════
 

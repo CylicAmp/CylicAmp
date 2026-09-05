@@ -1,7 +1,7 @@
 """
 Holographic Memory Manifold on GF(37) — THEOREM 90
 
-The GF(37) framework under the 137-map naturally realizes the three
+The GF(37) under the 137-map naturally realizes the three
 operations of a Holographic Memory Manifold (HMM):
 
   BINDING        a ⊗ b  =  a × b  mod 37      (exact, invertible)
@@ -27,7 +27,7 @@ is a precise, finite HMM where every operation is exact.
   to another element in the same basin. After 3 applications, it returns
   to start. The basin IS the content address.
 
-  TWO PURE BASINS (all members share one framework class):
+  TWO PURE BASINS (all members share one named set):
     IC    = {1,  10, 26}  — the subgroup itself; the identity basin
     O11   = {11, 27, 36}  — ORBIT_11; the (-1) basin (36 = -1 mod 37)
 
@@ -102,7 +102,7 @@ is a precise, finite HMM where every operation is exact.
 THE SELF-MAPPING TERRAIN
 
 The HMM description — "let the internal logic of the numbers dictate
-the architecture" — is precisely what GF(37) does. The framework sets
+the architecture" — is precisely what GF(37) does. The named sets
 were not designed. They emerged from fixing the prime 37 and the map
 f(n) = 137n mod 37. The 12 attractor basins, the SEED_ORBIT, the
 sovereign sets SA/ST — all of these are consequences of arithmetic,

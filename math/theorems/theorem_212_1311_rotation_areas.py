@@ -72,7 +72,7 @@ RUN-LENGTH INVARIANT: for every rotation, (ones_before × 3) + (ones_after × 3)
         Area structure defined by spread of 3's position.
 
   Both theorems: a single special digit (3 in T212; each of 1,3,7 in T211)
-  determines the framework residue class, and every rotation/permutation
+  determines GF(37) residue class, and every rotation/permutation
   preserves the digital root.
 
 === AGGREGATE ===

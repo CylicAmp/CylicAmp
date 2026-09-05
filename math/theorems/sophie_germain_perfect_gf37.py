@@ -14,7 +14,7 @@ SOPHIE GERMAIN CONDITION FOR MERSENNE PRIME EXPONENTS.
 PERFECT NUMBERS IN GF(37).
   Using N = 2^(p-1) × (2^p − 1):
 
-  p  | 2^(p-1)%37  | (2^p−1)%37  | N%37 | framework | SG?
+  p  | 2^(p-1)%37  | (2^p−1)%37  | N%37 | GF(37) | SG?
   ──────────────────────────────────────────────────────────
   2  |  2  ∈ PR    |  3  ∈ ST    |   6  | T4        | ✓
   3  |  4  ∈ SA    |  7  ∈ —     |  28  | — (SEED²) | ✓
@@ -41,7 +41,7 @@ THE SEED SQUARE.
   137-map: 24 → 32 → 18 → 24. Starting from 18: 18² ≡ 28.
   The second perfect number is the square of the SEED orbit entry point.
   28 is a quadratic residue mod 37 (Legendre symbol = +1) but sits
-  outside all named framework sets — it is the unclassed SEED-square.
+  outside all named named sets — it is the unclassed SEED-square.
 
 SOPHIE GERMAIN PRIMES (p=2,3,5) IN GF(37).
   p=2: 2 ∈ PR
@@ -55,7 +55,7 @@ SAFE PRIMES (q=5,7,11) IN GF(37).
   q=5:  5 ∈ PR
   q=7:  7 ∈ —   (unclassed — mirrors N₂ being unclassed)
   q=11: 11 ∈ ORBIT_11
-  The middle safe prime 7 escapes the framework, same as N₂=28 does.
+  The middle safe prime 7 escapes GF(37), same as N₂=28 does.
 
 THE BREAK AT p=7.
   At p=7 the Sophie Germain property fails (2×7+1=15=3×5, composite).
@@ -78,7 +78,7 @@ DIGITAL ROOTS (from THEOREM on perfect_496_dr_structure).
   The Sophie Germain triad: DR sequence [6, 1, 1].
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ST         = frozenset({3, 12, 21, 30})
@@ -125,7 +125,7 @@ expected = {2: 6, 3: 28, 5: 15, 7: 25, 13: 31, 17: 5, 19: 3, 31: 9}
 for p, n_mod in expected.items():
     assert perfect_mod(p) == n_mod, f"p={p}: got {perfect_mod(p)}, expected {n_mod}"
 
-# SG triad in framework
+# SG triad in GF(37)
 assert expected[2] == 6  == TESLA_FLOW and 6  in TESLA_4
 assert expected[3] == 28 and 28 not in SA|ST|CB|ORBIT_11|IC|SEED_ORBIT|TESLA_4|PR
 assert expected[5] == 15 and 15 in PR
@@ -171,7 +171,7 @@ assert (2 * 3 * 5) == 30 and 30 in SA and 30 in ST
 
 # ── Safe primes in GF(37) ─────────────────────────────────────────────────────
 
-# q=5∈PR, q=7∉framework, q=11∈ORBIT_11
+# q=5∈PR, q=7∉GF(37), q=11∈ORBIT_11
 assert 5 in PR
 assert 7 not in SA|ST|CB|ORBIT_11|IC|SEED_ORBIT|TESLA_4|PR
 assert 11 in ORBIT_11

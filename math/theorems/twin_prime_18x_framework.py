@@ -1,5 +1,5 @@
 """
-Twin Prime (18x-1, 18x+1) GF(37) Framework
+Twin Prime (18x-1, 18x+1) GF(37) GF(37)
 ============================================
 
 CENTRAL THEOREM: For the family (18x-1, 18x+1), the orbit-pair sequence

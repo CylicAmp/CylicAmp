@@ -101,7 +101,7 @@ TWO FUTURE DIRECTIONS (from reviewer, verbatim).
       for a diagonal kernel.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ST         = frozenset({3, 12, 21, 30})

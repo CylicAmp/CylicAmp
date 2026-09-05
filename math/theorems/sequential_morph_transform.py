@@ -54,7 +54,7 @@ GF(37) CONNECTIONS.
   • Col 3 stabilizes at 8 ∈ CB: cascade base appears in 6 of 9 iterations.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA        = frozenset({4, 9, 25, 30})
 ST        = frozenset({3, 12, 21, 30})

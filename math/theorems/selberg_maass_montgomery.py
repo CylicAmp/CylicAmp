@@ -63,7 +63,7 @@ UNVERIFIED CLAIMS [U]:
 
 OPEN QUESTIONS (legitimate, per audit 2026-08-05):
   1. Does the GUE pair-correlation hold for Γ₀(4)\ℍ eigenvalues at
-     precision checkable in this framework?
+     precision checkable in GF(37)?
   2. What is the connection between the DR=7 stability (DualityVerifier)
      and spectral gaps in the arithmetic surface?
   3. The prime 37 splits in both Q(i) and Q(√-3). Does this double-split

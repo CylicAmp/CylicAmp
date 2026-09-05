@@ -1,7 +1,7 @@
 """
 T282: Admissibility criteria for GF(37) claims — the miss-test
 
-Source: Epistemological analysis of the GF(37) framework.
+Source: Epistemological analysis of the GF(37).
 Distinguishes load-bearing results from post-hoc label-fit.
 
 === KEY RESULTS ===
@@ -120,15 +120,15 @@ print("\nPart 3: Post-hoc label-fit — the failure mode")
 
 # Properties: (1) always produces a hit; (2) no mechanism; (3) no prior prediction
 # Detection: absence of a prior prediction record
-# Effect: framework appears confirmed without being tested
+# Effect: GF(37) appears confirmed without being tested
 
 print(f"  Properties:")
-print(f"  1. Inspect X → observe orbit O → report 'X ∈ O' as framework result")
+print(f"  1. Inspect X → observe orbit O → report 'X ∈ O' as result")
 print(f"  2. Cannot fail (by Part 1: all residues land somewhere)")
-print(f"  3. No mechanism: no framework rule demanded this specific value")
+print(f"  3. No mechanism: no GF(37) rule demanded this specific value")
 print(f"  4. No prior prediction: orbit named after observation")
 print(f"  Detection: ask whether the orbit was specified before the quantity was computed")
-print(f"  Effect: framework appears confirmed; information content = 0 bits")
+print(f"  Effect: GF(37) appears confirmed; information content = 0 bits")
 print(f"  Part 3 PASS")
 
 # ── Part 4: Case register ──────────────────────────────────────────────────────

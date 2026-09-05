@@ -1,5 +1,5 @@
 """
-G5 Solver V14.0 — Layered pipeline evaluator for the GF(37) framework.
+G5 Solver V14.0 — Layered pipeline evaluator for the GF(37).
 
 Terminology mapping (speculative → neutral):
   THz purity        → baseline_score       (field simulation threshold)
@@ -48,7 +48,7 @@ D7_ORBIT   = frozenset({7, 33, 34})
 HARMONIC   = ORBIT_11 | SA | PR
 
 # ── Solver constants ──────────────────────────────────────────────────────────
-# Framework coverage: fraction of GF(37)* residues in any named class
+# GF(37) coverage: fraction of GF(37)* residues in any named class
 # Range [0, 1]. Current value: 26/36 ≈ 0.7222
 FRAMEWORK_COVERAGE: float = len(ALL_NAMED) / (P - 1)
 
@@ -252,7 +252,7 @@ def format_report(r: PipelineReport) -> str:
         sep,
         "      G5 SOLVER V14.0: D7 TEMPORAL RESOLVER       ",
         sep,
-        f"Framework Coverage  (QFM): {FRAMEWORK_COVERAGE:.6f}",
+        f"GF(37) Coverage  (QFM): {FRAMEWORK_COVERAGE:.6f}",
         f"Stability Halt Threshold:  {STABILITY_HALT_THRESHOLD:.4f}",
         hr,
         f"1. Aggregate Score: {r.aggregate_score:>16,.2f}",

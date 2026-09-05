@@ -38,7 +38,7 @@ EXACT DIFFERENCES < 37 THAT ARE PRIMITIVE ROOTS
     root. ord₃₇(13) = 36 is verified below.
 
 DOUBLE-MEMBERSHIP OF PRIMITIVE ROOTS IN OTHER NAMED CLASSES
-    Six of the twelve primitive roots also belong to other named framework sets:
+    Six of the twelve primitive roots also belong to other named named sets:
 
         13  ∈ CB         ∩ PR
         17  ∈ BASIN_Y    ∩ PR

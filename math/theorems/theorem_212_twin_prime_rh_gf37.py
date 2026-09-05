@@ -124,7 +124,7 @@ SA = {4, 9, 25, 30}
 ST = {3, 12, 21, 30}
 SEED = {18, 24, 32}
 SG26 = {1, 10, 26}
-framework = SA | ST | SEED
+SA_ST_SEED = SA | ST | SEED
 doubling = {1, 2, 4, 5, 7, 8}
 trinity = {3, 6, 9}
 

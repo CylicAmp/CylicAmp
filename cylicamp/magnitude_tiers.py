@@ -1,5 +1,5 @@
 """
-Magnitude Tier Framework
+Magnitude Tier GF(37)
 
 Each tier n defines:
   Null state:       0...0  (n+3 digits)

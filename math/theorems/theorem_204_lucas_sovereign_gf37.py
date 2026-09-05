@@ -20,7 +20,7 @@ EARLY LUCAS SOVEREIGN HITS (exact values, not just mod 37):
   L(3) = 4     ∈ SA (exact)
   L(6) = 18    ∈ SEED (exact)
   L(10) = 123  → 123 mod 37 = 12 ∈ ST
-  All three framework classes appear in L(2..6) alone.
+  All three named sets appear in L(2..6) alone.
 
 FIBONACCI SOVEREIGN HITS:
   F(0) = 0  = SEAM
@@ -63,7 +63,7 @@ CONSECUTIVE SEED HITS L(15),L(16):
   L(15) mod37 = 32 ∈ SEED; L(16) mod37 = 24 ∈ SEED.
   Two consecutive Lucas indices hit SEED elements.
   L(15)+L(16) = L(17): L(17) mod37 = (32+24) mod37 = 56 mod37 = 19 (NQR g^11).
-  The Fibonacci recurrence at consecutive SEED indices exits framework.
+  The Fibonacci recurrence at consecutive SEED indices exits GF(37).
 """
 
 P = 37
@@ -146,7 +146,7 @@ def run_assertions():
     # 8. Consecutive SEED hits at L(15),L(16)
     assert lucas(15) % P == 32 and 32 in SEED
     assert lucas(16) % P == 24 and 24 in SEED
-    # L(17) = L(15)+L(16): exits framework
+    # L(17) = L(15)+L(16): exits GF(37)
     L17_mod = (lucas(15) % P + lucas(16) % P) % P
     assert L17_mod == lucas(17) % P
     assert not is_sovereign(L17_mod)

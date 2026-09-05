@@ -2,7 +2,7 @@
 T254: Three Elliptic Curves over GF(37) — ANOM, TWIN, PRIME
 
 Three named elliptic curves over F_37, each with a distinct group order
-that maps to a structurally significant orbit in the GF(37) framework.
+that maps to a structurally significant orbit in the GF(37).
 
 ANOM:  y² = x³ + 5x       (mod 37)  — #E = 26 = MULT
 TWIN:  y² = x³ + 2x + 1   (mod 37)  — #E = 36 = φ(37) = |(F_37)*|

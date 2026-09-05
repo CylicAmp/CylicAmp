@@ -44,7 +44,7 @@ II. PARTIAL PRODUCTS P_k IN GF(37)
   P_9  = 16  = 4² = SA²
   P_10 = 28  = 37−9       (SEAM-complement of SA node 9)
 
-  The first 7 partial products all land on named framework nodes.
+  The first 7 partial products all land on named named residues.
   P_6 = 4 ∈ SA: after exactly 3 pairs, the oscillating product sits at SA.
 
 III. PAIR PRODUCTS ∏_{i=1}^{k} (2i)²/((2i−1)(2i+1)) IN GF(37)

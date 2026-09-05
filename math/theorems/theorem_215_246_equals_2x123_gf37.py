@@ -46,7 +46,7 @@ DIGIT ANALYSIS OF 123:
   Digit sum: 1+2+3 = 6 ∈ SEED-gen: the imaginary unit i.
   DR(123) = DR(6) = 6.
   The three digits {1,2,3} = {<26> identity, primitive root, ST generator}
-  — the three most fundamental single-element roles in the framework.
+  — the three most fundamental single-element roles in GF(37).
 
 DIGIT ANALYSIS OF 246:
   Digits: 2, 4, 6.

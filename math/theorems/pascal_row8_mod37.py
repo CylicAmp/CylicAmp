@@ -56,7 +56,7 @@ IV. PARTIAL SUMS MOD 37
 
   Partial sums:     [1,  9, 37, 93, 163, 219, 247, 255, 256]
   mod 37:           [1,  9,  0, 19,  15,  34,  25,  33,  34]
-  Framework flags:  [.,SA, 0, PR,  PR,   .,  SA,   .,   .]
+  GF(37) flags:  [.,SA, 0, PR,  PR,   .,  SA,   .,   .]
 
   Index 2: first seam hit (37 ≡ 0) — exactly at the end of {1,8,28}
   Index 1: 9 (SA) — first partial sum beyond the seed

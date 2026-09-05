@@ -3,7 +3,7 @@ Theorem 58: Sector Axiom Completion — GF(37) Definitions for the Axiomatic Sys
 
 Supplies the GF(37) definitions required to complete the axiomatic system
 (60 axioms, 15 theorem groups). All terms below are sourced from the existing
-framework; assertions verify every claim against the field.
+GF(37); assertions verify every claim against the field.
 
 DEFINITIONS
 ===========

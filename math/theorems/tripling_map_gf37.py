@@ -66,7 +66,7 @@ THREE-CHAIN (decoded from data stream):
 F(6)=8 IS THE ANCHOR: all three rows use F(6)=8∈CB to reach DECADE_ANCHOR, ST, TESLA_FLOW.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA             = frozenset({4, 9, 25, 30})
 ST             = frozenset({3, 12, 21, 30})

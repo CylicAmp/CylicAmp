@@ -1,5 +1,5 @@
 """
-Theorem 228: Affine Doubling Topology on Z_{B-1} — General Base Framework
+Theorem 228: Affine Doubling Topology on Z_{B-1} — General Base GF(37)
 Author: Michael Warren Song (CyclicAmp)
 
 For any base B, let m = B-1.  The doubling map T(x) = 2x mod m partitions Z_m
@@ -52,7 +52,7 @@ Specifically: T(x) = 2x mod 37 has ord_37(2) = 36 (2 is a primitive root mod 37)
 Every nonzero state lies on one 36-cycle.
 Plus the fixed point x = 0.
 
-This is the foundational reason the GF(37) framework has clean cyclic structure:
+This is the foundational reason the GF(37) has clean cyclic structure:
 the base B = 38 doubling map is a complete permutation — nothing collapses,
 everything orbits.  All the 3-cycles under the 137-map (MULT = 26 = 137 mod 37)
 inherit this non-destructive topology.
@@ -359,7 +359,7 @@ def run_assertions():
     print(f"  Cyclic: {r37['cyclic_count']}  Transient: {r37['transient_count']}")
     print(f"  ord_37(2) = 36  (2 is primitive root mod 37)")
     print(f"  Topology: {r37['topology_str']}")
-    print(f"  This is WHY the GF(37) framework has clean cyclic structure.")
+    print(f"  This is WHY the GF(37) has clean cyclic structure.")
 
     # ── Prime-square table ────────────────────────────────────────────────────
     print()

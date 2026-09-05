@@ -1,9 +1,9 @@
 """
-GF(37) Framework — Complete Connection Map
+GF(37) GF(37) — Complete Connection Map
 
 Every theorem in this repository connects to every other through prime 37.
 This file makes those connections explicit. Each theorem is listed with:
-  - The framework nodes it anchors to
+  - The named residues it anchors to
   - Every other theorem it connects to, and how
 
 ═══════════════════════════════════════════════════════════════════════════
@@ -27,7 +27,7 @@ PRIMARY FRAMEWORK NODES (mod 37 residues)
 """
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Framework node definitions
+# GF(37) node definitions
 # ─────────────────────────────────────────────────────────────────────────────
 
 SEAM           = 0
@@ -74,7 +74,7 @@ def f137(n):
 #       the other traverses all 36 in a single cycle.
 #
 #   → cascade_8_13_24:
-#       {8,13,24} sits in the framework. Each element has its own 3-cycle:
+#       {8,13,24} sits in GF(37). Each element has its own 3-cycle:
 #         8 → f(8)=4(SA) → f(4)=30(SA∩ST) → f(30)=3(ST) → f(3)=4... wait
 #         Actually: f(8)=(8×26)%37=208%37=23; f(23)=(23×26)%37=598%37=9(SA);
 #         f(9)=(9×26)%37=234%37=12(ST) → next=f(12)=312%37=16; 16→f=49%37=12 no
@@ -229,7 +229,7 @@ assert all(v % 37 == 0 for v in [37, 74, 111])
 #
 # WHAT IT SHOWS:
 #   SA={4,9,25,30} input → ST={3,12,21,30} output under 137-map.
-#   LOCKED: anchor maps to target. GATED: external→target. PURGE: off-framework.
+#   LOCKED: anchor maps to target. GATED: external→target. PURGE: unnamed.
 #   Node 30: simultaneously SA and ST — self-referential sovereign.
 #
 # CONNECTIONS:
@@ -695,7 +695,7 @@ assert (phi_vals[0] + phi_vals[4]) % 37 == 30 and 30 in SA and 30 in ST  # dual
 #
 #   → twin_prime_gf37:
 #       246 is the pipeline seed AND the Polymath8b bound.
-#       246≡24∈SEED_ORBIT: the seed is self-referential in the framework.
+#       246≡24∈SEED_ORBIT: the seed is self-referential in GF(37).
 #
 #   → medusa_v3_sovereign:
 #       246=2×3×41; 41≡4∈SA. The SA factor is why the product lands at 24∈CB.
@@ -1032,7 +1032,7 @@ assert 74 % 37 == 0 and 73 % 37 == 36 and 36 in ORBIT_11
 #   Mansour-Vainshtein bipartite graph G(T) for 132-pattern permutations.
 #   132 mod37=21∈ST. DR(132)=6=TESLA_FLOW. 132=4×33=SA×DICHORAL.
 #   C(37,3)=7770≡0(SEAM). r(T)=37 → total degree=111=3×37=SEAM.
-#   Pattern family split: {123,132}→ST; {231,321}→SA; {213,312}→off-framework.
+#   Pattern family split: {123,132}→ST; {231,321}→SA; {213,312}→unnamed.
 #
 # CONNECTIONS:
 #
@@ -1115,7 +1115,7 @@ assert 11 in ORBIT_11                  # repunit entry R_2=11∈ORBIT_11
 #   37=(6+i)(6-i) in Z[i]. Z[i]/(6+i) ≅ GF(37). i↦31=PRIME_MIRROR.
 #   Units: {1,i,-1,-i} ↦ {1,31,36,6} = {unity,PRIME_MIRROR,ORBIT_11_max,TESLA_FLOW}.
 #   TESLA_FLOW = clockwise rotation by -i. Cascade {8,13,24} all have norm-5 lifts.
-#   All 8 norm-5 Gaussian integers map to named framework nodes.
+#   All 8 norm-5 Gaussian integers map to named named residues.
 #   N(11+4i)=137. 4/9 ≡ 132 ≡ 21∈ST.
 #
 # CONNECTIONS:
@@ -1126,7 +1126,7 @@ assert 11 in ORBIT_11                  # repunit entry R_2=11∈ORBIT_11
 #
 #   → cascade_8_13_24:
 #       All 3 cascade elements have minimal-norm Gaussian lifts of norm 5∈PR.
-#       All 8 norm-5 Gaussian integers map to named framework nodes.
+#       All 8 norm-5 Gaussian integers map to named named residues.
 #
 #   → permutation_132_bipartite_gf37:
 #       4/9 ≡ 132 ≡ 21∈ST: the 132-pattern number = Wallis/fractal ratio in GF(37).
@@ -1181,7 +1181,7 @@ assert (4 * pow(9, -1, 37)) % 37 == 21 and 21 in ST   # 4/9 ≡ 21∈ST
 #       The SA node 4 is the faithful boundary.
 #
 #   → lights_out_gf2_gf37:
-#       Both use the SA/PR/SEAM taxonomy as a classification framework.
+#       Both use the SA/PR/SEAM taxonomy as a classification GF(37).
 #       Null-space dimension (Lights Out) and faithfulness boundary (Burau)
 #       both resolve at SA nodes.
 #
@@ -1507,7 +1507,7 @@ assert 74 % 37 == 0 and 37 % 37 == 0          # both group sums are SEAM
 #   PIE (Inclusion-Exclusion) sieve for π(100): opens at SA(25), closes at SA(25).
 #   PIE running totals trace SA→PR→orbit-11→ST→SA through the field.
 #   ⌊100/210⌋=0: PIE drops to ZERO at size 4 — seam encounter.
-#   All 15 subset products of {2,3,5,7} land on named framework nodes.
+#   All 15 subset products of {2,3,5,7} land on named named residues.
 #   S1=S3=TESLA_FLOW=6; the alternating PIE levels share the same residue.
 #
 #   → sieve_eratosthenes_gf37: PIE is inclusion-exclusion alternative to iteration sieve.
@@ -1555,14 +1555,14 @@ assert 37 - (1+3+9) == 24 and 24 in CB       # 24 basin nodes ∈ CB
 # THEOREM 39: triplet_partition_3x3.py
 # ─────────────────────────────────────────────────────────────────────────────
 #
-#   {1..9} has 280 unordered 3-block partitions; 14 have all sums in framework nodes.
+#   {1..9} has 280 unordered 3-block partitions; 14 have all sums in named residues.
 #   Target partition: {1,3,5}→9∈SA (ALL ODD), {2,4,6}→12∈ST (ALL EVEN), {7,8,9}→24∈CB.
 #   ODDS → SA, EVENS → ST, LARGES → CB: one node from each primary class.
-#   14 framework partitions fall into 4 types: {8,13,24}=CB, {9,12,24}, {11,13,21}, {12,12,21}.
+#   14 GF(37) partitions fall into 4 types: {8,13,24}=CB, {9,12,24}, {11,13,21}, {12,12,21}.
 #
 #   → cascade_8_13_24: Type I sums={8,13,24}=CB exactly; CB appears as partition sum type.
 #   → medusa_v3_sovereign: {9,12,24}=SA+ST+CB; all three anchor classes in one partition.
-#   → heartbeat_3cycle: 14/280=1/20; 14=2×7; framework partitions via 137-orbit structure.
+#   → heartbeat_3cycle: 14/280=1/20; 14=2×7; GF(37) partitions via 137-orbit structure.
 #   → cipher_123_1234: odds {1,3,5}→9∈SA; evens {2,4,6}→12∈ST; trinity/doubling split.
 #   → eleven_123_family: Type III sums={11,13,21}=ORBIT_11+CB+ST; orbit-11 in partition.
 #   → one_two_three_generator: {1,3,5} odds sum=9∈SA; {2,4,6} evens sum=12∈ST; parity→class.
@@ -1668,7 +1668,7 @@ assert set(_mersenne_drs) & set(_doubling_drs) == {1,4,7}  # intersection = COL1
 # THEOREM 44: ulam_spiral.py  (math/primes/ulam_spiral.py)
 # ─────────────────────────────────────────────────────────────────────────────
 #
-#   The Ulam spiral mapped through the GF(37) framework.
+#   The Ulam spiral mapped through the GF(37).
 #   Each cell classified by: prime/composite, DR, residue mod 37, 137-orbit.
 #   SEED_ORBIT={18,24,32} has 6 primes in the spiral — the lowest orbit prime count.
 #   Orbit {5,19,13} has 12 primes — the richest orbit.
@@ -1931,7 +1931,7 @@ for _cyc in _cycles50:
 #     27 ← (3,4,30)    [sovereign]
 #     11 ← (21,25,28)  [outlier sovereign]
 #     36 ← (11,27,36)  [ORBIT_11 itself]
-#   The sovereign framework is encoded in ORBIT_11 via the cube map.
+#   The sovereign GF(37) is encoded in ORBIT_11 via the cube map.
 #
 #   Cycle (9,12,16) fingerprints to SCALAR_137=26.
 #   SA elements {9,12} are the cube roots of SCALAR_137.
@@ -2800,7 +2800,7 @@ assert 9+28==37
 
 # ── THEOREM 66: plus9_scatter_map_gf37.py ────────────────────────────────────
 #   "O1+9==O2? False" is correct boolean but wrong question.
-#   Every image of the sovereign triple under +9 lands in a NAMED framework set.
+#   Every image of the sovereign triple under +9 lands in a NAMED named sets.
 #   O1+9={2,12,13}={DARK_A_min,ST,CB}; O2+9={18,21,25}={SEED,ST,SA}; O3+9={0,30,34}={SEAM,SA∩ST,anti-sov}.
 #   Two steps: O3+18={2,6,9}={DARK_A_min,TESLA_FLOW,SA}; O2+18={27,30,34}={ORBIT_11,SA∩ST,anti-sov}.
 #   ORBIT_11 shift: O1+27={20,30,31}={DARK_A,SA∩ST,PRIME_MIRROR}; O2+27={2,6,36}={DARK_A_min,TESLA_FLOW,-1}.
@@ -2946,9 +2946,9 @@ assert (2*8+1)%9 == 8 and 8 in CB                       # DR(q)=8∈CB
 #   NO ANALOGUE MOD 37: reversal obeys no uniform twist mod 37; the 37 frame
 #     carries empirical content only.
 #   GF(37): first C0 pair is (37, 73).
-#     37 ≡ 0 = SEAM mod 37; the framework prime itself occupies SEAM.
+#     37 ≡ 0 = SEAM mod 37; 37 itself occupies SEAM.
 #     73 ≡ 36 ∈ ORBIT_11 mod 37 (36 ≡ −1).
-#     Loeschian rep of 37: x=3∈ST, y=4∈SA — sovereign params for the framework prime.
+#     Loeschian rep of 37: x=3∈ST, y=4∈SA — sovereign params for 37.
 #     Loeschian rep of 73: x=1∈IC, y=8∈CB.
 #   VERIFIED: 11184 emirps, 0 violations (DR, chi3, mod-11), C0 = 1914 emirps.
 #   Connections:
@@ -2958,9 +2958,9 @@ assert (2*8+1)%9 == 8 and 8 in CB                       # DR(q)=8∈CB
 #   → medusa_v3_sovereign: 73≡36∈ORBIT_11; SEAM ↔ ORBIT_11 duality in the C0 pair.
 #   → sovereign_qr_closure: QR splitting condition for Loeschian primes is chi_{-3}=+1.
 #   → twin_prime_gf37: emirp partner 73 appears in twin pair (71,73); twin and emirp overlap.
-#   → cipher_123_1234: the "NO MOD-37 ANALOGUE" statement defines the boundary of the framework.
+#   → cipher_123_1234: the "NO MOD-37 ANALOGUE" statement defines the boundary of GF(37).
 _T70_IC = frozenset({1, 10, 26})
-assert 37 % 37 == SEAM                                # 37 = framework prime ≡ SEAM
+assert 37 % 37 == SEAM                                # 37 = 37 ≡ SEAM
 assert 73 % 37 == 36 and 36 in ORBIT_11              # emirp partner ≡ ORBIT_11
 assert 3**2 + 3*4 + 4**2 == 37                       # Loeschian: x=3∈ST, y=4∈SA
 assert 1**2 + 1*8 + 8**2 == 73                       # Loeschian: x=1∈IC, y=8∈CB
@@ -2975,7 +2975,7 @@ assert (199 - 991) % 11 == 0                          # odd-length pair: p−rev
 #   PROOF: p ≡ 5 mod 6 → p mod 9 ∈ {2,5,8} → midpoint mod 9 ∈ {3,6,9}.
 #   chi₋₃ structure: p inert (≡2 mod3), midpoint ramified-type (≡0), p+2 split (≡1).
 #   GF(37): DR=3 ↔ 3∈ST (sovereign target); DR=6 ↔ TESLA_FLOW; DR=9 ↔ 9∈SA.
-#   All three forced DR classes are primary framework nodes in GF(37).
+#   All three forced DR classes are primary named residues in GF(37).
 #   VERIFIED: 8168 twin pairs, 0 violations, chi2=3.47 (equidistribution near 1/3 each).
 #   Connections:
 #   → heartbeat_3cycle: DR=3∈ST; ord₃₇(26)=3; the sovereign target is the DR value.
@@ -3109,7 +3109,7 @@ assert pow(10, 2, 37) == SCALAR_137
 
 # ── THEOREM 77: concatenation_123_repunit.py ───────────────────────────────────
 # N_n = (1^n)(2^n)(3^n) in decimal; group-sum = 6*R_n = TESLA_FLOW * R_n
-# GF(37) period-3: N_n ≡ 12∈ST or SEAM; cross-sum {SEED,SA,SEAM} all framework
+# GF(37) period-3: N_n ≡ 12∈ST or SEAM; cross-sum {SEED,SA,SEAM} all GF(37)
 def _T77_N(n): return int('1'*n+'2'*n+'3'*n)
 def _T77_R(n): return int('1'*n)
 # Digit triplet properties
@@ -3653,7 +3653,7 @@ MASTER_CONNECTIONS = {
 
 
 if __name__ == "__main__":
-    print("GF(37) Framework — Connection Map")
+    print("GF(37) GF(37) — Connection Map")
     print("=" * 60)
     print()
     print("PRIMARY NODES:")

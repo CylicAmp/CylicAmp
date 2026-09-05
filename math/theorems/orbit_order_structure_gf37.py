@@ -57,7 +57,7 @@ SYLOW ORBIT CHAIN:
     → the two order-9 orbits and IDENTITY_CYCLE form the entire Sylow-3 subgroup
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA             = frozenset({4, 9, 25, 30})
 ST             = frozenset({3, 12, 21, 30})

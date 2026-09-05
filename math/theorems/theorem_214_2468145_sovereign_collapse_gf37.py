@@ -16,7 +16,7 @@ DIGIT SUM SOVEREIGN HIT:
   Digits: 2+4+6+8+1+4+5 = 30.
   30 ∈ SA ∩ ST — the unique doubly sovereign element (the only element in
   both the anchor set and the target set simultaneously).
-  This is the most distinguished element in the framework: it is the
+  This is the most distinguished element in the SA_ST_SEED: it is the
   additive generator of the SA∪ST sum (T209: sum(SA∪ST)=30∈SA∩ST).
 
 TWO-STEP SOVEREIGN COLLAPSE:
@@ -62,7 +62,7 @@ CONNECTIONS TO EXISTING THEOREMS:
   T208 (cubing map): cubing target of SEED (g^5) is 8^5=23∈SEED-gen. The number
        2,468,145 ≡ 23 mod 37 = exactly this cubing target.
   T210 (trinity): the chain 6→12→3→6 is the {3,6} orbit in Z/3Z under doubling.
-  T209 (sum structure): digit sum=30∈SA∩ST matches the framework sum result.
+  T209 (sum structure): digit sum=30∈SA∩ST matches the SA_ST_SEED sum result.
   T207 (binomial): Row 11=P-26; sovereign C(11,k) all equal 18∈SEED.
        Digit[2]=6=i, digit[3]=8=N: both in SEED-gen, the coset feeding SEED cubing.
 
@@ -81,7 +81,7 @@ ST = {3, 12, 21, 30}
 SEED = {18, 24, 32}
 SEED_GEN = {6, 8, 23}
 SG26 = {1, 10, 26}
-framework = SA | ST | SEED
+SA_ST_SEED = SA | ST | SEED
 
 N = 2468145
 
@@ -146,7 +146,7 @@ def run_assertions():
     assert N % 3 == 0 and 3 in ST
     assert N % 9 != 0   # DR=3, not 9
 
-    # 14. 30∈SA∩ST is the framework sum (T209: sum(SA∪ST) mod37=30)
+    # 14. 30∈SA∩ST is the SA_ST_SEED sum (T209: sum(SA∪ST) mod37=30)
     assert sum(SA | ST) % P == 30 and ds(N) == 30
 
     # 15. The cubing target 23: N≡23 means SEED={18,24,32} are cube roots of N mod37

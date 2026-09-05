@@ -1,6 +1,6 @@
 """
 T260: n=260 — IC orbit, CAS_EXT self-product closure
-GF(37) framework — 137-map f(x) = 26x mod 37
+GF(37) — 137-map f(x) = 26x mod 37
 
 260 = 2² × 5 × 13 = 4 × 5 × 13
 260 mod 37 = 1 ∈ IC = {1, 10, 26}

@@ -1,9 +1,9 @@
 """
-{1,2}-sequence patterns connected to the GF(37) framework.
+{1,2}-sequence patterns connected to the GF(37).
 
 A = 112211, B = 121121, C = 211112 are the three base blocks.
 Their digit sums, DR values, and mod-37 residues connect directly
-to the framework's core structure.
+to GF(37)'s core structure.
 """
 
 

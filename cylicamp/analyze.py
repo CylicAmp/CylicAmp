@@ -1,5 +1,5 @@
 """
-Universal analyzer: paste any number, get the full GF(37) framework answer.
+Universal analyzer: paste any number, get the full GF(37) answer.
 Usage:  python3 cylicamp/analyze.py 137
         python3 cylicamp/analyze.py 17 19
 """
@@ -284,7 +284,7 @@ def analyze(n):
         tags.append("nuclear magic number")
     if n in MAGIC_NEW:
         tags.append("confirmed new subshell closure")
-    # prime index of n connects back through framework
+    # prime index of n connects back through GF(37)
     if pidx and pidx <= 200:
         pidx_r = pidx % P
         pidx_sets = [name for name, s in NAMED.items() if pidx_r in s] or ["UNNAMED"]

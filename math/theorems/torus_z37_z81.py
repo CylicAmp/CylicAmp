@@ -1,7 +1,7 @@
 """
 Theorem 217: Discrete Torus Dynamics on Z_37 x Z_81
 
-The F_37 framework defines a discrete dynamical system:
+The F_37 GF(37) defines a discrete dynamical system:
 
   State space:   Z_37 x Z_81  (2997 points, discrete torus)
   Evolution:     (a, b) -> (a - 2, b + 54)  mod (37, 81)

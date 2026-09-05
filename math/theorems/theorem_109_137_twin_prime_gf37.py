@@ -166,7 +166,7 @@ THEOREM 109.  (Prime 137 — Self-Reference and Twin Prime Structure in GF(37)).
 
   (iv) [SEED–MULTIPLIER GAP]  The seed residue 24 (CB ∩ SEED_ORBIT) and the
        map multiplier 26 (IC) differ by 2 in both Z and GF(37). The twin prime
-       gap equals this framework gap. The pair (431, 433) realizes residues
+       gap equals GF(37) gap. The pair (431, 433) realizes residues
        (24, 26). Furthermore: 26 × 24 ≡ 32 ∈ SEED_ORBIT (multiplier × seed
        = f(seed)); 26 + 24 ≡ 13 ∈ CB (multiplier + seed ∈ cascade base).
 
@@ -183,7 +183,7 @@ COROLLARY 109.7  (The four-way closure at 24 and 26).
   26 + 24 ≡ 13 ∈ CB (mod 37).
   26 × 24 ≡ 32 ∈ SEED_ORBIT (mod 37).
   The arithmetic operations (difference, sum mod P, product mod P) on the
-  pair (seed_residue, multiplier) all land in named framework classes.
+  pair (seed_residue, multiplier) all land in named named sets.
 
 COROLLARY 109.8  (Self-reference chain).
   137 (prime) → f(1) = 26 ≡ 137 → f(26) = 10 → f(10) = 1 → f(1) = 26.

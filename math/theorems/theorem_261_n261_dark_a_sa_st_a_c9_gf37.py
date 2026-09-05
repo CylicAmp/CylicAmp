@@ -1,6 +1,6 @@
 """
 T261: n=261 — DARK_A orbit, SA_ST_A × C9 closure
-GF(37) framework — 137-map f(x) = 26x mod 37
+GF(37) — 137-map f(x) = 26x mod 37
 
 261 = 3² × 29 = 9 × 29
 261 mod 37 = 2 ∈ DARK_A = {2, 15, 20}

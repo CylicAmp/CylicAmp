@@ -46,7 +46,7 @@ PRIMES q BY CLASS NUMBER h(1 − 4q), CLASSIFIED IN GF(37)
     NOTABLE DOUBLE-CONNECTIONS TO THE FRAMEWORK:
 
         q = 41   h=1   41 mod 37 = 4  ∈ SA
-            The prime 41 is a Rabinowitsch prime AND a framework element in SA.
+            The prime 41 is a Rabinowitsch prime AND a GF(37) element in SA.
             41 × 67 = 2747; |67−41| = 26 ∈ IC (the 137-map multiplier).
 
         q = 47   h=2   47 mod 37 = 10 ∈ IC
@@ -260,7 +260,7 @@ def run():
     # ---------------------------------------------------------------
     # PART 4 — Notable connections
     # ---------------------------------------------------------------
-    print("\n--- Part 4: Notable connections to the GF(37) framework ---")
+    print("\n--- Part 4: Notable connections to the GF(37) ---")
 
     # q=41: SA element; the RSA factoring pair (41,67)
     assert 41 % P == 4 and 4 in SA

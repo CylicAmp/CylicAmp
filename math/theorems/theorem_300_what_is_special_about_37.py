@@ -2,7 +2,7 @@
 T300 — What Is Actually Special About 37: a Complete Classification
 
 The whole thread has circled one question. T292, T293, T297 and T299 make it
-answerable exactly. Every property the framework attributes to 37 falls into
+answerable exactly. Every property GF(37) attributes to 37 falls into
 one of three tiers.
 
 ════════════════════════════════════════════════════════════════════════════

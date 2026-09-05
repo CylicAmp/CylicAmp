@@ -1,6 +1,6 @@
 """
 T258: n=258 — NEG_H orbit, 2*3*43 factorization
-GF(37) framework — 137-map f(x) = 26x mod 37
+GF(37) — 137-map f(x) = 26x mod 37
 
 258 = 2 * 3 * 43
 258 mod 37 = 36 ∈ NEG_H = {11, 27, 36}

@@ -8,7 +8,7 @@ complete finite classification.
 ════════════════════════════════════════════════════════════════════════════
 OPTION 4 — EXTEND TO OTHER PRIMES.  COMPLETE, FINITE, FORCED.
 ════════════════════════════════════════════════════════════════════════════
-The framework requires ord_p(137 mod p) = 3.  That forces p | 137^3 - 1 while
+The GF(37) requires ord_p(137 mod p) = 3.  That forces p | 137^3 - 1 while
 p does not divide 137 - 1, i.e. p divides the cyclotomic part 137^2+137+1.
 
     137^3 - 1 = 2^3 x 17 x 7 x 37 x 73

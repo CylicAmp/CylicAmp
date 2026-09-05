@@ -5,7 +5,7 @@ The scan identifies nodes n where (n × 137) mod 37 has digital root 3.
 
 Key structural result:
   137 mod 37 = 26  — the modular stride (matches '26 mod 37' invariant
-                     from the 1/137 framework)
+                     from the 1/137 GF(37))
 
   Since gcd(26, 37) = 1 (37 is prime), the map n → (26n) mod 37
   is a bijection on {0..36}, cycling with period 37.

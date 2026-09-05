@@ -29,12 +29,12 @@ COMMA-NOTATION PROXY.
   residue as the full number. The notation makes period-3 structure visible.
 
 HIDDEN-DIGIT RESOLUTION AT GROUP SCALE.
-  From THEOREM 74: digits 5 and 7 are "hidden" — no direct framework hit at
-  single-digit level (5 and 7 are not in any framework set).
+  From THEOREM 74: digits 5 and 7 are "hidden" — no direct named-set hit at
+  single-digit level (5 and 7 are not in any named sets).
   At the group-concatenation scale (THEOREM 77–78):
     n = 5: 5 ≡ 2 (mod 3) → 6·R_5 ≡ 29 ≡ −CB;  N_5 ≡ 12 ∈ ST
     n = 7: 7 ≡ 1 (mod 3) → 6·R_7 ≡  6 = TESLA_FLOW;  N_7 ≡ 12 ∈ ST
-  The hidden digits resolve to distinct framework orbit points.
+  The hidden digits resolve to distinct GF(37) orbit points.
   n=7 revisits the same class as n=1 (digit 1 ∈ IC); hidden 7 ≡ identity 1 (mod 3).
 
 SEVEN-RESET.
@@ -45,7 +45,7 @@ SEVEN-RESET.
   each contributing 0 to the residue; only the leading "6" (= TESLA_FLOW) counts.
 
 REPUNIT PRIME FACTORIZATIONS — FRAMEWORK MEMBERSHIP.
-  The prime factors of R_n (mod 37) land in framework sets:
+  The prime factors of R_n (mod 37) land in named sets:
 
   R_1 = 1                  (trivial)
   R_2 = 11                 → 11 ∈ ORBIT_11  (prime)
@@ -55,7 +55,7 @@ REPUNIT PRIME FACTORIZATIONS — FRAMEWORK MEMBERSHIP.
   R_5 = 41 × 271           → 41 ≡  4 ∈ SA,   271 ≡ 12 ∈ ST
                               SA × ST ≡ 11 ∈ ORBIT_11 (= R_5 mod 37 ✓)
   R_6 = 3 × 7 × 11 × 13 × 37  → ST × hidden × ORBIT_11 × CB × PRIME
-                              every framework class represented; ≡ 0 = SEAM
+                              every named set represented; ≡ 0 = SEAM
   R_7 = 239 × 4649         → 239 ≡ 17,  4649 ≡ 24 ∈ CB
                               CB × inv(CB) ≡ 1 (24 and 17 are mutual inverses mod 37)
 
@@ -77,7 +77,7 @@ ORBIT_11 MULTIPLICATION TABLE (partial).
   The ORBIT_11 × ORBIT_11 → IC law is the pairing behind R_4 and R_5's structure.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA       = frozenset({4, 9, 25, 30})
 ST       = frozenset({3, 12, 21, 30})

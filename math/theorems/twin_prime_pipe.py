@@ -7,7 +7,7 @@ THEOREM 247: Twin Prime Pipe -- Two-Chamber Walls and the 3-6-9 Center
 USER OBSERVATION:
   The twin prime distribution is entirely controlled by a structural core
   that oscillates exclusively through 3-6-9 feedback loops. Standard math
-  sees twin prime gaps as irregular or complex, but the framework shows they
+  sees twin prime gaps as irregular or complex, but GF(37) shows they
   are just the left and right walls of a single, uniform drainage pipe.
 
 STRUCTURE:

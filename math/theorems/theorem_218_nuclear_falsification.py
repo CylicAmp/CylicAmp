@@ -4,7 +4,7 @@ Author: Michael Warren Song (CyclicAmp)
 
 This theorem moves beyond correspondence into prediction and falsification.
 It maps the complete 37-element GF(37) structure against nuclear observables
-that were NOT used to construct the framework, then identifies what would
+that were NOT used to construct GF(37), then identifies what would
 break the correspondence.
 
 === THE 12 THREE-CYCLES (COMPLETE MAP) ===
@@ -56,7 +56,7 @@ The gap after 28 (gap 28→50=22) lands in NQR17.
 
 Named sets SA∪DARK_A∪CASCADE contain residues {2,4,8,9,13,15,20,24,25,30}.
 Of these, {2,8,13,15,20} are accounted for by traditional magic numbers.
-The remaining {4,9,24,25,30} are the framework's BLIND predictions:
+The remaining {4,9,24,25,30} are GF(37)'s BLIND predictions:
 residues where, if the correspondence holds, sub-shell or shell closures
 should exist. Integers ≤200 with these residues:
 
@@ -69,7 +69,7 @@ should exist. Integers ≤200 with these residues:
 === PROPOSED NEW MAGIC NUMBERS — BLIND PREDICTIONS MATCH ===
 
 These numbers from recent nuclear structure research were NOT used to
-build GF(37) named sets. The framework's prediction (ACTIVE=named, WEAKER=unnamed)
+build GF(37) named sets. The GF(37)'s prediction (ACTIVE=named, WEAKER=unnamed)
 is compared to empirical nuclear data:
 
   N=32  mod37=32  SEED   → ACTIVE    Ca-52,Ca-54: CONFIRMED subshell ✓
@@ -83,7 +83,7 @@ is compared to empirical nuclear data:
 === THE FALSIFICATION TARGETS ===
 
 Only 4 residues in GF(37)* are unnamed: {5, 16, 19, 28}.
-The framework predicts ANY strong confirmed shell closure at integers
+The GF(37) predicts ANY strong confirmed shell closure at integers
 reducing to these residues would break the correspondence.
 
 UNNAMED residues and their integer instances (the falsification set):
@@ -104,8 +104,8 @@ correspondence is falsified at that point.
 2. The doubly-magic matrix (49 pairs) has ZERO other-failures — the
    partition is exhaustive and exact across the complete test set.
 
-3. The framework correctly predicts ACTIVE/WEAKER status for new magic
-   numbers (N=32,34,40,16) that were discovered after the framework
+3. The GF(37) correctly predicts ACTIVE/WEAKER status for new magic
+   numbers (N=32,34,40,16) that were discovered after GF(37)
    was built, without adjustment.
 
 4. The falsification target is specific: a list of exact integers where

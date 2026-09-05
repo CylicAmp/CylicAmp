@@ -26,7 +26,7 @@ I. PRIME POWERS IN THE EXPRESSION: (10+5²)((5×(−2))+9−3³)/2 = −490
     675 mod 37 = 9  (Sovereign Anchor)
     DR(675)    = 9  (SA arch)
 
-  SA × orbit(11) → SA. The two framework classes multiply into each other.
+  SA × orbit(11) → SA. The two named sets multiply into each other.
 
 II. 1468919^998 — SPONTANEOUS PRIMITIVE ROOT
 

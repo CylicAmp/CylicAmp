@@ -27,7 +27,7 @@ CONNECTIONS TO THE FRAMEWORK:
     and 2^12 ≡ 26 mod 37.
   • p ≡ 26 = SCALAR_137: the prime ITSELF is the 137-map multiplier mod 37.
     The world-record Sophie Germain prime is fixed at the most fundamental
-    constant in this framework.
+    constant in GF(37).
   • q ≡ 16 ∈ O2 = {9,12,16}: the safe prime lands in the second sovereign orbit,
     the orbit of the sovereign targets minus the SA∩ST pivot.
   • n mod 37 = 1290000 mod 37: let's compute — 1290000/37 = 34864.8...,
@@ -41,7 +41,7 @@ DIGITAL ROOT:
   q = 2p+1 ≡ 17 ≡ 8 mod 9  →  DR(q) = 8 ∈ CB
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA             = frozenset({4, 9, 25, 30})
 ST             = frozenset({3, 12, 21, 30})
