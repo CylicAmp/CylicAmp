@@ -84,6 +84,47 @@ These questions are not negotiable. They run on every number.
 
 ---
 
+## Grading a Correspondence — Four Orthogonal Cuts
+
+The fixed questions above grade a NUMBER. These grade a CLAIM that two things
+correspond. They nest, and a claim is only as strong as the weakest cut it
+fails. Worked and asserted in `math/theorems/theorem_305_claim_strength_cuts.py`.
+
+**Cut 1 — literal vs structural.** Literal: the same object appears on both
+sides, or a defined discretization of it. Structural: only the ROLE is shared;
+the operators need not be. Use "structural" for one thing only — shared role,
+not shared operator.
+
+**Cut 2 — level of the correspondence.**
+
+| Level | Claim | What you must produce |
+|---|---|---|
+| 1 structural analogy | same role | the role, named |
+| 2 formal correspondence | a map Φ | objects each side, and what identity, inequality or diagram Φ preserves |
+| 3 theorem | a proved implication | hypotheses, conclusion, and the failure mode if a hypothesis is dropped |
+
+**Cut 3 — native vs correspondence rigor.** Native: how strong is the target
+theory on its own ground. Correspondence: how strong is the identification.
+These diverge. A mature target does not upgrade the map.
+
+**Cut 4 — Φ vs functor.** Both at Level 2. A functor requires categories C, D
+and preservation of identities and composition. "Functorial" without C, D and F
+named is still Level 1; it is not a synonym for "precise."
+
+**The audit test, asked in order:**
+1. What is the local object?
+2. What is the compatibility condition or invariant?
+3. What global behavior is thereby restricted?
+4. Is the claim a shared role, a structure-preserving map, or a proved
+   implication — and is that claim about the target, or about the map between
+   targets?
+
+These are independent of the other two screens. `forced-check` grades scope
+(Tier A / B / C). `miss-test` grades whether the test could have come back
+negative. These cuts grade how strong the identification is.
+
+---
+
 ## What Makes a Theorem
 
 A theorem in this repository has:
@@ -103,7 +144,7 @@ A theorem does NOT have:
 ## What Connects Everything
 
 The prime is 37.
-The multiplier is 137 = α⁻¹ (integer part of the inverse fine structure constant).
+The multiplier is 137. (137 is the nearest integer to α⁻¹ = 137.035999...; no result here depends on that, and T300 places 137 in Tier B only — it selects {7, 37, 73} and does nothing else.)
 137 mod 37 = 26. ord₃₇(26) = 3. All orbits are 3-cycles.
 
 Every theorem in this repository is a consequence of that single structure.
