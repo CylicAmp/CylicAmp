@@ -1,0 +1,85 @@
+GF(37) COMPLETE REFERENCE TABLE
+
+r     residue 1..36
+orbit 137-map orbit (T285)          cls   Z/12Z class
+pos   position in orbit             blk   decimal block of r/37 = 27r (T303)
+anti  antipode 37-r (T283)          ablk  antipode's block; blk+ablk = 999
+QR    quadratic residue mod 37      DR    digital root
+ch    chamber r mod 6               p?    prime
+r30   Rule 30 image mod 37          RH    n with floor(gamma_n) = r, n <= 30
+
+  r    orbit  cls  pos  blk  anti  ablk  QR  DR  ch  p?  r30         RH
+  1       IC    0    0  027    36   972   Y   1   1   n   20       [19]
+  2   DARK_A    1    0  054    35   945   n   2   2   Y    7          -
+  3       C3    2    0  081    34   918   Y   3   3   Y   23    [7, 20]
+  4       C3    2    1  108    33   891   Y   4   4   n   14          -
+  5  CAS_EXT   11    0  135    32   864   n   5   5   Y   30       [21]
+  6    TESLA    3    0  162    31   837   n   6   0   n   13        [8]
+  7       D7    8    0  189    30   810   Y   7   1   Y   29          -
+  8    TESLA    3    1  216    29   783   n   8   2   n   28       [22]
+  9  SA_ST_A    4    0  243    28   756   Y   9   3   n   11          -
+ 10       IC    0    1  270    27   729   Y   1   4   n   27       [23]
+ 11    NEG_H    6    0  297    26   702   Y   2   5   Y    6        [9]
+ 12  SA_ST_A    4    1  324    25   675   Y   3   0   n   26       [10]
+ 13  CAS_EXT   11    1  351    24   648   n   4   1   Y    5       [24]
+ 14       C9    9    0  378    23   621   n   5   2   n   25    [1, 25]
+ 15   DARK_A    1    1  405    22   594   n   6   3   n    4       [11]
+ 16  SA_ST_A    4    2  432    21   567   Y   7   4   n   19          -
+ 17    NQR17    7    0  459    20   540   n   8   5   Y    2          -
+ 18     SEED    5    0  486    19   513   n   9   0   n   26       [26]
+ 19  CAS_EXT   11    2  513    18   486   n   1   1   Y    5       [12]
+ 20   DARK_A    1    2  540    17   459   n   2   2   n   17       [27]
+ 21  SA_ST_B   10    0  567    16   432   Y   3   3   n   33    [2, 28]
+ 22    NQR17    7    1  594    15   405   n   4   4   n   16       [13]
+ 23    TESLA    3    2  621    14   378   n   5   5   Y   32       [14]
+ 24     SEED    5    1  648    13   351   n   6   0   n   15       [29]
+ 25  SA_ST_B   10    1  675    12   324   Y   7   1   n   35        [3]
+ 26       IC    0    2  702    11   297   Y   8   2   n   14          -
+ 27    NEG_H    6    1  729    10   270   Y   9   3   n   30       [30]
+ 28  SA_ST_B   10    2  756     9   243   Y   1   4   n   13       [15]
+ 29       C9    9    1  783     8   216   n   2   5   Y   29          -
+ 30       C3    2    2  810     7   189   Y   3   0   n   12    [4, 16]
+ 31       C9    9    2  837     6   162   n   4   1   Y   28          -
+ 32     SEED    5    2  864     5   135   n   5   2   n    1    [5, 17]
+ 33       D7    8    1  891     4   108   Y   6   3   n   21          -
+ 34       D7    8    2  918     3   081   Y   7   4   n    8          -
+ 35    NQR17    7    2  945     2   054   n   8   5   n   24       [18]
+ 36    NEG_H    6    2  972     1   027   Y   9   0   n   15          -
+
+SEAM: r = 0 (37 | n). No orbit, no class, no block.
+
+ORBITS
+        IC  cls  0  [1, 10, 26]  blocks ['027', '270', '702']  antipode NEG_H
+    DARK_A  cls  1  [2, 15, 20]  blocks ['054', '405', '540']  antipode NQR17
+        C3  cls  2  [3, 4, 30]  blocks ['081', '108', '810']  antipode D7
+     TESLA  cls  3  [6, 8, 23]  blocks ['162', '216', '621']  antipode C9
+   SA_ST_A  cls  4  [9, 12, 16]  blocks ['243', '324', '432']  antipode SA_ST_B
+      SEED  cls  5  [18, 24, 32]  blocks ['486', '648', '864']  antipode CAS_EXT
+     NEG_H  cls  6  [11, 27, 36]  blocks ['297', '729', '972']  antipode IC
+     NQR17  cls  7  [17, 22, 35]  blocks ['459', '594', '945']  antipode DARK_A
+        D7  cls  8  [7, 33, 34]  blocks ['189', '891', '918']  antipode C3
+        C9  cls  9  [14, 29, 31]  blocks ['378', '783', '837']  antipode TESLA
+   SA_ST_B  cls 10  [21, 25, 28]  blocks ['567', '675', '756']  antipode SA_ST_A
+   CAS_EXT  cls 11  [5, 13, 19]  blocks ['135', '351', '513']  antipode SEED
+
+ANTIPODAL PAIRS (T283) — class distance 6, blocks sum to 999
+        IC <-> NEG_H     cls  0 /  6
+    DARK_A <-> NQR17     cls  1 /  7
+        C3 <-> D7        cls  2 /  8
+     TESLA <-> C9        cls  3 /  9
+   SA_ST_A <-> SA_ST_B   cls  4 / 10
+      SEED <-> CAS_EXT   cls  5 / 11
+
+BLOCK-MAP CYCLES (T303) — B(k) = 27k, six 6-cycles = the antipodal pairs
+  [1, 27, 26, 36, 10, 11]      IC / NEG_H
+  [2, 17, 15, 35, 20, 22]      DARK_A / NQR17
+  [3, 7, 4, 34, 30, 33]        C3 / D7
+  [5, 24, 19, 32, 13, 18]      CAS_EXT / SEED
+  [6, 14, 8, 31, 23, 29]       TESLA / C9
+  [9, 21, 12, 28, 16, 25]      SA_ST_A / SA_ST_B
+
+CONSTANTS
+  137 mod 37 = 26 = 10^2 mod 37     ord_37(26) = 3
+  ord_37(10) = 3   ord_37(2) = 36   ord_37(27) = 6
+  Phi_3(10) = 111 = 3 x 37           Phi_3(137) = 18907 = 7 x 37 x 73
+  999 = 27 x 37                      block(k) = 27k exactly
