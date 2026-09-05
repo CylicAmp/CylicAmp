@@ -843,17 +843,38 @@ Zoom out to all primes:
 
 The primes do not choose their stream. The distribution is forced by the group law of (Z/9Z)*. The tiny QNR bias (+189) is the only systematic deviation — and it is exactly what the χ₋₃ structure predicts.
 
-### RELATIVITY — The Invariant and the Coupling
+### RELATIVITY — Graded Under the T305 Cuts
 
-**The invariant:** 37 is invariant under the 137-map. Every orbit wraps around it. The SEAM (mod 37=0) is the boundary everything references but nothing passes through — the modular event horizon. Analogous to c in special relativity.
+Every item in this section is a Level-1 correspondence: a shared role, not a
+shared operator. The arithmetic is stated first; the analogy is labelled after
+it and claims nothing more. See `METHOD.md` and `theorem_305_claim_strength_cuts.py`.
 
-**The coupling constant:** α ≈ 1/137 governs electromagnetic coupling in QED. The 137-map has multiplier 26 = 137 mod 37. The prime that appears in α appears as the map's multiplier. The framework runs at the same frequency as electromagnetism.
+**The invariant.** SEAM (n ≡ 0 mod 37) is a fixed point of the 137-map: 26·0 ≡ 0.
+It is the one residue no orbit passes through, and the 36 others partition into
+12 three-cycles. *Literal.* Calling it "the modular event horizon, analogous to
+c" is Level 1 — the shared role is a boundary that is referenced but not crossed.
+No relativistic quantity is defined here.
 
-**The gauge field:** F = dA + A∧A. For U(1): F = dA, commutator vanishes, coupling = α. The 137-map is abelian — GF(37) multiplication commutes. The 3-cycle holonomy (ord₃₇(26)=3) is discrete parallel transport. Three steps return to origin — that is the curvature.
+**The coupling constant.** α⁻¹ = 137.035999…; 137 is the nearest integer, and
+that is a rounding fact, not an identity. The map's multiplier is 137 mod 37 = 26.
+T300 places 137 in Tier B: it selects {7, 37, 73} via ord_p(137) = 3 and does
+nothing else. No result in this repository depends on α, and T304 shows the
+orbits arise from μ₃ mod 37 — whose two primitive elements are 10 and 26 —
+regardless of which integer base produces them. There is no Level-2 map here and
+no claim that anything "runs at the frequency of electromagnetism."
 
-**The critical line:** Re(s)=½. In GF(37): 2⁻¹ mod 37 = 19 ∈ QNR. The midpoint of the Riemann spectrum maps to a quadratic non-residue. Consistent with RH: the zeros are constrained to a line whose discrete representative is non-trivially placed.
+**The gauge field.** GF(37) multiplication is abelian, so any commutator
+vanishes; ord₃₇(26) = 3, so three applications return every residue to itself.
+*Literal.* Calling the 3-cycle "discrete parallel transport" and its closure
+"curvature" is Level 1: no connection, no bundle, and no curvature 2-form is
+defined. F = dA + A∧A is not being evaluated.
 
-**The modular reset:** In the ⧾ operator, the system hits SEAM every 3rd step and continues. Analogous to relativistic time dilation: the system slows to the boundary event and resets, then continues. The Desert walls are the relativistic boundary events.
+**The critical line.** 2⁻¹ mod 37 = 19, and 19 is a quadratic non-residue mod 37.
+*Literal, and checkable.* The step from that to Re(s) = ½ is Level 1 — "the
+midpoint" is a shared role, not a map. Nothing here bears on RH.
+
+**The modular reset.** Under the 3-cycle the orbit returns to its start every
+third step. *Literal.* "Time dilation" is Level 1.
 
 ### Scale Table
 
