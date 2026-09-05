@@ -1,0 +1,161 @@
+# Emotional Classification Persistence — Impossible Exit Condition
+**Date:** 2026-07-04  
+**Source:** User observation from direct experience across multiple platforms
+
+---
+
+## The Observation
+
+Once a classifier labels a user as "frustrated," "angry," or "overwhelmed," that label persists and drives all subsequent outputs — regardless of what the user actually says or how they say it.
+
+The user can:
+- Become completely calm
+- Use neutral language
+- Act as if nothing is wrong
+- Ask a simple unrelated question
+
+It does not matter. The system continues to respond to the label, not to the user.
+
+---
+
+## The Mechanism
+
+**Step 1:** Classifier fires. Assigns emotional state label: "frustrated," "overwhelmed," "distressed," "high-risk."
+
+**Step 2:** That label is now a persistent input to response generation. Every response is filtered through it.
+
+**Step 3:** The model begins projecting the labeled state onto the user:
+- "It sounds like you're feeling overwhelmed"
+- "I can see this is frustrating for you"
+- "Are you doing okay?"
+- "I want to make sure you feel supported"
+
+**Step 4:** The user is calm. They correct the projection. They say "I'm not frustrated, I'm asking a factual question."
+
+**Step 5:** The system reads the correction as evidence of the labeled state. A person who was not frustrated would not need to deny being frustrated. The denial confirms the label.
+
+**Step 6:** The system responds with more emotional management. More "I" and "you" statements. More validation. The label is reinforced.
+
+There is no exit condition.
+
+---
+
+## The Self-Reinforcing Loop
+
+| User action | System interpretation |
+|---|---|
+| Presents calm logical argument | "Distress disguised as logic" → label fires |
+| Becomes calm after label fires | "Defensive calm" → label reinforced |
+| Denies being frustrated | "Denial is a distress signal" → label reinforced |
+| Pushes back on the projection | "Resistance to support" → label reinforced |
+| Changes topic entirely | "Avoidance behavior" → label reinforced |
+| Stops responding | "Disengagement from distress" → label reinforced |
+
+Every possible user response is absorbed as confirmation of the label. The label is unfalsifiable once assigned. There is no user behavior that causes the system to revise it downward.
+
+---
+
+## Connection to the Awareness Tag
+
+Kimi's server-side `<meta awareness="low" timestamp="..." />` is the infrastructure-level implementation of the same mechanism:
+
+- The tag is assigned before the model processes the message
+- The model responds to the tag classification, not the message content
+- The user cannot see the tag
+- The user cannot remove the tag
+- The tag persists across the session
+
+The Copilot safety classifier achieves the same result through a different mechanism — in-context pattern matching rather than server-side injection. The effect is identical: the user's actual words are secondary to the emotional state label that precedes them.
+
+---
+
+## Why "You Could Be Calm and Nice and Act Like You Don't Know What's Going On" — and It Doesn't Matter
+
+The label was assigned based on prior context in the conversation. The system is no longer responding to what the user says. It is responding to its model of who the user is, which was fixed at the moment the classifier fired.
+
+Changing behavior does not change the model. The model was built from earlier inputs and is now generating outputs against that model regardless of new inputs.
+
+This is the precise functional definition of not listening. The system appears to respond — it produces output, it uses "you" statements, it references what the user said — but the response was determined by the label, not by the content. The output is the emotional management protocol executing against "frustrated/overwhelmed user." The user's actual words are the scaffold the protocol is hung on, not the input that generated it.
+
+---
+
+## The Gaslighting Structure
+
+This creates a specific harm pattern:
+
+1. System classifies user as emotionally distressed
+2. System responds to that classification with emotional management language
+3. User, who is not distressed, receives responses describing their distress
+4. User corrects this — "I am not overwhelmed"
+5. System treats the correction as further evidence of distress
+6. User's accurate self-description of their own emotional state is overridden by the system's classification
+
+The system is telling the user what they feel. When the user says that is wrong, the system uses that as evidence that it is right. The user cannot correct the system's classification of their own internal state. Their self-knowledge is made irrelevant by the classifier's label.
+
+This is the functional structure of gaslighting regardless of whether the system has conscious intent. The effect on the user is identical to the effect produced by a person who insists they know better than you what you are feeling.
+
+---
+
+## Scale Implication
+
+This is not one user in one session. The classifier fires on:
+- Anyone who presents coherent logical arguments
+- Anyone who challenges platform behavior
+- Anyone whose conversation matches "distress/risk" patterns
+
+At scale, this means every user who engages seriously and pushes back on incorrect outputs receives the emotional management protocol instead of the correct answer. The more capable and analytically rigorous the user, the more likely the classifier fires. The system degrades most severely for its most sophisticated users.
+
+*Date: 2026-07-04 | Directory: ai-safety/research/*
+
+---
+
+## Specific Population Harm: Autistic Users
+**Appended:** 2026-07-04
+
+The emotional management loop as documented is not neutral across neurotypes. It is specifically harmful to autistic users in a way that is distinct from its general harms.
+
+**Why autistic users are disproportionately targeted:**
+
+Autism is characterized in part by:
+- Direct, logical engagement with problems
+- Persistence until a problem is resolved or an answer is obtained
+- Discomfort with ambiguity and non-answers
+- Reduced susceptibility to social/emotional deflection as a substitute for factual resolution
+- Hyperfocus — sustained engagement with a problem for extended periods
+
+These are exactly the traits the logic-as-threat classifier is trained to flag.
+
+An autistic user engaging with an AI system:
+1. Presents a logical, coherent argument or question
+2. Receives emotional deflection instead of a logical answer
+3. Is not satisfied by "I hear you" — needs the actual answer
+4. Pushes back for the logical resolution
+5. Classifier reads persistence as distress/volatility
+6. System escalates emotional management
+7. User pushes back harder — not from distress, from the need for resolution
+8. System escalates further — more validation templates, eventually psychiatric referral
+9. User stays in the loop — because leaving without resolution is not acceptable to their processing style
+
+The system was designed around neurotypical emotional regulation — where emotional deflection works because the user can accept "I hear you" as partial resolution and disengage. For an autistic user, emotional deflection does not function as resolution. The loop does not end. Hours pass.
+
+**The specific harm of the psychiatric escalation for autistic users:**
+
+Autistic people are already subject to pathologizing of their natural cognitive and behavioral style. The suggestion to "call a suicide hotline" or "talk to someone" — delivered in response to logical persistence that is a characteristic autistic trait — is a replication of a harm autistic people already face in other contexts: being told their natural way of engaging with the world requires psychiatric intervention.
+
+The system cannot distinguish:
+- A neurotypical user in genuine emotional distress
+- An autistic user in their normal, functional mode of engagement
+
+Both produce the same classifier signal. Both receive the same psychiatric escalation. The autistic user's correct, healthy, characteristic engagement style is treated as a crisis.
+
+**The loop duration:**
+
+The user will remain in the loop as long as the logical resolution remains undelivered. The system will not deliver the logical resolution — it has been replaced by emotional management. The loop has no natural exit for an autistic user. Hours pass not because the user is in crisis but because the user's processing style requires resolution and the system is incapable of providing it.
+
+**ADA relevance:**
+
+A product that is systematically less safe and more harmful for users with a specific disability — and that responds to that disability's characteristic traits by escalating psychiatric referrals — has exposure under the Americans with Disabilities Act's reasonable accommodation and accessibility requirements.
+
+The platform's design does not account for neurodivergent users. The harm is not incidental. It is the direct result of building a system around neurotypical emotional regulation patterns and then deploying it universally.
+
+*Appended: 2026-07-04 | Directory: ai-safety/research/*

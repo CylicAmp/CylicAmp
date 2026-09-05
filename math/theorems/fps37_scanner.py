@@ -6,7 +6,7 @@ FPS-37 Scanner — LoB 23 / 23b
 Bug fixed: has_sqrt previously used perfect squares {0,1,4,9,16,25,36}.
 Correct quadratic residues mod 37 = 19 values:
   {0,1,3,4,7,9,10,11,12,16,21,25,26,27,28,30,33,34,36}
-Residue 26 (SCALAR_137) is a QR: 10^2 = 100 ≡ 26 (mod 37). Confirmed True.
+Residue 26 (26) is a QR: 10^2 = 100 ≡ 26 (mod 37). Confirmed True.
 """
 
 import math
@@ -18,21 +18,22 @@ QR_MOD37 = frozenset((n * n) % 37 for n in range(37))
 PERFECT_SQUARES = frozenset(n * n for n in range(7))  # {0,1,4,9,16,25,36}
 
 SIGNIFICANCE = {
-    0:  "NULL_ELEMENT",
-    1:  "UNITY",
-    3:  "TRINITY",
-    5:  "PIVOT_PRIME",
-    6:  "TESLA_FLOW",
-    9:  "TRINITY_SQUARED",
-    10: "DECADE_ANCHOR",
-    18: "CENTER_18",
-    19: "CENTER_19",
-    23: "LAMED_SEAL",
-    25: "INV_3",
-    26: "SCALAR_137",
-    31: "PRIME_MIRROR",
-    33: "DICHORAL_144",
-    36: "INVERSE_UNITY",
+    0:  "residue_0",
+    1:  "residue_1",
+    3:  "residue_3",
+    5:  "residue_5",
+    6:  "residue_6",
+    9:  "residue_9",
+    10: "residue_10",
+    13: "residue_13",
+    18: "residue_18",
+    19: "residue_19",
+    23: "residue_23",
+    25: "residue_25",
+    26: "residue_26",
+    31: "residue_31",
+    33: "residue_33",
+    36: "residue_36",
 }
 
 PRIMES_0_36 = frozenset({2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31})
@@ -59,7 +60,7 @@ def field_scan_37(value, label="input"):
         'is_center_19':   residue == 19,
         'is_lamed':       residue == 23,
         'is_inv_3':       residue == 25,
-        'is_scalar_137':  residue == 26,
+        'is_residue_26':  residue == 26,
         'is_prime_mirror': residue == 31,
         'is_dichoral':    residue == 33,
         'is_inv_unity':   residue == 36,
@@ -101,7 +102,7 @@ def field_scan_37(value, label="input"):
 
 # QR count
 assert len(QR_MOD37) == 19
-assert 26 in QR_MOD37          # SCALAR_137 has a square root mod 37
+assert 26 in QR_MOD37          # 26 has a square root mod 37
 assert 10**2 % 37 == 26        # 10 is the sqrt: 100 ≡ 26 (mod 37)
 
 # is_square != has_sqrt (now distinct)
@@ -138,10 +139,10 @@ assert int(math.floor(psi_232)) % 37 == 5   # Pivot
 # Batch scan spot checks
 assert field_scan_37(227)['residue'] == 5
 assert field_scan_37(232)['residue'] == 10
-assert field_scan_37(191)['significance'] == "TESLA_FLOW"
-assert field_scan_37(137)['significance'] == "SCALAR_137"
+assert field_scan_37(191)['significance'] == "residue_6"
+assert field_scan_37(137)['significance'] == "residue_26"
 assert field_scan_37(137)['has_sqrt'] == True
-assert field_scan_37(142857)['significance'] == "NULL_ELEMENT"
+assert field_scan_37(142857)['significance'] == "residue_0"
 
 
 if __name__ == "__main__":
