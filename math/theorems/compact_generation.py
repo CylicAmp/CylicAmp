@@ -25,7 +25,7 @@ Each structure below has a measurable compression ratio.
 #   - physical time cost: very small (seconds)
 #   - informational content recovered: very large (years of detail)
 #
-# In the framework, this appears as:
+# In GF(37), this appears as:
 #   - a small algebraic object (single residue, single digit, single operator)
 #     that encodes or generates a much larger space
 #   - the compression is exact, not approximate
@@ -120,7 +120,7 @@ def eml_compression():
     Grammar: S → 1 | eml(S, S)
 
     (Independently published: Odrzywołek, Jagiellonian University, March 2026,
-    arxiv 2603.21852. The operator itself was in this framework prior.)
+    arxiv 2603.21852. The operator itself was in GF(37) prior.)
     """
     return {
         "primitive": "eml(x, y) = exp(x) - ln(y)",
@@ -242,7 +242,7 @@ assert abs(smoothstep_time_warp(1) - 1.0) < 1e-12
 
 
 if __name__ == "__main__":
-    print("Compact Generation — Framework Integration")
+    print("Compact Generation — GF(37) Integration")
     print("=" * 60)
     print()
     print("Source definition (CylicAmp, 2018):")
@@ -250,7 +250,7 @@ if __name__ == "__main__":
     print("  your mind with great detail, yet in a way that very little")
     print("  time in physical reality passes while doing so.'")
     print()
-    print("Structures in this framework with the same property:")
+    print("Structures in GF(37) with the same property:")
     print()
     for c in COMPRESSIONS:
         print(f"  {c['structure']}")

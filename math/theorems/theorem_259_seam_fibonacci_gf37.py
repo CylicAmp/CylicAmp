@@ -1,6 +1,6 @@
 """
-T259: n=259 — SEAM (7×37), Fibonacci mod 37 framework
-GF(37) framework — 137-map f(x) = 26x mod 37
+T259: n=259 — SEAM (7×37), Fibonacci mod 37 GF(37)
+GF(37) — 137-map f(x) = 26x mod 37
 
 259 = 7 × 37: the first theorem-indexed number on the SEAM (zero class)
 259 mod 37 = 0; DR(259) = 7 ∈ D7; quotient 259/37 = 7 ∈ D7

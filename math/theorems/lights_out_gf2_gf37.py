@@ -12,7 +12,7 @@ The two solution methods (named in the source):
   1. LIGHT CHASING — greedy row-by-row elimination (algorithm)
   2. LINEAR ALGEBRA — explicit null-space computation over GF(2) (structure)
 
-Both methods are analogous to structures already in the GF(37) framework.
+Both methods are analogous to structures already in the GF(37).
 
 ═══════════════════════════════════════════════════════════════════════════
 
@@ -138,7 +138,7 @@ VI. GF(37) STRUCTURE OF THE PUZZLE NUMBERS
 
   GF(2) vs GF(37):
     The Lights Out puzzle uses GF(2) (binary field, characteristic 2).
-    This framework uses GF(37) (prime field, characteristic 37).
+    This GF(37) uses GF(37) (prime field, characteristic 37).
     2 ∈ PR (primitive root mod 37) — the binary field's characteristic
     is itself a generator of GF(37)*.
     The two fields are connected: GF(2) operates inside the orbit structure

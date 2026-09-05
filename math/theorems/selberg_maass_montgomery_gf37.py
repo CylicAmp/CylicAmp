@@ -31,7 +31,7 @@ VERIFIED GF(37) CONNECTIONS:
    λ₁ ≥ 3/16.  (Selberg 1965; Ramanujan conjecture for GL(2) would give λ₁ ≥ 1/4.)
    Numerator 3 ∈ ST = {3, 12, 21, 30} (Sovereign Target).
    Denominator 16 = 2⁴: DR(16) = 7.
-   DR = 7 is the prime stability check (DualityVerifier threshold in this framework).
+   DR = 7 is the prime stability check (DualityVerifier threshold in GF(37)).
 
 4. τ(37) mod 37 = 31; DR(31) = 4 ∈ SA [V]
    τ(37) = −182213314  (Ramanujan tau function, coefficient of q³⁷ in q·∏(1−qⁿ)²⁴)
@@ -53,7 +53,7 @@ MONTGOMERY PAIR CORRELATION:
   This is the GUE (Gaussian Unitary Ensemble) pair correlation function.
   Conjectured (Montgomery 1973) and numerically confirmed (Odlyzko) to describe
   the pair correlation of nontrivial zeros of the Riemann zeta function.
-  Framework note: the RH critical line maps to 19 in GF(37); the pair correlation
+  GF(37) note: the RH critical line maps to 19 in GF(37); the pair correlation
   captures the "repulsion" between zeros, quantized here by the digital-root step Δ=9.
 
 EPISTEMIC STATUS:

@@ -71,7 +71,7 @@ LEMMA 110.3  (The 8 multiples of 99 hit five named classes).
     k=6: 2  ∈ PR                   (primitive root, primitive root of GF(37))
     k=7: 27 ∈ ORBIT_11             (orbit-11 element)
     k=8: 15 ∈ PR                   (primitive root)
-  Five of eight residues land in named framework classes. The sequence
+  Five of eight residues land in named named sets. The sequence
   SA → CB → identity → multiplier in k=1..4 is a descent through sovereignty,
   cascade base, and the IC orbit to the map's own coefficient.             ∎
 
@@ -98,7 +98,7 @@ LEMMA 110.6  (Permutations of {1,2,3}).
   The six permutations of {1,2,3} as 3-digit numbers are 123, 132, 213, 231,
   312, 321. All have digit-sum 1+2+3=6, hence DR=6.
 
-  The three reversal pairs and their framework classes:
+  The three reversal pairs and their named sets:
     Pair (123, 321): |diff| = 198 ≡ 13 ∈ CB.  Sum = 444 ≡ 0 (SEAM).
     Pair (132, 231): |diff| = 99  ≡ 25 ∈ SA.  Sum = 363 ≡ 30 ∈ SA ∩ ST.
     Pair (213, 312): |diff| = 99  ≡ 25 ∈ SA.  Sum = 525 ≡ 7  ∈ D7_ORBIT.
@@ -116,7 +116,7 @@ LEMMA 110.7  (Three multiplicative DR families of single digits).
     {2,4,8}: powers of 2 (2¹=2, 2²=4, 2³=8).
     {3,6,9}: multiples of 3.
 
-  Framework arithmetic of the three families:
+  GF(37) arithmetic of the three families:
     {1,5,7}: sum = 13 ∈ CB ∩ PR.
              product = 35 ≡ 35 (mod 37) ∈ BASIN_Y ∩ PR  =  the forbidden
              twin prime residue (p ≡ 35 → p+2 ≡ 0, blocked; Theorem 108).

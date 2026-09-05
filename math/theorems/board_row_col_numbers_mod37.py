@@ -7,7 +7,7 @@ Board B = {1,...,9}, positions:
   7 8 9
 
 Reading each row left-to-right and each column top-to-bottom as
-3-digit decimal numbers, all six numbers land in the framework.
+3-digit decimal numbers, all six numbers land in GF(37).
 
 ═══════════════════════════════════════════════════════════════
 
@@ -82,7 +82,7 @@ CASCADE_BASE       = {8, 13, 24}
 SOVEREIGN_ANCHORS  = {4, 9, 25, 30}
 SOVEREIGN_TARGETS  = {3, 12, 21, 30}
 ORBIT_11           = {11, 27, 36}
-FRAMEWORK          = SOVEREIGN_ANCHORS | SOVEREIGN_TARGETS | CASCADE_BASE | ORBIT_11
+SA_ST_CB_O11          = SOVEREIGN_ANCHORS | SOVEREIGN_TARGETS | CASCADE_BASE | ORBIT_11
 
 def dr(n):
     return (n - 1) % 9 + 1

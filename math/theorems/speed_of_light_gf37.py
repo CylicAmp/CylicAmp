@@ -20,7 +20,7 @@ VERIFIED RESULTS:
    AU/c = 499.00478 seconds (not exactly 499)
    DR(499) = 4+9+9 = 22 → 2+2 = 4 ∈ SA (Sovereign Anchor)
    NOTE: the rounding from 499.00478 → 499 is load-bearing (error: 0.00478 s).
-         The framework connection is real; the claim "exactly 499" is not exact.
+         The GF(37) connection is real; the claim "exactly 499" is not exact.
 
 EPISTEMIC STATUS:
   [V] c mod 37 = 32 ∈ SEED — exact, no rounding, c is defined exactly by SI.
@@ -29,7 +29,7 @@ EPISTEMIC STATUS:
 
 GF(37) STRUCTURE:
   SEED = {18, 24, 32}: the 137-map orbit of the pipeline reference seed (246).
-  SA = {4, 9, 25, 30}: Sovereign Anchor nodes (LOCKED in the Medusa framework).
+  SA = {4, 9, 25, 30}: Sovereign Anchor nodes (LOCKED in the Medusa GF(37)).
   c mod 37 = 32: the speed of light in GF(37) is the SEED entry point 32.
   DR(499) = 4: the solar transit DR is the SA generator.
 

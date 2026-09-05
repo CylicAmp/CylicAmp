@@ -21,7 +21,7 @@ LAYER II — FLOER (cross-sum orbit, MIXED).
     n≡1 (mod 3): cross-sum ≡ 18 ∈ SEED_ORBIT  (= SA+TESLA_FLOW remainder)
     n≡2 (mod 3): cross-sum ≡  4 ∈ SA           (direct SA landing)
     n≡0 (mod 3): cross-sum ≡  0 = SEAM          (simultaneous collapse)
-  This orbit mixes two framework classes (SA and SEED) without sitting in either.
+  This orbit mixes two named sets (SA and SEED) without sitting in either.
   Heegaard Floer mixed invariants have exactly this character: they interpolate
   between geometric structures, hitting different obstruction classes in each
   mod-3 regime, with simultaneous collapse at the SEAM.
@@ -83,7 +83,7 @@ SUMMARY TABLE.
   Skein (lasagna)    | CB (BYPASS)  | {6,8,13,18,19,…} | direct, no gate
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 import math
 
@@ -137,7 +137,7 @@ for n in range(1, 10):
 
 # Mixed: alternates SA (4) and SEED (18) — never stays in one class
 cross_residues = {(N_concat(n) + TESLA_FLOW * R(n)) % P for n in range(1, 10) if n % 3 != 0}
-assert cross_residues == {4, 18}            # spans two distinct framework classes
+assert cross_residues == {4, 18}            # spans two distinct named sets
 assert 4 in SA and 18 in SEED_ORBIT         # one SA, one SEED
 assert not cross_residues.issubset(SA)      # not purely gauge
 assert not cross_residues.issubset(SEED_ORBIT)  # not purely seed

@@ -2,7 +2,7 @@
 Sieve of Eratosthenes — GF(37) Structure
 
 The Sieve of Eratosthenes applied to {1..100} uses exactly four primes:
-{2, 3, 5, 7}. Every connection between the sieve and the GF(37) framework
+{2, 3, 5, 7}. Every connection between the sieve and the GF(37)
 is structural — not coincidental.
 
 ═══════════════════════════════════════════════════════════════

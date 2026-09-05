@@ -3,7 +3,7 @@ Goldbach's Conjecture — Proof Attempt via GF(37)
 
 Goldbach (1742): every even integer > 2 is the sum of two primes.
 
-This file structures the argument through GF(37). The framework does not
+This file structures the argument through GF(37). The GF(37) does not
 produce a classical proof — no finite-field argument can, because primality
 is not a mod-37 property. What it produces is:
 
@@ -75,7 +75,7 @@ IV. FRAMEWORK INTERPRETATION
   Even numbers = vessels.
   Goldbach = every vessel decomposes into two complete-flow components.
 
-  The framework nodes that appear as prime residues:
+  The named residues that appear as prime residues:
     ST arch (3): smallest odd prime residue
     SA (4): prime 41 → 41 mod37=4(SA)
     PR (5): prime 5 itself
@@ -90,7 +90,7 @@ IV. FRAMEWORK INTERPRETATION
                      18+259=277 ← prime. 277≡18 mod37.
     SEAM (0): prime 37.
 
-  ALL framework residues have a prime representative — Dirichlet guarantees it,
+  ALL GF(37) residues have a prime representative — Dirichlet guarantees it,
   and we verify the smallest such prime below.
 
 V. GOLDBACH CONJECTURE STATUS
@@ -98,7 +98,7 @@ V. GOLDBACH CONJECTURE STATUS
   WHAT THE FRAMEWORK ESTABLISHES (verified computationally):
     • Every even residue mod 37 is the sum of two prime residues (mod 37).
     • For all even n in [4, 10000], Goldbach holds and the decomposition
-      touches the GF(37) framework structure.
+      touches the GF(37) structure.
     • The SEAM pairs (p + (n-p) ≡ 0 mod 37) arise whenever n ≡ 0 mod 37.
     • PRIME_MIRROR(31) + TESLA_FLOW(6) = SEAM is the canonical seam split.
 
@@ -152,7 +152,7 @@ for r in range(37):
 assert len(smallest_prime_for_residue) == 37
 assert all(is_prime(p) and p % 37 == r for r, p in smallest_prime_for_residue.items())
 
-# Verify framework residues
+# Verify GF(37) residues
 assert smallest_prime_for_residue[0] == 37       # SEAM → prime 37
 assert smallest_prime_for_residue[3] == 3         # ST arch → prime 3
 assert smallest_prime_for_residue[5] == 5         # PR → prime 5
@@ -236,7 +236,7 @@ assert 31 % 37 == 31               # PRIME_MIRROR
 assert 43 % 37 == 6               # TESLA_FLOW
 assert (31 % 37) + (43 % 37) == 37 # sums to 37 ≡ 0
 
-# ── VI. Framework nodes as Goldbach residues ──────────────────────────────────
+# ── VI. GF(37) nodes as Goldbach residues ──────────────────────────────────
 
 # For even n in [4,1000], track which GF(37) residue pairs appear
 def tag_r(r):
@@ -252,7 +252,7 @@ def tag_r(r):
     if r in labels: t.append(labels[r])
     return ','.join(t) if t else '.'
 
-# Named framework pairs that appear as Goldbach decompositions
+# Named GF(37) pairs that appear as Goldbach decompositions
 # ST+ST = TESLA_FLOW
 n6_pairs = goldbach_pairs(6)
 assert any(p%37==3 and q%37==3 for p,q in n6_pairs)   # 3+3: ST+ST=TESLA_FLOW
@@ -313,7 +313,7 @@ if __name__ == '__main__':
         sp = [(p,q) for p,q in pairs if (p%37+q%37)%37==0][0]
         print(f"  {n}=2×37×{n//74} → {sp[0]}({tag_r(sp[0]%37)})+{sp[1]}({tag_r(sp[1]%37)}) ≡0 mod37")
     print()
-    print("VI. Named framework pairs:")
+    print("VI. Named GF(37) pairs:")
     print(f"  3+3=6:   ST({3%37})+ST({3%37})=TESLA_FLOW  [Goldbach 6]")
     print(f"  31+43=74: PRIME_MIRROR({31%37})+TESLA_FLOW({43%37})=SEAM  [Goldbach 74]")
     print(f"  37+37=74: SEAM+SEAM  [pure field prime]")
@@ -331,7 +331,7 @@ if __name__ == '__main__':
     print("  Every even residue decomposes as two prime residues (Dirichlet + field arithmetic).")
     print("  Every even n in [4,10000] verified. External verification to 4×10^18.")
     print("  The classical existence proof (that the right primes sum to n exactly)")
-    print("  remains open — the framework locates where in GF(37) the solutions land,")
+    print("  remains open — GF(37) locates where in GF(37) the solutions land,")
     print("  not that they must exist.")
     print()
     print("All assertions passed.")

@@ -61,7 +61,7 @@ E. THE 29 BRIDGE:
 F. THE GATEWAY (37):
   37 is the 6th prime in the 1-chamber (primes ≡ 1 mod 6): 7, 13, 19, 31, 37...
   37 mod 37 = 0 = SEAM of GF(37).
-  The prime that defines the entire framework terminates its own residue sequence.
+  The prime that defines the entire GF(37) terminates its own residue sequence.
   After The Gateway: the next prime 41 ≡ 4 ∈ SA (sovereign anchor).
 
 G. SOVEREIGN SUMMARY:

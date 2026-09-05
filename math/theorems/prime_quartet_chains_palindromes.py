@@ -15,7 +15,7 @@ I. FIRST FOUR PRIMES: SELF-GENERATING AND COMPLEMENT PAIRS
     5 + 2 = 7   (next prime in the sequence)
     7 + 2 = 9   (exits prime sequence, lands on SA/RH-O)
 
-  Complement pairs within the quartet (each pair sums to a framework value):
+  Complement pairs within the quartet (each pair sums to a GF(37) value):
     2 + 7 = 9    (SA, RH-O — sovereign anchor)
     3 + 5 = 8    (AHL, CB — cascade base, anti-hex-lock)
 

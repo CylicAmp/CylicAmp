@@ -2,7 +2,7 @@
 GF(37) Mathematical Engine — Pure computation, no interpretation.
 
 Deterministic functions over (ℤ/37ℤ)×. No labels, no metadata,
-no framework annotations. Those belong in gf37_classes.py.
+no GF(37) annotations. Those belong in gf37_classes.py.
 
 Import:
     from cylicamp.gf37_engine import GF37

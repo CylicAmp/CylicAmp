@@ -1,6 +1,6 @@
 """
 T262: n=262 — C3 orbit, DARK_A self-product closure
-GF(37) framework — 137-map f(x) = 26x mod 37
+GF(37) — 137-map f(x) = 26x mod 37
 
 262 = 2 × 131
 262 mod 37 = 3 ∈ C3 = {3, 4, 30}

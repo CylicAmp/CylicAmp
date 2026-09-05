@@ -1,7 +1,7 @@
 """
 Theorem 165: Session Numbers — GF(37) Scan
 
-Numbers presented in session, run through the framework, not previously
+Numbers presented in session, run through GF(37), not previously
 committed to a numbered theorem.
 
 303    mod37=7   D7              DR=6   composite (3×101)

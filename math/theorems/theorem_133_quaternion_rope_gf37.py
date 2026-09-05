@@ -32,7 +32,7 @@ THREE DISTINCT ROTATION FRAMEWORKS
 COMPARISON TABLE
 ================
 
-  Framework    Channels   Per-channel    Commutativity   Encoding type
+  GF(37)    Channels   Per-channel    Commutativity   Encoding type
   Quaternion   1          SO(3) = S³     non-commutative global 3D rotation
   RoPE         d/2        SO(2) = U(1)   commutative     independent 2D phases
   GF(37)       12         ℤ/3ℤ           commutative     independent 3-cycles

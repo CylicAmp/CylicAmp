@@ -2,8 +2,8 @@
 LaneGenerator: Execution Lanes from Divisors of Seed 246 — THEOREM 97
 
 The seed 246 has exactly 8 divisors: {1, 2, 3, 6, 41, 82, 123, 246}.
-Each divisor defines an execution lane in the framework. Their mod-37
-residues map directly to named framework classes.
+Each divisor defines an execution lane in GF(37). Their mod-37
+residues map directly to named named sets.
 
 Divisor → mod 37 → class:
   1   → 1   ∈ IC ∩ TESLA_4
@@ -16,7 +16,7 @@ Divisor → mod 37 → class:
   246 → 24  ∈ CB ∩ SEED_ORBIT
 
 The 8 lanes span: IC, PR, ST, TESLA_4, SA, CB, SEED_ORBIT.
-Every named framework class is represented except ORBIT_11 and BASIN_Y.
+Every named named set is represented except ORBIT_11 and BASIN_Y.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

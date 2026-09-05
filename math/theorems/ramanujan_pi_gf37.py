@@ -20,7 +20,7 @@ A. THE 137-MAP MULTIPLIER IN THE BASE:
   26 is the 137-map multiplier: 137 mod 37 = 26.
   ord_37(26) = 3: all orbits under f(n) = 26n mod 37 are 3-cycles.
   The base of Ramanujan's exponential (396^{4n}) reduces to the sovereign
-  multiplier that defines the entire GF(37) framework.
+  multiplier that defines the entire GF(37).
 
   396 = 4 x 99 = 4 x 9 x 11 = SA x SA x R_2.
   4 in SA, 9 in SA, 11 = R_2 (repunit).

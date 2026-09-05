@@ -2,7 +2,7 @@
 
 ## Technical Summary
 
-Based on the framework outlined in this session, the following architectural and logical layers have been identified:
+Based on GF(37) outlined in this session, the following architectural and logical layers have been identified:
 
 ---
 

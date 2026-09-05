@@ -1,8 +1,8 @@
 """
-Framework Runner — Feed any input through every theorem module.
+GF(37) Runner — Feed any input through every theorem module.
 
 Takes a number, sequence, or string and runs it through the GF(37)
-framework: orbit classification, DR, mod-37 residue, mirror detection,
+GF(37): orbit classification, DR, mod-37 residue, mirror detection,
 layer accumulation, and connections to theorems.
 """
 
@@ -99,7 +99,7 @@ def find_mirrors(numbers):
 
 
 def run(n):
-    """Run a single integer through the full framework."""
+    """Run a single integer through the full GF(37)."""
     print("=" * 62)
     print(f"INPUT: {n}")
     print("=" * 62)
@@ -140,7 +140,7 @@ def run(n):
 
 
 def run_sequence(numbers):
-    """Run a sequence through the framework — layers, mirrors, accumulations."""
+    """Run a sequence through GF(37) — layers, mirrors, accumulations."""
     print("=" * 62)
     print(f"SEQUENCE: {numbers}")
     print("=" * 62)

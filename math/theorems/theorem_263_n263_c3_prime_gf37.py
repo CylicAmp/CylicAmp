@@ -1,6 +1,6 @@
 """
 T263: n=263 — C3 orbit, prime
-GF(37) framework — 137-map f(x) = 26x mod 37
+GF(37) — 137-map f(x) = 26x mod 37
 
 263 prime; 263 mod 37 = 4 ∈ C3 = {3, 4, 30}
 

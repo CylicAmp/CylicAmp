@@ -109,7 +109,7 @@ def summarise():
     print(f"  -640320³ mod 37 = {r}  ∈ CB        (j at Heegner-163 point)")
     print()
     print("  j(i)=1728 → 26 = 137 mod 37: the Gaussian CM value")
-    print("  maps to the GF(37) framework's own multiplier.")
+    print("  maps to the GF(37)'s own multiplier.")
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@ Triple ORBIT_11 Convergence and 458689 Cross-Pairs — THEOREM 94
 
 Three independent paths through SEED_ORBIT = {18, 24, 32} converge
 to 11 ∈ ORBIT_11. The 6-digit coordinate 458689 has cross-pair sums
-that map to named framework classes across GF(37).
+that map to named named sets across GF(37).
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -51,7 +51,7 @@ ORBIT_11 × ST → T4
 
   86 + 89 = 175
     175 mod 37 = 27  ∈ ORBIT_11;   DR(175) = 13 → DR = 4 = DR(Ƴ)
-    Framework chain: DR+3=7 → +1=8∈CB → +1=9∈SA → +1=10∈IC → DR=1
+    GF(37) chain: DR+3=7 → +1=8∈CB → +1=9∈SA → +1=10∈IC → DR=1
 
   45 + 86 + 89 = 220
     220 mod 37 = 35  ∈ BASIN_Y (Ƴ-basin);   DR(220) = 4 = DR(Ƴ)
@@ -164,7 +164,7 @@ assert 86 + 89 == 175
 assert 175 % P == 27 and 27 in ORBIT_11
 assert dr(175) == 4 and dr(175) == dr(22)       # DR = DR(Ƴ)
 
-# Framework chain from DR(175)=4: +3=7, +1=8(CB), +1=9(SA), +1=10(IC)
+# GF(37) chain from DR(175)=4: +3=7, +1=8(CB), +1=9(SA), +1=10(IC)
 assert 4 + 3 == 7
 assert 7 + 1 == 8  and 8 in CB
 assert 8 + 1 == 9  and 9 in SA

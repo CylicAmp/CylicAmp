@@ -102,7 +102,7 @@ MAIN THEOREM
 THEOREM 106.  (Mohr-Mascheroni / Fermat Primes — GF(37) Classification).
 
   ┌──────────────────────────────────────┬────────┬────────────────────────────┐
-  │  Quantity                            │ mod 37 │  Framework Class           │
+  │  Quantity                            │ mod 37 │  Named set           │
   ├──────────────────────────────────────┼────────┼────────────────────────────┤
   │  F_0 = 3  (triangle)                 │   3    │  ST                        │
   │  F_1 = 5  (pentagon)                 │   5    │  PR, Metonic orbit{5,13,19}│

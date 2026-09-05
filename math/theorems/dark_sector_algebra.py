@@ -2,7 +2,7 @@
 Dark Sector Algebra — GF(37)
 
 The quadratic residue structure of GF(37) produces a clean visible/dark
-sector partition that coincides exactly with the sovereign framework classes.
+sector partition that coincides exactly with the sovereign named sets.
 
 VISIBLE SECTOR (QR — quadratic residues mod 37):
   SA = {4,9,25,30}    — all sovereign anchors are QR
@@ -21,7 +21,7 @@ Proof that PR ⊂ NQR:
   so every QR has order dividing 18.
   Therefore no primitive root can be a QR. □
 
-Prime gap residues mod 37 land on named framework nodes:
+Prime gap residues mod 37 land on named named residues:
   gap ≡  4: SA (visible sovereign anchor)
   gap ≡ 12: ST (visible sovereign target)
   gap ≡  8: CB (dark cascade base)
@@ -37,7 +37,7 @@ The dark sector boundary is the Legendre symbol:
 
 import sympy
 
-# ── Framework constants ────────────────────────────────────────────────────────
+# ── Constants ────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ST         = frozenset({3, 12, 21, 30})
@@ -127,7 +127,7 @@ def prime_gap_residues(limit=500):
 
 GAP_RESIDUES = prime_gap_residues()
 
-# Every prime gap residue hits a named framework node
+# Every prime gap residue hits a named named residue
 GAP_FRAMEWORK = {
     4:  "SA",
     12: "ST",

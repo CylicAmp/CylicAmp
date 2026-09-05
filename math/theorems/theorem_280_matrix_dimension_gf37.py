@@ -1,7 +1,7 @@
 """
 T280: Matrix dimension shift and palindromic tiling in GF(37)
 
-Source: User's dimensional matrix framework — multi-tiered numerical resets
+Source: User's dimensional matrix GF(37) — multi-tiered numerical resets
         folding into diamond-shaped geometric matrices.
 
 === KEY RESULTS ===

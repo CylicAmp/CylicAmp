@@ -2,7 +2,7 @@
 Orbit Connection Map — Full Library Coverage
 
 Scans every theorem file and maps which GF(37) orbits each one touches.
-Finds files that bridge multiple orbits — the connective tissue of the framework.
+Finds files that bridge multiple orbits — the connective tissue of GF(37).
 """
 
 import os

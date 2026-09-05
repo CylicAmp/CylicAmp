@@ -31,7 +31,7 @@ WHAT IS LOAD-BEARING: 26 = 10^2 (mod 37)
     100 mod 37 = 26 = 137 mod 37.
 
 So the 137-map  x -> 26x  IS multiplication by 10^2: a TWO-PLACE DECIMAL
-SHIFT. Everything the framework calls an orbit is a decimal-shift triple:
+SHIFT. Everything GF(37) calls an orbit is a decimal-shift triple:
 
     orbit(x) = {x, 26x, 26^2 x} = {x, 100x, 10x} = x * {1, 10, 100}
 
@@ -105,14 +105,14 @@ CAS_EXT, via 819 mod 37 = 5 and 819/37 = 22.135135... with repeating block
 ════════════════════════════════════════════════════════════════════════════
 THE CLEANEST DERIVATION: Phi_3(10) = 111
 ════════════════════════════════════════════════════════════════════════════
-IC does not need 137 at all. It follows from the framework's own SEAM value:
+IC does not need 137 at all. It follows from GF(37)'s own SEAM value:
 
     Phi_3(10) = 10^2 + 10 + 1 = 111 = 3 x 37
     37 | 111,  and  10 != 1 (mod 37)
     =>  ord_37(10) = 3
     =>  <10> = {1, 10, 26} = IC
 
-One line, no 137. The 111 = 3 x 37 already recorded in the framework IS
+One line, no 137. The 111 = 3 x 37 already recorded in GF(37) IS
 Phi_3 evaluated at 10.
 
 And 137 contributes nothing further: 137 = 26 = 10^2 (mod 37), and
@@ -159,10 +159,10 @@ the units of Z[omega]. Here is a third:
 
 All three coincide because ord_37(10) = 3, which is the same statement as
 1/37 = 0.027027... having period 3, which is the same statement as
-999 = 27 x 37. The framework's 111 = 3 x 37 is the half-length version:
+999 = 27 x 37. The GF(37)'s 111 = 3 x 37 is the half-length version:
 1/111 also has period 3.
 
-That the 137-multiplier equals 10^2 is why the framework's arithmetic and
+That the 137-multiplier equals 10^2 is why GF(37)'s arithmetic and
 its decimal observations keep landing on each other. They are one structure.
 """
 
@@ -438,7 +438,7 @@ def run():
     print(f"  Phi_3(10) = 10^2+10+1 = 111 = 3 x 37")
     print(f"  37 | 111 and 10 != 1 (mod 37)  =>  ord_37(10) = "
           f"{order_mod(10, P)}  =>  <10> = {sorted(ORBITS['IC'])} = IC")
-    print("  One line, no 137. The framework's 111 IS Phi_3 at 10.")
+    print("  One line, no 137. The GF(37)'s 111 IS Phi_3 at 10.")
     print(f"\n  137 = {137%P} = 10^2 (mod 37), and <10^2> = <10> since")
     print(f"  gcd(2, ord(10)) = gcd(2,3) = 1. So 137 adds nothing here.")
     print("\n  Two Use-1 evaluations, both in play:")
@@ -468,7 +468,7 @@ def run():
     print(f"  statement as 1/37 = 0.{expand(37,9)}... having period 3,")
     print(f"  which is the same statement as 999 = 27 x 37.")
     print(f"  ord_111(10) = {order_mod(10,111)} as well; 111 = 3 x 37.")
-    print("\n  That the 137-multiplier equals 10^2 is why the framework's")
+    print("\n  That the 137-multiplier equals 10^2 is why GF(37)'s")
     print("  arithmetic and its decimal observations keep landing on each")
     print("  other. They are one structure, not two.")
 

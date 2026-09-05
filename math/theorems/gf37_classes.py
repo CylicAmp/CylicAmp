@@ -1,7 +1,7 @@
 """
 GF(37) Class Definitions — Canonical Single Source of Truth
 
-All named classes, orbits, and cross-orbit sets for the GF(37) framework.
+All named classes, orbits, and cross-orbit sets for the GF(37).
 Import from this file instead of redefining sets per-theorem.
 
     from gf37_classes import SA, ST, CB, IC, SEED_ORB, TESLA_ORB, QR37, PR37

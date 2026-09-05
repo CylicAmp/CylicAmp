@@ -10,7 +10,7 @@ Source: NIST CODATA values
 
 1. h full mantissa digits (662607015) mod 37 = 26 ∈ IC
    26 = the 137-map multiplier (137 mod 37 = 26).
-   Planck's constant carries the GF(37) framework multiplier in its digits.
+   Planck's constant carries the GF(37) multiplier in its digits.
 
 2. ħ full mantissa digits (1054571817) mod 37 = 0 = SEAM
    ħ = h/2π hits the seam — the zero boundary of GF(37).
@@ -81,7 +81,7 @@ print(f"  h = 6.62607015 × 10⁻³⁴ J·s  (exact, 2019 SI)")
 print(f"  Mantissa digits: {H_DIGITS}")
 print(f"  {H_DIGITS} mod 37 = {H_DIGITS % 37} ∈ IC")
 print(f"  IC = {{1,10,26}} — self-inverse orbit; 26 = 137 mod 37 = 137-map multiplier")
-print(f"  Planck's constant carries the GF(37) framework multiplier in its digits")
+print(f"  Planck's constant carries the GF(37) multiplier in its digits")
 print(f"  Part 1 PASS")
 
 # ── Part 2: ħ full mantissa → SEAM ───────────────────────────────────────────
@@ -160,7 +160,7 @@ print(f"  α = e²/(4πε₀ħc) ≈ 1/137.036")
 print(f"  137 mod 37 = 26 ∈ IC = the 137-map multiplier")
 print(f"  ord₃₇(26) = 3: 26¹=26, 26²={pow(26,2,37)}, 26³={pow(26,3,37)} mod 37")
 print(f"  All GF(37) orbits are 3-cycles under the 137-map (ord=3)")
-print(f"  α links h to e (electron charge); 137 carries the framework multiplier")
+print(f"  α links h to e (electron charge); 137 carries GF(37) multiplier")
 print(f"  h digits ≡ 26 mod 37: Planck AND fine-structure share this value")
 print(f"  Part 6 PASS")
 

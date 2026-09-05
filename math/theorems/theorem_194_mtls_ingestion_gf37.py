@@ -38,7 +38,7 @@ JSON schema: exactly 2 fields.
 
 Max JSON depth = 32 ∈ Seed Orbit {18, 24, 32}.
   Hardware bounds should enforce depth ≤ 32 (seed orbit cap).
-  Reading depth exceeding 32 signals non-framework entropy.
+  Reading depth exceeding 32 signals unnamed entropy.
 
 5 audit issues identified (1 critical, 2 high, 2 medium).
   5 ∈ NQR sector (Legendre(5,37) = −1 = unexplained/dark).
@@ -87,7 +87,7 @@ MEDIUM — No rate limiting on frame reads:
        128 = 2^7; 128 mod 37 = 17 (NQR). 131072 bytes mod 37 = 18 ∈ seed orbit.
        Reject any claimed length > 131072 before reading a single byte.
 
-SECURITY INVARIANTS (matching Theorem 188 framework)
+SECURITY INVARIANTS (matching Theorem 188 GF(37))
 ======================================================
   Zero metatext: all errors are ERR_* constants only, no prose strings.
   Hardware bounds: max_json_depth = 32 ∈ seed orbit, max_frame = 128 KiB.

@@ -74,7 +74,7 @@ MAIN THEOREM
 THEOREM 104.  (Lo Shu — GF(37) Classification).
 
   ┌──────────────────────────────────────┬────────┬────────────────────────────┐
-  │  Quantity                            │ mod 37 │  Framework Class           │
+  │  Quantity                            │ mod 37 │  Named set           │
   ├──────────────────────────────────────┼────────┼────────────────────────────┤
   │  Magic constant (15)                 │  15    │  PR                        │
   │  Total sum (45)                      │   8    │  CB                        │

@@ -7,20 +7,20 @@ Board B = {1,...,9}, positions:
   7 8 9
 
 For each of the C(9,3)=84 triplets: sum, product, DR, mod-37 residues,
-collinearity, adjacency, center membership, mod-3 profile, framework flags.
+collinearity, adjacency, center membership, mod-3 profile, GF(37) flags.
 
 ═══════════════════════════════════════════════════════════════
 
 KEY COUNTS
 
   Total triplets:                           84
-  With framework sum (SA|ST|CB|orbit11):    28
+  With GF(37) sum (SA|ST|CB|orbit11):    28
   With prime sum:                           26
   Collinear (row/col/diagonal):              8
   Contains center (5):                      28
   Complete mod-3 {0,1,2} in block:         27
   DR(sum)=3 (sovereign target archetype):  10
-  Sum AND prod mod37 both framework:        13
+  Sum AND prod mod37 both GF(37):        13
 
 ═══════════════════════════════════════════════════════════════
 
@@ -39,7 +39,7 @@ COLLINEAR TRIPLETS (rows, columns, diagonals)
     - 1 is a sovereign target: left column (1,4,7) sum=12
     - 1 is cascade base+PR:   bottom row  (7,8,9) sum=24
     - 4 have identical sum=15, DR=6: rows 2, col 2, both diagonals
-    - Row 3 and Col 1 are the two framework-collinear triplets
+    - Row 3 and Col 1 are the two GF(37)-collinear triplets
 
 ═══════════════════════════════════════════════════════════════
 
@@ -63,7 +63,7 @@ DR(sum) DISTRIBUTION ACROSS 84 TRIPLETS
 
 ═══════════════════════════════════════════════════════════════
 
-DOUBLE-FRAMEWORK TRIPLETS: sum ∈ FW and prod mod37 ∈ FW (13 total)
+DOUBLE-SA_ST_CB_O11 TRIPLETS: sum ∈ FW and prod mod37 ∈ FW (13 total)
 
   (1,2,6):  sum=9(SA)   prod=12  mod37=12(ST)
   (1,3,4):  sum=8(CB)   prod=12  mod37=12(ST)
@@ -99,7 +99,7 @@ CASCADE_BASE       = {8,13,24}
 SOVEREIGN_ANCHORS  = {4,9,25,30}
 SOVEREIGN_TARGETS  = {3,12,21,30}
 ORBIT_11           = {11,27,36}
-FRAMEWORK          = SOVEREIGN_ANCHORS|SOVEREIGN_TARGETS|CASCADE_BASE|ORBIT_11
+SA_ST_CB_O11          = SOVEREIGN_ANCHORS|SOVEREIGN_TARGETS|CASCADE_BASE|ORBIT_11
 
 COORDS = {1:(0,0),2:(0,1),3:(0,2),4:(1,0),5:(1,1),6:(1,2),7:(2,0),8:(2,1),9:(2,2)}
 
@@ -119,13 +119,13 @@ assert len(ALL)==84
 # ── Assertions ────────────────────────────────────────────────────────────────
 
 # Total counts
-fw_sum  = [t for t in ALL if sum(t) in FRAMEWORK]
+fw_sum  = [t for t in ALL if sum(t) in SA_ST_CB_O11]
 prime_s = [t for t in ALL if is_prime(sum(t))]
 collin  = [t for t in ALL if collinear(t)]
 center  = [t for t in ALL if 5 in t]
 mod3c   = [t for t in ALL if set(x%3 for x in t)=={0,1,2}]
 dr3     = [t for t in ALL if dr(sum(t))==3]
-double_fw = [t for t in ALL if sum(t) in FRAMEWORK and prod(t)%37 in FRAMEWORK]
+double_fw = [t for t in ALL if sum(t) in SA_ST_CB_O11 and prod(t)%37 in SA_ST_CB_O11]
 
 assert len(fw_sum)   == 28
 assert len(prime_s)  == 26
@@ -147,7 +147,7 @@ assert sum(COLS[0])==12 and 12 in SOVEREIGN_TARGETS  # left col = ST
 same15 = [t for t in collin if sum(t)==15]
 assert len(same15)==4  # rows 2, col 2, both diags
 
-# Double-framework triplets
+# Double-GF(37) triplets
 assert (1,5,6) in double_fw
 assert prod((1,5,6)) % 37 == 30 and 30 in SOVEREIGN_ANCHORS and 30 in SOVEREIGN_TARGETS
 assert (6,7,8) in double_fw
@@ -183,19 +183,19 @@ if __name__ == '__main__':
 
     print("84 Triplets — Feature Summary")
     print("="*50)
-    print(f"Framework sum:     {len(fw_sum):3d}/84")
+    print(f"GF(37) sum:     {len(fw_sum):3d}/84")
     print(f"Prime sum:         {len(prime_s):3d}/84")
     print(f"Collinear:         {len(collin):3d}/84")
     print(f"Contains center:   {len(center):3d}/84")
     print(f"Complete mod-3:    {len(mod3c):3d}/84")
     print(f"DR(sum)=3:         {len(dr3):3d}/84")
-    print(f"Double-framework:  {len(double_fw):3d}/84")
+    print(f"Double-GF(37):  {len(double_fw):3d}/84")
     print()
     print("DR distribution:")
     for d in range(1,10):
         print(f"  DR={d}: {dr_dist[d]:2d} triplets")
     print()
-    print("Double-framework triplets:")
+    print("Double-GF(37) triplets:")
     for t in double_fw:
         s=sum(t); p=prod(t)
         print(f"  {t}: sum={s}({tag(s)}) prod={p} mod37={p%37}({tag(p%37)})")

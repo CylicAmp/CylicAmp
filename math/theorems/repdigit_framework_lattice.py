@@ -1,5 +1,5 @@
 """
-Repdigit Framework Lattice and Sign Partition — THEOREM 74
+Repdigit GF(37) Lattice and Sign Partition — THEOREM 74
 
 REPDIGIT PERIOD-3 LAW.
   ord₃₇(10) = 3 (since 10³ = 1000 = 27×37 + 1 ≡ 1 mod 37).
@@ -17,7 +17,7 @@ SINGLE REPDIGIT FRAMEWORK MAP:
   7 = 7           (no single-level hit)
   8 ∈ CB          (cascade base)
   9 ∈ SA          (sovereign anchor)
-  6 of 9 digits hit framework nodes directly; only 2, 5, 7 don't.
+  6 of 9 digits hit named residues directly; only 2, 5, 7 don't.
 
 DOUBLE REPDIGIT FRAMEWORK MAP:
   11 ≡ 11 ∈ ORBIT_11   (IC → ORBIT_11 crossing)
@@ -31,7 +31,7 @@ DOUBLE REPDIGIT FRAMEWORK MAP:
   99 ≡ 25 ∈ SA          (SA → SA: 9 stays sovereign across both levels)
 
 THE TWO HIDDEN DIGITS (5 AND 7).
-  5 and 7 are the only digits with no direct framework hit at single level.
+  5 and 7 are the only digits with no direct named-set hit at single level.
   At double level: 55≡18∈SEED, 77≡3∈ST.
   Together: 5+7=12∈ST; 55+77=132≡21∈ST.
   The hidden pair sums to ST at both scales.
@@ -71,7 +71,7 @@ DIVERGENCE THEOREM (1+2 vs 2+1).
 DOUBLING-AND-CANCELLATION: 3+3+6+6+12-12 = 18 ∈ SEED_ORBIT.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA        = frozenset({4, 9, 25, 30})
 ST        = frozenset({3, 12, 21, 30})
@@ -99,10 +99,10 @@ assert 111 == 3 * 37
 for d in range(1, 10):
     assert (int(str(d) * 3)) % 37 == 0
 
-# Single repdigit framework map
+# Single repdigit GF(37) map
 assert 1 in IC and 3 in ST and 4 in SA and 6 in TESLA_4 and 8 in CB and 9 in SA
 
-# Double repdigit framework map
+# Double repdigit GF(37) map
 assert 11 % 37 == 11 and 11 in ORBIT_11       # IC → ORBIT_11
 assert 33 % 37 == 33 and (37 - 33) in SA      # ST → -SA (33 ≡ -4, 4∈SA)
 assert 55 % 37 == 18 and 18 in SEED           # 5 → SEED at double level
@@ -159,7 +159,7 @@ assert 14 + 14 == 28 and 28 * 2 == 56     # closed doubling one short (THEOREM 7
 
 
 if __name__ == "__main__":
-    print("Repdigit Framework Lattice and Sign Partition — THEOREM 74")
+    print("Repdigit GF(37) Lattice and Sign Partition — THEOREM 74")
     print("=" * 60)
     print()
     print("REPDIGIT MAP mod 37 (period 3, triple=SEAM):")

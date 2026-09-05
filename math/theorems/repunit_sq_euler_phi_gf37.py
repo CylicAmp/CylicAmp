@@ -3,8 +3,8 @@ Repunit Squares and Euler Totient — GF(37) Structure
 
 R_n = 111...1 (n ones).  R_n² has the palindrome digit pattern 123...n...321.
 The 137-map orbit of R_n² mod 37 is a period-3 cycle anchored to three
-framework nodes.  Simultaneously: φ(38..42) maps the 37-offsets of the first
-five field units {1,2,3,4,5} onto framework residues.
+named residues.  Simultaneously: φ(38..42) maps the 37-offsets of the first
+five field units {1,2,3,4,5} onto GF(37) residues.
 
 ═══════════════════════════════════════════════════════════════
 
@@ -20,7 +20,7 @@ I. R_n MOD 37 — PERIOD-3 CYCLE
 
 II. R_n² MOD 37 — PERIOD-3 CYCLE IN FRAMEWORK NODES
 
-  Squaring maps the period-3 cycle to three framework nodes:
+  Squaring maps the period-3 cycle to three named residues:
 
   n ≡ 1 mod 3:  R_n² ≡  1² =   1 mod 37  (unity)
   n ≡ 2 mod 3:  R_n² ≡ 11² = 121 ≡ 10 mod 37  (DECADE_ANCHOR)

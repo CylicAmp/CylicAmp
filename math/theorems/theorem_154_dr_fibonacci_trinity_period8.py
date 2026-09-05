@@ -70,7 +70,7 @@ ONE-PERIOD PROPERTIES (seed (9,6))
 GF(37) CONNECTIONS
 ===================
 
-The period 8 connects to the framework in two ways:
+The period 8 connects to GF(37) in two ways:
 
     8 ∈ TESLA_ORB = {6, 8, 23}
 

@@ -43,7 +43,7 @@ ORBIT_11 AS FINGERPRINT TARGET:
     27 ← (3,4,30)     [all SA/ST — the sovereign cycle]
     11 ← (21,25,28)   [SA+ST+unclassified — the outlier sovereign cycle]
     36 ← (11,27,36)   [ORBIT_11 itself]
-  The sovereign framework is "encoded" in ORBIT_11 via the cube map.
+  The sovereign GF(37) is "encoded" in ORBIT_11 via the cube map.
 
 SCALAR_137 AS FINGERPRINT:
   The cycle (9,12,16) — containing SA node 9 and ST node 12 — cubes to 26.
@@ -68,7 +68,7 @@ ORDER-18 CYCLE PAIR:
   SA∪ST contains exactly these elements plus the order-9 members {9,12}.
 """
 
-# ── Framework constants ────────────────────────────────────────────────────────
+# ── Constants ────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ST         = frozenset({3, 12, 21, 30})

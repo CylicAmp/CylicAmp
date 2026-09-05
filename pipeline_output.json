@@ -23,7 +23,7 @@
     106,
     135
   ],
-  "sovereign_status": "Node 24 -> Res 32 [PURGE]: Non-Framework Entropy.",
+  "sovereign_status": "Node 24 -> Res 32 [PURGE]: res not in ST.",
   "abcabc_orbit_position": 0,
   "lucas_orbit_hits": [
     [
@@ -57,8 +57,8 @@
   "provenance": {
     "source_id": "cylicamp/engine_integration",
     "source_type": "INTERNAL_DERIVATION",
-    "citation": "CylicAmp pipeline \u2014 user-originated framework",
-    "timestamp": "2026-09-02T05:23:52.554093+00:00"
+    "citation": "CylicAmp pipeline \u2014 user-originated",
+    "timestamp": "2026-09-05T20:17:37.882175+00:00"
   },
   "meta_history": [
     {

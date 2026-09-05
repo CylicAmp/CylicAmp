@@ -745,7 +745,7 @@ class UnifiedMathematicalFramework:
         }
 
     def full_verify(self) -> Dict[str, Dict]:
-        """Run every verification in the framework. All must pass."""
+        """Run every verification in GF(37). All must pass."""
         return {
             '137_map':      self.map137.verify(),
             'dr_system':    DigitalRootSystem.verify(),

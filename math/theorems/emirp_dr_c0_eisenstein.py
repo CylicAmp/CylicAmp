@@ -29,10 +29,10 @@ By CRT mod-37 residue is independent of DR. Identities live on the 9/11
 side; the 37 frame carries empirical content only.
 
 GF(37) CONNECTIONS:
-  • p = 37 IS the framework prime: 37 ≡ 0 = SEAM mod 37.
+  • p = 37 IS 37: 37 ≡ 0 = SEAM mod 37.
   • q = 73 ≡ 36 ∈ ORBIT_11 mod 37  (36 ≡ −1; the ORBIT_11 antipode).
   • Loeschian parameters of 37: x=3 ∈ ST, y=4 ∈ SA — sovereign anchor and
-    target sit in the Eisenstein representation of the framework prime itself.
+    target sit in the Eisenstein representation of 37 itself.
   • Loeschian parameters of 73: x=1 ∈ IC, y=8 ∈ CB — identity cycle and
     cascade base appear in the representation of 37's emirp partner.
   • The first C0 emirp pair (37, 73) maps to (SEAM, ORBIT_11) in GF(37):
@@ -45,7 +45,7 @@ VERIFIED (LIMIT = 10^6):
   chi2 vs candidate baseline = 6.46 on df=5
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA          = frozenset({4, 9, 25, 30})
 ST          = frozenset({3, 12, 21, 30})

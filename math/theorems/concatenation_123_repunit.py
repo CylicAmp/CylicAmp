@@ -31,7 +31,7 @@ DIGIT TRIPLET {1, 2, 3} — FRAMEWORK SATURATION.
   Pairwise-product sum: 1·2 + 2·3 + 1·3 = 11 ∈ ORBIT_11
   Concatenation:  123 ≡ 12 ∈ ST (mod 37)
 
-  The three digits land in three distinct framework sets (IC, primitive root, ST);
+  The three digits land in three distinct named sets (IC, primitive root, ST);
   sum and product both equal TESLA_FLOW; pairwise product sum = ORBIT_11.
 
 INITIAL SEQUENCE: 1, 2, 3, 6, 12.
@@ -63,8 +63,8 @@ CROSS-SUM ORBIT (N_n + 6·R_n mod 37).
   n ≡ 2 (mod 3): 12 + 29 = 41 ≡ 4 ∈ SA
   n ≡ 0 (mod 3):  0 + 0  =  0 = SEAM
 
-  The cross-sum cycles through {SEED, SA, SEAM} — all framework nodes, period 3.
-  The cross-sum orbit is entirely within the GF(37) framework.
+  The cross-sum cycles through {SEED, SA, SEAM} — all named residues, period 3.
+  The cross-sum orbit is entirely within the GF(37).
 
 TRIPLE-SEAM FACTORIZATION.
   666 = 6·111 = 6·3·37 = 18·37.
@@ -78,7 +78,7 @@ DIFFERENCE INVARIANT.
   ST residue minus TESLA_FLOW = TESLA_FLOW.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA       = frozenset({4, 9, 25, 30})
 ST       = frozenset({3, 12, 21, 30})

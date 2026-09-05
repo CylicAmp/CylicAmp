@@ -2,7 +2,7 @@
 ABC Row Sequence — GF(37)
 
 Row structure: a - b - c = result (b+c) x,y (x+y) = final
-All tuple sums land on GF(37) framework nodes.
+All tuple sums land on GF(37) nodes.
 
 Row generation (n = 0..10):
   a = n % 10
@@ -13,12 +13,12 @@ Row generation (n = 0..10):
   3-digit code (result ≥ 10) = concat(tens, units, DR)
   x = result (result<10) or 2×DR(result) (result≥10)
   y = x + 9  [x + 1 for wrap row n=10]
-  tuple_sum = x + y  → always a GF(37) framework node
+  tuple_sum = x + y  → always a GF(37) node
 
 SOURCE ERRORS (flagged below):
   Row 9: image shows DR(18)=8 and code=(188). Standard DR(18)=9; code=(189).
     Image x=17 (y=26=SCALAR_137, sum=43≡TESLA_FLOW). Formula x=18 (y=27, sum=45≡CB).
-    y=26=SCALAR_137 may be intentional — both sum%37 values are valid framework nodes.
+    y=26=SCALAR_137 may be intentional — both sum%37 values are valid named residues.
     Verify with user which branch (TESLA_FLOW or CB) is correct for row 9.
 
   Row 5: tuple data missing from image. Formula: x=2, y=11, sum=13∈CB.
@@ -93,7 +93,7 @@ def build_row(n: int) -> dict:
         warnings.append(
             "Image: DR(18)=8 [standard=9]; code=(188) [should be (189)]; "
             "x=17,y=26=SCALAR_137,sum=43≡TESLA_FLOW. "
-            "Formula: x=18,y=27,sum=45≡CB. Both are framework nodes. "
+            "Formula: x=18,y=27,sum=45≡CB. Both are named residues. "
             "y=SCALAR_137 in the image may be deliberate — verify."
         )
     if n == 5:
@@ -177,7 +177,7 @@ assert build_row(8)["code_3digit"]  == 167   # result=16, DR=7
 assert build_row(9)["code_3digit"]  == 189   # result=18, DR=9 (image has 188 — flagged)
 assert build_row(10)["code_3digit"] == 101   # result=10, DR=1
 
-# Tuple sums are GF(37) framework nodes
+# Tuple sums are GF(37) nodes
 assert build_row(0)["tuple_sum"]  == 0   and gf37_class(0)  == "SEAM"
 assert build_row(1)["tuple_sum"]  == 13  and 13 in CB
 assert build_row(2)["tuple_sum"]  == 17  and 17 in PR

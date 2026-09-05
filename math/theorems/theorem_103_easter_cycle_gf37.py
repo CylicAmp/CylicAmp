@@ -104,7 +104,7 @@ MAIN THEOREM
 THEOREM 103.  (Easter Cycle — GF(37) Classification).
 
   ┌──────────────────────────────────┬────────┬────────────────────────────┐
-  │  Quantity                        │ mod 37 │  Framework Class           │
+  │  Quantity                        │ mod 37 │  Named set           │
   ├──────────────────────────────────┼────────┼────────────────────────────┤
   │  Annual epact (11)               │  11    │  ORBIT_11                  │
   │  Intercalary threshold (30)      │  30    │  SA ∩ ST  (unique node)    │
@@ -127,7 +127,7 @@ COROLLARY 103.9  (The saltus as synchronization transit).
       19 × 11 = 209  ≡  24 ∈ SEED_ORBIT   (pre-correction)
       209 + 1 = 210  ≡  25 ∈ SA            (post-correction)
   The correction that synchronizes the Moon to the Sun moves the cumulative
-  epact out of the framework's dark non-QR seed orbit and into the
+  epact out of GF(37)'s dark non-QR seed orbit and into the
   sovereign anchor set.
 
 COROLLARY 103.10  (Metonic orbit unity).

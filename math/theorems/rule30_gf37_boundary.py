@@ -31,7 +31,7 @@ KEY STRUCTURAL FACTS:
 
   a(41)=100 mod 37=26∈IC: At the century boundary, the record run
   reaches the 137-map multiplier. The same value appears in the
-  primes-to-137 framework: cumulative prime sum at index 9 = 100,
+  primes-to-137 GF(37): cumulative prime sum at index 9 = 100,
   100 mod 37 = 26 ∈ IC.
 
   a(46)=111=3×37: The repunit milestone is 3 (∈ST, Sovereign Target)
@@ -51,7 +51,7 @@ LEFT-PERMUTATIVE BOUNDARY = INVERSE 137-MAP:
   map. In GF(37), the inverse 137-map is multiplication by 10:
     10 × 26 ≡ 1 mod 37  (since 260 = 7×37 + 1)
   The boundary dynamics implement the inverse 137-map = decimal shift.
-  This is already in the framework: period(1/37)=3=ord₃₇(10).
+  This is already in GF(37): period(1/37)=3=ord₃₇(10).
 
 ENTROPY DUALITY:
 

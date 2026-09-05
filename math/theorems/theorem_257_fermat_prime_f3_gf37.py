@@ -1,6 +1,6 @@
 """
 T257: n=257 — Fermat Prime F3, NQR17 orbit
-GF(37) framework — 137-map f(x) = 26x mod 37
+GF(37) — 137-map f(x) = 26x mod 37
 
 257 = 2^8 + 1 = Fermat prime F3
 257 mod 37 = 35 ∈ NQR17 = {17, 22, 35}

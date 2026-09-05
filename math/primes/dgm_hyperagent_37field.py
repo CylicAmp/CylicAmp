@@ -127,7 +127,7 @@ REGISTRY = {
 # ================================================================
 
 if __name__ == "__main__":
-    print("DGM-H Hyperagent Framework — 37-Field Integration")
+    print("DGM-H Hyperagent GF(37) — 37-Field Integration")
     print("=" * 60)
 
     print("\nEuler Totient Table (phi(1) to phi(40)):")

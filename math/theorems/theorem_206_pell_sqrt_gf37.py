@@ -25,19 +25,19 @@ PELL y-VALUES MOD 37:
     y_12 = 4   [SA]
     y_15 = 32  [SEED]
     y_16 = 30  [SA∩ST]
-  All framework classes appear in the Pell y-values mod37.
+  All SA_ST_SEED classes appear in the Pell y-values mod37.
 
 FRAMEWORK SQUARE ROOTS IN GF(37):
-  For each framework element v, sqrt(v) = {r : r^2 ≡ v (mod 37)}.
+  For each SA_ST_SEED element v, sqrt(v) = {r : r^2 ≡ v (mod 37)}.
   (SA∪ST elements are QR; SEED elements are NQR — no sqrt exists for SEED.)
 
-  Framework elements WITH another framework element as sqrt:
+  GF(37) elements WITH another SA_ST_SEED element as sqrt:
     sqrt(9)  ∋ 3∈ST    [3^2=9∈SA: T199 squaring ST→SA]
     sqrt(12) ∋ 30∈SA∩ST [30^2=12∈ST: T199 squaring SA∩ST→ST]
     sqrt(21) ∋ 24∈SEED  [24^2=21∈ST: T199 squaring SEED→ST]
     sqrt(25) ∋ 32∈SEED  [32^2=25∈SA: T199 squaring SEED→SA]
 
-  Framework elements whose square roots are OUTSIDE framework:
+  GF(37) elements whose square roots are OUTSIDE SA_ST_SEED:
     sqrt(3)  = {15,22} (both NQR g^7 and g^1)
     sqrt(4)  = {2,35}  (both non-sovereign)
     sqrt(30) = {17,20} (both NQR)
@@ -46,13 +46,13 @@ FRAMEWORK SQUARE ROOTS IN GF(37):
     18, 24, 32 ∈ NQR → no sqrt exists in GF(37).
 
 SQRT INVERSE GRAPH — SOVEREIGN CONNECTIONS:
-  The squaring map restricted to framework:
+  The squaring map restricted to SA_ST_SEED:
     3(ST)  → 9(SA)      [T199: ST→SA]
     24(SEED)→ 21(ST)    [T199: SEED→ST]
     30(SA∩ST)→ 12(ST)  [T199: SA∩ST→ST]
     32(SEED)→ 25(SA)    [T199: SEED→SA]
-  Taking sqrt (inverse): the 4 framework elements {9,12,21,25} each have
-  a framework square root. The other 7 framework elements ({3,4,18,24,30,32}
+  Taking sqrt (inverse): the 4 SA_ST_SEED elements {9,12,21,25} each have
+  a SA_ST_SEED square root. The other 7 SA_ST_SEED elements ({3,4,18,24,30,32}
   and the SEAM connection) do not.
 
 PELL PERIOD AND 12:
@@ -75,7 +75,7 @@ P = 37
 SA = {4, 9, 25, 30}
 ST = {3, 12, 21, 30}
 SEED = {18, 24, 32}
-framework = SA | ST | SEED
+SA_ST_SEED = SA | ST | SEED
 
 
 def legendre(a, p):
@@ -113,8 +113,8 @@ def run_assertions():
     assert pell_y_mod(15) == 32 and 32 in SEED
     assert pell_y_mod(16) == 30 and 30 in SA and 30 in ST
 
-    # 4. Framework square roots
-    # Elements with a framework sqrt
+    # 4. GF(37) square roots
+    # Elements with a SA_ST_SEED sqrt
     assert pow(3, 2, P) == 9 and 9 in SA     # sqrt(9)∋3∈ST
     assert pow(30, 2, P) == 12 and 12 in ST  # sqrt(12)∋30∈SA∩ST
     assert pow(24, 2, P) == 21 and 21 in ST  # sqrt(21)∋24∈SEED
@@ -123,18 +123,18 @@ def run_assertions():
     # 5. SEED elements are NQR — no sqrt in GF(37)
     assert all(legendre(s, P) == P - 1 for s in SEED)
 
-    # 6. sqrt(3), sqrt(4), sqrt(30) have no framework elements
+    # 6. sqrt(3), sqrt(4), sqrt(30) have no SA_ST_SEED elements
     for v in [3, 4, 30]:
         roots = [r for r in range(1, P) if pow(r, 2, P) == v]
-        assert not any(r in framework for r in roots), f"sqrt({v})={roots} unexpectedly in framework"
+        assert not any(r in SA_ST_SEED for r in roots), f"sqrt({v})={roots} unexpectedly in SA_ST_SEED"
 
-    # 7. Exactly 4 framework elements have a framework sqrt
-    fw_with_fw_sqrt = [v for v in sorted(framework)
-                       if any(pow(r, 2, P) == v for r in framework)]
+    # 7. Exactly 4 SA_ST_SEED elements have a SA_ST_SEED sqrt
+    fw_with_fw_sqrt = [v for v in sorted(SA_ST_SEED)
+                       if any(pow(r, 2, P) == v for r in SA_ST_SEED)]
     assert fw_with_fw_sqrt == [9, 12, 21, 25]
 
-    # 8. Those 4 elements' framework square roots
-    fw_sqrt_map = {v: [r for r in sorted(framework) if pow(r, 2, P) == v]
+    # 8. Those 4 elements' SA_ST_SEED square roots
+    fw_sqrt_map = {v: [r for r in sorted(SA_ST_SEED) if pow(r, 2, P) == v]
                    for v in fw_with_fw_sqrt}
     assert fw_sqrt_map[9] == [3]     # sqrt(9)∋3∈ST
     assert fw_sqrt_map[12] == [30]   # sqrt(12)∋30∈SA∩ST
@@ -155,7 +155,7 @@ def run_assertions():
     # 11. Pell recurrence mod37: trace = 146 ≡ 35
     assert (73 + 73) % P == 35  # trace mod37
 
-    # 12. All framework classes appear in Pell y-values mod37
+    # 12. All SA_ST_SEED classes appear in Pell y-values mod37
     pell_sectors = set()
     for n in range(40):
         ym = pell_y_mod(n)
@@ -166,7 +166,7 @@ def run_assertions():
     assert pell_sectors == {'SA', 'ST', 'SEED', 'SEAM'}
 
     print("All assertions passed.")
-    print(f"Framework elements with framework sqrt: {fw_sqrt_map}")
+    print(f"GF(37) elements with SA_ST_SEED sqrt: {fw_sqrt_map}")
 
 
 if __name__ == "__main__":

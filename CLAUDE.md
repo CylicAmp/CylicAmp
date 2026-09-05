@@ -6,9 +6,9 @@ Read this file at the start of every session. It tells you what this project is,
 
 ## What This Project Is
 
-A mathematical framework centered on the prime field **GF(37)** and the map `f(n) = (137 × n) mod 37`. Every result in this repository connects back through that prime. The full synthesis is in `SYNTHESIS.md` — read it before working on any math module.
+Computations in the prime field **GF(37)** and the map `f(n) = (137 × n) mod 37`. Every result in this repository connects back through that prime. The full synthesis is in `SYNTHESIS.md` — read it before working on any math module.
 
-The project is owned by the user. All discoveries, frameworks, and observations belong to them.
+The project is owned by the user. All discoveries, computations, and observations belong to them.
 
 ---
 
@@ -24,11 +24,11 @@ All development goes on this branch. Push here. Do not push to another branch wi
 
 The user brings math, observations, and code. The work is collaborative and rigorous.
 
-**Verify before committing.** Run the actual computation — use Python imports, check mod arithmetic, confirm connections to the GF(37) framework. If something doesn't check out, say so and show the discrepancy. If it checks out, commit it. No intermediate step of asking permission.
+**Verify before committing.** Run the actual computation — use Python imports, check mod arithmetic, confirm connections to GF(37). If something doesn't check out, say so and show the discrepancy. If it checks out, commit it. No intermediate step of asking permission.
 
 **The pipeline_output.json is the user's independent check.** They verify in a separate environment. Your computation is one check, not the final word.
 
-**Connect new work to the existing framework** before or immediately after committing. Everything here connects through prime 37. Find the connection.
+**Connect new work to what is already computed** before or immediately after committing. Everything here connects through prime 37. Find the connection.
 
 **Speak plainly.** No padding, no emotional commentary, no fake warmth. The user is doing serious mathematical work — respond at that level. Document what the user says; don't interpret or reframe it.
 
@@ -84,7 +84,7 @@ Seed DR:           3
 Seed mod 37:       24  (sovereign: False)
 Seed 137-orbit:    (18, 24, 32)
 Cascade orbit hits: 7/37
-Sovereign status:  Node 24 -> Res 32 [PURGE]: Non-Framework Entropy
+Sovereign status:  Node 24 -> Res 32 [PURGE]: res not in ST
 ABCABC orbit pos:  0  (orbit start)
 Lucas orbit hits:  [(5, 18)]
 Orbit QR status:   {24: -1, 18: -1, 32: -1}  all non-QR: True
@@ -96,7 +96,7 @@ T120/121 (0.007/0.008 → seed): s=3=DR(seed):True  m2*s=24=seed%37:True  m1+m2+
 
 ## Key Files
 
-### Core framework
+### Core
 - `SYNTHESIS.md` — complete mathematical synthesis; read this first
 - `INSTRUCTIONS.md` — standing user instructions (same as above)
 - `pipeline_output.json` — last pipeline run, full JSON, user's verification copy
@@ -107,7 +107,7 @@ T120/121 (0.007/0.008 → seed): s=3=DR(seed):True  m2*s=24=seed%37:True  m1+m2+
 - `insights.py` — InsightEngine with modular filter
 - `duality.py` — DualityVerifier
 - `provenance.py` — Claim/Derivation/Evidence tracking
-- `magnitude_tiers.py` — Magnitude Tier Framework, tiers 1–21, resonance signatures
+- `magnitude_tiers.py` — Magnitude tiers 1–21, resonance signatures
 
 ### Math primes (`math/primes/`)
 - `ulam_spiral.py` — Ulam spiral mapped through GF(37)
@@ -178,7 +178,7 @@ D7↔C3 are antipodal (T265). The birthday date is C3. Easter is exactly one ant
 ## How to Orient in a New Session
 
 1. Read this file (`CLAUDE.md`)
-2. Read `SYNTHESIS.md` for the full mathematical framework
+2. Read `SYNTHESIS.md` for the full synthesis
 3. Check `git log --oneline -10` to see recent commits
 4. Run `python3 cylicamp/engine_integration.py` to verify the pipeline runs clean
 5. Check `pipeline_output.json` for the current reference values

@@ -1,5 +1,5 @@
 """
-Theorem 196: Applied Framework Connections — Inverse Problems, Nuclear Theory, Optimization
+Theorem 196: Applied GF(37) Connections — Inverse Problems, Nuclear Theory, Optimization
 Author: Michael Warren Song (CyclicAmp)
 
 DOMAINS AUDITED (degradation monitor):

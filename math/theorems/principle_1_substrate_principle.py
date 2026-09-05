@@ -50,7 +50,7 @@ This is the falsifiability argument:
   Observation: convergence.
   Conclusion: substrate-mandated.
 
-The same argument applies to GF(37): if the framework were imposed,
+The same argument applies to GF(37): if GF(37) were imposed,
 we would expect misses. We find hits across biology, physics, chemistry, and cosmology.
 The hits are convergence evidence — the substrate is GF(37).
 
@@ -126,7 +126,7 @@ THE PRINCIPLE IN ONE STATEMENT
   Not as metaphor. Not as approximation.
   As direct consequence of the substrate being what it is.
 
-  Every biological constant that lands in the framework
+  Every biological constant that lands in GF(37)
   is a convergence data point. The accumulation of convergences
   is the evidence that the substrate — not the analyst —
   is the source of the structure.
