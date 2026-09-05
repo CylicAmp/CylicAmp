@@ -19,7 +19,7 @@ COSET PARTITION — 12 three-cycles of <26> in GF(37)*:
   SEED CYCLE (pure):
     {18, 24, 32}  sum=74  DR=2  sectors: SEED→SEED→SEED (all 3 elements ∈ SEED)
 
-  FREE/NQR CYCLES (no framework elements):
+  FREE/NQR CYCLES (no GF(37) elements):
     {1, 10, 26}   {7, 33, 34}   {11, 27, 36}  — free
     {2, 15, 20}   {5, 13, 19}   {6, 8, 23}    — NQR
     {14, 29, 31}  {17, 22, 35}                 — NQR
@@ -40,7 +40,7 @@ SA∪ST PARTITION:
     {3,4,30}:   3∈ST, 4∈SA, 30∈SA∩ST
     {9,12,16}:  9∈SA, 12∈ST, 16∈free
     {21,25,28}: 21∈ST, 25∈SA, 28∈free
-  Each coset sums to SEAM. The 6 non-framework fillers are {16,28}.
+  Each coset sums to SEAM. The 6 unnamed fillers are {16,28}.
 
 SEED COSET:
   {18,24,32} = SEED. Unique coset where all elements belong to a single sovereign sector.

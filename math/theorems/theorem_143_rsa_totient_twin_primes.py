@@ -1,6 +1,6 @@
 """
 Theorem 143: Euler Totient, RSA Verification, and Twin Prime Analysis
-Connected to the GF(37) framework.
+Connected to the GF(37).
 
 KEY CONSTANTS FROM THE FRAMEWORK:
   p  = 37          (the prime)
@@ -118,7 +118,7 @@ def run_assertions():
         assert euler_totient.compute(n) == expected, \
             f"phi({n}) = {euler_totient.compute(n)}, expected {expected}"
 
-    # Framework constants
+    # GF(37) constants
     assert euler_totient.compute(37) == 36
     assert euler_totient.compute(36) == 12
     assert euler_totient.compute(euler_totient.compute(37)) == 12
@@ -151,7 +151,7 @@ def main():
     else:
         print("Totient agreement verified for n=1..40.\n")
 
-    print("--- GF(37) Framework Constants ---")
+    print("--- GF(37) GF(37) Constants ---")
     p = 37
     phi_p      = euler_totient.compute(p)
     phi_phi_p  = euler_totient.compute(phi_p)

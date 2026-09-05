@@ -118,7 +118,7 @@ def run_assertions():
     assert len(sov_harmonic) == 6
     assert set(sov_harmonic) == {(2, 2), (4, 26), (8, 17), (9, 15), (12, 28), (19, 36)}
 
-    # 3. Sovereign harmonic values cover all five framework categories
+    # 3. Sovereign harmonic values cover all five GF(37) categories
     vals = [(a + b) % P for a, b in sov_harmonic]
     assert set(vals) == {4, 30, 25, 24, 3, 18}
     assert any(v in SA and v not in ST for v in vals)   # pure SA

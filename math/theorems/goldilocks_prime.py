@@ -9,7 +9,7 @@ This prime is used in real ZK proof systems (Plonky2, Starky) because:
 2. p - 1 = 2^32 × (3 × 5 × 17 × 257 × 65537), so NTT up to size 2^32
 3. The odd factor 3 × 5 × 17 × 257 × 65537 = product of Fermat primes F1–F4
 
-Connection to this framework: the same structure of "multiplicative group
+Connection to GF(37): the same structure of "multiplicative group
 with primitive roots enabling large orbits" applies here as in (Z/37Z)*.
 - ord_37(2) = 36 = φ(37): 2 generates (Z/37Z)* of size 36
 - For Goldilocks: any primitive root mod p generates (Z/pZ)* of size p-1
@@ -126,7 +126,7 @@ def lookup_table_stats():
 
 
 # =============================================================================
-# Connection to mod-37 framework
+# Connection to mod-37 GF(37)
 # =============================================================================
 
 def goldilocks_mod37():
@@ -181,7 +181,7 @@ def summarise():
     print(f"  24 tables:  {24 * stats['total_kb']} KB = {24 * stats['total_kb'] // 1024} MB")
 
     m37 = goldilocks_mod37()
-    print(f"\nMod-37 residues (connection to orbit framework):")
+    print(f"\nMod-37 residues (connection to orbit GF(37)):")
     print(f"  p mod 37 = {m37['p mod 37']}")
     print(f"  (p-1) mod 37 = {m37['(p-1) mod 37']}")
     print(f"  {m37['note']}")

@@ -73,7 +73,7 @@ ADJACENT SUMS IN THE DOUBLING CYCLE {1,2,4,8,7,5}:
   ST appears at three of six positions.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA              = frozenset({4, 9, 25, 30})
 ST              = frozenset({3, 12, 21, 30})

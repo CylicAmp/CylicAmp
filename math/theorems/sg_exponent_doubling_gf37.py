@@ -54,7 +54,7 @@ PARTIAL CHAIN SUMS MOD 37 FOR THE SG TRIAD.
     S(0)=1, S(1)=3, S(2)=7, S(3)=15, S(4)=31.
   In GF(37): 1∈IC, 3∈ST, 7∈—, 15∈PR, 31∈T4.
   The final partial sum 31∈T4 is the Mersenne prime factor of 496.
-  Path: IC → ST → — → PR → T4 (five steps, four framework transitions).
+  Path: IC → ST → — → PR → T4 (five steps, four named-set transitions).
 
 CHAIN TOP MOD 37 SEQUENCE (2^(p-1) for p=2,3,5,7).
   p=2: 2^1  =  2 ∈ PR
@@ -77,7 +77,7 @@ OUTER SYMMETRY OF CHAIN TOPS.
   Chain top sum lands in ST — the same class as the Mersenne prime for p=2.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ST         = frozenset({3, 12, 21, 30})

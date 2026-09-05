@@ -197,7 +197,7 @@ def run():
     print(f"  CDT (2408.15403): 1, zeta(2), L(2, chi_{{-3}}) are Q-independent.  Proven.")
     print(f"  Gap: twin prime conjecture requires L(1, chi_{{-3}}) ≠ 0 and pair")
     print(f"       correlation control at s=1.  CDT operates at s=2.  Open.")
-    print(f"  This framework: exact structural conditions, not a proof of infinitude.")
+    print(f"  This GF(37): exact structural conditions, not a proof of infinitude.")
 
     print(f"\n{'='*70}")
     print(f"COMPLETE ANATOMY SUMMARY")

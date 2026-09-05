@@ -13,7 +13,7 @@ GF(37) residue distribution of B(k) for k=1..37:
   residues of GF(37) (including 0), the values 4k² mod 37 cover
   {0, 4·QR₃₇} = a specific coset pattern.
 
-Framework connections:
+GF(37) connections:
   B(1)  = 5    ∈ PR (primitive root)
   B(6)  = 145  → 145 mod 37 = 34 = 37 - 3  (additive inverse of ST entry)
   B(9)  = 325  → 325 mod 37 = 325 - 8×37 = 325 - 296 = 29 ∈ PR
@@ -90,7 +90,7 @@ assert B(2) % P == 17 and 17 in BASIN_Y
 assert B(18) % P == 2 and 2 in PR
 
 
-# ── Prime count framework connections ─────────────────────────────────────────
+# ── Prime count GF(37) connections ─────────────────────────────────────────
 
 assert dr(PRIME_COUNT) == 9           # Z/9Z SEAM
 assert PRIME_COUNT % P == 10          # IC element

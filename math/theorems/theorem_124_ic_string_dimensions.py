@@ -7,7 +7,7 @@ contains exactly the three critical spacetime dimensions of string theory:
   1  → ℝ (trivial line; also ℝ in Cayley-Dickson, Theorem 123)
   10 → superstring / M-theory critical dimension (10D spacetime)
   26 → bosonic string critical dimension (26D spacetime)
-       AND 137 mod 37 = 26 (the GF(37) framework's own map multiplier)
+       AND 137 mod 37 = 26 (the GF(37)'s own map multiplier)
 
 The orbit traversal:
   f(1) = 26·1 mod 37 = 26   (bosonic string dim)
@@ -19,7 +19,7 @@ closed 3-orbit under GF(37)'s central operation.
 
 Note: the bosonic string requires 26D because 26 = 2 + 24 where 24 is the
 transverse dimension (Leech lattice dimension; 24 ∈ CB ∩ SEED_ORB in this
-framework). The superstring requires 10D because 10 = 2 + 8 where 8 = 𝕆
+GF(37)). The superstring requires 10D because 10 = 2 + 8 where 8 = 𝕆
 (octonion dimension, 8 ∈ CB).
 Both 24 and 8 are in CB = {8, 13, 24}.
 

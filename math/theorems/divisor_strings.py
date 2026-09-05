@@ -17,11 +17,11 @@ Verified results:
 The "111" pattern:
   The claim that "all 9 multiples of 11 in 11–99 contain '111'" is FALSE
   under this definition. Only n=11 gives string "1". The number 111 = 3×37
-  appears in the cascade framework (k=5 step: 13+21+24+32+37=127 is nearby;
+  appears in the cascade GF(37) (k=5 step: 13+21+24+32+37=127 is nearby;
   111 is a cascade element at step k=5). The connection is structural, not
   string-containment.
 
-Connection to mod-37 framework:
+Connection to mod-37 GF(37):
   - 37 itself is one of the 22 palindromes (prime → string "1")
   - 93 = 3 × 31; 93 mod 37 = 19 ∈ QNR_37
   - "1331" = 11³; 11 is in the cascade and in the orbit

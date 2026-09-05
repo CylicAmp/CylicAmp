@@ -15,7 +15,7 @@ I. THE 9-CYCLE
   all ≡ 12 mod 37  (Sovereign Target)
   step = 111 = 3×37 = SEAM × 3  (each step is a seam multiple)
 
-  789 → 891:  step = 102,  102 mod37 = 28  (no framework label)
+  789 → 891:  step = 102,  102 mod37 = 28  (no name)
   891 → 912:  step =  21,  21 mod37 = 21   (ST — Sovereign Target)
   912 → 123:  digit-wrap closes the cycle
 
@@ -64,7 +64,7 @@ IV. PALINDROME PAIRS (digit-reversal sums)
     Digit sums both = 21(ST).
 
   912 + 219 = 1131:  1131 mod37 = 21(ST)  ← DOES NOT REACH SEAM
-    912 mod37 = 24(SEED_ORBIT),  219 mod37 = 34  (no framework label)
+    912 mod37 = 24(SEED_ORBIT),  219 mod37 = 34  (no name)
     24+34 = 58,  58 mod37 = 21(ST).
 
   Lines 1 and 3: SA(25) + ST(12) = SEAM — symmetric seam pairs.
@@ -95,7 +95,7 @@ VI. DIVERGENT SERIES — DENOMINATORS IN THE FRAMEWORK
 
   All three denominators are sovereign nodes:
     4(SA), 12(ST), 120→9(SA).
-  The regularized sums select only framework nodes as denominators.
+  The regularized sums select only named residues as denominators.
 
 ═══════════════════════════════════════════════════════════════
 """
@@ -178,7 +178,7 @@ assert 876 + 678 == 1554 and 1554 == 42 * 37
 
 # 912 and 219 — BREAKS the seam-sum pattern
 assert 912 % 37 == 24 and 24 in SEED_ORBIT
-assert 219 % 37 == 34                                   # 34: no framework label
+assert 219 % 37 == 34                                   # 34: no name
 assert (912 + 219) % 37 == 21 and 21 in SOVEREIGN_TARGETS  # ST, not SEAM
 assert (912 + 219) != 0                                 # NOT a seam pair
 

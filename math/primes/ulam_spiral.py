@@ -1,5 +1,5 @@
 """
-Ulam spiral mapped through the GF(37) framework.
+Ulam spiral mapped through the GF(37).
 
 Standard Ulam construction: integers placed in a square spiral starting from 1
 at center, moving right. Each cell is classified by:

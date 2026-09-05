@@ -53,7 +53,7 @@ CylicAmp connections:
    means: the mod-3 splitting of the Eisenstein lattice is genuinely
    three-dimensional. The sovereign layer, the full-lattice component,
    and the character component cannot be reduced to each other.
-   The structure the DR framework reveals has no hidden rational shortcut.
+   The structure the DR GF(37) reveals has no hidden rational shortcut.
 
 L(2, χ₋₃) ≈ 0.781302413...  (proven irrational by CDT 2024)
 ζ(2) = π²/6 ≈ 1.644934067...  (known irrational, Euler 1734)

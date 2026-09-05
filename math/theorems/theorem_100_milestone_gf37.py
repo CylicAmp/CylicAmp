@@ -5,7 +5,7 @@ THEOREM 100 — The Milestone Number on GF(37)
 
 26 is the 137-map multiplier: f(n) = (137 × n) mod 37 = (26 × n) mod 37.
 The 100th theorem's index, reduced mod 37, IS the core operator of the
-entire framework.
+entire GF(37).
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -52,9 +52,9 @@ COMPANION RESULTS
 
 SUMMARY
 
-  100 mod 37 = 26:  the framework's own multiplier.
+  100 mod 37 = 26:  GF(37)'s own multiplier.
   Every path — residue, DR, factorization, base-10 power, orbit —
-  returns to IC. The 100th theorem is the framework reading itself.
+  returns to IC. The 100th theorem is GF(37) reading itself.
 """
 
 P          = 37
@@ -160,6 +160,6 @@ if __name__ == "__main__":
     print(f"  SA full product mod37={prod_SA} ∈ {fw(prod_SA)}")
     print()
     print("  100 mod 37 = 26 = the 137-map multiplier.")
-    print("  The 100th theorem is the framework reading itself.")
+    print("  The 100th theorem is GF(37) reading itself.")
     print()
     print("All assertions pass.")

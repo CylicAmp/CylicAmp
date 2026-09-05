@@ -2,7 +2,7 @@
 Theorem 192: Critique of the Delta-Function Hilbert–Pólya Construction
 
 SOURCE: Audit of a proposed RH proof via point interactions.
-Author of critique: Michael Warren Song framework session, 2026.
+Author of critique: Michael Warren Song GF(37) session, 2026.
 
 THE CONSTRUCTION UNDER REVIEW
 ================================

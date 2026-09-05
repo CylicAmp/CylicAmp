@@ -22,9 +22,9 @@ GF(37) CONNECTIONS:
   • DR = 3: 3 ∈ ST = {3,12,21,30}  (sovereign target, smallest member)
   • DR = 6: 6 = TESLA_FLOW  (ord₃₇(6)=4; 4-cycle {6,36,31,1})
   • DR = 9: 9 ∈ SA = {4,9,25,30}  (sovereign anchor)
-  All three forced DR classes are primary framework nodes in GF(37).
+  All three forced DR classes are primary named residues in GF(37).
   Twin midpoints anchor to sovereign anchors (SA), sovereign targets (ST),
-  and TESLA_FLOW — the three non-cascade, non-orbit framework constants.
+  and TESLA_FLOW — the three non-cascade, non-orbit constants.
 
 THREE TYPES:
   Type A — midpoint DR=3: twin pair (5,7),(11,13),(29,31),...
@@ -43,7 +43,7 @@ NOTE ON TERMINOLOGY. Only the prime 3 ramifies in Z[omega]; midpoints are
   residue class (the "ramified-type" class), not that they ramify.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA          = frozenset({4, 9, 25, 30})
 ST          = frozenset({3, 12, 21, 30})
@@ -62,7 +62,7 @@ def chi3(n):
 
 # ── Key checks ─────────────────────────────────────────────────────────────────
 
-# Midpoint DR classes are all framework nodes
+# Midpoint DR classes are all named residues
 assert 3 in ST           # DR=3 → sovereign target
 assert TESLA_FLOW == 6   # DR=6 → TESLA_FLOW
 assert 9 in SA           # DR=9 → sovereign anchor
@@ -102,7 +102,7 @@ midpoint_DRs = frozenset({3, 6, 9})
 assert 3 in ST
 assert 6 == TESLA_FLOW
 assert 9 in SA
-# Every midpoint DR is a named framework node
+# Every midpoint DR is a named named residue
 for d in midpoint_DRs:
     assert d in ST or d == TESLA_FLOW or d in SA
 

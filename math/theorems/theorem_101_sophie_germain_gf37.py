@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-THEOREM 101 — The Sophie Germain Prime p = k·2^e − 1 in the GF(37) Framework
+THEOREM 101 — The Sophie Germain Prime p = k·2^e − 1 in the GF(37) GF(37)
 ================================================================================
 
 STATEMENT.
@@ -99,10 +99,10 @@ THEOREM 101.  (Sophie Germain Prime — GF(37) Classification).
 
 Let p = 2,618,163,402,417 × 2^{1,290,000} − 1 be the largest known Sophie
 Germain prime. Then p, its safe prime q = 2p+1, and its metadata satisfy
-the following framework classification:
+the following GF(37) classification:
 
   ┌─────────────────┬─────────────┬─────────────────────────────┐
-  │   Quantity      │  mod 37     │   Framework Class           │
+  │   Quantity      │  mod 37     │   Named set           │
   ├─────────────────┼─────────────┼─────────────────────────────┤
   │   k             │    11       │   —                         │
   │   2^e           │    26       │   IC orbit ⟨26⟩             │

@@ -133,7 +133,7 @@ def run_assertions():
     assert 12 + 12 == 24 and 24 in SEED
     assert (16 + 16) % P == 32 and 32 in SEED
 
-    # 5. SEED+SEED diagonal = g^6 (exits framework; contains 36=-1)
+    # 5. SEED+SEED diagonal = g^6 (exits GF(37); contains 36=-1)
     assert diagonal_sum(5, 5) == 6
     assert frozenset((18 + 18) * g % P for g in SG26) == frozenset({11, 27, 36})
     assert 36 in frozenset({11, 27, 36})  # 36 = -1 mod 37

@@ -94,7 +94,7 @@ the endpoint of energy-releasing stellar nucleosynthesis.
     DR(56) = 2 and 2 is the primitive root are two separate facts.
 
 Observed correspondence: the most stable ordinary nucleus has
-  Z mod 37 = the framework multiplier, and
+  Z mod 37 = GF(37) multiplier, and
   N mod 37 = the double-sovereign node (the unique SA∩ST element).
 This is a numerical observation, not a derivation.
 
@@ -185,8 +185,8 @@ Ar (Z=18) reduces to 18, an element of the seed orbit {18, 24, 32}.
 
 These are observed numerical correspondences between nuclear physics integers
 and GF(37) structure. The nuclear shell model governs the physics; GF(37)
-is an independent mathematical framework. The claim is that these integers
-align with the framework — not that the framework causes or predicts nuclear
+is an independent mathematical GF(37). The claim is that these integers
+align with GF(37) — not that GF(37) causes or predicts nuclear
 stability. That causal question is open.
 """
 

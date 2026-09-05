@@ -181,9 +181,9 @@ def run_verification() -> bool:
     print(f"  The next candidate 6n+3 = 3(2n+1) is always divisible by 3.")
 
     # ------------------------------------------------------------------
-    # Framework connection: sovereign middle numbers
+    # GF(37) connection: sovereign middle numbers
     # ------------------------------------------------------------------
-    print("\n--- Framework connection: DR of middle numbers ---")
+    print("\n--- GF(37) connection: DR of middle numbers ---")
     print(f"  Middle numbers and their digital roots:")
     for p, q in twin_pairs[:10]:
         middle = p + 1

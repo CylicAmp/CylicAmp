@@ -11,7 +11,7 @@ Both 17 and 35 are primitive roots mod 37 (order 36).
 
 Further: 54 = 6 * 9, where
   6  = imaginary unit in F_37 (6^2 ≡ -1 mod 37)
-  9  = universal modulus (T(n) ≡ 5 mod 9 throughout the framework)
+  9  = universal modulus (T(n) ≡ 5 mod 9 throughout GF(37))
   9  = 18/2 = half the lattice step
   9^2 = 81 = the Z_81 torus dimension
 
@@ -96,12 +96,12 @@ def run():
     print(f"\nDecomposition: 54 = 6 * 9")
     six_sq = verify_6_squared()
     print(f"  6^2 mod {P} = {six_sq}  = {six_sq - P} (= -1)  [6 is i in F_{P}]")
-    print(f"  9 = universal modulus (T(n) ≡ 5 mod 9 throughout framework)")
+    print(f"  9 = universal modulus (T(n) ≡ 5 mod 9 throughout GF(37))")
     print(f"  9 = 18/2  (half the lattice step)")
     print(f"  9^2 = {9**2} = Z_81 torus dimension")
 
     print(f"\nTherefore: 54 = (imaginary unit) * (invariant modulus)")
-    print(f"  The Z_81 step encodes both i and 9 from the GF({P}) framework.")
+    print(f"  The Z_81 step encodes both i and 9 from the GF({P}) GF(37).")
 
     print(f"\nCoset structure of C_{idx_a} = {c_a}:")
     g = c_a[0]

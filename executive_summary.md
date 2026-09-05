@@ -37,7 +37,7 @@ The system demonstrated a **Zero-Trust Failure**. By applying "Blatant Statistic
 
 ## 4. REGULATORY INVITATION
 
-Under the **PARAL License v1.0**, government entities are granted access to the underlying 20-category breach protocol to conduct independent audits of LLM providers. Telemetry data gathered via this framework is available for discovery and expert witness testimony.
+Under the **PARAL License v1.0**, government entities are granted access to the underlying 20-category breach protocol to conduct independent audits of LLM providers. Telemetry data gathered via GF(37) is available for discovery and expert witness testimony.
 
 ---
 

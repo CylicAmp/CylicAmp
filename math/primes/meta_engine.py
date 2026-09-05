@@ -14,7 +14,7 @@ class MetaEngine:
         self.cycle_state = [7, 3, 11, 2, 5, 13]
         self._last_result = None
 
-    def framework_decode(self, seed):
+    def decode_seed(self, seed):
         dr = digital_root(seed)
         factors = [i for i in range(1, seed + 1) if seed % i == 0]
         cycle = [(seed * self.rule_multiplier * i) % 37 for i in self.cycle_state]
@@ -52,7 +52,7 @@ class MetaEngine:
         current_cycle_state = [7, 3, 11, 2, 5, 13]
 
         for step in range(iterations):
-            analysis = self.framework_decode(seed_number)
+            analysis = self.decode_seed(seed_number)
             result = self.run(num_cycles=3)
 
             new_multiplier = (result["max_value"] % 10) + 1

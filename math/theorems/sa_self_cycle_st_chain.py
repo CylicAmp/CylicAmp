@@ -2,7 +2,7 @@
 SA Self-Cycle and ST Digit Chain
 
 The Sovereign Anchor 9 is the step of the ST sequence AND generates
-a closed cycle through the framework's key non-sovereign nodes.
+a closed cycle through GF(37)'s key non-sovereign nodes.
 The ST digit chain sums to the 137-map multiplier.
 
 ═══════════════════════════════════════════════════════════════

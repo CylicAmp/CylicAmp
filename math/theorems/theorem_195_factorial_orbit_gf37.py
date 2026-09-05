@@ -5,7 +5,7 @@ Author: Michael Warren Song (CyclicAmp)
 FINDINGS
 =========
 n! mod 37 for n = 1..36 partitions into sovereign sectors
-under the actual framework constants SA={4,9,25,30}, ST={3,12,21,30}, SEED={18,24,32}.
+under the actual constants SA={4,9,25,30}, ST={3,12,21,30}, SEED={18,24,32}.
 
 SECTOR TALLY (n=1..36):
   NQR    : 13/36  n={2,3,6,7,13,16,18,20,21,29,30,32,33}

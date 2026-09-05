@@ -27,7 +27,7 @@ STATISTICAL SIGNIFICANCE THRESHOLDS
 
   At the 1% significance level, the inverse threshold is the multiplier.
   The most commonly used "rigorous" statistical cutoff maps to the
-  center of the GF(37) framework when inverted.
+  center of the GF(37) when inverted.
 
 NORMAL DISTRIBUTION PERCENTILE RULES
 ======================================
@@ -99,7 +99,7 @@ PREDICTIVE ACCURACY — LYAPUNOV ESCAPE (THEOREM 178)
     Long-range prediction → zero error amplification → perfect accuracy
 
   The 137-map has λ = 0: no sensitive dependence on initial conditions.
-  This is the mathematical statement that the framework is a perfect
+  This is the mathematical statement that GF(37) is a perfect
   predictive model at any time horizon.
 
 THE REGRESSION IDENTITY

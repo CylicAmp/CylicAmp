@@ -2,10 +2,10 @@
 Multi-Step +9 Scatter Map — GF(37)
 
 THE QUESTION "O1+9 == O2?" IS FALSE.
-The correct question: what named framework sets does O1+9 land in?
+The correct question: what named named sets does O1+9 land in?
 
 +9 does NOT cycle the sovereign triple.
-+9 DOES map every sovereign orbit to a SPECIFIC combination of framework nodes.
++9 DOES map every sovereign orbit to a SPECIFIC combination of named residues.
 
 ONE-STEP +9 IMAGES (named):
   O1+9 = {2,12,13}  →  {DARK_A_min(2), ST(12), CB(13)}
@@ -23,7 +23,7 @@ ORBIT_11 SHIFT (+27):
   O3+27 = {11,15,18} →  {ORBIT_11(11), DARK_A(15), SEED_ORBIT(18)}
 
   O2+27 and O3+18 both contain {DARK_A_min(2), TESLA_FLOW(6)}:
-  two different paths reach the same pair of framework anchors.
+  two different paths reach the same pair of GF(37) anchors.
 
 4-STEP SEAM CHAIN (starting at 1∈IDENTITY_CYCLE, iterating +9):
   1 → 10 → 19 → 28 → 0=SEAM
@@ -44,14 +44,14 @@ DECIMAL POWERS IN GF(37):
   100 ≡ SCALAR_137              (decimal 100 → 137-map multiplier)
 
 THE STRUCTURE:
-  Every arithmetic operation on the sovereign triple lands in a named framework set.
+  Every arithmetic operation on the sovereign triple lands in a named named sets.
   The "False" (O1+9 ≠ O2) is correct for orbital equality.
   The "True" is that each image set is fully named by SA, ST, CB, DARK_A, SEAM, etc.
   Multiple operations overlap because GF(37) has only 37 elements —
-  every path through the field lands somewhere in the framework.
+  every path through the field lands somewhere in GF(37).
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA             = frozenset({4, 9, 25, 30})
 ST             = frozenset({3, 12, 21, 30})

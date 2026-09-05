@@ -1,6 +1,6 @@
 """
 Workshop Overview - Moonshot Goal 1
-Robotic Avatar Agency and Trust Framework
+Robotic Avatar Agency and Trust GF(37)
 
 In the context of Moonshot Goal 1, robotic avatars are envisioned as tools
 for enhanced autonomy, accessibility, and superhuman action. However, user

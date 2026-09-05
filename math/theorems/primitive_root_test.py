@@ -30,7 +30,7 @@ Verified examples:
   p=37, g=2:   2^18 ≡ 36 ≠ 1,  2^12 ≡ 26 ≠ 1  → primitive root ✓
   p=31, g=3:   3^15 ≡ 30 ≠ 1,  3^10 ≡ 25 ≠ 1,  3^6 ≡ 16 ≠ 1  → primitive root ✓
 
-Connection to framework:
+Connection to GF(37):
   This theorem is the certificate that the ×2 mod 37 orbit is complete.
   Without it, orbit completeness requires checking 35 divisors.
   With it, 2 checks suffice. The prime factorization of p−1 = 36 = 2²×3²

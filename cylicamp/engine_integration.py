@@ -4,7 +4,7 @@ Connects MetaEngine and Field simulation into the core pipeline.
 MetaEngine.rule_multiplier feeds InsightEngine.multiplier.
 Field.mean_threshold feeds TrajectoryGenerator angle modulation.
 Two-number patterns feed the modular filter via DR=8 (AHL) anchor.
-Seed is classified through the Ulam/GF(37) framework (ulam_spiral.classify).
+Seed is classified through the Ulam/GF(37) (ulam_spiral.classify).
 """
 
 import sys
@@ -81,7 +81,7 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
     dv = DualityVerifier()
     result = dv.verify_duality_spectrum(energy_spectrum, required_min_stability=0.5)
 
-    # Step 6: Classify seed through Ulam/GF(37) framework
+    # Step 6: Classify seed through Ulam/GF(37)
     seed_cell = ulam_classify(seed)
 
     # Step 7: Cascade — seed residue mod 37 is 24, which is in the {8,13,24} base.
@@ -138,7 +138,7 @@ def run_integrated_engine(seed=246, iterations=3, field_nodes=12, steps=50):
             retrieval_method="heartbeat_step * 3",
             timestamp=datetime.now(timezone.utc),
             hash=str(hash(tuple(sorted(seed_orbit)))),
-            citation="CylicAmp pipeline — user-originated framework",
+            citation="CylicAmp pipeline — user-originated",
         ),
     )
 

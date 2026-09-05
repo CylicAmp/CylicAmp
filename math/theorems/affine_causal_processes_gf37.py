@@ -35,7 +35,7 @@ PRIMALITY AS ZERO-DIVISOR FILTER.
     Condition (1): A₁ = SEAM or B₁ = SEAM
     Condition (2): A₂ = SEAM or C₁ = SEAM
     Condition (3): B₂ = SEAM or C₂ = SEAM
-  No two nonzero elements multiply to zero — including all framework nodes.
+  No two nonzero elements multiply to zero — including all named residues.
   Primality enforces: every valid process must have SEAM as at least one endpoint
   of each "reading pair." Composite moduli allow zero divisors, creating spurious
   solutions that violate this clean separation.
@@ -84,7 +84,7 @@ CENSUS OF VALID AFFINE PROCESSES OVER GF(37).
   over GF(37) is an open computation.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA       = frozenset({4, 9, 25, 30})
 ST       = frozenset({3, 12, 21, 30})

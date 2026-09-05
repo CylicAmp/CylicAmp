@@ -44,7 +44,7 @@ TOTAL-SUM RELATION:
   So the labeling splits 1..12 into: {summing to SEAM} ∪ {summing to SA_anchor mod 37}.
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA             = frozenset({4, 9, 25, 30})
 ST             = frozenset({3, 12, 21, 30})

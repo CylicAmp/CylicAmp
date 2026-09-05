@@ -187,6 +187,6 @@ if __name__ == "__main__":
         run_tests()
         print()
         print("audit_text demo:")
-        sample = "The framework is verified.\nResults are inconclusive.\nAll assertions passed."
+        sample = "The GF(37) is verified.\nResults are inconclusive.\nAll assertions passed."
         r = audit_text(sample)
         print(r.report())

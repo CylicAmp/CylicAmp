@@ -10,7 +10,7 @@ Lucas sequence: L(0)=2, L(1)=1, L(n)=L(n-1)+L(n-2)
   L(0)=2  L(1)=1  L(2)=3  L(3)=4  L(4)=7
   L(5)=11  L(6)=18  L(7)=29  L(8)=47  L(9)=76  L(10)=123
 
-Framework anchors in the sequence:
+GF(37) anchors in the sequence:
   L(3)=4  — bridge DR (prime anchor DR=4 from DR(11)=2, 11 prime)
   L(4)=7  — bridge constant (U+B=3+4=7)
   L(8)=47 — prime (47 is prime, DR=2=11 anchor)
@@ -65,7 +65,7 @@ assert CHAIN == lucas_3_10, f"Chain mismatch: {CHAIN} vs {lucas_3_10}"
 for i in range(2, len(CHAIN)):
     assert CHAIN[i] == CHAIN[i-1] + CHAIN[i-2]
 
-# Framework anchor DRs
+# GF(37) anchor DRs
 assert dr(4) == 4    # L(3): bridge DR
 assert dr(7) == 7    # L(4): bridge constant
 assert dr(11) == 2   # L(5): Prime Anchor

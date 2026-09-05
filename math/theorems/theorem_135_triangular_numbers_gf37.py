@@ -40,7 +40,7 @@ KEY STRUCTURAL FACTS
 ======================
 
 1.  26 IS NEVER TRIANGULAR
-    26 = 137 mod 37 = the 137-map multiplier. The key of the entire framework
+    26 = 137 mod 37 = the 137-map multiplier. The key of the entire GF(37)
     is permanently excluded from the triangular image mod 37.
     Discriminant: 1 + 8×26 = 209 ≡ 209 − 5×37 = 24 mod 37.
     24 ∈ NQR (SEED_ORB), so no solution exists.

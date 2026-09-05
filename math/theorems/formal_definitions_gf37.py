@@ -1,7 +1,7 @@
 """
-Formal Definitions and Theorems — GF(37) Framework
+Formal Definitions and Theorems — GF(37) GF(37)
 
-Every term used informally in the framework is defined here with precision,
+Every term used informally in GF(37) is defined here with precision,
 followed by its theorem. Nothing is left as a metaphor.
 
 ═══════════════════════════════════════════════════════════════════════════
@@ -291,7 +291,7 @@ SURVIVES = [
 # ═══ PRINT SUMMARY ══════════════════════════════════════════════════════════
 
 if __name__ == '__main__':
-    print("Formal Definitions — GF(37) Framework")
+    print("Formal Definitions — GF(37) GF(37)")
     print("=" * 55)
     print()
     print("HEARTBEAT (Theorem H1):")

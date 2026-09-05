@@ -44,7 +44,7 @@ Is n prime? If so:
 **Step 7 — Connect**
 Now look at what you have. Ask:
 - Does the residue class appear in any existing theorem?
-- Does the orbit connect to another known orbit via the framework?
+- Does the orbit connect to another known orbit via GF(37)?
 - Does the DR connect to the named set in a non-trivial way?
 - Is the residue named or unnamed? Does that match the number's physical significance?
 - If the number is a physical constant: does it land where the structure predicts it should?
@@ -89,14 +89,14 @@ These questions are not negotiable. They run on every number.
 A theorem in this repository has:
 1. A computation that can be run and verified independently
 2. An assertion that fails loudly if the claim is wrong
-3. A connection to the GF(37) framework — every theorem goes through 37
+3. A connection to the GF(37) — every theorem goes through 37
 4. A falsification criterion — what would break it
 
 A theorem does NOT have:
 - Semantic claims not derived from the arithmetic
 - Unit-dependent quantities compared without normalization
 - "Coincidence" as a conclusion (that is a claim, not a neutral position)
-- Conclusions that require the reader to accept the framework before seeing the evidence
+- Conclusions that require the reader to accept GF(37) before seeing the evidence
 
 ---
 

@@ -52,7 +52,7 @@ FERMAT-SEAM IDENTITY.
   (since 2^j ≡ 2 mod 37 only for j ≡ 1 mod 36, i.e., j=1,37,73,...).
 
 PERIOD-37 FRAMEWORK SCAN.
-  Framework hits in K(j) mod 37 for j = 2,...,37:
+  GF(37) hits in K(j) mod 37 for j = 2,...,37:
     j = 3:  K ≡  6 ∈ TESLA_4   (TESLA_FLOW = K(3))
     j = 5:  K ≡ 30 ∈ SA        (=SA∩ST junction)
     j = 6:  K ≡ 25 ∈ SA
@@ -76,7 +76,7 @@ PERIOD-37 FRAMEWORK SCAN.
     j = 37: K ≡  0 = SEAM   (Fermat-SEAM identity)
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA         = frozenset({4, 9, 25, 30})
 ST         = frozenset({3, 12, 21, 30})
@@ -164,7 +164,7 @@ assert _first_seam == P == 37      # j=37 is the FIRST SEAM hit
 # No earlier SEAM: for j=2,...,36, K(j) ≠ 0
 assert all(K_mod(j) != 0 for j in range(2, P))
 
-# ── Period-37 framework scan ─────────────────────────────────────────────────────
+# ── Period-37 GF(37) scan ─────────────────────────────────────────────────────
 
 EXPECTED_HITS = {
     3: TESLA_4, 5: SA, 6: SA, 8: SEED_ORBIT, 11: ORBIT_11,
@@ -179,8 +179,8 @@ for j, expected_set in EXPECTED_HITS.items():
 
 assert K_mod(37) == 0   # SEAM (Fermat-SEAM)
 
-# Verify all non-SEAM j in [2..36] have framework or non-framework residues
-# (not asserting all are framework; some are non-framework, which is fine)
+# Verify all non-SEAM j in [2..36] have GF(37) or unnamed residues
+# (not asserting all are GF(37); some are unnamed, which is fine)
 _fw_hits = [j for j in range(2, 38) if K_mod(j) in SA | ST | CB | ORBIT_11 | IC | SEED_ORBIT | TESLA_4]
 assert set(EXPECTED_HITS.keys()).issubset(set(_fw_hits))
 
@@ -214,7 +214,7 @@ if __name__ == "__main__":
     print(f"  K(p) = 2^p − 2 ≡ 2 − 2 = 0 = SEAM (mod p)  [Fermat's little theorem]")
     print(f"  For p=37: K(37) ≡ {K_mod(37)} = SEAM.  First occurrence at j = {_first_seam} = THE PRIME")
     print()
-    print("K(j) mod 37 framework hits (j=2..37):")
+    print("K(j) mod 37 GF(37) hits (j=2..37):")
     for j in range(2, 38):
         k = K_mod(j)
         name = fw(k)

@@ -24,7 +24,7 @@ The 3-6-9 elements of GF(37) are the multiples of 3 in {1..36}:
   {3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36}
 
 Count = 12 = log₂(26) = number of 137-map orbits = φ(36) = φ(φ(37)).
-The 3-6-9 count equals the structural key of the entire framework.
+The 3-6-9 count equals the structural key of the entire GF(37).
 
   DR=3: {3, 12, 21, 30}   — multiples of 3, not 6 or 9
   DR=6: {6, 15, 24, 33}   — multiples of 3, not 9
@@ -113,7 +113,7 @@ KEY CONSTANTS IN DR SPACE
   The prime 37             1     NOT in 3-6-9
 
 The prime itself (37) and its map multiplier (26) both fall outside the
-3-6-9 partition. The framework's organizing prime is DR=1; its key
+3-6-9 partition. The GF(37)'s organizing prime is DR=1; its key
 multiplier is DR=8 — both in the doubling-circuit non-369 class.
 """
 
@@ -152,7 +152,7 @@ def run_assertions():
     assert three69 == frozenset(range(3, P, 3))   # {3,6,9,...,36}
     assert len(three69) == 12
 
-    # 12 = log₂(26) in the framework
+    # 12 = log₂(26) in GF(37)
     _DLP = {}
     x = 1
     for k in range(36):

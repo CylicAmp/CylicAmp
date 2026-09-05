@@ -48,7 +48,7 @@ THE GRAVITY ANALOGY:
   Prime orbits mod 37 look random without this structure. With it:
   - Every prime p (p ≠ 37) lands in either QR or QNR when reduced mod 37.
     This is a deterministic binary classification, not randomness.
-  - The named framework sets are sorted by this classification:
+  - The named named sets are sorted by this classification:
     SEED and CASCADE (the generative/pipeline layer) are QNR.
     SA, ST, IC, NEG_H (the sovereign/anchor layer) are QR.
   - The 137-map cannot move an orbit from one class to the other.

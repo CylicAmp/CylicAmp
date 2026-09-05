@@ -56,7 +56,7 @@ ARITHMETIC CONNECTIONS:
   9  + 28 = 37 = SEAM:   SA(9) + outlier(28) = SEAM             (fundamental)
 """
 
-# ── Framework ──────────────────────────────────────────────────────────────────
+# ── Constants ──────────────────────────────────────────────────────────────────
 
 SA             = frozenset({4, 9, 25, 30})
 ST             = frozenset({3, 12, 21, 30})
@@ -104,13 +104,13 @@ assert 27 in ORBIT_11
 def shift9(o):
     return frozenset((x + 9) % 37 for x in o)
 
-# SA elements exit the triple — each to a distinct framework set
+# SA elements exit the triple — each to a distinct named sets
 assert (4  + 9) % 37 == 13 and 13 in CB         # 4 → CB
 assert (9  + 9) % 37 == 18 and 18 in SEED_ORBIT  # 9 → SEED_ORBIT
 assert (25 + 9) % 37 == 34 and 34 in frozenset({7,33,34})  # 25 → anti-sov
 assert (30 + 9) % 37 ==  2 and  2 in DARK_A      # 30 → DARK_A
 
-# All four SA exits land in DIFFERENT framework sets
+# All four SA exits land in DIFFERENT named sets
 SA_exit_destinations = {(x+9)%37 for x in SA}
 assert SA_exit_destinations.isdisjoint(TRIPLE)   # none stay
 

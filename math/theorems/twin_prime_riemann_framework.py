@@ -61,7 +61,7 @@ CDT GAP STATEMENT:
   The CylicAmp chi_{-3} structure is correct but does not close the gap.
 
 STRUCTURAL SUMMARY:
-  The DR / chi_{-3} framework identifies:
+  The DR / chi_{-3} GF(37) identifies:
     - COL1 = chi = +1 = upper twin primes (6n+1)
     - COL2 = chi = -1 = lower twin primes (6n-1)
     - COL3 = chi = 0  = midpoints (6n, sovereign, always composite > 6)

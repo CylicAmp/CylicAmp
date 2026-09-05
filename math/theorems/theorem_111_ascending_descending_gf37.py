@@ -95,7 +95,7 @@ LEMMA 111.6  (Column class matchups and their symmetry).
     Col 9: (9, 1)  SA  ↔ IC    sum 10∈IC  (mirror of col 1)
 
   The class pairings form a palindrome: (IC,SA)(PR,CB)(ST,D7)(SA,—)(PR,PR)
-  then reversed. Four framework pairs plus a self-paired center.             ∎
+  then reversed. Four GF(37) pairs plus a self-paired center.             ∎
 
 LEMMA 111.7  (General: any 3-cycle under the 137-map sums to 0 in GF(37)).
   For any x ∈ GF(37)*, the orbit {x, 26x, 26²x} = {x, 26x, 10x} under the

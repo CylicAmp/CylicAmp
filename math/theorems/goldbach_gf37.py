@@ -75,7 +75,7 @@ IV. GOLDBACH ↔ HOSE FLOW
     Also: PRIME_MIRROR(31) + TESLA_FLOW(43) = seam.
 
   The Goldbach structure shows which combinations of prime residues
-  are dual in GF(37) — which pairs sum to each framework node.
+  are dual in GF(37) — which pairs sum to each named residue.
 
 ═══════════════════════════════════════════════════════════════
 """

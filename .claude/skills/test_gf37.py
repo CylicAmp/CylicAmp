@@ -75,7 +75,7 @@ def test_return_types():
            (246, 3, 'Trinity'), (137, 2, 'Valve')])
 
 
-# ── framework invariants that later theorems depend on ─────────────────
+# ── invariants that later theorems depend on ─────────────────
 
 def test_orbits():
     print("orbit structure")

@@ -5,7 +5,7 @@ Usage:
     from gf37_toolkit import classify, analyze, batch, orbit, dr
 
     classify(336)     # full class report
-    analyze(248)      # all framework connections
+    analyze(248)      # all GF(37) connections
     batch([1728, 744, 196883, 196884])  # table
     orbit(3)          # 137-map 3-cycle
     dr(336)           # digital root with chain
@@ -44,7 +44,7 @@ _CLASSES = [
     ('DARK_A',    DARK_A),
 ]
 
-# Framework constants for near-miss detection
+# GF(37) constants for near-miss detection
 _CONSTANTS = {
     'phi_37':    36,
     '137-map':   26,
@@ -145,7 +145,7 @@ def classify(n: int, verbose: bool = True) -> dict:
 def analyze(n: int) -> dict:
     """
     Deep analysis: classify + check divisibility, factoring, and proximity
-    to framework constants.
+    to constants.
     """
     print(f"\n{'='*52}")
     print(f"  ANALYZE  {n}")
@@ -154,7 +154,7 @@ def analyze(n: int) -> dict:
     result = classify(n)
     r = result['mod37']
 
-    # Divisibility by small framework primes
+    # Divisibility by small GF(37) primes
     divs = []
     for p in [2, 3, 7, 37, 41, 43]:
         if n % p == 0:
@@ -167,7 +167,7 @@ def analyze(n: int) -> dict:
     trinity = mod9 in {3, 6, 0}  # 0 here means 9 in DR convention
     print(f"    mod 9   : {mod9}  {'(trinity {3,6,9})' if trinity else '(doubling chain)'}")
 
-    # Proximity to framework constants
+    # Proximity to constants
     close = []
     for name, val in _CONSTANTS.items():
         if abs(n - val) <= 5:

@@ -1,5 +1,5 @@
 """
-The Law of 12: Universal Cycle Completion Framework.
+The Law of 12: Universal Cycle Completion GF(37).
 
 12 = The point where Tesla 3-6-9 cycles complete their journey
 and return to origin. Consciousness (1) encounters duality (2)

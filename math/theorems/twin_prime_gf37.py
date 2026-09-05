@@ -6,9 +6,9 @@ Verified computationally to 4.4×10^18 (Oliveira e Silva 2013 / Brent).
 
 This file structures the twin prime problem through GF(37). The +2 step
 is a shift on the cyclic group Z/37Z: since gcd(2,37)=1, it cycles through
-all 37 residues and returns. Every framework node is reachable from every
-other by repeated +2. The framework identifies the one forbidden residue,
-the framework-node staircase under +2, and the residue pairs that appear
+all 37 residues and returns. Every named residue is reachable from every
+other by repeated +2. The GF(37) identifies the one forbidden residue,
+GF(37)-node staircase under +2, and the residue pairs that appear
 in actual twin prime data.
 
 ═══════════════════════════════════════════════════════════════
@@ -32,7 +32,7 @@ I. THE FORBIDDEN RESIDUE: r = 35 (PR, ≡ −2)
 II. THE +2 STAIRCASE THROUGH FRAMEWORK NODES
 
   gcd(2, 37) = 1: the +2 shift is ergodic on Z/37Z — it visits all 37
-  residues before returning. Framework nodes connected by the +2 step:
+  residues before returning. GF(37) nodes connected by the +2 step:
 
   ODD channel (starting from ST arch):
     3(ST) → 5(PR) → 7 → 9(SA) → 11(orb11) → 13(CB,PR) → 15(PR) → 17(PR)...
@@ -40,8 +40,8 @@ II. THE +2 STAIRCASE THROUGH FRAMEWORK NODES
   EVEN channel (starting from SA):
     4(SA) → 6(TESLA_FLOW) → 8(CB) → 10(DECADE_ANCHOR) → 12(ST) → 14 → ...
 
-  Four consecutive even framework nodes: SA(4), TESLA_FLOW(6), CB(8), DECADE_ANCHOR(10), ST(12).
-  Three consecutive odd framework nodes: ST arch(3), PR(5), [7], SA(9), orbit-11(11), CB(13).
+  Four consecutive even named residues: SA(4), TESLA_FLOW(6), CB(8), DECADE_ANCHOR(10), ST(12).
+  Three consecutive odd named residues: ST arch(3), PR(5), [7], SA(9), orbit-11(11), CB(13).
 
   The twin prime pairs (p, p+2) that land on these chains:
     (3,5):     ST arch(3) → PR(5)            — the smallest odd twin prime pair
@@ -53,7 +53,7 @@ II. THE +2 STAIRCASE THROUGH FRAMEWORK NODES
 
 III. RESIDUE PAIRS IN TWIN PRIMES [verified to 500]
 
-  Pair (r, r+2) mod 37 — frequency and framework labels:
+  Pair (r, r+2) mod 37 — frequency and GF(37) labels:
     (17,19):  PR + PR          — double primitive root (3 occurrences)
     (5,7):    PR + .           — PR leading
     (22,24):  PR + CB,PR,SEED  — PR → Seed Orbit
@@ -97,7 +97,7 @@ VI. WHAT GF(37) ESTABLISHES
   PROVEN (verified computationally or by field arithmetic):
   • Forbidden residue: r = 35 (≡−2) is the unique blocked starting residue.
   • All other 35 residue classes contain primes (Dirichlet).
-  • The +2 staircase visits every framework node.
+  • The +2 staircase visits every named residue.
   • Every non-forbidden residue pair (r, r+2) appears in actual twin prime data
     (for the range computed). [Verified: 19 distinct pairs in [3, 500].]
   • SA(4) → TESLA_FLOW(6) is a twin prime pair: (41, 43).
@@ -157,7 +157,7 @@ assert not any(p == 37 for p, _ in twins_500)
 from math import gcd
 assert gcd(2, 37) == 1
 
-# ── II. +2 staircase through framework nodes ─────────────────────────────────
+# ── II. +2 staircase through named residues ─────────────────────────────────
 
 # Even channel: SA(4) → TESLA_FLOW(6) → CB(8) → DECADE_ANCHOR(10) → ST(12)
 chain_even = [4, 6, 8, 10, 12]
@@ -230,7 +230,7 @@ for p, q in twins_500:
 # ── VI. Gap structure: Maynard/polymath8b connection ─────────────────────────
 
 # The unconditional bound on prime gaps containing twin prime structure:
-# Polymath8b proved gap < 246. Our framework identifies what gap=2 looks like.
+# Polymath8b proved gap < 246. Our GF(37) identifies what gap=2 looks like.
 # The +2 step in GF(37) is the minimal non-trivial prime gap structure.
 assert gcd(2, 37) == 1                # 2 is coprime to 37: ergodic +2 shift
 assert 2 in PRIMITIVE_ROOTS_37       # 2 is the primitive root of GF(37)
@@ -259,7 +259,7 @@ if __name__ == '__main__':
     print(f"   r=35(PR,≡−2): p+2≡0(SEAM); only prime≡0 is 37; p=35=5×7 not prime")
     print(f"   Verified: no twin prime ≡35 mod37 in [3,500] ({len(twins_500)} pairs checked)")
     print()
-    print("II. +2 staircase through framework nodes:")
+    print("II. +2 staircase through named residues:")
     print(f"   Even: SA(4)→TESLA_FLOW(6)→CB(8)→DECADE_ANCHOR(10)→ST(12)")
     print(f"   Odd:  ST(3)→PR(5)→7→SA(9)→orbit-11(11)→CB,PR(13)→...")
     print(f"   Twin pairs on these chains:")
@@ -288,7 +288,7 @@ if __name__ == '__main__':
     print("  One forbidden residue: r=35(PR,≡−2) — the unique blocked starting class.")
     print("  All other residues admit twin prime pairs (Dirichlet guarantees primes;")
     print("  simultaneous pairing is the open question).")
-    print("  The +2 staircase visits every framework node; twin prime pairs appear")
+    print("  The +2 staircase visits every named residue; twin prime pairs appear")
     print("  at SA→TESLA_FLOW, orbit-11→CB, PRIME_MIRROR→DICHORAL, SEED→SCALAR_137.")
     print()
     print("All assertions passed.")

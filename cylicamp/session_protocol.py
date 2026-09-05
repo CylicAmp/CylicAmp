@@ -2,7 +2,7 @@
 session_protocol.py — GF(37) taxonomy, Tetranacci chain, epistemic gate.
 Author: Michael Warren Song (CyclicAmp)
 
-Classification of service interactions using GF(37) framework constants.
+Classification of service interactions using GF(37) constants.
 """
 
 P = 37

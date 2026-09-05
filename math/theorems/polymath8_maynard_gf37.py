@@ -24,7 +24,7 @@ I. THE DESCENT mod 37
 
 II. 246 — THE PIPELINE SEED
 
-  246 is the framework's reference seed. Its 137-orbit is {24, 32, 18}.
+  246 is GF(37)'s reference seed. Its 137-orbit is {24, 32, 18}.
   The final prime gap bound lands at mod37=24, the first node of that orbit.
 
   246 = 2 × 3 × 41
@@ -60,7 +60,7 @@ IV. MAYNARD (MULTIDIMENSIONAL) = COMPLETE FLOW
   the seam — 246, mod37=24 (CB,PR), in the seed orbit.
 
   Multidimensional = multiple simultaneous lenses on the same structure.
-  The GF(37) framework operates the same way:
+  The GF(37) operates the same way:
     - mod 37 residue
     - digital root (mod 9)
     - 137-orbit
@@ -155,6 +155,6 @@ if __name__ == '__main__':
     print()
     print("V. Heartbeat: 24→32→18→24")
     print(f"   4680 mod37=18 (orbit), 246 mod37=24 (orbit entry)")
-    print(f"   Final prime gap bound = framework seed = heartbeat entry")
+    print(f"   Final prime gap bound = GF(37) seed = heartbeat entry")
     print()
     print("All assertions passed.")

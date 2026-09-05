@@ -80,7 +80,7 @@ ABCABC ≡ 2·ABC (mod 37) = PERIODIC GAUGE FIELD:
 
 === SYNTHESIS ===
 
-The GF(37) framework is a discrete gauge theory:
+The GF(37) is a discrete gauge theory:
   - The prime field Z/37Z is the base space
   - The 137-map is the discrete connection (parallel transport rule)
   - The seed orbit {18, 24, 32} is the holonomy class of the reference fiber

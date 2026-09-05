@@ -2,7 +2,7 @@
 The Seed Window 241–252 on GF(37) — THEOREM 89
 
 The 12 consecutive integers 241–252, presented with digit-split notation
-(2-46, 24-7, 25-1, ...), encode a rich cross-section of the GF(37) framework
+(2-46, 24-7, 25-1, ...), encode a rich cross-section of the GF(37)
 around the reference seed 246.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -55,7 +55,7 @@ LAYER 3: THE SEED SPLIT IDENTITY
 LAYER 4: WINDOW COVERAGE AND BOUNDARY
 
   The 12 residues covered: 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30.
-  Contains every named framework class except TESLA_4.
+  Contains every named named set except TESLA_4.
     T4 = {6, 36, 31, 1} — all outside the range 19–30.
     31 ∈ T4 would appear at n=253 = 246 + 7. The window stops one short.
 

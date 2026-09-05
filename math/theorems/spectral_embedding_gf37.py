@@ -68,7 +68,7 @@ GF(37) CONNECTIONS:
   Largest eigenvalue rounds to 9 ∈ SA (sovereign anchor)
   Spectral gap λ₂ ≈ 1.9522 (irrational: 2×(1 - cos(2π/37)))
   The 7-level spectrum (0 + 6 bands) mirrors the 7 residue classes in T246
-  and the 7-cell anchor structure of the Medusa framework.
+  and the 7-cell anchor structure of the Medusa GF(37).
 ================================================================================
 """
 
