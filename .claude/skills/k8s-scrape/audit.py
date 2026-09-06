@@ -182,17 +182,23 @@ def chain(prom_f, pm_f, wl_f):
     reps = wl.get('spec', {}).get('replicas')
     eps = pm.get('spec', {}).get('podMetricsEndpoints') or []
     tl = pm.get('spec', {}).get('targetLimit')
+    sel_failed = bool(cause) and cause.startswith("selection")
     if reps is None:
         reps = 1
+    if sel_failed:
+        reps = 0        # no pod entered endpoint evaluation
     n_elig = sum(1 for r in elig_eps if r)
     n_res = sum(1 for r in resolved_eps if r)
     cand = reps * len(eps)
     gen = reps * n_res
     A("")
     A(f"{OK} 6  target generation")
-    A(f"        |P| matching pods        {reps}   (one Deployment template, so E(P)")
-    A(f"                                       is identical for every replica —")
-    A(f"                                       the product form is valid here)")
+    A(f"        |P| matching pods        {reps}"
+      + ("   (selection failed; no pod reached endpoint evaluation)" if sel_failed
+         else "   (one Deployment template, so E(P)"))
+    if not sel_failed:
+        A(f"                                       is identical for every replica —")
+        A(f"                                       the product form is valid here)")
     A(f"        |E| endpoint configs     {len(eps)}")
     A(f"        of which eligible        {n_elig}")
     A(f"        of which resolved        {n_res}")
@@ -217,8 +223,7 @@ def chain(prom_f, pm_f, wl_f):
         A("  SELECTION")
         A(f"    PodMonitor selected by Prometheus : "
           f"{'no' if cause and cause.startswith('selection') and 'not selected' in (fails[0] if fails else '') else 'yes'}")
-        sel_fail = bool(cause) and cause.startswith("selection")
-        A(f"    pods matched                      : {0 if sel_fail else reps}")
+        A(f"    pods matched                      : {reps}")
         A("  ENDPOINT ELIGIBILITY")
         A(f"    {n_elig} of {len(eps)} endpoint configs applicable to the selected pods")
         A("  ENDPOINT RESOLUTION")
@@ -230,8 +235,7 @@ def chain(prom_f, pm_f, wl_f):
                   "eligible, UNRESOLVED")
             A(f"    endpoint[{i}] port {ep.get('port')!r:<16} {st}")
         A("  TARGET GENERATION")
-        c_eff, g_eff = (0, 0) if sel_fail else (cand, gen)
-        A(f"    candidates {c_eff}   generated {g_eff}"
+        A(f"    candidates {cand}   generated {gen}"
           + (f"   targetLimit {tl}" if tl is not None else ""))
         A("")
         A("SCRAPE STATE:     NOT APPLICABLE")
