@@ -51,7 +51,7 @@ def _iana(name):
 
 def chain(prom_f, pm_f, wl_f):
     prom, pm, wl = (yaml.safe_load(open(f)) for f in (prom_f, pm_f, wl_f))
-    L, fails, warns = [], [], []
+    L, fails, warns, limitfail = [], [], [], None
     A = L.append
     A("=" * 70); A("SELECTOR CHAIN"); A("=" * 70)
 
@@ -155,14 +155,45 @@ def chain(prom_f, pm_f, wl_f):
           f"scheme {ep.get('scheme', 'http (default)')}  "
           f"interval {ep.get('interval', 'global (default)')}")
 
+    # 6 cardinality vs targetLimit
+    reps = wl.get('spec', {}).get('replicas')
+    eps = pm.get('spec', {}).get('podMetricsEndpoints') or []
+    tl = pm.get('spec', {}).get('targetLimit')
+    A("")
+    A(f"{OK} 6  cardinality")
+    if reps is None:
+        A(f"        replicas not set in the manifest (defaults to 1)")
+        reps = 1
+    A(f"        N_P (replicas)           {reps}")
+    A(f"        N_E (endpoint configs)   {len(eps)}")
+    A(f"        N_T ~ N_P x N_E          {reps * len(eps)}   target candidates")
+    if tl is None:
+        A(f"        targetLimit unset — no cap on generated targets")
+    else:
+        okt = reps * len(eps) <= tl
+        A(f"{OK if okt else BAD}       targetLimit {tl}"
+          f" vs {reps * len(eps)} candidates")
+        if not okt:
+            limitfail = (f"{reps*len(eps)} target candidates exceed targetLimit {tl}")
+    A(f"        note: targetLimit bounds TARGETS, not pods and not endpoint configs")
+
     A("")
     A("=" * 70)
-    if fails:
+    if limitfail and not fails:
+        A("STATUS: TARGET LIMIT EXCEEDED")
+        A("LAYER:  TARGET GENERATION")
+        A("NEXT CHECK: " + limitfail)
+        A("        The selector chain is intact — pods match and the port resolves.")
+        A("        This is not a discovery mismatch and not a scrape failure.")
+        A("        Raise targetLimit, reduce replicas, or drop an endpoint config.")
+    elif fails:
         A("STATUS: ZERO TARGETS")
         A("LAYER:  DISCOVERY")
         A("NEXT CHECK: " + fails[0])
         for f in fails[1:]:
             A("     also: " + f)
+        if limitfail:
+            A("     also: " + limitfail + "  (TARGET GENERATION layer)")
     elif warns:
         A("STATUS: TARGET GENERATED, BUT SUSPECT")
         A("LAYER:  DISCOVERY (chain resolves; the result is probably not what you want)")
