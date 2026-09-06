@@ -53,7 +53,7 @@ def chain(prom_f, pm_f, wl_f):
     prom, pm, wl = (yaml.safe_load(open(f)) for f in (prom_f, pm_f, wl_f))
     L, fails, warns, limitfail = [], [], [], None
     cause = None   # selection | eligibility | resolution | limit
-    resolved_eps = []
+    elig_eps, resolved_eps = [], []
     A = L.append
     A("=" * 70); A("SELECTOR CHAIN"); A("=" * 70)
 
@@ -141,21 +141,39 @@ def chain(prom_f, pm_f, wl_f):
         if len(setfields) > 1:
             A(f"{BAD}    endpoint[{i}] sets {setfields}; set exactly one "
               f"(precedence is CRD-version dependent)")
-            fails.append(f"endpoint[{i}] sets {setfields}"); cause = cause or "resolution"
+            fails.append(f"endpoint[{i}] sets {setfields}")
+            cause = cause or "resolution"
+            elig_eps.append(True); resolved_eps.append(False)
+            continue
         pn = ep.get('port')
-        if pn is not None:
-            ok5 = pn in ports
-            resolved_eps.append(ok5)
-            A(f"{OK if ok5 else BAD}    endpoint[{i}].port {pn!r} "
-              f"{'-> containerPort ' + str(ports[pn][0][1]) if ok5 else 'NOT DECLARED on any container'}")
-            if not ok5:
-                fails.append(f"no container port named {pn!r}"); cause = cause or "resolution"
-            elif pn != 'metrics' and ep.get('path', '/metrics') == '/metrics':
-                A(f"{WARN}    endpoint[{i}] scrapes {pn!r} (containerPort "
-                  f"{ports[pn][0][1]}) at /metrics — is that the metrics port, "
-                  f"or the app port?")
-                warns.append(f"endpoint[{i}] targets port {pn!r}, not 'metrics'; "
-                             f"a target WILL be generated against the wrong port")
+        if pn is None:
+            A(f"{WARN}    endpoint[{i}] is not port-name based ({setfields or 'no port field'})")
+            elig_eps.append(True); resolved_eps.append(bool(setfields))
+        else:
+            # ELIGIBILITY: can a port-name endpoint apply to this pod at all?
+            elig = bool(ports)
+            elig_eps.append(elig)
+            if not elig:
+                A(f"{BAD}    endpoint[{i}] port {pn!r}: pod declares NO named ports")
+                A(f"           -> ELIGIBILITY failure: a name-based endpoint cannot")
+                A(f"              apply to a pod with no named ports. Nothing to resolve.")
+                fails.append(f"endpoint[{i}] ineligible: pod has no named ports")
+                cause = cause or "eligibility"
+                resolved_eps.append(False)
+            else:
+                ok5 = pn in ports
+                resolved_eps.append(ok5)
+                A(f"{OK if ok5 else BAD}    endpoint[{i}].port {pn!r} eligible; "
+                  + (f"resolves -> containerPort {ports[pn][0][1]}" if ok5
+                     else f"RESOLUTION failure: {pn!r} not among {sorted(ports)}"))
+                if not ok5:
+                    fails.append(f"endpoint[{i}] unresolved: no port named {pn!r}")
+                    cause = cause or "resolution"
+                elif pn != 'metrics' and ep.get('path', '/metrics') == '/metrics':
+                    A(f"{WARN}    endpoint[{i}] scrapes {pn!r} (containerPort "
+                      f"{ports[pn][0][1]}) at /metrics — metrics port, or app port?")
+                    warns.append(f"endpoint[{i}] targets port {pn!r}, not 'metrics'; "
+                                 f"a target WILL be generated against the wrong port")
         A(f"        path {ep.get('path', '/metrics (default)')}  "
           f"scheme {ep.get('scheme', 'http (default)')}  "
           f"interval {ep.get('interval', 'global (default)')}")
@@ -166,6 +184,7 @@ def chain(prom_f, pm_f, wl_f):
     tl = pm.get('spec', {}).get('targetLimit')
     if reps is None:
         reps = 1
+    n_elig = sum(1 for r in elig_eps if r)
     n_res = sum(1 for r in resolved_eps if r)
     cand = reps * len(eps)
     gen = reps * n_res
@@ -175,7 +194,8 @@ def chain(prom_f, pm_f, wl_f):
     A(f"                                       is identical for every replica —")
     A(f"                                       the product form is valid here)")
     A(f"        |E| endpoint configs     {len(eps)}")
-    A(f"        of which resolvable      {n_res}")
+    A(f"        of which eligible        {n_elig}")
+    A(f"        of which resolved        {n_res}")
     A(f"        candidate targets        {cand}")
     A(f"        generated targets        {gen}")
     if tl is None:
@@ -199,11 +219,16 @@ def chain(prom_f, pm_f, wl_f):
           f"{'no' if cause and cause.startswith('selection') and 'not selected' in (fails[0] if fails else '') else 'yes'}")
         sel_fail = bool(cause) and cause.startswith("selection")
         A(f"    pods matched                      : {0 if sel_fail else reps}")
+        A("  ENDPOINT ELIGIBILITY")
+        A(f"    {n_elig} of {len(eps)} endpoint configs applicable to the selected pods")
         A("  ENDPOINT RESOLUTION")
         for i, ep in enumerate(eps):
+            e = elig_eps[i] if i < len(elig_eps) else None
             r = resolved_eps[i] if i < len(resolved_eps) else None
-            A(f"    endpoint[{i}] port {ep.get('port')!r:<16} "
-              f"{'resolved' if r else 'FAILED' if r is False else 'not port-based'}")
+            st = ("resolved" if r else
+                  "INELIGIBLE" if e is False else
+                  "eligible, UNRESOLVED")
+            A(f"    endpoint[{i}] port {ep.get('port')!r:<16} {st}")
         A("  TARGET GENERATION")
         c_eff, g_eff = (0, 0) if sel_fail else (cand, gen)
         A(f"    candidates {c_eff}   generated {g_eff}"
