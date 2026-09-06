@@ -1,0 +1,201 @@
+{
+  "seed": 246,
+  "multiplier": 8,
+  "field_threshold": 0.9499999999999997,
+  "insight_score": 104832.0,
+  "spectrum_status": "FAIL",
+  "stability_ratio": 0.0,
+  "seed_dr": 3,
+  "seed_mod37": 24,
+  "seed_sovereign": false,
+  "seed_orbit": [
+    18,
+    24,
+    32
+  ],
+  "cascade_orbit_hits_count": 7,
+  "cascade_orbit_hits": [
+    24,
+    32,
+    61,
+    69,
+    98,
+    106,
+    135
+  ],
+  "sovereign_status": "Node 24 -> Res 32 [PURGE]: res not in ST.",
+  "abcabc_orbit_position": 0,
+  "lucas_orbit_hits": [
+    [
+      5,
+      18
+    ]
+  ],
+  "orbit_qr": {
+    "24": -1,
+    "18": -1,
+    "32": -1
+  },
+  "orbit_all_nonqr": true,
+  "heartbeat_3cycle": [
+    24,
+    32,
+    18,
+    24
+  ],
+  "t120_t121": {
+    "s_eq_seed_dr": true,
+    "m2_times_s": 24,
+    "m2_times_s_eq_seed_mod37": true,
+    "m1_plus_m2_plus_s": 18,
+    "orbit_18_check": true,
+    "m2_times_s_plus_1": 32,
+    "orbit_32_check": true,
+    "dr_seed_mod37": 6,
+    "dr_matches_t120": true
+  },
+  "provenance": {
+    "source_id": "cylicamp/engine_integration",
+    "source_type": "INTERNAL_DERIVATION",
+    "citation": "CylicAmp pipeline \u2014 user-originated",
+    "timestamp": "2026-09-06T10:40:50.341023+00:00"
+  },
+  "meta_history": [
+    {
+      "step": 1,
+      "multiplier": 3,
+      "cycle_state": [
+        8,
+        6,
+        10,
+        9,
+        7,
+        11
+      ],
+      "max_value": 92,
+      "final_state": 244,
+      "analysis": {
+        "seed": 246,
+        "digital_root": 3,
+        "factors": [
+          1,
+          2,
+          3,
+          6,
+          41,
+          82,
+          123,
+          246
+        ],
+        "cycle": [
+          29,
+          23,
+          35,
+          3,
+          26,
+          1
+        ],
+        "rule_multiplier": 7
+      }
+    },
+    {
+      "step": 2,
+      "multiplier": 5,
+      "cycle_state": [
+        2,
+        5,
+        6,
+        9,
+        10,
+        11
+      ],
+      "max_value": 94,
+      "final_state": 313,
+      "analysis": {
+        "seed": 244,
+        "digital_root": 1,
+        "factors": [
+          1,
+          2,
+          4,
+          61,
+          122,
+          244
+        ],
+        "cycle": [
+          18,
+          13,
+          23,
+          21,
+          34,
+          7
+        ],
+        "rule_multiplier": 3
+      }
+    },
+    {
+      "step": 3,
+      "multiplier": 8,
+      "cycle_state": [
+        6,
+        3,
+        9,
+        4,
+        8,
+        1
+      ],
+      "max_value": 87,
+      "final_state": 268,
+      "analysis": {
+        "seed": 313,
+        "digital_root": 7,
+        "factors": [
+          1,
+          313
+        ],
+        "cycle": [
+          3,
+          33,
+          10,
+          22,
+          18,
+          32
+        ],
+        "rule_multiplier": 5
+      }
+    }
+  ],
+  "seed_ulam": {
+    "n": 246,
+    "col": -8,
+    "row": -4,
+    "dr": 3,
+    "mod37": 24,
+    "prime": false,
+    "dr7_prime": false,
+    "sovereign": false,
+    "orbit_137": [
+      18,
+      24,
+      32
+    ]
+  },
+  "g5_solver": {
+    "aggregate_mod_p": 11,
+    "consistency_status": "FAIL",
+    "dynamic_threshold_status": "STABLE",
+    "halt_status": "HALTED",
+    "authority_status": "NON_SOVEREIGN",
+    "authority_detail": "24 \u2209 SA\u222aST  [CB]",
+    "compatibility_status": "HARMONIOUS",
+    "compatibility_detail": "11 \u2208 ORBIT_11",
+    "all_checks_pass": false
+  },
+  "cage_integrity": {
+    "aggregate_residue": 11,
+    "scaled_insight": 0.2972972972972973,
+    "required_integrity_index": 0.3705904774487397,
+    "integrity_ratio": 0.0,
+    "status": "CAGE INTEGRITY FAIL: Insufficient insight to stabilize environment."
+  }
+}

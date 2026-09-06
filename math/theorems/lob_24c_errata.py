@@ -2,7 +2,7 @@
 LoB 24c — Errata Correction Record (MWS v37.20 → v37.21)
 
 Two falsified claims identified, verified, corrected, and propagated.
-Framework sealed clean after correction.
+GF(37) sealed clean after correction.
 
 ERRATA TABLE
 ============
@@ -72,6 +72,6 @@ if __name__ == "__main__":
     print()
 
     print("Dependency audit: no downstream contamination found.")
-    print("Framework version: v37.20 → v37.21")
+    print("GF(37) version: v37.20 → v37.21")
     print()
     print("All assertions passed.")

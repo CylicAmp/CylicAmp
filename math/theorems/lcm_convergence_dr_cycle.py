@@ -1,6 +1,6 @@
 """
 LCM Convergence and Digital Root Cycle
-Master Kimchi — Little Wood 37 Framework
+Master Kimchi — Little Wood 37 GF(37)
 
 Results:
   LCM(1,2,3)   = 6   — 1-2-3 group meets every 6n
@@ -32,6 +32,12 @@ dr_values = [dr for _, dr in dr_6n]
 cycle = dr_values[:3]
 for i, dr in enumerate(dr_values):
     assert dr == cycle[i % 3], f"Cycle broken at step {i+1}: got {dr}, expected {cycle[i%3]}"
+
+import math
+assert math.lcm(1, 2, 3) == 6,     "LCM(1,2,3) must be 6"
+assert math.lcm(1, 2, 3, 9) == 18, "LCM(1,2,3,9) must be 18"
+assert set(convergence_123) == {i for i in range(6, limit+1, 6)}
+assert set(convergence_1239) == {i for i in range(18, limit+1, 18)}
 
 # Verify 9 appears only at n ≡ 0 (mod 3) in 6n sequence
 nine_positions = [i+1 for i, (_, dr) in enumerate(dr_6n) if dr == 9]

@@ -76,8 +76,39 @@ class DRAlgebra:
         return sorted(subgroup)
 
 
+def run_assertions():
+    algebra = DRAlgebra()
+
+    # Group structure: (DR, +) isomorphic to Z/9Z
+    # Identity is 9, every element has an inverse, addition is associative
+    assert algebra.add(9, 5) == 5 and algebra.add(5, 9) == 5, "9 is identity"
+    for a in algebra.dr_classes:
+        assert algebra.add(algebra.add(3, a), 6) == algebra.add(3, algebra.add(a, 6)), \
+            f"associativity failed for a={a}"
+
+    # Cycle decomposition under doubling
+    cycles = algebra.find_cycles()
+    cycle_sets = [frozenset(c) for c in cycles]
+    assert frozenset({1, 2, 4, 8, 7, 5}) in cycle_sets, \
+        "6-cycle {1,2,4,8,7,5} must exist under doubling"
+    assert frozenset({3, 6}) in cycle_sets, \
+        "2-cycle {3,6} must exist under doubling"
+    assert frozenset({9}) in cycle_sets, \
+        "fixed point {9} must exist under doubling"
+
+    cycle_lengths = sorted(len(c) for c in cycles)
+    assert cycle_lengths == [1, 2, 6], \
+        f"doubling cycle lengths = {cycle_lengths}, expected [1,2,6]"
+
+    # Generators: elements generating the full group of order 9
+    generators = [g for g in algebra.dr_classes
+                  if len(algebra.generate_subgroup(g)) == 9]
+    assert len(generators) == 6, f"|generators| = {len(generators)}, expected 6 (φ(9))"
+
+
 # Main analysis
 if __name__ == "__main__":
+    run_assertions()
     algebra = DRAlgebra()
 
     print("DR-Algebra Structure")

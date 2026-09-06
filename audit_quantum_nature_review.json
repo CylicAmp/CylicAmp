@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-05-26T23:44:40.405864+00:00",
+  "source_url": "mock://quantum_nature_review",
+  "extracted_metrics": {
+    "baseline_coherence_time": 1.5,
+    "max_coherence_time": 5.5,
+    "qubit_count": 10,
+    "hyperbolic_count": 0,
+    "detected_hyperbole_list": [],
+    "is_quasi_periodic": true
+  },
+  "test_results": {
+    "suite_passed": true,
+    "failures": []
+  }
+}

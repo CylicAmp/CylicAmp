@@ -1,0 +1,557 @@
+<title>Two Triangles · GF(37)</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Deliberate single dark theme — instrument display */
+:root {
+  --ground:    #06080f;
+  --panel:     #0d1520;
+  --border:    #182435;
+  --text:      #a8bcc8;
+  --dim:       #2e4a5a;
+  --A:         #c89030;   /* Triangle A — 4s — D7 — amber */
+  --B:         #36b4e0;   /* Triangle B — 1/2/3 — cyan */
+  --seam:      #8090a0;
+  --A-glow:    rgba(54,180,224,0.18);
+  --B-glow:    rgba(200,144,48,0.18);
+  --seam-glow: rgba(128,144,160,0.25);
+}
+
+body {
+  background: var(--ground);
+  color: var(--text);
+  font-family: 'Courier New', Courier, monospace;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+canvas { display: block; }
+
+/* ── HUD top-right ────────────────────────────────── */
+#hud {
+  position: fixed;
+  top: 16px;
+  right: 18px;
+  font-size: 10px;
+  line-height: 2.3;
+  letter-spacing: 0.07em;
+  text-align: right;
+  pointer-events: none;
+}
+.hud-row { display: flex; align-items: baseline; justify-content: flex-end; gap: 6px; }
+.hud-key { color: var(--dim); text-transform: uppercase; font-size: 9px; letter-spacing: 0.14em; }
+.hud-val { font-variant-numeric: tabular-nums; min-width: 72px; text-align: right; }
+.hud-val.a { color: var(--A); }
+.hud-val.b { color: var(--B); }
+.hud-val.seam { color: var(--seam); }
+.hud-val.dim  { color: var(--dim); }
+
+/* ── Big reading ──────────────────────────────────── */
+#reading {
+  position: fixed;
+  top: 16px;
+  left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.reading-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.digit-str {
+  font-size: 32px;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.orbit-pill {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 2px;
+}
+.orbit-IC     { color: var(--B);    border-color: var(--B);    background: rgba(200,144,48,0.1); }
+.orbit-O11    { color: var(--A);    border-color: var(--A);    background: rgba(54,180,224,0.1); }
+.orbit-SEAM   { color: var(--seam); border-color: var(--seam); background: rgba(128,144,160,0.1); }
+.r-mod { font-size: 12px; color: var(--dim); font-variant-numeric: tabular-nums; min-width: 40px; }
+
+/* ── Controls ─────────────────────────────────────── */
+#ctrl {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 22px;
+  background: rgba(6,8,15,0.92);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+.ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+.ctrl-label { color: var(--dim); text-transform: uppercase; }
+.ctrl-label.a { color: var(--A); }
+.ctrl-label.b { color: var(--B); }
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100px;
+  height: 2px;
+  background: var(--border);
+  outline: none;
+  cursor: pointer;
+}
+input[type=range].a::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px; height: 12px;
+  background: var(--A); border-radius: 50%;
+}
+input[type=range].b::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px; height: 12px;
+  background: var(--B); border-radius: 50%;
+}
+.ctrl-val { color: var(--text); min-width: 32px; font-variant-numeric: tabular-nums; font-size: 10px; }
+.ctrl-sep { width: 1px; height: 24px; background: var(--border); }
+
+button {
+  font-family: inherit;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--dim);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+button:hover { color: var(--text); border-color: var(--text); }
+button.active-a { color: var(--A); border-color: var(--A); }
+button.active-b { color: var(--B); border-color: var(--B); }
+
+/* ── Theorem note bottom-left ─────────────────────── */
+#theorem {
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+  font-size: 9px;
+  color: var(--dim);
+  letter-spacing: 0.08em;
+  line-height: 1.9;
+  pointer-events: none;
+}
+</style>
+
+<!-- HUD: orbit readouts -->
+<div id="hud">
+  <div class="hud-row"><span class="hud-key">δ phase</span><span class="hud-val dim" id="h-phase">0.0°</span></div>
+  <div class="hud-row"><span class="hud-key">speed A</span><span class="hud-val a" id="h-sa">1.00×</span></div>
+  <div class="hud-row"><span class="hud-key">speed B</span><span class="hud-val b" id="h-sb">0.62×</span></div>
+  <div class="hud-row"><span class="hud-key">414</span><span class="hud-val dim">≡ 7 ∈ D7</span></div>
+  <div class="hud-row"><span class="hud-key">123414321</span><span class="hud-val dim">≡ 7 ∈ D7</span></div>
+  <div class="hud-row"><span class="hud-key">ring sum</span><span class="hud-val dim">18 ∈ SEED_ORB</span></div>
+  <div class="hud-row"><span class="hud-key">1234</span><span class="hud-val dim">≡ 13 ∈ NQR_5</span></div>
+</div>
+
+<!-- Reading: top and bottom row 3-digit numbers -->
+<div id="reading">
+  <div class="reading-row">
+    <span class="digit-str" id="r-top">414</span>
+    <span class="r-mod" id="r-top-mod">≡7</span>
+    <span class="orbit-pill orbit-O11" id="r-top-orb">D7</span>
+  </div>
+  <div class="reading-row">
+    <span class="digit-str" id="r-bot">243</span>
+    <span class="r-mod" id="r-bot-mod">≡21</span>
+    <span class="orbit-pill orbit-IC" id="r-bot-orb">OUTLIER_ORB</span>
+  </div>
+</div>
+
+<canvas id="c"></canvas>
+
+<!-- Controls -->
+<div id="ctrl">
+  <div class="ctrl-group">
+    <span class="ctrl-label a">▲ 4</span>
+    <input type="range" class="a" id="sa" min="0" max="30" value="10" step="1">
+    <span class="ctrl-val" id="sa-v">1.0×</span>
+    <button id="dir-a">CW</button>
+  </div>
+  <div class="ctrl-sep"></div>
+  <div class="ctrl-group">
+    <span class="ctrl-label b">▲ 1·2·3</span>
+    <input type="range" class="b" id="sb" min="0" max="30" value="6" step="1">
+    <span class="ctrl-val" id="sb-v">0.6×</span>
+    <button id="dir-b">CW</button>
+  </div>
+  <div class="ctrl-sep"></div>
+  <button id="btn-pause">PAUSE</button>
+</div>
+
+<!-- Theorem note -->
+<div id="theorem">
+  Theorem 147 · GF(37)<br>
+  ring: 1−4−2−4−3−4<br>
+  414 ≡ 123414321 ≡ 7 ∈ D7<br>
+  5·1234·<span style="color:#c89030">1</span>·4321·5
+</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+let W, H;
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// ── State ──────────────────────────────────────────
+// 12-node ring: 30° steps from top (90°) going CW
+// Even nodes (0,2,4,6,8,10): integers 1,2,3,4,5,6
+// Odd nodes  (1,3,5,7,9,11): fractions 1/2,2/3,3/4,4/5,5/6,6/7
+// Initial: phaseA=90 → A vertices claim integer nodes 1,3,5
+//          phaseB=30 → B vertices claim integer nodes 2,4,6 → top reads 4-1-4=414
+let phaseA = 90;   // Triangle A: the 4-triangle
+let phaseB = 30;   // Triangle B: the 1-2-3-triangle (B[0] at 30° = integer "2")
+let speedA = 1.0;  // degrees per frame (×some scale)
+let speedB = 0.62;
+let dirA = 1;      // +1 = CW, -1 = CCW
+let dirB = 1;
+let paused = false;
+let lastTime = null;
+
+// ── Controls ───────────────────────────────────────
+const saSlider = document.getElementById('sa');
+const sbSlider = document.getElementById('sb');
+const saVal    = document.getElementById('sa-v');
+const sbVal    = document.getElementById('sb-v');
+const dirABtn  = document.getElementById('dir-a');
+const dirBBtn  = document.getElementById('dir-b');
+const pauseBtn = document.getElementById('btn-pause');
+
+saSlider.addEventListener('input', () => {
+  speedA = saSlider.value / 10;
+  saVal.textContent = speedA.toFixed(1) + '×';
+  document.getElementById('h-sa').textContent = speedA.toFixed(2) + '×';
+});
+sbSlider.addEventListener('input', () => {
+  speedB = sbSlider.value / 10;
+  sbVal.textContent = speedB.toFixed(1) + '×';
+  document.getElementById('h-sb').textContent = speedB.toFixed(2) + '×';
+});
+dirABtn.addEventListener('click', () => {
+  dirA *= -1;
+  dirABtn.textContent = dirA > 0 ? 'CW' : 'CCW';
+});
+dirBBtn.addEventListener('click', () => {
+  dirB *= -1;
+  dirBBtn.textContent = dirB > 0 ? 'CW' : 'CCW';
+});
+pauseBtn.addEventListener('click', () => {
+  paused = !paused;
+  pauseBtn.textContent = paused ? 'PLAY' : 'PAUSE';
+  if (!paused) { lastTime = null; requestAnimationFrame(loop); }
+});
+
+// ── 12-node ring definition ────────────────────────
+// Angles going CW from top: 90°, 60°, 30°, 0°, -30°, -60°, -90°, -120°, -150°, 180°, 150°, 120°
+const RING12 = [90, 60, 30, 0, -30, -60, -90, -120, -150, 180, 150, 120];
+// Fixed labels: even indices = integers, odd indices = fractions
+const LABELS12 = ['1','1/2','2','2/3','3','3/4','4','4/5','5','5/6','6','6/7'];
+// Modular values for each label (mod 37)
+const MODS12 = [1,19,2,13,3,10,4,23,5,7,6,22];
+
+// ── GF(37) helpers ─────────────────────────────────
+const ORBIT_MAP = {
+  1:'IC', 10:'IC', 26:'IC',
+  3:'SOVEREIGN_SPIRAL', 4:'SOVEREIGN_SPIRAL', 30:'SOVEREIGN_SPIRAL',
+  7:'D7', 33:'D7', 34:'D7',
+  9:'SA_ORB', 12:'SA_ORB', 16:'SA_ORB',
+  11:'ORBIT_11', 27:'ORBIT_11', 36:'ORBIT_11',
+  21:'OUTLIER_ORB', 25:'OUTLIER_ORB', 28:'OUTLIER_ORB',
+  2:'DARK_A', 15:'DARK_A', 20:'DARK_A',
+  5:'NQR_5', 13:'NQR_5', 19:'NQR_5',
+  6:'TESLA_ORB', 8:'TESLA_ORB', 23:'TESLA_ORB',
+  14:'NQR_14', 29:'NQR_14', 31:'NQR_14',
+  17:'NQR_17', 22:'NQR_17', 35:'NQR_17',
+  18:'SEED_ORB', 24:'SEED_ORB', 32:'SEED_ORB',
+};
+function orbitOf(n) {
+  const r = ((n % 37) + 37) % 37;
+  if (r === 0) return 'SEAM';
+  return ORBIT_MAP[r] || '?';
+}
+function orbitColor(name) {
+  const m = {
+    'D7':'#c89030', 'IC':'#36b4e0', 'ORBIT_11':'#7090e0',
+    'SOVEREIGN_SPIRAL':'#e06030', 'OUTLIER_ORB':'#a060d0',
+    'NQR_5':'#50c870', 'SEED_ORB':'#e0b030', 'SEAM':'#8090a0',
+    'SA_ORB':'#60d0c0', 'NQR_14':'#d070a0', 'NQR_17':'#80a0e0',
+    'TESLA_ORB':'#70e060', 'DARK_A':'#b08060',
+  };
+  return m[name] || '#a8bcc8';
+}
+
+function angDiff(a, b) {
+  let d = Math.abs(((a - b) % 360 + 360) % 360);
+  if (d > 180) d = 360 - d;
+  return d;
+}
+
+// For each of the 12 ring nodes: determine if a triangle vertex is "on" it
+// Returns: { claimed: bool, digit: int (4 for A, 1/2/3 for B, 0=unclaimed), label, mod37 }
+const CLAIM_THRESHOLD = 22; // degrees — half of 30° step, slightly relaxed
+
+function getNode12Info(nodeIdx, pA, pB) {
+  const ang = RING12[nodeIdx];
+  const dA = Math.min(angDiff(ang,pA), angDiff(ang,pA+120), angDiff(ang,pA+240));
+  const dBs = [angDiff(ang,pB), angDiff(ang,pB+120), angDiff(ang,pB+240)];
+  const minB = Math.min(...dBs);
+  const whichB = dBs.indexOf(minB);
+  const minDist = Math.min(dA, minB);
+  if (minDist > CLAIM_THRESHOLD) {
+    return { claimed: false, digit: 0, label: LABELS12[nodeIdx], mod37: MODS12[nodeIdx] };
+  }
+  if (dA <= minB) {
+    return { claimed: true, digit: 4, label: '4', mod37: 4 };
+  }
+  return { claimed: true, digit: whichB+1, label: String(whichB+1), mod37: whichB+1 };
+}
+
+// ── Draw helpers ───────────────────────────────────
+function toXY(cx, cy, r, angleDeg) {
+  const rad = angleDeg * Math.PI / 180;
+  return [cx + r * Math.cos(rad), cy - r * Math.sin(rad)];
+}
+
+function drawTriangle(cx, cy, r, phase, color, glow) {
+  ctx.beginPath();
+  const angles = [phase, phase + 120, phase + 240];
+  for (let i = 0; i < 3; i++) {
+    const [x, y] = toXY(cx, cy, r, angles[i]);
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 14;
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = glow;
+  ctx.fill();
+}
+
+function drawNode12(cx, cy, info, r_ring, angleDeg) {
+  const [x, y] = toXY(cx, cy, r_ring, angleDeg);
+  const isInt = info.label.indexOf('/') === -1;
+  const isA   = info.claimed && info.digit === 4;
+  const isB   = info.claimed && info.digit > 0 && info.digit < 4;
+
+  let col, bg, radius, fontSize;
+  if (isA) {
+    col = '#c89030'; bg = 'rgba(200,144,48,0.18)'; radius = 22; fontSize = 22;
+  } else if (isB) {
+    col = '#36b4e0'; bg = 'rgba(54,180,224,0.15)'; radius = 19; fontSize = 20;
+  } else if (isInt) {
+    col = '#506070'; bg = 'rgba(30,50,70,0.5)'; radius = 17; fontSize = 16;
+  } else {
+    col = '#304050'; bg = 'rgba(20,35,50,0.5)'; radius = 14; fontSize = 12;
+  }
+
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, 2*Math.PI);
+  ctx.fillStyle = bg; ctx.fill();
+  ctx.strokeStyle = col; ctx.lineWidth = info.claimed ? 1.5 : 0.8;
+  if (info.claimed) { ctx.shadowColor = col; ctx.shadowBlur = 10; }
+  ctx.stroke(); ctx.shadowBlur = 0;
+
+  ctx.fillStyle = col;
+  ctx.font = `${info.claimed ? 'bold ' : ''}${fontSize}px Courier New`;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(info.label, x, y + (info.label.indexOf('/') !== -1 ? 0 : 0));
+}
+
+function drawRing12(cx, cy, r) {
+  ctx.beginPath();
+  for (let i = 0; i < 12; i++) {
+    const [x, y] = toXY(cx, cy, r, RING12[i]);
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.strokeStyle = '#182435'; ctx.lineWidth = 1; ctx.stroke();
+}
+
+// ── Update HUD ─────────────────────────────────────
+function updateHUD(nodes) {
+  // "top arc" = nodes 11,0,1 (reading clockwise across the top)
+  // Show the claimed-digit sequence or fraction sequence
+  const topNodes = [11, 0, 1];
+  const topLabels = topNodes.map(i => nodes[i].label);
+  const topStr = topLabels.join('-');
+
+  // Find all-integer reading across top 3 claimed nodes
+  const claimed = topNodes.map(i => nodes[i]);
+  const allClaimed = claimed.every(n => n.claimed);
+  let reading3 = '';
+  let orb3 = '';
+  let r37 = '';
+  if (allClaimed) {
+    const n = claimed[0].digit*100 + claimed[1].digit*10 + claimed[2].digit;
+    const r = ((n%37)+37)%37;
+    reading3 = String(n);
+    orb3 = orbitOf(n);
+    r37 = '≡' + r;
+  } else {
+    // use mod37 of the position labels
+    const mods = topNodes.map(i => nodes[i].mod37);
+    const sum3 = mods.reduce((a,b)=>a+b,0);
+    reading3 = topStr;
+    orb3 = orbitOf(sum3);
+    r37 = 'Σ≡' + (((sum3%37)+37)%37);
+  }
+
+  const tc = orbitColor(orb3);
+  const rt = document.getElementById('r-top');
+  rt.textContent = reading3;
+  rt.style.color = tc;
+  document.getElementById('r-top-mod').textContent = r37;
+  const tpill = document.getElementById('r-top-orb');
+  tpill.textContent = orb3;
+  tpill.style.cssText = `color:${tc};border-color:${tc};background:${tc}18`;
+
+  // Bottom arc = nodes 5,6,7
+  const botNodes = [5, 6, 7];
+  const botClaimed = botNodes.map(i => nodes[i]);
+  const allB = botClaimed.every(n => n.claimed);
+  let bStr = '', bOrb = '', bR = '';
+  if (allB) {
+    const n = botClaimed[0].digit*100 + botClaimed[1].digit*10 + botClaimed[2].digit;
+    const r = ((n%37)+37)%37;
+    bStr = String(n); bOrb = orbitOf(n); bR = '≡' + r;
+  } else {
+    const mods = botNodes.map(i => nodes[i].mod37);
+    const sum3 = mods.reduce((a,b)=>a+b,0);
+    bStr = botNodes.map(i=>nodes[i].label).join('-');
+    bOrb = orbitOf(sum3); bR = 'Σ≡' + (((sum3%37)+37)%37);
+  }
+  const bc = orbitColor(bOrb);
+  document.getElementById('r-bot').textContent = bStr;
+  document.getElementById('r-bot').style.color = bc;
+  document.getElementById('r-bot-mod').textContent = bR;
+  const bpill = document.getElementById('r-bot-orb');
+  bpill.textContent = bOrb;
+  bpill.style.cssText = `color:${bc};border-color:${bc};background:${bc}18`;
+
+  const delta = ((phaseA - phaseB) % 360 + 360) % 360;
+  document.getElementById('h-phase').textContent = delta.toFixed(1) + '°';
+}
+
+// ── Draw ───────────────────────────────────────────
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  const cx = W / 2;
+  const cy = H / 2;
+  const R_RING = Math.min(W, H) * 0.30;
+  const R_TRI  = R_RING * 0.88;
+
+  // Faint radial gradient background
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, R_RING * 1.4);
+  grad.addColorStop(0, 'rgba(24,36,53,0.15)');
+  grad.addColorStop(1, 'transparent');
+  ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
+
+  // 12-node polygon ring
+  drawRing12(cx, cy, R_RING);
+
+  // Spoke lines to integer nodes (every other = 60° apart)
+  ctx.strokeStyle = '#0f1e2d'; ctx.lineWidth = 1;
+  for (let i = 0; i < 12; i += 2) {
+    const [x, y] = toXY(cx, cy, R_RING, RING12[i]);
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(x, y); ctx.stroke();
+  }
+  // Lighter spokes to fraction nodes
+  ctx.strokeStyle = '#0a1420'; ctx.lineWidth = 0.5;
+  for (let i = 1; i < 12; i += 2) {
+    const [x, y] = toXY(cx, cy, R_RING, RING12[i]);
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(x, y); ctx.stroke();
+  }
+
+  // Triangles — B (1-2-3, cyan) behind, A (4, amber) in front
+  drawTriangle(cx, cy, R_TRI, phaseB, '#36b4e0', 'rgba(54,180,224,0.05)');
+  drawTriangle(cx, cy, R_TRI, phaseA, '#c89030', 'rgba(200,144,48,0.05)');
+
+  // Compute 12-node infos and draw
+  const nodes = RING12.map((_, i) => getNode12Info(i, phaseA, phaseB));
+  for (let i = 0; i < 12; i++) {
+    drawNode12(cx, cy, nodes[i], R_RING, RING12[i]);
+  }
+
+  // Triangle vertex markers
+  for (let k = 0; k < 3; k++) {
+    const [ax, ay] = toXY(cx, cy, R_TRI, phaseA + k*120);
+    ctx.beginPath(); ctx.arc(ax, ay, 4, 0, 2*Math.PI);
+    ctx.fillStyle = '#c89030'; ctx.shadowColor = '#c89030'; ctx.shadowBlur = 10;
+    ctx.fill(); ctx.shadowBlur = 0;
+
+    const [bx, by] = toXY(cx, cy, R_TRI, phaseB + k*120);
+    ctx.beginPath(); ctx.arc(bx, by, 4, 0, 2*Math.PI);
+    ctx.fillStyle = '#36b4e0'; ctx.shadowColor = '#36b4e0'; ctx.shadowBlur = 10;
+    ctx.fill(); ctx.shadowBlur = 0;
+  }
+
+  // Center label: orbit of top-arc read
+  const topClaimed = [11,0,1].map(i=>nodes[i]);
+  if (topClaimed.every(n=>n.claimed)) {
+    const n = topClaimed[0].digit*100 + topClaimed[1].digit*10 + topClaimed[2].digit;
+    const orb = orbitOf(n);
+    const col = orbitColor(orb);
+    ctx.fillStyle = col+'28';
+    ctx.beginPath(); ctx.arc(cx,cy,26,0,2*Math.PI); ctx.fill();
+    ctx.fillStyle = col;
+    ctx.font = 'bold 10px Courier New';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(orb.replace('_',' '), cx, cy);
+  }
+
+  updateHUD(nodes);
+}
+
+// ── Loop ───────────────────────────────────────────
+const DEG_PER_MS = 0.04; // base speed scale
+
+function loop(ts) {
+  if (paused) return;
+  if (lastTime === null) lastTime = ts;
+  const dt = Math.min(ts - lastTime, 50);
+  lastTime = ts;
+
+  phaseA = (phaseA + dirA * speedA * DEG_PER_MS * dt) % 360;
+  phaseB = (phaseB + dirB * speedB * DEG_PER_MS * dt) % 360;
+
+  draw();
+  requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
+</script>

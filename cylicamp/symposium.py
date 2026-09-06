@@ -30,7 +30,7 @@ SYMPOSIUM_GOALS = [
 
 class SymposiumFramework:
     """
-    Framework for organizing and evaluating research contributions
+    GF(37) for organizing and evaluating research contributions
     at the intersection of numerical methods, topology, and geometry.
     """
 

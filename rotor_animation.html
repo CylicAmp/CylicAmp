@@ -1,0 +1,541 @@
+<title>Recursive Rotor · GF(37)</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Deliberate single-theme: this is a dark instrument display */
+body {
+  background: #06080f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Courier New', Courier, monospace;
+  color: #b0c4d4;
+}
+
+canvas { display: block; }
+
+/* ── HUD ─────────────────────────────────────────── */
+#hud {
+  position: fixed;
+  top: 16px;
+  right: 18px;
+  font-size: 10px;
+  line-height: 2.3;
+  letter-spacing: 0.07em;
+  text-align: right;
+  pointer-events: none;
+  user-select: none;
+}
+.hud-row { display: flex; align-items: baseline; justify-content: flex-end; gap: 6px; }
+.hud-key { color: #2e4a5a; text-transform: uppercase; font-size: 9px; letter-spacing: 0.14em; }
+.hud-val { color: #b0c4d4; font-variant-numeric: tabular-nums; min-width: 52px; text-align: right; }
+.hud-val.accent { color: #4ab0e0; }
+
+/* ── Controls ────────────────────────────────────── */
+#ctrl {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 8px 18px;
+  background: rgba(6, 8, 15, 0.9);
+  border: 1px solid #1a2e3a;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.cg { display: flex; align-items: center; gap: 8px; }
+.clbl {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #2e4a5a;
+}
+.cval {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: #4ab0e0;
+  min-width: 26px;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 68px;
+  height: 2px;
+  background: #1a2e3a;
+  border-radius: 1px;
+  outline: none;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #4ab0e0;
+  cursor: pointer;
+}
+
+#i-path {
+  background: none;
+  border: 1px solid #1a2e3a;
+  color: #4ab0e0;
+  padding: 3px 7px;
+  border-radius: 2px;
+  font: 11px/1 'Courier New', Courier, monospace;
+  letter-spacing: 0.22em;
+  width: 60px;
+  outline: none;
+  text-align: center;
+}
+#i-path:focus { border-color: #4ab0e0; }
+
+.div { width: 1px; height: 18px; background: #1a2e3a; flex-shrink: 0; }
+
+button {
+  background: none;
+  border: 1px solid #1a2e3a;
+  color: #2e4a5a;
+  padding: 3px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  font: 9px/1 'Courier New', Courier, monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: color 0.12s, border-color 0.12s;
+}
+button:hover { color: #4ab0e0; border-color: #4ab0e0; }
+button.on    { color: #4ab0e0; border-color: #2a6080; }
+
+/* ── Formula overlay ─────────────────────────────── */
+#formula {
+  position: fixed;
+  bottom: 70px;
+  right: 18px;
+  font-size: 9.5px;
+  line-height: 2.0;
+  letter-spacing: 0.05em;
+  color: #1e3040;
+  text-align: right;
+  pointer-events: none;
+  user-select: none;
+  transition: color 0.3s;
+}
+#formula.lit { color: #2e4a5a; }
+
+/* ── Legend ──────────────────────────────────────── */
+#legend {
+  position: fixed;
+  bottom: 70px;
+  left: 18px;
+  font-size: 9.5px;
+  line-height: 2.1;
+  letter-spacing: 0.07em;
+}
+.leg-row { display: flex; align-items: center; gap: 8px; }
+.leg-swatch {
+  width: 22px; height: 2px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+.leg-label { color: #2e4a5a; }
+.leg-val   { color: #4a6070; font-variant-numeric: tabular-nums; }
+</style>
+
+<canvas id="c"></canvas>
+
+<div id="hud">
+  <div class="hud-row"><span class="hud-key">t</span><span class="hud-val accent" id="h-t">0.0000</span></div>
+  <div class="hud-row"><span class="hud-key">cycle</span><span class="hud-val" id="h-cyc">0.0000</span></div>
+  <div class="hud-row"><span class="hud-key">depth L</span><span class="hud-val" id="h-dep">5</span></div>
+  <div class="hud-row"><span class="hud-key">segs</span><span class="hud-val" id="h-seg">1364</span></div>
+</div>
+
+<div id="legend">
+  <div class="leg-row"><span class="leg-swatch" style="background:#d64f38"></span><span class="leg-label">arm 0 &nbsp;</span><span class="leg-val">ω = −1</span></div>
+  <div class="leg-row"><span class="leg-swatch" style="background:#eff0ff"></span><span class="leg-label">arm 1 &nbsp;</span><span class="leg-val">ω =  0</span></div>
+  <div class="leg-row"><span class="leg-swatch" style="background:#3cb4e8"></span><span class="leg-label">arm 2 &nbsp;</span><span class="leg-val">ω = +1</span></div>
+  <div class="leg-row"><span class="leg-swatch" style="background:#8c52ec"></span><span class="leg-label">arm 3 &nbsp;</span><span class="leg-val">ω = +2</span></div>
+</div>
+
+<div id="formula">
+  α_j = (j+1)·π/2 + t·Σ(iₖ−1)<br>
+  X_L = 400 + Σ d₀/2ʲ · cos(α_j)<br>
+  Y_L = 400 + Σ d₀/2ʲ · sin(α_j)
+</div>
+
+<div id="ctrl">
+  <div class="cg">
+    <span class="clbl">ω</span>
+    <input type="range" id="r-spd" min="0.05" max="4" step="0.05" value="0.6">
+    <span class="cval" id="v-spd">0.60</span>
+  </div>
+  <div class="div"></div>
+  <div class="cg">
+    <span class="clbl">L</span>
+    <input type="range" id="r-dep" min="1" max="5" step="1" value="5">
+    <span class="cval" id="v-dep">5</span>
+  </div>
+  <div class="div"></div>
+  <button id="b-pp" class="on">PAUSE</button>
+  <button id="b-rst">RESET</button>
+  <button id="b-tr">TRACE</button>
+  <input type="text" id="i-path" value="0000" maxlength="4" spellcheck="false" title="suffix for levels 1–4 (digits 0–3); level 0 varies across all 4 arms">
+  <button id="b-rb">RIBBON</button>
+  <div class="div"></div>
+  <div class="cg">
+    <span class="clbl">fade</span>
+    <input type="range" id="r-fade" min="0.2" max="8" step="0.1" value="2.5">
+    <span class="cval" id="v-fade">2.5s</span>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+
+// Animation state
+let t       = 0;
+let omega   = 0.6;
+let maxL    = 5;
+let running = true;
+let tracing = false;
+let prev    = null;
+
+// 4 simultaneous trails — each point is [x, y, alpha]
+// alpha decays with half-life HALF_LIFE seconds; points below ALPHA_FLOOR are pruned
+let HALF_LIFE  = 2.5;   // seconds for alpha to halve — controlled by slider
+const ALPHA_FLOOR = 0.02;
+let trails      = [[], [], [], []];
+let traceSuffix = [0, 0, 0, 0];    // arm index at levels 1–4
+let ribbonMode   = false;
+let ribbonTrails = [[], [], [], []];   // tip trail per arm, same [x,y,alpha] format
+
+// Colors by angular velocity ω = i−1, for arm index i:
+//   arm 0 → ω = −1  (retrograde, clockwise)
+//   arm 1 → ω =  0  (fixed, no rotation)
+//   arm 2 → ω = +1  (prograde)
+//   arm 3 → ω = +2  (fast prograde)
+const ARM_COLOR = [
+  'rgba(214, 79, 56, 0.88)',   // ω=−1: red-orange
+  'rgba(240,242,255, 0.93)',   // ω= 0: white (stationary axis)
+  'rgba( 60,180,232, 0.88)',   // ω=+1: cyan
+  'rgba(140, 82,236, 0.88)',   // ω=+2: violet
+];
+const DEPTH_WIDTH = [2.6, 1.8, 1.2, 0.8, 0.52, 0.34];
+
+function resize() {
+  const s = Math.min(window.innerWidth, window.innerHeight, 900);
+  canvas.width = canvas.height = s;
+}
+resize();
+window.addEventListener('resize', () => { resize(); trails = [[], [], [], []]; });
+
+// Count total segments for depth L
+function segCount(L) {
+  return L < 1 ? 0 : Math.round(4 * (Math.pow(4, L) - 1) / 3);
+}
+
+// ── Recursive rotor (corrected independent-arm model) ─────────────────────
+// save/restore INSIDE the loop: each arm's rotation θ(i,t) = π/2 + t(i−1)
+// is independent of the others at the same level. This matches the closed-form
+// α_j = Σ_{k=0}^{j} θ(i_k,t) exactly for all arm paths.
+// Color is by arm index i (= angular velocity ω+1); width is by depth.
+function rotor(d, lvl) {
+  if (d <= 9 || lvl >= maxL) return;
+  const lw     = DEPTH_WIDTH[Math.min(lvl, DEPTH_WIDTH.length - 1)];
+  const isLeaf = (d / 2 <= 9 || lvl + 1 >= maxL);
+
+  for (let i = 0; i < 4; i++) {
+    const ac = ARM_COLOR[i];
+    ctx.save();                                // pushMatrix — isolate this arm
+    ctx.rotate(Math.PI / 2 + t * (i - 1));   // independent: θ(i,t), no accumulation
+    ctx.strokeStyle = ac;
+    ctx.lineWidth   = lw;
+    ctx.shadowColor = ac;
+    ctx.shadowBlur  = isLeaf ? 7 : 2;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(d, 0);
+    ctx.stroke();
+    ctx.translate(d, 0);
+    rotor(d / 2, lvl + 1);
+    ctx.restore();                             // popMatrix — next arm starts fresh
+  }
+}
+
+// ── Closed-form: endpoint for an explicit arm path ────────────────────────
+// α_j = Σ_{k=0}^{j} θ(path[k], t)  where θ(i,t) = π/2 + t·(i−1)
+function pathEndpoint(cx, cy, d0, path) {
+  let x = cx, y = cy, cumAng = 0;
+  const L = Math.min(path.length, maxL);
+  for (let j = 0; j < L; j++) {
+    cumAng += Math.PI / 2 + t * (path[j] - 1);
+    x += (d0 / Math.pow(2, j)) * Math.cos(cumAng);
+    y += (d0 / Math.pow(2, j)) * Math.sin(cumAng);
+  }
+  return [x, y];
+}
+
+// ── Ribbon: cumulative-rotation envelope ──────────────────────────────────
+// Uses the ORIGINAL Processing model where rotations accumulate within the loop:
+//   Θ_i(t) = Σ_{m=0}^{i} (π/2 + t·(m−1))
+// Each arm's envelope points lie on a radial line in direction Θ_i.
+function cumulAngle(i) {
+  let th = 0;
+  for (let m = 0; m <= i; m++) th += Math.PI / 2 + t * (m - 1);
+  return th;
+}
+
+function drawRibbon(cx, cy, d0, dt) {
+  const RDEPTH = Math.min(maxL, 8);
+  const outer  = [];   // outermost point per arm
+
+  // ── Tip trails + mesh ────────────────────────────────────────────────
+  const decay = Math.pow(0.5, dt / HALF_LIFE);
+  ctx.shadowBlur = 0;
+
+  // Mesh weft: envelope polygon at each past time step (drawn first, below warp)
+  const meshLen = Math.min(...[0,1,2,3].map(i => ribbonTrails[i].length));
+  ctx.lineWidth = 0.5;
+  for (let k = 0; k < meshLen; k++) {
+    const a = Math.min(...[0,1,2,3].map(i => ribbonTrails[i][k][2]));
+    ctx.strokeStyle = `rgba(255,80,170,${(a * 0.28).toFixed(3)})`;
+    ctx.beginPath();
+    ctx.moveTo(ribbonTrails[0][k][0], ribbonTrails[0][k][1]);
+    for (let i = 1; i < 4; i++) ctx.lineTo(ribbonTrails[i][k][0], ribbonTrails[i][k][1]);
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  // Mesh warp: individual arm tip trails over time
+  ctx.lineWidth = 0.7;
+  for (let i = 0; i < 4; i++) {
+    const tr = ribbonTrails[i];
+    const [r, g, b] = armRGB(i);
+    for (let k = 1; k < tr.length; k++) {
+      const a = tr[k][2];
+      ctx.strokeStyle = `rgba(${r},${g},${b},${(a * 0.65).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.moveTo(tr[k-1][0], tr[k-1][1]);
+      ctx.lineTo(tr[k][0],   tr[k][1]);
+      ctx.stroke();
+    }
+  }
+
+  // ── Arm spines (radial lines, all depths) ────────────────────────────
+  ctx.lineWidth = 0.8;
+  ctx.shadowBlur = 0;
+  for (let i = 0; i < 4; i++) {
+    const th = cumulAngle(i);
+    const [ri, gi, bi] = armRGB(i);
+    let x = cx, y = cy, d = d0;
+
+    ctx.strokeStyle = `rgba(${ri},${gi},${bi},0.35)`;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    for (let L = 0; L < RDEPTH; L++) {
+      x += d * Math.cos(th);
+      y += d * Math.sin(th);
+      ctx.lineTo(x, y);
+      d /= 2;
+    }
+    ctx.stroke();
+    outer.push([x, y, i]);
+
+    // depth tick marks
+    x = cx; y = cy; d = d0;
+    ctx.fillStyle = `rgba(${ri},${gi},${bi},0.55)`;
+    for (let L = 0; L < RDEPTH; L++) {
+      x += d * Math.cos(th);
+      y += d * Math.sin(th);
+      ctx.beginPath();
+      ctx.arc(x, y, Math.max(0.8, 2.5 - L * 0.3), 0, 2 * Math.PI);
+      ctx.fill();
+      d /= 2;
+    }
+  }
+
+  // ── Outer envelope polygon (connecting the 4 arm tips) ───────────────
+  ctx.strokeStyle = 'rgba(255, 80, 170, 0.75)';
+  ctx.lineWidth   = 1.3;
+  ctx.shadowColor = 'rgba(255, 80, 170, 0.4)';
+  ctx.shadowBlur  = 8;
+  ctx.beginPath();
+  ctx.moveTo(outer[0][0], outer[0][1]);
+  for (let k = 1; k < 4; k++) ctx.lineTo(outer[k][0], outer[k][1]);
+  ctx.closePath();
+  ctx.stroke();
+
+  // Outer tip glows + update trails
+  ctx.shadowBlur = 10;
+  for (const [ox, oy, i] of outer) {
+    const [ri, gi, bi] = armRGB(i);
+    ctx.fillStyle   = `rgba(${ri},${gi},${bi},0.9)`;
+    ctx.shadowColor = `rgba(${ri},${gi},${bi},0.5)`;
+    ctx.beginPath();
+    ctx.arc(ox, oy, 3, 0, 2 * Math.PI);
+    ctx.fill();
+
+    // decay existing, prune, append current tip
+    const aged = ribbonTrails[i]
+      .map(p => [p[0], p[1], p[2] * decay])
+      .filter(p => p[2] > ALPHA_FLOOR);
+    aged.push([ox, oy, 1.0]);
+    ribbonTrails[i] = aged;
+  }
+  ctx.shadowBlur = 0;
+}
+
+// Extract raw RGBA values from ARM_COLOR strings for trail drawing
+function armRGB(i) {
+  const m = ARM_COLOR[i].match(/[\d.]+/g);
+  return [+m[0], +m[1], +m[2]];
+}
+
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (!prev) prev = now;
+  const dt = Math.min((now - prev) / 1000, 0.05);
+  prev = now;
+  if (running) t += dt * omega;
+
+  const S  = canvas.width;
+  const cx = S / 2;
+  const cy = S / 2;
+  const d0 = 200 * (S / 800);
+
+  // ── Background ──────────────────────────────────────────────────────────
+  ctx.fillStyle = '#06080f';
+  ctx.fillRect(0, 0, S, S);
+
+  // Ambient centre glow
+  const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, S * 0.42);
+  grd.addColorStop(0, 'rgba(18, 50, 90, 0.10)');
+  grd.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, S, S);
+
+  // Crosshair
+  ctx.strokeStyle = 'rgba(74, 176, 224, 0.05)';
+  ctx.lineWidth   = 1;
+  ctx.shadowBlur  = 0;
+  ctx.beginPath();
+  ctx.moveTo(cx, 0); ctx.lineTo(cx, S);
+  ctx.moveTo(0, cy); ctx.lineTo(S, cy);
+  ctx.stroke();
+
+  // ── Trails (one per arm) ─────────────────────────────────────────────────
+  if (tracing) {
+    ctx.shadowBlur = 0;
+    ctx.lineWidth  = 0.9;
+    for (let arm = 0; arm < 4; arm++) {
+      const tr = trails[arm];
+      if (tr.length < 2) continue;
+      const [r, g, b] = armRGB(arm);
+      for (let i = 1; i < tr.length; i++) {
+        const alpha = tr[i][2];
+        ctx.strokeStyle = `rgba(${r},${g},${b},${(alpha * 0.85).toFixed(3)})`;
+        ctx.beginPath();
+        ctx.moveTo(tr[i - 1][0], tr[i - 1][1]);
+        ctx.lineTo(tr[i][0],     tr[i][1]);
+        ctx.stroke();
+      }
+      // Leading dot — newest point
+      const [lx, ly, la] = tr[tr.length - 1];
+      ctx.fillStyle   = `rgba(${r},${g},${b},${(la * 0.95).toFixed(3)})`;
+      ctx.shadowColor = `rgba(${r},${g},${b},${(la * 0.5).toFixed(3)})`;
+      ctx.shadowBlur  = 9;
+      ctx.beginPath();
+      ctx.arc(lx, ly, 2.2, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+  }
+
+  // ── Ribbon ───────────────────────────────────────────────────────────────
+  if (ribbonMode) drawRibbon(cx, cy, d0, dt);
+
+  // ── Rotor ────────────────────────────────────────────────────────────────
+  ctx.save();
+  ctx.translate(cx, cy);
+  rotor(d0, 0);
+  ctx.restore();
+
+  // Collect 4 traces — decay existing alphas, prune invisible, append new point
+  if (tracing) {
+    const decay = Math.pow(0.5, dt / HALF_LIFE);
+    for (let arm = 0; arm < 4; arm++) {
+      // decay and prune
+      const aged = [];
+      for (const p of trails[arm]) {
+        const a = p[2] * decay;
+        if (a > ALPHA_FLOOR) aged.push([p[0], p[1], a]);
+      }
+      // append new point at full alpha
+      const [px, py] = pathEndpoint(cx, cy, d0, [arm, ...traceSuffix]);
+      aged.push([px, py, 1.0]);
+      trails[arm] = aged;
+    }
+  }
+
+  // ── HUD update ───────────────────────────────────────────────────────────
+  const phase = ((t % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+  document.getElementById('h-t').textContent   = t.toFixed(4);
+  document.getElementById('h-cyc').textContent = (phase / (2 * Math.PI)).toFixed(4);
+  document.getElementById('h-dep').textContent = maxL;
+  document.getElementById('h-seg').textContent = segCount(maxL).toLocaleString();
+
+  // Light up formula when tracing
+  document.getElementById('formula').classList.toggle('lit', tracing);
+}
+
+requestAnimationFrame(frame);
+
+// ── Controls ─────────────────────────────────────────────────────────────────
+document.getElementById('r-spd').addEventListener('input', function() {
+  omega = +this.value;
+  document.getElementById('v-spd').textContent = omega.toFixed(2);
+});
+document.getElementById('r-dep').addEventListener('input', function() {
+  maxL = +this.value;
+  document.getElementById('v-dep').textContent = maxL;
+  trails = [[], [], [], []];
+});
+document.getElementById('b-pp').addEventListener('click', function() {
+  running = !running;
+  this.textContent = running ? 'PAUSE' : 'PLAY';
+  this.classList.toggle('on', running);
+  if (running) prev = null;
+});
+document.getElementById('b-rst').addEventListener('click', () => { t = 0; trails = [[], [], [], []]; ribbonTrails = [[], [], [], []]; });
+document.getElementById('b-tr').addEventListener('click', function() {
+  tracing = !tracing;
+  this.classList.toggle('on', tracing);
+  if (!tracing) trails = [[], [], [], []];
+});
+
+document.getElementById('b-rb').addEventListener('click', function() {
+  ribbonMode = !ribbonMode;
+  this.classList.toggle('on', ribbonMode);
+  if (!ribbonMode) ribbonTrails = [[], [], [], []];
+});
+
+document.getElementById('r-fade').addEventListener('input', function() {
+  HALF_LIFE = +this.value;
+  document.getElementById('v-fade').textContent = HALF_LIFE.toFixed(1) + 's';
+});
+
+document.getElementById('i-path').addEventListener('input', function() {
+  // suffix for levels 1–4; keep only digits 0–3, max 4 chars
+  const clean  = this.value.replace(/[^0-3]/g, '').slice(0, 4);
+  this.value   = clean;
+  traceSuffix  = clean.padEnd(4, '0').split('').map(Number);
+  trails = [[], [], [], []];
+});
+</script>
