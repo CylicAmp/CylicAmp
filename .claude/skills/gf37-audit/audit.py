@@ -150,6 +150,52 @@ def audit(n, seen_residues=None):
         if n % 111 == 0:
             A(f"  n = {n//111} x 111, and 111 = Phi_3(10) = 3 x 37 (T302)")
 
+    # ── decimal / cyclotomic (T301-T304) ────────────────────────────────
+    A("  --- decimal period and cyclotomic slot (T301-T304) ---")
+    if n > 1:
+        pre10, per10 = G.period(n, 10)
+        pre2,  per2  = G.period(n, 2)
+        def _p(x):
+            return 'terminates' if x == 0 else ('unknown (search bound)' if x < 0 else x)
+        A(f"  1/{n}  base 10: pre={pre10} period={_p(per10)}"
+          f"   base 2: pre={pre2} period={_p(per2)}")
+        for base, per in ((10, per10), (2, per2)):
+            if per <= 0:
+                continue
+            comp = "  (halves complementary)" if G.complement_halves(1, n, base) else ""
+            rp = G.repetend(1, n, base, max_len=240)
+            if rp is None:
+                A(f"       block base {base:>2} = period {per}, not printed{comp}")
+            else:
+                A(f"       block base {base:>2} = {rp}{comp}")
+        if per10 > 0:
+            slot = G.order_slot(10, per10)
+            if slot is None:
+                A(f"       Phi_{per10}(10) has degree {G.totient(per10)} — "
+                  f"too large to factor here, slot not computed")
+            else:
+                A(f"       Phi_{per10}(10) = {G.phi_d(per10, 10)} = "
+                  f"{G.factor_str(G.phi_d(per10, 10))}"
+                  f"   -> primes of period {per10}: {slot}")
+            if slot == [n]:
+                A(f"       {n} is the ONLY prime with decimal period {per10}")
+            elif slot is not None and not G.is_prime(n):
+                q = n
+                for pp in G.factor(10):
+                    while q % pp == 0:
+                        q //= pp
+                A(f"       n = {G.factor_str(n)}; part coprime to 10 is {q}"
+                  f" = {G.factor_str(q)}, and ord_{q}(10) = {per10}")
+    if G.is_prime(n):
+        ls = G.lists_containing(n)
+        A(f"  complete lists containing {n}: {ls or 'none'}"
+          f"   (L1 ord_p(137)=3 {G.L1_ORD137}, L2 p=n^2+1 {G.L2_CM}, "
+          f"L3 ord_p(10)=3 {G.L3_ORD10})")
+        for d in (1, 2, 3, 4, 6, 8):
+            if G.phi_d(d, 137) % n == 0 and 137 % n:
+                A(f"  n | Phi_{d}(137) = {G.phi_d(d,137)}  -> ord_{n}(137) = "
+                  f"{G.order_mod(137, n)}")
+
     # ── forced facts ────────────────────────────────────────────────────
     A("  --- forced, carries no information (T282) ---")
     A("  * orbit membership: the partition is complete")
