@@ -116,6 +116,60 @@ def check_orbit_claim(n, name):
     return "\n".join(out)
 
 
+# ── mechanism 5: rendering ──────────────────────────────────────────────────
+
+def check_digits(n):
+    """Every forced base-10 fact about n. None of these carry information."""
+    import numpy as np
+    s = str(abs(n))
+    d = [int(c) for c in s]
+    L = ['-' * 68, f"rendering audit: {n}  ({len(s)} digits)", '-' * 68]
+    A = L.append
+
+    ds = sum(d)
+    A(f"  digit sum {ds}, DR {(ds - 1) % 9 + 1}   FORCED: DR(n) = DR(digit sum)")
+    alt = sum(x * (-1) ** i for i, x in enumerate(d))
+    A(f"  alternating sum {alt}")
+    if len(d) % 2 == 0:
+        A(f"    even length, so n = {-alt % 11} mod 11 and n mod 11 = {n % 11}"
+          f"   agree: {(-alt) % 11 == n % 11}   FORCED (10 = -1 mod 11)")
+    else:
+        A(f"    odd length, so n = {alt % 11} mod 11 and n mod 11 = {n % 11}"
+          f"   agree: {alt % 11 == n % 11}   FORCED")
+
+    if len(s) == 2:
+        a, b = d
+        A(f"  mirror {10*b+a}:  sum = {11*(a+b)} = 11 x {a+b}   FORCED")
+    if len(s) == 3 and d[0] == d[2]:
+        a, b = d[0], d[1]
+        A(f"  palindrome aba; swap to bab gives {91*(a-b)} = 91 x {a-b}"
+          f"   FORCED (91 = Phi_6(10) = 7 x 13)")
+
+    if len(set(d)) == 1:
+        A(f"  repdigit: {len(d)} copies of {d[0]}, digit sum {len(d)*d[0]}"
+          f"   FORCED = k*d")
+    if len(set(d)) == 2 and all(d[i] == d[i % 2] for i in range(len(d))):
+        A(f"  period-2 alternation, length {len(d)}")
+        P = np.abs(np.fft.fft(d)) ** 2
+        nz = [k for k in range(len(d)) if P[k] > 1e-9]
+        if len(d) % 2 == 0:
+            A(f"    even length -> DFT nonzero only at {nz} (DC + Nyquist)  FORCED")
+        else:
+            A(f"    odd length -> DFT nonzero at {len(nz)} of {len(d)} bins;"
+              f" 2 does not divide {len(d)}  FORCED")
+
+    # comma grouping runs right to left, so slice from the right
+    grp = [s[max(0, len(s) - i - 3):len(s) - i] for i in range(0, len(s), 3)][::-1]
+    A(f"  comma groups (right to left, as printed): {','.join(grp)}")
+    A(f"    substring occurrence is a rendering fact. Test divisibility:")
+    for t in (37, 137, 111, 1001):
+        A(f"      {t} | n : {n % t == 0}   (n mod {t} = {n % t})")
+
+    A("  every line above is determined by the numeral's shape.")
+    A("  substitute other digits in the same arrangement and each still holds.")
+    return "\n".join(L)
+
+
 if __name__ == '__main__':
     a = sys.argv[1:]
     if not a:
@@ -129,5 +183,9 @@ if __name__ == '__main__':
         print(check_tier(' '.join(a[1:]) or '(unnamed)'))
     elif cmd == 'orbit-claim':
         print(check_orbit_claim(int(a[1]), a[2]))
+    elif a[0] == 'digits':
+        print(check_digits(int(a[1])))
     else:
         print(__doc__); sys.exit(1)
+
+
