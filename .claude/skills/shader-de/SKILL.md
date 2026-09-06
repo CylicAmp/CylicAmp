@@ -72,3 +72,37 @@ A large safety factor is not a mistake. It costs march steps and buys
 robustness across aspect ratios and animated parameters. A factor below 1 is
 a bug regardless of how the render looks — it means some ray, somewhere,
 steps through geometry.
+
+## Constant proximity is a diagnostic, not a bound
+
+`constant_literals()` flags numeric literals within 1% of pi, pi/2, pi/3, pi/4,
+tau, phi, sqrt2, e. It reports line numbers and does not deduplicate, so
+`vec2(3.14159, 3.14159)` is two occurrences.
+
+    constant proximity  =/=>  Lipschitz multiplier
+
+These flags are never fatal and contribute nothing to the DE certificate. A
+1%-off constant may be deliberate golf, or it may rotate an axis, shift a
+boundary, move a phase, or flip a branch — the check makes no claim either
+way. Do not write that such an error "becomes invisible after several folds";
+depending on where the constant sits its error can stay fixed, accumulate, or
+change the geometry outright.
+
+Two implementation rules, both found by breaking the earlier version:
+
+**The literal pattern is unsigned.** Folding `[-+]?` into the match does NOT
+break `x-3.14159` — the engine advances past the operator and matches at the
+digit, and the lookbehind then sees `-`, which is not `\w` or `.`. What it
+does break is the standalone negative: `x * -6.2832` captures `-6.2832`, and
+|(-6.2832) - tau| / tau = 2.0, so the tau approximation is silently missed.
+A false negative on exactly the constant the check exists to catch. Unary
+minus is an operator, not part of the literal.
+
+**Strip both comment forms before scanning.** `line.split("//")[0]` leaves
+`/* pi = 3.14159 */` intact and reports it as code. `strip_comments()`
+replaces comment bytes with spaces rather than deleting them, so line numbers
+and columns still refer to the original source. The pipeline is
+
+    source preprocessing  ->  token extraction  ->  constant audit
+
+and the audit stage must never see comment text.

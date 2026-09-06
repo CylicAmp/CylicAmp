@@ -28,6 +28,70 @@ CONSTS = {'pi': math.pi, 'pi/2': math.pi/2, 'pi/3': math.pi/3,
           'sqrt2': math.sqrt(2), 'e': math.e}
 
 
+_FLOAT_LIT = re.compile(
+    r"(?<![\w.])"
+    r"((?:\d+\.\d*|\.\d+|\d+)(?:[eE][-+]?\d+)?)"
+    r"[fF]?"
+    r"(?![\w.])"
+)
+
+
+def strip_comments(src):
+    """Remove // and /* */ comments, preserving line count and columns.
+
+    Replaces comment bytes with spaces rather than deleting them, so every
+    reported line number and offset still refers to the original source.
+    Without this, a literal inside /* pi = 3.14159 */ is reported as code.
+    """
+    out, i, n = [], 0, len(src)
+    while i < n:
+        two = src[i:i + 2]
+        if two == '//':
+            while i < n and src[i] != '\n':
+                out.append(' '); i += 1
+        elif two == '/*':
+            out.append('  '); i += 2
+            while i < n and src[i:i + 2] != '*/':
+                out.append('\n' if src[i] == '\n' else ' '); i += 1
+            out.append('  '); i += 2
+        else:
+            out.append(src[i]); i += 1
+    return ''.join(out)
+
+
+def constant_literals(src):
+    """Every numeric literal within 1% of a named constant, with line numbers.
+
+    Precision/intent diagnostic ONLY. A nearby approximation is often
+    deliberate in compact GLSL. This check makes no claim about its effect on
+    DE correctness, geometry, or Lipschitz continuity, contributes no
+    Lipschitz factor, and is never fatal.
+
+    The literal pattern is deliberately UNSIGNED. Folding [-+]? into the match
+    does not break `x-3.14159` (the engine advances past the operator and
+    matches at the digit) but it does capture the sign in `x * -6.2832`,
+    after which |(-6.2832) - tau| / tau = 2.0 and the tau approximation is
+    silently missed. Unary minus is an operator, not part of the literal.
+
+    Occurrences are NOT deduplicated: vec2(3.14159, 3.14159) is two literals.
+    """
+    hits = []
+    for lineno, line in enumerate(strip_comments(src).splitlines(), 1):
+        for m in _FLOAT_LIT.finditer(line):
+            try:
+                v = float(m.group(1))
+            except ValueError:
+                continue
+            if not math.isfinite(v) or v == 0.0:
+                continue
+            for name, cv in CONSTS.items():
+                if cv and abs(v - cv) / abs(cv) <= 0.01:
+                    hits.append((lineno, m.group(1), name, cv, v))
+                    break
+    return hits
+
+
+
 def scan(src):
     L = []
     A = L.append
@@ -119,18 +183,16 @@ def scan(src):
     if not found:
         A("  none found")
 
-    # constant approximations
-    A("\nnumeric literals near named constants:")
-    hits = False
-    for lit in sorted(set(re.findall(r'(?<![\w.])(\d+\.\d+)', src)), key=float):
-        v = float(lit)
-        for name, cv in CONSTS.items():
-            if cv and abs(v - cv) / cv < 0.01 and v != cv:
-                A(f"  {lit} vs {name} = {cv:.6f}   error {abs(v-cv):.2e}"
-                  f"  ({abs(v-cv)/cv*100:.3f}%)")
-                hits = True
-    if not hits:
+    # constant approximations — diagnostic only, never fatal, no Lipschitz factor
+    A("\nnumeric literals near named constants (diagnostic only):")
+    lits = constant_literals(src)
+    for lineno, raw, name, cv, v in lits:
+        err = abs(v - cv)
+        A(f"  line {lineno}: {raw} vs {name} = {cv:.6f}   error {err:.2e}"
+          f"  ({err/abs(cv)*100:.3f}%)" + ("   EXACT" if err == 0 else ""))
+    if not lits:
         A("  none within 1%")
+    A("  constant proximity is not a Lipschitz multiplier and is never fatal.")
 
     # implicit dependencies
     A("\nimplicit dependencies:")
