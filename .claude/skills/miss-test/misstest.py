@@ -6,6 +6,7 @@ has been declared, then measures whether that condition could actually fire.
   python3 misstest.py declare "<claim>" "<miss condition>"
   python3 misstest.py sweep <expr> <domain>    # what fraction of the domain passes?
   python3 misstest.py orbit-uniform '<json counts>'
+  python3 misstest.py grammar '<atoms>' <lo> <hi> [max_terms]   # coverage, not |G|
 
 sweep example — is "x^3+5 is QR" selective over F_37*?
   python3 misstest.py sweep "pow(x,3,37)+5" qr
@@ -105,6 +106,71 @@ def orbit_uniform(counts):
     return "\n".join(L)
 
 
+# ── grammar coverage (uniform-image model) ─────────────────────────────────
+
+def grammar_coverage(atoms, lo, hi, max_terms=3):
+    """Image of {signed sums, products} of up to max_terms atoms.
+
+    Returns (image, coverage, bits) against the universe [lo, hi].
+    This is the UNIFORM-IMAGE model: every distinct reachable value gets
+    equal weight. If the grammar carries a prior over expressions, use
+    -log2 sum{P(e) : e = t} instead; the two are different meters and
+    neither substitutes for the other.
+    """
+    import itertools
+    from math import log2
+    atoms = sorted({a for a in atoms if a != 0})
+    img = set()
+    for r in range(1, max_terms + 1):
+        for c in itertools.combinations_with_replacement(atoms, r):
+            v = 1
+            for x in c:
+                v *= x
+            if abs(v) < 10 ** 9:
+                img.add(v)
+        for c in itertools.combinations(atoms, r):
+            for sg in itertools.product((1, -1), repeat=r):
+                img.add(sum(s * x for s, x in zip(sg, c)))
+    n = sum(1 for v in img if lo <= v <= hi)
+    U = hi - lo + 1
+    c = n / U
+    return img, c, (-log2(c) if c else float('inf'))
+
+
+def look_elsewhere(c, T):
+    """P(>=1 hit) for T INDEPENDENT pre-named targets at coverage c.
+
+    Only valid when the targets are independent. Post-hoc target families are
+    usually algebraically dependent (444 = 183+261, 78 = 261-183), in which
+    case compute the joint event directly instead — see joint_fit_rate. The
+    union bound is an upper bound and is typically vacuous here.
+    """
+    from math import log2
+    p = 1 - (1 - c) ** T
+    return p, (-log2(p) if p else float('inf'))
+
+
+def joint_fit_rate(image, constraints, sampler, trials=200000, seed=37):
+    """Exact null rate that a whole multi-expression fit exists.
+
+    constraints: list of callables target -> int, each of whose values must
+    land in `image`; plus any structural condition (parity, integrality) the
+    derived quantities require. sampler() draws one target from the null.
+    Returns (hits/trials, bits).
+    """
+    import random
+    from math import log2
+    rnd = random.Random(seed)
+    hit = 0
+    for _ in range(trials):
+        t = sampler(rnd)
+        vals = [f(t) for f in constraints]
+        if all(v in image for v in vals) and (vals[0] - vals[-1]) % 2 == 0:
+            hit += 1
+    r = hit / trials
+    return r, (-log2(r) if r else float('inf'))
+
+
 if __name__ == '__main__':
     a = sys.argv[1:]
     if not a:
@@ -115,5 +181,21 @@ if __name__ == '__main__':
         print(sweep(a[1], a[2]))
     elif a[0] == 'orbit-uniform':
         print(orbit_uniform(json.loads(a[1])))
+    elif a[0] == 'grammar':
+        # grammar '<comma-separated atoms>' <lo> <hi> [max_terms]
+        atoms = [int(x) for x in a[1].replace(' ', '').split(',')]
+        lo, hi = int(a[2]), int(a[3])
+        mt = int(a[4]) if len(a) > 4 else 3
+        img, c, bits = grammar_coverage(atoms, lo, hi, mt)
+        print(f"atoms {len(set(atoms))}, terms <= {mt}")
+        print(f"image size {len(img)}; in [{lo},{hi}]: {sum(1 for v in img if lo<=v<=hi)}")
+        print(f"coverage {c:.4f}  ->  s_image = {bits:.2f} bits  (UNIFORM-IMAGE model)")
+        for T in (1, 2, 3, 5):
+            p_, b_ = look_elsewhere(c, T)
+            print(f"  T={T} independent targets: P(>=1 hit) {p_:.4f}, {b_:.2f} bits")
+        print("NOTE: if your targets are algebraically dependent, T is not the count")
+        print("      of hits. Compute the joint event with joint_fit_rate instead.")
     else:
         print(__doc__); sys.exit(1)
+
+
