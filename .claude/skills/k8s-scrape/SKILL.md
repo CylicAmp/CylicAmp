@@ -106,3 +106,68 @@ both for the same target.
 | needs a Service | no | yes |
 | port field | container port **name** | Service port **name** |
 | use for | private metrics port | metrics behind a ClusterIP |
+
+## Terminology — four distinct things
+
+| Term | Meaning |
+|---|---|
+| Pod | workload instance |
+| endpoint configuration | one `podMetricsEndpoints[]` entry — a template, not a destination |
+| target | resolved Pod + endpoint = a concrete scrape identity |
+| sample | one datum returned by a scrape of a target |
+
+```
+target T = (Pod P, endpoint config E, resolved params R)
+R = address + port + path + scheme + auth/TLS + target labels
+```
+
+An endpoint configuration is **not** a target; it participates in building many.
+
+## Cardinality
+
+```
+N_T  ~  N_P x N_E          matching Pods x applicable endpoint configs
+```
+
+3 pods x 2 endpoint configs = 6 target candidates. `targetLimit` bounds **N_T**,
+not pods and not endpoint configs. `audit.py chain` computes this from
+`spec.replicas` and the endpoint list and compares it against `targetLimit`.
+
+## Which limit acts where
+
+| Mechanism | Unit | Stage | Failure |
+|---|---|---|---|
+| `selector`, `namespaceSelector` | pods, namespaces | discovery | zero targets |
+| `targetLimit` | targets | target generation | target-limit exceeded |
+| `port` (named) | endpoint | target generation | wrong or missing target |
+| `path`, `scheme` | endpoint | scrape | HTTP / TLS failure |
+| `scrapeTimeout` | one scrape | scrape | context deadline exceeded |
+| `interval` | one target | scheduling | — |
+| `metricRelabelings` | samples | post-scrape | series dropped or renamed |
+| `sampleLimit` | samples | scrape/ingestion boundary | too many samples |
+| `labelLimit`, label name/value limits | sample labels | ingestion | rejected labels |
+
+```
+scrapeTimeout  = time allowed to OBTAIN the response
+sampleLimit    = samples permitted FROM that response
+targetLimit    = how many targets may exist at all
+```
+
+HTTP 200 does not mean every sample was ingested. A timeout is a transport
+failure, not an ingestion one. Availability of individual fields is CRD-version
+dependent.
+
+## Failure vocabulary
+
+| Avoid | Use |
+|---|---|
+| "endpoint failed" | target is down |
+| "no endpoint" | zero targets were generated |
+| "endpoint limit" | target limit, or name the specific endpoint constraint |
+| "PodMonitor is down" | PodMonitor generated zero targets |
+| "Prometheus can't find the endpoint" | Prometheus has no matching target |
+| "metrics failed" | scrape failed, or samples were limited |
+
+`audit.py classify` emits the state, the layer, and the ordered checks, and
+refuses to cross layers: no relabeling advice while zero targets exist, no
+selector advice once discovery has succeeded.
