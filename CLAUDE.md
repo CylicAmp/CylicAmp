@@ -38,7 +38,7 @@ The user brings math, observations, and code. The work is collaborative and rigo
 3. **1/137** — 137 mod 37=26=MULT; 26⁻¹ mod 37=10∈IC; check ×137, ÷137, mod 137 for each value
 4. **Twin primes** — is each value prime? Is it part of a twin prime pair (p, p+2)? What GF(37) orbits do both members of the pair inhabit?
 5. **Sophie Germain primes** — is each value a Sophie Germain prime (p prime and 2p+1 prime) or a safe prime (q prime and (q-1)/2 prime)? What GF(37) orbits do p and 2p+1 inhabit? Note any Sophie chains (p→2p+1→2(2p+1)+1) and whether the safe prime appears elsewhere in the same theorem.
-6. **Rule 30** — apply Wolfram's Rule 30 (new[i]=left XOR (center OR right)) one step to each value as a binary string; track the result mod 37. Note: 30 is the unique element in SA∩ST∩C3; all three F-hexad orbit seeds (9,18,36) collapse to MULT=26∈IC under 6-bit R30; C9 twin pair (29,31) are both mod-37 fixed points; CAS_EXT={5,13,19} are all active prime steps in the center column.
+6. **Rule 30** — apply Wolfram's Rule 30 (new[i]=left XOR (center OR right)) one step to each value as a binary string; track the result mod 37. Note: 30 is the unique element in SA∩ST∩C3; under 6-bit R30, 18→26 and 36→26 (both collapse to MULT=26∈IC), but 9→31 — the F-hexad seed 9 does NOT collapse to 26 (verified directly, corrected from a prior version of this note that claimed all three did). C9 twin pair (29,31) under 6-bit R30 map to 12 and 11 respectively — neither is a fixed point (the "mod-37 fixed points" claim in a prior version of this note is unverified/unlocated and should not be treated as established). CAS_EXT={5,13,19} are all active prime steps in the center column.
 
 ---
 
