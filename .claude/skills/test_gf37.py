@@ -21,6 +21,13 @@ import gf37 as G
 FAILS = []
 
 
+def ok(name):
+    """Report a test whose work was done by bare asserts above it. The
+    assert is the test; this only prints. Never use it to stand in for a
+    condition — a printer that always passes is not a check."""
+    print(f"  ok    {name}")
+
+
 def check(name, cond, detail=''):
     if cond:
         print(f"  ok    {name}")
@@ -157,10 +164,153 @@ def test_primes():
     check("negatives are not prime", not G.is_prime(-7))
 
 
+
+# ── cyclotomic / decimal-period primitives (T301-T304) ─────────────────────
+
+def test_cyclotomic():
+    assert G.phi_d(1, 137) == 136
+    assert G.phi_d(3, 137) == 18907 == 7 * 37 * 73
+    assert G.phi_d(3, 10) == 111 == 3 * 37
+    assert G.phi_d(6, 10) == 91 == 7 * 13
+    assert G.phi_d(8, 10) == 10001 == 73 * 137
+    for d in range(1, 13):                      # x^d-1 = prod_{e|d} Phi_e(x)
+        prod = 1
+        for e in range(1, d + 1):
+            if d % e == 0:
+                prod *= G.phi_d(e, 10)
+        assert prod == 10 ** d - 1, d
+    ok("cyclotomic values and the x^d-1 product identity")
+
+
+def test_order_slot():
+    assert G.order_slot(10, 3) == [37]          # the L3 singleton
+    assert G.order_slot(137, 3) == [7, 37, 73]  # L1, complete
+    assert G.order_slot(10, 6) == [7, 13]
+    assert G.order_slot(10, 8) == [73, 137]
+    # every prime in a slot really has that order; the p | d case is excluded
+    for d in range(1, 10):
+        for p in G.order_slot(10, d):
+            assert G.order_mod(10, p) == d and d % p != 0
+    ok("order slots: primes with ord_p(a) = d")
+
+
+def test_period():
+    assert G.period(37, 10) == (0, 3)           # 1/37 = 0.027027...
+    assert G.period(137, 10) == (0, 8)
+    assert G.period(7, 10) == (0, 6)
+    assert G.period(8, 10) == (3, 0)            # terminates
+    assert G.period(8, 2) == (3, 0)
+    assert G.period(8, 100) == (2, 0)           # pre = ceil(v_2(8)/v_2(100))
+    assert G.period(1, 10) == (0, 0)
+    # the stated rule against the observed expansion
+    from fractions import Fraction
+    for base in (2, 3, 10, 12, 100):
+        for d in range(1, 60):
+            f = Fraction(1, d)
+            seen, r, i = {}, f.numerator % f.denominator, 0
+            while r not in seen and r != 0:
+                seen[r] = i
+                r = r * base % f.denominator
+                i += 1
+            obs = (i, 0) if r == 0 else (seen[r], i - seen[r])
+            assert G.period(d, base) == obs, (d, base, G.period(d, base), obs)
+    ok("period(n, base) matches the observed expansion, 5 bases x 59 n")
+
+
+def test_repetend():
+    assert G.repetend(1, 37, 10) == '027'
+    assert G.repetend(1, 7, 10) == '142857'
+    assert G.repetend(1, 17, 2) == '00001111'
+    assert G.repetend(8, 17, 2) == '01111000'
+    assert G.repetend(10, 33, 2) == '0100110110'
+    assert len(G.repetend(1, 69, 2)) == 22
+    assert G.repetend(1, 8, 10) == ''           # terminates
+    # a repetend must reproduce its own number
+    from fractions import Fraction
+    for a, b, base in ((1, 37, 10), (1, 7, 10), (8, 17, 2), (10, 33, 2)):
+        r = G.repetend(a, b, base)
+        assert Fraction(int(r, base), base ** len(r) - 1) == Fraction(a, b)
+    ok("repetends, and each reproduces its own fraction")
+
+
+def test_complement_halves():
+    assert G.complement_halves(1, 17, 2) is True     # 2^4 = -1 mod 17
+    assert G.complement_halves(8, 17, 2) is True
+    assert G.complement_halves(10, 33, 2) is True    # 2^5 = -1 mod 33
+    assert G.complement_halves(1, 69, 2) is False    # 2^11 != -1 mod 69
+    assert G.complement_halves(1, 37, 10) is False   # period 3, odd
+    assert G.complement_halves(1, 37, 2) is True     # 2 is a primitive root
+    assert G.complement_halves(1, 8, 2) is None      # terminates
+    ok("complement-halves test tracks base^(L/2) = -1")
+
+
+def test_lists():
+    assert G.L1_ORD137 == [7, 37, 73]
+    assert G.L2_CM == [5, 17, 37]
+    assert G.L3_ORD10 == [37]
+    assert G.lists_containing(37) == ['L1', 'L2', 'L3']
+    assert G.lists_containing(73) == ['L1']
+    assert G.lists_containing(5) == ['L2']
+    assert G.lists_containing(11) == []
+    # each list agrees with the computation it claims to record
+    assert G.order_slot(137, 3) == G.L1_ORD137
+    assert G.order_slot(10, 3) == G.L3_ORD10
+    assert G.L2_CM == [n * n + 1 for n in (2, 4, 6)]
+    ok("the three complete lists, and each matches its own derivation")
+
+
+def test_factor_str():
+    assert G.factor_str(111) == '3 x 37'
+    assert G.factor_str(999) == '3^3 x 37'
+    assert G.factor_str(18907) == '7 x 37 x 73'
+    assert G.factor_str(1) == '1'
+    ok("factor_str renders factorizations")
+
+
+def test_guards_refuse_rather_than_hang():
+    """Every unbounded search in this library must have a stated bound.
+
+    Found by auditing 233, then 9999991, then 2^31-1: each hung in a
+    different place — order_slot factoring a 112-digit Phi, repetend
+    building a 1.6-million-digit string, order_mod looping toward n-1.
+    A silent hang is worse than a stated refusal.
+    """
+    import time
+    t0 = time.time()
+    assert G.order_slot(10, 232) is None          # Phi_232(10) has 112 digits
+    assert G.order_slot(10, 1666665) is None      # degree 622080
+    assert G.order_slot(10, 3) == [37]            # small ones still work
+    assert G.repetend(1, 9999991, 10) is None     # period 1666665
+    assert G.repetend(1, 37, 10) == '027'
+    assert G.order_mod(10, 2 ** 31 - 1, max_steps=10 ** 5) is None
+    assert G.order_mod(2, 2 ** 31 - 1) == 31      # unbounded default is fine
+    assert G.period(2 ** 31 - 1, 10)[1] == -1     # -1 = unknown, not 0
+    assert G.period(2 ** 31 - 1, 2) == (0, 31)
+    assert time.time() - t0 < 10, "a guard is not firing"
+    ok("guards return None/-1 instead of hanging (233, 9999991, 2^31-1)")
+
+
+def test_period_zero_vs_unknown():
+    """0 means terminates, -1 means unknown. They must not be confused."""
+    assert G.period(8, 10) == (3, 0)              # terminates
+    assert G.period(37, 10) == (0, 3)
+    assert G.period(2 ** 31 - 1, 10)[1] == -1     # unknown
+    assert G.period(8, 10)[1] != G.period(2 ** 31 - 1, 10)[1]
+    ok("period 0 (terminates) is distinct from -1 (unknown)")
+
+
+def test_totient():
+    assert G.totient(1666665) == 622080
+    for n, t in ((1, 1), (2, 1), (12, 4), (37, 36), (1369, 37 * 36)):
+        assert G.totient(n) == t, n
+    ok("totient from the factorization")
+
 if __name__ == '__main__':
-    for t in (test_dr_domain, test_factor_roundtrip, test_return_types,
-              test_orbits, test_antipodal, test_blocks,
-              test_homomorphisms, test_primes):
+    # every test defined in this module runs; an unregistered test is a
+    # test that silently never ran, which is worse than no test.
+    tests = [v for k, v in sorted(globals().items())
+             if k.startswith('test_') and callable(v)]
+    for t in tests:
         t()
     print()
     if FAILS:

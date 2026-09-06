@@ -142,15 +142,24 @@ def prime_profile(n):
     }
 
 
-def order_mod(a, n):
-    """Multiplicative order of a mod n, or None if not coprime."""
+def order_mod(a, n, max_steps=None):
+    """Multiplicative order of a mod n, by direct search.
+
+    max_steps bounds the search and returns None when exceeded, instead of
+    looping to n-1. The order of 10 mod 2^31-1 is 1073741823; a caller that
+    asks for it unbounded simply hangs. Default stays unbounded so existing
+    callers, all of which use small moduli, are unchanged.
+    """
+    from math import gcd
     a %= n
-    if gcd(a, n) != 1:
+    if n <= 1 or gcd(a, n) != 1:
         return None
     k, v = 1, a
     while v != 1:
-        v = (v * a) % n
+        v = v * a % n
         k += 1
+        if max_steps is not None and k > max_steps:
+            return None
     return k
 
 
@@ -187,6 +196,16 @@ def factor(n):
     return f
 
 
+def factor_str(n):
+    """Human-readable factorization, e.g. 111 -> '3 x 37', 9 -> '3^2'."""
+    if abs(n) < 2:
+        return str(n)
+    parts = []
+    for b, e in sorted(factor(n).items()):
+        parts.append(str(b) if e == 1 else f"{b}^{e}")
+    return " x ".join(parts)
+
+
 def factor_product(f):
     """Reconstruct n from factor(n). Used to assert round-tripping."""
     v = 1
@@ -208,3 +227,122 @@ GAMMA = [
 def rh_hits(r):
     """Indices n where floor(gamma_n) = r (mod 37)."""
     return [i for i, g in enumerate(GAMMA, 1) if int(g) % P == r % P]
+
+
+# ── cyclotomic / decimal-period primitives (T301–T304) ─────────────────────
+
+def phi_d(d, a):
+    """Phi_d(a), the d-th cyclotomic polynomial evaluated at integer a.
+    Computed by exact division: x^d - 1 = prod_{e | d} Phi_e(x)."""
+    num = a ** d - 1
+    for e in range(1, d):
+        if d % e == 0:
+            num //= phi_d(e, a)
+    return num
+
+
+def totient(n):
+    """Euler phi, from the factorization. deg Phi_n = totient(n)."""
+    t = n
+    for q in factor(n):
+        t = t // q * (q - 1)
+    return t
+
+
+def order_slot(a, d, max_digits=18):
+    """Primes p with ord_p(a) = d: the factors of Phi_d(a), minus the
+    exception p | d. Complete for that d (T301).
+
+    Returns None when Phi_d(a) is too large to factor by trial division
+    rather than hanging. Callers must handle None — a silent hang is worse
+    than a stated refusal.
+    """
+    # deg Phi_d = totient(d), so Phi_d(a) has about totient(d)*log10(a)
+    # digits. Check that BEFORE computing it — an earlier version built the
+    # integer first, which for d = 1666665 means a 1.6-million-digit number.
+    t = totient(d)
+    if t * len(str(abs(a))) > max_digits:
+        return None
+    v = phi_d(d, a)
+    if len(str(abs(v))) > max_digits:
+        return None
+    out = []
+    for q in factor(v):
+        if a % q and order_mod(a, q) == d:
+            out.append(q)
+    return sorted(out)
+
+
+def period(n, base=10, max_steps=10 ** 7):
+    """(pre-period, period) of 1/n in the given base.
+    pre = max over p | base of ceil(v_p(n) / v_p(base)); period = ord_q(base)
+    on the part of n coprime to the base. period 0 means it terminates;
+    period -1 means the order search exceeded max_steps and is unknown."""
+    if n <= 1:
+        return (0, 0)
+    q, pre = n, 0
+    for p, vb in factor(base).items():
+        vn = 0
+        while q % p == 0:
+            q //= p
+            vn += 1
+        pre = max(pre, -(-vn // vb))
+    return (pre, (order_mod(base, q, max_steps) or -1) if q > 1 else 0)
+
+
+def repetend(a, b, base=2, max_len=4096):
+    """The repeating digit block of a/b in the given base, as a string.
+    Empty string when the expansion terminates.
+
+    Returns None when the period exceeds max_len rather than building a
+    string of that length. 1/9999991 has period 1666665; a caller that
+    asks for it without a bound simply hangs. Callers must handle None.
+    """
+    from math import gcd
+    g = gcd(a, b)
+    a, b = a // g, b // g
+    pre, per = period(b, base)
+    if not per:
+        return ''
+    if per > max_len:
+        return None
+    r = a % b
+    for _ in range(pre):
+        r = r * base % b
+    out = []
+    for _ in range(per):
+        r *= base
+        out.append(r // b)
+        r %= b
+    return ''.join(map(str, out))
+
+
+def complement_halves(a, b, base=2):
+    """True iff base^(L/2) = -1 mod q, so the repetend's halves are
+    digit-complements (each pair summing to base-1)."""
+    from math import gcd
+    g = gcd(a, b)
+    b //= g
+    q = b
+    for p in factor(base):
+        while q % p == 0:
+            q //= p
+    if q <= 1:
+        return None
+    L = order_mod(base, q)
+    if L % 2:
+        return False
+    return pow(base, L // 2, q) == q - 1
+
+
+# The three complete lists that meet at 37 (T304). Each is proved complete
+# in its own theorem; they are recorded here as data, not recomputed.
+L1_ORD137 = [7, 37, 73]      # ord_p(137) = 3          | Phi_3(137) = 18907
+L2_CM     = [5, 17, 37]      # p = n^2+1, n = |R*| in {2,4,6}
+L3_ORD10  = [37]             # ord_p(10)  = 3          | Phi_3(10)  = 111
+
+
+def lists_containing(p):
+    """Which of the three complete lists hold this prime."""
+    return [n for n, L in (('L1', L1_ORD137), ('L2', L2_CM), ('L3', L3_ORD10))
+            if p in L]
