@@ -52,6 +52,8 @@ def _iana(name):
 def chain(prom_f, pm_f, wl_f):
     prom, pm, wl = (yaml.safe_load(open(f)) for f in (prom_f, pm_f, wl_f))
     L, fails, warns, limitfail = [], [], [], None
+    cause = None   # selection | eligibility | resolution | limit
+    resolved_eps = []
     A = L.append
     A("=" * 70); A("SELECTOR CHAIN"); A("=" * 70)
 
@@ -66,6 +68,7 @@ def chain(prom_f, pm_f, wl_f):
     A(f"        labels   {pm_labels}")
     if not ok:
         A(f"        {why}"); fails.append("PodMonitor not selected by Prometheus")
+        cause = cause or "selection (Prometheus does not adopt this PodMonitor)"
     elif not pspec.get('podMonitorSelector'):
         A(f"        {why} — every PodMonitor in scope is used")
         warns.append("Prometheus.podMonitorSelector is empty: it adopts EVERY PodMonitor")
@@ -87,7 +90,7 @@ def chain(prom_f, pm_f, wl_f):
           f"PodMonitor's own namespace {pm_ns!r}")
         A(f"        workload is in {wl_ns!r}")
         if not ok3:
-            fails.append(f"workload ns {wl_ns!r} outside PodMonitor ns {pm_ns!r}")
+            fails.append(f"workload ns {wl_ns!r} outside PodMonitor ns {pm_ns!r}"); cause = cause or "selection (namespace)"
     elif pnss.get('any'):
         A(f"{OK} 3  namespaceSelector any:true -> all namespaces")
     else:
@@ -95,7 +98,7 @@ def chain(prom_f, pm_f, wl_f):
         ok3 = wl_ns in names
         A(f"{OK if ok3 else BAD} 3  namespaceSelector matchNames {names}, workload ns {wl_ns!r}")
         if not ok3:
-            fails.append(f"workload ns {wl_ns!r} not in {names}")
+            fails.append(f"workload ns {wl_ns!r} not in {names}"); cause = cause or "selection (namespace)"
 
     # 4 PodMonitor -> pod labels
     tmpl = wl.get('spec', {}).get('template', {})
@@ -108,13 +111,14 @@ def chain(prom_f, pm_f, wl_f):
     A(f"        pod labels {pod_labels}")
     if not ok4:
         A(f"        {why4}"); fails.append("pod labels do not match PodMonitor.selector")
+        cause = cause or "selection (labels)"
     elif not psel:
         A(f"        {why4} — this is the cardinality hazard, not a no-op")
         warns.append("PodMonitor.selector is empty: EVERY pod in scope becomes a target")
     for k in pod_annos:
         if any(k == mk for mk in (psel or {}).get('matchLabels', {})):
             A(f"{BAD}    {k!r} is an ANNOTATION; selectors read labels only")
-            fails.append(f"{k} is an annotation, not a label")
+            fails.append(f"{k} is an annotation, not a label"); cause = cause or "selection (labels)"
 
     # 5 endpoint port -> named container port
     ports = {}
@@ -137,14 +141,15 @@ def chain(prom_f, pm_f, wl_f):
         if len(setfields) > 1:
             A(f"{BAD}    endpoint[{i}] sets {setfields}; set exactly one "
               f"(precedence is CRD-version dependent)")
-            fails.append(f"endpoint[{i}] sets {setfields}")
+            fails.append(f"endpoint[{i}] sets {setfields}"); cause = cause or "resolution"
         pn = ep.get('port')
         if pn is not None:
             ok5 = pn in ports
+            resolved_eps.append(ok5)
             A(f"{OK if ok5 else BAD}    endpoint[{i}].port {pn!r} "
               f"{'-> containerPort ' + str(ports[pn][0][1]) if ok5 else 'NOT DECLARED on any container'}")
             if not ok5:
-                fails.append(f"no container port named {pn!r}")
+                fails.append(f"no container port named {pn!r}"); cause = cause or "resolution"
             elif pn != 'metrics' and ep.get('path', '/metrics') == '/metrics':
                 A(f"{WARN}    endpoint[{i}] scrapes {pn!r} (containerPort "
                   f"{ports[pn][0][1]}) at /metrics — is that the metrics port, "
@@ -155,57 +160,85 @@ def chain(prom_f, pm_f, wl_f):
           f"scheme {ep.get('scheme', 'http (default)')}  "
           f"interval {ep.get('interval', 'global (default)')}")
 
-    # 6 cardinality vs targetLimit
+    # 6 cardinality — CONDITIONAL, not an unconditional product
     reps = wl.get('spec', {}).get('replicas')
     eps = pm.get('spec', {}).get('podMetricsEndpoints') or []
     tl = pm.get('spec', {}).get('targetLimit')
-    A("")
-    A(f"{OK} 6  cardinality")
     if reps is None:
-        A(f"        replicas not set in the manifest (defaults to 1)")
         reps = 1
-    A(f"        N_P (replicas)           {reps}")
-    A(f"        N_E (endpoint configs)   {len(eps)}")
-    A(f"        N_T ~ N_P x N_E          {reps * len(eps)}   target candidates")
+    n_res = sum(1 for r in resolved_eps if r)
+    cand = reps * len(eps)
+    gen = reps * n_res
+    A("")
+    A(f"{OK} 6  target generation")
+    A(f"        |P| matching pods        {reps}   (one Deployment template, so E(P)")
+    A(f"                                       is identical for every replica —")
+    A(f"                                       the product form is valid here)")
+    A(f"        |E| endpoint configs     {len(eps)}")
+    A(f"        of which resolvable      {n_res}")
+    A(f"        candidate targets        {cand}")
+    A(f"        generated targets        {gen}")
     if tl is None:
-        A(f"        targetLimit unset — no cap on generated targets")
+        A(f"        targetLimit unset")
     else:
-        okt = reps * len(eps) <= tl
-        A(f"{OK if okt else BAD}       targetLimit {tl}"
-          f" vs {reps * len(eps)} candidates")
+        okt = gen <= tl
+        A(f"{OK if okt else BAD}       targetLimit {tl} vs {gen} generated")
         if not okt:
-            limitfail = (f"{reps*len(eps)} target candidates exceed targetLimit {tl}")
-    A(f"        note: targetLimit bounds TARGETS, not pods and not endpoint configs")
+            limitfail = f"{gen} generated targets exceed targetLimit {tl}"
+            cause = cause or "target-generation constraint"
 
     A("")
     A("=" * 70)
-    if limitfail and not fails:
-        A("STATUS: TARGET LIMIT EXCEEDED")
-        A("LAYER:  TARGET GENERATION")
-        A("NEXT CHECK: " + limitfail)
-        A("        The selector chain is intact — pods match and the port resolves.")
-        A("        This is not a discovery mismatch and not a scrape failure.")
-        A("        Raise targetLimit, reduce replicas, or drop an endpoint config.")
-    elif fails:
-        A("STATUS: ZERO TARGETS")
-        A("LAYER:  DISCOVERY")
-        A("NEXT CHECK: " + fails[0])
+    if fails or limitfail:
+        A("DISCOVERY STATE:  ABSENT" if gen == 0 or fails
+          else "DISCOVERY STATE:  CONSTRAINED")
+        A(f"DISCOVERY CAUSE:  {cause}")
+        A("")
+        A("  SELECTION")
+        A(f"    PodMonitor selected by Prometheus : "
+          f"{'no' if cause and cause.startswith('selection') and 'not selected' in (fails[0] if fails else '') else 'yes'}")
+        sel_fail = bool(cause) and cause.startswith("selection")
+        A(f"    pods matched                      : {0 if sel_fail else reps}")
+        A("  ENDPOINT RESOLUTION")
+        for i, ep in enumerate(eps):
+            r = resolved_eps[i] if i < len(resolved_eps) else None
+            A(f"    endpoint[{i}] port {ep.get('port')!r:<16} "
+              f"{'resolved' if r else 'FAILED' if r is False else 'not port-based'}")
+        A("  TARGET GENERATION")
+        c_eff, g_eff = (0, 0) if sel_fail else (cand, gen)
+        A(f"    candidates {c_eff}   generated {g_eff}"
+          + (f"   targetLimit {tl}" if tl is not None else ""))
+        A("")
+        A("SCRAPE STATE:     NOT APPLICABLE")
+        A("DATA STATE:       NOT APPLICABLE")
+        A("")
+        A("NEXT CHECK: " + (fails[0] if fails else limitfail))
         for f in fails[1:]:
             A("     also: " + f)
-        if limitfail:
-            A("     also: " + limitfail + "  (TARGET GENERATION layer)")
+        if limitfail and fails:
+            A("     also: " + limitfail + "  (target-generation constraint)")
+        A("")
+        if limitfail and not fails:
+            A(f"  {gen} targets WERE generated; the constraint rejected the population.")
+            A("  That is a target-generation outcome, not a selector mismatch.")
+        else:
+            A("  zero targets is the OUTCOME. The cause above is the layer to fix.")
     elif warns:
-        A("STATUS: TARGET GENERATED, BUT SUSPECT")
-        A("LAYER:  DISCOVERY (chain resolves; the result is probably not what you want)")
+        A("DISCOVERY STATE:  PRESENT, BUT SUSPECT")
+        A(f"  generated targets {gen}")
         for w in warns:
             A("  ! " + w)
-        A("NOTE:   these produce targets, so the symptom is not '0 targets'.")
-        A("        It is wrong-port scrapes or runaway cardinality.")
+        A("SCRAPE STATE:     unknown from manifests — targets exist, check live")
+        A("DATA STATE:       not evaluable until the scrape succeeds")
     else:
-        A("STATUS: chain intact — discovery should produce a target")
-        A("LAYER:  next failures would be TRANSPORT (listener, path, scheme,")
-        A("        network, TLS/auth) then INGESTION (metricRelabelings, limits)")
-        A("NOTE:   a PodMonitor opens no port. Exposure is Service/Ingress/NetworkPolicy.")
+        A("DISCOVERY STATE:  PRESENT")
+        A(f"  candidates {cand}, generated {gen}")
+        A("SCRAPE STATE:     unknown from manifests")
+        A("    next failures: listener bound, path, scheme, network, TLS/auth,")
+        A("    scrapeTimeout — all TRANSPORT, none fixable by a selector edit")
+        A("DATA STATE:       not evaluable until the scrape succeeds")
+        A("    then: metricRelabelings, sampleLimit, labelLimit, cardinality")
+        A("NOTE: a PodMonitor opens no port. Exposure is Service/Ingress/NetworkPolicy.")
     return "\n".join(L)
 
 
