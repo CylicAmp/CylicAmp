@@ -123,15 +123,49 @@ R = address + port + path + scheme + auth/TLS + target labels
 
 An endpoint configuration is **not** a target; it participates in building many.
 
-## Cardinality
+## Cardinality — conditional, not a product
 
 ```
-N_T  ~  N_P x N_E          matching Pods x applicable endpoint configs
+T = { (P, e, rho(P,e))  |  P in P_M,  e in E(P),  R(P,e) }
+|T| = sum over P in P_M of |{ e in E(P) : R(P,e) }|
 ```
 
-3 pods x 2 endpoint configs = 6 target candidates. `targetLimit` bounds **N_T**,
-not pods and not endpoint configs. `audit.py chain` computes this from
-`spec.replicas` and the endpoint list and compares it against `targetLimit`.
+`|T| = |P| x |E|` holds **only** when every selected pod is eligible, every
+pod has the same applicable endpoint set, every endpoint resolves for every
+pod, and nothing is filtered afterwards. A single Deployment satisfies the
+second condition — all replicas share one template — so the product is valid
+there and `audit.py` uses it, saying so. A DaemonSet across heterogeneous
+nodes, or two workloads under one selector, does not.
+
+`targetLimit` bounds `|T|` — not pods, not endpoint configs.
+
+## Two axes, never one status
+
+```
+Discovery State   ABSENT | PRESENT           was a target generated?
+Scrape State      N/A | FAILED | SUCCEEDED   given one, did the scrape work?
+Data State        N/A | LIMITED | ACCEPTED   what happened to the samples?
+
+D = ABSENT  =>  S = N/A          a nonexistent target cannot fail to scrape
+```
+
+**Zero targets is an outcome, not a cause.** Always report the cause class:
+
+```
+selection    Prometheus does not adopt the PodMonitor, or namespace/label
+             selection matched nothing
+eligibility  pod matched but is not eligible for this endpoint
+resolution   pod and endpoint matched but the named port does not resolve
+constraint   candidates were generated then rejected by targetLimit
+```
+
+`audit.py chain` emits the full record — SELECTION / ENDPOINT RESOLUTION /
+TARGET GENERATION with candidate and generated counts — so "3 pods selected,
+0 targets generated, cause: resolution" is never reported as "no pods found".
+
+Target identity is `T = (P, E, rho)`. The address `10.42.1.17:9100` is the
+target's **resolved address**, not its whole identity; two endpoint configs
+can resolve to one address with different paths.
 
 ## Which limit acts where
 
