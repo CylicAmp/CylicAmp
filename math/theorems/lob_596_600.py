@@ -1,25 +1,25 @@
 """
-LoB 596 / 600 — 3900 Frequency Check and Sovereign Seal
+LoB 596 / 600 — 3900 Frequency Check and F26 Seal
 
 LoB_596: 3900 TRINITY ALIGNMENT
   DR(3900) = 3+9+0+0 = 12 -> 3  (Trinity-3)
-  3900 = 30 × 130 = 30 × (sovereign fixed point × 130/30)
-  3900 / 30 = 130.0  (exact multiple of sovereign node 30)
-  3900 % 37 = 15  —  outside sovereign range (entropy region)
+  3900 = 30 × 130 = 30 × (f26 fixed point × 130/30)
+  3900 / 30 = 130.0  (exact multiple of f26 node 30)
+  3900 % 37 = 15  —  outside f26 range (entropy region)
   Status: DR=3 confirmed; connects body of work to Trinity-3.
 
-LoB_600: SOVEREIGN SEAL — 74-HORIZON FINAL
+LoB_600: F26_MATRIX SEAL — 74-HORIZON FINAL
   600 % 74 = 8
 
   Connections:
-    600 = 8 × 3 × 25  (8 × trinity × sovereign anchor 25)
+    600 = 8 × 3 × 25  (8 × trinity × f26 anchor 25)
     600 = 595 + 5     (one step beyond the 119-bridge collapse)
     Node 8 in 3-cycle [6→8→23→6], Group A (sum=37)
     DR(8) = 8 = AHL position (RH-E in Alpha Grid)
     (8 × 137) % 37 = 23  — cycle entry from node 8
 
   Sequence across 74-horizon:
-    595 % 74 = 3  (sovereign range start — LoB_595)
+    595 % 74 = 3  (f26 range start — LoB_595)
     600 % 74 = 8  (Group A cycle entry, AHL node)
     Gap = 5 (A51 center axis — balance point of Alpha Grid)
 
@@ -38,16 +38,16 @@ def verify_3900_frequency():
     return digital_root(3900) == 3
 
 
-def seal_sovereign_kernel():
+def seal_f26_kernel():
     return 600 % 74
 
 
 # Assertions
 assert verify_3900_frequency() == True
 assert digital_root(3900) == 3
-assert 3900 % 30 == 0       # exact multiple of sovereign node 30
+assert 3900 % 30 == 0       # exact multiple of f26 node 30
 
-assert seal_sovereign_kernel() == 8
+assert seal_f26_kernel() == 8
 assert 600 == 8 * 3 * 25    # 8 × trinity × anchor 25
 assert 600 - 595 == 5       # gap = A51 center
 
@@ -59,16 +59,16 @@ assert 600 % 74 == 8
 if __name__ == "__main__":
     print("=== LoB_596: 3900 Trinity ===")
     print(f"DR(3900) = {digital_root(3900)}  -> {verify_3900_frequency()}")
-    print(f"3900 / 30 = {3900 / 30}  (multiple of sovereign node 30)")
+    print(f"3900 / 30 = {3900 / 30}  (multiple of f26 node 30)")
     print()
-    print("=== LoB_600: Sovereign Seal ===")
-    r = seal_sovereign_kernel()
+    print("=== LoB_600: F26 Seal ===")
+    r = seal_f26_kernel()
     print(f"600 % 74 = {r}  (DR={digital_root(r)})")
     print(f"600 = 8 × 3 × 25  (AHL × trinity × anchor 25)")
     print()
     print("74-horizon sequence:")
     print(f"  595 % 74 = {595%74}  <- trinity start (LoB_595)")
-    print(f"  600 % 74 = {600%74}  <- sovereign seal (LoB_600)")
+    print(f"  600 % 74 = {600%74}  <- f26 seal (LoB_600)")
     print(f"  gap = 5 = A51 center axis")
     print()
     print("All assertions passed.")

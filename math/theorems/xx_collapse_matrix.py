@@ -1,7 +1,7 @@
 """
 Theorem 29: XX Collapse — 119/911 Matrix Audit
 
-Matrix of 1s and 9s encoding the sovereign/shield duality.
+Matrix of 1s and 9s encoding the anchor/shield duality.
 "119" = bridge node (137-18=119, exhaust phi class).
 "911" = mirror/reversal of 119.
 
@@ -15,13 +15,13 @@ Key results:
 2. 119/911 SUBSTRING PATTERN
    Row 1: "119" at [3,9]  "911" at [0,6]   — 2 each, offset by 3
    Row 2: "119" at [0,6]  "911" at [3,9]   — 2 each, offset by 3 (inverted row 1)
-   Row 3: "119" at [2,5,8]  "911" at [1,4,7] — 3 EACH, spacing=3 (order-3 heartbeat)
+   Row 3: "119" at [2,5,8]  "911" at [1,4,7] — 3 EACH, spacing=3 (order-3 cycle under f(n)=(26n)%37)
    Row 4: no "119" or "911" substrings
 
 3. ROW 3 IS THE RESONANCE ROW
    "191191191191" — pure alternating 1-9-1 period-3 pattern
    Contains exactly 3 occurrences of "119" AND 3 of "911"
-   The order-3 heartbeat appears directly in the substring count
+   The order-3 cycle under f(n)=(26n)%37 appears directly in the substring count
 
 4. DR=8 INVARIANT
    All three structured rows have digit sum 44, DR(44)=8
@@ -61,7 +61,7 @@ assert matrix[3].count('1') == 4
 assert matrix[3].count('9') == 7
 assert len(matrix[3]) == 11
 
-# Row 3 has order-3 heartbeat in substring count
+# Row 3 has order-3 f26_map in substring count
 assert len(find_pattern(matrix[2], "119")) == 3
 assert len(find_pattern(matrix[2], "911")) == 3
 
@@ -82,7 +82,7 @@ if __name__ == "__main__":
         print(f"  1s={ones}  9s={nines}  digit_sum={dsum}  DR={dr(dsum)}")
         print(f"  '119' at {p119}  '911' at {p911}")
     print()
-    print("Row 3 order-3 heartbeat: 3× '119' and 3× '911'  ✓")
+    print("Row 3 order-3 cycle (3-cycles under f(n)=(26n)%37): 3× '119' and 3× '911'  ✓")
     print("Rows 1-3 digit sum invariant: 44 (DR=8)  ✓")
     print("Row 4 entropy: different structure, length 11, no 119/911  ✓")
     print()
