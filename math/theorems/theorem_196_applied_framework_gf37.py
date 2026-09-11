@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 196: Applied GF(37) Connections — Inverse Problems, Nuclear Theory, Optimization
 Author: Michael Warren Song (CyclicAmp)

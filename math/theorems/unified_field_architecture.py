@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 224: Unified Field Architecture — Void to Geometric Morphogenesis
 

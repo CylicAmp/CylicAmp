@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Ƴ = 22: The Inverse Seed Coordinate on GF(37) — THEOREM 92
 

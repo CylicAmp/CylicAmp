@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 T302 — The 137-Map IS the Decimal Shift: 26 = 10^2 (mod 37)
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Permutation analysis for digit sets {3,4,7} and {1,3,7}.
 

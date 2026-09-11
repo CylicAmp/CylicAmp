@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 216: Chain-of-Thought Serialization and GF(37) Orbit Structure
 Author: Michael Warren Song (CyclicAmp)

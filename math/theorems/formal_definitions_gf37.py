@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Formal Definitions and Theorems — GF(37) GF(37)
 

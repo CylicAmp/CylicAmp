@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 238: Rule 30 Computational Complexity — GF(37) Modular Prediction and Irreducibility
 Author: Michael Warren Song (CyclicAmp)

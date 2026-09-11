@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T289 — Quadratic Twist Pairs of j=0 Curves over F_37 = H_4-Coset Partition
 

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 186: Fractal Uncertainty Principle and GF(37)
 

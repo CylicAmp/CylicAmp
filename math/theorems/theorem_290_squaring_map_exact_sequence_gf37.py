@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 T290 — The Squaring Map on Orbits: Exact Sequence H_2 → Z/12Z → H_6
 

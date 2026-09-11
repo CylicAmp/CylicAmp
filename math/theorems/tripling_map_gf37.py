@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Tripling Map and Six-Orbit Cycle — GF(37)
 

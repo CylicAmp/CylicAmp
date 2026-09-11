@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 245: n = 130 — Unique Divisor-Square-Sum Solution (GF(37))
 

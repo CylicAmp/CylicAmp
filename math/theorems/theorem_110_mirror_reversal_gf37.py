@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 110 — Mirror Reversal of 3-Digit Numbers in GF(37)

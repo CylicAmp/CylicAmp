@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T280: Matrix dimension shift and palindromic tiling in GF(37)
 

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 141: Pisano Period π(37) = 76 — Full Orbit Mapping
 

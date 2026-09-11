@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T270: Birthday March 3 (3/3/2026) — astronomical events in GF(37)
 

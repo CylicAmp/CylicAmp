@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 All 84 Triplets on the 3×3 Board: Complete Feature Table
 

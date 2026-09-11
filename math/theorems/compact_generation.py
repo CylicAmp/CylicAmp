@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Compact Generation
 

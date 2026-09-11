@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Reciprocal Quadrinomial PP Classification over GF(q²)
 ======================================================

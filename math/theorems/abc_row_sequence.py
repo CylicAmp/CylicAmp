@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 ABC Row Sequence — GF(37)
 

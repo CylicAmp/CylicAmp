@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 107 — Three Convergences at Seed 246: Metonic Orbit Sum = P,

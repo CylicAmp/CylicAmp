@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 THEOREM 100 — The Milestone Number on GF(37)
 

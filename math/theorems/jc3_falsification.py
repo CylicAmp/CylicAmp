@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 259: Jacobian Conjecture JC(3) — Falsification and Stress Tests

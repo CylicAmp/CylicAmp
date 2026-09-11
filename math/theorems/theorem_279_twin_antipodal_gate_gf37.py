@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T279: Twin prime antipodal gate — TESLA↔C9 symmetry and orbit arithmetic
 

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 192: Critique of the Delta-Function Hilbert–Pólya Construction
 

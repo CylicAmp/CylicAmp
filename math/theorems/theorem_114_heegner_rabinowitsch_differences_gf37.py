@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 THEOREM 114 — Heegner–Rabinowitsch Difference Structure in GF(37)
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Polyhedral Orbit Duality
 

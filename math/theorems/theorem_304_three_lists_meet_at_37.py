@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T304 — Three Independent Lists, One Intersection: the Pan-Out
 

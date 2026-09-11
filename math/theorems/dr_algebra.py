@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 CLOSED ALGEBRA ON DIGITAL ROOT CLASSES
 ================================================================

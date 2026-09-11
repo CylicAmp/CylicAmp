@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T284: The operator group ⟨11⟩ = IC ∪ NEG_H and the three-level coset partition
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 THEOREM 113 — Dual Focal Triads and the Emergence of 6
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 262: E8 Theta Function mod 37 — Zero Distribution and GF(37) Structure

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Ghost Kervaire Chain and the Fermat-SEAM Identity on GF(37) — THEOREM 82
 

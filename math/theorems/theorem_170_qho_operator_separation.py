@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 170: QHO Operator Separation — Six Mathematical Layers
 

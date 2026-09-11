@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 239: The Mirror Seam-Antipode Sequence -- 37/73 Reversal Palindrome

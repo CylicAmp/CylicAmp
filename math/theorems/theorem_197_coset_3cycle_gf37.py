@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 197: Coset 3-Cycle Structure in GF(37) — The 137-Map Partition
 Author: Michael Warren Song (CyclicAmp)

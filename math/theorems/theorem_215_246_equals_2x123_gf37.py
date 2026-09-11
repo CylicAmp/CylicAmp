@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 215: 246 = 2 × 123 — Seed as Primitive Root × Lucas Number in GF(37)
 Author: Michael Warren Song (CyclicAmp)

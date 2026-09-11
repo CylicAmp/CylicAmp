@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 175: Riemann Zeros, Trinity Algorithm, and GF(37) Structure
 

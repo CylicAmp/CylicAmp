@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 223: Complete GF(37) Orbit Partition — Riemann Zero Coverage
 Author: Michael Warren Song (CyclicAmp)

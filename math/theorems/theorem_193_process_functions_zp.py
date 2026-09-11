@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 193: Three-Party Process Functions over ℤ_p
 Author: Michael Warren Song (CyclicAmp)

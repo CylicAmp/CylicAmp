@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 T301 — The Cyclotomic Slot Table: Where 37 Actually Sits
 

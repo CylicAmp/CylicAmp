@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 122: Coin Paradox, Banach-Tarski, and Kakeya — One Algebraic Engine
 

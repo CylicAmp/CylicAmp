@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Concatenation-Repunit Identity on GF(37) — THEOREM 77
 

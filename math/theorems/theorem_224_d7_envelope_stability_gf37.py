@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 Theorem 224: D7 Envelope — Stability Admissible Region in GF(37)
 Author: Michael Warren Song (CyclicAmp)

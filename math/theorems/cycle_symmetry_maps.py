@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Cycle Symmetry Maps — GF(37)
 

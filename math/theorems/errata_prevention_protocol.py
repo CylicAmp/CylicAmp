@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Errata Prevention Protocol — MWS v37.21+
 

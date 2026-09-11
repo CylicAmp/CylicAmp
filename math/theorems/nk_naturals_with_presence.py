@@ -1,3 +1,4 @@
+# CLASS: NOTE
 """
 Nκ — Naturals with Presence
 

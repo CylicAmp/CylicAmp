@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 242: Consecutive Digit Triples -- Sovereign Reduction and Imaginary Chain

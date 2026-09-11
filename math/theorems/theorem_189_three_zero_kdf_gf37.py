@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 189: Three-Zero Cryptographic KDF in GF(37)
 

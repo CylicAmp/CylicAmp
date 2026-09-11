@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 198: DR Trinity and 3-Sequence Structure in GF(37)
 Author: Michael Warren Song (CyclicAmp)

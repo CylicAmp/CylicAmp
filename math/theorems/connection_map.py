@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 GF(37) GF(37) — Complete Connection Map
 

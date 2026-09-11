@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T260: n=260 — IC orbit, CAS_EXT self-product closure
 GF(37) — 137-map f(x) = 26x mod 37

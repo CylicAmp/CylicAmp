@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 LoB 591/592/595 — Partition Congruence, Pulse Sync, Horizon Lock
 

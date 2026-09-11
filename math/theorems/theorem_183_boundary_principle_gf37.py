@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 183: The Boundary Principle in GF(37)
 

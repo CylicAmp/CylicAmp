@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 158: The Counting Palindrome — 11213141514131211 Hits SEAM
 

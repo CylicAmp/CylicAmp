@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 227: The Three-Block Ladder -- 4 Rows, 12 Blocks, 12-3=9

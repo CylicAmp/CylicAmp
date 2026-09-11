@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Nine Tower DR Invariant — Formal Theorem Sheet
 

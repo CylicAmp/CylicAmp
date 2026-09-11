@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 3×3 Triplet Partition GF(37) — GF(37) Connection
 

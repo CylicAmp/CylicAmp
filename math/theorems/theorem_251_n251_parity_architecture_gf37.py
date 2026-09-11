@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T251: n=251 — Parity Architecture of the Twin Prime Field
 GF(37) — 137-map f(x) = 26x mod 37

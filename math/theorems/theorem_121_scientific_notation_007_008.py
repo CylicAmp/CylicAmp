@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 121: Scientific Notation Structure of 0.007 and 0.008
 ==============================================================

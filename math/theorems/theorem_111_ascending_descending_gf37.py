@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 111 — The Ascending and Descending Integer Sequences in GF(37)

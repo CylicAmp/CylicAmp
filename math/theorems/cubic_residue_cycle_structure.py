@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Cubic Residue Cycle Structure — GF(37)
 

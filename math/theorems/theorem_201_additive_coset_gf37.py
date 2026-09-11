@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 201: Additive Coset Structure in GF(37) — Sum Factorization and Coset Displacement
 Author: Michael Warren Song (CyclicAmp)

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 THEOREM 116 — Multiplicative Orders of All Residues Modulo 37
 

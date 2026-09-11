@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 251: Three-Tier Phase Engine -- 137-Map Orbits as Coordinate Gears

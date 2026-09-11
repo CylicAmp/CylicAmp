@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 220: Reversal Ladder — 2357, 291-Step Climb, and the 99² Lock
 

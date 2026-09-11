@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 233: Rule 30 — Wolfram's Cellular Automaton in GF(37)
 Author: Michael Warren Song (CyclicAmp)

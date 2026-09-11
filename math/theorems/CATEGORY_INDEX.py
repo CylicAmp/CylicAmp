@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Mathematical Category Index — CylicAmp GF(37)
 

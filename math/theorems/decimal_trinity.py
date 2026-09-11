@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 225: ord_37(10) = 3 -- The Decimal Base as Generator of H_3

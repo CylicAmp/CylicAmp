@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 ABABAB Convergence — GF(37)
 

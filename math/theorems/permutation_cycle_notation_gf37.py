@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Permutation Cycle Notation — SA×NQR / ST×QR Cross-Duality in GF(37)
 

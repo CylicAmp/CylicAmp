@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T257: n=257 — Fermat Prime F3, NQR17 orbit
 GF(37) — 137-map f(x) = 26x mod 37

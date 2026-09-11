@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T288 — j=0 Elliptic Curves over F_37: Isomorphism Classes = Antipodal Pairs
 

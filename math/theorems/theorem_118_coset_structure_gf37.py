@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 THEOREM 118 — Abelian Group Structure and Cosets of (ℤ/37ℤ)×
 

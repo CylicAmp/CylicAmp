@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 227: S_old / D7 Crossing Equation — φ³ Linear Floor and Envelope Intersections
 Author: Michael Warren Song (CyclicAmp)

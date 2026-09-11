@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Alternating 1-2 Structures: sequences, palindromes, triples, tables
 

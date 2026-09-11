@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 249: n = 23,456,789 — The 8-Digit Pandigital Prime (GF(37))
 

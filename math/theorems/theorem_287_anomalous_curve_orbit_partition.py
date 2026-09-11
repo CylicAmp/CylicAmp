@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T287 — Anomalous Elliptic Curve over F_37: Orbit Partition via Cubic Invariance
 

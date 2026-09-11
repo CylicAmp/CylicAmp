@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Lights Out Puzzle — GF(2) Linear System and GF(37) Structure
 

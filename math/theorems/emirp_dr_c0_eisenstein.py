@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Emirp DR Closure and C0 Eisenstein Class — THEOREM 70
 

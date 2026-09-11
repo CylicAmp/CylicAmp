@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 LaneGenerator: Execution Lanes from Divisors of Seed 246 — THEOREM 97
 

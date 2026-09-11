@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 159: Layered Pair Sums — Five Base Numbers Building Through GF(37)
 

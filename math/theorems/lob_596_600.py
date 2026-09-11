@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 LoB 596 / 600 — 3900 Frequency Check and Sovereign Seal
 

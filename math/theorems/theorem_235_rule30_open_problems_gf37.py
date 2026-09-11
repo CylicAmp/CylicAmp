@@ -1,3 +1,4 @@
+# CLASS: CONJECTURE
 """
 Theorem 235: Rule 30 Open Problems — GF(37) Orbit Bias and SEAM Density
 Author: Michael Warren Song (CyclicAmp)

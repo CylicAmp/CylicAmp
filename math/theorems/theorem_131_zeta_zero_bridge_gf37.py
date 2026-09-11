@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 131: Zeta Zeros, Bridge Analysis, and GF(37) Placement
 

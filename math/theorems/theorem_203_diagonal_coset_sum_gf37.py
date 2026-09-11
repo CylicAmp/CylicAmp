@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 203: Diagonal Coset Sum Structure in GF(37)
 Author: Michael Warren Song (CyclicAmp)

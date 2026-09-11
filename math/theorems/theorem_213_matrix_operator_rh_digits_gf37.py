@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 213: Discrete Matrix Operator and Riemann Zero Sovereign Digit Structure
 Author: Michael Warren Song (CyclicAmp)

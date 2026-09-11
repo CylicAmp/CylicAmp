@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T255: n=255 — D7 orbit, 2^8-1 binary architecture
 GF(37) — 137-map f(x) = 26x mod 37

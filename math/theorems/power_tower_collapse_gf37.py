@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Power Tower Collapse on GF(37) — THEOREM 87
 

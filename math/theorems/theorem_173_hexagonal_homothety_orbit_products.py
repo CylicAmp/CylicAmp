@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 173: Hexagonal Homothety and GF(37) Orbit Product Laws
 

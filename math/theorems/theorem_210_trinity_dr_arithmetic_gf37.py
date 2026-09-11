@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 210: Digital Root Arithmetic of the Trinity {3,6,9} in GF(37)
 Author: Michael Warren Song (CyclicAmp)

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Orbit Sector Geometry — GF(37)
 

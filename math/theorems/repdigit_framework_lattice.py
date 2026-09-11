@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Repdigit GF(37) Lattice and Sign Partition — THEOREM 74
 

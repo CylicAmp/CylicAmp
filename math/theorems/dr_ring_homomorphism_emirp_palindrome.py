@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 DR Ring Homomorphism, Emirp Invariance, Palindromic Prime Sovereign Exclusion
 ==============================================================================

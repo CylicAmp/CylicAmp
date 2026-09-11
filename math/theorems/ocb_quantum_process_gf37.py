@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 OCB QUANTUM PROCESS LAYER — GF(37) CONNECTIONS

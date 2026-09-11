@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T306 — The Discrete Rotation Group over F_37 Is F_37* Itself, and Its Order-3
         Subgroup Is IC

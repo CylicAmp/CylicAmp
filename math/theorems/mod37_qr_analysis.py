@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 MOD-37 QUADRATIC RESIDUE ANALYSIS: <3> = QR_37
 ================================================================

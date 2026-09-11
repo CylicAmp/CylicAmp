@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 178: GF(37) Escapes the Lyapunov Complexity Barrier for 3-SAT
 

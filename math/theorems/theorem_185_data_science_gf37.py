@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 185: Data Science, Regression, and Statistics in GF(37)
 

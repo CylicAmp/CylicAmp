@@ -1,3 +1,4 @@
+# CLASS: CONJECTURE
 """
 Theorem 167: Twin Prime χ₋₃ Structure and GF(37) Forbidden Residues
 

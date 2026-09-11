@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Kervaire Addend Chain — SEAM Landing and Digital Root Structure on GF(37) — THEOREM 83
 

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 190: MWS GF(37) v24.90 — Integrity Constants in GF(37)
 Author: Michael Warren Song

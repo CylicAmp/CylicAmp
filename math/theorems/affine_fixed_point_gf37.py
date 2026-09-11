@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Affine Fixed-Point Census on GF(37) — THEOREM 75
 

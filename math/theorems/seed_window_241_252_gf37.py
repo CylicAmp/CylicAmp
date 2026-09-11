@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 The Seed Window 241–252 on GF(37) — THEOREM 89
 

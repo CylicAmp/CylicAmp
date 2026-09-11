@@ -1,3 +1,4 @@
+# CLASS: CONJECTURE
 """
 Theorem 243: Rule 30 — Unified 2-Adic Description of Both Boundaries (GF(37))
 

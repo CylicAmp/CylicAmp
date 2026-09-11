@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 58: Sector Axiom Completion — GF(37) Definitions for the Axiomatic System
 

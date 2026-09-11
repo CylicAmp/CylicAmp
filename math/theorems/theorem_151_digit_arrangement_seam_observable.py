@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 151: Digit Arrangement, the SEAM, and the Limits of Observable Structure
 

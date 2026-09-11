@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T252: Cyclic System of Cubic Equations — GF(37) Orbit Decomposition
 

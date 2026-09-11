@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 154: DR Fibonacci on the Trinity — Period-8 Orbit in {3, 6, 9}
 

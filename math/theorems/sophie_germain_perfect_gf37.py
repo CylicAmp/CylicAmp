@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Sophie Germain Perfect Number Triad on GF(37) — THEOREM 85
 

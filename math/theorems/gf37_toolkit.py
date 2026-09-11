@@ -1,3 +1,4 @@
+# CLASS: NOTE
 """
 GF(37) Toolkit — fast classification and connection lookup for any integer.
 

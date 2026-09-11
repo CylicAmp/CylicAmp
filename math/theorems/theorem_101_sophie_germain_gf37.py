@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 101 — The Sophie Germain Prime p = k·2^e − 1 in the GF(37) GF(37)

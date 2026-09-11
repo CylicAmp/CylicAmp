@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 194: mTLS Secure Ingestion Pipeline — GF(37) Specification
 Author: Michael Warren Song (CyclicAmp)

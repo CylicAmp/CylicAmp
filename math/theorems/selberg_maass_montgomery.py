@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 SELBERG / MAASS / MONTGOMERY — Spectral Geometry Research Record

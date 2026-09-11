@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Emirp Product COL1 Theorem
 ==========================

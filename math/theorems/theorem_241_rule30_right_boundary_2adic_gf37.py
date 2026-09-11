@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 241: Rule 30 Right Boundary — 2-adic Period Structure and GF(37) Classification
 Author: Michael Warren Song (CyclicAmp)

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Prime Power Sovereign Collapse
 

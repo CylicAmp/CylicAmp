@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Sequence 146, 257, 368 — GF(37) Structure
 

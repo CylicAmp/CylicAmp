@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Twin Prime Conjecture — GF(37) Structure
 

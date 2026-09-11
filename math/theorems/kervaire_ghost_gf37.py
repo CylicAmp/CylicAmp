@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Kervaire Dimension Arithmetic on GF(37) and the Ghost Equation — THEOREM 81
 

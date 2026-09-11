@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 127: Emirp Pair 37↔73, Genesis Gematria, and GF(37)
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 172: Triangular SEAM Numbers and the ORBIT_11 = −IC Squaring Map
 

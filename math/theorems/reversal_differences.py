@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 234: Reversal Differences -- 198=18×11 and the {594,396} Pair

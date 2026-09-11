@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 T298 — j=1728 over F_37: Gaussian CM, and a Clean Case of the T297 Seam
 

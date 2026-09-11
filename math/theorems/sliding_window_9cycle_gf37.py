@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Sliding Window 9-Cycle — GF(37) Structure
 

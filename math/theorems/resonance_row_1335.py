@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 17-Point Resonance Row and 1335 Partition Invariant
 

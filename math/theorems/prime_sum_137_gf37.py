@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 PRIMES TO 137 — CUMULATIVE PRIME SUM AND GF(37)

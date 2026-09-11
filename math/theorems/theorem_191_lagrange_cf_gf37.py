@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 191: Lagrange Spectrum, Periodic Continued Fractions, and GF(37)
 

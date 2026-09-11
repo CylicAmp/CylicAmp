@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 The Triple Coupling Constant 666 on GF(37) — THEOREM 88
 

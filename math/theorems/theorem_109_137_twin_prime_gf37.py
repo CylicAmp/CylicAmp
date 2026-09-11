@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 109 — The Prime 137 is Self-Referential in GF(37)

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 DIGITAL ROOT SPIRAL — GF(37) STRUCTURE

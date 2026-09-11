@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 188: Consolidated Mathematical GF(37) — Session Compilation 2026
 

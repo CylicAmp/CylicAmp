@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 GF(37) Class Definitions — Canonical Single Source of Truth
 

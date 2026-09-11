@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 217: Discrete Torus Dynamics on Z_37 x Z_81
 

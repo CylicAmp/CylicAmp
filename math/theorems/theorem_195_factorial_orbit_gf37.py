@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 195: Factorial Orbit Structure in GF(37)
 Author: Michael Warren Song (CyclicAmp)

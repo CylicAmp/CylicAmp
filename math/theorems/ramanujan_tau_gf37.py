@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 THEOREM 260: Ramanujan τ mod 37 — GF(37) Classification
 """

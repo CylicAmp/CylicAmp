@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 T297 — Block Separation: the Curve Results Are Not Corollaries of the Group
 

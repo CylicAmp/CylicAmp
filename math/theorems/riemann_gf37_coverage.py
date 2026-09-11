@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# CLASS: COMPUTATION
 """
 GF(37) Riemann Zero Coverage Algorithm
 Author: Michael Warren Song (CyclicAmp)

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Ulam Diagonal B(k) = 4k² + 1 — THEOREM 96
 

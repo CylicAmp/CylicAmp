@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 234: 1.137 — Decimal Shift, Reversal Pair, and Alternating String SEAM
 Author: Michael Warren Song (CyclicAmp)

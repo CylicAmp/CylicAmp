@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 257: σ₃ Divisibility, Cube Roots of -1, and the Eisenstein Splitting

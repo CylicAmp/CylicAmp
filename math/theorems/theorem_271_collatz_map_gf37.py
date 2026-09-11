@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T271: Collatz map C(x) = 3x+1 mod 37 on GF(37)
 

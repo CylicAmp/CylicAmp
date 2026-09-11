@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 124: IC Orbit = {1, 10, 26} — String Theory Critical Dimensions
 

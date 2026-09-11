@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 168: Signed Single Digits ±1..±9 — Complete GF(37) Orbit Map
 

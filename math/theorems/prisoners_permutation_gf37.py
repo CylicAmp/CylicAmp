@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 100 Prisoners Problem — Permutation Cycles and GF(37) Structure
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Repdigit Self-Similarity and Repunit Factorization on GF(37) — THEOREM 78
 

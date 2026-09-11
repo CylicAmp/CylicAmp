@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 148: Single-Digit Orbit Coverage and the {1,3,5}/{2,4,6}/{7,8,9} Partition in GF(37)
 

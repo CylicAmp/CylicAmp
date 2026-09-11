@@ -1,3 +1,4 @@
+# CLASS: NOTE
 """
 Triple Grid Analysis — Odd/Even neighborhood technique.
 

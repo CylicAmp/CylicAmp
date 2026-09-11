@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 GroupFramework — Primitive Roots 20 and 17 mod 37
 

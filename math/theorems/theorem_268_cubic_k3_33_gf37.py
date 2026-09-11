@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T268: x_k = (k³ + 33) mod 37 for k = 1..5 — cubic trajectory in GF(37)
 

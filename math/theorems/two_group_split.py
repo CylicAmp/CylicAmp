@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Two-Group Split — GF(37)
 

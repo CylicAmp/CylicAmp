@@ -1,3 +1,4 @@
+# CLASS: NOTE
 """
 Theorem 132: Discrete Logarithm Algorithms in GF(37)
 

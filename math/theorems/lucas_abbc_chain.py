@@ -1,3 +1,4 @@
+# CLASS: CONJECTURE
 """
 Lucas Sequence in the ABBC Manifold — Chain L(3..10)
 

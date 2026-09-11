@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 204: Lucas and Fibonacci Sovereign Intersections in GF(37)
 Author: Michael Warren Song (CyclicAmp)

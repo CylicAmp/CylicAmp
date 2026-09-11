@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 229: The Imaginary-Unit AP -- 12,18,24,30,36 and the -1 Pivot

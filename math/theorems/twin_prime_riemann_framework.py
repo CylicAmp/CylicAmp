@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Twin Prime χ₋₃ Structure and the Riemann Gap
 =============================================

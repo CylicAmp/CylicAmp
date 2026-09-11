@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 208: Cubing Map and Coset Structure in GF(37)
 Author: Michael Warren Song (CyclicAmp)

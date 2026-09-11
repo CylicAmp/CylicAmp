@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Primitive Root Power Invariants — GF(37)
 

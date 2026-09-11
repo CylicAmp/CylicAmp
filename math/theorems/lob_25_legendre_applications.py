@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 LoB 25 — Legendre Symbol Applications in the 37-Field
 

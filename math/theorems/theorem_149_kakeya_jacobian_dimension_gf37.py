@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 149: Kakeya, Jacobian, and Local-Implies-Global at Dimension 3
 

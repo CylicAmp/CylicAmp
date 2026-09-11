@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 FPS-37 Scanner — LoB 23 / 23b
 

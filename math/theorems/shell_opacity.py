@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Shell Opacity Theorem: 100% INVIOLATE
 

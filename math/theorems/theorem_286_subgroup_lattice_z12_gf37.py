@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T286 — Subgroup Lattice of Z/12Z and GF(37)* via the Orbit Quotient
 

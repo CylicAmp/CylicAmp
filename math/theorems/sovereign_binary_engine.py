@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Sovereign Binary Engine
 

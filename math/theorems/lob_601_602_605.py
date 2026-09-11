@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 LoB 601/602/605 — Inversion, Trinity Invariant, Quiescence
 

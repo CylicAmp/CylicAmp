@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 153: SEED_ORB and NQR_5 as Orbit Complements; the DR-Residue Closes to SEAM
 

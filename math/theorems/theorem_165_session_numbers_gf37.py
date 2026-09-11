@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 165: Session Numbers — GF(37) Scan
 

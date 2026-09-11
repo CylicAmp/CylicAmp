@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 241: Hydrogen Orbital Structure and GF(37) Sovereign Classification

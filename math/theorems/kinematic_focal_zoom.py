@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Kinematic Focal Zoom — Multiplicative Orbit on Z/333Z
 

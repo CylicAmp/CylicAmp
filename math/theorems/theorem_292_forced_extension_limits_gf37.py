@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T292 — The Four Extension Options, Resolved to What Is FORCED
 

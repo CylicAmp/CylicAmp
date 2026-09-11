@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 163: GF(37) C6 Decomposition — Complement Pairs as Radial Shells
 

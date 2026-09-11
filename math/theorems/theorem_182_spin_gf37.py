@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 182: Spin Structure Encoded in GF(37)
 

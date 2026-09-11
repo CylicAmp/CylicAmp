@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 DIGIT EXTENSION OPERATOR (⧾) — GF(37) STRUCTURE

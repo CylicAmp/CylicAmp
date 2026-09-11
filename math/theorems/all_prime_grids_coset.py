@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 238: All-Prime 3x3 Digit Grids -- Coset Structure of Row Residues

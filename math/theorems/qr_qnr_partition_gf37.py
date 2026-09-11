@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 QR/QNR PARTITION OF GF(37) — THE HIDDEN STRUCTURE OF PRIME NAVIGATION

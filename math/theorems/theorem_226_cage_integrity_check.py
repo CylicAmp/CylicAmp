@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 226: Cage Integrity Check — D7 Envelope Gate on GF(37)-Scaled Insight
 Author: Michael Warren Song (CyclicAmp)

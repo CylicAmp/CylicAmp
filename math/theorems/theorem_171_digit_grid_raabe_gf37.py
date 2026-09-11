@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 171: Digit Grid State Machine and Raabe Boundary Constant
 

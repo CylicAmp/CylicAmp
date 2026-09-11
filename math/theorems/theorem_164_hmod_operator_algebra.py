@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 164: H_mod Operator Algebra — The Full Modular Hilbert Space
 

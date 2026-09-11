@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 248: Dhananjaya Prana Engine -- GF(37) Sovereign Analysis

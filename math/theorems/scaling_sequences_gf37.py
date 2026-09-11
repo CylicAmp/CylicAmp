@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Scaling Sequences — GF(37) Structure
 

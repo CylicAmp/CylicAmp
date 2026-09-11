@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Pattern (1-4)(5)(1-4) — 16 Numbers on GF(37) — THEOREM 98
 

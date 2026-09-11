@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 237: Rule 30 Normality — Block Frequency Convergence and GF(37) Extremes
 Author: Michael Warren Song (CyclicAmp)

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T254: Three Elliptic Curves over GF(37) — ANOM, TWIN, PRIME
 

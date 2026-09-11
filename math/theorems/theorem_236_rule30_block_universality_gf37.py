@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 236: Rule 30 Problem 3 — Block Universality and GF(37) Coverage Steps
 Author: Michael Warren Song (CyclicAmp)

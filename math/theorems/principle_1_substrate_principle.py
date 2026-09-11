@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Principle 1: The Substrate Principle
 

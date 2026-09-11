@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T278: Twin prime structural proof — GF(37) complete statement
 

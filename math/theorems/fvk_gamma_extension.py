@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 236: FvK Gamma Extension -- ε->γ Sovereign Mapping (T223 Addendum)

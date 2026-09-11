@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T293 — p=37 Is the Unique Admissible Prime with an Orbit-Aligned Anomalous Curve
 

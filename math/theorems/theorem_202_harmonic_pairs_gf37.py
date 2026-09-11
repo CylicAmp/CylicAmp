@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 202: Harmonic Pairs and Fixed Points in GF(37)
 Author: Michael Warren Song (CyclicAmp)

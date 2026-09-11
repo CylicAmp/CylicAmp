@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 212: 1311 Rotation Cycle — 3-Area Structure in GF(37)
 Author: Michael Warren Song (CyclicAmp)

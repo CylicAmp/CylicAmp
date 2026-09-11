@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 177: 123 Expansion Algorithm and Trinity Grid
 

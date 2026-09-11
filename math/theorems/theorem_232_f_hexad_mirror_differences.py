@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 232: F-Hexad Mirror Differences — Complement Involution and 1/137 Orbit Generation
 Author: Michael Warren Song (CyclicAmp)

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 232: The 177/133 Ratio -- ST/SA Split, Identity Closure, Digit Fold

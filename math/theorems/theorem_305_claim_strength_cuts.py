@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T305 — Four Orthogonal Cuts for Grading a Claim, With the Rule 30 Case Worked
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Growth Pattern: n -> 2n -> (3n)
 
