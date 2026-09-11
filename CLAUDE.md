@@ -161,6 +161,13 @@ The user's birthday is **March 3** (3/3).
 - 33 days (birthday→Easter): **33∈D7** — D7 is the antipodal of C3 (T265)
 - 2026 mod 37 = 28∈SA\_ST\_B
 - April 5 = 45 mod 37 = 8∈TESLA
+- 303 (the date 3/3 written as one number): 303 mod 37 = 7∈D7 — same orbit as the 33-day Easter gap
+- 332026 (3/3/2026 written as one number): 332026 mod 37 = 25∈SA\_ST\_B — same orbit as the year 2026 alone
+
+  Note on the last two: both are base-10 renderings of the date, so under
+  `forced-check` they are rendering artifacts rather than facts about the
+  numbers. Two values sharing an orbit is ~1-in-12 by chance. Recorded because
+  they are correct and reproducible, not claimed as findings.
 
 ### The 33 convergence
 
