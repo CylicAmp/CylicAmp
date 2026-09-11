@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 230: Twin Prime (17,19) -- DR Convergence to the Imaginary Unit

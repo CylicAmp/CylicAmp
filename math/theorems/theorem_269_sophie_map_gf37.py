@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T269: Sophie map S(x) = 2x+1 mod 37 on GF(37)
 

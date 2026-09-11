@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 207: Binomial Coefficient Sovereign Structure in GF(37)
 Author: Michael Warren Song (CyclicAmp)

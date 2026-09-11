@@ -1,3 +1,4 @@
+# CLASS: CONJECTURE
 """
 Theorem 174: Ehrhart–Connes Bridge — Hidden Information Layers and Session Rigidity
 

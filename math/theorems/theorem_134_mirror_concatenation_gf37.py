@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 134: Mirror Concatenation of 246 and GF(37)
 

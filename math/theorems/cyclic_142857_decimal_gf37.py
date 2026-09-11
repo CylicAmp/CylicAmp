@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 CYCLIC NUMBER 142857 — DECIMAL STRUCTURE AND GF(37)

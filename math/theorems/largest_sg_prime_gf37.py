@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 THEOREM 102 — The Largest Known Sophie Germain Prime on GF(37)
 

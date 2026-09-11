@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 220: The Barrier Theorem — c and the 3-Map
 Author: Michael Warren Song (CyclicAmp)

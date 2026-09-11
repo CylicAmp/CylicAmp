@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 128: Loeschian Norms and Speed of Light in GF(37)
 

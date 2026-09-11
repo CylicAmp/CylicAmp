@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 206: Pell Equation, Continued Fractions, and Square Roots in GF(37)
 Author: Michael Warren Song (CyclicAmp)

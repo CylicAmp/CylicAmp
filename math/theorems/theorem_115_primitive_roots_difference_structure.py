@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 THEOREM 115 — Primitive Roots mod 37 in the Heegner–Rabinowitsch Difference Set
 

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Dark Sector Algebra — GF(37)
 

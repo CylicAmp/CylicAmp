@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 Theorem 223: Non-Euclidean Shell Buckling, +1 Nematic Defect, GF(37) Mode Selection
 

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Orbit Negation Duality — GF(37)
 

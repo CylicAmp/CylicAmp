@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T274: SEED ↔ NQR17 — complete multiplicative inverse orbits in GF(37)
 

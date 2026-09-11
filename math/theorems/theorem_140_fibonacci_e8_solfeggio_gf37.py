@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 140: Fibonacci, E₈, and Solfeggio Frequencies in GF(37)
 

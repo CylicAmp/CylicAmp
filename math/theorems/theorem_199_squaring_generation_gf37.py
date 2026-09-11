@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 199: Squaring Generation of SA and ST from SEED and 137-Map Cycle in GF(37)
 Author: Michael Warren Song (CyclicAmp)

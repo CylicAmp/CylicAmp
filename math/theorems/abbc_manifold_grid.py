@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 ABBC Manifold Grid Structure — Verified
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 176: Birthday, Biblical Dates, and GF(37) Structure
 

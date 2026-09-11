@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 249: Audit Corrections -- 666, Calendar Dates, Solar Transit in GF(37)

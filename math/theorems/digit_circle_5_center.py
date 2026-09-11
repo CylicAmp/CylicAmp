@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Digit Circle with 5 at Center
 

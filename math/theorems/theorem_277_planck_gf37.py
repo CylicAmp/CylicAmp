@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T277: Planck's constant h and ħ in GF(37)
 

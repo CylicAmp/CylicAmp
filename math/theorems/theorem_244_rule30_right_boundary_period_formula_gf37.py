@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 244: Rule 30 — Right Boundary Period Exponents: Formula vs Reality (GF(37))
 

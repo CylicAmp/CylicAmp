@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Pascal's Triangle Row 8 — GF(37) Spine
 

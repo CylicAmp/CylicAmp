@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Burau Representation of the Braid Group — GF(37) Structure
 

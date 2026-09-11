@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 145: The 6–7 Triangle Pair — IC / ORBIT_11 Bipartition via Positional Weights
 

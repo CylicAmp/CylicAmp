@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 217: Nuclear Stability, Z and N Numbers, and GF(37) Classification
 Author: Michael Warren Song (CyclicAmp)

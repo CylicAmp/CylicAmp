@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 LoB 691/695 — AHL-8 Vault and Observer Gap Lock
 

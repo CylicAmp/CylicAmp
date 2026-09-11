@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Sequential Morphing Transform and Its 9-Orbit — THEOREM 73
 

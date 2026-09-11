@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Sylow Subgroup Structure — GF(37)*
 

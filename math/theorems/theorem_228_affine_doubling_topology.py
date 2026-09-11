@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 228: Affine Doubling Topology on Z_{B-1} — General Base GF(37)
 Author: Michael Warren Song (CyclicAmp)

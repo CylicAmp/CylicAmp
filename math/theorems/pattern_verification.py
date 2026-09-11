@@ -1,3 +1,4 @@
+# CLASS: NOTE
 # Raw computational verification of user-provided patterns
 # No narrative. Only operators and results.
 

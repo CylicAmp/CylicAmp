@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 496 = 2^4 × 31 — Third Perfect Number and DR Structure
 

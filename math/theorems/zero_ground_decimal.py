@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 235: Zero-Ground Decimal Architecture -- The 45+81=126=9 Foundation

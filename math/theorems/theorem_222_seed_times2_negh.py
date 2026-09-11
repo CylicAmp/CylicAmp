@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 222: SEED × 2 = NEG_H — Primitive Root Maps SEED onto NEG_H
 Author: Michael Warren Song (CyclicAmp)

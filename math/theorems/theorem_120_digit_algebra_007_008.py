@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 120: Digit Algebra of the (0.007, 0.008) Pair
 ======================================================

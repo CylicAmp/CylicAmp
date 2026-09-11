@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 3-DIGIT ROTATION PATTERNS AND D4 DIRECTIONAL VARIATIONS
 ============================================================

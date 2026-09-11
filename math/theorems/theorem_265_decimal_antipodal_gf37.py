@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T265: 1/37 = 0.027027... — Decimal period, IC trinity, and antipodal orbit pairing
 

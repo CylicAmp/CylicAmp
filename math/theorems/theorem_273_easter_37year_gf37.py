@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T273: Easter dates 2016-2052 — full 37-year cycle in GF(37)
 

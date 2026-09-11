@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 139: GF(7) and GF(37) — Structural Parallel
 

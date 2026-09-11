@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Fixed-Line Structure of 3-Cycle Affine Processes on GF(37) — THEOREM 79
 

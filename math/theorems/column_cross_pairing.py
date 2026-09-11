@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Column Cross-Pairing Theorem
 Column groups of the 3×3 grid: COL1=(1,4,7), COL2=(2,5,8), COL3=(3,6,9)

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 247: Twin Prime Pipe -- Two-Chamber Walls and the 3-6-9 Center

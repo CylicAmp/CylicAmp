@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 143: Euler Totient, RSA Verification, and Twin Prime Analysis
 Connected to the GF(37).

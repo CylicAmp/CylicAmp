@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 LoB 26 — Collatz Map T in F_37
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 157: Repdigit Triples Are SEAM — Trinity DRs, 37 as Factor
 

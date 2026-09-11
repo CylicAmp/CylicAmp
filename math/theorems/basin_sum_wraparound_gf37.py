@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Basin Sum Wrap-Around Identity on GF(37) — THEOREM 95
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 214: Sovereign Collapse of 2,468,145 in GF(37)
 Author: Michael Warren Song (CyclicAmp)

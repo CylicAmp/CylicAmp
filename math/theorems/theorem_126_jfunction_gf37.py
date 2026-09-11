@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 126: j-Function Special Values in GF(37)
 

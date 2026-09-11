@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 T299 — Two Maps Out of Phi_3, and Why They Land on the Same Subgroup at p=37
 

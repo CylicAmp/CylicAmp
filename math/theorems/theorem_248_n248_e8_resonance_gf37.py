@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 248: n = 248 — E₈ Resonance (GF(37))
 

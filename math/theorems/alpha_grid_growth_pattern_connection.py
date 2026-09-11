@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Alpha Grid — Growth Pattern Connection
 

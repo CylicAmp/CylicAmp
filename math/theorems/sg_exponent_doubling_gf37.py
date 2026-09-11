@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Sophie Germain Exponent Doubling and Perfect Number Chain on GF(37) — THEOREM 86
 

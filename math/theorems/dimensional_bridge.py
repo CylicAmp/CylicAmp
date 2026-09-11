@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 37phi Dimensional Bridge — computational verification.
 

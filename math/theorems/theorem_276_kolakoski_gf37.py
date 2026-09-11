@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T276: Kolakoski sequence gap set {2,3,4} in GF(37)
 

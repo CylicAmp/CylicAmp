@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 181: Otolith Crystal Structure Encoded in GF(37)
 

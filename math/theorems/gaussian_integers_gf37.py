@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Gaussian Integers and GF(37) — Complex Structure of the Prime Field
 

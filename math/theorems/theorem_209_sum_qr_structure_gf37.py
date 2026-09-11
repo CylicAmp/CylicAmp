@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 209: Sum Structure and QR Partition of the GF(37) in GF(37)
 Author: Michael Warren Song (CyclicAmp)

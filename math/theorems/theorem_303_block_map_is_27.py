@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T303 — The Decimal-Block Map Is Multiplication by 27, and Its Cycles Are the
         Antipodal Pairs

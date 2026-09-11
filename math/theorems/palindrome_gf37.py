@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Palindrome Structure in GF(37) — THEOREM 56
 

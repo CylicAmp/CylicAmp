@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 THEOREM 112 — The Five-Split: GF(37) Partition of Digits 1–9
 

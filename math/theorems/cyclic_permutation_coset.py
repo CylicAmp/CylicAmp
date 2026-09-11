@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 240: Cyclic Permutation Coset -- 999=27x37 and the F37 Field Closure

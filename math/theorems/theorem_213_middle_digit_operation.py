@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 213: Middle-Digit Operation on 3-Digit Numbers and GF(37) Orbits
 Author: Michael Warren Song (CyclicAmp)

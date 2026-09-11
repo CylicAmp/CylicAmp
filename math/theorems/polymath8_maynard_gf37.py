@@ -1,3 +1,4 @@
+# CLASS: CONJECTURE
 """
 Polymath8 / Maynard Prime Gap Bound — GF(37) Structure
 

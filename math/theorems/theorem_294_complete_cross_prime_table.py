@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 T294 — Complete Cross-Prime Structural Table for {7, 37, 73}
 

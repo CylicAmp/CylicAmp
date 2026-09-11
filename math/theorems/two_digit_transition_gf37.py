@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Two-Digit Transition Algebra — GF(37)
 

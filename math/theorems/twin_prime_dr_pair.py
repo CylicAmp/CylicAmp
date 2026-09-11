@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 261: Twin Prime DR Pair Theorem — Perfect Tripartition by m mod 3

@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 Theorem 218: GF(37) Nuclear Predictions — Falsification Program
 Author: Michael Warren Song (CyclicAmp)

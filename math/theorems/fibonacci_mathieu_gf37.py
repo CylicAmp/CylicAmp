@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 243: Fibonacci Seam, Mathieu Residues, and Nested Radical Anchors

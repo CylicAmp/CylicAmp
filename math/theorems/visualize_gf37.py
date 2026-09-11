@@ -1,3 +1,4 @@
+# CLASS: NOTE
 """
 GF(37) Visualizations
 

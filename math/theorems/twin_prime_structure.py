@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 TWIN PRIME STRUCTURE THEOREM
 =============================================

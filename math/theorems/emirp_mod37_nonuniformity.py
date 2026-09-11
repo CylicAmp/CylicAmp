@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Emirp Non-Uniformity Mod 37
 arXiv connection: Calegari–Dimitrov–Tang (2408.15403)

@@ -1,3 +1,4 @@
+# CLASS: CONJECTURE
 """
 Goldbach's Conjecture — GF(37) Structure
 

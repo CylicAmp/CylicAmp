@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: NOTE
 """
 ================================================================================
 MONTE CARLO — PRIME STREAM DISTRIBUTION

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Twin Prime Midpoints and the DR Sovereign Axis — THEOREM 71
 

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T264: A078358 — Non-oblong numbers in GF(37)
 Oblong numbers: n(n+1). Non-oblong: complement (A002378 ↔ A078358).

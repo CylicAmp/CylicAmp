@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T295 — The Real Generalization: mu_3 and the GLV Endomorphism (secp256k1)
 

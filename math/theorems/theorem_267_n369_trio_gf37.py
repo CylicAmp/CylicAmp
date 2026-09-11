@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T267: 369 = −1 mod 37 and the {3,6,9} trio in GF(37)
 

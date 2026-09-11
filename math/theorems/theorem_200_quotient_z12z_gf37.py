@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 200: GF(37)*/<26> ≅ Z/12Z — Complete Quotient Structure
 Author: Michael Warren Song (CyclicAmp)

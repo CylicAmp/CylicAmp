@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Sofia Germain Prime in GF(37) — THEOREM 69
 

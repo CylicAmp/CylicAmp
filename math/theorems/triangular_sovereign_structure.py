@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Triangular Sovereign Structure
 Collapses to Euler's prime 41 as organizer.

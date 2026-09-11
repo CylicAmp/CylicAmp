@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 Theorem 219: GF(37) — Three-Layer Falsification Protocol
 Author: Michael Warren Song (CyclicAmp)

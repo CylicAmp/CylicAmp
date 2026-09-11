@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 184: Skin as the Biological Boundary — GF(37) Instantiation
 

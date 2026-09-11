@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 144: The Loop Cipher — Negation mod 37 via ord₃₇(10) = 3
 

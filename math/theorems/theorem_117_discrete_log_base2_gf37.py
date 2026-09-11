@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 THEOREM 117 — Discrete Logarithm Base 2 and the 137-Map in GF(37)
 

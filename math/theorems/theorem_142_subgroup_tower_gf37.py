@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 142: The Subgroup Tower μ₃ < H₉ < QR < F₃₇×
 

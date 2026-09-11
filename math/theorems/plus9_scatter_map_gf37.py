@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Multi-Step +9 Scatter Map — GF(37)
 

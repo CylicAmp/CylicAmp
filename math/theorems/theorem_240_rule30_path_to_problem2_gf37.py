@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 240: Rule 30 — Logical Path to Problem 2 via GF(37) Orbit Convergence
 Author: Michael Warren Song (CyclicAmp)

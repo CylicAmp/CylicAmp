@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 138: DR Subtraction Law and Orbit Multiplication in GF(37)
 

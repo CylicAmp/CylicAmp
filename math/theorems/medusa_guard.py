@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Medusa Guard — 137/37 Packet Verification
 

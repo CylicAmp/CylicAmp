@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 211: {1,3,7} Permutation Diamond and 11-Ladder in GF(37)
 Author: Michael Warren Song (CyclicAmp)

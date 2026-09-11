@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T281: The 147/258/369 grid in GF(37)
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 307: SEED Orbit Riemann Zero Coverage — Per-Residue Breakdown
 Author: Michael Warren Song (CyclicAmp)

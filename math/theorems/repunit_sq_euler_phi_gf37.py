@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Repunit Squares and Euler Totient — GF(37) Structure
 

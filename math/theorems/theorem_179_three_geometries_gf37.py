@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 179: Three Cosmic Geometries as GF(37) Orbit Classes
 

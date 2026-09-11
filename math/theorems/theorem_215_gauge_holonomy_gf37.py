@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 215: Gauge Theory, Holonomy, and GF(37) Discrete Bundle Structure
 Author: Michael Warren Song (CyclicAmp)

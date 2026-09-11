@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 T300 — What Is Actually Special About 37: a Complete Classification
 

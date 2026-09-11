@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T296 — The Geometric Model: F_37* as a Regular 36-gon, Maps as Rotations
 

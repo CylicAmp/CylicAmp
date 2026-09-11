@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Sector Invariance under the 137-Map — GF(37)
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 TWIN PRIME CHAMBER CLASSIFICATION — C3 / C6 / C9

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 106 — The Mohr-Mascheroni Theorem, Fermat Primes, and GF(37)

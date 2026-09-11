@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 {8,13,24} CASCADE: Combinatorial Generation via Subset-Sum Closure
 =========================================================================

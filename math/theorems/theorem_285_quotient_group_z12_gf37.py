@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T285: The 12 orbits form Z/12Z — GF(37)*/IC as a cyclic quotient group
 

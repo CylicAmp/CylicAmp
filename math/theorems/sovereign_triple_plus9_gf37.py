@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Sovereign Triple and Additive +9 Action — GF(37)
 

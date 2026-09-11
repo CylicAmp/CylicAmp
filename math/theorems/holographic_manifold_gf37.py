@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Holographic Memory Manifold on GF(37) — THEOREM 90
 

@@ -1,3 +1,4 @@
+# CLASS: CONJECTURE
 """
 Theorem 166: Goldbach GF(37) Structure
 

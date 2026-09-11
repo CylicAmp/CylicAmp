@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T291 — Iterated Squaring Collapses Z/12Z onto its Sylow 3-Subgroup H_3
 

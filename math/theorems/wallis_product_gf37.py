@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Wallis Product for π/2 — GF(37) Structure of the Fractions and Partial Products
 

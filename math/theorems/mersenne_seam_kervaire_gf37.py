@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Mersenne-SEAM Theorem and SEED-Shifted Kervaire Continuation on GF(37) — THEOREM 84
 

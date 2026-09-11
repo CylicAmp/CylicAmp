@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 103 — The Easter Cycle and the Saltus Lunae on GF(37)

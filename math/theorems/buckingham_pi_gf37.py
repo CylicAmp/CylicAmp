@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 216: Buckingham Pi Theorem — Null Space and F_37 Bridge
 

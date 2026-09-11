@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 233: The (1)+n DR Addition Table -- Self-Feeding Chain {2,5,6,8}

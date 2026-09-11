@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: CONJECTURE
 """
 ================================================================================
 RULE 30 RIGHT BOUNDARY — GF(37) STRUCTURE

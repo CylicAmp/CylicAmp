@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 246: n = 167 — The CAS_EXT Prime (GF(37))
 

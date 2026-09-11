@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T266: 123×k — DR=6→3→9 cycle, pipeline seed at k=2, uniform orbit coverage
 

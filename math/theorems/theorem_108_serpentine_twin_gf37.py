@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 108 — The Serpentine 3×3 Path and Twin Prime Candidates in GF(37)

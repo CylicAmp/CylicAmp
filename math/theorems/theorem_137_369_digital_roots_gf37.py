@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 137: 3-6-9 Digital Roots in GF(37)
 

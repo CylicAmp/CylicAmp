@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Goldbach's Conjecture — Proof Attempt via GF(37)
 

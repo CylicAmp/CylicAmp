@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Reversal DR Collapse — Sovereign Fixed Point is Universal Attractor
 =====================================================================

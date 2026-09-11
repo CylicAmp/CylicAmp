@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 132-Pattern Permutations — Bipartite Graph Construction and GF(37) Structure
 

@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 250: n = 250 — The Twin Prime Modular Engine (GF(37))
 

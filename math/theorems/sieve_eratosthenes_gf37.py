@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Sieve of Eratosthenes — GF(37) Structure
 

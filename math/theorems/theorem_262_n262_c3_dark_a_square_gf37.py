@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T262: n=262 — C3 orbit, DARK_A self-product closure
 GF(37) — 137-map f(x) = 26x mod 37

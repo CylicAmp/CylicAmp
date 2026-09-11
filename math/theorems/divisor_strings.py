@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 DIVISOR STRINGS: Proper-Divisor-String Palindromes in 11–99
 =========================================================================

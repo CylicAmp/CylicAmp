@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: METHOD
 """
 ================================================================================
 FIXED-POINT FORMULATION: Phys = Fix(C ∘ E)

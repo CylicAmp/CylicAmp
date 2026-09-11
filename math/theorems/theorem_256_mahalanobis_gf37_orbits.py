@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T256: n=256 — Mahalanobis Distance and the GF(37) Orbit Classifier
 GF(37) — 137-map f(x) = 26x mod 37

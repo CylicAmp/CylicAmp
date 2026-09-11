@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 239: Rule 30 Autocorrelation Structure — GF(37) Lag-Domain Inversion
 Author: Michael Warren Song (CyclicAmp)

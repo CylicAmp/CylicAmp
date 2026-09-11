@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Zeno Spatial-Temporal Scaling Law
 f(n) = 100 · (0.5)^(n-1)

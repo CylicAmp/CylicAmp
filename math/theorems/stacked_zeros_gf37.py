@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Stacked Zeros — Two Zero-Counting Techniques over the 1–9 Grid
 

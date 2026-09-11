@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 155: The First Three Primes, Prime Concatenation, and Collapse to IC
 

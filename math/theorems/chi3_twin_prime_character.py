@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 254: chi_{-3} Twin Prime Character -- Two Chambers Are One Character

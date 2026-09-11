@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 MONTE CARLO PI / PI DIGITS — GF(37) CONNECTIONS

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Fold+Mirror Transform on GF(37) — THEOREM 99
 

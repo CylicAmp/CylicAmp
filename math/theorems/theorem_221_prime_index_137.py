@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 221: Prime Index Chain — 137 is the 33rd Prime
 Author: Michael Warren Song (CyclicAmp)

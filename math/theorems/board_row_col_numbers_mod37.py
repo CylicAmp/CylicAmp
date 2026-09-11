@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 3×3 Board: Row and Column Numbers mod 37
 

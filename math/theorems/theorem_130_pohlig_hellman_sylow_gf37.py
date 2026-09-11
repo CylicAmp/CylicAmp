@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 130: Pohlig-Hellman and Sylow Decomposition of GF(37)*
 

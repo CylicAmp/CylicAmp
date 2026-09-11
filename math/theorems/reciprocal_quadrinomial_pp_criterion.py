@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Reciprocal Quadrinomial Permutation Polynomial Criterion
 =========================================================

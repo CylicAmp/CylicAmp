@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Five-Six Orbit — GF(37)
 

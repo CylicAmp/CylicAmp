@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 156: The Prime Pair Bridge — Three Consecutive Primes Landing in SEED_ORB
 

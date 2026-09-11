@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 230: The Six Manifold — Backwards Doubling of the Divisor Pairs of 6
 Author: Michael Warren Song (CyclicAmp)

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 162: ATOMICS Field Equations — GF(37) Embedding of the Stellar Model
 

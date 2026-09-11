@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Eisenstein Character χ₋₃ and the CylicAmp DR Structure
 Calegari–Dimitrov–Tang Theorem (arXiv:2408.15403, August 2024)

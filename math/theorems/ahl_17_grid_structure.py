@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 AHL-17 Grid Structure
 Absolute Harmonic Location = 8 = DR(17)

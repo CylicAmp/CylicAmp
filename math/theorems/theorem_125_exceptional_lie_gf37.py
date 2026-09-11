@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 125: Exceptional Lie Algebras in GF(37)
 

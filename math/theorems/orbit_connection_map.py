@@ -1,3 +1,4 @@
+# CLASS: NOTE
 """
 Orbit Connection Map — Full Library Coverage
 

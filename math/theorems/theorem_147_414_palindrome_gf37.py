@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 147: The 414 Palindrome Tower in GF(37)
 

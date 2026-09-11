@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Fibonacci-seed Grid: Four Reading Directions
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Tripling Map 6-Cycle Structure on GF(37) 137-Orbits — THEOREM 68
 

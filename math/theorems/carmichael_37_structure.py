@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Carmichael Numbers of Cyclotomic Type Divisible by 37
 ======================================================

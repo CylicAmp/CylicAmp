@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 T253: GF(37) Motivic Decomposition — Orbit Structure as Tannakian Category
 

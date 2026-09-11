@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Corrected, deterministic, falsifiable implementation.
 All claims computed; no hardcoded truths.

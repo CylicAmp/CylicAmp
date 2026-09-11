@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Unit Scalar Initialization and Basin Preservation on GF(37) — THEOREM 91
 

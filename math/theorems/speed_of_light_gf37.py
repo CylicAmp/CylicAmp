@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 SPEED OF LIGHT / SOLAR TRANSIT — GF(37) CONNECTIONS

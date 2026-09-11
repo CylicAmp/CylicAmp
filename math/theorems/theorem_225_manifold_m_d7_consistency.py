@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 225: Temporal Stability Manifold M and D7-Consistency
 Author: Michael Warren Song (CyclicAmp)

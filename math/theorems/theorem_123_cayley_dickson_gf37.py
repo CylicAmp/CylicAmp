@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 123: Cayley-Dickson Doubling Sequence in GF(37)
 

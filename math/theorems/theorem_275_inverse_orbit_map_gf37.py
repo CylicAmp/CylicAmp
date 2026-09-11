@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T275: Complete multiplicative inverse orbit map of GF(37)
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Layer 38: Computational Verification of DR=9 Termination
 Unified 1/137 Lattice — well-founded termination metric.

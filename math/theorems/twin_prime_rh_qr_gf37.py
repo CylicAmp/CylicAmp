@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 TWIN PRIME / RIEMANN HYPOTHESIS — GF(37) STRUCTURE

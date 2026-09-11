@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 221: Twin Prime Consolidation — Full Anatomy with Imaginary Unit Gate
 

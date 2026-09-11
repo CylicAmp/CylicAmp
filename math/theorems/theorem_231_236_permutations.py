@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 231: {2, 3, 6} Permutations — All Splits Under Basic Arithmetic
 Author: Michael Warren Song (CyclicAmp)

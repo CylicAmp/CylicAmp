@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 135: Triangular Numbers in GF(37)
 

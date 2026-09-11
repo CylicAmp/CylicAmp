@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 150: Φ₃, the Forcing Mechanism, and the Lucas Sequence in GF(37)
 

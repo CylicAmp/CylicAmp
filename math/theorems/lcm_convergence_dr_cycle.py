@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 LCM Convergence and Digital Root Cycle
 Master Kimchi — Little Wood 37 GF(37)

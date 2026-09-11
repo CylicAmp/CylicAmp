@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 MATHEMATICAL CONSTANTS — GF(37) DECIMAL STRUCTURE

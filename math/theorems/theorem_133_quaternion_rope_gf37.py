@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 133: Quaternions, RoPE, and GF(37) Orbit Structure
 

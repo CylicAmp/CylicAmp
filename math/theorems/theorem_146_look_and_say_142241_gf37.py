@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 146: Look-and-Say Orbit of 142241 in GF(37)
 

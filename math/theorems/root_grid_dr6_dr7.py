@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Root Grid Theorem — DR Classes 6 and 7 (Raw Archive v37.22)
 

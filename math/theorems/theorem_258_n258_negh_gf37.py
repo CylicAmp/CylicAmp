@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T258: n=258 — NEG_H orbit, 2*3*43 factorization
 GF(37) — 137-map f(x) = 26x mod 37

@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 Multi-Layer Obstruction Calculus on GF(37) — THEOREM 80
 

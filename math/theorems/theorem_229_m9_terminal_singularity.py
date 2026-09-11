@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 229: M_9 — Terminal Singularity Operator on ℂ⁹
 Author: Michael Warren Song (CyclicAmp)

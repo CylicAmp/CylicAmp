@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 1/137 GF(37) — Layer 30: 9×9 Sovereign Matrix and DR Orbit Entropy
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Matrix Configurations A and B: Linear Algebra over GF(37)
 

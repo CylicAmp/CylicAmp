@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Three-Party Affine Process Functions over GF(37) — THEOREM 76
 

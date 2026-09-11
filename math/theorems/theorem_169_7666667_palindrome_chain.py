@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 169: 7666667 Palindrome, 0.00048 Chain, and 8123
 

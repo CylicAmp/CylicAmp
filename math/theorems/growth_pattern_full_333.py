@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Growth Pattern n->2n->(3n): Full 333-row table
 LCM(9, 37) = 333 — complete cycle where both DR period (9) and GF(37) period (37) realign.

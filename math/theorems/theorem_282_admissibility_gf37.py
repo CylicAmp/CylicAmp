@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 T282: Admissibility criteria for GF(37) claims — the miss-test
 

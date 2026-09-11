@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 180: Periodic Table Structure Encoded in GF(37)
 

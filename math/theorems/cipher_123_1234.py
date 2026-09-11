@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Cipher 123 and 1234 — Z/9Z partition and cascade connection
 

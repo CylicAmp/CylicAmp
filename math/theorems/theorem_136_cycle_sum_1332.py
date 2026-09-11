@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 136: The 246-624-462 Cycle Sum = 36 × 37
 

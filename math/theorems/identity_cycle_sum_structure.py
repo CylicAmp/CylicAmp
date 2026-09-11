@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Identity Cycle Sum Structure — GF(37)
 

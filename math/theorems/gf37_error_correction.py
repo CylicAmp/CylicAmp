@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 GF(37) Error-Correcting Codes — Reed-Solomon and BCH
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 129: Digit Rotation is the 137-Map (Seed 246)
 

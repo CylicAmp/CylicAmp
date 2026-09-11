@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Theorem 242: Rule 30 Left vs Right Boundary — Dual 2-adic Structure and GF(37)
 Author: Michael Warren Song (CyclicAmp)

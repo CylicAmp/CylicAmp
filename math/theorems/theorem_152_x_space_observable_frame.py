@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 152: X-Space, the Observable Frame, and the Invisible Container
 

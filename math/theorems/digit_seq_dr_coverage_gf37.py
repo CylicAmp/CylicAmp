@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Digit Sequence DR Coverage and the DR=2 Gap — GF(37)
 

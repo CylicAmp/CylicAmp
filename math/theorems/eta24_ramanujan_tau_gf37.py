@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 η^24 — RAMANUJAN TAU FUNCTION AND NODE 24 IN GF(37)

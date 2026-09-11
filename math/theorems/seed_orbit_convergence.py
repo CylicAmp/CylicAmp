@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: COMPUTATION
 """
 ================================================================================
 THEOREM 250: Seed Orbit Convergence -- {18,24,32} Collects Across Domains

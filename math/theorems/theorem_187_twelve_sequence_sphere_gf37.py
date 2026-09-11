@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 187: The Twelve Sequence and Sovereign Sphere
 

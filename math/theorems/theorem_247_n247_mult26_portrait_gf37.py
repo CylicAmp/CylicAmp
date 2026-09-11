@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 247: n = 247 — The 137-Map Multiplier Portrait (GF(37))
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 HANLON DECOMPOSITION — 3×3 GRID AND C5
 ========================================

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Orbit Order Structure — Homogeneous / Non-Homogeneous Dichotomy in GF(37)
 

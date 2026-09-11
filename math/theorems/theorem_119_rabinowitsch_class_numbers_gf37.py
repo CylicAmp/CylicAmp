@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 THEOREM 119 — Rabinowitsch Class Number Structure in GF(37)
 

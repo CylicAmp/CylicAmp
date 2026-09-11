@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 T261: n=261 — DARK_A orbit, SA_ST_A × C9 closure
 GF(37) — 137-map f(x) = 26x mod 37

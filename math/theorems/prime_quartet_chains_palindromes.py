@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Prime Quartet, Arithmetic Chains, and Palindrome Orbit Table
 

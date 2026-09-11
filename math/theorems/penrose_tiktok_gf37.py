@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Theorem 222: Penrose Patch, TikTok Numbers, and GF(37) Coset Anatomy
 

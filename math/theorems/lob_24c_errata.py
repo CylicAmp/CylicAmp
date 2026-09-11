@@ -1,3 +1,4 @@
+# CLASS: METHOD
 """
 LoB 24c — Errata Correction Record (MWS v37.20 → v37.21)
 

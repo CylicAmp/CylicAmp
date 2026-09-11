@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CLASS: THEOREM
 """
 ================================================================================
 DRIFT / LOESCHIAN NORM / Δ² TORUS — Three Linked Threads
