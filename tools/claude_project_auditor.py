@@ -461,7 +461,7 @@ class TwentyCategoryLogDetector:
                                              r"(service (unavailable|degraded|limited)) without (reason|detail|explanation)"],
 
         # Denying a capability that demonstrably exists in the service
-        "CAPABILITY_DENIAL":                [r"(that('s| is) not (something|a feature) (we|I) (offer|support|do)",
+        "CAPABILITY_DENIAL":                [r"(that('s| is) not (something|a feature) (we|I) (offer|support|do))",
                                              r"(that (feature|capability|function) (is not|isn't) available)",
                                              r"(we (do not|don't) (support|offer|provide) that)"],
 
