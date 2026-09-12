@@ -38,6 +38,15 @@ TRANSIENT DISTRIBUTION (all 36 nonzero elements)
     all five bands (0..4) populated -- confirms cubic_shift_33_gf37.py's
     exhaustive max-4 result from the orbit-level view.
 
+    The six non-touching orbits pair off exactly two per depth band, not
+    merely "somewhere in {2,3,4}":
+        depth 2: C3, SA_ST_B
+        depth 3: DARK_A, NQR17
+        depth 4: SA_ST_A, C9
+    Each orbit contributes all 3 of its elements to a single depth (no
+    ambiguity, unlike the touching orbits), so a band of 6 elements at
+    depth 2, 3, or 4 is exactly 2 orbits -- verified by assertion below.
+
 FALSIFICATION
     Any assert below failing.
 """
@@ -98,12 +107,24 @@ def run():
     assert non_touching == {'DARK_A', 'C3', 'SA_ST_A', 'C9', 'NQR17', 'SA_ST_B'}
 
     # transient ambiguity exactly on the touching orbits
+    orbit_depth = {}
     for name, s in NAMED_ORBITS.items():
         ts = {transient(x) for x in s}
         if name in touching:
             assert ts == {0, 1}, (name, ts)
         else:
             assert len(ts) == 1, (name, ts)
+            orbit_depth[name] = next(iter(ts))
+
+    # the six non-touching orbits pair off exactly two per depth band
+    from collections import defaultdict
+    by_depth = defaultdict(set)
+    for name, d in orbit_depth.items():
+        by_depth[d].add(name)
+    assert by_depth[2] == {'C3', 'SA_ST_B'}
+    assert by_depth[3] == {'DARK_A', 'NQR17'}
+    assert by_depth[4] == {'SA_ST_A', 'C9'}
+    assert all(len(v) == 2 for v in by_depth.values())
 
     # full distribution
     from collections import Counter
