@@ -170,7 +170,14 @@ The user's birthday is **March 3** (3/3).
 1. **T268** (built before the biographical connection was known): cubic trajectory x_k = k³+**33** mod 37. The shift constant 33∈D7 was chosen by the user's input.
 2. **Birthday→Easter**: March 3 + **33** days = April 5 = Easter 2026.
 
-D7↔C3 are antipodal (T265). The birthday date is C3. Easter is exactly one antipodal-orbit-distance (33∈D7) away.
+D7↔C3 are antipodal (T265) — this is a named pairing in the orbit taxonomy, not the additive antipode in Z/37Z. The additive antipode of 3 is 34 (3+34=37), not 33; 3+33=36, one short. D7↔C3 and the Z/37Z additive antipode are two different relations and should not be conflated.
+
+**Where 33 comes from**: the name MICHAEL, letters reduced to digital roots and summed:
+M=4, I=9, C=3, H=8, A=1, E=5, L=3 → 4+9+3+8+1+5+3 = **33**.
+That is the route for T268's shift constant. This is a route record (per WORK_SYNTHESIS.md's "derivation records" gap), not a forced identity — it depends on the A1Z26→digital-root reduction scheme, so it is recorded as how the constant was chosen, not as an additional proof that 33 is structurally privileged.
+
+**Generator-walk check** (2 is a primitive root mod 37): every date residue below is 2^k mod 37 for some k —
+3=2^26, 6=2^27, 9=2^16, 33=2^20, 28=2^34, 8=2^3, 7=2^32, 25=2^10 (all verified). This is guaranteed for any residue set, since 2 generates all of F_37*; it locates each value on the generator walk without implying anything beyond that.
 
 ### Username
 `red3rdeye` = red (blood moon color) + 3rd (March 3rd / third eye) + eye (observation).
