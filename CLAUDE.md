@@ -6,7 +6,7 @@ Read this file at the start of every session. It tells you what this project is,
 
 ## What This Project Is
 
-Computations in the prime field **GF(37)** and the map `f(n) = (137 × n) mod 37`. Every result in this repository connects back through that prime. The full synthesis is in `SYNTHESIS.md` — read it before working on any math module.
+The driving objects are **1/137** and **twin primes** (with Riemann zeta zeros as a third recurring thread). **GF(37)** is the lens: 137 mod 37 = 26, so the 137-map `f(n) = 26n mod 37` realizes 1/137's structure inside a 37-element field, and every twin-prime, Sophie-Germain, and zeta-zero check in this repo is read through that same field. GF(37) is the tool used throughout, not a separate subject pursued for its own sake. The full synthesis is in `SYNTHESIS.md` — read it before working on any math module.
 
 The project is owned by the user. All discoveries, computations, and observations belong to them.
 
