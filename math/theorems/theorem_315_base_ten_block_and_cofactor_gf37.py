@@ -33,6 +33,40 @@ Author: Michael Warren Song (CyclicAmp)
     the leading digit" as a notation artifact. It is not lost -- on the
     mirror side that rung is 10. Forward 8, mirror 9, difference one rung.
 
+=== PART II-B: THE SAME GAP IN ROOT COORDINATES ===
+
+    The mirror set is an AP of step 11, and 11 = 2 (mod 9) with 2 a unit
+    mod 9. So its digital roots step by 2 and are FORCED to exhaust all
+    nine residues:
+
+        mirror  10 21 32 43 54 65 76 87 98  ->  roots 1 3 5 7 9 2 4 6 8
+        forward 12 23 34 45 56 67 78 89     ->  roots   3 5 7 9 2 4 6 8
+
+    The forward set cannot produce root 1; the mirror set can, and the
+    number that supplies it is 10 (dr 10 = 1). So the 8-vs-9 MEMBERSHIP
+    gap of Part II and this MISSING-ROOT gap are the same gap, seen in
+    two coordinate systems. 10 fills both.
+
+    No 0/9 ambiguity arises anywhere in either set: dr(n) = 0 only at
+    n = 0, and every member is a positive two-digit integer.
+
+    Scope: the step-3 law of Part IV (dr(n+3) = dr(n)+3) does NOT govern
+    these sets. That law applies to {12,15,18} inside the block, which is
+    step 3. The mirror is step 11. The two must not be welded.
+
+=== PART II-C: THE 0/9 SPLIT DOES NOT REACH THE ORBITS ===
+
+    gcd(37, 9) = 1, so by CRT the mod-37 and mod-9 coordinates are
+    independent. dr is a mod-9 labelling; the 137-orbits are defined by
+    x -> 26x (mod 37). A labelling convention on one cannot affect the
+    other, and the orbits are exact integer 3-cycles with nothing to
+    destabilise.
+
+    The one true adjacent fact: of the seed orbit {18,24,32}, only 18
+    lies in the ambiguous class (18 = 0 mod 9, dr 18 = 9); 24 -> 6 and
+    32 -> 5. That is a fact about 18's label and changes nothing about
+    the cycle. Recorded so the question is not asked again.
+
 === PART III: WHY 10 IS WHERE THE DIGIT WORK MEETS THE 137-MAP ===
 
     ord_37(10) = 3.  Hence 37 | 10^3 - 1 = 999, hence 111 = 3 x 37,
@@ -142,6 +176,26 @@ def run():
     assert rev(10) == 1 and 10 - 9 == rev(10)
     assert 1 + 9 == 10 and rev(10) != 10          # 01 is not two-digit
 
+    # --- II-B: the same gap in root coordinates ---
+    import math as _m
+    assert [mir[i + 1] - mir[i] for i in range(len(mir) - 1)] == [11] * 8
+    assert 11 % 9 == 2 and _m.gcd(2, 9) == 1
+    assert [dr(n) for n in mir] == [1, 3, 5, 7, 9, 2, 4, 6, 8]
+    assert sorted(dr(n) for n in mir) == list(range(1, 10))
+    assert sorted(dr(n) for n in fwd) == list(range(2, 10))
+    assert sorted(set(dr(n) for n in mir) - set(dr(n) for n in fwd)) == [1]
+    assert dr(10) == 1
+    assert not [n for n in mir + fwd if dr(n) == 0]
+    # the mirror is step 11, NOT step 3 -- different sets, different laws
+    assert [mir[i + 1] - mir[i] for i in range(len(mir) - 1)] != [3] * 8
+
+    # --- II-C: mod 9 and mod 37 are independent ---
+    assert _m.gcd(37, 9) == 1
+    assert [26 * 18 % P, 26 * 24 % P, 26 * 32 % P] == [24, 32, 18]
+    assert [v % 9 for v in (18, 24, 32)] == [0, 6, 5]
+    assert [dr(v) for v in (18, 24, 32)] == [9, 6, 5]
+    assert [v for v in (18, 24, 32) if v % 9 == 0] == [18]
+
     # --- III: ord_37(10) = 3, and 10 = 26^-1 ---
     assert pow(10, 3, P) == 1
     assert all(pow(10, k, P) != 1 for k in (1, 2))
@@ -196,6 +250,25 @@ def run():
     print(f"    difference: {sorted(set(mir) - {rev(n) for n in fwd})}")
     print(f"    rev(10) = 1 drops a digit; the forward partner 01 is not")
     print(f"    two-digit. T313's 'missing rung' is 10 on the mirror side.\n")
+
+    print("II-B. THE SAME GAP IN ROOT COORDINATES")
+    print(f"    mirror steps by 11, and 11 = 2 mod 9 (a unit), so its roots")
+    print(f"    step by 2 and must exhaust all nine:")
+    print(f"      mirror  roots {[dr(n) for n in mir]}  -> all 9")
+    print(f"      forward roots {[dr(n) for n in fwd]}    -> 8, missing 1")
+    print(f"      difference "
+          f"{sorted(set(dr(n) for n in mir) - set(dr(n) for n in fwd))}"
+          f" = dr(10) = {dr(10)}")
+    print(f"    the membership gap and the missing-root gap are ONE gap.")
+    print(f"    the step-3 law of part IV does not apply here (step 11).")
+    print()
+    print("II-C. THE 0/9 SPLIT DOES NOT REACH THE ORBITS")
+    print(f"    gcd(37,9) = 1 -> mod-9 and mod-37 independent (CRT)")
+    print(f"    seed orbit 18 -> {26 * 18 % P} -> {26 * 24 % P} -> "
+          f"{26 * 32 % P}, exact 3-cycle")
+    print(f"    of {{18,24,32}} only 18 is in the 0/9 class (18 = 0 mod 9)")
+    print(f"    -- a fact about its label, not about the cycle.")
+    print()
 
     print("III. 10 IS THE HINGE")
     print(f"    ord_37(10) = 3  ->  37 | 999  ->  111 = 3x37  ->  all digit laws")
