@@ -282,6 +282,116 @@ def blocks(lead=1):
     print(f"   root progression: {[dr(lead + B) for B in range(1, 10)]}")
 
 
+def rev_of(n):
+    return int(str(abs(n))[::-1])
+
+
+def digit_sum(n):
+    return sum(int(c) for c in str(abs(n)))
+
+
+def pair_report(a, b):
+    """
+    Everything two numbers generate -- run on ANY two numbers, not just the
+    ones that look interesting. This is the "should be done every time"
+    expansion: relation, flips, concatenations, arithmetic, the two forced
+    reversal laws, the flanked block with both flank rules, and GF(37).
+    """
+    ra, rb = rev_of(a), rev_of(b)
+    dsa, dsb = digit_sum(a), digit_sum(b)
+    TRI = {tri(n): n for n in range(1, 500)}
+
+    def tag(n):
+        t = f" T_{TRI[n]}" if n in TRI else ""
+        return f"{n} (dr {dr(n)}, mod37 {abs(n)%P} {orbit_of(n)}{t})"
+
+    print(f"=== PAIR ({a}, {b}) ===")
+
+    rel = []
+    if rb == a and ra == b:
+        rel.append("FLIP PAIR (each is the other's reverse)")
+    if len(set(str(a))) == 1 and len(set(str(b))) == 1:
+        rel.append("REPDIGIT PAIR")
+    if a == ra:
+        rel.append(f"{a} is a palindrome")
+    if b == rb:
+        rel.append(f"{b} is a palindrome")
+    if dsa == dsb:
+        rel.append(f"equal digit sums ({dsa})")
+    if dr(a) == dr(b):
+        rel.append(f"equal digital roots ({dr(a)})")
+    print(f"  RELATION      {'; '.join(rel) if rel else 'no special relation'}")
+
+    print(f"  A             {tag(a)}   digits {[int(c) for c in str(a)]} sum {dsa}")
+    print(f"  B             {tag(b)}   digits {[int(c) for c in str(b)]} sum {dsb}")
+    print(f"  FLIPS         {a}->{ra}   {b}->{rb}")
+
+    for n, r, ds in ((a, ra, dsa), (b, rb, dsb)):
+        s, d = n + r, abs(n - r)
+        law1 = (s == 11 * ds) if len(str(n)) == 2 else None
+        dd = abs(int(str(n)[0]) - int(str(n)[-1]))
+        law2 = (d == 9 * dd) if len(str(n)) == 2 else None
+        extra = ""
+        if law1 is not None:
+            extra = f"   [n+rev = 11 x {ds} = {11*ds}: {law1}]"
+        if law2 is not None:
+            extra += f"  [|n-rev| = 9 x {dd} = {9*dd}: {law2}]"
+        print(f"    {n:>4} + {r:<4} = {s:<5} dr {dr(s)}    "
+              f"|{n} - {r}| = {d:<4} dr {dr(d) if d else 0}{extra}")
+
+    print(f"  CONCAT        {a}|{b} = {tag(int(str(a)+str(b)))}")
+    print(f"                {b}|{a} = {tag(int(str(b)+str(a)))}")
+    print(f"  ARITHMETIC    {a}+{b} = {tag(a+b)}")
+    print(f"                |{a}-{b}| = {tag(abs(a-b))}")
+    print(f"                {a}x{b} = {tag(a*b)}")
+
+    if len(str(a)) == 2:
+        d1, d2 = int(str(a)[0]), int(str(a)[1])
+        ab, ba, aa, bb = 10 * d1 + d2, 10 * d2 + d1, 11 * d1, 11 * d2
+        print(f"  TWO RENDERINGS of digits ({d1},{d2}) -- same sum, different spread")
+        print(f"    flip pair      {ab} + {ba} = {ab + ba}")
+        print(f"    repdigit pair  {aa} + {bb} = {aa + bb}")
+        print(f"    both = 11 x ({d1}+{d2}) = {11 * (d1 + d2)}   "
+              f"identical: {ab + ba == aa + bb}")
+        print(f"    but spreads differ: |{ab}-{ba}| = 9x{abs(d1-d2)} = {abs(ab-ba)}"
+              f"   vs  |{aa}-{bb}| = 11x{abs(d1-d2)} = {abs(aa-bb)}   (ratio 9:11)")
+
+    seen, rows = set(), []
+    for n in (a, ra, rb, b):
+        if n not in seen:
+            seen.add(n)
+            rows.append(n)
+    flanked_block(rows, indent="  ")
+
+
+def flanked_block(rows, indent=""):
+    """
+    The flanked block: each row is  <flank>-<n>-<flank>, under two rules --
+    rule 1 flanks with the number's own first and last digit, rule 2 flanks
+    with its digit sum on both sides. Your 4-row block used rule 1 for 28/82
+    and rule 2 for 14/41, so both are printed rather than one being guessed.
+    Reports whether the outer columns mirror and whether the row roots
+    palindrome.
+    """
+    print(f"{indent}FLANKED BLOCK (rule 1: own digits | rule 2: digit sum)")
+    l1, r1, k1, k2 = [], [], [], []
+    for n in rows:
+        d1, d2 = int(str(n)[0]), int(str(n)[-1])
+        s = digit_sum(n)
+        t1, t2 = d1 + n + d2, s + n + s
+        l1.append(d1)
+        r1.append(d2)
+        k1.append(dr(t1))
+        k2.append(dr(t2))
+        print(f"{indent}  {d1}-{n}-{d2}  sum {t1:<5} dr {dr(t1)}   |   "
+              f"{s}-{n}-{s}  sum {t2:<5} dr {dr(t2)}")
+    print(f"{indent}  left col {l1}  right col {r1}  "
+          f"mirror: {r1 == l1[::-1]}")
+    print(f"{indent}  row roots rule1 {k1} palindromic: {k1 == k1[::-1]}"
+          f"   rule2 {k2} palindromic: {k2 == k2[::-1]}")
+    print(f"{indent}  middle col {rows}  self-reverse: {rows == rows[::-1]}")
+
+
 def verify():
     """Every claim this engine encodes, asserted. Fails loudly."""
     M = build_matrix()
@@ -364,6 +474,14 @@ def verify():
     # period 9 in the step index
     for s in range(1, 30):
         assert harmonic_tie(82, s)['phase_delta'] == harmonic_tie(82, s + 9)['phase_delta']
+    # --- the two-renderings identity, exhaustive over all digit pairs ---
+    for d1 in range(1, 10):
+        for d2 in range(1, 10):
+            ab, ba, aa, bb = 10 * d1 + d2, 10 * d2 + d1, 11 * d1, 11 * d2
+            assert ab + ba == aa + bb == 11 * (d1 + d2)
+            assert abs(ab - ba) == 9 * abs(d1 - d2)
+            assert abs(aa - bb) == 11 * abs(d1 - d2)
+            assert (abs(ab - ba) == abs(aa - bb)) == (d1 == d2)
     print("engine.verify(): all assertions passed")
 
 
@@ -385,6 +503,15 @@ if __name__ == "__main__":
         collatz_audit(int(a[1]))
     elif a[0] == "matrix":
         matrix_report()
+    elif a[0] == "pair":
+        pair_report(int(a[1]), int(a[2]))
+    elif a[0] == "block":
+        flanked_block([int(x) for x in a[1:]])
+    elif a[0] == "pairs":
+        vals = [int(x) for x in a[1:]]
+        for i in range(0, len(vals) - 1, 2):
+            pair_report(vals[i], vals[i + 1])
+            print()
     elif a[0] == "blocks":
         blocks(int(a[1]) if len(a) > 1 else 1)
     elif a[0] == "verify":
