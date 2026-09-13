@@ -106,11 +106,48 @@ def registers(N, step=None):
         'orbit': orbit_of(N),
     }
     if step is not None:
-        reg['step'] = step
-        reg['T_n'] = tri(step)
-        reg['R_n'] = dr(tri(step))
-        reg['tri_delta'] = (root - dr(tri(step))) % 9
+        reg.update(harmonic_tie(N, step))
     return reg
+
+
+def harmonic_tie(N, step):
+    """
+    Register 6's step-relative part.
+
+    The earlier version reported only (dr(N) - R_step) mod 9. That is a
+    tautology whenever N IS the triangular number for its step: running the
+    engine across the cycle itself printed delta=0 nine times out of nine
+    because it could not print anything else. Fixed here three ways:
+
+      - the degenerate case is DETECTED and labelled, not silently zeroed
+      - phase_delta measures signed step-distance to the nearest position
+        where the cycle actually takes dr(N), which is not degenerate
+      - dr(N) in {2,4,5,7,8} has NO tie at all (the cycle only ever takes
+        {1,3,6,9}); that returns None rather than a misleading number
+    """
+    root = dr(N)
+    pos = ((step - 1) % 9) + 1                      # cycle has period 9 in n
+    aligns = [i + 1 for i, v in enumerate(R_CYCLE) if v == root]
+    out = {
+        'step': step,
+        'cycle_pos': pos,
+        'T_n': tri(step),
+        'R_n': dr(tri(step)),
+        'root_delta': (root - dr(tri(step))) % 9,
+        'tautological': N == tri(step),
+    }
+    if not aligns:
+        out['phase_delta'] = None
+    else:
+        best = None
+        for p in aligns:
+            d = (p - pos) % 9
+            if d > 4:
+                d -= 9
+            if best is None or (abs(d), d) < (abs(best), best):
+                best = d
+        out['phase_delta'] = best
+    return out
 
 
 def show(N, step=None):
@@ -132,8 +169,20 @@ def show(N, step=None):
               f"{R_CYCLE}\n                 only ever takes values "
               f"{sorted(set(R_CYCLE))}, so 2,4,5,7,8 never align")
     if step is not None:
-        print(f"                 step {step}: T_{step}={g['T_n']} R_{step}={g['R_n']}"
-              f"  delta={g['tri_delta']}")
+        print(f"                 step {step} (cycle pos {g['cycle_pos']}): "
+              f"T_{step}={g['T_n']}  R={g['R_n']}  root_delta={g['root_delta']}")
+        if g['tautological']:
+            print(f"                 TAUTOLOGICAL: N is T_{step} itself, so "
+                  f"root_delta is 0 by construction, not a measurement")
+        if g['phase_delta'] is None:
+            print(f"                 phase_delta: none -- dr={g['dr']} never "
+                  f"occurs in the cycle, so there is no position to measure to")
+        else:
+            d = g['phase_delta']
+            where = "on an alignment" if d == 0 else \
+                    f"{abs(d)} step{'s' if abs(d) > 1 else ''} " \
+                    f"{'past' if d < 0 else 'before'} the nearest one"
+            print(f"                 phase_delta={d:+d}  ({where})")
     print(f"  -- GF(37)      mod 37 = {g['mod37']}  orbit = {g['orbit']}")
 
 
@@ -291,6 +340,30 @@ def verify():
 
     # repo ties
     assert 111 == 3 * 37 and 999 // 37 == 27
+
+    # --- register 6: the fix ---
+    # every triangular number at its own step is flagged, not silently zeroed
+    for n in range(1, 40):
+        h = harmonic_tie(tri(n), n)
+        assert h['tautological'] is True
+        assert h['root_delta'] == 0                  # 0 BY CONSTRUCTION here
+        assert h['phase_delta'] == 0                 # it does sit on an alignment
+    # a value that is not its step's triangular number is not flagged
+    assert harmonic_tie(82, 1)['tautological'] is False
+    assert harmonic_tie(34, 4)['tautological'] is False
+    # roots outside {1,3,6,9} have no tie at all, and say so
+    assert sorted(set(R_CYCLE)) == [1, 3, 6, 9]
+    for N in (34, 41, 5, 2, 8):
+        assert dr(N) not in (1, 3, 6, 9)
+        assert harmonic_tie(N, 4)['phase_delta'] is None
+    # phase_delta is a real signed distance, not always 0
+    assert harmonic_tie(82, 3)['phase_delta'] == 1      # dr 1 aligns at 1,4,7
+    assert harmonic_tie(82, 5)['phase_delta'] == -1
+    assert harmonic_tie(82, 1)['phase_delta'] == 0
+    assert {harmonic_tie(82, s)['phase_delta'] for s in range(1, 10)} == {-1, 0, 1}
+    # period 9 in the step index
+    for s in range(1, 30):
+        assert harmonic_tie(82, s)['phase_delta'] == harmonic_tie(82, s + 9)['phase_delta']
     print("engine.verify(): all assertions passed")
 
 
