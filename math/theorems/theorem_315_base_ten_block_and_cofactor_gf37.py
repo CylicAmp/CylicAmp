@@ -67,6 +67,41 @@ Author: Michael Warren Song (CyclicAmp)
     32 -> 5. That is a fact about 18's label and changes nothing about
     the cycle. Recorded so the question is not asked again.
 
+=== PART II-D: THE MIRROR SET IN MOD-37 COORDINATES ===
+
+    M mod 37 = [10, 21, 32, 6, 17, 28, 2, 13, 24]
+
+    Successive differences are a constant 11 mod 37 -- the step survives
+    reduction. gcd(11,37) = 1, so all nine terms are distinct residues.
+    The set is an AP of step 11 in Z/37 as well as in Z.
+
+    Its endpoints echo Part IV's block:
+        first  M[0] = 10, residue 10 in IC   {1,10,26}    the base
+        last   M[8] = 98, residue 24 in SEED {18,24,32}   the seed orbit
+
+    The block 10..18 opens on the base and closes on the seed orbit
+    (18 itself). The mirror set does the same in mod-37 coordinates,
+    opening on residue 10 and closing on residue 24. Two members land in
+    SEED: 32 (residue 32) and 98 (residue 24).
+
+    SCOPE: this is an observation, not a mechanism. Both sets begin at 10
+    for the same reason -- it is the least two-digit solution of each --
+    but the endpoints landing in SEED is arithmetic (98 = 10 + 8x11, and
+    98 mod 37 = 24) with no derivation connecting the mirror set to the
+    pipeline seed. Recorded at observation grade.
+
+    Practical note, from an off-by-one that surfaced this: iterating the
+    pair (M, F) with range(len(F)) drops M[8] = 98 -- which is exactly
+    the member on the seed residue. The correct pairing is
+    M[i+1] = rev(F[i]) for i = 0..7, leaving M[0] = 10 unpaired (Part II).
+    Index-aligning M[i] with F[i] instead returns a constant -2 (= 35
+    mod 37), which is only the offset between two step-11 APs -- a fact
+    about listing order. The correctly aligned difference is a constant 9,
+    which is the defining relation itself, not a finding.
+
+    Checked and negative: the relation between M and F is additive only.
+    M[i+1]/F[i] mod 37 and M[i]/F[i] mod 37 are both non-constant.
+
 === PART III: WHY 10 IS WHERE THE DIGIT WORK MEETS THE 137-MAP ===
 
     ord_37(10) = 3.  Hence 37 | 10^3 - 1 = 999, hence 111 = 3 x 37,
@@ -189,6 +224,28 @@ def run():
     # the mirror is step 11, NOT step 3 -- different sets, different laws
     assert [mir[i + 1] - mir[i] for i in range(len(mir) - 1)] != [3] * 8
 
+    # --- II-D: the mirror set in mod-37 coordinates ---
+    m37 = [n % P for n in mir]
+    assert m37 == [10, 21, 32, 6, 17, 28, 2, 13, 24]
+    assert [(m37[i + 1] - m37[i]) % P for i in range(8)] == [11] * 8
+    assert _m.gcd(11, 37) == 1 and len(set(m37)) == 9
+    assert m37[0] == 10 and sorted(_orbit_triple(10)) == [1, 10, 26]
+    assert mir[8] == 98 and m37[8] == 24
+    assert 246 % P == 24                       # the pipeline seed residue
+    assert sorted(_orbit_triple(24)) == [18, 24, 32]
+    assert [n for n in mir if n % P in (18, 24, 32)] == [32, 98]
+    # the two alignments, and which constant each returns
+    assert all(rev(fwd[i]) == mir[i + 1] for i in range(8))
+    assert [mir[i + 1] - fwd[i] for i in range(8)] == [9] * 8    # definition
+    assert [(mir[i] - fwd[i]) % P for i in range(8)] == [35] * 8  # AP offset
+    assert [mir[i] - fwd[i] for i in range(8)] == [-2] * 8
+    assert (-2) % P == 35 and 35 + 2 == P
+    # checked and negative: no constant multiplicative relation
+    assert len(set((mir[i + 1] * pow(fwd[i], P - 2, P)) % P
+                   for i in range(8))) > 1
+    assert len(set((mir[i] * pow(fwd[i], P - 2, P)) % P
+                   for i in range(8))) > 1
+
     # --- II-C: mod 9 and mod 37 are independent ---
     assert _m.gcd(37, 9) == 1
     assert [26 * 18 % P, 26 * 24 % P, 26 * 32 % P] == [24, 32, 18]
@@ -268,6 +325,18 @@ def run():
           f"{26 * 32 % P}, exact 3-cycle")
     print(f"    of {{18,24,32}} only 18 is in the 0/9 class (18 = 0 mod 9)")
     print(f"    -- a fact about its label, not about the cycle.")
+    print()
+    print("II-D. THE MIRROR SET MOD 37")
+    print(f"    M mod 37 = {[n % P for n in mir]}")
+    print(f"    step 11 mod 37 throughout; gcd(11,37)=1 so all 9 distinct")
+    print(f"    opens on residue 10 (IC, the base), closes on residue 24")
+    print(f"    (SEED, the pipeline seed residue 246 mod 37 = {246 % P})")
+    print(f"    members landing in SEED: "
+          f"{[n for n in mir if n % P in (18, 24, 32)]}")
+    print(f"    observation grade -- no derivation links M to the seed.")
+    print(f"    alignment: M[i+1]-F[i] = 9 (the definition);")
+    print(f"    M[i]-F[i] = -2 = 35 mod 37 (only the AP offset).")
+    print(f"    multiplicative relation: checked, non-constant, none.")
     print()
 
     print("III. 10 IS THE HINGE")
