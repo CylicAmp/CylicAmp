@@ -70,6 +70,38 @@ MECHANISM (derived, then stress-tested before being written down)
       T_(8-n) - T_n = 36 - 9n = 0 (mod 9).
     About n=5 it fails immediately: R_4 = 1 but R_6 = 3.
 
+=== VERDICT LABELS CORRECTED (added after review; originals left verbatim) ===
+
+    The three verdicts above are kept exactly as first written. Two of the
+    three labels are wrong, and this is the correction rather than an edit
+    of the text -- corrections stay in place in this repo.
+
+ 1. Labelled FALSIFIED. Should be SCOPE CLARIFIED.
+    The claim's mechanism survives intact: rev(n) - n = 99(a-c) for every
+    3-digit span, wrapping or not. The stated constant 198 was the value
+    of that mechanism on a sub-domain (a-c = -2, the seven non-wrapping
+    windows). The wrap does not break the law, it changes a-c to 7 and
+    the same law returns 693. Nothing was refuted; the domain on which
+    the constant is 198 was narrowed. Both values come out of one formula.
+
+ 2. Labelled FALSIFIED. Correct as labelled -- no change.
+    "Non-triad numbers can never enter the triad sub-circuit" is false as
+    a statement, not merely over-broad: 1+2 = 3 contradicts it directly.
+    The true statement (triad + non-triad is never triad) is a DIFFERENT
+    statement over different operands, not a restriction of this one.
+    FALSIFIED is the right label.
+
+ 3. Labelled FALSIFIED. Should be PARAMETER CORRECTED.
+    The claimed phenomenon -- that the root stream has a mirror symmetry --
+    is real and forced: R_n = R_(8-n), because T_(8-n) - T_n = 36 - 9n = 0
+    (mod 9). Only the axis was wrong (n=4, not n=5). A theorem that names
+    the right symmetry and the wrong constant has a bad constant, not a
+    dead claim.
+
+    Net: of three "corrections", one claim died (2) and two were
+    re-scoped (1, 3). The earlier tally of three falsifications
+    overstated how much was refuted. Recorded, not rewritten.
+
 === FALSIFICATION ===
     Any assert below failing.
 """
@@ -140,6 +172,27 @@ def run():
     assert all(dr(tri(n)) == dr(tri(8 - n)) for n in range(1, 8))
     assert dr(tri(4)) == 1 and dr(tri(6)) == 3     # kills the n=5 axis
 
+    # --- label correction 1: one law covers both 198 and 693 ---
+    # rev(n) - n = 99(a - c) for EVERY 3-digit n, wrap included.
+    for n in range(100, 1000):
+        a, c = n // 100, n % 10
+        assert rev(n) - n == 99 * (c - a)
+    for w in WINDOWS:
+        a, c = w // 100, w % 10
+        assert rev(w) - w == 99 * (c - a)
+    assert [w // 100 - w % 10 for w in WINDOWS] == [-2] * 7 + [7, 7]
+
+    # --- label correction 3: the mirror is forced, only the axis moved ---
+    assert all(tri(8 - n) - tri(n) == 36 - 9 * n for n in range(0, 9))
+    assert all((36 - 9 * n) % 9 == 0 for n in range(0, 9))
+    # the congruence is exact for all n in 0..8:
+    assert all((tri(8 - n) - tri(n)) % 9 == 0 for n in range(0, 9))
+    # the dr form holds on 1..7. it fails ONLY at the n=0/n=8 endpoint,
+    # and only because of the dr(0)=0 convention: tri(0)=0 -> dr 0, while
+    # tri(8)=36 -> dr 9. same residue class, different label. recorded.
+    assert all(dr(tri(n)) == dr(tri(8 - n)) for n in range(1, 8))
+    assert dr(tri(0)) == 0 and dr(tri(8)) == 9 and (36 - 0) % 9 == 0
+
     print("All assertions passed.\n")
     print("TRIAD LOCK  dr(2A) vs dr(T_A):")
     for A in range(1, 10):
@@ -161,6 +214,14 @@ def run():
           f"(e.g. 1+2=3) -- only triad+non-triad is closed off")
     print(f"  3. mirror axis n=4 (R_n=R_(8-n)), not n=5: "
           f"R_4={dr(tri(4))} vs R_6={dr(tri(6))}")
+
+    print("\nVERDICT LABELS (corrected after review, originals kept):")
+    print("  1. SCOPE CLARIFIED -- rev(n)-n = 99(a-c) holds for all 900")
+    print(f"     3-digit n; 198 is that law at a-c=-2, 693 at a-c=7.")
+    print("  2. FALSIFIED -- stands. 1+2=3 contradicts the claim outright.")
+    print("  3. PARAMETER CORRECTED -- the mirror R_n=R_(8-n) is forced by")
+    print("     T_(8-n)-T_n = 36-9n = 0 mod 9; only the axis was wrong.")
+    print("  net: 1 claim dead, 2 re-scoped -- not 3 falsifications.")
 
 
 if __name__ == "__main__":
