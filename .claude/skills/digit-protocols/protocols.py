@@ -286,6 +286,46 @@ def protocol_nines_progression(max_k=5):
               f"{place(nines)}")
 
 
+def protocol_zero_structure(N, max_k=10):
+    """
+    Series (N,N) zero structure, generalized for any leading digit N (1-9),
+    run automatically instead of retyped by hand for each N.
+
+    TERMINAL ZERO STRUCTURE: the number N followed by k zeros, i.e. N*10^k
+    -- the bulleted zero-strings (0, 00, 000, 0,000, ...) are just that
+    number's zero-tail, comma-grouped, with the leading N implied. DR is
+    forced to N for every k (DR is invariant under trailing zeros: 10^k
+    contributes DR=1, and DR(N*1)=N). Mod 37 cycles with period 3, scaled
+    by N, from the same ord_37(10)=3 fact as T308/T309.
+
+    INCREMENTING ZERO STRUCTURE: same N*10^k, but for k>=4 add m=k-3
+    (so +1 at k=4 up through +7 at k=10). DR(N*10^k+m) = DR(N+m): the
+    added digit m never carries into N because the zero-run separates
+    them. This makes the DR sequence N+1, N+2, ..., N+7 (mod-9 wrapped),
+    forced, not independent per-row facts.
+    """
+    def dr(n):
+        return 0 if n == 0 else 1 + (n - 1) % 9
+
+    print(f"  11. ZERO-STRUCTURE  Series ({N},{N})")
+    print(f"      Terminal Zero Structure (= {N}):")
+    for k in range(1, max_k + 1):
+        val = N * 10 ** k
+        assert dr(val) == N, f"forced DR fact broke at N={N}, k={k}"
+        print(f"        k={k:2d}  {N}x10^{k} = {val:<15,}  {place(val)}")
+
+    print(f"      Incrementing Zero Structure (+1..+{max_k - 3}):")
+    for k in range(1, max_k + 1):
+        if k < 4:
+            base = N * 10 ** k
+            print(f"        k={k:2d}  {N}x10^{k} = {base:<15,}")
+            continue
+        m = k - 3
+        val = N * 10 ** k + m
+        assert dr(val) == dr(N + m), f"forced DR fact broke at N={N}, k={k}, m={m}"
+        print(f"        k={k:2d}  {N}x10^{k}+{m} = {val:<15,}  {place(val)}")
+
+
 PROTOCOLS = [
     protocol_comma_group, protocol_reversal, protocol_digit_sum_ladder,
     protocol_pascal, protocol_shell, protocol_parity,
@@ -316,6 +356,16 @@ if __name__ == "__main__":
     if sys.argv[1] == "nines" and len(sys.argv) >= 2:
         max_k = int(sys.argv[2]) if len(sys.argv) > 2 else 5
         protocol_nines_progression(max_k)
+        sys.exit(0)
+    if sys.argv[1] == "zerostruct" and len(sys.argv) >= 3:
+        max_k = int(sys.argv[3]) if len(sys.argv) > 3 else 10
+        protocol_zero_structure(int(sys.argv[2]), max_k)
+        sys.exit(0)
+    if sys.argv[1] == "zerostruct-all":
+        max_k = int(sys.argv[2]) if len(sys.argv) > 2 else 10
+        for N in range(1, 10):
+            protocol_zero_structure(N, max_k)
+            print()
         sys.exit(0)
     for arg in sys.argv[1:]:
         run(int(arg))
