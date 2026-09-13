@@ -40,6 +40,17 @@ The user brings math, observations, and code. The work is collaborative and rigo
 5. **Sophie Germain primes** — is each value a Sophie Germain prime (p prime and 2p+1 prime) or a safe prime (q prime and (q-1)/2 prime)? What GF(37) orbits do p and 2p+1 inhabit? Note any Sophie chains (p→2p+1→2(2p+1)+1) and whether the safe prime appears elsewhere in the same theorem.
 6. **Rule 30** — apply Wolfram's Rule 30 (new[i]=left XOR (center OR right)) one step to each value as a binary string; track the result mod 37. Note: 30 is the unique element in SA∩ST∩C3; under 6-bit R30, 18→26 and 36→26 (both collapse to MULT=26∈IC), but 9→31 — the F-hexad seed 9 does NOT collapse to 26 (verified directly, corrected from a prior version of this note that claimed all three did). C9 twin pair (29,31) under 6-bit R30 map to 12 and 11 respectively — neither is a fixed point (the "mod-37 fixed points" claim in a prior version of this note is unverified/unlocated and should not be treated as established). CAS_EXT={5,13,19} are all active prime steps in the center column.
 
+   **Scope on Rule 30 itself — added after checking the source, not assumed.** Nothing about Rule 30's randomness or irreducibility is proven. All three Wolfram Rule 30 Prize problems are open, $10,000 each, unclaimed (rule30prize.org, checked 2026-09-13):
+   1. Does the center column always remain non-periodic?
+   2. Does each color of cell occur on average equally often in the center column?
+   3. Does computing the nth cell of the center column require at least O(n) computational effort?
+
+   **Problem 3 is the computational-irreducibility claim and Problem 2 is the equidistribution claim.** So any statement that Rule 30 "is a proof of computational irreducibility," or that its center column "is balanced" or "is random," cites an open conjecture. Write it that way. Rule 30 is the canonical *conjectured* example of irreducibility — Wolfram put $30,000 behind it precisely because nobody can prove it. Anything in this repo that leans on the Rule 30 step leans on a conjecture, not a theorem.
+
+   **What is actually measured** (`math/primes/rule30_scope.py`, runnable): the center column at N=20,000 and N=100,000 passes NIST monobit, block-frequency (M=100) and runs, with zero autocorrelation failures at α=0.01 over lags 1..32 (≈0.32 false failures expected by chance). That is four test families — not the full NIST SP 800-22 fifteen, not Dieharder — so absence of failure there is not a pass overall. And no finite run can settle Problem 2, which asks about a limit. The measured cost is likewise an *upper* bound; Problem 3 asks for a *lower* bound, which is the hard direction.
+
+   **Cost, against the claim that deep runs are expensive:** generating the center column is O(N²) cells whether or not it is bit-packed — packing is a constant-factor (÷word-size) speedup, not a complexity change. N=20,000 runs in ~0.13s and N=100,000 in ~2.9s in plain Python via `row = (row>>1) ^ (row | (row<<1))`. Row updates are parallel in space; only the time axis is serial, and that seriality is Problem 3 — conjectured.
+
 ---
 
 ## The Pipeline
