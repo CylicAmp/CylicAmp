@@ -229,17 +229,61 @@ def protocol_reversal_build(seed, steps=4):
     this recurrence. 1 + reverse(1) = 1+1 = 2, not 9. That first step is a
     separate seed choice, not explained by the rule -- recorded here rather
     than papered over. The recurrence is verified to hold from 9 onward.
+
+    Every step's arithmetic is printed explicitly (10^k + rev(prior) = sum)
+    so any hand-computed value can be checked against it directly. Also
+    prints the digit-swap variant (swap the two distinct digits present,
+    e.g. 191 -> 919) alongside the string-reversal value at every step,
+    since they coincide except when the prior term has more than two
+    distinct digit values or is not built from exactly {a,b} -- the two
+    operations are NOT the same rule, and are reported separately rather
+    than one silently substituted for the other.
     """
     def rev(n):
         return int(str(n)[::-1])
 
+    def digit_swap(n):
+        s = str(n)
+        digits = sorted(set(s))
+        if len(digits) != 2:
+            return None
+        a, b = digits
+        table = str.maketrans(a + b, b + a)
+        return int(s.translate(table))
+
+    print(f"  9. REVERSAL-BUILD  seed={seed}")
+    prior = seed
     terms = [seed]
     for k in range(1, steps + 1):
-        terms.append(10 ** k + rev(terms[-1]))
-    print(f"  9. REVERSAL-BUILD  seed={seed}")
+        r = rev(prior)
+        total = 10 ** k + r
+        swap = digit_swap(prior)
+        swap_total = 10 ** k + swap if swap is not None else None
+        line = f"       step {k}: 10^{k}={10**k} + rev({prior})={r}  =>  {total}"
+        if swap_total is not None and swap_total != total:
+            line += f"    [digit-swap({prior})={swap} would give {swap_total} instead]"
+        print(line)
+        terms.append(total)
+        prior = total
     print(f"       terms: {terms}")
     for t in terms:
         print(f"       {place(t)}")
+
+
+def protocol_nines_progression(max_k=5):
+    """
+    The zero-count block: k zeros written as a tally (0, 00, 000, ...) marks
+    10^k - 1, the all-nines repunit of length k (9, 99, 999, 9999, ...).
+    Digital root is 9 for every k (forced: any nonzero multiple of 9 has
+    DR 9). Mod 37 it cycles with period 3 -- the same ord_37(10)=3 fact
+    behind T308 and the comma-group protocol.
+    """
+    print(f"  10. NINES-PROGRESSION (k zeros -> 10^k-1)")
+    for k in range(1, max_k + 1):
+        nines = 10 ** k - 1
+        ds = sum(int(c) for c in str(nines))
+        print(f"       {'0'*k:<6} -> 10^{k}-1 = {nines:<7} digit_sum={ds:<3} "
+              f"{place(nines)}")
 
 
 PROTOCOLS = [
@@ -268,6 +312,10 @@ if __name__ == "__main__":
     if sys.argv[1] == "revbuild" and len(sys.argv) >= 3:
         steps = int(sys.argv[3]) if len(sys.argv) > 3 else 4
         protocol_reversal_build(int(sys.argv[2]), steps)
+        sys.exit(0)
+    if sys.argv[1] == "nines" and len(sys.argv) >= 2:
+        max_k = int(sys.argv[2]) if len(sys.argv) > 2 else 5
+        protocol_nines_progression(max_k)
         sys.exit(0)
     for arg in sys.argv[1:]:
         run(int(arg))
