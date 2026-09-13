@@ -102,6 +102,8 @@ def registers(N, step=None):
         'dr': root,
         'partition': 'TRIAD' if root in TRIAD else 'CIRCUIT',
         'harmonic_positions': [i + 1 for i, v in enumerate(R_CYCLE) if v == root],
+        'pc': pc_string(N),
+        'parity': parity_string(N),
         'mod37': abs(N) % P,
         'orbit': orbit_of(N),
     }
@@ -155,6 +157,8 @@ def show(N, step=None):
     print(f"[{N}]")
     print(f"  1. POSITIONAL  '{g['string']}'  digits={g['digits']}  "
           f"len={g['length']}  groups={g['comma_groups']}  tier={g['period_tier']}")
+    print(f"     digit class  {g['pc']}   parity {g['parity']}"
+          f"   (P prime, C composite, 1 unit, 0 zero)")
     print(f"  2. FLIP        rev={g['reverse']}  |N-rev|={g['rev_delta']}"
           f"  dr(delta)={g['rev_delta_dr']}")
     print(f"  3. SUM         {' + '.join(map(str, g['digits']))} = {g['digit_sum']}")
@@ -280,6 +284,65 @@ def blocks(lead=1):
         print(f"   {base}  {base}  {flip}(flip)   {lead}+{B} = {lead+B} -> dr {dr(lead+B)}"
               f"   |flip-base| = {abs(flip-base)}")
     print(f"   root progression: {[dr(lead + B) for B in range(1, 10)]}")
+
+
+PRIME_DIGITS = (2, 3, 5, 7)
+COMPOSITE_DIGITS = (4, 6, 8, 9)
+
+
+def digit_class(d):
+    """
+    P / C / 1 / 0 -- a complete partition of the ten digits:
+        0            zero, neither
+        1            UNIT, neither prime nor composite
+        2,3,5,7      prime      (4 of them)
+        4,6,8,9      composite  (4 of them)
+    1 gets its own symbol rather than being lumped with the composites.
+    That distinction is not cosmetic: calling 1 composite is exactly the
+    error found in reference/cut_table_113115117167.py earlier.
+    """
+    if d == 0:
+        return '0'
+    if d == 1:
+        return '1'
+    return 'P' if d in PRIME_DIGITS else 'C'
+
+
+def pc_string(n):
+    return ''.join(digit_class(int(c)) for c in str(abs(n)))
+
+
+def parity_string(n):
+    return ''.join('E' if int(c) % 2 == 0 else 'O' for c in str(abs(n)))
+
+
+def classify_rows(rows):
+    """
+    Render rows (each a number or a tuple of digits) under both schemes,
+    with the unary zero-tally that indexes them.
+    """
+    print("  row            digits            P/C/1     parity   tally")
+    pcs, eos = [], []
+    for i, r in enumerate(rows, start=1):
+        digits = list(r) if isinstance(r, (tuple, list)) else [int(c) for c in str(r)]
+        s = ''.join(str(d) for d in digits)
+        pc = ''.join(digit_class(d) for d in digits)
+        eo = ''.join('E' if d % 2 == 0 else 'O' for d in digits)
+        pcs.append(pc)
+        eos.append(eo)
+        print(f"  {i}  {str(r):<12} {str(digits):<17} {pc:<9} {eo:<8} {'0'*i} ({i})")
+    print(f"\n  P/C column:  {pcs}")
+    print(f"  parity:      {eos}")
+    dupes = {p: [i + 1 for i, x in enumerate(eos) if x == p]
+             for p in set(eos) if eos.count(p) > 1}
+    for sig, where in dupes.items():
+        print(f"  SYMMETRY BREAK: rows {where} share parity {sig}; only the "
+              f"tally ({', '.join('0'*i for i in where)}) separates them")
+    for i in range(len(eos)):
+        for j in range(i + 1, len(eos)):
+            if eos[i] != eos[j] and sorted(eos[i]) == sorted(eos[j]):
+                print(f"  TRANSPOSITION: rows {i+1} and {j+1} ({eos[i]} / {eos[j]}) "
+                      f"are position-swaps of the same multiset")
 
 
 def rev_of(n):
@@ -482,6 +545,28 @@ def verify():
             assert abs(ab - ba) == 9 * abs(d1 - d2)
             assert abs(aa - bb) == 11 * abs(d1 - d2)
             assert (abs(ab - ba) == abs(aa - bb)) == (d1 == d2)
+    # --- digit classification: P / C / 1 / 0 is a complete partition ---
+    assert [digit_class(d) for d in range(10)] == \
+        ['0', '1', 'P', 'P', 'C', 'P', 'C', 'P', 'C', 'C']
+    assert len(PRIME_DIGITS) == len(COMPOSITE_DIGITS) == 4
+    assert set(PRIME_DIGITS) | set(COMPOSITE_DIGITS) | {0, 1} == set(range(10))
+    assert not (set(PRIME_DIGITS) & set(COMPOSITE_DIGITS))
+    assert digit_class(1) == '1'          # unit, NOT composite
+    # the 4-row block renders exactly as given
+    assert [pc_string(n) for n in (2288, 5145, 5415, 8822)] == \
+        ['PPCC', 'P1CP', 'PC1P', 'CCPP']
+    assert [parity_string(n) for n in (2288, 5145, 5415, 8822)] == \
+        ['EEEE', 'OOEO', 'OEOO', 'EEEE']
+    # symmetry break: rows 1 and 4 share a parity signature but differ
+    assert parity_string(2288) == parity_string(8822)
+    assert pc_string(2288) != pc_string(8822)
+    # middle transposition: rows 2 and 3 are position-swaps of one multiset
+    assert parity_string(5145) != parity_string(5415)
+    assert sorted(parity_string(5145)) == sorted(parity_string(5415))
+
+    # --- the chain 8+6 -> 14 -> +dr -> 19 ---
+    assert 8 + 6 == 14 and dr(14) == 5
+    assert 14 + dr(14) == 19 and dr(19) == 1
     print("engine.verify(): all assertions passed")
 
 
@@ -505,6 +590,8 @@ if __name__ == "__main__":
         matrix_report()
     elif a[0] == "pair":
         pair_report(int(a[1]), int(a[2]))
+    elif a[0] == "classify":
+        classify_rows([int(x) for x in a[1:]])
     elif a[0] == "block":
         flanked_block([int(x) for x in a[1:]])
     elif a[0] == "pairs":
