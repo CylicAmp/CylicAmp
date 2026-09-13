@@ -1,0 +1,18 @@
+# Canonical identity for the repository owner.
+#
+# Git records an author name+email verbatim on every commit, so the same
+# person appears as several contributors when the local git config changes
+# between machines or sessions. These three spellings are one person:
+#
+#   Michael Song        <red3rdeye@gmail.com>   (328 commits)
+#   Michael Warren Song <red3rdeye@gmail.com>   ( 26 commits)
+#   CYLIC-AMP           <Red3rdeye@gmail.com>   (  3 commits, capital R)
+#
+# The capital R in the third makes git treat it as a distinct address.
+# This file folds all three into one for git log, git shortlog and
+# git blame. It does NOT alter any commit object, and GitHub's web UI
+# does not read .mailmap -- it is a local/clone-level normalization only.
+
+Michael Song <red3rdeye@gmail.com> <Red3rdeye@gmail.com>
+Michael Song <red3rdeye@gmail.com> Michael Warren Song <red3rdeye@gmail.com>
+Michael Song <red3rdeye@gmail.com> CYLIC-AMP <Red3rdeye@gmail.com>
