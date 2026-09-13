@@ -220,6 +220,28 @@ def protocol_stream_counting(stream):
             print(f"         '{u}': {non_ov.get(u,0)} / {ov.get(u,0)}")
 
 
+def protocol_reversal_build(seed, steps=4):
+    """
+    The additive-reversal recurrence: term_k = 10^(k-1) + reverse(term_(k-1)).
+    Starting from seed=9: 9 -> 10+rev(9)=19 -> 100+rev(19)=191 -> 1000+rev(191)=1191 ...
+
+    NOTE: the step 1 -> 9 that motivated this (1+8=9) is NOT an instance of
+    this recurrence. 1 + reverse(1) = 1+1 = 2, not 9. That first step is a
+    separate seed choice, not explained by the rule -- recorded here rather
+    than papered over. The recurrence is verified to hold from 9 onward.
+    """
+    def rev(n):
+        return int(str(n)[::-1])
+
+    terms = [seed]
+    for k in range(1, steps + 1):
+        terms.append(10 ** k + rev(terms[-1]))
+    print(f"  9. REVERSAL-BUILD  seed={seed}")
+    print(f"       terms: {terms}")
+    for t in terms:
+        print(f"       {place(t)}")
+
+
 PROTOCOLS = [
     protocol_comma_group, protocol_reversal, protocol_digit_sum_ladder,
     protocol_pascal, protocol_shell, protocol_parity,
@@ -242,6 +264,10 @@ if __name__ == "__main__":
         sys.exit(0)
     if sys.argv[1] == "stream" and len(sys.argv) == 3:
         protocol_stream_counting(sys.argv[2])
+        sys.exit(0)
+    if sys.argv[1] == "revbuild" and len(sys.argv) >= 3:
+        steps = int(sys.argv[3]) if len(sys.argv) > 3 else 4
+        protocol_reversal_build(int(sys.argv[2]), steps)
         sys.exit(0)
     for arg in sys.argv[1:]:
         run(int(arg))
