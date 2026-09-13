@@ -326,6 +326,59 @@ def protocol_zero_structure(N, max_k=10):
         print(f"        k={k:2d}  {N}x10^{k}+{m} = {val:<15,}  {place(val)}")
 
 
+def protocol_triangular_reduction(max_n=9):
+    """
+    Cumulative zero-reduction stream: the running total of the incrementing
+    zero structure (protocol 11), reduced to a digital root.
+
+        zeros prefix = "0"*n
+        index        = n
+        suffix       = T_n = n(n+1)/2   (cumulative sum 1+2+...+n)
+        root         = DR(T_n)
+        raw string   = "0"*n + str(n) + str(T_n)
+        reduced      = "0"*n + str(n) + str(DR(T_n))
+
+    The terminal root stream for n=1..9 is 1,3,6,1,6,3,1,9,9 -- exactly one
+    full cycle, and it repeats forever after.
+
+    Two forced facts, both asserted below rather than observed per-row:
+      PERIOD 9: T_(n+9) - T_n = 9n+45, divisible by 9, so DR(T_n) depends
+        only on n mod 9. The stream cannot do anything but repeat.
+      PALINDROME: T_(8-n) - T_n = 36-9n, divisible by 9, so DR(T_n) =
+        DR(T_(8-n)). That mirrors the first seven terms about n=4:
+        1,3,6,[1],6,3,1. The two 9s at n=8,9 sit outside the mirror
+        because 36 and 45 are both multiples of 9.
+    """
+    def dr(n):
+        return 0 if n == 0 else 1 + (n - 1) % 9
+
+    def tri(n):
+        return n * (n + 1) // 2
+
+    print(f"  12. TRIANGULAR-REDUCTION (cumulative zero structure)")
+    stream = []
+    for n in range(1, max_n + 1):
+        T = tri(n)
+        d = dr(T)
+        stream.append(d)
+        raw = "0" * n + str(n) + str(T)
+        red = "0" * n + str(n) + str(d)
+        print(f"       n={n}  T_n={T:<4} DR={d}  raw={raw:<26} reduced={red:<26} "
+              f"{place(T)}")
+
+    print(f"       terminal root stream: {stream}")
+
+    # forced: period 9
+    for n in range(1, max_n + 20):
+        assert dr(tri(n + 9)) == dr(tri(n)), f"period-9 broke at n={n}"
+        assert (tri(n + 9) - tri(n)) % 9 == 0
+    # forced: palindrome about n=4 within the first seven
+    for n in range(1, 8):
+        assert dr(tri(8 - n)) == dr(tri(n)), f"palindrome broke at n={n}"
+        assert (tri(8 - n) - tri(n)) % 9 == 0
+    print(f"       period-9 and palindrome both verified (forced, asserted)")
+
+
 PROTOCOLS = [
     protocol_comma_group, protocol_reversal, protocol_digit_sum_ladder,
     protocol_pascal, protocol_shell, protocol_parity,
@@ -360,6 +413,10 @@ if __name__ == "__main__":
     if sys.argv[1] == "zerostruct" and len(sys.argv) >= 3:
         max_k = int(sys.argv[3]) if len(sys.argv) > 3 else 10
         protocol_zero_structure(int(sys.argv[2]), max_k)
+        sys.exit(0)
+    if sys.argv[1] == "triangular":
+        max_n = int(sys.argv[2]) if len(sys.argv) > 2 else 9
+        protocol_triangular_reduction(max_n)
         sys.exit(0)
     if sys.argv[1] == "zerostruct-all":
         max_k = int(sys.argv[2]) if len(sys.argv) > 2 else 10
