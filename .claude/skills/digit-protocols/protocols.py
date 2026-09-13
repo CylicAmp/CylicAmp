@@ -151,6 +151,75 @@ def protocol_parity(n):
     print(f"  6. PARITY       digits={s}  parities={parities}  strictly alternating={alt}")
 
 
+def protocol_two_number_board(a, b):
+    """
+    The (a,b) 3x3 board: corners and center = a, cardinal edges = b.
+        a b a
+        b a b
+        a b a
+    Reports rows, columns, both diagonals, corners, edges, perimeter,
+    total, and the a-b-a palindrome the board is built around.
+    """
+    G = [[a, b, a], [b, a, b], [a, b, a]]
+    rows = [sum(r) for r in G]
+    cols = [G[0][c] + G[1][c] + G[2][c] for c in range(3)]
+    d1 = G[0][0] + G[1][1] + G[2][2]
+    d2 = G[0][2] + G[1][1] + G[2][0]
+    corners = G[0][0] + G[0][2] + G[2][0] + G[2][2]
+    edges = G[1][0] + G[1][2] + G[0][1] + G[2][1]
+    perim = corners + edges
+    total = perim + G[1][1]
+    aba = int(f"{a}{b}{a}")
+    print(f"  7. TWO-NUMBER BOARD  (a={a}, b={b})")
+    print(f"       grid: {G[0]} / {G[1]} / {G[2]}")
+    print(f"       rows={rows}  cols={cols}  diag1={d1}  diag2={d2}")
+    print(f"       corners=4a={corners}  edges=4b={edges}  perimeter={perim}  total={total}")
+    for label, v in [("outer row/col", rows[0]), ("middle row/col", rows[1]),
+                      ("diag1", d1), ("diag2", d2), ("perimeter", perim),
+                      ("total", total), ("a-b-a palindrome", aba)]:
+        print(f"       {label:<16} {place(v)}")
+
+
+def unit_counts(stream, unit_len):
+    """
+    Chunk COUNT for a fixed-size grouping, non-overlapping from position 0
+    (the '24 digits, groups of N' reading), plus how many times each
+    distinct unit of that length actually occurs -- non-overlapping from
+    position 0, and separately allowing overlap.
+    """
+    L = len(stream)
+    chunks = [stream[i:i + unit_len] for i in range(0, L, unit_len)] if L % unit_len == 0 else None
+    overlap_positions = range(L - unit_len + 1)
+    from collections import Counter
+    overlap_count = Counter(stream[i:i + unit_len] for i in overlap_positions)
+    nonoverlap_count = Counter(chunks) if chunks else Counter()
+    return chunks, nonoverlap_count, overlap_count
+
+
+def protocol_stream_counting(stream):
+    """
+    For a digit stream (e.g. an alternating 1-2-1-2... run), reports how
+    the count changes with the counting unit: chunk size, non-overlapping
+    vs overlapping occurrence counts. The count is a property of how you
+    read the stream, not of the digits themselves -- this makes that
+    explicit and checkable rather than asserted.
+    """
+    L = len(stream)
+    print(f"  8. STREAM COUNTING  stream={stream}  (length {L})")
+    for size in sorted(set(d for d in range(1, L + 1) if L % d == 0)):
+        chunks, non_ov, ov = unit_counts(stream, size)
+        print(f"       chunk size {size:>2} -> {len(chunks)} chunks, distinct: {sorted(non_ov)}")
+    print(f"       occurrence counts by unit (non-overlap from pos 0 / overlapping):")
+    seen_units = set()
+    for size in range(1, min(4, L) + 1):
+        _, non_ov, ov = unit_counts(stream, size)
+        for u in sorted(set(non_ov) | set(ov)):
+            if u in seen_units:
+                continue
+            seen_units.add(u)
+            print(f"         '{u}': {non_ov.get(u,0)} / {ov.get(u,0)}")
+
+
 PROTOCOLS = [
     protocol_comma_group, protocol_reversal, protocol_digit_sum_ladder,
     protocol_pascal, protocol_shell, protocol_parity,
@@ -167,6 +236,12 @@ def run(n):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print(__doc__)
+        sys.exit(0)
+    if sys.argv[1] == "board" and len(sys.argv) == 4:
+        protocol_two_number_board(int(sys.argv[2]), int(sys.argv[3]))
+        sys.exit(0)
+    if sys.argv[1] == "stream" and len(sys.argv) == 3:
+        protocol_stream_counting(sys.argv[2])
         sys.exit(0)
     for arg in sys.argv[1:]:
         run(int(arg))
