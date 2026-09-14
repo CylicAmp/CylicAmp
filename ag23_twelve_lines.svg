@@ -1,0 +1,249 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="644" height="758" viewBox="0 0 644 758">
+<rect width="644" height="758" fill="#12151a"/>
+<text x="28" y="30" fill="#e8e3d8" font-size="15" font-family="ui-monospace,monospace">The 12 lines of AG(2,3) on d = 1 + x + 3y</text>
+<text x="28" y="50" fill="#707a88" font-size="11.5" font-family="ui-monospace,monospace">Four parallel classes, three lines each. Every class partitions the nine points; two points lie on exactly one line.</text>
+<text x="28" y="68" fill="#707a88" font-size="11.5" font-family="ui-monospace,monospace">&#9679; = a 15-line (one of the eight Lo Shu lines).  The x = c class is the three +3-orbits, the columns of every lift grid.</text>
+<text x="28" y="88" fill="#4a8fb5" font-size="12.5" font-family="ui-monospace,monospace">(1, 0)  y = c        sums [6, 15, 24]   rows</text>
+<rect x="28" y="96" width="30" height="30" rx="4" fill="#22282f" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="43" y="116" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="62" y="96" width="30" height="30" rx="4" fill="#22282f" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="77" y="116" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="96" y="96" width="30" height="30" rx="4" fill="#22282f" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="111" y="116" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="28" y="130" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="43" y="150" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="62" y="130" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="77" y="150" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="96" y="130" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="111" y="150" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="28" y="164" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="43" y="184" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="62" y="164" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="77" y="184" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="96" y="164" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="111" y="184" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="28" y="214" fill="#4a8fb5" font-size="11.5" font-family="ui-monospace,monospace">123   sum 6</text>
+<rect x="156" y="96" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="171" y="116" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="190" y="96" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="205" y="116" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="224" y="96" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="239" y="116" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="156" y="130" width="30" height="30" rx="4" fill="#22282f" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="171" y="150" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="190" y="130" width="30" height="30" rx="4" fill="#22282f" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="205" y="150" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="224" y="130" width="30" height="30" rx="4" fill="#22282f" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="239" y="150" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="156" y="164" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="171" y="184" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="190" y="164" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="205" y="184" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="224" y="164" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="239" y="184" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="156" y="214" fill="#4a8fb5" font-size="11.5" font-family="ui-monospace,monospace">456   sum 15 ●</text>
+<rect x="284" y="96" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="299" y="116" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="318" y="96" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="333" y="116" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="352" y="96" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="367" y="116" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="284" y="130" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="299" y="150" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="318" y="130" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="333" y="150" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="352" y="130" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="367" y="150" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="284" y="164" width="30" height="30" rx="4" fill="#22282f" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="299" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="318" y="164" width="30" height="30" rx="4" fill="#22282f" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="333" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="352" y="164" width="30" height="30" rx="4" fill="#22282f" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="367" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="284" y="214" fill="#4a8fb5" font-size="11.5" font-family="ui-monospace,monospace">789   sum 24</text>
+<text x="408" y="114" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">123 and 789 are the two</text>
+<text x="408" y="130" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">lines no 15-set or orbit</text>
+<text x="408" y="146" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">reaches</text>
+<text x="28" y="246" fill="#d98c3f" font-size="12.5" font-family="ui-monospace,monospace">(0, 1)  x = c        sums [12, 15, 18]   columns / the +3-orbits</text>
+<rect x="28" y="254" width="30" height="30" rx="4" fill="#22282f" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="43" y="274" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="62" y="254" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="77" y="274" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="96" y="254" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="111" y="274" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="28" y="288" width="30" height="30" rx="4" fill="#22282f" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="43" y="308" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="62" y="288" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="77" y="308" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="96" y="288" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="111" y="308" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="28" y="322" width="30" height="30" rx="4" fill="#22282f" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="43" y="342" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="62" y="322" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="77" y="342" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="96" y="322" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="111" y="342" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="28" y="372" fill="#d98c3f" font-size="11.5" font-family="ui-monospace,monospace">147   sum 12</text>
+<rect x="156" y="254" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="171" y="274" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="190" y="254" width="30" height="30" rx="4" fill="#22282f" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="205" y="274" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="224" y="254" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="239" y="274" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="156" y="288" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="171" y="308" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="190" y="288" width="30" height="30" rx="4" fill="#22282f" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="205" y="308" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="224" y="288" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="239" y="308" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="156" y="322" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="171" y="342" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="190" y="322" width="30" height="30" rx="4" fill="#22282f" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="205" y="342" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="224" y="322" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="239" y="342" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="156" y="372" fill="#d98c3f" font-size="11.5" font-family="ui-monospace,monospace">258   sum 15 ●</text>
+<rect x="284" y="254" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="299" y="274" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="318" y="254" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="333" y="274" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="352" y="254" width="30" height="30" rx="4" fill="#22282f" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="367" y="274" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="284" y="288" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="299" y="308" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="318" y="288" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="333" y="308" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="352" y="288" width="30" height="30" rx="4" fill="#22282f" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="367" y="308" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="284" y="322" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="299" y="342" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="318" y="322" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="333" y="342" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="352" y="322" width="30" height="30" rx="4" fill="#22282f" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="367" y="342" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="284" y="372" fill="#d98c3f" font-size="11.5" font-family="ui-monospace,monospace">369   sum 18</text>
+<text x="408" y="272" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">columns of every lift</text>
+<text x="408" y="288" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">258 is the one orbit</text>
+<text x="408" y="304" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">that is also a 15-line</text>
+<text x="28" y="404" fill="#7fae72" font-size="12.5" font-family="ui-monospace,monospace">(1, 1)  y = x + c    sums [15, 15, 15]   diagonal</text>
+<rect x="28" y="412" width="30" height="30" rx="4" fill="#22282f" stroke="#7fae72" stroke-width="2.2"/>
+<text x="43" y="432" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="62" y="412" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="77" y="432" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="96" y="412" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="111" y="432" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="28" y="446" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="43" y="466" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="62" y="446" width="30" height="30" rx="4" fill="#22282f" stroke="#7fae72" stroke-width="2.2"/>
+<text x="77" y="466" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="96" y="446" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="111" y="466" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="28" y="480" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="43" y="500" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="62" y="480" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="77" y="500" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="96" y="480" width="30" height="30" rx="4" fill="#22282f" stroke="#7fae72" stroke-width="2.2"/>
+<text x="111" y="500" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="28" y="530" fill="#7fae72" font-size="11.5" font-family="ui-monospace,monospace">159   sum 15 ●</text>
+<rect x="156" y="412" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="171" y="432" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="190" y="412" width="30" height="30" rx="4" fill="#22282f" stroke="#7fae72" stroke-width="2.2"/>
+<text x="205" y="432" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="224" y="412" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="239" y="432" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="156" y="446" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="171" y="466" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="190" y="446" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="205" y="466" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="224" y="446" width="30" height="30" rx="4" fill="#22282f" stroke="#7fae72" stroke-width="2.2"/>
+<text x="239" y="466" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="156" y="480" width="30" height="30" rx="4" fill="#22282f" stroke="#7fae72" stroke-width="2.2"/>
+<text x="171" y="500" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="190" y="480" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="205" y="500" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="224" y="480" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="239" y="500" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="156" y="530" fill="#7fae72" font-size="11.5" font-family="ui-monospace,monospace">267   sum 15 ●</text>
+<rect x="284" y="412" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="299" y="432" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="318" y="412" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="333" y="432" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="352" y="412" width="30" height="30" rx="4" fill="#22282f" stroke="#7fae72" stroke-width="2.2"/>
+<text x="367" y="432" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="284" y="446" width="30" height="30" rx="4" fill="#22282f" stroke="#7fae72" stroke-width="2.2"/>
+<text x="299" y="466" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="318" y="446" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="333" y="466" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="352" y="446" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="367" y="466" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="284" y="480" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="299" y="500" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="318" y="480" width="30" height="30" rx="4" fill="#22282f" stroke="#7fae72" stroke-width="2.2"/>
+<text x="333" y="500" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="352" y="480" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="367" y="500" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="284" y="530" fill="#7fae72" font-size="11.5" font-family="ui-monospace,monospace">348   sum 15 ●</text>
+<text x="408" y="430" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">all three sum 15</text>
+<text x="408" y="446" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">rows of grid 159</text>
+<text x="28" y="562" fill="#b07ab5" font-size="12.5" font-family="ui-monospace,monospace">(1, 2)  y = 2x + c   sums [15, 15, 15]   anti-diagonal</text>
+<rect x="28" y="570" width="30" height="30" rx="4" fill="#22282f" stroke="#b07ab5" stroke-width="2.2"/>
+<text x="43" y="590" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="62" y="570" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="77" y="590" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="96" y="570" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="111" y="590" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="28" y="604" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="43" y="624" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="62" y="604" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="77" y="624" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="96" y="604" width="30" height="30" rx="4" fill="#22282f" stroke="#b07ab5" stroke-width="2.2"/>
+<text x="111" y="624" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="28" y="638" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="43" y="658" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="62" y="638" width="30" height="30" rx="4" fill="#22282f" stroke="#b07ab5" stroke-width="2.2"/>
+<text x="77" y="658" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="96" y="638" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="111" y="658" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="28" y="688" fill="#b07ab5" font-size="11.5" font-family="ui-monospace,monospace">168   sum 15 ●</text>
+<rect x="156" y="570" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="171" y="590" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="190" y="570" width="30" height="30" rx="4" fill="#22282f" stroke="#b07ab5" stroke-width="2.2"/>
+<text x="205" y="590" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="224" y="570" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="239" y="590" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="156" y="604" width="30" height="30" rx="4" fill="#22282f" stroke="#b07ab5" stroke-width="2.2"/>
+<text x="171" y="624" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="190" y="604" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="205" y="624" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="224" y="604" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="239" y="624" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="156" y="638" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="171" y="658" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="190" y="638" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="205" y="658" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="224" y="638" width="30" height="30" rx="4" fill="#22282f" stroke="#b07ab5" stroke-width="2.2"/>
+<text x="239" y="658" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="156" y="688" fill="#b07ab5" font-size="11.5" font-family="ui-monospace,monospace">249   sum 15 ●</text>
+<rect x="284" y="570" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="299" y="590" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="318" y="570" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="333" y="590" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="352" y="570" width="30" height="30" rx="4" fill="#22282f" stroke="#b07ab5" stroke-width="2.2"/>
+<text x="367" y="590" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="284" y="604" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="299" y="624" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="318" y="604" width="30" height="30" rx="4" fill="#22282f" stroke="#b07ab5" stroke-width="2.2"/>
+<text x="333" y="624" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="352" y="604" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="367" y="624" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="284" y="638" width="30" height="30" rx="4" fill="#22282f" stroke="#b07ab5" stroke-width="2.2"/>
+<text x="299" y="658" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="318" y="638" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="333" y="658" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="352" y="638" width="30" height="30" rx="4" fill="#171b21" stroke="#262c34" stroke-width="1"/>
+<text x="367" y="658" fill="#3c434c" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="284" y="688" fill="#b07ab5" font-size="11.5" font-family="ui-monospace,monospace">357   sum 15 ●</text>
+<text x="408" y="588" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">all three sum 15</text>
+<text x="408" y="604" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">rows of grid 168</text>
+<text x="28" y="748" fill="#525c6a" font-size="11" font-family="ui-monospace,monospace">9 points, 12 lines, 4 classes, 3 points per line, each point on 4 lines. The 8 dotted lines are exactly the Lo Shu lines.</text>
+</svg>
