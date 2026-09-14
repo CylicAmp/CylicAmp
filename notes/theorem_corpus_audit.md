@@ -106,6 +106,73 @@ inconclusive rather than folded into either tier.
 
 ---
 
+## 3b. The redundancy axis
+
+Mutation cannot see redundancy: in a fixed computation every assertion passes
+by construction, so nothing to delete or perturb changes the outcome. Three
+shapes ARE detectable syntactically, and all three mean "this check could not
+have been red".
+
+```
+D1  exact duplicate assertions, same scope            208
+D2  tautologies: assert X == (X's own assigned RHS)    38
+D3  conjunct subsumption: assert A; later assert A and B   197
+                                                    -----
+                                  443 of 10,266 assertions   4.3%
+```
+
+D2 is the cleanest — these cannot fail:
+
+```python
+DECADE = 10        ; assert DECADE == 10
+PRIME_MIRROR = 31  ; assert 31 == PRIME_MIRROR
+PHI_37 = 36        ; assert PHI_37 == 36
+```
+
+### The T316 gate shape
+
+T120/121's redundancy was SEMANTIC — check 2 entailed checks 3, 4 and 5 — and
+that is invisible to syntax. But it has a syntactic signature: a bundle of four
+or more named booleans reported together. Across 480 theorem files that shape
+appears **4 times in 3 files**, and one of them is T316 itself, which documents
+the pattern rather than committing it.
+
+The one real instance is `fps37_scanner.py:51`: fifteen booleans, every one of
+the form `residue == <constant>`.
+
+```
+'is_null'      residue == 0      'is_lamed'        residue == 23
+'is_unity'     residue == 1      'is_inv_3'        residue == 25
+'is_trinity'   residue == 3      'is_scalar_137'   residue == 26
+...                              'is_inv_unity'    residue == 36
+```
+
+They are MUTUALLY EXCLUSIVE by construction — at most one can be true. That is
+T316 inverted: not several checks forced true together, but fifteen flags that
+between them carry exactly one fact already known (the residue). Fifteen names,
+zero information beyond the input. `fps37_scanner.py:74` by contrast holds four
+genuinely independent predicates and is fine.
+
+### A caveat about this detector
+
+**The original T120/121 gate sits just under its threshold.** That dict is 5/9
+boolean = 0.56 and the ratio cut is 0.6, so the strict pass misses it; only a
+looser scan finds it. A detector tuned to miss its own motivating example is
+weak evidence, and the "4 instances in 480 files" figure should be read as a
+lower bound, not a clean count.
+
+### What remains unmeasured
+
+Semantic entailment among assertions is not detectable by any of this. T316's
+redundancy surfaced only because the gate was a PREDICATE OVER A PARAMETER —
+sweeping the seed made the implication visible. Most theorems here assert fixed
+facts, so there is no parameter to sweep and no analogous test.
+
+So the redundancy axis is **partially** measured: syntactic redundancy at 4.3%,
+semantic entailment unmeasured and not reachable this way.
+
+---
+
 ## 4. What this says about the T316 pattern
 
 T316's failure mode — five displayed checks, two independent conditions — is
@@ -114,9 +181,18 @@ detect. What it does detect is the adjacent failure: *assertions that hold
 independently of the subject*. The corpus is in good shape on the second
 (92%) and the first remains unmeasured at scale.
 
-The general lesson both share: a green check is evidence only in proportion to
-how easily it could have been red. Counting checks measures nothing; the useful
-question is how many of them could independently have failed.
+The general lesson all of it shares: a green check is evidence only in
+proportion to how easily it could have been red. Counting checks measures
+nothing; the useful question is how many of them could INDEPENDENTLY have
+failed.
+
+Three ways a check fails that test, all found in this corpus:
+  - it references no data at all                     (796, 7.8%)
+  - it restates something already asserted or assigned (443, 4.3%)
+  - it holds for a prime that is not 37               (11 theorems)
+and one that is not reachable by static analysis at all: it is entailed by a
+sibling check. That last is the T316 case, and it is the one worth watching
+by hand.
 
 ---
 
