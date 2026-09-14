@@ -65,11 +65,64 @@ Same goal, opposite mechanism: A never exceeds `Q_max` and pays in key material
 (2.17x Galois keys, verified); B exceeds it briefly and pays in an extra prime
 during ModRaise.
 
-**Not verified:** the original table's "pt-mul + rescale before KS" for Owner B.
-The variant read here rescales with no plaintext multiply. The README lists
-eight test entry points (`evalroundplus_test_S2C_first_adaptive_S2C`,
-`erpluspar_12/23/all_together_*`); the pt-mul may appear in the adaptive ones.
-Recorded as unchecked, not as wrong.
+### The pt-mul IS there, in the erpluspar variants — verified
+
+The simple variant read first has no plaintext multiply at the over-raise. The
+`erpluspar_*_adaptive_S2C` variants (the ones the README uses to reproduce the
+paper's Table 4) do, and they lift more to pay for it:
+
+```cpp
+// simple (proposal_main.cpp ~200)
+const int LogQ_new    = LOGQ + LogDelS;
+RS<LogQ_new, LOGQ, N>(...)                       // drops LogDelS, back to LOGQ
+
+// erpluspar_12_S2C_first_adaptive_S2C (3692)
+const int LogQ_new    = LOGQ + LogDelS + LOGDELTA_cts;   // bigger lift
+const int LogQ_new_rs = LOGQ + LOGDELTA_cts;             // rescale KEEPS LOGDELTA_cts
+RS<LogQ_new, LogQ_new_rs, N>(...)                        // drops only LogDelS
+```
+
+One extra `LOGDELTA_cts` — a full C2S rescale step — survives into CoeffToSlot.
+It is consumed in the first factor, via `CoeffToSlot_sw_adaptive` ->
+`grouped_serial_linear_transform_sw_adaptive` -> `linear_transform_sw`
+(`HEAAN/linear_transform.h`):
+
+```cpp
+rot<LOGQ, N>(pt, pt_rot, N/2 - Ar.off[s]);       // rotate the PLAINTEXT
+ct_rot = ct;
+ct_rot *= pt_rot;                                 // 1. pt-MUL
+RS<LOGQ, LOGQ - LOGDELTA, N>(ct_rot, ct_rs);      // 2. RESCALE
+swkgen(skey_rot, skey, rkey);
+rot_ct<LOGQ - LOGDELTA, N>(ct_rs, Ar.off[s], rkey, ct_block);   // 3. KEY-SWITCH
+```
+
+**pt-mul -> rescale -> key-switch**, confirming the original table row exactly.
+
+The plain `linear_transform` does the reverse — pt-mul, accumulate, then
+`rot_ct` on the CIPHERTEXT at full `LOGQ`, with no rescale in between. The
+mechanism in `_sw` is that it **rotates the plaintext instead of the
+ciphertext**, by the complementary offset `N/2 - Ar.off[s]`. That lets the
+rescale precede the key-switch, so the key-switch — the expensive operation —
+runs at `LOGQ - LOGDELTA` rather than `LOGQ`. The extra `LOGDELTA_cts` carried
+through ModRaise is exactly what buys that.
+
+### Which makes the A/B parallel exact
+
+```
+A   fold divide-by-q_L into the GHS/AKS key      -> the key-switch performs the rescale
+B   rotate plaintext, pt-mul, rescale, then switch -> the rescale precedes the key-switch
+```
+
+Both lower the modulus at which the **first factor's key-switch** runs. A
+rewrites the key; B reorders the operations. And both keep the same shape for
+the rest of the chain: `serial_linear_transform_sw_adaptive` uses
+`linear_transform_sw` for factor 0 and
+`linear_transform_adaptive_sparse_babystep_giantstep` for factors 1..D-1,
+mirroring `dftLevelConserved`'s LCR-at-i=0 / AKS-or-BSGS-after split.
+
+Incidental: the dense (`double[][]`) overload of plain `linear_transform`
+carries a literal `// BUG` comment on its `rot_ct` line. Not on any path used
+by these variants, but recorded.
 
 ---
 
@@ -164,7 +217,8 @@ the emitter cannot express any of the three alternatives. HEIR can neither
 | A: HEIR emit needs replace AND emitter change | **verified here** |
 | B: lift to Q_over > Q_max, saving survives C2S | **verified here** |
 | B: object is ModRaise, not first C2S factor | **verified — corrects the table** |
-| B: "pt-mul + rescale before KS" | **unchecked** (8 variants; one read) |
+| B: "pt-mul + rescale before KS" | **verified** in the erpluspar variants |
+| B: first factor special, later factors BSGS (as in A) | **verified here** |
 | B: no HEIR target exists at all | **verified here** |
 | C: real paper, Sage PoC, partial CtS present | **verified here** |
 | C: blocked by atomic bootstrap op | **verified here** |
