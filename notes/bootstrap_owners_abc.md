@@ -222,8 +222,69 @@ the emitter cannot express any of the three alternatives. HEIR can neither
 | B: no HEIR target exists at all | **verified here** |
 | C: real paper, Sage PoC, partial CtS present | **verified here** |
 | C: blocked by atomic bootstrap op | **verified here** |
-| C: depth O(log C), EvalMod-replacement | **unchecked** |
+| C: EvalMod genuinely replaced, not reduced | **verified** — zero EvalMod in the package |
+| C: depth is O(log C) | **verified** — but see below, it is not *lower* depth |
+| C: "not a full DFT chain" | **not what the benchmark tests** (baseline runs at matched C) |
 | relative wall-clock of any of the three | unmeasured (host RAM ceiling) |
+
+---
+
+## 3b. Owner C's O(log C) claim, verified and qualified
+
+`benchmarks.py` states both depth formulas outright:
+
+```python
+# PaCo
+L = ceil((log_C + 1)/g) + ceil((log_C - 1)/g) + log_h + 3
+# Original
+L = 2 * ceil(max(log_C - 1, 1)/g) + log_d + r + 1
+```
+
+**O(log C): verified.** The C-dependent term is
+`ceil((log2 C + 1)/g) + ceil((log2 C - 1)/g)`, from the two matrix chains built
+in `config_PaCo` — `log2(C)+1` partial-CtS factors and `log2(C)-1` StC factors,
+with `C` a power of two, `C >= 2`, and `4*C*h <= N`.
+
+**EvalMod replaced, not reduced: verified.** `grep -rnE
+'eval_mod|EvalMod|sine|taylor|squaring'` over `paco_package/` returns nothing.
+`seq_PaCo` runs blind-rotate (`coeff_encoding_list[t] @ bsk[t]`), trace, the
+partial-CtS chain, mu/eta plaintext multiplies, then the StC chain. The `d`
+and `r` prompts in `benchmarks.py` belong to the BASELINE it compares against.
+
+**"Not a full DFT chain": not what is tested.** The baseline is configured at
+matched slot count — `CKKS.config(N, 2**(log_C - 1), L, q, p, delta)` — so both
+sides carry O(log C / g) transform depth. The benchmark is PaCo vs
+baseline-at-C-slots, not PaCo vs a full `log2(N/2)` chain.
+
+**And PaCo is not cheaper in depth at the repo's own defaults**
+(N=2^16, h=64, g=3, d=63, r=2):
+
+```
+    C   PaCo L   Orig L   diff
+    2      10       11      -1
+    4      11       11       0
+    8      12       11      +1
+   32      13       13       0
+  256      15       15       0
+
+PaCo constant:  log2(h) + 3           = 9
+Orig constant:  ceil(log2 d) + r + 1  = 9
+```
+
+Within +/-1 across the whole admissible range of C; the two constants coincide.
+
+**The real structural change is which parameter the depth depends on.**
+Original CKKS bootstrapping depth carries no `h` term — it is `log2(d) + r + 1`,
+purely EvalMod. PaCo's is `log2(h) + 3`, purely the secret's Hamming weight.
+PaCo does not remove a cost; it **relocates the dependence** from EvalMod
+parameters onto the sparse secret. It wins when `log2(h) + 3 < log2(d) + r + 1`
+— sparse secret, expensive EvalMod — and loses on a dense one. The constraint
+`4*C*h <= N` couples them: raising `h` both raises the constant and caps `C`.
+
+The other half of the trade, from the `seq_PaCo` docstring: *"Only the
+coefficients indexed by multiples of N / C are bootstrapped."* The O(log C) is
+bought by refreshing C of N coefficients; `parallel_PaCo(kappa)` recovers
+coverage with kappa independent instances at multiples of `N/(kappa*C)`.
 
 ---
 
