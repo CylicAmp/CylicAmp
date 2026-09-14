@@ -175,6 +175,34 @@ between them carry exactly one fact already known (the residue). Fifteen names,
 zero information beyond the input. `fps37_scanner.py:74` by contrast holds four
 genuinely independent predicates and is fine.
 
+### The 5 inconclusive results, diagnosed
+
+"Crashes on mutation" proves nothing by itself, so these were held out of both
+tiers. Running them individually shows two distinct causes:
+
+```
+theorem_133_quaternion_rope_gf37   KeyError: 26      both mutations
+theorem_135_triangular_numbers     KeyError: 9       both mutations
+theorem_276_kolakoski_gf37         ValueError: No discrete log for 3
+theorem_285_quotient_group_z12     ValueError: 40
+theorem_272_easter_dates_gf37      ValueError: 2016  <- different cause
+```
+
+**Four are weak evidence FOR 37-dependence.** They crash because the file
+indexes into a structure that only exists mod 37 — `26` is the 137-map
+multiplier, and the orbit and discrete-log tables have no such key at 43. The
+code cannot run without 37's structure, which is dependence, just expressed as
+an absent data structure rather than a failed assertion. Weak evidence, not
+strong: a crash also happens when a table is merely *built* from 37 without any
+claim resting on it.
+
+**One is tool over-reach.** `theorem_272_easter_dates_gf37` passes the `P`
+mutation cleanly and only breaks on the literal pass, with `ValueError: 2016`.
+The blanket literal rewrite hit a `37` inside Gregorian/Easter date arithmetic,
+which is not a modulus. That is a limitation of pass 2: it cannot distinguish a
+`37` used as the field characteristic from a `37` used as an ordinary constant.
+Anything reported by pass 2 alone should be read with that in mind.
+
 ### A caveat about this detector
 
 **The original T120/121 gate sits just under its threshold.** That dict is 5/9
