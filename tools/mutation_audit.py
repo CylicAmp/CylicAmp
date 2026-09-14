@@ -34,7 +34,7 @@ from concurrent.futures import ProcessPoolExecutor
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
                  "math", "theorems")
 D = os.path.normpath(D) + os.sep
-TIMEOUT = 90
+TIMEOUT = 150
 
 
 def _run(path, timeout):
@@ -48,14 +48,62 @@ def _run(path, timeout):
         return "TIMEOUT"
 
 
+def _sites(src):
+    """Every standalone integer literal 37, as (lineno, col, end_col), plus
+    whether it sits in modulus position (RHS of %, or the modulus arg of pow).
+    Positions come from the AST, so a 37 inside a string or a float is never
+    a site."""
+    import ast
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return []
+    modpos = set()
+    for n in ast.walk(tree):
+        c = None
+        if isinstance(n, ast.BinOp) and isinstance(n.op, ast.Mod):
+            c = n.right
+        elif (isinstance(n, ast.Call) and getattr(n.func, "id", "") == "pow"
+              and len(n.args) == 3):
+            c = n.args[2]
+        elif (isinstance(n, ast.Call) and getattr(n.func, "id", "") == "divmod"
+              and len(n.args) == 2):
+            c = n.args[1]
+        if isinstance(c, ast.Constant) and c.value == 37:
+            modpos.add((c.lineno, c.col_offset))
+    out = []
+    for n in ast.walk(tree):
+        if (isinstance(n, ast.Constant) and n.value == 37
+                and isinstance(n.value, int) and not isinstance(n.value, bool)):
+            out.append((n.lineno, n.col_offset, n.end_col_offset,
+                        (n.lineno, n.col_offset) in modpos))
+    return sorted(set(out))
+
+
+def _splice(src, site, newP):
+    lines = src.split("\n")
+    ln, c0, c1, _ = site
+    line = lines[ln - 1]
+    lines[ln - 1] = line[:c0] + str(newP) + line[c1:]
+    return "\n".join(lines)
+
+
 def _mutate(args):
-    name, newP, mode, timeout = args
+    """mode 'P'    -> rewrite the module-level P = 37
+       mode 'SITE' -> rewrite ONE literal 37, given as args[4]
+
+    Per-site is what makes pass 2 trustworthy. A blanket rewrite of every 37
+    cannot tell a field characteristic from an ordinary constant -- it broke
+    theorem_272_easter_dates_gf37 by rewriting a 37 inside Gregorian date
+    arithmetic, producing a crash that says nothing about 37-dependence.
+    One site at a time keeps those separable."""
+    name, newP, mode, timeout = args[:4]
     src = open(D + name).read()
     if mode == "P":
         mut = re.sub(r'^P = 37\s*$', f'P = {newP}', src, count=1, flags=re.M)
     else:
-        mut = re.sub(r'(?<![\d.\w])37(?![\d\w.])', str(newP), src)
-    tmp = D + f"_zzmut_{mode}{newP}_{os.getpid()}_{name}"
+        mut = _splice(src, args[4], newP)
+    tmp = D + f"_zzmut_{mode}{newP}_{os.getpid()}_{abs(hash(str(args[4:])))%99999}_{name}"
     open(tmp, "w").write(mut)
     try:
         return _run(tmp, timeout)
@@ -64,6 +112,29 @@ def _mutate(args):
             os.remove(tmp)
         except OSError:
             pass
+
+
+def _literal_verdict(args):
+    """Mutate each literal 37 alone. Verdict rules:
+         any site -> ASSERT   => 37 is load-bearing (an assertion depends on it)
+         no ASSERT, some PASS => those sites carry no assertion weight
+         all sites -> crash   => structural dependence only, weak evidence
+    Returns (verdict, detail)."""
+    name, newP, timeout = args
+    src = open(D + name).read()
+    sites = _sites(src)
+    if not sites:
+        return ("NOSITES", "")
+    res = [(_mutate((name, newP, "SITE", timeout, s)), s) for s in sites]
+    kinds = [r for r, _ in res]
+    nmod = sum(1 for s in sites if s[3])
+    detail = (f"{len(sites)} sites ({nmod} in %/pow); "
+              + " ".join(sorted({k for k in kinds})))
+    if "ASSERT" in kinds:
+        return ("ASSERT", detail)
+    if "PASS" in kinds:
+        return ("PASS", detail)
+    return ("ERROR", detail)
 
 
 def main():
@@ -101,9 +172,10 @@ def main():
         r43 = list(ex.map(_mutate, [(f, 43, "P", a.timeout) for f in live]))
         r73 = list(ex.map(_mutate, [(f, 73, "P", a.timeout) for f in live]))
         surv = [f for f, x in zip(live, r43) if x == "PASS"]
-        lit = list(ex.map(_mutate, [(f, 43, "LIT", a.timeout) for f in surv]))
+        lit = list(ex.map(_literal_verdict, [(f, 43, a.timeout) for f in surv]))
 
-    litmap = dict(zip(surv, lit))
+    litmap = {f: v[0] for f, v in zip(surv, lit)}
+    litdetail = {f: v[1] for f, v in zip(surv, lit)}
     tally = collections.Counter()
     decorative, inconclusive = [], []
     for f, x43, x73 in zip(live, r43, r73):
@@ -122,8 +194,11 @@ def main():
             elif L == "PASS":
                 tally["TIER A -- 37 IS DECORATIVE"] += 1
                 decorative.append(f)
+            elif L == "NOSITES":
+                tally["TIER A -- no literal 37 to mutate either"] += 1
+                decorative.append(f)
             else:
-                tally["inconclusive (crash on literal mutation)"] += 1
+                tally["structural only (every site crashes)"] += 1
                 inconclusive.append(f)
 
     print("RESULT")
@@ -139,10 +214,14 @@ def main():
         for f in decorative:
             print(f"    {f}")
     if inconclusive:
-        print(f"\n  inconclusive ({len(inconclusive)}): mutation broke them "
-              f"structurally, so the test says nothing")
+        print(f"\n  structural only ({len(inconclusive)}): no single-site "
+              f"mutation reaches an assertion -- the file cannot RUN at another")
+        print(f"  prime because it indexes 37-derived tables. Weak evidence of")
+        print(f"  dependence, not proof: a table merely BUILT from 37 crashes")
+        print(f"  identically to one a claim rests on.")
         for f in inconclusive:
-            print(f"    {f}")
+            d = litdetail.get(f, "")
+            print(f"    {f}" + (f"   [{d}]" if d else ""))
     slow = [f for f, b in zip(files, base) if b != "PASS"]
     if slow:
         print(f"\n  did not complete at timeout={a.timeout}s "

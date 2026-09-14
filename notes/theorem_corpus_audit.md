@@ -49,14 +49,14 @@ passes both           TIER A  holds for other primes; the 37 is decorative
    4   EXCLUDED: no assertions at all, so no mutation can fail them
  228   testable
 
- 194   TIER C   fails both mutations
-  21   TIER C   caught only by the second pass (literal mutation)
+ 193   TIER C   fails the P mutation
+  24   TIER C   caught only by pass 2 (per-site literal mutation)
    1   TIER B   the {7,37,73} family
    7   TIER A   >>> 37 IS DECORATIVE <<<
-   5   inconclusive (mutation broke them structurally)
+   2   structural only (cannot run at another prime at all)
 ```
 
-**216 of 228 (95%) demonstrably depend on 37.** That is the headline and it is
+**218 of 227 (96%) demonstrably depend on 37.** That is the headline and it is
 good news for the corpus.
 
 An earlier run of this tool reported 11 Tier A and 191 Tier C. Both numbers
@@ -196,12 +196,37 @@ an absent data structure rather than a failed assertion. Weak evidence, not
 strong: a crash also happens when a table is merely *built* from 37 without any
 claim resting on it.
 
-**One is tool over-reach.** `theorem_272_easter_dates_gf37` passes the `P`
-mutation cleanly and only breaks on the literal pass, with `ValueError: 2016`.
-The blanket literal rewrite hit a `37` inside Gregorian/Easter date arithmetic,
-which is not a modulus. That is a limitation of pass 2: it cannot distinguish a
-`37` used as the field characteristic from a `37` used as an ordinary constant.
-Anything reported by pass 2 alone should be read with that in mind.
+**One was tool over-reach, and pass 2 has since been rewritten.**
+`theorem_272_easter_dates_gf37` passed the `P` mutation and broke only on the
+literal pass, with `ValueError: 2016` — the blanket rewrite of every `37` had
+hit one inside Gregorian/Easter date arithmetic, which is not a modulus.
+
+Pass 2 now mutates **one literal at a time**, located by AST position so a `37`
+inside a string or a float is never a site. The verdict rule:
+
+```
+any site -> ASSERT   =>  37 is load-bearing        (Tier C)
+no ASSERT, some PASS =>  those sites carry no assertion weight  (Tier A)
+every site crashes   =>  structural dependence only (weak evidence)
+```
+
+That separation matters because all three outcomes occur *within a single
+file*:
+
+```
+theorem_272   18 sites (17 in %/pow)   ASSERT ERROR PASS
+theorem_276   11 sites ( 5 in %/pow)   ASSERT ERROR PASS
+theorem_285   12 sites (10 in %/pow)   ASSERT ERROR PASS
+```
+
+All three moved from "inconclusive" to Tier C: each has a site whose mutation
+fails an assertion, which the blanket rewrite had masked behind a crash at an
+unrelated constant. Only two files remain structural-only
+(`theorem_133_quaternion_rope`, `theorem_135_triangular_numbers`), where no
+single-site mutation reaches an assertion because the file cannot run at 43 at
+all — it indexes 37-derived tables, and `26`, the 137-map multiplier, is not a
+key there. Weak evidence of dependence, not proof: a table merely *built* from
+37 crashes identically to one a claim rests on.
 
 ### A caveat about this detector
 
