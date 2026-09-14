@@ -123,3 +123,101 @@ st = sp.Matrix([sum(om[j]*sp.diff(u[i],(x,y,z)[j]) for j in range(3))
 print([sp.simplify(c) for c in st])      # -> [0, 0, 0] for ANY psi
 EOF
 ```
+
+---
+
+## 4. The remaining T256 rows, graded against T305
+
+Every row of T256's correspondence table and its three residuals, graded by
+T305's cuts. Verified computationally, not read off.
+
+### Outright false — two of the three residuals
+
+**R1 PHASE ADVECTION.** Claim: `chi_{-3}(f^k(n)) = chi_{-3}(n)` for all n with
+3 not dividing n. **FALSE.** At k=1 it fails for 16 of the 24 eligible n:
+
+    n = 1, 2, 4, 5, 11, 13, 14, 16, 22, 23, 25, 26, 31, 32, 34, 35
+    n=1: f(1)=26, chi(26) = -1, chi(1) = +1
+
+The written proof reads `chi(26n mod 37) = chi(26n)`. That step is false:
+**37 = 1 (mod 3)**, so subtracting 37 shifts the class mod 3. The proof's other
+step, gcd(26,3) = 1, is true and does not bear on it.
+
+What IS true and trivial: f^3 = identity because ord_37(26) = 3, so
+chi(f^3(n)) = chi(n) for every n. The period-3 statement holds; the per-step
+statement does not.
+
+**R3 MOMENTUM.** Claim: `SA = {4,9,25,30}` is fixed under the 137-map. **FALSE**,
+and the file's own text breaks mid-sentence: *"9 -> 234 mod 37 = 12; wait -- SA
+elements are fixed points of DR, not the 137-map."* The orbits are
+
+    4 -> 30 -> 3      9 -> 12 -> 16      25 -> 21 -> 28      30 -> 3 -> 4
+
+The fallback offered in that same sentence, DR(f(n)) = DR(n) for n in SA, also
+fails — at 4, 9 and 25.
+
+### True but scope-overstated
+
+**INTERFACE THEOREM.** Claim: every twin prime (p, p+2), p>3, has
+chi = (-1, 0, +1) across p, p+1, p+2. **TRUE** — verified on all 102 twin primes
+below 4000. But it also holds for **all 666 integers n = 5 (mod 6)** in the same
+range. Twin primality is never used. The content is "n = 5 mod 6", which every
+twin prime p>3 satisfies for an unrelated reason. True, not a twin-prime fact.
+
+### Genuinely strong — the best row in the file
+
+**SPECTRAL GAP.** Claim: in Cay(Z_37, H u -H) with H = {1,10,26}, the gap is at
+k* = 7, indexed by C3 u (-C3) = {3,4,7,30,33,34}. **CONFIRMED.**
+
+    eigenvalues are constant on mu_3-cosets of j  (lambda_j = lambda_26j: True)
+    max non-trivial eigenvalue 4.047813, attained at j = {3,4,7,30,33,34}
+    C3 = {3,4,30},  -C3 = {7,33,34},  union = exactly that set
+    spectral gap = 6 - 4.047813 = 1.952187
+    only 6 distinct eigenvalues among 36 (coset structure)
+
+"Minimum non-trivial eigenvalue" is correct under the Laplacian convention
+(6 - lambda), which is the standard spectral-gap reading. The index set matches
+C3 u (-C3) exactly. This is a real computed fact with a nontrivial match.
+
+Native rigor: theorem. Correspondence rigor: still L1 — calling it "the
+dominant instability mode" imports a fluid role the computation does not supply.
+
+### Level-1 rows
+
+| row | grade |
+|---|---|
+| phase field alpha in [0,1] -> chi in {-1,0,+1} | CUT1 structural, CUT2 L1. Both are 3-valued; that is the shared role. alpha is continuous, chi is a character. |
+| heavy / light phase -> 5-chamber / 1-chamber | L1, and definitional: it restates chi's own values. |
+| continuity div u = 0 -> orbit closure (R2) | native: theorem (gcd(26,37)=1 gives a bijection, all 12 orbits size 3, verified). correspondence: L1 — "volume-preserving" is a shared role. |
+| 6^2 = -1 -> "imaginary unit = pipe width" | 36 = -1 mod 37 is true. "= pipe width (interface thickness)" identifies nothing defined. No content. |
+| mushroom rollup -> 3-cycles | L1, and blind to 2D/3D — see section 2. |
+
+---
+
+## 5. The structural finding: a claim-assertion gap
+
+T256 runs clean. It passes because **its assertions test only true sub-steps,
+never the claims that are false.** The complete assert list:
+
+    assert gcd(26, 3) == 1            <- the only R1-related assert, and it is
+                                         the IRRELEVANT step of a broken proof
+    assert image == list(range(P))    <- supports R2
+    assert orbit_sizes == {3}         <- supports R2
+    assert len(v_left) == len(v_ctr) == len(v_right) == 0
+    assert pow(6, 2, P) == P - 1      <- true; "pipe width" not asserted
+
+R1 and R3 live in the docstring and are never tested. So the file is green
+while two of its three residuals are false, and the single assertion touching
+R1 checks the one step of its proof that does not matter.
+
+This is a failure mode distinct from the two in `notes/theorem_corpus_audit.md`.
+That audit measured whether assertions can fail (mutation) and whether they
+restate each other (redundancy). Neither detects **assertions that pass but do
+not cover the file's claims**. Call it the claim-assertion gap: the asserts test
+A, the docstring claims B, and nothing checks B.
+
+It is not statically detectable in general — deciding whether an assert covers a
+prose claim needs the claim formalised. What IS mechanisable is a weaker proxy:
+flag any file whose docstring states a universally quantified claim ("for all n
+with ...") that no assertion quantifies over. T256 would be caught by that.
+Recorded as a proposal, not built.
