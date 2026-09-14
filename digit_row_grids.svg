@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="866" height="534" viewBox="0 0 866 534">
+<rect width="866" height="534" fill="#12151a"/>
+<text x="34" y="34" fill="#e8e3d8" font-size="15" font-family="ui-monospace,monospace">Each consecutive row and its own 3x3 — 3 singles, then the 6 two-digit numbers</text>
+<text x="34" y="66" fill="#d98c3f" font-size="14" font-family="ui-monospace,monospace">123   S=6  dr=6</text>
+<rect x="34" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#d98c3f" stroke-width="1.6" opacity="1"/>
+<text x="61" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="92" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#d98c3f" stroke-width="1.6" opacity="1"/>
+<text x="119" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="150" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#d98c3f" stroke-width="1.6" opacity="1"/>
+<text x="177" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="34" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="61" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">12</text>
+<rect x="92" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="119" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">13</text>
+<rect x="150" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="177" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">21</text>
+<rect x="34" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="61" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">23</text>
+<rect x="92" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="119" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">31</text>
+<rect x="150" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="177" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">32</text>
+<text x="34" y="218" fill="#707a88" font-size="11.5" font-family="ui-monospace,monospace">6, 15, 24, 33</text>
+<text x="34" y="234" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">S + 9x{1,2,3}</text>
+<text x="242" y="66" fill="#8a7fb5" font-size="14" font-family="ui-monospace,monospace">234   S=9  dr=9</text>
+<rect x="242" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#8a7fb5" stroke-width="1.6" opacity="1"/>
+<text x="269" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="300" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#8a7fb5" stroke-width="1.6" opacity="1"/>
+<text x="327" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="358" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#8a7fb5" stroke-width="1.6" opacity="1"/>
+<text x="385" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="242" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="269" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">23</text>
+<rect x="300" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="327" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">24</text>
+<rect x="358" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="385" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">32</text>
+<rect x="242" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="269" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">34</text>
+<rect x="300" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="327" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">42</text>
+<rect x="358" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="385" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">43</text>
+<text x="242" y="218" fill="#707a88" font-size="11.5" font-family="ui-monospace,monospace">9, 27, 36, 45</text>
+<text x="242" y="234" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">S + 9x{2,3,4}</text>
+<text x="450" y="66" fill="#4a8fb5" font-size="14" font-family="ui-monospace,monospace">345   S=12  dr=3</text>
+<rect x="450" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#4a8fb5" stroke-width="1.6" opacity="1"/>
+<text x="477" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="508" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#4a8fb5" stroke-width="1.6" opacity="1"/>
+<text x="535" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="566" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#4a8fb5" stroke-width="1.6" opacity="1"/>
+<text x="593" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="450" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="477" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">34</text>
+<rect x="508" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="535" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">35</text>
+<rect x="566" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="593" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">43</text>
+<rect x="450" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="477" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">45</text>
+<rect x="508" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="535" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">53</text>
+<rect x="566" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="593" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">54</text>
+<text x="450" y="218" fill="#707a88" font-size="11.5" font-family="ui-monospace,monospace">12, 39, 48, 57</text>
+<text x="450" y="234" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">S + 9x{3,4,5}</text>
+<text x="658" y="66" fill="#d98c3f" font-size="14" font-family="ui-monospace,monospace">456   S=15  dr=6</text>
+<rect x="658" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#d98c3f" stroke-width="1.6" opacity="1"/>
+<text x="685" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="716" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#d98c3f" stroke-width="1.6" opacity="1"/>
+<text x="743" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="774" y="76" width="54" height="38" rx="4" fill="#1e242c" stroke="#d98c3f" stroke-width="1.6" opacity="1"/>
+<text x="801" y="100" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="658" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="685" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">45</text>
+<rect x="716" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="743" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">46</text>
+<rect x="774" y="118" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="801" y="142" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">54</text>
+<rect x="658" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="685" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">56</text>
+<rect x="716" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="743" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">64</text>
+<rect x="774" y="160" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="801" y="184" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">65</text>
+<text x="658" y="218" fill="#707a88" font-size="11.5" font-family="ui-monospace,monospace">15, 51, 60, 69</text>
+<text x="658" y="234" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">S + 9x{4,5,6}</text>
+<text x="34" y="288" fill="#8a7fb5" font-size="14" font-family="ui-monospace,monospace">567   S=18  dr=9</text>
+<rect x="34" y="298" width="54" height="38" rx="4" fill="#1e242c" stroke="#8a7fb5" stroke-width="1.6" opacity="1"/>
+<text x="61" y="322" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="92" y="298" width="54" height="38" rx="4" fill="#1e242c" stroke="#8a7fb5" stroke-width="1.6" opacity="1"/>
+<text x="119" y="322" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="150" y="298" width="54" height="38" rx="4" fill="#1e242c" stroke="#8a7fb5" stroke-width="1.6" opacity="1"/>
+<text x="177" y="322" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="34" y="340" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="61" y="364" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">56</text>
+<rect x="92" y="340" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="119" y="364" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">57</text>
+<rect x="150" y="340" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="177" y="364" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">65</text>
+<rect x="34" y="382" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="61" y="406" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">67</text>
+<rect x="92" y="382" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="119" y="406" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">75</text>
+<rect x="150" y="382" width="54" height="38" rx="4" fill="#171b21" stroke="#8a7fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="177" y="406" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">76</text>
+<text x="34" y="440" fill="#707a88" font-size="11.5" font-family="ui-monospace,monospace">18, 63, 72, 81</text>
+<text x="34" y="456" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">S + 9x{5,6,7}</text>
+<text x="242" y="288" fill="#4a8fb5" font-size="14" font-family="ui-monospace,monospace">678   S=21  dr=3</text>
+<rect x="242" y="298" width="54" height="38" rx="4" fill="#1e242c" stroke="#4a8fb5" stroke-width="1.6" opacity="1"/>
+<text x="269" y="322" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="300" y="298" width="54" height="38" rx="4" fill="#1e242c" stroke="#4a8fb5" stroke-width="1.6" opacity="1"/>
+<text x="327" y="322" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="358" y="298" width="54" height="38" rx="4" fill="#1e242c" stroke="#4a8fb5" stroke-width="1.6" opacity="1"/>
+<text x="385" y="322" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="242" y="340" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="269" y="364" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">67</text>
+<rect x="300" y="340" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="327" y="364" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">68</text>
+<rect x="358" y="340" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="385" y="364" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">76</text>
+<rect x="242" y="382" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="269" y="406" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">78</text>
+<rect x="300" y="382" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="327" y="406" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">86</text>
+<rect x="358" y="382" width="54" height="38" rx="4" fill="#171b21" stroke="#4a8fb5" stroke-width="0.9" opacity="0.8"/>
+<text x="385" y="406" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">87</text>
+<text x="242" y="440" fill="#707a88" font-size="11.5" font-family="ui-monospace,monospace">21, 75, 84, 93</text>
+<text x="242" y="456" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">S + 9x{6,7,8}</text>
+<text x="450" y="288" fill="#d98c3f" font-size="14" font-family="ui-monospace,monospace">789   S=24  dr=6</text>
+<rect x="450" y="298" width="54" height="38" rx="4" fill="#1e242c" stroke="#d98c3f" stroke-width="1.6" opacity="1"/>
+<text x="477" y="322" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="508" y="298" width="54" height="38" rx="4" fill="#1e242c" stroke="#d98c3f" stroke-width="1.6" opacity="1"/>
+<text x="535" y="322" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="566" y="298" width="54" height="38" rx="4" fill="#1e242c" stroke="#d98c3f" stroke-width="1.6" opacity="1"/>
+<text x="593" y="322" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="450" y="340" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="477" y="364" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">78</text>
+<rect x="508" y="340" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="535" y="364" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">79</text>
+<rect x="566" y="340" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="593" y="364" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">87</text>
+<rect x="450" y="382" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="477" y="406" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">89</text>
+<rect x="508" y="382" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="535" y="406" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">97</text>
+<rect x="566" y="382" width="54" height="38" rx="4" fill="#171b21" stroke="#d98c3f" stroke-width="0.9" opacity="0.8"/>
+<text x="593" y="406" fill="#e8e3d8" font-size="14" text-anchor="middle" font-family="ui-monospace,monospace">98</text>
+<text x="450" y="440" fill="#707a88" font-size="11.5" font-family="ui-monospace,monospace">24, 87, 96, 105</text>
+<text x="450" y="456" fill="#525c6a" font-size="10.5" font-family="ui-monospace,monospace">S + 9x{7,8,9}</text>
+<text x="34" y="514" fill="#525c6a" font-size="11" font-family="ui-monospace,monospace">colour = digital root of the row, constant across all its values: 6 amber, 9 violet, 3 blue — cycles 6,9,3</text>
+</svg>
