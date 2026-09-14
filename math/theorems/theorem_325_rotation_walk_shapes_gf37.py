@@ -147,8 +147,16 @@ def rot(s, k):
 
 
 def latin(g):
+    """A Latin square: n symbols, each once per row AND once per column.
+
+    The symbol-set check is not decoration.  Without it a grid like the 3x3
+    multiplication table (T327) -- 1 2 3 / 2 4 6 / 3 6 9 -- passes on
+    row-and-column distinctness alone while using six symbols, and is not a
+    Latin square.
+    """
     n = len(g)
-    return (all(len(set(r)) == n for r in g)
+    return (len({c for r in g for c in r}) == n
+            and all(len(set(r)) == n for r in g)
             and all(len({g[r][c] for r in range(n)}) == n for c in range(n)))
 
 
@@ -161,6 +169,10 @@ def run():
 
     # --- the stack is the cyclic Latin square ---
     assert latin(S)
+    assert len({c for r in S for c in r}) == 3          # three symbols only
+    # the guard: T327's multiplication table is row- and column-distinct but
+    # uses six symbols, so it must NOT pass
+    assert not latin(["123", "246", "369"])
     assert track(S, "1") == [0, 1, 2]          # main diagonal
     assert track(S, "2") == [1, 2, 0]
     assert track(S, "3") == [2, 0, 1]
