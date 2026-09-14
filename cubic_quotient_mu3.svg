@@ -1,67 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520">
-<rect width="760" height="520" fill="#12151a"/>
-<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5c6675"/></marker></defs>
-<line x1="644.0" y1="166.0" x2="612.0" y2="166.0" stroke="#4a8fb5" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<line x1="566.0" y1="166.0" x2="534.0" y2="166.0" stroke="#4a8fb5" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<line x1="319.1" y1="141.0" x2="393.5" y2="184.0" stroke="#d98c3f" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<line x1="495.1" y1="341.8" x2="316.3" y2="147.7" stroke="#4a8fb5" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<line x1="185.7" y1="306.0" x2="185.7" y2="220.0" stroke="#d98c3f" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<line x1="280.9" y1="383.0" x2="206.5" y2="340.0" stroke="#d98c3f" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<line x1="644.0" y1="358.0" x2="612.0" y2="358.0" stroke="#4a8fb5" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<line x1="489.0" y1="172.6" x2="437.2" y2="188.8" stroke="#4a8fb5" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<line x1="566.0" y1="358.0" x2="534.0" y2="358.0" stroke="#4a8fb5" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<line x1="414.3" y1="218.0" x2="414.3" y2="304.0" stroke="#d98c3f" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<line x1="395.3" y1="339.0" x2="320.8" y2="382.0" stroke="#d98c3f" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<line x1="204.7" y1="185.0" x2="279.2" y2="142.0" stroke="#d98c3f" stroke-width="1.8" marker-end="url(#a)" opacity="0.85"/>
-<circle cx="666.0" cy="166.0" r="20" fill="#16242c" stroke="#4a8fb5" stroke-width="2"/>
-<text x="666.0" y="171.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">2</text>
-<text x="666.0" y="204.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{14,29,31}</text>
-<text x="666.0" y="138.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=4</text>
-<circle cx="588.0" cy="166.0" r="20" fill="#16242c" stroke="#4a8fb5" stroke-width="2"/>
-<text x="588.0" y="171.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">4</text>
-<text x="588.0" y="204.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{2,15,20}</text>
-<text x="588.0" y="138.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=3</text>
-<circle cx="300.0" cy="130.0" r="20" fill="#2a2018" stroke="#d98c3f" stroke-width="2"/>
-<text x="300.0" y="135.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">6</text>
-<text x="300.0" y="168.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{7,33,34}</text>
-<text x="300.0" y="102.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
-<circle cx="510.0" cy="358.0" r="20" fill="#16242c" stroke="#4a8fb5" stroke-width="2"/>
-<text x="510.0" y="363.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">7</text>
-<text x="510.0" y="396.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{21,25,28}</text>
-<text x="510.0" y="330.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=2</text>
-<circle cx="185.7" cy="328.0" r="20" fill="#2a2018" stroke="#d98c3f" stroke-width="2"/>
-<text x="185.7" y="333.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">10</text>
-<text x="185.7" y="366.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{5,13,19}</text>
-<text x="185.7" y="300.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
-<circle cx="300.0" cy="394.0" r="20" fill="#2a2018" stroke="#d98c3f" stroke-width="2"/>
-<text x="300.0" y="399.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">19</text>
-<text x="300.0" y="432.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{18,24,32}</text>
-<text x="300.0" y="366.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
-<circle cx="666.0" cy="358.0" r="20" fill="#16242c" stroke="#4a8fb5" stroke-width="2"/>
-<text x="666.0" y="363.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">22</text>
-<text x="666.0" y="396.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{9,12,16}</text>
-<text x="666.0" y="330.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=4</text>
-<circle cx="510.0" cy="166.0" r="20" fill="#16242c" stroke="#4a8fb5" stroke-width="2"/>
-<text x="510.0" y="171.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">23</text>
-<text x="510.0" y="204.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{3,4,30}</text>
-<text x="510.0" y="138.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=2</text>
-<circle cx="588.0" cy="358.0" r="20" fill="#16242c" stroke="#4a8fb5" stroke-width="2"/>
-<text x="588.0" y="363.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">25</text>
-<text x="588.0" y="396.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{17,22,35}</text>
-<text x="588.0" y="330.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=3</text>
-<circle cx="414.3" cy="196.0" r="20" fill="#2a2018" stroke="#d98c3f" stroke-width="2"/>
-<text x="414.3" y="201.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">27</text>
-<text x="414.3" y="234.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{6,8,23}</text>
-<text x="414.3" y="168.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
-<circle cx="414.3" cy="328.0" r="20" fill="#2a2018" stroke="#d98c3f" stroke-width="2"/>
-<text x="414.3" y="333.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">32</text>
-<text x="414.3" y="366.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{11,27,36}</text>
-<text x="414.3" y="300.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
-<circle cx="185.7" cy="196.0" r="20" fill="#2a2018" stroke="#d98c3f" stroke-width="2"/>
-<text x="185.7" y="201.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">34</text>
-<text x="185.7" y="234.0" fill="#6b7280" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{1,10,26}</text>
-<text x="185.7" y="168.0" fill="#4b5563" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
-<text x="24" y="34" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace">T(x) = x^3 + 33 mod 37 — quotient on F_37*/mu_3</text>
-<text x="24" y="478" fill="#6b7280" font-size="11" font-family="ui-monospace,monospace">node = shelf Y = T(x); below it the mu_3-coset (= 137-orbit) sitting over it; X = depth downstairs</text>
-<text x="24" y="496" fill="#4b5563" font-size="11" font-family="ui-monospace,monospace">amber = the C_6;  blue = the two tails.  12 shelves, 36 units, max transient 4</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="470" viewBox="0 0 860 470">
+<rect width="860" height="470" fill="#12151a"/>
+<defs><marker id="ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#d98c3f"/></marker><marker id="ta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4a8fb5"/></marker></defs>
+<line x1="119.0" y1="120.0" x2="179.0" y2="120.0" stroke="#4a8fb5" stroke-width="2" marker-end="url(#ta)"/>
+<line x1="227.0" y1="120.0" x2="287.0" y2="120.0" stroke="#4a8fb5" stroke-width="2" marker-end="url(#ta)"/>
+<line x1="639.9" y1="122.5" x2="705.7" y2="160.5" stroke="#d98c3f" stroke-width="2" marker-end="url(#ca)"/>
+<line x1="330.2" y1="335.9" x2="600.2" y2="126.3" stroke="#4a8fb5" stroke-width="2" marker-end="url(#ta)"/>
+<line x1="512.6" y1="274.0" x2="512.6" y2="198.0" stroke="#d98c3f" stroke-width="2" marker-end="url(#ca)"/>
+<line x1="600.1" y1="347.5" x2="534.3" y2="309.5" stroke="#d98c3f" stroke-width="2" marker-end="url(#ca)"/>
+<line x1="119.0" y1="350.0" x2="179.0" y2="350.0" stroke="#4a8fb5" stroke-width="2" marker-end="url(#ta)"/>
+<line x1="334.8" y1="122.9" x2="702.6" y2="169.8" stroke="#4a8fb5" stroke-width="2" marker-end="url(#ta)"/>
+<line x1="227.0" y1="350.0" x2="287.0" y2="350.0" stroke="#4a8fb5" stroke-width="2" marker-end="url(#ta)"/>
+<line x1="727.4" y1="196.0" x2="727.4" y2="272.0" stroke="#d98c3f" stroke-width="2" marker-end="url(#ca)"/>
+<line x1="707.5" y1="308.5" x2="641.7" y2="346.5" stroke="#d98c3f" stroke-width="2" marker-end="url(#ca)"/>
+<line x1="532.5" y1="161.5" x2="598.3" y2="123.5" stroke="#d98c3f" stroke-width="2" marker-end="url(#ca)"/>
+<circle cx="96.0" cy="120.0" r="21" fill="#15242d" stroke="#4a8fb5" stroke-width="2"/>
+<text x="96.0" y="125.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">2</text>
+<text x="96.0" y="159.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{14,29,31}</text>
+<text x="96.0" y="91.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=4</text>
+<circle cx="204.0" cy="120.0" r="21" fill="#15242d" stroke="#4a8fb5" stroke-width="2"/>
+<text x="204.0" y="125.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">4</text>
+<text x="204.0" y="159.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{2,15,20}</text>
+<text x="204.0" y="91.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=3</text>
+<circle cx="620.0" cy="111.0" r="21" fill="#2c2117" stroke="#d98c3f" stroke-width="2"/>
+<text x="620.0" y="116.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">6</text>
+<text x="620.0" y="150.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{7,33,34}</text>
+<text x="620.0" y="82.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
+<circle cx="312.0" cy="350.0" r="21" fill="#15242d" stroke="#4a8fb5" stroke-width="2"/>
+<text x="312.0" y="355.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">7</text>
+<text x="312.0" y="389.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{21,25,28}</text>
+<text x="312.0" y="321.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=2</text>
+<circle cx="512.6" cy="297.0" r="21" fill="#2c2117" stroke="#d98c3f" stroke-width="2"/>
+<text x="512.6" y="302.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">10</text>
+<text x="512.6" y="336.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{5,13,19}</text>
+<text x="512.6" y="268.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
+<circle cx="620.0" cy="359.0" r="21" fill="#2c2117" stroke="#d98c3f" stroke-width="2"/>
+<text x="620.0" y="364.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">19</text>
+<text x="620.0" y="398.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{18,24,32}</text>
+<text x="620.0" y="330.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
+<circle cx="96.0" cy="350.0" r="21" fill="#15242d" stroke="#4a8fb5" stroke-width="2"/>
+<text x="96.0" y="355.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">22</text>
+<text x="96.0" y="389.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{9,12,16}</text>
+<text x="96.0" y="321.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=4</text>
+<circle cx="312.0" cy="120.0" r="21" fill="#15242d" stroke="#4a8fb5" stroke-width="2"/>
+<text x="312.0" y="125.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">23</text>
+<text x="312.0" y="159.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{3,4,30}</text>
+<text x="312.0" y="91.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=2</text>
+<circle cx="204.0" cy="350.0" r="21" fill="#15242d" stroke="#4a8fb5" stroke-width="2"/>
+<text x="204.0" y="355.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">25</text>
+<text x="204.0" y="389.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{17,22,35}</text>
+<text x="204.0" y="321.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=3</text>
+<circle cx="727.4" cy="173.0" r="21" fill="#2c2117" stroke="#d98c3f" stroke-width="2"/>
+<text x="727.4" y="178.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">27</text>
+<text x="727.4" y="212.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{6,8,23}</text>
+<text x="727.4" y="144.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
+<circle cx="727.4" cy="297.0" r="21" fill="#2c2117" stroke="#d98c3f" stroke-width="2"/>
+<text x="727.4" y="302.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">32</text>
+<text x="727.4" y="336.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{11,27,36}</text>
+<text x="727.4" y="268.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
+<circle cx="512.6" cy="173.0" r="21" fill="#2c2117" stroke="#d98c3f" stroke-width="2"/>
+<text x="512.6" y="178.0" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace" text-anchor="middle">34</text>
+<text x="512.6" y="212.0" fill="#707a88" font-size="10.5" font-family="ui-monospace,monospace" text-anchor="middle">{1,10,26}</text>
+<text x="512.6" y="144.0" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace" text-anchor="middle">X=0/1</text>
+<text x="24" y="32" fill="#e8e3d8" font-size="14" font-family="ui-monospace,monospace">T(x) = x^3 + 33 mod 37  —  quotient on F_37*/mu_3, all arrows follow T</text>
+<text x="24" y="424" fill="#707a88" font-size="11" font-family="ui-monospace,monospace">node = shelf Y = T(x);  below = the mu_3-coset (= 137-orbit) over it;  above = depth downstairs</text>
+<text x="24" y="442" fill="#525c6a" font-size="11" font-family="ui-monospace,monospace">blue tails flow left-to-right into the amber C_6.  in-degree 0 at shelves 2 and 22.  12 shelves, 36 units.</text>
 </svg>
