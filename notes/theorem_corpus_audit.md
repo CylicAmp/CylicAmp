@@ -45,42 +45,64 @@ passes both           TIER A  holds for other primes; the 37 is decorative
 ### Result
 
 ```
- 191   TIER C   fails both mutations
+ 232   files define a module-level P = 37
+   4   EXCLUDED: no assertions at all, so no mutation can fail them
+ 228   testable
+
+ 194   TIER C   fails both mutations
   21   TIER C   caught only by the second pass (literal mutation)
    1   TIER B   the {7,37,73} family
-  11   TIER A   >>> 37 IS DECORATIVE <<<
+   7   TIER A   >>> 37 IS DECORATIVE <<<
    5   inconclusive (mutation broke them structurally)
-   2   slow, not broken (29s and 65s)
 ```
 
-**213 of 232 (92%) demonstrably depend on 37.** That is the headline and it is
+**216 of 228 (95%) demonstrably depend on 37.** That is the headline and it is
 good news for the corpus.
 
-### The 11 where it does not
+An earlier run of this tool reported 11 Tier A and 191 Tier C. Both numbers
+were wrong for reasons in the tool, not the corpus: four of the "Tier A" files
+contain **no assertions at all**, so every mutation passes them trivially, and
+a 25s timeout made two working files look broken. Zero-assertion files are now
+excluded and listed separately; the timeout defaults to 90s.
 
-Every assertion in these still holds with every `37` replaced by `43`:
+### The 7 where it does not — triaged, and only one is a mislabel
+
+Tier A is only a defect where the file's NAME or placement claims
+37-specificity. Three of the seven make no such claim and are correct as they
+stand:
 
 ```
-buckingham_pi_gf37.py              orbit_connection_map.py
-dr_addition_table.py               ramanujan_tau_gf37.py
-gf37_toolkit.py                    theorem_132_dlp_algorithms_gf37.py
-monte_carlo_prime_streams.py       theorem_193_process_functions_zp.py
-torus_z37_z81.py                   twin_prime_dr_pair.py
-theorem_314_twelve_double_closure_gf37.py
+dr_addition_table.py              assertions are mod-9 digital-root facts
+twin_prime_dr_pair.py             (a-3)%9, (b+6)%9 -- a DR theorem
+theorem_193_process_functions_zp.py   title says "over Z_p"; SHOULD be general
 ```
 
-Several are clearly fine as-is — `gf37_toolkit.py` and `dr_addition_table.py`
-are utilities, and `theorem_193_process_functions_zp.py` says `zp` in its name,
-i.e. it is about Z/pZ generally and SHOULD survive. A Tier A result is only a
-problem where the file's title or placement claims 37-specificity.
+The other four carry `gf37`/`z37` in the name. Each now has a SCOPE block
+recording what the mutation test showed. None was patched to manufacture
+37-dependence — adding a check to make a mutation fail is precisely the error
+this audit exists to catch.
 
-**T314 is mine, written this session, and it is a real hit.** It has ZERO
-assertions referencing `37` or `P`. Every claim in it — `9 + dr(n) = n` on
-{10..18}, `n + 9 = rev(n)` on the a-b=-1 diagonal, their intersection {12} — is
-base-10 and mod-9. Its only GF(37) content is placing 12 and 21 in ST, which
-the docstring already calls "near-vacuous". The filename ends `_gf37` and the
-file is not a GF(37) theorem. Recorded, not renamed: the mathematics in it is
-correct and stands; the claim its name makes does not.
+- **`buckingham_pi_gf37.py`** — Tier A is CORRECT and is the *stronger*
+  statement: an integer null-space vector stays null modulo any prime not
+  dividing the relevant minors. The only 37-specific detail is the cosmetic
+  `-1 -> 36` relabelling.
+- **`torus_z37_z81.py`** — likewise general. The orbit period follows from
+  `gcd(STEP_A, P)` and `gcd(STEP_B, Q)` by CRT for any coprime pair; 37 and 81
+  are the worked instance.
+- **`ramanujan_tau_gf37.py`** — Tier A here means UNDER-ASSERTION, not
+  generality. Its one assertion is `13 in CASCADE`, a literal set membership
+  that tests nothing about tau. The real content — how many n <= N have
+  tau(n) = 0 (mod 37), and the residue spread of those zeros — is printed and
+  never asserted. Recorded rather than patched: inventing a threshold from one
+  run is how a fixture gets mistaken for a result.
+- **`theorem_314_twelve_double_closure_gf37.py`** — **mine, written this
+  session, and the one genuine mislabel.** ZERO assertions reference `37` or
+  `P`. Every claim — `9 + dr(n) = n` on {10..18}, `n + 9 = rev(n)` on the
+  a-b = -1 diagonal, their intersection {12} — is base-10 and mod-9. Its only
+  GF(37) content is placing 12 and 21 in ST, which its own docstring already
+  calls near-vacuous. The filename ends `_gf37`; the file is not a GF(37)
+  theorem. Left in place rather than renamed, per this repo's rule that
+  corrections are recorded where the error was made.
 
 ---
 

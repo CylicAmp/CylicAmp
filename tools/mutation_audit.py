@@ -70,10 +70,28 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--timeout", type=int, default=TIMEOUT)
     a = ap.parse_args()
-    files = sorted(f for f in os.listdir(D)
-                   if f.endswith(".py") and not f.startswith("_zz")
-                   and re.search(r'^P = 37\s*$', open(D + f).read(), re.M))
-    print(f"{len(files)} theorem files define a module-level P = 37\n")
+    import ast
+    cand = sorted(f for f in os.listdir(D)
+                  if f.endswith(".py") and not f.startswith("_zz")
+                  and re.search(r'^P = 37\s*$', open(D + f).read(), re.M))
+    # A file with no assertions passes EVERY mutation trivially -- nothing in
+    # it can fail. Counting those as "Tier A / 37 is decorative" is a false
+    # positive; this was the tool's own first-run error. Excluded and reported.
+    files, noassert = [], []
+    for f in cand:
+        try:
+            n = sum(1 for x in ast.walk(ast.parse(open(D + f).read()))
+                    if isinstance(x, ast.Assert))
+        except Exception:
+            n = 0
+        (files if n else noassert).append(f)
+    print(f"{len(cand)} theorem files define a module-level P = 37")
+    if noassert:
+        print(f"  {len(noassert)} excluded: NO ASSERTIONS, so no mutation can "
+              f"fail them (not a finding)")
+        for f in noassert:
+            print(f"    {f}")
+    print(f"  {len(files)} carry at least one assertion and are testable\n")
     with ProcessPoolExecutor(4) as ex:
         base = list(ex.map(_run, [D + f for f in files],
                            [a.timeout] * len(files)))

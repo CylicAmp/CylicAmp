@@ -19,6 +19,13 @@ Observables: T(n) in {14, 23, 32, 41, 50}  (5 energy levels)
              coset in C_1 .. C_12           (12 symmetry sectors)
 
 Hamiltonian: H(k) = (2a/37 + 54b/81) mod 1
+
+SCOPE (added after mutation audit, tools/mutation_audit.py): TIER A.
+The single assertion (orbit period == the predicted combined period) still
+holds with 37 replaced by 43. That is CORRECT and general: the period follows
+from gcd(STEP_A, P) and gcd(STEP_B, Q) by CRT, for ANY coprime pair of moduli.
+37 and 81 are the worked instance, not the content. The file name names the
+instance; the theorem is about coprime torus dynamics.
 """
 
 import sys

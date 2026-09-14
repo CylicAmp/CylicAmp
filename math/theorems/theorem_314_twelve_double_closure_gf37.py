@@ -81,6 +81,16 @@ Author: Michael Warren Song (CyclicAmp)
 
 === FALSIFICATION ===
     Any assert below failing.
+
+SCOPE (added after mutation audit, tools/mutation_audit.py): TIER A, and here
+that IS a mislabel. This file has ZERO assertions referencing 37 or P. Every
+claim in it -- 9 + dr(n) = n on the block {10..18}, n + 9 = rev(n) on the
+a-b = -1 diagonal, and their intersection {12} -- is base-10 and mod-9
+arithmetic. The only GF(37) content is placing 12 and 21 in ST, which the
+section above already calls near-vacuous. The filename ends _gf37 and this is
+not a GF(37) theorem. The mathematics is correct and stands; the claim the name
+makes does not. Left in place rather than renamed, per this repo's rule that
+corrections are recorded where the error was made.
 """
 
 P = 37

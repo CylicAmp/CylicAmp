@@ -2,6 +2,15 @@
 # CLASS: COMPUTATION
 """
 THEOREM 260: Ramanujan τ mod 37 — GF(37) Classification
+
+SCOPE (added after mutation audit, tools/mutation_audit.py): TIER A, but the
+reason is UNDER-ASSERTION, not generality. The file's single assertion is
+`13 in CASCADE`, and CASCADE = {8,13,24} is a literal set, so it holds for any
+P and tests nothing about tau. The actual content -- the count of n <= N with
+tau(n) = 0 (mod 37), and the residue distribution of those zeros -- is PRINTED
+and never asserted. So this computation currently has no failing-loud check on
+its own subject. Recorded, not patched: adding an assertion would mean fixing a
+threshold from one run, which is how a fixture becomes mistaken for a result.
 """
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))

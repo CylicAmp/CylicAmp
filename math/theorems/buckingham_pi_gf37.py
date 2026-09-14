@@ -10,6 +10,15 @@ The null space basis gives Re = rho*v*L/mu and Ma = v/c_s.
 Over F_37 the rank and nullity are preserved, and the null vectors
 map as -1 -> 36 (mod 37), revealing structural resonance with the
 GF(37).
+
+SCOPE (added after mutation audit, tools/mutation_audit.py): TIER A.
+Every assertion here still holds with 37 replaced by 43. That is CORRECT and is
+the stronger statement: an integer vector in the null space of an integer
+matrix stays in the null space modulo ANY prime that does not divide the
+relevant minors. Nothing here is special to 37 -- the only 37-specific detail
+is the cosmetic -1 -> 36 relabelling. The file name says gf37; the result is
+general. Read it as "the Buckingham Pi null space survives reduction mod p",
+with 37 as the worked instance.
 """
 
 import sys
