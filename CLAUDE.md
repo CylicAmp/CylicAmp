@@ -82,7 +82,42 @@ After every run it saves a complete JSON to `pipeline_output.json` — this is t
 | 13 | `cylicamp/provenance.py` | Provenance tracking — source of every claim |
 | 14 | `math/theorems/theorem_120/121` | T120/121 digit pair (0.007, 0.008) → seed orbit |
 
-### Reference Output (seed=246)
+### Reference Output (seed=246) — a REGRESSION FIXTURE, not a property of 246
+
+**Read this block as a fixture.** It is the correct thing to diff against after a
+code change, and a wrong value here means something broke. It is *not* evidence
+that seed 246 is distinguished. A sweep over seeds 1..1110 (T316,
+`math/theorems/theorem_316_t120_seed_class_mod_333_gf37.py`) splits its sixteen
+values three ways:
+
+- **8 are constant for every seed** — `Meta multiplier 8`, `Field threshold
+  0.9500`, `Insight Score 104832`, `Spectrum Status FAIL`, `Stability Ratio
+  0.0000`, and the G5 `all_checks_pass`/`aggregate_mod_p 11`/cage-integrity
+  lines. `Insight Score` is byte-identical across all 1110 seeds tested. These
+  carry **zero** information about which seed was supplied.
+- **7 are pure functions of `seed mod 37`** (`Seed DR` is mod 9) — the 137-orbit
+  `(18,24,32)`, `Heartbeat 24→32→18→24`, `Cascade 7/37`, `ABCABC pos 0`,
+  `Sovereign status`, `Orbit QR`, `seed mod 37` itself. Every seed ≡ 24 (mod 37)
+  reproduces them identically. These are facts about the **residue class**, not
+  about 246.
+- **1 distinguishes 246 from its own residue class** — the T120/121 line. It
+  holds for 1 seed in 333.
+
+The T120/121 gate reduces to two conditions, not five: `m1=7, m2=8, s=3` are
+constants, so `m1+m2+s=18∈orbit`, `m2*(s+1)=32∈orbit` and
+`DR(seed%37)=DR(m1+m2)` are all **forced** once `seed ≡ 24 (mod 37)` fixes the
+orbit to {18,24,32}. What remains is `dr(seed)=3` (i.e. `seed ≡ 3 mod 9`) and
+`seed ≡ 24 (mod 37)`; gcd(9,37)=1, so by CRT the passing set is exactly
+
+    seed ≡ 246  (mod 333),    333 = 9 × 37
+
+verified against the live pipeline outside the swept range. **So 246 is the
+smallest member of that class, not a unique seed** — 579, 912, 1245, … all
+reproduce this entire block. Do not cite any line of it as a property of 246.
+
+(333 here is the same fact as T311's sub-grid difference `333 = 37 × 9` — "the 9
+and the 37 together" — one fact, not two sightings.)
+
 
 ```
 Seed:              246
