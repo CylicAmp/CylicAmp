@@ -59,6 +59,11 @@ by three.  Stacked, they are the 123 multiplication table: 123k for k = 1,2,3.
     Three rows, three different orbits -- unlike T325, where all three rows
     sat in one.  The counting stack SPREADS; the rotation stack CLOSES.
 
+    The stack sums to 738 == 35, in NQR17 (12 + 24 + 36 = 72 == 35).  Note
+    this does NOT vanish: T325/T326's rotation classes sum to 0 mod 37
+    because 111 = 3 x 37 divides their sum, but a multiplication stack sums
+    to 123(1+2+3) = 6 x 123, which carries no factor of 37.
+
     123 + 246 = 369 exactly, as integers and mod 37 (12 + 24 = 36).  The
     third row is the sum of the first two, so the stack is additive as well
     as multiplicative -- a two-term Lucas step, cf. lucas_abbc_chain.
@@ -160,6 +165,8 @@ def run():
     assert 369 % P == 36 and orbit_of(369) == 'NEG_H' and 36 == P - 1
     assert 123 + 246 == 369                            # row3 = row1 + row2
     assert (12 + 24) % P == 36
+    assert sum(STACK) == 738 and 738 % P == 35         # 12+24+36 = 72 == 35
+    assert orbit_of(738) == 'NQR17'
 
     # --- the grid ---
     assert [sum(r) for r in grid] == [6, 12, 18]
@@ -176,6 +183,7 @@ def run():
     assert orbit_of(main) == orbit_of(anti) == 'IC'
     assert {main % P, anti % P, 137 % P} == ORBITS['IC'] == {1, 10, 26}
     assert (MULT * 10) % P == 1                        # 10 = 26^-1 (T325)
+    assert (main * anti) % P == 10                     # 1 x 10, stays in IC
     assert is_prime(149) and is_prime(151)             # twin pair
     assert 151 % P == 3 and orbit_of(151) == 'C3' and 3 in TARGETS
     assert 111 == 3 * P and 333 == 9 * P and 148 == 4 * P
