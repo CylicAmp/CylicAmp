@@ -260,18 +260,35 @@ baseline-at-C-slots, not PaCo vs a full `log2(N/2)` chain.
 (N=2^16, h=64, g=3, d=63, r=2):
 
 ```
-    C   PaCo L   Orig L   diff
-    2      10       11      -1
-    4      11       11       0
-    8      12       11      +1
-   32      13       13       0
-  256      15       15       0
+    C   CtS  StC   PaCo L   Orig L   diff
+    2     1    0      10       11      -1
+    4     1    1      11       11       0
+    8     2    1      12       11      +1
+   16     2    1      12       11      +1
+   32     2    2      13       13       0
+   64     3    2      14       13      +1
+  128     3    2      14       13      +1
+  256     3    3      15       15       0
 
+CtS = ceil((log2 C + 1)/g)   StC = ceil((log2 C - 1)/g)   g = 3
 PaCo constant:  log2(h) + 3           = 9
 Orig constant:  ceil(log2 d) + r + 1  = 9
 ```
 
-Within +/-1 across the whole admissible range of C; the two constants coincide.
+PaCo is **never below** the baseline except at C=2, and is strictly **above** it
+at C = 8, 16, 64, 128. The two constants coincide, so the whole difference is
+the ceiling behaviour of the two transform chains.
+
+Consequence for parameters, since FHE parameters are dictated by L: a scheme
+with equal or higher depth cannot run on smaller parameters. At C = 8, 16, 64
+and 128, PaCo needs one MORE level, which pushes Q up, not down. Any claim that
+sparse bootstrapping yields "smaller and faster parameters" is not supported by
+these numbers and is contradicted at half the admissible values of C.
+
+**Arithmetic warning.** These ceilings are easy to get wrong, and getting them
+wrong biases in one direction — every error found in a drifted copy of this
+table understated PaCo's depth (`ceil(4/3)` read as 1, `ceil(7/3)` as 2,
+`ceil(8/3)` as 2). Recompute with true division, not integer division.
 
 **The real structural change is which parameter the depth depends on.**
 Original CKKS bootstrapping depth carries no `h` term — it is `log2(d) + r + 1`,
@@ -285,6 +302,23 @@ The other half of the trade, from the `seq_PaCo` docstring: *"Only the
 coefficients indexed by multiples of N / C are bootstrapped."* The O(log C) is
 bought by refreshing C of N coefficients; `parallel_PaCo(kappa)` recovers
 coverage with kappa independent instances at multiples of `N/(kappa*C)`.
+
+**On precision.** A claim that PaCo "removes the precision/error tradeoff
+inherent in EvalMod" is NOT supported by anything in this repository. The
+tradeoff is relocated, not eliminated: PaCo swaps EvalMod's analytical
+approximation error for the noise growth of its blind-rotate and accumulator
+steps. `benchmarks.py` computes and prints both `precision_paco` and
+`precision_orig`, which is what one does for a quantity expected to vary — the
+authors treat it as an empirical comparison, not a structural guarantee.
+
+**The sound form of the argument**, narrower than the usual framing:
+PaCo does structurally compress the TRANSFORM depth from O(log N) to O(log C)
+— real, and large: a full DFT at N=2^16, g=3 costs 2*ceil(15/3) = 10 levels
+against PaCo's 6 at C=256. But it spends that saving on a heavier evaluation
+constant, `log2(h) + 3` in place of `log2(d) + r + 1`. The benefit is therefore
+strictly conditional on the regime: it wins only where the N-to-C gap is large
+enough to outpace the constant h imposes, and `4*C*h <= N` works against that
+by capping C as h grows.
 
 ---
 
