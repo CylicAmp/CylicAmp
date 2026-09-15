@@ -16,7 +16,7 @@ more than expected.
 
     Setting b = 1 gives a^2 + a + 1 = Phi_3(a), identically.  So T128's
     subject and the polynomial T333/T340/T341 were built on are the same
-    object, seen with b specialised or not.  Neither file cites the other.
+    object, seen with b specialised or not.
 
 === 37 IS ITSELF A LOESCHIAN NUMBER ===
 
@@ -45,8 +45,7 @@ more than expected.
     so 2w+1 is a square root of -3.  With w = 10 that is 21, and
     21^2 = 441 == 34 == -3 (mod 37).  Verified.
 
-    Six theorems were written as if these were separate findings.  They are
-    one congruence wearing six faces, and the congruence holds for every
+    These are one congruence wearing six faces, and it holds for every
     prime p == 1 (mod 3) -- TIER A.  What 37 supplies is only that the
     order-3 element happens to be 10, the base we write in (T333).
 
