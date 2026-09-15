@@ -25,6 +25,20 @@ building it retroactively collapses T331 and T332 into arithmetic mod 12.
     cannot -- which is exactly the T336 twin-prime null, restated as a
     reason rather than a measurement.
 
+    GRADE: TIER A, DEFINITIONAL.  This is not a discovery and must not be
+    ranked as one.  H is a subgroup of the abelian group F_37*, so F_37*/H
+    is a quotient GROUP and the coset map is a homomorphism BY
+    CONSTRUCTION; indexing by powers of a primitive root is the discrete
+    log, which is the canonical isomorphism F_p*/H = Z/[F_p*:H].  The
+    homomorphism IS that isomorphism.  Verified with zero counterexamples
+    for p = 13, 37, 41, 61, 101 across subgroups of order 1, 2, 3, 4.
+    The 36 x 36 check below confirms that the INDEXING TABLE is correct;
+    it is not evidence for a theorem and carries no information about 37.
+
+    The 37-specific content of this thread is not here.  It is in T333:
+    that base 10 is admissible because 10 generates IC, the roots of
+    Phi_3 mod 37 being exactly 10 and 26.
+
 === IT COLLAPSES T331 AND T332 ===
 
     orbit(-1) = NEG_H has index 6, so negation is  j -> j + 6.  T331's six
@@ -80,6 +94,21 @@ building it retroactively collapses T331 and T332 into arithmetic mod 12.
     sovereign orbits -- C3, SA_ST_A, SA_ST_B, at indices 2, 4, 10 -- are
     among them, matching the "3 of the 6 QR orbits" note already in
     CLAUDE.md.
+
+=== WHAT THIS THEOREM CONTAINS, GRADED ===
+
+    Ranked by evidential weight, every item is definitional or null:
+
+      1. the index homomorphism      TIER A, definitional (see above)
+      2. prime squares 167/167       TIER A, algebraically forced
+      3. squarefree semiprimes       predicted null, chi-square 2.42
+      4. safe primes                 predicted null, chi-square 4.94
+      5. T331/T332 collapse          consequences of 1, not evidence
+
+    So T339 contains NO 37-specific positive result.  Its instrument
+    detects known multiplicative structure exactly and finds nothing else.
+    That is the honest summary, and it is a stronger statement than a
+    ranking that places the homomorphism first as a discovery.
 
 === GRADING THE HIT HONESTLY ===
 
