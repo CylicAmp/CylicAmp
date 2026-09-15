@@ -33,7 +33,10 @@ generated.
 
 === RESULT: ALL THREE MISS ===
 
-    58,979 twin pairs (p, p+2), p > 3, up to 10^7.
+    58,979 twin pairs (p, p+2), p > 3, up to 10^7.  Anchored to the
+    literature: pi_2(10^7) = 58,980 counting the pair (3,5), and this file
+    takes p > 3, hence one fewer.  A run reporting any other n has a
+    counting bug, and the assertion below catches it.
 
         H1 duals      observed 0.08489   expected 0.08571   z = -0.71
         H2 same-half  observed 0.45752   expected 0.45714   z = +0.18
@@ -125,7 +128,10 @@ def run():
     N = 10 ** 7
     tw = twins(N)
     n = len(tw)
+    # anchored to the literature, not just to this sieve: pi_2(10^7) = 58980
+    # counting the pair (3,5); this file takes p > 3, hence one fewer.
     assert n == 58979, n
+    assert n + 1 == 58980, "pi_2(10^7) = 58980 including (3,5)"
 
     d = sum(1 for p in tw if DUAL[BY[p % P]] == BY[(p + 2) % P])
     s = sum(1 for p in tw if (BY[p % P] in HALF37) == (BY[(p + 2) % P] in HALF37))
