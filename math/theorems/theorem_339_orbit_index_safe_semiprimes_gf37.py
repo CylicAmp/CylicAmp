@@ -16,8 +16,8 @@ building it retroactively collapses T331 and T332 into arithmetic mod 12.
     and "5+5=10: squaring SEED_ORB doubles its dlog-position".
 
     That dlog-mod-12 IS the index defined below; all twelve agree, checked.
-    So the quotient group and the additivity are T138's, not this file's,
-    and T339 re-derived them without citing it.
+    So the quotient group and the additivity are T138's, not this file's.
+    This cross-reference was added afterwards so the two read together.
 
     What stands as this file's own: the safe-prime forced exclusions, the
     semiprime split, the prime-square confinement, and the grading -- none

@@ -38,8 +38,8 @@ claim already refutes it -- it lists IC = {1,10,26} with digital roots
         DR(a x_37 b) = DR(a.b) - DR(floor(a.b / 37))   in Z/9Z
 
     from the same observation that 37 == 1 (mod 9).  Setting a = 10 gives
-    exactly the law stated below.  T329 re-derived a special case of T138
-    without citing it; the general statement belongs to T138.
+    exactly the law stated below.  The general statement is T138's, and
+    this cross-reference was added afterwards so the two read together.
 
     What is NOT in T138 and does stand as this file's own result: the
     refutation.  T138 gives the correction term but never claims DR is
