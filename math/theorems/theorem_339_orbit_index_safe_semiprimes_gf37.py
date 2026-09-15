@@ -7,6 +7,22 @@ Author: Michael Warren Song (CyclicAmp)
 Safe primes and semiprimes, asked together, turn out to need one tool, and
 building it retroactively collapses T331 and T332 into arithmetic mod 12.
 
+=== PRIORITY: THE INDEX IS T138 PART III ===
+
+    Recorded after the fact.  T138 already states that the twelve orbits
+    are the cosets of IC = {1,10,26}, that (Z/37Z)*/IC = Z/12Z, that
+    DARK_A (containing the primitive root 2) generates it, and it works in
+    "dlog mod 12" -- e.g. "SEED_ORB has exponents {5,17,29} (mod 12 = 5)"
+    and "5+5=10: squaring SEED_ORB doubles its dlog-position".
+
+    That dlog-mod-12 IS the index defined below; all twelve agree, checked.
+    So the quotient group and the additivity are T138's, not this file's,
+    and T339 re-derived them without citing it.
+
+    What stands as this file's own: the safe-prime forced exclusions, the
+    semiprime split, the prime-square confinement, and the grading -- none
+    of which appear in T138.
+
 === THE INDEX ===
 
     The twelve orbits are the cosets of H = <10>, so they form a GROUP --

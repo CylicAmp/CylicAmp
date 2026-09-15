@@ -30,6 +30,22 @@ claim already refutes it -- it lists IC = {1,10,26} with digital roots
     the orbits of a map defined by the other, short of a constant function.
     No search is needed; the claim is excluded before it is tested.
 
+=== PRIORITY: THE LAW BELOW IS T138 PART I, SPECIALISED ===
+
+    Recorded after the fact.  T138 ("DR Subtraction Law") already proved,
+    for ALL 36^2 pairs and not just for the multipliers 10 and 26,
+
+        DR(a x_37 b) = DR(a.b) - DR(floor(a.b / 37))   in Z/9Z
+
+    from the same observation that 37 == 1 (mod 9).  Setting a = 10 gives
+    exactly the law stated below.  T329 re-derived a special case of T138
+    without citing it; the general statement belongs to T138.
+
+    What is NOT in T138 and does stand as this file's own result: the
+    refutation.  T138 gives the correction term but never claims DR is
+    constant on orbits, and the measurement that it is constant in 0 of 12
+    orbits, with the CRT argument excluding it a priori, is new here.
+
 === THE CORRECT LAW: DIGITAL ROOT SHIFTS BY THE WRAP COUNT ===
 
     The orbit of x is {x, 26x, 10x} mod 37, and 37 == 1 (mod 9), so every
