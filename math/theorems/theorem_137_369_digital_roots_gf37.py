@@ -77,7 +77,30 @@ ORBIT-BY-ORBIT 3-6-9 COVERAGE
   DARK_A           {}      {15}    {}      1       {2,20}
   NQR_5            {}      {}      {}      0       {5,13,19}: all DR∉{3,6,9}
   TESLA_ORB        {}      {6}     {}      1       {8,23}
-  NQR_14           {}      {}      {}      0 (*)   {14,29,31}: wait...
+  NQR_14 (C9)      {}      {}      {}      0       {14,29,31}: DRs 5,2,4
+                                                    -- none in {3,6,9}, so
+                                                    the count really is 0.
+                                                    [RESOLVED]
+
+  COMPLETED TABLE -- four orbits contain no 3-6-9 element at all:
+    IC      {1,10,26}   DRs 1,1,8      none
+    CAS_EXT {5,13,19}   DRs 5,4,1      none
+    C9      {14,29,31}  DRs 5,2,4      none
+    NQR17   {17,22,35}  DRs 8,4,8      none
+  and eight orbits contain some, totalling 12:
+    C3 {3,30}  D7 {33}  SA_ST_A {9,12}  NEG_H {27,36}
+    SA_ST_B {21}  DARK_A {15}  TESLA {6}  SEED {18,24}
+
+  So the 3-6-9 set is NOT a union of orbits -- no orbit lies wholly inside
+  it.  That is the same fact as T329 (the digital root is not an orbit
+  invariant) and T138 Part II (the 3-6-9 elements are not multiplicatively
+  closed mod 37), seen from the covering side.
+
+  CONNECTION TO T327's COUNTING STACK.  The rows 123, 246, 369 have digital
+  roots 6, 3, 9 -- the whole trinity, one each -- and orbit indices 4, 5, 6,
+  consecutive.  Both are forced: each row is 123d with digit sum 3(a+d)
+  (T326), and idx(123d) = idx(12) + idx(d) = 4 + idx(d) with 1, 2, 3
+  carrying indices 0, 1, 2 (3 shares C3 with 4 = 2^2).
   NQR_17           {}      {}      {}      0 (*)
   SEED_ORB         {}      {24}    {18}    2       {32}
 
