@@ -14,11 +14,20 @@ the integer 111.  It is about the three multipliers.
 
         x(1 + 10 + 26) = 37x == 0   (mod 37)
 
-    so EVERY orbit sums to 0 mod 37, for every x, with no reference to
-    base 10 at all.  T326 derived the rotation seam from 111 = 3 x 37, a
-    fact about 3-digit numerals.  This is the same seam without the numeral:
-    the rotation-class sum vanishes because the orbit multipliers sum to the
-    modulus.  The numeral version is a corollary, not the source.
+    so EVERY orbit sums to 0 mod 37, for every x.
+
+    CORRECTED BY T340.  The claim originally made here -- that this is "the
+    same seam without the numeral" and that 111 = 3 x 37 is "a corollary,
+    not the source" -- is wrong.  1 + 10 + 26 and 111 are the SAME
+    expression, since 26 = 100 mod 37:
+
+        1 + 10 + 26  ==  1 + 10 + 10^2  ==  Phi_3(10)  ==  111
+
+    One is reduced term by term, the other is not; neither is more
+    fundamental.  The genuinely coordinate-free statement is T333's, that
+    Phi_3(x) = x^2 + x + 1 vanishes at a primitive cube root of unity, and
+    10 is one mod 37.  This result and T333's admissible-base criterion are
+    one fact, not two.
 
 === SHARPER: THE SUM IS 37 OR 74, NEVER ANYTHING ELSE ===
 
