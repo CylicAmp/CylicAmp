@@ -78,6 +78,20 @@ It has now been identified.
     Row labelling: the single-hinge result is rows 2 -> 3 of this array
     (123 -> 246), not rows 1 -> 2.  Row 1 is 12321 and is not in the hinge.
 
+=== BRANCH CLOSED -- see T335 ===
+
+    STATUS: CLOSED.  Do not reopen without meeting T335's repair conditions.
+
+    T335 audited the transfer gate registered in T333 and found:
+      * parameter-free rules are EXCLUDED -- every array row is divisible
+        by 3 and 38515 == 1 (mod 3); and the digits 5 and 8 occur nowhere
+        in rows 1-4, so no digit rule works either;
+      * rules with a free additive constant make the gate VACUOUS -- two
+        parameters against one real constraint.
+    There is no middle, so the match below is falsified for parameter-free
+    rules and underdetermined otherwise.  The grade in this file stands as
+    the final disposition: suggestive, n=1, NOT established.
+
 === FALSIFICATION ===
     Any assert below failing; or a stated generating rule for row 5 whose
     output is not congruent to the stack sum.
