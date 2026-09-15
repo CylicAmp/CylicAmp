@@ -29,6 +29,16 @@ the integer 111.  It is about the three multipliers.
     10 is one mod 37.  This result and T333's admissible-base criterion are
     one fact, not two.
 
+=== PRIOR ART: orbit_negation_duality_gf37.py ===
+
+    Found by tools/build_index.py after this file was written.  That file
+    already contains the whole of what follows: all twelve orbits with their
+    integer sums 37 and 74, the six negation-dual pairs in the same pairing,
+    the theorem that every pair sums to 111 = 3 x 37 with its proof
+    ("pairwise sums each equal 37, three pairs, 111"), and the fact that
+    negation commutes with the 137-map.  It is the earlier and more complete
+    statement.  What follows re-derives it.
+
 === SHARPER: THE SUM IS 37 OR 74, NEVER ANYTHING ELSE ===
 
     Each orbit has three DISTINCT residues in 1..36, so its sum lies

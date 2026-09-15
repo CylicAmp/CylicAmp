@@ -27,6 +27,19 @@ say why the halves are equal.  They are forced, by one line.
     111 x (1+2+3).  Both are 18 x 37.  Recorded as a collision of small
     numbers with two different derivations, not as one mechanism.)
 
+=== PRIOR ART: orbit_negation_duality_gf37.py ===
+
+    Found by tools/build_index.py after this file was written.  The argument
+    below -- that no orbit is self-negating because -1 = 36 is not in
+    <26> = {1,10,26} -- is stated there in those terms, under the heading
+    "NO SELF-DUAL ORBITS", together with the conclusion that all twelve
+    orbits pair into six genuine duals.  The correction this file makes to
+    the canon draft is right, but the argument it makes it with is not new.
+
+    What does appear to stand as this file's own: the 6/6 count being FORCED
+    by the total 666 = 18 x 37, and the inversion-closure count of exactly
+    two via the quotient Z/12.
+
 === THE CLOSING CLAIM OF THE CANON DRAFT IS FALSE ===
 
     The draft ends: "Because no orbit in F_37* contains its own modular

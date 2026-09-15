@@ -45,6 +45,18 @@ question is where phi sits in GF(37).  It does not sit anywhere.
     Primes below 60 where it does not:     2, 3, 7, 13, 17, 23, 37, 43,
                                            47, 53
 
+=== PRIOR ART ON THE PISANO PERIOD: T141 ===
+
+    Found by tools/build_index.py after this file was written.  T141
+    ("Pisano Period pi(37) = 76 -- Full Orbit Mapping") already has the
+    period, and more besides: the four zeros at k in {0,19,38,57}, spaced
+    19 = pi(37)/4 apart, and F_19 = 4181 = 37 x 113.  The section below
+    re-derives the period only.
+
+    The prohibition itself -- that x^2 - x - 1 has no root mod 37, so phi
+    does not exist in GF(37) -- was not found elsewhere in the corpus and
+    may stand.
+
 === THE PISANO PERIOD IS MAXIMAL ===
 
     When 5 is a residue the Fibonacci period divides p-1; when it is a
