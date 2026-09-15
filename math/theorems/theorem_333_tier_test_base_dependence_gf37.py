@@ -60,6 +60,12 @@ tier assigned by a test is a fact.  The discriminator:
 
 === THE PRE-REGISTERED ROW-5 HARNESS (T330 Tier 3) ===
 
+    GATE STATUS: CLOSED BY T335.  The gate below is under-constrained --
+    [246,492,738] is 2 x the d=1 stack, so its legs collapse to one exact
+    equation and one congruence against two free parameters.  Kept as the
+    registered artifact and as a worked example of a test that cannot fail;
+    T335 states the repair conditions.  Do not quote a pass from it.
+
     T330 graded the row-5 match as unfalsifiable for want of a generative
     rule.  The rule does not exist yet, so the TEST is registered now,
     before any candidate, and its pass condition is fixed here:
