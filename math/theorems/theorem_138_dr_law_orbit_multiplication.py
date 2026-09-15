@@ -43,7 +43,11 @@ Examples:
 
 SPECIAL CASES:
   DR(1332) = DR(36·37) = DR(36) = 9   [cycle sum = group order × prime]
-  DR(6666) = DR(6·37·3) = DR(6·3) = DR(18) = 9... wait: DR(6666)=6
+  DR(666)  = DR(6·37·3) = DR(6·3) = DR(18) = 9
+    [RESOLVED: the original line conflated 666 with 6666.  6·37·3 = 666,
+    and DR(666) = 9 as derived.  6666 is a different number: it is not a
+    multiple of 37 (6666 = 37·180 + 6) and DR(6666) = 6.  Both values are
+    correct; only the identification of the two numerals was wrong.]
   DR(444)  = DR(12·37) = DR(12) = 3   [log₂(26) × prime preserves DR=3]
 
 PART II: 3-6-9 ELEMENTS ARE NOT MULTIPLICATIVELY CLOSED IN GF(37)
@@ -85,7 +89,9 @@ ORBIT MULTIPLICATION TABLE (selected rows):
   SEED_ORB × SEED_ORB = OUTLIER_ORB
   OUTLIER_ORB × OUTLIER_ORB = D7
   D7 × D7 = SA_ORB
-  SA_ORB × SA_ORB = D7  (wait: this produces a cycle)
+  SA_ORB × SA_ORB = D7  [RESOLVED: yes, and the cycle is order 3.
+    In dlog mod 12, SA_ORB = 4 and D7 = 8, so 4+4 = 8 and 8+8 = 16 = 4.
+    {IC, SA_ORB, D7} = indices {0,4,8} is the order-3 subgroup of Z/12Z.]
 
 QR ORBITS FORM ORDER-6 SUBGROUP:
   {IC, SOVEREIGN_SPIRAL, SA_ORB, ORBIT_11, D7, OUTLIER_ORB}
