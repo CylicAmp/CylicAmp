@@ -39,7 +39,23 @@ the integer 111.  It is about the three multipliers.
     negation commutes with the 137-map.  It is the earlier and more complete
     statement.  What follows re-derives it.
 
+    ALSO PRIOR, AND NOT CITED HERE UNTIL NOW: T283
+    (theorem_283_negation_antipodal_gf37.py, 2026-09-03).  It restates the
+    same six pairs and the same no-self-negating argument in the CURRENT
+    orbit names, eleven days before this file.  Nothing below is new
+    against it either, with one exception, stated in the next section.
+    Priority chain: orbit_negation_duality (2026-07-26) -> T283 -> this.
+
 === SHARPER: THE SUM IS 37 OR 74, NEVER ANYTHING ELSE ===
+
+    This is the one part of this file that is not in either predecessor.
+    Both of them LIST the sums 37 and 74, read off the table.  Neither
+    bounds them.  The bound below is what makes the two values exhaustive
+    rather than observed, and T332's 6/6 forcing argument runs on it --
+    without "only 37 or 74" as a premise, 666 = 18 x 37 is a consistency
+    check (which the 2026-07-26 file already performs) and not a
+    derivation.  Verified 2026-09-16: the only multiples of 37 in [6, 105]
+    are 37 and 74.
 
     Each orbit has three DISTINCT residues in 1..36, so its sum lies
     between 1+2+3 = 6 and 34+35+36 = 105, and is a positive multiple of 37.

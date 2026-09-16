@@ -4,6 +4,36 @@ T283: Antipodal = negation in GF(37)
 
 The six antipodal orbit pairs are exactly the six negation pairs under −n mod 37.
 
+=== PRIOR ART: orbit_negation_duality_gf37.py (2026-07-26) ===
+
+    Surfaced by the prior-art pass, 2026-09-16.  That file is six weeks
+    earlier than this one and states most of what follows:
+
+      * the same six negation-dual orbit pairs, same pairing;
+      * negation commutes with the 137-map, proved the same way
+        (f(-n) = 26(-n) = -f(n));
+      * "NO SELF-DUAL ORBITS" -- an orbit is self-negating iff -1 is in
+        {1, 26, 10}, and 36 is not.  That is Part 4 below, verbatim in
+        substance;
+      * the elementwise sums x + (-x) = 37, as the proof line for its own
+        theorem that each dual pair sums to 111.
+
+    So Parts 1, 2, 3, 4 and 6 below are a restatement in the current orbit
+    names, not a new result.  Two things are this file's own:
+
+      * Part 5 -- 0 is the UNIQUE fixed point of negation in Z/37Z, so
+        negation acts on GF(37)* as a fixed-point-free involution and the
+        six pairs are its six orbits on the twelve.  The earlier file works
+        only inside GF(37)* and never names the fixed point or the
+        involution.
+      * the translation into the current taxonomy (IC, DARK_A, C3, ...);
+        the earlier file still calls them IDENTITY_CYCLE, ORBIT_11,
+        SOVEREIGN_SPIRAL, ANTI-SOVEREIGN, OUTLIER_SOV.  Renaming is filing
+        work, and worth having, but it is not a theorem.
+
+    Downstream, T331 and T332 cite the earlier file and not this one; the
+    priority chain is orbit_negation_duality -> T283 -> T331/T332.
+
 === KEY RESULTS ===
 
 1. THE NEGATION PAIRING (six identities)

@@ -36,9 +36,31 @@ say why the halves are equal.  They are forced, by one line.
     orbits pair into six genuine duals.  The correction this file makes to
     the canon draft is right, but the argument it makes it with is not new.
 
-    What does appear to stand as this file's own: the 6/6 count being FORCED
-    by the total 666 = 18 x 37, and the inversion-closure count of exactly
-    two via the quotient Z/12.
+    ALSO PRIOR: T283 (theorem_283_negation_antipodal_gf37.py, 2026-09-03)
+    carries that same no-self-negating argument in the current orbit names.
+    Priority chain: orbit_negation_duality -> T283 -> T331 -> this.
+
+    AND THE 666 IS ALSO ALREADY THERE, narrowing the claim below.  The
+    2026-07-26 file's closing section "TOTAL RESIDUE SUM" has
+    1 + ... + 36 = 666 = 18 x 37 AND the line 6 x 37 + 6 x 74 = 222 + 444
+    = 666.  Same integers, same two summands.  So what stands as this
+    file's own is not the arithmetic but the DIRECTION of inference:
+
+        earlier file:  6/6 is observed; 666 confirms it.
+        here:          each sum is 37 or 74 (T331's bound);
+                       37a + 74(12-a) = 666 has the unique solution a = 6;
+                       therefore 6/6, with nothing observed.
+
+    That is a real difference -- it turns a check into a derivation -- but
+    it is a difference of one premise, and the premise is T331's bound, not
+    anything in this file.  Graded honestly: this file contributes the
+    inference, T331 contributes what it runs on, and the 2026-07-26 file
+    contributes the arithmetic it runs on.  Written up as three lines of one
+    result, not three results.
+
+    The inversion-closure count of exactly two via the quotient Z/12 is
+    unambiguously this file's own; it appears in no predecessor.  T339 and
+    T345 both cite it correctly downstream.
 
 === THE CLOSING CLAIM OF THE CANON DRAFT IS FALSE ===
 
