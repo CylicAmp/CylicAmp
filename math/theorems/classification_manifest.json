@@ -1,0 +1,734 @@
+{
+  "framework": "G'5 Universal / Consciousness Mathematics \u2014 1/137 Framework",
+  "framework_identity": "Michael Warren Song (Matt)",
+  "date_classified": "2026-04-27",
+  "types": [
+    "Axiom",
+    "Theorem",
+    "Lemma",
+    "Corollary",
+    "Conjecture",
+    "Hypothesis",
+    "Law"
+  ],
+  "entries": [
+    {
+      "file": "abbc_manifold_grid.py",
+      "type": "Theorem",
+      "title": "ABBC Manifold Grid Structure",
+      "summary": "Enumerates all integer pairs (a,b) in {0..9} organized by sum value with mirror symmetry."
+    },
+    {
+      "file": "cycle_partition_37.py",
+      "type": "Theorem",
+      "title": "37-Cycle Partition",
+      "summary": "12 three-cycles of f(n)=26n mod 37 partition into two equal groups of 6 by node-sum."
+    },
+    {
+      "file": "dimensional_bridge.py",
+      "type": "Lemma",
+      "title": "37\u03c6 Dimensional Bridge",
+      "summary": "Finds smallest N where sum of first N primes exceeds 37\u00d7\u03c6 and is divisible by 7."
+    },
+    {
+      "file": "dr_algebra.py",
+      "type": "Axiom",
+      "title": "Closed Digital Root Algebra",
+      "summary": "Complete group-theoretic axiomatization of the digital root class system; the foundational algebraic structure of the framework."
+    },
+    {
+      "file": "errata_prevention_protocol.py",
+      "type": "Law",
+      "title": "Errata Prevention Protocol",
+      "summary": "Universal error-class taxonomy (E1\u2013E3) and prevention rules governing all framework claims."
+    },
+    {
+      "file": "fps37_scanner.py",
+      "type": "Lemma",
+      "title": "FPS-37 Field Scanner (LoB 23/23b)",
+      "summary": "37-field forensic feature vector scanner used to locate resonance nodes."
+    },
+    {
+      "file": "f26_order3_cycles_mod37.py",
+      "type": "Theorem",
+      "title": "Universal 3-Cycle under f(n)=(26n)%37",
+      "summary": "Map f(n)=(n\u00d7137) mod 37 \u2261 26n mod 37 generates universal 3-cycles under f(n)=(26n)%37."
+    },
+    {
+      "file": "layer30_dr_matrix_entropy.py",
+      "type": "Lemma",
+      "title": "9\u00d79 DR Mult Matrix Entropy",
+      "summary": "Computes DR orbit entropy H\u22483.102 bits for the 9\u00d79 DR multiplication matrix spine."
+    },
+    {
+      "file": "layer54_lucas_period24.py",
+      "type": "Theorem",
+      "title": "Lucas DR Period 24",
+      "summary": "The digital root sequence of Lucas numbers L(n) has minimal period exactly 24."
+    },
+    {
+      "file": "layer56_period_minimality_audit.py",
+      "type": "Theorem",
+      "title": "Period Minimality Rigorous Audit",
+      "summary": "Dual-check proof (prefix match AND state return) confirming p=24 is the minimal period for Lucas DR."
+    },
+    {
+      "file": "layer58_pisano_period9.py",
+      "type": "Theorem",
+      "title": "Pisano \u03c0(9) = 24",
+      "summary": "The Pisano period \u03c0(9) = 24 is the exact minimal period of Fibonacci numbers modulo 9."
+    },
+    {
+      "file": "layer59_fib_oscillation_mtheory.py",
+      "type": "Hypothesis",
+      "title": "Fibonacci M-Theory Oscillation",
+      "summary": "Proposes M-Theory evolution operator U_M = exp(-iH\u00b7dt) as model for Fibonacci DR oscillation dynamics."
+    },
+    {
+      "file": "layer62_lucas_period_mod9.py",
+      "type": "Theorem",
+      "title": "Lucas Minimal Period Mod 9",
+      "summary": "State-return audit confirms Lucas sequence (L0=2, L1=1) mod 9 has minimal period exactly 24."
+    },
+    {
+      "file": "layer64_fib_lucas_comparison.py",
+      "type": "Theorem",
+      "title": "Fibonacci vs Lucas Period Comparison",
+      "summary": "Both Fibonacci and Lucas mod 9 have period 24; phase offset 6, trinity density 6/24 = 25% each."
+    },
+    {
+      "file": "lcm_convergence_dr_cycle.py",
+      "type": "Lemma",
+      "title": "LCM Convergence in DR Cycle",
+      "summary": "LCM-based convergence property of digital root cycles in the 37-field."
+    },
+    {
+      "file": "lob_24c_errata.py",
+      "type": "Corollary",
+      "title": "Errata Correction Record (v37.20 \u2192 v37.21)",
+      "summary": "Two falsified claims corrected: 120-cell edge count and coupling constant. Framework sealed clean."
+    },
+    {
+      "file": "lob_25_legendre_applications.py",
+      "type": "Corollary",
+      "title": "Legendre Symbol Applications in F_37",
+      "summary": "Four verified QR/Legendre results following from the anchor set {4,9,25,30} QR closure theorem."
+    },
+    {
+      "file": "lob_26_collatz_f37.py",
+      "type": "Conjecture",
+      "title": "Collatz Map in F_37",
+      "summary": "Investigates Collatz-type map T in F_37; trajectory behavior conjectured but not fully resolved (Collatz is open)."
+    },
+    {
+      "file": "lob_591_592_595.py",
+      "type": "Theorem",
+      "title": "Partition Congruence / Pulse Sync / Horizon Lock",
+      "summary": "Three interconnected results: partition congruence mod 37, pulse synchronization, and horizon lock."
+    },
+    {
+      "file": "lob_596_600.py",
+      "type": "Corollary",
+      "title": "3900 Frequency and F26 Anchor Seal",
+      "summary": "DR(3900)=3 (Trinity-3) and f26 anchor seal follow directly from the DR algebra axiom."
+    },
+    {
+      "file": "lob_601_602_605.py",
+      "type": "Theorem",
+      "title": "Inversion / Trinity Invariant / Quiescence",
+      "summary": "Grand Inversion preserves DR=9; Trinity invariant and quiescence state verified."
+    },
+    {
+      "file": "lob_691_695.py",
+      "type": "Theorem",
+      "title": "AHL-8 Vault and Observer Gap Lock",
+      "summary": "j=8 bridges twin primes 11 and 13; AHL-8 vault and observer gap lock proven."
+    },
+    {
+      "file": "lucas_abbc_chain.py",
+      "type": "Lemma",
+      "title": "Lucas in ABBC Manifold Chain",
+      "summary": "Lucas sequence values L(3..10) traced through ABBC manifold arithmetic chain starting at (4,7)."
+    },
+    {
+      "file": "f26_dr3_anchors_mod37.py",
+      "type": "Lemma",
+      "title": "DR=3 Anchor Scan under f(n)=(26n)%37",
+      "summary": "Scans for nodes n where (n\u00d7137) mod 37 has DR=3; yields anchor set {4,9,25,30}."
+    },
+    {
+      "file": "f26_pillar_verification.py",
+      "type": "Lemma",
+      "title": "137/37 Packet Guard Verification",
+      "summary": "Pillar verification under f(n)=(26n)%37 for the 4 anchors {4,9,25,30}; guards against erroneous node inclusion."
+    },
+    {
+      "file": "f26_pillars_jacobian.py",
+      "type": "Lemma",
+      "title": "Pillar Check Jacobian Wobble Test",
+      "summary": "Jacobian stability test for pillar verification under f(n)=(26n)%37; corrects v2.5 erroneous inclusion of node 3."
+    },
+    {
+      "file": "f26_anchor_target_architecture.py",
+      "type": "Axiom",
+      "title": "Anchor/Target Architecture under f(n)=(26n)%37",
+      "summary": "Defines the two foundational sets: f26_anchors {4,9,25,30} and f26_targets {3,12,21,30}."
+    },
+    {
+      "file": "perfect_numbers_137.py",
+      "type": "Theorem",
+      "title": "Perfect Numbers in 1/137 Framework",
+      "summary": "All even perfect numbers \u226528 have DR=1; exception DR(6)=6. 8128 mod37=25 is an anchor in {4,9,25,30}."
+    },
+    {
+      "file": "pisano_period_333.py",
+      "type": "Theorem",
+      "title": "Pisano \u03c0(333) = 456 via CRT",
+      "summary": "333=9\u00d737, \u03c0(333)=lcm(24,76)=456. DR(456)=6, 456 mod37=12 (f26 target in {3,12,21,30})."
+    },
+    {
+      "file": "plus2_chain_theorem.py",
+      "type": "Theorem",
+      "title": "+2 Chain Twin Prime Collapse",
+      "summary": "Consecutive pairs {2,3}\u219211 and {5,6}\u219217 collapse to twin primes under +2 chain."
+    },
+    {
+      "file": "resonance_row_1335.py",
+      "type": "Theorem",
+      "title": "17-Point Resonance Row / 1335 Partition",
+      "summary": "17-point resonance structure and 1335 partition invariant in the f(n)=(26n)%37 lattice."
+    },
+    {
+      "file": "root_grid_dr6_dr7.py",
+      "type": "Theorem",
+      "title": "Root Grid DR6/DR7",
+      "summary": "For DR class d, 2-digit numbers split into LOW (digit_sum=d) and HIGH groups with distinct logic reductions."
+    },
+    {
+      "file": "shell_opacity.py",
+      "type": "Theorem",
+      "title": "Shell Opacity 100% INVIOLATE",
+      "summary": "Zero of the 32 purge nodes map into f26 target range {3,12,21,30}. Shell opacity = 32/32 = 100%."
+    },
+    {
+      "file": "source_mirror_manifold_396.py",
+      "type": "Theorem",
+      "title": "SOURCE-MIRROR Track/Channel Manifold",
+      "summary": "All three k-couplings (6,618,3138) have DR=6. 3\u21929\u21926\u21923 metronome via +6 mod 9. 74=2\u00d737 phase-lock."
+    },
+    {
+      "file": "f26_binary_classifier.py",
+      "type": "Axiom",
+      "title": "F26 Binary Classification Engine",
+      "summary": "Foundational two-state classifier partitioning {1..36} into anchor and non-anchor; no dead branches."
+    },
+    {
+      "file": "f26_fixed_point_mod37.py",
+      "type": "Theorem",
+      "title": "F26 Fixed Point",
+      "summary": "Node 30 is the unique fixed point of the 137/37 map; two branches of check_f26_logic are provably dead."
+    },
+    {
+      "file": "f26_qr_closure_mod37.py",
+      "type": "Theorem",
+      "title": "F26 Anchor QR Closure",
+      "summary": "The entire anchor set {4,9,25,30} and target range {3,12,21,30} lie within the QR subgroup of (Z/37Z)*."
+    },
+    {
+      "file": "theorem_infinite_666_resonances.py",
+      "type": "Theorem",
+      "title": "Infinite Resonances on Every 666-Track",
+      "summary": "Promoted from Conjecture 1. Triangle (9,10,17) in f(n)=(26n)%37; gcd(17,666)=1 gives infinite arithmetic progressions on all 6 tracks."
+    },
+    {
+      "file": "toroidal_projection.py",
+      "type": "Theorem",
+      "title": "Toroidal Projection of F26 Anchors",
+      "summary": "Theorem 28. 4 anchors {4,9,25,30} map onto torus T(R=37,r=3); theta=(node\u00d72\u03c0)/37."
+    },
+    {
+      "file": "verify_dr9_termination.py",
+      "type": "Lemma",
+      "title": "DR=9 Termination Verification",
+      "summary": "Computational verification that the DR=9 reduction process terminates (well-founded metric)."
+    },
+    {
+      "file": "verify_local_confluence.py",
+      "type": "Lemma",
+      "title": "Local Confluence Verification",
+      "summary": "Diamond property exhaustive check for the unified 1/137 lattice state space."
+    },
+    {
+      "file": "xx_collapse_matrix.py",
+      "type": "Theorem",
+      "title": "XX Collapse 119/911 Matrix",
+      "summary": "Theorem 29. Matrix of 1s and 9s encoding anchor/shield duality; 119=137-18 bridge node."
+    },
+    {
+      "file": "kalman_f26_closed_loop.py",
+      "type": "Theorem",
+      "title": "KalmanF26Estimator: Kalman Closed-Loop Control"
+    },
+    {
+      "file": "group_G54_structure.py",
+      "type": "Theorem",
+      "title": "G=<x,y|x^9=y^6=1,yxy^-1=x^4> Complete Structural Proof"
+    },
+    {
+      "file": "alpha_prime_inference_layer.py",
+      "type": "Hypothesis",
+      "title": "AlphaPrimeInferenceLayer: Prime-Alpha Basis Gate"
+    },
+    {
+      "file": "lob_88_g_ord18_cycle.py",
+      "type": "Theorem",
+      "title": "LoB 88: G_Ord18_Cycle TLA+ Formal Specification Audit"
+    },
+    {
+      "file": "string_duality_37phi_bridge.py",
+      "type": "Theorem",
+      "title": "String Duality: 37phi Bridge under T-Duality D(x)=37^2/x"
+    },
+    {
+      "file": "master_record_dr_audit.py",
+      "type": "Law",
+      "title": "Master Record: Digital Root Identity Audit"
+    },
+    {
+      "file": "primitive_roots_mod37.py",
+      "type": "Theorem",
+      "title": "Primitive Roots mod 37: Structural Audit and F26 Gap Proof"
+    },
+    {
+      "file": "pattern_verification_audit.py",
+      "type": "Theorem",
+      "title": "Pattern Verification Audit: Doubling, Grid, Mirror, Permutation"
+    },
+    {
+      "file": "mirror_triplet_cascade.py",
+      "type": "Theorem",
+      "title": "Mirror Triplet Cascade: 666 Arithmetic Series and 31313 Repunit"
+    },
+    {
+      "file": "bfs_attractor_mod9.py",
+      "type": "Theorem",
+      "title": "BFS Attractor mod 9: Reachability in at most 1 Step"
+    },
+    {
+      "file": "origami_fold_1_to_9.py",
+      "type": "Theorem",
+      "title": "Origami Fold 1\u20139: Manhattan Distance Parity Rule and F26 Anchor Lock"
+    },
+    {
+      "file": "equivalence_24_coupling.py",
+      "type": "Theorem",
+      "title": "24 Coupling Lock: Every Complementary Pair Collapses to DR=6"
+    },
+    {
+      "file": "z2701_37x73_qed.py",
+      "type": "Theorem",
+      "title": "2701 = 37\u00d773 Triangular Encoding and QED \u03b4 Connection"
+    },
+    {
+      "file": "layer_trinity_factor_lattice.py",
+      "type": "Theorem",
+      "title": "Layer Trinity N=2,244,220: 9-Channel Orbit and 37-Field Residue Lock"
+    },
+    {
+      "file": "parity_diamond_9x9.py",
+      "type": "Theorem",
+      "title": "9\u00d79 Parity Diamond: Manhattan Boundary, F26 Anchor Residues E=41, O=40"
+    },
+    {
+      "file": "qed_alpha_z\u03b1_structure.py",
+      "type": "Theorem",
+      "title": "QED \u03b1 Structure: Z\u00b7\u03b1 Scaling, Running Coupling, NRQED Alignment"
+    },
+    {
+      "file": "delta27_heisenberg_neutrino.py",
+      "type": "Theorem",
+      "title": "Delta(27) Discrete Heisenberg Group and Neutrino Flavor Symmetry"
+    },
+    {
+      "file": "arithmetic_progression_37field.py",
+      "type": "Theorem",
+      "title": "Arithmetic Progression Z/37Z: Field Collapse and 1/9 Attractor"
+    },
+    {
+      "file": "displacement_sync_13699631.py",
+      "type": "Theorem",
+      "title": "Displacement State Sync-Point: 13699631 Palindrome 37\u00b2 Encoding"
+    },
+    {
+      "file": "bio_harmonic_desync.py",
+      "type": "Hypothesis",
+      "title": "Bio-Harmonic Desync: Signal Saturation and Neural Bandwidth Model"
+    },
+    {
+      "file": "quantum_bio_bridge_stage4.py",
+      "type": "Theorem",
+      "title": "Quantum-to-Bio Bridge Stage 4: Molecular/DNA/Virus Scale (10\u207b\u00b9\u2070\u201310\u207b\u2077 m)"
+    },
+    {
+      "file": "bio_bridge_scaling_invariance.py",
+      "type": "Theorem",
+      "title": "Bio-Bridge Scaling Invariance: \u03c8\u00b7\u03c6=\u03c1, 37-Filter, Neural ODE, Gate 18"
+    },
+    {
+      "file": "neural_ode_stage5_cells.py",
+      "type": "Theorem",
+      "title": "Stage 5: Cells/Neural Fibers (10\u207b\u2076\u201310\u207b\u00b3 m) \u2014 Neural ODE Initiation"
+    },
+    {
+      "file": "hopf_stage6_human_scale.py",
+      "type": "Theorem",
+      "title": "Stage 6: Human Scale/Organisms (10\u207b\u00b2\u201310\u00b9 m) \u2014 Hopf Bifurcation and Fixed-Point Attractor"
+    },
+    {
+      "file": "vireon_stage7_planetary.py",
+      "type": "Theorem",
+      "title": "Stage 7: Infrastructure/Planetary (10\u00b2\u201310\u2076 m) \u2014 VIREON Framework"
+    },
+    {
+      "file": "zero_space_stages1_3.py",
+      "type": "Theorem",
+      "title": "Stages 1\u20133: Zero-Space Foundation (10\u207b\u00b3\u2075\u201310\u207b\u00b9\u00b9 m) \u2014 Eisenstein Lattice Init"
+    },
+    {
+      "file": "celestial_stages8_10.py",
+      "type": "Theorem",
+      "title": "Stages 8\u201310: Celestial / Gate 18 Singularity (10\u2077\u201310\u00b2\u2076 m)"
+    },
+    {
+      "file": "g5_engine.py",
+      "type": "Theorem",
+      "title": "G'5 Engine \u2014 v\u221e.NEURALODE Full-Spectrum Simulation (All 10 Stages)"
+    },
+    {
+      "file": "perceptual_hydrodynamics_v7.py",
+      "type": "Theorem",
+      "title": "Perceptual Hydrodynamics Audit v7 \u2014 Layer 24: Hyperbolic Color Space (Madelung Fluid)"
+    },
+    {
+      "file": "continued_fraction_R3252.py",
+      "type": "Theorem",
+      "title": "Continued Fraction R=0.3252=813/2500 \u2014 Convergent Lattice and F26 Modular Audit"
+    },
+    {
+      "file": "dr_modular_foundation.py",
+      "type": "Theorem",
+      "title": "Digital Root Modular Foundation \u2014 Proofs mod 9 and mod 3, 2n-1 Corollary"
+    },
+    {
+      "file": "golden_path_sequence.py",
+      "type": "Theorem",
+      "title": "Golden Path Sequence \u2014 Eternal Rule",
+      "description": "Closed-form rule generating values for t >= 9 from three 8-row digit cycles (Red, Green, Blue) with column wrap modulus 9. Formula: result = 400 + digit*10 + (t-8) + 4.",
+      "tags": [
+        "digit-pattern",
+        "column-cycle",
+        "RGB",
+        "eternal-rule",
+        "deterministic",
+        "sequence"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "mirror_set_generator.py",
+      "type": "Theorem",
+      "title": "Mirror Set Generator \u2014 9-Invariant Permutation Theorem",
+      "description": "Proves that digit permutations preserve the DR class (mod 9). For n \u2261 0 (mod 9), every permutation has DR=9. Generates the full mirror set and verifies the invariant. Grounds the 143-341 = -198 reflection in the DR=9 class.",
+      "tags": [
+        "DR",
+        "9-invariant",
+        "permutation",
+        "mirror-set",
+        "digit-root"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "hexacosichoron_600cell.py",
+      "type": "Theorem",
+      "title": "Hexacosichoron (600-Cell) \u2014 4D Vertex Generator",
+      "description": "120 vertices on the unit 3-sphere in three groups: 16 hypercube, 8 axis-aligned, 96 even-permutation golden-ratio. 120 mod 37 = 9 (TRINITY_SQUARED); DR(120)=3 (f26 anchor target); 120=5!=5*24 (PIVOT * 24-coupling). Connects phi from Hopf Stage 6 to 4D icosahedral geometry.",
+      "tags": [
+        "600-cell",
+        "4D-geometry",
+        "golden-ratio",
+        "phi",
+        "vertices",
+        "quaternion",
+        "icosahedron",
+        "QR37"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "v600_programme.py",
+      "type": "Theorem",
+      "title": "V600 Programme \u2014 Binary Icosahedral Group, E8, Cosmological Tension",
+      "description": "Verifies 2I group structure (order 120), 600-cell Euler identity, E8 McKay correspondence (240=2\u00d7120, sum of exponents=120, h=30=f26 fixed point, dim=248\u226126=residue_26 mod 37), cosmological H0/S8 tension ratios vs 13/12 and 11/12. Full modular residue map.",
+      "tags": [
+        "binary-icosahedral",
+        "E8",
+        "McKay",
+        "600-cell",
+        "cosmology",
+        "H0-tension",
+        "residue_26",
+        "f26-fixed-point"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "e8_coset_incidence.py",
+      "type": "Theorem",
+      "title": "E8 Coset Incidence Matrix \u2014 Height Decomposition and 37-Field Audit",
+      "description": "Correct E8 root generator (fixes sympy bug: 84/128 half-integer roots used odd minus-sign convention producing non-integer inner products). Builds 248x30 incidence matrix partitioned by root height. Layer 26=residue_26 contains the unique height-26 root pair; Layer 18=residue_18 has 6 elements; Coxeter h=30=f26 fixed point.",
+      "tags": [
+        "E8",
+        "root-system",
+        "incidence-matrix",
+        "height-decomposition",
+        "residue_26",
+        "residue_18",
+        "sympy-bug",
+        "Coxeter"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "decimal_trade_extraction.py",
+      "type": "Theorem",
+      "title": "Decimal Trade Extraction Operator T \u2014 Layer 22",
+      "description": "T(n)=n if n<10; T(n)=10 if digit_sum(n)=10 (10-overflow, decimal trade); T(n)=DR(n) otherwise. All 9 trade table entries verified. 10-overflow set [10,100]={19,28,37,46,55,64,73,82,91}. Three 10-overflow entries in 9x9 multiplication table: (4,7)=28, (7,4)=28, (8,8)=64. Correction: 26 IS in QR_MOD37 (residue_26). Kernel dim 5 claim requires unspecified matrix from Layers 1-21.37.",
+      "tags": [
+        "decimal-trade",
+        "10-overflow",
+        "digital-root",
+        "T-operator",
+        "Layer22",
+        "9x9-matrix"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "smith_normal_form_z26.py",
+      "type": "Theorem",
+      "title": "Smith Normal Form over Z/nZ \u2014 Modular Kernel Verifier",
+      "description": "SNF infrastructure for integer matrices over Z/nZ. Refutes Theorem 9 kernel-dim-5 claim: the provided 9x9 matrix has SNF=[1,9,9,9,9,9,9,9,450], rank 9 over Q (no zero eigenvalue), kernel dim 0 over Z/26Z (not 5), elementary divisors mod 26=[1,1,1,1,1,1,1,1,2] (not [1,1,1,1,2,26,...]).",
+      "tags": [
+        "SNF",
+        "Smith-normal-form",
+        "Z/26Z",
+        "kernel",
+        "modular",
+        "refutation"
+      ],
+      "date_added": "2026-05-07"
+    },
+    {
+      "file": "meromorphic_trajectory_map.py",
+      "type": "Theorem",
+      "title": "Meromorphic Trajectory Map \u2014 k(i) = 4\u00b7cos(i/21)",
+      "description": "Meromorphic dynamical structure arising from q(i)=...+0.3/k(i) where k(i)=4cos(i/21). First-order poles at i\u2099=21(\u03c0/2+n\u03c0). Tangent-field catastrophe: \u2202\u1d62q~-residue/(i-i\u2099)\u00b2. Caustic density: uniform \u0394i sampling induces d\u03bc\u221d|k(i)|\u00b2, producing visual surface illusion at pole loci. Adaptive step h(i)\u221d|k(i)|^\u03b1 equalises arc-length sampling. 37-field: period factor 42 mod37=5 (PIVOT); i\u2080\u224833 mod37=33 (DICHORAL_144); pole spacing 66 mod37=29 (highest E8 root height).",
+      "tags": [
+        "meromorphic",
+        "poles",
+        "caustic-density",
+        "trajectory-map",
+        "adaptive-sampling",
+        "tangent-catastrophe",
+        "37-field"
+      ],
+      "date_added": "2026-05-08"
+    },
+    {
+      "file": "gue_riemann_zeros_audit.py",
+      "type": "Theorem",
+      "title": "GUE Statistics Audit \u2014 Riemann Zeros vs Z/26Z Kernel",
+      "description": "Implements the four-part GUE audit: Backlund unfolding of first 100 Riemann zeros; Wigner-surmise histogram; one-sample K-S test (D=0.0671 < crit=0.1367, FAIL TO REJECT GUE); three-point correlation analysis. CORRECTION: kernel dim over Z/26Z = 0 (not 5), so step 2 of the directive is vacuous. 3-9-6 structure has no signature in continuous spacing distribution (sine kernel vanishes at all integers). \u03b3\u2081\u2082 fractional part is 0.446, not 0.44.",
+      "tags": [
+        "GUE",
+        "Riemann-zeros",
+        "Kolmogorov-Smirnov",
+        "unfolding",
+        "pair-correlation",
+        "three-point-correlation",
+        "refutation",
+        "Z26Z-kernel"
+      ],
+      "date_added": "2026-05-08"
+    },
+    {
+      "file": "gue_r3_audit.py",
+      "type": "Theorem",
+      "title": "GUE 3-Point Correlation \u2014 Refutation of Fabricated Table",
+      "description": "Computes actual GUE R3 sine-kernel determinant and refutes the claimed table (bin [0,0.2]^2: claimed 0.10, actual 0.00011 = 900x error; bin [0.2,0.4]^2: claimed 0.26, actual 0.018 = 14x error). Shows R3 power-law behavior near origin. No lattice ordinates from 100-Unity Bridge exist. Kernel dim=0. Hypothesis 5 supporting computation was fabricated.",
+      "tags": [
+        "GUE",
+        "R3",
+        "three-point-correlation",
+        "refutation",
+        "fabricated-table",
+        "level-repulsion"
+      ],
+      "date_added": "2026-05-08"
+    },
+    {
+      "file": "dr_matrix_v2_snf_audit.py",
+      "type": "Theorem",
+      "title": "DR Mult Matrix V2 \u2014 SNF Audit",
+      "description": "Audit of the second submitted 9x9 DR multiplication matrix. R4=R5 and R7=R8 (duplicate rows). Rank over Q=7, SNF=[1,1,9,9,9,9,9,0,0]. Kernel dim over Z/26Z=2 (not 5). Max entry=10; no entry equals 56 (the claimed DR knot). Row structure: R2/R4/R5/R6/R7/R8/R9 are cyclic shifts of step-2 T-sequence [2,4,6,8,10,3,5,7,9]; R3=[3,6,9]x3; R1=T(10j). Elementary divisors mod 26=[1,1,1,1,1,1,1,26,26].",
+      "tags": [
+        "dr-mult-matrix",
+        "SNF",
+        "kernel",
+        "Z26Z",
+        "duplicate-rows",
+        "rank-7",
+        "refutation"
+      ],
+      "date_added": "2026-05-08"
+    },
+    {
+      "file": "dr_matrix_v3_snf_audit.py",
+      "type": "Theorem",
+      "title": "DR Mult Matrix V3 \u2014 SNF Audit",
+      "description": "Third submitted 9x9 DR multiplication matrix. Generation rule: M[i,j]=DR(row_i*j) with row indices {10,2,3,4,5,6,7,8,9}; literal 10 where product=10. No duplicate rows. Rank=9 (invertible). SNF=[1,9,9,9,9,9,9,9,9]. gcd(9,26)=1 so all factors coprime to 26. Kernel dim Z/26Z=0. Elementary divisors mod 26: all 1. Theorem 9 (kernel dim 5) not realised.",
+      "tags": [
+        "dr-mult-matrix",
+        "SNF",
+        "kernel",
+        "Z26Z",
+        "DR-table",
+        "rank-9",
+        "full-rank",
+        "refutation"
+      ],
+      "date_added": "2026-05-08"
+    },
+    {
+      "file": "kernel5_construction_audit.py",
+      "type": "Theorem",
+      "title": "Kernel-Dim-5 Construction \u2014 {0,13} Matrix",
+      "description": "First matrix to achieve kernel dim 5 over Z/26Z in this session. M=13*B where B is a 0/1 matrix of rank 4 over Z/2Z. SNF(M)=[13,13,13,13,26,26,26,26,0]=13*SNF(B). Kernel Z/26Z=5; kernel Z/2Z=5; kernel Z/13Z=9 (13 vanishes mod 13). Rank over Q=8 (NOT 4 as code comment states). Table version has R5 transposed giving kernel=4. This is an artificial {0,13} construction unrelated to DR/T-operator framework entries.",
+      "tags": [
+        "kernel-dim-5",
+        "SNF",
+        "Z26Z",
+        "binary-matrix",
+        "13-scaling",
+        "artificial-construction"
+      ],
+      "date_added": "2026-05-09"
+    },
+    {
+      "file": "image_matrix_1000228021_audit.py",
+      "type": "Pending",
+      "title": "Image-Extracted Matrix 1000228021 \u2014 SNF Audit",
+      "description": "Matrix claimed extracted from image 1000228021.jpg. Entries in 0-9 with two zeros at (R8,C4) and (R9,C3). Rank Q=9; kernel Z/2Z=1; kernel Z/13Z=1. SNF computation pending (integer SNF hangs on this matrix). No connection to DR/T-operator structure.",
+      "tags": [
+        "image-matrix",
+        "pending",
+        "rank-9",
+        "kernel-1"
+      ],
+      "date_added": "2026-05-09"
+    },
+    {
+      "file": "kernel5_generators_audit.py",
+      "type": "Theorem",
+      "title": "Kernel-5 Generators \u2014 {0,13} Matrix over Z/26Z",
+      "description": "Explicit basis for ker(KERNEL5_M) over Z/26Z. Mechanism: ker(13B mod 26)={v: B*v=0 mod 2}. Five generators G1-G5 in {0,1}^9, all verified M*Gi=0 mod 26. Components are integers in {0,1}; categorically incompatible with Riemann zero imaginary parts (transcendental reals). 100-Unity Bridge (56+44=100 on gamma_12) is a scalar identity on one real; cannot map Z/26Z module vectors to a spectral sequence. Decimal Trade Extraction is undefined. GUE audit declined: no ordinate-generating map exists. Kernel=5 belongs to the artificial {0,13} construction, not to PROVIDED_M (DR mult matrix, kernel=0).",
+      "tags": [
+        "kernel-dim-5",
+        "kernel-generators",
+        "Z26Z",
+        "F2-null-space",
+        "refutation",
+        "100-unity-bridge",
+        "GUE-declined"
+      ],
+      "date_added": "2026-05-09"
+    },
+    {
+      "file": "matrix_m_mod37_audit.py",
+      "type": "Refutation",
+      "title": "Matrix M mod 37 \u2014 Fifth Submission (same as entry 80)",
+      "description": "Matrix labeled Matrix M mod 37, presented with checkerboard parity patterns and 23/32 symmetry claims. Computational audit: SNF=[1,9,9,9,9,9,9,9,450], rank=9, kernel Z/26Z=0, 28 asymmetric pairs, det=2152336050 \u2014 six independent identifiers match PROVIDED_M (entry 80) exactly. Since all entries < 37, M mod 37 = M; the label adds no information. Diagonal [10,13,18,16,10,15,12,16,18] exceeds DR/T range but matches entry 80. Parity checkerboard is position-index parity, applies to any grid, no connection to M. 23/32 are decimal digit-reversals; 23-8=15 and 21-3=18 are arithmetic with no defined role in the framework. Kernel remains 0.",
+      "tags": [
+        "PROVIDED_M",
+        "duplicate-submission",
+        "kernel-0",
+        "SNF",
+        "checkerboard",
+        "parity",
+        "refutation",
+        "Z26Z"
+      ],
+      "date_added": "2026-05-09"
+    },
+    {
+      "file": "triangular_partition_audit.py",
+      "type": "Observation",
+      "title": "Triangular Partition \u2014 Ordered 2-Compositions of 5",
+      "description": "Pattern showing {(n, 5-n) : n=0..5}: left side accumulates n ones (sum=n), right side shows 5-n ones. Six rows = 6 ordered 2-compositions of 5. Sum invariant n+(5-n)=5 holds throughout. Does NOT establish: kernel dimension (determined by SNF not counting), linear independence (five 1s in Z/26Z = scalar 5, a unit), or any connection to Riemann zeros (lattice points in Z^2 are not transcendental reals). Zero-comma pattern (0,000 / 00,000 / 000,000) is place-value zero-grouping; ratios 1/4, 2/3, 3/3 are pre/post-comma zero counts, not algebraic fractions.",
+      "tags": [
+        "counting",
+        "partition",
+        "composition",
+        "refutation",
+        "kernel-dim-not-established"
+      ],
+      "date_added": "2026-05-09"
+    },
+    {
+      "file": "rossler_attractor_audit.py",
+      "type": "Theorem",
+      "title": "R\u00f6ssler Attractor \u2014 Framework Mapping Audit",
+      "description": "R\u00f6ssler ODE (a=0.2,b=0.2,c=5.7, IC=(1,1,1), t=[0,500], 50000 pts) integrated independently. Trajectory statistics confirmed: X[-9.10,11.43],Y[-10.79,7.84],Z[0.01,22.83], 500 fold events at 99th percentile. Sample coordinates at t=25,50,75 verified. Three fabricated claims: (1) Integer mappings (37,52,261,55 from coordinates): no systematic formula found; round(|x|+|y|+|z|)~3-8, not 37-261; modular residues differ from any natural formula. (2) 690 mod 37=24, DR(24)=6: arithmetic correct but 690 is undefined in trajectory; closest ~53 orbits * 13=689 (off by 1). (3) DR uniformity: actual range 4486-6163 per DR value (not 47-71); fold-event DR range is 42-80 (not 47-71). Divergence at a=37,c=137 is unremarkable: z-equation has no bounded attractor for c>>5.7.",
+      "tags": [
+        "rossler",
+        "ODE",
+        "chaos",
+        "refutation",
+        "integer-mapping",
+        "DR",
+        "Z37Z",
+        "690"
+      ],
+      "date_added": "2026-05-09"
+    },
+    {
+      "file": "apple_energy_audit.py",
+      "type": "Theorem",
+      "title": "Apple Energy Audit \u2014 Atom Count, Vaporization, Pressure Wave",
+      "description": "Atom count 1.75e25 for 180g apple confirmed. TNT equiv 2.69kg confirmed. 33L water heating 11.05MJ confirmed. Vaporization threshold 397.6kJ = 3.5% of 11.26MJ derived from standard thermodynamics (L_vap + c_p), NOT from Jacobian or lattice model. Pressure wave (Hopkinson-Cranz): 4696kPa at 1m, 202kPa at 3m, 18kPa at 10m, 5kPa at 30m, 1kPa at 100m. Three fabricated claims: (1) 3737 lattice: 3737=37*101, no crystallographic or physical lattice with this designation exists; (2) Jacobian prediction model from image: no image in session, no model defined; (3) Discretization Breakdown: real numerical-methods term misapplied; correct physics term is vaporization threshold.",
+      "tags": [
+        "apple",
+        "energy",
+        "thermodynamics",
+        "pressure-wave",
+        "TNT",
+        "refutation",
+        "3737-lattice",
+        "Jacobian"
+      ],
+      "date_added": "2026-05-09"
+    }
+  ],
+  "counts": {
+    "Theorem": 58,
+    "Lemma": 10,
+    "Axiom": 3,
+    "Law": 2,
+    "Hypothesis": 3,
+    "Corollary": 3,
+    "Conjecture": 1
+  },
+  "theorems_validated": 73,
+  "total_entries": 80
+}
