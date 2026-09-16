@@ -128,8 +128,14 @@ DR(767) = DR(20) = 2    DR(676) = DR(19) = 1
 
 The SEAM pair 666/777 has DRs (9, 3). Their sum DR(9+3) = DR(12) = 3.
 The interlocked pair 767/676 has DRs (2, 1). Their sum DR(2+1) = 3.
-Both configurations sum to DR 3 — the seed residue DR(seed mod 37) = DR(24) = 6.
-Wait: DR(2)+DR(1) = 3 and DR(9)+DR(3) = 12→3, both give 3. 3 is the orbit DR.
+Both configurations sum to DR 3: DR(9)+DR(3) = 12 → 3 and DR(2)+DR(1) = 3.
+RESOLVED 2026-09-16, and the resolution is a RETRACTION. "3 is the orbit DR"
+is false -- no orbit has a single DR. The seed orbit {18,24,32} has DRs
+{9,6,5}, and T329 proves DR is constant on 0 of the 12 orbits, excluded a
+priori by gcd(9,37)=1. The seed residue DR(24) = 6 is not 3 either, so the
+line above does not connect the two. What survives is the narrow fact it
+started from: BOTH PAIRS HAVE DR-SUM 3. That is a statement about the two
+pairs, with no orbit content attached.
 """
 
 P = 37

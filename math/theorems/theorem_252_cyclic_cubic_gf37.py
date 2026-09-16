@@ -269,7 +269,7 @@ floor_mod = floor_N % 37
 print(f"  floor(N(252)) = {floor_N}; mod 37 = {floor_mod} ∈ {orbit_of(floor_N)}")
 
 # ── Part 7: Perfect cube structure — the binomial identity ───────────────────
-# x³ - 27 = (x-3)³ + 9(x-3) · (??? ) — expand to see clean form
+# x³ - 27: expand to the clean form (next two lines carry it out)
 # x³ - 27 = x³ - 9x² + 27x - 27 + 9x² - 27x = (x-3)³ + 9x(x-3)
 # So: x³ - 27 = (x-3)[(x-3)² + 9x]
 # At the real solution x=3: (x-3)=0 → SEAM

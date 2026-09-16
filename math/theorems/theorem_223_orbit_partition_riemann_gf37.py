@@ -85,9 +85,11 @@ Every 4-digit number under the Kaprekar routine converges to 6174 → SEED.
 Every 3-digit number converges to 495 → C9.
 The two Kaprekar attractors land in DIFFERENT named GF(37) orbits:
   6174 → SEED  (the seed orbit; contains c, γ₅)
-  495  → C9    (contains floor(γ₁) = 14, floor(γ₉) = 48 mod 37 = 11∈NEG_H...)
+  495  → C9    (contains floor(γ₁) = 14)
 
-Wait: 495 mod 37 = 14 ∈ C9 = {14, 29, 31}. floor(γ₁) = 14 ∈ C9.
+RESOLVED 2026-09-16: the parenthetical used to name floor(γ₉) = 48 here too.
+48 mod 37 = 11 ∈ NEG_H, NOT C9 -- it does not belong in this line and has
+been removed. 495 mod 37 = 14 ∈ C9 = {14,29,31} and floor(γ₁) = 14 stand.
 The 3-digit Kaprekar constant and the first Riemann zero floor land in the SAME orbit.
 """
 

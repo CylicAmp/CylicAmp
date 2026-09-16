@@ -258,7 +258,8 @@ def tag_r(r):
 n6_pairs = goldbach_pairs(6)
 assert any(p%37==3 and q%37==3 for p,q in n6_pairs)   # 3+3: ST+ST=TESLA_FLOW
 
-# orbit-11 + PRIME_MIRROR = SEAM (11+31=42≡5; wait: we need sum≡0 mod37)
+# RESOLVED 2026-09-16: PRIME_MIRROR 31 does NOT pair with 11 for the seam --
+# 11+31 = 42 = 5 (mod 37), not 0. The seam partner of 11 is 26: 11+26 = 37.
 # 11+26=37: orbit-11(11) + 26(SCALAR_137) = SEAM
 # Let's find primes p≡11,q≡26 with p+q=some even n
 assert (11 + 26) % 37 == 0   # orbit-11 + SCALAR_137 = SEAM
