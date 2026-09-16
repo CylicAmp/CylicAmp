@@ -124,6 +124,17 @@ The prime is a FUNCTION of the unit count. Nothing is being searched.
     The honest sentence is therefore: 37 is to j=0 what 17 is to j=1728.
     Not: 37 is the prime where the unit group meets the power subgroup.
 
+    PRIOR ART, MISSED WHEN THIS SECTION WAS WRITTEN (same day, later pass).
+    T300 already carries this list as its Tier C -- "p = n^2 + 1 -> {5, 17,
+    37}" -- together with the observation that Tier B {7,37,73} and Tier C
+    are independent conditions meeting only at 37.  T301 already carries the
+    completeness argument: of the nine Heegner discriminants only -3 and -4
+    have units beyond +-1, so n in {2,4,6} exactly and the list is closed.
+    So the "STRONGER/WEAKER" split above is a re-derivation of T300+T301,
+    not a new finding.  What it adds is the route -- reaching the same list
+    from T299's own criterion rather than from the Heegner classification --
+    and the explicit p=17 set check.  Filed as a second route, not a result.
+
 PRIOR SIGHTING OF THE SAME INTEGER, DIFFERENT STATEMENT.
 connection_map.py:1150 carries `assert 6**2 + 1**2 == 37` as the
 two-square representation. Same arithmetic, different content: Fermat

@@ -45,6 +45,20 @@ chain. Tier B and Tier C are unrelated conditions producing different lists:
 
     Tier B  ord_p(137) = 3   ->  {7, 37, 73}
     Tier C  p = n^2 + 1      ->  {5, 17, 37}
+
+ADDED 2026-09-16 — TIER C IS A SINGLE QUADRATIC. A unit count is always
+even (2, 4 or 6), so writing n = 2k turns the Tier C condition into
+
+    p = n^2 + 1 = (2k)^2 + 1 = 4k^2 + 1 =: B(k),
+
+and Tier C is exactly B(1), B(2), B(3) — three CONSECUTIVE values of one
+quadratic, terminating at 37 because 6 is the largest unit count available
+(T301). B(4) = 65 is not prime and B(5) = 101 is prime but has no unit
+count to go with it, so the list closes for a reason unrelated to primality.
+(B(k) = 4k^2+1 is the D = -4 CM family: 4B = (4k)^2 + 4. Its siblings
+4k^2 ± 2k + 1 sit over D = -3, via 4A = (4k+1)^2 + 3 and 4C = (4k-1)^2 + 3.
+Their POLYNOMIAL discriminants -16 and -12 name conductor-2 orders; the
+values themselves are represented by the fundamental -4 and -3.)
     intersection             ->  {37}
 
 Tier C does not pick out {7, 37, 73}; only 37 lies on both lists. 7 and 73
@@ -210,6 +224,19 @@ def verify_tiers_independent():
     assert tier_b == [7, 37, 73]
     assert tier_c == [5, 17, 37]
     assert sorted(set(tier_b) & set(tier_c)) == [37]
+
+    # ADDED 2026-09-16: Tier C is one quadratic, not three separate primes.
+    # A unit count is always EVEN (2, 4 or 6), so n = 2k and
+    #     p = n^2 + 1 = (2k)^2 + 1 = 4k^2 + 1 =: B(k).
+    # Tier C is therefore exactly B(1), B(2), B(3) -- consecutive values of
+    # a single quadratic, and it stops at 37 because 6 is the largest unit
+    # count an imaginary quadratic order can have (T301's completeness).
+    B = lambda k: 4 * k * k + 1
+    assert [n for n, _, _, _ in CM_FAMILIES] == [2, 4, 6]
+    assert all(n % 2 == 0 for n, _, _, _ in CM_FAMILIES)
+    assert [B(1), B(2), B(3)] == [5, 17, 37] == tier_c
+    assert B(4) == 65 and not is_prime(65)      # no n=8 unit count exists,
+    assert B(5) == 101 and is_prime(101)        # and 101 is prime but unused
     return tier_b, tier_c
 
 
