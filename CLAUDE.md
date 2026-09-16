@@ -53,6 +53,26 @@ The user brings math, observations, and code. The work is collaborative and rigo
 
 ---
 
+## The Audit Chain — run every result through this
+
+    Find -> Check prior art -> Reproduce -> Test mechanism
+         -> Classify dynamics -> Test baseline -> Prove -> Interpret
+
+Interpretation is LAST. The `audit-chain` skill holds the full order and
+dispatches to the others: `prior-art`, `audit-supplied`, `forced-check`,
+`tier-test`, `finite-dynamics`, `miss-test`, `theorem-build`, `claim-grade`.
+
+Two standing rules from that chain:
+
+- **Check prior art before writing, not after.** The corpus is 568 files.
+  The Z/12 orbit quotient exists in at least five (T118, T138, T200, T285,
+  T339). Rediscovery is a filing problem, not misconduct — link the earlier
+  file and say what is new beyond it.
+- **Never interpret a deviation until the reference distribution has been
+  independently established.** A wrong baseline inverts the sign: 0.0577
+  against 1/12 reads as a 31% deficit; against the correct 1/18 it is a 3%
+  excess.
+
 ## The Pipeline
 
 The main entry point is `cylicamp/engine_integration.py`. Run it with:
