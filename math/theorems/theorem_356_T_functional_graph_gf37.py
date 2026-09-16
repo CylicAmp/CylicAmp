@@ -1,7 +1,7 @@
 # CLASS: THEOREM
 """
-Theorem 356: T's functional graph, in full -- one 6-cycle of orbits fed by
-two transient chains of length three
+Theorem 356: T descends to a well-defined map on the quotient, whose graph
+is one 6-cycle fed by two transient chains of length three
 Author: Michael Warren Song (CyclicAmp)
 
 T355 concluded that of the four maps in the family, exactly one carries
@@ -35,9 +35,33 @@ information: T itself.  This is that map, worked out completely.
 
     plus the seam, which drops straight onto D7.
 
-    Six orbits on the cycle, six transient -- an exact split, and the
-    transient half is two chains of equal length entering at two different
-    points of the cycle.  Nothing was chosen to make that symmetric.
+    Six orbits on the cycle, six transient -- an exact split, and the two
+    transient chains have EQUAL LENGTH, entering at two distinct cycle
+    points.
+
+    CORRECTION TO AN EARLIER WORDING.  This was first described as a
+    "symmetric" structure.  That is wrong, not merely undefined.  Equal
+    chain length is not a symmetry: a symmetry would be a graph
+    automorphism exchanging the two chains, and none exists.  Any
+    automorphism must rotate the 6-cycle, the two entry points sit at
+    ADJACENT cycle positions 1 (D7) and 2 (TESLA), and no rotation of a
+    6-cycle transposes two adjacent points -- checked for all six
+    rotations, none swaps them and only the identity preserves the pair as
+    a set.  So the graph has no symmetry relating the chains; they are
+    merely the same length.
+
+    What is established, separately and in order:
+
+      (a) phi is WELL DEFINED on the quotient     -- theorem, from T349
+      (b) phi has exactly one cycle, length 6     -- computed
+      (c) two transient chains, both length 3     -- computed
+      (d) entering at distinct, adjacent points   -- computed
+      (e) no automorphism exchanges them          -- computed
+
+    (a) is the structural fact; (b)-(e) are the measured shape.  The two
+    should not be stated as one claim, and "complete" and "symmetric" are
+    not defined terms in this framework, so neither belongs in the
+    statement.
 
 === THE STATE-LEVEL PICTURE AGREES ===
 
@@ -135,6 +159,17 @@ def run():
     assert b == ['SA_ST_A', 'NQR17', 'SA_ST_B', 'D7']
     assert len(a) - 1 == len(b) - 1 == 3
     assert a[-1] != b[-1]                       # enter at different points
+    # and no rotation of the 6-cycle exchanges the two entry points
+    pos = {o: i for i, o in enumerate(w)}
+    assert pos['D7'] == 1 and pos['TESLA'] == 2          # adjacent
+    swaps = [k for k in range(6)
+             if (pos['TESLA'] + k) % 6 == pos['D7']
+             and (pos['D7'] + k) % 6 == pos['TESLA']]
+    assert swaps == []                                   # no symmetry
+    keeps = [k for k in range(6)
+             if {(pos['TESLA'] + k) % 6, (pos['D7'] + k) % 6}
+             == {pos['TESLA'], pos['D7']}]
+    assert keeps == [0]                                  # identity only
     assert phi['SEAM'] if False else BY[T(0)] == 'D7'
 
     # --- state levels ---
@@ -188,8 +223,11 @@ def run():
     print("  TWO TRANSIENT CHAINS OF LENGTH THREE")
     print(f"    {' -> '.join(a)}")
     print(f"    {' -> '.join(b)}")
-    print("    entering the cycle at two different points, plus the seam")
-    print("    dropping straight onto D7.\n")
+    print("    entering at two DISTINCT, ADJACENT cycle points (D7 at")
+    print("    position 1, TESLA at 2), plus the seam dropping onto D7.")
+    print("    Equal length is NOT a symmetry: no rotation of a 6-cycle")
+    print("    transposes two adjacent points, so no automorphism exchanges")
+    print("    the chains. Checked for all six rotations.\n")
     print("  STATE LEVELS")
     for k in sorted(cnt):
         os = sorted({('SEAM' if x == 0 else BY[x])
