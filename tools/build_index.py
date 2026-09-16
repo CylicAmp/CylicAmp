@@ -19,14 +19,27 @@ DIRS = ["math/theorems", "math/primes", "math/turbulence", "cylicamp"]
 ORBITS = ["IC", "DARK_A", "C3", "CAS_EXT", "TESLA", "D7", "SA_ST_A",
           "NEG_H", "C9", "NQR17", "SEED", "SA_ST_B", "SEAM"]
 
+# Regions that CITE an earlier result must not count as restating it --
+# otherwise adding a prior-art note makes a file collide with the very file
+# it credits, and the report gets noisier the more carefully it is filed.
+# Found 2026-09-16: T285 collided with T138 on "DR wrap law" purely because
+# its new prior-art note names T138's DR subtraction law.
+CITE_BLOCK = re.compile(
+    r"^[ \t]*(?:={3,}\s*)?(?:PRIOR ART|PRIORITY|ALSO PRIOR|PRIOR SIGHTING|"
+    r"AUDIT \d{4}-\d{2}-\d{2}|ADDED \d{4}-\d{2}-\d{2}|RESOLVED \d{4}-\d{2}-\d{2})"
+    r"\b.*?(?=\n[ \t]*(?:={3,}|\n)|\Z)", re.I | re.M | re.S)
+
 # terms whose co-occurrence signals the same underlying result
 TOPICS = {
     "quotient Z/12": [r"Z/12", r"Z_12", r"quotient group", r"orbit index"],
     "orbit zero-sum": [r"1 \+ 10 \+ 26", r"orbit sum", r"sums? to (?:37|74)"],
     "Phi_3 / cube roots": [r"Phi_3", r"x\^2 ?\+ ?x ?\+ ?1", r"cube root"],
-    "DR wrap law": [r"37 ?== ?1 \(mod 9\)", r"DR subtraction", r"wrap count"],
+    # was r"37 ?== ?1" alone, which fired on any `(a*b) % 37 == 1` assertion
+    "DR wrap law": [r"37 ?[=≡]=? ?1 ?\(mod ?9\)", r"DR subtraction", r"wrap count"],
     "negation duality": [r"negation dual", r"37 ?- ?x"],
-    "Koopman": [r"Koopman", r"permutation matrix"],
+    # "permutation matrix" alone matched T229, which only mentions the phrase
+    # in passing; Koopman work always names Koopman.
+    "Koopman": [r"Koopman"],
     "twin primes": [r"twin prime"],
     "Sophie Germain": [r"Sophie ?Germain"],
     "Rule 30": [r"Rule ?30"],
@@ -50,6 +63,7 @@ def entry(path, text):
     except (SyntaxError, ValueError):
         doc = ""
     lines = [l.strip() for l in doc.splitlines() if l.strip()]
+    body = CITE_BLOCK.sub(" ", text)      # topic match ignores citation blocks
     m = re.match(r"theorem_(\d+)_", path.name)
     cls = re.search(r"#\s*CLASS:\s*(\w+)", text)
     return {
@@ -60,7 +74,11 @@ def entry(path, text):
         "orbits": [o for o in ORBITS if re.search(r"\b%s\b" % o, text)],
         "refs": sorted({int(x) for x in re.findall(r"\bT(\d{2,3})\b", doc)}),
         "topics": sorted(t for t, pats in TOPICS.items()
-                         if any(re.search(p, text, re.I) for p in pats)),
+                         if any(re.search(p, body, re.I) for p in pats)),
+        "why": {t: sorted({re.search(p, body, re.I).group(0)[:28]
+                           for p in pats if re.search(p, body, re.I)})
+                for t, pats in TOPICS.items()
+                if any(re.search(p, body, re.I) for p in pats)},
         "flagged": bool(FLAG.search(text)),
         "loose": bool(LOOSE.search(text)) and not re.search(r"RESOLVED", text),
     }
@@ -89,6 +107,10 @@ def main():
             ids = [tag(e) for e in group]
             print("  %-20s %3d  %s%s" % (t, len(group), ", ".join(ids[:12]),
                                          " ..." if len(ids) > 12 else ""))
+            if "--why" in sys.argv:       # what each file matched on
+                for e in group:
+                    print("       %-28s %s" % (tag(e),
+                                               ", ".join(e["why"].get(t, []))))
     flagged = [tag(e) for e in entries if e["flagged"]]
     loose = [tag(e) for e in entries if e["loose"]]
     print("\n  self-flagged UNVERIFIED (%d): %s" % (len(flagged), flagged))
