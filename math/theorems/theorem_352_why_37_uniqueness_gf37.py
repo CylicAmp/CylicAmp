@@ -10,6 +10,44 @@ of a very small number of forced facts wearing different clothes.  This
 file names that number, and states the one thing that is genuinely about 37
 rather than about primes in general.
 
+=== PRIOR ART: T304 AND T302 ===
+
+    Found by the prior-art skill during the dedup pass, after this file was
+    written.  T304 ("Three Independent Lists, One Intersection: the
+    Pan-Out") already contains everything below, and more:
+
+      * "37 is the UNIQUE prime with ord_p(10) = 3", derived exactly as
+        here from Phi_3(10) = 111 = 3 x 37 with p = 3 excluded because
+        ord_3(10) = 1 -- and verified over every prime below 200,000,
+        where this file checked only to 20,000.
+      * the same fact stated as: 37 is the only prime whose reciprocal
+        repeats with period 3, since the decimal period of 1/p is
+        ord_p(10).
+      * its consequences already listed: period 3 gives 1/37 = 0.027027,
+        999 = 27 x 37 gives block(k) = 27k (T303), 1001 gives ABCABC =
+        2 ABC, and 111 = 3 x 37 gives the half-length block.
+      * the roots of x^2 + x + 1 mod 37 being {10, 26} -- which T333 also
+        re-derives.
+
+    T302 ("The 137-Map IS the Decimal Shift: 26 = 10^2 mod 37") has the
+    other half: the 137-map is a two-place decimal shift, so every orbit is
+    a decimal-shift triple x{1, 10, 100}.
+
+    T304 also places the fact in a wider frame this file lacks: it is one of
+    THREE lists whose intersection is 37 --
+
+        L1  ord_p(137) = 3, primes dividing Phi_3(137) = 18907   {7,37,73}
+        L2  p = n^2 + 1 with n a CM unit count                   {5,17,37}
+        L3  ord_p(10)  = 3, primes dividing Phi_3(10)  = 111     {37}
+
+    with L3 the singleton.  This file re-derived L3 alone and presented it
+    as the whole of "why 37".  T304 is the earlier and more complete
+    statement; read it first.
+
+    What may stand as this file's own: the explicit five-fact inventory and
+    the rule that no result is evidence for 37 unless it uses fact 2.  That
+    is a methodological statement rather than a new theorem.
+
 === THE UNIQUENESS ===
 
     ord_p(10) = 3 requires p | 10^3 - 1 = 999 = 3^3 x 37.  The prime
