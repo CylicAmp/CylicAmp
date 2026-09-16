@@ -70,12 +70,26 @@ UNVERIFIED CLAIMS [U] — scope narrowed 2026-09-16:
   - any specific eigenvalue r_j for Γ₀(4)\ℍ cited in that session
   - any specific GUE fit statistics cited for those eigenvalues
 
-  ASSESSED, not merely flagged. These are not a to-do item. Maass CUSP
-  forms have no closed form and no series to sum; producing r_j requires
-  Hejhal's algorithm (or a Selberg-trace/Steil variant), which is a
-  substantial numerical program not present in this repo and not written
-  here. So the status is "cannot be verified in this repo", with the reason
-  named -- not "nobody has got round to it".
+  ASSESSED. Maass CUSP forms have no closed form and no series to sum;
+  producing r_j requires Hejhal's algorithm or a Selberg-trace variant.
+
+  REASON REPLACED 2026-09-16. This note used to say that program is "not
+  present in this repo and not written here". That is now false, and the
+  correction matters more than the flag: math/theorems/hejhal_maass_level1.py
+  implements the one-cusp algorithm and runs. Against the known first odd
+  level-1 eigenvalue r_1 = 9.53369526135 it gives g(r_1) = 1.3e-09 while
+  every neighbour tested sits above 10^2 -- an eleven-order dip at the right
+  place -- and a blind scan over [9.2, 14.1] found the r_2 = 12.173
+  neighbourhood unaided.
+
+  So the flags no longer rest on "no such program exists". They rest on
+  something narrower and true: this is the ONE-CUSP algorithm, Gamma_0(4)
+  has three cusps, and Stromberg's block extension is not written. The
+  solve is also heuristic -- a dip is a candidate, not a proof, and
+  certification is the separate BSV argument.
+
+  That is a smaller gap than the one recorded a day ago, and it was closed
+  by writing the solver instead of describing it again.
 
   THE METHOD, SPECIFIED 2026-09-16 so the flag carries its own recipe.
   Hejhal forces a truncated Fourier series to be automorphic on a horocycle.
