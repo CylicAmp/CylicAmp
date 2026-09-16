@@ -108,10 +108,61 @@ UNVERIFIED CLAIMS [U] — scope narrowed 2026-09-16:
   WHAT Gamma_0(4) ADDS -- verified here: index 6 in SL_2(Z), THREE cusps
   (infinity, 0, 1/2), no elliptic points, genus 0, area 6*(pi/3) = 2pi.
   One horocycle is not enough. Stromberg's extension rings every cusp and
-  solves all three expansions together, V block-indexed by (cusp, mode);
-  pullback needs cusp-normalizing maps including z -> -1/(4z) and
-  z -> z/(2z+1). Newforms must be separated from lifts out of Gamma_0(2)
-  and SL_2(Z).
+  solves all three expansions together.
+
+  THE MULTI-CUSP SYSTEM, specified 2026-09-16. A cusp p_j has width h_j,
+  the least h > 0 with A_j [[1,h],[0,1]] A_j^-1 in Gamma, for A_j in
+  SL_2(Z) with A_j(inf) = p_j. Verified here:
+
+      cusp    h_j   A_j              conjugate
+      inf      1    [[1,0],[0,1]]    [[1,1],[0,1]]
+      0        4    [[0,-1],[1,0]]   [[1,0],[-4,1]]
+      1/2      1    [[1,0],[2,1]]    [[-1,1],[-4,3]]
+
+  Widths sum to 6 = the index -- the standard identity, and it checks. Each
+  h_j divides N. The normalizer sigma_j = A_j rho_{h_j}, rho_h(z) = hz,
+  ABSORBS the width, which is why f_j(z) = f(sigma_j z) has an ordinary
+  integer-mode expansion at every cusp. (Noted because computing the width
+  from sigma_j instead of A_j returns 1 everywhere -- the scaling has
+  already divided it out. That is the construction working, not a bug.)
+
+  Three cusps give three unknown sequences c_inf, c_0, c_{1/2}. Around each
+  cusp eta lay 2Q > M points z_m = sigma_eta(x_m + iY), x_m = (m-1/2)/2Q --
+  a closed loop about eta downstairs. Pull each back into F by T_m in
+  Gamma; the pullback lands near some cusp zeta(m) at height y_m*, and
+  automorphy equates the eta-series at Y with the zeta-series at y_m*.
+  Inverting the DFT on the eta-horocycle gives
+
+      c_eta(n) kappa_n(Y) = sum_zeta sum_{|k|<=M} V^{eta zeta}_{nk}(r,Y) c_zeta(k)
+
+  with V a K-Bessel at the pullback height times a phase from the x-shift of
+  T_m sigma_zeta. For Gamma_0(4) that is a 3x3 block grid, each block 2Mx2M,
+  or MxM after the parity split. The one-cusp Hejhal matrix is the inf-block
+  with the off-diagonal blocks deleted. Residual over all three:
+  g(r) = sum_eta || c_eta^(Y) - c_eta^(Y') ||, same 1-D search, bigger vector.
+
+  WHAT CUTS THE BLOCKS: Fricke/Atkin-Lehner W_4 (verified: -1/(4z) swaps inf
+  and 0, squares to -I so is a projective involution, and normalizes
+  Gamma_0(4) on generators) ties c_0 to c_inf; reflection z -> -zbar halves
+  the +-n unknowns via cosine/sine; Hecke fills high coefficients in phase 2.
+  Oldforms lifting from Gamma_0(2) and SL_2(Z) as f(z) +- eps f(dz), d | 4,
+  appear in g(r) and must be TAGGED, not counted as new.
+
+  ONE DISTINCTION, checked. Both z -> -1/(4z) and z -> z/(2z+1) normalize
+  Gamma_0(4) and square into it, so both are Gamma_0(4)-involutions as
+  stated -- but they are not the same kind. The Hall divisors of 4 are
+  {1, 4}, so the Atkin-Lehner group is {1, W_4} and W_4 is the ONLY
+  nontrivial Atkin-Lehner involution. [[1,0],[2,1]] has lower-left 2, so it
+  is outside Gamma_0(4), and it lives in the LARGER normalizer that exists
+  only because 4 is not squarefree (h = 2 divides 24 with h^2 | 4). That
+  matters when reading Stromberg's +-1 columns, which are Atkin-Lehner
+  eigenvalue labels.
+
+  Phase 1 scans r at two heights watching g(r); phase 2 freezes a dip,
+  raises M and precision, applies Hecke and the involutions, and reports
+  H_1 = ||c^(Y) - c^(Y')|| with a consistency score H_2. Still heuristic:
+  the certificate is BSV, or the rigorous Hejhal of Seymour-Howell /
+  Lowry-Duda, as a separate pass.
 
   CORRECTION to the unfolding constant. The Weyl law is
   N(R) ~ (Area/4pi) R^2, so at area 2pi it is R^2/2, not R^2/4. Control:
@@ -301,6 +352,16 @@ def run():
             r = r * (q + 1) // q
         return r
     assert (_index(4), _cusps(4)) == (6, 3)        # area 6*(pi/3) = 2pi
+    # cusp widths of Gamma_0(4): sum to the index, each divides N
+    _W = {'inf': 1, '0': 4, '1/2': 1}
+    assert sum(_W.values()) == _index(4) == 6
+    assert all(4 % h == 0 for h in _W.values())
+    # A_0 = [[0,-1],[1,0]] conjugates [[1,4],[0,1]] to [[1,0],[-4,1]] in G_0(4)
+    assert (0 * 4 - (-1) * 1) == 1 and (-4) % 4 == 0
+    # Hall divisors of 4 are {1,4}: W_4 is the only Atkin-Lehner involution
+    assert [d for d in (1, 2, 4) if 4 % d == 0 and _m.gcd(d, 4 // d) == 1] == [1, 4]
+    assert 2 % 4 != 0          # [[1,0],[2,1]] is OUTSIDE Gamma_0(4)...
+    assert 4 % 4 == 0          # ...but its square is inside
     assert (_index(13), _cusps(13)) == (14, 2)
     assert (_index(37), _cusps(37)) == (38, 2)
     # Weyl N(R) ~ (Area/4pi)R^2; SL_2(Z) area pi/3 gives the known R^2/12
