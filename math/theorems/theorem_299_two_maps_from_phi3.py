@@ -91,6 +91,47 @@ else in the admissible set {7, 37, 73}. Unlike the trace-containment
 coincidence tested in T297, this one IS structural — it follows from
 cyclic-group uniqueness plus an arithmetic identity on p-1.
 
+════════════════════════════════════════════════════════════════════════════
+AUDIT 2026-09-16 — THE SCOPE CLAIM ABOVE IS UNDERSTATED, AND THE UPGRADE
+CUTS BOTH WAYS
+════════════════════════════════════════════════════════════════════════════
+"nowhere else in the admissible set {7, 37, 73}" is true but far weaker
+than what the criterion gives. The reduced unit group has order n only
+when n | p-1, and in that case gcd(n, p-1) = n, so the condition
+
+    n * gcd(n, p-1) = p - 1      collapses to      p = n^2 + 1.
+
+The prime is a FUNCTION of the unit count. Nothing is being searched.
+
+    STRONGER. For j=0, n = 6 and p = 37 is the unique prime where the
+    alignment holds — among ALL primes, not merely inside {7, 37, 73}.
+    Verified over every prime p == 1 (mod 3) below 20000: the hit list is
+    exactly [37]. That is Tier C, and few results here reach it.
+
+    WEAKER. Every CM family gets exactly one such prime, by the same
+    one-line argument:
+
+        n = 2 (generic, units +-1)   p = 5
+        n = 4 (j = 1728, Z[i])       p = 17    verified: hit list is [17]
+        n = 6 (j = 0,    Z[omega])   p = 37
+
+    Checked directly: at p=17, mu_4 = (F_17*)^4 = {1,4,13,16}; at p=37,
+    mu_6 = (F_37*)^6 = {1,10,11,26,27,36}. So 37 is not distinguished by
+    HAVING this property — 17 has it too, and 5. It is distinguished as
+    the value that goes with n = 6. 37 occupies one slot in a family
+    indexed by the unit count, and the slot was never open to choice.
+
+    The honest sentence is therefore: 37 is to j=0 what 17 is to j=1728.
+    Not: 37 is the prime where the unit group meets the power subgroup.
+
+PRIOR SIGHTING OF THE SAME INTEGER, DIFFERENT STATEMENT.
+connection_map.py:1150 carries `assert 6**2 + 1**2 == 37` as the
+two-square representation. Same arithmetic, different content: Fermat
+gives every p == 1 (mod 4) some representation a^2 + b^2, so the 6 there
+is not forced by anything. Here the 6 is the order of the unit group of
+Z[omega] and cannot be any other number. One identity, two readings —
+recorded so the coincidence is not counted twice.
+
 And it still computes no traces. The two maps land on the same subgroup;
 they do not thereby become the same map.
 """
@@ -219,6 +260,64 @@ def verify_coincidence():
     return rows, u4, fourth
 
 
+# ─── AUDIT 2026-09-16: the criterion collapses to p = n^2 + 1 ───────────────
+
+def _primes(hi):
+    sieve = [True] * hi
+    sieve[0] = sieve[1] = False
+    for i in range(2, int(hi ** 0.5) + 1):
+        if sieve[i]:
+            sieve[i * i::i] = [False] * len(sieve[i * i::i])
+    return [i for i, v in enumerate(sieve) if v]
+
+
+def _aligns(n, q):
+    """reduced unit group (order n) equals the n-th powers, in F_q*"""
+    if (q - 1) % n:
+        return False          # the n roots of unity are not all present
+    return n * gcd(n, q - 1) == q - 1
+
+
+def verify_audit(hi=20000):
+    """The scope claim is stronger than T299 first stated, and weaker."""
+    primes = _primes(hi)
+
+    # the condition collapses: n | q-1  =>  gcd(n, q-1) = n  =>  q = n^2 + 1
+    for n in (2, 4, 6):
+        for q in primes:
+            if (q - 1) % n == 0:
+                assert _aligns(n, q) == (q == n * n + 1), (n, q)
+
+    # STRONGER: for j=0 the unique prime over ALL primes is 37, not just {7,37,73}
+    j0 = [q for q in primes if q > 3 and q % 3 == 1 and _aligns(6, q)]
+    assert j0 == [37], j0
+
+    # WEAKER: every CM family has its own, by the same argument
+    j1728 = [q for q in primes if q > 3 and q % 4 == 1 and _aligns(4, q)]
+    assert j1728 == [17], j1728
+    generic = [q for q in primes if q > 2 and _aligns(2, q)]
+    assert generic == [5], generic
+    assert (2 ** 2 + 1, 4 ** 2 + 1, 6 ** 2 + 1) == (5, 17, 37)
+
+    # and the two alignments hold as SETS, not merely as orders
+    def mu(n, q):
+        return sorted(x for x in range(1, q) if pow(x, n, q) == 1)
+
+    def powers(n, q):
+        return sorted({pow(x, n, q) for x in range(1, q)})
+
+    assert mu(6, 37) == powers(6, 37) == [1, 10, 11, 26, 27, 36]
+    assert mu(4, 17) == powers(4, 17) == [1, 4, 13, 16]
+    assert mu(2, 5) == powers(2, 5) == [1, 4]
+
+    # 37 = 6^2 + 1^2 (connection_map.py:1150) is Fermat, and is NOT this:
+    # every p == 1 mod 4 has such a representation, so that 6 is not forced.
+    two_sq = [q for q in primes[:200] if q % 4 == 1 and
+              any(a * a + b * b == q for a in range(1, 100) for b in range(a, 100))]
+    assert len(two_sq) > 1 and 37 in two_sq      # common; not a distinction
+    return j0, j1728, generic
+
+
 def run():
     print("=" * 76)
     print("T299 — Two Maps Out of Phi_3 = x^2 + x + 1")
@@ -269,6 +368,19 @@ def run():
     print(f"    fourth powers  {fourth}   order {len(fourth)}")
     print("  The j=0 alignment needs 6^2 = 36 = p-1. True at p=37, and")
     print("  nowhere else in the admissible set {7, 37, 73}.")
+    j0, j1728, generic = verify_audit()
+    print("\n  AUDIT 2026-09-16 -- that scope claim is understated.")
+    print("  n | p-1 forces gcd(n,p-1) = n, so the condition collapses to")
+    print("  p = n^2 + 1: the prime is a FUNCTION of the unit count.")
+    print(f"    STRONGER  j=0 (n=6):     unique prime = {j0}, over ALL primes")
+    print(f"                              below 20000, not just in {{7,37,73}}")
+    print(f"    WEAKER    j=1728 (n=4):  {j1728}     generic (n=2): {generic}")
+    print("                              every CM family gets exactly one.")
+    print("  mu_6 = (F_37*)^6 and mu_4 = (F_17*)^4 checked as SETS, not orders.")
+    print("  So: 37 is to j=0 what 17 is to j=1728. 37 fills the n=6 slot;")
+    print("  it is not distinguished by having the property at all.")
+    print("  (connection_map.py:1150's 6^2+1^2=37 is Fermat -- every p==1 mod 4")
+    print("   has some a^2+b^2, so that 6 is not forced. Different statement.)")
     print("\n  Unlike the trace-containment coincidence of T297, this one IS")
     print("  structural: cyclic-group uniqueness plus an identity on p-1.")
     print("  It still computes no traces. The two maps land on the same")
