@@ -7,6 +7,34 @@ Author: Michael Warren Song (CyclicAmp)
 T355 concluded that of the four maps in the family, exactly one carries
 information: T itself.  This is that map, worked out completely.
 
+=== THE DESCENT CONDITION, AND THE STRONGER FACT ===
+
+    For T to descend to the quotient by ~ (same fibre of cubing) the
+    required condition is
+
+        x ~ y  =>  T(x) ~ T(y)          class-preserving
+
+    That holds.  But what is actually true is strictly stronger:
+
+        x ~ y  =>  T(x) = T(y)          CONSTANT on classes
+
+    and the proof is one line: x ~ y means x^3 = y^3, hence x^3 + 33 =
+    y^3 + 33, so T(x) = T(y) as POINTS, not merely as classes.  Both
+    verified over all twelve classes.
+
+    The distinction is not pedantic.  Constancy gives the exact
+    factorisation
+
+        T  =  iota o Tbar o q
+
+    with q the quotient map and Tbar injective on classes -- the twelve
+    classes go to twelve DISTINCT values.  From that the whole in-degree
+    table follows at once: twelve points of in-degree 3, one per class,
+    and 33 of in-degree 1 from the seam alone.  A merely class-preserving
+    map would give no such structure, since it could spread one class
+    across three points of the target class.  The in-degree column below
+    is therefore a consequence of constancy, not an independent finding.
+
 === T DESCENDS TO THE QUOTIENT ===
 
     T(x) = x^3 + 33 is constant on every 137-orbit, because the fibres of
@@ -115,6 +143,19 @@ T = lambda x: (pow(x, 3, P) + 33) % P
 def run():
     from collections import Counter
 
+    # --- the descent condition, weak and strong ---
+    cls = lambda x: 'SEAM' if x == 0 else BY[x]
+    weak = all(cls(T(x)) == cls(T(y))
+               for o in ORBITS for x in ORBITS[o] for y in ORBITS[o])
+    strong = all(T(x) == T(y)
+                 for o in ORBITS for x in ORBITS[o] for y in ORBITS[o])
+    assert weak and strong          # the strong form is what holds
+    # x ~ y means x^3 = y^3, so T(x) = T(y) as points
+    for o in ORBITS:
+        assert len({pow(x, 3, P) for x in ORBITS[o]}) == 1
+    # Tbar is injective on classes
+    assert len({T(ORBITS[o][0]) for o in ORBITS}) == 12
+
     # --- T is constant on orbits ---
     phi, img = {}, {}
     for o, mem in ORBITS.items():
@@ -214,7 +255,11 @@ def run():
 
     print("All assertions passed.\n")
     print("THEOREM 356.  T's functional graph, complete.\n")
-    print("  T IS CONSTANT ON ORBITS, so it descends to phi on the twelve:")
+    print("  DESCENT: x~y => T(x) = T(y), constant on classes -- stronger")
+    print("  than the class-preserving condition descent requires. Hence")
+    print("  T = iota o Tbar o q with Tbar injective, and the in-degree")
+    print("  table below is a CONSEQUENCE of that, not a separate finding.\n")
+    print("  phi on the twelve classes:")
     for o in ORBITS:
         print(f"    {o:9s} -> {img[o]:2d} -> {phi[o]}")
     print(f"    SEAM      -> {T(0)} -> {BY[T(0)]}\n")
