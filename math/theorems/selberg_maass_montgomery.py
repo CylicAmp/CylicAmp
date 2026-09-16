@@ -178,9 +178,64 @@ UNVERIFIED CLAIMS [U] — scope narrowed 2026-09-16:
   them is the substitute already ruled out above. LMFDB Maass data for
   Gamma_0(N) comes from this same Stromberg-Hejhal pipeline.
 
+  WHAT LMFDB ACTUALLY SERVES, and why it does not clear these flags
+  (2026-09-16). lmfdb.org/ModularForm/GL2/Q/Maass/ holds 35,416 Maass
+  newforms: weight 0, trivial character, SQUAREFREE level N <= 105, each
+  with a rigorous interval for R, the first 1000 Hecke-normalized a_n as
+  (center, error), parity, Fricke sign, ~5 GB total. Level 1 is 2,202 forms
+  certified by the Booker-Strombergsson-Venkatesh quasimode argument; for
+  squarefree 2 <= N <= 105 completeness is a Selberg-trace count plus a
+  rigorous Hejhal refine, which is why high-R bins thin out as N grows. An
+  older heuristic set (Lemurell-Stromberg, Then) of ~14k was replaced.
+
+  LEVEL 4 IS 2^2, NOT SQUAREFREE. The rigorous ingest stopped at squarefree
+  N. So importing LMFDB does NOT clear these two flags -- it would clear a
+  level-1 or level-5 flag. The published Gamma_0(4) list is Stromberg 2005
+  Table 3, heuristic, H_1 and H_2 ~ 1e-11, with cosine/sine and oldform
+  flags. Cite it as Stromberg, and keep the certificate flag off until a
+  non-squarefree rigor pass exists.
+
+  So the exit condition tightens: not "imported from Stromberg/LMFDB" but
+  EITHER computed here, OR a certified non-squarefree ingest appearing,
+  OR the surface changing to one LMFDB already certifies.
+
+  WHAT *IS* AVAILABLE FROM CERTIFIED DATA, stated so the option is on the
+  record and not mistaken for this one: a nearest-neighbour spacing test on
+  the 2,202 level-1 R_j, even and odd separated (two independent spectra),
+  unfolded by R/6. That is a GOE test on PSL_2(Z)\H, area pi/3. It is a
+  real computation this repo could do. It says nothing about Gamma_0(4).
+
+  AND SELBERG'S GAP IS NOT THE OPEN QUESTION HERE. lambda_1 >= 1/4 is
+  conjectural in general; Kim-Sarnak proves lambda_1 >= 1/4 - (7/64)^2 =
+  975/4096 = 0.23804 for every congruence surface, and Booker-Strombergsson
+  checked all levels N < 857 numerically -- which includes 4. The first
+  Gamma_0(4) newform is lambda ~ 13.96 and the first level-1 cusp form is
+  lambda ~ 91.14, both clearing 1/4 by a wide margin. These flags are about
+  PRODUCING the R_j list and fitting GUE to it, not about whether a
+  complementary-series form occurs.
+  (Kim-Sarnak arithmetic checked here: LRS on GL_5 gives 1/2 - 1/26 = 6/13
+  hence theta <= 3/26; the pair-sum refinement 1/2 - 1/16 = 7/16 hence
+  theta <= 7/64; and 1/4 - (7/64)^2 = 975/4096 exactly.)
+
+  TWO CORRECTIONS to the supplied notes.
+  (1) WEYL CONSTANT, again. Gamma_0(4) at area 2pi has N(R) ~ R^2/2, not
+      R^2/4. Settled internally by the supplied level-1 figures: area pi/3
+      gives R^2/12 and "R=32 -> about 85" (32^2/12 = 85.3, correct), and
+      2pi / (pi/3) = 6, so the constant must be 12/6 = 2. Unfolding follows:
+      level 1 uses dN/dR = R/6 (as given, correct); Gamma_0(4) uses R, not
+      R/2.
+  (2) H_n CONVENTION. "H_n(delta) is m(pi,v) <= 1/2 - delta" contradicts the
+      values delta_2 = 7/64, delta_3 = 5/14, delta_4 = 9/22 given with it.
+      Under that reading GL_2 would give m <= 25/64 = 0.391, not 7/64, and
+      GL_4 would give 1/11 = 0.091 -- BETTER than GL_2, which is impossible
+      since these bounds worsen with n. The direct reading is the right one:
+      H_n(delta_n) means m <= delta_n, and 7/64 < 5/14 < 9/22 < 1/2 is then
+      increasing in n as it must be.
+
   SO THE FLAG STAYS. The algorithm is specified; the run is not. It lifts
-  only when the list is computed here, or imported from Stromberg/LMFDB and
-  cited as imported -- which would make it [P-cited], never [V].
+  only when the list is computed here, or a certified non-squarefree ingest
+  exists and is cited as imported -- which would make it [P-cited], never
+  [V].
 
   AND THE SUBSTITUTE THAT WOULD NOT COUNT: Montgomery pair correlation for
   RIEMANN zeros is easy here (mpmath gives gamma_n directly) and says
@@ -367,6 +422,25 @@ def run():
     # Weyl N(R) ~ (Area/4pi)R^2; SL_2(Z) area pi/3 gives the known R^2/12
     assert abs((1 / 3) / 4 - 1 / 12) < 1e-15
     assert abs(2 / 4 - 1 / 2) < 1e-15              # Gamma_0(4): R^2/2
+    # the area ratio settles it: 2pi / (pi/3) = 6, so 12 / 6 = 2
+    assert abs(2 / (1 / 3) - 6) < 1e-12 and abs(12 / 6 - 2) < 1e-12
+    assert abs(32 ** 2 / 12 - 85.33) < 0.01       # the supplied level-1 check
+    # Kim-Sarnak, exact rationals
+    from fractions import Fraction as _F
+    assert _F(1, 2) - _F(1, 26) == _F(6, 13)              # LRS on GL_5
+    assert (_F(1, 2) - _F(1, 26)) / 4 == _F(3, 26)
+    assert _F(1, 2) - _F(1, 16) == _F(7, 16)              # pair-sum refinement
+    assert _F(7, 16) / 4 == _F(7, 64)
+    assert _F(1, 4) - _F(7, 64) ** 2 == _F(975, 4096)
+    # Blomer-Brumley deltas are DIRECT bounds: increasing in n, all < 1/2
+    _d = (_F(7, 64), _F(5, 14), _F(9, 22))
+    assert _d[0] < _d[1] < _d[2] < _F(1, 2)
+    assert _F(1, 2) - _d[2] < _F(1, 2) - _d[0]    # complementary reading would
+    assert _F(1, 2) - _d[0] != _F(7, 64)          # make GL_4 beat GL_2: wrong
+    # level 4 is NOT squarefree, so it is outside the LMFDB rigorous ingest
+    assert 4 % (2 ** 2) == 0
+    print(f"  LMFDB rigorous ingest is squarefree N<=105; 4 = 2^2 is excluded,")
+    print(f"  so importing it cannot lift these flags. Stromberg 2005 is the cite.")
     print(f"  Gamma_0(13) and Gamma_0(37) both have 2 cusps (index 14, 38);")
     print(f"  Gamma_0(4) has 3. The 13-vs-37 control is shape-matched, 4 is not.")
     print(f"\n  double split = p \u2261 1 (mod 12) = {dbl[:6]}...; 37 is the 2nd,")
