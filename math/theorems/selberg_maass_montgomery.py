@@ -97,6 +97,26 @@ OPEN QUESTIONS (legitimate, per audit 2026-08-05):
      structure leave a signature in the spectral geometry of Γ₀(4)\ℍ
      or Γ₀(37)\ℍ?
 
+     SHARPENED 2026-09-16 — the premise is true but SHARED, so the question
+     needs a control or it cannot come back negative.
+     All three representations of 37 are forced by congruence, not special:
+        37 = 6² + 1²          forced by 37 = 1 (mod 4)   [disc -4, Fermat]
+        37 = 4² + 4·3 + 3²    forced by 37 = 1 (mod 3)   [disc -3,  h=1]
+        37 = 5² + 3·2²        forced by 37 = 1 (mod 3)   [disc -12, conductor 2]
+     Each solvability is IFF its congruence — checked on every prime below
+     400. The double split is therefore exactly p = 1 (mod 12), and that set
+     is {13, 37, 61, 73, 97, 109, 157, ...}. 37 is its SECOND member.
+
+     So an affirmative answer must separate 37 from 13, 61, 73, 97; anything
+     that merely uses the double split is a statement about p = 1 (mod 12)
+     and is Tier A, carrying no information about 37. The natural control is
+     13: it is smaller, it has the same double split (13 = 2²+3² = 1²+1·3+3²
+     = 1²+3·2²), and Γ₀(13) is cheaper to work with than Γ₀(37). If a
+     signature exists it must already show at 13 — and if it shows equally
+     at 13, that is the negative result.
+     (The disc -12 form is the conductor-2 order flagged in T300's note: the
+     same order/field distinction, here as a concrete representation.)
+
 COMPUTATIONAL STATUS:
   No numerical eigenvalue computation in this repo.
   Standard tools: LMFDB, Sage maass_forms module, Stefan Lemurell's data.
@@ -199,6 +219,22 @@ def run():
     print(f"         Hejhal's algorithm, which is not here. Not a to-do item.")
     print(f"         A GUE fit on RIEMANN zeros is easy and would not count:")
     print(f"         different spectrum, no licence to transfer the result.")
+    # open question 3: the double split is shared, so state the control
+    def solvable(q, f):
+        r = int(q ** 0.5) + 2
+        return any(f(x, y) == q for x in range(r) for y in range(r))
+    sq = lambda x, y: x * x + y * y
+    eis = lambda x, y: x * x + x * y + y * y
+    d12 = lambda x, y: x * x + 3 * y * y
+    for q in [n for n in range(5, 400) if all(n % k for k in range(2, n))]:
+        assert solvable(q, sq) == (q % 4 == 1)     # all three solvabilities
+        assert solvable(q, eis) == (q % 3 == 1)    # are IFF a congruence --
+        assert solvable(q, d12) == (q % 3 == 1)    # none distinguishes 37
+    dbl = [n for n in range(5, 300)
+           if n % 12 == 1 and all(n % k for k in range(2, n))]
+    assert dbl[:5] == [13, 37, 61, 73, 97] and dbl.index(37) == 1
+    print(f"\n  double split = p \u2261 1 (mod 12) = {dbl[:6]}...; 37 is the 2nd,")
+    print(f"  so open question 3 needs 13 as its control or it cannot fail.")
     print(f"\nOpen: spectral geometry of Γ₀(37)\\ℍ and double-split structure of 37.")
 
 
