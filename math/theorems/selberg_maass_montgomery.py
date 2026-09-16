@@ -54,13 +54,39 @@ GF(37) CONNECTIONS:
   τ(37) ≢ 0 mod 37: 37 is not a zero of tau — consistent with 37
   being an ordinary prime for the Galois representation ρ_Δ mod 37.
 
-UNVERIFIED CLAIMS [U]:
+VERIFIED 2026-09-16 [V] — the arithmetic in this file now runs:
+  tau(37) = -182213314, from the q-expansion of Delta = q prod (1-q^n)^24
+  computed here; tau(1..12) reproduces the standard values as a control.
+  tau(37) mod 37 = 31, confirming the figure T260 supplied, and 31 != 0, so
+  37 is ordinary for rho_Delta as stated. 31 lies in C9 = {14,29,31}.
+  37 mod 4 = 1 and 37 mod 3 = 1, so 37 splits in BOTH Q(i) and Q(sqrt-3);
+  explicitly 37 = 6^2 + 1^2 and 37 = 4^2 + 4*3 + 3^2.
+  Open question 3 below therefore rests on a verified premise.
+
+UNVERIFIED CLAIMS [U] — scope narrowed 2026-09-16:
   Specific numerical pair-correlation results from the original session
-  were flagged as generated text, not executed computation.
-  The following require independent verification before use:
-  - Any specific eigenvalue r_j for Γ₀(4)\ℍ cited in that session
-  - Any specific GUE fit statistics cited for those eigenvalues
-  These are not committed as verified results.
+  were flagged as generated text, not executed computation. Exactly two
+  items remain unverified, and they are the only two:
+  - any specific eigenvalue r_j for Γ₀(4)\ℍ cited in that session
+  - any specific GUE fit statistics cited for those eigenvalues
+
+  ASSESSED, not merely flagged. These are not a to-do item. Maass CUSP
+  forms have no closed form and no series to sum; producing r_j requires
+  Hejhal's algorithm (or a Selberg-trace/Steil variant), which is a
+  substantial numerical program not present in this repo and not written
+  here. So the status is "cannot be verified in this repo", with the reason
+  named -- not "nobody has got round to it".
+
+  AND THE SUBSTITUTE THAT WOULD NOT COUNT: Montgomery pair correlation for
+  RIEMANN zeros is easy here (mpmath gives gamma_n directly) and says
+  nothing about Γ₀(4). Zeta zeros and Maass eigenvalues are different
+  spectra; a GUE fit on the first would not license any claim about the
+  second. Recorded so the easy computation is not mistaken for the hard one.
+
+PRIOR COPY: T193 (2026-08-14) carries the same spectral-geometry note,
+  appended to a file about process functions on Z_p, flagged from the same
+  2026-08-05 L-function audit. This file (2026-08-23) is the fuller record;
+  the two never cross-referenced until now.
 
 OPEN QUESTIONS (legitimate, per audit 2026-08-05):
   1. Does the GUE pair-correlation hold for Γ₀(4)\ℍ eigenvalues at
@@ -132,12 +158,47 @@ def run():
     print(f"\n  37 = {splits_qi[0][0]}² + {splits_qi[0][1]}²  (splits in Z[i])  check")
     assert splits_qi
 
+    # ── tau(37), computed here rather than cited (added 2026-09-16) ──────
+    # Delta = q * prod_{n>=1} (1 - q^n)^24 ; tau(n) is the coefficient of q^n.
+    N = 40
+    coef = [0] * (N + 1)
+    coef[0] = 1
+    for n in range(1, N + 1):
+        for _ in range(24):                       # multiply by (1 - q^n)
+            nxt = [0] * (N + 1)
+            for i, a in enumerate(coef):
+                if a:
+                    nxt[i] += a
+                    if i + n <= N:
+                        nxt[i + n] -= a
+            coef = nxt
+    tau = lambda n: coef[n - 1]                   # shift for the leading q
+
+    # control: the standard values, so a wrong expansion fails loudly here
+    assert [tau(n) for n in range(1, 13)] == [
+        1, -24, 252, -1472, 4830, -6048, -16744, 84480,
+        -113643, -115920, 534612, -370944]
+    t37 = tau(37)
+    assert t37 == -182213314
+    assert t37 % 37 == 31                  # the figure T260 supplied
+    assert t37 % 37 != 0                   # 37 ordinary for rho_Delta
+    assert 31 in {14, 29, 31}              # C9
+    assert 37 % 4 == 1 and 37 % 3 == 1     # splits in BOTH Q(i) and Q(sqrt-3)
+    assert 4 * 4 + 4 * 3 + 3 * 3 == 37     # Eisenstein norm form
+    print(f"\n  tau(37) = {t37}  (computed here; tau(1..12) matches as control)")
+    print(f"  tau(37) mod 37 = {t37 % 37} \u2208 C9, nonzero \u2192 37 ordinary  check")
+
     print(f"\nEPISTEMIC STATUS SUMMARY:")
     print(f"  [P] Selberg trace formula setup, Montgomery conjecture statement")
     print(f"  [P] GUE pair correlation kernel R₂(ξ) — standard mathematics")
     print(f"  [V] GF(37) connections: splits in Q(i) and Q(√-3), τ(37)≢0")
+    print(f"  [V] tau(37) = -182213314 \u2261 31 (mod 37), computed above not cited")
     print(f"  [U] Specific eigenvalue r_j values from original session")
     print(f"  [U] Numerical GUE fit statistics from original session")
+    print(f"      \u2514\u2500 ASSESSED: unverifiable in this repo. Maass cusp forms need")
+    print(f"         Hejhal's algorithm, which is not here. Not a to-do item.")
+    print(f"         A GUE fit on RIEMANN zeros is easy and would not count:")
+    print(f"         different spectrum, no licence to transfer the result.")
     print(f"\nOpen: spectral geometry of Γ₀(37)\\ℍ and double-split structure of 37.")
 
 

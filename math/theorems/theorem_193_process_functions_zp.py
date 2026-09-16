@@ -67,6 +67,14 @@ SPECTRAL GEOMETRY NOTE (Γ₀(4)\ℍ, Maass Forms, GUE)
   Specific numerical pair-correlation claims from early session: UNVERIFIED
   (flagged in Aug 5 L-function audit as generated text, not executed computation).
   Research question survives as legitimate.
+
+  CROSS-REFERENCE added 2026-09-16. This note is a compressed copy of what
+  became selberg_maass_montgomery.py (2026-08-23), which is the fuller
+  record and now carries the assessment: the two unverified items are the
+  r_j eigenvalues and their GUE fit, and they cannot be verified in this
+  repo because Maass cusp forms need Hejhal's algorithm, which is not here.
+  Read that file for the scope; nothing spectral is computed in THIS file,
+  whose subject is process functions on Z_p.
 """
 
 import itertools
