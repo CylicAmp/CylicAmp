@@ -65,9 +65,14 @@ dispatches to the others: `prior-art`, `audit-supplied`, `forced-check`,
 Two standing rules from that chain:
 
 - **Check prior art before writing, not after.** The corpus is 568 files.
-  The Z/12 orbit quotient exists in at least five (T118, T138, T200, T285,
-  T339). Rediscovery is a filing problem, not misconduct — link the earlier
-  file and say what is new beyond it.
+  The Z/12 orbit quotient exists in **four** — T138 (2026-08-07, first),
+  T200, T285, T339 — each adding real content on a repeatedly-restated base,
+  and until 2026-09-16 only one citation link existed between them.
+  **T118 and T276 are not in this cluster**, though an earlier version of
+  this note listed T118: T118 is the subgroup lattice, and its only quotient
+  is (Z/37Z)*/H_9 ≅ Z/4Z; T276 is Kolakoski and never states the quotient.
+  Rediscovery is a filing problem, not misconduct — link the earlier file and
+  say what is new beyond it.
 - **Never interpret a deviation until the reference distribution has been
   independently established.** A wrong baseline inverts the sign: 0.0577
   against 1/12 reads as a 31% deficit; against the correct 1/18 it is a 3%

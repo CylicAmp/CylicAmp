@@ -4,6 +4,16 @@ T285: The 12 orbits form Z/12Z — GF(37)*/IC as a cyclic quotient group
 
 Source: Coset structure from T284; negation structure from T283.
 
+PRIOR ART, added 2026-09-16.  The quotient itself is not first stated here.
+T138 (2026-08-07) already has GF(37)*/IC = Z/12Z with DARK_A generating it,
+alongside its own DR subtraction law; T200 (2026-08-15) already works inside
+that quotient, indexing the sovereign cosets as g^2, g^3, g^4, g^5, g^10.
+This file cites neither, and results 1-3 below restate them.
+
+What stands as this file's own: result 4 (antipodal = +6 in Z/12Z), the
+inverse pairing n <-> 12-n in result 6, and result 5 -- TESLA<->C9 being the
+one pair where the two maps coincide, because 6^2 = -1 forces x^-1 = -x.
+
 === KEY RESULTS ===
 
 1. ORBIT PRODUCT IS WELL-DEFINED

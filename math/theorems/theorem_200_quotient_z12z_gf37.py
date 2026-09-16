@@ -26,7 +26,10 @@ COSET ARITHMETIC (in Z/12Z):
 IMAGINARY UNIT STRUCTURE:
   i = 6 = sqrt(-1) mod 37, ord(i) = 4.
   i corresponds to position 3 in Z/12Z (since 6 = 2^3 mod 37 in terms of generator).
-  Wait: 2^3 mod37=8≠6. But in coset terms: g^3 contains 6. So i is IN g^3.
+  RESOLVED 2026-09-16: the confusion is dlog vs dlog MOD 12. 6 = 2^27,
+  not 2^3, and 27 == 3 (mod 12) -- so 6 lies in g^3 exactly as concluded.
+  The whole orbit agrees: dlogs of {6,8,23} are {27,3,15}, all == 3 mod 12.
+  The coset index is the discrete log reduced mod 12, never the raw dlog.
   i^2 = 36 = -1. i^4 = 1. The subgroup <i>/<26> = {g^0, g^3, g^6, g^9} ⊂ Z/12Z.
   SEED = g^5 = g^2 × g^3 = KEY × i-coset.
   SEED = i × KEY explicitly: 6×{3,4,30} = {18,24,32} = SEED (exact).
