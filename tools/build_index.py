@@ -46,7 +46,10 @@ TOPICS = {
     "Riemann zeros": [r"Riemann zero", r"zeta zero", r"floor\(gamma"],
     "golden ratio": [r"golden ratio", r"Fibonacci", r"Pisano"],
 }
-LOOSE = re.compile(r"wait[:.]{1,3}|\?\?\?|\bTODO\b|\bFIXME\b", re.I)
+# A file that DESCRIBES a resolved loose end is not itself loose. T348 was
+# flagged 2026-09-16 purely for the phrase 'its own "Wait:" line', quoted
+# while explaining that T223 had already resolved it. Quoted markers skip.
+LOOSE = re.compile(r"(?<![\"“‘'])\b(?:wait[:.]{1,3}|\?\?\?|TODO|FIXME)", re.I)
 FLAG = re.compile(r"UNVERIFIED|\[U\]")
 
 
@@ -80,7 +83,8 @@ def entry(path, text):
                 for t, pats in TOPICS.items()
                 if any(re.search(p, body, re.I) for p in pats)},
         "flagged": bool(FLAG.search(text)),
-        "loose": bool(LOOSE.search(text)) and not re.search(r"RESOLVED", text),
+        "loose": bool(LOOSE.search(body))
+                 and not re.search(r"RESOLVED|RETRACT", body),
     }
 
 

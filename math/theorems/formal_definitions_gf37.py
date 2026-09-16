@@ -123,8 +123,11 @@ PART IV — ANNIHILATION AND SURVIVAL
 
   Proof:  Compute all 12 orbits and their DR values (verified below).
   Example orbits:
-    O(1)  = {1, 26, 260 mod 37=1... wait:
-    {n, 26n mod37, 26²n mod37} for each starting n.
+    RESOLVED 2026-09-16: O(1) = {1, 26, 10} = IC. The chain is
+    1 -> 26 -> 26*26 = 676 = 10 (mod 37) -> 26*10 = 260 = 1 (mod 37),
+    closing in three steps. The abandoned line had 260 in the second slot,
+    where 676 belongs; 260 is the third step, the one that closes.
+    In general O(n) = {n, 26n, 26²n} mod 37 for each starting n.
   The 12 orbits have different DR-triples, so they are not all collapsed to
   a single DR value — the orbit structure survives.  ∎
 

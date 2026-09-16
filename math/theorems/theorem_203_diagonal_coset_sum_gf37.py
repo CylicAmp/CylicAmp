@@ -24,7 +24,9 @@ KEY SOVEREIGN DIAGONAL SUMS:
   g^4+g^4  → g^5:  SA+ST coset diagonal = SEED
                    9+9=18; 12+12=24; 16+16=32.  Proof: 9+9=18=2×9, 18∈SEED.
   g^4+g^10 → g^2:  g^4 + KEY^{-1} diagonal = KEY
-                   9+21=30; 12+25=0=SEAM... wait: 9+21=30∈g^2, 12+25=37≡0 ...
+                   RESOLVED 2026-09-16: the ELEMENT sums are not constant here
+                   (30, 0, 7), which is why the diagonal is defined on the coset
+                   REPRESENTATIVES. The correction is stated immediately below.
 
   Corrected g^4+g^10: rep_4=9, rep_10=21. diag = (9+21)×<26> = 30×<26> = {30,4,3} = KEY ✓
   [Individual element sums vary: 9+21=30(KEY), 12+25=0(SEAM), 16+28=7(g^8)]
