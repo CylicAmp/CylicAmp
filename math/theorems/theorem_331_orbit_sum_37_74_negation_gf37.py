@@ -39,6 +39,16 @@ the integer 111.  It is about the three multipliers.
     negation commutes with the 137-map.  It is the earlier and more complete
     statement.  What follows re-derives it.
 
+    THE FULL CHAIN, established 2026-09-16 by searching the corpus rather
+    than this file's own citations:
+
+        2026-07-26  identity_cycle_sum_structure  base case only:
+                    1 + 10 + 26 = 37 for the identity cycle. No 74.
+        2026-07-31  basin_sum_wraparound          THE RESULT: all twelve
+                    orbits, wrap-count identity, {37,74} bound, 6/6, 666.
+        2026-09-14  this file                     re-derivation.
+        2026-09-15  T332                          the forcing inference.
+
     EARLIEST OF ALL: basin_sum_wraparound_gf37.py (2026-07-31) has the
     orbit-sum identity S(a) = 37(a - k1 - k2) with k1 = floor(10a/37),
     k2 = floor(26a/37), the {37, 74} bound, the 6/6 split and the 666

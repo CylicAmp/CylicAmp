@@ -2,6 +2,19 @@
 """
 Basin Sum Wrap-Around Identity on GF(37) — THEOREM 95
 
+ORIGIN NOTE, added 2026-09-16. The base case is five days older:
+identity_cycle_sum_structure.py (2026-07-26) has "THEOREM 2: Triple sum =
+SEAM, 1 + 10 + 26 = 37", for the identity cycle alone. It never mentions 74
+and never leaves that one orbit. THIS file is where the statement becomes
+general -- all twelve basins, the wrap-count identity, the {37,74} bound
+and the 6/6 split -- so it is the origin of the RESULT, with the earlier
+file the origin of the seed fact.
+
+Downstream: T331 (2026-09-14) re-derives all of the above, and T332
+(2026-09-15) adds the one step not here -- that 37a + 74(12-a) = 666 has
+the unique solution a = 6, so the 6/6 split is forced rather than counted.
+Both now cross-reference this file.
+
 For any IC-coset basin with representative a ∈ GF(37)*,
 the integer sum of the three basin elements is:
 
