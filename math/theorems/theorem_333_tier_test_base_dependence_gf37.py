@@ -20,6 +20,19 @@ tier assigned by a test is a fact.  The discriminator:
     Survives every base  -> Tier 1.
     Breaks              -> Tier 2, and the break point IS the expiry.
 
+=== PRIOR ART: T304 ===
+
+    Found during the dedup pass.  T304 already records that the roots of
+    x^2 + x + 1 mod 37 are {10, 26}, and T302 that the 137-map is the
+    two-place decimal shift.  The identification of the admissible bases is
+    therefore not new here.
+
+    What appears to stand as this file's own is the METHOD -- deciding a
+    tier by re-running the construction in another base and taking the
+    break point as the stated expiry -- and the observation that base 10
+    and base 26 give different numbers of surviving rows (3 against 1)
+    because the digit bound and the residue bound coincide only at base 10.
+
 === RUNNING IT ON T326 ===
 
     In base b, an AP triple with digits (a, a+d, a+2d) is
