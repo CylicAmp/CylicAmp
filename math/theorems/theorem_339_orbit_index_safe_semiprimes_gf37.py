@@ -19,6 +19,18 @@ building it retroactively collapses T331 and T332 into arithmetic mod 12.
     So the quotient group and the additivity are T138's, not this file's.
     This cross-reference was added afterwards so the two read together.
 
+    AND T285 TOO, found 2026-09-16.  T285 (2026-09-03) carries the index
+    table already, as its "DARK_A power sequence n = 0..11" -- verified
+    byte-identical to the j = 0..11 table below, all twelve entries.  It
+    also carries "ANTIPODAL MAP = +6 IN Z/12Z", which is this file's
+    "negation is j -> j+6" used to collapse T331.  So neither the index nor
+    the +6 law is new here; both predate this file by twelve days.
+
+    What still stands as this file's own after both cross-references: the
+    additivity idx(xy) = idx(x) + idx(y) (mod 12) stated as the headline and
+    checked on all 36 x 36 pairs, the safe-prime forced exclusions, the
+    semiprime split, the prime-square confinement, and the grading.
+
     What stands as this file's own: the safe-prime forced exclusions, the
     semiprime split, the prime-square confinement, and the grading -- none
     of which appear in T138.

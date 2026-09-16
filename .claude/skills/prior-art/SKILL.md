@@ -1,6 +1,6 @@
 ---
 name: prior-art
-description: Search the CylicAmp corpus for an existing result BEFORE writing a new theorem. Use at the start of every theorem, every time a pattern looks new, and before reporting anything as a discovery. The corpus is 568 files with no one able to hold it in memory, and results have been independently re-derived three and four times — the Z/12 orbit quotient exists in T138, T200 and T339; the 37/74 orbit-sum split and negation duality exist in orbit_negation_duality_gf37 and again in T331 and T332; the Pisano period 76 exists in T141 and again in T344. Run this before theorem-build, not after.
+description: Search the CylicAmp corpus for an existing result BEFORE writing a new theorem. Use at the start of every theorem, every time a pattern looks new, and before reporting anything as a discovery. The corpus is 568 files with no one able to hold it in memory, and results have been independently re-derived three and four times — the Z/12 orbit quotient exists in T138, T200, T285 and T339 (and NOT in T118, despite an earlier note saying so); the 37/74 orbit-sum split and negation duality exist in orbit_negation_duality_gf37 and again in T331 and T332; the Pisano period 76 exists in T141 and again in T344. Run this before theorem-build, not after.
 ---
 
 # prior-art
