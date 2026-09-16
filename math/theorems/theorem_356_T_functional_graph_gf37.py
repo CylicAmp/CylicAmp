@@ -27,6 +27,28 @@ information: T itself.  This is that map, worked out completely.
 
         T  =  iota o Tbar o q
 
+    THREE MAPS, THREE TYPES -- worth keeping straight:
+
+        q     F_37    -> F_37/~     37 points to 13 classes
+        Tbar  F_37/~  -> F_37       13 classes to 13 points, INJECTIVE
+        phi   F_37/~  -> F_37/~     13 classes to 13 classes
+
+    and  phi = q o Tbar.  Tbar is not an endomorphism -- its source and
+    target are different sets -- so it has no cycles at all.  THE 6-CYCLE
+    BELONGS TO phi, not to Tbar.  The quotient has 13 classes, the twelve
+    orbits together with the seam, and phi acts on all thirteen:
+
+        cycle, length 6   IC -> D7 -> TESLA -> NEG_H -> SEED -> CAS_EXT
+        chain, length 3   C9      -> DARK_A -> C3      -> TESLA
+        chain, length 3   SA_ST_A -> NQR17  -> SA_ST_B -> D7
+        chain, length 1   SEAM                         -> D7
+
+        6 + 3 + 3 + 1 = 13.
+
+    So the transient part is SEVEN classes, not six: the two length-three
+    chains plus the seam, which is itself a chain of length one entering
+    at D7.
+
     with q the quotient map and Tbar injective on classes -- the twelve
     classes go to twelve DISTINCT values.  From that the whole in-degree
     table follows at once: twelve points of in-degree 3, one per class,
@@ -153,8 +175,26 @@ def run():
     # x ~ y means x^3 = y^3, so T(x) = T(y) as points
     for o in ORBITS:
         assert len({pow(x, 3, P) for x in ORBITS[o]}) == 1
-    # Tbar is injective on classes
-    assert len({T(ORBITS[o][0]) for o in ORBITS}) == 12
+    # Tbar is injective on classes -- and the quotient has THIRTEEN
+    classes_ = sorted(ORBITS) + ['SEAM']
+    Tbar = {c: (T(0) if c == 'SEAM' else T(ORBITS[c][0])) for c in classes_}
+    assert len(classes_) == 13
+    assert len(set(Tbar.values())) == 13          # injective on all thirteen
+    phi13 = {c: cls(Tbar[c]) for c in classes_}
+    # phi = q o Tbar is the endomorphism; Tbar itself has no cycles
+    cyc13 = ['IC']
+    while phi13[cyc13[-1]] != 'IC':
+        cyc13.append(phi13[cyc13[-1]])
+    assert len(cyc13) == 6
+    def chain13(c):
+        ch = [c]
+        while ch[-1] not in cyc13:
+            ch.append(phi13[ch[-1]])
+        return ch
+    assert len(chain13('C9')) - 1 == 3
+    assert len(chain13('SA_ST_A')) - 1 == 3
+    assert chain13('SEAM') == ['SEAM', 'D7'] and len(chain13('SEAM')) - 1 == 1
+    assert 6 + 3 + 3 + 1 == 13 == len(classes_)
 
     # --- T is constant on orbits ---
     phi, img = {}, {}
