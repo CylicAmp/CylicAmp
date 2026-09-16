@@ -65,6 +65,53 @@ The baseline is 1/18 because orbit(p) = orbit(p+g) requires 1 + g/p in the
 order-3 subgroup, which for fixed g pins p to exactly 2 of 36 residues.
 Same data, opposite conclusion.
 
+## Audit the summaries too
+
+> **Run the audit chain on summaries, inventories and conclusions with the
+> same severity as on the underlying computations.**
+
+An unaudited premise can migrate upward through a record until repetition
+makes it look established. It cannot acquire evidentiary status that way,
+but it can acquire the appearance of it, and the appearance is enough to
+get it cited.
+
+**Worked case.** `T_C(N) << N` entered this record four times. Every single
+time:
+
+- it appeared in a **summary paragraph**, never in a computational section
+- it appeared inside a **list of things already checked** -- "the framework
+  is officially purged", "everything that remains has survived hostile
+  auditing"
+- it was never accompanied by a definition, at any of the four appearances
+
+Grepping 568 files, the only occurrences of `T_C` are in T357 and T358,
+both recording it as undefined and excluded. The 11-compressor that
+travelled with it appears nowhere at all.
+
+**The diagnostic signature** of a premise laundering itself upward:
+
+1. it is named rather than stated -- a label, not a formula
+2. it appears in conclusions and never in working
+3. its status verb escalates -- "proposed", then "retained", then
+   "verified", then "survived auditing"
+4. it travels in a list with genuinely verified items, borrowing their
+   status
+
+**Three statuses, not two.**
+
+```
+not assessed  !=  survived  !=  failed
+```
+
+Something with no definition cannot survive an audit and cannot fail one --
+an audit tests a definition against a computation, and there is nothing to
+test. The correct status is *not assessed*, and it must be written that way
+rather than folded into either of the others.
+
+When closing a record, list what was verified and what was never eligible,
+separately and by name. A shorter list that holds beats a longer one that
+does not.
+
 ## The one Tier C fact, and its limit
 
 ```
