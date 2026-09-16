@@ -131,6 +131,31 @@ information: T itself.  This is that map, worked out completely.
     and that orbit is itself one of the six on the cycle.  The six orbits
     feeding the cycle and the six orbits ON the cycle are the SAME six.
 
+=== TIER-TEST: THE STRUCTURE IS NOT DISTINGUISHED ===
+
+    Run after the fact, per the tier-test skill.  Sweeping x^3 + c over all
+    37 values of c on F_37, and over primes p == 1 (mod 3):
+
+        c-values giving exactly ONE cycle      12 of 37  (32%)
+        c-values giving exactly cycle type [6]  4 of 37  (11%)
+        c = 33 is one of those four.
+
+        p      classes   c with one cycle
+        7          3     86%
+        13         5     62%
+        31        11     45%
+        37        13     32%
+        67        23     21%
+        97        33     10%
+
+    "One cycle" is common at small p and thins out as p grows, which is
+    what random-map heuristics predict (a random map on n points has about
+    (1/2)log n cycles).  So neither the single cycle nor the length 6 is
+    special to c = 33; four shift constants give the same cycle type.
+
+    The structure of T356 is correct and completely characterised.  It is
+    not evidence that 33 or 37 is distinguished.  TIER A.
+
 === INDICES, REPORTED WITHOUT CLAIM ===
 
         on-cycle    {0, 3, 5, 6, 8, 11}
