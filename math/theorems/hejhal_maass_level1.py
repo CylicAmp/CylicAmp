@@ -36,10 +36,29 @@ r_1 = 9.53369526135 (Booker-Strombergsson-Venkatesh, 100 decimals):
     r = 9.8               g = 7.3e+01
     r = 10.2              g = 9.3e+01
 
-and a BLIND scan over r in [9.2, 14.1] at step 0.1, told nothing, produced
-a local minimum in the 12.17 neighbourhood (known r_2 = 12.17300832468).
-The 0.1 grid is too coarse to catch every dip -- they are narrow -- so a
-coarse scan must be followed by local refinement.
+A BLIND scan over r in [9.2, 14.1] at step 0.1, told nothing, produced a
+local minimum in the 12.17 neighbourhood; local refinement then returned
+9.53367 and 12.17250 against the true 9.53369526 and 12.17300832 -- five
+and four significant figures, found without being given the answer.
+
+PARITY IS ALSO DECIDED, and sharply.  Running the same r through the sine
+and the cosine expansion separates the two spectra by ten orders:
+
+    r                    odd (sin)    even (cos)    verdict
+    9.53369526135        1.36e-09     1.08e+01      ODD
+    12.17300832468       1.47e-11     2.06e+00      ODD
+    13.77975135189       2.05e+02     3.30e-11      EVEN
+
+All three known values dip to 1e-9..1e-11 in their own parity and not at
+all in the other.  This corrects the first reading of the blind scan: the
+scan searched the ODD spectrum only, so r_3 = 13.7798 being EVEN could not
+appear in it.  Correctly absent, not missed.  (A refinement pass reported
+13.885 with g = 9.18; that was a bracket walking out of its interval, the
+floor of a flat region, not a detection.  Recorded so it is not mistaken
+for a fourth eigenvalue.)
+
+The 0.1 grid is too coarse to catch every dip -- they are narrow -- so the
+working recipe is coarse scan, then local refinement, per parity.
 
 SCOPE, so this is not read as more than it is.
   * This is the ONE-CUSP algorithm.  Gamma_0(4) has three cusps and needs
@@ -133,6 +152,21 @@ def run():
     print("\n  g(r_1) = %.2e, every neighbour > 1 and at least 1e6 larger."
           % float(hit))
     print("  The dip locates the known eigenvalue. Machinery validated.\n")
+
+    # parity: each known value dips in ONE expansion and not the other
+    print("  parity separation (same r, sine vs cosine):")
+    print("   r                    odd         even        verdict")
+    for s, want in (('9.53369526135', 'ODD'), ('13.77975135189', 'EVEN')):
+        r = mp.mpf(s)
+        go = residual(r, M=18, Q=22, odd=True)
+        ge = residual(r, M=18, Q=22, odd=False)
+        got = 'ODD' if go < ge else 'EVEN'
+        assert got == want, (s, got, want)
+        small, big = (go, ge) if go < ge else (ge, go)
+        assert small < mp.mpf('1e-6') and big > 1, (s, small, big)
+        assert big / small > mp.mpf('1e8'), (s, big / small)
+        print("   %-18s  %.2e   %.2e   %s" % (s, float(go), float(ge), got))
+    print("  each dips in one parity only, by at least 8 orders.\n")
     print("  NOT a certificate (BSV is separate), and NOT Gamma_0(4)")
     print("  (three cusps, needs Stromberg's block extension, not written).")
     print("\n  ALL ASSERTIONS PASS")
