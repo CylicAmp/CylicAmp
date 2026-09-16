@@ -77,6 +77,60 @@ UNVERIFIED CLAIMS [U] — scope narrowed 2026-09-16:
   here. So the status is "cannot be verified in this repo", with the reason
   named -- not "nobody has got round to it".
 
+  THE METHOD, SPECIFIED 2026-09-16 so the flag carries its own recipe.
+  Hejhal forces a truncated Fourier series to be automorphic on a horocycle.
+  At the infinity cusp, f(x+iy) = sum_{n!=0} a_n sqrt(y) K_{ir}(2pi|n|y)
+  e^{2pi i n x}. K_{ir} decays like e^{-2pi|n|y}/sqrt(y), so at fixed height
+  Y and target 10^-D only |n| <= M(Y,r) survive -- that truncation is the
+  only reason a finite linear system exists. r sits nonlinearly inside the
+  Bessel order; the a_n are linear once r is guessed. The loop:
+
+    1. guess r_0
+    2. pick horocycle height Y: M(Y,r_0) manageable, K_{ir_0}(2 pi Y) not
+       underflowing
+    3. sample 2Q > M equally spaced z_m = x_m + iY
+    4. pull each back to the fundamental domain, z_m* = gamma_m z_m;
+       automorphy gives f(z_m) = f(z_m*)
+    5. expand both sides -- left is a DFT in the a_n, right is the same
+       series at Im(z_m*) -- and equate modes:
+         a_n sqrt(Y) K_{ir_0}(2pi|n|Y) = sum_k V_{nk}(r_0,Y) a_k + err
+    6. normalize a_1 = 1, solve for a_2..a_M
+    7. repeat at Y'. If r_0 is an eigenvalue the two coefficient vectors
+       agree. g(r) = || a^(Y)(r) - a^(Y')(r) || is a 1-D nonlinear residual;
+       walk r until it drops through the noise floor (Newton, not a grid).
+
+  Parity splits the system (even -> cosines, odd -> sines); Hecke relations
+  a_p a_n = a_{pn} + a_{n/p} cut the unknowns further on congruence groups.
+  The raw solve is HEURISTIC. A certificate is a separate almost-automorphy
+  argument (Booker-Strombergsson-Venkatesh), which for congruence groups
+  still wants an explicit Selberg trace remainder.
+
+  WHAT Gamma_0(4) ADDS -- verified here: index 6 in SL_2(Z), THREE cusps
+  (infinity, 0, 1/2), no elliptic points, genus 0, area 6*(pi/3) = 2pi.
+  One horocycle is not enough. Stromberg's extension rings every cusp and
+  solves all three expansions together, V block-indexed by (cusp, mode);
+  pullback needs cusp-normalizing maps including z -> -1/(4z) and
+  z -> z/(2z+1). Newforms must be separated from lifts out of Gamma_0(2)
+  and SL_2(Z).
+
+  CORRECTION to the unfolding constant. The Weyl law is
+  N(R) ~ (Area/4pi) R^2, so at area 2pi it is R^2/2, not R^2/4. Control:
+  the same formula gives SL_2(Z) (area pi/3) the standard N(R) ~ R^2/12,
+  which is the known value -- so the factor is right and the surface is
+  right. A GUE test is a spacing statistic on a long CERTIFIED list of r_j
+  unfolded by R^2/2. Pair correlation of Riemann zeros does not enter.
+
+  LITERATURE VALUES, cited not computed: Stromberg's Gamma_0(4) newform
+  list begins r ~ 3.70330780123, 6.62042287384, 8.52250301688; the level-1
+  PSL_2(Z) list begins r_1 = 9.53369526135, r_2 = 12.17300832468,
+  r_3 = 13.77975135189. The level-1 numbers are NOT Gamma_0(4) and mixing
+  them is the substitute already ruled out above. LMFDB Maass data for
+  Gamma_0(N) comes from this same Stromberg-Hejhal pipeline.
+
+  SO THE FLAG STAYS. The algorithm is specified; the run is not. It lifts
+  only when the list is computed here, or imported from Stromberg/LMFDB and
+  cited as imported -- which would make it [P-cited], never [V].
+
   AND THE SUBSTITUTE THAT WOULD NOT COUNT: Montgomery pair correlation for
   RIEMANN zeros is easy here (mpmath gives gamma_n directly) and says
   nothing about Γ₀(4). Zeta zeros and Maass eigenvalues are different
@@ -233,6 +287,27 @@ def run():
     dbl = [n for n in range(5, 300)
            if n % 12 == 1 and all(n % k for k in range(2, n))]
     assert dbl[:5] == [13, 37, 61, 73, 97] and dbl.index(37) == 1
+
+    # Gamma_0(N) data, verified: the control surface must match in SHAPE
+    import math as _m
+    def _cusps(N):
+        return sum(len([k for k in range(1, _m.gcd(d, N // d) + 1)
+                        if _m.gcd(k, _m.gcd(d, N // d)) == 1])
+                   for d in range(1, N + 1) if N % d == 0)
+    def _index(N):
+        r = N
+        for q in {x for x in range(2, N + 1)
+                  if N % x == 0 and all(x % k for k in range(2, x))}:
+            r = r * (q + 1) // q
+        return r
+    assert (_index(4), _cusps(4)) == (6, 3)        # area 6*(pi/3) = 2pi
+    assert (_index(13), _cusps(13)) == (14, 2)
+    assert (_index(37), _cusps(37)) == (38, 2)
+    # Weyl N(R) ~ (Area/4pi)R^2; SL_2(Z) area pi/3 gives the known R^2/12
+    assert abs((1 / 3) / 4 - 1 / 12) < 1e-15
+    assert abs(2 / 4 - 1 / 2) < 1e-15              # Gamma_0(4): R^2/2
+    print(f"  Gamma_0(13) and Gamma_0(37) both have 2 cusps (index 14, 38);")
+    print(f"  Gamma_0(4) has 3. The 13-vs-37 control is shape-matched, 4 is not.")
     print(f"\n  double split = p \u2261 1 (mod 12) = {dbl[:6]}...; 37 is the 2nd,")
     print(f"  so open question 3 needs 13 as its control or it cannot fail.")
     print(f"\nOpen: spectral geometry of Γ₀(37)\\ℍ and double-split structure of 37.")
