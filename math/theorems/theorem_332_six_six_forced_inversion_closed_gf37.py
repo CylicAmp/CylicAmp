@@ -40,6 +40,17 @@ say why the halves are equal.  They are forced, by one line.
     carries that same no-self-negating argument in the current orbit names.
     Priority chain: orbit_negation_duality -> T283 -> T331 -> this.
 
+    NARROWED FURTHER 2026-09-16.  basin_sum_wraparound_gf37.py (2026-07-31)
+    holds BOTH ingredients of the argument below -- the {37, 74} bound AND
+    the total 6 x 37 + 6 x 74 = 666 -- six weeks before T331.  So the
+    premise this file's derivation runs on is not T331's either.  What is
+    still this file's own is narrow but real: basin_sum COUNTS 6/6 off its
+    table and then checks that it recovers 666.  The inference in the other
+    direction -- 37a + 74(12-a) = 666 has the unique solution a = 6, so the
+    split is forced and nothing needs counting -- is not stated there.
+    That inference, and the inversion-closure count of exactly two via the
+    quotient Z/12, are what this file contributes.
+
     AND THE 666 IS ALSO ALREADY THERE, narrowing the claim below.  The
     2026-07-26 file's closing section "TOTAL RESIDUE SUM" has
     1 + ... + 36 = 666 = 18 x 37 AND the line 6 x 37 + 6 x 74 = 222 + 444

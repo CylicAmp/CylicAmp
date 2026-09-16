@@ -39,6 +39,12 @@ the integer 111.  It is about the three multipliers.
     negation commutes with the 137-map.  It is the earlier and more complete
     statement.  What follows re-derives it.
 
+    EARLIEST OF ALL: basin_sum_wraparound_gf37.py (2026-07-31) has the
+    orbit-sum identity S(a) = 37(a - k1 - k2) with k1 = floor(10a/37),
+    k2 = floor(26a/37), the {37, 74} bound, the 6/6 split and the 666
+    total.  Verified: the identity holds for all 12 representatives.  That
+    file is the origin of this result.
+
     ALSO PRIOR, AND NOT CITED HERE UNTIL NOW: T283
     (theorem_283_negation_antipodal_gf37.py, 2026-09-03).  It restates the
     same six pairs and the same no-self-negating argument in the CURRENT
@@ -48,14 +54,29 @@ the integer 111.  It is about the three multipliers.
 
 === SHARPER: THE SUM IS 37 OR 74, NEVER ANYTHING ELSE ===
 
-    This is the one part of this file that is not in either predecessor.
-    Both of them LIST the sums 37 and 74, read off the table.  Neither
-    bounds them.  The bound below is what makes the two values exhaustive
-    rather than observed, and T332's 6/6 forcing argument runs on it --
-    without "only 37 or 74" as a premise, 666 = 18 x 37 is a consistency
-    check (which the 2026-07-26 file already performs) and not a
-    derivation.  Verified 2026-09-16: the only multiples of 37 in [6, 105]
-    are 37 and 74.
+    RETRACTED 2026-09-16, ONE DAY AFTER IT WAS WRITTEN.  The note here used
+    to claim the bound was "the one part of this file that is not in either
+    predecessor".  That is false.  basin_sum_wraparound_gf37.py, dated
+    2026-07-31 and self-labelled THEOREM 95, already carries it, with the
+    same argument:
+
+        "Since each basin element lies in [1, 36] and there are 3 elements,
+         S(a) in [3, 108].  The only multiples of 37 in this range are
+         {37, 74} -- because 3 x 37 = 111 > 108."
+
+    It also carries the 6/6 split with explicit representatives
+    ({1,2,3,5,6,9} summing to 37, {7,11,14,17,18,21} to 74) and the total
+    6 x 37 + 6 x 74 = 222 + 444 = 666.  Six weeks before this file.
+
+    The version below bounds by DISTINCT residues, [6, 105] rather than
+    [3, 108].  Marginally tighter, identical conclusion.  That is a
+    sharpening of a sentence, not a new result.
+
+    HOW THE ERROR HAPPENED, since it is the instructive part: the audit that
+    produced the retracted claim checked this file only against the two
+    predecessors THIS FILE ITSELF NAMED.  It never ran a fresh prior-art
+    search on the contribution being certified.  Checking a file against its
+    own bibliography can only ever confirm what the file already knew.
 
     Each orbit has three DISTINCT residues in 1..36, so its sum lies
     between 1+2+3 = 6 and 34+35+36 = 105, and is a positive multiple of 37.
