@@ -217,6 +217,36 @@ UNVERIFIED CLAIMS [U] — scope narrowed 2026-09-16:
   hence theta <= 3/26; the pair-sum refinement 1/2 - 1/16 = 7/16 hence
   theta <= 7/64; and 1/4 - (7/64)^2 = 975/4096 exactly.)
 
+  UNFOLDING, SETTLED 2026-09-16 -- and the constant to use is NOT R.
+  Weyl gives the density of the COMPLETE cusp spectrum. Stromberg Table 3
+  is a NEWFORM table. Those are different counts, and the gap between them
+  is a third error, independent of the factor-of-two in the constant.
+
+  Work it out. total(N) ~ index(N) * R^2/12, and a newform of level M | N
+  appears sigma_0(N/M) times in the level-N spectrum. In units of R^2/12:
+
+      total(1) = 1      new(1) = 1
+      total(2) = 3      new(2) = 3 - 2*new(1)             = 1
+      total(4) = 6      new(4) = 6 - 2*new(2) - 3*new(1)  = 1
+
+  (multiplicities: sigma_0(4/1) = 3 copies of each level-1 newform,
+   sigma_0(4/2) = 2 copies of each level-2 newform, 1 of each level-4.)
+
+  SO THE NEWFORM DENSITY IS R^2/12 AT ALL THREE LEVELS, and Stromberg's
+  Gamma_0(4) list unfolds by dN/dR = R/6 -- not R, which is the FULL
+  Gamma_0(4) spectrum including the oldforms lifted from levels 1 and 2.
+
+  That is a trap worth naming: R/6 is also the level-1 TOTAL constant, so
+  unfolding Stromberg correctly and unfolding it wrong by copying the
+  level-1 figure produce the same number. Right answer, wrong reason, and
+  no way to tell them apart from the output.
+
+  PER PARITY, halve again -- even and odd are independent spectra:
+      level-1 total      R/12        Gamma_0(4) total      R/2
+      Gamma_0(4) newforms R/12
+  Strombergs table carries the cosine/sine column, so a parity-separated
+  test on it unfolds by R/12.
+
   TWO CORRECTIONS to the supplied notes.
   (1) WEYL CONSTANT, again. Gamma_0(4) at area 2pi has N(R) ~ R^2/2, not
       R^2/4. Settled internally by the supplied level-1 figures: area pi/3
@@ -425,6 +455,17 @@ def run():
     # the area ratio settles it: 2pi / (pi/3) = 6, so 12 / 6 = 2
     assert abs(2 / (1 / 3) - 6) < 1e-12 and abs(12 / 6 - 2) < 1e-12
     assert abs(32 ** 2 / 12 - 85.33) < 0.01       # the supplied level-1 check
+    # newform vs total density: sigma_0(N/M) copies of each level-M newform
+    _sig = lambda n: len([d for d in range(1, n + 1) if n % d == 0])
+    _tot = {1: 1, 2: 3, 4: 6}                      # = index(N), in R^2/12 units
+    _new = {1: _tot[1]}
+    _new[2] = _tot[2] - _sig(2) * _new[1]
+    _new[4] = _tot[4] - _sig(2) * _new[2] - _sig(4) * _new[1]
+    assert (_sig(4), _sig(2), _sig(1)) == (3, 2, 1)
+    assert _new == {1: 1, 2: 1, 4: 1}              # newform density R^2/12 flat
+    print(f"  newform density is R^2/12 at levels 1, 2 and 4 alike, so")
+    print(f"  Stromberg's Gamma_0(4) NEWform table unfolds by R/6, not R;")
+    print(f"  R is the full spectrum, news plus olds lifted from levels 1 and 2.")
     # Kim-Sarnak, exact rationals
     from fractions import Fraction as _F
     assert _F(1, 2) - _F(1, 26) == _F(6, 13)              # LRS on GL_5
