@@ -31,6 +31,40 @@ The second terms 1,2,3,4 are the index in both. Same map, two inputs.
     apart matters: a forced equivalence sitting on a contingent premise is
     not a forced result.
 
+=== THE THEOREM ===
+
+    Let c_n be the n-th composite, p_n the n-th prime, and
+
+        d_n = c_n - (p_{n+1} + 1).
+
+    (a)  d_1 = d_2 = d_3 = 0   and   d_4 = -3.
+    (b)  d_{n+1} <= d_n  for every n >= 1.
+    (c)  hence d_n <= -3 for every n >= 4, so {1,2,3} is the COMPLETE zero
+         set: no later coincidence is possible.
+    (d)  independently, d_n ~ -n log n -> -infinity.
+
+    Proof of (b), which is the whole result.  The composite gap c_{n+1}-c_n
+    is at most 2: a gap of 3 or more needs two consecutive integers both
+    prime, and that happens only at (2,3).  Every prime gap above p = 3 is
+    at least 2.  So
+
+        d_{n+1} - d_n = (c_{n+1}-c_n) - (p_{n+2}-p_{n+1}) <= 2 - 2 = 0.
+
+    (c) is (b) with the single value d_4 = -3.  (d) is the density mismatch
+    and is a separate argument that does not give (b) or (c).
+
+    THE NUMERICAL TABLE BELOW IS VERIFICATION, NOT EVIDENCE.  (b) and (c)
+    are proved; computing d_n to n = 2000 checks the implementation, not
+    the claim.
+
+    AND THAT IS WHAT LICENSES THE WORD "COINCIDENCE" HERE.  Calling a
+    pattern a coincidence is as much a claim as calling it a structure, and
+    needs as much work.  Without (b) -- with only the asymptotics of (d) --
+    "just a three-term coincidence" would be numerology with the sign
+    reversed, since (d) permits d_n to return to 0 finitely often before
+    diverging.  (b) is what makes the three-term reading a theorem rather
+    than a dismissal.
+
 === IT WAS GOING TO BREAK, AND THE LOCAL REASONS ARE SYMPTOMS ===
 
     At n = 4 it fails twice over -- c_4 = 9 is the first ODD composite, and
@@ -186,6 +220,13 @@ def run():
     print("              are consecutive odd primes at gap 2\n")
     print("  d_n = c_n - (p_(n+1)+1):  n=1..3 zero, then")
     print("   ", {k: v for k, v in big.items()})
+    print("  THEOREM  d_n = c_n - (p_(n+1)+1)")
+    print("   (a) d_1 = d_2 = d_3 = 0, d_4 = -3")
+    print("   (b) d_(n+1) <= d_n for every n >= 1   [composite gaps <= 2,")
+    print("       prime gaps >= 2, so the difference is <= 0]")
+    print("   (c) hence d_n <= -3 for n >= 4: {1,2,3} is the COMPLETE zero set")
+    print("   (d) separately, d_n ~ -n log n -> -infinity")
+    print("   the table above VERIFIES the implementation; (b),(c) are proved.\n")
     print("  (1) exact       d_1 = d_2 = d_3 = 0")
     print("  (2) proved      non-increasing for all n >= 1, and <= -3 for n >= 4:")
     print("                  composite gaps are 1 or 2 (two consecutive integers")

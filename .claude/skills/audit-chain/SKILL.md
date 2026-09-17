@@ -65,6 +65,30 @@ The baseline is 1/18 because orbit(p) = orbit(p+g) requires 1 + g/p in the
 order-3 subgroup, which for fixed g pins p to exactly 2 of 36 residues.
 Same data, opposite conclusion.
 
+### The same rule pointing the other way
+
+> **"Coincidence" is a claim. It needs the work that "structure" needs.**
+
+Grading a pattern down is not the safe default, and a dismissal is not
+automatically the conservative reading. Both directions assert something
+about every n you did not check.
+
+The concrete case is T361. Two sequences agree for three terms and then
+part. Asymptotics (`d_n ~ -n log n`) prove they separate eventually — and
+prove nothing about any particular n, since a sequence tending to minus
+infinity may still return to zero finitely often first. Calling the
+agreement "a three-term coincidence" on the strength of the asymptotics
+alone would have been numerology with the sign reversed.
+
+What licensed the word was a separate finite argument: composite gaps are
+at most 2, prime gaps at least 2, so the difference sequence never
+increases, so the three zeros are the complete zero set. That is the claim
+doing the work, and it is a theorem rather than an impression.
+
+Before writing "just a coincidence", ask which statement rules out
+recovery at every later index, and whether it is proved or merely
+suggestive. If nothing does, the honest label is "not assessed".
+
 ## Audit the summaries too
 
 > **Run the audit chain on summaries, inventories and conclusions with the
