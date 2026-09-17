@@ -44,8 +44,8 @@ theorem about it. Then a numerical check confirms the IMPLEMENTATION, not
 the mathematics, and reporting it as a verified result overstates what
 happened.
 
-Worked case: Dragon-64 checks `S'S = I`, `S^4 = I`, `S^2 = C` and
-`(ST)^3 = C` for its (S,T). But S is the symplectic Fourier transform on
+Worked case: a supplied audit of the Weil representation of SL(2,Z/8Z)
+checks `S'S = I`, `S^4 = I`, `S^2 = C` and `(ST)^3 = C` for its (S,T). But S is the symplectic Fourier transform on
 `(Z/nZ)^2` and T the quadratic-form diagonal — that pair satisfying those
 relations IS the Weil representation, a theorem for every n, confirmed here
 at n = 3..12. The run is a correct test of the code.

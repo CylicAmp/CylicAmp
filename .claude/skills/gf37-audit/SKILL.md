@@ -28,6 +28,27 @@ not be reported as a discovery.
 If the number is SEAM (37 | n) there is no orbit and no class. SEAM is the
 rotation axis, not a gap in the structure (T302).
 
+## The labels are names, not concepts
+
+The twelve orbit names are labels for the twelve cosets of
+`<10> = {1,10,26}` in `F_37*`. Each has an exact mathematical designation
+— its element set, and its index `j` in the quotient `F_37*/<10> = Z/12`
+(T339), where `j` is the power of the primitive root 2 landing in it:
+
+```
+j   0   1      2   3     4       5    6     7     8  9  10     11
+  IC DARK_A  C3 TESLA SA_ST_A SEED NEG_H NQR17 D7 C9 SA_ST_B CAS_EXT
+```
+
+SEAM is the class `{0}`, outside `F_37*` entirely.
+
+Use the label for indexing and the designation when the claim depends on
+what the set actually is. A name carries no mathematical content — where a
+result turns on structure, cite the set or the index, not the label. Names
+like SOVEREIGN, HEARTBEAT and SCALAR_137 elsewhere in the corpus are the
+same kind of thing, and the branch `signature-obfuscation-audit` renames
+them to `f26`, `order-3 cycle under f(n) = 26n mod 37`, and `26`.
+
 ## After the audit
 
 Run `forced-check tier` on any property you intend to claim, and
