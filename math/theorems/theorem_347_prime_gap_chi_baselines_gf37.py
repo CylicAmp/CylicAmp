@@ -68,6 +68,23 @@ against a baseline that is not the right one.
         observed                                   0.0577
         ratio                                      1.032
 
+    SUPERSEDED FOR PRIME PAIRS, 2026-09-17, see T362.  The numerator above
+    is right and the derivation of it is right.  The DENOMINATOR is not,
+    once p+g is also required to be prime: p+g prime and above 37 forbids
+    p == -g (mod 37), and that class is never one of the two qualifying
+    ones (it gives (p+g)/p == 0).  So one class leaves the denominator and
+    the baseline is 2/35 = 0.05714, not 2/36 = 0.0556.
+
+        observed  0.0577  against 1/18   ratio 1.039
+        observed  0.0577  against 2/35   ratio 1.010
+
+    Most of the residual this file set out to explain is the missing class.
+    Checked to 2 x 10^7: of 1,270,594 consecutive prime pairs above 37,
+    ZERO have either member divisible by 37 -- the exclusion is exact.
+
+    The 1/18 statement remains correct for a single prime classified alone,
+    where all 36 classes are reachable.
+
     Against the correct baseline this is a 3% EXCESS, not a 31% deficit.
     "A prime's successor prefers a different orbit" inverts the sign of the
     effect by using 1/12.
