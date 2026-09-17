@@ -26,8 +26,9 @@ method is: **find the parameter the construction is actually built on, and
 vary that one.**
 
 A supplied construction often carries its own axis, and it is usually named
-in the title. Worked case, Dragon-64 / D(Z/8Z): the axis is `n`, the
-modulus of the discrete torus `(Z/nZ)^2`. Re-running the whole thing for
+in the title. Worked case, the pointed MTC on `(Z/8Z)^2` — equivalently the
+Weil representation of `SL(2,Z/8Z)`: the axis is `n`, the modulus of the
+discrete torus `(Z/nZ)^2`. Re-running the whole thing for
 n = 3..12 showed every structural claim — `S'S = I`, `S^2 = C`,
 `(ST)^3 = C`, `S_00 = 1/n` — holding in all ten, so none of them says
 anything about 8. The specific integers (|SL2| = 384, dim A' = 44, the

@@ -30,7 +30,8 @@ Domains: `qr`, `nqr`, `seam`, `prime`.
 
 Chi-squares a distribution over the 12 orbits. `chi^2/df` near or below 1
 means no orbit is distinguished and naming one is post-hoc selection.
-This is what settled the CAS_EXT question in T302 Part 4.
+This is what settled the CAS_EXT question — the coset {5,13,19},
+index j = 11 — in T302 Part 4.
 
 ## When there is no null to beat
 
@@ -39,7 +40,9 @@ A third outcome, distinct from pass and fail: **the screen does not apply.**
 If the material reports a computation rather than an effect — this group
 has this order, this algebra has this decomposition — there is nothing
 being claimed against chance, so there is no reference distribution and no
-miss condition to declare. Dragon-64 is the case: every number in it is a
+miss condition to declare. The case: the pointed MTC on (Z/8Z)^2, i.e. the
+Weil representation of SL(2,Z/8Z) together with its commutant. Every number
+in it — the group order, the orbit counts, the Wedderburn type — is a
 deterministic evaluation, and asking what would have been surprising is
 malformed.
 

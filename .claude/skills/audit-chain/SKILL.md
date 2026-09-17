@@ -150,7 +150,9 @@ does not.
 
 Every step above is written as something that kills a claim, which builds
 in an expectation that each audit produces a correction. Sometimes none of
-them fires. Dragon-64 / D(Z/8Z) went through all eight steps and came out
+them fires. A supplied audit of the pointed MTC on (Z/8Z)^2 — the Weil
+representation of SL(2,Z/8Z) and its commutant — went through all eight
+steps and came out
 with nothing to fix: 13/13 reproduced, no prior art, the structural claims
 correctly identified by the document itself as construction rather than
 discovery, the analogies explicitly refused in its own text.
@@ -166,8 +168,8 @@ What a clean pass should still produce:
 - the **tier**, stated — a document can be entirely correct and still carry
   no information about the parameter it is named for
 - what was checked that the document did **not** check, if anything. On
-  Dragon-64 that was Burnside pinning the trivial block, and the 64-dim
-  multiplicities cross-checking the 44-dim ones
+  that one it was Burnside pinning the trivial isotypic block, and the
+  64-dimensional multiplicities cross-checking the 44-dimensional ones
 - the **grade**, which is usually Level 1 for a correct instance of a
   classified family, and Level 1 is not a criticism
 
