@@ -17,6 +17,27 @@ applicable*, or a bounded assessment. If the chain admits no such path, the
 chain itself generates pressure to manufacture a problem, and the output
 stops being information.
 
+### The same rule at sentence scale
+
+"Interpretation is last" governs the order of work. It governs the order of
+exposition too:
+
+> **mechanism -> implication**, never **conclusion -> justification**.
+
+Every verdict this chain issues is a substantive classification — *forced*,
+*contingent*, *noise*, *coincidence*, *Tier A*, *not assessed*. Each needs
+its basis stated BEFORE the label, not supplied after it. A correct
+classification written in the wrong order still asks the reader to accept
+the verdict on the writer's authority and check afterwards, and that is the
+habit the whole chain exists to break.
+
+The test: can a reader inspect the stated basis and reach the label
+themselves? If the sentence only works because the label came first, invert
+it. Worked case: this file carried "That is not a coincidence, and it is
+the maintenance instruction: ..." for one day, four sections below its own
+rule against exactly that shape. Rewritten to lead with the mechanism, the
+conclusion follows without needing to be announced.
+
 ```
 Find
   -> Check prior art      prior-art
