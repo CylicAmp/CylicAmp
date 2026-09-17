@@ -41,11 +41,33 @@ The second terms 1,2,3,4 are the index in both. Same map, two inputs.
         primes have density 1/log n   =>  p_n ~ n log n
         so  d_n := c_n - (p_{n+1}+1) ~ n - n log n  ->  -infinity.
 
-    Measured: d_n = 0 for n = 1,2,3 and then strictly negative, monotone
-    non-increasing, never returning to zero --
-
         n         4      5     10     100     1000    10000    50000
         d_n      -3     -4    -14   -415    -6731   -93370  -556311
+
+    FOUR CLAIMS, SEPARATED -- the asymptotic argument above does NOT by
+    itself give the finite ones, and conflating them was the first draft's
+    error:
+
+      (1) EXACT.     d_1 = d_2 = d_3 = 0.
+      (2) PROVED.    d_n is non-increasing for every n >= 1, and d_n <= -3
+                     for every n >= 4.  Two lines:
+
+                         d_{n+1} - d_n = (c_{n+1}-c_n) - (p_{n+2}-p_{n+1})
+
+                     Composite gaps are 1 or 2 -- a gap of 3 or more would
+                     need two consecutive integers both prime, which happens
+                     only at (2,3).  Prime gaps are >= 2 above p = 3.  So
+                     the difference is <= 2 - 2 = 0 always.  Monotonicity
+                     plus d_4 = -3 then forces d_n <= -3 for all n >= 4.
+                     Checked against the proof to n = 2000.
+      (3) ASYMPTOTIC. d_n -> -infinity, by the density mismatch above.
+      (4) INTERPRETATION. 9 is the first visible symptom, not the cause.
+
+    (2) was recorded as "measured" in the first version of this file.  It is
+    not measured; it is a consequence of the two gap bounds, and it is the
+    claim that actually rules out recovery at any finite n.  (3) alone would
+    permit d_n to wander back to 0 finitely often before diverging; (2) is
+    what forbids that.
 
     So the three matches are the closing of a small-number window, not the
     opening of a structure. Had 9 been even and 11 been 9, the divergence
@@ -131,10 +153,14 @@ def run():
     assert C[3] == 9 and prime(5) + 1 == 12                  # the break
 
     # --- d_n: strictly negative from n=4, monotone, never returns ---
-    d = [C[n - 1] - (prime(n + 1) + 1) for n in range(1, 400)]
-    assert d[:3] == [0, 0, 0]
-    assert all(x < 0 for x in d[3:])
-    assert all(d[i + 1] <= d[i] for i in range(3, len(d) - 1))
+    d = [C[n - 1] - (prime(n + 1) + 1) for n in range(1, 2000)]
+    assert d[:3] == [0, 0, 0]                                # (1) exact
+    # (2) proved: the two gap bounds the monotonicity argument rests on
+    gaps_c = {C[i + 1] - C[i] for i in range(20000)}
+    assert gaps_c == {1, 2}                                  # composite gaps
+    assert all(prime(n + 2) - prime(n + 1) >= 2 for n in range(1, 2000))
+    assert all(d[i + 1] - d[i] <= 0 for i in range(len(d) - 1))
+    assert d[3] == -3 and all(x <= -3 for x in d[3:])         # forced by (2)
     big = {n: C[n - 1] - (prime(n + 1) + 1) for n in (4, 5, 10, 100, 1000)}
     assert big == {4: -3, 5: -4, 10: -14, 100: -415, 1000: -6731}
 
@@ -160,8 +186,14 @@ def run():
     print("              are consecutive odd primes at gap 2\n")
     print("  d_n = c_n - (p_(n+1)+1):  n=1..3 zero, then")
     print("   ", {k: v for k, v in big.items()})
-    print("  strictly negative from n=4, monotone, never returns to 0.")
-    print("  c_n ~ n against p_n ~ n log n, so d_n -> -infinity: forced to break.\n")
+    print("  (1) exact       d_1 = d_2 = d_3 = 0")
+    print("  (2) proved      non-increasing for all n >= 1, and <= -3 for n >= 4:")
+    print("                  composite gaps are 1 or 2 (two consecutive integers")
+    print("                  both prime only at 2,3); prime gaps are >= 2; so")
+    print("                  d_(n+1) - d_n <= 2 - 2 = 0.  Not a measurement.")
+    print("  (3) asymptotic  c_n ~ n vs p_n ~ n log n, so d_n -> -infinity")
+    print("  (4) reading     9 is the first symptom, not the cause")
+    print("  (3) alone would allow d_n back to 0 finitely often; (2) forbids it.\n")
     print("  parity: two ODD primes always sum to an even number > 2.")
     print("  3+2 = 5 is prime only because 2 is the even prime, so the")
     print("  supplied 'two primes give a composite' note is not a rule.\n")
