@@ -62,6 +62,29 @@ prime.
         dj = 0   0.05715   against 2/35 = 0.057143
         chi^2 = 7.64 on 11 df       (5% critical value 19.68)
 
+=== IT HOLDS FOR EVERY EVEN GAP, NOT JUST g = 2 ===
+
+    The derivation used nothing about g except g != 0 (mod 37), so the
+    baseline and the full 12-cell shape should hold for every gap.  Odd g
+    needs no test: p and p+g cannot both be prime above 2.  Measured to
+    N = 2 x 10^7 below; the runnable check uses N = 2 x 10^6 by default, so
+    its numbers are noisier -- one standard error on the dj=0 rate is about
+    3.3% there against 1.0% here, which is why that check is written in
+    standard errors rather than as a fixed percentage.  With the predicted
+    (2,3,3,...,3)/35:
+
+        g     pairs     dj=0 obs    ratio to 2/35    chi^2 (11 df)
+        2    107,402     0.05714       1.0000            7.72
+        4    107,077     0.05727       1.0022            3.23
+        6    213,810     0.05751       1.0065            9.79
+        8    107,196     0.05714       0.9999            5.19
+       10    142,943     0.05734       1.0035            4.88
+       12    214,286     0.05748       1.0060            6.83
+
+    Every chi-square is below the 5% critical value of 19.68, and no ratio
+    departs from 1 by more than 0.7%.  Against 1/18 each of these would
+    read as a 2.8 to 3.5% excess.
+
 === WHAT IS PROVED AND WHAT IS MEASURED, KEPT APART ===
 
     PROVED, no data:   the residue-class baseline 2/35, and the full
@@ -155,6 +178,26 @@ def run(N=2_000_000):
     print("\n  twin pairs: %d, classes 0 and 35 attained %d times"
           % (len(tw), sum(1 for p in tw if p % P in (0, 35))))
     print("  dj = 0 rate %.5f against 2/35 = %.5f" % (hit / len(tw), 2 / 35))
+
+    # --- every even gap, same baseline and same 12-cell shape ---
+    from collections import Counter
+    print("\n   g   pairs    dj=0 obs   ratio to 2/35    z    chi^2 (11 df)")
+    for g in (2, 4, 6, 8, 10, 12):
+        pp = [q for q in range(41, N - g) if s[q] and s[q + g]]
+        c = Counter((IDX[(q + g) % P] - IDX[q % P]) % 12 for q in pp)
+        n = len(pp)
+        exp = lambda j: n * ((2 if j == 0 else 3) / 35)
+        chi = sum((c[j] - exp(j)) ** 2 / exp(j) for j in range(12))
+        assert chi < 19.68, (g, chi)
+        # tolerance in standard errors, not a fixed percentage: se scales as
+        # 1/sqrt(n), and at the default N one se is already about 3.3%
+        se = ((2 / 35) * (33 / 35) / n) ** 0.5
+        z = (c[0] / n - 2 / 35) / se
+        assert abs(z) < 4, (g, c[0] / n, z)
+        print("  %3d  %7d   %.5f     %.4f   %+5.2f    %7.2f"
+              % (g, n, c[0] / n, (c[0] / n) / (2 / 35), z, chi))
+    print("  5% critical value 19.68; odd g needs no test (one member even)")
+
     print("\n  ALL ASSERTIONS PASS")
 
 
