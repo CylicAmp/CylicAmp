@@ -173,6 +173,41 @@ What a clean pass should still produce:
 - the **grade**, which is usually Level 1 for a correct instance of a
   classified family, and Level 1 is not a criticism
 
+## Names
+
+> **A name carries no mathematical content.**
+
+The rule blocks two opposite errors, which is why it is worth stating as a
+rule rather than applied case by case. You do not have to purge a label
+because its origin is non-mathematical; and you may not let a label stand
+as evidence for a structural claim. Ground a statement in `{0}`,
+`F_37*/<10>`, `j in Z/12` — never in "because this is SEAM" or "because
+this is CAS_EXT".
+
+When a name needs a decision, it falls into exactly one of four cases:
+
+**Imported branding** — arrived with supplied material, contributes nothing
+mathematical, belongs to that document's presentation. *Remove it.* Write
+what the object is instead. (Dragon-64 -> the pointed MTC on (Z/8Z)^2.)
+
+**Corpus label** — an established identifier hundreds of files depend on.
+*Retain, and anchor it* to its mathematical object where it first matters:
+the element set, the index, the defining property. Removing it from one
+place desynchronises that place from everything else. The table is in
+`gf37-audit`.
+
+**Literal interface token** — a CLI argument, a dict key, a filename the
+tools parse. *Leave it alone.* Editing it changes an interface rather than
+clarifying mathematics, and silently breaks the command.
+
+**Unresolved terminology split** — two branches disagree on what to call
+the same object. *Document the existing mapping; do not pick a side.* A
+migration across hundreds of files is a decision in its own right and must
+not ride in on an audit cleanup. Recording the mapping keeps it reversible
+until the decision is actually made. The open case: SOVEREIGN, HEARTBEAT,
+SCALAR_137 against `f26`, `order-3 cycle under f(n) = 26n mod 37`, `26`,
+across 304 files and flagged in PR #6.
+
 ## Maintaining this chain
 
 The four rules added on 2026-09-17 — the construction axis in `tier-test`,
