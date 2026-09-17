@@ -7,6 +7,16 @@ description: The standing order of work for every result in this project — Fin
 
 The order is the method. Interpretation is last.
 
+> **Auditing tests claims against specified failure conditions. It does not
+> assume that a failure exists. A successful audit may leave the claim
+> unchanged; a non-applicable test is an outcome, not an omission.**
+
+An audit is a decision procedure, not a defect-finding ritual. A correct
+document must have a path through this chain ending in *confirmed*, *not
+applicable*, or a bounded assessment. If the chain admits no such path, the
+chain itself generates pressure to manufacture a problem, and the output
+stops being information.
+
 ```
 Find
   -> Check prior art      prior-art
@@ -160,6 +170,25 @@ What a clean pass should still produce:
   multiplicities cross-checking the 44-dim ones
 - the **grade**, which is usually Level 1 for a correct instance of a
   classified family, and Level 1 is not a criticism
+
+## Maintaining this chain
+
+The four rules added on 2026-09-17 — the construction axis in `tier-test`,
+the standard-object mechanism in `forced-check`, the clean-pass section
+above, and "not applicable" in `miss-test` — were all found by auditing
+material that PASSED. None of them had surfaced in months of auditing
+things that failed.
+
+That is not a coincidence, and it is the maintenance instruction: **a
+failure-oriented corpus hides its own assumptions, and only a successful
+case exposes them.** Every rule here was written against a defect, so the
+gaps were all in the shape of "what does this say when there is nothing
+wrong" — invisible until something with nothing wrong came through.
+
+So: run the chain on material you expect to pass, deliberately and
+periodically. Not to find something, but to test whether the chain can
+say "nothing to find" in the vocabulary it has. If it cannot say that
+cleanly, fix the chain.
 
 ## The one Tier C fact, and its limit
 
