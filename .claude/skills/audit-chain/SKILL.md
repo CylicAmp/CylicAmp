@@ -136,6 +136,31 @@ When closing a record, list what was verified and what was never eligible,
 separately and by name. A shorter list that holds beats a longer one that
 does not.
 
+## When nothing fires
+
+Every step above is written as something that kills a claim, which builds
+in an expectation that each audit produces a correction. Sometimes none of
+them fires. Dragon-64 / D(Z/8Z) went through all eight steps and came out
+with nothing to fix: 13/13 reproduced, no prior art, the structural claims
+correctly identified by the document itself as construction rather than
+discovery, the analogies explicitly refused in its own text.
+
+**A clean pass is a result. Report it as one.** The failure mode here is
+manufacturing a criticism to justify the time spent — reaching for a
+quibble, or downgrading something accurate so the audit has an output.
+That is the same error as inflating a finding, pointed the other way, and
+the rule from the previous section applies: a dismissal is a claim.
+
+What a clean pass should still produce:
+
+- the **tier**, stated — a document can be entirely correct and still carry
+  no information about the parameter it is named for
+- what was checked that the document did **not** check, if anything. On
+  Dragon-64 that was Burnside pinning the trivial block, and the 64-dim
+  multiplicities cross-checking the 44-dim ones
+- the **grade**, which is usually Level 1 for a correct instance of a
+  classified family, and Level 1 is not a criticism
+
 ## The one Tier C fact, and its limit
 
 ```

@@ -32,6 +32,31 @@ Chi-squares a distribution over the 12 orbits. `chi^2/df` near or below 1
 means no orbit is distinguished and naming one is post-hoc selection.
 This is what settled the CAS_EXT question in T302 Part 4.
 
+## When there is no null to beat
+
+A third outcome, distinct from pass and fail: **the screen does not apply.**
+
+If the material reports a computation rather than an effect — this group
+has this order, this algebra has this decomposition — there is nothing
+being claimed against chance, so there is no reference distribution and no
+miss condition to declare. Dragon-64 is the case: every number in it is a
+deterministic evaluation, and asking what would have been surprising is
+malformed.
+
+Write that as "no baseline applicable: the claim is a computation, not an
+effect." Do NOT write "baseline not established", which reads as an
+omission, and do not invent a null so the screen has something to report.
+
+The distinction is the same three-status rule as everywhere else:
+
+```
+not applicable  !=  not established  !=  failed
+```
+
+The screen is for claims of the form "X lands somewhere meaningful". If
+nothing is being claimed to land anywhere, the screen has no purchase and
+says so.
+
 ## When a test fails
 
 Record it. T290 and T302 keep their falsified hypotheses in the theorem

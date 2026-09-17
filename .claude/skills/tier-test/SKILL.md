@@ -1,6 +1,6 @@
 ---
 name: tier-test
-description: Decide whether a GF(37) result is actually about 37 by re-running the construction elsewhere — at other primes, or in other bases. Use on every result before calling it a finding, and always before presenting one as evidence for 37. Complements forced-check, which classifies by mechanism; this classifies by experiment. Four results in one session were presented as discoveries and turned out to hold for every prime congruent to 1 mod 3, carrying no information about 37 at all.
+description: Decide whether a result is actually about the parameter it is named for by re-running the construction elsewhere. Identify the axis the construction is built on first — primes and bases are this corpus's usual two, but a supplied construction carries its own (for a discrete torus (Z/nZ)^2 it is n). Use on every result before calling it a finding, and always before presenting one as evidence for 37. Complements forced-check, which classifies by mechanism; this classifies by experiment. Four results in one session were presented as discoveries and turned out to hold for every prime congruent to 1 mod 3, carrying no information about 37 at all.
 ---
 
 # tier-test
@@ -17,6 +17,30 @@ python3 .claude/skills/tier-test/tier.py prime         # the whole table
 ## The test
 
 **Re-run the construction somewhere else.**
+
+### First identify the axis
+
+Primes and bases are this corpus's usual axes because most results here are
+built on `p = 37` or on base-10 numerals. They are not the method. The
+method is: **find the parameter the construction is actually built on, and
+vary that one.**
+
+A supplied construction often carries its own axis, and it is usually named
+in the title. Worked case, Dragon-64 / D(Z/8Z): the axis is `n`, the
+modulus of the discrete torus `(Z/nZ)^2`. Re-running the whole thing for
+n = 3..12 showed every structural claim — `S'S = I`, `S^2 = C`,
+`(ST)^3 = C`, `S_00 = 1/n` — holding in all ten, so none of them says
+anything about 8. The specific integers (|SL2| = 384, dim A' = 44, the
+twist histogram 20/12, the block type) are that general construction
+evaluated at n = 8.
+
+Even the parts that look like they might be special usually resolve into a
+rule once the axis is swept: the count of modular twist refinements is 1,
+3 or 4 according to whether n is odd, 2 mod 4, or 0 mod 4 — the 2-adic
+valuation, not the 8.
+
+If you cannot name the axis, you cannot tier the result. Say "not assessed"
+rather than assigning a tier by inspection.
 
 - Survives every prime p = 1 mod 3 → **Tier A**. It says nothing about 37.
 - Survives only {7, 37, 73} → **Tier B**.
