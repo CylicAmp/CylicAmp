@@ -31,39 +31,72 @@ The second terms 1,2,3,4 are the index in both. Same map, two inputs.
     apart matters: a forced equivalence sitting on a contingent premise is
     not a forced result.
 
-=== THE THEOREM ===
+=== THEOREM ===
 
-    Let c_n be the n-th composite, p_n the n-th prime, and
+    Let p_n be the n-th prime, c_n the n-th composite, and
 
         d_n = c_n - (p_{n+1} + 1).
 
-    (a)  d_1 = d_2 = d_3 = 0   and   d_4 = -3.
-    (b)  d_{n+1} <= d_n  for every n >= 1.
-    (c)  hence d_n <= -3 for every n >= 4, so {1,2,3} is the COMPLETE zero
-         set: no later coincidence is possible.
-    (d)  independently, d_n ~ -n log n -> -infinity.
+    Then the zero set of d is exactly
 
-    Proof of (b), which is the whole result.  The composite gap c_{n+1}-c_n
-    is at most 2: a gap of 3 or more needs two consecutive integers both
-    prime, and that happens only at (2,3).  Every prime gap above p = 3 is
-    at least 2.  So
+        { n : d_n = 0 }  =  {1, 2, 3}.
 
-        d_{n+1} - d_n = (c_{n+1}-c_n) - (p_{n+2}-p_{n+1}) <= 2 - 2 = 0.
+    In particular the three-term alignment 4 = 3+1, 6 = 5+1, 8 = 7+1 is a
+    FINITE coincidence, not the start of a recurring correspondence.
 
-    (c) is (b) with the single value d_4 = -3.  (d) is the density mismatch
-    and is a separate argument that does not give (b) or (c).
+=== PROOF ===
 
-    THE NUMERICAL TABLE BELOW IS VERIFICATION, NOT EVIDENCE.  (b) and (c)
-    are proved; computing d_n to n = 2000 checks the implementation, not
-    the claim.
+    Directly, d_1 = d_2 = d_3 = 0, and d_4 = 9 - (11 + 1) = -3.
+    It remains to show d_n never returns to zero.
 
-    AND THAT IS WHAT LICENSES THE WORD "COINCIDENCE" HERE.  Calling a
-    pattern a coincidence is as much a claim as calling it a structure, and
-    needs as much work.  Without (b) -- with only the asymptotics of (d) --
-    "just a three-term coincidence" would be numerology with the sign
-    reversed, since (d) permits d_n to return to 0 finitely often before
-    diverging.  (b) is what makes the three-term reading a theorem rather
-    than a dismissal.
+    For every n >= 1,
+
+        d_{n+1} - d_n = (c_{n+1} - c_n) - (p_{n+2} - p_{n+1}).
+
+    COMPOSITE GAPS ARE AT MOST 2.  A gap of 3 or more would put two
+    consecutive integers c_n+1, c_n+2 both outside the composites, hence
+    both prime.  Of two consecutive integers one is even, and the only even
+    prime is 2, while c_n + 1 >= 5.  So no such gap exists and consecutive
+    composites sit at distance 1 or 2.  (Checked to 200000: no composite
+    c >= 4 has c+1 and c+2 both prime.  The check is a check; the argument
+    is the proof.)
+
+    PRIME GAPS ARE AT LEAST 2.  For n >= 1 we have p_{n+1} >= p_2 = 3, so
+    p_{n+1} is odd and p_{n+2} - p_{n+1} >= 2.  The single prime gap of 1,
+    namely p_2 - p_1 = 3 - 2, occurs at n = 0 and is outside the range.
+
+    Hence d_{n+1} - d_n <= 2 - 2 = 0: d is non-increasing on n >= 1.  With
+    d_4 = -3 this gives d_n <= -3 for every n >= 4, so no n >= 4 has
+    d_n = 0, and the zero set is exactly {1, 2, 3}.   []
+
+    THIS IS THE LOAD-BEARING RESULT.  It is what licenses the word
+    "coincidence".  Calling a pattern a coincidence is as much a claim as
+    calling it a structure, and without a complete zero set the label would
+    be an interpretation imposed after the fact rather than a theorem.
+
+=== ASYMPTOTIC SEPARATION (INDEPENDENT, AND WEAKER WHERE IT MATTERS) ===
+
+    The finite argument already excludes every later equality.  Separately,
+    composites have natural density 1 and primes density 1/log n, so
+
+        c_n ~ n,    p_{n+1} ~ n log n,    d_n ~ n - n log n -> -infinity.
+
+    The sequences do not merely fail to meet again; the separation grows
+    without bound, on the order of n log n.
+
+    NOTE WHAT THIS DOES NOT DO.  A sequence tending to -infinity may still
+    return to zero finitely often first.  So the asymptotics alone would
+    NOT give the zero set, and "just a three-term coincidence" argued from
+    density alone would be numerology with the sign reversed.  The gap
+    inequality is what forbids recovery at every finite n.
+
+=== THE FIRST FAILURE IS LOCAL; THE DIVERGENCE IS GLOBAL ===
+
+    c_4 = 9 != p_5 + 1 = 12 fails twice over -- 9 is the first ODD
+    composite, and the gap 7 -> 11 is 4.  Both are true and both are local.
+    They say where the alignment first becomes visibly broken.  They are
+    not the mechanism: that is the gap inequality for recovery, and the
+    density mismatch for scale.
 
 === IT WAS GOING TO BREAK, AND THE LOCAL REASONS ARE SYMPTOMS ===
 
@@ -192,6 +225,11 @@ def run():
     # (2) proved: the two gap bounds the monotonicity argument rests on
     gaps_c = {C[i + 1] - C[i] for i in range(20000)}
     assert gaps_c == {1, 2}                                  # composite gaps
+    # the ARGUMENT behind that bound, not just the observation:
+    assert not any(not isprime(c) and isprime(c + 1) and isprime(c + 2)
+                   for c in range(4, 200000))
+    # THE THEOREM: the zero set is exactly {1,2,3}
+    assert [n for n in range(1, 2000) if d[n - 1] == 0] == [1, 2, 3]
     assert all(prime(n + 2) - prime(n + 1) >= 2 for n in range(1, 2000))
     assert all(d[i + 1] - d[i] <= 0 for i in range(len(d) - 1))
     assert d[3] == -3 and all(x <= -3 for x in d[3:])         # forced by (2)
