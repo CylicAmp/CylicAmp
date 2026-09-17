@@ -69,29 +69,60 @@ The second terms 1,2,3,4 are the index in both. Same map, two inputs.
     d_4 = -3 this gives d_n <= -3 for every n >= 4, so no n >= 4 has
     d_n = 0, and the zero set is exactly {1, 2, 3}.   []
 
-    WHAT EACH HALF DOES.  The proof is MONOTONICITY plus ONE STRICTLY
-    NEGATIVE WITNESS, and neither half closes it alone:
+    PROOF DECOMPOSITION -- the two statements have distinct roles, and
+    both are required.
 
-        monotonicity alone  permits 0, 0, 0, 0, ... forever -- non-increasing
-                            does not mean decreasing
-        d_4 = -3 alone      says nothing whatever about n >= 5
+      (1) MONOTONICITY
 
-    Monotonicity is global and proved from the gap bounds; the witness is a
-    single local value.  n = 4 is not distinguished by being 4, or by -3
-    being -3.  Any w with d_w < 0 proves the same theorem for n >= w:
-    w = 5, 10, 100 all work, verified.  What n = 4 supplies is that it is
-    the EARLIEST such witness, and the only zeros below it are 1, 2, 3 --
-    which is exactly what pins the zero set to {1,2,3} rather than to some
-    larger finite set.  A later witness proves the same statement and
-    leaves a finite check behind it.
+          d_(n+1) - d_n
+            = (c_(n+1) - c_n) - (p_(n+2) - p_(n+1))
+            <= 2 - 2
+            = 0.
 
-    So the boundary is not "9 is odd".  It is the first index at which d
-    goes strictly negative, after which monotonicity propagates it forever:
+          Therefore
 
-        d_1 = 0
-        d_2 = 0
-        d_3 = 0
-        d_4 = -3   <-- witness enters here; d_n <= -3 for all n >= 4
+              d_(n+1) <= d_n
+
+          for every n >= 1.
+
+          This statement alone does not exclude zeros after n = 3:
+          a non-increasing sequence may remain at zero indefinitely.
+
+      (2) STRICT NEGATIVITY AT THE FIRST FAILURE
+
+          d_4 = c_4 - (p_5 + 1)
+              = 9 - (11 + 1)
+              = -3 < 0.
+
+          This statement alone does not control later terms.
+
+      (3) COMBINATION
+
+          From (1), for every n >= 4,
+
+              d_n <= d_4 = -3 < 0.
+
+          Therefore
+
+              d_n != 0  for every n >= 4.
+
+          Together with d_1 = d_2 = d_3 = 0,
+
+              {n : d_n = 0} = {1, 2, 3}.
+
+    This is the complete finite proof.  The zero set is established
+    directly: the first three values are exactly zero, and monotonicity
+    together with d_4 < 0 places every subsequent value strictly below
+    zero.
+
+    The value n = 4 is where the exact sequences first differ:
+
+              c_4 = 9,
+              p_5 + 1 = 12.
+
+    The proof does not require any interpretation of this value beyond the
+    strict inequality d_4 < 0.  Its role is precisely to establish that,
+    once monotonicity is known, every subsequent d_n remains negative.
 
     THIS IS THE LOAD-BEARING RESULT.  It is what licenses the word
     "coincidence".  Calling a pattern a coincidence is as much a claim as
@@ -254,12 +285,8 @@ def run():
                    for c in range(4, 200000))
     # THE THEOREM: the zero set is exactly {1,2,3}
     assert [n for n in range(1, 2000) if d[n - 1] == 0] == [1, 2, 3]
-    # the witness is not special: any w with d_w < 0 proves it for n >= w
-    for w in (4, 5, 10, 100):
-        assert d[w - 1] < 0
-        assert all(x <= d[w - 1] for x in d[w - 1:])
-        assert [n for n in range(1, w) if d[n - 1] == 0] == [1, 2, 3]
-    assert next(n for n in range(1, 2000) if d[n - 1] < 0) == 4   # earliest
+    assert d[3] == 9 - (11 + 1) == -3 < 0                     # (2)
+    assert all(x <= d[3] for x in d[3:])                      # (3) from (1),(2)
     assert all(prime(n + 2) - prime(n + 1) >= 2 for n in range(1, 2000))
     assert all(d[i + 1] - d[i] <= 0 for i in range(len(d) - 1))
     assert d[3] == -3 and all(x <= -3 for x in d[3:])         # forced by (2)
