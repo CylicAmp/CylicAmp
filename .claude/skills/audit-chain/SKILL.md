@@ -216,11 +216,12 @@ above, and "not applicable" in `miss-test` — were all found by auditing
 material that PASSED. None of them had surfaced in months of auditing
 things that failed.
 
-That is not a coincidence, and it is the maintenance instruction: **a
-failure-oriented corpus hides its own assumptions, and only a successful
-case exposes them.** Every rule here was written against a defect, so the
-gaps were all in the shape of "what does this say when there is nothing
-wrong" — invisible until something with nothing wrong came through.
+The mechanism, checkable against this file: every rule here was written
+against a defect. So every gap was necessarily shaped like *what does this
+say when there is nothing wrong* — and a gap of that shape cannot be found
+by material that is wrong. It stays invisible until something correct comes
+through. Hence the maintenance instruction: **a failure-oriented corpus
+hides its own assumptions, and only a successful case exposes them.**
 
 So: run the chain on material you expect to pass, deliberately and
 periodically. Not to find something, but to test whether the chain can
