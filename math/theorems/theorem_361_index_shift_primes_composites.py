@@ -69,6 +69,30 @@ The second terms 1,2,3,4 are the index in both. Same map, two inputs.
     d_4 = -3 this gives d_n <= -3 for every n >= 4, so no n >= 4 has
     d_n = 0, and the zero set is exactly {1, 2, 3}.   []
 
+    WHAT EACH HALF DOES.  The proof is MONOTONICITY plus ONE STRICTLY
+    NEGATIVE WITNESS, and neither half closes it alone:
+
+        monotonicity alone  permits 0, 0, 0, 0, ... forever -- non-increasing
+                            does not mean decreasing
+        d_4 = -3 alone      says nothing whatever about n >= 5
+
+    Monotonicity is global and proved from the gap bounds; the witness is a
+    single local value.  n = 4 is not distinguished by being 4, or by -3
+    being -3.  Any w with d_w < 0 proves the same theorem for n >= w:
+    w = 5, 10, 100 all work, verified.  What n = 4 supplies is that it is
+    the EARLIEST such witness, and the only zeros below it are 1, 2, 3 --
+    which is exactly what pins the zero set to {1,2,3} rather than to some
+    larger finite set.  A later witness proves the same statement and
+    leaves a finite check behind it.
+
+    So the boundary is not "9 is odd".  It is the first index at which d
+    goes strictly negative, after which monotonicity propagates it forever:
+
+        d_1 = 0
+        d_2 = 0
+        d_3 = 0
+        d_4 = -3   <-- witness enters here; d_n <= -3 for all n >= 4
+
     THIS IS THE LOAD-BEARING RESULT.  It is what licenses the word
     "coincidence".  Calling a pattern a coincidence is as much a claim as
     calling it a structure, and without a complete zero set the label would
@@ -230,6 +254,12 @@ def run():
                    for c in range(4, 200000))
     # THE THEOREM: the zero set is exactly {1,2,3}
     assert [n for n in range(1, 2000) if d[n - 1] == 0] == [1, 2, 3]
+    # the witness is not special: any w with d_w < 0 proves it for n >= w
+    for w in (4, 5, 10, 100):
+        assert d[w - 1] < 0
+        assert all(x <= d[w - 1] for x in d[w - 1:])
+        assert [n for n in range(1, w) if d[n - 1] == 0] == [1, 2, 3]
+    assert next(n for n in range(1, 2000) if d[n - 1] < 0) == 4   # earliest
     assert all(prime(n + 2) - prime(n + 1) >= 2 for n in range(1, 2000))
     assert all(d[i + 1] - d[i] <= 0 for i in range(len(d) - 1))
     assert d[3] == -3 and all(x <= -3 for x in d[3:])         # forced by (2)
