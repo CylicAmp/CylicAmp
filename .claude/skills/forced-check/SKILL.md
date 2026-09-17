@@ -1,6 +1,6 @@
 ---
 name: forced-check
-description: Decide whether a GF(37) claim is forced or contingent before recording it. Use when a pattern looks striking — factorizations agreeing on coset position or digital root, an extreme block mapping to a named orbit, a property that seems special to 37. Also use for any digit observation — mirror sums, repdigit digit sums, palindrome swaps, comma groups, checkerboard grids, digit-vector spectra, splitting a decimal expansion — since those are almost always fixed by the numeral rather than the number. Detects the five forcing mechanisms — complete partition, homomorphism, unbroken tie, definition, and base-10 rendering — and classifies any property into Tier A (true for every p = 1 mod 3), Tier B (the set {7,37,73}), or Tier C (unique to 37).
+description: Decide whether a GF(37) claim is forced or contingent before recording it. Use when a pattern looks striking — factorizations agreeing on coset position or digital root, an extreme block mapping to a named orbit, a property that seems special to 37. Also use for any digit observation — mirror sums, repdigit digit sums, palindrome swaps, comma groups, checkerboard grids, digit-vector spectra, splitting a decimal expansion — since those are almost always fixed by the numeral rather than the number. Detects the six forcing mechanisms — complete partition, homomorphism, unbroken tie, definition, base-10 rendering, and standard object (a named construction checked against a property it is defined to have, where the run tests the code rather than the mathematics) — and classifies any property into Tier A (true for every p = 1 mod 3), Tier B (the set {7,37,73}), or Tier C (unique to 37).
 ---
 
 # forced-check
@@ -37,6 +37,24 @@ shape carries nothing about the specific value. This is the mechanism behind
 every digit-game result: mirror sums, repdigit digit sums, comma groups,
 checkerboard determinants. Run `forced.py digits <n>` before recording any
 digit observation.
+
+**standard object** — the thing being tested is a named construction, and
+the property being checked is part of its definition or an immediate
+theorem about it. Then a numerical check confirms the IMPLEMENTATION, not
+the mathematics, and reporting it as a verified result overstates what
+happened.
+
+Worked case: Dragon-64 checks `S'S = I`, `S^4 = I`, `S^2 = C` and
+`(ST)^3 = C` for its (S,T). But S is the symplectic Fourier transform on
+`(Z/nZ)^2` and T the quadratic-form diagonal — that pair satisfying those
+relations IS the Weil representation, a theorem for every n, confirmed here
+at n = 3..12. The run is a correct test of the code.
+
+Before checking whether a named object has a property, look up what it is
+defined to satisfy. Ask: could this check have come back False without the
+code being wrong? If no, it is an implementation test, and should be
+labelled one. This mechanism fires on anything imported with a name —
+Weil, Heisenberg, Hilbert class polynomial, Kaprekar, Collatz, Rule 30.
 
 ## Tier classification (T300)
 
