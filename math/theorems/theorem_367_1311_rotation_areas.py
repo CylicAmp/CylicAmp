@@ -1,7 +1,15 @@
 # CLASS: COMPUTATION
 """
-Theorem 212: 1311 Rotation Cycle — 3-Area Structure in GF(37)
+Theorem 367: 1311 Rotation Cycle — 3-Area Structure in GF(37)
 Author: Michael Warren Song (CyclicAmp)
+
+RENUMBERED 2026-09-18, from T212.  Two files carried the number 212 --
+this one and theorem_212_twin_prime_rh_gf37.py -- written eleven days apart on
+unrelated subjects, so a citation of "T212" resolved to neither.
+The number stayed with the file existing cross-references point at;
+this one moved to the first free number.  Detector:
+tools/number_collisions.py.
+
 
 The digit sequence {1,1,1,3} has 4 rotations. Arranged as a two-column board
 (each row pairs a rotation with its mirror), the board divides into 3 areas
@@ -68,11 +76,11 @@ RUN-LENGTH INVARIANT: for every rotation, (ones_before × 3) + (ones_after × 3)
         All 6 permutations share DR=2.
         Primality partitions along GF(37) coset boundaries.
 
-  T212: rotations of {1,1,1,3} all share DR=6.
+  T367: rotations of {1,1,1,3} all share DR=6.
         3 of 4 residues land in ST={3,12,21,30} (sovereign targets, DR=3).
         Area structure defined by spread of 3's position.
 
-  Both theorems: a single special digit (3 in T212; each of 1,3,7 in T211)
+  Both theorems: a single special digit (3 in T367; each of 1,3,7 in T211)
   determines GF(37) residue class, and every rotation/permutation
   preserves the digital root.
 

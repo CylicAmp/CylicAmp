@@ -1,7 +1,15 @@
 # CLASS: THEOREM
 """
-Theorem 213: Discrete Matrix Operator and Riemann Zero Sovereign Digit Structure
+Theorem 368: Discrete Matrix Operator and Riemann Zero Sovereign Digit Structure
 Author: Michael Warren Song (CyclicAmp)
+
+RENUMBERED 2026-09-18, from T213.  Two files carried the number 213 --
+this one and theorem_213_middle_digit_operation.py -- written eleven days apart on
+unrelated subjects, so a citation of "T213" resolved to neither.
+The number stayed with the file existing cross-references point at;
+this one moved to the first free number.  Detector:
+tools/number_collisions.py.
+
 
 === PART I: MATRIX OPERATOR VERIFICATION ===
 
