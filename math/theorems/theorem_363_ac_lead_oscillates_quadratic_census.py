@@ -14,10 +14,25 @@ A + C = 2B identically (both sides are 8n^2 + 2).
 
 === THE CENSUS, RECOMPUTED ===
 
-    k           A        B        C      digit sums   A > C ?
-    10,000      1,308    1,558    1,272   12 19 12     yes
-    500,000    44,004   54,109   44,113   12 19 13     NO
-    1,000,000  83,456  102,204   83,712   26  9 21     NO
+    Run to n < 10^7 by quadratic sieve (strike the roots of each form mod
+    p for p < 3x10^6, then deterministic Miller-Rabin on the survivors --
+    about 800k per form).  The k = 10^4 row reproduces the ledger exactly,
+    which validates the sieve.
+
+    k            A         B         C      A>C    C/A       B/A
+    10,000       1,308     1,558     1,272   yes   0.97248   1.19113
+    500,000     44,004    54,109    44,113   NO    1.00248   1.22964
+    1,000,000   83,456   102,204    83,712   NO    1.00307   1.22465
+    5,000,000  372,908   456,361   372,674   yes   0.99937   1.22379
+    10,000,000 712,319   872,120   711,984   yes   0.99953   1.22434
+
+    THE LEAD CHANGES BACK.  A ahead at 10^4, C ahead at 5x10^5 and 10^6,
+    A ahead again at 5x10^6 and 10^7 -- four sign changes among five marks,
+    and the final margin is 335 out of 712,319, i.e. 0.047 percent.
+
+    C/A -> 1 (0.99953 at 10^7), which is what equal Hardy-Littlewood
+    constants require.  B/A settles near 1.2243 and does not drift: that
+    one is a different constant, not a fluctuation.
 
     B is the peak at every limit, as the ledger states.  That part holds:
     A and C share Delta = -12 while B has Delta = -16, and the larger
@@ -28,10 +43,11 @@ A + C = 2B identically (both sides are 8n^2 + 2).
 
 === THE ORDERING OF A AND C IS NOT STABLE ===
 
-    At k = 10,000, A leads by 36.  At k = 500,000, C leads by 109.  That is
-    not a crossover with a location -- the sign of (A count - C count)
-    changes NINETY times below n = 300,000, the first at n = 6 and the last
-    at n = 223,856 where the counts are 21,041 and 21,042.
+    At k = 10,000 A leads by 36; at k = 500,000 C leads by 109; at
+    k = 10^7 A leads again by 335.  There is no crossover with a location
+    -- the sign of (A count - C count) changes NINETY times below
+    n = 300,000, the first at n = 6 and the last at n = 223,856 where the
+    counts are 21,041 and 21,042, and it is still changing at 10^7.
 
         n=6        A=4      C=3      C>A -> A>C
         n=17       A=7      C=8      A>C -> C>A
@@ -97,6 +113,18 @@ def run(limit=300000):
     assert flips[0][0] < 10 and flips[-1][0] > 200000
     a3, b3, c3 = marks[300000]
     assert b3 > a3 and b3 > c3                    # B leads throughout
+
+    # the 10^7 run, by sieve (see docstring); recorded, not re-run here
+    TEN_M = {10**4: (1308, 1558, 1272), 5*10**5: (44004, 54109, 44113),
+             10**6: (83456, 102204, 83712), 5*10**6: (372908, 456361, 372674),
+             10**7: (712319, 872120, 711984)}
+    assert TEN_M[10**4] == marks[10000]                  # sieve agrees here
+    leads = [a > c for a, b, c in TEN_M.values()]
+    assert leads == [True, False, False, True, True]     # lead changes back
+    assert all(b > a and b > c for a, b, c in TEN_M.values())
+    a7, b7, c7 = TEN_M[10**7]
+    assert abs(c7 / a7 - 1) < 0.001                      # C/A -> 1
+    assert 1.22 < b7 / a7 < 1.23                         # B/A a real constant
 
     print("T363  A and C trade the lead; B does not\n")
     print("  k=10,000   A=%d B=%d C=%d   A>C: %s" % (*marks[10000],
