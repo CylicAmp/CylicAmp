@@ -1,6 +1,6 @@
 # CLASS: COMPUTATION
 """
-T258: n=258 — NEG_H orbit, 2*3*43 factorization
+T376: n=258 — NEG_H orbit, 2*3*43 factorization
 GF(37) — 137-map f(x) = 26x mod 37
 
 258 = 2 * 3 * 43
@@ -144,7 +144,7 @@ print(f"  NEG_H × IC = {orbit_of(11*10%37)} ✓")
 
 # ── Part 5: Halving — bridge to T257 ─────────────────────────────────────────
 # (258-1)/2 = 128 = 2^7; same value as (257-1)/2
-# Both T257 and T258 produce 128 under halving
+# Both T257 and T376 produce 128 under halving
 
 half = (n - 1) // 2
 assert half == 128 == 2**7
@@ -152,7 +152,7 @@ assert half % 37 == 17
 assert orbit_of(half) == "NQR17"
 
 print(f"\nPart 5 PASS: (258-1)/2 = 128 = 2^7; 128 mod 37 = 17 ∈ NQR17")
-print(f"  (257-1)/2 = 128 (T257) and (258-1)/2 = 128 (T258): same halving value")
+print(f"  (257-1)/2 = 128 (T257) and (258-1)/2 = 128 (T376): same halving value")
 print(f"  Consecutive integers 257 and 258 share the same integer halving result")
 
 # ── Part 6: DR and Rule 30 ────────────────────────────────────────────────────

@@ -1,7 +1,14 @@
 # CLASS: THEOREM
 """
-Theorem 237: Rule 30 Normality — Block Frequency Convergence and GF(37) Extremes
+Theorem 374: Rule 30 Normality — Block Frequency Convergence and GF(37) Extremes
 Author: Michael Warren Song (CyclicAmp)
+
+RENUMBERED 2026-09-18, from T237.  universal_scope_81_149.py declared THEOREM 237 ten
+days earlier, so the number was already in use when this file took
+it.  That file keeps it and is renamed for it; this one moved to the
+first free number.  No external citation of T237 existed, so nothing
+was redirected.  Detector: tools/number_collisions.py.
+
 
 Normality (stronger than Problem 3): for every k, each k-bit block appears
 in the center column with frequency approaching exactly 1/2^k.
@@ -287,7 +294,7 @@ def run_assertions():
 
     print("All assertions passed.")
     print()
-    print("THEOREM 237: Rule 30 Normality — Block Frequency Convergence and GF(37) Extremes")
+    print("THEOREM 374: Rule 30 Normality — Block Frequency Convergence and GF(37) Extremes")
     print()
     print(f"Density at N={N}: {density:.6f}")
     print(f"Mean run of 1s: {mean_1:.4f}  (expected 2.0)")

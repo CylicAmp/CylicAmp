@@ -1,7 +1,14 @@
 # CLASS: THEOREM
 """
-Theorem 216: Chain-of-Thought Serialization and GF(37) Orbit Structure
+Theorem 372: Chain-of-Thought Serialization and GF(37) Orbit Structure
 Author: Michael Warren Song (CyclicAmp)
+
+RENUMBERED 2026-09-18, from T216.  buckingham_pi_gf37.py declared THEOREM 216 ten
+days earlier, so the number was already in use when this file took
+it.  That file keeps it and is renamed for it; this one moved to the
+first free number.  No external citation of T216 existed, so nothing
+was redirected.  Detector: tools/number_collisions.py.
+
 
 === THE SERIALIZATION CONSTRAINT ===
 
