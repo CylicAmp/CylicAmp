@@ -1,7 +1,15 @@
 # CLASS: THEOREM
 """
-Theorem 215: Gauge Theory, Holonomy, and GF(37) Discrete Bundle Structure
+Theorem 370: Gauge Theory, Holonomy, and GF(37) Discrete Bundle Structure
 Author: Michael Warren Song (CyclicAmp)
+
+RENUMBERED 2026-09-18, from T215.  Two files carried the number 215 --
+this one and theorem_215_246_equals_2x123_gf37.py -- written eleven days apart on
+unrelated subjects, so a citation of "T215" resolved to neither.
+The number stayed with the file existing cross-references point at;
+this one moved to the first free number.  Detector:
+tools/number_collisions.py.
+
 
 === GAUGE COVARIANCE: CONTINUOUS SETTING ===
 

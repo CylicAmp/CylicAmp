@@ -1,7 +1,15 @@
 # CLASS: COMPUTATION
 """
-Theorem 214: Sovereign Collapse of 2,468,145 in GF(37)
+Theorem 369: Sovereign Collapse of 2,468,145 in GF(37)
 Author: Michael Warren Song (CyclicAmp)
+
+RENUMBERED 2026-09-18, from T214.  Two files carried the number 214 --
+this one and theorem_214_dr_symmetric_pair_duality.py -- written eleven days apart on
+unrelated subjects, so a citation of "T214" resolved to neither.
+The number stayed with the file existing cross-references point at;
+this one moved to the first free number.  Detector:
+tools/number_collisions.py.
+
 
 THE NUMBER: 2,468,145
 
