@@ -51,7 +51,7 @@ For a construction using base-10 digits, the second axis is the base: re-run
 it in base b and see where it breaks. **The break point is the stated
 expiry**, and it belongs in the result.
 
-## The one Tier C fact in this corpus
+## The Tier C facts in this corpus
 
 ```
 ord_p(10) = 3  requires  p | 10^3 - 1 = 999 = 3^3 x 37
@@ -62,6 +62,18 @@ prime divisors of 999 are 3 and 37; at p = 3 the base collapses to 1
 Everything else structural — the twelve orbits, the 37/74 split, negation
 duality, the CRT independence, the Koopman spectrum — holds for every
 p = 1 mod 3. **No result is evidence FOR 37 unless it uses ord_37(10) = 3.**
+
+### A SECOND one, unrelated to the first (T365)
+
+37 is the FIRST IRREGULAR PRIME: it divides the numerator of B_32, and
+equivalently divides the class number of Q(zeta_37). No prime below 37
+does. That is the first exponent Kummer's proof of FLT does not reach.
+
+**The two do not touch.** `ord_37(10) = 3` is about the multiplicative
+order of a particular base; irregularity is about Bernoulli numerators and
+cyclotomic class numbers. Neither implies the other and neither
+strengthens the other. Cite whichever one a result actually uses, and
+never both as if they were one distinction.
 
 ## The reverse error
 
