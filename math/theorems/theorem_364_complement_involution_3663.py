@@ -1,65 +1,55 @@
 # CLASS: THEOREM
 """
-Theorem 364: the 9s-complement on Z_3663 is x -> 2673 - x, and its CRT form
-(0,0,9) - (a,b,c) is GLOBAL, not restricted to {3663, 6336}
+Theorem 364: the 9s-complement on Z_3663 is a GLOBAL affine involution;
+F_37 is its invariant fibre; {3663, 6336} is one of eighteen two-cycles
 Author: Michael Warren Song (CyclicAmp)
+
+=== STATEMENT ===
+
+    R = Z_3663 = Z_9 x Z_11 x Z_37, CRT coordinates (a, b, c).
+    C(X) = 9999 - X, the four-digit 9s-complement.
+
+    (1) GLOBAL FORM.  9999 = 2(3663) + 2673, so on R
+
+            C(x) = 2673 - x   (mod 3663),
+
+        and 2673 -> (0,0,9), giving for EVERY (a,b,c)
+
+            C(a, b, c) = (-a, -b, 9 - c),        C^2 = id_R.
+
+    (2) INVARIANT FIBRE.  F_37 = {(0,0,c) : c in Z_37} satisfies
+        C(F_37) = F_37, since C(0,0,c) = (0,0,9-c).
+        Off the fibre a -> -a and b -> -b, so nonzero 9- and 11-
+        coordinates are INVERTED, not preserved.
+
+    (3) ORBIT DECOMPOSITION ON THE FIBRE.  The induced map is the
+        one-dimensional affine involution c -> 9 - c (mod 37).  Its fixed
+        points solve 2c = 9; with 2^-1 = 19 (mod 37) the unique one is
+        c = 23.  An involution on 37 points with one fixed point splits the
+        other 36 into 18 disjoint two-cycles:
+
+            F_37 = {(0,0,23)} u O_1 u ... u O_18,   |O_k| = 2.
+
+    (4) THE SUPPLIED PAIR.  3663 <-> 6336 is the orbit (0,0,0) <-> (0,0,9),
+        since 6336 = 2673 (mod 3663) and 2673 -> (0,0,9).  It is ONE of the
+        eighteen two-cycles, not the mechanism that creates the fibre.
+
+=== WHAT THIS CORRECTS IN THE FIRST VERSION SUPPLIED ===
+
+    That version stated the CRT identity as a property of the restricted
+    domain D = {3663, 6336}, with a scope caveat against generalising it.
+    The caveat guards the wrong statement.  The identity generalises -- it
+    is the whole map in coordinates, verified on all 3663 residues.  What
+    does NOT generalise is the fixing of the 9- and 11-coordinates, which
+    holds on D only because D lies on the (0,0) fibre where 0 is already
+    the unique fixed point of negation.
+
+    Confinement to the 37-axis is a property of the fibre, not of the map.
 
 Supplied as a restricted-domain invariance theorem.  Every step verifies.
 The scope caveat attached to it is correct to be cautious but guards the
 wrong statement: the formula generalises, and what does not is the fixing
 of the 9- and 11-coordinates.
-
-=== WHAT WAS SUPPLIED, AND CHECKS ===
-
-    N = 3663 = 9 x 11 x 37,  C(X) = 9999 - X,  D = {3663, 6336}.
-
-    C(3663) = 6336 and C(6336) = 3663, so C restricted to D is an
-    involution and D is a closed 2-orbit.
-
-    Mod 3663: 3663 == 0 and 6336 == 2673.  CRT coordinates (mod 9, 11, 37):
-
-        3663 -> (0, 0, 0)
-        6336 -> (0, 0, 9)          2673 = 72 x 37 + 9
-
-    so the orbit is (0,0,0) <-> (0,0,9), with the 9- and 11-coordinates
-    zero throughout and all motion in the 37-coordinate.  All verified.
-
-=== THE SHARPENING: THE CRT FORMULA IS GLOBAL ===
-
-    9999 mod 3663 = 2673, so for EVERY X,
-
-        C(X) = 9999 - X == 2673 - X    (mod 3663),
-
-    and since 2673 -> (0,0,9),
-
-        C_CRT(a, b, c) = (0, 0, 9) - (a, b, c)
-
-    holds on all 3663 residues, not only on D.  Verified exhaustively.
-
-    So the supplied identity is not a property of the restricted domain.
-    It is the whole map, written in coordinates.
-
-=== WHAT IS ACTUALLY RESTRICTED ===
-
-    The 9- and 11-coordinates are NOT invariant in general.  The formula
-    sends a -> -a and b -> -b.  On D they look fixed only because D's
-    points have a = b = 0, and 0 is the unique fixed point of negation in
-    Z_9 and in Z_11.  Checked: no residue with a nonzero 9-coordinate is
-    fixed by C.
-
-    That is the real content -- D sits on the (0,0) fibre, where two of the
-    three coordinates are already at their negation fixed point, so the map
-    can only move the third.  Confinement to the 37-axis is a property of
-    the fibre, not of the map.
-
-    The 37-coordinate is not free either: c -> 9 - c has the fixed point
-    2c == 9, i.e. c == 23.  So on the (0,0) fibre C has exactly one fixed
-    point and 18 two-cycles, of which D's is one.
-
-=== SCOPE, RESTATED ===
-    C|_D : (0,0,0) <-> (0,0,9) is correct.
-    C_CRT(a,b,c) = (0,0,9) - (a,b,c) is correct and GLOBAL.
-    "the 9- and 11-coordinates remain invariant" is true only on a = b = 0.
 
 === FALSIFICATION ===
     An X in Z_3663 with C_CRT(X) != (0,0,9) - CRT(X); or a residue with
