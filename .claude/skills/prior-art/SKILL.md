@@ -55,6 +55,30 @@ Never "re-derived without citing it" or "neither file cites the other" —
 a project re-deriving its own earlier result is a filing problem, not
 misconduct, and the note should read as a pointer rather than a charge.
 
+## A citation by number may not resolve (full-corpus sweep, 2026-09-18)
+
+> **51 theorem numbers point at two different files.** Run
+> `python3 tools/number_collisions.py` before citing any number.
+
+- **T212, T213, T214, T215** each have TWO properly-named
+  `theorem_NNN_*.py` files, written eleven days apart on unrelated
+  subjects. "T213" is either a Riemann matrix operator or a middle-digit
+  operation, and nothing in the name distinguishes them.
+- **T216 through T262** — every number in that run — has a numbered file
+  AND a differently-named file declaring the same number in its docstring.
+  `dr_addition_table.py` opens "THEOREM 233" while
+  `theorem_233_rule_30.py` also exists.
+
+So a cross-reference written as a bare number is ambiguous across a quarter
+of the corpus. **Cite the filename, not the number**, wherever the number
+is in that range. The existing notes that say "T138" and similar are safe
+only because those numbers are unique; check before adding more.
+
+This also explains a blind spot: `largest_sg_prime_gf37.py` declares itself
+THEOREM 102 and duplicates T101's seven results on the same prime, written
+the same day. The index tags it by stem, so it never appeared beside T101
+in any numbered listing.
+
 ## What it cannot do
 
 It searches text. It will miss a result stated in different vocabulary,
