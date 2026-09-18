@@ -25,6 +25,10 @@ def sqrt_mod(a,p):
     return r
 
 def mr(n):
+    # the small-prime pre-check is LOAD-BEARING: if the value is itself one
+    # of the bases then that base is 0 mod n and the test wrongly rejects a
+    # genuine prime. Dropping it undercounted A by 1 (7), B by 2 (5, 17)
+    # and C by 2 (3, 13) at every mark in the 10^8 run.
     if n<2: return False
     for p in (2,3,5,7,11,13,17,19,23,29,31,37,41):
         if n%p==0: return n==p

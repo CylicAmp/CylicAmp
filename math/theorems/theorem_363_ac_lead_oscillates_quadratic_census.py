@@ -19,16 +19,25 @@ A + C = 2B identically (both sides are 8n^2 + 2).
     about 800k per form).  The k = 10^4 row reproduces the ledger exactly,
     which validates the sieve.
 
-    k            A         B         C      A>C    C/A       B/A
-    10,000       1,308     1,558     1,272   yes   0.97248   1.19113
-    500,000     44,004    54,109    44,113   NO    1.00248   1.22964
-    1,000,000   83,456   102,204    83,712   NO    1.00307   1.22465
-    5,000,000  372,908   456,361   372,674   yes   0.99937   1.22379
-    10,000,000 712,319   872,120   711,984   yes   0.99953   1.22434
+    k             A          B          C        A-C     C/A       B/A
+    10,000        1,308      1,558      1,272       +36  0.972477  1.19113
+    1,000,000    83,456    102,204     83,712      -256  1.003067  1.22465
+    10,000,000  712,319    872,120    711,984      +335  0.999530  1.22434
+    50,000,000  3,228,454  3,954,180  3,228,380     +74  0.999977  1.22479
+    100,000,000 6,209,014  7,605,407  6,207,428  +1,586  0.999745  1.22490
 
-    THE LEAD CHANGES BACK.  A ahead at 10^4, C ahead at 5x10^5 and 10^6,
-    A ahead again at 5x10^6 and 10^7 -- four sign changes among five marks,
-    and the final margin is 335 out of 712,319, i.e. 0.047 percent.
+    (A 500,000 mark from a separate run: A 44,004  B 54,109  C 44,113,
+    with C ahead by 109.)
+
+    The 10^8 run was cross-validated against the independent 10^7 run: the
+    10^4, 10^6 and 10^7 rows agree exactly on all three forms.
+
+    THE LEAD CHANGES BACK, AND THE MARGIN NEVER STABILISES.  A ahead at
+    10^4, C ahead at 5x10^5 and 10^6, A ahead again from 5x10^6 through
+    10^8.  The signed gap A - C runs +36, -256, +335, +74, +1,586 -- it
+    changes sign, shrinks to 74 at 5x10^7, then opens to 1,586 at 10^8,
+    which is still only 0.026 percent of A.  Nothing is converging; the
+    difference is a random walk about zero.
 
     C/A -> 1 (0.99953 at 10^7), which is what equal Hardy-Littlewood
     constants require.  B/A settles near 1.2243 and does not drift: that
@@ -115,16 +124,23 @@ def run(limit=300000):
     assert b3 > a3 and b3 > c3                    # B leads throughout
 
     # the 10^7 run, by sieve (see docstring); recorded, not re-run here
-    TEN_M = {10**4: (1308, 1558, 1272), 5*10**5: (44004, 54109, 44113),
-             10**6: (83456, 102204, 83712), 5*10**6: (372908, 456361, 372674),
-             10**7: (712319, 872120, 711984)}
-    assert TEN_M[10**4] == marks[10000]                  # sieve agrees here
-    leads = [a > c for a, b, c in TEN_M.values()]
-    assert leads == [True, False, False, True, True]     # lead changes back
-    assert all(b > a and b > c for a, b, c in TEN_M.values())
-    a7, b7, c7 = TEN_M[10**7]
-    assert abs(c7 / a7 - 1) < 0.001                      # C/A -> 1
-    assert 1.22 < b7 / a7 < 1.23                         # B/A a real constant
+    RUN = {10**4: (1308, 1558, 1272), 5*10**5: (44004, 54109, 44113),
+           10**6: (83456, 102204, 83712), 5*10**6: (372908, 456361, 372674),
+           10**7: (712319, 872120, 711984),
+           5*10**7: (3228454, 3954180, 3228380),
+           10**8: (6209014, 7605407, 6207428)}
+    assert RUN[10**4] == marks[10000]                    # sieve agrees here
+    leads = [a > c for a, b, c in RUN.values()]
+    assert leads == [True, False, False, True, True, True, True]
+    assert leads.count(False) == 2 and leads.count(True) == 5
+    assert all(b > a and b > c for a, b, c in RUN.values())   # B always
+    gaps = [a - c for a, b, c in RUN.values()]
+    assert gaps == [36, -109, -256, 234, 335, 74, 1586]
+    assert min(gaps) < 0 < max(gaps)                     # sign changes
+    a8, b8, c8 = RUN[10**8]
+    assert abs(c8 / a8 - 1) < 0.0003                     # C/A -> 1
+    assert 1.224 < b8 / a8 < 1.226                       # B/A a real constant
+    assert abs(gaps[-1]) / a8 < 0.0003                   # still 0.026 percent
 
     print("T363  A and C trade the lead; B does not\n")
     print("  k=10,000   A=%d B=%d C=%d   A>C: %s" % (*marks[10000],
