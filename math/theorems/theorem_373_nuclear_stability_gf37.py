@@ -1,7 +1,14 @@
 # CLASS: THEOREM
 """
-Theorem 217: Nuclear Stability, Z and N Numbers, and GF(37) Classification
+Theorem 373: Nuclear Stability, Z and N Numbers, and GF(37) Classification
 Author: Michael Warren Song (CyclicAmp)
+
+RENUMBERED 2026-09-18, from T217.  torus_z37_z81.py declared THEOREM 217 ten
+days earlier, so the number was already in use when this file took
+it.  That file keeps it and is renamed for it; this one moved to the
+first free number.  No external citation of T217 existed, so nothing
+was redirected.  Detector: tools/number_collisions.py.
+
 
 All arithmetic verified. Named-set membership is exact. Physical claims are
 stated as observed numerical correspondences, not as causal derivations from

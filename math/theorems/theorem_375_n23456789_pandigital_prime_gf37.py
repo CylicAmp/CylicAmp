@@ -1,6 +1,13 @@
 # CLASS: COMPUTATION
 """
-Theorem 249: n = 23,456,789 — The 8-Digit Pandigital Prime (GF(37))
+Theorem 375: n = 23,456,789 — The 8-Digit Pandigital Prime (GF(37))
+
+RENUMBERED 2026-09-18, from T249.  audit_corrections.py declared THEOREM 249 ten
+days earlier, so the number was already in use when this file took
+it.  That file keeps it and is renamed for it; this one moved to the
+first free number.  No external citation of T249 existed, so nothing
+was redirected.  Detector: tools/number_collisions.py.
+
 
 STRUCTURE:
   23,456,789 is the concatenation of the 8 consecutive digits {2,3,4,5,6,7,8,9}
@@ -123,7 +130,7 @@ def rule30_step(v: int) -> int:
 
 def main():
     print("=" * 70)
-    print("THEOREM 249: n=23,456,789 — The 8-Digit Pandigital Prime (GF(37))")
+    print("THEOREM 375: n=23,456,789 — The 8-Digit Pandigital Prime (GF(37))")
     print("=" * 70)
 
     n = 23_456_789
@@ -272,7 +279,7 @@ def main():
     print(f"  floor(N(n)) mod 37 = {floor_N % 37} ∈ {orbit_of(floor_N)} ✓")
 
     print("\n" + "=" * 70)
-    print("THEOREM 249 VERIFIED")
+    print("THEOREM 375 VERIFIED")
     print("=" * 70)
 
 

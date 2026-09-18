@@ -57,6 +57,27 @@ misconduct, and the note should read as a pointer rather than a charge.
 
 ## A citation by number may not resolve (full-corpus sweep, 2026-09-18)
 
+**Status after the 2026-09-18 fix: 4 hard collisions cleared, 7 of 47 soft
+ones cleared, 40 remain.** Run `python3 tools/number_collisions.py` before
+citing any number in 218-261.
+
+### Why the remaining 40 were NOT bulk-renamed
+
+The unnumbered file is older in all 47 pairs, so by date it has the prior
+claim. But the 110 external citations do not agree with the date: resolved
+by context, 122 point at the numbered file, 107 at the unnumbered, 19 tie.
+Per number the majority splits 18 / 15 / 14.
+
+So no uniform rule preserves them. Renaming all 47 would silently redirect
+roughly half — and a citation that resolves *confidently to the wrong file*
+is worse than one that fails to resolve, because nothing flags it. The
+seven fixed were exactly those with ZERO external citations, where the
+rename cannot redirect anything.
+
+The remaining 40 need per-citation judgement, the way T212-T215 were done:
+grep the cited phrase against both candidates and see which contains it.
+That is 110 individual determinations and it is not mechanical.
+
 > **51 theorem numbers point at two different files.** Run
 > `python3 tools/number_collisions.py` before citing any number.
 

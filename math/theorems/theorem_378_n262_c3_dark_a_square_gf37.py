@@ -1,6 +1,6 @@
 # CLASS: COMPUTATION
 """
-T262: n=262 — C3 orbit, DARK_A self-product closure
+T378: n=262 — C3 orbit, DARK_A self-product closure
 GF(37) — 137-map f(x) = 26x mod 37
 
 262 = 2 × 131
@@ -117,7 +117,7 @@ assert half % 37 == 19
 assert orbit_of(half) == "CAS_EXT"
 
 print(f"\nPart 5 PASS: (262-1)/2 = 130 mod 37 = 19 ∈ CAS_EXT")
-print(f"  130 = T245; CAS_EXT connection T245↔T261↔T262")
+print(f"  130 = T245; CAS_EXT connection T245↔T261↔T378")
 
 # ── Part 6: DR and Rule 30 ────────────────────────────────────────────────────
 
