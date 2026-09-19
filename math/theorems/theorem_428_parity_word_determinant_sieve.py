@@ -182,6 +182,59 @@ but the certificate should read |D| divides B, and it does here.
   multipliers.
 
 ================================================================================
+4c. SPECIFICATION FOR THE CYCLE-MEAN CONSTRUCTION, AND WHY IT IS VACUOUS
+================================================================================
+
+  Three conventions were asked for, to build the De Bruijn edge shift and
+  run Karp against log2/log3 = 0.63093.  Answering them in the conventions
+  this file actually uses:
+
+  (1) ALPHABET.  The two-letter shift over {E, O} on the SHORTCUT map
+
+          T(n) = (3n+1)/2  for odd n,        T(n) = n/2  for even n
+
+      not the fully accelerated 2-adic presentation odd x -> (3x+1)/2^k.
+      Every letter is one step and every step halves, which is why the
+      denominator is 2^L and not 2^(number of E's).
+
+  (2) EDGE WEIGHTS.  Uniform step length 1.  An O contributes log 3 and
+      every step contributes log 2, so the log-growth of a word is
+      a log 3 - L log 2 and the cycle mean is exactly the odd-density a/L.
+      Contraction is a/L < log2/log3, which is the same inequality as this
+      file's sign condition 2^L > 3^a.  Nothing new is being asked; the
+      threshold and the determinant are two readings of one line.
+
+  (3) FORBIDDEN BLOCKS.  There are none, and that is the problem.
+
+  THE SUBSHIFT IS THE FULL 2-SHIFT.  The parity-vector map is a bijection on
+  the 2-adic integers, so every word of length L is realised by EXACTLY ONE
+  residue class mod 2^L.  Verified here by direct count for every word of
+  length 1..12 and for m = 3, 5, 7: exactly one residue each, no exceptions.
+
+  Therefore F = {} and the De Bruijn edge shift is unconstrained, so
+
+      lambda* = max cycle mean = 1,   attained by the all-O loop,
+
+  and 1 > 0.63093.  The threshold test is passed by a word that genuinely
+  exists: for m = 3 the all-O word of length L is realised by x = 2^L - 1,
+  e.g. 255 mod 256 giving 255, 383, 575, 863, 1295, 1943, 2915, 4373, 6560,
+  odd at every one of the eight steps.  So Karp returns 1, the comparison
+  fails, and NO contraction follows -- not because the computation is hard
+  but because the object has no forbidden blocks to prune.
+
+  WHAT WOULD MAKE IT NON-VACUOUS.  F must come from somewhere other than
+  parity admissibility, since parity forbids nothing.  Two honest sources:
+  a window condition that forbids words whose realising class mod 2^K is
+  incompatible with staying above the starting value, or a descent
+  certificate that forbids words after which the trajectory has provably
+  dropped.  Both are conditions on the VALUE, not on the parity word, so
+  they do not define a subshift of finite type on {E,O} without further
+  work.  That is the gap, and it is where the effort belongs.
+
+  This is the same shape as the miss-test failures recorded in T425-T427:
+  the instrument cannot come back negative, so its verdict carries nothing.
+
+================================================================================
 5. SCOPE -- WHAT THIS DOES NOT DO
 ================================================================================
 
@@ -406,6 +459,40 @@ def main():
         assert neg == want[m][1], (m, neg)
     print("   complete for every cycle with L <= 24; every one already known.")
     print("   the L<=16 word sieve and this agree, and 24 adds nothing new.")
+
+    print("\nPart 4c: the cycle-mean construction is vacuous, F = {}")
+
+    def follows(x, word, m):
+        v = x
+        for s in word:
+            if (v % 2 != 0) != bool(s):
+                return False
+            v = (m * v + 1) // 2 if v % 2 else v // 2
+        return True
+
+    for m in (3, 5, 7):
+        for L in range(1, 11):
+            for w in range(1 << L):
+                word = tuple((w >> i) & 1 for i in range(L))
+                hits = sum(1 for x in range(1 << L) if follows(x, word, m))
+                assert hits == 1, (m, word, hits)
+    print("   every parity word of length 1..10 is realised by EXACTLY ONE")
+    print("   residue mod 2^L, for m = 3, 5, 7 -> no block is forbidden ✓")
+    print("   so the De Bruijn edge shift is the FULL 2-shift, lambda* = 1")
+    print("   (the all-O loop), and 1 > log2/log3 = %.5f"
+          % (math.log(2) / math.log(3)))
+    L = 8
+    allO = (1,) * L
+    x = [v for v in range(1 << L) if follows(v, allO, 3)]
+    assert x == [(1 << L) - 1]
+    tr, v = [x[0]], x[0]
+    for _ in range(L):
+        v = (3 * v + 1) // 2 if v % 2 else v // 2
+        tr.append(v)
+    print("   witness m=3, L=8: x = %d = 2^8 - 1, trajectory %s" % (x[0], tr))
+    print("   odd at every step, so the threshold is exceeded by a real word.")
+    print("   Karp returns 1; no contraction follows. F must come from a")
+    print("   condition on the VALUE, not on the parity word.")
 
     print("\nPart 5: scope")
     print("   closes the PERIODIC branch, and only for L <= 24 as run here.")
