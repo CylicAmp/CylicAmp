@@ -106,9 +106,32 @@ Verified output:
 
 | Constant | Value | Role |
 |---|---|---|
-| α⁻¹ (fine structure) | 137 | Core |
+| α⁻¹ (fine structure) | **137.035999177(21)**, not 137 | Core — 137 is the *nearest integer*, see note |
 | Decomposition | 3×37 + 2×13 | Factored scaffold |
 | E₈ dimension | 248 | Amplification target |
 | 37-field | mod 37 | Orbit geometry (see modal_crossing_orbit.py) |
 | 505-anchor | DR=1 | Sovereign coordinate |
 | 3-9-6 cycle | Tesla harmonic | Digital root phase lock |
+
+**Note on α⁻¹ (corrected 2026-09-19).** This row previously read `α⁻¹ = 137`.
+That is false as a statement about the fine-structure constant. CODATA 2022
+gives
+
+    α⁻¹ = 137.035999177(21)
+
+a measured dimensionless quantity with no known closed form and no reason to
+be an integer. The deviation of 137 from it is 0.035999177, a relative
+difference of 2.63 × 10⁻⁴ and about **1.71 × 10⁶ standard deviations** —
+experimentally excluded by a wide margin, not a rounding question.
+
+What survives, and is what this framework actually uses, is the integer 137
+in its own right: 137 is prime, 137 = 3×37 + 2×13, 137 mod 37 = 26 = MULT,
+and ord₁₃₇(10) = 8 so 1/137 has the 8-digit period 00729927. None of that
+depends on α, and none of it is evidence about α.
+
+`theorem_277_planck_gf37.py` already states this correctly — it writes
+α ≈ 1/137.036 throughout and says "α denominator 137" rather than claiming
+equality. This file was the inconsistent one.
+
+Whether the integer 137 has any physical relation to α⁻¹ beyond proximity is
+**OPEN** and is not claimed here.
