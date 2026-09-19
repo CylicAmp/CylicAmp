@@ -53,11 +53,32 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   Machine-checked: over all n = 2m with m odd and at least 5 divisors below
   120000, the structural step of (C) has 0 exceptions.
 
-  n ODD IS OPEN.  What is known: every divisor is odd so each square is
-  1 (mod 8), giving n = 5 (mod 8); and n > d_5^2 while n < 5 d_5^2, so the
-  fifth smallest divisor lies in (sqrt(n/5), sqrt(n)) and n has at least ten
-  divisors. None of that closes it. The QR step that killed k=3 needs a lone
-  square on one side and there are three here, so it does not transfer.
+  n ODD IS OPEN, and is narrowed rather than closed.  What is proved:
+
+    - every divisor is odd, so each square is 1 (mod 8) and n = 5 (mod 8);
+    - n > d_5^2 while n < 5 d_5^2, so the fifth smallest divisor lies in
+      (sqrt(n/5), sqrt(n)) and n therefore has at least ten divisors;
+    - if 3 | n then mod 3 forces EXACTLY ONE of d_3, d_4, d_5 to be a
+      multiple of 3, since n = 10 + d_3^2 + d_4^2 + d_5^2 and 3 | n need
+      d_3^2 + d_4^2 + d_5^2 = 2 (mod 3);
+    - in the case 3 | n, 9 does not divide n: d_3 = q, the least prime of
+      n/3 with q >= 5, the multiple of 3 is 3q, and the remaining member is
+      r = min(q^2, q').  THE r = q^2 BRANCH CLOSES: then
+          n = 10 + 10q^2 + q^4  and  r = q^2 | n  give  q^2 | 10,
+      impossible for q >= 5.  So r = q', the next prime, and what is left is
+          n = 10 + 10q^2 + q'^2,   q | 10 + q'^2,   q' | 10(1 + q^2).
+
+  That two-prime system has exactly ONE solution with 5 <= q < 3000 and
+  q' < 200000, namely (q, q') = (13, 17), n = 1989 = 3^2 * 13 * 17 -- which
+  fails the case's own hypothesis, since 9 | 1989.  So the case is empty as
+  far as it has been searched and NOT proved empty: there is no congruence
+  obstruction, because 1 + q^2 + q'^2 = 0 (mod 9) holds only for the residue
+  pairs (1,7), (7,1), (4,4) and the others are admissible.
+
+  The QR step that closed k=3 does not transfer: it needs a lone square on
+  one side of the congruence and here there are three.  The cases 3 does not
+  divide n, and 9 | n, are untouched.  k=5 with n odd remains a search
+  result behind the 5e8 bound.
 
   ADDED 2026-09-19 — PROOF THAT k=3 IS IMPOSSIBLE.
   The line above said "no solutions found up to 500 000 000". It is now a
@@ -538,8 +559,24 @@ def main():
           if len(divisors(x)) >= 5 and sum(d * d for d in divisors(x)[:5]) == x]
     assert k5 == []
     print("  cross-check: exhaustive k=5 search to 300000 returns %s ✓" % k5)
-    print("  n ODD stays OPEN: n = 5 (mod 8) and sqrt(n/5) < d5 < sqrt(n), but")
-    print("  the k=3 QR step needs one square on a side and here there are three.")
+    # n odd: the one sub-branch that DOES close, plus the bounded search
+    for q in (5, 7, 11, 13, 101):
+        assert 10 % (q * q) != 0            # r = q^2 would need q^2 | 10
+    print("  n odd, 3|n, 9∤n, r=q^2 branch: r|n -> q^2 | 10, false for q>=5 ✓")
+    prim = [x for x in range(5, 40000)
+            if all(x % i for i in range(2, int(x ** 0.5) + 1))]
+    hits = [(q, qq) for q in prim if q < 600 for qq in prim
+            if qq > q and (10 + qq * qq) % q == 0
+            and (10 * (1 + q * q)) % qq == 0]
+    print("  system q|10+q'^2, q'|10(1+q^2): %d pair(s), q<600 q'<40000: %s"
+          % (len(hits), hits))
+    for q, qq in hits:
+        nn = 10 + 10 * q * q + qq * qq
+        assert nn % 9 == 0                  # fails the case hypothesis 9∤n
+        print("      (%d,%d) -> n=%d, and 9|n, so the case excludes it"
+              % (q, qq, nn))
+    print("  NOT a proof: there is no congruence obstruction, only scarcity.")
+    print("  n odd with 3∤n, and with 9|n, are untouched. k=5 odd stays open.")
 
     print("\n  k=2, k=3, k=4 PROVED; k=5 proved for n even, open for n odd.")
 
