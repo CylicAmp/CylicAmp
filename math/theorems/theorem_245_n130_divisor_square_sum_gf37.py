@@ -208,8 +208,44 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   pairs (1,7), (7,1), (4,4) and the others are admissible.
 
   The QR step that closed k=3 does not transfer: it needs a lone square on
-  one side of the congruence and here there are three.  The cases 3 does not
-  divide n, and 9 | n, are untouched.  k=5 with n odd remains a search
+  one side of the congruence and here there are three.  The case 9 | n is
+  untouched.
+
+  THE CASE 3 DOES NOT DIVIDE n, WORKED 2026-09-19.  Mod 3 gives NO kill:
+  every divisor is then coprime to 3, so each square is 1 (mod 3) and
+  n = 5 = 2 (mod 3), which is consistent.  What the case does give is
+  p >= 5 for the least prime, on top of n = 5 (mod 8) from five odd squares.
+
+  ONE SHAPE DIES OUTRIGHT.  For (1, p, p^2, p^3, p^4) every divisor but 1 is
+  a power of p, so n = 1 (mod p) and p does not divide n.  Contradiction.
+
+  THE OTHER ELEVEN ARE SEARCHED, ALL EMPTY, by divisor pinning: once p is
+  fixed, q divides the fixed integer C = sum of squares of the tokens free
+  of q, so only finitely many q survive, and r and s pin the same way.  No
+  blind sweep is involved.
+
+      shape             p bound   candidates  skipped   n reached
+      1 p p^2 p^3 q      400         19         31      6.1e17
+      1 p p^2 q p^3      400         22         31      1.1e14
+      1 p p^2 q pq       400         12          0      3.2e15
+      1 p p^2 q r        400          0          0      --
+      1 p q p^2 pq       400        113          0      2.9e15
+      1 p q p^2 r        400         26          0      5.4e13
+      1 p q pq q^2       120         22          0      6.8e14
+      1 p q pq r         400         13          2      4.5e17
+      1 p q r p^2        400         37          0      4.0e10
+      1 p q r pq         400         31          2      1.7e13
+      1 p q r s          400          0          0      --
+
+  THE SKIPPED COLUMN IS A COVERAGE HOLE, not a result.  C is factored only
+  when it is below 1e14, and for the two shapes carrying p^3 and p^4 the
+  quantity C = 1 + p^2 + p^4 + p^6 exceeds that for 31 of the ~77 primes
+  below 400.  Those p are NOT covered.  The weakest shape overall is
+  (1, p, q, pq, q^2) at p < 120, and per the search-bounds rule that is the
+  figure to quote for the case, not the 6.1e17 that one lucky shape reached.
+
+  So 3-not-dividing-n is now REDUCED, not closed: 1 of 12 shapes proved
+  empty, 11 searched and empty with the bounds above.  k=5 with n odd remains a search
   result behind the 5e8 bound.
 
   SUPPLIED CASE TREE, AUDITED 2026-09-19.  A nine-branch tree over the shape

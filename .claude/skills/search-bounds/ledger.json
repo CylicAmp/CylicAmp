@@ -52,5 +52,11 @@
   "param": "p<=200,q<=400",
   "n": "1.6e13",
   "kind": "search"
+ },
+ {
+  "branch": "k=5 odd, 3 not| n (weakest shape)",
+  "param": "p<120",
+  "n": "6.8e14",
+  "kind": "search"
  }
 ]
