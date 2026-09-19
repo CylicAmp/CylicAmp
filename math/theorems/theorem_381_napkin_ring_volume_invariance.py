@@ -49,6 +49,36 @@ T379.)
     version has vastly more surface.  The R-independence is a statement
     about the measure, not about the shape.
 
+    ADDED 2026-09-19 -- the surface has a closed form too, and it is exact,
+    not just "grows".  Archimedes' hat-box theorem gives the spherical zone
+    as 2 pi R h EXACTLY, for every cut position, and the bore wall is a
+    cylinder of radius r_cyl = sqrt(R^2 - h^2/4) and height h, so
+
+        S(R) = 2 pi R h  +  2 pi h sqrt(R^2 - (h/2)^2)
+             = 2 pi h ( R + sqrt(R^2 - (h/2)^2) )
+
+        S(R) / (4 pi R h)  ->  1     as R -> infinity
+
+    Both halves go to 2 pi R h, so the total is asymptotically 4 pi R h --
+    the divergence is exactly LINEAR in R, not merely unbounded.  Checked
+    against the three numbers in the table above: 113.097, 339.292,
+    1499.434 to the printed digits.
+
+    This sharpens what fails and why.  Cavalieri and the hat-box theorem are
+    the same KIND of statement -- each says a measure does not depend on a
+    coordinate -- but they free different coordinates:
+
+        Cavalieri   slice AREA pi(h^2 - 4z^2)/4 is free of R   -> V is R-free
+        hat-box     zone AREA 2 pi R h is free of z            -> zone is
+                                                                  z-free but
+                                                                  carries R
+
+    So the hat-box is not the surface analogue of the invariance; it is the
+    surface analogue of the slicing, and it keeps the R that Cavalieri
+    cancels.  The R in 2 pi R h is why no rearrangement of the argument can
+    make the surface R-free: the outer band's own area is proportional to R
+    however thin the radial extent gets.
+
     The constraint R >= h/2 is what makes r_cyl real; at R = h/2 the hole
     has radius 0 and the ring IS the sphere of diameter h.  That degenerate
     case is why the answer has to be pi h^3/6 -- it is forced by the one
@@ -108,6 +138,15 @@ def run():
     assert abs(surf[0] - 36 * np.pi) < 1e-9                      # degenerate = sphere
     assert surf[2] / surf[0] > 13                                # unbounded
 
+    # ADDED 2026-09-19: the surface closed form, and its linear asymptote
+    def S(Rv):
+        return 2 * np.pi * hv * (Rv + np.sqrt(Rv * Rv - hv * hv / 4))
+    for Rv, s in zip((3.0, 5.0, 20.0), surf):
+        assert abs(S(Rv) - s) < 1e-9, Rv        # closed form = zone + cylinder
+    assert abs(S(3.0) - 4 * np.pi * 3.0 * hv) > 1.0        # not yet asymptotic
+    for Rv in (1e4, 1e6, 1e9):
+        assert abs(S(Rv) / (4 * np.pi * Rv * hv) - 1) < 1e-7, Rv   # -> 4 pi R h
+
     print("T381  the napkin ring\n")
     print("  A(z) = pi(h^2 - 4z^2)/4  -- R cancels identically")
     print("  V = pi h^3 / 6 = (4/3) pi (h/2)^3, the sphere of diameter h")
@@ -121,6 +160,14 @@ def run():
         print("   R=%-5.0f total surface %9.3f" % (Rv, s))
     print("   volumes identical, surfaces grow without bound. Cavalieri")
     print("   equates cross-section AREA; it says nothing about boundary.")
+    print("\n  S(R) = 2 pi h (R + sqrt(R^2 - (h/2)^2)),  exact:")
+    for Rv in (3.0, 5.0, 20.0, 1e4, 1e6):
+        print("   R=%-9.0f S=%14.3f   S/(4 pi R h) = %.9f"
+              % (Rv, S(Rv), S(Rv) / (4 * np.pi * Rv * hv)))
+    print("   the divergence is exactly LINEAR: S ~ 4 pi R h.")
+    print("   zone = 2 pi R h is Archimedes' hat-box -- free of the CUT")
+    print("   POSITION, not of R. Cavalieri frees R and keeps z; the hat-box")
+    print("   frees z and keeps R. That is why the surface cannot be R-free.")
     print("\n  and R >= h/2 is forced: at R = h/2 the hole has radius 0 and")
     print("  the ring IS the sphere -- which is why the answer must be")
     print("  pi h^3/6, fixed by that one case and carried by R-independence.")
