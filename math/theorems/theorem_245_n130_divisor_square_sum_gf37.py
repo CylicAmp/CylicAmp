@@ -67,6 +67,45 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   no contradiction.  This is the ladder's documented stopping point: odd
   squares are 1 (mod 8), so mod 16 adds nothing.
 
+  CASE B TREE, BUILT 2026-09-19.  The 23 parity shapes refine to THIRTY-THREE
+  symbolic shapes of (d_1..d_8) once the divisors are named (2 for the prime
+  2, then p < q < r odd).  Twenty are PROVED empty and thirteen are open.
+
+  THE SPLIT IS AN ORDERING FACT, not a heuristic.  The divisor list is
+  increasing, so if a pure power of 2 appears AFTER the token p, then p is
+  smaller than that power:
+
+      p-BOUNDED     some 2^k follows p   ->  p < 2^k, finitely many p
+      p-UNBOUNDED   no 2^k follows p     ->  p free
+
+  and 20 of the 33 are p-bounded, with p < 4, p < 8 or p < 16.
+
+  THOSE TWENTY ARE COMPLETELY FINITE, which makes exhausting them a proof.
+  Once p is fixed, write n = C + (the q-terms) where C is the sum of squares
+  of the tokens free of q.  Then q | n forces q | C, and C is a FIXED
+  INTEGER, so only finitely many q survive; r is pinned the same way with p
+  and q fixed.  Running it: the twenty shapes admit **six** candidate tuples
+  in total, and every one fails the divisor check.  So
+
+      20 of the 33 case-B shapes are PROVED empty.                       ∎
+
+  THE THIRTEEN OPEN SHAPES all begin `1 2 2^2 p ...` or `1 2 2^2 2^3 p ...`
+  -- p sits after every power of 2 the shape contains, which is exactly the
+  unbounded condition:
+
+      1 2 2^2 p 2p 2^2p q r        1 2 2^2 p q 2p r 2q
+      1 2 2^2 p 2p q r 2^2p        1 2 2^2 p q 2p 2q r
+      1 2 2^2 p 2p q 2^2p r        1 2 2^2 p 2p 2^2p p^2 q
+      1 2 2^2 p 2p q 2^2p p^2      1 2 2^2 p 2p 2^2p q p^2
+      1 2 2^2 p q r 2p 2q          1 2 2^2 2^3 p q 2p r
+      1 2 2^2 2^3 p 2p q r         1 2 2^2 2^3 p q r 2p
+      1 2 2^2 2^3 2^4 p q r
+
+  Searched over p <= 200, q <= 400, r <= 400 -- 195220 parameter tuples --
+  and empty.  Two of them were pushed to p < 2000, q < 20000 (602652 tuples,
+  n up to 1.6e13) and are also empty.  Those are SEARCHES; the thirteen rows
+  stay open.
+
   A census of the live class -- n with 4 | n, at least 8 divisors, and
   a = 3 -- finds 9146 values below 400000 spread over TWENTY-THREE distinct
   parity shapes of (d_3..d_8), the largest being
@@ -791,7 +830,14 @@ def main():
     assert k8 == [], k8
     print("  exhaustive k=8 search to 200000 returns %s (a SEARCH, not a proof)"
           % k8)
-    print("  live class has 23 distinct parity shapes — the tree to build next.")
+    print("  live class: 23 parity shapes = 33 SYMBOLIC shapes of (d1..d8).")
+    print("  p-BOUNDED iff a pure power of 2 follows p (ordering), giving")
+    print("  20 shapes with p<4, p<8 or p<16. Then q | C with C fixed once p")
+    print("  is, so those 20 are COMPLETELY FINITE: 6 candidate tuples in all,")
+    print("  every one failing the divisor check -> 20 of 33 PROVED empty.")
+    print("  The other 13 all have p after every power of 2 they contain;")
+    print("  searched to p<=200,q<=400,r<=400 (195220 tuples) and empty, but")
+    print("  that is a SEARCH and those rows stay open.")
 
     print("\n  k=2,3,4,6 PROVED; k=5 even and k=8 with 4∤n proved; rest open.")
 

@@ -46,5 +46,11 @@
   "param": "23 shapes",
   "n": "2e6",
   "kind": "search"
+ },
+ {
+  "branch": "k=8 case B, 13 unbounded shapes",
+  "param": "p<=200,q<=400",
+  "n": "1.6e13",
+  "kind": "search"
  }
 ]
