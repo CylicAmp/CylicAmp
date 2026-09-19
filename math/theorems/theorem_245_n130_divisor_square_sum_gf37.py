@@ -80,6 +80,62 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   divide n, and 9 | n, are untouched.  k=5 with n odd remains a search
   result behind the 5e8 bound.
 
+  SUPPLIED CASE TREE, AUDITED 2026-09-19.  A nine-branch tree over the shape
+  of (d_1..d_5) was supplied, killing seven branches and reducing k=5 to two
+  live families C1 and C2.  Reproduced, and one structural defect found.
+
+  WHAT CHECKS OUT:
+    - the parity lemma. n = 1 + (k-1) odd squares, so k even forces n even
+      and p = 2; k odd gives n odd, consistent, no forcing. Correct.
+    - all five numeric kills. 374 has divisors 1,2,11,17,22 (not 1,2,4,8,17);
+      110 has 1,2,5,10,11; 266 has 1,2,7,14,19; 66 has 1,2,3,6,11; none
+      solves.
+    - C1 over odd primes q <= 5000: ZERO triples pass the filters.
+    - C2 over the same range: EXACTLY ONE, (p,q,r) = (3,13,17), n = 1989.
+      It dies on the exponent as stated -- 1989 = 3^2 . 13 . 17, so the five
+      smallest divisors are 1, 3, 9, 13, 17 and their squares sum to 549,
+      not 1989. Every congruence holds and only v_3(n) is wrong.
+
+  WHAT DOES NOT: THE TREE IS INCOMPLETE.  A census of the shapes that
+  actually occur, over every n <= 300000 with at least five divisors, finds
+  TWELVE, not nine.  The nine listed are A1a, A1b, A2a, A2b, A2c, B1a, B1b,
+  C1, C2.  The three unlisted are
+
+      (1, p, q, pq, q^2)    9972 occurrences
+      (1, p, q, r,  s )     1848
+      (1, p, q, r,  p^2)    1044
+
+  none of them rare.  So "two branches survive" was not established: five
+  did, and three of the five were never examined.
+
+  THOSE THREE, SEARCHED HERE, ARE EMPTY -- so the CONCLUSION stands while
+  the reduction does not:
+
+      (1,p,q,pq,q^2)   q | n forces q | p^2+1, so q is a prime factor of
+                       p^2+1 above p. For p < 4000: 414 such pairs, 6 pass
+                       p|n and q|n, 0 solutions.
+      (1,p,q,r,p^2)    p^2 | n forces p^2 | 1+q^2+r^2, which pins r modulo
+                       p^2, so each (p,q) leaves O(1) candidates. For
+                       p < 400: 34630 candidates survive the congruence,
+                       0 solutions.
+      (1,p,q,r,s)      lcm is pqrs so pqrs | n, and n < 5s^2 gives pqr < 5s;
+                       writing n = k.pqrs makes s a root of
+                       s^2 - k.pqr.s + (1+p^2+q^2+r^2) = 0. For p,q,r < 200
+                       and k <= 200: no integral s at all, 0 solutions.
+
+  COVERAGE, STATED PER BRANCH RATHER THAN GLOBALLY.  The supplied note gives
+  one figure, n <~ 6e14 from q <= 5000, which is right for C1 and C2 -- r
+  divides q^2+1 so n grows like q^4 -- but it does not describe the other
+  three, whose bounds are p < 4000, p < 400 and (p,q,r < 200, k <= 200).
+  The weakest is (1,p,q,r,p^2) at p < 400, i.e. n up to about 2.6e10. Quoting
+  6e14 for the layer as a whole would overstate the weakest branch by four
+  orders of magnitude.
+
+  So: k=5 has no solution in any of the five live shapes within the ranges
+  above, and that is a wider search than the 5e8 brute force -- but it is
+  still a search, on five branches with five different bounds, and not a
+  proof.
+
   ADDED 2026-09-19 — PROOF THAT k=3 IS IMPOSSIBLE.
   The line above said "no solutions found up to 500 000 000". It is now a
   theorem, and it is STRONGER than the claim that prompted it: a supplied
