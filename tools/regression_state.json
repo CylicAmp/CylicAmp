@@ -10,9 +10,9 @@
   "status": "PASS"
  },
  "cylicamp/cli.py": {
-  "msg": "ModuleNotFoundError: No module named 'cylicamp'",
+  "msg": "",
   "secs": 0.0,
-  "status": "ERROR"
+  "status": "PASS"
  },
  "cylicamp/cycle_triples.py": {
   "msg": "",
@@ -20,23 +20,23 @@
   "status": "PASS"
  },
  "cylicamp/degradation_monitor.py": {
-  "msg": "ModuleNotFoundError: No module named 'cylicamp'",
+  "msg": "",
   "secs": 0.1,
-  "status": "ERROR"
+  "status": "PASS"
  },
  "cylicamp/diff_geometry.py": {
   "msg": "",
-  "secs": 0.7,
+  "secs": 0.8,
   "status": "PASS"
  },
  "cylicamp/engine_integration.py": {
   "msg": "",
-  "secs": 0.3,
+  "secs": 0.2,
   "status": "PASS"
  },
  "cylicamp/entropy_120cell.py": {
   "msg": "",
-  "secs": 0.5,
+  "secs": 0.6,
   "status": "PASS"
  },
  "cylicamp/euler_totient.py": {
@@ -85,9 +85,9 @@
   "status": "PASS"
  },
  "cylicamp/pipeline.py": {
-  "msg": "ModuleNotFoundError: No module named 'cylicamp'",
+  "msg": "",
   "secs": 0.0,
-  "status": "ERROR"
+  "status": "PASS"
  },
  "cylicamp/prime_visual.py": {
   "msg": "",
@@ -124,11 +124,6 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "cylicamp/viewer.py": {
-  "msg": "EOFError: EOF when reading a line",
-  "secs": 0.0,
-  "status": "ERROR"
- },
  "math/primes/dgm_hyperagent_37field.py": {
   "msg": "",
   "secs": 0.5,
@@ -136,7 +131,7 @@
  },
  "math/primes/dr_algebra.py": {
   "msg": "",
-  "secs": 0.2,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/primes/field_simulation.py": {
@@ -145,9 +140,9 @@
   "status": "PASS"
  },
  "math/primes/main.py": {
-  "msg": "ModuleNotFoundError: No module named 'cylicamp'",
+  "msg": "",
   "secs": 0.0,
-  "status": "ERROR"
+  "status": "PASS"
  },
  "math/primes/meta_engine.py": {
   "msg": "",
@@ -181,7 +176,7 @@
  },
  "math/primes/verify_dr9_termination.py": {
   "msg": "",
-  "secs": 0.2,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/primes/verify_local_confluence.py": {
@@ -566,7 +561,7 @@
  },
  "math/theorems/goldbach_proof_attempt_gf37.py": {
   "msg": "",
-  "secs": 20.5,
+  "secs": 19.9,
   "status": "PASS"
  },
  "math/theorems/goldilocks_prime.py": {
@@ -610,9 +605,9 @@
   "status": "PASS"
  },
  "math/theorems/hejhal_maass_level1.py": {
-  "msg": "exceeded 45s",
-  "secs": 45.0,
-  "status": "TIMEOUT"
+  "msg": "",
+  "secs": 51.4,
+  "status": "PASS"
  },
  "math/theorems/holographic_manifold_gf37.py": {
   "msg": "",
@@ -651,7 +646,7 @@
  },
  "math/theorems/kinematic_focal_zoom.py": {
   "msg": "",
-  "secs": 15.8,
+  "secs": 13.0,
   "status": "PASS"
  },
  "math/theorems/lane_generator_246_gf37.py": {
@@ -666,7 +661,7 @@
  },
  "math/theorems/layer30_sovereign_matrix_entropy.py": {
   "msg": "",
-  "secs": 6.2,
+  "secs": 1.1,
   "status": "PASS"
  },
  "math/theorems/lcm_convergence_dr_cycle.py": {
@@ -766,7 +761,7 @@
  },
  "math/theorems/monte_carlo_prime_streams.py": {
   "msg": "",
-  "secs": 1.3,
+  "secs": 1.2,
   "status": "PASS"
  },
  "math/theorems/multi_layer_obstruction_gf37.py": {
@@ -966,7 +961,7 @@
  },
  "math/theorems/primitive_root_test.py": {
   "msg": "",
-  "secs": 0.3,
+  "secs": 0.4,
   "status": "PASS"
  },
  "math/theorems/principle_1_substrate_principle.py": {
@@ -991,7 +986,7 @@
  },
  "math/theorems/ramanujan_tau_gf37.py": {
   "msg": "",
-  "secs": 24.1,
+  "secs": 24.2,
   "status": "PASS"
  },
  "math/theorems/ratio_177_133_identity.py": {
@@ -1056,7 +1051,7 @@
  },
  "math/theorems/riemann_gf37_coverage.py": {
   "msg": "",
-  "secs": 9.1,
+  "secs": 8.9,
   "status": "PASS"
  },
  "math/theorems/root_grid_dr6_dr7.py": {
@@ -1136,7 +1131,7 @@
  },
  "math/theorems/session_log_verified.py": {
   "msg": "",
-  "secs": 0.4,
+  "secs": 0.5,
   "status": "PASS"
  },
  "math/theorems/sg_exponent_doubling_gf37.py": {
@@ -1146,7 +1141,7 @@
  },
  "math/theorems/shell_buckling_gf37.py": {
   "msg": "",
-  "secs": 2.0,
+  "secs": 1.9,
   "status": "PASS"
  },
  "math/theorems/shell_octave_identity_gf37.py": {
@@ -1556,7 +1551,7 @@
  },
  "math/theorems/theorem_164_hmod_operator_algebra.py": {
   "msg": "",
-  "secs": 0.2,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/theorem_165_session_numbers_gf37.py": {
@@ -1851,7 +1846,7 @@
  },
  "math/theorems/theorem_223_orbit_partition_riemann_gf37.py": {
   "msg": "",
-  "secs": 2.3,
+  "secs": 2.1,
   "status": "PASS"
  },
  "math/theorems/theorem_224_d7_envelope_stability_gf37.py": {
@@ -1915,8 +1910,8 @@
   "status": "PASS"
  },
  "math/theorems/theorem_236_rule30_block_universality_gf37.py": {
-  "msg": "exceeded 45s",
-  "secs": 45.0,
+  "msg": "exceeded 120s",
+  "secs": 120.1,
   "status": "TIMEOUT"
  },
  "math/theorems/theorem_237_universal_scope_81_149.py": {
@@ -1925,13 +1920,13 @@
   "status": "PASS"
  },
  "math/theorems/theorem_238_rule30_complexity_gf37.py": {
-  "msg": "exceeded 45s",
-  "secs": 45.1,
+  "msg": "exceeded 120s",
+  "secs": 120.1,
   "status": "TIMEOUT"
  },
  "math/theorems/theorem_239_rule30_autocorrelation_gf37.py": {
   "msg": "",
-  "secs": 3.4,
+  "secs": 4.2,
   "status": "PASS"
  },
  "math/theorems/theorem_240_rule30_path_to_problem2_gf37.py": {
@@ -1961,7 +1956,7 @@
  },
  "math/theorems/theorem_245_n130_divisor_square_sum_gf37.py": {
   "msg": "",
-  "secs": 35.2,
+  "secs": 35.3,
   "status": "PASS"
  },
  "math/theorems/theorem_246_n167_cas_ext_prime_gf37.py": {
@@ -2061,7 +2056,7 @@
  },
  "math/theorems/theorem_297_block_separation.py": {
   "msg": "",
-  "secs": 2.0,
+  "secs": 1.9,
   "status": "PASS"
  },
  "math/theorems/theorem_298_j1728_gaussian_cm.py": {
@@ -2096,7 +2091,7 @@
  },
  "math/theorems/theorem_304_three_lists_meet_at_37.py": {
   "msg": "",
-  "secs": 1.1,
+  "secs": 1.2,
   "status": "PASS"
  },
  "math/theorems/theorem_305_claim_strength_cuts.py": {
@@ -2110,9 +2105,9 @@
   "status": "PASS"
  },
  "math/theorems/theorem_307_seed_orbit_residue_breakdown_gf37.py": {
-  "msg": "exceeded 45s",
-  "secs": 45.0,
-  "status": "TIMEOUT"
+  "msg": "",
+  "secs": 98.0,
+  "status": "PASS"
  },
  "math/theorems/theorem_308_reversal_build_mod37_period_gf37.py": {
   "msg": "",
@@ -2261,7 +2256,7 @@
  },
  "math/theorems/theorem_337_sophie_germain_map_gf37.py": {
   "msg": "",
-  "secs": 0.7,
+  "secs": 0.6,
   "status": "PASS"
  },
  "math/theorems/theorem_338_sg_137_generate_agl_gf37.py": {
@@ -2381,7 +2376,7 @@
  },
  "math/theorems/theorem_361_index_shift_primes_composites.py": {
   "msg": "",
-  "secs": 10.7,
+  "secs": 10.9,
   "status": "PASS"
  },
  "math/theorems/theorem_362_prime_pair_baseline_2_over_35.py": {
@@ -2391,7 +2386,7 @@
  },
  "math/theorems/theorem_363_ac_lead_oscillates_quadratic_census.py": {
   "msg": "",
-  "secs": 5.1,
+  "secs": 5.2,
   "status": "PASS"
  },
  "math/theorems/theorem_364_complement_involution_3663.py": {
@@ -2426,7 +2421,7 @@
  },
  "math/theorems/theorem_370_gauge_holonomy_gf37.py": {
   "msg": "",
-  "secs": 0.2,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/theorem_371_12321_rotation_reversal_d5.py": {
@@ -2445,8 +2440,8 @@
   "status": "PASS"
  },
  "math/theorems/theorem_374_rule30_normality_gf37.py": {
-  "msg": "exceeded 45s",
-  "secs": 45.1,
+  "msg": "exceeded 120s",
+  "secs": 120.1,
   "status": "TIMEOUT"
  },
  "math/theorems/theorem_375_n23456789_pandigital_prime_gf37.py": {
@@ -2476,7 +2471,7 @@
  },
  "math/theorems/theorem_423_data_pipeline_correspondence_grade_gf37.py": {
   "msg": "",
-  "secs": 1.1,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/theorem_424_rewrite_certificate_ledger_gf37.py": {
@@ -2541,7 +2536,7 @@
  },
  "math/theorems/torus_animation_137map.py": {
   "msg": "",
-  "secs": 14.5,
+  "secs": 14.1,
   "status": "PASS"
  },
  "math/theorems/triadic_seed_mu3_gf37.py": {
@@ -2606,7 +2601,7 @@
  },
  "math/theorems/twin_prime_consolidation.py": {
   "msg": "",
-  "secs": 0.2,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/twin_prime_dr_convergence.py": {
@@ -2661,7 +2656,7 @@
  },
  "math/theorems/ulam_diagonal_b4k2_gf37.py": {
   "msg": "",
-  "secs": 1.4,
+  "secs": 1.3,
   "status": "PASS"
  },
  "math/theorems/unified_field_architecture.py": {
@@ -2691,7 +2686,7 @@
  },
  "math/theorems/visualize_gf37.py": {
   "msg": "",
-  "secs": 2.1,
+  "secs": 1.8,
   "status": "PASS"
  },
  "math/theorems/wallis_product_gf37.py": {
@@ -2716,7 +2711,7 @@
  },
  "math/turbulence/filter_scale_flux_sign.py": {
   "msg": "",
-  "secs": 0.7,
+  "secs": 0.6,
   "status": "PASS"
  }
 }

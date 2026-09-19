@@ -28,7 +28,8 @@ from concurrent.futures import ProcessPoolExecutor
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DIRS = ["math/theorems", "math/primes", "math/turbulence", "cylicamp"]
 STATE = ROOT / "tools" / "regression_state.json"
-SKIP = {"__init__.py", "CATEGORY_INDEX.py"}
+SKIP = {"__init__.py", "CATEGORY_INDEX.py",
+        "viewer.py"}   # viewer.py is an interactive REPL, not a check
 
 
 def targets(only=None):
@@ -53,8 +54,11 @@ def run_one(args):
     rel, timeout = args
     t0 = time.time()
     try:
+        env = dict(os.environ)
+        env["PYTHONPATH"] = str(ROOT) + os.pathsep + env.get("PYTHONPATH", "")
         r = subprocess.run([sys.executable, rel], cwd=ROOT, capture_output=True,
-                           text=True, timeout=timeout)
+                           text=True, timeout=timeout, env=env,
+                           stdin=subprocess.DEVNULL)
         dt = time.time() - t0
         if r.returncode == 0:
             return rel, "PASS", dt, ""
