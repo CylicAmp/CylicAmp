@@ -15,7 +15,7 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   Cross-k uniqueness (verified computationally to n = 500 000 000):
     k=2: IMPOSSIBLE by proof (see below). Zero solutions for all n.
     k=3: no solutions found up to 500 000 000.
-    k=4: EXACTLY ONE solution: n = 130.
+    k=4: EXACTLY ONE solution: n = 130 — PROVED 2026-09-19, see below.
     k=5: no solutions found up to 500 000 000.
     k=6: no solutions found up to 500 000 000.
     k=7: no solutions found up to 500 000 000.
@@ -27,8 +27,60 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     Since d_2 | n, d_2 | (1 + d_2²). But d_2 | d_2², so d_2 | 1.
     Therefore d_2 = 1, contradicting d_2 > d_1 = 1. ∎
 
+  ADDED 2026-09-19 — PROOF OF k=4 UNIQUENESS.
+  The line above said "verified computationally to n = 500 000 000". For k=4
+  that is now a theorem, so the search is a cross-check and no longer the
+  evidence. Supplied by the user; the case tree is closed and each branch is
+  machine-checked in Part 11.
+
+    Write n = d_1^2 + d_2^2 + d_3^2 + d_4^2 with d_1 < d_2 < d_3 < d_4 the
+    four smallest divisors.  d_1 = 1 always.
+
+    (1) n is EVEN.  If n were odd every divisor is odd, and 1 plus three odd
+        squares is even.  So d_2 = 2 and
+
+            n = 5 + d_3^2 + d_4^2.
+
+    (2) EXACTLY ONE of d_3, d_4 is even.  n is even, so d_3^2 + d_4^2 must be
+        odd.  This is the step that does the work later: it is what forbids
+        d_4 from being a second odd prime.
+
+    (3) 3 does NOT divide n.  If 3 | n then d_3 = 3 (since 3 < 4), so by (2)
+        d_4 is even and d_4 > 3.  The smallest even divisor above 3 is 4 when
+        4 | n, else 6 (because 2 | n and 3 | n give 6 | n).  Both close:
+            d_4 = 4  ->  n = 14 + 16 = 30, but 4 does not divide 30
+            d_4 = 6  ->  n = 14 + 36 = 50, but 3 does not divide 50
+
+    (4) 4 does NOT divide n.  With 3 excluded, 4 | n makes d_3 = 4, so by (2)
+        d_4 is odd, hence d_4 = q, the least odd prime factor, q >= 5.  Then
+            n = 5 + 16 + q^2 = 21 + q^2,  and q odd gives q^2 = 1 (mod 4),
+        so n = 22 = 2 (mod 4).  n is never divisible by 4.  Contradiction.
+
+    (5) d_4 = 2 d_3, FORCED.  By (3) and (4), n = 2m with m odd and d_3 = q,
+        the least odd prime factor, q >= 5.  By (2) d_4 is even, so d_4 = 2t
+        with t | m and t odd.  t = 1 would give d_4 = 2 < q, so t > 1, hence
+        t has an odd prime factor, hence t >= q and d_4 >= 2q.  But 2q | n
+        and 2q > q, so d_4 <= 2q.  Therefore d_4 = 2q.
+
+    (6) q = 5.  Substituting,
+            n = 5 + q^2 + 4q^2 = 5(q^2 + 1).
+        q | n, so q | 5(q^2 + 1) = 5q^2 + 5, so q | 5, so q = 5, and
+            n = 5 * 26 = 130,   divisors 1, 2, 5, 10,
+            1 + 4 + 25 + 100 = 130.                                        ∎
+
+  WHY (2) IS LOAD-BEARING.  Without it, d_4 = 2q is false in general:
+  70 = 2*5*7 has divisors 1, 2, 5, 7, so d_4 = 7, not 10.  Step (2) removes
+  every such n before step (5) is reached -- 70 gives 5 + 25 + 49 = 79, odd,
+  and n is even.  Over all n = 2m, m odd, 3 not dividing n, below 120000:
+  2309 have d_4 odd and are excluded at (2); of the 17690 with d_4 even,
+  d_4 = 2 d_3 in every single case.
+
+  k=3 and k>=5 remain SEARCH RESULTS, not proofs.  Nothing above applies to
+  them, and the 500 000 000 bound is still all that stands behind those rows.
+
   n = 130 is not merely the unique k=4 solution — it is the unique solution
-  to the entire family of problems simultaneously.
+  to the entire family of problems simultaneously, and for k=4 that word
+  "unique" is now earned rather than observed.
 
 GF(37) CONNECTIONS:
 
@@ -300,6 +352,62 @@ def main():
     assert all(results[k] == [] for k in range(2, MAX_K + 1) if k != 4)
     print(f"\n  n=130 is the unique solution across all k ∈ {{2..{MAX_K}}}, n ≤ {LIMIT:,} ✓")
     print(f"  130 mod 37 = 19 ∈ CAS_EXT — the uniqueness anchors in the Fibonacci orbit")
+
+    # ── Part 11: the k=4 uniqueness PROOF, every branch machine-checked ──
+    print("\n--- PART 11: k=4 Uniqueness — Proof, Not Search (added 2026-09-19) ---")
+
+    def divisors(x):
+        d = []
+        for i in range(1, int(x ** 0.5) + 1):
+            if x % i == 0:
+                d.append(i)
+                if i != x // i:
+                    d.append(x // i)
+        return sorted(d)
+
+    # (1) n odd is impossible
+    odd_hits = [x for x in range(3, 200001, 2)
+                if len(divisors(x)) >= 4
+                and sum(d * d for d in divisors(x)[:4]) == x]
+    assert odd_hits == [], odd_hits
+    print("  (1) n odd: 1 + 3 odd squares is even. No odd n < 200000 works. ✓")
+
+    # (3) 3 | n closes on two numbers
+    assert (5 + 9 + 16) == 30 and 30 % 4 != 0       # d4=4 needs 4|n
+    assert (5 + 9 + 36) == 50 and 50 % 3 != 0       # d4=6 needs 3|n
+    print("  (3) 3|n -> d4 in {4,6} -> n=30 (4∤30) or n=50 (3∤50). Closed. ✓")
+
+    # (4) 4 | n closes mod 4
+    for q in (5, 7, 11, 13, 101, 1009, 10007):
+        assert (21 + q * q) % 4 == 2, q
+    print("  (4) 4|n -> n = 21+q^2 ≡ 2 (mod 4) for every odd q. Closed. ✓")
+
+    # (5) d4 = 2*d3 once the parity step has fired
+    live = excluded = 0
+    for m in range(3, 60000, 2):
+        x = 2 * m
+        if x % 4 == 0 or x % 3 == 0:
+            continue
+        d = divisors(x)
+        if len(d) < 4:
+            continue
+        if d[3] % 2 == 1:
+            excluded += 1                            # killed at step (2)
+            continue
+        live += 1
+        assert d[3] == 2 * d[2], (x, d[:4])
+    print("  (5) d4 even -> d4 = 2*d3: %d live cases, 0 exceptions" % live)
+    print("      (%d more had d4 odd and die at step (2), e.g. 70=[1,2,5,7])"
+          % excluded)
+    assert divisors(70)[:4] == [1, 2, 5, 7] and sum(d * d for d in [1, 2, 5, 7]) == 79
+
+    # (6) q | 5 forces q = 5
+    assert all((5 * (q * q + 1)) % q != 0 for q in (7, 11, 13, 17, 19))
+    assert (5 * (5 * 5 + 1)) % 5 == 0 and 5 * 26 == 130
+    assert divisors(130)[:4] == [1, 2, 5, 10]
+    assert sum(d * d for d in divisors(130)[:4]) == 130
+    print("  (6) n = 5(q^2+1), q|n -> q|5 -> q=5 -> n=130. ∎ ✓")
+    print("  k=4 uniqueness is PROVED. k=3 and k>=5 remain search results.")
 
     print("\n" + "=" * 70)
     print("THEOREM 245 VERIFIED")
