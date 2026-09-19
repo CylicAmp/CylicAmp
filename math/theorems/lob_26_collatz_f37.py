@@ -21,6 +21,21 @@ Structural comparison:
   f(n) = 3n+1 (pure linear): 3 cycles of lengths [1, 18, 18] — different structure.
   g(n) = 2n+19: matches T at exactly one point, x=12. Not a Collatz branch.
 
+CROSS-REFERENCE, added 2026-09-19 (T425):
+  T is NOT the Collatz map reduced mod 37. Parity is not a function of a
+  residue class (37 is odd), so the integer map does not descend: 1 = 38
+  (mod 37) but Collatz(1) = 4 and Collatz(38) = 19. T is Collatz applied to
+  the canonical representative and then reduced -- a choice of lift.
+  Consequence for the cycles above: {1,4,2} is the GENUINE Collatz cycle
+  (no step is reduced), while the 9-cycle is an ARTIFACT -- exactly two of
+  its steps reduce, 17 -> 52 -> 15 and 15 -> 46 -> 9, and those two are the
+  ones that close it. In the integers 17 runs 17, 52, 26, 13, 40, 20, 10, 5,
+  16, 8, 4, 2, 1, into the 3-cycle.
+  T425 also has the full dynamics this file leaves out: 24 transients, max
+  tail 9, 9 sources, in-degrees {0:9, 1:19, 2:9}, eventual image = the 13
+  cycle elements at depth 10, and the semiconjugacy bound that separates T
+  from T271's affine C.
+
 Modulus-specificity:
   Cycle structure [1,3,9] is F_37-specific. Other primes yield different patterns.
   QR status of elements has no predictive correlation with cycle membership.
