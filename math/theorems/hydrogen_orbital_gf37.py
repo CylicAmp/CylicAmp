@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 241: Hydrogen Orbital Structure and GF(37) Sovereign Classification
+THEOREM 404: Hydrogen Orbital Structure and GF(37) Sovereign Classification
 ================================================================================
 
 USER OBSERVATION:
@@ -70,6 +70,15 @@ G. THE TWIN PRIME CONNECTION:
   17+19 = 36 = -1 mod 37 = antipode.
   The twin prime shell is the double-sovereign shell.
 ================================================================================
+
+RENUMBERED 2026-09-19: T241 -> T404.
+This file declared Theorem 241 on 2026-08-20, before `theorem_241_rule30_right_boundary_2adic_gf37.py`
+(2026-08-29) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T404; citations that meant `theorem_241_rule30_right_boundary_2adic_gf37.py` were left at T241.
 """
 
 import sys
@@ -104,7 +113,7 @@ def legendre(a, p):
 
 def run():
     print("=" * 70)
-    print("THEOREM 241: HYDROGEN ORBITAL STRUCTURE AND GF(37) CLASSIFICATION")
+    print("THEOREM 404: HYDROGEN ORBITAL STRUCTURE AND GF(37) CLASSIFICATION")
     print("=" * 70)
 
     # A: Prime shells and SA

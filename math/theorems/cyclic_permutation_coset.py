@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 240: Cyclic Permutation Coset -- 999=27x37 and the F37 Field Closure
+THEOREM 403: Cyclic Permutation Coset -- 999=27x37 and the F37 Field Closure
 ================================================================================
 
 USER STATEMENT:
@@ -27,7 +27,7 @@ A. THE 999 MECHANISM:
   {N, 10N mod 999, 100N mod 999} mod 37 = {N mod 37} * {1, 10, 100} mod 37
                                           = {N mod 37} * H  [complete coset of H]
 
-B. THE THREE ALL-PRIME GRIDS (from T238):
+B. THE THREE ALL-PRIME GRIDS (from T401):
   G(3,1): rows 311, 131, 113
     311+131+113 = 555 = 15*37  =>  sum ≡ 0 (mod 37)
     mod 37: {15, 20, 2} = C_2 = 2*H
@@ -58,13 +58,22 @@ D. COSET SUM DIVISIBILITY:
   Equivalently: sum of N's three cyclic permutations ≡ 0 (mod 37).
   Equivalently: every coset sum in GF(37)*/H is divisible by 37.
 
-E. UNIFICATION WITH T238:
-  T238 uses the 111-decomposition: N_i = 111s + (b-s)*e_i, 111≡0.
-  T240 uses the 999-identity: cyclic shifts via mod 999 = mod 37 projection.
+E. UNIFICATION WITH T401:
+  T401 uses the 111-decomposition: N_i = 111s + (b-s)*e_i, 111≡0.
+  T403 uses the 999-identity: cyclic shifts via mod 999 = mod 37 projection.
   Both give the same coset structure for the all-prime grids.
   The diagonal grid (b,s) and the cyclic permutation framing are equivalent:
   the three rows of a (b,s) grid ARE the three cyclic permutations of row N_1.
 ================================================================================
+
+RENUMBERED 2026-09-19: T240 -> T403.
+This file declared Theorem 240 on 2026-08-19, before `theorem_240_rule30_path_to_problem2_gf37.py`
+(2026-08-29) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T403; citations that meant `theorem_240_rule30_path_to_problem2_gf37.py` were left at T240.
 """
 
 import sys
@@ -124,7 +133,7 @@ def coset_of(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 240: CYCLIC PERMUTATION COSET -- 999=27x37 & F37 CLOSURE")
+    print("THEOREM 403: CYCLIC PERMUTATION COSET -- 999=27x37 & F37 CLOSURE")
     print("=" * 70)
 
     cosets = build_cosets()
@@ -211,10 +220,10 @@ def run():
         print(f"  G({b},{s}): {'+'.join(str(r) for r in rows)} = {row_sum} = {row_sum//P}*{P}  check")
         assert row_sum % P == 0
 
-    # E: Unification with T238
-    print(f"\nE. UNIFICATION WITH T238:")
-    print(f"  T238: N_i = 111s + (b-s)*e_i,  111≡0,  {{100,10,1}}≡H")
-    print(f"  T240: {{N, 10N mod 999, 100N mod 999}} = cyclic shifts,  999≡0")
+    # E: Unification with T401
+    print(f"\nE. UNIFICATION WITH T401:")
+    print(f"  T401: N_i = 111s + (b-s)*e_i,  111≡0,  {{100,10,1}}≡H")
+    print(f"  T403: {{N, 10N mod 999, 100N mod 999}} = cyclic shifts,  999≡0")
     print(f"  Both: residues form complete coset (b-s)*H in GF({P})*")
     print(f"  The three rows of a (b,s) grid ARE the three cyclic permutations of row N_1:")
     for b, s, rows in grids:

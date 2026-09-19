@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 246: Master 6-Step Heartbeat -- Two Prime Chambers
+THEOREM 409: Master 6-Step Heartbeat -- Two Prime Chambers
 ================================================================================
 
 USER OBSERVATION:
@@ -48,7 +48,7 @@ C. THE 5-CHAMBER PRODUCT:
 D. THE 1-CHAMBER PRODUCT:
   7 × 13 × 19 × 29 × 31 mod 37 = 1  in H (identity).
   The five pre-gateway primes of the 1-chamber multiply to the identity.
-  This mirrors prod(H) = 1×10×26 = 1 (T245-C): the pre-seam product is sovereign.
+  This mirrors prod(H) = 1×10×26 = 1 (T408-C): the pre-seam product is sovereign.
   1-chamber endpoint: 37 mod 37 = 0 (SEAM). The prime terminates its own sequence.
   When 37 is included: product = 0 (seam absorbs all).
 
@@ -72,6 +72,15 @@ G. SOVEREIGN SUMMARY:
   1-chamber endpoint: 37 mod 37 = 0 = SEAM [The Gateway]
   All four sovereign zones appear in the chamber structure.
 ================================================================================
+
+RENUMBERED 2026-09-19: T246 -> T409.
+This file declared Theorem 246 on 2026-08-20, before `theorem_246_n167_cas_ext_prime_gf37.py`
+(2026-08-30) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T409; citations that meant `theorem_246_n167_cas_ext_prime_gf37.py` were left at T246.
 """
 
 import sys
@@ -113,7 +122,7 @@ def flags(r):
 
 def run():
     print("=" * 70)
-    print("THEOREM 246: MASTER 6-STEP HEARTBEAT -- TWO PRIME CHAMBERS")
+    print("THEOREM 409: MASTER 6-STEP HEARTBEAT -- TWO PRIME CHAMBERS")
     print("=" * 70)
 
     five_chamber = [5, 11, 17, 23, 29, 41]

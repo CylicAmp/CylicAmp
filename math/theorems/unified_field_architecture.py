@@ -1,6 +1,6 @@
 # CLASS: THEOREM
 """
-Theorem 224: Unified Field Architecture — Void to Geometric Morphogenesis
+Theorem 388: Unified Field Architecture — Void to Geometric Morphogenesis
 
 Source: user GF(37) connecting metric ground state, atomic generators,
 prime convergence, FvK buckling, and the digital fold conservation loop.
@@ -21,9 +21,9 @@ GF(37) CONNECTIONS:
        2 × 3 = 6, the imaginary unit: 6² ≡ -1 (mod 37)
      The product of the two atomic generators is i_{GF(37)}.
   C. Harmonic spectrum {0,1,2} → coset map:
-       m=0 (cup, sovereign)   →  C_3  = {3,4,30}   [fully sovereign, T222]
+       m=0 (cup, sovereign)   →  C_3  = {3,4,30}   [fully sovereign, T386]
        m=1 (dipole)           →  C_2  = {2,15,20}  [generator 2 lives here]
-       m=2 (saddle, step)     →  C_10 = {17,22,35} [torus-step coset, T218/T223]
+       m=2 (saddle, step)     →  C_10 = {17,22,35} [torus-step coset, T382/T387]
   D. Digital fold 5→16→7→14→5:
        5+16+7+14 = 42 = 37+5 ≡ 5 (mod 37). Loop sum = seed. Exact.
        16 = 2^4 ∈ C_7 = {9,12,16}; 12 is a sovereign target (12∈ST).
@@ -33,6 +33,15 @@ GF(37) CONNECTIONS:
      In GF(37)*: 9 generates an orbit under 137-map → {9,...} ∈ C_7.
   F. Ground attractor H = {1,10,26}: the kernel / root of the quotient.
      The "root 1" terminus of every trajectory = identity of GF(37)*.
+
+RENUMBERED 2026-09-19: T224 -> T388.
+This file declared Theorem 224 on 2026-08-16, before `theorem_224_d7_envelope_stability_gf37.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T388; citations that meant `theorem_224_d7_envelope_stability_gf37.py` were left at T224.
 """
 
 import sys
@@ -109,7 +118,7 @@ def coset_of(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 224: UNIFIED FIELD ARCHITECTURE — VOID TO MORPHOGENESIS")
+    print("THEOREM 388: UNIFIED FIELD ARCHITECTURE — VOID TO MORPHOGENESIS")
     print("=" * 70)
 
     cosets = build_cosets()
@@ -145,7 +154,7 @@ def run():
     assert ord3 == 18
     assert prod == 6 and pow(6, 2, P) == P - 1
     ci6, c6 = coset_of(6, cosets)
-    print(f"   6 ∈ C_{ci6} = {c6}  [imag-unit coset, T222]")
+    print(f"   6 ∈ C_{ci6} = {c6}  [imag-unit coset, T386]")
 
     # III. Prime convergence and harmonic modes
     print(f"\nIII. PRIME CONVERGENCE: 2+3=5")
@@ -156,9 +165,9 @@ def run():
 
     print(f"\n   Harmonic mode → coset map:")
     modes = [
-        ("m=0 (cup, axisymmetric, sovereign)", 3, C3,  "C_3 (fully sovereign, T222)"),
+        ("m=0 (cup, axisymmetric, sovereign)", 3, C3,  "C_3 (fully sovereign, T386)"),
         ("m=1 (dipole, generator-2 mode)",     2, C2,  "C_2 (generator 2 lives here)"),
-        ("m=2 (saddle, torus-step mode)",      17, C10, "C_10 (torus-step coset, T218/T223)"),
+        ("m=2 (saddle, torus-step mode)",      17, C10, "C_10 (torus-step coset, T382/T387)"),
     ]
     for label, rep, coset_set, note in modes:
         ci, c = coset_of(rep, cosets)
@@ -166,7 +175,7 @@ def run():
         print(f"   {label}")
         print(f"     → C_{ci} = {c}  [{note}]")
 
-    print(f"\n   FvK mode selection (from T223, Ritz sweep):")
+    print(f"\n   FvK mode selection (from T387, Ritz sweep):")
     print(f"   Free BC   → cup (m=0) wins  → C_3  (sovereign coset)")
     print(f"   Clamped   → saddle (m=2) wins → C_10 (torus-step coset)")
     print(f"   ε_crit = 1/√37 ≈ 0.1644  [imaginary unit in denominator]")

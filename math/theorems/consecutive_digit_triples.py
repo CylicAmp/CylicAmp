@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 242: Consecutive Digit Triples -- Sovereign Reduction and Imaginary Chain
+THEOREM 405: Consecutive Digit Triples -- Sovereign Reduction and Imaginary Chain
 ================================================================================
 
 USER OBSERVATIONS:
@@ -83,6 +83,15 @@ G. SUMMARY TABLE:
   {6,7,8} -> 21 (ST, mod 37 = 12)
   {9}     -> 9  (SA, 333 = SEAM)
 ================================================================================
+
+RENUMBERED 2026-09-19: T242 -> T405.
+This file declared Theorem 242 on 2026-08-20, before `theorem_242_rule30_left_vs_right_boundary_gf37.py`
+(2026-08-29) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T405; citations that meant `theorem_242_rule30_left_vs_right_boundary_gf37.py` were left at T242.
 """
 
 import sys
@@ -105,7 +114,7 @@ def dr(n):
 
 def run():
     print("=" * 70)
-    print("THEOREM 242: CONSECUTIVE DIGIT TRIPLES -- SOVEREIGN REDUCTION")
+    print("THEOREM 405: CONSECUTIVE DIGIT TRIPLES -- SOVEREIGN REDUCTION")
     print("=" * 70)
 
     # A: {1,2,3} -> imaginary unit

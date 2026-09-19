@@ -76,7 +76,7 @@ there is a third between them.
     homomorphism on NUMBERS: DR(a+b) = DR(DR(a)+DR(b)).  That is a
     different statement -- about addition of numbers, not concatenation of
     strings -- and it does not give the three-level split above.
-    T226 has the k = 1 case for threes: "three 3s sum to 9; 9+1 = 10".
+    T390 has the k = 1 case for threes: "three 3s sum to 9; 9+1 = 10".
 
 === FALSIFICATION ===
     A k with DR(R_k) != 9; or digitsum(R_k) + k != 10k.

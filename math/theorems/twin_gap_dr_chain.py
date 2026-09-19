@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 231: The Twin Gap Chain -- 17+1,1=19; 8+2=10+1=11=2
+THEOREM 395: The Twin Gap Chain -- 17+1,1=19; 8+2=10+1=11=2
 ================================================================================
 
 USER OBSERVATION:
@@ -30,8 +30,8 @@ DR CHAIN:
   The chain: gap(2) drives through DRs, passes H, lands at 11, returns to gap.
 
 KEY CONNECTIONS:
-  A. 8+2=10: DR(lower twin) + twin gap = 10 = decimal base, H-element (T225).
-  B. 10+1=11: R_2 = the 2-digit repunit. And 9x11=99=25(mod 37)=SA (T226).
+  A. 8+2=10: DR(lower twin) + twin gap = 10 = decimal base, H-element (T389).
+  B. 10+1=11: R_2 = the 2-digit repunit. And 9x11=99=25(mod 37)=SA (T390).
   C. DR(11)=2: the chain returns the gap. Self-referential.
   D. 11 in C_8={11,27,36}: 11 and 36 (=17+19) are COSET-MATES.
      The DR chain from the pair ends in the same coset as the pair's sum.
@@ -41,6 +41,15 @@ SELF-REFERENTIAL LOOP:
   gap=2 -> [8+2=10->H] -> [10+1=11->C_8] -> DR(11)=2 = gap.
   Input and output are identical.
 ================================================================================
+
+RENUMBERED 2026-09-19: T231 -> T395.
+This file declared Theorem 231 on 2026-08-16, before `theorem_231_236_permutations.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T395; citations that meant `theorem_231_236_permutations.py` were left at T231.
 """
 
 import sys
@@ -83,7 +92,7 @@ def coset_of(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 231: THE TWIN GAP CHAIN -- 17+1,1=19; 8+2=10+1=11=2")
+    print("THEOREM 395: THE TWIN GAP CHAIN -- 17+1,1=19; 8+2=10+1=11=2")
     print("=" * 70)
 
     cosets = build_cosets()
@@ -113,7 +122,7 @@ def run():
     ci_A, c_A = coset_of(step_A, cosets)
     in_H = step_A in H_SET
     print(f"\nSTEP A: DR({p}) + gap = {dr_p}+{dr_gap} = {step_A}")
-    print(f"  {step_A} in H={sorted(H_SET)}: {in_H}  [decimal base, T225]  check")
+    print(f"  {step_A} in H={sorted(H_SET)}: {in_H}  [decimal base, T389]  check")
     assert in_H
 
     # Step B: H-element + DR(upper) -> C_8
@@ -142,16 +151,16 @@ def run():
     R2 = 11
     print(f"\nREPUNIT CONNECTION:")
     print(f"  11 = R_2 (the 2-digit repunit: 1+1=2)")
-    print(f"  9 x R_2 = 9 x 11 = 99 = {99%P} (mod {P}) in SA  [T226: 10^2-1=SA]")
+    print(f"  9 x R_2 = 9 x 11 = 99 = {99%P} (mod {P}) in SA  [T390: 10^2-1=SA]")
     assert 9 * R2 % P == 25 and 25 in SA
-    print(f"  R_2 x 37 = {R2*P}  = PENROSE OUTER RADIUS (T222: 407=11x37=seam)  check")
+    print(f"  R_2 x 37 = {R2*P}  = PENROSE OUTER RADIUS (T386: 407=11x37=seam)  check")
     assert R2 * P == 407
     print(f"  Compare R_3=111=3x37: the step from R_2 to R_3 adds one '1' digit.")
 
     # DR(11)=2: the first prime
     print(f"\nDR(11)=2: THE FIRST PRIME")
-    print(f"  2 = the first prime, first atomic generator (T224)")
-    print(f"  2+3=5 (T228): the chain ends at the DR of the first step in the prime sequence")
+    print(f"  2 = the first prime, first atomic generator (T388)")
+    print(f"  2+3=5 (T392): the chain ends at the DR of the first step in the prime sequence")
     print(f"  DR({step_B}) = {step_C} = the prime that starts the whole sequence")
 
     # Coset of 11

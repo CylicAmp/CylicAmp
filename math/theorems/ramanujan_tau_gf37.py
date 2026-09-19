@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # CLASS: COMPUTATION
 """
-THEOREM 260: Ramanujan τ mod 37 — GF(37) Classification
+THEOREM 420: Ramanujan τ mod 37 — GF(37) Classification
 
 SCOPE (added after mutation audit, tools/mutation_audit.py): TIER A, but the
 reason is UNDER-ASSERTION, not generality. The file's single assertion is
@@ -11,6 +11,15 @@ tau(n) = 0 (mod 37), and the residue distribution of those zeros -- is PRINTED
 and never asserted. So this computation currently has no failing-loud check on
 its own subject. Recorded, not patched: adding an assertion would mean fixing a
 threshold from one run, which is how a fixture becomes mistaken for a result.
+
+RENUMBERED 2026-09-19: T260 -> T420.
+This file declared Theorem 260 on 2026-08-22, before `theorem_260_n260_ic_casext_square_gf37.py`
+(2026-08-31) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T420; citations that meant `theorem_260_n260_ic_casext_square_gf37.py` were left at T260.
 """
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
@@ -68,7 +77,7 @@ def classify(r):
 def run():
     N = 5000
     print("="*70)
-    print("THEOREM 260: RAMANUJAN tau MOD 37 — GF(37) CLASSIFICATION")
+    print("THEOREM 420: RAMANUJAN tau MOD 37 — GF(37) CLASSIFICATION")
     print("="*70)
 
     print("\nComputing tau(n) mod 37 for n=1..5000...")

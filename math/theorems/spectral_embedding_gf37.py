@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 255: Spectral Embedding of the 137-Map Cayley Graph
+THEOREM 417: Spectral Embedding of the 137-Map Cayley Graph
 ================================================================================
 
 SOURCE: Spectral graph embedding formalism (eigengap, energy, stability criteria).
@@ -68,9 +68,18 @@ GF(37) CONNECTIONS:
   6 eigenvalue levels × 6 multiplicities = 36 = φ(37) = ord₃₇(2)
   Largest eigenvalue rounds to 9 ∈ SA (sovereign anchor)
   Spectral gap λ₂ ≈ 1.9522 (irrational: 2×(1 - cos(2π/37)))
-  The 7-level spectrum (0 + 6 bands) mirrors the 7 residue classes in T246
+  The 7-level spectrum (0 + 6 bands) mirrors the 7 residue classes in T409
   and the 7-cell anchor structure of the Medusa GF(37).
 ================================================================================
+
+RENUMBERED 2026-09-19: T255 -> T417.
+This file declared Theorem 255 on 2026-08-21, before `theorem_255_n255_d7_binary_gf37.py`
+(2026-08-31) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T417; citations that meant `theorem_255_n255_d7_binary_gf37.py` were left at T255.
 """
 
 import sys
@@ -104,7 +113,7 @@ def flags(r):
 
 def run():
     print("=" * 70)
-    print("THEOREM 255: SPECTRAL EMBEDDING OF THE 137-MAP CAYLEY GRAPH")
+    print("THEOREM 417: SPECTRAL EMBEDDING OF THE 137-MAP CAYLEY GRAPH")
     print("=" * 70)
 
     # Error checks
@@ -202,7 +211,7 @@ def run():
     assert abs(spectral_gap - expected_gap) < 1e-6
     print(f"  Spectral gap λ₂ at j∈C3∪(-C3) = {spectral_gap:.6f}  check")
     print(f"  C3={{3,4,30}} indexes the minimum eigenvectors — the sovereign coset drives the gap")
-    print(f"  7 eigenvalue levels (0 + 6 bands) = 7 ← anchor prime from T246  check")
+    print(f"  7 eigenvalue levels (0 + 6 bands) = 7 ← anchor prime from T409  check")
 
     print(f"\nAll verifications passed.")
 

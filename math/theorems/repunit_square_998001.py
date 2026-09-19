@@ -2,7 +2,7 @@
 # CLASS: THEOREM
 """
 ================================================================================
-THEOREM 253: 1/998001 — Repunit Square and the Concatenation Sequence
+THEOREM 415: 1/998001 — Repunit Square and the Concatenation Sequence
 ================================================================================
 
 CORE FACT:
@@ -65,6 +65,15 @@ D. GF(37) CONNECTION:
   The period is a SEAM of GF(37): it is a multiple of 37.
   DR(2997) = DR(2+9+9+7) = DR(27) = 9 in SA.
 ================================================================================
+
+RENUMBERED 2026-09-19: T253 -> T415.
+This file declared Theorem 253 on 2026-08-21, before `theorem_253_gf37_motive_framework.py`
+(2026-08-30) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T415; citations that meant `theorem_253_gf37_motive_framework.py` were left at T253.
 """
 
 import sys
@@ -101,7 +110,7 @@ def flags(r):
 
 def run():
     print("=" * 70)
-    print("THEOREM 253: 1/998001 — REPUNIT SQUARE AND CONCATENATION SEQUENCE")
+    print("THEOREM 415: 1/998001 — REPUNIT SQUARE AND CONCATENATION SEQUENCE")
     print("=" * 70)
 
     # A: Series identity (corrected)

@@ -2,10 +2,10 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 245: All-Prime Grids -- Full Structural Analysis
+THEOREM 408: All-Prime Grids -- Full Structural Analysis
 ================================================================================
 
-Extends T238 (master coset theorem) and T240 (cyclic permutation) with the
+Extends T401 (master coset theorem) and T403 (cyclic permutation) with the
 complete structural picture of the three all-prime grids:
 
   G(3,1): 311, 131, 113  -> C_2  = {2, 15, 20}
@@ -51,7 +51,7 @@ D. TWO-DIGIT READINGS OF EACH PAIR:
     37 mod 37 = 0 = SEAM.
     Both DR=1 in H.
     The digit pair (7,3) read as two-digit numbers gives exactly the
-    seam-antipode pair {37, 73} from T239 (Mirror Seam-Antipode theorem).
+    seam-antipode pair {37, 73} from T402 (Mirror Seam-Antipode theorem).
 
 E. THE (b+s) SOVEREIGN PATTERN:
   G(3,1): b+s = 4  in SA.
@@ -91,6 +91,15 @@ I. ENSEMBLE CLOSURE (ALL 9 ROWS):
   The product of all 9 three-digit primes across all three grids is 1 in GF(37)*.
 ================================================================================
 ================================================================================
+
+RENUMBERED 2026-09-19: T245 -> T408.
+This file declared Theorem 245 on 2026-08-20, before `theorem_245_n130_divisor_square_sum_gf37.py`
+(2026-08-30) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T408; citations that meant `theorem_245_n130_divisor_square_sum_gf37.py` were left at T245.
 """
 
 import sys
@@ -137,7 +146,7 @@ def coset_of(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 245: ALL-PRIME GRIDS -- FULL STRUCTURAL ANALYSIS")
+    print("THEOREM 408: ALL-PRIME GRIDS -- FULL STRUCTURAL ANALYSIS")
     print("=" * 70)
 
     cosets = build_cosets()
@@ -203,7 +212,7 @@ def run():
     assert 73 % P == P-1 and 37 % P == 0
     assert dr(73) == 1 and dr(37) == 1
     print(f"  G(7,3): 73 mod{P}={73%P}=ANTIPODE, 37 mod{P}={37%P}=SEAM  check")
-    print(f"  The digit pair (7,3) contains the seam-antipode pair from T239  check")
+    print(f"  The digit pair (7,3) contains the seam-antipode pair from T402  check")
 
     # E: b+s pattern
     print(f"\nE. THE (b+s) SOVEREIGN PATTERN:")

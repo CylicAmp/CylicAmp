@@ -172,7 +172,7 @@ Nothing in the files themselves was modified to produce this.
 | `triple_coupling_666_gf37.py` | 42 | The Triple Coupling Constant 666 on GF(37) — THEOREM 88 |
 | `twin_midpoint_dr_axis.py` | 24 | Twin Prime Midpoints and the DR Sovereign Axis — THEOREM 71 |
 | `twin_prime_chamber_gf37.py` | 18 | -*- coding: utf-8 -*- |
-| `twin_prime_consolidation.py` | 8 | Theorem 221: Twin Prime Consolidation — Full Anatomy with Imaginary Unit Gate |
+| `twin_prime_consolidation.py` | 8 | Theorem 385: Twin Prime Consolidation — Full Anatomy with Imaginary Unit Gate |
 | `twin_prime_dr_pair.py` | 3 | -*- coding: utf-8 -*- |
 | `twin_prime_gf37.py` | 50 | Twin Prime Conjecture — GF(37) Structure |
 | `twin_prime_pipe.py` | 9 | -*- coding: utf-8 -*- |
@@ -180,7 +180,7 @@ Nothing in the files themselves was modified to produce this.
 | `twin_prime_riemann_framework.py` | 23 | Twin Prime χ₋₃ Structure and the Riemann Gap |
 | `twin_prime_structure.py` | 21 | TWIN PRIME STRUCTURE THEOREM |
 | `two_group_split.py` | 26 | Two-Group Split — GF(37) |
-| `unified_field_architecture.py` | 11 | Theorem 224: Unified Field Architecture — Void to Geometric Morphogenesis |
+| `unified_field_architecture.py` | 11 | Theorem 388: Unified Field Architecture — Void to Geometric Morphogenesis |
 | `unit_scalar_init_gf37.py` | 16 | Unit Scalar Initialization and Basin Preservation on GF(37) — THEOREM 91 |
 | `verify_local_confluence.py` | 2 | Layer 38 (cont.): Computational Verification of Local Confluence |
 | `zero_ground_decimal.py` | 12 | -*- coding: utf-8 -*- |
@@ -204,7 +204,7 @@ Nothing in the files themselves was modified to produce this.
 | `cipher_123_1234.py` | 9 | Cipher 123 and 1234 — Z/9Z partition and cascade connection |
 | `column_cross_pairing.py` | 19 | Column Cross-Pairing Theorem |
 | `consecutive_digit_triples.py` | 16 | -*- coding: utf-8 -*- |
-| `coset_step_alignment.py` | 1 | Theorem 218: Coset Alignment of Torus Steps |
+| `coset_step_alignment.py` | 1 | Theorem 382: Coset Alignment of Torus Steps |
 | `cyclic_permutation_coset.py` | 15 | -*- coding: utf-8 -*- |
 | `dhananjaya_prana_engine.py` | 12 | -*- coding: utf-8 -*- |
 | `digit_circle_5_center.py` | 37 | Digit Circle with 5 at Center |
@@ -268,8 +268,8 @@ Nothing in the files themselves was modified to produce this.
 | `pascal_row8_mod37.py` | 37 | Pascal's Triangle Row 8 — GF(37) Spine |
 | `pattern_1234_5_1234_gf37.py` | 18 | Pattern (1-4)(5)(1-4) — 16 Numbers on GF(37) — THEOREM 98 |
 | `payload_digit_structure.py` | 18 | Payload Digit Structure — 23572481523 |
-| `penrose_tiktok_gf37.py` | 11 | Theorem 222: Penrose Patch, TikTok Numbers, and GF(37) Coset Anatomy |
-| `period_999_2997.py` | 2 | Theorem 219: The 999 -> 2997 Period Split |
+| `penrose_tiktok_gf37.py` | 11 | Theorem 386: Penrose Patch, TikTok Numbers, and GF(37) Coset Anatomy |
+| `period_999_2997.py` | 2 | Theorem 383: The 999 -> 2997 Period Split |
 | `permutation_132_bipartite_gf37.py` | 15 | 132-Pattern Permutations — Bipartite Graph Construction and GF(37) Structure |
 | `permutation_347_137.py` | 6 | Permutation analysis for digit sets {3,4,7} and {1,3,7}. |
 | `permutation_cycle_notation_gf37.py` | 39 | Permutation Cycle Notation — SA×NQR / ST×QR Cross-Duality in GF(37) |
@@ -293,7 +293,7 @@ Nothing in the files themselves was modified to produce this.
 | `repunit_sq_euler_phi_gf37.py` | 52 | Repunit Squares and Euler Totient — GF(37) Structure |
 | `resonance_row_1335.py` | 4 | 17-Point Resonance Row and 1335 Partition Invariant |
 | `reversal_differences.py` | 14 | -*- coding: utf-8 -*- |
-| `reversal_ladder_2357.py` | 7 | Theorem 220: Reversal Ladder — 2357, 291-Step Climb, and the 99² Lock |
+| `reversal_ladder_2357.py` | 7 | Theorem 384: Reversal Ladder — 2357, 291-Step Climb, and the 99² Lock |
 | `riemann_gf37_coverage.py` | 2 | !/usr/bin/env python3 |
 | `root_grid_dr6_dr7.py` | 12 | Root Grid Theorem — DR Classes 6 and 7 (Raw Archive v37.22) |
 | `rule30_mersenne_gf37.py` | 4 | -*- coding: utf-8 -*- |
@@ -464,7 +464,7 @@ Nothing in the files themselves was modified to produce this.
 | `fixed_point_physics_math.py` | 7 | -*- coding: utf-8 -*- |
 | `lob_24c_errata.py` | 5 | LoB 24c — Errata Correction Record (MWS v37.20 → v37.21) |
 | `multi_layer_obstruction_gf37.py` | 43 | Multi-Layer Obstruction Calculus on GF(37) — THEOREM 80 |
-| `shell_buckling_gf37.py` | 4 | Theorem 223: Non-Euclidean Shell Buckling, +1 Nematic Defect, GF(37) Mode Selection |
+| `shell_buckling_gf37.py` | 4 | Theorem 387: Non-Euclidean Shell Buckling, +1 Nematic Defect, GF(37) Mode Selection |
 | `theorem_218_nuclear_falsification.py` | 12 | Theorem 218: GF(37) Nuclear Predictions — Falsification Program |
 | `theorem_219_annotated_map_observables.py` | 15 | Theorem 219: GF(37) — Three-Layer Falsification Protocol |
 | `theorem_224_d7_envelope_stability_gf37.py` | 33 | Theorem 224: D7 Envelope — Stability Admissible Region in GF(37) |

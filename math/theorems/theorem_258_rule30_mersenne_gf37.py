@@ -28,7 +28,7 @@ RIGHT EDGE RUN RECORDS:
   7  | 127     | 16         | —
   8  | 255     | 24         | SEED
   9  | 511     | 25         | SA
-  10 | 1023    | 27         | -H (cube root of -1, T257)
+  10 | 1023    | 27         | -H (cube root of -1, T419)
   11 | 2047    | 29         | C9
   12 | 4095    | 34         | —  (-3 mod 37)
 

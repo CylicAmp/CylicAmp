@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 233: The (1)+n DR Addition Table -- Self-Feeding Chain {2,5,6,8}
+THEOREM 397: The (1)+n DR Addition Table -- Self-Feeding Chain {2,5,6,8}
 ================================================================================
 
 USER NOTATION:
@@ -54,6 +54,15 @@ CHAIN ANATOMY:
   Row n=8 first intermediate 9 is in SA.
   Both SA entries produce 5 (prime seed) as ultimate result: 4+2=6->imag, but 9+5=14->5.
 ================================================================================
+
+RENUMBERED 2026-09-19: T233 -> T397.
+This file declared Theorem 233 on 2026-08-17, before `theorem_233_rule_30.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T397; citations that meant `theorem_233_rule_30.py` were left at T233.
 """
 
 import sys
@@ -97,7 +106,7 @@ def coset_of(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 233: (1)+n DR ADDITION TABLE -- SELF-FEEDING CHAIN {2,5,6,8}")
+    print("THEOREM 397: (1)+n DR ADDITION TABLE -- SELF-FEEDING CHAIN {2,5,6,8}")
     print("=" * 70)
 
     cosets = build_cosets()

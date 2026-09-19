@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 229: The Imaginary-Unit AP -- 12,18,24,30,36 and the -1 Pivot
+THEOREM 393: The Imaginary-Unit AP -- 12,18,24,30,36 and the -1 Pivot
 ================================================================================
 
 USER: "Continue with 17 19 36."
@@ -45,6 +45,15 @@ TWIN PRIME PAIR SUMS (gap=2 pairs only):
   (41,43): 84    mod 37 = 10  C_1  [H -- sovereign kernel]
   (59,61): 120   mod 37 =  9  C_7  [SA -- sovereign anchor]
 ================================================================================
+
+RENUMBERED 2026-09-19: T229 -> T393.
+This file declared Theorem 229 on 2026-08-16, before `theorem_229_m9_terminal_singularity.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T393; citations that meant `theorem_229_m9_terminal_singularity.py` were left at T229.
 """
 
 import sys
@@ -92,7 +101,7 @@ def tag(r):
 
 def run():
     print("=" * 70)
-    print("THEOREM 229: IMAGINARY-UNIT AP -- 12,18,24,30,36 AND THE -1 PIVOT")
+    print("THEOREM 393: IMAGINARY-UNIT AP -- 12,18,24,30,36 AND THE -1 PIVOT")
     print("=" * 70)
 
     cosets = build_cosets()

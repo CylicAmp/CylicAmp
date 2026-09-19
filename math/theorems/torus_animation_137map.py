@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 252: Torus Animation of the 137-Map Phase Engine
+THEOREM 414: Torus Animation of the 137-Map Phase Engine
 ================================================================================
 
 The three sovereign orbits under f(n) = 26n mod 37 embed naturally on a torus
@@ -43,6 +43,15 @@ ANIMATION:
   as a closed 3-point loop on the torus surface; phase arrows show the
   ×26 direction.  The torus shell is rendered semi-transparent.
 ================================================================================
+
+RENUMBERED 2026-09-19: T252 -> T414.
+This file declared Theorem 252 on 2026-08-21, before `theorem_252_cyclic_cubic_gf37.py`
+(2026-08-30) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T414; citations that meant `theorem_252_cyclic_cubic_gf37.py` were left at T252.
 """
 
 import sys
@@ -95,7 +104,7 @@ def torus_surface():
 
 
 def verify():
-    print("THEOREM 252: TORUS ANIMATION OF THE 137-MAP PHASE ENGINE")
+    print("THEOREM 414: TORUS ANIMATION OF THE 137-MAP PHASE ENGINE")
     print("=" * 60)
 
     all_elements = []
@@ -180,7 +189,7 @@ def build_animation(n_frames=72, out_path=None):
                     f"{label}\n{orbit[0]}", color=color,
                     fontsize=7, ha='center')
 
-        ax.set_title("T252 — 137-Map Orbits on T²\n"
+        ax.set_title("T414 — 137-Map Orbits on T²\n"
                      "SEED {18,24,32}  ·  C3 {3,4,30}  ·  H {1,26,10}",
                      color='#cccccc', fontsize=9, pad=4)
 

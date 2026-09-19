@@ -3,7 +3,9 @@
 
 Written after a full-corpus prior-art sweep found that 40+ numbers resolve
 to two different files on unrelated subjects, which makes every cross-
-reference by number ambiguous.
+reference by number ambiguous. Cleared 2026-09-19 (early block T218-T261
+renumbered to T382-T421); this now prints 0 and 0, and is a regression
+check, not an open report.
 
     python3 tools/number_collisions.py
 """

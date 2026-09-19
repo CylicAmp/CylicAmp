@@ -47,17 +47,17 @@ DIRICHLET L-FUNCTION [P]:
 
 GF(37) CONNECTIONS:
   37 ≡ 1 (mod 4) → χ mod 4 gives χ(37) = +1 (37 splits in Q(i))
-  37 ≡ 1 (mod 3) → 37 splits in Q(√-3) (Eisenstein splitting, T257)
+  37 ≡ 1 (mod 3) → 37 splits in Q(√-3) (Eisenstein splitting, T419)
   Hecke operator T_37 acts on S_12(Γ₀(1)) (space containing Δ):
     T_37(Δ) = τ(37) · Δ  (since Δ is a Hecke eigenform)
-    τ(37) mod 37 = 31  (computed in T260)
+    τ(37) mod 37 = 31  (computed in T420)
   τ(37) ≢ 0 mod 37: 37 is not a zero of tau — consistent with 37
   being an ordinary prime for the Galois representation ρ_Δ mod 37.
 
 VERIFIED 2026-09-16 [V] — the arithmetic in this file now runs:
   tau(37) = -182213314, from the q-expansion of Delta = q prod (1-q^n)^24
   computed here; tau(1..12) reproduces the standard values as a control.
-  tau(37) mod 37 = 31, confirming the figure T260 supplied, and 31 != 0, so
+  tau(37) mod 37 = 31, confirming the figure T420 supplied, and 31 != 0, so
   37 is ordinary for rho_Delta as stated. 31 lies in C9 = {14,29,31}.
   37 mod 4 = 1 and 37 mod 3 = 1, so 37 splits in BOTH Q(i) and Q(sqrt-3);
   explicitly 37 = 6^2 + 1^2 and 37 = 4^2 + 4*3 + 3^2.
@@ -347,11 +347,11 @@ def run():
     assert P % 4 == 1
     print(f"  37 ≡ {P%4} (mod 4) → χ mod 4: χ(37) = +1 → 37 splits in Q(i)  check")
 
-    # 37 mod 3 (already in T257)
+    # 37 mod 3 (already in T419)
     assert P % 3 == 1
-    print(f"  37 ≡ {P%3} (mod 3) → 37 splits in Q(√-3) (Eisenstein, T257)  check")
+    print(f"  37 ≡ {P%3} (mod 3) → 37 splits in Q(√-3) (Eisenstein, T419)  check")
 
-    # tau(37) mod 37 — computed in T260
+    # tau(37) mod 37 — computed in T420
     def compute_tau_mod(N, m):
         coeffs = [0]*(N+1); coeffs[0] = 1
         for k in range(1, N+1):
@@ -404,7 +404,7 @@ def run():
         -113643, -115920, 534612, -370944]
     t37 = tau(37)
     assert t37 == -182213314
-    assert t37 % 37 == 31                  # the figure T260 supplied
+    assert t37 % 37 == 31                  # the figure T420 supplied
     assert t37 % 37 != 0                   # 37 ordinary for rho_Delta
     assert 31 in {14, 29, 31}              # C9
     assert 37 % 4 == 1 and 37 % 3 == 1     # splits in BOTH Q(i) and Q(sqrt-3)

@@ -23,7 +23,7 @@ ZERO ENRICHMENT STRUCTURE (verified):
     Note: σ₃(37) = 1 + 37³ ≡ 1 (mod 37) → n=37 itself is NOT a zero.
     Zeros at multiples of 37 arise from other divisors.
 
-CONNECTION TO THEOREM 257 (σ₃ DIVISIBILITY):
+CONNECTION TO THEOREM 419 (σ₃ DIVISIBILITY):
   37|σ₃(p) ⟺ p∈{11,27,36} (mod 37) = -H (cube roots of -1 mod 37)
   240 mod 37 = 18 ∈ SEED = {18,24,32}
   E8 coefficient a(n) = 240·σ₃(n); 240 ≡ 18 (mod 37), 18 ∈ SEED orbit
@@ -34,7 +34,7 @@ CONNECTION TO THEOREM 257 (σ₃ DIVISIBILITY):
 
 GF(37) KEY FACTS:
   37 | σ₃(n) for:
-    n = p with p ≡ 11, 27, or 36 (mod 37): σ₃(p) = 1+p³ ≡ 0 (T257)
+    n = p with p ≡ 11, 27, or 36 (mod 37): σ₃(p) = 1+p³ ≡ 0 (T419)
     n = 11k for most k (since 37|σ₃(11) and σ₃ is multiplicative-like)
   37 ∤ σ₃(37): σ₃(37) = 1+37³ ≡ 1+0 = 1 (mod 37) ≠ 0
 ================================================================================
@@ -150,7 +150,7 @@ def run():
 
     print(f"\nGF(37) SUMMARY:")
     print(f"  240 ≡ 18 ∈ SEED: E8 scaling enters at SEED orbit node 18")
-    print(f"  37|σ₃(p) ⟺ p∈-H (Theorem 257) — prime zeros classified")
+    print(f"  37|σ₃(p) ⟺ p∈-H (Theorem 419) — prime zeros classified")
     print(f"  11∈-H: σ₃(11)≡0 drives the mod-11 enrichment (6×)")
     print(f"  σ₃(37)≡1 ≠ 0: multiples of 37 not automatically zeros")
 

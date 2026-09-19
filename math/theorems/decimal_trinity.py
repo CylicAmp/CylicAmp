@@ -2,7 +2,7 @@
 # CLASS: THEOREM
 """
 ================================================================================
-THEOREM 225: ord_37(10) = 3 -- The Decimal Base as Generator of H_3
+THEOREM 389: ord_37(10) = 3 -- The Decimal Base as Generator of H_3
 ================================================================================
 
 STATEMENT:
@@ -59,6 +59,15 @@ USER OBSERVATION:
   in 3 steps through the decimal base. The "nine" is the DR modulus
   (1+9=10, DR(n+9)=DR(n)). The century closes at 100 = 26 (mod 37), the
   third H-element -- orbit return.
+
+RENUMBERED 2026-09-19: T225 -> T389.
+This file declared Theorem 225 on 2026-08-16, before `theorem_225_manifold_m_d7_consistency.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T389; citations that meant `theorem_225_manifold_m_d7_consistency.py` were left at T225.
 """
 
 import sys
@@ -96,7 +105,7 @@ def coset_of(x, cosets):
 
 def run():
     print("=" * 80)
-    print("T225: ord_37(10) = 3 -- The Decimal Base as Generator of H_3")
+    print("T389: ord_37(10) = 3 -- The Decimal Base as Generator of H_3")
     print("=" * 80)
 
     cosets = build_cosets()
@@ -231,9 +240,9 @@ def run():
     print(f"    H_3 = <10> is the decimal place-value cycle in GF(37).")
     print(f"    'The 1' generates the trinity and returns to 1.")
 
-    # [10] T225 synthesis
+    # [10] T389 synthesis
     print("\n" + "=" * 80)
-    print("T225 SYNTHESIS")
+    print("T389 SYNTHESIS")
     print("=" * 80)
     print("    The decimal base 10 generates the cube-root subgroup H_3 in GF(37).")
     print("    - The three zeros in 1,000 are the 3-cycle 10^0, 10^1, 10^2.")

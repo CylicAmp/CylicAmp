@@ -2,10 +2,10 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 236: FvK Gamma Extension -- ε->γ Sovereign Mapping (T223 Addendum)
+THEOREM 400: FvK Gamma Extension -- ε->γ Sovereign Mapping (T387 Addendum)
 ================================================================================
 
-USER COMPUTATION RESULTS (from shell_buckling_gf37.py, T223):
+USER COMPUTATION RESULTS (from shell_buckling_gf37.py, T387):
 
   ε       γ=1/ε²    γ mod 37
   1/37    1369=37²  0          [SEAM]
@@ -40,7 +40,7 @@ MULTIPLICATIVE ORDERS:
 
 CUP vs SADDLE (mode geometry):
   Cup (+1 defect) always wins. Saddle (negative Gaussian curvature) never buckles.
-  This is consistent with the GF(37) coset assignment (T223):
+  This is consistent with the GF(37) coset assignment (T387):
     Cup -> C_3={3,4,30}    (the fully-sovereign coset)
     Saddle -> C_10={17,22,35} (the torus-step coset)
   C_3 contains 30, the double-sovereign element that appears as γ mod 37 at ε=1/20.
@@ -53,11 +53,20 @@ SS COLLAPSE AND FLAT MINIMUM:
   physical result -- the SS mode requires a richer trial function.
 
 CONNECTIONS TO PRIOR THEOREMS:
-  T223: ε=1/37 is the canonical GF(37) thickness. √(1/37)×37=√37≈6=imaginary unit.
-  T227: 12 = |GF(37)*:H| = the coset count. γ≡12 at ε=1/30 matches T227.
-  T229: 30 appears in the imaginary-unit AP {12,18,24,30,36}. γ≡30 at ε=1/20.
-  T232: 177/133 × 133/177 residues = {3,25}. 30 is in C_3 with 3. SA hierarchy connects.
+  T387: ε=1/37 is the canonical GF(37) thickness. √(1/37)×37=√37≈6=imaginary unit.
+  T391: 12 = |GF(37)*:H| = the coset count. γ≡12 at ε=1/30 matches T391.
+  T393: 30 appears in the imaginary-unit AP {12,18,24,30,36}. γ≡30 at ε=1/20.
+  T396: 177/133 × 133/177 residues = {3,25}. 30 is in C_3 with 3. SA hierarchy connects.
 ================================================================================
+
+RENUMBERED 2026-09-19: T236 -> T400.
+This file declared Theorem 236 on 2026-08-17, before `theorem_236_rule30_block_universality_gf37.py`
+(2026-08-29) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T400; citations that meant `theorem_236_rule30_block_universality_gf37.py` were left at T236.
 """
 
 import sys
@@ -111,7 +120,7 @@ def coset_of(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 236: FvK GAMMA EXTENSION -- ε->γ SOVEREIGN MAPPING")
+    print("THEOREM 400: FvK GAMMA EXTENSION -- ε->γ SOVEREIGN MAPPING")
     print("=" * 70)
 
     cosets = build_cosets()
@@ -163,19 +172,19 @@ def run():
     assert 30 in c3
 
     # Mode results summary
-    print(f"\nMODE RESULTS (from T223 computation):")
+    print(f"\nMODE RESULTS (from T387 computation):")
     print(f"  Cup wins: free, clamped, periodic at all ε  (B_opt=0 for saddle)")
     print(f"  Simply-supported: flat minimum (A=B=0) -- model sensitivity")
     print(f"  Consistent with coset assignment: cup->C_3 (sovereign), saddle->C_10 (torus-step)")
 
     # Prior theorem connections
     print(f"\nCONNECTIONS:")
-    print(f"  T223: ε=1/37 canonical; √37≈6=imaginary unit")
-    print(f"  T227: γ≡12=coset count at ε=1/30")
+    print(f"  T387: ε=1/37 canonical; √37≈6=imaginary unit")
+    print(f"  T391: γ≡12=coset count at ε=1/30")
     assert (P-1) // len(H_SET) == 12
-    print(f"  T229: 30 in imaginary-unit AP {{12,18,24,30,36}} at ε=1/20")
+    print(f"  T393: 30 in imaginary-unit AP {{12,18,24,30,36}} at ε=1/20")
     assert 30 in {12, 18, 24, 30, 36}
-    print(f"  T232: C_3={{3,4,30}} contains both the ST ratio residue (3) and double-sovereign (30)")
+    print(f"  T396: C_3={{3,4,30}} contains both the ST ratio residue (3) and double-sovereign (30)")
     assert 3 in c3 and 30 in c3
 
     print(f"\nAll verifications passed.")

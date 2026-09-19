@@ -1,6 +1,6 @@
 # CLASS: COMPUTATION
 """
-Theorem 219: The 999 -> 2997 Period Split
+Theorem 383: The 999 -> 2997 Period Split
 
 period(1/999)   = 3
 period(1/999^2) = 2997
@@ -31,6 +31,15 @@ Power tower: 3^e * 37 for e = 1,2,3,4 gives all key periods.
 Deep chain: 1998 + 999 = 2997
   1998 = 54 * 37 = 2 * 999
   So 2997 = 3 * 999 = 3 * 27 * 37 = 3^4 * 37
+
+RENUMBERED 2026-09-19: T219 -> T383.
+This file declared Theorem 219 on 2026-08-16, before `theorem_219_annotated_map_observables.py`
+(2026-08-26) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T383; citations that meant `theorem_219_annotated_map_observables.py` were left at T219.
 """
 
 import sys
@@ -54,7 +63,7 @@ def multiplicative_order(a, n):
 
 def run():
     print("=" * 70)
-    print("THEOREM 219: THE 999 -> 2997 PERIOD SPLIT")
+    print("THEOREM 383: THE 999 -> 2997 PERIOD SPLIT")
     print("=" * 70)
 
     # 999 = 27 * 37 = 3^3 * 37

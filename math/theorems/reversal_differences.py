@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 234: Reversal Differences -- 198=18×11 and the {594,396} Pair
+THEOREM 398: Reversal Differences -- 198=18×11 and the {594,396} Pair
 ================================================================================
 
 USER NOTATION:
@@ -62,6 +62,15 @@ AP {123, 147, 159} WITH HALVING STEPS:
   The step halves: 24 -> 12. Both steps are sovereign (seed orbit, then ST).
   147 is at the -1 pivot: the AP passes through -1.
 ================================================================================
+
+RENUMBERED 2026-09-19: T234 -> T398.
+This file declared Theorem 234 on 2026-08-17, before `theorem_234_1137_decimal_shift.py`
+(2026-08-29) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T398; citations that meant `theorem_234_1137_decimal_shift.py` were left at T234.
 """
 
 import sys
@@ -104,7 +113,7 @@ def coset_of(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 234: REVERSAL DIFFERENCES -- 198=18x11 AND THE {594,396} PAIR")
+    print("THEOREM 398: REVERSAL DIFFERENCES -- 198=18x11 AND THE {594,396} PAIR")
     print("=" * 70)
 
     cosets = build_cosets()

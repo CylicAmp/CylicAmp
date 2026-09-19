@@ -1,6 +1,6 @@
 # CLASS: COMPUTATION
 """
-Theorem 218: Coset Alignment of Torus Steps
+Theorem 382: Coset Alignment of Torus Steps
 
 CRITICAL DISCOVERY: Both torus step components, when reduced mod 37,
 land in the same coset of H = {1, 10, 26} in F_37*.
@@ -18,6 +18,15 @@ Further: 54 = 6 * 9, where
 
 The two directions of motion on the torus are not independent:
 they are coupled through the coset structure of GF(37)*.
+
+RENUMBERED 2026-09-19: T218 -> T382.
+This file declared Theorem 218 on 2026-08-16, before `theorem_218_nuclear_falsification.py`
+(2026-08-26) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T382; citations that meant `theorem_218_nuclear_falsification.py` were left at T218.
 """
 
 import sys
@@ -68,7 +77,7 @@ def verify_6_squared():
 
 def run():
     print("=" * 70)
-    print("THEOREM 218: COSET ALIGNMENT OF TORUS STEPS")
+    print("THEOREM 382: COSET ALIGNMENT OF TORUS STEPS")
     print("=" * 70)
 
     coset_list = cosets_gf37()

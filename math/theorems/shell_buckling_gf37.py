@@ -1,6 +1,6 @@
 # CLASS: METHOD
 """
-Theorem 223: Non-Euclidean Shell Buckling, +1 Nematic Defect, GF(37) Mode Selection
+Theorem 387: Non-Euclidean Shell Buckling, +1 Nematic Defect, GF(37) Mode Selection
 
 PHYSICAL SETUP:
   Disk of radius R, single +1 nematic defect at center (Guillamat geometry).
@@ -19,7 +19,7 @@ PREDICTIONS (committed before computing):
 
 GF(37) CONNECTIONS (the new structural findings):
   A. ε = 1/37: the natural field thickness. ε² = 1/1369 = 1/37².
-     From T219: ord_1369(10) = 111 = 3 × 37 — the period of 1/37² decimal.
+     From T383: ord_1369(10) = 111 = 3 × 37 — the period of 1/37² decimal.
      The bending stiffness ε² = 1/37² encodes the same period structure.
 
   B. Boundary-layer width for clamped edge: √(ε)·R.
@@ -34,10 +34,10 @@ GF(37) CONNECTIONS (the new structural findings):
 
   D. Coset identification of modes:
      Cup (axisymmetric, sovereignty-preserving) → C_3 = {3, 4, 30}
-       C_3 is the fully-sovereign coset (T222). The cup mode preserves
+       C_3 is the fully-sovereign coset (T386). The cup mode preserves
        the radial symmetry of the defect — it is the "sovereign" deformation.
      Saddle (n=2, symmetry-breaking) → C_10 = {17, 22, 35}
-       C_10 is the torus-step coset (T218). Both torus steps -2 ≡ 35 and
+       C_10 is the torus-step coset (T382). Both torus steps -2 ≡ 35 and
        54 ≡ 17 live here. Saddle breaks axisymmetry — it steps off the
        symmetric coset exactly as the torus map steps in C_10.
      Higher wrinkle (n≥3) → C_11 = {18, 24, 32}
@@ -54,6 +54,15 @@ GF(37) CONNECTIONS (the new structural findings):
      12 = |GF(37)* : H| where H = {1, 10, 26}. Not a coincidence:
      each physical boundary condition selects a distinct coset, and the
      mode winner is determined by which coset contains the BC residue.
+
+RENUMBERED 2026-09-19: T223 -> T387.
+This file declared Theorem 223 on 2026-08-16, before `theorem_223_orbit_partition_riemann_gf37.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T387; citations that meant `theorem_223_orbit_partition_riemann_gf37.py` were left at T223.
 """
 
 import sys
@@ -225,7 +234,7 @@ def build_cosets():
 
 def run():
     print("=" * 70)
-    print("THEOREM 223: NON-EUCLIDEAN SHELL BUCKLING — GF(37) MODE SELECTION")
+    print("THEOREM 387: NON-EUCLIDEAN SHELL BUCKLING — GF(37) MODE SELECTION")
     print("=" * 70)
 
     # ── Section A: GF(37) thickness ─────────────────────────────────────────
@@ -233,7 +242,7 @@ def run():
     eps_field = 1.0 / P
     print(f"   ε = 1/37 = {eps_field:.6f}")
     print(f"   ε² = 1/1369 = {eps_field**2:.8f}")
-    print(f"   From T219: ord_1369(10) = 111 = 3 × 37  [bending stiffness carries period structure]")
+    print(f"   From T383: ord_1369(10) = 111 = 3 × 37  [bending stiffness carries period structure]")
 
     # ── Section B: Boundary layer = imaginary unit ───────────────────────────
     print("\nB. BOUNDARY LAYER WIDTH = IMAGINARY UNIT")
@@ -257,9 +266,9 @@ def run():
     # ── Section D: Coset identification of modes ─────────────────────────────
     print("\nD. COSET IDENTIFICATION OF MODES")
     print(f"   Cup (axisymmetric, sovereign)  →  C_3  = {sorted(C3)}")
-    print(f"   C_3: {3}∈ST, {4}∈SA, {30}∈SA∩ST  — fully sovereign (T222)")
+    print(f"   C_3: {3}∈ST, {4}∈SA, {30}∈SA∩ST  — fully sovereign (T386)")
     print(f"   Saddle (symmetry-breaking)     →  C_10 = {sorted(C10)}")
-    print(f"   C_10: torus-step coset (T218); both -2≡35 and 54≡17 live here")
+    print(f"   C_10: torus-step coset (T382); both -2≡35 and 54≡17 live here")
     print(f"   Higher wrinkle (seed mode)     →  C_11 = {sorted(C11)}")
     print(f"   C_11: seed orbit {{18,24,32}}; the system's fundamental orbit")
 

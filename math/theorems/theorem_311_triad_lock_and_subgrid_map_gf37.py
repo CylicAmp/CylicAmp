@@ -36,7 +36,7 @@ MECHANISM (derived, then stress-tested before being written down)
 
     Reversal shift: rev(b) - b = 198 for b in {123,456,789}, and
     dr(198) = 9. This is the reversal-difference law 99(a-c) with
-    a-c = -2 (T234's 198 = 18 x 11).
+    a-c = -2 (T398's 198 = 18 x 11).
 
     Sliding-window DRs for 123,234,...,912 lock to 6,9,3 repeating.
     Step sizes 111,102,21,789 are all multiples of 3 (111 = 3 x 37).

@@ -1,9 +1,9 @@
-# The 2D/3D vorticity distinction, and what it does to T256
+# The 2D/3D vorticity distinction, and what it does to T418
 
 Written because a claim reached this session that spatial cutoffs and bounding
 exponents "must be injected to prevent the linearized operator R(u,p) from
 collapsing into a finite-time singularity." That is not how the 3D problem
-works, and the reason why is the same fact that grades T256's vortex row.
+works, and the reason why is the same fact that grades T418's vortex row.
 
 ---
 
@@ -66,9 +66,9 @@ parabolic Hausdorff dimension by 1.
 
 ---
 
-## 2. What this does to T256
+## 2. What this does to T418
 
-`math/theorems/pinn_rt_phase_field.py` (Theorem 256, "Discrete Phase-Field
+`math/theorems/pinn_rt_phase_field.py` (Theorem 418, "Discrete Phase-Field
 Correspondence") maps GF(37)/the 137-map onto two-phase Navier-Stokes of
 Rayleigh-Taylor class. Its correspondence table includes:
 
@@ -89,7 +89,7 @@ curl'."* The vortex row is the same shape.
   question, and a 3-cycle is blind to it.
 
 So the vortex row is a level-1 correspondence at best, and it is blind on
-precisely the axis that matters. That is not an argument against T256's other
+precisely the axis that matters. That is not an argument against T418's other
 rows — the phase-advection residual R1 in that file is a genuine, proved
 statement about the 137-map (f(n) = 26n preserves chi_{-3} class when 3 does
 not divide n, since gcd(26,3) = 1). It is an argument for keeping that row
@@ -126,9 +126,9 @@ EOF
 
 ---
 
-## 4. The remaining T256 rows, graded against T305
+## 4. The remaining T418 rows, graded against T305
 
-Every row of T256's correspondence table and its three residuals, graded by
+Every row of T418's correspondence table and its three residuals, graded by
 T305's cuts. Verified computationally, not read off.
 
 ### Outright false — two of the three residuals
@@ -196,7 +196,7 @@ dominant instability mode" imports a fluid role the computation does not supply.
 
 ## 5. The structural finding: a claim-assertion gap
 
-T256 runs clean. It passes because **its assertions test only true sub-steps,
+T418 runs clean. It passes because **its assertions test only true sub-steps,
 never the claims that are false.** The complete assert list:
 
     assert gcd(26, 3) == 1            <- the only R1-related assert, and it is
@@ -219,5 +219,5 @@ A, the docstring claims B, and nothing checks B.
 It is not statically detectable in general — deciding whether an assert covers a
 prose claim needs the claim formalised. What IS mechanisable is a weaker proxy:
 flag any file whose docstring states a universally quantified claim ("for all n
-with ...") that no assertion quantifies over. T256 would be caught by that.
+with ...") that no assertion quantifies over. T418 would be caught by that.
 Recorded as a proposal, not built.
