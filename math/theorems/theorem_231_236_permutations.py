@@ -121,7 +121,11 @@ GF(37):
   192 × 137 = 26304  DR=6  mod37=34∈D7
 
 1/137: 138 mod 137 = 1  (138 is the only T231 value ≡ 1 mod 137)
-  138 = 2×3×23 = 2×69 = 6×23.  DR=3.  138/137 ≈ 1.0073 ≈ 1 + α⁻¹·α = 1 + 1/137 × 137 = 1+1.
+  138 = 2×3×23 = 2×69 = 6×23.  DR=3.  138/137 = 1 + 1/137 ≈ 1.00730.
+  (CORRECTED 2026-09-19. This read "≈ 1 + α⁻¹·α = 1 + 1/137 × 137 = 1+1",
+  which is wrong twice: α⁻¹·α = 1 exactly, so 1 + α⁻¹·α = 2, and
+  1/137 × 137 = 1 likewise gives 2 — neither is 1.0073. The true statement
+  is 138/137 = 1 + 1/137, and 1/137 ≈ α only because 137 ≈ α⁻¹.)
 
 RIEMANN HYPOTHESIS:
   192 mod 37 = 7 ∈ D7.  γ₃₃ ≈ 107.168 → floor=107, 107 mod37=33∈D7.

@@ -2,8 +2,11 @@
 """
 Theorem 182: Spin Structure Encoded in GF(37)
 
-THE FINE STRUCTURE CONSTANT DECOMPOSES INTO THE FRAMEWORK
+THE INTEGER 137 DECOMPOSES INTO THE FRAMEWORK
 ===========================================================
+  (Retitled 2026-09-19. What decomposes below is the INTEGER 137, not the
+  fine-structure constant: α⁻¹ = 137.035999177(21) is not an integer and
+  137 is only its nearest one. Nothing here is a statement about α.)
   α ≈ 1/137   (fine structure constant — governs all electromagnetic interactions)
   137 = 3 × 37 + 26
 
