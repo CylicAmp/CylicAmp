@@ -143,12 +143,51 @@ but the certificate should read |D| divides B, and it does here.
   this instrument replaces the finite-field one for cycle questions.
 
 ================================================================================
+4b. OUT TO L = 24, BY BOUNDING THE CYCLE MINIMUM INSTEAD OF ENUMERATING
+================================================================================
+
+  Word enumeration stops being possible around L = 17: 2^24 words per
+  multiplier is out of reach in this language.  It is also unnecessary.
+
+  BOUNDING LEMMA.  Fix L and a with D = 2^L - m^a > 0.  Then
+  B_sigma <= Bmax(L, a, m), the maximum of sum_{j in O} 2^j m^{a_j} over all
+  placements of a O's in L slots, which a two-line DP computes exactly.  Any
+  positive cycle on such a word has x = B/D <= Bmax/D.  Maximising over all
+  (L, a) with L <= 24 gives a single bound X, and then testing every odd
+  x <= X directly is a COMPLETE search -- no word is skipped, because every
+  cycle has a minimum element and that element is <= X.
+
+      m = 3   X = 3018    worst (L,a) = (24,15)
+      m = 5   X = 18510   worst (L,a) = (21,9)
+      m = 7   X = 14398   worst (L,a) = (23,8)
+
+  The same construction with D < 0 bounds the negative cycles:
+
+      m = 3   |x| <= 9436    m = 5   |x| <= 19363   m = 7   |x| <= 12027
+
+  RESULT, complete for every cycle of length L <= 24:
+
+      m = 3   positive minima {1}          negative {-1, -5, -17}
+      m = 5   positive minima {1, 13, 17}  negative {-1}
+      m = 7   positive minima {1}          negative none
+
+  Every one is a cycle already known.  m = 3 returns exactly the trivial
+  cycle and the three classical negative cycles and nothing else; m = 5
+  returns exactly its three known cycles; m = 7 returns only the trivial one
+  and has no negative cycle at all, since -1 -> -3 -> -10 -> -5 -> -17 -> ...
+  runs away downward instead of closing.
+
+  So the L <= 16 word sieve and the L <= 24 bounded search agree where they
+  overlap, and the extension to 24 adds no new cycle for any of the three
+  multipliers.
+
+================================================================================
 5. SCOPE -- WHAT THIS DOES NOT DO
 ================================================================================
 
   Eliminating cycles is not proving descent, and the supplied text says so.
   The sieve closes the PERIODIC branch, and only up to the searched length:
-  L <= 16 here.  A trajectory can avoid periodicity and still climb.
+  L <= 24 here.  A trajectory can avoid periodicity and still climb.
 
   The stated next question is recorded as OPEN, not as progress:
 
@@ -318,8 +357,58 @@ def main():
     print("             vacuous, as the 2-adic parity-vector bijection predicts")
     print("   m=3 negatives are exactly the orbits of -1, -5 and -17 ✓")
 
+    print("\nPart 4b: complete to L = 24 by bounding the cycle minimum")
+
+    def bmax(L, a, m):
+        """Exact max of B over placements of a O's in L slots."""
+        dp = {0: 0}
+        for j in range(L - 1, -1, -1):
+            nd = {}
+            for tt, val in dp.items():
+                if tt <= a:
+                    nd[tt] = max(nd.get(tt, -1), val)
+                if tt < a:
+                    nd[tt + 1] = max(nd.get(tt + 1, -1), val + (1 << j) * m ** tt)
+            dp = nd
+        return dp.get(a, 0)
+
+    def bound(m, LMAX, positive):
+        X = 0
+        for L in range(1, LMAX + 1):
+            for a in range(1, L + 1):
+                D = (1 << L) - m ** a
+                if (D <= 0) if positive else (D >= 0):
+                    continue
+                X = max(X, bmax(L, a, m) // abs(D))
+        return X
+
+    def search(m, LMAX, X, positive):
+        seeds = set()
+        rng = range(1, X + 1, 2) if positive else range(-1, -X - 1, -2)
+        for x in rng:
+            v, path = x, [x]
+            for _ in range(LMAX):
+                v = (m * v + 1) // 2 if v % 2 else v // 2
+                if v == x:
+                    seeds.add(min(path) if positive else max(path))
+                    break
+                path.append(v)
+        return sorted(seeds, reverse=not positive)
+
+    LMAX = 24
+    want = {3: ([1], [-1, -5, -17]), 5: ([1, 13, 17], [-1]), 7: ([1], [])}
+    for m in (3, 5, 7):
+        Xp, Xn = bound(m, LMAX, True), bound(m, LMAX, False)
+        pos, neg = search(m, LMAX, Xp, True), search(m, LMAX, Xn, False)
+        print("   m=%d  bound +%-6d -%-6d   positive %s   negative %s"
+              % (m, Xp, Xn, pos, neg))
+        assert pos == want[m][0], (m, pos)
+        assert neg == want[m][1], (m, neg)
+    print("   complete for every cycle with L <= 24; every one already known.")
+    print("   the L<=16 word sieve and this agree, and 24 adds nothing new.")
+
     print("\nPart 5: scope")
-    print("   closes the PERIODIC branch, and only for L <= 16 as run here.")
+    print("   closes the PERIODIC branch, and only for L <= 24 as run here.")
     print("   eliminating cycles is not proving descent; the non-periodic")
     print("   growth question is OPEN and nothing here bears on it.")
     print("   for m = 3 the sign argument closes a VANISHING fraction of")
