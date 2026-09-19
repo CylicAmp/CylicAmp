@@ -14,7 +14,7 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
 
   Cross-k uniqueness (verified computationally to n = 500 000 000):
     k=2: IMPOSSIBLE by proof (see below). Zero solutions for all n.
-    k=3: no solutions found up to 500 000 000.
+    k=3: IMPOSSIBLE by proof — PROVED 2026-09-19, see below. Not just n odd.
     k=4: EXACTLY ONE solution: n = 130 — PROVED 2026-09-19, see below.
     k=5: no solutions found up to 500 000 000.
     k=6: no solutions found up to 500 000 000.
@@ -26,6 +26,50 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     d_1 = 1 always (smallest divisor). So n = 1² + d_2² = 1 + d_2².
     Since d_2 | n, d_2 | (1 + d_2²). But d_2 | d_2², so d_2 | 1.
     Therefore d_2 = 1, contradicting d_2 > d_1 = 1. ∎
+
+  ADDED 2026-09-19 — PROOF THAT k=3 IS IMPOSSIBLE.
+  The line above said "no solutions found up to 500 000 000". It is now a
+  theorem, and it is STRONGER than the claim that prompted it: a supplied
+  infographic asserted only that "k=3, n odd" is eliminated. Both parities
+  close, so the whole row closes.
+
+    n = 1 + d_2^2 + d_3^2, with d_2 < d_3 the next two divisors.
+
+    n EVEN — two lines.  d_2 = 2, so n = 5 + d_3^2, and n even forces d_3
+    odd.  d_3 | n and d_3 | 5 + d_3^2 give d_3 | 5, so d_3 = 5 and n = 30.
+    But the divisors of 30 are 1, 2, 3, 5: d_3 = 3, not 5.  Contradiction.
+
+    n ODD — every divisor is odd.  Write p = d_2, the least prime factor.
+    d_3 is either p^2 or the second prime q.
+
+      (i)  d_3 = p^2.  Then n = 1 + p^2 + p^4 and p | n gives p | 1.  Closed.
+
+      (ii) d_3 = q.  p | n gives p | 1 + q^2, so q^2 = -1 (mod p), so -1 is a
+           quadratic residue mod p and p = 1 (mod 4).  Symmetrically q | n
+           gives p^2 = -1 (mod q) and q = 1 (mod 4).  In particular p >= 5,
+           so 3 does not divide n.
+
+      (iii) p and q are odd, so p^2 = q^2 = 1 (mod 8) and n = 3 (mod 8).
+            Hence n = 3 (mod 4).
+
+      (iv) If n = p^a q^b with p = q = 1 (mod 4) then n = 1 (mod 4),
+           contradicting (iii).  So n has a further prime factor r = 3
+           (mod 4), and r > q > p since p, q are the two smallest.
+
+      (v)  Then n >= p q r > p q^2.  But p < q gives
+               n = 1 + p^2 + q^2 < 1 + 2q^2 < 3q^2,
+           so p q^2 < 3 q^2 and p < 3, contradicting p >= 5.            ∎
+
+  THE CLAIM AS SUPPLIED, AND WHAT ACTUALLY PROVES IT.  The infographic gives
+  three reasons: "diagonal symmetry constraints incompatible with k=3 parity
+  requirements", "fractal iteration leads to contradiction in boundary
+  conditions for n odd", and "the 504 framework has no valid mappings in
+  this class".  None of the three bears on this problem.  504 = 9P3 is the
+  count of ordered main diagonals of a 3x3 digit grid (T422) and D_4 is that
+  grid's symmetry group; neither appears anywhere in n = 1 + d_2^2 + d_3^2.
+  The conclusion is right and the stated route to it is not the proof.  What
+  closes it is (ii) -- the quadratic-residue step forcing p = q = 1 (mod 4)
+  -- together with the size bound in (v).
 
   ADDED 2026-09-19 — PROOF OF k=4 UNIQUENESS.
   The line above said "verified computationally to n = 500 000 000". For k=4
@@ -75,8 +119,9 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   2309 have d_4 odd and are excluded at (2); of the 17690 with d_4 even,
   d_4 = 2 d_3 in every single case.
 
-  k=3 and k>=5 remain SEARCH RESULTS, not proofs.  Nothing above applies to
-  them, and the 500 000 000 bound is still all that stands behind those rows.
+  k>=5 remain SEARCH RESULTS, not proofs.  Nothing above applies to them,
+  and the 500 000 000 bound is still all that stands behind those rows.
+  k=2, k=3 and k=4 are now all proved.
 
   n = 130 is not merely the unique k=4 solution — it is the unique solution
   to the entire family of problems simultaneously, and for k=4 that word
@@ -407,7 +452,35 @@ def main():
     assert divisors(130)[:4] == [1, 2, 5, 10]
     assert sum(d * d for d in divisors(130)[:4]) == 130
     print("  (6) n = 5(q^2+1), q|n -> q|5 -> q=5 -> n=130. ∎ ✓")
-    print("  k=4 uniqueness is PROVED. k=3 and k>=5 remain search results.")
+
+    # ── Part 12: k=3 is impossible, BOTH parities ────────────────────────
+    print("\n--- PART 12: k=3 Impossible — Both Parities (added 2026-09-19) ---")
+    assert divisors(30)[:3] == [1, 2, 3]
+    assert sum(d * d for d in divisors(30)[:3]) == 14 != 30
+    print("  n even: d3 | 5 -> d3 = 5 -> n = 30, but divisors(30)[:3] = %s"
+          % divisors(30)[:3])
+    for pp in (3, 5, 7, 11, 13, 101):
+        assert (1 + pp * pp + pp ** 4) % pp == 1 % pp
+    print("  n odd, d3 = p^2: n = 1+p^2+p^4 = 1 (mod p), never 0 ✓")
+    # (ii)+(iii): both primes must be 1 mod 4, so n = 3 mod 8
+    checked = 0
+    for pp in (5, 13, 17, 29, 37, 41):
+        for qq in (13, 17, 29, 37, 41, 53, 61, 73):
+            if qq <= pp:
+                continue
+            nn = 1 + pp * pp + qq * qq
+            assert nn % 8 == 3, (pp, qq)
+            if nn % pp == 0 and nn % qq == 0:
+                checked += 1
+    print("  n odd, d3 = q: n = 1+p^2+q^2 = 3 (mod 8) for every odd p,q ✓")
+    print("      -> p = q = 1 (mod 4) by QR; two such primes give n = 1 (mod 4),")
+    print("      so a third prime r = 3 (mod 4) with r > q is forced, and then")
+    print("      n >= p q r > p q^2 while n < 3 q^2 gives p < 3 < 5. ∎ ✓")
+    k3 = [x for x in range(2, 300001)
+          if len(divisors(x)) >= 3 and sum(d * d for d in divisors(x)[:3]) == x]
+    assert k3 == [], k3
+    print("  cross-check: exhaustive k=3 search to 300000 returns %s ✓" % k3)
+    print("  k=2, k=3, k=4 are all PROVED. k>=5 remain search results.")
 
     print("\n" + "=" * 70)
     print("THEOREM 245 VERIFIED")
