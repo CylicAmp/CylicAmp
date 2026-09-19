@@ -75,6 +75,21 @@ GROUP, which T271 does not treat.
 === FALSIFICATION ===
     ord_37(3) != 18; |<C,mu>| != 666; or an element of <C,mu> whose linear
     part is a non-residue.
+
+GENERALISED 2026-09-19 (T427).  The ORDER 666 is one value of a formula:
+
+    |<A_m, mu>| = 37 * lcm(ord_37(m), 3),   A_m(x) = mx + 1
+
+verified by exhaustive construction for every m in 2..36.  666 is that
+formula at ord_37(3) = 18; 1332 at m = 2 (T338) and m = 5 (T426); 333 at
+m = 7.  So "half" is not a fact about the Collatz map, it is index 2 in a
+cyclic group.
+
+What that does NOT touch is this file's second half.  Index 2 subgroups are
+kernels of characters, which is why the missing coset here has a name --
+the quadratic character of differences.  At m = 7 the index is 4 and the
+missing three quarters are not a single character.  That characterisation
+is narrower than the order statement and remains this file's own.
 """
 
 P = 37
