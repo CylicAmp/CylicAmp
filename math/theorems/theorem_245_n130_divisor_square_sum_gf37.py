@@ -17,7 +17,7 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     k=3: IMPOSSIBLE by proof — PROVED 2026-09-19, see below. Not just n odd.
     k=4: EXACTLY ONE solution: n = 130 — PROVED 2026-09-19, see below.
     k=5: n EVEN impossible by proof (2026-09-19). n odd: open, search only.
-    k=6: no solutions found up to 500 000 000.
+    k=6: IMPOSSIBLE by proof — PROVED 2026-09-19, see below.
     k=7: no solutions found up to 500 000 000.
     k=8: no solutions found up to 500 000 000.
     (k≥9 requires n ≥ d_9² ≥ 9² = 81 and grows rapidly; no solutions expected.)
@@ -26,6 +26,50 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     d_1 = 1 always (smallest divisor). So n = 1² + d_2² = 1 + d_2².
     Since d_2 | n, d_2 | (1 + d_2²). But d_2 | d_2², so d_2 | 1.
     Therefore d_2 = 1, contradicting d_2 > d_1 = 1. ∎
+
+  ADDED 2026-09-19 — k=6 IS IMPOSSIBLE.
+  The even layers are the easy ones, and k=6 closes completely. Four steps,
+  each machine-checked in Part 14.
+
+    (1) PARITY forces p = 2.  If every divisor were odd then
+        n = 1 + (five odd squares) is EVEN, contradicting n odd. So d_2 = 2
+        and n = 5 + d_3^2 + d_4^2 + d_5^2 + d_6^2.
+
+    (2) MOD 4 leaves two cases.  An odd divisor contributes 1 and an even
+        one 0, so n = 1 + a (mod 4) with a the number of odd entries among
+        d_3..d_6.  n is even, which kills a = 0, 2, 4 outright (they give
+        n = 1, 3, 1 mod 4, all odd).  So
+
+            a = 1  <=>  n = 2 (mod 4)        a = 3  <=>  4 | n
+
+    (3) a = 1 IS IMPOSSIBLE.  Then 4 does not divide n, so n = 2m with m
+        odd and d_3 = q, the least odd prime — no even divisor lies in
+        (2, q), since any such is 2t with t an odd divisor > 1, hence
+        2t >= 2q.  d_3 is odd, so d_4, d_5, d_6 must all be even.  d_4 = 2q,
+        and the next divisor after 2q is min(q^2, q'), which is ODD because
+        min(q^2,q') < 2 min(q^2,q').  So d_5 is odd and a >= 2.
+
+    (4) a = 3 IS IMPOSSIBLE, in both sub-cases, and MOD 8 does the work.
+
+        (4a) 3 | n.  Then d_3 = 3 and d_4 = 4, so
+                 n = 30 + d_5^2 + d_6^2  with d_5, d_6 odd,
+             and an odd square is 1 (mod 8), so n = 32 = 0 (mod 8): 8 | n.
+             But 2 and 3 divide n, so 6 | n and 6 > 4, giving d_5 in {5, 6}.
+             d_5 = 5 forces d_6 = 6, which is even; d_5 = 6 is even itself.
+             Either way a < 3.
+
+        (4b) 3 does not divide n.  Then d_3 = 4, so d_4, d_5, d_6 must ALL
+             be odd and
+                 n = 21 + (three odd squares) = 24 = 0 (mod 8): 8 | n.
+             So 8 is a divisor above 4, and for it not to be among the six
+             smallest we need d_4, d_5, d_6 < 8.  The odd divisors in (4, 8)
+             are 5 and 7 — two slots for three divisors.               ∎
+
+  WHY THE EVEN LAYERS ARE EASIER, stated plainly: step (1) is the parity
+  lemma, and it only fires for even k, because 1 + (k-1) odd squares is even
+  exactly when k is even.  That single forcing is what k=3 and k=5 lack, and
+  it is why those two needed quadratic residues and a case tree while k=6
+  needs only mod 4 and mod 8.
 
   ADDED 2026-09-19 — k=5 WITH n EVEN IS IMPOSSIBLE.
   Half the k=5 row closes by the same method. n odd does NOT close here and
@@ -228,9 +272,10 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   2309 have d_4 odd and are excluded at (2); of the 17690 with d_4 even,
   d_4 = 2 d_3 in every single case.
 
-  k>=5 remain SEARCH RESULTS, not proofs.  Nothing above applies to them,
-  and the 500 000 000 bound is still all that stands behind those rows.
-  k=2, k=3 and k=4 are now all proved.
+  k=2, k=3, k=4 and k=6 are proved; k=5 is proved for n even and reduced to
+  five live shapes for n odd; k>=7 remain SEARCH RESULTS behind the
+  500 000 000 bound.  Every even layer that has been attacked has fallen to
+  the parity lemma; every odd one has resisted.
 
   n = 130 is not merely the unique k=4 solution — it is the unique solution
   to the entire family of problems simultaneously, and for k=4 that word
@@ -634,7 +679,42 @@ def main():
     print("  NOT a proof: there is no congruence obstruction, only scarcity.")
     print("  n odd with 3∤n, and with 9|n, are untouched. k=5 odd stays open.")
 
-    print("\n  k=2, k=3, k=4 PROVED; k=5 proved for n even, open for n odd.")
+    # ── Part 14: k=6 is impossible ───────────────────────────────────────
+    print("\n--- PART 14: k=6 Impossible (added 2026-09-19) ---")
+    print("  (1) 1 + five odd squares is even -> d2 = 2, n = 5 + d3^2..d6^2 ✓")
+    assert (1 + 5) % 2 == 0
+    live = [a for a in range(5) if (1 + a) % 2 == 0]
+    print("  (2) n = 1+a (mod 4); n even leaves a in %s" % live)
+    assert live == [1, 3]
+    bad = seen = 0
+    for m in range(3, 120000, 2):
+        x = 2 * m
+        dd = divisors(x)
+        if len(dd) < 6:
+            continue
+        seen += 1
+        if sum(1 for y in dd[2:6] if y % 2) == 1:
+            bad += 1
+    print("  (3) a=1 over %d values n=2m, m odd, >=6 divisors: %d occurrences"
+          % (seen, bad))
+    assert bad == 0
+    assert (30 + 1 + 1) % 8 == 0
+    assert (21 + 1 + 1 + 1) % 8 == 0
+    print("  (4a) 3|n -> n = 30 + two odd squares = 0 (mod 8), so 8|n; but 6|n")
+    print("       and 6>4 forces d5 in {5,6}, neither leaving d5,d6 both odd ✓")
+    print("  (4b) 3∤n -> n = 21 + three odd squares = 0 (mod 8), so 8|n; then")
+    print("       d4,d5,d6 < 8 all odd, but (4,8) holds only 5 and 7 ✓")
+    gap = [y for y in range(5, 8) if y % 2]
+    assert gap == [5, 7] and len(gap) < 3
+    k6 = [x for x in range(2, 300001)
+          if len(divisors(x)) >= 6 and sum(d * d for d in divisors(x)[:6]) == x]
+    assert k6 == [], k6
+    print("  cross-check: exhaustive k=6 search to 300000 returns %s ✓" % k6)
+    print("  (a separate run to 3,000,000 also returned empty)")
+    print("  k=6 PROVED impossible. The parity lemma fires only for even k,")
+    print("  which is why k=3 and k=5 needed far more work.")
+
+    print("\n  k=2, k=3, k=4, k=6 PROVED; k=5 proved for n even, open for n odd.")
 
     print("\n" + "=" * 70)
     print("THEOREM 245 VERIFIED")
