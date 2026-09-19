@@ -16,7 +16,7 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     k=2: IMPOSSIBLE by proof (see below). Zero solutions for all n.
     k=3: IMPOSSIBLE by proof — PROVED 2026-09-19, see below. Not just n odd.
     k=4: EXACTLY ONE solution: n = 130 — PROVED 2026-09-19, see below.
-    k=5: no solutions found up to 500 000 000.
+    k=5: n EVEN impossible by proof (2026-09-19). n odd: open, search only.
     k=6: no solutions found up to 500 000 000.
     k=7: no solutions found up to 500 000 000.
     k=8: no solutions found up to 500 000 000.
@@ -26,6 +26,38 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     d_1 = 1 always (smallest divisor). So n = 1² + d_2² = 1 + d_2².
     Since d_2 | n, d_2 | (1 + d_2²). But d_2 | d_2², so d_2 | 1.
     Therefore d_2 = 1, contradicting d_2 > d_1 = 1. ∎
+
+  ADDED 2026-09-19 — k=5 WITH n EVEN IS IMPOSSIBLE.
+  Half the k=5 row closes by the same method. n odd does NOT close here and
+  is still a search result; the file says which half is which.
+
+    n = 5 + d_3^2 + d_4^2 + d_5^2 once n is even and d_2 = 2.
+
+    (A) 4 | n and 3 | n.  Then d_3 = 3 and d_4 = 4, so n = 30 + d_5^2, and
+        4 | n needs d_5^2 = 2 (mod 4). Squares mod 4 are 0 and 1. Closed.
+
+    (B) 4 | n, 3 does not divide n.  Then d_3 = 4 and n = 21 + d_4^2 + d_5^2,
+        and 4 | n needs d_4^2 + d_5^2 = 3 (mod 4). Two squares reach only
+        0, 1, 2. Closed.
+
+    (C) 4 does not divide n, so n = 2 (mod 4).  Mod 4 an odd divisor
+        contributes 1 and a divisor = 2 (mod 4) contributes 0, so
+        n = 5 + a (mod 4) where a counts the odd members of d_3, d_4, d_5.
+        n = 2 (mod 4) forces a = 1.  But d_3 = q, the least odd prime, is
+        odd, so d_4 and d_5 must both be even.  d_4 = 2q, since an even
+        divisor 2t with q < 2t < 2q would need an odd divisor t strictly
+        between q/2 and q.  The next divisor after 2q is min(q^2, q'), which
+        is ODD because min(q^2, q') < 2 min(q^2, q').  So d_5 is odd and
+        a >= 2.  Contradiction.  Closed.                                   ∎
+
+  Machine-checked: over all n = 2m with m odd and at least 5 divisors below
+  120000, the structural step of (C) has 0 exceptions.
+
+  n ODD IS OPEN.  What is known: every divisor is odd so each square is
+  1 (mod 8), giving n = 5 (mod 8); and n > d_5^2 while n < 5 d_5^2, so the
+  fifth smallest divisor lies in (sqrt(n/5), sqrt(n)) and n has at least ten
+  divisors. None of that closes it. The QR step that killed k=3 needs a lone
+  square on one side and there are three here, so it does not transfer.
 
   ADDED 2026-09-19 — PROOF THAT k=3 IS IMPOSSIBLE.
   The line above said "no solutions found up to 500 000 000". It is now a
@@ -480,7 +512,36 @@ def main():
           if len(divisors(x)) >= 3 and sum(d * d for d in divisors(x)[:3]) == x]
     assert k3 == [], k3
     print("  cross-check: exhaustive k=3 search to 300000 returns %s ✓" % k3)
-    print("  k=2, k=3, k=4 are all PROVED. k>=5 remain search results.")
+    # ── Part 13: k=5 with n even is impossible ───────────────────────────
+    print("\n--- PART 13: k=5, n EVEN Impossible (added 2026-09-19) ---")
+    sq4 = {x * x % 4 for x in range(4)}
+    assert sq4 == {0, 1}
+    assert (-30) % 4 == 2 and 2 not in sq4
+    print("  (A) 4|n, 3|n -> n = 30 + d5^2 needs d5^2 = 2 (mod 4). ✓ closed")
+    two_sq = {(a * a + b * b) % 4 for a in range(4) for b in range(4)}
+    assert (-21) % 4 == 3 and 3 not in two_sq
+    print("  (B) 4|n, 3∤n -> n = 21 + d4^2 + d5^2 needs 3 (mod 4); two squares")
+    print("      reach only %s. ✓ closed" % sorted(two_sq))
+    bad = seen = 0
+    for m in range(3, 120000, 2):
+        x = 2 * m
+        dd = divisors(x)
+        if len(dd) < 5:
+            continue
+        seen += 1
+        if dd[3] == 2 * dd[2] and dd[4] % 2 == 0:
+            bad += 1
+    assert bad == 0
+    print("  (C) 4∤n -> a=1 forces d4,d5 even, but d4=2q and then d5=min(q^2,q')")
+    print("      is odd. %d values checked, %d exceptions ✓ closed" % (seen, bad))
+    k5 = [x for x in range(2, 300001)
+          if len(divisors(x)) >= 5 and sum(d * d for d in divisors(x)[:5]) == x]
+    assert k5 == []
+    print("  cross-check: exhaustive k=5 search to 300000 returns %s ✓" % k5)
+    print("  n ODD stays OPEN: n = 5 (mod 8) and sqrt(n/5) < d5 < sqrt(n), but")
+    print("  the k=3 QR step needs one square on a side and here there are three.")
+
+    print("\n  k=2, k=3, k=4 PROVED; k=5 proved for n even, open for n odd.")
 
     print("\n" + "=" * 70)
     print("THEOREM 245 VERIFIED")
