@@ -2,7 +2,7 @@
 # CLASS: THEOREM
 """
 ================================================================================
-THEOREM 238: All-Prime 3x3 Digit Grids -- Coset Structure of Row Residues
+THEOREM 401: All-Prime 3x3 Digit Grids -- Coset Structure of Row Residues
 ================================================================================
 
 USER FINDINGS:
@@ -44,12 +44,12 @@ CONSEQUENCES:
     3 in ST (sovereign target)
     4 in SA (sovereign anchor)
     30 in SA AND ST (the only double-sovereign element)
-  C_3 is also the cup mode coset (T223/T236).
+  C_3 is also the cup mode coset (T387/T400).
 
   THE (7,3) GRID IS THE UNIQUE ALL-PRIME GRID WHOSE COSET IS C_3.
 
 THE (7,3) PAIR: FOUR ARITHMETIC OPERATIONS
-  b+s = 7+3 = 10  in H   (sovereign kernel; the complement pair, T232)
+  b+s = 7+3 = 10  in H   (sovereign kernel; the complement pair, T396)
   b-s = 7-3 =  4  in SA  (sovereign anchor; generator of C_3)
   b*s = 7x3 = 21  in ST  (sovereign target)
   b/s = 7/3 = 27 (mod 37)  in C_8 = {11,27,36}  (the -1/repunit coset)
@@ -63,6 +63,15 @@ WHY 337 = 300+37:
   The number 337 literally encodes the canvas prime: 300+37.
   This is because 300 = 3*100 and 37 is the step to the next SA element.
 ================================================================================
+
+RENUMBERED 2026-09-19: T238 -> T401.
+This file declared Theorem 238 on 2026-08-17, before `theorem_238_rule30_complexity_gf37.py`
+(2026-08-29) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T401; citations that meant `theorem_238_rule30_complexity_gf37.py` were left at T238.
 """
 
 import sys
@@ -114,7 +123,7 @@ def coset_of(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 238: ALL-PRIME 3x3 DIGIT GRIDS -- COSET STRUCTURE")
+    print("THEOREM 401: ALL-PRIME 3x3 DIGIT GRIDS -- COSET STRUCTURE")
     print("=" * 70)
 
     cosets = build_cosets()

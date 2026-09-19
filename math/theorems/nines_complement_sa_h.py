@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 226: The Nines-Complement SA-to-H Step
+THEOREM 390: The Nines-Complement SA-to-H Step
 ================================================================================
 
 USER OBSERVATION:
@@ -29,9 +29,9 @@ STRUCTURE:
   After k=3 the cycle closes: 10^3 = 1 in H, and the orbit repeats.
 
 GF(37) ANATOMY:
-  - 9 ∈ SA because 9 is a sovereign anchor (T218: 9 = 18/2, half the lattice step).
+  - 9 ∈ SA because 9 is a sovereign anchor (T382: 9 = 18/2, half the lattice step).
   - 25 ∈ SA because 25 = 5^2 and 25 ∈ {4,9,25,30}.
-  - 999 = 27x37: the repunit period structure from T219 (ord_37(10^3)=999).
+  - 999 = 27x37: the repunit period structure from T383 (ord_37(10^3)=999).
   - Each nines-complement 10^k - 1 factors as 9 x R_k where R_k is the k-repunit:
       R_1 = 1, R_2 = 11, R_3 = 111 = 3x37.
     At k=3 the repunit hits the field prime: R_3 = 3x37, so 9xR_3 = 27x37 = 0 (mod 37).
@@ -51,6 +51,15 @@ SA PLUS ONE MAP (full):
    30+1 = 31: in C_9 (not H)
   The k=1 and k=2 nines-complements land on the two SA elements adjacent to H.
 ================================================================================
+
+RENUMBERED 2026-09-19: T226 -> T390.
+This file declared Theorem 226 on 2026-08-16, before `theorem_226_cage_integrity_check.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T390; citations that meant `theorem_226_cage_integrity_check.py` were left at T226.
 """
 
 import sys
@@ -94,7 +103,7 @@ def coset_of(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 226: THE NINES-COMPLEMENT SA-TO-H STEP")
+    print("THEOREM 390: THE NINES-COMPLEMENT SA-TO-H STEP")
     print("=" * 70)
 
     cosets = build_cosets()
@@ -146,7 +155,7 @@ def run():
         print(f"  k={k}: 10^{k}-1 = {'9'*k:{k}s}  mod 37 = {nines_mod:2d} ({tag_n:5s})"
               f"  ->  10^{k} mod 37 = {power_mod:2d} ({tag_p})")
 
-    # Connection to repunit structure (T225/T219)
+    # Connection to repunit structure (T389/T383)
     print("\nREPUNIT STRUCTURE:")
     for k in [1, 2, 3]:
         R_k = (10**k - 1) // 9

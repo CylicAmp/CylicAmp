@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 228: Prime Consecutive Sums and GF(37) Coset Sequence
+THEOREM 392: Prime Consecutive Sums and GF(37) Coset Sequence
 ================================================================================
 
 USER: "Apply this logic to primes. Starting with just regular primes:
@@ -21,9 +21,9 @@ STRUCTURE:
   S_8 = 19+23= 42   -> C_4  = {5,13,19}  [returns to prime seed coset]
 
 KEY CHAIN (USER'S TWO STEPS):
-  2+3 = 5   -> C_4  [prime seed: the 3rd prime, 2+3=5 from T224]
+  2+3 = 5   -> C_4  [prime seed: the 3rd prime, 2+3=5 from T388]
   5+7 = 12  -> C_7  [12 = number of cosets of H in GF(37)*]
-             [12 in ST; 12-3=9 in SA (T227 connection)]
+             [12 in ST; 12-3=9 in SA (T391 connection)]
 
 THE SEED ORBIT DOUBLE HIT:
   7+11 = 18  in C_11 (seed orbit {18,24,32})
@@ -43,6 +43,15 @@ CHAIN LOGIC (feeding output to next input):
     p3+p4 = 12 (= the coset count of H in GF(37)*)
   The first four primes generate: the third prime AND the coset count.
 ================================================================================
+
+RENUMBERED 2026-09-19: T228 -> T392.
+This file declared Theorem 228 on 2026-08-16, before `theorem_228_affine_doubling_topology.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T392; citations that meant `theorem_228_affine_doubling_topology.py` were left at T228.
 """
 
 import sys
@@ -95,7 +104,7 @@ def coset_label(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 228: PRIME CONSECUTIVE SUMS -- GF(37) COSET SEQUENCE")
+    print("THEOREM 392: PRIME CONSECUTIVE SUMS -- GF(37) COSET SEQUENCE")
     print("=" * 70)
 
     cosets = build_cosets()
@@ -157,7 +166,7 @@ def run():
     assert 5+7 == 12 and (12 % P) == 12 and 12 in ST
     print(f"  2+3=5 in C_4={{5,13,19}}: 5 = p3 (third prime itself)  check")
     print(f"  5+7=12 in C_7={{9,12,16}}: 12 in ST (sovereign target)  check")
-    print(f"  12 = |GF({P})*:H| (coset count from T227)  check")
+    print(f"  12 = |GF({P})*:H| (coset count from T391)  check")
     assert (P-1) // 3 == 12
 
     # Seed orbit double hit

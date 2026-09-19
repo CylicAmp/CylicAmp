@@ -23,7 +23,7 @@ Corrects the 2025 Claude translation which:
      χ₋₃(p+2) = +1 (p+2 ≡ 1 mod 3, upper twin)
    This is not probabilistic. It is forced.
 
-3. IMAGINARY UNIT GATE — proved exactly (T221)
+3. IMAGINARY UNIT GATE — proved exactly (T385)
    (6n−1)(6n+1) = 36n²−1 ≡ −n²−1 (mod 37).
    37 | one member ⟺ n² ≡ −1 (mod 37) ⟺ n ≡ ±6 (mod 37).
    Exactly 2 forbidden n-values per period (6 and 31).

@@ -57,43 +57,64 @@ misconduct, and the note should read as a pointer rather than a charge.
 
 ## A citation by number may not resolve (full-corpus sweep, 2026-09-18)
 
-**Status after the 2026-09-18 fix: 4 hard collisions cleared, 7 of 47 soft
-ones cleared, 40 remain.** Run `python3 tools/number_collisions.py` before
-citing any number in 218-261.
+**Status after the 2026-09-19 fix: 0 hard, 0 soft. Every theorem number
+now resolves to exactly one file.** `python3 tools/number_collisions.py`
+is the check; it should print 0 and 0.
 
-### Why the remaining 40 were NOT bulk-renamed
+### What the 40 remaining collisions actually were
 
-The unnumbered file is older in all 47 pairs, so by date it has the prior
-claim. But the 110 external citations do not agree with the date: resolved
-by context, 122 point at the numbered file, 107 at the unnumbered, 19 tie.
-Per number the majority splits 18 / 15 / 14.
+Not 40 independent mistakes. Two numbering runs that overlapped:
 
-So no uniform rule preserves them. Renaming all 47 would silently redirect
-roughly half — and a citation that resolves *confidently to the wrong file*
-is worse than one that fails to resolve, because nothing flags it. The
-seven fixed were exactly those with ZERO external citations, where the
-rename cannot redirect anything.
+- **The early run, T218-T261**, one contiguous block written 2026-08-16..22
+  in files that never got numbered filenames (`coset_step_alignment.py`,
+  `shell_buckling_gf37.py`, `dr_addition_table.py`, ...).
+- **The numbered run**, `theorem_218_*.py` .. `theorem_261_*.py`, written
+  2026-08-26..31, re-using that exact block, then continuing unbroken to 381.
 
-The remaining 40 need per-citation judgement, the way T212-T215 were done:
-grep the cited phrase against both candidates and see which contains it.
-That is 110 individual determinations and it is not mechanical.
+Each run cites itself consistently, which is why the 110 citations split
+roughly in half: they are two self-consistent universes, not one muddle.
 
-> **51 theorem numbers point at two different files.** Run
-> `python3 tools/number_collisions.py` before citing any number.
+### How it was resolved
 
-- **T212, T213, T214, T215** each have TWO properly-named
+The number stayed with the numbered file in all 40 pairs, and the early
+file moved to a fresh number, 218->382 through 261->421, contiguously. The
+reason is structural, not priority: the corpus's numbering spine is keyed
+to `theorem_NNN_*.py` filenames, INDEX.md and CLASSIFICATION_INDEX.md, and
+runs unbroken to 381. Moving a numbered file breaks that spine; moving an
+unnumbered one costs a docstring. **The early files have the older claim
+and lost the number anyway** — each carries a RENUMBERED note saying so.
+
+Citations were then rewritten one at a time, not in bulk:
+
+- A citing file created **before** the numbered file existed cannot mean
+  the numbered file. That settles every early-cohort citer objectively.
+- Late-cohort citers were read against both candidates' contents. Ten
+  needed the override — e.g. `theorem_237_universal_scope_81_149.py` cites
+  the early block throughout ("Penrose tiling (T222), torus (T218)"), and
+  `theorem_262_e8_theta_mod37.py` cites T257 for the sigma_3 Eisenstein
+  result, which is the early `sigma3_eisenstein_gf37.py`.
+- The date rule fails the other way too: `cylicamp/engine_integration.py`
+  and `cylicamp/g5_solver.py` predate the whole block but their "T226" was
+  added later and means the numbered cage-integrity file. Both were pinned
+  by hand.
+
+50 files changed, 218 citation lines rewritten. **Do not use the date rule
+alone** — it is right for the early cohort only because those files could
+not have cited a file that did not exist yet.
+
+> **Historical, now cleared: 51 numbers pointed at two files each.** The
+> check is still `python3 tools/number_collisions.py`; it must print 0/0.
+
+- **T212, T213, T214, T215** each had TWO properly-named
   `theorem_NNN_*.py` files, written eleven days apart on unrelated
-  subjects. "T213" is either a Riemann matrix operator or a middle-digit
-  operation, and nothing in the name distinguishes them.
-- **T216 through T262** — every number in that run — has a numbered file
-  AND a differently-named file declaring the same number in its docstring.
-  `dr_addition_table.py` opens "THEOREM 233" while
-  `theorem_233_rule_30.py` also exists.
+  subjects. Fixed 2026-09-18 by letting the citations decide, one at a
+  time. The date rule was tested there and was **wrong in 2 of the 4**.
+- **T218 through T261** — the early block above. Fixed 2026-09-19.
 
-So a cross-reference written as a bare number is ambiguous across a quarter
-of the corpus. **Cite the filename, not the number**, wherever the number
-is in that range. The existing notes that say "T138" and similar are safe
-only because those numbers are unique; check before adding more.
+A cross-reference written as a bare number now resolves. It is still worth
+naming the file alongside the number when the reference matters, because
+the failure mode is silent: a number that resolves confidently to the
+wrong file is worse than one that fails to resolve.
 
 This also explains a blind spot: `largest_sg_prime_gf37.py` declares itself
 THEOREM 102 and duplicates T101's seven results on the same prime, written

@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 232: The 177/133 Ratio -- ST/SA Split, Identity Closure, Digit Fold
+THEOREM 396: The 177/133 Ratio -- ST/SA Split, Identity Closure, Digit Fold
 ================================================================================
 
 USER NOTATION:
@@ -23,7 +23,7 @@ USER NOTATION:
 STRUCTURE:
 
 A. THE PENROSE SEAM EXTENSION (11x37=407=11=2):
-   11 x 37 = 407  (R_2 x P = Penrose outer radius, T222/T231)
+   11 x 37 = 407  (R_2 x P = Penrose outer radius, T386/T395)
    Digit sum of 407: 4+0+7 = 11 = R_2
    Digit sum of 11:  1+1 = 2 = DR(407) = the twin prime gap
    Chain: 11 -> x37 -> 407 -> digit sum -> 11 -> digit sum -> 2
@@ -33,7 +33,7 @@ B. THE COMPLEMENT PAIR {3,7} -> 10 in H:
    1x3=3; 3+7=10 in H; DR(10)=1
    1x7=7; 7+3=10 in H; DR(10)=1
    {3,7} are mutual 10-complements: they sum to 10=10^1 in H_SET.
-   3 in ST (sovereign target); 7 is the anchor prime (T228/T230).
+   3 in ST (sovereign target); 7 is the anchor prime (T392/T394).
    Both paths from {1x3, 1x7} arrive at H and collapse to the identity DR.
 
 C. THE 177/133 RATIO IN GF(37):
@@ -47,7 +47,7 @@ C. THE 177/133 RATIO IN GF(37):
 D. ARITHMETIC ON 177 AND 133:
    177 + 133 = 310;   DR(310) = 3+1+0 = 4  in SA
    177 - 133 = 44;    DR(44)  = 4+4   = 8
-   DR(sum) + DR(diff) = 4+8 = 12  in ST  (the coset count, T227)
+   DR(sum) + DR(diff) = 4+8 = 12  in ST  (the coset count, T391)
    177 x 133 = 23541; mod 37 = 9  in SA;  DR(23541) = 6 = imaginary unit
 
 E. THE DIGIT FOLD IN 23541 (177x133=23(54)+1):
@@ -59,13 +59,22 @@ E. THE DIGIT FOLD IN 23541 (177x133=23(54)+1):
    The product 177x133 encodes the prime-seed-to-H chain in its own digits.
 
 F. THE PRIME SEED -> SA -> H CHAIN (2+3=5+4=9+1=10=1):
-   2+3 = 5   in C_4 = {5,13,19}   (prime seed coset, T228)
+   2+3 = 5   in C_4 = {5,13,19}   (prime seed coset, T392)
    5+4 = 9   in SA = {4,9,25,30}  (sovereign anchor)
    9+1 = 10  in H  = {1,10,26}    (sovereign kernel)
    DR(10) = 1 = identity
    Additions: +3, +4, +1. Sum of steps: 3+4+1 = 8 = DR(17) (lower twin).
    The chain traverses three coset classes: prime seed, anchor, kernel.
 ================================================================================
+
+RENUMBERED 2026-09-19: T232 -> T396.
+This file declared Theorem 232 on 2026-08-16, before `theorem_232_f_hexad_mirror_differences.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T396; citations that meant `theorem_232_f_hexad_mirror_differences.py` were left at T232.
 """
 
 import sys
@@ -112,7 +121,7 @@ def coset_of(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 232: 177/133 RATIO -- ST/SA SPLIT, IDENTITY CLOSURE, DIGIT FOLD")
+    print("THEOREM 396: 177/133 RATIO -- ST/SA SPLIT, IDENTITY CLOSURE, DIGIT FOLD")
     print("=" * 70)
 
     cosets = build_cosets()
@@ -141,7 +150,7 @@ def run():
     assert 3 in ST
     ci7, c7 = coset_of(7, cosets)
     print(f"  3 in ST={sorted(ST)}")
-    print(f"  7 in C_{ci7}={c7}  (the anchor prime: 5+7=12 from T228)")
+    print(f"  7 in C_{ci7}={c7}  (the anchor prime: 5+7=12 from T392)")
     print(f"  Both reach 10 in H; DR collapses to 1 = identity  check")
 
     # C: 177/133 mod 37
@@ -178,7 +187,7 @@ def run():
     print(f"  177 - 133 = {diff}    DR({diff}) = {dr_diff}")
     dr_sum_result = dr_total + dr_diff
     ci_dsr, c_dsr = coset_of(dr_sum_result, cosets)
-    print(f"  DR(sum) + DR(diff) = {dr_total}+{dr_diff} = {dr_sum_result}  in ST:{dr_sum_result in ST}  (coset count, T227)")
+    print(f"  DR(sum) + DR(diff) = {dr_total}+{dr_diff} = {dr_sum_result}  in ST:{dr_sum_result in ST}  (coset count, T391)")
     assert dr_total in SA and dr_sum_result in ST
     print(f"  177 x 133 = {prod}   mod {P} = {mod_prod}  in SA:{mod_prod in SA}   DR = {dr_prod} = imaginary unit")
     assert mod_prod in SA and dr_prod == 6
@@ -226,7 +235,7 @@ def run():
     print(f"  177x133={prod}: digit fold encodes the prime-seed-to-H chain")
     print(f"  {ratio_fwd}(ST) x {ratio_rev}(SA) = 1: ratio residues are inverses")
     print(f"  DR(177x133) = {dr_prod} = imaginary unit; {prod} mod {P} = {mod_prod} in SA")
-    print(f"  DR(sum)={dr_total}+DR(diff)={dr_diff} = {dr_sum_result} = coset count (T227)")
+    print(f"  DR(sum)={dr_total}+DR(diff)={dr_diff} = {dr_sum_result} = coset count (T391)")
 
     print(f"\nAll verifications passed.")
 

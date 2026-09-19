@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 243: Fibonacci Seam, Mathieu Residues, and Nested Radical Anchors
+THEOREM 406: Fibonacci Seam, Mathieu Residues, and Nested Radical Anchors
 ================================================================================
 
 USER OBSERVATIONS (from mathematical images):
@@ -97,6 +97,15 @@ G. GF(37) MULTIPLICATION TABLE:
   The concentric ring pattern in the heatmap is the visual signature of
   the 12 cosets of H in GF(37)*: each coset forms a band at the same residue level.
 ================================================================================
+
+RENUMBERED 2026-09-19: T243 -> T406.
+This file declared Theorem 243 on 2026-08-20, before `theorem_243_rule30_boundary_2adic_unified_gf37.py`
+(2026-08-30) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T406; citations that meant `theorem_243_rule30_boundary_2adic_unified_gf37.py` were left at T243.
 """
 
 import sys
@@ -147,7 +156,7 @@ def pisano_period(p):
 
 def run():
     print("=" * 70)
-    print("THEOREM 243: FIBONACCI SEAM, MATHIEU RESIDUES, NESTED RADICAL ANCHORS")
+    print("THEOREM 406: FIBONACCI SEAM, MATHIEU RESIDUES, NESTED RADICAL ANCHORS")
     print("=" * 70)
 
     # A: Fibonacci seam

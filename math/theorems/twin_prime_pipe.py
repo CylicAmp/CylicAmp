@@ -2,7 +2,7 @@
 # CLASS: THEOREM
 """
 ================================================================================
-THEOREM 247: Twin Prime Pipe -- Two-Chamber Walls and the 3-6-9 Center
+THEOREM 410: Twin Prime Pipe -- Two-Chamber Walls and the 3-6-9 Center
 ================================================================================
 
 USER OBSERVATION:
@@ -29,7 +29,7 @@ B. THE 3-6-9 FEEDBACK IN THE CENTER:
   Any multiple of 6 has digit sum divisible by 3.
   Therefore DR(p+1) ∈ {3, 6, 9} -- exactly the 3-6-9 feedback loop:
     DR=3  in ST = {3,12,21,30}  (sovereign target)
-    DR=6  = imaginary unit      (6^2 = -1 mod 37; drives T242, T246)
+    DR=6  = imaginary unit      (6^2 = -1 mod 37; drives T405, T409)
     DR=9  in SA = {4,9,25,30}   (sovereign anchor)
 
   The center of every twin prime pair oscillates through {ST, imag_unit, SA}.
@@ -43,9 +43,9 @@ C. THE PIPE IS UNIFORM:
   The "irregularity" is only in which multiples of 6 happen to have
   both neighbors prime. The pipe itself never changes shape.
 
-D. CONNECTION TO T246 (6-STEP HEARTBEAT):
-  T246 established: 5-chamber = primes ≡ 5 mod 6; 1-chamber = primes ≡ 1 mod 6.
-  T247 shows: every twin prime pair spans exactly one step across the pipe,
+D. CONNECTION TO T409 (6-STEP HEARTBEAT):
+  T409 established: 5-chamber = primes ≡ 5 mod 6; 1-chamber = primes ≡ 1 mod 6.
+  T410 shows: every twin prime pair spans exactly one step across the pipe,
   with the lower prime always on the 5-chamber wall (left) and the upper
   always on the 1-chamber wall (right).
   The driver 6 = 1+2+3 (imaginary unit) is the width of the pipe.
@@ -56,6 +56,15 @@ E. DR CENTER DISTRIBUTION (up to 10000):
   DR=9 (SA):         65 pairs  (~32%)
   Roughly uniform oscillation through the three sovereign feedback values.
 ================================================================================
+
+RENUMBERED 2026-09-19: T247 -> T410.
+This file declared Theorem 247 on 2026-08-20, before `theorem_247_n247_mult26_portrait_gf37.py`
+(2026-08-30) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T410; citations that meant `theorem_247_n247_mult26_portrait_gf37.py` were left at T247.
 """
 
 import sys
@@ -84,7 +93,7 @@ def is_prime(n):
 
 def run():
     print("=" * 70)
-    print("THEOREM 247: TWIN PRIME PIPE -- TWO-CHAMBER WALLS AND 3-6-9 CENTER")
+    print("THEOREM 410: TWIN PRIME PIPE -- TWO-CHAMBER WALLS AND 3-6-9 CENTER")
     print("=" * 70)
 
     pairs = [(p, p+2) for p in range(5, 10001)
@@ -133,10 +142,10 @@ def run():
     print(f"  Center mod 6: {center_mods}  (always 0 = 6-divisible)  check")
     assert widths == {2} and center_mods == {0}
 
-    # D: Connection to T246
-    print(f"\nD. CONNECTION TO T246 (6-STEP HEARTBEAT):")
-    print(f"  T246: 5-chamber = primes ≡ 5 mod 6; 1-chamber = primes ≡ 1 mod 6")
-    print(f"  T247: every twin prime pair spans the pipe -- lower in 5-chamber,")
+    # D: Connection to T409
+    print(f"\nD. CONNECTION TO T409 (6-STEP HEARTBEAT):")
+    print(f"  T409: 5-chamber = primes ≡ 5 mod 6; 1-chamber = primes ≡ 1 mod 6")
+    print(f"  T410: every twin prime pair spans the pipe -- lower in 5-chamber,")
     print(f"        upper in 1-chamber, center divisible by 6 = 1+2+3 (imag unit)")
     assert pow(6, 2, P) == P - 1
     print(f"  6^2 = {pow(6,2,P)} = -1 mod {P} (imaginary unit drives the pipe width)  check")

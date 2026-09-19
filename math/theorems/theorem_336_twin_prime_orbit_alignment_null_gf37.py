@@ -49,7 +49,7 @@ generated.
 
 === THE CONTRAST, AND WHY T329 EXPLAINS IT ===
 
-    Twin primes are NOT structureless.  T261 shows the digital-root pair is
+    Twin primes are NOT structureless.  T421 shows the digital-root pair is
     completely determined by m mod 3, where p = 6m-1:
 
         m == 0 (mod 3)   DR pair (8, 1)   19616

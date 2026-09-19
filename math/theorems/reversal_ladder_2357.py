@@ -1,6 +1,6 @@
 # CLASS: COMPUTATION
 """
-Theorem 220: Reversal Ladder — 2357, 291-Step Climb, and the 99² Lock
+Theorem 384: Reversal Ladder — 2357, 291-Step Climb, and the 99² Lock
 
 STRUCTURE:
   2357 = concat(2,3,5,7) — first four primes — and is itself prime.
@@ -39,6 +39,15 @@ MOD 37:
   Sequence: 20 → 15 → 10  (decreasing by 5 = -291 mod 37 each rung)
   Terminal residue 10 ∈ H = {1, 10, 26}  (sovereign kernel of GF(37)*)
   9936 ≡ 20 (mod 37): 9936 branch stays outside H.
+
+RENUMBERED 2026-09-19: T220 -> T384.
+This file declared Theorem 220 on 2026-08-16, before `theorem_220_barrier_c_mod3.py`
+(2026-08-26) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T384; citations that meant `theorem_220_barrier_c_mod3.py` were left at T220.
 """
 
 import sys
@@ -96,7 +105,7 @@ def ladder(start, step=291, max_rungs=6):
 
 def run():
     print("=" * 70)
-    print("THEOREM 220: REVERSAL LADDER — 2357, 291-STEP CLIMB, 99² LOCK")
+    print("THEOREM 384: REVERSAL LADDER — 2357, 291-STEP CLIMB, 99² LOCK")
     print("=" * 70)
 
     # 2357 primality and concatenation

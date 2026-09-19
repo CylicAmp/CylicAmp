@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 230: Twin Prime (17,19) -- DR Convergence to the Imaginary Unit
+THEOREM 394: Twin Prime (17,19) -- DR Convergence to the Imaginary Unit
 ================================================================================
 
 USER NOTATION (decoded):
@@ -18,7 +18,7 @@ THE +1=7 EXTENSION:
   After converging to 6 (imaginary unit), add back DR(19)=1 (the "=1"
   from line 1). Result: 6+1=7.
 
-  7 is the prime that anchors the AP: 5+7=12 (T228, the second user step).
+  7 is the prime that anchors the AP: 5+7=12 (T392, the second user step).
   7 x 6 = 42 = 5 (mod 37): imaginary unit times 7 returns to prime seed.
   7 + 17 = 24 in C_11={18,24,32}: lower twin + anchor prime = seed orbit.
   7 + 12 = 19: anchor prime + AP opener = upper twin prime.
@@ -61,6 +61,15 @@ SA PRODUCT:
   9 = 3^2 (square of the second prime).
   4 x 9 = (2x3)^2 = 6^2 = 36: product of atomic generators squared.
 ================================================================================
+
+RENUMBERED 2026-09-19: T230 -> T394.
+This file declared Theorem 230 on 2026-08-16, before `theorem_230_six_manifold.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T394; citations that meant `theorem_230_six_manifold.py` were left at T230.
 """
 
 import sys
@@ -83,7 +92,7 @@ def dr(n):
 
 def run():
     print("=" * 70)
-    print("THEOREM 230: TWIN PRIME (17,19) -- DR CONVERGENCE TO IMAGINARY UNIT")
+    print("THEOREM 394: TWIN PRIME (17,19) -- DR CONVERGENCE TO IMAGINARY UNIT")
     print("=" * 70)
 
     p, q = 17, 19
@@ -163,7 +172,7 @@ def run():
     step = dr_result + dr_q   # 6 + DR(19) = 6+1 = 7
     print(f"  Imaginary unit {dr_result} + DR({q})={dr_q}  =  {step}")
     assert step == 7
-    print(f"  Result: {step} = the prime anchoring the AP (5+7=12 from T228)")
+    print(f"  Result: {step} = the prime anchoring the AP (5+7=12 from T392)")
 
     # 6 x 7 mod 37
     prod_67 = (6 * 7) % P

@@ -46,7 +46,7 @@ GF(37) CONNECTION:
   37 ≡ 1 (mod 3):  verified.
   Legendre(-3/37) = 1:  -3 ≡ 34 (mod 37), 34^{18} ≡ 1 (mod 37).  verified.
   37 splits in ℤ[ω] (Eisenstein):  37 = N(-7 + 3ω) = 49 - 21 + 9 = 37.  verified.
-  (Cross-reference T257: 37 ≡ 1 mod 3 also gave Eisenstein splitting there.)
+  (Cross-reference T419: 37 ≡ 1 mod 3 also gave Eisenstein splitting there.)
 
 ================================================================================
 THREAD 2: Δ² TORUS AND 18-STEP LADDER [V]

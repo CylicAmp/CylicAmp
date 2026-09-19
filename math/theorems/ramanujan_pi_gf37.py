@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 244: Ramanujan's Pi Formula Constants in GF(37)
+THEOREM 407: Ramanujan's Pi Formula Constants in GF(37)
 ================================================================================
 
 USER OBSERVATION:
@@ -83,6 +83,15 @@ G. THE 137-MAP CONNECTION:
   The Ramanujan base 396 cycles through {26, 10, 1} = H under repeated
   multiplication. The powers of 396 mod 37 ARE the sovereign kernel H.
 ================================================================================
+
+RENUMBERED 2026-09-19: T244 -> T407.
+This file declared Theorem 244 on 2026-08-20, before `theorem_244_rule30_right_boundary_period_formula_gf37.py`
+(2026-08-30) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T407; citations that meant `theorem_244_rule30_right_boundary_period_formula_gf37.py` were left at T244.
 """
 
 import sys
@@ -112,7 +121,7 @@ def is_prime(n):
 
 def run():
     print("=" * 70)
-    print("THEOREM 244: RAMANUJAN'S PI FORMULA CONSTANTS IN GF(37)")
+    print("THEOREM 407: RAMANUJAN'S PI FORMULA CONSTANTS IN GF(37)")
     print("=" * 70)
     print("  1/pi = (2*sqrt(2)/9801) * sum (4n)!(1103+26390n) / ((n!)^4 * 396^4n)")
 

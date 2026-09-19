@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 227: The Three-Block Ladder -- 4 Rows, 12 Blocks, 12-3=9
+THEOREM 391: The Three-Block Ladder -- 4 Rows, 12 Blocks, 12-3=9
 ================================================================================
 
 USER OBSERVATION:
@@ -48,6 +48,15 @@ ROW 3 IS THE PIVOT:
   This is the seam -- the row where the decimal place-value hits zero mod 37.
   After the seam, row 4 = row 1: the orbit restarts.
 ================================================================================
+
+RENUMBERED 2026-09-19: T227 -> T391.
+This file declared Theorem 227 on 2026-08-16, before `theorem_227_s_old_d7_crossing.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T391; citations that meant `theorem_227_s_old_d7_crossing.py` were left at T227.
 """
 
 import sys
@@ -94,7 +103,7 @@ def coset_label(x, cosets):
 
 def run():
     print("=" * 70)
-    print("THEOREM 227: THE THREE-BLOCK LADDER -- 4 ROWS, 12 BLOCKS, 12-3=9")
+    print("THEOREM 391: THE THREE-BLOCK LADDER -- 4 ROWS, 12 BLOCKS, 12-3=9")
     print("=" * 70)
 
     cosets = build_cosets()

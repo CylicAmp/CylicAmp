@@ -16,7 +16,7 @@ USER STATEMENT (mathematical fields):
   Numerical Analysis / Game Theory.
 
   This is the scope within which the GF(37) operates.
-  Every connection documented in T222-T236 draws from one or more of these
+  Every connection documented in T386-T400 draws from one or more of these
   domains; GF(37) itself is inter-disciplinary by structure.
 
 USER COMPUTATION:
@@ -45,33 +45,33 @@ A. 81+68=149:
 B. FIELD-SCOPE COUNT:
   22 mathematical fields listed.
   22 = 2 x 11 = 2 x R_2.
-  22 mod 37 = 22 = 133 mod 37 (from T232: the denominator of the ratio).
+  22 mod 37 = 22 = 133 mod 37 (from T396: the denominator of the ratio).
   DR(22) = 4 in SA.
   The count of mathematical fields (22) matches the GF(37) residue of 133.
 
 C. CONNECTIONS ACROSS THE 22 FIELDS:
-  Arithmetic:       DR arithmetic, the 9-modulus, the (1)+n table (T233)
+  Arithmetic:       DR arithmetic, the 9-modulus, the (1)+n table (T397)
   Algebra:          GF(37), cosets H/SA/ST, primitive root ord_37(2)=36
   Linear Algebra:   Coset decomposition of GF(37)* as a module
-  Calculus:         FvK energy minimization (T223, T236)
-  Real Analysis:    Convergence of the digit-fold chain (T232)
-  Complex Analysis: The imaginary unit 6: 6^2=-1 in GF(37) (T224)
+  Calculus:         FvK energy minimization (T387, T400)
+  Real Analysis:    Convergence of the digit-fold chain (T396)
+  Complex Analysis: The imaginary unit 6: 6^2=-1 in GF(37) (T388)
   Number Theory:    Twin primes (17,19), DRs, repunits, sovereign sets
   Combinatorics:    12 cosets, 3-element structure, cascade {8,13,24}->37
   Graph Theory:     The 137-map orbit graph: 3-cycles in GF(37)*
-  Geometry:         Penrose tiling (T222), torus (T218), nematic defect (T223)
+  Geometry:         Penrose tiling (T386), torus (T382), nematic defect (T387)
   Trigonometry:     PHI/PSI spiral trajectory (cylicamp/trajectory.py)
   Probability:      Ulam spiral prime density, GF(37) coverage (T pipeline)
   Statistics:       Cascade orbit hits 7/37, sovereign ratios
   Stochastic:       Heartbeat 3-cycle as a deterministic Markov chain
-  Optimization:     Ritz-FvK energy minimization (T223/T236)
+  Optimization:     Ritz-FvK energy minimization (T387/T400)
   Dynamical Sys:    The 137-map as a discrete dynamical system
-  Diff Equations:   FvK plate equations underlying T223
+  Diff Equations:   FvK plate equations underlying T387
   Topology:         +1 nematic defect, Euler characteristic, index theory
   Set Theory:       H, SA, ST, SEED_ORBIT as structured subsets of Z/37Z
   Category Theory:  GF(37)* as a group object; cosets as a quotient category
   Information:      ord_37(2)=36 -> 2 generates full information capacity
-  Numerical:        Ritz approximation scheme in T223
+  Numerical:        Ritz approximation scheme in T387
   Game Theory:      Sovereign LOCKED/GATED/PURGE classification (T medusa)
 ================================================================================
 """
@@ -137,7 +137,7 @@ def run():
     ci_a, c_a = coset_of(a, cosets)
     ci_b, c_b = coset_of(b, cosets)
     ci_s, c_s = coset_of(s, cosets)
-    print(f"  {a} mod {P} = {ra}  C_{ci_a}={c_a}  (anchor prime: 5+7=12, T228)")
+    print(f"  {a} mod {P} = {ra}  C_{ci_a}={c_a}  (anchor prime: 5+7=12, T392)")
     print(f"  {b} mod {P} = {rb}  [37-6={P-6}; -{rb%P}=-imaginary_unit mod {P}]")
     print(f"  {a}+{b} = {s}  mod {P} = {rs}  in H:{rs in H_SET}  check")
     assert rs in H_SET
@@ -152,7 +152,7 @@ def run():
     print(f"  22 mathematical fields in the user's scope statement")
     print(f"  22 = 2 x 11 = 2 x R_2  [first prime times repunit]")
     assert n_fields == 2 * 11
-    print(f"  22 mod {P} = {n_fields % P}  = 133 mod {P}  [denominator from T232]")
+    print(f"  22 mod {P} = {n_fields % P}  = 133 mod {P}  [denominator from T396]")
     assert n_fields % P == 133 % P
     print(f"  DR(22) = {dr(n_fields)}  in SA:{dr(n_fields) in SA}")
     assert dr(n_fields) in SA

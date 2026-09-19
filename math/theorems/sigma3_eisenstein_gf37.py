@@ -2,7 +2,7 @@
 # CLASS: THEOREM
 """
 ================================================================================
-THEOREM 257: σ₃ Divisibility, Cube Roots of -1, and the Eisenstein Splitting
+THEOREM 419: σ₃ Divisibility, Cube Roots of -1, and the Eisenstein Splitting
 ================================================================================
 
 CLAIM: 37 | σ₃(p) ⟺ p ≡ 11, 27, or 36 (mod 37)
@@ -21,7 +21,7 @@ GF(37) CONNECTION — THE KEY RESULT:
   -H = {36, 27, 11} = cube roots of -1 mod 37
 
   The σ₃ divisibility condition selects exactly -H from Z₃₇.
-  H ∪ (-H) = {1,10,11,26,27,36} = Cayley graph generators (T255).
+  H ∪ (-H) = {1,10,11,26,27,36} = Cayley graph generators (T417).
 
 EISENSTEIN CONNECTION:
   37 ≡ 1 (mod 3) ⟺ 37 splits in Z[ω] (Eisenstein integers, ω = e^{2πi/3})
@@ -47,6 +47,15 @@ E8 NOTE:
   E8 contributes nothing to this divisibility. The result holds from
   the Eisenstein splitting of 37 and the structure of (Z/37Z)*.
 ================================================================================
+
+RENUMBERED 2026-09-19: T257 -> T419.
+This file declared Theorem 257 on 2026-08-22, before `theorem_257_fermat_prime_f3_gf37.py`
+(2026-08-31) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T419; citations that meant `theorem_257_fermat_prime_f3_gf37.py` were left at T257.
 """
 
 import sys
@@ -79,7 +88,7 @@ def is_prime(n):
 
 def run():
     print("=" * 70)
-    print("THEOREM 257: σ₃ DIVISIBILITY, CUBE ROOTS OF -1, EISENSTEIN SPLITTING")
+    print("THEOREM 419: σ₃ DIVISIBILITY, CUBE ROOTS OF -1, EISENSTEIN SPLITTING")
     print("=" * 70)
 
     # 1. Cube roots of -1 mod 37
@@ -162,7 +171,7 @@ def run():
     cayley_gens = sorted(H_SET | NEG_H)
     assert cayley_gens == [1, 10, 11, 26, 27, 36]
     print(f"\n8. CAYLEY GRAPH CONNECTION:")
-    print(f"   H ∪ (-H) = {cayley_gens} = generators of Cay(Z_37, H∪(-H)) from T255")
+    print(f"   H ∪ (-H) = {cayley_gens} = generators of Cay(Z_37, H∪(-H)) from T417")
     print(f"   σ₃ divisibility selects -H = the negative half of the Cayley generators")
 
     print(f"\nAll verifications passed.")

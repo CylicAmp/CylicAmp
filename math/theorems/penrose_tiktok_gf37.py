@@ -1,6 +1,6 @@
 # CLASS: COMPUTATION
 """
-Theorem 222: Penrose Patch, TikTok Numbers, and GF(37) Coset Anatomy
+Theorem 386: Penrose Patch, TikTok Numbers, and GF(37) Coset Anatomy
 
 Source: images from Penrose ring diagram (primes mapped to radii) and
 TikTok video (@endlingtales) showing numbers 141, 347, 251, 417, 346,
@@ -35,12 +35,12 @@ D. COSET MAP OF THE TIKTOK NUMBERS
    347    ≡ 14  →  C_9   (prime-mirror coset {14,29,31})
    251    ≡ 29  →  C_9   (same coset as 347)
    346    ≡ 13  →  C_4
-   347743 ≡ 17  →  C_10  (torus step coset from T218)
+   347743 ≡ 17  →  C_10  (torus step coset from T382)
    141141 ≡ 23  →  C_5   (imaginary unit coset {6,8,23})
    55577177555 ≡ 32 → C_11 (seed orbit coset {18,24,32})
 
 E. THE 20 + 12 = 32 IDENTITY
-   The reversal ladder (T220) has first column-1 residue 9381 ≡ 20 (mod 37).
+   The reversal ladder (T384) has first column-1 residue 9381 ≡ 20 (mod 37).
    20 ∈ C_2 = {2, 15, 20}  (same coset as the twin prime step size +2).
    12 is a sovereign target.
    20 + 12 = 32 ∈ {18, 24, 32} = C_11 = seed orbit.
@@ -52,6 +52,15 @@ F. BLASCHKE PRODUCT PARALLEL
    The 137-map on GF(37) also has order 3: ord_37(26) = 3 (orbit size 3).
    Both are degree/order-3 maps.  The Blaschke product is the continuous
    complex-analytic analogue of the discrete 137-map on the finite field.
+
+RENUMBERED 2026-09-19: T222 -> T386.
+This file declared Theorem 222 on 2026-08-16, before `theorem_222_seed_times2_negh.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T386; citations that meant `theorem_222_seed_times2_negh.py` were left at T222.
 """
 
 import sys
@@ -102,7 +111,7 @@ def is_prime(n):
 
 def run():
     print("=" * 70)
-    print("THEOREM 222: PENROSE PATCH, TIKTOK NUMBERS, GF(37) COSET ANATOMY")
+    print("THEOREM 386: PENROSE PATCH, TIKTOK NUMBERS, GF(37) COSET ANATOMY")
     print("=" * 70)
 
     cosets = build_cosets()
@@ -216,7 +225,7 @@ def run():
                 flags[-1] += "(seed)"
         note = "  ← SOVEREIGN COSET" if i == 2 else \
                "  ← SEED ORBIT" if i == 10 else \
-               "  ← TORUS-STEP COSET (T218)" if i == 9 else \
+               "  ← TORUS-STEP COSET (T382)" if i == 9 else \
                "  ← IMAG-UNIT COSET" if i == 4 else \
                "  ← H (kernel)" if i == 0 else ""
         print(f"   C_{i+1:2d} = {c}  {' | '.join(flags)}{note}")

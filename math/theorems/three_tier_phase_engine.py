@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 251: Three-Tier Phase Engine -- 137-Map Orbits as Coordinate Gears
+THEOREM 413: Three-Tier Phase Engine -- 137-Map Orbits as Coordinate Gears
 ================================================================================
 
 USER OBSERVATION:
@@ -46,6 +46,15 @@ D. INTER-TIER PRODUCTS:
     3×1=3, 3×26=4, 3×10=30 -- these are C_3 itself
     The H kernel maps C_3 to itself (coset structure).
 ================================================================================
+
+RENUMBERED 2026-09-19: T251 -> T413.
+This file declared Theorem 251 on 2026-08-21, before `theorem_251_n251_parity_architecture_gf37.py`
+(2026-08-30) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T413; citations that meant `theorem_251_n251_parity_architecture_gf37.py` were left at T251.
 """
 
 import sys
@@ -80,7 +89,7 @@ def flags(r):
 
 def run():
     print("=" * 70)
-    print("THEOREM 251: THREE-TIER PHASE ENGINE")
+    print("THEOREM 413: THREE-TIER PHASE ENGINE")
     print("=" * 70)
 
     # A: Three tiers

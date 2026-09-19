@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 254: chi_{-3} Twin Prime Character -- Two Chambers Are One Character
+THEOREM 416: chi_{-3} Twin Prime Character -- Two Chambers Are One Character
 ================================================================================
 
 USER OBSERVATION (from chi_{-3} analysis and infographic):
@@ -22,16 +22,16 @@ A. CHI_{-3} DEFINED:
 B. THE KEY EQUIVALENCE (three representations of the same condition):
   chi_{-3}(n) = 0  ↔  3|n  ↔  DR(n) ∈ {3, 6, 9}
 
-  This means T247 (twin prime pipe, DR(center)∈{3,6,9}) and the
+  This means T410 (twin prime pipe, DR(center)∈{3,6,9}) and the
   chi_{-3} infographic (chi_{-3}(center)=0) are the SAME theorem
   stated two different ways.
 
 C. CHAMBER ASSIGNMENT IS CHARACTER ASSIGNMENT:
-  5-chamber (T246): primes ≡ 5 (mod 6) ≡ -1 (mod 3)  →  chi_{-3} = -1
-  1-chamber (T246): primes ≡ 1 (mod 6) ≡ +1 (mod 3)  →  chi_{-3} = +1
+  5-chamber (T409): primes ≡ 5 (mod 6) ≡ -1 (mod 3)  →  chi_{-3} = -1
+  1-chamber (T409): primes ≡ 1 (mod 6) ≡ +1 (mod 3)  →  chi_{-3} = +1
 
-  The two prime chambers of T246 are exactly the two nonzero character
-  classes of chi_{-3}. The pipe (T247) straddles the chi_{-3} = 0 axis.
+  The two prime chambers of T409 are exactly the two nonzero character
+  classes of chi_{-3}. The pipe (T410) straddles the chi_{-3} = 0 axis.
 
 D. CHEBYSHEV BIAS:
   More primes have chi_{-3} = -1 than chi_{-3} = +1 below any large x.
@@ -43,9 +43,18 @@ E. SPECIAL GF(37) TWIN PRIME PAIRS:
   (29,31): center 30 ∈ SA∩ST (double-sovereign); 29,31 ∈ C9={14,29,31}
            -- the only twin prime pair where BOTH walls are in the same
               GF(37) coset (C9). Center 30 is the double-sovereign element
-              of T248 (engine × ST generator).
+              of T411 (engine × ST generator).
   (179,181): center 180 mod37=32 ∈ SEED_ORBIT; 31 mod37=31 ∈ C9.
 ================================================================================
+
+RENUMBERED 2026-09-19: T254 -> T416.
+This file declared Theorem 254 on 2026-08-21, before `theorem_254_elliptic_curves_gf37.py`
+(2026-08-30) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T416; citations that meant `theorem_254_elliptic_curves_gf37.py` were left at T254.
 """
 
 import sys
@@ -95,7 +104,7 @@ def flags(r):
 
 def run():
     print("=" * 70)
-    print("THEOREM 254: chi_{-3} TWIN PRIME CHARACTER")
+    print("THEOREM 416: chi_{-3} TWIN PRIME CHARACTER")
     print("=" * 70)
 
     pairs = [(p, p+2) for p in range(5, 10001)
@@ -120,7 +129,7 @@ def run():
         d = dr(n)
         assert (c == 0) == (n % 3 == 0) == (d in {3, 6, 9})
     print(f"  Verified for n=1..1000  check")
-    print(f"  T247 (DR(center)∈{{3,6,9}}) = chi_{{-3}} infographic: SAME THEOREM")
+    print(f"  T410 (DR(center)∈{{3,6,9}}) = chi_{{-3}} infographic: SAME THEOREM")
 
     # C: Chamber = character class
     print(f"\nC. CHAMBER ASSIGNMENT IS CHARACTER ASSIGNMENT:")

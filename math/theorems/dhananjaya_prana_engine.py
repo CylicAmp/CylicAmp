@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 248: Dhananjaya Prana Engine -- GF(37) Sovereign Analysis
+THEOREM 411: Dhananjaya Prana Engine -- GF(37) Sovereign Analysis
 ================================================================================
 
 USER OBSERVATION:
@@ -39,7 +39,7 @@ D. SPEED OF LIGHT IN GF(37):
 
 E. ALGEBRAIC RELATIONS OF 4 AND 3:
   4 - 3 = 1 in H (identity).
-  4 + 3 = 7 (anchor prime; first prime in 1-chamber, T246).
+  4 + 3 = 7 (anchor prime; first prime in 1-chamber, T409).
   4 × 3 = 12 in ST (SA × ST closes to ST).
   4 / 3 mod 37 = 4 × pow(3,-1,37) mod 37 = 4 × 25 = 100 mod 37 = 26 in H.
   The ratio 4/3 in GF(37) = 26 = the 137-map multiplier.
@@ -52,7 +52,7 @@ F. ENGINE COMPONENTS SHARE THE FULLY SOVEREIGN COSET C_3:
     4 in SA, 3 in ST, 30 in SA AND ST (double-sovereign).
   Dividing any consecutive pair in the orbit gives 26 (the 137-map multiplier):
     4/3 = 26, 30/4 = 26, 3/30 = 26 (all mod 37).
-  G(7,3) from T245 also lives in C_3. The engine components and the
+  G(7,3) from T408 also lives in C_3. The engine components and the
   all-prime grid coset are the same 137-map orbit.
 
 G. SPEED OF LIGHT STAYS IN SEED_ORBIT:
@@ -62,6 +62,15 @@ G. SPEED OF LIGHT STAYS IN SEED_ORBIT:
   The engine (C_3 orbit) and the speed of light (SEED_ORBIT) are
   two separate sovereign orbits with no overlap.
 ================================================================================
+
+RENUMBERED 2026-09-19: T248 -> T411.
+This file declared Theorem 248 on 2026-08-21, before `theorem_248_n248_e8_resonance_gf37.py`
+(2026-08-30) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T411; citations that meant `theorem_248_n248_e8_resonance_gf37.py` were left at T248.
 """
 
 import sys
@@ -94,7 +103,7 @@ def flags(r):
 
 def run():
     print("=" * 70)
-    print("THEOREM 248: DHANANJAYA PRANA ENGINE -- GF(37) SOVEREIGN ANALYSIS")
+    print("THEOREM 411: DHANANJAYA PRANA ENGINE -- GF(37) SOVEREIGN ANALYSIS")
     print("=" * 70)
 
     c = 299792458
@@ -157,7 +166,7 @@ def run():
         r = num * pow(den,-1,P) % P
         assert r == 26
         print(f"  {num}/{den} mod{P} = {r} in H:{r in H_SET}  check")
-    print(f"  {{3,4,30}} = C_3: G(7,3) coset (T245) = engine component orbit  check")
+    print(f"  {{3,4,30}} = C_3: G(7,3) coset (T408) = engine component orbit  check")
     assert 30 in SA and 30 in ST
     print(f"  30 in SA AND ST (double-sovereign)  check")
 

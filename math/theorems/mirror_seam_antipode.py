@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 239: The Mirror Seam-Antipode Sequence -- 37/73 Reversal Palindrome
+THEOREM 402: The Mirror Seam-Antipode Sequence -- 37/73 Reversal Palindrome
 ================================================================================
 
 OBSERVATION:
@@ -60,6 +60,15 @@ E. CONNECTIONS:
   DR of both = 1 (H-element: identity DR).
   The two primes differ by: 73-37 = 36 = -1 (mod 37) = twin prime pair sum (17+19).
 ================================================================================
+
+RENUMBERED 2026-09-19: T239 -> T402.
+This file declared Theorem 239 on 2026-08-18, before `theorem_239_rule30_autocorrelation_gf37.py`
+(2026-08-29) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T402; citations that meant `theorem_239_rule30_autocorrelation_gf37.py` were left at T239.
 """
 
 import sys
@@ -89,7 +98,7 @@ def is_prime(n):
 
 def run():
     print("=" * 70)
-    print("THEOREM 239: MIRROR SEAM-ANTIPODE -- 37/73 REVERSAL PALINDROME")
+    print("THEOREM 402: MIRROR SEAM-ANTIPODE -- 37/73 REVERSAL PALINDROME")
     print("=" * 70)
 
     # A: Factor anatomy

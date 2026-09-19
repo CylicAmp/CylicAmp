@@ -2,7 +2,7 @@
 # CLASS: THEOREM
 """
 ================================================================================
-THEOREM 261: Twin Prime DR Pair Theorem — Perfect Tripartition by m mod 3
+THEOREM 421: Twin Prime DR Pair Theorem — Perfect Tripartition by m mod 3
 ================================================================================
 
 Every twin prime pair (p, p+2) with p > 3 has the form (6m-1, 6m+1).
@@ -47,9 +47,18 @@ GF(37) CONNECTION:
   structure in GF(37).
 
   6m-1 structure: the twin prime gap is always 2, straddling 6m.
-  6m ≡ 0 (mod 2,3) → chi_{-3}(6m) = 0 → interface (Theorem 256).
+  6m ≡ 0 (mod 2,3) → chi_{-3}(6m) = 0 → interface (Theorem 418).
   This is exactly the discrete RT interface condition.
 ================================================================================
+
+RENUMBERED 2026-09-19: T261 -> T421.
+This file declared Theorem 261 on 2026-08-22, before `theorem_261_n261_dark_a_sa_st_a_c9_gf37.py`
+(2026-08-31) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T421; citations that meant `theorem_261_n261_dark_a_sa_st_a_c9_gf37.py` were left at T261.
 """
 
 import sys, os
@@ -78,7 +87,7 @@ def is_prime(n):
 
 def run():
     print("=" * 70)
-    print("THEOREM 261: TWIN PRIME DR PAIR THEOREM — PERFECT TRIPARTITION")
+    print("THEOREM 421: TWIN PRIME DR PAIR THEOREM — PERFECT TRIPARTITION")
     print("=" * 70)
 
     # 1. Congruence proof
@@ -171,7 +180,7 @@ def run():
     # 5. Interface structure
     print(f"\n5. INTERFACE STRUCTURE:")
     print(f"  Every twin prime pair straddles 6m (the interface).")
-    print(f"  chi_{{-3}}(6m) = 0: 3|(6m) → interface in discrete RT model (T256)")
+    print(f"  chi_{{-3}}(6m) = 0: 3|(6m) → interface in discrete RT model (T418)")
     print(f"  chi_{{-3}}(p) = -1: p=6m-1 ≡ 5 (mod 6) → heavy phase")
     print(f"  chi_{{-3}}(q) = +1: q=6m+1 ≡ 1 (mod 6) → light phase")
     print(f"  DR tripartition is orthogonal to chi_{{-3}} structure:")

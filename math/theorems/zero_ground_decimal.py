@@ -2,7 +2,7 @@
 # CLASS: THEOREM
 """
 ================================================================================
-THEOREM 235: Zero-Ground Decimal Architecture -- The 45+81=126=9 Foundation
+THEOREM 399: Zero-Ground Decimal Architecture -- The 45+81=126=9 Foundation
 ================================================================================
 
 USER OBSERVATION:
@@ -83,6 +83,15 @@ F. 19+19=38 AND THE CARRY:
   19+19 = 38 mod 37 = 1 in H.
   Two elements of the prime seed coset sum to the identity in H.
 ================================================================================
+
+RENUMBERED 2026-09-19: T235 -> T399.
+This file declared Theorem 235 on 2026-08-17, before `theorem_235_rule30_open_problems_gf37.py`
+(2026-08-29) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T399; citations that meant `theorem_235_rule30_open_problems_gf37.py` were left at T235.
 """
 
 import sys
@@ -105,7 +114,7 @@ def dr(n):
 
 def run():
     print("=" * 70)
-    print("THEOREM 235: ZERO-GROUND DECIMAL ARCHITECTURE -- 45+81=126=9")
+    print("THEOREM 399: ZERO-GROUND DECIMAL ARCHITECTURE -- 45+81=126=9")
     print("=" * 70)
 
     # A: Zero as container

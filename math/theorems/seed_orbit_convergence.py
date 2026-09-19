@@ -2,7 +2,7 @@
 # CLASS: COMPUTATION
 """
 ================================================================================
-THEOREM 250: Seed Orbit Convergence -- {18,24,32} Collects Across Domains
+THEOREM 412: Seed Orbit Convergence -- {18,24,32} Collects Across Domains
 ================================================================================
 
 USER OBSERVATION:
@@ -23,14 +23,14 @@ B. CONVERGENTS INTO SEED_ORBIT (mod 37):
     18 itself         DR=9 in SA
     499 (solar transit, seconds)  DR=4 in SA, prime
     1979 (calendar anchor)        DR=8
-    55 (cumul. orbitals n=1..5, T241)  DR=1 in H
+    55 (cumul. orbitals n=1..5, T404)  DR=1 in H
   24 slot:
     24 itself         DR=6 (imaginary unit)
     246 (pipeline seed)           DR=3 in ST
-    95040 (M12 group order, T243) DR=9 in SA
+    95040 (M12 group order, T406) DR=9 in SA
   32 slot:
     32 itself         DR=5 (prime seed)
-    c mod37=32 (speed of light, T248)  DR=1 in H
+    c mod37=32 (speed of light, T411)  DR=1 in H
 
 C. LINKS BETWEEN 499 AND 1979:
   Both land at SEED_ORBIT position 18.
@@ -38,6 +38,15 @@ C. LINKS BETWEEN 499 AND 1979:
   1979 / 499 mod37 = 1 in H (identity).
   The difference is a SEAM; the ratio is the identity.
 ================================================================================
+
+RENUMBERED 2026-09-19: T250 -> T412.
+This file declared Theorem 250 on 2026-08-21, before `theorem_250_n250_twin_prime_engine_gf37.py`
+(2026-08-30) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T412; citations that meant `theorem_250_n250_twin_prime_engine_gf37.py` were left at T250.
 """
 
 import sys
@@ -70,7 +79,7 @@ def flags(r):
 
 def run():
     print("=" * 70)
-    print("THEOREM 250: SEED ORBIT CONVERGENCE")
+    print("THEOREM 412: SEED ORBIT CONVERGENCE")
     print("=" * 70)
 
     # A: Orbit definition
@@ -89,10 +98,10 @@ def run():
         (18,    "18 itself"),
         (499,   "solar transit (seconds)"),
         (1979,  "calendar anchor"),
-        (55,    "cumul. orbitals n=1..5 (T241)"),
+        (55,    "cumul. orbitals n=1..5 (T404)"),
         (24,    "24 itself"),
         (246,   "pipeline seed"),
-        (95040, "M12 group order (T243)"),
+        (95040, "M12 group order (T406)"),
         (32,    "32 itself"),
         (299792458, "speed of light c"),
     ]

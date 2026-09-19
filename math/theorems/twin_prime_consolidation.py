@@ -1,6 +1,6 @@
 # CLASS: THEOREM
 """
-Theorem 221: Twin Prime Consolidation — Full Anatomy with Imaginary Unit Gate
+Theorem 385: Twin Prime Consolidation — Full Anatomy with Imaginary Unit Gate
 
 Collects and tightens the complete structural account of twin primes through
 GF(37).  Adds one new theorem not present in earlier files:
@@ -26,7 +26,7 @@ THEOREM 7 (Imaginary Unit Gate):
 
 CONSEQUENCE:
   The twin prime voids modulo 37 are gated by the imaginary unit.
-  The same 6 that appears in 54 = 6×9 (Theorem 218, torus step)
+  The same 6 that appears in 54 = 6×9 (Theorem 382, torus step)
   and in 6^2 ≡ -1 (the complex structure of GF(37)) is the exact
   gatekeeper of which residue classes cannot produce twin prime pairs.
 
@@ -47,7 +47,16 @@ CDT STATUS (arXiv:2408.15403):
            It does not close the conjecture.  What it does:
            → Proves necessary structural conditions on ALL twin prime pairs.
            → Identifies the imaginary unit as the mod-37 gatekeeper.
-           → Connects twin prime voids to the torus step structure (T218).
+           → Connects twin prime voids to the torus step structure (T382).
+
+RENUMBERED 2026-09-19: T221 -> T385.
+This file declared Theorem 221 on 2026-08-16, before `theorem_221_prime_index_137.py`
+(2026-08-27) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T385; citations that meant `theorem_221_prime_index_137.py` were left at T221.
 """
 
 import sys
@@ -83,7 +92,7 @@ def imaginary_units_mod37():
 
 def run():
     print("=" * 70)
-    print("THEOREM 221: TWIN PRIME CONSOLIDATION")
+    print("THEOREM 385: TWIN PRIME CONSOLIDATION")
     print("=" * 70)
 
     is_p = sieve(10 ** 6)
@@ -182,11 +191,11 @@ def run():
     print(f"  For each free n, neither 6n-1 nor 6n+1 is divisible by {P}.")
     print(f"  Dirichlet guarantees primes in each; the conjecture is about both simultaneously.")
 
-    # ── Connection to T218 ───────────────────────────────────────────────
-    print(f"\nCONNECTION TO THEOREM 218 (Torus Step Alignment):")
-    print(f"  T218: torus steps -2 and 54 both reduce to C_10 = {{17,22,35}} mod {P}")
-    print(f"  T218: 54 = 6*9  where 6 = imaginary unit (6^2 ≡ -1)")
-    print(f"  T221: twin prime voids at n ≡ ±6 (mod {P})")
+    # ── Connection to T382 ───────────────────────────────────────────────
+    print(f"\nCONNECTION TO THEOREM 382 (Torus Step Alignment):")
+    print(f"  T382: torus steps -2 and 54 both reduce to C_10 = {{17,22,35}} mod {P}")
+    print(f"  T382: 54 = 6*9  where 6 = imaginary unit (6^2 ≡ -1)")
+    print(f"  T385: twin prime voids at n ≡ ±6 (mod {P})")
     print(f"  The same 6 gates the torus (via 54=6×9) and the twin primes (via n=±6).")
     print(f"  Both the torus dynamics and the twin prime exclusion are governed by")
     print(f"  the imaginary unit of GF({P}).")

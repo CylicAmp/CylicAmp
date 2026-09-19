@@ -2,7 +2,7 @@
 # CLASS: THEOREM
 """
 ================================================================================
-THEOREM 256: Discrete Phase-Field Correspondence
+THEOREM 418: Discrete Phase-Field Correspondence
 ================================================================================
 
 The GF(37)/137-map GF(37) is a discrete two-phase dynamical system whose
@@ -67,6 +67,15 @@ GF(37) CONNECTIONS:
   6² ≡ -1 mod 37 → imaginary unit = pipe width (interface thickness)
   |Z₃₇| = 37 prime → the map is a bijection (volume-preserving / incompressible)
 ================================================================================
+
+RENUMBERED 2026-09-19: T256 -> T418.
+This file declared Theorem 256 on 2026-08-21, before `theorem_256_mahalanobis_gf37_orbits.py`
+(2026-08-31) re-used the number. The number goes to that file, not
+because it has the older claim -- it does not -- but because the corpus's
+numbering spine is keyed to `theorem_NNN_*.py` filenames and INDEX.md and
+runs unbroken to 381; moving a numbered file breaks the spine, moving this
+one costs a docstring. Every citation that meant THIS file was rewritten to
+T418; citations that meant `theorem_256_mahalanobis_gf37_orbits.py` were left at T256.
 """
 
 import sys
@@ -116,7 +125,7 @@ def is_prime(n):
 
 def run():
     print("=" * 70)
-    print("THEOREM 256: DISCRETE PHASE-FIELD CORRESPONDENCE")
+    print("THEOREM 418: DISCRETE PHASE-FIELD CORRESPONDENCE")
     print("GF(37)/137-MAP AS DISCRETE TWO-PHASE DYNAMICAL SYSTEM")
     print("=" * 70)
 
