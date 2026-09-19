@@ -28,14 +28,22 @@ THE GRADES
 
   claim                                        level  weakest cut  decided by
   1 batch partition = Riemann sum               L1    Cut 1        computation
-  2 four-tier ledger = DLQ validation tiers     --    ungradeable  absent source
+  2 four-tier ledger = DLQ validation tiers     L2*   Cut 2        computation
   3 birthday bound bounds bucket allocation     L1    Cut 3        native/corr.
   4 napkin ring = aggregation projection        L1    Cut 1        computation
   5 quadrant partition = sharding               L1    Cut 1        computation
 
-  No claim reaches Level 2. Not one names a map Phi, objects on each side,
-  and a relation that survives it. "Is a physical realization of" is the
-  Level-1 formula: a role, asserted.
+  * UPDATED 2026-09-19.  Claim 2 was ungradeable when this file was written
+  because its left-hand side was not in the corpus.  T424
+  (theorem_424_rewrite_certificate_ledger_gf37.py) writes it down, so the cut
+  can now be run: the FILTRATION reaches Level 2, and the DLQ identification
+  specifically fails Cut 2 on a computed obstruction -- INVALID is not
+  absorbing (180 of 900 ordered invalid pairs land back in K_E) while a DLQ
+  is.  See the amended CLAIM 2 section.  The other four claims are unchanged.
+
+  Claims 1, 3, 4 and 5 reach Level 1 and no further.  Not one names a map
+  Phi, objects on each side, and a relation that survives it.  "Is a physical
+  realization of" is the Level-1 formula: a role, asserted.
 
 ================================================================================
 CLAIM 1 -- "batch partitioning evaluates a Riemann sum, and truncating
@@ -70,21 +78,45 @@ CLAIM 2 -- "the four-tier rewrite-certificate ledger maps one-to-one to DLQ
             validation layers"
 ================================================================================
 
-  Ungradeable as stated, and the reason is not a judgement call.
+  AS FIRST GRADED (2026-09-19, morning): ungradeable.  Cut 2 asks, for
+  Level 2, for the objects on each side.  The DLQ side was clear; the ledger
+  side -- EXACT / EASY_EQUIVALENT / FINAL_EQUIVALENT / INVALID, K_easy, K_E,
+  e_hard - 1 non-trivial coset defects -- was not in this corpus under those
+  names or any of them.  No source object, so no Phi, so nothing to grade.
 
-  Cut 2 asks, for Level 2, for the objects on each side. The DLQ side is
-  clear. The ledger side -- EXACT / EASY_EQUIVALENT / FINAL_EQUIVALENT /
-  INVALID, K_easy, K_E, e_hard - 1 non-trivial coset defects -- is not in
-  this corpus under those names or any of them. The grep is asserted below.
+  AS GRADED NOW: T424 supplies the object.  It is a CONSTRUCTION and says so
+  -- the smallest filtration consistent with the supplied names, built from
+  corpus objects that already existed:
 
-  So there is no source object to build a Phi from. This is not "the claim is
-  wrong"; it is "the claim's left-hand side has not been written down here".
-  Two honest outcomes: write the ledger as its own file first and then grade
-  the map, or read the claim as Level 1 about a four-tier filtration in
-  general, which is a role and a common one.
+      {1}  <|  H  <|  K_E  <|  G = (Z/37Z)*
+       1       3        6      36        orders, indices 3 * 2 * 6 = 36
 
-  Noting the shape anyway: a filtration by cost-to-certify (0, O(1), heavy,
-  fails) is a real and useful design, and it does not need GF(37) to be one.
+      H   = {1,10,26}, the 137-map kernel        -> EXACT u EASY_EQUIVALENT
+      K_E = H u (-H), the Cayley generators      -> + FINAL_EQUIVALENT
+            (T417, T419; -H is the cube roots of -1)
+      e_hard = [K_E : H] = 2, so e_hard - 1 = 1 non-trivial coset, = -H,
+      three elements -- the supplied "coset defects", now a count
+
+  With Phi specified, two named relations SURVIVE it: the tiers are totally
+  ordered by certificate cost and Phi is order-preserving; and the easy tier
+  is closed, so two easy records compose to an easy one, because H is a
+  subgroup.  That is Level 2 for the filtration.
+
+  One relation does NOT survive, and it is computed rather than argued:
+
+      algebra    INVALID is not absorbing -- 180 of the 900 ordered pairs
+                 from G \ K_E have their product back inside K_E; 2 * 5 = 10
+                 is the first, and 10 is in H
+      pipeline   the DLQ IS absorbing; two dead-lettered rows do not combine
+                 into a valid one, which is the whole point of a DLQ
+
+  So the DLQ identification fails Cut 2 on that relation.  T424 Part 6 shows
+  the failure cannot be repaired by choosing a different K_E: for ANY proper
+  subgroup S < G the complement G \ S is unclosed, checked over all nine
+  subgroups.  The obstruction is structural.
+
+  GRADE: Level 2 for the filtration; the DLQ map fails Cut 2.  Better than
+  ungradeable, worse than the claim asserted.
 
 ================================================================================
 CLAIM 3 -- "bucket allocation is bounded below by the birthday threshold"
@@ -274,16 +306,25 @@ def main():
     print("   residual does not shrink with n because it is not an")
     print("   approximation error. T379's O(1/n) belongs to quadrature.")
 
-    print("\nCLAIM 2 -- the ledger's left-hand side is absent from the corpus")
+    print("\nCLAIM 2 -- left-hand side now supplied by T424; regrade below")
     root = pathlib.Path(__file__).resolve().parent.parent.parent
     pat = r"e_hard|K_E\b|EASY_EQ|quotient strata|kernel filtration"
     hits = subprocess.run(
         ["grep", "-rlE", pat, "--include=*.py", "--include=*.md", str(root)],
         capture_output=True, text=True).stdout.split()
     hits = [h for h in hits if pathlib.Path(h).name != pathlib.Path(__file__).name]
-    print("   files defining the four-tier ledger: %d" % len(hits))
-    assert hits == [], hits
-    print("   so no Phi can be built; ungradeable, not refuted.")
+    print("   files defining the four-tier ledger: %d  %s"
+          % (len(hits), [pathlib.Path(h).name for h in hits]))
+    assert len(hits) == 1 and "theorem_424" in hits[0], hits
+    print("   filtration {1} < H < K_E < G, indices 3 * 2 * 6 = 36 -> Level 2")
+    G = set(range(1, P))
+    K_E = {1, 10, 11, 26, 27, 36}
+    bad = sorted(G - K_E)
+    back = [(a, b) for a in bad for b in bad if (a * b) % P in K_E]
+    print("   INVALID not absorbing: %d of %d ordered pairs return to K_E"
+          % (len(back), len(bad) ** 2))
+    assert len(back) == 180
+    print("   a DLQ is absorbing -> the identification fails Cut 2 (see T424)")
 
     print("\nCLAIM 3 -- the birthday bound is native L3 and correspondence L1")
     for N in (365, 4096, 65536, 1000000):
@@ -337,7 +378,7 @@ def main():
     assert orbit_of(23) == "TESLA" and orbit_of(365) == "SEED"
 
     print("\n" + "=" * 78)
-    print("ALL ASSERTIONS PASS -- no claim above Level 1")
+    print("ALL ASSERTIONS PASS -- claim 2 filtration L2, the other four L1")
     print("=" * 78)
 
 
