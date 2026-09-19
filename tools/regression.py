@@ -8,6 +8,13 @@ EARLIER proof, which is the failure mode a corpus of 430+ files actually has.
     python3 tools/regression.py --timeout 30    # shorter per-file budget
     python3 tools/regression.py --diff          # compare against saved state
     python3 tools/regression.py --only theorem_245
+
+SIDE EFFECTS, by design and worth knowing: this RUNS the corpus, so any file
+that writes an artifact will write it. A full pass touches at least
+pipeline_output.json (timestamp only -- every computed value is stable) and
+math/theorems/torus_animation_137map.gif (regenerated, so the bytes differ
+while the animation does not). Expect a dirty tree after a full run; check
+that the pipeline fixture still matches before committing the churn.
 """
 import argparse
 import json
