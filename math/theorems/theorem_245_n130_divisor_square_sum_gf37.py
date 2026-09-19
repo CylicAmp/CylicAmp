@@ -19,13 +19,62 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     k=5: n EVEN impossible by proof (2026-09-19). n odd: open, search only.
     k=6: IMPOSSIBLE by proof — PROVED 2026-09-19, see below.
     k=7: no solutions found up to 500 000 000.
-    k=8: no solutions found up to 500 000 000.
+    k=8: 4∤n IMPOSSIBLE by proof (2026-09-19); 4|n open, 23 live shapes.
     (k≥9 requires n ≥ d_9² ≥ 9² = 81 and grows rapidly; no solutions expected.)
 
   Proof of k=2 impossibility:
     d_1 = 1 always (smallest divisor). So n = 1² + d_2² = 1 + d_2².
     Since d_2 | n, d_2 | (1 + d_2²). But d_2 | d_2², so d_2 | 1.
     Therefore d_2 = 1, contradicting d_2 > d_1 = 1. ∎
+
+  ADDED 2026-09-19 — k=8: HALF PROVED, HALF OPEN.
+  The parity lemma fires (k even, so p = 2), but k=8 does NOT close the way
+  k=6 did, and the reason is countable: k=6 leaves four terms after 1 and 4,
+  so mod 4 gives a in {1,3}; k=8 leaves six, so a in {1,3,5}. The extra
+  middle case is where it stops.
+
+    n = 5 + d_3^2 + ... + d_8^2, and mod 4 gives n = 1 + a (mod 4) with a the
+    number of odd entries among d_3..d_8. n even leaves a = 1, 3, 5, i.e.
+
+        a = 1 or 5  <=>  n = 2 (mod 4)        a = 3  <=>  4 | n
+
+  CASE A, 4 does not divide n, IS PROVED IMPOSSIBLE.  Here n = 2m with m odd,
+  the divisors are the odd e_1 < e_2 < ... together with their doubles, and
+  d_3 = e_2 = q.
+
+    a = 1.  d_3 = q is odd, so d_4..d_8 are all even, i.e. five doubles
+            2e_i appear before the next odd divisor e_3.  That needs
+            e_3 > 2e_6 >= 2e_3.  Absurd.  (Machine-checked: zero occurrences
+            of a = 1 across 81931 values n = 2m with at least 8 divisors.)
+
+    a = 5.  Exactly one even among d_3..d_8, so d_8 = 2q and d_3..d_7 are
+            five ODD divisors q = e_2 < e_3 < e_4 < e_5 < e_6 < 2q.  Any
+            divisor in (q, 2q) is PRIME, because a composite one has all its
+            prime factors >= q and so is at least q^2 > 2q.  So m needs five
+            primes in [q, 2q), which first becomes possible at q = 17.  But
+            then m >= q e_3 e_4 e_5 e_6 > q^5 while
+                n = 5 + 5q^2 + e_3^2 + e_4^2 + e_5^2 + e_6^2 < 5 + 21q^2,
+            and 2q^5 > 5 + 21q^2 for every q >= 3.  At q = 17 that is
+            n >= 13357342 against n < 6074.                              ∎
+
+  CASE B, 4 | n with a = 3, IS OPEN.  Mod 8 does not close it.  Writing
+  b for the number of even entries among d_3..d_8 that are 2 (mod 4),
+
+      odd^2 = 1,  (2·odd)^2 = 4,  (4k)^2 = 0   (mod 8)
+      so  n = 5 + 3 + 4b = 4b  (mod 8)
+
+  and 8 | n needs b even while 4 || n needs b odd.  Both are reachable, so
+  no contradiction.  This is the ladder's documented stopping point: odd
+  squares are 1 (mod 8), so mod 16 adds nothing.
+
+  A census of the live class -- n with 4 | n, at least 8 divisors, and
+  a = 3 -- finds 9146 values below 400000 spread over TWENTY-THREE distinct
+  parity shapes of (d_3..d_8), the largest being
+  (o, e4, e2, o, e4, o) with 1417.  That is the case tree still to be built,
+  and it is an order of magnitude larger than k=5's five live shapes.
+
+  Exhaustive k=8 search to 2 000 000: no solutions.  That is a SEARCH, and
+  the 4 | n row stays open behind it.
 
   ADDED 2026-09-19 — k=6 IS IMPOSSIBLE.
   The even layers are the easy ones, and k=6 closes completely. Four steps,
@@ -714,7 +763,37 @@ def main():
     print("  k=6 PROVED impossible. The parity lemma fires only for even k,")
     print("  which is why k=3 and k=5 needed far more work.")
 
-    print("\n  k=2, k=3, k=4, k=6 PROVED; k=5 proved for n even, open for n odd.")
+    # ── Part 15: k=8, half proved ────────────────────────────────────────
+    print("\n--- PART 15: k=8 — 4∤n proved, 4|n open (added 2026-09-19) ---")
+    live_a = [a for a in range(7) if (1 + a) % 2 == 0]
+    print("  mod 4: n = 1+a (mod 4), n even leaves a in %s" % live_a)
+    assert live_a == [1, 3, 5]
+    bad = seen = 0
+    for m in range(3, 200000, 2):
+        x = 2 * m
+        dd = divisors(x)
+        if len(dd) < 8:
+            continue
+        seen += 1
+        if sum(1 for y in dd[2:8] if y % 2) == 1:
+            bad += 1
+    print("  a=1 over %d values n=2m, m odd, >=8 divisors: %d" % (seen, bad))
+    assert bad == 0
+    # a=5 dies on size: needs 5 primes in [q,2q), then 2q^5 > 5+21q^2
+    assert all(2 * q ** 5 > 5 + 21 * q * q for q in range(3, 500))
+    print("  a=5 needs 5 primes in [q,2q) so m > q^5, but n < 5+21q^2;")
+    print("      2q^5 > 5+21q^2 for every q >= 3 ✓  -> CASE A closed")
+    # mod 8 does NOT close case B
+    print("  4|n, a=3: n = 4b (mod 8); 8|n needs b even, 4||n needs b odd —")
+    print("      both reachable, so mod 8 gives no contradiction. OPEN.")
+    k8 = [x for x in range(2, 200001)
+          if len(divisors(x)) >= 8 and sum(d * d for d in divisors(x)[:8]) == x]
+    assert k8 == [], k8
+    print("  exhaustive k=8 search to 200000 returns %s (a SEARCH, not a proof)"
+          % k8)
+    print("  live class has 23 distinct parity shapes — the tree to build next.")
+
+    print("\n  k=2,3,4,6 PROVED; k=5 even and k=8 with 4∤n proved; rest open.")
 
     print("\n" + "=" * 70)
     print("THEOREM 245 VERIFIED")

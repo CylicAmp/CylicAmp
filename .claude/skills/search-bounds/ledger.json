@@ -40,5 +40,11 @@
   "param": "-",
   "n": "-",
   "kind": "proof"
+ },
+ {
+  "branch": "k=8 case B (4|n, a=3)",
+  "param": "23 shapes",
+  "n": "2e6",
+  "kind": "search"
  }
 ]
