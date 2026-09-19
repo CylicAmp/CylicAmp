@@ -102,11 +102,16 @@ Verified output:
 
 ---
 
+> **DUPLICATE, 2026-09-19.** This file was byte-identical to
+> `math/theorems/one_over_137_framework.md`. That copy is CANONICAL and
+> carries the full note on α⁻¹; edit it, not this one. Found by a
+> prior-art sweep of the α claim, not by reading.
+
 ## Key Constants
 
 | Constant | Value | Role |
 |---|---|---|
-| α⁻¹ (fine structure) | 137 | Core |
+| α⁻¹ (fine structure) | **137.035999177(21)**, not 137 | Core — 137 is the *nearest integer* |
 | Decomposition | 3×37 + 2×13 | Factored scaffold |
 | E₈ dimension | 248 | Amplification target |
 | 37-field | mod 37 | Orbit geometry (see modal_crossing_orbit.py) |

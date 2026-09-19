@@ -60,8 +60,8 @@ PRIMES q BY CLASS NUMBER h(1 − 4q), CLASSIFIED IN GF(37)
         q = 107  h=2   107 mod 37 = 33 ∈ D7
 
         q = 137  h=3   137 mod 37 = 26 ∈ IC
-            137 IS the fine-structure-constant prime and the map's defining
-            multiplier source. Its discriminant D = 1 − 4·137 = −547 has h = 3.
+            137 is the NEAREST INTEGER to alpha^-1 = 137.035999177(21),
+            not equal to it, and it is the map's defining multiplier source. Its discriminant D = 1 − 4·137 = −547 has h = 3.
             dlog₂(26) = 12; the 137-map shifts discrete logs by 12.
 
         q = 431  h=5   431 mod 37 = 24 ∈ CB ∩ SEED_ORBIT
