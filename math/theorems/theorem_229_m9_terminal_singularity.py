@@ -99,6 +99,18 @@ M_9 is NOT an orthogonal projection (M_9 ≠ M_9ᵀ):
 
 M_9 is an oblique projection: it collapses along directions NOT orthogonal to
 the image span{e_9}.  The kernel and image are complementary but not orthogonal.
+
+GENERALISED 2026-09-19 (T430).  This file records trace(M_9) = rank(M_9) = 1
+as a property of M_9.  That trace is not incidental -- it is what forces the
+idempotency.  For ANY rank-one A = v w^T,
+
+    A^2 = v (w^T v) w^T = tr(A) . A,    hence  A^k = tr(A)^(k-1) . A.
+
+M_9 is the case tr = 1, so A^2 = A.  The 3x3 all-ones matrix is the case
+tr = 3, so J^2 = 3J.  Idempotency and the power law are one identity read at
+two traces.  T430 has the law, the GF(37) consequence (the n x n all-ones
+matrix has period ord_37(n), and is NILPOTENT exactly when 37 | n), and the
+forced-check that the period is not an orbit invariant.
 """
 
 import numpy as np
