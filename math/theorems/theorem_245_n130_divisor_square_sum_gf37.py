@@ -156,9 +156,9 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
       1 2 2^2 p 2p q r 2^2p         20000       0    66      --
       1 2 2^2 p q 2p 2q r           20000      72   348    6.0e10
       1 2 2^2 p 2p q 2^2p r         20000      69    66    6.3e10
-      1 2 2^2 p 2p 2^2p p^2 q         120      20     0    4.0e15
-      1 2 2^2 p 2p q 2^2p p^2         300       4     0    5.2e08
-      1 2 2^2 p 2p 2^2p q p^2         300      18     0    6.3e09
+      1 2 2^2 p 2p 2^2p p^2 q       20000     935  1033    9.1e31
+      1 2 2^2 p 2p q 2^2p p^2       20000      97  1033    9.4e15
+      1 2 2^2 p 2p 2^2p q p^2       20000     619  1033    1.5e16
       1 2 2^2 p q r 2p 2q           20000       0   348      --
 
   EVERY ROW EMPTY.  Three readings the table supports and a summary would
@@ -176,10 +176,33 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
       count is zero.  Complete coverage of a smaller range beats a
       hole-ridden sweep of a larger one.
 
-  (c) The three p^2 shapes stop early for a reason that is not arithmetic:
-      the verification step computes all divisors of n by trial division to
-      sqrt(n), and n grows like p^8 there.  p < 120 is a limit of the CHECK,
-      not of the mathematics, and a smarter verifier would move it.
+  (c) The three p^2 shapes first stopped at p < 120-300 for a reason that was
+      not arithmetic: the verifier computed ALL divisors of n by trial
+      division to sqrt(n), and n grows like p^8 there.  FIXED 2026-09-20 --
+      the verifier now strips the known primes 2, p, q, r from n, enumerates
+      only the divisors built from them up to d_8, and requires the cofactor
+      to contribute no divisor below d_8.  That removed the sqrt(n) cost and
+      took all three from p < 120-300 to p < 20000.  Validated against brute
+      force on 24939 prefixes with zero disagreements, plus two negative
+      controls.
+
+  (d) SHAPES 4, 6 AND 7 ARE NOT IMPOSSIBLE, refuting a supplied argument.
+      The claim was that an unlisted power of 2 must exceed d_8, giving
+      16 > 2p against p > 8 for shape 4, and similarly 8 > 2q and 8 > 4p for
+      6 and 7 -- so all three would be mutually unsatisfiable and droppable.
+      The step does not hold: a shape listing 2^3 says v_2(n) >= 3, NOT that
+      16 divides n, and if 16 does not divide n it is under no ordering
+      constraint at all.  Explicit witnesses, each with v_2(n) exactly as
+      small as the shape requires:
+
+          shape 4   n = 8*11*13*17 = 19448   divisors 1,2,4,8,11,13,17,22
+          shape 6   n = 4*5*7*11   = 1540    divisors 1,2,4,5,7,10,11,14
+          shape 7   n = 4*5*11*13  = 2860    divisors 1,2,4,5,10,11,13,20
+
+      All three shapes are realized, so none may be dropped.  The real cause
+      of their cand 0 is the PINNING, not the ordering: q must be a prime
+      factor of C(p) lying in (p, 2p), which is an arithmetic condition that
+      simply never held in range.  Ordering alone permits all three.
 
   WEAKEST BRANCH, which is the figure to quote: p < 120.  Not the 8.6e15 one
   row reached.  The thirteen are BOUNDED, not closed -- still searches.
