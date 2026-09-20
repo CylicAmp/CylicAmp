@@ -53,6 +53,50 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   So the whole n = 2 (mod 4) branch of k=7 is closed, exactly as it is for
   k=6 and for k=8's case A.
 
+  THE TWO DOMINANT ODD SHAPES, WORKED 2026-09-20.  Of the 71 odd shapes,
+  two carry over a third of the cases:
+
+      A   1 p q pq r pr qr    15599 occurrences   needs pq < r
+      B   1 p q r pq pr qr     8926               needs q < r < pq
+
+  They are ONE search, because they give the SAME n and differ only in the
+  ordering window:
+
+      n = 1 + p^2 + q^2 + p^2q^2 + r^2 + p^2r^2 + q^2r^2
+        = (1 + p^2)(1 + q^2)  +  r^2 (1 + p^2 + q^2)
+
+  THE PINNING IS EXACT.  Reducing that expression modulo each prime,
+
+      r | n  =>  r | (1 + p^2)(1 + q^2)
+      p | n  =>  p | (1 + q^2)(1 + r^2)
+      q | n  =>  q | (1 + p^2)(1 + r^2)
+
+  and since r is prime it divides one of the two factors, so
+  r is in primes(1+p^2) union primes(1+q^2) -- which makes the search cheap:
+  factor 1+x^2 once per prime x, never the product.
+
+  RESULT over p < 2000 and q < 20000:
+
+      shape A    ZERO candidates
+      shape B    FIVE candidates, none a solution
+
+  The five near-misses satisfy all three divisibilities and fail on the
+  SHAPE -- n picks up a small prime that is not p, q or r:
+
+      p=5  q=13  r=17   n=60775       actual d[:7] = 1,5,11,13,17,25,55
+      p=5  q=89  r=233  n=431640655   actual d[:7] = 1,5,23,89,115,181,233
+      p=17 q=29  r=421  n=200703751   actual d[:7] = 1,17,29,421,493,967,7157
+      p=17 q=89  r=233  n=448064359   actual d[:7] = 1,17,31,41,89,233,527
+      p=61 q=89  r=233  n=661572511   actual d[:7] = 1,61,89,233,523,5429,14213
+
+  11, 23, 31 and 41 are the intruders.  That is the obstruction in this
+  family: the congruences are satisfiable, and then n acquires a divisor
+  smaller than the ones the shape names.
+
+  Shape A's emptiness is a SEARCH result, not a proof.  r prime and
+  r | (1+p^2)(1+q^2) give r <= 1 + q^2, and r > pq then needs p < (1+q^2)/q,
+  which is consistent -- so nothing here forbids A.
+
   WHAT REMAINS, and it is large.  The k=7 shape census over n <= 200000
   finds 133 distinct shapes of (d_1..d_7) -- 71 with n odd and 62 with n
   even.  Against 12 for k=5 and 33 for k=8's case B, this is the biggest

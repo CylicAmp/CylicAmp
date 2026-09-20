@@ -64,5 +64,11 @@
   "param": "p<120",
   "n": "4.0e15",
   "kind": "search"
+ },
+ {
+  "branch": "k=7 odd, shapes A+B",
+  "param": "p<2000,q<20000",
+  "n": "1e13",
+  "kind": "search"
  }
 ]
