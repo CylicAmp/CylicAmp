@@ -97,6 +97,35 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   r | (1+p^2)(1+q^2) give r <= 1 + q^2, and r > pq then needs p < (1+q^2)/q,
   which is consistent -- so nothing here forbids A.
 
+  NEXT BATCH OF ODD SHAPES, 2026-09-20.  Six more of the 71, all EMPTY:
+
+      shape                        bounds            cand  skip   n reached
+      1 p p^2 p^3 q pq p^2q        p<600  q<3000       1     44    6.4e07
+      1 p q p^2 pq p^2q r          p<100  q<2000       0      0      --
+      1 p p^2 q pq p^2q r          p<100  q<2000       0      0      --
+      1 p p^2 q r pq pr            p<300  q<2000       1      0    4.6e10
+      1 p q r s pq pr              p<60   q<400        0      0      --
+      1 p q pq r s pr              p<60   q<400        0      0      --
+
+  Eight of the 71 odd shapes are now covered, carrying roughly 45% of the
+  odd cases below 200000.
+
+  ONLY THE LAST PRIME CAN BE PINNED, and getting that wrong silently loses
+  candidates.  The general solver (tools/shape_solver.py) first pinned every
+  prime after the first, by requiring q | C where C is the sum of squares of
+  the tokens free of q.  That is WRONG: q | n involves the tokens carrying
+  r and s as well, and those are not fixed yet.  Only the LAST prime has the
+  property that every token free of it uses primes already chosen.  The bug
+  showed up as a control failure -- the solver returned 2 candidates on
+  1 p q r pq pr qr where the hand-written search returned 5.  Fixed, and the
+  control now reproduces 5 exactly at p<600, q<3000.
+
+  THE BOUNDS ARE SET BY C's GROWTH, not by the arithmetic.  For the shapes
+  carrying p^2q, C is of order p^4 q^2, so it passes 1e15 almost immediately
+  and the skip count explodes -- 25323 skipped pairs at p<600, against 0 at
+  p<100.  The lower bound with complete coverage is the better run, as in
+  the k=8 case.
+
   WHAT REMAINS, and it is large.  The k=7 shape census over n <= 200000
   finds 133 distinct shapes of (d_1..d_7) -- 71 with n odd and 62 with n
   even.  Against 12 for k=5 and 33 for k=8's case B, this is the biggest
