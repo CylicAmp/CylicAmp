@@ -58,5 +58,11 @@
   "param": "p<120",
   "n": "6.8e14",
   "kind": "search"
+ },
+ {
+  "branch": "k=8 case B, 13 shapes (weakest)",
+  "param": "p<120",
+  "n": "4.0e15",
+  "kind": "search"
  }
 ]

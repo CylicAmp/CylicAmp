@@ -135,10 +135,54 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
       1 2 2^2 2^3 p 2p q r         1 2 2^2 2^3 p q r 2p
       1 2 2^2 2^3 2^4 p q r
 
-  Searched over p <= 200, q <= 400, r <= 400 -- 195220 parameter tuples --
-  and empty.  Two of them were pushed to p < 2000, q < 20000 (602652 tuples,
-  n up to 1.6e13) and are also empty.  Those are SEARCHES; the thirteen rows
-  stay open.
+  ALL THIRTEEN BOUNDED, 2026-09-20.  They are not three-parameter families:
+  once p is fixed, q divides C(p) = the sum of squares of the tokens free of
+  q, and C is a SMALL QUADRATIC in p for every shape --
+
+      21(1 + p^2)   six shapes      21 + 5 p^2    three
+      5(17 + p^2)   three           341 + p^2     one
+
+  (plus a p^4 term for the three carrying p^2).  So q is pinned by p and r by
+  (p,q): each shape is ONE free parameter, not three.  That is what took p
+  from 200 to 10^4-10^5.
+
+      shape                        p bound   cand  skip   n reached
+      1 2 2^2 2^3 2^4 p q r         20000     527     0    8.6e15
+      1 2 2^2 2^3 p q 2p r         100000     229   989    3.7e11
+      1 2 2^2 2^3 p 2p q r           5000     130     0    3.1e13
+      1 2 2^2 2^3 p q r 2p         100000       0   989      --
+      1 2 2^2 p 2p 2^2p q r          3000     115     0    2.7e13
+      1 2 2^2 p q 2p r 2q           20000       0   348      --
+      1 2 2^2 p 2p q r 2^2p         20000       0    66      --
+      1 2 2^2 p q 2p 2q r           20000      72   348    6.0e10
+      1 2 2^2 p 2p q 2^2p r         20000      69    66    6.3e10
+      1 2 2^2 p 2p 2^2p p^2 q         120      20     0    4.0e15
+      1 2 2^2 p 2p q 2^2p p^2         300       4     0    5.2e08
+      1 2 2^2 p 2p 2^2p q p^2         300      18     0    6.3e09
+      1 2 2^2 p q r 2p 2q           20000       0   348      --
+
+  EVERY ROW EMPTY.  Three readings the table supports and a summary would
+  not:
+
+  (a) The `cand 0` rows -- 2^3 p q r 2p, p q 2p r 2q, p 2p q r 2^2p, and
+      p q r 2p 2q -- produce NO valid tuple at all in range: ordering plus
+      pinning are mutually unsatisfiable there, and nothing reaches the
+      divisor check.  Whether that is provable rather than range-limited is
+      worth asking; it would upgrade four rows from search to proof.
+
+  (b) LOWERING the bound STRENGTHENED two rows.  At p < 100000 the skip
+      column is 989 -- primes where C_2 exceeded the 1e16 factoring cap and
+      which are therefore NOT covered.  At p < 20000 and p < 5000 the skip
+      count is zero.  Complete coverage of a smaller range beats a
+      hole-ridden sweep of a larger one.
+
+  (c) The three p^2 shapes stop early for a reason that is not arithmetic:
+      the verification step computes all divisors of n by trial division to
+      sqrt(n), and n grows like p^8 there.  p < 120 is a limit of the CHECK,
+      not of the mathematics, and a smarter verifier would move it.
+
+  WEAKEST BRANCH, which is the figure to quote: p < 120.  Not the 8.6e15 one
+  row reached.  The thirteen are BOUNDED, not closed -- still searches.
 
   A census of the live class -- n with 4 | n, at least 8 divisors, and
   a = 3 -- finds 9146 values below 400000 spread over TWENTY-THREE distinct
