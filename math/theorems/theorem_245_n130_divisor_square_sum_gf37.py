@@ -18,7 +18,7 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     k=4: EXACTLY ONE solution: n = 130 — PROVED 2026-09-19, see below.
     k=5: n EVEN impossible by proof (2026-09-19). n odd: open, search only.
     k=6: IMPOSSIBLE by proof — PROVED 2026-09-19, see below.
-    k=7: no solutions found up to 500 000 000.
+    k=7: 4∤n IMPOSSIBLE by proof (2026-09-20); 4|n and n odd open.
     k=8: 4∤n IMPOSSIBLE by proof (2026-09-19); 4|n open, 23 live shapes.
     (k≥9 requires n ≥ d_9² ≥ 9² = 81 and grows rapidly; no solutions expected.)
 
@@ -26,6 +26,39 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     d_1 = 1 always (smallest divisor). So n = 1² + d_2² = 1 + d_2².
     Since d_2 | n, d_2 | (1 + d_2²). But d_2 | d_2², so d_2 | 1.
     Therefore d_2 = 1, contradicting d_2 > d_1 = 1. ∎
+
+  ADDED 2026-09-20 — k=7: THE 4-DOES-NOT-DIVIDE-n HALF IS IMPOSSIBLE.
+  k=7 is odd, so the parity lemma forces nothing and the ladder does not
+  fire -- the same position as k=3 and k=5.  But the EVEN branch still
+  splits, and one side of it closes.
+
+    n even: d_2 = 2 and n = 5 + d_3^2 + ... + d_7^2, five terms.  Mod 4,
+    n = 1 + a (mod 4) with a the number of odd entries among d_3..d_7, and
+    n even forces a odd, so a in {1,3,5}, with
+        4 | n        <=>  a = 3        n = 2 (mod 4)  <=>  a in {1,5}
+
+    a = 1 IS IMPOSSIBLE.  d_3 = q is odd, so d_4..d_7 are all even; d_4 = 2q,
+    and the next divisor after 2q is min(q^2, q'), which is ODD because
+    min(q^2,q') < 2 min(q^2,q').  So d_5 is odd.  (Machine-checked: zero
+    occurrences of a = 1 across 81931 values n = 2m with >= 7 divisors.)
+
+    a = 5 IS IMPOSSIBLE.  All of d_3..d_7 odd puts 2q beyond d_7, so the
+    odd divisors in (q, 2q) number at least four, and each is PRIME -- a
+    composite divisor there has all prime factors >= q and so is at least
+    q^2 > 2q.  The first q admitting four primes in [q, 2q) is q = 11.  But
+    then m > q^4 while n = 5 + q^2 + four odd squares each below (2q)^2 is
+    under 5 + 17q^2, and 2q^4 > 5 + 17q^2 for every q >= 3.  At q = 11 that
+    is n >= 92378 against n < 2062.                                       ∎
+
+  So the whole n = 2 (mod 4) branch of k=7 is closed, exactly as it is for
+  k=6 and for k=8's case A.
+
+  WHAT REMAINS, and it is large.  The k=7 shape census over n <= 200000
+  finds 133 distinct shapes of (d_1..d_7) -- 71 with n odd and 62 with n
+  even.  Against 12 for k=5 and 33 for k=8's case B, this is the biggest
+  tree in the table by an order of magnitude, and the odd half of it has had
+  no work at all.  Exhaustive k=7 search to 2 000 000: no solutions, which
+  is a SEARCH.
 
   ADDED 2026-09-20 — EVERY EVEN LAYER COLLAPSES TO TWO CASES, NOT MORE.
   The prediction going in was that the ladder's reach shrinks as k grows:
