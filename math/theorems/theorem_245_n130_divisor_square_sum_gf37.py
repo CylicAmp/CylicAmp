@@ -126,6 +126,36 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   p<100.  The lower bound with complete coverage is the better run, as in
   the k=8 case.
 
+  ALL 71 ODD SHAPES RUN, 2026-09-20.  The remaining 63 went through
+  tools/shape_solver.py.  Result: 57 EMPTY, 0 HIT, 6 UNRESOLVED.  The full
+  per-shape table with bounds, candidate counts and skip counts is in
+  notes/k7_odd_shape_table.txt.
+
+  So 65 of the 71 odd shapes are covered, and NOT ONE produced a solution.
+  Candidate counts are tiny throughout -- the largest is 5, and most shapes
+  return 0 -- which says the three divisibility conditions are far more
+  restrictive than the ordering.
+
+  THE SIX UNRESOLVED ALL CARRY FIVE DISTINCT PRIMES:
+
+      1 p q r s pq t     1 p q r pq s t     1 p q r s t pq
+      1 p q pq r s t     1 p q r p^2 s t    1 p q p^2 r s t
+
+  and the solver cannot reach them because it iterates four primes freely
+  and pins only the fifth.  But a SIZE argument closes one of them outright.
+  All five primes divide n, so pqrst | n, and n = 1 + six squares each at
+  most d_7^2, so n <= 1 + 6 d_7^2.
+
+    For 1 p q r s t pq, d_7 = pq, so n < 6p^2q^2 and pqrst <= n give
+    rst <= 6pq.  But r, s, t all exceed q, so rst > q^3, hence q^3 < 6pq
+    and q^2 < 6p < 6q, forcing q < 6.  So p = 3, q = 5 and rst <= 90, while
+    the three smallest admissible primes above 5 give rst >= 7*11*13 = 1001.
+                                                                          ∎
+
+  The other five have d_7 = t.  There n <= 1 + 6t^2 gives pqrs < 7t, and
+  t | n with n = C + t^2 gives t | C, so t <= C with C dominated by s^2.
+  That bounds the family without closing it, and those five stay OPEN.
+
   WHAT REMAINS, and it is large.  The k=7 shape census over n <= 200000
   finds 133 distinct shapes of (d_1..d_7) -- 71 with n odd and 62 with n
   even.  Against 12 for k=5 and 33 for k=8's case B, this is the biggest
