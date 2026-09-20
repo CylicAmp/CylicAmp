@@ -27,6 +27,40 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     Since d_2 | n, d_2 | (1 + d_2²). But d_2 | d_2², so d_2 | 1.
     Therefore d_2 = 1, contradicting d_2 > d_1 = 1. ∎
 
+  ADDED 2026-09-20 — EVERY EVEN LAYER COLLAPSES TO TWO CASES, NOT MORE.
+  The prediction going in was that the ladder's reach shrinks as k grows:
+  k=6 leaves a in {1,3}, k=8 leaves {1,3,5}, k=10 leaves {1,3,5,7}, k=12
+  leaves {1,3,5,7,9}, so the closed fraction should fall like 1/(k/2 - 2).
+  That prediction is WRONG, and the reason is that two constraints were
+  being conflated.
+
+    (A) THE CONGRUENCE, which is only valid for a SOLUTION, since it uses
+        n = the sum:  n = 1 + a (mod 4), so n even forces a odd, and then
+            4 | n        <=>  a = 3 (mod 4)
+            n = 2 (mod 4) <=>  a = 1 (mod 4)
+
+    (B) THE STRUCTURE, which is about what the divisor list can produce at
+        all, independent of the equation.
+
+  Intersecting them, over n <= 400000 with at least k divisors:
+
+        k     4|n live      4 does not divide n live
+        6     a = 3         none
+        8     a = 3         a = 5
+        10    a = 3         a = 5
+        12    a = 3         a = 5
+
+  So every even layer has AT MOST TWO live cases and the pair does not grow
+  with k.  k=6 is the special one -- its 4-does-not-divide-n class is empty
+  outright, which is why it closed completely.
+
+  WHAT ACTUALLY GROWS is the a = 3 tree.  At k=8 it carries 33 symbolic
+  shapes; that is where the layer stalled, not at the number of cases.  The
+  ladder's reach is constant; the tree underneath it is what expands.
+
+  (The B column is measured over a range, so it is evidence about which a
+  the structure produces, not a proof that no other a occurs higher up.)
+
   ADDED 2026-09-19 — k=8: HALF PROVED, HALF OPEN.
   The parity lemma fires (k even, so p = 2), but k=8 does NOT close the way
   k=6 did, and the reason is countable: k=6 leaves four terms after 1 and 4,
