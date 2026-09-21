@@ -463,8 +463,27 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   pairs (1,7), (7,1), (4,4) and the others are admissible.
 
   The QR step that closed k=3 does not transfer: it needs a lone square on
-  one side of the congruence and here there are three.  The case 9 | n is
-  untouched.
+  one side of the congruence and here there are three.
+
+  THE CASE 9 | n, WORKED 2026-09-21.  Two sub-cases, by where 9 sits.
+
+    A. d_3 = 9 (so q > 9).  Then d_4, d_5 are coprime to 3 and
+           n = 91 + d_4^2 + d_5^2,
+       while 9 | n needs 1 + d_4^2 + d_5^2 = 0 (mod 9).  Squares coprime to
+       3 are 1, 4, 7 (mod 9), so the live pairs are (1,7), (4,4), (7,1) --
+       three options, not one.  Pinning d_5 | 91 + d_4^2 and searching
+       d_4 < 3000: NO solutions.
+
+    B. d_3 = q with q in {5,7} (so q < 9).  Then exactly one of d_4, d_5 is
+       a multiple of 3 and n = 10 + q^2 + d_4^2 + d_5^2.  Pinning
+       d_5 | 10 + q^2 + d_4^2 and searching d_4 < 4000: NO solutions.
+
+    Cross-check: exhaustive search over odd n divisible by 9 up to
+    3 000 000 returns nothing.
+
+  Both are SEARCHES.  Combined with the 3-not-dividing-n work above, every
+  branch of k=5 with n odd now has coverage and none has a solution, but
+  none of it is a proof.
 
   THE CASE 3 DOES NOT DIVIDE n, WORKED 2026-09-19.  Mod 3 gives NO kill:
   every divisor is then coprime to 3, so each square is 1 (mod 3) and
