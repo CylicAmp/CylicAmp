@@ -89,6 +89,26 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   at k=7 and k=8.  In this branch it applies to 1013 of the 1588 values
   (63.8%), so it narrows rather than closes.
 
+  THE OTHER 575 ARE NOT A SEPARATE CASE -- THEY ARE FORCED.  If d_4 >= 2d_3
+  then d_4 = 2q exactly, because 2 | n and q | n give 2q | n with 2q > q, so
+  d_4 <= 2q always.  Measured over the branch: 575 values with d_4 >= 2d_3,
+  and ZERO with d_4 != 2q.  So the split is simply whether d_4 is the next
+  odd divisor e_3 or the double 2q, and 1013 + 575 = 1588 is the whole
+  branch.
+
+  THE 575 SPLIT FURTHER by where the second even divisor 2e_3 sits, which is
+  the same thing as how many odd divisors lie strictly inside (e_3, 2e_3):
+
+      oeoeooo  361   none inside
+      oeooeoo  143   one
+      oeoooeo   54   two
+      oeooooe   17   three
+
+  The last row needs THREE odd divisors of m between e_3 and 2e_3.  The
+  (q, 2q) primality argument does NOT transfer here: e_3 > 2q in this case,
+  so e_3 is not the least prime and divisors in (e_3, 2e_3) may be
+  composite.  Closing these four needs a different argument.
+
   TWO CORRECTIONS to my own first reading of this branch, both caught by
   looking at actual divisor lists rather than reasoning forward: the claim
   that FOUR odd divisors lie in (e_3, 2e_3) is wrong -- exactly one does,
