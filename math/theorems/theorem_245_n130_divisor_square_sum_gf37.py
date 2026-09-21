@@ -20,7 +20,8 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     k=6: IMPOSSIBLE by proof — PROVED 2026-09-19, see below.
     k=7: 4∤n IMPOSSIBLE by proof (2026-09-20); 4|n and n odd open.
     k=8: 4∤n IMPOSSIBLE by proof (2026-09-19); 4|n open, 23 live shapes.
-    (k≥9 requires n ≥ d_9² ≥ 9² = 81 and grows rapidly; no solutions expected.)
+    k=9: both EVEN branches empty under search (2026-09-21) — 31 shapes
+         with 4∤n, 27 with 4|n; n odd untouched, 259 shapes. OPEN.
 
   Proof of k=2 impossibility:
     d_1 = 1 always (smallest divisor). So n = 1² + d_2² = 1 + d_2².
@@ -76,6 +77,92 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   with n <= 650, which is the same number reached by hand.
 
   Still a SEARCH, not a proof: nothing here bounds p in general.
+
+  ADDED 2026-09-21 — THE k=9 4|n BRANCH: ALL 27 SHAPES, ALL EMPTY.
+  This is the other live branch, a = 3.  The mod-3 lemma forces 3 | n at
+  k = 9, so on this side 12 | n, and then 1, 2, 3, 4 are all divisors:
+
+      d_1..d_4 = 1, 2, 3, 4      and      d_3 = 3 EXACTLY.
+
+  Census over n <= 600000 with 12 | n, k >= 9 and a = 3: 26372 values,
+  d_3 != 3 in ZERO of them, 27 distinct shapes -- down from 73 before the
+  lemma was applied, so the lemma removes 46 of the 73.
+
+  NOTATION CHANGED HERE, AND WHY.  The 4-does-not-divide-n section above
+  writes tokens by concatenation (23 means 6).  That notation is ambiguous
+  once an exponent meets a following prime: 2^23 reads as 2^2 * 3 = 12 to
+  a human and as 2^23 to a regex that takes the digits after ^ greedily.
+  The generator emitted the first and an earlier parser read the second,
+  which would have silently computed wrong values.  Every shape below is
+  therefore written with explicit * separators -- 2^2*3 is 12 -- and the
+  solver splits on * before parsing ^.  Nothing above is affected; the
+  earlier shapes contain no exponent immediately followed by a prime.
+
+  THE 27 SHAPES AND THE RESULT.  f = census frequency out of 26372,
+  #P = number of free primes in the shape, cand = tuples passing the
+  ORDERING test only, before divisibility is applied.
+
+    shape                                       f     #P  cand  verdict
+    1 2 3 2^2 2*3 2^2*3 p 2*p 3*p             8954    1     0   EMPTY
+    1 2 3 2^2 p 2*3 2*p 2^2*3 3*p             2397    1     1   EMPTY
+    1 2 3 2^2 2*3 p 2^2*3 2*p 3*p             2180    1     1   EMPTY
+    1 2 3 2^2 p 2*3 2^3 3^2 2*p               1428    1     0   EMPTY
+    1 2 3 2^2 2*3 3^2 2^2*3 2*3^2 3^3         1356    0     1   EMPTY
+    1 2 3 2^2 p 2*3 3^2 2*p 2^2*3             1299    1     0   EMPTY
+    1 2 3 2^2 2*3 2^2*3 p q 2*p                917    2    28   EMPTY
+    1 2 3 2^2 2*3 p 2^3 3^2 2^2*3              865    1     0   EMPTY
+    1 2 3 2^2 2*3 p 3^2 2^2*3 2*p              798    1     0   EMPTY
+    1 2 3 2^2 2*3 3^2 2^2*3 p 2*3^2            656    1     0   EMPTY
+    1 2 3 2^2 2*3 3^2 2^2*3 2*3^2 p            615    1     1   EMPTY
+    1 2 3 2^2 2*3 2^3 3^2 2^2*3 p              541    1     1   EMPTY
+    1 2 3 2^2 2*3 2^3 3^2 p 2^2*3              519    1     0   EMPTY
+    1 2 3 2^2 2*3 2^2*3 p 2*p q                485    2   327   EMPTY
+    1 2 3 2^2 p 2*3 q 2^3 2*p                  476    2     0   EMPTY
+    1 2 3 2^2 2*3 3^2 p 2^2*3 2*3^2            451    1     0   EMPTY
+    1 2 3 2^2 p 2*3 q 2*p 2^2*3                433    2     0   EMPTY
+    1 2 3 2^2 2*3 p 2^2*3 q 2*p                307    2     1   EMPTY
+    1 2 3 2^2 2*3 p 2^2*3 2*p q                272    2     1   EMPTY
+    1 2 3 2^2 p 2*3 2*p q 2^2*3                260    2     0   EMPTY
+    1 2 3 2^2 p 2*3 2^3 2*p q                  260    2     1   EMPTY
+    1 2 3 2^2 p 2*3 2*p 2^2*3 q                200    2     1   EMPTY
+    1 2 3 2^2 2*3 p 2^3 q 2^2*3                173    2     0   EMPTY
+    1 2 3 2^2 2*3 p q 2^2*3 2*p                160    2     0   EMPTY
+    1 2 3 2^2 2*3 p 2^3 2^2*3 q                134    2     2   EMPTY
+    1 2 3 2^2 2*3 2^3 p 2^2*3 q                134    2     1   EMPTY
+    1 2 3 2^2 2*3 2^3 2^2*3 p q                102    2   310   EMPTY
+
+  The skip column -- shapes where the pinning integer exceeded the 10^15
+  factoring cap -- is ZERO on all 27 rows.  No row was abandoned.
+
+  WHAT IS DECIDED AND WHAT IS ONLY SEARCHED.  These are two different
+  certificates and the table mixes them:
+
+    13 rows are DECIDED FOR ALL PRIMES.  One row (the 3^3 shape) has no
+    free prime at all: it is the single number n = 1 + 4 + 9 + 16 + 36 +
+    81 + 144 + 324 + 729 = 1344, and 1344 = 2^6 * 3 * 7 has prefix
+    1, 2, 3, 4, 6, 7, 8, 12, 14, not the shape.  One number, checked, gone.
+    The other 12 rows carry exactly one free prime p, and every token
+    containing p contributes a multiple of p^2, so with C the sum of the
+    p-free squares, n = C (mod p) and p | n forces p | C.  C is a FIXED
+    integer -- it does not depend on p -- so the prime is drawn from a
+    finite factor list, not from a range.  With skip = 0 those 12 rows are
+    exhausted over ALL p.  No bound is involved.
+
+    14 rows are SEARCHED, bounded at p < 3000.  These carry two free
+    primes.  The smaller runs over primes below 3000; the larger is pinned
+    by the same divisibility argument and is unbounded.  The weakest
+    certificate on the table is therefore p < 3000, and it is what the
+    branch as a whole rests on.  Nothing here bounds p in general.
+
+  THE LARGEST SHAPE DIES IN ONE LINE, which is a good check on the solver.
+  1 2 3 2^2 2*3 2^2*3 p 2*p 3*p is 34% of the branch (8954 of 26372).  Its
+  p-free squares are 1 + 4 + 9 + 16 + 36 + 144 = 210 = 2 * 3 * 5 * 7, so
+  p | 210 gives p in {5, 7}; but the shape puts p after 12, so p > 12.
+  Empty, no search required.  The solver returns cand 0 for that row.
+
+  SO BOTH k=9 EVEN BRANCHES ARE NOW EMPTY UNDER SEARCH: 31 shapes with
+  4 not dividing n, 27 shapes with 4 | n, 58 in all, every one EMPTY with
+  skip 0.  The odd branch -- 259 shapes -- is untouched.  k=9 stays OPEN.
 
   ADDED 2026-09-21 — k=9: REDUCED, AND THE TREE IS 378 SHAPES.
   k=9 is odd, so the parity lemma forces nothing.  The even branch splits as
@@ -1354,6 +1441,33 @@ def main():
     print("  The other 13 all have p after every power of 2 they contain;")
     print("  searched to p<=200,q<=400,r<=400 (195220 tuples) and empty, but")
     print("  that is a SEARCH and those rows stay open.")
+
+    print("\n  k=9, 4|n branch (2026-09-21): 12|n is forced -- 4|n by the branch,")
+    print("  3|n by the mod-3 lemma -- so 1,2,3,4 are all divisors and d_3=3.")
+    LIM = 120000
+    pref9 = [[] for _ in range(LIM + 1)]
+    for d in range(1, LIM + 1):
+        for m in range(d, LIM + 1, d):
+            if len(pref9[m]) < 9: pref9[m].append(d)
+    branch = [x for x in range(12, LIM + 1, 12)
+              if len(pref9[x]) == 9
+              and sum(1 for y in pref9[x][2:] if y % 2) == 3]
+    assert branch and all(pref9[x][2] == 3 for x in branch)
+    print("      %d values to %d in the branch, d_3 != 3 in 0 of them ✓"
+          % (len(branch), LIM))
+    # the 34%-of-branch shape 1 2 3 4 6 12 p 2p 3p dies with no search:
+    C210 = 1 + 4 + 9 + 16 + 36 + 144
+    assert C210 == 210 and [d for d in divisors(210) if is_prime(d)] == [2, 3, 5, 7]
+    print("      shape 1 2 3 2^2 2*3 2^2*3 p 2*p 3*p: p | 210 so p in {5,7},")
+    print("      but the shape puts p after 12 -> EMPTY with no search ✓")
+    # the one shape with no free prime is a single number
+    n1344 = 1 + 4 + 9 + 16 + 36 + 81 + 144 + 324 + 729
+    assert n1344 == 1344 and divisors(1344)[:9] != [1, 2, 3, 4, 6, 9, 12, 18, 27]
+    print("      shape with no free prime is n=1344 alone; its prefix is")
+    print("      %s, not the shape -> EMPTY ✓" % divisors(1344)[:9])
+    print("  All 27 shapes EMPTY, skip 0. 13 rows decided for ALL p (12 have")
+    print("  one free prime pinned by p | C with C fixed, 1 has none); the")
+    print("  other 14 are a SEARCH bounded at p < 3000 -- the weakest row.")
 
     print("\n  k=2,3,4,6 PROVED; k=5 even and k=8 with 4∤n proved; rest open.")
 
