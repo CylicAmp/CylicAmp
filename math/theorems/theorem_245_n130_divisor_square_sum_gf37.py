@@ -27,6 +27,31 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     Since d_2 | n, d_2 | (1 + d_2²). But d_2 | d_2², so d_2 | 1.
     Therefore d_2 = 1, contradicting d_2 > d_1 = 1. ∎
 
+  ADDED 2026-09-21 — THE MOD-3 LEMMA, which mirrors the parity lemma at 2.
+
+      If 3 does not divide n then every divisor is coprime to 3, so every
+      d_i^2 = 1 (mod 3) and  n = sum of k squares = k (mod 3).
+      Hence  3 | k  FORCES  3 | n.
+
+  The parity lemma says 2 | k forces 2 | n.  This is the same statement one
+  prime up, and it fires on k = 3, 6, 9, 12 -- exactly the layers the parity
+  lemma misses at k = 3 and 9.
+
+  IT SHORTENS THE k=3 PROOF.  Step (ii) there derives p = 1 (mod 4) from
+  p | 1 + q^2, hence p >= 5 and 3 does not divide n.  The lemma says 3 | n
+  is forced, so p = 3 -- and 3 is not 1 (mod 4).  Contradiction at once.
+  The size bound in step (v) is not needed for the odd case.
+
+  IT SHORTENS THE k=6 PROOF.  Sub-case (4b) there is "3 does not divide n",
+  worked through d_3 = 4 and a mod-8 argument.  The lemma closes that
+  sub-case outright, leaving only (4a).
+
+  IT COLLAPSES THE k=9 BRANCH BELOW.  3 | n is forced at k = 9, so in the
+  4-does-not-divide-n branch the least odd prime is q = 3 exactly, not a
+  free parameter, and 6 | n.  The whole a = 5 analysis above was carried out
+  with q free; with q = 3 fixed, e_3 < 2q = 6 means e_3 = 5, so the 1013
+  values with d_4 < 2d_3 collapse to the single case e_3 = 5.
+
   ADDED 2026-09-21 — k=9: REDUCED, AND THE TREE IS 378 SHAPES.
   k=9 is odd, so the parity lemma forces nothing.  The even branch splits as
   usual: n = 5 + seven squares, a = #odd among d_3..d_9, n even forces a odd
