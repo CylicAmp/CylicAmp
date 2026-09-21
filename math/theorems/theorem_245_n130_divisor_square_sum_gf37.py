@@ -152,9 +152,27 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     the three smallest admissible primes above 5 give rst >= 7*11*13 = 1001.
                                                                           ∎
 
-  The other five have d_7 = t.  There n <= 1 + 6t^2 gives pqrs < 7t, and
-  t | n with n = C + t^2 gives t | C, so t <= C with C dominated by s^2.
-  That bounds the family without closing it, and those five stay OPEN.
+  THE OTHER FIVE, CLOSED IN RANGE BY INVERTING THE SEARCH (2026-09-20).
+  Forward search fails on them -- four primes free and one pinned is too
+  deep.  Inverting gives a TWO-SIDED squeeze on the largest prime t:
+
+      from above   t | n and n = C + t^2  =>  t | C, so t is a prime
+                   factor of a definite integer once p,q,r,s are fixed
+      from below   pqrst | n and n < 7t^2  =>  pqrs < 7t, so t > pqrs/7
+
+  A prime divisor of C that also exceeds pqrs/7 is a very thin target, and
+  over p<60, q<200, r<300, s<400 the five shapes yield
+
+      1 p q r s pq t    326 t-candidates,  0 passing
+      1 p q r pq s t    326               0
+      1 p q pq r s t    326               0
+      1 p q r p^2 s t   421               0
+      1 p q p^2 r s t   421               0
+
+  -- zero candidates even reach the divisor check.  That is a SEARCH over
+  those caps, not a proof; the shapes remain open above them.  What the
+  inversion bought is tractability: a four-deep free search became a
+  two-sided pin.
 
   WHAT REMAINS, and it is large.  The k=7 shape census over n <= 200000
   finds 133 distinct shapes of (d_1..d_7) -- 71 with n odd and 62 with n
