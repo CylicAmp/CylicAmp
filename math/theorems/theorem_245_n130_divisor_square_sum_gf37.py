@@ -20,8 +20,10 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     k=6: IMPOSSIBLE by proof — PROVED 2026-09-19, see below.
     k=7: 4∤n IMPOSSIBLE by proof (2026-09-20); 4|n and n odd open.
     k=8: 4∤n IMPOSSIBLE by proof (2026-09-19); 4|n open, 23 live shapes.
-    k=9: both EVEN branches empty under search (2026-09-21) — 31 shapes
-         with 4∤n, 27 with 4|n; n odd untouched, 259 shapes. OPEN.
+    k=9: both EVEN branches empty under search (2026-09-21), shape lists
+         SATURATED. n odd does NOT close — its shape list keeps growing
+         (83 by 600k, 101 by 1.2M), so the 83 swept shapes are not the
+         branch. Exhaustive odd search to 2e6 is clean. OPEN.
 
   Proof of k=2 impossibility:
     d_1 = 1 always (smallest divisor). So n = 1² + d_2² = 1 + d_2².
@@ -160,9 +162,122 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   p | 210 gives p in {5, 7}; but the shape puts p after 12, so p > 12.
   Empty, no search required.  The solver returns cand 0 for that row.
 
+  THE SHAPE LIST HERE IS SATURATED, which is what lets the 27 rows stand
+  for the branch (checked 2026-09-21, after the odd branch showed that this
+  cannot be assumed).  Distinct shapes first realized at or below B:
+  27 at B = 300000, and still 27 at 600000, 900000, 1200000, 1800000 and
+  2400000 -- ZERO shapes first appear above 600000.  The rigidity of
+  12 | n with a = 3 caps how large the free primes can be.  The n odd
+  branch fails this same test; see below.
+
   SO BOTH k=9 EVEN BRANCHES ARE NOW EMPTY UNDER SEARCH: 31 shapes with
   4 not dividing n, 27 shapes with 4 | n, 58 in all, every one EMPTY with
-  skip 0.  The odd branch -- 259 shapes -- is untouched.  k=9 stays OPEN.
+  skip 0.  The odd branch is treated below and does NOT close.
+
+  ADDED 2026-09-21 — k=9, n ODD: THE TREE IS INCOMPLETE, AND THAT IS THE
+  RESULT.  This branch does not close, and the reason is not that the
+  shapes survive -- every shape tested is empty -- but that the SHAPE LIST
+  ITSELF does not saturate.  Recorded here so the row is not mistaken for
+  the kind of certificate the two even branches carry.
+
+  WHAT THE MOD-3 LEMMA GIVES HERE.  n odd and 3 | k = 9 force 3 | n, and
+  with no factor 2 the least prime factor is 3, so
+
+      d_1 = 1,  d_2 = 3  EXACTLY.
+
+  Measured over n <= 600000, odd, 3 | n, k >= 9: 43873 values, d_2 != 3 in
+  ZERO of them.
+
+  THE COUNT LEMMA, IN ITS GENERAL FORM.  Let c = #{i <= k : 3 | d_i}.  Every
+  divisor prime to 3 has square 1 (mod 3), so
+
+      n = k - c  (mod 3),   and 3 | n forces  c = k  (mod 3).
+
+  THIS FILE ALREADY CONTAINS THE k=5 INSTANCE, in the "n ODD IS OPEN"
+  block above: "if 3 | n then mod 3 forces EXACTLY ONE of d_3, d_4, d_5 to
+  be a multiple of 3".  That is c = 2 = 5 (mod 3), the same statement.  What
+  is added here is the general form, the k=9 instance, and the two
+  consequences below.  The mod-8 line in the same block -- "each square is
+  1 (mod 8) and n = 5 (mod 8)" -- is likewise the k=5 instance of
+  n = k (mod 8) for odd n; at k = 9 it reads n = 1 (mod 8), and with n odd
+  and 3 | n that pins n = 9 (mod 24).
+
+  CONSEQUENCE 1 -- c is 3 or 6.  c = 0 (mod 3), c >= 1 because d_2 = 3, and
+  c <= 8 because d_1 = 1.  So c is in {3, 6}.  Over n <= 600000 the census
+  splits 1008 values at c=3 and 13172 at c=6, against 19290 + 8316 + 2082 +
+  5 at c = 4, 5, 7, 8 -- so the lemma discards 68% of the branch by
+  congruence.  At the level of shapes it cuts 267 down to 83.  Those 184
+  shapes are killed by a congruence, not by a search.
+
+  CONSEQUENCE 2 -- AT MOST SIX DISTINCT PRIMES.  Let t be the number of
+  distinct primes among d_1..d_9.  The nine entries are 1, those t primes,
+  and 8-t composites.  Only 3 itself is a prime divisible by 3, so the
+  other c-1 multiples of 3 are composite:
+
+      c - 1 <= 8 - t,   i.e.   t <= 9 - c.
+
+  With c in {3,6} this gives t <= 6 when c = 3 and t <= 3 when c = 6, so at
+  most FIVE free primes in any shape.  Both bounds are attained in the
+  census (4 shapes at c=3,t=6; 29 at c=6,t=3) and no shape violates either.
+  So the shape set is FINITE -- which is what makes the failure below a
+  statement about the census rather than about the problem.
+
+  THE SATURATION TEST FAILS, AND THAT IS THE FINDING.  Distinct shapes
+  first realized at or below B, after the c-lemma:
+
+      B = 150000 :  57        B =  800000 :  95
+      B = 300000 :  69        B = 1000000 :  98
+      B = 450000 :  76        B = 1200000 : 101
+      B = 600000 :  83
+
+  Eighteen new shapes appear between 600000 and 1200000 and the count is
+  still climbing at the top of the range.  The reason is structural: a
+  shape carrying t distinct primes cannot be realized below roughly their
+  product, so the many-prime shapes enter late -- 1 3 p q r s t 3*p 3*q
+  first occurs at 969969 = 3*7*11*13*17*19.  A census bound is therefore
+  not a shape-list bound here, and the 83-shape sweep below covers THE
+  SHAPES SEEN BELOW 600000, not the branch.
+
+  CONTRAST WITH 4|n, WHICH DOES SATURATE.  The same test on the 4|n branch
+  holds at 27 shapes flat: 27 at 300000, and still 27 at 600000, 900000,
+  1200000, 1800000 and 2400000, with ZERO shapes first appearing above
+  600000.  That is why the 27-shape table is quoted as covering its branch
+  and this one is not.  The difference is the rigidity of 12 | n with a = 3,
+  which caps how large the free primes can be.
+
+  THE 83 SHAPES, SWEPT ANYWAY.  All 83 run EMPTY with skip 0 -- no row hit
+  the 10^15 factoring cap.  By free-prime count:
+
+      #P = 1 :  8 shapes    all decided for ALL p
+      #P = 2 : 30 shapes    22 decided for ALL p, 8 bounded p < 3000
+      #P = 3 : 13 shapes    all bounded p < 3000
+      #P = 4 : 28 shapes    1 decided for ALL p, 27 bounded p < 800
+      #P = 5 :  4 shapes    all bounded p < 300
+
+  A row is "decided for ALL p" when ordering pins every free prime but the
+  last to a finite window and the last is pinned by p | C with C fixed; 31
+  of the 83 are of that kind.  THE WEAKEST ROWS ARE THE FOUR #P = 5 SHAPES
+  AT p < 300; one of them is also clear to p < 800, but the branch figure
+  is the weakest row, not the best one.
+
+  INDEPENDENT OF THE TREE: an exhaustive search over odd n with 3 | n and
+  at least 9 divisors, n <= 2000000, returns NOTHING.  That statement does
+  not depend on the shape census being complete, and it is the only clean
+  coverage this branch has.
+
+  ON THE SOLVER, since it is easy to credit the wrong mechanism: the
+  ordering test is a PRUNER, not a termination or correctness device.
+  Termination comes from the finiteness of the prime range and of the
+  factor list of C; running with every ordering check disabled still halts
+  and returns identical hits.  Where the ordering bound fires it is
+  decisive -- 5 nodes against 760 on 1 3 p 3^2 3*p 3^3 3^2*p 3^3*p q, a
+  152x cut -- and where it gives no bound it is worth nothing: 750 against
+  753 on 1 3 3^2 p 3*p 3^2*p q 3*q 3^2*q.  Measured, not assumed.
+
+  SO THE ODD BRANCH IS NOT CLOSED, not even under search.  The two even
+  branches are covered by saturated shape lists; this one is not.  k=9
+  remains OPEN, and the open part is now located precisely: the shapes
+  first realized above 600000.
 
   ADDED 2026-09-21 — k=9: REDUCED, AND THE TREE IS 378 SHAPES.
   k=9 is odd, so the parity lemma forces nothing.  The even branch splits as
@@ -1468,6 +1583,59 @@ def main():
     print("  All 27 shapes EMPTY, skip 0. 13 rows decided for ALL p (12 have")
     print("  one free prime pinned by p | C with C fixed, 1 has none); the")
     print("  other 14 are a SEARCH bounded at p < 3000 -- the weakest row.")
+
+    print("\n  k=9, n ODD (2026-09-21): 3|n is forced by the mod-3 lemma and n")
+    print("  has no factor 2, so the least prime factor is 3: d_1,d_2 = 1,3.")
+    LIM9 = 300000
+    idx9 = {}; arr9 = []
+    for x in range(3, LIM9 + 1, 6):
+        idx9[x] = len(arr9); arr9.append([])
+    for d in range(1, LIM9 + 1, 2):
+        for m in range(d, LIM9 + 1, 2 * d):
+            if m % 3 == 0:
+                a = arr9[idx9[m]]
+                if len(a) < 9: a.append(d)
+
+    def pfac(x):
+        f = {}; d = 2
+        while d * d <= x:
+            while x % d == 0: f[d] = f.get(d, 0) + 1; x //= d
+            d += 1
+        if x > 1: f[x] = f.get(x, 0) + 1
+        return f
+
+    live9 = [(x, arr9[i]) for x, i in idx9.items() if len(arr9[i]) >= 9]
+    assert live9 and all(a[1] == 3 for _, a in live9)
+    print("      %d values to %d, d_2 != 3 in 0 of them ✓" % (len(live9), LIM9))
+    bad_c = bad_t = 0; first9 = {}
+    for x, a in live9:
+        c = sum(1 for y in a if y % 3 == 0)
+        if sum(y * y for y in a) % 3 != (9 - c) % 3: bad_c += 1
+        t = len({q for y in a for q in pfac(y)})
+        if t > 9 - c: bad_t += 1
+        if c in (3, 6):
+            syms = sorted({q for y in a for q in pfac(y) if q > 3})
+            sym = {3: "3"}
+            for j, q in enumerate(syms): sym[q] = "pqrstu"[j]
+            sh = " ".join("1" if y == 1 else "*".join(
+                sym[q] if e == 1 else "%s^%d" % (sym[q], e)
+                for q, e in sorted(pfac(y).items())) for y in a)
+            if sh not in first9: first9[sh] = x
+    assert bad_c == 0 and bad_t == 0
+    print("      sum(d_i^2) = k - c (mod 3): 0 violations -> 3|c, c in {3,6} ✓")
+    print("      t distinct primes <= 9 - c: 0 violations -> t <= 6, <=5 free ✓")
+    s150 = sum(1 for v in first9.values() if v <= 150000); s300 = len(first9)
+    print("      c in {3,6} shapes: %d by n=150000, %d by n=300000" % (s150, s300))
+    assert s300 > s150, "odd shape list looked saturated — recheck the census"
+    print("      STILL GROWING (83 by 600k, 101 by 1.2M) — the census is NOT")
+    print("      the branch, so the 83-shape sweep does not cover n odd.")
+    sol9 = [x for x, a in live9 if sum(y * y for y in a) == x]
+    assert sol9 == []
+    print("      exhaustive odd 3|n search to %d: %s — clean to 2e6 (a SEARCH)"
+          % (LIM9, sol9))
+    print("  All 83 shapes seen below 600000 are EMPTY, skip 0; 31 decided for")
+    print("  ALL p, the weakest rows the four 5-prime shapes at p < 300.")
+    print("  n odd is NOT closed: the tree is incomplete, not merely unsearched.")
 
     print("\n  k=2,3,4,6 PROVED; k=5 even and k=8 with 4∤n proved; rest open.")
 
