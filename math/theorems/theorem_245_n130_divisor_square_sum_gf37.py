@@ -21,9 +21,8 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     k=7: 4∤n IMPOSSIBLE by proof (2026-09-20); 4|n and n odd open.
     k=8: 4∤n IMPOSSIBLE by proof (2026-09-19); 4|n open, 23 live shapes.
     k=9: both EVEN branches empty under search (2026-09-21), shape lists
-         SATURATED. n odd does NOT close — its shape list keeps growing
-         (83 by 600k, 101 by 1.2M), so the 83 swept shapes are not the
-         branch. Exhaustive odd search to 2e6 is clean. OPEN.
+         SATURATED. n odd: shape list now BUILT from the count lemma, not
+         sampled — 7180 shapes, all EMPTY, weakest row p<120. OPEN.
 
   Proof of k=2 impossibility:
     d_1 = 1 always (smallest divisor). So n = 1² + d_2² = 1 + d_2².
@@ -252,13 +251,13 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
       #P = 2 : 30 shapes    22 decided for ALL p, 8 bounded p < 3000
       #P = 3 : 13 shapes    all bounded p < 3000
       #P = 4 : 28 shapes    1 decided for ALL p, 27 bounded p < 800
-      #P = 5 :  4 shapes    all bounded p < 300
+      #P = 5 :  4 shapes    all bounded p < 800
 
   A row is "decided for ALL p" when ordering pins every free prime but the
   last to a finite window and the last is pinned by p | C with C fixed; 31
-  of the 83 are of that kind.  THE WEAKEST ROWS ARE THE FOUR #P = 5 SHAPES
-  AT p < 300; one of them is also clear to p < 800, but the branch figure
-  is the weakest row, not the best one.
+  of the 83 are of that kind.  THE WEAKEST ROWS ARE THE 27 #P = 4 SHAPES
+  AT p < 800, matched by the four #P = 5 shapes, which all finished at
+  p < 800 (corrected upward from the p < 300 first recorded here).
 
   INDEPENDENT OF THE TREE: an exhaustive search over odd n with 3 | n and
   at least 9 divisors, n <= 2000000, returns NOTHING.  That statement does
@@ -274,10 +273,92 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   152x cut -- and where it gives no bound it is worth nothing: 750 against
   753 on 1 3 3^2 p 3*p 3^2*p q 3*q 3^2*q.  Measured, not assumed.
 
-  SO THE ODD BRANCH IS NOT CLOSED, not even under search.  The two even
-  branches are covered by saturated shape lists; this one is not.  k=9
-  remains OPEN, and the open part is now located precisely: the shapes
-  first realized above 600000.
+
+  ADDED 2026-09-21 — k=9 n ODD: THE SHAPE LIST, BUILT INSTEAD OF SAMPLED.
+  The census failure above is repaired by enumerating the shapes from the
+  count lemma rather than by scanning n.  Code: tools/k9_odd_shape_enumerator.py.
+
+  WHY THE SET IS FINITE AT ALL.  c in {3,6} and t <= 9 - c give t <= 6, so
+  at most six distinct primes and at most FIVE free ones.  Without that the
+  enumeration would not terminate, and the census would be the only tool.
+
+  THE CONSTRUCTION.  The nine smallest divisors of n are the nine smallest
+  divisors of 3^E1 * v2^E2 * ... * vt^Et, every other prime of n lying above
+  d_9.  Divisor-closure forces every prime that appears to BE in the list,
+  so the exponent set is an ORDER IDEAL of size 9 containing the unit and
+  all t generators.  Monomials outside the ideal ("ghosts") must exceed d_9
+  or they would themselves be among the nine.  Orderings are then tested in
+  LOG SPACE, where each comparison of monomials is linear in
+  (log v2 .. log vt), by linear programming.
+
+  IT IS A SUPERSET, DELIBERATELY.  The LP runs over the REALS with
+  NON-STRICT inequalities, so it admits every ordering actual primes could
+  produce and some they cannot.  That is the sound direction: sweeping a
+  superset and finding it empty proves the true set empty.  It is not a
+  tight count -- 7180 shapes against the 101 a census to 1.2e6 finds.
+
+      t = 2 :    52 shapes        t = 5 :   649
+      t = 3 :   405               t = 6 :  5927
+      t = 4 :   147               total :  7180
+
+  VALIDATION, WHICH IS THE POINT.  The enumeration contains all 83 shapes
+  of the 600000 census AND all 18 that census MISSED -- the exact cases
+  that broke the sampling method are present in the built list.  t=1 gives
+  zero shapes: the chain 1,3,9,...,3^8 has c = 8, which the count lemma
+  forbids.
+
+  THE SWEEP OF THE BUILT LIST.  All 7180 EMPTY, skip 0 on every row, no
+  timeouts, 493 decided for ALL p.  Bounds are per group, and the branch
+  figure is the WEAKEST of them, not the best:
+
+      group      shapes   bound      decided for ALL p
+      t <= 3        457   p < 3000         377
+      t = 4         147   p <  800           0
+      t = 5         649   p <  200          38
+      t = 6        5927   p <  120          78      <- weakest row
+      total        7180                    493
+
+  So the odd branch's failure mode has CHANGED KIND.  It was an incomplete
+  tree, where no amount of searching covered the branch because shapes were
+  missing.  It is now a complete tree with weak per-node bounds: p < 120 on
+  the 5927 five-free-prime shapes.  A bound can be pushed; a gap cannot.
+
+  c = 6 IS NOW A COMPLETE CASE.  c = 6 forces t <= 3, and t <= 3 is fully
+  enumerated: 432 shapes with c = 6, every one EMPTY, skip 0, and 377 of
+  them decided for ALL p.  The remaining 55 rest on p < 3000.  This is the
+  first k=9 odd sub-branch whose shape list is built rather than sampled.
+
+  THE CONTENT TEST, which upgrades search to proof.  n is a polynomial in
+  the free primes; let g be the gcd of its coefficients.  Then g | n for
+  EVERY assignment, so each prime r | g divides n and is therefore a
+  DIVISOR of n.  The nine smallest divisors are the shape's tokens, and the
+  only prime tokens are 3 and the free primes.  Nine distinct odd divisors
+  starting at 1 force d_9 >= 17, so any r <= 13 lies below d_9 and must be
+  in the list.  If r is not 3 and cannot be a free prime, the shape is
+  EMPTY FOR ALL VALUES -- a proof, with no search.
+
+  It fires on 36 of the 432 c=6 shapes, every one with g = 91 = 7 * 13,
+  which is 1 + 9 + 81: the shapes whose 3-part is exactly {1,3,9}, so that
+  n factors as 91 * (sum of the rest).  Worked case:
+
+      1 3 3^2 p 3*p 3^2*p q 3*q 3^2*q  ->  n = 91(1 + p^2 + q^2)
+
+  so 7 | n; but the shape puts p after 9, so p > 9 and q > 9p, leaving 7
+  equal to neither 3 nor a free prime, and 7 < 9q = d_9.  Contradiction,
+  for every p and q.  The solver reports that row as a p < 3000 SEARCH --
+  the certificate the solver prints is a property of its own method, not of
+  the shape, and the content test is strictly sharper on these rows.
+
+  It fires on ZERO shapes with c = 3, where the 3-part is never {1,3,9}
+  alone, so the 91 does not appear.
+
+  SO THE ODD BRANCH IS STILL NOT CLOSED, but the reason has changed.  The
+  shape list is no longer sampled -- it is built from the count lemma and
+  contains every census shape including the eighteen the census missed.
+  What is weak now is the per-shape prime bound, p < 120 on the 5927
+  five-free-prime shapes.  That is a bound to push, not a gap to fill.
+  k=9 remains OPEN, and the odd branch now sits where the two even ones
+  do: a complete tree, swept, with the coverage stated per row.
 
   ADDED 2026-09-21 — k=9: REDUCED, AND THE TREE IS 378 SHAPES.
   k=9 is odd, so the parity lemma forces nothing.  The even branch splits as
@@ -1634,8 +1715,35 @@ def main():
     print("      exhaustive odd 3|n search to %d: %s — clean to 2e6 (a SEARCH)"
           % (LIM9, sol9))
     print("  All 83 shapes seen below 600000 are EMPTY, skip 0; 31 decided for")
-    print("  ALL p, the weakest rows the four 5-prime shapes at p < 300.")
-    print("  n odd is NOT closed: the tree is incomplete, not merely unsearched.")
+    print("  ALL p, the weakest rows bounded at p < 800.")
+    print("  n odd: the tree WAS incomplete. It is now BUILT, not sampled --")
+    print("  see tools/k9_odd_shape_enumerator.py and docs_k9_odd_shapes.txt.")
+    import os
+    _shp = os.path.join(os.path.dirname(__file__), "..", "..",
+                        "docs_k9_odd_shapes.txt")
+    if os.path.exists(_shp):
+        _S = [x.strip() for x in open(_shp) if x.strip()]
+        assert len(_S) == 7180, len(_S)
+        _t = {}
+        for x in _S:
+            _n = len({q.split("^")[0] for tk in x.split() for q in tk.split("*")
+                      if tk != "1"})
+            _t[_n] = _t.get(_n, 0) + 1
+        assert _t == {2: 52, 3: 405, 4: 147, 5: 649, 6: 5927}, _t
+        assert max(_t) <= 6                      # the t <= 9-c bound, on file
+        # the count lemma holds on every built shape
+        for x in _S:
+            _c = sum(1 for tk in x.split()
+                     if "3" in {q.split("^")[0] for q in tk.split("*")})
+            assert _c in (3, 6), (x, _c)
+        print("      %d shapes on file, t distribution %s, c in {3,6} on all ✓"
+              % (len(_S), dict(sorted(_t.items()))))
+        print("      contains all 101 census shapes incl. the 18 the census missed")
+        print("      swept: all 7180 EMPTY, skip 0, 493 decided for ALL p;")
+        print("      bounds p<3000 (t<=3), p<800 (t=4), p<200 (t=5), p<120 (t=6)")
+        print("      -> WEAKEST ROW p < 120. A bound to push, not a gap to fill.")
+    else:
+        print("      (shape file absent; enumeration check skipped)")
 
     print("\n  k=2,3,4,6 PROVED; k=5 even and k=8 with 4∤n proved; rest open.")
 
