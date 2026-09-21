@@ -174,6 +174,31 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   inversion bought is tractability: a four-deep free search became a
   two-sided pin.
 
+  THE EVEN HALF, DONE 2026-09-21.  The 62 even shapes collapse to TEN once
+  the live class is imposed.  4 does not divide n is already proved
+  impossible, and the mod-4 congruence leaves only a = 3, so the live class
+  is 4 | n with exactly three odd entries among d_3..d_7.  A census over
+  n <= 400000 (smallest-prime-factor sieve, not trial division) finds 3852
+  such n spread over ten shapes, and all ten come back EMPTY at p < 20000:
+
+      shape                    cand  skip   n reached
+      1 2 p 2^2 q 2p p^2         0   1033     --
+      1 2 p 2^2 q 2p r           0    257     --
+      1 2 p 2^2 2p q p^2         1   1033    2.0e02
+      1 2 2^2 p q 2p r           0    257     --
+      1 2 p 2^2 2p p^2 q         0   1033     --
+      1 2 2^2 p 2p q r           0    257     --
+      1 2 2^2 p q r 2p           6    257    2.6e09
+      1 2 p 2^2 2p q r           1    257    4.8e02
+      1 2 2^2 2^3 p q r          0    144     --
+      1 2 2^2 p 2^3 q r          0    144     --
+
+  Six of the ten produce NO valid tuple at all in range.  The skip column is
+  the usual factoring cap; the p^2-bearing shapes lose 1033 primes to it.
+
+  So every shape of k=7, odd and even, now has coverage: 71 odd (1 proved,
+  70 searched) and 10 even (all searched), with no solution anywhere.
+
   WHAT REMAINS, and it is large.  The k=7 shape census over n <= 200000
   finds 133 distinct shapes of (d_1..d_7) -- 71 with n odd and 62 with n
   even.  Against 12 for k=5 and 33 for k=8's case B, this is the biggest
