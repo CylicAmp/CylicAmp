@@ -27,6 +27,34 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     Since d_2 | n, d_2 | (1 + d_2²). But d_2 | d_2², so d_2 | 1.
     Therefore d_2 = 1, contradicting d_2 > d_1 = 1. ∎
 
+  ADDED 2026-09-21 — k=9: REDUCED, AND THE TREE IS 378 SHAPES.
+  k=9 is odd, so the parity lemma forces nothing.  The even branch splits as
+  usual: n = 5 + seven squares, a = #odd among d_3..d_9, n even forces a odd
+  so a is in {1,3,5,7}, with 4 | n <=> a = 3 (mod 4).  Intersecting the
+  congruence with the shapes that actually occur:
+
+      4 | n        congruence {3,7}   occurring {0,1,2,3,4}   LIVE: a = 3
+      4 does not   congruence {1,5}   occurring {4,5}         LIVE: a = 5
+
+  UNLIKE k=7, THE 4-DOES-NOT-DIVIDE-n BRANCH SURVIVES.  At k=7 that branch
+  was empty because its congruence set {1,5} missed the occurring set {3,4}
+  entirely.  At k=9 the two overlap at a = 5, so the branch is live and the
+  argument that closed k=7 does not apply here.
+
+  TREE SIZE, over n <= 400000:
+
+      4 | n, a = 3      22526 values     73 shapes
+      4 not | n, a = 5   1588 values     46 shapes
+      n odd             38036 values    259 shapes
+                                        --- 378 total
+
+  against 12 for k=5, 81 for k=7 and 33 for k=8's case B.  The dominant odd
+  shapes are 1 p p^2 q pq p^2q r pr p^2r (2775) and
+  1 p q p^2 pq p^2q r pr qr (2707).
+
+  Exhaustive k=9 search to 300000: nothing.  That is a SEARCH and a short
+  one; k=9 is OPEN with no branch yet attacked.
+
   ADDED 2026-09-20 — k=7: THE 4-DOES-NOT-DIVIDE-n HALF IS IMPOSSIBLE.
   k=7 is odd, so the parity lemma forces nothing and the ladder does not
   fire -- the same position as k=3 and k=5.  But the EVEN branch still
@@ -195,6 +223,28 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
 
   Six of the ten produce NO valid tuple at all in range.  The skip column is
   the usual factoring cap; the p^2-bearing shapes lose 1033 primes to it.
+
+  WHAT 'cand' COUNTS, stated because it is weaker than it looks: a tuple
+  that passes the ORDERING constraint, before divisibility is tested.  It is
+  not a near-solution.  The six on 1 2 2^2 p q r 2p, preserved as explicit
+  witnesses rather than a count:
+
+      p      q       r       n             rejected because n is not
+      379    421     709     1398148       divisible by 379, 421, 758
+      2011   2971    3259    39668548      by 2011, 2971, 4022
+      2657   3851    4339    68955388      by 2657, 3851, 5314
+      7741   8219    14891   588909268     by 7741, 8219, 15482
+      16067  23971   25939   2538183028    by 16067, 23971, 32134
+      16453  23911   26839   2645573908    by 16453, 23911, 32906
+
+  In every one r divides n -- it was pinned to do so -- and p, q and 2p do
+  not.  So the six die at the first divisibility test, not at the prefix
+  check.  Every 'cand' figure elsewhere in this file counts the same weak
+  thing and should be read that way.
+
+  STATUS WORDING.  These ten rows are SEARCH certificates over p < 20000,
+  not impossibility certificates.  k=7 as a whole is OPEN: one shape proved,
+  eighty searched.
 
   So every shape of k=7, odd and even, now has coverage: 71 odd (1 proved,
   70 searched) and 10 even (all searched), with no solution anywhere.
