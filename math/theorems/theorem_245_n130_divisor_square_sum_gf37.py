@@ -52,6 +52,31 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   with q free; with q = 3 fixed, e_3 < 2q = 6 means e_3 = 5, so the 1013
   values with d_4 < 2d_3 collapse to the single case e_3 = 5.
 
+  ADDED 2026-09-21 — THE k=9 4-DOES-NOT-DIVIDE-n BRANCH, REDONE WITH q = 3.
+  The mod-3 lemma forces 3 | n at k = 9, so in this branch d_3 = 3 exactly
+  and 6 | n.  Redoing the census with that fixed, over n <= 600000:
+
+      1791 values, d_3 != 3 in ZERO of them, and 31 distinct shapes
+      (46 with q left free -- the lemma removes 15).
+
+  All 31 run through a solver with 2 and 3 as LITERALS and the last prime
+  pinned by the divisibility it forces.  Every one EMPTY, and the skip
+  column is ZERO throughout -- no factoring cap was hit anywhere, so the
+  coverage is complete for the bounds used (p < 3000 on the early shapes,
+  p < 800 on the four-prime ones).
+
+  Notation in the shape strings: 23 means 6 = 2*3, 23^2 means 18 = 2*3^2,
+  3p means 3p, and so on -- the tokens concatenate prime symbols.
+
+  The tightest shape is a good check on the method.  1 2 3 p 23 3^2 2p q 3p
+  reads 1, 2, 3, p, 6, 9, 10, q, 15, so p < 6 gives p = 5, and
+  n = 481 + q^2 with q | n forcing q | 481 = 13 * 37; the window
+  10 < q < 15 leaves q = 13 and n = 650.  But 650 = 2 * 5^2 * 13 is not
+  divisible by 3.  The solver returns exactly one candidate for that shape
+  with n <= 650, which is the same number reached by hand.
+
+  Still a SEARCH, not a proof: nothing here bounds p in general.
+
   ADDED 2026-09-21 — k=9: REDUCED, AND THE TREE IS 378 SHAPES.
   k=9 is odd, so the parity lemma forces nothing.  The even branch splits as
   usual: n = 5 + seven squares, a = #odd among d_3..d_9, n even forces a odd
