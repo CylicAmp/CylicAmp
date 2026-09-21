@@ -107,7 +107,28 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   The last row needs THREE odd divisors of m between e_3 and 2e_3.  The
   (q, 2q) primality argument does NOT transfer here: e_3 > 2q in this case,
   so e_3 is not the least prime and divisors in (e_3, 2e_3) may be
-  composite.  Closing these four needs a different argument.
+  composite.
+
+  THE oeooooe PATTERN, SEARCHED DIRECTLY (2026-09-21).  Writing the shape
+  out, d_3..d_9 = q, 2q, e_3, e_4, e_5, e_6, 2e_3 with 2q < e_3 and
+  e_6 < 2e_3, so
+
+      n = 5 + 5q^2 + 5e_3^2 + e_4^2 + e_5^2 + e_6^2.
+
+  e_6 PINS: n = C + e_6^2 with C = 5 + 5q^2 + 5e_3^2 + e_4^2 + e_5^2 a
+  definite integer once q, e_3, e_4, e_5 are fixed, and e_6 | n forces
+  e_6 | C.  Searching q in {3,5,7,11} and e_3 < 130, with e_4 < e_5 ranging
+  over EVERY odd value in (e_3, 2e_3) rather than only the divisors -- a
+  superset of the real pattern -- gives 174509 tuples, 17418 pinned e_6
+  candidates, and NO solutions.
+
+  The seventeen census instances below 400000 all have q in {3, 5} and
+  e_3 in {7, 9, 11, 13, 17}, well inside that range: 18018, 43758, 54054,
+  126126, 131274, 162162, 198198, 209950, 234234, 254150, 277134, 284050,
+  306306, 342342, 371450, 378378, 393822.
+
+  So the pattern is EMPTY for q <= 11 and e_3 < 130.  That is a SEARCH over
+  a superset, not a proof -- nothing here bounds q or e_3 in general.
 
   TWO CORRECTIONS to my own first reading of this branch, both caught by
   looking at actual divisor lists rather than reasoning forward: the claim
