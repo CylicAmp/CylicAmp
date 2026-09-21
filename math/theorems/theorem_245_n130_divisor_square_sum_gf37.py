@@ -53,7 +53,31 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   1 p q p^2 pq p^2q r pr qr (2707).
 
   Exhaustive k=9 search to 300000: nothing.  That is a SEARCH and a short
-  one; k=9 is OPEN with no branch yet attacked.
+  one; k=9 is OPEN.
+
+  THE 4-DOES-NOT-DIVIDE-n BRANCH, STRUCTURE (2026-09-21).  n = 2m with m
+  odd, so the divisors are the odd e_1 < e_2 < ... and their doubles.  Over
+  the 1588 values with a = 5 below 400000:
+
+    - the two even entries among d_3..d_9 are EXACTLY 2e_2 and 2e_3, with
+      zero exceptions.  So the five odd entries are e_2..e_6.
+    - there are SEVEN parity patterns for (d_3..d_9), not one:
+          ooeeooo 547   ooeoeoo 413   oeoeooo 361   oeooeoo 143
+          oeoooeo  54   ooeooeo  53   oeooooe  17
+    - e_3 < 2e_2 in 1013 of them (63.8%), and e_3 is PRIME in 1482 (93.3%).
+
+  WHERE THAT LEADS.  e_2 = q is the least odd prime factor, so an odd
+  divisor below 2q cannot be composite -- all its factors are at least q, so
+  it is at least q^2 > 2q.  Hence e_3 < 2e_2 forces e_3 to be a PRIME in
+  (q, 2q), which is the same Bertrand-shaped constraint that closed the
+  a = 5 branches at k=7 and k=8.  It applies to 63.8% of this branch, not
+  all of it, so it narrows rather than closes.
+
+  TWO CORRECTIONS to my own first reading of this branch, both caught by
+  looking at actual divisor lists rather than reasoning forward: the claim
+  that FOUR odd divisors lie in (e_3, 2e_3) is wrong -- exactly one does,
+  namely e_4 -- and the claim that 1, 2, e_2, e_3, 2e_2, e_4, 2e_3, e_5, e_6
+  is THE order is wrong, it is one of seven.
 
   ADDED 2026-09-20 — k=7: THE 4-DOES-NOT-DIVIDE-n HALF IS IMPOSSIBLE.
   k=7 is odd, so the parity lemma forces nothing and the ladder does not
