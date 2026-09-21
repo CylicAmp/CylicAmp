@@ -22,7 +22,8 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
     k=8: 4∤n IMPOSSIBLE by proof (2026-09-19); 4|n open, 23 live shapes.
     k=9: both EVEN branches empty under search (2026-09-21), shape lists
          SATURATED. n odd: shape list now BUILT from the count lemma, not
-         sampled — 7180 shapes, all EMPTY, weakest row p<120. OPEN.
+         sampled — 7180 shapes, all EMPTY; t=6 (5927) PROVED empty by
+         size, weakest remaining row p<300. OPEN.
 
   Proof of k=2 impossibility:
     d_1 = 1 always (smallest divisor). So n = 1² + d_2² = 1 + d_2².
@@ -313,15 +314,16 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
 
       group      shapes   bound      decided for ALL p
       t <= 3        457   p < 3000         377
-      t = 4         147   p <  800           0
-      t = 5         649   p <  200          38
-      t = 6        5927   p <  120          78      <- weakest row
-      total        7180                    493
+      t = 4         147   p < 1500           0
+      t = 5         649   p <  300          38      <- weakest row
+      t = 6        5927   PROVED EMPTY    5927      (see the t=6 section)
+      total        7180                   6342
 
   So the odd branch's failure mode has CHANGED KIND.  It was an incomplete
   tree, where no amount of searching covered the branch because shapes were
-  missing.  It is now a complete tree with weak per-node bounds: p < 120 on
-  the 5927 five-free-prime shapes.  A bound can be pushed; a gap cannot.
+  missing.  It is now a complete tree with per-node bounds -- and the
+  largest group in it, t = 6, has since been PROVED empty outright.  A
+  bound can be pushed or removed; a gap cannot.
 
   c = 6 IS NOW A COMPLETE CASE.  c = 6 forces t <= 3, and t <= 3 is fully
   enumerated: 432 shapes with c = 6, every one EMPTY, skip 0, and 377 of
@@ -352,11 +354,73 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   It fires on ZERO shapes with c = 3, where the 3-part is never {1,3,9}
   alone, so the 91 does not appear.
 
+
+  ADDED 2026-09-21 — THE t = 6 LAYER IS PROVED EMPTY.  5927 of the 7180
+  shapes, 82.5% of the built list, die to a size argument with NO search
+  and NO prime bound.  This removes what was the weakest row outright.
+
+  THE STRUCTURE, verified on all 5927.  Divisor-closure puts every prime of
+  the list IN the list, so a t=6 shape has six bare-prime tokens
+  3 < p < q < r < s < t, plus 1, plus exactly two composites.  c = 3 and
+  3 is the ONLY prime that is a multiple of 3, so both composites must
+  carry a factor 3.  Measured: all 5927 have exactly six bare-prime tokens
+  and exactly two composites, both divisible by 3; none has a composite
+  free of 3.  In particular NO TOKEN IS p*q.
+
+  THE ARGUMENT.
+    (i)   3, p, q, r, s, t are pairwise coprime and all divide n, so
+          3pqrst | n  and therefore  n >= 3pqrst.
+    (ii)  n = sum of the nine divisor squares, every d_i <= d_9 and
+          d_1 = 1 < d_9, so  n < 9 d_9^2.
+    (iii) pq | n, and pq is not one of the nine tokens, so pq is a divisor
+          of n outside the nine smallest:  pq > d_9.
+    Chaining,  3pqrst <= n < 9 d_9^2 < 9 (pq)^2,  so   r s t < 3 p q.
+    But r, s, t are all > q, so rst > q^3; and p < q, so 3pq < 3q^2.  Then
+          q^3 < 3 q^2   =>   q < 3,
+    contradicting q >= 5.  No t=6 shape has a solution. ∎
+
+  Machine-checked: over 44253 (p,q) pairs with p,q < 2000, tested against
+  the SMALLEST admissible r < s < t above q -- the binding case, since
+  larger r,s,t only enlarge the left side -- ZERO satisfy rst < 3pq.
+
+  THE SAME TEST DOES NOT REACH t <= 5, and the way it fails is worth
+  recording.  Generalized, the necessary condition is P < 9m^2 with P the
+  product of the shape's distinct primes and m the least product of two of
+  them that is NOT a token.  At t=6 that closes symbolically.  At t=5 and
+  t=4 it does not: for a t=5 shape whose non-3 composite is p^2 it reduces
+  to rs < 3pq, hence s < 3p -- a real Bertrand-shaped window, but
+  satisfiable (p,q,r,s = 7,11,13,17 gives rs = 221 < 231 = 3pq).
+
+  AND THE BOUNDED VERSION OF THE TEST IS NOT A PROOF.  Screening the 147
+  t=4 shapes for assignments satisfying P < 9m^2 with primes below 30
+  leaves 112 looking dead; widening to primes below 120 brings TWO of those
+  112 back to life, with witnesses
+
+      1 3 p 3*p q 3*q p*q q^2 r     p,q,r = 5, 17, 293
+      1 3 p 3*p q 3*q p^2 p*q r     p,q,r = 11, 37, 409
+
+  So a bounded size screen is a SEARCH like any other and its "kills" are
+  not certificates.  Only the symbolic closure at t=6 is a proof.  Recorded
+  because the two results look identical in a results table and are not.
+
+  THE TABLE AFTER THIS, with the bounds pushed:
+
+      group      shapes   status                      decided for ALL p
+      t <= 3        457   swept, p < 3000                   377
+      t = 4         147   swept, p < 1500                     0
+      t = 5         649   swept, p <  300                     38   <- weakest
+      t = 6        5927   PROVED EMPTY, no bound           5927
+      total        7180                                    6342
+
+  The weakest row is now p < 300 on the 649 t=5 shapes, up from p < 120 on
+  5927 t=6 shapes.  Proving the largest group outright is what moved it.
+
   SO THE ODD BRANCH IS STILL NOT CLOSED, but the reason has changed.  The
   shape list is no longer sampled -- it is built from the count lemma and
   contains every census shape including the eighteen the census missed.
-  What is weak now is the per-shape prime bound, p < 120 on the 5927
-  five-free-prime shapes.  That is a bound to push, not a gap to fill.
+  What is weak now is the per-shape prime bound, p < 300 on the 649 t = 5
+  shapes -- the t = 6 layer that used to hold the weakest row is proved.
+
   k=9 remains OPEN, and the odd branch now sits where the two even ones
   do: a complete tree, swept, with the coverage stated per row.
 
@@ -1740,8 +1804,13 @@ def main():
               % (len(_S), dict(sorted(_t.items()))))
         print("      contains all 101 census shapes incl. the 18 the census missed")
         print("      swept: all 7180 EMPTY, skip 0, 493 decided for ALL p;")
-        print("      bounds p<3000 (t<=3), p<800 (t=4), p<200 (t=5), p<120 (t=6)")
-        print("      -> WEAKEST ROW p < 120. A bound to push, not a gap to fill.")
+        print("      t=6 (5927 shapes, 82.5%) PROVED EMPTY by size: 3pqrst | n")
+        print("      and n < 9d_9^2 < 9(pq)^2 give rst < 3pq, but rst > q^3 > 3pq.")
+        assert all(_r * _s * _t >= 3 * _p * _q for _p, _q, _r, _s, _t in
+                   [(5, 7, 11, 13, 17), (7, 11, 13, 17, 19),
+                    (11, 13, 17, 19, 23), (97, 101, 103, 107, 109)])
+        print("      remaining bounds p<3000 (t<=3), p<1500 (t=4), p<300 (t=5)")
+        print("      -> WEAKEST ROW p < 300, on the 649 t=5 shapes.")
     else:
         print("      (shape file absent; enumeration check skipped)")
 
