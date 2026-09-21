@@ -65,13 +65,29 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
           ooeeooo 547   ooeoeoo 413   oeoeooo 361   oeooeoo 143
           oeoooeo  54   ooeooeo  53   oeooooe  17
     - e_3 < 2e_2 in 1013 of them (63.8%), and e_3 is PRIME in 1482 (93.3%).
+      e_3 < 2e_2 does NOT follow from the parity count; it is a separate
+      branch condition, and 63.8% is how often it happens, not a derivation.
 
-  WHERE THAT LEADS.  e_2 = q is the least odd prime factor, so an odd
-  divisor below 2q cannot be composite -- all its factors are at least q, so
-  it is at least q^2 > 2q.  Hence e_3 < 2e_2 forces e_3 to be a PRIME in
-  (q, 2q), which is the same Bertrand-shaped constraint that closed the
-  a = 5 branches at k=7 and k=8.  It applies to 63.8% of this branch, not
-  all of it, so it narrows rather than closes.
+  THE INVARIANT, AND THE HYPOTHESIS IT NEEDS.  The tempting statement is
+
+      d_3 = q,  d_4 = r,  q < r < 2q   =>   r is prime.
+
+  UNQUALIFIED IT IS FALSE.  Over n <= 400000 there are 93047 instances of
+  d_3 < d_4 < 2 d_3 and in 40891 of them d_4 is composite -- n = 12, 24, 36
+  all give (1, 2, 3, 4) with r = 4.  The reason is that d_3 need not be the
+  least ODD prime: when 4 | n it can be 3 with d_4 = 4, or 4 itself.
+
+  WITH THE HYPOTHESIS IT IS EXACT.  Restrict to 4 not dividing n, so that
+  d_3 = q really is the least odd prime.  Then an odd divisor below 2q
+  cannot be composite -- all its prime factors are at least q, so it is at
+  least q^2 > 2q for q >= 3.  Measured: 14348 instances, ZERO with d_4
+  composite.
+
+      4 does not divide n,  q < d_4 < 2q   =>   d_4 is prime.
+
+  That is the same Bertrand-shaped constraint that closed the a = 5 branches
+  at k=7 and k=8.  In this branch it applies to 1013 of the 1588 values
+  (63.8%), so it narrows rather than closes.
 
   TWO CORRECTIONS to my own first reading of this branch, both caught by
   looking at actual divisor lists rather than reasoning forward: the claim
