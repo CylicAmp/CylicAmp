@@ -44,6 +44,11 @@ LEVEL 1 (proved, parameter-free, shape-level -- hold for every realization):
                 modulus is capped at 8 for this reason; using 2^a for
                 a >= 4 is unsound (3^2 = 5^2 = 9 mod 16, not 1).
 
+  parity        Every divisor of an odd n is odd, and a sum of k odd
+                squares has the parity of k. For EVEN k that sum is even
+                and cannot equal an odd n, so the whole odd sector dies.
+                Silent at k = 5, where the sum is 5 mod 8 and odd.
+
   prime_power   For the chain 1, q, q^2, ..., q^(k-1): q | n forces
                 n = 0 mod q, while n = 1 + q^2 + ... = 1 mod q. Parameter
                 free, so it closes the shape outright.
@@ -176,8 +181,31 @@ def oracle_cofactor_size(rep: Shape, pool: List[int]) -> Optional[Certificate]:
                        f"n = sum d_i^2 < lcm(d_i) | n on all {len(reals)} "
                        f"realizations over primes <= {pool[-1]}")
 
+def oracle_parity(rep: Shape, k: int) -> Optional[Certificate]:
+    """LEVEL 1. Closes the entire ODD sector whenever k is even.
+
+    Every divisor of an odd n is odd, so an odd n forces all k of the
+    d_i odd. A sum of k odd squares has the parity of k, hence is even
+    when k is even, and cannot equal an odd n.
+
+    Each odd square is 1 mod 8, which sharpens the sum to k mod 8, but
+    parity alone is what closes it. At k = 5 the sum is 5 mod 8, odd, so
+    the lemma is silent -- which is why the k=5 odd sector needs work.
+
+    The lemma is parameter-free and inherits nothing from any other
+    verdict: it reads only k and whether the shape uses the prime 2.
+    """
+    if k % 2 != 0:
+        return None
+    if any(v[0] > 0 for v in rep):
+        return None                      # even sector; lemma does not apply
+    return Certificate(
+        "PARITY_EVEN_K", 1,
+        f"n odd => all d_i odd => sum d_i^2 = {k} mod 8, even, != odd n")
+
 def close_shape(rep: Shape, k: int, pool: List[int]) -> Optional[Certificate]:
-    return (oracle_modular(rep)
+    return (oracle_parity(rep, k)
+            or oracle_modular(rep)
             or oracle_prime_power(rep, k)
             or oracle_cofactor_size(rep, pool))
 
@@ -291,11 +319,35 @@ def test_k5_ledger() -> None:
     print(f"[ok] k=5 ledger: 120 labeled -> 18 orbits -> 13 admissible; "
           f"{len(L['closed'])} closed, {len(L['open'])} open")
 
+def test_parity_lemma() -> None:
+    """Even k kills the odd sector; odd k must leave it alone."""
+    odd_chain  = tuple((0, i, 0, 0, 0, 0) for i in range(6))   # 1,q,..,q^5
+    even_chain = tuple((i, 0, 0, 0, 0, 0) for i in range(6))   # 1,2,..,2^5
+    assert oracle_parity(odd_chain, 6) is not None
+    assert oracle_parity(even_chain, 6) is None, "lemma must not touch even n"
+    assert oracle_parity(odd_chain, 5) is None, "sum of 5 odd squares is odd"
+    for k in range(1, 9):
+        fires = oracle_parity(tuple((0,) * 6 for _ in range(k)), k) is not None
+        assert fires == (k % 2 == 0), k
+    print("[ok] parity lemma: fires exactly on even k, odd sector only")
+
+def test_parity_kills_k6_odd_sector() -> None:
+    pool = small_primes(12)
+    reps = orbit_reps(labeled_universe(6, 6), 6)
+    odd = [r for r in reps if all(v[0] == 0 for v in r)]
+    assert odd, "no odd k=6 shapes to kill"
+    for rep in odd:
+        cert = oracle_parity(rep, 6)
+        assert cert is not None and cert.level == 1, rep
+    print(f"[ok] k=6: all {len(odd)} odd-sector shapes closed at Level 1")
+
 def self_test() -> None:
     test_admissibility_rule()
+    test_parity_lemma()
     test_modular_soundness_cap()
     test_k4_anchor()
     test_k5_ledger()
+    test_parity_kills_k6_odd_sector()
     print("\nAll self-tests passed.")
 
 if __name__ == "__main__":
