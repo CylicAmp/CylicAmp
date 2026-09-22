@@ -1,1 +1,8 @@
 __pycache__/
+
+# Node dependencies (installed on demand by scripts/browser-smoke.mjs)
+node_modules/
+package-lock.json
+
+# Generated browser-smoke output; regenerate with scripts/browser-smoke.mjs
+screenshots/
