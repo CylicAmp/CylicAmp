@@ -36,7 +36,7 @@ def check_f26_logic(node):
     res = (node * 137) % 37
     status = ""
     if node in ANCHORS and res in TARGETS:
-        status = "FIXED POINT / f26_26x_mod37" if node == 30 else "ANCHOR -> TARGET (VALID)"
+        status = "ANCHOR∩TARGET / f26_26x_mod37" if node == 30 else "ANCHOR -> TARGET (VALID)"
     elif node in ANCHORS:
         status = "ANCHOR -> ENTROPY (INVALID)"   # dead branch — see proof above
     elif res in TARGETS:
