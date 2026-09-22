@@ -81,6 +81,49 @@ being 1, 3, 9, 13, 17.
 
 m = 9 is the ONLY value observed in either sweep. If m = 9 can be
 forced, or 9 | m shown in general, the shape closes outright.
+
+--------------------------------------------------------------------
+THE VIETA DESCENT DOES NOT CLOSE THIS -- tried, and why it fails
+--------------------------------------------------------------------
+m*r*t = r^2 + 10t^2 + 1 is not Vieta-symmetric as written: jumping in t
+gives non-integers, because the quadratic in t has leading coefficient
+10. Substituting T = 10t repairs it:
+
+        10x^2 + y^2 + 10 = m*x*y            (E)
+
+and (E) recovers the whole structure. For fixed x the two y-roots are
+exactly 10t and s, since s + 10t = m*r and s*10t = 10(r^2+1). The known
+pair appears as the two roots over x = 13: (13, 100) with t = 10, and
+(13, 17) with s = 17, both giving m = 9.
+
+Both jumps are then integral:
+
+    y-jump   y' = m*x - y,      y*y'  = 10(x^2 + 1)   -- always
+    x-jump   x' = m*y/10 - x,   x*x'  = (y^2 + 10)/10 -- only if 10 | y
+
+TWO OBSTRUCTIONS, both fatal to the approach.
+
+1. m is NOT pinned by the equation. Solutions exist for
+   m in {9, 12, 15, 21, 33, 36, 51, 111, 132, 261, ...}. The Diophantine
+   side of the problem does not single out 9 at all. What removes the
+   other m is that r and s must be PRIME, that s > r, and that t is
+   even -- arithmetic side conditions the Vieta structure cannot see.
+   m = 15 is the sharpest case: (r, t, s) = (7, 10, 5) has all three of
+   r, s prime and t even, and fails ONLY on s > r.
+
+2. The descent has NO FINITE BASE. A solution descends in y when
+   y^2 > 10(x^2+1), and in x only when 10 | y. So whenever 10 does not
+   divide y, the x-jump is unavailable and minimality reduces to
+   y^2 <= 10(x^2+1) -- satisfied by any small y beside a large x. The
+   minimal set is therefore infinite: (1,1), (1,2), (1,4), (7,2), (7,5),
+   (11,1), (13,4), (13,17), (127,25), (343,26), ... A Markov-style
+   argument needs a finite set of descent roots to classify. There is
+   none here.
+
+So the closure, if it exists, is not a descent argument. That matches
+what the sweeps already showed: both near-misses satisfy every
+congruence and die on the PREFIX condition, which is a statement about
+the ORDER of divisors, not about the equation.
 """
 
 from typing import List, Tuple, Dict
@@ -210,15 +253,96 @@ def test_no_witnesses() -> None:
     print("[ok] no witnesses in range; every surviving pair has m = 9")
 
 
+
+
+# =====================================================================
+# THE VIETA FORM (recorded as a ruled-out route, not a closure)
+# =====================================================================
+
+def vieta_m(x: int, y: int) -> int:
+    """m for the substituted equation 10x^2 + y^2 + 10 = m*x*y, or 0."""
+    num = 10 * x * x + y * y + 10
+    return num // (x * y) if num % (x * y) == 0 else 0
+
+
+def vieta_y_jump(x: int, y: int, m: int) -> int:
+    """The other y-root. Always integral: y*y' = 10(x^2+1)."""
+    return m * x - y
+
+
+def vieta_x_jump(x: int, y: int, m: int) -> int:
+    """The other x-root. Integral only when 10 | y."""
+    if y % 10:
+        return 0
+    return m * y // 10 - x
+
+
+def vieta_is_minimal(x: int, y: int, m: int) -> bool:
+    """No available jump decreases. Note this set is INFINITE."""
+    if vieta_y_jump(x, y, m) < y:
+        return False
+    if y % 10 == 0 and vieta_x_jump(x, y, m) < x:
+        return False
+    return True
+
+
+def test_vieta_substitution() -> None:
+    """T = 10t turns the form Vieta-symmetric and recovers the known pair."""
+    r, t, s = 13, 10, 17
+    assert vieta_m(r, 10 * t) == 9 and vieta_m(r, s) == 9
+    # the two y-roots over x=r are exactly 10t and s
+    assert vieta_y_jump(r, 10 * t, 9) == s
+    assert vieta_y_jump(r, s, 9) == 10 * t
+    assert s * (10 * t) == 10 * (r * r + 1)
+    assert s + 10 * t == 9 * r
+    # the x-jump needs 10 | y
+    assert vieta_x_jump(r, s, 9) == 0
+    assert vieta_x_jump(r, 10 * t, 9) == (10 * t * t + 1) // r == 77
+    print("[ok] Vieta form: 10x^2+y^2+10 = mxy, roots over x=13 are 100 and 17")
+
+
+def test_vieta_does_not_force_m() -> None:
+    """Obstruction 1: many m admit solutions, so the equation alone is silent."""
+    found = {vieta_m(x, y) for x in range(1, 1200) for y in range(1, 1200)}
+    found.discard(0)
+    for expected in (9, 12, 15, 21, 33, 36, 111):
+        assert expected in found, expected
+    assert len(found) > 1, "m would be pinned, which it is not"
+    # the sharpest near-case: r,s prime and t even, failing only on s > r
+    assert vieta_m(7, 100) == 15 and vieta_m(7, 5) == 15
+    assert is_prime(7) and is_prime(5) and (100 // 10) % 2 == 0
+    assert 5 < 7, "m=15 is excluded by s > r alone"
+    print("[ok] obstruction 1: m is not pinned; m=15 dies only on s > r")
+
+
+def test_vieta_has_no_finite_base() -> None:
+    """Obstruction 2: the minimal set is infinite, so there is nothing to classify."""
+    mins = []
+    for x in range(1, 4000):
+        for y in range(1, 40):
+            m = vieta_m(x, y)
+            if m and y % 10 and vieta_is_minimal(x, y, m):
+                mins.append((x, y))
+    assert len(mins) >= 8, mins
+    # they keep appearing as x grows, because 10 does not divide y
+    assert max(x for x, _ in mins) > 100
+    print(f"[ok] obstruction 2: {len(mins)} minimal solutions with y < 40; "
+          f"largest x = {max(x for x, _ in mins)}")
+
+
 def self_test() -> None:
     test_reductions()
     test_identity()
     test_both_sweeps_agree()
     test_known_pair_dies_on_nine()
     test_no_witnesses()
+    test_vieta_substitution()
+    test_vieta_does_not_force_m()
+    test_vieta_has_no_finite_base()
     print("\nAll self-tests passed.")
     print("NOTE: shape C q=3 remains OPEN. The sweeps are exhaustive only to")
-    print("      their bounds. Forcing m = 9 in general would close it.")
+    print("      their bounds. Forcing m = 9 in general would close it, but")
+    print("      the Vieta descent is NOT the route -- see the two obstructions.")
 
 
 if __name__ == "__main__":
