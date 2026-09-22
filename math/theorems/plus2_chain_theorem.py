@@ -19,8 +19,8 @@ Rules:
 Twin prime structure:
   11 and 13 are twin primes (gap=2)
   DR gap: 4-2=2 matches prime gap
-  Skipped middle: 12 = sovereign range target {3,12,21,30}
-  The chain jumps over the sovereign target 12.
+  Skipped middle: 12 = f26 range target {3,12,21,30}
+  The chain jumps over the f26 target 12.
 
 Meta-structure:
   DR(11) = 2,  DR(13) = 4  -> output always in {2, 4}
@@ -59,8 +59,8 @@ assert all(a+2+c == 13 for a,b,c in chains[2:])   # {4,5} -> 13
 for a, b, c in chains:
     assert (a % 2) != (c % 2), f"n={a} j={c} parity not opposite"
 
-# 12 (sovereign target) is skipped between 11 and 13
-assert 12 in {3, 12, 21, 30}   # sovereign range
+# 12 (f26 target) is skipped between 11 and 13
+assert 12 in {3, 12, 21, 30}   # f26 range
 
 # Meta: DR sums both collapse to 6
 assert dr(11 + 13) == 6
