@@ -49,6 +49,14 @@ LEVEL 1 (proved, parameter-free, shape-level -- hold for every realization):
                 and cannot equal an odd n, so the whole odd sector dies.
                 Silent at k = 5, where the sum is 5 mod 8 and odd.
 
+  count_mod3    Michael Song's count lemma (commit 02ae900). Divisors
+                coprime to 3 square to 1 mod 3, so n = k - c (mod 3) with
+                c the count of prefix entries divisible by 3. When 3 | n
+                this forces c = k (mod 3), and 3 is then the least prime
+                present. Kills the 3 | n branch of any shape failing it.
+                NOTE: it closes a BRANCH, not a shape, so it is recorded
+                separately and never used as a closing certificate.
+
   prime_power   For the chain 1, q, q^2, ..., q^(k-1): q | n forces
                 n = 0 mod q, while n = 1 + q^2 + ... = 1 mod q. Parameter
                 free, so it closes the shape outright.
@@ -203,6 +211,42 @@ def oracle_parity(rep: Shape, k: int) -> Optional[Certificate]:
         "PARITY_EVEN_K", 1,
         f"n odd => all d_i odd => sum d_i^2 = {k} mod 8, even, != odd n")
 
+def oracle_count_mod3(rep: Shape, k: int) -> Optional[Certificate]:
+    """LEVEL 1, but closes a BRANCH, not a shape. Never a closing certificate.
+
+    Michael Song's count lemma (commit 02ae900). Every divisor coprime to
+    3 squares to 1 mod 3, so with c = #{i <= k : 3 | d_i},
+
+        n = k - c   (mod 3),   and   3 | n  forces  c = k (mod 3).
+
+    If 3 | n then 3 is a divisor, and since only 1 and 2 are smaller, 3
+    lies in the prefix for every k >= 3 -- so some slot of the shape holds
+    it. Which slot is not determined by the exponent pattern alone (for
+    even n the least prime is 2, not 3), so every slot is tried and the
+    branch is declared empty only if EVERY placement fails the congruence.
+    That is the conservative direction.
+
+    The surviving 3 does-not-divide n branch is untouched, which is why
+    this never closes a shape on its own. n = 130 lives in exactly that
+    branch, and the k=4 anchor test pins the distinction.
+    """
+    if k < 3:
+        return None
+    support = sorted({i for v in rep for i, e in enumerate(v) if e > 0})
+    if not support:
+        return None
+    counts = []
+    for slot in support:
+        c = sum(1 for v in rep if v[slot] > 0)
+        if c % 3 == k % 3:
+            return None               # some placement is consistent
+        counts.append(c)
+    return Certificate(
+        "MOD3_CONTENT", 1,
+        f"3 | n forces c = {k % 3} (mod 3); no placement of the prime 3 "
+        f"achieves it (c in {counts}). The 3 | n branch is empty; "
+        f"3 does not divide n is untouched")
+
 def close_shape(rep: Shape, k: int, pool: List[int]) -> Optional[Certificate]:
     return (oracle_parity(rep, k)
             or oracle_modular(rep)
@@ -341,9 +385,32 @@ def test_parity_kills_k6_odd_sector() -> None:
         assert cert is not None and cert.level == 1, rep
     print(f"[ok] k=6: all {len(odd)} odd-sector shapes closed at Level 1")
 
+def test_count_mod3_lemma() -> None:
+    """Song's count lemma: kills 3|n branches, and never closes a shape."""
+    A = ((0,0,0,0,0),(1,0,0,0,0),(2,0,0,0,0),(3,0,0,0,0),(0,1,0,0,0))
+    assert oracle_count_mod3(A, 5) is not None, "should kill A's 3|n branch"
+    C = ((0,0,0,0,0),(1,0,0,0,0),(0,1,0,0,0),(0,0,1,0,0),(1,1,0,0,0))
+    assert oracle_count_mod3(C, 5) is None, "C's 3|n branch survives"
+
+    # The lemma may fire on the n=130 shape -- and what it says is TRUE,
+    # since 3 does not divide 130. What must never happen is the shape
+    # being CLOSED by it, because 130 lives in the surviving branch.
+    anchor = ((0,0,0,0),(1,0,0,0),(0,1,0,0),(1,1,0,0))
+    assert 130 % 3 != 0
+    pool = small_primes(25)
+    assert close_shape(anchor, 4, pool) is None, "UNSOUND: n=130 closed"
+
+    # and it must not be wired into close_shape at all
+    import inspect
+    assert "oracle_count_mod3" not in inspect.getsource(close_shape), \
+        "branch-level lemma must not be a closing certificate"
+    print("[ok] count lemma (Song): kills A's 3|n branch, spares C, "
+          "never closes n=130")
+
 def self_test() -> None:
     test_admissibility_rule()
     test_parity_lemma()
+    test_count_mod3_lemma()
     test_modular_soundness_cap()
     test_k4_anchor()
     test_k5_ledger()
