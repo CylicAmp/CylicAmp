@@ -9,9 +9,15 @@ survivor is q=3:
 
         prefix {1, 3, r, s, 3r},   3 < r < s,   n = 10(1+r^2) + s^2
 
-STATUS: still OPEN. Everything below Level 1 is a reduction, not a
-closure; the searches are Level 2 and exhaustive only to their stated
-bounds. No proof of emptiness is claimed.
+STATUS: this branch is CLOSED. The ordering argument at the bottom of
+this docstring proves it empty at Level 1, for every r and s.
+
+SCOPE, precisely: what closes is the 3 | n branch of shape C, which is
+exactly the branch that forces q = 3. The 3-does-NOT-divide-n branch of
+shape C (all three primes above 3) is a DIFFERENT case and is UNTOUCHED
+here -- with c = 0 the count lemma gives n = 5 = 2 (mod 3), consistent
+with 3 not dividing n, so it yields no contradiction. Shape C as a whole
+is therefore not yet closed.
 
 --------------------------------------------------------------------
 LEVEL 1 REDUCTIONS
@@ -124,6 +130,58 @@ So the closure, if it exists, is not a descent argument. That matches
 what the sweeps already showed: both near-misses satisfy every
 congruence and die on the PREFIX condition, which is a statement about
 the ORDER of divisors, not about the equation.
+
+--------------------------------------------------------------------
+THE ORDERING ARGUMENT -- Level 1, closes the branch
+--------------------------------------------------------------------
+Write n = 3*r*s*m', so that m = 3m'.
+
+(O1) 3 | m, because 3 | n and 3 divides neither r nor s. And 3 does not
+     divide m', because 9 does not divide n by (C2).
+
+(O2) EVERY PRIME FACTOR OF m' IS AT LEAST r. A prime p | n with
+     p < max(prefix) is a divisor below the largest prefix element, so
+     it must BE in the prefix, hence p is 3, r or s. Since 3 does not
+     divide m', every prime factor of m' is r, s, or >= max(prefix) --
+     and all three of those are >= r. So
+
+         m' = 1   or   m' >= r.
+
+(O3) SIZE BOUND. s and s' = 10(r^2+1)/s are the roots of
+     X^2 - m*r*X + 10(r^2+1), so
+
+         m = s/r + 10(r^2+1)/(r*s) =: f(s),
+
+     convex in s with its minimum at s = sqrt(10(r^2+1)). The range of s
+     is bounded on both sides: s > r, and s <= (r^2+1)/2, because r is
+     odd so r^2+1 = 2u with u ODD, and s is an odd divisor of 2u, hence
+     a divisor of u. A convex function on an interval is maximised at an
+     endpoint, so
+
+         m <= max( f(r), f((r^2+1)/2) )
+            = max( 11 + 10/r^2,  (r^2+41)/(2r) ).
+
+(O4) m' >= r IS IMPOSSIBLE. It would give m = 3m' >= 3r, but
+       3r > 11 + 10/r^2     iff  3r^3 - 11r^2 - 10 > 0, true for r >= 4;
+       3r > (r^2+41)/(2r)   iff  5r^2 > 41,             true for r >= 3.
+     Both hold for every r >= 5, so 3r exceeds the bound in (O3).
+
+(O5) Hence m' = 1 by (O2), i.e. m = 3. But then the quadratic
+     X^2 - 3rX + 10(r^2+1) has discriminant
+
+         9r^2 - 40(r^2+1) = -31r^2 - 40 < 0
+
+     for every r, so no real s exists at all -- let alone a prime one.
+
+CONTRADICTION in every case. The branch is empty.
+
+This is why neither congruences nor the Vieta descent could finish it:
+both are blind to the ORDER of the divisors, and (O2) -- the step that
+does the work -- is purely a statement about which primes are allowed
+to sit below the fifth-smallest divisor. The two near-misses are not
+coincidences but the predicted shape of the failure: each sits in the
+window where f forces m = 9, and 9 | m is exactly what the prefix
+forbids.
 """
 
 from typing import List, Tuple, Dict
@@ -330,6 +388,68 @@ def test_vieta_has_no_finite_base() -> None:
           f"largest x = {max(x for x, _ in mins)}")
 
 
+
+
+# =====================================================================
+# THE ORDERING ARGUMENT (Level 1 closure of this branch)
+# =====================================================================
+
+def f_bound(s: float, r: int) -> float:
+    """m as a function of s: f(s) = s/r + 10(r^2+1)/(r s), convex in s."""
+    return s / r + 10 * (r * r + 1) / (r * s)
+
+
+def m_upper_bound(r: int) -> float:
+    """(O3). f is convex, so its max over r < s <= (r^2+1)/2 is at an endpoint."""
+    return max(f_bound(r, r), f_bound((r * r + 1) / 2, r))
+
+
+def test_s_upper_bound() -> None:
+    """(O3): r odd makes r^2+1 = 2u with u odd, so an odd s divides u."""
+    for r in [p for p in primes_upto(1500) if p > 3]:
+        u = (r * r + 1) // 2
+        assert u % 2 == 1, r                      # r^2+1 = 2 (mod 8)
+        for s in prime_divisors(r * r + 1):
+            if s == 2:
+                continue
+            assert u % s == 0 and s <= u, (r, s)
+    print("[ok] (O3): every odd s dividing r^2+1 satisfies s <= (r^2+1)/2")
+
+
+def test_m_prime_bound() -> None:
+    """(O4): 3r always exceeds the (O3) bound, so m' >= r is impossible."""
+    for r in range(5, 5000):
+        assert 3 * r > m_upper_bound(r), r
+        assert 3 * r ** 3 - 11 * r * r - 10 > 0, r      # 3r > 11 + 10/r^2
+        assert 5 * r * r > 41, r                        # 3r > (r^2+41)/(2r)
+    print("[ok] (O4): 3r > max(f(r), f((r^2+1)/2)) for every r >= 5")
+
+
+def test_m_equals_three_impossible() -> None:
+    """(O5): m = 3 leaves the quadratic with a negative discriminant."""
+    for r in range(1, 20000):
+        assert 9 * r * r - 40 * (r * r + 1) < 0, r
+    print("[ok] (O5): m = 3 gives discriminant -31r^2-40 < 0, no real s")
+
+
+def test_branch_is_empty() -> None:
+    """The chain (O2)+(O4)+(O5) leaves no case, and the sweeps agree."""
+    for r, s, t, m in search_by_r(60000):
+        # every surviving pair must land on the forced value m = 9
+        assert m == 9, (r, s, m)
+        assert m <= m_upper_bound(r) + 1e-9, (r, m)
+        assert n_of(r, s) % 9 == 0                  # so the prefix breaks
+    assert surviving_witnesses(search_by_r(60000)) == []
+    print("[ok] branch empty: m' = 1 forces m = 3, which has no real s")
+
+
+def self_test_ordering() -> None:
+    test_s_upper_bound()
+    test_m_prime_bound()
+    test_m_equals_three_impossible()
+    test_branch_is_empty()
+
+
 def self_test() -> None:
     test_reductions()
     test_identity()
@@ -339,10 +459,12 @@ def self_test() -> None:
     test_vieta_substitution()
     test_vieta_does_not_force_m()
     test_vieta_has_no_finite_base()
+    self_test_ordering()
     print("\nAll self-tests passed.")
-    print("NOTE: shape C q=3 remains OPEN. The sweeps are exhaustive only to")
-    print("      their bounds. Forcing m = 9 in general would close it, but")
-    print("      the Vieta descent is NOT the route -- see the two obstructions.")
+    print("RESULT: the q=3 branch of shape C is CLOSED at Level 1 by the")
+    print("        ordering argument (O1)-(O5).")
+    print("SCOPE:  shape C's 3-does-not-divide-n branch (q > 3) is untouched,")
+    print("        so shape C as a whole is not yet closed.")
 
 
 if __name__ == "__main__":
