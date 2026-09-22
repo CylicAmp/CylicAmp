@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{Analysis of the 9$\times$9 State Matrix and Z/333Z Field}
+\maketitle
+
+\section{Modular Field Constants}
+Primary modulus: $\mathbb{Z}/333\mathbb{Z}$
+Secondary modulus: $\mathbb{Z}/37\mathbb{Z}$
+Completion Constant (C): $575 \equiv 20 \pmod{37}$
+Triad verification: $\mathrm{DR}(7) + \mathrm{DR}(4) + \mathrm{DR}(9) = 20$
+
+\section{Adjacency Lattice Transitions}
+Rule A: $S \to S + 1$ (linear)
+Rule B: $(d_1, d_2) \to (d_2, d_1)$ (mirror)
+Rule C: $S \to S + 9$ (digital root invariant)
+
+\section{Chain [89--99]}
+\[
+89 \pmod{37} = 15, \quad 98 \pmod{37} = 24, \quad 99 \pmod{37} = 25
+\]
+Differential persistence:
+\[
+25 - 15 = 10, \quad 24 - 15 = 9, \quad 25 - 24 = 1
+\]
+This defines the terminal state at 99 as the point of total modular collapse within the $\mathbb{Z}/333\mathbb{Z}$ field.
+
+\section{Field Invariants}
+The matrix preserves the 7-4-9 triad equilibrium seal and the mod-9 digit-pair transition system across the entire lattice.
+
+\end{document}

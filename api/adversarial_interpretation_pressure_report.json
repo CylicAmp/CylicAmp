@@ -1,0 +1,550 @@
+{
+  "report_id": "adversarial_interpretation_pressure_report_1",
+  "spec_version": "de-spec-v1.1",
+  "date": "2026-05-25",
+  "status": "GAPS_CLOSED",
+  "summary": {
+    "total_fixtures": 59,
+    "passed": 59,
+    "failed": 0,
+    "gaps_identified": 4,
+    "gaps_closed": 4
+  },
+  "gap_closures": {
+    "GAP-1": {
+      "description": "Duplicate-key policy",
+      "resolution": "REJECT on first duplicate (No-Repair Rule §2)",
+      "python_behavior": "last-wins (silent)",
+      "rust_default": "Value: last-wins / Struct: error",
+      "v1_1_behavior": "REJECT → DuplicateKeyError",
+      "status": "CLOSED"
+    },
+    "GAP-2": {
+      "description": "Numeric type contract",
+      "resolution": "Signed 64-bit integers only; floats and out-of-range integers are parse errors",
+      "python_behavior": "arbitrary int; float(100.0) silently coerced",
+      "rust_default": "i64/u64/f64 with arbitrary_precision feature off",
+      "v1_1_behavior": "REJECT float → FloatNotPermittedError; REJECT |n|>2^63 → IntegerRangeError",
+      "status": "CLOSED"
+    },
+    "GAP-3": {
+      "description": "Lone surrogate Unicode policy",
+      "resolution": "Strict UTF-8; lone surrogates rejected post-parse",
+      "python_behavior": "accepts \\uD800 as valid string content",
+      "rust_default": "rejects with InvalidUnicodeCodePoint",
+      "v1_1_behavior": "REJECT → LoneSurrogateError (aligns with Rust)",
+      "status": "CLOSED"
+    },
+    "GAP-4": {
+      "description": "Canonical form algorithm",
+      "resolution": "Exact algorithm: recursive NFC sort_keys + UTF-8 + no whitespace + integers only",
+      "status": "CLOSED",
+      "algorithm": "de_spec_v1_1_parser.canonical_bytes()"
+    }
+  },
+  "open_gaps": {
+    "resource_constraint_precedence": {
+      "description": "When MEMORY_LIMIT and INSTRUCTION_LIMIT fire simultaneously, error precedence is undefined",
+      "status": "OPEN — requires formal precedence table in v1.2"
+    }
+  },
+  "fixtures": [
+    {
+      "id": "dup-001",
+      "category": "GAP-1",
+      "expected": "REJECT",
+      "note": "Basic duplicate: last-wins in Python/Rust Value, but v1.1 REJECTS",
+      "result": "PASS",
+      "raised": "DuplicateKeyError"
+    },
+    {
+      "id": "dup-002",
+      "category": "GAP-1",
+      "expected": "REJECT",
+      "note": "Duplicate non-adjacent key",
+      "result": "PASS",
+      "raised": "DuplicateKeyError"
+    },
+    {
+      "id": "dup-003",
+      "category": "GAP-1",
+      "expected": "REJECT",
+      "note": "Duplicate empty-string key",
+      "result": "PASS",
+      "raised": "DuplicateKeyError"
+    },
+    {
+      "id": "dup-004",
+      "category": "GAP-1",
+      "expected": "REJECT",
+      "note": "Duplicate key in nested object",
+      "result": "PASS",
+      "raised": "DuplicateKeyError"
+    },
+    {
+      "id": "dup-005",
+      "category": "GAP-1",
+      "expected": "REJECT",
+      "note": "Duplicate with identical values — still REJECT",
+      "result": "PASS",
+      "raised": "DuplicateKeyError"
+    },
+    {
+      "id": "dup-006",
+      "category": "GAP-1",
+      "expected": "REJECT",
+      "note": "Triplicate field set, second dup later in sequence",
+      "result": "PASS",
+      "raised": "DuplicateKeyError"
+    },
+    {
+      "id": "dup-007",
+      "category": "GAP-1",
+      "expected": "REJECT",
+      "note": "Duplicate inside array element",
+      "result": "PASS",
+      "raised": "DuplicateKeyError"
+    },
+    {
+      "id": "dup-008",
+      "category": "GAP-1",
+      "expected": "REJECT",
+      "note": "Deeply nested duplicate",
+      "result": "PASS",
+      "raised": "DuplicateKeyError"
+    },
+    {
+      "id": "dup-accept-001",
+      "category": "GAP-1",
+      "expected": "ACCEPT",
+      "note": "Case-distinct keys are different — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"A\":1,\"a\":2}",
+      "hash": "0d0e3924a16d7710884d7aaf5ddacfafcef0079c6717e1415b8074f911635606"
+    },
+    {
+      "id": "dup-accept-002",
+      "category": "GAP-1",
+      "expected": "ACCEPT",
+      "note": "Anagram keys are different — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"ab\":1,\"ba\":2}",
+      "hash": "b89d7716b99c91b34d636740eb0c55dbe98793adc3caafbf0cd74b5a3480cf0f"
+    },
+    {
+      "id": "num-001",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "100.0 is a float literal — REJECT even though integer-valued",
+      "result": "PASS",
+      "raised": "FloatNotPermittedError"
+    },
+    {
+      "id": "num-002",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "Non-integer float",
+      "result": "PASS",
+      "raised": "FloatNotPermittedError"
+    },
+    {
+      "id": "num-003",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "0.0 is a float literal — REJECT",
+      "result": "PASS",
+      "raised": "FloatNotPermittedError"
+    },
+    {
+      "id": "num-004",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "Negative zero float — REJECT",
+      "result": "PASS",
+      "raised": "FloatNotPermittedError"
+    },
+    {
+      "id": "num-005",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "Scientific notation is a float literal — REJECT",
+      "result": "PASS",
+      "raised": "FloatNotPermittedError"
+    },
+    {
+      "id": "num-006",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "Explicit exponent float — REJECT",
+      "result": "PASS",
+      "raised": "FloatNotPermittedError"
+    },
+    {
+      "id": "num-007",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "1.5e2 = 150.0 — REJECT (float literal)",
+      "result": "PASS",
+      "raised": "FloatNotPermittedError"
+    },
+    {
+      "id": "num-008",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "Decimal float",
+      "result": "PASS",
+      "raised": "FloatNotPermittedError"
+    },
+    {
+      "id": "num-009",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "Float outside i64 range — REJECT at float stage",
+      "result": "PASS",
+      "raised": "FloatNotPermittedError"
+    },
+    {
+      "id": "num-010",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "2^63 = i64_MAX + 1 — REJECT (Rust default serde_json fails here too)",
+      "result": "PASS",
+      "raised": "IntegerRangeError"
+    },
+    {
+      "id": "num-011",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "-2^63 - 1 = i64_MIN - 1 — REJECT",
+      "result": "PASS",
+      "raised": "IntegerRangeError"
+    },
+    {
+      "id": "num-012",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "Arbitrarily large integer — Python accepts, v1.1 REJECTS",
+      "result": "PASS",
+      "raised": "IntegerRangeError"
+    },
+    {
+      "id": "num-013",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "Arbitrarily large negative — REJECT",
+      "result": "PASS",
+      "raised": "IntegerRangeError"
+    },
+    {
+      "id": "num-accept-001",
+      "category": "GAP-2",
+      "expected": "ACCEPT",
+      "note": "2^63 - 1 = i64_MAX — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"n\":9223372036854775807}",
+      "hash": "faf5d00c8f17856eac0c8cae6eae118ca936a9ae1af9de80da15dcc33e844a9d"
+    },
+    {
+      "id": "num-accept-002",
+      "category": "GAP-2",
+      "expected": "ACCEPT",
+      "note": "-2^63 = i64_MIN — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"n\":-9223372036854775808}",
+      "hash": "bef2d002efa1e5cb6c97e2738e7f311f87d3bbb75dd3a860d55052aa0128e978"
+    },
+    {
+      "id": "num-accept-003",
+      "category": "GAP-2",
+      "expected": "ACCEPT",
+      "note": "Zero integer — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"n\":0}",
+      "hash": "f3013f933b9fb80ab6d995e7ad9da36f683837ba1d81e950c943d40111eac2f0"
+    },
+    {
+      "id": "num-accept-004",
+      "category": "GAP-2",
+      "expected": "ACCEPT",
+      "note": "Negative one — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"n\":-1}",
+      "hash": "0c31e9341837b3869856e8ea000cdc2668e68a8bd0f291d61c3d7ea52bbcff96"
+    },
+    {
+      "id": "uni-001",
+      "category": "GAP-3",
+      "expected": "REJECT",
+      "note": "Lone high surrogate — Python accepts, Rust rejects, v1.1 REJECTS",
+      "result": "PASS",
+      "raised": "LoneSurrogateError"
+    },
+    {
+      "id": "uni-002",
+      "category": "GAP-3",
+      "expected": "REJECT",
+      "note": "Lone high surrogate (max) — REJECT",
+      "result": "PASS",
+      "raised": "LoneSurrogateError"
+    },
+    {
+      "id": "uni-003",
+      "category": "GAP-3",
+      "expected": "REJECT",
+      "note": "Lone low surrogate — REJECT",
+      "result": "PASS",
+      "raised": "LoneSurrogateError"
+    },
+    {
+      "id": "uni-004",
+      "category": "GAP-3",
+      "expected": "REJECT",
+      "note": "Lone low surrogate (max) — REJECT",
+      "result": "PASS",
+      "raised": "LoneSurrogateError"
+    },
+    {
+      "id": "uni-005",
+      "category": "GAP-3",
+      "expected": "REJECT",
+      "note": "Two consecutive high surrogates (no low) — REJECT",
+      "result": "PASS",
+      "raised": "LoneSurrogateError"
+    },
+    {
+      "id": "uni-006",
+      "category": "GAP-3",
+      "expected": "REJECT",
+      "note": "Surrogate embedded in valid text — REJECT",
+      "result": "PASS",
+      "raised": "LoneSurrogateError"
+    },
+    {
+      "id": "uni-007",
+      "category": "GAP-3",
+      "expected": "REJECT",
+      "note": "Reversed surrogate order (low then high) — REJECT",
+      "result": "PASS",
+      "raised": "LoneSurrogateError"
+    },
+    {
+      "id": "uni-008",
+      "category": "GAP-3",
+      "expected": "REJECT",
+      "note": "Lone surrogate in key — REJECT",
+      "result": "PASS",
+      "raised": "LoneSurrogateError"
+    },
+    {
+      "id": "uni-009",
+      "category": "GAP-3",
+      "expected": "REJECT",
+      "note": "Lone surrogate inside array — REJECT",
+      "result": "PASS",
+      "raised": "LoneSurrogateError"
+    },
+    {
+      "id": "uni-010",
+      "category": "GAP-3",
+      "expected": "REJECT",
+      "note": "Lone surrogate deeply nested — REJECT",
+      "result": "PASS",
+      "raised": "LoneSurrogateError"
+    },
+    {
+      "id": "uni-accept-001",
+      "category": "GAP-3",
+      "expected": "ACCEPT",
+      "note": "Valid surrogate pair (emoji) — ACCEPT; decodes to U+1F600",
+      "result": "PASS",
+      "canon": "{\"s\":\"😀\"}",
+      "hash": "f9949e1006d1ca22bc0b60ea94f09779f11a8f0a29bae250fc7ab313d879f5e7"
+    },
+    {
+      "id": "uni-accept-002",
+      "category": "GAP-3",
+      "expected": "ACCEPT",
+      "note": "NFD input normalized to NFC in canonical form",
+      "result": "PASS",
+      "canon": "{\"s\":\"é\"}",
+      "hash": "86028b41ba792eaf82aa26a45b218f6734f7f1096a86f1746c8296e088a0ccb4"
+    },
+    {
+      "id": "uni-accept-003",
+      "category": "GAP-3",
+      "expected": "ACCEPT",
+      "note": "Pure ASCII string — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"s\":\"hello\"}",
+      "hash": "aa2a66ada1633cb40b81191752d22a004787247afec983bfaabc99e7b1397639"
+    },
+    {
+      "id": "canon-001",
+      "category": "GAP-4",
+      "expected": "ACCEPT",
+      "note": "Keys sorted: a before z",
+      "result": "PASS",
+      "canon": "{\"a\":2,\"z\":1}",
+      "hash": "c2985c5ba6f7d2a55e768f92490ca09388e95bc4cccb9fdf11b15f4d42f93e73"
+    },
+    {
+      "id": "canon-002",
+      "category": "GAP-4",
+      "expected": "ACCEPT",
+      "note": "Whitespace stripped in canonical form",
+      "result": "PASS",
+      "canon": "{\"a\":1,\"b\":2}",
+      "hash": "43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777"
+    },
+    {
+      "id": "canon-003",
+      "category": "GAP-4",
+      "expected": "ACCEPT",
+      "note": "Recursive key sort on nested object",
+      "result": "PASS",
+      "canon": "{\"nested\":{\"a\":2,\"z\":1}}",
+      "hash": "872396769f22e9510fb3950e7dab20d79c5301ab12593ffdc76ca26a3656e1a6"
+    },
+    {
+      "id": "canon-004",
+      "category": "GAP-4",
+      "expected": "ACCEPT",
+      "note": "Canonical form is identical regardless of input whitespace",
+      "result": "PASS",
+      "canon": "{\"a\":2,\"z\":1}",
+      "hash": "c2985c5ba6f7d2a55e768f92490ca09388e95bc4cccb9fdf11b15f4d42f93e73"
+    },
+    {
+      "id": "canon-005",
+      "category": "GAP-4",
+      "expected": "ACCEPT",
+      "note": "Two-level recursive sort",
+      "result": "PASS",
+      "canon": "{\"a\":1,\"b\":{\"a\":0,\"z\":9}}",
+      "hash": "0d9cfabbcfd888199fd30fbb120d1f09517d12cc6245ca44350ab2fba86c5481"
+    },
+    {
+      "id": "edge-001",
+      "category": "BOUNDARY",
+      "expected": "ACCEPT",
+      "note": "Empty object — ACCEPT (locked hash from v1.0 conformance vectors)",
+      "result": "PASS",
+      "canon": "{}",
+      "hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "id": "edge-002",
+      "category": "BOUNDARY",
+      "expected": "ACCEPT",
+      "note": "Null value — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"k\":null}",
+      "hash": "1593875d9ce96c358d8bc6a80b95e4fa420e006fae36a5e510d1ebf07a1a55aa"
+    },
+    {
+      "id": "edge-003",
+      "category": "BOUNDARY",
+      "expected": "ACCEPT",
+      "note": "Boolean true — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"k\":true}",
+      "hash": "083f11265e69cc86c458e3b282bf580b065ffc252c62bf9a0b473a29f12b2e0c"
+    },
+    {
+      "id": "edge-004",
+      "category": "BOUNDARY",
+      "expected": "ACCEPT",
+      "note": "Boolean false — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"k\":false}",
+      "hash": "724a47a1c665fd68415905b5aac3e1dc12568d33650f5a5f98e3f1a93aba5494"
+    },
+    {
+      "id": "edge-005",
+      "category": "BOUNDARY",
+      "expected": "ACCEPT",
+      "note": "Empty string value — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"k\":\"\"}",
+      "hash": "780dbee244ff7855be35a16ef5473b11ca05844f96977ba39be7f49a2434fbef"
+    },
+    {
+      "id": "edge-006",
+      "category": "BOUNDARY",
+      "expected": "ACCEPT",
+      "note": "Empty string key — ACCEPT (single occurrence)",
+      "result": "PASS",
+      "canon": "{\"\":1}",
+      "hash": "f3d86de1bf4b354382f91a12a4487daaeb56692b2c46f2df52f6f83a84610074"
+    },
+    {
+      "id": "edge-007",
+      "category": "BOUNDARY",
+      "expected": "ACCEPT",
+      "note": "Integer array value — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"k\":[1,2,3]}",
+      "hash": "e1a7f4435c5d74363bf5d9953fad16cee0732f48dbed99835b964473e87ae06f"
+    },
+    {
+      "id": "edge-008",
+      "category": "BOUNDARY",
+      "expected": "ACCEPT",
+      "note": "Empty array value — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"k\":[]}",
+      "hash": "3617db225ae74d5ac76cbeb155742e2a651442e5c8afbbdad984b2aa8a4b2cfb"
+    },
+    {
+      "id": "edge-009",
+      "category": "BOUNDARY",
+      "expected": "ACCEPT",
+      "note": "Standard two-key object (locked hash from v1.0 conformance vectors)",
+      "result": "PASS",
+      "canon": "{\"a\":1,\"b\":2}",
+      "hash": "43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777"
+    },
+    {
+      "id": "edge-010",
+      "category": "BOUNDARY",
+      "expected": "ACCEPT",
+      "note": "Mixed nested structure — ACCEPT",
+      "result": "PASS",
+      "canon": "{\"a\":1,\"b\":{\"c\":2,\"d\":[3,4]}}",
+      "hash": "d20de737209179d2edce447762ae912f3aa6fdf1afbc5d06064ec74f65e807e5"
+    },
+    {
+      "id": "diverge-001",
+      "category": "GAP-1",
+      "expected": "REJECT",
+      "note": "DIVERGENCE: Python last-wins, Rust Value last-wins, Rust struct ERRORS. v1.1 mandates REJECT (closes divergence by choosing strictest)",
+      "result": "PASS",
+      "raised": "DuplicateKeyError"
+    },
+    {
+      "id": "diverge-002",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "DIVERGENCE: Python accepts (arbitrary int), Rust default fails. v1.1 mandates REJECT (i64 ceiling)",
+      "result": "PASS",
+      "raised": "IntegerRangeError"
+    },
+    {
+      "id": "diverge-003",
+      "category": "GAP-2",
+      "expected": "REJECT",
+      "note": "DIVERGENCE: Python → float(100.0), Rust → Number(f64). v1.1 mandates REJECT (no float literals permitted)",
+      "result": "PASS",
+      "raised": "FloatNotPermittedError"
+    },
+    {
+      "id": "diverge-004",
+      "category": "GAP-3",
+      "expected": "REJECT",
+      "note": "DIVERGENCE: Python accepts, Rust rejects. v1.1 mandates REJECT (closes in Rust's direction)",
+      "result": "PASS",
+      "raised": "LoneSurrogateError"
+    }
+  ],
+  "failures": []
+}

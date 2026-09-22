@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "last_session_id": "2026-07-08-CylicAmp",
+  "last_updated": "2026-07-08",
+  "status": "active",
+  "active_branch": "claude/verify-math-patterns-CnzDe",
+  "active_task": "Math theorem verification suite — sections A through R complete",
+  "last_checkpoint": "math/theorems/dr_pattern_suite.py",
+  "last_checkpoint_sha256": "16d0bb6c8fde58741429d0873fed48b62115e754c6ad5f822d74c251dff1650d",
+  "completed": [
+    "Section A–M: digital root theorems, sovereign matrix, D4 group algebra",
+    "Section N: engineered motif gradient word, D4 center — bulk word = r²",
+    "Section O: D4 E-rep spans M2(C) (Burnside density), commutant dim=6",
+    "Section P: ker(M_E) basis k1=vec(iσ_y) k2=vec(σ_z), D4 acts as Z2×Z2",
+    "Section Q: H_E(t,δ) exact char poly, splitting is O(δ²) not O(δ)",
+    "Section R: Q=P11-P22 commutes with all D4, splits zero modes → accidental"
+  ],
+  "pending_actions": [
+    "Owner review of CLEANUP_CANDIDATES.md — no files removed until owner decides",
+    "Commit history cleanup — requires owner approval before force push"
+  ],
+  "known_errors_corrected": [
+    "ker(M_E) dim=2 not 4 (Sovereign Kernel doc error)",
+    "Bulk word = r² not e (Sovereign Kernel doc error)",
+    "T_z=σ_z⊗I does NOT preserve kernel — correct operator is r⊗r",
+    "H_E zero mode splitting false — zeros are permanent at t=4 for all δ",
+    "H_E spectral table in doc was fabricated — actual evals have no zero modes at t=0.5"
+  ],
+  "session_protocol": {
+    "save_policy": "Save verified math immediately without being asked. Run, commit, push.",
+    "file_target": "math/theorems/dr_pattern_suite.py",
+    "section_naming": "Sequential letters A, B, C... each as numbered section with assertions",
+    "no_social_filler": true,
+    "no_idle_talk": true,
+    "output_mode": "data, analysis, conclusions only"
+  },
+  "artifacts": {
+    "cleanup_candidates": "CLEANUP_CANDIDATES.md",
+    "math_suite": "math/theorems/dr_pattern_suite.py",
+    "test_runner": "math/theorems/run_all_math_tests.py"
+  }
+}

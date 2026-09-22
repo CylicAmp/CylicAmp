@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TWO_THREE_SEAM – Where Two or Three Are Gathered</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #060a10;
+    color: #e0e8f0;
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 {
+    font-size: 1.1rem;
+    letter-spacing: 0.18em;
+    color: #7be6ff;
+    text-align: center;
+    padding: 1.4rem 1rem 0.3rem;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-size: 0.72rem;
+    color: #8888aa;
+    text-align: center;
+    letter-spacing: 0.12em;
+    padding-bottom: 1.2rem;
+  }
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 1.2rem 1.2rem;
+  }
+  canvas#hub {
+    width: 100%;
+    aspect-ratio: 1;
+    display: block;
+    border-radius: 4px;
+  }
+  .panels {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .panel {
+    background: #0c1520;
+    border: 1px solid #1c2a3a;
+    border-radius: 4px;
+    padding: 0.9rem 1rem;
+  }
+  .panel h2 {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: #5599cc;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+    border-bottom: 1px solid #1c2a3a;
+    padding-bottom: 0.4rem;
+  }
+  .dr-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.28rem 0;
+    font-size: 0.8rem;
+  }
+  .dr-row .label { color: #88aacc; }
+  .dr-val {
+    font-size: 1.1rem;
+    font-weight: bold;
+    width: 2rem;
+    text-align: center;
+    border-radius: 3px;
+    padding: 0 0.2rem;
+  }
+  .dr-2 { color: #7be6ff; background: rgba(123,230,255,0.08); }
+  .dr-3 { color: #ff9f40; background: rgba(255,159,64,0.08); }
+  .dr-5 { color: #b06fff; background: rgba(176,111,255,0.08); }
+  .dr-1 { color: #55ff99; background: rgba(85,255,153,0.1); }
+  .prop-row {
+    font-size: 0.76rem;
+    padding: 0.22rem 0;
+    color: #aab8cc;
+    display: flex;
+    justify-content: space-between;
+  }
+  .prop-row .val { color: #ddeeff; }
+  .pulse-bar {
+    height: 3px;
+    border-radius: 2px;
+    margin-top: 0.3rem;
+    background: linear-gradient(90deg, #7be6ff, #55ff99, #7be6ff);
+    background-size: 200% 100%;
+    animation: barflow 3s linear infinite;
+  }
+  @keyframes barflow {
+    from { background-position: 0% 50%; }
+    to   { background-position: 200% 50%; }
+  }
+  .period-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    justify-content: center;
+  }
+  .period-chip {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.55rem;
+    border-radius: 12px;
+    font-weight: bold;
+    transition: opacity 0.6s;
+  }
+  .chip-cyan { background: rgba(123,230,255,0.15); color: #7be6ff; border: 1px solid #7be6ff44; }
+  .chip-magenta { background: rgba(255,80,200,0.12); color: #ff50c8; border: 1px solid #ff50c844; }
+  .footer-note {
+    font-size: 0.66rem;
+    color: #445566;
+    text-align: center;
+    padding: 0.6rem 1rem 1rem;
+    letter-spacing: 0.08em;
+  }
+  .zero-sum-anim {
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 0.5rem;
+    color: #aabbd0;
+    min-height: 1.5rem;
+  }
+  .zero-sum-anim span { transition: color 0.5s; }
+</style>
+</head>
+<body>
+
+<h1>TWO_THREE_SEAM</h1>
+<div class="subtitle">Calendar Prime Bridge [2 · 3 · 32] &nbsp;·&nbsp; Where Two or Three Are Gathered</div>
+
+<div class="main-grid">
+  <canvas id="hub"></canvas>
+
+  <div class="panels">
+
+    <!-- DR Signature -->
+    <div class="panel">
+      <h2>Digital Root Signature</h2>
+      <div class="dr-row">
+        <span class="label">2 (Calendar Prime)</span>
+        <span class="dr-val dr-2">2</span>
+      </div>
+      <div class="dr-row">
+        <span class="label">3 (77 mod 37)</span>
+        <span class="dr-val dr-3">3</span>
+      </div>
+      <div class="dr-row">
+        <span class="label">32 ∈ FOURTEEN_DARK</span>
+        <span class="dr-val dr-5">5</span>
+      </div>
+      <div class="dr-row" style="border-top:1px solid #1c2a3a; margin-top:0.4rem; padding-top:0.5rem;">
+        <span class="label">Sum → 10 → DR</span>
+        <span class="dr-val dr-1">1</span>
+      </div>
+      <div class="pulse-bar"></div>
+      <div class="period-row">
+        <div class="period-chip chip-cyan" id="chip-cyan">CYAN PHASE</div>
+        <div class="period-chip chip-magenta" id="chip-magenta">MAGENTA PHASE</div>
+      </div>
+    </div>
+
+    <!-- Bridge Properties -->
+    <div class="panel">
+      <h2>Bridge Properties</h2>
+      <div class="prop-row">
+        <span>2 + 3 + 32</span><span class="val">= 37</span>
+      </div>
+      <div class="prop-row">
+        <span>37 mod 37</span><span class="val">= 0 ✓</span>
+      </div>
+      <div class="prop-row">
+        <span>77 mod 37</span><span class="val">= 3</span>
+      </div>
+      <div class="prop-row">
+        <span>28 × 2 = 56, DR</span><span class="val">= 2</span>
+      </div>
+      <div class="prop-row">
+        <span>28 × 3 = 84, DR</span><span class="val">= 3</span>
+      </div>
+      <div class="prop-row">
+        <span>28 × 7 = 196, DR</span><span class="val">= 7</span>
+      </div>
+      <div class="prop-row" style="margin-top:0.3rem; border-top:1px solid #1c2a3a; padding-top:0.4rem;">
+        <span>Period class</span><span class="val" style="color:#55ff99">Period-2</span>
+      </div>
+      <div class="prop-row">
+        <span>Hub residue</span><span class="val">28</span>
+      </div>
+      <div class="zero-sum-anim" id="zs-anim"><span>2 + 3 + 32 = 37</span></div>
+    </div>
+
+    <!-- Named Cycles -->
+    <div class="panel">
+      <h2>Sovereign Cycles</h2>
+      <div class="prop-row"><span>IDENTITY_BRIDGE</span><span class="val">[1, 8, 28]</span></div>
+      <div class="prop-row"><span>DECADE_SEVEN</span><span class="val">[2, 7, 28]</span></div>
+      <div class="prop-row"><span>FOURTEEN_DARK</span><span class="val">[14, 28, 32]</span></div>
+      <div class="prop-row"><span>THIRTYFOUR_MIRROR</span><span class="val">[12, 28, 34]</span></div>
+      <div class="prop-row" style="margin-top:0.3rem; border-top:1px solid #1c2a3a; padding-top:0.4rem;">
+        <span>Hub volume</span><span class="val">30.833</span>
+      </div>
+      <div class="prop-row">
+        <span>Hub surface</span><span class="val">200.92</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer-note">
+  Copyright &copy; 2026 Michael Warren Song &nbsp;&middot;&nbsp; All Rights Reserved &nbsp;&middot;&nbsp;
+  Texas Uniform Trade Secrets Act &nbsp;&middot;&nbsp; Title 17 U.S.C.
+</div>
+
+<script>
+const canvas = document.getElementById('hub');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width  = rect.width;
+  canvas.height = rect.width;
+}
+resize();
+window.addEventListener('resize', () => { resize(); });
+
+// Nodes
+const NODE = {
+  HUB:      { label: '28', sub: 'COMMON BLAZING HUB', color: '#ffe080', r: 38 },
+  IDENTITY: { label: '[1,8,28]', sub: 'IDENTITY_BRIDGE', color: '#bb88ff', r: 26 },
+  DECADE:   { label: '[2,7,28]', sub: 'DECADE_SEVEN', color: '#7be6ff', r: 26 },
+  FOURTEEN: { label: '[14,28,32]', sub: 'FOURTEEN_DARK', color: '#55dd88', r: 26 },
+};
+
+// Period-2 chip animation
+let chipPhase = 0;
+setInterval(() => {
+  chipPhase = 1 - chipPhase;
+  document.getElementById('chip-cyan').style.opacity    = chipPhase === 0 ? '1' : '0.3';
+  document.getElementById('chip-magenta').style.opacity = chipPhase === 1 ? '1' : '0.3';
+}, 1200);
+
+// Zero-sum animation
+const zsStates = [
+  '2 + 3 + 32 = 37',
+  '37 mod 37 = 0',
+  'DR[2] + DR[3] + DR[5] = 10',
+  'DR(10) = 1  →  Period-2',
+];
+let zsIdx = 0;
+const zsEl = document.getElementById('zs-anim').querySelector('span');
+setInterval(() => {
+  zsIdx = (zsIdx + 1) % zsStates.length;
+  zsEl.textContent = zsStates[zsIdx];
+}, 2200);
+
+let t = 0;
+
+function draw() {
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // Dark background
+  ctx.fillStyle = '#08111c';
+  ctx.fillRect(0, 0, W, H);
+
+  // Node positions (fraction of W/H)
+  const hub = { x: W * 0.5,  y: H * 0.5  };
+  const idb = { x: W * 0.5,  y: H * 0.15 };  // IDENTITY top
+  const dec = { x: W * 0.16, y: H * 0.78 };  // DECADE left
+  const frt = { x: W * 0.84, y: H * 0.78 };  // FOURTEEN right
+
+  // Animated pulse along bridge edges
+  const pulse = (t % 1);
+
+  // Draw triangle edges first (background glow)
+  function glowEdge(a, b, colorA, colorB, alpha) {
+    const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+    grad.addColorStop(0, colorA + Math.round(alpha * 255).toString(16).padStart(2,'0'));
+    grad.addColorStop(1, colorB + Math.round(alpha * 255).toString(16).padStart(2,'0'));
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+  }
+
+  glowEdge(idb, dec, '#bb88ff', '#7be6ff', 0.55);
+  glowEdge(dec, frt, '#7be6ff', '#55dd88', 0.55);
+  glowEdge(frt, idb, '#55dd88', '#bb88ff', 0.55);
+
+  // Hub spokes
+  glowEdge(hub, idb, '#ffe080', '#bb88ff', 0.35);
+  glowEdge(hub, dec, '#ffe080', '#7be6ff', 0.35);
+  glowEdge(hub, frt, '#ffe080', '#55dd88', 0.35);
+
+  // Animated seam [2,3,32] bridge — dec → frt with bright pulse
+  function drawSeam(a, b) {
+    // Bright base
+    const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+    grad.addColorStop(0, '#7be6ffcc');
+    grad.addColorStop(0.5, '#ffffff88');
+    grad.addColorStop(1, '#55dd88cc');
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    // Moving particle on seam
+    const px = a.x + (b.x - a.x) * pulse;
+    const py = a.y + (b.y - a.y) * pulse;
+    const glow = ctx.createRadialGradient(px, py, 0, px, py, 14);
+    glow.addColorStop(0, '#ffffffcc');
+    glow.addColorStop(0.4, '#7be6ff99');
+    glow.addColorStop(1, 'transparent');
+    ctx.beginPath();
+    ctx.arc(px, py, 14, 0, Math.PI * 2);
+    ctx.fillStyle = glow;
+    ctx.fill();
+  }
+  drawSeam(dec, frt);
+
+  // Small bridge annotations along seam
+  const mid = { x: (dec.x + frt.x) / 2, y: (dec.y + frt.y) / 2 };
+  ctx.font = `${Math.round(W * 0.028)}px Courier New`;
+  ctx.fillStyle = '#ffffffbb';
+  ctx.textAlign = 'center';
+  ctx.fillText('TWO_THREE_SEAM', mid.x, mid.y - W * 0.04);
+  ctx.font = `${Math.round(W * 0.022)}px Courier New`;
+  ctx.fillStyle = '#88bbdd99';
+  ctx.fillText('[2 · 3 · 32]  →  37 ≡ 0 mod 37', mid.x, mid.y - W * 0.022);
+
+  // Draw nodes
+  function drawNode(pos, node) {
+    const R = node.r * (W / 600);
+    // Glow
+    const g = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, R * 2.5);
+    g.addColorStop(0, node.color + '55');
+    g.addColorStop(1, 'transparent');
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, R * 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = g;
+    ctx.fill();
+    // Ring
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, R, 0, Math.PI * 2);
+    ctx.strokeStyle = node.color + 'cc';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    // Fill
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, R, 0, Math.PI * 2);
+    ctx.fillStyle = '#060a10dd';
+    ctx.fill();
+    // Label
+    ctx.font = `bold ${Math.round(W * 0.032)}px Courier New`;
+    ctx.fillStyle = node.color;
+    ctx.textAlign = 'center';
+    ctx.fillText(node.label, pos.x, pos.y + W * 0.012);
+    // Sub
+    ctx.font = `${Math.round(W * 0.020)}px Courier New`;
+    ctx.fillStyle = node.color + '99';
+    ctx.fillText(node.sub, pos.x, pos.y + W * 0.048);
+  }
+
+  drawNode(hub, NODE.HUB);
+  drawNode(idb, NODE.IDENTITY);
+  drawNode(dec, NODE.DECADE);
+  drawNode(frt, NODE.FOURTEEN);
+
+  // Bridge members floating labels
+  function bridgeLabel(pos, val, dr, col) {
+    const bx = pos.x, by = pos.y - NODE.FOURTEEN.r * (W / 600) - W * 0.07;
+    ctx.font = `bold ${Math.round(W * 0.028)}px Courier New`;
+    ctx.fillStyle = col;
+    ctx.textAlign = 'center';
+    ctx.fillText(val, bx, by);
+    ctx.font = `${Math.round(W * 0.019)}px Courier New`;
+    ctx.fillStyle = col + '99';
+    ctx.fillText('DR=' + dr, bx, by + W * 0.028);
+  }
+  bridgeLabel(dec, '2', '2', '#7be6ff');
+  bridgeLabel(frt, '32', '5', '#55dd88');
+  // 3 label above hub
+  const threeLabelY = hub.y - NODE.HUB.r * (W / 600) - W * 0.06;
+  ctx.font = `bold ${Math.round(W * 0.028)}px Courier New`;
+  ctx.fillStyle = '#ff9f40';
+  ctx.textAlign = 'center';
+  ctx.fillText('3', hub.x + W * 0.12, threeLabelY);
+  ctx.font = `${Math.round(W * 0.019)}px Courier New`;
+  ctx.fillStyle = '#ff9f4099';
+  ctx.fillText('DR=3  (77 mod 37)', hub.x + W * 0.12, threeLabelY + W * 0.028);
+
+  // Period-2 ring around hub — pulsing
+  const ringAlpha = 0.25 + 0.2 * Math.sin(t * Math.PI * 2 * 0.8);
+  const ringR = NODE.HUB.r * (W / 600) * 2.8;
+  ctx.beginPath();
+  ctx.arc(hub.x, hub.y, ringR, 0, Math.PI * 2);
+  ctx.strokeStyle = `rgba(255,224,128,${ringAlpha})`;
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([8, 8]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  t += 0.005;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

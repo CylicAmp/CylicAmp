@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CylicAmp — 1/137 Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0a0f; color: #e0e0e0; font-family: monospace; padding: 16px; }
+  h1 { color: #c8a84b; font-size: 1.2em; text-align: center; padding: 16px 0 4px; letter-spacing: 2px; }
+  h2 { color: #7eb8c9; font-size: 0.9em; letter-spacing: 1px; margin: 20px 0 8px; border-bottom: 1px solid #222; padding-bottom: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width:600px){ .grid { grid-template-columns: 1fr; } }
+  .card { background: #111118; border: 1px solid #222; border-radius: 6px; padding: 14px; }
+  .card h3 { color: #a78bfa; font-size: 0.8em; margin-bottom: 10px; letter-spacing: 1px; }
+  .seq { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0; }
+  .cell { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+          border-radius: 4px; font-size: 0.85em; font-weight: bold; cursor: default; }
+  .dr1{background:#1a2a1a;color:#4ade80}
+  .dr2{background:#1a1a2a;color:#60a5fa}
+  .dr3{background:#2a1a1a;color:#f87171}
+  .dr4{background:#2a2a1a;color:#fbbf24}
+  .dr5{background:#1a2a2a;color:#34d399}
+  .dr6{background:#2a1a2a;color:#e879f9}
+  .dr7{background:#1a1a1a;color:#94a3b8}
+  .dr8{background:#2a1e1a;color:#fb923c}
+  .dr9{background:#2a1a1a;color:#ff6b6b;border:1px solid #ff6b6b44}
+  .stat { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #1a1a1a; font-size: 0.8em; }
+  .stat span:last-child { color: #c8a84b; }
+  input[type=number] { background: #1a1a2a; border: 1px solid #333; color: #e0e0e0;
+                       padding: 8px; border-radius: 4px; font-family: monospace; width: 100%; font-size: 1em; }
+  button { background: #3730a3; color: #e0e0e0; border: none; padding: 8px 16px;
+           border-radius: 4px; cursor: pointer; font-family: monospace; margin-top: 8px; width: 100%; font-size: 0.9em; }
+  button:hover { background: #4338ca; }
+  .result { margin-top: 10px; padding: 10px; background: #0d0d15; border-radius: 4px; font-size: 0.85em; line-height: 1.8; }
+  .gold { color: #c8a84b; }
+  .blue { color: #60a5fa; }
+  .red  { color: #f87171; }
+  .green{ color: #4ade80; }
+  .anchor { color: #ff6b6b; font-weight: bold; }
+  .matrix { display: grid; grid-template-columns: repeat(9, 1fr); gap: 2px; margin-top: 8px; }
+  .mcell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+           border-radius: 3px; font-size: 0.7em; font-weight: bold; }
+  .offset-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .label { font-size: 0.75em; color: #666; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<h1>⬡ CylicAmp — 1/137 Framework</h1>
+
+<div class="grid">
+
+  <!-- DR CALCULATOR -->
+  <div class="card">
+    <h3>▸ DIGITAL ROOT CALCULATOR</h3>
+    <input type="number" id="drInput" placeholder="Enter any number" oninput="calcDR()">
+    <div class="result" id="drResult">—</div>
+  </div>
+
+  <!-- SOVEREIGN ANCHORS -->
+  <div class="card">
+    <h3>▸ SOVEREIGN ANCHORS — 1/137</h3>
+    <div class="stat"><span>Modulus</span><span>37</span></div>
+    <div class="stat"><span>Multiplier</span><span>137</span></div>
+    <div class="stat"><span>Residue (137 mod 37)</span><span>26</span></div>
+    <div class="stat"><span>Order of 26 in F₃₇</span><span>3</span></div>
+    <div style="margin-top:8px"></div>
+    <div class="stat"><span>Anchors {4,9,25,30}</span><span class="gold">all QR mod 37</span></div>
+    <div class="stat"><span>Targets {3,12,21,30}</span><span class="gold">all QR mod 37</span></div>
+    <div class="stat"><span>Fixed point</span><span>30</span></div>
+    <div class="stat"><span>Pivot (5)</span><span class="red">non-residue</span></div>
+  </div>
+
+  <!-- FIBONACCI DR SEQUENCE -->
+  <div class="card">
+    <h3>▸ FIBONACCI DR — PERIOD 24</h3>
+    <div class="label">F₀=0, F₁=1 — Pisano π(9)=24</div>
+    <div class="seq" id="fibSeq"></div>
+    <div class="stat" style="margin-top:8px"><span>9-Anchors at</span><span class="anchor">0, 12</span></div>
+    <div class="stat"><span>Trinity {3,6,9} density</span><span>8/24 = 33%</span></div>
+    <div class="stat"><span>Period confirmed</span><span class="green">✓ 24</span></div>
+  </div>
+
+  <!-- LUCAS DR SEQUENCE -->
+  <div class="card">
+    <h3>▸ LUCAS DR — PERIOD 24</h3>
+    <div class="label">L₀=2, L₁=1 — minimal period 24</div>
+    <div class="seq" id="lucasSeq"></div>
+    <div class="stat" style="margin-top:8px"><span>9-Anchors at</span><span class="anchor">6, 18</span></div>
+    <div class="stat"><span>Trinity {3,6,9} density</span><span>8/24 = 33%</span></div>
+    <div class="stat"><span>9-anchor offset vs Fib</span><span class="gold">6 = half-period/2</span></div>
+  </div>
+
+  <!-- SYMMETRY COMPARISON -->
+  <div class="card">
+    <h3>▸ FIB vs LUCAS SYMMETRY</h3>
+    <div class="label">Element-wise alignment over period 24</div>
+    <div class="seq" id="matchSeq"></div>
+    <div class="result" id="matchStats"></div>
+    <div style="margin-top:8px;font-size:0.75em;color:#666">
+      Gold = match &nbsp;|&nbsp; Dark = mismatch
+    </div>
+  </div>
+
+  <!-- LAW OF 12 -->
+  <div class="card">
+    <h3>▸ LAW OF 12</h3>
+    <div class="label">All multiples of 12 → DR in {3,6,9}</div>
+    <div class="seq" id="law12"></div>
+    <div class="stat" style="margin-top:8px"><span>3×6×9×12</span><span>1944 → DR=<span class="anchor">9</span></span></div>
+    <div class="stat"><span>DR=3 class</span><span>{12,21,30,39,48}</span></div>
+    <div class="stat"><span>12×4=48</span><span>DR=<span class="anchor">3</span></span></div>
+  </div>
+
+  <!-- 9×9 SOVEREIGN MATRIX -->
+  <div class="card" style="grid-column: span 2">
+    <h3>▸ 9×9 SOVEREIGN MATRIX (DR form)</h3>
+    <div class="label">Spine = DR(2r) &nbsp;|&nbsp; Outer = DR(r×c) &nbsp;|&nbsp; H ≈ 3.102 bits</div>
+    <div class="matrix" id="matrix"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:0.75em">
+      <span class="dr3" style="padding:2px 6px;border-radius:3px">DR 3,6,9 → 13/81</span>
+      <span class="dr1" style="padding:2px 6px;border-radius:3px">DR 1,2,4,5,7,8 → 7/81</span>
+      <span style="color:#666">Mirror: M[r,c] = M[r,10-c]</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function dr(n) {
+  if (n === 0) return 9;
+  n = Math.abs(n);
+  return ((n - 1) % 9) + 1;
+}
+
+function drClass(v) { return 'cell dr' + v; }
+
+// DR Calculator
+function calcDR() {
+  const v = parseInt(document.getElementById('drInput').value);
+  if (isNaN(v)) { document.getElementById('drResult').innerHTML = '—'; return; }
+  const d = dr(v);
+  const ds = String(Math.abs(v)).split('').reduce((a,c)=>a+parseInt(c),0);
+  document.getElementById('drResult').innerHTML =
+    `<span class="gold">${v}</span> → digit sum <span class="blue">${ds}</span> → DR = <span class="anchor" style="font-size:1.4em">${d}</span>
+    <br><br>
+    <span style="color:#666">QR mod 37: </span><span class="${(v*v)%37 !== v%37 ? 'green':'gold'}">${isQR37(Math.abs(v)%37) ? '✓ yes' : '✗ no'}</span>
+    &nbsp;&nbsp;<span style="color:#666">Trinity: </span><span class="${[3,6,9].includes(d)?'anchor':'blue'}">${[3,6,9].includes(d)?'yes':'no'}</span>`;
+}
+
+const QR37 = new Set();
+for (let n=0; n<37; n++) QR37.add((n*n)%37);
+function isQR37(n) { return QR37.has(n%37); }
+
+// Fibonacci mod 9
+function fibMod9(n) {
+  if (n===0) return 0;
+  if (n===1) return 1;
+  let a=0,b=1;
+  for (let i=2;i<=n;i++){[a,b]=[b,(a+b)%9];}
+  return b;
+}
+const FIB_DR = Array.from({length:24},(_,i)=>{const v=fibMod9(i);return v===0?9:v;});
+
+// Lucas mod 9
+function lucasMod9(n) {
+  if (n===0) return 2;
+  if (n===1) return 1;
+  let a=2,b=1;
+  for (let i=2;i<=n;i++){[a,b]=[b,(a+b)%9];}
+  return b;
+}
+const LUCAS_DR = Array.from({length:24},(_,i)=>{const v=lucasMod9(i);return v===0?9:v;});
+
+// Render sequences
+function renderSeq(id, arr, highlight=[]) {
+  const el = document.getElementById(id);
+  el.innerHTML = arr.map((v,i) =>
+    `<div class="${drClass(v)}" title="pos ${i} = ${v}" style="${highlight.includes(i)?'border:2px solid #c8a84b':''}">
+      ${v}
+    </div>`
+  ).join('');
+}
+
+renderSeq('fibSeq', FIB_DR, [0,12]);
+renderSeq('lucasSeq', LUCAS_DR, [6,18]);
+
+// Symmetry comparison
+const matchEl = document.getElementById('matchSeq');
+let matches = 0, matchPositions = [];
+FIB_DR.forEach((v,i) => {
+  const same = v === LUCAS_DR[i];
+  if (same) { matches++; matchPositions.push(i); }
+  matchEl.innerHTML += `<div class="cell" style="background:${same?'#2a2a00':'#1a1a1a'};color:${same?'#c8a84b':'#444'};border:1px solid ${same?'#c8a84b33':'#222'}" title="pos ${i}: F=${v} L=${LUCAS_DR[i]}">${i}</div>`;
+});
+document.getElementById('matchStats').innerHTML =
+  `<span class="gold">Direct matches: ${matches}/24</span> at positions [${matchPositions.join(', ')}]
+  <br>Identity: Lₙ = F_{n-1} + F_{n+1} (mod 9) — shared period, distinct phase`;
+
+// Law of 12
+const law12El = document.getElementById('law12');
+for (let n=12; n<=96; n+=12) {
+  const d = dr(n);
+  law12El.innerHTML += `<div class="${drClass(d)}" title="${n}">${d}</div>`;
+}
+
+// 9×9 Sovereign Matrix
+const matEl = document.getElementById('matrix');
+for (let r=1; r<=9; r++) {
+  for (let c=1; c<=9; c++) {
+    let val;
+    if (c===5) val = dr(2*r);
+    else val = dr(r * (c<=4 ? c : 10-c));
+    matEl.innerHTML += `<div class="mcell ${drClass(val)}" title="r${r}×c${c}=${val}">${val}</div>`;
+  }
+}
+</script>
+</body>
+</html>
