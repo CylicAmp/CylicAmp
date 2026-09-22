@@ -1,0 +1,128 @@
+DANGLING THEOREM CITATIONS
+======================================================================
+
+Theorem numbers cited in the text of committed files that have NO
+corresponding theorem file anywhere in the repository.
+
+Checked against ALL ELEVEN branch histories. These files were never
+created in any commit on any branch -- `git log --all --diff-filter=A`
+returns zero additions for every one of them. They were not deleted.
+INDEX.md agrees: it has rows for 381 and 422 and nothing between.
+
+numbered theorem files present : 291  (range 58-430)
+distinct T-numbers cited       : 248
+cited with no file             : 46  (19% of citations)
+
+THE DANGLING NUMBERS
+  isolated : 73 79 81 82 83 84
+  block    : 382-421  (forty consecutive)
+
+FILES MAKING DANGLING CITATIONS (count each)
+  8    math/theorems/theorem_237_universal_scope_81_149.py
+  6    math/theorems/ratio_177_133_identity.py
+  6    math/theorems/twin_gap_dr_chain.py
+  5    math/theorems/fvk_gamma_extension.py
+  4    math/theorems/nines_complement_sa_h.py
+  4    math/theorems/shell_buckling_gf37.py
+  4    math/theorems/unified_field_architecture.py
+  4    math/theorems/all_prime_grids_coset.py
+  4    math/theorems/all_prime_grids_full.py
+  4    math/theorems/seed_orbit_convergence.py
+  4    math/theorems/chi3_twin_prime_character.py
+  3    math/theorems/connection_map.py
+  3    math/theorems/penrose_tiktok_gf37.py
+  3    math/theorems/prime_sum_coset_sequence.py
+  3    math/theorems/twin_prime_pipe.py
+  3    math/theorems/dhananjaya_prana_engine.py
+  2    math/theorems/theorem_429_transversal_triple_partitions_gf37.py
+  2    math/theorems/twin_prime_consolidation.py
+  2    math/theorems/twin_prime_dr_convergence.py
+  2    math/theorems/cyclic_permutation_coset.py
+  2    math/theorems/heartbeat_6step_chambers.py
+  2    math/theorems/spectral_embedding_gf37.py
+  2    math/theorems/sigma3_eisenstein_gf37.py
+  2    math/theorems/theorem_423_data_pipeline_correspondence_grade_gf37.py
+  2    math/theorems/theorem_424_rewrite_certificate_ledger_gf37.py
+  2    math/theorems/twin_prime_dr_pair.py
+  2    math/theorems/selberg_maass_montgomery.py
+  1    math/theorems/mws_framework_verified.py
+  1    math/theorems/mws_pure_math_extract.py
+  1    math/theorems/multi_layer_obstruction_gf37.py
+  1    math/theorems/ghost_kervaire_chain_gf37.py
+  1    math/theorems/kervaire_addend_chain_gf37.py
+  1    math/theorems/mersenne_seam_kervaire_gf37.py
+  1    math/theorems/sg_exponent_doubling_gf37.py
+  1    math/theorems/coset_step_alignment.py
+  1    math/theorems/period_999_2997.py
+  1    math/theorems/reversal_ladder_2357.py
+  1    math/theorems/theorem_278_twin_prime_structure_gf37.py
+  1    math/theorems/decimal_trinity.py
+  1    math/theorems/theorem_359_length_vs_digital_root.py
+  1    math/theorems/three_block_ladder.py
+  1    math/theorems/prime_ap_imaginary_unit.py
+  1    math/theorems/dr_addition_table.py
+  1    math/theorems/reversal_differences.py
+  1    math/theorems/theorem_311_triad_lock_and_subgrid_map_gf37.py
+  1    math/theorems/zero_ground_decimal.py
+  1    math/theorems/mirror_seam_antipode.py
+  1    math/theorems/hydrogen_orbital_gf37.py
+  1    math/theorems/consecutive_digit_triples.py
+  1    math/theorems/fibonacci_mathieu_gf37.py
+  1    math/theorems/ramanujan_pi_gf37.py
+  1    math/theorems/three_tier_phase_engine.py
+  1    math/theorems/torus_animation_137map.py
+  1    math/theorems/repunit_square_998001.py
+  1    math/theorems/pinn_rt_phase_field.py
+  1    math/theorems/drift_loeschian_delta2.py
+  1    math/theorems/theorem_258_rule30_mersenne_gf37.py
+  1    math/theorems/theorem_262_e8_theta_mod37.py
+  1    math/theorems/ramanujan_tau_gf37.py
+  1    math/theorems/theorem_336_twin_prime_orbit_alignment_null_gf37.py
+
+EVERY DANGLING NUMBER AND WHO CITES IT
+  T73   mws_framework_verified.py, mws_pure_math_extract.py
+  T79   connection_map.py, multi_layer_obstruction_gf37.py
+  T81   connection_map.py, ghost_kervaire_chain_gf37.py, kervaire_addend_chain_gf37.py
+  T82   connection_map.py
+  T83   mersenne_seam_kervaire_gf37.py
+  T84   sg_exponent_doubling_gf37.py
+  T382  coset_step_alignment.py, nines_complement_sa_h.py, penrose_tiktok_gf37.py, shell_buckling_gf37.py, theorem_237_universal_scope_81_149.py, theorem_429_transversal_triple_partitions_gf37.py, twin_prime_consolidation.py, unified_field_architecture.py
+  T383  nines_complement_sa_h.py, period_999_2997.py, shell_buckling_gf37.py
+  T384  penrose_tiktok_gf37.py, reversal_ladder_2357.py
+  T385  theorem_278_twin_prime_structure_gf37.py, twin_prime_consolidation.py
+  T386  penrose_tiktok_gf37.py, ratio_177_133_identity.py, shell_buckling_gf37.py, theorem_237_universal_scope_81_149.py, theorem_429_transversal_triple_partitions_gf37.py, twin_gap_dr_chain.py, unified_field_architecture.py
+  T387  all_prime_grids_coset.py, fvk_gamma_extension.py, shell_buckling_gf37.py, theorem_237_universal_scope_81_149.py, unified_field_architecture.py
+  T388  prime_sum_coset_sequence.py, theorem_237_universal_scope_81_149.py, twin_gap_dr_chain.py, unified_field_architecture.py
+  T389  decimal_trinity.py, nines_complement_sa_h.py, twin_gap_dr_chain.py
+  T390  nines_complement_sa_h.py, theorem_359_length_vs_digital_root.py, twin_gap_dr_chain.py
+  T391  fvk_gamma_extension.py, prime_sum_coset_sequence.py, ratio_177_133_identity.py, three_block_ladder.py
+  T392  prime_sum_coset_sequence.py, ratio_177_133_identity.py, theorem_237_universal_scope_81_149.py, twin_gap_dr_chain.py, twin_prime_dr_convergence.py
+  T393  fvk_gamma_extension.py, prime_ap_imaginary_unit.py
+  T394  ratio_177_133_identity.py, twin_prime_dr_convergence.py
+  T395  ratio_177_133_identity.py, twin_gap_dr_chain.py
+  T396  all_prime_grids_coset.py, fvk_gamma_extension.py, ratio_177_133_identity.py, theorem_237_universal_scope_81_149.py
+  T397  dr_addition_table.py, theorem_237_universal_scope_81_149.py
+  T398  reversal_differences.py, theorem_311_triad_lock_and_subgrid_map_gf37.py
+  T399  zero_ground_decimal.py
+  T400  all_prime_grids_coset.py, fvk_gamma_extension.py, theorem_237_universal_scope_81_149.py
+  T401  all_prime_grids_coset.py, all_prime_grids_full.py, cyclic_permutation_coset.py
+  T402  all_prime_grids_full.py, mirror_seam_antipode.py
+  T403  all_prime_grids_full.py, cyclic_permutation_coset.py
+  T404  hydrogen_orbital_gf37.py, seed_orbit_convergence.py
+  T405  consecutive_digit_triples.py, twin_prime_pipe.py
+  T406  fibonacci_mathieu_gf37.py, seed_orbit_convergence.py
+  T407  ramanujan_pi_gf37.py
+  T408  all_prime_grids_full.py, dhananjaya_prana_engine.py, heartbeat_6step_chambers.py
+  T409  chi3_twin_prime_character.py, dhananjaya_prana_engine.py, heartbeat_6step_chambers.py, spectral_embedding_gf37.py, twin_prime_pipe.py
+  T410  chi3_twin_prime_character.py, twin_prime_pipe.py
+  T411  chi3_twin_prime_character.py, dhananjaya_prana_engine.py, seed_orbit_convergence.py
+  T412  seed_orbit_convergence.py
+  T413  three_tier_phase_engine.py
+  T414  torus_animation_137map.py
+  T415  repunit_square_998001.py
+  T416  chi3_twin_prime_character.py
+  T417  sigma3_eisenstein_gf37.py, spectral_embedding_gf37.py, theorem_423_data_pipeline_correspondence_grade_gf37.py, theorem_424_rewrite_certificate_ledger_gf37.py
+  T418  pinn_rt_phase_field.py, twin_prime_dr_pair.py
+  T419  drift_loeschian_delta2.py, selberg_maass_montgomery.py, sigma3_eisenstein_gf37.py, theorem_258_rule30_mersenne_gf37.py, theorem_262_e8_theta_mod37.py, theorem_423_data_pipeline_correspondence_grade_gf37.py, theorem_424_rewrite_certificate_ledger_gf37.py
+  T420  ramanujan_tau_gf37.py, selberg_maass_montgomery.py
+  T421  theorem_336_twin_prime_orbit_alignment_null_gf37.py, twin_prime_dr_pair.py
