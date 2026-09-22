@@ -355,6 +355,32 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   alone, so the 91 does not appear.
 
 
+  ADDED 2026-09-22 — SATURATION CHECKED AT k=7 AND k=8, AND THE SPLIT IS
+  STRUCTURAL.  The k=9 odd branch showed a census can keep finding new
+  shapes past any bound, so the k=7 and k=8 trees quoted above were tested
+  the same way.  Shapes first realized at or below B:
+
+      k=7, all n        177 @100k   203 @600k   209 @1.2M   209 @1.5M
+      k=8, 4|n           84 @200k    85 @600k    85 @1.2M    85 @2.0M
+      k=8, n = 2 mod 4   73 @200k    77 @600k    79 @1.2M    80 @1.5M
+      k=8, n odd        197 @200k   241 @600k   265 @1.2M   272 @1.5M
+
+  NO FILED CLAIM IS THREATENED.  k=7 is flat at 209, so every k=7 branch is
+  saturated.  At k=8 the only branch still open is 4|n, and it is flat at
+  85 from 400000 to 2000000 with ZERO shapes first appearing above 600000.
+  The two branches that keep growing, n odd and n = 2 mod 4, are exactly
+  the ones closed by PROOF (4 does not divide n, 2026-09-19), where the
+  shape count is irrelevant because no shape enumeration is relied on.
+
+  THE PATTERN IS STRUCTURAL, not luck.  Every EVEN branch tested saturates
+  and every ODD branch keeps climbing: k=8 odd 197->272 and still rising,
+  k=9 odd 83->101 and still rising, while k=8 4|n, k=9 4|n and k=9 4-not-n
+  all go flat and stay flat.  The reason is the one identified for k=9: an
+  odd n has no small even divisors to fill the prefix, so the nine smallest
+  divisors can carry many distinct primes, and a shape with t primes is not
+  realizable below roughly their product.  Even branches cap t and saturate
+  quickly; odd branches do not, so only they need the enumerator.
+
   ADDED 2026-09-21 — THE t = 6 LAYER IS PROVED EMPTY.  5927 of the 7180
   shapes, 82.5% of the built list, die to a size argument with NO search
   and NO prime bound.  This removes what was the weakest row outright.
