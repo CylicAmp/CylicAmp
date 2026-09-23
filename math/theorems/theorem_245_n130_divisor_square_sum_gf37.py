@@ -1034,9 +1034,38 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
       impossible for q >= 5.  So r = q', the next prime, and what is left is
           n = 10 + 10q^2 + q'^2,   q | 10 + q'^2,   q' | 10(1 + q^2).
 
-  That two-prime system has exactly ONE solution with 5 <= q < 3000 and
-  q' < 200000, namely (q, q') = (13, 17), n = 1989 = 3^2 * 13 * 17 -- which
-  fails the case's own hypothesis, since 9 | 1989.  So the case is empty as
+  ADDED 2026-09-23 -- THE SYSTEM SHARPENS, AND THERE ARE TWO SOLUTIONS.
+
+  q' | 10(1 + q^2) with q' prime and q' > q >= 5 gives q' does not divide 10,
+  so the condition is really
+
+      q' | q^2 + 1.
+
+  Hence q^2 = -1 (mod q'), so -1 is a quadratic residue mod q', so
+
+      q' = 1 (mod 4)   FORCED.
+
+  That also changes how the system is searched: enumerate the prime divisors
+  of q^2 + 1 rather than sweeping q'. Over q < 1000000 the full system
+
+      q' | q^2 + 1,   q | q'^2 + 10,   q < q' < q^2
+
+  has exactly TWO solutions, not one:
+
+      q = 13      q' = 17        n = 1989            = 3^2 * 13 * 17
+      q = 53197   q' = 69073     n = 33070287429
+
+  Both have q' = 1 (mod 4) as forced. BOTH FAIL THE CASE HYPOTHESIS: 9 | n in
+  each. The earlier line here said "exactly ONE solution with 5 <= q < 3000
+  and q' < 200000"; that was correct for its bounds and is superseded.
+
+  THE 9|n COINCIDENCE IS NOT A MECHANISM, which is worth recording because
+  two out of two looks like a law. 9 | n requires (q^2, q'^2) = (1,7), (7,1)
+  or (4,4) mod 9. Sweeping 4560 pairs with q' | q^2 + 1 and q < q' < q^2,
+  WITHOUT imposing q | q'^2 + 10, those classes occur 1548 times -- 33.9%,
+  which is the 1-in-3 the three admissible pairs out of nine predict. Two
+  solutions both landing there is p ~ 0.11, not a law. The case is still
+  open and still search-only.  So the case is empty as
   far as it has been searched and NOT proved empty: there is no congruence
   obstruction, because 1 + q^2 + q'^2 = 0 (mod 9) holds only for the residue
   pairs (1,7), (7,1), (4,4) and the others are admissible.
