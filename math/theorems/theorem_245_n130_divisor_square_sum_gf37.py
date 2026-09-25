@@ -99,6 +99,41 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           selection effect of the generator, which only sees prefixes
           dividing a smooth m -- not established structure.
 
+          THE BLIND SPOT SEARCHED (2026-09-25). The gap left by the smooth
+          generator is a solution whose prefix CONTAINS a large prime.
+          That case has a bound of its own: if q is inside the prefix then
+          q <= d_k <= sqrt(n) = sqrt(mq), hence
+
+              q <= m.
+
+          So it is a two-parameter sweep over smooth m and prime q <= m,
+          with n = m*q. For q not dividing m the divisors of n are just
+          divs(m) merged with q*divs(m), so the merge can be done lazily and
+          abandoned the moment the running sum passes n. Code:
+          tools/divisor_square_bigprime.py.
+
+          Two slices run, both returning ONLY the already-known 3039520:
+
+              m smooth <= 3.0e5, q in [47, 20000]   30 659 612 pairs   195s
+              m smooth <= 1.5e6, q in [47,  6000]   26 425 130 pairs   218s
+
+          57 million (m,q) pairs, one solution, and it is the one already on
+          the list. 3039520 = 19360 * 157 with d_31 = 880, so 157 sits well
+          inside its prefix.
+
+          THIS IS A SEARCH, AND ITS SHAPE IS NARROW. It covers only n of the
+          form (43-smooth) * (one prime in the stated window). It does NOT
+          cover q <= 43 -- which is why 148480 = 5120 * 29, whose 29 is also
+          inside the prefix, does not appear in these runs; it was found by
+          the earlier unrestricted version. Nor does it cover two large
+          primes, nor a large prime squared.
+
+          WHERE THE TWO REGIMES SIT. Of the eight known solutions, 148480
+          and 3039520 have their largest prime INSIDE the prefix; the four
+          at k=107 have it just OUTSIDE -- 78936002964 has d_107 = 194922
+          and largest prime 202481. That near-miss is worth noting and is
+          not explained.
+
           78936002964 IS NOT DIVISIBLE BY 5. It ends in 4. Its 216 divisors
           were built from the factorization, sorted, and the 107 smallest
           have squares summing to exactly n. So:
