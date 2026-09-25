@@ -71,6 +71,33 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
               41251514850  107     2 * 3^2 * 5^2 * 7^2 * 13 * 143909   2
               54116036100  107     2^2 * 3^2 * 5^2 * 7^3 * 175303      2
               78936002964  107     2^2 * 3^2 * 7^2 * 13 * 17 * 202481  0
+            1059758860356  107     2^2 * 3^2 * 7^2 * 19 * 43 * 735337  0
+
+          EIGHT SOLUTIONS KNOWN. 1059758860356 also has NO factor of 5,
+          so the 5 | n conjecture now has two independent counterexamples.
+
+          THE GENERATOR SATURATES IN BOTH DIRECTIONS. Smooth m from 2e6 to
+          6e7 -- a 30x range -- returns the same seven; widening the prime
+          set from {2..43} to {2..97} returns the same seven. By the
+          census-saturation rule (flat over at least a 3x range) it is
+          saturated for this method. That is NOT completeness: the
+          generator cannot see a solution whose prefix contains a prime too
+          large to divide a smooth m, which is exactly why 3039520 is
+          missing from its output and had to come from the sieve.
+
+          A GENERATOR BUG, RECORDED BECAUSE IT NEARLY GOT FILED. An earlier
+          version assumed n/m was prime whenever it was not smooth, built
+          the divisor list from that assumption, then checked the candidate
+          against its own wrong list. It reported dozens of solutions; a
+          sample of five was checked against real factorizations and FOUR
+          WERE FALSE. Only 1059758860356 survived. The fix is to factor
+          every candidate for real before accepting it, which costs little
+          because the m % s test already rejects almost everything: at
+          m <= 6e7 only 1077 candidates reach the factoring step.
+
+          k VALUES: 4, 11, 19, 31, and four at 107. The pile-up at 107 is a
+          selection effect of the generator, which only sees prefixes
+          dividing a smooth m -- not established structure.
 
           78936002964 IS NOT DIVISIBLE BY 5. It ends in 4. Its 216 divisors
           were built from the factorization, sorted, and the 107 smallest

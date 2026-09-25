@@ -1,39 +1,56 @@
-"""Blocked divisor sieve over m; every candidate verified against its own prefix."""
-import sys, time
+"""Smooth-m generator with CORRECT verification.
 
-def verify(n, kmax=400):
-    D=[]; s=0; d=1
-    lim=int(n**0.5)+1
-    while d<=lim and len(D)<kmax:
-        if n%d==0:
-            D.append(d); s+=d*d
-            if s==n: return len(D)
-            if s>n: return None
-        d+=1
+gen3 assumed n/m was prime when it was not smooth, built the divisor list
+from that assumption, and checked the candidate against its own wrong list.
+4 of 5 sampled hits were false. Here every candidate is factored for real
+and its true divisor list rebuilt before it is accepted."""
+import sys, time
+from sympy import factorint
+
+def smooth(primes, M):
+    out=[1]
+    for p in primes:
+        new=[]
+        for m in out:
+            v=m
+            while v<=M: new.append(v); v*=p
+        out=new
+    return sorted(out)
+
+def divisors_from(f):
+    d=[1]
+    for p,e in f.items(): d=[x*p**i for x in d for i in range(e+1)]
+    return sorted(d)
+
+def verify(n):
+    """ground truth: factor n, build all divisors, test every prefix"""
+    D=divisors_from(factorint(n))
+    s=0
+    for k,d in enumerate(D,1):
+        s+=d*d
+        if s==n: return k
+        if s>n: return None
     return None
 
-def search(M, block=100_000, verbose=True):
-    hits=[]; t=time.time()
-    lo=2
-    while lo<=M:
-        hi=min(lo+block, M+1)
-        divs=[[] for _ in range(hi-lo)]
-        for d in range(1, hi):
-            start=max(d, ((lo+d-1)//d)*d)
-            for m in range(start, hi, d):
-                divs[m-lo].append(d)
-        for i,D in enumerate(divs):
-            m=lo+i
-            s=0
-            for k,d in enumerate(D,1):
-                s+=d*d
-                if s<=m or s%m: continue
-                if verify(s): hits.append((s,k,m))
-        if verbose: print(f"   m<{hi}  ({time.time()-t:.0f}s)  hits so far {len(hits)}", flush=True)
-        lo=hi
+def run(primes, M, verbose=True):
+    t=time.time(); ms=smooth(primes,M)
+    if verbose: print(f"  {len(ms)} smooth m <= {M}", flush=True)
+    cand=0; hits=[]
+    for m in ms:
+        if m<2: continue
+        D=divisors_from(factorint(m))
+        s=0
+        for k,d in enumerate(D,1):
+            s+=d*d
+            if s<=m or s%m: continue
+            cand+=1
+            kk=verify(s)
+            if kk: hits.append((s,kk,m))
+    if verbose: print(f"  {cand} candidates factored, {len(set(hits))} verified  ({time.time()-t:.0f}s)")
     return sorted(set(hits))
 
 if __name__=="__main__":
     M=int(sys.argv[1])
-    for n,k,m in search(M):
-        print(f"  n = {n:>20}  k = {k:<4} from m = {m}")
+    P=[2,3,5,7,11,13,17,19,23,29,31,37,41,43]
+    for n,k,m in run(P,M):
+        print(f"  n = {n:>22}  k = {k:<5} m = {m}")
