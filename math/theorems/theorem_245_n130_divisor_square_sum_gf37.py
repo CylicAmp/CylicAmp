@@ -128,6 +128,37 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           the earlier unrestricted version. Nor does it cover two large
           primes, nor a large prime squared.
 
+          THE TWO REMAINING GAPS CLOSED AS SEARCHES (2026-09-25).
+
+          q <= 43 IS NOT A SEPARATE FIBER -- IT IS n FULLY SMOOTH. If the
+          extra prime is at most 43 then n has no large prime at all, so
+          the case is "enumerate 43-smooth n and test the prefix". Over
+          n <= 3e9 that returns EXACTLY the three already known:
+          130, 1860, 148480. 3039520 is correctly absent, since 157 > 43
+          makes it non-smooth. Code: tools/divisor_square_smooth_n.py.
+
+          TWO LARGE PRIMES: n = m*q1*q2, m smooth, 47 <= q1 <= q2 prime
+          (q1 = q2 allowed, which covers a large prime squared). The
+          divisors are the four-way merge of A, q1A, q2A, q1q2A with
+          A = divs(m), done with a manual four-pointer merge and a
+          reachability prune -- the prefix can only use divisors below
+          sqrt(n), so a triple whose entire below-root divisor sum falls
+          short of n is skipped untested. Two slices:
+
+              m <=  5000, q in [47, 400]   2 854 272 triples   61s   none
+              m <= 60000, q in [47, 250]   5 068 765 triples  185s   none
+
+          7.9 million triples, ZERO solutions. Code:
+          tools/divisor_square_twoprime.py.
+
+          SO ALL FOUR SHAPES HAVE NOW BEEN SWEPT, none completely:
+              n smooth                       n <= 3e9        3 found
+              smooth * one prime, outside    m <= 6e7        7 found
+              smooth * one prime, inside     57M pairs       1 found
+              smooth * two primes            7.9M triples    0 found
+          Every one is a search certificate with the bounds above. No shape
+          is closed by proof, and nothing covers three or more large primes.
+
           WHERE THE TWO REGIMES SIT. Of the eight known solutions, 148480
           and 3039520 have their largest prime INSIDE the prefix; the four
           at k=107 have it just OUTSIDE -- 78936002964 has d_107 = 194922
