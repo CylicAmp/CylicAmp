@@ -5,14 +5,49 @@ Theorem 245: n = 130 — Unique Divisor-Square-Sum Solution (GF(37))
 PROBLEM:  Find all n ∈ ℕ such that the k smallest divisors d_1 < d_2 < ... < d_k
           satisfy  d_1² + d_2² + ... + d_k² = n.
 
-RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
-          It occurs at k = 4. No other k has any solution.
+RESULT:   n = 130 is the unique solution AT k = 4. The claim that it is
+          unique across ALL k is FALSE and is corrected below.
+
+CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
+          This file previously read "n = 130 is the UNIQUE solution across
+          ALL k >= 2 ... No other k has any solution", and reported that as
+          "verified computationally to n = 500 000 000". It is false. An
+          exhaustive search over EVERY k for n <= 3 000 000 returns three
+          solutions:
+
+              n =    130   k =  4    130 = 2 * 5 * 13
+              n =   1860   k = 11    1860 = 2^2 * 3 * 5 * 31
+              n = 148480   k = 19    148480 = 2^10 * 5 * 29
+
+          1860 = 1+4+9+16+25+36+100+144+225+400+900, over 1,2,3,4,5,6,10,
+          12,15,20,30. 148480 likewise over its nineteen smallest divisors.
+          Both are far below the claimed 5e8 verification bound.
+
+          WHY THEY WERE MISSED. The verification code in this file tests
+          specific k -- k=4, k=8 and so on -- and never swept k freely. The
+          phrase "across ALL k" was an extrapolation from the per-k sections,
+          which stop at k = 9. k = 11 and k = 19 were never examined.
+
+          WHY THEY SIT WHERE THEY DO. The two lemmas this file relies on fire
+          only on certain k: the parity lemma when 2 | k, the mod-3 lemma when
+          3 | k. For k = 11 and k = 19 neither divides, so both lemmas are
+          silent and nothing constrained those layers at all. The solutions
+          are exactly where the machinery says nothing.
+
+          WHAT SURVIVES. Every per-k proof in this file stands: k=2, k=3, k=6
+          impossible; k=4 has 130 alone; k=5 even, k=7 and k=8 with 4 not
+          dividing n impossible; the k=9 work below. None of those is touched.
+          What fails is only the global uniqueness sentence.
+
+          GF(37): 130 = 19 (CAS_EXT), 1860 = 10 (DECADE_ANCHOR),
+          148480 = 36 = -1 (NEG). The three solutions land in three
+          different orbits; no shared residue.
 
   130 = 1² + 2² + 5² + 10² = 1 + 4 + 25 + 100 = 130 ✓
   divisors of 130: [1, 2, 5, 10, 13, 26, 65, 130]
   130 = 2 × 5 × 13
 
-  Cross-k uniqueness (verified computationally to n = 500 000 000):
+  Per-k results (the cross-k uniqueness claim is retracted above):
     k=2: IMPOSSIBLE by proof (see below). Zero solutions for all n.
     k=3: IMPOSSIBLE by proof — PROVED 2026-09-19, see below. Not just n odd.
     k=4: EXACTLY ONE solution: n = 130 — PROVED 2026-09-19, see below.
@@ -1868,6 +1903,26 @@ def main():
         print("      -> WEAKEST ROW p < 300, on the 649 t=5 shapes.")
     else:
         print("      (shape file absent; enumeration check skipped)")
+
+    print("\n  CORRECTION 2026-09-25: the cross-k uniqueness claim was FALSE.")
+    def _divs(x):
+        d = []; i = 1
+        while i * i <= x:
+            if x % i == 0:
+                d.append(i)
+                if i != x // i: d.append(x // i)
+            i += 1
+        return sorted(d)
+    for _n, _k in ((130, 4), (1860, 11), (148480, 19)):
+        _D = _divs(_n)
+        assert sum(d * d for d in _D[:_k]) == _n, (_n, _k)
+        print("      n = %-7d k = %-3d smallest %d divisors sum of squares = n OK"
+              % (_n, _k, _k))
+    print("      130 is unique AT k=4 only. 1860 (k=11) and 148480 (k=19) are")
+    print("      both below the 5e8 bound this file claimed to have verified.")
+    print("      k=11 and k=19: neither 2|k nor 3|k, so the parity and mod-3")
+    print("      lemmas are both silent there. The solutions sit exactly where")
+    print("      the machinery says nothing.")
 
     print("\n  k=2,3,4,6 PROVED; k=5 even and k=8 with 4∤n proved; rest open.")
 
