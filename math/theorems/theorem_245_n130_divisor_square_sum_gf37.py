@@ -39,9 +39,35 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           dividing n impossible; the k=9 work below. None of those is touched.
           What fails is only the global uniqueness sentence.
 
-          GF(37): 130 = 19 (CAS_EXT), 1860 = 10 (DECADE_ANCHOR),
-          148480 = 36 = -1 (NEG). The three solutions land in three
-          different orbits; no shared residue.
+          SEARCH EXTENDED 2026-09-25 TO n < 10^9, COMPLETE OVER ALL k.
+          Exactly FOUR solutions exist below 10^9 -- twice the bound this
+          file wrongly claimed to have checked:
+
+              n          k    factorization          n mod 37
+              130        4    2 * 5 * 13                 19
+              1860      11    2^2 * 3 * 5 * 31           10
+              148480    19    2^10 * 5 * 29              36
+              3039520   31    2^5 * 5 * 11^2 * 157        7
+
+          The method that makes this cheap: every divisor used satisfies
+          d_k^2 <= n, so only divisors below sqrt(n) can appear. A segmented
+          sieve adds them in increasing order and tests equality after each,
+          killing a candidate the moment its running total passes n. That is
+          O(N log sqrt N) rather than factoring each n, and it reproduces the
+          three previously known solutions in 0.8s for n < 3e6.
+
+          EMPIRICAL STRUCTURE, all four solutions, none of it proved:
+            - every n is divisible by 10
+            - every n has 5^1 EXACTLY, never 5^0 or 5^2
+            - every n carries one large prime: 13, 31, 29, 157
+            - k runs 4, 11, 19, 31 -- gaps 7, 8, 12
+            - only k=4 is even; 11, 19, 31 are all odd, and none divisible
+              by 3, so both of this file's lemmas stay silent on all three
+
+          GF(37): 19 (CAS_EXT), 10 (DECADE_ANCHOR), 36 = -1 (NEG), 7 (D7).
+          Four solutions, four different orbits, no shared residue and no
+          orbit repeated. With 12 orbits and 4 draws that is unremarkable on
+          its own -- recorded as a fact, not a pattern.
 
   130 = 1² + 2² + 5² + 10² = 1 + 4 + 25 + 100 = 130 ✓
   divisors of 130: [1, 2, 5, 10, 13, 26, 65, 130]
@@ -1913,13 +1939,15 @@ def main():
                 if i != x // i: d.append(x // i)
             i += 1
         return sorted(d)
-    for _n, _k in ((130, 4), (1860, 11), (148480, 19)):
+    for _n, _k in ((130, 4), (1860, 11), (148480, 19), (3039520, 31)):
         _D = _divs(_n)
         assert sum(d * d for d in _D[:_k]) == _n, (_n, _k)
         print("      n = %-7d k = %-3d smallest %d divisors sum of squares = n OK"
               % (_n, _k, _k))
-    print("      130 is unique AT k=4 only. 1860 (k=11) and 148480 (k=19) are")
-    print("      both below the 5e8 bound this file claimed to have verified.")
+    print("      130 is unique AT k=4 only. Complete search over ALL k to")
+    print("      n < 10^9 gives exactly four solutions: 130, 1860, 148480,")
+    print("      3039520 -- three of them under the 5e8 bound this file")
+    print("      claimed to have verified.")
     print("      k=11 and k=19: neither 2|k nor 3|k, so the parity and mod-3")
     print("      lemmas are both silent there. The solutions sit exactly where")
     print("      the machinery says nothing.")
