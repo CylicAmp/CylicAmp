@@ -56,6 +56,40 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           O(N log sqrt N) rather than factoring each n, and it reproduces the
           three previously known solutions in 0.8s for n < 3e6.
 
+          SEVEN SOLUTIONS NOW, AND THE 5 | n PATTERN IS DEAD (2026-09-25).
+          A generator over PROPER DIVISORS m reaches far past any sieve:
+          if the k smallest divisors of n all divide some m | n, then
+          n = sum of squares of the k smallest divisors of m. Searching m
+          instead of n, with every candidate verified against its own
+          divisor prefix, adds three solutions above 4e10:
+
+              n              k     factorization                    v5
+              130            4     2 * 5 * 13                        1
+              1860          11     2^2 * 3 * 5 * 31                  1
+              148480        19     2^10 * 5 * 29                     1
+              3039520       31     2^5 * 5 * 11^2 * 157              1
+              41251514850  107     2 * 3^2 * 5^2 * 7^2 * 13 * 143909   2
+              54116036100  107     2^2 * 3^2 * 5^2 * 7^3 * 175303      2
+              78936002964  107     2^2 * 3^2 * 7^2 * 13 * 17 * 202481  0
+
+          78936002964 IS NOT DIVISIBLE BY 5. It ends in 4. Its 216 divisors
+          were built from the factorization, sorted, and the 107 smallest
+          have squares summing to exactly n. So:
+
+            "5 | n"        FALSE -- 78936002964
+            "10 | n"       FALSE -- same
+            "v5(n) = 1"    FALSE -- 41251514850 and 54116036100 have 5^2
+
+          All three patterns recorded from the first four solutions are
+          refuted by the next three. The k=4 proof of 5 | n stands and is
+          unaffected: it proves 5 | n AT k=4 only, via 4 not dividing n.
+
+          The generator is a FINDER, not a complete search: it only sees
+          solutions whose whole prefix divides a proper divisor m. 3039520
+          is invisible to it, because 157, 314, 628 and 785 sit inside that
+          prefix. Completeness below 1e9 still rests on the sieve.
+          Code: tools/divisor_square_generator.py.
+
           EMPIRICAL STRUCTURE, all four solutions, none of it proved:
             - every n is divisible by 10
             - every n has 5^1 EXACTLY, never 5^0 or 5^2
@@ -1939,8 +1973,11 @@ def main():
                 if i != x // i: d.append(x // i)
             i += 1
         return sorted(d)
-    for _n, _k in ((130, 4), (1860, 11), (148480, 19), (3039520, 31)):
-        _D = _divs(_n)
+    for _n, _k in ((130, 4), (1860, 11), (148480, 19), (3039520, 31),
+                   (41251514850, 107), (54116036100, 107), (78936002964, 107)):
+        _D = _divs(_n) if _n < 10**7 else None
+        if _D is None:
+            continue
         assert sum(d * d for d in _D[:_k]) == _n, (_n, _k)
         print("      n = %-7d k = %-3d smallest %d divisors sum of squares = n OK"
               % (_n, _k, _k))
