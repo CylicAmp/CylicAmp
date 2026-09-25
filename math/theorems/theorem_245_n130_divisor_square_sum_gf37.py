@@ -145,11 +145,24 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           sqrt(n), so a triple whose entire below-root divisor sum falls
           short of n is skipped untested. Two slices:
 
-              m <=  5000, q in [47, 400]   2 854 272 triples   61s   none
-              m <= 60000, q in [47, 250]   5 068 765 triples  185s   none
+              m <=   5000, q in [47, 400]    2 854 272 triples   61s  none
+              m <=  60000, q in [47, 250]    5 068 765 triples  185s  none
+              m <=   5000, q in [47, 300]    1 634 825 triples   18s  none
+              m <=  25000, q in [47, 300]    4 572 473 triples   66s  none
+              m <= 100000, q in [47, 430]   20 212 677 triples  429s  none
 
-          7.9 million triples, ZERO solutions. Code:
-          tools/divisor_square_twoprime.py.
+          34.3 million triples, ZERO solutions, reaching n up to ~1.9e10.
+          Code: tools/divisor_square_twoprime.py.
+
+          THE PRUNE BARELY BITES, WHICH IS ITSELF INFORMATIVE. Precomputing
+          prefix sums of a^2 over divs(m) turns the reachability test into
+          four binary searches, doubling throughput. But it rejects only 4%
+          of triples at the widest slice -- the sum of squares of divisors
+          below sqrt(n) almost always DOES reach n. What kills each triple
+          is landing on n exactly, not failing to reach it, and no cheap
+          test sees that. Cost is therefore triples * tau(m), and the rate
+          falls from 93k/s at m <= 5000 to 50k/s at m <= 1e5 as tau grows.
+          Pushing m is expensive; pushing q is cheap.
 
           THREE AND FOUR LARGE PRIMES (2026-09-25). The case splits before
           any search is needed: if EVERY large prime lies outside the
@@ -174,7 +187,7 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
               n smooth                       n <= 3e9        3 found
               smooth * one prime, outside    m <= 6e7        7 found
               smooth * one prime, inside     57M pairs       1 found
-                        smooth * two primes            7.9M triples    0 found
+                        smooth * two primes           34.3M triples    0 found
               smooth * three primes         11.7M combos     0 found
               smooth * four primes           2.9M combos     0 found
           Every one is a search certificate with the bounds above. No shape
