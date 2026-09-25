@@ -151,13 +151,35 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           7.9 million triples, ZERO solutions. Code:
           tools/divisor_square_twoprime.py.
 
+          THREE AND FOUR LARGE PRIMES (2026-09-25). The case splits before
+          any search is needed: if EVERY large prime lies outside the
+          prefix, the prefix divides m and the shape is already covered by
+          the smooth generator, which saturated. So the only new territory
+          has at least one large prime inside, and that one still obeys
+          q <= d_k <= sqrt(n).
+
+          Divisors of n = m * q1 * ... * qr are divs(m) times every subset
+          product of the q's -- 2^r sorted streams, merged lazily. The
+          reachability prune runs first: if the squares of all divisors
+          below sqrt(n) do not reach n, the merge is never started.
+
+              r = 3   m <= 3000, q in [47,150]    1 342 139 combos   44s
+              r = 3   m <= 9000, q in [47,200]   10 333 835 combos  418s
+              r = 4   m <= 4000, q in [47,130]    2 943 504 combos  209s
+
+          14.6 million combinations, ZERO solutions at r = 3 and r = 4.
+          Code: tools/divisor_square_multiprime.py.
+
           SO ALL FOUR SHAPES HAVE NOW BEEN SWEPT, none completely:
               n smooth                       n <= 3e9        3 found
               smooth * one prime, outside    m <= 6e7        7 found
               smooth * one prime, inside     57M pairs       1 found
-              smooth * two primes            7.9M triples    0 found
+                        smooth * two primes            7.9M triples    0 found
+              smooth * three primes         11.7M combos     0 found
+              smooth * four primes           2.9M combos     0 found
           Every one is a search certificate with the bounds above. No shape
-          is closed by proof, and nothing covers three or more large primes.
+          is closed by proof. All eight known solutions carry at most ONE
+          large prime; nothing with two or more has ever been found.
 
           WHERE THE TWO REGIMES SIT. Of the eight known solutions, 148480
           and 3039520 have their largest prime INSIDE the prefix; the four
