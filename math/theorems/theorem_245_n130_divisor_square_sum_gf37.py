@@ -122,7 +122,43 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           the generator. In all four the prefix is EXACTLY the proper divisors
           of m, with tau(m) = 108, d_107 = m/2, and n = m * p. So
               n = sigma_2(m) - m^2,    p = (sigma_2(m) - m^2) / m,
-          and k = tau(m) - 1 = 107. Why tau(m) = 108 recurs is not explained.
+          and k = tau(m) - 1 = 107.
+
+          WHY tau(m) = 108 (2026-09-26). The family is: prefix = all proper
+          divisors of m, n = m*p. It needs
+              (i)  m | sigma_2(m),
+              (ii) p = sigma_2(m)/m - m prime and p > m/2.
+          (ii) needs sum_{d|m} 1/d^2 > 3/2 against a ceiling of zeta(2) =
+          1.6449. Without 2 the ceiling is 1.234, without 3 it is 1.462, so
+          6 | m is forced. Searching every m = 0 mod 6 up to 2e7 gives
+          EXACTLY FIVE members:
+
+              m = 60 = 2^2 * 3 * 5                 tau =  12  -> n = 1860
+              m = 286650 = 2*3^2*5^2*7^2*13        tau = 108
+              m = 308700 = 2^2*3^2*5^2*7^3         tau = 108
+              m = 389844 = 2^2*3^2*7^2*13*17       tau = 108
+              m = 1441188 = 2^2*3^2*7^2*19*43      tau = 108
+
+          So 1860 belongs to the same family -- its prefix is the proper
+          divisors of 60 -- and 108 is not universal; the family has tau in
+          {12, 108}.
+
+          THE MECHANISM. sigma_2 is multiplicative, so (i) requires every
+          prime power of m to be supplied by sigma_2 of the other
+          components. 3^2 and 7^2 supply each other:
+              sigma_2(3^2) = 91   = 7 * 13
+              sigma_2(7^2) = 2451 = 3 * 19 * 43
+              sigma_2(2^2) = 21   = 3 * 7
+          Together 21 * 91 * 2451 = 3^2 * 7^2 * 13 * 19 * 43: the pair closes
+          and throws off 13, 19, 43 as the next primes to balance. That is
+          why 13, 17, 19 and 43 appear in the members. Three squares give
+          tau factor 3*3*3 = 27; closing the leftovers costs two first-power
+          primes (x2x2) or one cube (x4). 27 * 4 = 108.
+
+          SCOPE. This explains the four observed members and shows why the
+          smallest closed configurations built on 3^2 <-> 7^2 land on 108. It
+          does not prove every family member beyond 2e7 has tau 12 or 108.
+          Code: tools/divisor_square_proper_family.py.
 
           THE BLIND SPOT SEARCHED (2026-09-25). The gap left by the smooth
           generator is a solution whose prefix CONTAINS a large prime.
