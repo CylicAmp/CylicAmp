@@ -715,6 +715,22 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           show no odd square coprime to 6 is short by exactly a divisor of
           1435 -- a global statement of odd-perfect type. Open.
 
+          PROVED CASES of (i) s^2 | 1435 sigma_2(s^2):
+          * s = p^e (one prime): sigma_2(p^2e) = 1 (mod p), so p^2e | 1435,
+            impossible (1435 squarefree).
+          * s = p * r^b, 5 <= p < r, any b >= 1 (two primes, smaller one to
+            the first power). sigma_2(p^2) = (p^2+p+1)(p^2-p+1): coprime
+            (odd, difference 2p, p divides neither), each < (p+1)^2 < r^2.
+            So v_r(sigma_2(p^2)) <= 1, v_r(1435 sigma_2(p^2)) <= 2, forcing
+            b = 1 and r | 1435, i.e. r in {7, 41}. Then p^2 must divide
+            1435 sigma_2(r^2):  r = 7:  1435*2451    = 3*5*7*19*41*43,
+                                r = 41: 1435*2827443 = 3*5*7*41*547*1723,
+            both squarefree. Impossible.  (Brute check p < r < 2e4, a=b=1:
+            no solution.)
+          OPEN: s = p^a r^b with a >= 2 (larger prime may appear once:
+          p^2a | 1435 (r^2+r+1)(r^2-r+1) is not size-blocked), and three or
+          more primes.
+
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
                   233^2+1 = 2*5*61*89. They co-occur in all 24 members
