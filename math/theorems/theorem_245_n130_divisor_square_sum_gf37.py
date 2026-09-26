@@ -737,7 +737,7 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           v_p(sigma_2(r^2b)) <= w_p + v_p(2b+1), so (i) needs
               (A) 2a <= alpha + w_p + v_p(2b+1)
               (B) 2b <= beta  + w_r + v_r(2a+1).
-          b = 1: v_p(3) = 0, so w_p >= 2a - 1 >= 3 - alpha... i.e. w_p >= 2.
+          b = 1: v_p(3) = 0, so w_p >= 2a - alpha >= 3, i.e. r^(p-1) = 1 (mod p^3).
           b >= 2 and w_p = w_r = 1: p^(2a-2) | 2b+1 and r^(2b-2) | 2a+1 give
           2b+1 >= 5^(7^(2b-2) - 3): impossible.
           THEOREM C: any two-prime solution with a >= 2 has
