@@ -243,6 +243,35 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           that is evidence, not proof, that it loses nothing above it.
           Code: tools/divisor_square_family_fast.py.
 
+          CAP REMOVED (2026-09-26). The same fact covers every exponent and
+          every size: for q^e || m, q^e | sigma_2(m/q^e), since
+          sigma_2(q^e) = 1 (mod q). So a large prime of ANY size and ANY
+          exponent is read off a sigma_2 factorisation, never searched for.
+          For two large primes q1 < q2, each divides sigma_2 of the rest,
+          which leaves three cases: q2 | sigma_2(core); q1 | sigma_2(core)
+          and q2 | sigma_2(q1^e1); or neither divides sigma_2(core), making
+          them a mutual pair that depends only on themselves. Mutual pairs
+          are precomputed once: scanning all 12 032 primes q1 in
+          [250, 129099] finds NONE at M = 1e12.
+
+          The bound on what two primes >= 250 can add to sigma_2/m^2 is
+          (1 - 250^-2)^-2 ~ 1.000032; an earlier draft used 1.01, 300x
+          looser, and ran slower for it. Every member is divisible by 2 and
+          3, so the tree splits into independent subtrees at 2^a * 3^b and
+          runs on four cores.
+
+              m <= 1e12, primes < 250 any exponent, PLUS up to two primes
+              >= 250 of any size and any exponent:
+              469 roots, 125 790 130 nodes, 26 members, 310s
+
+          THE SAME 26 MEMBERS, identical as sets to the capped search. So at
+          1e12 no member has a prime >= 5000, and none has a prime >= 250
+          squared.
+
+          Still not covered: three or more primes >= 250 in m.
+          Code: tools/divisor_square_family_uncapped.py,
+                tools/divisor_square_family_parallel.py.
+
           THE BLIND SPOT SEARCHED (2026-09-25). The gap left by the smooth
           generator is a solution whose prefix CONTAINS a large prime.
           That case has a bound of its own: if q is inside the prefix then
