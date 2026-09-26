@@ -268,9 +268,48 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           1e12 no member has a prime >= 5000, and none has a prime >= 250
           squared.
 
-          Still not covered: three or more primes >= 250 in m.
           Code: tools/divisor_square_family_uncapped.py,
                 tools/divisor_square_family_parallel.py.
+
+          COMPLETE AT m <= 1e12 (2026-09-26): EXACTLY 26 MEMBERS.
+          No restriction remains on the size, exponent or number of large
+          primes. The argument:
+
+          (1) AT MOST FOUR PRIMES >= 250. A member's small-prime core c has
+              sigma_2(c)/c^2 > 1.5 / 1.000064, and every such c is >= 60
+              (6, 12, 18, 24, 30, 36, 42, 48, 54 all fall short). So the
+              large part is <= 1e12/60 = 1.67e10, and 250^5 > 1.67e10.
+
+          (2) REACHABLE PRIMES ARE READ OFF. Call a large prime reachable if
+              it divides sigma_2(c) times sigma_2 of large primes already
+              chosen. Reading them off recursively, any order, any exponent
+              that fits, finds every reachable set.
+
+          (3) UNREACHABLE PRIMES WOULD FORM A SELF-SUPPLYING CLUSTER. A large
+              prime not reachable from the core gets none of its power from
+              sigma_2(c) or from reachable primes, so all of q^e must divide
+              sigma_2 of the other unreachable ones -- a cluster independent
+              of the core. Exhaustive scans to 1.67e10:
+                  size 2:  12 032 primes q1 scanned      none
+                  size 3: 108 020 pairs (q1,q2) scanned  none
+                  size 4:   3 018 triples scanned        none
+              (size 4 needs exponent 1 throughout: 251^2*257*263*269 >
+              1.67e10.) So no member has an unreachable large prime.
+
+          By (1)-(3), recursive read-off to depth 4 is exhaustive. Result:
+
+              469 roots, 125 905 718 nodes, 26 members, 352s
+
+          IDENTICAL as a set to the two-prime search. The proper-divisor
+          family below m = 1e12 is therefore exactly these 26, without
+          qualification. Code: tools/divisor_square_family_complete.py,
+          tools/divisor_square_clusters.py.
+
+          A defect caught before it could matter: the first draft tested
+          "q in chosen" against a set of (prime, exponent) pairs, so the
+          test never fired and a prime could be chosen twice, giving
+          sigma_2(q)^2 where sigma_2(q^2) was meant. Fixed before the 1e12
+          run; both 1e10 runs returned the same 13.
 
           THE BLIND SPOT SEARCHED (2026-09-25). The gap left by the smooth
           generator is a solution whose prefix CONTAINS a large prime.
