@@ -614,6 +614,27 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           and a = 6 fit by size but no candidate has them to 1e14 (the
           other primes of m must also be supplied, which the bound omits).
 
+          a = 2 AND a = 6 AT v3 = 3, SEARCHED TO 1e16 (complete: core >= 108,
+          large part <= 9.3e13 < 1.667e14 cluster bound, depth 5 suffices;
+          tools/divisor_square_family_root.py, 137 885 485 nodes, 273s).
+          "Never occur" is FALSE as a general statement:
+            a = 2: no candidate below 1e16. Not proved for all m.
+            a = 6: 22 candidates, first m = 8.537e14 -- a size effect
+                   (min m for a = 6 is 2.47e13; the first actual one is
+                   30x larger). NONE has q prime.
+          Why a = 6 fails primality: 21 of the 22 have 5^2 || m (the other
+          5^5). Since 5 | m, q = sigma_2(m)/m (mod 5), so 5 | q exactly when
+          v5(sigma_2(m)) > v5(m). sigma_2(3^3) = 820 = 2^2*5*41 supplies one
+          5; any further supplier forces the surplus:
+              sigma_2(7) = 50 = 2*5^2,   sigma_2(43) = 1850 = 2*5^2*37,
+              sigma_2(157) = 24650 = 2*5^2*17*29,  and any exponent-1
+              p = +-2 (mod 5) gives 5 | p^2 + 1  (13, 17, 37, 67, 127, 233 ...).
+          43 is itself read off the core: sigma_2(2^6) = 5461 = 43*127.
+          LEMMA: 3^3 || m, 5^2 || m, and one more 5 supplied anywhere
+          => 5 | q => q not prime.  20 of the 22 fall to it. The two
+          exceptions (only 820 + 13 supplying 5: v5 = 2 exact; and a 5^5
+          case) have q composite with no small forced factor.
+
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
                   233^2+1 = 2*5*61*89. They co-occur in all 24 members
