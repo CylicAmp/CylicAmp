@@ -672,9 +672,10 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
               (ii)  v3(sigma_2(s^2)) = 2
               (iii) sigma_2(s^2)/s^2 > 1.016028,
           with m = 108 s^2. Since sigma_2(m) = 2^2*3*5*7*41*sigma_2(s^2), the
-          equation is 1435 sigma_2(s^2) = 9 s^2 (108 s^2 + q); with
-          sigma_2(s^2)/s^2 < 1.0966 this is sigma_2(s^2)/s^2 = k/1435,
-          k in [1436, 1573].
+          equation is 1435 sigma_2(s^2) = 9 s^2 (108 s^2 + q). (An earlier
+          version added "sigma_2(s^2)/s^2 = k/1435, k in [1436,1573]"; that
+          was WRONG -- the 1.0966 bound is on sigma_2(s^2)/s^4, and
+          sigma_2(s^2)/s^2 grows like s^2. Retracted 2026-09-26.)
           THE OBSTRUCTION IS (i) ALONE: for s <= 5e6, (ii) holds for
           1 259 577 of 1 666 666 s, while (i) holds for NONE, ratio ignored.
           Odd n with n | sigma_2(n) are common (65, 175, 525, 1105, ...) and
@@ -687,31 +688,21 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           to me. Largest-prime, smallest-prime and Omega-counting arguments
           were tried and do not close. OPEN beyond s <= 9.6e9 (m <= 1e22).
 
-          PARTIAL PROOF OF (i) (2026-09-26). Let rho = sigma_2(s^2)/s^2 and
-          D its reduced denominator. (i) <=> D | 1435. Always
-          1 < rho < 1.0966 (product of p^2/(p^2-1) over p >= 5), and a prime
-          p | s forces rho >= 1 + p^-2 + p^-4. So rho = N/D with D < N <
-          1.0966 D:
-              D = 1, 5, 7        no integer N fits          IMPOSSIBLE
-              D = 35             N = 38 only: rho = 38/35 exactly
-              D = 41             N in {42, 43, 44}
-              D = 205            N in 214..224
-              D = 287            N in 294..314
-              D = 1435           N in 1527..1573
-          THEOREM A. s^2 | 1435 sigma_2(s^2) with s > 1, gcd(s,6) = 1
-          forces 41 | s or 35 | s. In particular s coprime to 35*41 is
-          impossible: then s^2 | sigma_2(s^2), so rho is an integer in
-          (1, 1.0966).
-          THEOREM B (supply of 5 and 41). If 5 | s then some p | s has
-          p = +-1 (mod 5) and 5 | v_p(s^2)+1: for p != 5,
-          v5(sigma_2(p^2e)) = v5(2e+1) when p^2 = 1 (mod 5) and 0 when
-          p^2 = -1 (mod 5). If 41 | s then some p | s has ord_41(p^2) in
-          {1, 5} (the odd divisors of 20) with that order dividing
-          v_p(s^2)+1. Either way (Theorem A): SOME PRIME OF s HAS
-          v_p(s^2) = 4 (mod 10), or 41 | v_p(s^2)+1.
-          What is still missing: A and B cut the shapes but do not empty
-          them; each required supplier must itself be supplied, and no
-          argument yet shows that chain cannot close.
+          RETRACTED (2026-09-26): a "partial proof" stood here claiming a
+          denominator window D < N < 1.0966 D for rho = sigma_2(s^2)/s^2,
+          hence "41 | s or 35 | s" and a case rho = 38/35. The window used
+          the bound 1.0966 on sigma_2(s^2)/s^2; the bound holds for
+          sigma_2(s^2)/s^4. rho is about s^2, so there is no window and
+          none of those conclusions follows.
+          WHAT STANDS -- supply lemmas, each from (i) alone:
+            If 5 | s: v5(sigma_2(s^2)) >= 2 v5(s) - 1 >= 1, and for p != 5,
+              v5(sigma_2(p^2e)) = v5(2e+1) if p = +-1 (mod 5), else 0.
+              So some p | s has p = +-1 (mod 5) and 5 | v_p(s^2) + 1.
+            If 41 | s: some p | s has ord_41(p^2) in {1, 5} (odd divisors
+              of 20), that order dividing v_p(s^2) + 1.
+            Every prime of s outside {5, 7, 41} needs FULL supply,
+              p^(2e) | sigma_2(s^2 / p^(2e)).
+          These restrict shapes; they do not rule any class out.
 
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
