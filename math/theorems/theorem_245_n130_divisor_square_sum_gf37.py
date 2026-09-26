@@ -195,9 +195,53 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           primes, x8 = 864 -- the same 3^2 <-> 7^2 engine, one size up.
 
           COVERAGE. Complete for m <= 1e10 with every prime of m below 5000.
-          NOT covered: family members with a prime factor of m >= 5000, and
-          m > 1e10. A run to 1e12 exceeded the time limit and is not
-          reported. Code: tools/divisor_square_family_dfs.py.
+          Code: tools/divisor_square_family_dfs.py.
+
+          PUSHED TO m <= 1e12 (2026-09-26): 26 MEMBERS, 29 SOLUTIONS KNOWN.
+          The plain DFS grows too fast, so large primes are no longer
+          enumerated. A first-power prime q of m divides sigma_2(m/q), because
+          sigma_2(q) = 1 + q^2 = 1 (mod q) -- so q is READ OFF the factors of
+          sigma_2 of the smaller part instead of searched for. And a core can
+          only accept large primes if its own sigma_2/m^2 already sits within
+          a hair of 3/2, which rejects almost every core outright. Validated
+          by reproducing the same 13 members at 1e10 with 8x fewer nodes.
+
+              m <= 1e10    8 716 764 nodes    13 members    25s
+              m <= 1e11   34 717 677 nodes    16 members   100s
+              m <= 1e12  130 606 306 nodes    26 members   396s
+
+          All 26 verified independently, n factored from scratch without
+          reusing m or p. Thirteen are new beyond 1e10, n reaching 5.4e23:
+
+              n                              k
+              235445652691801860000        959
+              424148212955604337200       2159
+              2636858156546639844000      1727
+              7644548299825551290400      1727
+              35092558820878908663600     2159
+              50200139202212831554800     2159
+              72623409773566360804056      863
+              162844235143432035270000    1199
+              216163063203464844600000    1343
+              207032087429744760660000     959
+              231330310609111423668000    1727
+              494123300861413806601200    2159
+              537965724214259929380000     959
+
+          With 130, 148480 and 3039520 outside the family, 29 solutions of
+          the original equation are now known.
+
+          tau of m now takes NINE values: 12, 108, 240, 864, 960, 1200, 1344,
+          1728, 2160. Counts 1, 5, 1, 5, 4, 1, 1, 3, 5.
+
+          COVERAGE OF THE FAST SEARCH, which is narrower than the DFS and must
+          be stated as such: m <= 1e12, primes below 250 at any exponent, and
+          at most TWO further primes in [250, 5000) each to the first power.
+          Not covered: a prime of m >= 5000, a prime >= 250 squared, or three
+          or more primes in [250, 5000). At 1e10 the full DFS and the fast
+          search agree exactly, so the restriction lost nothing at that scale;
+          that is evidence, not proof, that it loses nothing above it.
+          Code: tools/divisor_square_family_fast.py.
 
           THE BLIND SPOT SEARCHED (2026-09-25). The gap left by the smooth
           generator is a solution whose prefix CONTAINS a large prime.
