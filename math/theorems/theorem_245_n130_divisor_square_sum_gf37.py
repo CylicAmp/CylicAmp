@@ -515,6 +515,30 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
 
           Spine class 10 (mod 11) over 95: 11 of p, P(>= 11) = 0.35. None.
 
+          p mod 9 SKEW BY v3(m) (candidates, m <= 1e12):
+              v3=1: 161, 61% at +-2    v3=2: 300, 73%
+              v3=3:  74, 95%           v3=4:  17, 41%
+          Driven by the 3-adic valuation of m, not uniform across it.
+          LEMMA: for prime q != 3 write q^2 = 1 + 3t; then
+              sigma_2(q^2) = q^4 + q^2 + 1 = 3(1 + 3t + 3t^2),
+          so sigma_2(q^2)/3 = 1 or 7 (mod 9), and = 7 exactly when
+          t = 1 (mod 3), i.e. q = +-2 (mod 9). By LTE all 3-supply in
+          sigma_2(m) comes from exponents with 3 | e+1, so the 3-part is
+          built from these {1,7} residues. Why the share peaks at v3 = 3
+          and drops at v3 = 4 is not yet derived.
+
+          READ-OFF LINKS among recurring primes (all 95 members):
+              89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
+                  233^2+1 = 2*5*61*89. They co-occur in all 24 members
+                  that contain either.
+              43 -> 37 -> 137: 43^2+1 = 2*5^2*37, 37^2+1 = 2*5*137.
+              41 -> 29 (41^2+1 = 2*29^2), 29 -> 421, 61 -> 1861,
+              97 -> 941, 67 -> 449.
+          Members containing: 7:61 13:50 17:36 61:27 29:24 89:24 233:24
+          43:20 37:19 41:12 157:8 67:7 97:6 137:2 23:0.
+          23 occurs in NO member (23^2+1 = 2*5*53, and 53 divides no m).
+          Member counts 26 / 55 / 95 at 1e12 / 1e14 / 1e16.
+
           Solutions known: 98 = 95 family members + 130, 148480, 3039520.
           Code: tools/divisor_square_family_1e16.py.
           Code: tools/divisor_square_family_1e14.py (resumable, chunked),
