@@ -704,6 +704,17 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
               p^(2e) | sigma_2(s^2 / p^(2e)).
           These restrict shapes; they do not rule any class out.
 
+          WHY SUPPLY LEMMAS CANNOT FINISH IT. For odd s <= 2e6 the unsupplied
+          part g(s) = s^2 / gcd(s^2, sigma_2(s^2)) gets as small as ONE prime:
+              s = 133 = 7*19 (coprime to 6): sigma_2(133^2) = 2451*130683,
+                  g = 19, so 133^2 | 19 * sigma_2(133^2);
+              s = 5: g = 25;  s = 487179: g = 37;  s = 566181: g = 43;
+              (s = 13167 = 3^2*7*11*19: g = 3.)
+          So "s^2 | c * sigma_2(s^2)" HAS solutions for c = 19; the claim
+          for c = 1435 = 5*7*41 is not a local impossibility. A proof must
+          show no odd square coprime to 6 is short by exactly a divisor of
+          1435 -- a global statement of odd-perfect type. Open.
+
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
                   233^2+1 = 2*5*61*89. They co-occur in all 24 members
