@@ -666,6 +666,27 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           STATUS: a = 2 at v3 = 3 has no candidate with m <= 1e22. Not
           proved impossible for all m.
 
+          REDUCTION (all m). A candidate with (a, b) = (2, 3) exists iff some
+          s, gcd(s,6) = 1, has
+              (i)   s^2 | 1435 * sigma_2(s^2)        1435 = 5*7*41
+              (ii)  v3(sigma_2(s^2)) = 2
+              (iii) sigma_2(s^2)/s^2 > 1.016028,
+          with m = 108 s^2. Since sigma_2(m) = 2^2*3*5*7*41*sigma_2(s^2), the
+          equation is 1435 sigma_2(s^2) = 9 s^2 (108 s^2 + q); with
+          sigma_2(s^2)/s^2 < 1.0966 this is sigma_2(s^2)/s^2 = k/1435,
+          k in [1436, 1573].
+          THE OBSTRUCTION IS (i) ALONE: for s <= 5e6, (ii) holds for
+          1 259 577 of 1 666 666 s, while (i) holds for NONE, ratio ignored.
+          Odd n with n | sigma_2(n) are common (65, 175, 525, 1105, ...) and
+          odd n | 1435 sigma_2(n) likewise (5, 7, 35, 41, 65, ...), so any
+          proof must use that s^2 is a SQUARE; no parity or congruence
+          argument separates it. Divisibility by s^2 is not a congruence to
+          a fixed modulus, so there is no local obstruction to find.
+          (i) is an odd-square abundancy equation of the same type as odd
+          perfect / odd multiperfect numbers; no proof for all s is known
+          to me. Largest-prime, smallest-prime and Omega-counting arguments
+          were tried and do not close. OPEN beyond s <= 9.6e9 (m <= 1e22).
+
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
                   233^2+1 = 2*5*61*89. They co-occur in all 24 members
