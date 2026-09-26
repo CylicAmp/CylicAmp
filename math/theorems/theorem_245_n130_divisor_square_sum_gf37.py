@@ -687,6 +687,32 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           to me. Largest-prime, smallest-prime and Omega-counting arguments
           were tried and do not close. OPEN beyond s <= 9.6e9 (m <= 1e22).
 
+          PARTIAL PROOF OF (i) (2026-09-26). Let rho = sigma_2(s^2)/s^2 and
+          D its reduced denominator. (i) <=> D | 1435. Always
+          1 < rho < 1.0966 (product of p^2/(p^2-1) over p >= 5), and a prime
+          p | s forces rho >= 1 + p^-2 + p^-4. So rho = N/D with D < N <
+          1.0966 D:
+              D = 1, 5, 7        no integer N fits          IMPOSSIBLE
+              D = 35             N = 38 only: rho = 38/35 exactly
+              D = 41             N in {42, 43, 44}
+              D = 205            N in 214..224
+              D = 287            N in 294..314
+              D = 1435           N in 1527..1573
+          THEOREM A. s^2 | 1435 sigma_2(s^2) with s > 1, gcd(s,6) = 1
+          forces 41 | s or 35 | s. In particular s coprime to 35*41 is
+          impossible: then s^2 | sigma_2(s^2), so rho is an integer in
+          (1, 1.0966).
+          THEOREM B (supply of 5 and 41). If 5 | s then some p | s has
+          p = +-1 (mod 5) and 5 | v_p(s^2)+1: for p != 5,
+          v5(sigma_2(p^2e)) = v5(2e+1) when p^2 = 1 (mod 5) and 0 when
+          p^2 = -1 (mod 5). If 41 | s then some p | s has ord_41(p^2) in
+          {1, 5} (the odd divisors of 20) with that order dividing
+          v_p(s^2)+1. Either way (Theorem A): SOME PRIME OF s HAS
+          v_p(s^2) = 4 (mod 10), or 41 | v_p(s^2)+1.
+          What is still missing: A and B cut the shapes but do not empty
+          them; each required supplier must itself be supplied, and no
+          argument yet shows that chain cannot close.
+
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
                   233^2+1 = 2*5*61*89. They co-occur in all 24 members
