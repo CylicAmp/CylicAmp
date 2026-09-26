@@ -311,6 +311,83 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           sigma_2(q)^2 where sigma_2(q^2) was meant. Fixed before the 1e12
           run; both 1e10 runs returned the same 13.
 
+          COMPLETE AT m <= 1e14 (2026-09-26): EXACTLY 55 MEMBERS.
+          The same three-part argument, rescaled:
+
+          (1) AT MOST FIVE PRIMES >= 250: large part <= 1e14/60 = 1.667e12,
+              and 250^6 > 1.667e12.
+          (2) Reachable primes are read off recursively, now to depth 5.
+          (3) No self-supplying cluster of size 2..5, any exponent, with
+              product <= 1.667e12. The largest member is read off the
+              sigma_2 pool of the others, so only the smaller ones are
+              enumerated:
+                  prefixes scanned by size: 100 853 / 2 360 227 /
+                  1 835 676 / 100 / 0        clusters found: none   (29s)
+
+          New prune, rigorous (lifting the exponent): for odd p,
+          v_2(sigma_2(p^e)) = v_2(e+1); for p != 3, v_3(sigma_2(p^e)) =
+          v_3(e+1). Since m | sigma_2(m), a node is dropped when
+              sum_(odd p) v_2(e+1) + f       <  v_2(m)   or
+              sum_(p!=3) v_3(e+1) + f // 2   <  v_3(m),
+          f = floor(log(M/c) / log p0), an upper bound on the supply any
+          further primes >= p0 can add. Checked at 1e12 first: 33 678 794
+          nodes (3.7x fewer), 145s, the identical 26.
+
+              m <= 1e14:  461 288 337 nodes, 55 members, 2074s on 4 cores
+
+          The 26 below 1e12 are exactly the proven set. Every one of the 55
+          re-verified from scratch: n = m*p factored by sympy, divisors
+          sorted, the prefix of squares hits n exactly at k = tau(m) - 1,
+          d_k = m/2, d_(k+1) = min(m, p). 55/55.
+
+          The 29 new, 1e12 < m <= 1e14:
+              1041904500000 = 2^5*3*5^6*7*13*17*449              tau=1344  p=613809482371  m%37= 3 p%37=18
+              1132240200000 = 2^6*3*5^5*7*13*89*233              tau=1344  p=661402854439  m%37=18 p%37=25
+              1213034004000 = 2^5*3^2*5^3*7^2*13^3*313           tau=1728  p=730189277773  m%37=30 p%37= 8
+              1487741923512 = 2^3*3^2*13^2*31*37^2*43*67         tau= 864  p=750983582113  m%37= 0 p%37=23
+              1803397352400 = 2^4*3^2*5^2*7^2*17*29*89*233       tau=2160  p=1079926419071  m%37=29 p%37=16
+              2361310739424 = 2^5*3^3*7*13^2*29^2*41*67          tau=1728  p=1280313582451  m%37=23 p%37=36
+              2373420660000 = 2^5*3*5^4*13*17*71*2521            tau= 960  p=1323517707353  m%37=12 p%37=14
+              2629361732400 = 2^4*3^2*5^2*13*17*19*31^2*181      tau=2160  p=1523536102609  m%37=15 p%37=32
+              3020041034010 = 2*3^4*5*7^2*11^2*13^2*61^2         tau=1620  p=1554530857207  m%37=34 p%37= 3
+              3486201223752 = 2^3*3^2*13^2*31*37^2*43*157        tau= 864  p=1758811910623  m%37= 0 p%37=32
+              3519428348700 = 2^2*3^4*5^2*11^2*37^2*43*61        tau=1620  p=1946832150433  m%37= 0 p%37=31
+              3701554500000 = 2^5*3*5^6*7*17*89*233              tau=1344  p=2146885033547  m%37=19 p%37=22
+              3793353051600 = 2^4*3^2*5^2*7^2*17*61*89*233       tau=2160  p=2265994350079  m%37=24 p%37=25
+              4167454200000 = 2^6*3*5^5*7*13*127*601             tau=1344  p=2433908407993  m%37=11 p%37= 5
+              4660019806176 = 2^5*3^2*7^2*17*29*37*43*421        tau=1728  p=2506340165699  m%37= 0 p%37=10
+              9550973289312 = 2^5*3^3*7*13^2*29^2*41*271         tau=1728  p=5175501797563  m%37=24 p%37= 6
+             10072789511904 = 2^5*3^2*7^2*17*19*29*181*421       tau=1728  p=5441193234371  m%37=29 p%37=23
+             12077999521056 = 2^5*3^2*7^3*31*37^2*43*67          tau=1728  p=6433407557069  m%37= 0 p%37=29
+             14509672750188 = 2^2*3^4*7^5*11^2*19^2*61           tau=1620  p=7610178879337  m%37=24 p%37=13
+             17108644123872 = 2^5*3^2*7^2*17*19*89*181*233       tau=1728  p=9214236634003  m%37=25 p%37=23
+             20577136443552 = 2^5*3^3*13^2*29^2*41*61*67         tau=1728  p=10530693091573  m%37=26 p%37=10
+             23324999403888 = 2^4*3^2*7*13^2*17*29^2*61*157      tau=2160  p=12682657961737  m%37=10 p%37=15
+             25600075800000 = 2^6*3*5^5*13*43*127*601            tau=1344  p=14161619908609  m%37=20 p%37=17
+             26671600200000 = 2^6*3*5^5*7*31*127*1613            tau=1344  p=15372034881383  m%37=17 p%37=20
+             34537682190000 = 2^4*3*5^4*11^2*37*137*1877         tau=1200  p=19194944994509  m%37= 0 p%37=33
+             50396952564000 = 2^5*3^2*5^3*7^2*97*313*941         tau=1728  p=29867496472109  m%37= 1 p%37=12
+             59624179725600 = 2^5*3^3*5^2*7^2*19*181*16381       tau=1728  p=35701121220509  m%37= 4 p%37=32
+             77362580022624 = 2^5*3^2*13^3*31*37^2*43*67         tau=1728  p=39479161974251  m%37= 0 p%37=17
+             91416458626272 = 2^5*3^3*13^2*29^2*41*67*271        tau=1728  p=46748649427603  m%37=13 p%37=31
+
+          tau over all 55: 12:1  108:5  240:1  864:7  960:5  1200:2
+                           1344:7  1620:3  1728:15  2160:9
+          1620 = 2^2*3^4*5 is NEW (three members, all with 3^4 and 11^2 or
+          7^5). 108 stays at five: no new tau = 108 member between 1e12 and
+          1e14.
+
+          GF(37): 37 | m for 9 of 55 (2 of 26 below 1e12, 7 of 29 above);
+          37 | p for none. One member has both 37 and 137 as factors:
+          m = 34537682190000 = 2^4*3*5^4*11^2*37*137*1877, tau 1200. No
+          baseline for 37 | m in this family has been established, so the
+          count is recorded, not interpreted.
+
+          Solutions known: 58 = 55 family members + 130, 148480, 3039520.
+          Code: tools/divisor_square_family_1e14.py (resumable, chunked),
+          tools/divisor_square_clusters_general.py,
+          tools/divisor_square_family_verify.py.
+
           THE BLIND SPOT SEARCHED (2026-09-25). The gap left by the smooth
           generator is a solution whose prefix CONTAINS a large prime.
           That case has a bound of its own: if q is inside the prefix then
