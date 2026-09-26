@@ -401,10 +401,122 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           {1:5, 2:19, 4:3, 5:5, 7:19, 8:4}, 38 of 55 at +-2. Split by v3(m)
           and v2(m) mod 2 it stays mixed, so no forcing mechanism is
           identified; recorded as unexplained, not as structure.
+          RESOLVED (1e16 run, below): the skew is in the CANDIDATES, not
+          the primes -- see "p mod 9 baseline".
           Spine class 10 (mod 11): p on it 7/55 vs 5.5 expected (P >= 7 is
           0.31); primes dividing m on it 1/28 (only 43). p^2+1 mod 11 lies
           in {2,4,5,6,10} for every p != 11 -- forced by the quadratic
           residues mod 11, so it filters nothing.
+
+          COMPLETE AT m <= 1e16 (2026-09-26): EXACTLY 95 MEMBERS.
+          (1) At most five primes >= 250: 1e16/60 = 1.667e14 < 250^6.
+          (2) Read-off to depth 5.
+          (3) No self-supplying cluster of size 2..5 below 1.667e14:
+              prefixes scanned 849 790 / 42 649 261 / 99 763 204 /
+              10 260 185, clusters found: none (662s).
+          Search: 240 932 items, 5 270 859 764 nodes, 95 members.
+          Speed-up used for most of the run: only primes >= 250 of the
+          sigma_2 pool are ever read off, and multiplicities are never
+          consulted, so a set of large primes is carried down the DFS
+          instead of rebuilding a Counter at every node. Checked at 1e12
+          against the previous code: identical node count (33 678 794)
+          and identical 26 members. The first 431 items ran on the old
+          code, the rest on the new; the two agree at 1e12 and the 1e16
+          members <= 1e14 are exactly the 55 above.
+          All 95 re-verified from scratch (sympy factorization of n = m*p,
+          prefix of squares = n at k = tau(m) - 1). 95/95.
+
+          The 40 new, 1e14 < m <= 1e16:
+              100339474200000 = 2^6*3*5^5*7*127*313*601                  tau= 1344 p=57667694211313 m%37= 3 p%37=18
+              101813595904944 = 2^4*3^2*7^2*11*17*61^2*89*233            tau= 2160 p=55614370228481 m%37=27 p%37= 9
+              137386439944416 = 2^5*3^3*13^2*17^2*89*157*233             tau= 1728 p=70595680577459 m%37=28 p%37=13
+              179572669800000 = 2^6*3*5^5*37*43*313*601                  tau= 1344 p=97884719469151 m%37= 0 p%37=26
+              185276754412704 = 2^5*3^2*17*31*37^2*43*89*233             tau= 1728 p=93834169440421 m%37= 0 p%37=33
+              208230048180000 = 2^5*3^2*5^4*7^2*11*19*37*43*71           tau= 8640 p=127527860101393 m%37= 0 p%37=10
+              242298676620000 = 2^5*3^3*5^4*7*11*13^2*29^2*41            tau= 8640 p=150074660368639 m%37=23 p%37= 4
+              257882492984688 = 2^4*3^2*11*13^2*17*61^2*97*157           tau= 2160 p=135056474200937 m%37=10 p%37=26
+              326683161420000 = 2^5*3*5^4*7*11*521*135721                tau=  960 p=191872812917063 m%37=36 p%37= 6
+              350287844577600 = 2^6*3*5^2*31*61*89*233*1861              tau= 1344 p=190998524091719 m%37=31 p%37= 6
+              432659182176000 = 2^8*3^2*5^3*13^3*17*19*29*73             tau= 6912 p=251636128926977 m%37= 6 p%37=32
+              439917193915056 = 2^4*3^2*11*13^2*29*61^2*97*157           tau= 2160 p=228873338343569 m%37= 4 p%37=20
+              491050873144728 = 2^3*3^2*13^2*61^2*89*233*523             tau=  864 p=246310338199897 m%37=29 p%37=29
+              540323070000000 = 2^7*3*5^7*7*17^2*29*307                  tau= 3072 p=314491356566113 m%37= 8 p%37=27
+              564754402322208 = 2^5*3^2*7^2*17*61*89*233*1861            tau= 1728 p=301967253719917 m%37=30 p%37=12
+              580936400163504 = 2^4*3^2*7^2*11*61^2*89*97*233            tau= 2160 p=314326726120321 m%37=30 p%37=31
+              597776068890000 = 2^4*3^2*5^4*7^2*11^2*13*17*37*137        tau=10800 p=371161273777939 m%37= 0 p%37= 5
+              668528049420000 = 2^5*3^2*5^4*7^2*11*37*43*61*71           tau= 8640 p=406742657845807 m%37= 0 p%37=16
+              717172801632000 = 2^8*3^3*5^3*7*19*29^2*41*181             tau= 6912 p=431346785546977 m%37=28 p%37=14
+              911273670946548 = 2^2*3^4*7^2*13^2*61^2*97*941             tau= 1620 p=470971756074647 m%37=18 p%37=32
+             1073778062112000 = 2^8*3^3*5^3*7*19*29^2*41*271             tau= 6912 p=645799538862727 m%37=27 p%37=19
+             1092893339083104 = 2^5*3^3*13^2*61^2*89*97*233              tau= 1728 p=556407349043771 m%37=32 p%37=17
+             1322367423651456 = 2^7*3*7*13*31*37^2*43*89*233             tau= 3072 p=693419204082919 m%37= 0 p%37=23
+             1325207730686112 = 2^5*3^2*7^2*13^3*41*73*14281             tau= 1728 p=714375212583013 m%37=26 p%37=10
+             2371924664098704 = 2^4*3^2*11*13^2*29*61^2*157*523          tau= 2160 p=1233658389201671 m%37=25 p%37= 7 twin-lo
+             2641936727430000 = 2^4*3^2*5^4*7^2*11^2*13*17*43*521        tau=10800 p=1639364066379181 m%37=35 p%37= 2
+             2700390068064000 = 2^8*3^2*5^3*13^3*17*19*73*181            tau= 6912 p=1565614357654273 m%37= 3 p%37=22 twin-hi
+             3132265332840336 = 2^4*3^2*7^2*11*61^2*89*233*523           tau= 2160 p=1694276612172439 m%37=21 p%37=11
+             3191571704462400 = 2^6*3^2*5^2*7^2*17*19*29*31*37*421       tau=12096 p=1938390952030807 m%37= 0 p%37=10
+             3866794397856000 = 2^8*3^3*5^3*13^2*19*61*73*313            tau= 6912 p=2229746083868063 m%37=30 p%37=30
+             4512495611490048 = 2^8*3^3*7*13*17*19*41^2*73*181           tau= 6912 p=2483202147400577 m%37=14 p%37=35
+             4905677658420000 = 2^5*3^2*5^4*7^2*11*37*43*61*521          tau= 8640 p=2983153215535057 m%37= 0 p%37=21
+             5969358305820000 = 2^5*3^3*5^4*7*13^2*29^2*41*271           tau= 8640 p=3618189597099239 m%37=15 p%37= 6
+             6185598048630000 = 2^4*3^2*5^4*7^2*11^2*13*43*89*233        tau=10800 p=3805105987618381 m%37=24 p%37=13
+             6201117698662224 = 2^4*3^2*13^2*17*29^2*61*157*1861         tau= 2160 p=3180320060175151 m%37=21 p%37= 1
+             6469261811095392 = 2^5*3^2*17^2*29*89*233*307*421           tau= 1728 p=3265719248401483 m%37=36 p%37=10
+             6828069275820000 = 2^5*3^3*5^4*13^2*31*37^2*41*43           tau= 8640 p=3931258126249631 m%37= 0 p%37=15
+             7127765905726800 = 2^4*3^2*5^2*31^3*37^2*43*1129            tau= 2160 p=4008250175694431 m%37= 0 p%37= 8
+             7482085536796416 = 2^8*3^3*7*13*19*29^2*41*67*271           tau= 6912 p=4091321262294209 m%37=28 p%37=34
+             8549730881177616 = 2^4*3^2*13^2*29*61^2*89*157*233          tau= 2160 p=4342077264028759 m%37= 1 p%37=31
+            37|m: 19 /95;  137|m: [34537682190000, 597776068890000]
+               60 (29, 31) (2, 4) (29, 31)
+               76698960 (42217079, 42217081) (5, 7) (5, 7)
+               3793353051600 (2265994350077, 2265994350079) (5, 7) (23, 25)
+               9550973289312 (5175501797561, 5175501797563) (5, 7) (4, 6)
+               2371924664098704 (1233658389201671, 1233658389201673) (2, 4) (7, 9)
+               2700390068064000 (1565614357654271, 1565614357654273) (5, 7) (20, 22)
+
+          tau over all 95: 12:1  108:5  240:1  864:8  960:6  1200:2
+             1344:10  1620:4  1728:21  2160:18  3072:2  6912:7  8640:6
+             10800:3  12096:1
+          New tau values: 3072, 6912, 8640, 10800, 12096. tau = 108 stays at
+          five members through 1e16.
+
+          p mod 9 BASELINE. Over all 95, p = +-2 (mod 9) for 62. Against the
+          Dirichlet 2/6 that is a large excess, but Dirichlet is the wrong
+          reference: p is not a random prime, it is sigma_2(m)/m - m. The
+          reference is the CANDIDATE set -- every node with m | sigma_2(m),
+          ratio > 3/2, q = sigma_2(m)/m - m > m/2, gcd(q,6) = 1, primality
+          NOT imposed. At m <= 1e12 (tools/divisor_square_family_candidates.py):
+              552 candidates, q mod 9 = {1:49, 2:190, 4:36, 5:30, 7:204, 8:43}
+              394/552 = 71% at +-2;  members 62/95 = 65%.
+          The skew is a property of the construction and the primes carry
+          it, no more. It says nothing about primality or twins.
+
+          TWINS over all 95: six p in a twin pair --
+              (29,31) (2,4); 42217079 lo (5,7); 2265994350079 hi (5,7);
+              5175501797563 hi (5,7); 1233658389201671 lo (2,4);
+              1565614357654273 hi (5,7).
+          Hardy-Littlewood expects 9.76; P(X <= 6) = 0.146. (8,1) has not
+          occurred. Given the mod-9 skew above -- p = 2 (lower) or 7 (upper)
+          both yield (2,4)/(5,7) -- the absence of (8,1) is what the
+          candidate distribution predicts, not a twin-prime effect.
+
+          37 AND 137. 37 | m for 19 of 95. 137 | m for two members, and both
+          also have 37 | m:
+              34537682190000  = 2^4*3*5^4*11^2*37*137*1877
+              597776068890000 = 2^4*3^2*5^4*7^2*11^2*13*17*37*137
+          FORCED: sigma_2(37) = 37^2 + 1 = 1370 = 10*137, i.e. 37^2 = -1
+          (mod 137), so 137 is READ OFF 37. In the first, sigma_2(137) =
+          18770 = 10*1877 then supplies 1877: the chain 37 -> 137 -> 1877.
+          The primes q with 137 | q^2 + 1 are q = +-37 (mod 137): 37, 311,
+          859, 1607, ... 37 is the smallest, which is why it is the one
+          that appears. This is an identity (37^2 + 1 = 10*137), not a
+          frequency; it needs no baseline.
+
+          Spine class 10 (mod 11) over 95: 11 of p, P(>= 11) = 0.35. None.
+
+          Solutions known: 98 = 95 family members + 130, 148480, 3039520.
+          Code: tools/divisor_square_family_1e16.py.
           Code: tools/divisor_square_family_1e14.py (resumable, chunked),
           tools/divisor_square_clusters_general.py,
           tools/divisor_square_family_verify.py.
