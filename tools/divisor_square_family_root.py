@@ -72,7 +72,7 @@ def feasible(jn,c,comps):
     p0=small[jn] if jn<len(small) else T
     R=M//c
     f2=int(log(R)/log(p0)+1e-9) if R>=p0 else 0
-    return s2+f2>=a and s3+f2//2>=b
+    return s2<=a and s3<=b and s2+f2>=a and s3+f2//2>=b   # supply only grows: surplus is final
 
 def children(j,c,s2,comps):
     r=s2/(c*c)

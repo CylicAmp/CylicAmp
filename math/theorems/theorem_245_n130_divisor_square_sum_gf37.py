@@ -635,6 +635,37 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           exceptions (only 820 + 13 supplying 5: v5 = 2 exact; and a 5^5
           case) have q composite with no small forced factor.
 
+          a = 2 AT v3 = 3: STRUCTURE, AND ABSENCE TO 1e22.
+          (1) SURPLUS IS FINAL. Supply only grows as primes are added, and a
+              candidate needs 2- and 3-supply EXACT. So a partial m with
+              2-supply > a or 3-supply > b is dead. Added to the DFS as a
+              prune; checked on a = 6 at 1e16: the same 22 candidates in
+              698 139 nodes instead of 137 885 485.
+          (2) At (a,b) = (2,3), 3^3 supplies both twos (v2(4) = 2), so every
+              prime p >= 5 has v2(e+1) = 0: ALL EXPONENTS EVEN, m = 108 s^2,
+              gcd(s,6) = 1. 2^2 supplies one 3 (v3(3) = 1), so primes >= 5 owe
+              exactly two threes: two primes with e = 2 (mod 6), or one with
+              9 | e+1. Every other prime has even e >= 4 with 3 not dividing
+              e+1 (e = 4, 6, 10, 12, ...).
+          (3) A prime r = 2 (mod 3) of s cannot be supplied by squared
+              primes: the prime factors of p^4+p^2+1 = (p^2+p+1)(p^2-p+1)
+              other than 3 are = 1 (mod 3). The core 21*820 gives 5 and 41
+              once each, short of r^2. So r needs a source with e >= 4.
+          (4) Ratio: need prod sigma_2(p^e)/p^2e > 1.5/(21/16*820/729) =
+              1.016028. Primes = 1 (mod 3) from 13 up give at most 1.012913,
+              so if s has no prime = 2 (mod 3), then 7 | s.
+          (1)-(4) do not close the case for all m. What they buy is depth:
+              M = 1e18:  33 287 nodes    0 candidates
+              M = 1e20: 102 598 nodes    0 candidates
+              M = 1e22: 285 171 nodes    0 candidates
+          COMPLETE to 1e22: large primes enter squared, so at most 4 of
+          them fit in 1e22/108 = 9.26e19 (250^10 > that), depth 5 suffices;
+          and no self-supplying cluster of 2..4 large primes at even
+          exponents has product <= 9.26e19 (prefixes 9 650 / 72 552 / 546,
+          26s; tools/divisor_square_clusters_even.py).
+          STATUS: a = 2 at v3 = 3 has no candidate with m <= 1e22. Not
+          proved impossible for all m.
+
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
                   233^2+1 = 2*5*61*89. They co-occur in all 24 members
