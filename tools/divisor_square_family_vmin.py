@@ -23,6 +23,6 @@ def minm(a,b):
     rec(0,n2,n3,[])
     return best
 for b in (3,4):
-    for a in range(1,13):
+    for a in range(1,14):
         mm,ex=minm(a,b); j=a+v(a+1,2)-v(b+1,2)
         print(f"v3={b} a={a} j={j}  min m = {mm:.3e}  exponents on 5,7,11,...: {ex}" if mm else f"v3={b} a={a} j={j}: impossible (3 over-supplies 2)")

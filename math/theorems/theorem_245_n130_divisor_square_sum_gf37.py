@@ -589,6 +589,31 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           m = 1.206e14 (a = 3). Code: tools/divisor_square_family_vmin.py.
           All four v3 = 4 members <= 1e16 have a in {1, 2}.
 
+          THEOREM (window at v3 = 3). Same argument, b = 3. Now 3^3 itself
+          supplies v2(4) = 2 twos, so primes >= 5 owe a - 2, and
+          j = a + v2(a+1) - 2. a = 1 is impossible (3^3 over-supplies 2).
+          Cutoff: m >= 27 * 2^a * 5^(a-2), so a <= 13 when m <= 1e14.
+              a = 2   j = 0   min m = 1.323e5
+              a = 3   j = 3   min m = 4.162e8
+              a = 4   j = 2   min m = 1.415e10
+              a = 5   j = 4   min m = 2.573e9
+              a = 6   j = 4   min m = 2.474e13
+              a = 7   j = 8   min m = 1.435e15
+              a = 8   j = 6   min m = 1.285e12   2^8: v3(9) = 2, so ONE
+                                                 squared prime finishes b
+              a = 9..13       min m >= 9.814e19
+          CONCLUSION:
+              m < 1.285e12  =>  a in {2,...,6},     j in {0, 2, 3, 4}
+              m < 1.435e15  =>  a in {2,...,6, 8},  j in {0, 2, 3, 4, 6}
+          In that window j = 1 (mod 3) -- the only case giving R = +-2 --
+          means j = 4, i.e. a in {5, 6}. j = 6 (2^6 = 1 mod 9) is exactly
+          the a = 8 branch that opens at 1.285e12: this is why the v3 = 3
+          share fell 0.95 -> 0.89 between 1e12 and 1e14.
+          Observed a at v3 = 3: 1e12 {3:1, 4:5, 5:68}; 1e14 {3:1, 4:10,
+          5:120, 8:62}. The bounds are NECESSARY, not sufficient: a = 2
+          and a = 6 fit by size but no candidate has them to 1e14 (the
+          other primes of m must also be supplied, which the bound omits).
+
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
                   233^2+1 = 2*5*61*89. They co-occur in all 24 members
