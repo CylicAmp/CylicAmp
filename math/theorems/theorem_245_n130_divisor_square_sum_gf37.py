@@ -524,8 +524,40 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           so sigma_2(q^2)/3 = 1 or 7 (mod 9), and = 7 exactly when
           t = 1 (mod 3), i.e. q = +-2 (mod 9). By LTE all 3-supply in
           sigma_2(m) comes from exponents with 3 | e+1, so the 3-part is
-          built from these {1,7} residues. Why the share peaks at v3 = 3
-          and drops at v3 = 4 is not yet derived.
+          built from these {1,7} residues.
+
+          DERIVED (2026-09-26): WHY THE SHARE PEAKS AT v3 = 3.
+          Write m = 3^b u, 3 does not divide u, q = sigma_2(m)/m - m.
+          (i)  For p^e || u, sigma_2(p^e)/p^e = sum of p^k, k = -e..e step 2,
+               an integer polynomial S_e(y) in y = p + 1/p. Mod 9, y = +-2
+               for every unit p (1,4,7 -> 2; 2,5,8 -> 7). Since S_e(2) = e+1
+               (set p = 1), S_e(p) = eps_p (e+1) (mod 9) whenever 3 does
+               not divide e+1; eps_p = -1 iff p = 2 (mod 3) and e odd.
+               Checked for all p < 2000, e <= 11: no failure.
+          (ii) sigma_2(3^b) = 1 (mod 9) for every b.
+          (iii) gcd(q,6) = 1 forces the 3-supply to be EXACT:
+               sum v3(e+1) = b. (A surplus puts 3 | q + m, and 3 | m.)
+          (iv) Primes with 3 | e+1 contribute +-(e+1)/3^v times a unit
+               C_p = 1 (mod 3) that depends on p mod 27; for e = 2,
+               sigma_2(p^2)/(3p^2) = 1 +- 3s (mod 9), p + 1/p = +-2 + 9s.
+          Hence, exactly,
+               q = eps * (tau(u)/3^b) * prod C_p  -  m     (mod 9),
+          verified on all 552 candidates at 1e12: 552/552.
+          When the 3-free part of tau(u)/3^b is 2^j (69/74 at v3 = 3),
+          R = eps 2^j, and 2^j = +-2 (mod 9) iff j = 1 (mod 3).
+          j = (number of primes of u at exponent 1) + (contribution of the
+          2-exponent), and each squared 3-supplier adds 0.
+            candidates <= 1e12, v3=3: j {2:5, 3:1, 4:68},   +-2 share 0.95
+            candidates <= 1e14, v3=3: j {2:10, 3:1, 4:120, 6:62}, 0.89
+            candidates <= 1e14, v3=4: j {2:59},              0.31
+          So the peak is j = 4 dominating at v3 = 3 (2^4 = 16 = -2 mod 9)
+          with prod C = 1 in 69/74; at v3 = 4 four squared suppliers use up
+          the size budget and leave j = 2 only (2^2 = 4, not +-2). The j
+          distribution is set by how many primes fit under M with ratio
+          > 3/2, so the peak is a SIZE-WINDOW effect and moves with M:
+          0.95 -> 0.89 from 1e12 to 1e14 as j = 6 (2^6 = 1 mod 9) opens.
+          Members <= 1e16 at v3 = 3: 13/16 = 0.81.
+          Overall candidate share: 0.71 (1e12, 552), 0.73 (1e14, 1368).
 
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
