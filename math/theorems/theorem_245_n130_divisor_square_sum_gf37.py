@@ -150,8 +150,11 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
               m <=   5000, q in [47, 300]    1 634 825 triples   18s  none
               m <=  25000, q in [47, 300]    4 572 473 triples   66s  none
               m <= 100000, q in [47, 430]   20 212 677 triples  429s  none
+              m <=   2000, q in [47,2500]   26 624 731 triples  177s  none
+              m <=    800, q in [47,6000]   16 751 117 triples   86s  none
 
-          34.3 million triples, ZERO solutions, reaching n up to ~1.9e10.
+          77.7 million triples, ZERO solutions. The last two slices take the
+          cheap direction -- small m, large q -- and reach q2 up to 6000.
           Code: tools/divisor_square_twoprime.py.
 
           THE PRUNE BARELY BITES, WHICH IS ITSELF INFORMATIVE. Precomputing
@@ -187,7 +190,7 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
               n smooth                       n <= 3e9        3 found
               smooth * one prime, outside    m <= 6e7        7 found
               smooth * one prime, inside     57M pairs       1 found
-                        smooth * two primes           34.3M triples    0 found
+                        smooth * two primes           77.7M triples    0 found
               smooth * three primes         11.7M combos     0 found
               smooth * four primes           2.9M combos     0 found
           Every one is a search certificate with the bounds above. No shape
