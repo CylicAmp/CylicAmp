@@ -160,6 +160,45 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           does not prove every family member beyond 2e7 has tau 12 or 108.
           Code: tools/divisor_square_proper_family.py.
 
+          PAST 2e7 THE FAMILY IS NOT {12, 108} (2026-09-26). A sieve cannot
+          go further, so the family is searched instead by DFS over
+          factorisations: m is built prime by prime, and a branch is cut the
+          moment sigma_2(m)/m^2 times the product over all remaining primes
+          of 1/(1-p^-2) cannot exceed 3/2. The cut is exact, so within its
+          bounds the search is complete. It reproduces the five sieve
+          members in under a second. At m <= 1e10, primes of m below 5000:
+
+              m              tau     p              n = m*p               k
+              60               12    31             1860                 11
+              286650          108    143909         41251514850         107
+              308700          108    175303         54116036100         107
+              389844          108    202481         78936002964         107
+              1441188         108    735337         1059758860356       107
+              36580068        108    18489817       676358763167556     107
+              76698960        240    42217079       3238006053537840    239
+              826169400       864    494317729      408390181577292600  863
+              883146600       864    528199271      466477390306128600  863
+              3943157400      864    2367409897     9335069854188787800 863
+              5156436600      864    3075687521     15859587703447668600 863
+              8147739600     2160    5083430447     41418467556867601200 2159
+              8897460000      960    5077110953     45173391619879380000 959
+
+          EIGHT NEW SOLUTIONS of the original equation -- every row from
+          36580068 down. Each verified independently: n factored, all its
+          divisors built and sorted, and the squares of the first k summing
+          to exactly n. Sixteen solutions are now known.
+
+          tau takes six values: 12, 108, 240, 864, 960, 2160. So 108 is one
+          value among several and the "why 108" argument above explains only
+          the tau-108 members. The 864 members share the core
+          2^3 * 3^2 * 5^2 * 7^2 (tau 4*3*3*3 = 108) plus three further
+          primes, x8 = 864 -- the same 3^2 <-> 7^2 engine, one size up.
+
+          COVERAGE. Complete for m <= 1e10 with every prime of m below 5000.
+          NOT covered: family members with a prime factor of m >= 5000, and
+          m > 1e10. A run to 1e12 exceeded the time limit and is not
+          reported. Code: tools/divisor_square_family_dfs.py.
+
           THE BLIND SPOT SEARCHED (2026-09-25). The gap left by the smooth
           generator is a solution whose prefix CONTAINS a large prime.
           That case has a bound of its own: if q is inside the prefix then
@@ -2166,7 +2205,12 @@ def main():
             i += 1
         return sorted(d)
     for _n, _k in ((130, 4), (1860, 11), (148480, 19), (3039520, 31),
-                   (41251514850, 107), (54116036100, 107), (78936002964, 107)):
+                   (41251514850, 107), (54116036100, 107), (78936002964, 107),
+                   (1059758860356, 107), (676358763167556, 107),
+                   (3238006053537840, 239), (408390181577292600, 863),
+                   (466477390306128600, 863), (9335069854188787800, 863),
+                   (15859587703447668600, 863), (41418467556867601200, 2159),
+                   (45173391619879380000, 959)):
         _D = _divs(_n) if _n < 10**7 else None
         if _D is None:
             continue
