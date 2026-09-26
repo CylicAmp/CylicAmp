@@ -731,6 +731,22 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           p^2a | 1435 (r^2+r+1)(r^2-r+1) is not size-blocked), and three or
           more primes.
 
+          TWO PRIMES, a >= 2: REDUCTION TO A WIEFERICH-TYPE CONDITION.
+          s = p^a r^b, 5 <= p < r. alpha = [p | 1435], beta = [r | 1435],
+          w_p = v_p(r^(p-1) - 1) >= 1, w_r = v_r(p^(r-1) - 1) >= 1. By LTE
+          v_p(sigma_2(r^2b)) <= w_p + v_p(2b+1), so (i) needs
+              (A) 2a <= alpha + w_p + v_p(2b+1)
+              (B) 2b <= beta  + w_r + v_r(2a+1).
+          b = 1: v_p(3) = 0, so w_p >= 2a - 1 >= 3 - alpha... i.e. w_p >= 2.
+          b >= 2 and w_p = w_r = 1: p^(2a-2) | 2b+1 and r^(2b-2) | 2a+1 give
+          2b+1 >= 5^(7^(2b-2) - 3): impossible.
+          THEOREM C: any two-prime solution with a >= 2 has
+              r^(p-1) = 1 (mod p^2)   or   p^(r-1) = 1 (mod r^2).
+          NOT A PROOF: for fixed p about 1/p of primes r satisfy the first,
+          so the condition is common. Brute check of (i) directly:
+          p < r < 3000, a in 2..5, b in 1..5: 1 827 560 cases, 0 solutions.
+          Two-prime a >= 2 remains OPEN beyond that range.
+
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
                   233^2+1 = 2*5*61*89. They co-occur in all 24 members
