@@ -99,6 +99,31 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           selection effect of the generator, which only sees prefixes
           dividing a smooth m -- not established structure.
 
+          THEOREM (2026-09-26) -- AT MOST ONE PRIME LIES ABOVE THE PREFIX.
+          Let r be the part of n built from primes greater than d_k, and
+          m = n / r. Then r = 1 or r is a single prime p with d_k < p <= d_k^2.
+
+          PROOF. Each d_i <= d_k has every prime factor <= d_k, so d_i is
+          coprime to r and divides m. Hence tau(m) >= k. Since tau(m) <= m for
+          every m >= 1, m >= k. Also n = sum d_i^2 <= k * d_k^2. So
+              r = n / m <= k * d_k^2 / k = d_k^2.
+          Every prime dividing r exceeds d_k, so two of them, or one squared,
+          would make r > d_k^2. So r is 1 or one prime to the first power. QED
+
+          Checked on all eight known solutions: r = 13, 31, 1, 1, 143909,
+          175303, 202481, 735337 -- each 1 or prime, each <= d_k^2.
+
+          SCOPE. This forbids two primes ABOVE d_k. It does NOT forbid two
+          primes between 43 and d_k both dividing n -- the cutoff the
+          two-large-prime searches used. Those searches remain searches.
+
+          CORRECTION: THE k=107 PILE-UP IS STRUCTURE, NOT ONLY SELECTION.
+          This file said the four k=107 solutions were a selection effect of
+          the generator. In all four the prefix is EXACTLY the proper divisors
+          of m, with tau(m) = 108, d_107 = m/2, and n = m * p. So
+              n = sigma_2(m) - m^2,    p = (sigma_2(m) - m^2) / m,
+          and k = tau(m) - 1 = 107. Why tau(m) = 108 recurs is not explained.
+
           THE BLIND SPOT SEARCHED (2026-09-25). The gap left by the smooth
           generator is a solution whose prefix CONTAINS a large prime.
           That case has a bound of its own: if q is inside the prefix then
@@ -2119,6 +2144,20 @@ def main():
     print("      k=11 and k=19: neither 2|k nor 3|k, so the parity and mod-3")
     print("      lemmas are both silent there. The solutions sit exactly where")
     print("      the machinery says nothing.")
+
+    print("\n  THEOREM: at most one prime of n exceeds d_k, and it is squarefree.")
+    from sympy import factorint as _fi, isprime as _ip
+    for _n, _k in ((130, 4), (1860, 11), (148480, 19), (3039520, 31),
+                   (41251514850, 107), (54116036100, 107),
+                   (78936002964, 107), (1059758860356, 107)):
+        _D = [1]
+        for _p, _e in _fi(_n).items(): _D = [x * _p ** i for x in _D for i in range(_e + 1)]
+        _D = sorted(_D); _dk = _D[_k - 1]
+        _r = 1
+        for _p, _e in _fi(_n).items():
+            if _p > _dk: _r *= _p ** _e
+        assert _r <= _dk * _dk and (_r == 1 or _ip(_r)) and _n // _r >= _k, _n
+    print("      r in {1, one prime} and r <= d_k^2 on all eight solutions")
 
     print("\n  k=2,3,4,6 PROVED; k=5 even and k=8 with 4∤n proved; rest open.")
 
