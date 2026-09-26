@@ -559,6 +559,36 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           Members <= 1e16 at v3 = 3: 13/16 = 0.81.
           Overall candidate share: 0.71 (1e12, 552), 0.73 (1e14, 1368).
 
+          THEOREM (j at v3 = 4). Let m be a candidate (m | sigma_2(m),
+          q = sigma_2(m)/m - m, gcd(q,6) = 1), a = v2(m), b = v3(m).
+          (1) EXACT 2-SUPPLY. For odd p, p^2 = 1 (mod 8), so by LTE
+              v2(sigma_2(p^e)) = v2(e+1); sigma_2(2^a) is odd. If
+              sum_(odd p) v2(e+1) > a then sigma_2(m)/m = m + q is even,
+              and with m even, q is even. So sum_(odd p) v2(e+1) = a,
+              INCLUDING p = 3, which supplies v2(b+1).
+          (2) Hence  j = v2(tau(u)) = a + v2(a+1) - v2(b+1)   exactly.
+              Checked on all 1920 candidates (1e12 and 1e14): 1920/1920.
+              (A first version omitted p = 3 and failed on 834 of them.)
+          (3) MINIMUM SIZE for given (a, b). Every prime >= 5 supplies twos
+              and threes only through v2(e+1), v3(e+1), and an exchange
+              argument puts the larger exponent on the smaller prime, so the
+              minimum sits on 5, 7, 11, ... with non-increasing exponents.
+              For b = 4:
+                  a = 1  j = 2   min m = 6.899e10   (5,7,11,13)^2 * 17
+                  a = 2  j = 2   min m = 1.061e10   (5,7,11)^2 * 13*17
+                  a = 3  j = 5   min m = 1.206e14   (5,7,11,13)^2 * 17*19*23
+                  a = 4  j = 4   min m = 6.994e15
+                  a = 5  j = 6   min m = 1.076e15
+                  a = 6..12      min m >= 8.976e17
+          (4) a <= 12 whenever m <= 1e14: each unit of 2-supply costs a
+              factor >= 5 (p^e >= 5^e >= 5^v2(e+1)), so m >= 81 * 10^a.
+          CONCLUSION: every candidate with v3(m) = 4 and m < 1.206e14 has
+          v2(m) in {1, 2} and j = 2 exactly. 2^2 = 4 is not +-2 (mod 9),
+          so R = eps*tau(u)/81 = +-4 and the +-2 share at v3 = 4 comes only
+          from prod C in {4, 7}. The window first admits j = 5 at
+          m = 1.206e14 (a = 3). Code: tools/divisor_square_family_vmin.py.
+          All four v3 = 4 members <= 1e16 have a in {1, 2}.
+
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
                   233^2+1 = 2*5*61*89. They co-occur in all 24 members
