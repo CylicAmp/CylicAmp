@@ -384,6 +384,27 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           count is recorded, not interpreted.
 
           Solutions known: 58 = 55 family members + 130, 148480, 3039520.
+
+          TWIN PRIMES, TRIPARTITE (standing check 4). For p > 3 a twin pair
+          has DR pair (2,4), (5,7) or (8,1) and nothing else -- proven in
+          twin_prime_tripartite_audit.py; it is p = 2 (mod 3) restated.
+          Of the 55 primes p = n/m, four are twin-pair members:
+              m = 60              p = 31              upper of (29,31)   (2,4)
+              m = 76698960        p = 42217079        lower              (5,7)
+              m = 3793353051600   p = 2265994350079   upper              (5,7)
+              m = 9550973289312   p = 5175501797563   upper              (5,7)
+          Hardy-Littlewood expects 6.65 (sum of 4*C2/ln p, C2 = 0.66016,
+          conditioned on p mod 6); 4 observed, P(X <= 4) ~ 0.18. No twin
+          excess or deficit. Pair residues mod 37: (29,31) is the C9 pair;
+          the others (5,7), (23,25), (4,6).
+          p mod 6 splits 28 : 27 (5 : 1), level. p mod 9 does NOT:
+          {1:5, 2:19, 4:3, 5:5, 7:19, 8:4}, 38 of 55 at +-2. Split by v3(m)
+          and v2(m) mod 2 it stays mixed, so no forcing mechanism is
+          identified; recorded as unexplained, not as structure.
+          Spine class 10 (mod 11): p on it 7/55 vs 5.5 expected (P >= 7 is
+          0.31); primes dividing m on it 1/28 (only 43). p^2+1 mod 11 lies
+          in {2,4,5,6,10} for every p != 11 -- forced by the quadratic
+          residues mod 11, so it filters nothing.
           Code: tools/divisor_square_family_1e14.py (resumable, chunked),
           tools/divisor_square_clusters_general.py,
           tools/divisor_square_family_verify.py.
