@@ -799,8 +799,9 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           (5, 13) and (89, 233) (= F_11, F_13); the next candidates fail
           (610 even, 4181 = 37*113, 75025, 1346269 = 557*2417, ...). So the
           89 <-> 233 read-off 2-cycle is the Markov-type equation
-          x^2 + y^2 + 1 = 3xy, and it is the ONLY exponent-1 two-cycle among
-          primes above 13.
+          x^2 + y^2 + 1 = 3xy. Among pairs with product <= 1.667e18 it is the
+          only exponent-1 two-cycle above 13; whether any LARGER consecutive
+          odd-index Fibonacci pair is both prime is not known.
           Member counts 26 / 55 / 95 at 1e12 / 1e14 / 1e16.
 
           Solutions known: 98 = 95 family members + 130, 148480, 3039520.
