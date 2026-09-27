@@ -228,6 +228,15 @@ base b.
     dr_49(137) = 41, an involution (41^2 = 1681 = 35*48 + 1); dr_49(37) = 37,
     order 4. 26 and 10 are non-units.
 
+(22) BASE 50 (m = 49 = 7^2, LOCAL; b EVEN) -- base 10's picture at the prime 7.
+    One island (7) = nilradical, 7 elements, and it squares to 0: every product of
+    two island elements is 0, i.e. has digital root 49 (as 3, 6, 9 products all
+    have root 9 in base 10). Idempotents {0,1}. Units 42, cyclic. Zero divisors 6.
+    CARRY COMPLEMENT: fixed point 25 = b/2 = 2^-1, lying in the preserved coset
+    4 + (7). DOUBLING: permutation; ord_49(2) = 21 (ord_7(2) = 3, 2^3 = 8 != 1 mod
+    49): two 21-cycles on units; on the island (7 14 28), (21 42 35), and 0.
+    CONTINGENT: 26 and 10 are PRIMITIVE ROOTS mod 49; 137 = 39 and 37 have order 21.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -560,6 +569,16 @@ assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(3) if
 assert all((x * 16) % m in {0, 16, 32} for x in range(m)) and any((x * 8) % m not in {0, 16, 32} for x in range(m))
 assert 2 * 16 % m == 32 and 2 * 32 % m == 16
 assert 137 % m == 41 and 41 * 41 % m == 1 and pow(37, 4, m) == 1 and pow(37, 2, m) != 1
+
+# (22) base 50
+m = 49
+assert [d for d in range(2, m) if m % d == 0] == [7]
+assert all(a * b % m == 0 for a in range(0, m, 7) for b in range(0, m, 7))
+assert [r for r in range(m) if (1 - r) % m == r] == [25] and 25 % 7 == 4
+assert pow(2, 21, m) == 1 and pow(2, 3, m) != 1 and pow(2, 7, m) != 1
+assert [2 * y % m for y in (7, 14, 28, 21, 42, 35)] == [14, 28, 7, 42, 35, 21]
+assert all(pow(g, 42 // q, m) != 1 for g in (26, 10) for q in (2, 3, 7))
+assert pow(137 % m, 21, m) == 1 and pow(37, 21, m) == 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")

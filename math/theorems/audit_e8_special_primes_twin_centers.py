@@ -35,6 +35,11 @@ ord(27) = 6, 6 | 5 + 1). Verified for every n <= 1e5: zeros certified by
 d = 2: 15428, d = 3: 1838, d = 4: 16, d = 6: 274, d = 12: 24.
 Dataset 50 "twin elevation" 20.0% vs 18.6% on n = 2000 each: z = 1.12, not
 significant.
+The d = 3 primes are exactly p = 7, 9, 12, 16, 33, 34 (mod 37) -- the elements of
+order 9 (p^3 in {10, 26}); a supplied decomposition listed only 9, 16, 34.
+SUPPLIED 1e6 SCAN, REPRODUCED independently (sieve, 2026-09-27): zeros <= 1e6:
+188 742 (18.874%); twin centres c = p+1 <= 1e6: 8168, of which 1652 zeros
+(20.225%); elevation 1.072. Criterion vs direct sigma_3: no mismatch.
 """
 from sympy import factorint, isprime, primerange
 
@@ -90,6 +95,7 @@ def _crit(n):
 
 
 assert all((sig3(n) % 37 == 0) == _crit(n) for n in range(1, 20001))
+assert [x for x in range(1, 37) if pow(x, 3, 37) in (10, 26)] == [7, 9, 12, 16, 33, 34]
 assert sig3(243) % 37 == 0 and _ord37(27) == 6 and _ord37(pow(7, 3, 37)) == 3
 
 if __name__ == "__main__":
