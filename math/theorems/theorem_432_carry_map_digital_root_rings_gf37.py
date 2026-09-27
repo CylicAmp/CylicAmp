@@ -79,6 +79,25 @@ base b.
     The 12 x 12 incidence #{x in O_i : 1 - x in O_j} is the order-12 cyclotomic
     number matrix of p = 37 (Gauss/Dickson) -- standard, recorded not claimed.
 
+(8) BASE 39 (m = 38 = 2 * 19, square-free MIXED = F_2 x F_19). Two islands:
+    (2) = the 19 evens, (19) = {0, 19}. Nilradical {0}. Idempotents {0,1,19,20}
+    (19 = (1,0), 20 = (0,1)). Units: 18, cyclic C18 (primitive roots 3,13,15,...).
+    Zero divisors: 19. CARRY COMPLEMENT: no fixed point (38 even); f(I) = 1 + I for
+    both islands; preserved coset only 10 + (19) = {10, 29}, which f swaps
+    (10 = 2^-1 in F_19). Two parts with D + d = 39^k never share a digital root.
+    DOUBLING: image = the evens in ONE step; evens = F_19 (x -> x mod 19) and 2 is
+    primitive mod 19, so x2 is a single 18-cycle on nonzero evens plus fixed 0.
+    dr_39(137) = 23, a unit of order 9.
+    FORCED, not information: the factor 19 is 38/2, the same 19 that is 2^-1 mod
+    37 in base 38 (both come from 38 = 2 * 19).
+
+(9) DOUBLING COLLAPSE (all bases, proved). Write m = b - 1 = 2^a * n, n odd. Under
+    Z/m = Z/2^a x Z/n, x2 is nilpotent of index a on the first factor and a
+    bijection on the second. Every orbit enters the ideal (2^a) = Z/n within a
+    steps, and there x2 is EXACTLY doubling in the root ring of base n + 1.
+    Base 37: a = 2, n = 9 -> base 10's 3-6-9 ring. Base 39: a = 1, n = 19 -> F_19.
+    Even b (m odd): a = 0, x2 is a permutation (the midpoint-inverse case).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -232,6 +251,39 @@ for d in (2, 3, 4, 6, 9, 12, 18, 36):
     assert sum(H) % p == 0
     cos = {frozenset(x * h % p for h in H) for x in range(1, p)}
     assert not any(frozenset((1 - x) % p for x in c) in cos for c in cos)
+
+# (8) base 39
+m = 38
+assert [d for d in range(2, m) if m % d == 0] == [2, 19]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 19, 20]
+assert not [r for r in range(m) if (1 - r) % m == r]
+assert [a for a in range(19) if (1 - a) % 19 == a] == [10] and (1 - 10) % m == 29
+assert sorted({2 * x % m for x in range(m)}) == list(range(0, m, 2))
+assert sorted(x % 19 for x in range(0, m, 2)) == list(range(19))
+assert all(pow(2, k, 19) != 1 for k in range(1, 18))
+assert 137 % m == 23 and next(k for k in range(1, 19) if pow(23, k, m) == 1) == 9
+
+
+# (9) doubling collapse, every base b = 3..60
+def v2(n):
+    a = 0
+    while n % 2 == 0:
+        n //= 2
+        a += 1
+    return a
+
+
+for b in range(3, 61):
+    m = b - 1
+    a = v2(m)
+    n = m >> a
+    ideal = set(range(0, m, 2**a))
+    assert all((x * 2**a) % m in ideal for x in range(m))                  # enters within a steps
+    if a:
+        assert any((x * 2**(a - 1)) % m not in ideal for x in range(m))    # a is sharp
+    assert sorted(x % n for x in ideal) == list(range(n)) if n > 1 else True
+    assert all((2 * x) % m % n == (2 * (x % n)) % n for x in ideal)        # x2 on (2^a) = x2 on Z/n
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
