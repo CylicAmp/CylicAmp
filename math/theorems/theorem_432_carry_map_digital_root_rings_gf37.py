@@ -41,6 +41,26 @@ base b.
     C2 x C6 (order 12), 4 idempotents, 6 nilpotents; 2 not invertible (37 odd).
     Recorded as structure; no claim that base 38 is otherwise distinguished.
 
+(6) BASE 37 (m = 36 = 2^2 * 3^2, MIXED). Seven proper islands (2),(3),(4),(6),
+    (9),(12),(18); nilradical (6) = {0,6,12,18,24,30}; idempotents {0,1,9,28}
+    (9 = (1,0), 28 = (0,1) under Z/4 x Z/9); 12 units, orders 1,2,3,6 (C2 x C6).
+    CARRY COMPLEMENT f(r) = 1 - r: NO fixed point (36 even), so two parts with
+    D + d = 37^k never share a digital root. f sends every island I onto 1 + I; a
+    coset a + (d) is preserved iff 2a = 1 (mod d), possible only for odd d:
+    a = 2 for (3), a = 5 for (9); no coset of an even-index island is preserved.
+    DOUBLING x2: not a permutation (image = (2), 18 elements). Every orbit reaches
+    the ideal (4) within 2 steps (the Z/4 component dies), and (4) = Z/9 via
+    x -> x mod 9. On it x2 is EXACTLY base 10's picture: unit cycle
+    (4 8 16 32 28 20) = (4 8 7 5 1 2) mod 9, island cycle (12 24) = (3 6), fixed 0
+    (the 9 class). Base 37 doubling = transient collapse onto base 10's 3-6-9 ring.
+    DIGITAL-ROOT RING = DISCRETE-LOG RING. 2 is primitive mod 37, so dlog_2:
+    GF(37)* -> Z/36 is an isomorphism and the base-37 digital-root ring is the
+    exponent ring of GF(37)*. The 137-map x -> 26x has dlog_2(26) = 12, so it is
+    translation by 12 on Z/36 and its 12 orbits are the cosets of the island (12).
+    PRIOR ART: the Z/12 orbit quotient is T138 (also T200, T285, T339, "dlog mod
+    12"). New here only: that quotient is Z/36 modulo the ideal (12) of the
+    base-37 digital-root ring. dr_37(137) = 29, a unit of order 6.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -160,6 +180,26 @@ r37 = TABLE[37]
 assert r37["kind"] == "MIXED" and r37["unit_group"] == [2, 6] and len(r37["idempotents"]) == 4
 assert len(r37["nilpotents"]) == 6 and not r37["two_inv"]
 assert primitive_root(37) == 2
+
+# (6) base 37: carry map coset structure on Z/36
+m = 36
+assert [d for d in range(2, m) if m % d == 0] == [2, 3, 4, 6, 9, 12, 18]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 6, 12, 18, 24, 30]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 9, 28]
+assert not [r for r in range(m) if (1 - r) % m == r]
+pres = {d: [a for a in range(d) if (1 - a) % d == a] for d in (2, 3, 4, 6, 9, 12, 18)}
+assert pres == {2: [], 3: [2], 4: [], 6: [], 9: [5], 12: [], 18: []}
+assert len({2 * x % m for x in range(m)}) == 18
+assert all(any((x * 2**k) % 4 == 0 for k in range(3)) for x in range(m))
+cyc = [4, 8, 16, 32, 28, 20]
+assert all(cyc[(i + 1) % 6] == 2 * cyc[i] % m for i in range(6))
+assert [x % 9 for x in cyc] == [4, 8, 7, 5, 1, 2] and [12 % 9, 24 % 9] == [3, 6]
+assert sorted(x % 9 for x in range(0, m, 4)) == list(range(9))
+DLOG = {pow(2, k, 37): k for k in range(36)}
+assert len(DLOG) == 36 and DLOG[26] == 12
+ORB = {frozenset({x, 26 * x % 37, 26 * 26 * x % 37}) for x in range(1, 37)}
+assert len(ORB) == 12 and all(len({DLOG[y] % 12 for y in o}) == 1 for o in ORB)
+assert 137 % 36 == 29
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
