@@ -761,6 +761,18 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
                       0 solutions.
           (tools/divisor_square_wieferich_pairs.py)
 
+          The known DOUBLE Wieferich pairs with both primes >= 5 --
+          (83, 4871), (911, 318917), (2903, 18787), (5, 1645333507) -- all
+          have w_p = w_r = 2, and the bounds give a <= 1: excluded outright
+          (a = 1 is already impossible).
+          THEOREM F (four primes, no Wieferich pair). Same count with k = 4:
+              2M <= 4 + 3 log_5(2M + 1)   =>   M <= 4   (8 <= 8.10; 10 > 8.47).
+          With M <= 4, 2e_y + 1 is in {3, 5, 7, 9}: only x = 5, 7 can gain
+          from v_x(2e_y+1). So e_x <= 2 for every x outside {5, 7};
+          e_7 <= 2 (a boost needs another prime at exponent 3, only 5 can);
+          e_5 <= 3 (needs >= 2 other primes at exponent 2).
+          This restricts shapes; it leaves infinitely many s. OPEN.
+
           THREE PRIMES, ALL EXPONENT 1: s = pqr, 5 <= p < q < r.
           Each factor x^2 +- x + 1 of sigma_2(p^2), sigma_2(q^2) is < r^2, so
           r divides each at most once; r^2 therefore needs r | a factor of
