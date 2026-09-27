@@ -201,6 +201,14 @@ base b.
     b = 2 (mod 4). Base 46 = 2 (mod 4) repeats base 10: centre 23, flanks 22, 24.
     Base 40 = 0 (mod 4) does not: centre 20, flanks 19, 21 odd.
 
+(19) BASE 47 (m = 46 = 2 * 23, square-free MIXED = F_2 x F_23). Islands (2), (23)
+    = {0, 23}. Nilradical {0}. Idempotents {0,1,23,24}. Units 22, cyclic C22. Zero
+    divisors 23. CARRY COMPLEMENT: no fixed point; only preserved coset
+    12 + (23) = {12, 35} (12 = 2^-1 mod 23). DOUBLING: one step onto the evens
+    = F_23; ord_23(2) = 11 (2 is a QR mod 23), so two 11-cycles plus 0.
+    CONTINGENT: dr_47(137) = 45 = -1, an involution (138 = 3 * 46); 37 GENERATES
+    the unit group (order 22). 26 and 10 are non-units.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -503,6 +511,16 @@ for b in range(4, 400, 2):
     assert (2 * c) % (b - 1) == 1 % (b - 1)
     assert ((c - 1) % 2 == 0 and (c + 1) % 2 == 0) == (b % 4 == 2)
     assert (c - 1) + (c + 1) == b
+
+# (19) base 47
+m = 46
+assert [d for d in range(2, m) if m % d == 0] == [2, 23]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 23, 24]
+assert not [r for r in range(m) if (1 - r) % m == r]
+assert [a for a in range(23) if (1 - a) % 23 == a] == [12]
+assert next(k for k in range(1, 23) if pow(2, k, 23) == 1) == 11
+assert 137 % m == m - 1 and 138 == 3 * m
+assert all(pow(37, 22 // q, m) != 1 for q in (2, 11))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
