@@ -747,6 +747,20 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           p < r < 3000, a in 2..5, b in 1..5: 1 827 560 cases, 0 solutions.
           Two-prime a >= 2 remains OPEN beyond that range.
 
+          THEOREM E (fixed Wieferich pair => finite check). For fixed p < r,
+          (A) and (B) bound the exponents:
+              2a <= alpha + w_p + log_p(2b+1),  2b <= beta + w_r + log_r(2a+1),
+          so each pair admits finitely many (a, b), all directly checkable.
+          A proof for ALL pairs needs a uniform bound on w_p = v_p(r^(p-1)-1):
+          that is the Wieferich problem (open; even infinitely many base-2
+          non-Wieferich primes is known only under abc). Not provable here.
+          Targeted search over the pairs Theorem C allows:
+            w_p >= 2: r in the p-1 classes k^p mod p^2, p <= 1000, r < 1e7:
+                      906 792 pairs, exponent bounds a <= 5, b <= 1; 0 solutions
+            w_r >= 2: all p < r <= 3e4 with p^(r-1) = 1 (mod r^2): 425 pairs;
+                      0 solutions.
+          (tools/divisor_square_wieferich_pairs.py)
+
           THREE PRIMES, ALL EXPONENT 1: s = pqr, 5 <= p < q < r.
           Each factor x^2 +- x + 1 of sigma_2(p^2), sigma_2(q^2) is < r^2, so
           r divides each at most once; r^2 therefore needs r | a factor of
