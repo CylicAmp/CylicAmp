@@ -40,6 +40,20 @@ order 9 (p^3 in {10, 26}); a supplied decomposition listed only 9, 16, 34.
 SUPPLIED 1e6 SCAN, REPRODUCED independently (sieve, 2026-09-27): zeros <= 1e6:
 188 742 (18.874%); twin centres c = p+1 <= 1e6: 8168, of which 1652 zeros
 (20.225%); elevation 1.072. Criterion vs direct sigma_3: no mismatch.
+
+WHY TWIN CENTRES ARE ELEVATED -- the local sieve, quantitatively (proved model).
+A twin centre has c = 0 mod 6 and c != +-1 mod p, so P(p | c) = 1/(p-2) instead of
+1/p; given p | c, higher powers are as for random integers. Hence
+    P(annihilated by p) = P(p | c) * sum_{e in class} (1 - 1/p) p^-(e-1).
+  p = 11, e odd:        twin 11/108 = 10.185%, mult-6 11/132 = 8.333%, delta 1.852 pp
+                        (supplied smallest-annihilator table: 1.819)
+  p = 7,  e = 2 mod 3:  twin 2.456%, mult-6 1.754%, delta 0.702 pp (supplied 0.697)
+FAIR CONTROL (N = 4e6): twin centres 21.25% zeros; multiples of 6 with c +- 1 free
+of all primes 5..47: 21.13%; plain multiples of 6: 19.15%. The elevation vanishes
+under the fair control: it is entirely the local sieve at small primes.
+SUPPLIED-CODE NOTE: np.arange(N+1, dtype=int64)**3 overflows int64 for n > 2.1e6
+(N^3 = 8e21 > 9.2e18), which produced the spurious 4.35% density; reducing mod 37
+before multiplying gives the correct 20.24% at N = 2e7.
 """
 from sympy import factorint, isprime, primerange
 
@@ -96,6 +110,12 @@ def _crit(n):
 
 assert all((sig3(n) % 37 == 0) == _crit(n) for n in range(1, 20001))
 assert [x for x in range(1, 37) if pow(x, 3, 37) in (10, 26)] == [7, 9, 12, 16, 33, 34]
+from fractions import Fraction as _Fr
+_P = lambda p, base, ecls: sum(_Fr(1, base) * _Fr(p - 1, p) * _Fr(1, p) ** (e - 1) for e in ecls)
+_e11 = [e for e in range(1, 80) if e % 2]
+assert abs(float(_P(11, 9, _e11)) - 11 / 108) < 1e-12 and abs(float(_P(11, 11, _e11)) - 11 / 132) < 1e-12
+assert round(float(_P(7, 5, [e for e in range(1, 80) if e % 3 == 2]) - _P(7, 7, [e for e in range(1, 80) if e % 3 == 2])) * 100, 3) == 0.702
+assert (2 * 10**6) ** 3 < 2**63 < (21 * 10**5) ** 3
 assert sig3(243) % 37 == 0 and _ord37(27) == 6 and _ord37(pow(7, 3, 37)) == 3
 
 if __name__ == "__main__":

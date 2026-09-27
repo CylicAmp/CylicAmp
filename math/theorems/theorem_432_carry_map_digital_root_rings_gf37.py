@@ -249,6 +249,15 @@ base b.
       26 is the IDEMPOTENT (0,1), the identity of the Z/25 factor, 26 = 2^20;
       10 is NILPOTENT (10^2 = 100 = 2*50).
 
+(24) BASE 52 (m = 51 = 3 * 17, square-free MIXED = F_3 x F_17; b EVEN). Islands
+    (3) = F_17 (17 elements), (17) = F_3. Nilradical {0}. Idempotents {0,1,18,34}.
+    Units 32 = C2 x C16. Zero divisors 18. CARRY COMPLEMENT: fixed point
+    26 = b/2 = 2^-1 -- MULT itself, FORCED by the choice b = 2 * 26 -- lying in the
+    preserved cosets 2 + (3) and 9 + (17). DOUBLING: permutation, ord(2) =
+    lcm(2, 8) = 8: cycles 1 x (0), 1 x length 2, 6 x length 8. ord(26) = 8 = ord(2)
+    (forced: inverses). CONTINGENT: dr_52(137) = 35 is an involution
+    (35^2 = 1225 = 24*51 + 1); 37 and 10 have the maximal order 16.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -602,6 +611,15 @@ assert [a for a in range(5) if (1 - a) % 5 == a] == [3] and [a for a in range(25
 assert pow(2, 20, m) == 26 and len({pow(2, k, m) for k in range(1, 21)}) == 20
 assert [2 * y % m for y in (10, 20, 40, 30)] == [20, 40, 30, 10]
 assert 137 % m == 37 and all(pow(37, 20 // q, m) != 1 for q in (2, 5))
+
+# (24) base 52
+m = 51
+assert [d for d in range(2, m) if m % d == 0] == [3, 17]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 18, 34]
+assert [r for r in range(m) if (1 - r) % m == r] == [26] and 26 % 3 == 2 and 26 % 17 == 9
+assert pow(2, 8, m) == 1 and pow(26, 8, m) == 1 and pow(26, 4, m) != 1
+assert 137 % m == 35 and 35 * 35 % m == 1
+assert pow(37, 16, m) == 1 and pow(37, 8, m) != 1 and pow(10, 16, m) == 1 and pow(10, 8, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
