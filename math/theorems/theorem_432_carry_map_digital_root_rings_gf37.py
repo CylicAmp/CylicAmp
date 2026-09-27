@@ -124,6 +124,19 @@ base b.
     dr_41(137) = 17, dr_41(37) = 37: units of order 4. 26 is a non-unit, and
     10 (= 26^-1 in GF(37)) is NILPOTENT here.
 
+(12) BASE 42 (m = 41 prime: root ring GF(41), a FIELD; b EVEN). No proper islands;
+    nilradical {0}; idempotents {0,1}. CARRY COMPLEMENT: exactly one fixed point
+    r = 21 = b/2 = 2^-1, a QR of order 20. As in base 38 (same proof: roots of
+    unity sum to 0, d <= 40 < 41), f maps no coset of any subgroup of GF(41)* of
+    order >= 2 onto a coset. |f(QR) & QR| = 9 = (p-5)/4, the classical cyclotomic
+    number of order 2 for p = 41 = 1 mod 4 (recorded, not claimed).
+    DOUBLING: permutation, but ord_41(2) = 20 (41 = 1 mod 8, so 2 is a QR): two
+    20-cycles, the QRs and the QNRs, plus fixed 0. Smallest primitive root 6.
+    No primitive sixth roots (41 = 2 mod 3): r^2 - r + 1 has no root, unlike base 38.
+    CONTINGENT: 26 is a PRIMITIVE ROOT mod 41; 10 and 37 have order 5 (41 | 10^5 - 1
+    = 9 * 41 * 271, the period-5 decimal of 1/41) and 37 = 10^-1 = 10^4 mod 41
+    (10000 - 37 = 9963 = 41 * 3^5). dr_42(137) = 14, order 8, a QNR.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -337,6 +350,22 @@ assert any((x * 4) % m not in {0, 8, 16, 24, 32} for x in range(m))
 assert [2 * y % m for y in (8, 16, 32, 24)] == [16, 32, 24, 8]
 assert 137 % m == 17 and pow(17, 4, m) == 1 and pow(17, 2, m) != 1
 assert pow(37, 4, m) == 1 and pow(37, 2, m) != 1
+
+# (12) base 42
+p = 41
+QR41 = {x * x % p for x in range(1, p)}
+assert [r for r in range(p) if (1 - r) % p == r] == [21] and 21 in QR41
+assert {pow(2, k, p) for k in range(20)} == QR41 and pow(2, 20, p) == 1
+assert not [r for r in range(p) if (r * r - r + 1) % p == 0]
+assert len({(1 - x) % p for x in QR41} & QR41) == (p - 5) // 4 == 9
+assert all(pow(26, 40 // q, p) != 1 for q in (2, 5))                     # 26 primitive mod 41
+assert pow(10, 5, p) == 1 and pow(37, 5, p) == 1 and 10 * 37 % p == 1
+assert pow(10, 4, p) == 37 and 10**5 - 1 == 9 * 41 * 271 and 10000 - 37 == 41 * 3**5
+assert 137 % p == 14 and pow(14, 8, p) == 1 and pow(14, 4, p) != 1 and 14 not in QR41
+for d in (2, 4, 5, 8, 10, 20, 40):
+    H = {pow(6, 40 // d * i, p) for i in range(d)}
+    cos = {frozenset(x * h % p for h in H) for x in range(1, p)}
+    assert not any(frozenset((1 - x) % p for x in c) in cos for c in cos)
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
