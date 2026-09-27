@@ -267,6 +267,15 @@ base b.
     CONTINGENT: MULT = 26 is NILPOTENT here, the only nonzero one (26^2 = 676 =
     13*52); dr_53(137) = 33 and 37 are units of order 12; 10 is a zero divisor.
 
+(26) BASE 54 (m = 53 prime: root ring GF(53), a FIELD; b EVEN). Carry complement
+    fixes exactly 27 = 2^-1 (= 3^3). No coset of any subgroup of order >= 2 maps to
+    a coset. |f(QR) & QR| = 12 = (p-5)/4 (p = 1 mod 4). No primitive sixth roots
+    (53 = 2 mod 3). DOUBLING: 2 is PRIMITIVE mod 53 (53 = 5 mod 8 makes 2 a QNR;
+    2^4 = 16 != 1): a single 52-cycle on all nonzero residues plus 0 -- the same
+    shape as base 38 (2 primitive mod 37).
+    CONTINGENT: 137 = 31 and 26 are primitive roots; 37 has order 26; 10 has order
+    13 (1/53 has decimal period 13). dlog_2: 26 -> 25, 37 -> 30, 10 -> 48.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -640,6 +649,17 @@ C53 = [4, 8, 16, 32, 12, 24, 48, 44, 36, 20, 40, 28]
 assert all(C53[(i + 1) % 12] == 2 * C53[i] % m for i in range(12)) and all((4 * x) % m in set(C53) | {0} for x in range(m))
 assert 137 % m == 33 and pow(33, 12, m) == 1 and pow(33, 6, m) != 1 and pow(33, 4, m) != 1
 assert pow(37, 12, m) == 1 and pow(37, 6, m) != 1 and pow(37, 4, m) != 1
+
+# (26) base 54
+p = 53
+QR53 = {x * x % p for x in range(1, p)}
+assert [r for r in range(p) if (1 - r) % p == r] == [27] and 27 == 3**3
+assert len({(1 - x) % p for x in QR53} & QR53) == 12 and not [r for r in range(p) if (r * r - r + 1) % p == 0]
+assert all(pow(2, 52 // q, p) != 1 for q in (2, 13)) and 2 not in QR53
+assert all(all(pow(g, 52 // q, p) != 1 for q in (2, 13)) for g in (137 % p, 26))
+assert pow(37, 26, p) == 1 and pow(37, 13, p) != 1 and pow(37, 2, p) != 1
+assert pow(10, 13, p) == 1 and pow(10, 1, p) != 1
+assert [pow(2, k, p) for k in (25, 30, 48)] == [26, 37, 10]
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
