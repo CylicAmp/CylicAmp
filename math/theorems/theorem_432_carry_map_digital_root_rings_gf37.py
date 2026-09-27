@@ -137,6 +137,25 @@ base b.
     = 9 * 41 * 271, the period-5 decimal of 1/41) and 37 = 10^-1 = 10^4 mod 41
     (10000 - 37 = 9963 = 41 * 3^5). dr_42(137) = 14, order 8, a QNR.
 
+(13) BASE 43 (m = 42 = 2*3*7, square-free MIXED = F_2 x F_3 x F_7). Six proper
+    islands (2),(3),(6),(7),(14),(21). Nilradical {0}. EIGHT idempotents
+    {0,1,7,15,21,22,28,36}, one per CRT pattern in {0,1}^3. Units 12 = C2 x C6.
+    Zero divisors 29. CARRY COMPLEMENT: no fixed point (42 even); preserved cosets
+    2 + (3), 4 + (7), 11 + (21) = {11, 32} (f swaps 11 and 32).
+    DOUBLING: one step (v2 = 1) onto (2) = Z/21 = base 22's root ring F_3 x F_7;
+    there ord(2) = lcm(2, 3) = 6: cycles (2 4 8 16 32 22), (10 20 40 38 34 26) on
+    the Z/21-units, (6 12 24), (18 36 30) on its F_7 island, (14 28) on its F_3
+    island, and 0. The idempotent 22 = (0,1,1), identity of Z/21, is on a cycle.
+    dr_43(137) = 11, a unit of order 6, lying in the preserved coset 11 + (21).
+
+(14) 137 IS THE CARRY MIDPOINT MODULO EVERY DIVISOR OF 273 (contingent, proved).
+    2 * 137 - 1 = 273 = 3 * 7 * 13, so 137 = 2^-1 mod d for every d | 273. In every
+    base b with b - 1 | 273 -- b = 4, 8, 14, 22, 40, 92, 274 -- dr_b(137) is the
+    unique fixed point b/2 of the carry complement; in any base whose root modulus
+    has odd part dividing 273 (e.g. base 43, odd part 21), 137 lies in the
+    preserved coset of that odd island. Base 40 (section 10) and base 43 are two
+    instances of this one fact.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -366,6 +385,26 @@ for d in (2, 4, 5, 8, 10, 20, 40):
     H = {pow(6, 40 // d * i, p) for i in range(d)}
     cos = {frozenset(x * h % p for h in H) for x in range(1, p)}
     assert not any(frozenset((1 - x) % p for x in c) in cos for c in cos)
+
+# (13) base 43
+m = 42
+assert [d for d in range(2, m) if m % d == 0] == [2, 3, 6, 7, 14, 21]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 7, 15, 21, 22, 28, 36]
+assert not [r for r in range(m) if (1 - r) % m == r]
+assert {d: [a for a in range(d) if (1 - a) % d == a] for d in (2, 3, 6, 7, 14, 21)} == \
+    {2: [], 3: [2], 6: [], 7: [4], 14: [], 21: [11]}
+assert (1 - 11) % m == 32 and (1 - 32) % m == 11
+assert len({2 * x % m for x in range(m)}) == 21
+assert [2 * y % m for y in (2, 4, 8, 16, 32, 22)] == [4, 8, 16, 32, 22, 2]
+assert 137 % m == 11 and pow(11, 6, m) == 1 and pow(11, 3, m) != 1 and pow(11, 2, m) != 1
+
+# (14) 137 = 2^-1 mod every divisor of 273
+assert 2 * 137 - 1 == 273 == 3 * 7 * 13
+D273 = [d for d in range(2, 274) if 273 % d == 0]
+assert D273 == [3, 7, 13, 21, 39, 91, 273]
+assert all(2 * 137 % d == 1 for d in D273)
+for b in [d + 1 for d in D273]:
+    assert [r for r in range(b - 1) if (1 - r) % (b - 1) == r] == [b // 2] == [137 % (b - 1) or b - 1]
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
