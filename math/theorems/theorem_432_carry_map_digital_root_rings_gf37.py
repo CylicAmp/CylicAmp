@@ -237,6 +237,18 @@ base b.
     49): two 21-cycles on units; on the island (7 14 28), (21 42 35), and 0.
     CONTINGENT: 26 and 10 are PRIMITIVE ROOTS mod 49; 137 = 39 and 37 have order 21.
 
+(23) BASE 51 (m = 50 = 2 * 5^2, MIXED = Z/2 x Z/25). Islands (2),(5),(10),(25).
+    Nilradical (10) = {0,10,20,30,40}, index 2 (10^2 = 0). Idempotents {0,1,25,26}
+    (25 = (1,0), 26 = (0,1)). Units 20, cyclic. Zero divisors 29.
+    CARRY COMPLEMENT: no fixed point; preserved cosets 3 + (5) and 13 + (25)
+    (13 = 2^-1 mod 25). DOUBLING: one step onto the evens = Z/25 = base 26's root
+    ring; 2 primitive mod 25: a 20-cycle (2 4 8 16 ... 38 26) ending at the
+    idempotent 26 = 2^20, and the island cycle (10 20 40 30), plus 0.
+    CONTINGENT -- all three project constants take structural roles here:
+      dr_51(137) = 37  (137 = 2*50 + 37), and 37 GENERATES the unit group (C20);
+      26 is the IDEMPOTENT (0,1), the identity of the Z/25 factor, 26 = 2^20;
+      10 is NILPOTENT (10^2 = 100 = 2*50).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -579,6 +591,17 @@ assert pow(2, 21, m) == 1 and pow(2, 3, m) != 1 and pow(2, 7, m) != 1
 assert [2 * y % m for y in (7, 14, 28, 21, 42, 35)] == [14, 28, 7, 42, 35, 21]
 assert all(pow(g, 42 // q, m) != 1 for g in (26, 10) for q in (2, 3, 7))
 assert pow(137 % m, 21, m) == 1 and pow(37, 21, m) == 1
+
+# (23) base 51
+m = 50
+assert [d for d in range(2, m) if m % d == 0] == [2, 5, 10, 25]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 10, 20, 30, 40] and 10 * 10 % m == 0
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 25, 26]
+assert not [r for r in range(m) if (1 - r) % m == r]
+assert [a for a in range(5) if (1 - a) % 5 == a] == [3] and [a for a in range(25) if (1 - a) % 25 == a] == [13]
+assert pow(2, 20, m) == 26 and len({pow(2, k, m) for k in range(1, 21)}) == 20
+assert [2 * y % m for y in (10, 20, 40, 30)] == [20, 40, 30, 10]
+assert 137 % m == 37 and all(pow(37, 20 // q, m) != 1 for q in (2, 5))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
