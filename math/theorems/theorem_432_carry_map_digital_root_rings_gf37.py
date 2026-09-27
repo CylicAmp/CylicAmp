@@ -276,6 +276,17 @@ base b.
     CONTINGENT: 137 = 31 and 26 are primitive roots; 37 has order 26; 10 has order
     13 (1/53 has decimal period 13). dlog_2: 26 -> 25, 37 -> 30, 10 -> 48.
 
+(27) BASE 55 (m = 54 = 2 * 3^3, MIXED = Z/2 x Z/27). Islands (2),(3),(6),(9),(18),
+    (27). Nilradical (6), 9 elements; 6 has nilpotency index 3 (6^2 = 36, 6^3 = 0)
+    -- the 3^3 factor. Idempotents {0,1,27,28}. Units 18, cyclic. Zero divisors 35.
+    CARRY COMPLEMENT: no fixed point; preserved cosets 2+(3), 5+(9), 14+(27).
+    DOUBLING: one step onto the evens = Z/27 = base 28's (local) root ring:
+    an 18-cycle on its units (2 primitive mod 27), a 6-cycle (6 12 24 48 42 30) on
+    its island, the 2-cycle (18 36), and 0.
+    CONTINGENT: 37 IS A CUBE ROOT OF UNITY mod 54 (37^2 = 19, 37*19 = 703 =
+    13*54 + 1; cube roots {1, 19, 37}) -- the role 26 plays in GF(37).
+    dr_55(137) = 29 GENERATES the unit group (order 18). 26 and 10 are zero divisors.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -660,6 +671,16 @@ assert all(all(pow(g, 52 // q, p) != 1 for q in (2, 13)) for g in (137 % p, 26))
 assert pow(37, 26, p) == 1 and pow(37, 13, p) != 1 and pow(37, 2, p) != 1
 assert pow(10, 13, p) == 1 and pow(10, 1, p) != 1
 assert [pow(2, k, p) for k in (25, 30, 48)] == [26, 37, 10]
+
+# (27) base 55
+m = 54
+assert [d for d in range(2, m) if m % d == 0] == [2, 3, 6, 9, 18, 27]
+assert [x for x in range(m) if pow(x, m, m) == 0] == list(range(0, m, 6)) and pow(6, 2, m) == 36 and pow(6, 3, m) == 0
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 27, 28]
+assert {d: a for d in (3, 9, 27) for a in [[a for a in range(d) if (1 - a) % d == a]]} == {3: [2], 9: [5], 27: [14]}
+assert [2 * y % m for y in (6, 12, 24, 48, 42, 30)] == [12, 24, 48, 42, 30, 6] and 2 * 18 % m == 36 and 2 * 36 % m == 18
+assert [x for x in range(m) if pow(x, 3, m) == 1] == [1, 19, 37] and 37 * 37 % m == 19 and 37 * 19 == 13 * m + 1
+assert 137 % m == 29 and all(pow(29, 18 // q, m) != 1 for q in (2, 3))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
