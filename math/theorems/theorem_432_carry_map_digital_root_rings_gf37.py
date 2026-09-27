@@ -98,6 +98,18 @@ base b.
     Base 37: a = 2, n = 9 -> base 10's 3-6-9 ring. Base 39: a = 1, n = 19 -> F_19.
     Even b (m odd): a = 0, x2 is a permutation (the midpoint-inverse case).
 
+(10) BASE 40 (m = 39 = 3 * 13, square-free MIXED = F_3 x F_13; b EVEN). Islands
+    (3) (13 elements) and (13) = {0,13,26}. Nilradical {0}. Idempotents
+    {0,1,13,27} (13 = (1,0), 27 = (0,1)). Units 24 = C2 x C12 (max order 12, not
+    cyclic). Zero divisors 14.
+    CARRY COMPLEMENT: 39 odd, so f has exactly one fixed point, r = 20 = b/2 = 2^-1
+    (20 = 2 mod 3, 7 mod 13: the preserved cosets 2 + (3) and 7 + (13) meet in 20).
+    For D + d = 40^k the digital roots are equal only when both are 20.
+    DOUBLING (a = 0, permutation): two unit 12-cycles; island (3) = F_13 carries one
+    12-cycle (2 primitive mod 13); island (13) = F_3 carries (13 26); 0 fixed.
+    CONTINGENT: dr_40(137) = 137 mod 39 = 20, the carry midpoint itself, because
+    2 * 137 = 274 = 7 * 39 + 1 (273 = 3*7*13). MULT = 26 lies in the island (13).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -284,6 +296,18 @@ for b in range(3, 61):
         assert any((x * 2**(a - 1)) % m not in ideal for x in range(m))    # a is sharp
     assert sorted(x % n for x in ideal) == list(range(n)) if n > 1 else True
     assert all((2 * x) % m % n == (2 * (x % n)) % n for x in ideal)        # x2 on (2^a) = x2 on Z/n
+
+# (10) base 40
+m = 39
+assert [d for d in range(2, m) if m % d == 0] == [3, 13]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 13, 27]
+assert [r for r in range(m) if (1 - r) % m == r] == [20]
+assert 20 % 3 == 2 and 20 % 13 == 7
+assert 137 % m == 20 and 2 * 137 % m == 1 and 273 == 3 * 7 * 13
+assert 26 % 13 == 0
+assert sorted({2 * x % m for x in range(m)}) == list(range(m))          # permutation
+assert next(k for k in range(1, 13) if pow(2, k, 13) == 1) == 12
+assert (2 * 13) % m == 26 and (2 * 26) % m == 13
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
