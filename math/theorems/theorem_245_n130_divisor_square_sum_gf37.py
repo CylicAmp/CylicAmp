@@ -757,6 +757,28 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           (tools/divisor_square_pqr.py.) Not a proof: nothing bounds q.
           Three primes with higher exponents, and >= 4 primes: OPEN.
 
+          THEOREM D (three primes, any exponents). s = p^a q^b r^c, primes
+          >= 5, e_x = exponent of x in s, M = max e_x. Call (x, y) a
+          WIEFERICH PAIR if y^(x-1) = 1 (mod x^2). For x needing 2 e_x
+          factors, by LTE each other prime y supplies at most
+          w_x(y) + v_x(2e_y + 1), w_x(y) = v_x(y^(x-1) - 1), and 1435
+          supplies at most 1. With no Wieferich pair (all w = 1):
+              2M <= 3 + 2 log_5(2M + 1).
+          M >= 3: 6 > 3 + 2 log_5 7 = 5.42, and the left side outgrows the
+          right. M = 2: need x | 2e_y + 1 with e_y <= 2, so 2e_y+1 = 5,
+          x = 5, e_y = 2; then y also attains M and the same argument makes
+          y = 5 = x, contradiction. HENCE: without a Wieferich pair among
+          p, q, r, every exponent is 1 (s = pqr, searched to q < 1e6 above).
+          The same count for two primes gives 2M <= 2 + log_5(2M+1), so
+          M = 1 directly -- consistent with Theorem C.
+          Brute check: three primes < 160, exponents 1..3: 176 715 cases,
+          0 solutions. Four or more primes: the bound 2M <= k + (k-1)
+          log_5(2M+1) no longer caps M at 1 (k = 4 admits M = 3). OPEN.
+          Literature (checked 2026-09-27): OEIS A046762 (n | sigma_2(n)) is
+          infinite (AMM Problem 11090); Cai-Chen-Zhang: sigma_2(n)/n = b has
+          finitely many solutions per b. Nothing on square terms. The odd
+          multiperfect analogue is open in general.
+
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
                   233^2+1 = 2*5*61*89. They co-occur in all 24 members
