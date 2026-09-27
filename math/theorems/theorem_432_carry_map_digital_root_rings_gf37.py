@@ -209,6 +209,14 @@ base b.
     CONTINGENT: dr_47(137) = 45 = -1, an involution (138 = 3 * 46); 37 GENERATES
     the unit group (order 22). 26 and 10 are non-units.
 
+(20) BASE 48 (m = 47 prime: root ring GF(47), a FIELD; b EVEN). Carry complement
+    fixes exactly r = 24 = 2^-1. No coset of any subgroup of order >= 2 maps to a
+    coset (roots-of-unity sum). |f(QR) & QR| = 11 = (p-3)/4 (p = 3 mod 4). No
+    primitive sixth roots (47 = 2 mod 3). DOUBLING: permutation, ord_47(2) = 23
+    (2 is a QR, 47 = 7 mod 8): two 23-cycles plus 0; primitive root 5.
+    CONTINGENT: 137 = 43, 26 and 10 are all PRIMITIVE ROOTS mod 47; 37 has order 23
+    (a QR). 47 = 10 (mod 37), in IC.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -521,6 +529,15 @@ assert [a for a in range(23) if (1 - a) % 23 == a] == [12]
 assert next(k for k in range(1, 23) if pow(2, k, 23) == 1) == 11
 assert 137 % m == m - 1 and 138 == 3 * m
 assert all(pow(37, 22 // q, m) != 1 for q in (2, 11))
+
+# (20) base 48
+p = 47
+QR47 = {x * x % p for x in range(1, p)}
+assert [r for r in range(p) if (1 - r) % p == r] == [24]
+assert len({(1 - x) % p for x in QR47} & QR47) == 11 and not [r for r in range(p) if (r * r - r + 1) % p == 0]
+assert pow(2, 23, p) == 1 and 2 in QR47
+assert all(all(pow(g, 46 // q, p) != 1 for q in (2, 23)) for g in (137 % p, 26, 10))
+assert pow(37, 23, p) == 1 and 47 % 37 == 10
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")

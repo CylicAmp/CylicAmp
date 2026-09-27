@@ -21,6 +21,20 @@ VERDICT: FORCED BY DEFINITION, not predictive.
     32/32/30 across the three classes -- uniform, as Dirichlet predicts.
   * Dataset 43 label "first 20 each" lists all such primes below 1000.
   * Arithmetic checks: 73^3 + 1 = 37 * 10514, 101^3 + 1 = 37 * 27846 (correct).
+
+COMPLETE CRITERION (supersedes the supplied "(A) odd special exponent, (B) p = 7,
+e = 2 mod 3", which covers 69.3% and misses e.g. 243 = 3^5). sigma_3 is
+multiplicative, so 37 | sigma_3(n) iff some p^e || n has 37 | sigma_3(p^e). For
+p != 37 let d = ord_37(p^3) (d | 12, the cubes form the order-12 subgroup):
+    d > 1:  37 | sigma_3(p^e)  iff  d | e + 1
+    d = 1 (p = 1, 10, 26 mod 37):  iff  37 | e + 1
+    p = 37: sigma_3 = 1, never.
+(A) is d = 2; (B) is d = 3 for p = 7 -- but EVERY prime with p^3 in {10, 26}
+(7, 53, 71, 83, 107, 127, ...) behaves like 7. 3^5 is d = 6 (ord(3) = 18,
+ord(27) = 6, 6 | 5 + 1). Verified for every n <= 1e5: zeros certified by
+d = 2: 15428, d = 3: 1838, d = 4: 16, d = 6: 274, d = 12: 24.
+Dataset 50 "twin elevation" 20.0% vs 18.6% on n = 2000 each: z = 1.12, not
+significant.
 """
 from sympy import factorint, isprime, primerange
 
@@ -56,6 +70,27 @@ assert [sum(c % q == 0 for c in centers) for q in (11, 73, 101, 307)] == [231, 2
 sp = [q for q in primerange(2, 10000) if q % 37 in (11, 27, 36)]
 assert len(sp) == 94
 assert 73**3 + 1 == 37 * 10514 and 101**3 + 1 == 37 * 27846
+
+def _ord37(y):
+    k, x = 1, y % 37
+    while x != 1:
+        x = x * y % 37
+        k += 1
+    return k
+
+
+def _crit(n):
+    for q, e in factorint(n).items():
+        if q == 37:
+            continue
+        d = _ord37(pow(q, 3, 37))
+        if (d > 1 and (e + 1) % d == 0) or (d == 1 and (e + 1) % 37 == 0):
+            return True
+    return False
+
+
+assert all((sig3(n) % 37 == 0) == _crit(n) for n in range(1, 20001))
+assert sig3(243) % 37 == 0 and _ord37(27) == 6 and _ord37(pow(7, 3, 37)) == 3
 
 if __name__ == "__main__":
     print("E8-zero audit: supplied matrix reproduced exactly from 37 | sigma_3(c); forced by p^3 = -1.")
