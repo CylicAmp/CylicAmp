@@ -258,6 +258,15 @@ base b.
     (forced: inverses). CONTINGENT: dr_52(137) = 35 is an involution
     (35^2 = 1225 = 24*51 + 1); 37 and 10 have the maximal order 16.
 
+(25) BASE 53 (m = 52 = 2^2 * 13, MIXED = Z/4 x Z/13). Islands (2),(4),(13),(26).
+    Nilradical (26) = {0, 26}. Idempotents {0,1,13,40} (13 = (1,0), 40 = (0,1)).
+    Units 24 = C2 x C12. Zero divisors 27. CARRY COMPLEMENT: no fixed point; only
+    preserved coset 7 + (13) (7 = 2^-1 mod 13). DOUBLING: settles in v2(52) = 2
+    steps onto (4) = Z/13 = base 14's root ring; 2 primitive mod 13, one 12-cycle
+    (4 8 16 32 12 24 48 44 36 20 40 28) through the idempotent 40, plus 0.
+    CONTINGENT: MULT = 26 is NILPOTENT here, the only nonzero one (26^2 = 676 =
+    13*52); dr_53(137) = 33 and 37 are units of order 12; 10 is a zero divisor.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -620,6 +629,17 @@ assert [r for r in range(m) if (1 - r) % m == r] == [26] and 26 % 3 == 2 and 26 
 assert pow(2, 8, m) == 1 and pow(26, 8, m) == 1 and pow(26, 4, m) != 1
 assert 137 % m == 35 and 35 * 35 % m == 1
 assert pow(37, 16, m) == 1 and pow(37, 8, m) != 1 and pow(10, 16, m) == 1 and pow(10, 8, m) != 1
+
+# (25) base 53
+m = 52
+assert [d for d in range(2, m) if m % d == 0] == [2, 4, 13, 26]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 26] and 26 * 26 == 13 * m
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 13, 40]
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(13) if (1 - a) % 13 == a] == [7]
+C53 = [4, 8, 16, 32, 12, 24, 48, 44, 36, 20, 40, 28]
+assert all(C53[(i + 1) % 12] == 2 * C53[i] % m for i in range(12)) and all((4 * x) % m in set(C53) | {0} for x in range(m))
+assert 137 % m == 33 and pow(33, 12, m) == 1 and pow(33, 6, m) != 1 and pow(33, 4, m) != 1
+assert pow(37, 12, m) == 1 and pow(37, 6, m) != 1 and pow(37, 4, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
