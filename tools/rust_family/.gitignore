@@ -1,3 +1,5 @@
 target/
 *.state
 *.tmp
+*.log
+*.out
