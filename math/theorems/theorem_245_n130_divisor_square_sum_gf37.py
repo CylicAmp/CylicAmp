@@ -747,6 +747,16 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           p < r < 3000, a in 2..5, b in 1..5: 1 827 560 cases, 0 solutions.
           Two-prime a >= 2 remains OPEN beyond that range.
 
+          THREE PRIMES, ALL EXPONENT 1: s = pqr, 5 <= p < q < r.
+          Each factor x^2 +- x + 1 of sigma_2(p^2), sigma_2(q^2) is < r^2, so
+          r divides each at most once; r^2 therefore needs r | a factor of
+          sigma_2(q^2) AND r | a factor of sigma_2(p^2) (or r in {7, 41}).
+          r | p^2 +- p + 1 with p < r fixes p among the roots
+          (-+1 +- sqrt(-3))/2 mod r, so each q costs O(1).
+          q < 1e6: 1 753 triples meet the r-condition; 0 full solutions.
+          (tools/divisor_square_pqr.py.) Not a proof: nothing bounds q.
+          Three primes with higher exponents, and >= 4 primes: OPEN.
+
           READ-OFF LINKS among recurring primes (all 95 members):
               89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
                   233^2+1 = 2*5*61*89. They co-occur in all 24 members
