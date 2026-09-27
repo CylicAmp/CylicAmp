@@ -156,6 +156,17 @@ base b.
     preserved coset of that odd island. Base 40 (section 10) and base 43 are two
     instances of this one fact.
 
+(15) BASE 44 (m = 43 prime: root ring GF(43), a FIELD; b EVEN). Carry complement
+    fixes exactly r = 22 = 2^-1 (a QNR). f maps no coset of any subgroup of order
+    >= 2 onto a coset (same roots-of-unity proof). |f(QR) & QR| = 10 = (p-3)/4,
+    the classical count for p = 3 mod 4 (recorded). DOUBLING: permutation with
+    ord_43(2) = 14 (2 is a QNR, 43 = 3 mod 8): three 14-cycles plus 0; smallest
+    primitive root 3. Cube roots of unity {1, 6, 36}; primitive sixth roots {7, 37}
+    (roots of r^2 - r + 1), swapped by f (1 - 7 = -6 = 37).
+    CONTINGENT: 37 IS A PRIMITIVE SIXTH ROOT OF UNITY MOD 43 (37 = -6, 6^3 = 1;
+    37^2 - 37 + 1 = 1333 = 43 * 31). 26 is a primitive root mod 43 (as mod 41).
+    10 has order 21 (1/43 has decimal period 21). dr_44(137) = 8 = 2^3, order 14.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -405,6 +416,23 @@ assert D273 == [3, 7, 13, 21, 39, 91, 273]
 assert all(2 * 137 % d == 1 for d in D273)
 for b in [d + 1 for d in D273]:
     assert [r for r in range(b - 1) if (1 - r) % (b - 1) == r] == [b // 2] == [137 % (b - 1) or b - 1]
+
+# (15) base 44
+p = 43
+QR43 = {x * x % p for x in range(1, p)}
+assert [r for r in range(p) if (1 - r) % p == r] == [22] and 22 not in QR43
+assert len({(1 - x) % p for x in QR43} & QR43) == (p - 3) // 4 == 10
+assert pow(2, 14, p) == 1 and all(pow(2, k, p) != 1 for k in range(1, 14))
+assert [r for r in range(1, p) if pow(r, 3, p) == 1] == [1, 6, 36]
+assert [r for r in range(p) if (r * r - r + 1) % p == 0] == [7, 37] and (1 - 7) % p == 37
+assert pow(37, 6, p) == 1 and all(pow(37, k, p) != 1 for k in (1, 2, 3)) and 37 * 37 - 37 + 1 == 43 * 31
+assert all(pow(26, 42 // q, p) != 1 for q in (2, 3, 7))
+assert pow(10, 21, p) == 1 and all(pow(10, 21 // q, p) != 1 for q in (3, 7))
+assert 137 % p == 8 == 2**3
+for d in (2, 3, 6, 7, 14, 21, 42):
+    H = {pow(3, 42 // d * i, p) for i in range(d)}
+    cos = {frozenset(x * h % p for h in H) for x in range(1, p)}
+    assert not any(frozenset((1 - x) % p for x in c) in cos for c in cos)
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
