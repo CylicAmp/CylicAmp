@@ -789,6 +789,18 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           Members containing: 7:61 13:50 17:36 61:27 29:24 89:24 233:24
           43:20 37:19 41:12 157:8 67:7 97:6 137:2 23:0.
           23 occurs in NO member (23^2+1 = 2*5*53, and 53 divides no m).
+
+          WHY 89 AND 233 (2026-09-27). Distinct primes q < r with q | r^2+1
+          and r | q^2+1 satisfy qr | q^2 + r^2 + 1, i.e. q^2 + r^2 + 1 = k q r.
+          Vieta jumping (replace r by kq - r) descends to (1,1), forcing k = 3;
+          the solutions are consecutive odd-index Fibonacci numbers
+          1, 2, 5, 13, 34, 89, 233, 610, 1597, ... (F_1, F_3, F_5, ...).
+          89^2 + 233^2 + 1 = 62211 = 3*89*233. Both-prime consecutive pairs:
+          (5, 13) and (89, 233) (= F_11, F_13); the next candidates fail
+          (610 even, 4181 = 37*113, 75025, 1346269 = 557*2417, ...). So the
+          89 <-> 233 read-off 2-cycle is the Markov-type equation
+          x^2 + y^2 + 1 = 3xy, and it is the ONLY exponent-1 two-cycle among
+          primes above 13.
           Member counts 26 / 55 / 95 at 1e12 / 1e14 / 1e16.
 
           Solutions known: 98 = 95 family members + 130, 148480, 3039520.
