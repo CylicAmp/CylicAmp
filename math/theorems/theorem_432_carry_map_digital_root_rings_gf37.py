@@ -61,6 +61,24 @@ base b.
     12"). New here only: that quotient is Z/36 modulo the ideal (12) of the
     base-37 digital-root ring. dr_37(137) = 29, a unit of order 6.
 
+(7) BASE 38 (m = 37: the root ring IS GF(37), a FIELD). Dual of base 37: the
+    digit ring Z/38 = Z/2 x Z/19 is mixed while the root ring is a field (base 37
+    had digit field F_37 and mixed root ring Z/36). Each carry lowers the digit sum
+    by 37, so s_38(x) = x (mod 37): the base-38 digital root is reduction in GF(37).
+    No proper islands (ideals); nilradical {0}; idempotents {0,1}; x2 is a single
+    36-cycle on units (2 primitive mod 37) plus fixed 0.
+    CARRY COMPLEMENT f(r) = 1 - r: exactly one fixed point, r = 19 = b/2 = 2^-1,
+    and 19 lies in CAS_EXT = {5,13,19}. For D + d = 38^k (D, d >= 1) the digital
+    roots sum to 38 and coincide only when both are 19.
+    THEOREM: f maps NO coset xH of any subgroup H of GF(37)* with |H| = d >= 2
+    onto a coset. Proof: sum_{h in H} h = 0 (the d-th roots of unity), so
+    1 - xH = yH would give d = 0 in GF(37), impossible for d <= 36. In particular
+    no 137-orbit (coset of <26>) maps to an orbit. f fixes 19 and swaps the
+    primitive sixth roots 11 <-> 27 (roots of r^2 - r + 1), both in NEG_H;
+    f(NEG_H) = {2, 11, 27}.
+    The 12 x 12 incidence #{x in O_i : 1 - x in O_j} is the order-12 cyclotomic
+    number matrix of p = 37 (Gauss/Dickson) -- standard, recorded not claimed.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -200,6 +218,20 @@ assert len(DLOG) == 36 and DLOG[26] == 12
 ORB = {frozenset({x, 26 * x % 37, 26 * 26 * x % 37}) for x in range(1, 37)}
 assert len(ORB) == 12 and all(len({DLOG[y] % 12 for y in o}) == 1 for o in ORB)
 assert 137 % 36 == 29
+
+# (7) base 38: root ring GF(37)
+p = 37
+assert [r for r in range(p) if (1 - r) % p == r] == [19] and 2 * 19 % p == 1
+CAS_EXT = {5, 13, 19}
+assert 19 in CAS_EXT
+assert sorted((1 - x) % p for x in (11, 27, 36)) == [2, 11, 27]
+assert [r for r in range(p) if (r * r - r + 1) % p == 0] == [11, 27]
+assert all(pow(2, k, p) != 1 for k in range(1, 36))
+for d in (2, 3, 4, 6, 9, 12, 18, 36):
+    H = {pow(2, 36 // d * i, p) for i in range(d)}
+    assert sum(H) % p == 0
+    cos = {frozenset(x * h % p for h in H) for x in range(1, p)}
+    assert not any(frozenset((1 - x) % p for x in c) in cos for c in cos)
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
