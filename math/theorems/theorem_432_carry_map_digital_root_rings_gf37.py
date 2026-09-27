@@ -167,6 +167,20 @@ base b.
     37^2 - 37 + 1 = 1333 = 43 * 31). 26 is a primitive root mod 43 (as mod 41).
     10 has order 21 (1/43 has decimal period 21). dr_44(137) = 8 = 2^3, order 14.
 
+(16) BASE 45 (m = 44 = 2^2 * 11, MIXED = Z/4 x Z/11). Proper islands (2),(4),(11),
+    (22). Nilradical (22) = {0, 22} (index 2). Idempotents {0,1,12,33} (33 = (1,0),
+    12 = (0,1)). Units 20 = C2 x C10. Zero divisors 23. CARRY COMPLEMENT: no fixed
+    point (44 even); only preserved coset 6 + (11) = {6,17,28,39} (6 = 2^-1 mod 11).
+    DOUBLING: settles in v2(44) = 2 steps onto (4) = Z/11 = base 12's root ring;
+    2 primitive mod 11: one 10-cycle (4 8 16 32 20 40 36 28 12 24) plus 0; the
+    idempotent 12 = (0,1) lies on it.
+    CONTINGENT: dr_45(137) = 5 and dr_45(37) = 37 are units of order 5 with
+    37 = 137^3 (mod 44), since 5^3 = 125 = 2*44 + 37. 26 and 10 are non-units.
+    Notation (supplied note, correct): dr is the least POSITIVE residue; it differs
+    from Z -> Z/(b-1) exactly on positive multiples of b-1 (dr gives b-1, the
+    residue gives 0). The complement identity dr(D) + dr(d) = b is an integer
+    equation and needs that convention; this file's dr() follows it.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -433,6 +447,19 @@ for d in (2, 3, 6, 7, 14, 21, 42):
     H = {pow(3, 42 // d * i, p) for i in range(d)}
     cos = {frozenset(x * h % p for h in H) for x in range(1, p)}
     assert not any(frozenset((1 - x) % p for x in c) in cos for c in cos)
+
+# (16) base 45
+m = 44
+assert [d for d in range(2, m) if m % d == 0] == [2, 4, 11, 22]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 22]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 12, 33]
+assert not [r for r in range(m) if (1 - r) % m == r]
+assert {d: [a for a in range(d) if (1 - a) % d == a] for d in (2, 4, 11, 22)} == {2: [], 4: [], 11: [6], 22: []}
+C45 = [4, 8, 16, 32, 20, 40, 36, 28, 12, 24]
+assert all(C45[(i + 1) % 10] == 2 * C45[i] % m for i in range(10))
+assert all((x * 4) % m in set(C45) | {0} for x in range(m))
+assert 137 % m == 5 and pow(5, 3, m) == 37 and pow(5, 5, m) == 1 and pow(37, 5, m) == 1
+assert dr(9, 10) == 9 and 9 % 9 == 0 and dr(10, 10) == 1 and dr(45, 10) == 9
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
