@@ -6,13 +6,13 @@ Three interconnected results:
 LoB_591: RAMANUJAN CONGRUENCE NODE SEQUENCE
   Condition: n ≡ 4 (mod 5) AND DR(n) = 1
   Nodes: {19, 64, 109, 154, 199, 244, 289, ...}  — period 45 = LCM(5,9)
-  Node 64 = 60+4, DR(64)=1. First sovereignty-aligned Ramanujan node.
+  Node 64 = 60+4, DR(64)=1. First f26-aligned Ramanujan node.
 
   Real Ramanujan congruence (for reference):
     p(5n+4) ≡ 0 (mod 5) for all n≥0  [Ramanujan 1919]
     Verified: p(4)=5, p(9)=30, p(14)=135, p(19)=490, p(24)=1575 ...
     All divisible by 5. The LoB_591 condition selects nodes where DR=1
-    (sovereign unity) aligns with the 5-congruence positions.
+    (f26 unity) aligns with the 5-congruence positions.
 
 LoB_592: HARDY-RAMANUJAN ASYMPTOTIC PULSE
   p(n) ~ (1/(4n√3)) × exp(π√(2n/3))
@@ -26,8 +26,8 @@ LoB_595: 74-HORIZON LOCK
   Connections:
     595 = 5 × 119   (5 copies of the bridge node)
     74  = 2 × 37    (Group B cycle sum from cycle partition theorem)
-    DR(595) = 1     (sovereign unity)
-    Result 3 ∈ {3,12,21,30}  — lands directly on sovereign range target 3
+    DR(595) = 1     (f26 unity)
+    Result 3 ∈ {3,12,21,30}  — lands directly on f26 range target 3
 
   The 74-horizon collapses the 5×bridge back to the trinity start.
 """
@@ -55,7 +55,7 @@ assert all(g == 45 for g in gaps), "Period not 45"
 assert lock_74_horizon() == 3
 assert 595 == 5 * 119
 assert 74 == 2 * 37
-assert lock_74_horizon() in {3, 12, 21, 30}  # sovereign range
+assert lock_74_horizon() in {3, 12, 21, 30}  # f26 range
 
 
 if __name__ == "__main__":
@@ -67,6 +67,6 @@ if __name__ == "__main__":
     print("=== LoB_595: 74-Horizon Lock ===")
     print(f"595 % 74 = {lock_74_horizon()}")
     print(f"595 = 5 × 119 (bridge node), 74 = 2 × 37 (Group B sum)")
-    print(f"Result {lock_74_horizon()} in sovereign range: True")
+    print(f"Result {lock_74_horizon()} in f26 range: True")
     print()
     print("All assertions passed.")

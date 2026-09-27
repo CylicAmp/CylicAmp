@@ -20,7 +20,7 @@ E1 (120-cell cells/edge):
 
 E2 (5 is non-residue mod 37):
   - fps37_scanner.py QR_MOD37: 5 not present — CLEAN (was already correct in v2)
-  - fps37_scanner.py is_pivot: residue==5 flags PIVOT_PRIME (prime, not QR) — CLEAN
+  - fps37_scanner.py is_pivot: residue==5 flags residue_5 (prime, not QR) — CLEAN
   - fps37_scanner.py has_sqrt: returns False for residue 5 — CORRECT
   - No assertion anywhere claims 5 is QR
 
@@ -42,7 +42,7 @@ def verify_errata():
     legendre_5_37 = pow(5, (37 - 1) // 2, 37)  # Euler criterion
     assert legendre_5_37 == 36, f"Expected 36 (≡-1), got {legendre_5_37}"
 
-    # Residue 5 is prime (PIVOT_PRIME label is correct)
+    # Residue 5 is prime (residue_5 label is correct)
     assert 5 in {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31}
 
     return "ERRATA_CLEAN"
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     print(f"E2: 5 mod 37 residue status")
     print(f"    Legendre(5|37) = 5^18 mod 37 = {legendre} (≡ -1 mod 37)")
     print(f"    5 in QR mod 37: {5 in set(qr_mod37)}")
-    print(f"    5 is prime (PIVOT_PRIME): correct label retained")
+    print(f"    5 is prime (residue_5): correct label retained")
     print()
 
     print("Dependency audit: no downstream contamination found.")

@@ -1,9 +1,9 @@
 """
-Theorem 28: Toroidal Projection of Sovereign Anchors
+Theorem 28: Toroidal Projection of F26 Anchors
 
-Maps the 4 sovereign anchors onto a torus T(R=37, r=3) where:
+Maps the 4 f26 anchors onto a torus T(R=37, r=3) where:
   theta = (node × 2π) / 37   — position on major circle (mod-37 field)
-  phi   = (node × 2π) / 3    — position on tube (order-3 heartbeat)
+  phi   = (node × 2π) / 3    — position on tube (order-3 f26_map)
 
 Key structural results:
 
@@ -21,7 +21,7 @@ Key structural results:
      Gap within (9,30): 291.89 - 87.57 = 204.32°  (identical)
      Offset between pairs: 87.57 - 38.92 = 48.65°
 
-The order-3 heartbeat (r=3) encodes the multiplicative order of 26 in Z/37Z,
+The order-3 f26_map (r=3) encodes the multiplicative order of 26 in Z/37Z,
 so the phi angle is the algebraic 3-cycle mapped to angular position on the tube.
 """
 

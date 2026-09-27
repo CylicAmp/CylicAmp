@@ -1,13 +1,13 @@
 """
 Shell Opacity Theorem: 100% INVIOLATE
 
-Of the 32 purge nodes, zero map into the sovereign range {3,12,21,30}.
+Of the 32 purge nodes, zero map into the f26 range {3,12,21,30}.
 Shell opacity = 32/32 = 100%.
 
-This is a direct corollary of the Sovereign Fixed Point bijection:
+This is a direct corollary of the F26 Fixed Point bijection:
   f(n) = (137n) mod 37 is a bijection on {1..36}.
   The 4 anchors {4,9,25,30} exclusively occupy the pre-images of {3,12,21,30}.
-  No purge node can reach a sovereign residue — the shell is mathematically sealed.
+  No purge node can reach a f26 residue — the shell is mathematically sealed.
 """
 
 DOMAIN = {4, 9, 25, 30}
