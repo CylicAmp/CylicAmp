@@ -888,6 +888,46 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           Members listed in math/theorems/t245_family_members_1e18.txt.
           Solutions known: 191 = 188 family members + 130, 148480, 3039520.
           Code: tools/divisor_square_family_1e18.py (DEPTH arg 6).
+
+          COMPLETE AT m <= 1e20 (2026-09-27): EXACTLY 358 MEMBERS.
+          (1) Up to SEVEN primes >= 250: 1e20/60 = 1.667e18 < 250^8. Read-off
+              to depth 7.
+          (2) CLUSTER SCAN REPLACED BY SUPPLY CYCLES. Every large prime of a
+              member must divide sigma_2 of some other prime power of m
+              (an in-edge y -> x when x | sigma_2(y^e)). Walking in-edges
+              backwards from any large prime ends at the small-prime core
+              (covered by read-off) or loops -- a SUPPLY CYCLE of large
+              primes. So every large prime is reachable from the core or from
+              a cycle, and it suffices to (a) enumerate all cycles with
+              product <= 1.667e18 and (b) seed the search with each.
+              Cycles are found from their smallest prime q: length >= 3, or
+              any exponent >= 2, forces q < B^(1/3) = 1 185 631; a 2-cycle with
+              both exponents 1 satisfies q^2 + r^2 + 1 = 3qr (Vieta), i.e.
+              consecutive odd-index Fibonacci primes -- none >= 250 in range.
+              Result: 55 cycles (321 717 nodes, 1528s), 1 disjoint pair
+              fitting in B, no triple. (t245_supply_cycles_1e20.json;
+              tools/divisor_square_supply_cycles.py.) At the 1e18 bound the
+              enumerator recovers the cycles inside both known clusters.
+          (3) Seeded searches (cycle primes forced into m, core + read-off
+              around them): all 56 give NO member. Positive control: seeding
+              1877 at 1e14 recovers member 34537682190000.
+          (4) Main search in RUST (tools/rust_family/), a line-for-line port
+              validated by IDENTICAL node counts and members against Python at
+              1e12 (1 832 796), 1e14 (37 450 482), 1e16 (300 318 563) and 1e18
+              (1 722 919 064; 188 members). Read-off below R = 1e6 uses
+              gcd(sigma_2(q^e), primorial(250..1e6)); checked against an
+              independent factorint on 3000 random (q,e,R): 3000/3000.
+              1e20: 159 724 items, 12 680 810 482 nodes, 11 437 s.
+          All 358 re-verified from scratch (sympy): 358/358. The 188 <= 1e18
+          are exactly the earlier set; 170 are new in (1e18, 1e20].
+          tau over all 358:
+             12:1  108:5  240:1  864:8  960:7  1200:2  1344:11  1620:4
+             1728:30  2160:20  3072:16  6720:2  6912:73  8640:17  10800:19
+             12096:47  12960:17  15360:11  21504:1  25920:26  27648:15
+             32400:2  34560:22  48384:1
+          New tau values: 21504, 27648, 32400, 48384. tau = 108: 5 members.
+          Members listed in math/theorems/t245_family_members_1e20.txt.
+          Solutions known: 361 = 358 family members + 130, 148480, 3039520.
           Code: tools/divisor_square_family_1e14.py (resumable, chunked),
           tools/divisor_square_clusters_general.py,
           tools/divisor_square_family_verify.py.
