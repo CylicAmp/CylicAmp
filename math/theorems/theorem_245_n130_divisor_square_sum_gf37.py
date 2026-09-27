@@ -773,6 +773,14 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           e_5 <= 3 (needs >= 2 other primes at exponent 2).
           This restricts shapes; it leaves infinitely many s. OPEN.
 
+          THEOREM G (five primes, no Wieferich pair): 2M <= 5 + 4 log_5(2M+1)
+          => M <= 5 (10 <= 10.96; 12 > 11.37). 2e_y+1 in {3,5,7,9,11}, so
+          only 5, 7, 11 gain from v_x(2e_y+1): e_x <= 2 elsewhere; e_11 <= 2
+          (booster needs exponent 5, unreachable); e_7 <= 3, and e_7 = 3
+          needs e_5 = 3; e_5 <= 4, and e_5 = 4 needs >= 3 others at exponent
+          2. In general k primes give 2M <= k + (k-1) log_5(2M+1): bounded
+          exponents for each k, but k is unbounded. OPEN.
+
           THREE PRIMES, ALL EXPONENT 1: s = pqr, 5 <= p < q < r.
           Each factor x^2 +- x + 1 of sigma_2(p^2), sigma_2(q^2) is < r^2, so
           r divides each at most once; r^2 therefore needs r | a factor of
