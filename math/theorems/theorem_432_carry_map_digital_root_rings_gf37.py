@@ -1,0 +1,179 @@
+# CLASS: THEOREM
+"""
+T432 — The carry map and the digital-root ring Z/(b-1)
+
+Definitions. s_b(x) = base-b digit sum. dr_b(x) = the digital root (x mod b-1 with
+0 -> b-1 for x > 0). CARRY MAP C_b(x, y) = number of carries when adding x + y in
+base b.
+
+(1) KUMMER'S IDENTITY (proved). C_b(x,y) = (s_b(x) + s_b(y) - s_b(x+y)) / (b-1).
+    Each carry replaces a column sum b by digit 0 plus 1 carried: the digit sum
+    drops by exactly b - 1. Hence s_b(x) + s_b(y) and s_b(x+y) lie in the same coset
+    of (b-1)Z, and C_b counts the coset steps between them. This is WHY digital
+    roots are additive mod b-1: carries are invisible modulo b-1.
+
+(2) BOUNDARY CARRIES (proved). If D + d = b^k with D, d >= 1 and v = v_b(D) (trailing
+    zeros), then v_b(d) = v and C_b(D, d) = k - v exactly: below position v both
+    digits are 0 (no carry); at position v the digits sum to b; above, each column
+    is (b-1) + carry = b, up to position k-1. Therefore
+        s_b(D) + s_b(d) = 1 + (b-1)(k - v),
+    and dr_b(D) + dr_b(d) = b (the supplied "absolute invariant", which needs
+    D, d >= 1; it fails at d = 0). The carry DEPTH is k - v, unbounded in k.
+
+(3) THE DIGITAL-ROOT RING R_b = Z/(b-1). With n = b - 1 = prod p_i^a_i:
+      units          phi(n), group = prod (Z/p_i^a_i)^x  (cyclic iff n in {1,2,4,p^a,2p^a})
+                     (the table lists these prime-power factors, e.g. n=35 prints
+                      C4xC6 = (Z/5)^x (Z/7)^x, which is C2xC12 in invariant factors)
+      idempotents    2^omega(n)      (one per CRT splitting)
+      nilpotents     n / rad(n)
+      zero divisors  n - phi(n) - 1  (nonzero non-units)
+      2 invertible   iff n odd       iff b even  (the midpoint inverse b/2)
+    CLASS: FIELD if n prime; LOCAL if n a prime power; MIXED if omega(n) >= 2.
+
+(4) BASE 13: R_13 = Z/12 = Z/4 x Z/3, MIXED. Units {1,5,7,11} = C2 x C2 (not
+    cyclic: every unit squares to 1). Idempotents {0,1,4,9}. Nilpotents {0,6}. Zero
+    divisors {2,3,4,6,8,9,10}. 2 not invertible (13 odd). Digit ring Z/13 = F_13,
+    primitive roots {2,6,7,11}.
+
+(5) GF(37). Base 38 is the base whose digital-root ring IS GF(37) (38 - 1 = 37):
+    in base 38 casting out 37s is dr, and the 137-map (x -> 26x) acts on digital
+    roots. Base 37 (the prime itself) has R_37 = Z/36 = Z/4 x Z/9, MIXED, units
+    C2 x C6 (order 12), 4 idempotents, 6 nilpotents; 2 not invertible (37 odd).
+    Recorded as structure; no claim that base 38 is otherwise distinguished.
+
+FALSIFICATION: any assertion below failing.
+"""
+import random
+from math import gcd
+from sympy import factorint, totient, primitive_root, is_primitive_root
+
+
+def digits(x, b):
+    out = []
+    while x:
+        out.append(x % b)
+        x //= b
+    return out
+
+
+def s(x, b):
+    return sum(digits(x, b))
+
+
+def carries(x, y, b):
+    c = n = 0
+    while x or y or c:
+        t = x % b + y % b + c
+        c = 1 if t >= b else 0
+        n += c
+        x //= b
+        y //= b
+    return n
+
+
+def dr(x, b):
+    return 0 if x == 0 else 1 + (x - 1) % (b - 1)
+
+
+def vb(x, b):
+    v = 0
+    while x % b == 0:
+        x //= b
+        v += 1
+    return v
+
+
+# (1) Kummer's identity
+random.seed(432)
+for _ in range(20000):
+    b = random.randint(2, 40)
+    x = random.randint(0, 10**12)
+    y = random.randint(0, 10**12)
+    assert (s(x, b) + s(y, b) - s(x + y, b)) == (b - 1) * carries(x, y, b)
+
+# (2) boundary carries
+for b in range(2, 30):
+    for k in range(1, 6):
+        N = b**k
+        for D in range(1, N, max(1, N // 300)):
+            d = N - D
+            v = vb(D, b)
+            assert vb(d, b) == v
+            assert carries(D, d, b) == k - v
+            assert s(D, b) + s(d, b) == 1 + (b - 1) * (k - v)
+            assert dr(D, b) + dr(d, b) == b
+
+
+# (3) the ring Z/n, n = b - 1
+def elementary_divisors_units(n):
+    out = []
+    for p, a in factorint(n).items():
+        if p == 2:
+            if a == 2:
+                out.append(2)
+            elif a >= 3:
+                out += [2, 2 ** (a - 2)]
+        else:
+            out.append((p - 1) * p ** (a - 1))
+    return sorted(x for x in out if x > 1)
+
+
+def ring_profile(n):
+    U = [x for x in range(n) if gcd(x, n) == 1]
+    idem = [x for x in range(n) if x * x % n == x]
+    nil = [x for x in range(n) if pow(x, n, n) == 0]  # x^n = 0 iff nilpotent
+    zd = [x for x in range(1, n) if gcd(x, n) > 1]
+    om = len(factorint(n))
+    kind = "FIELD" if om == 1 and max(factorint(n).values()) == 1 else ("LOCAL" if om == 1 else "MIXED")
+    rad = 1
+    for p in factorint(n):
+        rad *= p
+    # closed forms
+    assert len(U) == totient(n)
+    assert len(idem) == 2**om
+    assert len(nil) == n // rad
+    assert len(zd) == n - totient(n) - 1
+    # unit-group structure: element-order census matches the elementary divisors
+    ed = elementary_divisors_units(n)
+    cyclic = any(is_primitive_root(g, n) for g in U) if n > 2 else True
+    assert cyclic == (len(ed) <= 1)
+    return dict(n=n, kind=kind, units=len(U), unit_group=ed or [1], cyclic=cyclic,
+                idempotents=idem, nilpotents=nil, zero_divisors=len(zd), two_inv=gcd(2, n) == 1)
+
+
+TABLE = {b: ring_profile(b - 1) for b in range(3, 41)}
+for b, r in TABLE.items():
+    assert r["two_inv"] == (b % 2 == 0)
+
+# (4) base 13
+r13 = TABLE[13]
+assert r13["kind"] == "MIXED" and r13["unit_group"] == [2, 2] and not r13["cyclic"]
+assert r13["idempotents"] == [0, 1, 4, 9] and r13["nilpotents"] == [0, 6]
+assert [x for x in range(1, 12) if gcd(x, 12) > 1] == [2, 3, 4, 6, 8, 9, 10]
+assert all(u * u % 12 == 1 for u in (1, 5, 7, 11))
+assert [g for g in range(1, 13) if is_primitive_root(g, 13)] == [2, 6, 7, 11]
+
+# (5) GF(37)
+r38 = TABLE[38]
+assert r38["kind"] == "FIELD" and r38["units"] == 36 and r38["cyclic"]
+r37 = TABLE[37]
+assert r37["kind"] == "MIXED" and r37["unit_group"] == [2, 6] and len(r37["idempotents"]) == 4
+assert len(r37["nilpotents"]) == 6 and not r37["two_inv"]
+assert primitive_root(37) == 2
+
+if __name__ == "__main__":
+    print("T432 carry map + digital-root rings")
+    print("  (1) Kummer C_b = (s(x)+s(y)-s(x+y))/(b-1): 20000 random checks, b = 2..40")
+    print("  (2) D + d = b^k: carries = k - v_b(D); s(D)+s(d) = 1+(b-1)(k-v); dr sum = b")
+    print(f"  {'b':>3} {'n=b-1':>6} {'class':>6} {'|U|':>4} {'U structure':>14} "
+          f"{'#idem':>5} {'#nil':>4} {'#zd':>4} {'2^-1':>5}")
+    for b, r in TABLE.items():
+        ug = "x".join(f"C{x}" for x in r["unit_group"])
+        print(f"  {b:>3} {r['n']:>6} {r['kind']:>6} {r['units']:>4} {ug:>14} "
+              f"{len(r['idempotents']):>5} {len(r['nilpotents']):>4} {r['zero_divisors']:>4} "
+              f"{'yes' if r['two_inv'] else 'no':>5}")
+    cls = {}
+    for b, r in TABLE.items():
+        cls.setdefault(r["kind"], []).append(b)
+    for k, v in cls.items():
+        print(f"  {k}: bases {v}")
