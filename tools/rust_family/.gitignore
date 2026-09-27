@@ -4,3 +4,4 @@ target/
 *.log
 *.out
 cyc_*.json
+seeds_*.txt
