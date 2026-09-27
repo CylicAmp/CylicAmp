@@ -217,6 +217,17 @@ base b.
     CONTINGENT: 137 = 43, 26 and 10 are all PRIMITIVE ROOTS mod 47; 37 has order 23
     (a QR). 47 = 10 (mod 37), in IC.
 
+(21) BASE 49 (m = 48 = 2^4 * 3, MIXED = Z/16 x Z/3). Eight proper islands
+    (2),(3),(4),(6),(8),(12),(16),(24). Nilradical (6), 8 elements; 6 has
+    nilpotency index 4 (6^3 = 24, 6^4 = 0) -- the 2^4 factor. Idempotents
+    {0,1,16,33} (33 = (1,0), 16 = (0,1)). Units 16 = C2 x C2 x C4. Zero divisors 31.
+    CARRY COMPLEMENT: no fixed point; only preserved coset 2 + (3).
+    DOUBLING: settles in exactly v2(48) = 4 steps -- the longest transient in
+    bases 37..49 -- onto (16) = {0,16,32} = Z/3 = base 4's root ring, where it is
+    the 2-cycle (16 32); the idempotent 16 lies on it.
+    dr_49(137) = 41, an involution (41^2 = 1681 = 35*48 + 1); dr_49(37) = 37,
+    order 4. 26 and 10 are non-units.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -538,6 +549,17 @@ assert len({(1 - x) % p for x in QR47} & QR47) == 11 and not [r for r in range(p
 assert pow(2, 23, p) == 1 and 2 in QR47
 assert all(all(pow(g, 46 // q, p) != 1 for q in (2, 23)) for g in (137 % p, 26, 10))
 assert pow(37, 23, p) == 1 and 47 % 37 == 10
+
+# (21) base 49
+m = 48
+assert [d for d in range(2, m) if m % d == 0] == [2, 3, 4, 6, 8, 12, 16, 24]
+assert [x for x in range(m) if pow(x, m, m) == 0] == list(range(0, m, 6))
+assert pow(6, 3, m) == 24 and pow(6, 4, m) == 0
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 16, 33]
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(3) if (1 - a) % 3 == a] == [2]
+assert all((x * 16) % m in {0, 16, 32} for x in range(m)) and any((x * 8) % m not in {0, 16, 32} for x in range(m))
+assert 2 * 16 % m == 32 and 2 * 32 % m == 16
+assert 137 % m == 41 and 41 * 41 % m == 1 and pow(37, 4, m) == 1 and pow(37, 2, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
