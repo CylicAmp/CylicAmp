@@ -846,6 +846,11 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           x^2 + y^2 + 1 = 3xy. Among pairs with product <= 1.667e18 it is the
           only exponent-1 two-cycle above 13; whether any LARGER consecutive
           odd-index Fibonacci pair is both prime is not known.
+          MARKOV FORM: q^2 + r^2 + 1 = 3qr is the Markov equation
+          x^2 + y^2 + z^2 = 3xyz with x = 1, so (1, F_{2n-1}, F_{2n+1}) are
+          Markov triples: (1,1,2), (1,2,5), (1,5,13), (1,13,34), (1,34,89),
+          (1,89,233), ... The 89 <-> 233 read-off cycle IS the Markov triple
+          (1, 89, 233). (Connection noted 2026-09-28 from a supplied post.)
           Member counts 26 / 55 / 95 at 1e12 / 1e14 / 1e16.
 
           Solutions known: 98 = 95 family members + 130, 148480, 3039520.
