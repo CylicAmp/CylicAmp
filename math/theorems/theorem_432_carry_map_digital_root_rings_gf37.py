@@ -181,6 +181,26 @@ base b.
     residue gives 0). The complement identity dr(D) + dr(d) = b is an integer
     equation and needs that convention; this file's dr() follows it.
 
+(17) BASE 46 (m = 45 = 3^2 * 5 = 1+2+...+9, MIXED = Z/9 x Z/5; b EVEN). Proper
+    islands (3),(5),(9),(15). Nilradical (15) = {0,15,30}. Idempotents
+    {0,1,10,36}: 10 = (1,0), 36 = (0,1). Units 24 = C6 x C4 (max order 12). Zero
+    divisors 20. CARRY COMPLEMENT: exactly one fixed point r = 23 = b/2 = 2^-1, and
+    EVERY island has a preserved coset (m odd): 2+(3), 3+(5), 5+(9), 8+(15), all
+    meeting at 23. DOUBLING: a permutation (m odd) with ord(2) = lcm(6, 4) = 12.
+    BASE 10 INSIDE BASE 46: the island (5) = {0,5,...,40} is a ring isomorphic to
+    Z/9 (x -> x mod 9), i.e. base 10's root ring, and its identity is 10:
+    10 = 1 (mod 9), 10 = 0 (mod 5), 10^2 = 10 (mod 45). The island (9) is Z/5.
+    CONTINGENT: 10 is an IDEMPOTENT of Z/45; 26 is an involution (26^2 = 676 =
+    15*45 + 1); dr_46(137) = 2 (137 = 3*45 + 2), order 12; 37 has order 4.
+
+(18) THE MIDPOINT AND ITS EVEN FLANKS (supplied observation, proved). In base 10
+    the roots 1..9 have centre 5 = b/2 = 2^-1 mod 9, the carry complement's unique
+    fixed point; the complement pairs (4,6),(3,7),(2,8),(1,9) mirror around it, and
+    4, 6 -- "highest even on the left, lowest even on the right" -- are the pair
+    nearest the centre. For even b the flanks b/2 - 1, b/2 + 1 are EVEN iff
+    b = 2 (mod 4). Base 46 = 2 (mod 4) repeats base 10: centre 23, flanks 22, 24.
+    Base 40 = 0 (mod 4) does not: centre 20, flanks 19, 21 odd.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -460,6 +480,29 @@ assert all(C45[(i + 1) % 10] == 2 * C45[i] % m for i in range(10))
 assert all((x * 4) % m in set(C45) | {0} for x in range(m))
 assert 137 % m == 5 and pow(5, 3, m) == 37 and pow(5, 5, m) == 1 and pow(37, 5, m) == 1
 assert dr(9, 10) == 9 and 9 % 9 == 0 and dr(10, 10) == 1 and dr(45, 10) == 9
+
+# (17) base 46
+m = 45
+assert m == sum(range(10))
+assert [d for d in range(2, m) if m % d == 0] == [3, 5, 9, 15]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 15, 30]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 10, 36]
+assert [r for r in range(m) if (1 - r) % m == r] == [23]
+assert {d: [a for a in range(d) if (1 - a) % d == a] for d in (3, 5, 9, 15)} == {3: [2], 5: [3], 9: [5], 15: [8]}
+assert all(23 % d == a[0] for d, a in {3: [2], 5: [3], 9: [5], 15: [8]}.items())
+I5 = list(range(0, m, 5))
+assert sorted(x % 9 for x in I5) == list(range(9))                        # (5) = Z/9 as a ring
+assert all((x * y) % m % 9 == (x % 9) * (y % 9) % 9 for x in I5 for y in I5)
+assert 10 % 9 == 1 and 10 % 5 == 0 and 10 * 10 % m == 10 and all(10 * x % m == x for x in I5)
+assert 26 * 26 % m == 1 and 137 % m == 2
+assert sorted({2 * x % m for x in range(m)}) == list(range(m)) and pow(2, 12, m) == 1
+
+# (18) midpoint flanks
+for b in range(4, 400, 2):
+    c = b // 2
+    assert (2 * c) % (b - 1) == 1 % (b - 1)
+    assert ((c - 1) % 2 == 0 and (c + 1) % 2 == 0) == (b % 4 == 2)
+    assert (c - 1) + (c + 1) == b
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
