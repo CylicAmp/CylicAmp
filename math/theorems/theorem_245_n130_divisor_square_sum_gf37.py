@@ -781,6 +781,16 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           2. In general k primes give 2M <= k + (k-1) log_5(2M+1): bounded
           exponents for each k, but k is unbounded. OPEN.
 
+          THEOREM H (all k, no Wieferich pair; tools/divisor_square_kprime_caps.py).
+          Coarse caps (valid upper bounds, looser than D/F/G by hand):
+              k=6: M<=7,  generic e<=3, e_5,e_7,e_11 <= 5
+              k=7: M<=8,  generic e<=3, e_5..e_13 <= 6
+              k=8: M<=10, generic e<=4, e_5..e_13 <= 7
+              k=12: M<=18, generic e<=6, e_5 <= 17
+          Caps grow ~ linearly in k: every fixed k is a bounded-exponent
+          problem, no uniform bound exists from this argument. Closing (i)
+          needs an argument uniform in k. OPEN.
+
           THREE PRIMES, ALL EXPONENT 1: s = pqr, 5 <= p < q < r.
           Each factor x^2 +- x + 1 of sigma_2(p^2), sigma_2(q^2) is < r^2, so
           r divides each at most once; r^2 therefore needs r | a factor of
