@@ -110,6 +110,20 @@ base b.
     CONTINGENT: dr_40(137) = 137 mod 39 = 20, the carry midpoint itself, because
     2 * 137 = 274 = 7 * 39 + 1 (273 = 3*7*13). MULT = 26 lies in the island (13).
 
+(11) BASE 41 (m = 40 = 2^3 * 5, MIXED = Z/8 x Z/5). Six proper islands (2),(4),
+    (5),(8),(10),(20). Nilradical (10) = {0,10,20,30}; 10 has nilpotency index 3
+    (10^2 = 20, 10^3 = 0) -- the cube in 2^3, unlike the index-2 islands of
+    prime-square moduli. Idempotents {0,1,16,25} (25 = (1,0), 16 = (0,1)).
+    Units 16 = C2 x C2 x C4 (orders: one 1, seven 2, eight 4). Zero divisors 23.
+    CARRY COMPLEMENT: no fixed point (40 even). Only preserved coset:
+    3 + (5) = {3,8,...,38} (2*3 = 1 mod 5); no coset of an even-index island is
+    preserved.
+    DOUBLING: settles in exactly v2(40) = 3 steps onto (8) = {0,8,16,24,32} = Z/5
+    (base 6's root ring F_5); there (8 16 32 24) = (3 1 2 4) mod 5, 2 primitive
+    mod 5, and the idempotent 16 = (0,1) lies on the cycle.
+    dr_41(137) = 17, dr_41(37) = 37: units of order 4. 26 is a non-unit, and
+    10 (= 26^-1 in GF(37)) is NILPOTENT here.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -308,6 +322,21 @@ assert 26 % 13 == 0
 assert sorted({2 * x % m for x in range(m)}) == list(range(m))          # permutation
 assert next(k for k in range(1, 13) if pow(2, k, 13) == 1) == 12
 assert (2 * 13) % m == 26 and (2 * 26) % m == 13
+
+# (11) base 41
+m = 40
+assert [d for d in range(2, m) if m % d == 0] == [2, 4, 5, 8, 10, 20]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 10, 20, 30]
+assert pow(10, 2, m) == 20 and pow(10, 3, m) == 0
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 16, 25]
+assert not [r for r in range(m) if (1 - r) % m == r]
+assert {d: [a for a in range(d) if (1 - a) % d == a] for d in (2, 4, 5, 8, 10, 20)} == \
+    {2: [], 4: [], 5: [3], 8: [], 10: [], 20: []}
+assert all((x * 8) % m in {0, 8, 16, 24, 32} for x in range(m))
+assert any((x * 4) % m not in {0, 8, 16, 24, 32} for x in range(m))
+assert [2 * y % m for y in (8, 16, 32, 24)] == [16, 32, 24, 8]
+assert 137 % m == 17 and pow(17, 4, m) == 1 and pow(17, 2, m) != 1
+assert pow(37, 4, m) == 1 and pow(37, 2, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
