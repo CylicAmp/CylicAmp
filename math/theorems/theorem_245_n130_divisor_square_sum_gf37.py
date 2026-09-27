@@ -793,6 +793,44 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
 
           Solutions known: 98 = 95 family members + 130, 148480, 3039520.
           Code: tools/divisor_square_family_1e16.py.
+
+          COMPLETE AT m <= 1e18 (2026-09-27): EXACTLY 188 MEMBERS.
+          (1) Up to SIX primes >= 250: 1e18/60 = 1.667e16 < 250^7. Read-off
+              to depth 6.
+          (2) New prune, SURPLUS IS FINAL: members have gcd(q,6) = 1, so 2-
+              and 3-supply must be exact; supply only grows, so a partial m
+              already over-supplied is dead. Validated: identical 55 at 1e14
+              (37.5M nodes, 97s vs 461M, 2074s) and identical 95 at 1e16
+              (300M nodes, 1237s vs 5.27e9).
+          (3) CLUSTER SCAN, sizes 2..6, B = 1.667e16 (20 669 s): prefixes
+              7 353 923 / 735 921 315 / 3 389 184 156 / 1 551 189 753 /
+              19 795 630. For the first time it is NOT empty -- two
+              self-supplying clusters of large primes:
+                1291 * 4817^2 * 17977        product 5.385e14
+                  sigma_2(1291)   = 2*173*4817
+                  sigma_2(4817^2) = 3*1291*17977*7732891
+                  sigma_2(17977)  = 2*5*4817*6709
+                8011 * 8101^2 * 8191         product 4.306e15
+                  sigma_2(8011)   = 2*17*233*8101
+                  sigma_2(8101^2) = 3*7*19*271*607*8011*8191
+                  sigma_2(8191)   = 2*41*101*8101       (8191 = 2^13 - 1)
+              Each is invisible to read-off from a small core. Every m <=
+              1e18 containing one is m = c * cluster with c <= 1856 (resp.
+              232); ALL such c checked directly: no member. So the 188 is
+              complete.
+              Residues mod 37: 1291 = 33, 4817 = 7, 17977 = 32;
+              8011 = 19, 8101 = 35, 8191 = 14. Recorded, not interpreted.
+          Search: 123 974 items, 1 722 919 064 nodes, 188 members. All 188
+          re-verified from scratch (sympy): 188/188. The 95 <= 1e16 are
+          exactly the earlier set; 93 are new in (1e16, 1e18].
+          tau over all 188: 12:1 108:5 240:1 864:8 960:7 1200:2 1344:11
+             1620:4 1728:28 2160:20 3072:10 6720:1 6912:39 8640:13
+             10800:11 12096:15 12960:4 15360:1 25920:5 34560:2
+          New tau values: 6720, 12960, 15360, 25920, 34560. tau = 108 still
+          five members.
+          Members listed in math/theorems/t245_family_members_1e18.txt.
+          Solutions known: 191 = 188 family members + 130, 148480, 3039520.
+          Code: tools/divisor_square_family_1e18.py (DEPTH arg 6).
           Code: tools/divisor_square_family_1e14.py (resumable, chunked),
           tools/divisor_square_clusters_general.py,
           tools/divisor_square_family_verify.py.
