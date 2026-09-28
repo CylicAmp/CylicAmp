@@ -525,6 +525,28 @@ base b.
     871 -> 7, 429 -> 6, 241 -> 7) are running digital-root sums of the row
     results, chained block to block.
 
+(51) BASE 76 (m = 75 = 3 * 5^2, MIXED = Z/3 x Z/25; b EVEN). Islands (3),(5),(15),
+    (25). Nilradical (15) = {0,15,30,45,60}. Idempotents {0,1,25,51} (25 = (1,0),
+    51 = (0,1)). Units 40 = C2 x C20. Zero divisors 34. CARRY COMPLEMENT: fixed
+    point 38 = (m+1)/2; every island has a preserved coset (m odd): 2+(3), 3+(5),
+    8+(15), 13+(25). DOUBLING: permutation, ord(2) = lcm(2, 20) = 20: cycles (0),
+    one 2-cycle, three 4-cycles, three 20-cycles.
+    FORCED BY SMALL DIVISIBILITIES: 26 = (2, 1) = (-1, 1) is an INVOLUTION (26 - 1 =
+    25; cf. bases 51, 66 where 25 | 26 - 1 made 26 idempotent); 137 = 62 and 37
+    share the Z/25 coordinate 12 because 137 - 37 = 100 = 4 * 25 -- both of maximal
+    order 20. 10 is a zero divisor.
+
+(52) ABBA / DDDD PALINDROME PAIRS (supplied list, forced facts). For the pairs
+    (1221,1111), (2332,2222), ..., (9119,9999):
+      abba = 11 (91a + 10b): every even-length palindrome is divisible by 11;
+      dddd = 1111 d and 1111 = 30*37 + 1, so dddd = d (mod 37);
+      abba = 2a - b (mod 37) (1001 = 2, 110 = -1): only 1221 = 3 * 11 * 37 is
+        divisible by 37 (the only pair with b = 2a);
+      abba - dddd = 110 (b - a) = +-110, except 9119 - 9999 = -880 (b wraps to 1);
+      abba + baab = 1111 (a + b) = a + b (mod 37).
+    The inner digit b = a +- 1 (signs + + - + - - - + +) follows no rule found here;
+    recorded as the supplier's choice.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1159,6 +1181,22 @@ _pairs = [(12, 11), (11, 21), (23, 22), (22, 32), (34, 33), (33, 43), (45, 44), 
 _vals = [32, 23, 54, 45, 76, 67, 98, 89, 21, 12, 43, 34, 65, 56, 87, 78, 19, 91]
 assert all(_rev((a + b) % 99) == v == 10 * (a + b) % 99 for (a, b), v in zip(_pairs, _vals))
 assert all(_rev(n) == 10 * n % 99 for n in range(1, 99)) and 100 % 99 == 1
+
+# (51) base 76, (52) abba/dddd
+m = 75
+assert [d for d in range(2, m) if m % d == 0] == [3, 5, 15, 25]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 15, 30, 45, 60]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 25, 51]
+assert [r for r in range(m) if (1 - r) % m == r] == [38]
+assert {d: [a for a in range(d) if (1 - a) % d == a] for d in (3, 5, 15, 25)} == {3: [2], 5: [3], 15: [8], 25: [13]}
+assert pow(2, 20, m) == 1 and pow(2, 10, m) != 1 and pow(2, 4, m) != 1
+assert 26 * 26 % m == 1 and (26 % 3, 26 % 25) == (2, 1)
+assert 137 % m == 62 and 62 % 25 == 37 % 25 == 12 and 137 - 37 == 4 * 25
+assert all(pow(g, 20, m) == 1 and pow(g, 10, m) != 1 and pow(g, 4, m) != 1 for g in (62, 37))
+_P = [1221, 2332, 3223, 4554, 5445, 6556, 7667, 8998, 9119]
+assert all(n % 11 == 0 and n % 37 == (2 * (n // 1000) - (n // 100) % 10) % 37 for n in _P)
+assert [n for n in _P if n % 37 == 0] == [1221] and 1111 == 30 * 37 + 1
+assert all(int(f"{a}{b}{b}{a}") + int(f"{b}{a}{a}{b}") == 1111 * (a + b) for a in range(1, 10) for b in range(1, 10))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
