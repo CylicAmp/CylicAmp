@@ -770,6 +770,17 @@ base b.
     (1, 8) with 8 = 2^3 (137 = 8 mod 43), order 14; 26 = (0, 26) and 10 = (0, 10)
     lie in the GF(43) island, with coordinate orders 42 and 21.
 
+(72) BASE 88 (m = 87 = 3 * 29, square-free MIXED = F_3 x F_29; b EVEN). Islands
+    (3) = F_29, (29) = F_3. Nilradical {0}. Idempotents {0,1,30,58} (58 = (1,0),
+    30 = (0,1)). Units 56 = C2 x C28. Zero divisors 30. CARRY COMPLEMENT: reflection
+    about 44 = (m+1)/2, preserved cosets 2 + (3), 15 + (29). DOUBLING: permutation,
+    ord(2) = lcm(2, 28) = 28 (2 primitive mod 29): (0), one 2-cycle, three 28-cycles.
+    dr_88(137) = 50, 26, 37 and 10 ALL have the maximal element order 28. BASE RATE:
+    24 of the 56 units (43%) have order 28 (only those whose C28 coordinate has
+    order 28; an order-14 coordinate paired with order 2 gives lcm 14, not 28), so
+    all four has chance ~0.43^4 = 3.4% -- not a signal given the many bases and
+    properties examined in this sweep.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1597,6 +1608,14 @@ assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(43) i
 assert pow(2, 14, 43) == 1 and pow(2, 7, 43) != 1 and pow(2, 2, 43) != 1
 assert pow(37, 6, m) == 1 and pow(37, 3, m) != 1 and pow(37, 2, m) != 1 and (37 * 37 - 37 + 1) % 43 == 0
 assert 137 % m == 51 and 137 % 43 == 8 == 2**3 and pow(51, 14, m) == 1 and pow(51, 7, m) != 1
+
+# (72) base 88
+m = 87
+assert [d for d in range(2, m) if m % d == 0] == [3, 29] and [x for x in range(m) if x * x % m == x] == [0, 1, 30, 58]
+assert [r for r in range(m) if (1 - r) % m == r] == [44] and (44 % 3, 44 % 29) == (2, 15)
+assert pow(2, 28, m) == 1 and pow(2, 14, m) != 1 and pow(2, 4, m) != 1
+assert 137 % m == 50 and all(pow(g, 28, m) == 1 and pow(g, 14, m) != 1 and pow(g, 4, m) != 1 for g in (50, 26, 37, 10))
+assert sum(1 for u in range(m) if gcd(u, m) == 1 and pow(u, 28, m) == 1 and pow(u, 14, m) != 1 and pow(u, 4, m) != 1) == 24
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
