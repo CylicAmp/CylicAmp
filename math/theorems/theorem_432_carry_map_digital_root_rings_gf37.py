@@ -728,6 +728,16 @@ base b.
     mod 41, 10 of order 5); 37 = (1, 37) is a unit of order 5 (37 = 10^-1 mod 41);
     dr_83(137) = 55 = (1, 14) has order 8.
 
+(68) BASE 84 (m = 83 prime: root ring GF(83), a FIELD; b EVEN). Carry complement
+    fixes exactly 42 = (m+1)/2. No coset of any subgroup of order >= 2 maps to a
+    coset. |f(QR) & QR| = 20 = (p-3)/4. No primitive sixth roots (83 = 2 mod 3).
+    DOUBLING: 2 is PRIMITIVE mod 83 (83 = 3 mod 8, 82 = 2 * 41): one 82-cycle plus 0.
+    FORCED: the QRs form the index-2 subgroup of PRIME order 41, so every QR other
+    than 1 has order 41 -- 26, 37 and 10 are QRs, hence all of order 41 (1/83 has
+    decimal period 41). CONTINGENT: dr_84(137) = 54 is a PRIMITIVE ROOT (a QNR).
+    (Ledger for bases 66..83 as JSON: math/ledgers/t432_bases_66_83.json, checked by
+    tools/t432_ledger_check.py -- 23/23.)
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1519,6 +1529,14 @@ assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(41) i
 assert pow(2, 20, 41) == 1 and pow(2, 10, 41) != 1 and pow(2, 4, 41) != 1
 assert 137 % m == 55 and (55 % 2, 55 % 41) == (1, 14) and pow(55, 8, m) == 1 and pow(55, 4, m) != 1
 assert pow(37, 5, m) == 1 and 37 * 10 % 41 == 1
+
+# (68) base 84
+p = 83
+QR83 = {x * x % p for x in range(1, p)}
+assert [r for r in range(p) if (1 - r) % p == r] == [42] and len({(1 - x) % p for x in QR83} & QR83) == 20
+assert not [r for r in range(p) if (r * r - r + 1) % p == 0] and pow(2, 41, p) != 1 and pow(2, 2, p) != 1
+assert all(g in QR83 and pow(g, 41, p) == 1 for g in (26, 37, 10)) and len(QR83) == 41
+assert 137 % p == 54 and pow(54, 41, p) != 1 and pow(54, 2, p) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
