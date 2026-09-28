@@ -433,6 +433,15 @@ base b.
     (137 = 2*68 + 1; 136 = 2^3 * 17). 37 has maximal order 16; 26 and 10 are zero
     divisors.
 
+(43) BASE 70 (m = 69 = 3 * 23, square-free MIXED = F_3 x F_23; b EVEN). Islands
+    (3) = F_23, (23) = F_3. Nilradical {0}. Idempotents {0,1,24,46} (46 = (1,0),
+    24 = (0,1)). Units 44 = C2 x C22. Zero divisors 24. CARRY COMPLEMENT: fixed
+    point 35 = (m+1)/2 = b/2, in the preserved cosets 2 + (3) and 12 + (23).
+    DOUBLING: permutation, ord(2) = lcm(2, 11) = 22 (ord_23(2) = 11): cycles (0),
+    one 2-cycle (F_3 island), two 11-cycles (F_23 island), two 22-cycles (units).
+    CONTINGENT: dr_70(137) = 68 = -1, an involution (138 = 2 * 69); 26, 37 and 10
+    all have the maximal order 22.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -984,6 +993,15 @@ C69 = [4, 8, 16, 32, 64, 60, 52, 36]
 assert all(C69[(i + 1) % 8] == 2 * C69[i] % m for i in range(8)) and all((4 * x) % m % 4 == 0 for x in range(m))
 assert 137 % m == 1 and 136 == 2**3 * 17
 assert pow(37, 16, m) == 1 and pow(37, 8, m) != 1
+
+# (43) base 70
+m = 69
+assert [d for d in range(2, m) if m % d == 0] == [3, 23]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 24, 46]
+assert [r for r in range(m) if (1 - r) % m == r] == [35] and 35 % 3 == 2 and 35 % 23 == 12
+assert pow(2, 11, 23) == 1 and pow(2, 22, m) == 1 and pow(2, 11, m) != 1
+assert 137 % m == m - 1 and 138 == 2 * m
+assert all(pow(g, 22, m) == 1 and pow(g, 11, m) != 1 and pow(g, 2, m) != 1 for g in (26, 37, 10))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
