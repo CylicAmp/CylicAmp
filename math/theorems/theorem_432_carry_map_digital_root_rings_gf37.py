@@ -296,6 +296,18 @@ base b.
     on units. CONTINGENT: dr_56(137) = 27 and 37 have the maximal order 20; 26 has
     order 5; 10 is a zero divisor.
 
+(29) BASE 57 (m = 56 = 2^3 * 7, MIXED = Z/8 x Z/7). Islands (2),(4),(7),(8),(14),
+    (28). Nilradical (14) = {0,14,28,42}; 14 has nilpotency index 3 (14^2 = 28,
+    14^3 = 0). Idempotents {0,1,8,49} (49 = (1,0), 8 = (0,1)). Units 24 =
+    C2 x C2 x C6. Zero divisors 31. CARRY COMPLEMENT: no fixed point; only
+    preserved coset 4 + (7). DOUBLING: settles in v2(56) = 3 steps onto
+    (8) = Z/7 = base 8's root ring F_7; there ord(2) = 3: cycles (8 16 32),
+    (24 48 40), (0); the idempotent 8 lies on one.
+    CONTINGENT: dr_57(137) = 25 is a PRIMITIVE CUBE ROOT OF UNITY mod 56
+    (25^2 = 9, 25 * 9 = 225 = 4*56 + 1; cube roots {1, 9, 25}) -- the same role
+    137 = 26 plays in GF(37), where it drives the 137-map. 37 has order 6; 26 and
+    10 are zero divisors.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -699,6 +711,17 @@ assert [r for r in range(m) if (1 - r) % m == r] == [28] and 28 % 5 == 3 and 28 
 assert pow(2, 20, m) == 1 and pow(2, 10, m) != 1 and pow(2, 4, m) != 1
 assert 137 % m == 27 and pow(27, 20, m) == 1 and pow(27, 10, m) != 1 and pow(27, 4, m) != 1
 assert pow(37, 20, m) == 1 and pow(37, 10, m) != 1 and pow(37, 4, m) != 1 and pow(26, 5, m) == 1
+
+# (29) base 57
+m = 56
+assert [d for d in range(2, m) if m % d == 0] == [2, 4, 7, 8, 14, 28]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 14, 28, 42] and pow(14, 2, m) == 28 and pow(14, 3, m) == 0
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 8, 49]
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(7) if (1 - a) % 7 == a] == [4]
+assert all((x * 8) % m in {0, 8, 16, 24, 32, 40, 48} for x in range(m)) and any((x * 4) % m not in {0, 8, 16, 24, 32, 40, 48} for x in range(m))
+assert [2 * y % m for y in (8, 16, 32, 24, 48, 40)] == [16, 32, 8, 48, 40, 24]
+assert 137 % m == 25 and [x for x in range(m) if pow(x, 3, m) == 1] == [1, 9, 25] and 25 * 9 == 4 * m + 1
+assert pow(37, 6, m) == 1 and pow(37, 3, m) != 1 and pow(37, 2, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
