@@ -422,6 +422,17 @@ base b.
     1073 = 16*67 + 1) -- as mod 54 and mod 63 (bases 55, 64). 26 and 10 have order
     33; dr_68(137) = 3 has order 22.
 
+(42) BASE 69 (m = 68 = 2^2 * 17, MIXED = Z/4 x Z/17). Islands (2),(4),(17),(34).
+    Nilradical (34) = {0, 34}. Idempotents {0,1,17,52} (17 = (1,0), 52 = (0,1)).
+    Units 32 = C2 x C16. Zero divisors 35. CARRY COMPLEMENT: no fixed point
+    (m even); only preserved coset 9 + (17). DOUBLING: settles in v2(68) = 2 steps
+    onto (4) = Z/17 = base 18's root ring F_17, where ord(2) = 8: two 8-cycles
+    (4 8 16 32 64 60 52 36), (12 24 48 28 56 44 20 40), and 0; the idempotent 52
+    lies on the first.
+    CONTINGENT: dr_69(137) = 1 -- 137 is the IDENTITY of base 69's root ring
+    (137 = 2*68 + 1; 136 = 2^3 * 17). 37 has maximal order 16; 26 and 10 are zero
+    divisors.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -962,6 +973,17 @@ assert all(pow(g, 33, p) == 1 and pow(g, 11, p) != 1 and pow(g, 3, p) != 1 for g
 assert 137 % p == 3 and pow(3, 22, p) == 1 and pow(3, 11, p) != 1 and pow(3, 2, p) != 1
 for mm in (44, 45, 50, 65):                                          # standardized fixed-point table
     assert [r for r in range(mm) if (1 - r) % mm == r] == ([(mm + 1) // 2] if mm % 2 else [])
+
+# (42) base 69
+m = 68
+assert [d for d in range(2, m) if m % d == 0] == [2, 4, 17, 34]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 34]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 17, 52]
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(17) if (1 - a) % 17 == a] == [9]
+C69 = [4, 8, 16, 32, 64, 60, 52, 36]
+assert all(C69[(i + 1) % 8] == 2 * C69[i] % m for i in range(8)) and all((4 * x) % m % 4 == 0 for x in range(m))
+assert 137 % m == 1 and 136 == 2**3 * 17
+assert pow(37, 16, m) == 1 and pow(37, 8, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
