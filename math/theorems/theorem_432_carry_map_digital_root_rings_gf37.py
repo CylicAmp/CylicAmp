@@ -865,6 +865,16 @@ base b.
     non-injective phi exists (doubling orbits there have lengths 1, 2, 6; a 2-cycle
     {3,6} divides 10).
 
+(80) BASE 93 (m = 92 = 2^2 * 23, MIXED = Z/4 x F_23). Four islands (2),(4),(23),(46).
+    Nilradical {0,46}. Four idempotents {0,1,24,69}. Units 44 = C2 x C22, max order
+    22. Zero divisors 48. CARRY COMPLEMENT: no fixed point (b odd); one preserved
+    coset, 12+(23). DOUBLING: collapses in v_2(92) = 2 steps onto (4) = Z/23 (identity
+    24 = (0, 1)); there ord(2) = 11, so the image is {0} plus two 11-cycles.
+    dr_93(137) = 45 = (1, -1), order 2: FORCED by 138 = 6 * 23 and 137 = 1 mod 4.
+    26 = (2, 3) and 10 = (2, 10) are zero divisors; 37 = (1, 14) has order 22.
+    (Supplied restatement of section (77): phi(a) = 10a maps Z/9 onto 10Z/90 as a ring
+    isomorphism commuting with doubling -- checked; same content as (77).)
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1763,6 +1773,14 @@ assert _inc == [900, 9, 1791] + [900] * 6 + [-8100] and gcd(*_inc) == 9
 assert [s % 37 for s in _seq[:10]] == [28, 3, 12, 27, 2, 14, 26, 1, 13, 25] and 2 * 28 % 37 != 3
 assert [s % 11 for s in _seq[:10]] == [2, 0, 9, 7, 5, 3, 1, 10, 8, 6]
 assert min(d for d in range(2, 2000) if d % 2 and next(k for k in range(1, d + 1) if pow(2, k, d) == 1) == 10) == 11 and 1023 == 3 * 11 * 31
+
+# (80) base 93
+m = 92
+assert [d for d in range(2, m) if m % d == 0] == [2, 4, 23, 46] and [x for x in range(m) if pow(x, m, m) == 0] == [0, 46]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 24, 69] and not [r for r in range(m) if (1 - r) % m == r]
+assert {2 * 2 * x % m for x in range(m)} == set(range(0, m, 4)) and 24 * 4 % m == 4 and pow(2, 11, 23) == 1
+assert 137 % m == 45 and 45 * 45 % m == 1 and 138 == 6 * 23 and pow(37, 22, m) == 1 and pow(37, 11, m) != 1
+assert all(10 * a * 10 * b % 90 == 10 * a * b % 90 for a in range(9) for b in range(9))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
