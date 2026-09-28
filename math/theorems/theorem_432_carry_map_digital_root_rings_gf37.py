@@ -606,6 +606,27 @@ base b.
     CHIRALITY: an ML's adjacent types come in a clockwise / counter-clockwise pair
     that only a flip or colour swap identifies; an L-cup has one mark and none.
 
+(57) BASE 78 (m = 77 = 7 * 11, square-free MIXED = F_7 x F_11; b EVEN). Islands
+    (7) = F_11, (11) = F_7. Nilradical {0}. Idempotents {0,1,22,56}. Units 60 =
+    C6 x C10 (max order 30). Zero divisors 16. CARRY COMPLEMENT: fixed point
+    39 = (m+1)/2, in the preserved cosets 4 + (7) and 6 + (11). DOUBLING:
+    permutation, ord(2) = lcm(3, 10) = 30: (0), two 3-cycles (F_7 island), one
+    10-cycle (F_11 island), two 30-cycles.
+    CONTINGENT: 137 = (4, 5) and 26 = (5, 4) in F_7 x F_11 -- swapped coordinates
+    (137 mod 7 = 4 = 26 mod 11, 137 mod 11 = 5 = 26 mod 7), a residue coincidence.
+    ord(26) = 30 (maximal), ord(137) = ord(37) = 15, ord(10) = 6.
+
+(58) DIRECTION / DISTANCE STATES (supplied "number-flow machine" test, run).
+    Over all 81 ordered digit pairs (a, b), the state (U/D/E, |b - a|) takes 17
+    values (E0, U1..U8, D1..D8); reversal (a,b) -> (b,a) flips U <-> D and keeps
+    the distance; its orbits are 45 (9 fixed E-pairs, 36 swapped pairs).
+    DIRECTION IS NOT A ROOT-RING INVARIANT: in Z/9, D4 = U5 (-4 = 5); the step
+    that survives reduction is (b - a) mod 9. CLOSURE is then exact: repeating a
+    step s returns after 9/gcd(s, 9) steps -- 9 for s coprime to 3 (e.g. 1-5-9,
+    U4, visits every root), 3 for s = 3, 6 (the 3-6-9 island and its cosets).
+    The parity grid 123/456/789 -> checkerboard is FORCED (n = 3r + c + 1 = r + c + 1
+    mod 2, as 3 is odd), hence invariant under every rotation and reflection.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1289,6 +1310,19 @@ _SW = _C4 + [lambda c, s=s: ((c[1] + s) % 4, (c[0] + s) % 4) for s in range(4)]
 assert len(_ML) == 12 and _orb(_ML, _C4) == 3 and _orb(_ML, _D4) == 2 and _orb(_ML, _SW) == 2
 assert [(b - a) % 4 for a, b in [(2, 1), (0, 1), (3, 1), (1, 3)]] == [3, 1, 2, 2]
 assert len({frozenset((i + s) % 4 for s in range(4)) for i in range(4)}) == 1
+
+# (57) base 78, (58) direction states
+m = 77
+assert [d for d in range(2, m) if m % d == 0] == [7, 11] and [x for x in range(m) if x * x % m == x] == [0, 1, 22, 56]
+assert [r for r in range(m) if (1 - r) % m == r] == [39] and 39 % 7 == 4 and 39 % 11 == 6
+assert pow(2, 30, m) == 1 and all(pow(2, 30 // q, m) != 1 for q in (2, 3, 5))
+assert (137 % 7, 137 % 11) == (4, 5) and (26 % 7, 26 % 11) == (5, 4)
+assert pow(26, 30, m) == 1 and all(pow(26, 30 // q, m) != 1 for q in (2, 3, 5))
+_st = lambda a, b: ("E", 0) if a == b else (("U" if b > a else "D"), abs(b - a))
+_pp = [(a, b) for a in range(1, 10) for b in range(1, 10)]
+assert len({_st(a, b) for a, b in _pp}) == 17 and len({frozenset({p, p[::-1]}) for p in _pp}) == 45
+assert (-4) % 9 == 5 and {s: 9 // gcd(s, 9) for s in range(1, 9)} == {1: 9, 2: 9, 3: 3, 4: 9, 5: 9, 6: 3, 7: 9, 8: 9}
+assert all((3 * r + c + 1) % 2 == (r + c + 1) % 2 for r in range(3) for c in range(3))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
