@@ -24,9 +24,8 @@ CORRECTED
     with m < p^2 is the low digit: a carry iff 2 (m mod p) >= p. 18 mod 13 = 5,
     18 mod 17 = 1: no carry; 18 mod 11 = 7: carry.
 RECONCILIATION NOTES (supplied "all five threads closed")
-  * Thread 1 is out of date: the family search is COMPLETE at m <= 1e20 (358
-    members; T245) and the 1e22 run is in progress -- not "conditionally verified
-    at 1e16".
+  * Thread 1 is out of date: the family search is COMPLETE at m <= 1e22 (587
+    members; T245) -- not "conditionally verified at 1e16".
   * Thread 3: the +-2 (mod 9) clustering is not a sample-selection artifact. It is
     inherited from the candidate construction q = sigma_2(m)/m - m, derived exactly
     in T245 (q = eps * tau(u)/3^b * prod C - m mod 9; 71% of candidates at 1e12).
@@ -48,13 +47,14 @@ every inference used for exhaustiveness is independently checked):
             SCOPE: a property of this generator at 1e12, not a universal theorem;
             T245 shows the share varies with v3(m) (e.g. 95% at v3 = 3 but 31% at
             v3 = 4, both at 1e14).
-  Thread 1  VERIFIED TO m <= 1e20 (358 members). Certified scope: N <= 1e20;
-            the 1e22 run is an EXTENSION, incomplete, outside that scope. Artifacts: T245
-            ("COMPLETE AT m <= 1e20"), t245_family_members_1e20.txt (all 358
-            re-verified by sympy), t245_supply_cycles_1e20.json, tools/rust_family
-            (validated by identical node counts vs Python at 1e12..1e18),
-            tools/divisor_square_supply_cycles.py. Exhaustiveness rests on the
-            read-off + supply-cycle argument written out in T245. 1e22: running.
+  Thread 1  VERIFIED TO m <= 1e22 (587 members; completed 2026-09-28). Artifacts:
+            T245 ("COMPLETE AT m <= 1e22"), t245_family_members_1e22.txt (all 587
+            re-verified), t245_supply_cycles_1e22.json (106 cycles, 122 seeds),
+            tools/rust_family (validated by identical node counts vs Python at
+            1e12..1e18). Exhaustiveness rests on the read-off + supply-cycle
+            argument written out in T245. Four members at 1e22 contain supply
+            cycles (4817^2 and 8101^2 two-cycle junctions) and are found only by
+            the seeded runs.
   Thread 2  UNVERIFIED here.
 """
 from math import comb

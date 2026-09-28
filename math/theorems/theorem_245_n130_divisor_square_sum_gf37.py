@@ -945,6 +945,46 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           tools/divisor_square_clusters_general.py,
           tools/divisor_square_family_verify.py.
 
+          COMPLETE AT m <= 1e22 (2026-09-28): EXACTLY 587 MEMBERS.
+          (1) Up to EIGHT primes >= 250: 1e22/60 = 1.667e20 < 250^9. Read-off
+              to depth 8.
+          (2) Supply cycles with product <= 1.667e20, enumerated in Rust
+              (tools/rust_family/src/bin/cycles.rs; length cap floor(log_250 B)
+              = 8, q < B^(1/3) = 5 503 212): 106 cycles, 1 285 123 nodes, 474 s;
+              no Fibonacci 2-cycle >= 250 in range. 16 disjoint cycle pairs fit
+              in B; no disjoint triple does. (t245_supply_cycles_1e22.json.)
+          (3) Seeded searches: 122 seeds (106 cycles + 16 pairs). Four give
+              members, and ALL FOUR are cycle-containing members the main search
+              cannot reach:
+                277226850795071720400 = 2^4*3^2*5^2*11*13*1291*4817^2*17977
+                  (seeds [1291, 4817^2] and [4817^2, 17977]: two 2-cycles
+                  sharing 4817^2)
+                1702491146631682328952 = 2^3*3^2*17^2*19*8011*8101^2*8191
+                3099271808728883001312 = 2^5*3^3*7^2*17*8011*8101^2*8191
+                4033972830409022319168 = 2^6*3*7*17*41*8011*8101^2*8191
+                  (seeds [8011, 8101^2] and [8101^2, 8191]: likewise sharing
+                  8101^2)
+              These are the first members outside the reach of core + read-off:
+              at 1e20 all 56 seeds gave nothing.
+          (4) Main search (Rust, depth 8): 199 793 items, 86 312 409 078 nodes,
+              34 307 s, 583 members. Overlap with the seeded set: 0.
+              583 + 4 = 587.
+          All 587 re-verified from scratch (sympy factorint of m:
+          p = sigma_2(m)/m - m integral, prime, p > m/2, p not dividing m;
+          direct divisor-square sums on the 4 cycle members and 40 random
+          others). The 358 <= 1e20 are exactly the earlier set; 229 are new in
+          (1e20, 1e22]. Largest: 9933475307461748064000
+          = 2^8*3^4*5^3*11^2*17*29*31*37^2*73*89*233, tau = 103680.
+          tau over all 587:
+             12:1  108:5  240:1  864:9  960:7  1200:2  1344:12  1620:4
+             1728:31  2160:21  3072:19  6720:2  6912:97  8640:18  10800:22
+             12096:64  12960:20  15360:38  21504:5  24576:2  25920:45
+             27648:62  32400:4  33792:13  34560:46  48384:4  60480:4
+             64800:1  76800:1  103680:27
+          New tau values: 24576, 33792, 60480, 64800, 76800, 103680.
+          Members listed in math/theorems/t245_family_members_1e22.txt.
+          Solutions known: 590 = 587 family members + 130, 148480, 3039520.
+
           THE BLIND SPOT SEARCHED (2026-09-25). The gap left by the smooth
           generator is a solution whose prefix CONTAINS a large prime.
           That case has a bound of its own: if q is inside the prefix then
