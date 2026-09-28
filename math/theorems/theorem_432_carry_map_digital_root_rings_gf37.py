@@ -683,6 +683,29 @@ base b.
     nonzero part of an island is a multiplicative group (identity the idempotent,
     e.g. 40 for (5) mod 65), but the island itself is not a field.)
 
+(64) BASE 82 (m = 81 = 3^4, LOCAL). Islands (3) (27 elements = nilradical, index 4),
+    (9), (27) -- a chain. Idempotents {0,1}. Units 54, cyclic; 2 is PRIMITIVE mod 81
+    (primitive mod 9 and 2^6 = 64 != 1 mod 27). CARRY COMPLEMENT: fixed point 41 =
+    (m+1)/2 (b even), in the preserved cosets 2+(3), 5+(9), 14+(27). DOUBLING:
+    exactly ONE cycle per 3-adic layer: lengths 54 (units), 18 (3 x units mod 27),
+    6 (9 x units mod 9), 2 (27, 54), 1 (0).
+    REFINES BASE 10: 9 | 81, so dr_82(n) mod 9 = n mod 9 -- the base-82 root
+    determines the base-10 root (reduction Z/81 -> Z/9).
+    FORCED: 37 = 1 + 4*9 and 10 = 1 + 9 lie in the kernel 1 + 9Z/81 of that
+    reduction, a group of order 9, so both have order 9. CONTINGENT: dr_82(137) =
+    56 is a PRIMITIVE ROOT (order 54); 26 has order 6. 405 = 5 * 81 = 0 here.
+
+(65) THE 405 EVALUATION (supplied, all reproduced; all forced). The 3 x 3 all-9 field
+    gives E_digit = 9*9 = 81 and E_cycle = 9*45 = 405; ratio 5 = mean of 1..9; both
+    and their difference 324 = 4*81 have v3 = 4 (v3(9N) = v3(36N) = 2 + v3(N)).
+    The 9 x 9 mod-9 Cayley table also totals 9*45 = 405 (each row a permutation of
+    1..9): same total, same reason -- nine complete 1..9 cycles. Moments
+    M_r = 9 sum_{j<=9} j^r: 405, 2565, 18225, 137997, 1087425, 8805645, 72723825,
+    609581997; M_r = 0 (mod 81) for r odd (pair j with 9 - j), 54 for r even
+    (sum j^{2k} = 6 mod 9). Centred sums: odd ones 0; 540, 6372, 88020; variance
+    20/3. 405 = 35 = -2 (mod 37) is PRIMITIVE (2 primitive, -2 = 2^19, gcd(19,36) =
+    1); 405 = 10 (mod 79), order 13, cycle 1,10,21,52,46,65,18,22,62,67,38,64,8.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1430,6 +1453,22 @@ assert all(x * 16 % m in {0, 16, 32, 48, 64} for x in range(m)) and any(x * 8 % 
 assert [2 * y % m for y in (16, 32, 64, 48)] == [32, 64, 48, 16]
 assert 137 % m == 57 and pow(57, 4, m) == 1 and pow(57, 2, m) != 1 and pow(37, 4, m) == 1 and pow(37, 2, m) != 1
 assert all(40 * y % 65 == y for y in range(0, 65, 5))                    # 40 = identity of the island (5) mod 65
+
+# (64) base 82, (65) 405
+m = 81
+assert [d for d in range(2, m) if m % d == 0] == [3, 9, 27] and sum(pow(x, m, m) == 0 for x in range(m)) == 27
+assert pow(3, 4, m) == 0 and pow(3, 3, m) != 0 and [x for x in range(m) if x * x % m == x] == [0, 1]
+assert all(pow(2, 54 // q, m) != 1 for q in (2, 3)) and pow(2, 6, 27) != 1
+assert [r for r in range(m) if (1 - r) % m == r] == [41] and (41 % 3, 41 % 9, 41 % 27) == (2, 5, 14)
+assert all((n % 81) % 9 == n % 9 for n in range(1, 10000))
+assert all(pow(g, 9, m) == 1 and pow(g, 3, m) != 1 for g in (37, 10)) and 37 % 9 == 1 and 10 % 9 == 1
+assert 137 % m == 56 and all(pow(56, 54 // q, m) != 1 for q in (2, 3)) and pow(26, 6, m) == 1 and pow(26, 3, m) != 1 and pow(26, 2, m) != 1
+assert 405 % m == 0 and 405 == 5 * 81 and 405 - 81 == 4 * 81
+_M = [9 * sum(j**r for j in range(1, 10)) for r in range(1, 9)]
+assert _M == [405, 2565, 18225, 137997, 1087425, 8805645, 72723825, 609581997]
+assert [x % 81 for x in _M] == [0, 54, 0, 54, 0, 54, 0, 54]
+assert [9 * sum((j - 5)**k for j in range(1, 10)) for k in (2, 4, 6)] == [540, 6372, 88020]
+assert 405 % 37 == 35 and all(pow(35, 36 // q, 37) != 1 for q in (2, 3)) and 405 % 79 == 10
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
