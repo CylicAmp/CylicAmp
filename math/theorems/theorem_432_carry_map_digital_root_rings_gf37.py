@@ -287,6 +287,15 @@ base b.
     13*54 + 1; cube roots {1, 19, 37}) -- the role 26 plays in GF(37).
     dr_55(137) = 29 GENERATES the unit group (order 18). 26 and 10 are zero divisors.
 
+(28) BASE 56 (m = 55 = 5 * 11, square-free MIXED = F_5 x F_11; b EVEN). Islands
+    (5) = F_11, (11) = F_5. Nilradical {0}. Idempotents {0,1,11,45} (11 = (1,0),
+    45 = (0,1)). Units 40 = C4 x C10 (max order 20). Zero divisors 14.
+    CARRY COMPLEMENT: fixed point 28 = b/2 = 2^-1, in the preserved cosets 3 + (5)
+    and 6 + (11). DOUBLING: permutation, ord(2) = lcm(4, 10) = 20; cycles: (0), one
+    4-cycle (on the F_5 island), one 10-cycle (on the F_11 island), two 20-cycles
+    on units. CONTINGENT: dr_56(137) = 27 and 37 have the maximal order 20; 26 has
+    order 5; 10 is a zero divisor.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -681,6 +690,15 @@ assert {d: a for d in (3, 9, 27) for a in [[a for a in range(d) if (1 - a) % d =
 assert [2 * y % m for y in (6, 12, 24, 48, 42, 30)] == [12, 24, 48, 42, 30, 6] and 2 * 18 % m == 36 and 2 * 36 % m == 18
 assert [x for x in range(m) if pow(x, 3, m) == 1] == [1, 19, 37] and 37 * 37 % m == 19 and 37 * 19 == 13 * m + 1
 assert 137 % m == 29 and all(pow(29, 18 // q, m) != 1 for q in (2, 3))
+
+# (28) base 56
+m = 55
+assert [d for d in range(2, m) if m % d == 0] == [5, 11]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 11, 45]
+assert [r for r in range(m) if (1 - r) % m == r] == [28] and 28 % 5 == 3 and 28 % 11 == 6
+assert pow(2, 20, m) == 1 and pow(2, 10, m) != 1 and pow(2, 4, m) != 1
+assert 137 % m == 27 and pow(27, 20, m) == 1 and pow(27, 10, m) != 1 and pow(27, 4, m) != 1
+assert pow(37, 20, m) == 1 and pow(37, 10, m) != 1 and pow(37, 4, m) != 1 and pow(26, 5, m) == 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")

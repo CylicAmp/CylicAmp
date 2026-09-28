@@ -851,6 +851,14 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
           Markov triples: (1,1,2), (1,2,5), (1,5,13), (1,13,34), (1,34,89),
           (1,89,233), ... The 89 <-> 233 read-off cycle IS the Markov triple
           (1, 89, 233). (Connection noted 2026-09-28 from a supplied post.)
+          SCOPE (supplied "54 evaluations" summary, audited): the Vieta result
+          covers ONLY exponent-1 two-prime read-off cycles; it does not reduce the
+          family search. Below 1e22 there are 27 pairs (28 distinct coordinates,
+          not 54); both-prime pairs (2,5), (5,13), (89,233). 3qr = q^2 + r^2 + 1^2
+          is a sum of three squares by construction; odd-index Fibonacci numbers
+          are = 1, 2, 5 (mod 8), never 4^a(8b+7). The x = 2 Markov branch
+          (4 + y^2 + z^2 = 6yz) involves y^2 + 4, not sigma_2 = q^2 + 1: not a
+          read-off relation.
           Member counts 26 / 55 / 95 at 1e12 / 1e14 / 1e16.
 
           Solutions known: 98 = 95 family members + 130, 148480, 3039520.
