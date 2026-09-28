@@ -396,6 +396,22 @@ base b.
     base where 26 is idempotent; cf. base 51.) dr_66(137) = 7 and 37 have the
     maximal order 12; 10 is a non-unit.
 
+(39) BASE 67 (m = 66 = 2 * 3 * 11, square-free MIXED = F_2 x F_3 x F_11). Six islands
+    (2),(3),(6),(11),(22),(33). Nilradical {0}. EIGHT idempotents
+    {0,1,12,22,33,34,45,55}. Units 20 = C2 x C10. Zero divisors 45. CARRY
+    COMPLEMENT: no fixed point; preserved cosets 2+(3), 6+(11), 17+(33).
+    DOUBLING: one step onto the evens = Z/33 = base 34's root ring F_3 x F_11,
+    where ord(2) = lcm(2, 10) = 10: three 10-cycles, (22 44), and 0.
+    dr_67(137) = 5 has order 10; 37 has order 5; 26 and 10 are zero divisors.
+
+(40) WHEN IS 26 IDEMPOTENT (forced, all bases). 26 is idempotent mod m iff
+    m | 26^2 - 26 = 650 = 2 * 5^2 * 13. The moduli are 2,5,10,13,25,26,50,65,130,
+    ...; in the sweep that is exactly base 51 (m = 50) and base 66 (m = 65). The
+    double appearance is a divisibility fact about 650, not a coincidence.
+    (Supplied-audit corrections, 2026-09-28: base 51 has NO carry fixed point
+    (m = 50 even; 2*25 = 50 = 0); units of maximal order 12 in Z/65 = C4 x C12
+    number 24, not 16 (16 with ord b = 12, plus 8 with ord b in {3,6}, ord a = 4).)
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -908,6 +924,21 @@ assert pow(2, 12, m) == 1 and pow(2, 6, m) != 1 and pow(2, 4, m) != 1
 assert [2 * y % m for y in (13, 26, 52, 39)] == [26, 52, 39, 13]
 assert all(26 * x % m == x for x in range(0, m, 13))                   # identity on the island (13)
 assert 137 % m == 7 and all(pow(g, 12, m) == 1 and pow(g, 6, m) != 1 and pow(g, 4, m) != 1 for g in (7, 37))
+
+# (39) base 67, (40) the 26-idempotent criterion
+m = 66
+assert [d for d in range(2, m) if m % d == 0] == [2, 3, 6, 11, 22, 33]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 12, 22, 33, 34, 45, 55]
+assert not [r for r in range(m) if (1 - r) % m == r]
+assert {d: [a for a in range(d) if (1 - a) % d == a] for d in (3, 11, 33)} == {3: [2], 11: [6], 33: [17]}
+assert sorted({2 * x % m for x in range(m)}) == list(range(0, m, 2)) and pow(2, 10, 33) == 1 and pow(2, 5, 33) != 1
+assert 2 * 22 % m == 44 and 2 * 44 % m == 22
+assert 137 % m == 5 and pow(5, 10, m) == 1 and pow(5, 5, m) != 1 and pow(37, 5, m) == 1
+assert [mm for mm in range(2, 201) if (26 * 26 - 26) % mm == 0] == [2, 5, 10, 13, 25, 26, 50, 65, 130]
+assert [b for b in range(37, 68) if (26 * 26 - 26) % (b - 1) == 0] == [51, 66]
+assert not [r for r in range(50) if (1 - r) % 50 == r]
+from math import gcd as _g
+assert sum(1 for u in range(65) if _g(u, 65) == 1 and pow(u, 12, 65) == 1 and pow(u, 6, 65) != 1 and pow(u, 4, 65) != 1) == 24
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
