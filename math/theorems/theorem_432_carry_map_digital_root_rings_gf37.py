@@ -345,6 +345,14 @@ base b.
     Z/15's idempotents 1, 6, 10 appear as 16, 36, 40 -- each on a doubling cycle.
     dr_61(137) = 17 and 37 have order 4; 26 and 10 are zero divisors.
 
+(34) BASE 62 (m = 61 prime: root ring GF(61), a FIELD; b EVEN). Carry complement
+    fixes exactly 31 = 2^-1. No coset of any subgroup of order >= 2 maps to a
+    coset. |f(QR) & QR| = 14 = (p-5)/4 (p = 1 mod 4). 61 = 1 mod 3: cube roots of
+    unity {1, 13, 47}, primitive sixth roots {14, 48}, swapped by f. DOUBLING: 2 is
+    PRIMITIVE mod 61: one 60-cycle plus 0.
+    CONTINGENT: 26 and 10 are PRIMITIVE ROOTS mod 61 (1/61 has full decimal period
+    60); 37 has order 20; dr_62(137) = 15, a QR of order 15.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -799,6 +807,17 @@ for c in ((4, 8, 16, 32), (12, 24, 48, 36), (28, 56, 52, 44), (20, 40)):
     assert all(c[(i + 1) % len(c)] == 2 * c[i] % m for i in range(len(c)))
 assert [16 % 15, 36 % 15, 40 % 15] == [1, 6, 10]
 assert 137 % m == 17 and pow(17, 4, m) == 1 and pow(17, 2, m) != 1 and pow(37, 4, m) == 1 and pow(37, 2, m) != 1
+
+# (34) base 62
+p = 61
+QR61 = {x * x % p for x in range(1, p)}
+assert [r for r in range(p) if (1 - r) % p == r] == [31]
+assert len({(1 - x) % p for x in QR61} & QR61) == 14
+assert [r for r in range(1, p) if pow(r, 3, p) == 1] == [1, 13, 47]
+assert [r for r in range(p) if (r * r - r + 1) % p == 0] == [14, 48] and (1 - 14) % p == 48
+assert all(pow(g, 60 // q, p) != 1 for g in (2, 26, 10) for q in (2, 3, 5))
+assert pow(37, 20, p) == 1 and all(pow(37, 20 // q, p) != 1 for q in (2, 5))
+assert 137 % p == 15 and pow(15, 15, p) == 1 and all(pow(15, 15 // q, p) != 1 for q in (3, 5))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
