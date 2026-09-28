@@ -374,6 +374,17 @@ base b.
     CONTINGENT: 37 is a CUBE ROOT OF UNITY mod 63 (37^2 = 46, 37*46 = 1702 =
     27*63 + 1); dr_64(137) = 11, 26 and 10 have order 6.
 
+(37) BASE 65 (m = 64 = 2^6, LOCAL). Islands (2),(4),(8),(16),(32) -- a chain. The
+    nilradical is (2), all 32 evens; 2 has nilpotency index 6. Idempotents {0,1}.
+    Units 32 = C2 x C16. Zero divisors 31. CARRY COMPLEMENT: no fixed point and no
+    preserved coset (every island has even index); f(r) = 1 - r maps the nilradical
+    (evens) BIJECTIVELY onto the unit group (odds) -- the two halves of the ring.
+    DOUBLING IS NILPOTENT on the whole ring: every orbit reaches 0 within
+    v2(64) = 6 steps (a = 6, n = 1 in the doubling-collapse theorem: the surviving
+    ideal is {0}). First base in the sweep with no nonzero doubling cycle.
+    26 and 10 are nilpotent of index 6; dr_65(137) = 9 (order 8) and 37 (order 16)
+    are units.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -865,6 +876,17 @@ assert [y % 9 for y in (7, 14, 28, 56, 49, 35)] == [7, 5, 1, 2, 4, 8] and [21 % 
 assert all(2 * a % m == b for a, b in [(7, 14), (14, 28), (28, 56), (56, 49), (49, 35), (35, 7), (21, 42), (42, 21)])
 assert 37 * 37 % m == 46 and 37 * 46 == 27 * m + 1
 assert 137 % m == 11 and all(pow(g, 6, m) == 1 and pow(g, 2, m) != 1 and pow(g, 3, m) != 1 for g in (11, 26, 10))
+
+# (37) base 65
+m = 64
+assert [d for d in range(2, m) if m % d == 0] == [2, 4, 8, 16, 32]
+assert [x for x in range(m) if pow(x, m, m) == 0] == list(range(0, m, 2)) and pow(2, 6, m) == 0 and pow(2, 5, m) != 0
+assert [x for x in range(m) if x * x % m == x] == [0, 1]
+assert not [r for r in range(m) if (1 - r) % m == r]
+assert sorted((1 - x) % m for x in range(0, m, 2)) == list(range(1, m, 2))
+assert all(x * 64 % m == 0 for x in range(m)) and any(x * 32 % m for x in range(m))
+assert all(pow(r, 6, m) == 0 and pow(r, 5, m) != 0 for r in (26, 10))
+assert 137 % m == 9 and pow(9, 8, m) == 1 and pow(9, 4, m) != 1 and pow(37, 16, m) == 1 and pow(37, 8, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")

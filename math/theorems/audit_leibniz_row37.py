@@ -33,6 +33,25 @@ RECONCILIATION NOTES (supplied "all five threads closed")
   * Thread 4 checks: 11 * 26 = 286 = 27 (mod 37); 11 in -mu_3, 26 in mu_3, product
     in -mu_3. Syracuse 37 -> 7 -> 11 (3*37+1 = 112 = 16*7; 3*7+1 = 22 = 2*11).
   * Thread 2 (Collatz on twin centres) is not reproduced here.
+
+CROSS-THREAD STATUS (certification rule adopted 2026-09-28: a thread is VERIFIED
+only when its result reproduces from the stated domain and generation rules and
+every inference used for exhaustiveness is independently checked):
+  Thread 5  VERIFIED (this file).
+  Thread 4  VERIFIED (assertions above).
+  Thread 3  VERIFIED, re-run 2026-09-28 from the committed tool
+            tools/divisor_square_family_candidates.py 1e12 (clean state):
+            552 candidates (m | sigma_2(m), ratio > 3/2, q > m/2, gcd(q,6) = 1),
+            394 = 71.4% with q = +-2 (mod 9), 26 with q prime. The concentration
+            precedes prime filtering; mechanism derived and checked 552/552 in T245
+            (q = eps * tau(u)/3^b * prod C - m mod 9).
+  Thread 1  SUPERSEDED by COMPLETE m <= 1e20 (358 members). Artifacts: T245
+            ("COMPLETE AT m <= 1e20"), t245_family_members_1e20.txt (all 358
+            re-verified by sympy), t245_supply_cycles_1e20.json, tools/rust_family
+            (validated by identical node counts vs Python at 1e12..1e18),
+            tools/divisor_square_supply_cycles.py. Exhaustiveness rests on the
+            read-off + supply-cycle argument written out in T245. 1e22: running.
+  Thread 2  UNVERIFIED here.
 """
 from math import comb
 from collections import Counter
