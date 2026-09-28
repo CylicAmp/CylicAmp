@@ -385,6 +385,17 @@ base b.
     26 and 10 are nilpotent of index 6; dr_65(137) = 9 (order 8) and 37 (order 16)
     are units.
 
+(38) BASE 66 (m = 65 = 5 * 13, square-free MIXED = F_5 x F_13; b EVEN). Islands
+    (5) = F_13, (13) = F_5. Nilradical {0}. Idempotents {0,1,26,40} (26 = (1,0),
+    40 = (0,1)). Units 48 = C4 x C12. Zero divisors 16. CARRY COMPLEMENT: fixed
+    point 33 = b/2 = 2^-1, in the preserved cosets 3 + (5) and 7 + (13).
+    DOUBLING: permutation, ord(2) = lcm(4, 12) = 12: (0), one 4-cycle, five
+    12-cycles.
+    CONTINGENT: MULT = 26 is the IDEMPOTENT (1,0) -- the identity of the island
+    (13) = F_5 -- and lies on that island's doubling cycle (13 26 52 39). (Second
+    base where 26 is idempotent; cf. base 51.) dr_66(137) = 7 and 37 have the
+    maximal order 12; 10 is a non-unit.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -887,6 +898,16 @@ assert sorted((1 - x) % m for x in range(0, m, 2)) == list(range(1, m, 2))
 assert all(x * 64 % m == 0 for x in range(m)) and any(x * 32 % m for x in range(m))
 assert all(pow(r, 6, m) == 0 and pow(r, 5, m) != 0 for r in (26, 10))
 assert 137 % m == 9 and pow(9, 8, m) == 1 and pow(9, 4, m) != 1 and pow(37, 16, m) == 1 and pow(37, 8, m) != 1
+
+# (38) base 66
+m = 65
+assert [d for d in range(2, m) if m % d == 0] == [5, 13]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 26, 40] and 26 % 5 == 1 and 26 % 13 == 0
+assert [r for r in range(m) if (1 - r) % m == r] == [33] and 33 % 5 == 3 and 33 % 13 == 7
+assert pow(2, 12, m) == 1 and pow(2, 6, m) != 1 and pow(2, 4, m) != 1
+assert [2 * y % m for y in (13, 26, 52, 39)] == [26, 52, 39, 13]
+assert all(26 * x % m == x for x in range(0, m, 13))                   # identity on the island (13)
+assert 137 % m == 7 and all(pow(g, 12, m) == 1 and pow(g, 6, m) != 1 and pow(g, 4, m) != 1 for g in (7, 37))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")

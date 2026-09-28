@@ -45,7 +45,11 @@ every inference used for exhaustiveness is independently checked):
             394 = 71.4% with q = +-2 (mod 9), 26 with q prime. The concentration
             precedes prime filtering; mechanism derived and checked 552/552 in T245
             (q = eps * tau(u)/3^b * prod C - m mod 9).
-  Thread 1  SUPERSEDED by COMPLETE m <= 1e20 (358 members). Artifacts: T245
+            SCOPE: a property of this generator at 1e12, not a universal theorem;
+            T245 shows the share varies with v3(m) (e.g. 95% at v3 = 3 but 31% at
+            v3 = 4, both at 1e14).
+  Thread 1  VERIFIED TO m <= 1e20 (358 members). Certified scope: N <= 1e20;
+            the 1e22 run is an EXTENSION, incomplete, outside that scope. Artifacts: T245
             ("COMPLETE AT m <= 1e20"), t245_family_members_1e20.txt (all 358
             re-verified by sympy), t245_supply_cycles_1e20.json, tools/rust_family
             (validated by identical node counts vs Python at 1e12..1e18),
