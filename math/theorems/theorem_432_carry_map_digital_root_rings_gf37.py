@@ -308,6 +308,15 @@ base b.
     137 = 26 plays in GF(37), where it drives the 137-map. 37 has order 6; 26 and
     10 are zero divisors.
 
+(30) BASE 58 (m = 57 = 3 * 19, square-free MIXED = F_3 x F_19; b EVEN). Islands
+    (3) = F_19, (19) = F_3. Nilradical {0}. Idempotents {0,1,19,39}. Units 36 =
+    C2 x C18. Zero divisors 20. CARRY COMPLEMENT: fixed point 29 = b/2 = 2^-1, in
+    the preserved cosets 2 + (3) and 10 + (19). DOUBLING: permutation, ord(2) =
+    lcm(2, 18) = 18 (2 primitive mod 19): cycles (0), one 2-cycle (F_3 island),
+    three 18-cycles. Cube roots of unity {1, 7, 49}.
+    CONTINGENT: 37 is an INVOLUTION mod 57 (37^2 = 1369 = 24*57 + 1);
+    dr_58(137) = 23 and 10 have the maximal order 18; 26 has order 6.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -722,6 +731,16 @@ assert all((x * 8) % m in {0, 8, 16, 24, 32, 40, 48} for x in range(m)) and any(
 assert [2 * y % m for y in (8, 16, 32, 24, 48, 40)] == [16, 32, 8, 48, 40, 24]
 assert 137 % m == 25 and [x for x in range(m) if pow(x, 3, m) == 1] == [1, 9, 25] and 25 * 9 == 4 * m + 1
 assert pow(37, 6, m) == 1 and pow(37, 3, m) != 1 and pow(37, 2, m) != 1
+
+# (30) base 58
+m = 57
+assert [d for d in range(2, m) if m % d == 0] == [3, 19]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 19, 39]
+assert [r for r in range(m) if (1 - r) % m == r] == [29] and 29 % 3 == 2 and 29 % 19 == 10
+assert pow(2, 18, m) == 1 and pow(2, 9, m) != 1 and pow(2, 6, m) != 1
+assert [x for x in range(m) if pow(x, 3, m) == 1] == [1, 7, 49]
+assert 37 * 37 == 24 * m + 1 and 137 % m == 23
+assert all(pow(g, 18 // q, m) != 1 for g in (23, 10) for q in (2, 3)) and pow(26, 6, m) == 1 and pow(26, 3, m) != 1 and pow(26, 2, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
