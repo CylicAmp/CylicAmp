@@ -562,6 +562,26 @@ base b.
     multiplications by units/zero-divisors of the base-100 root ring: 10 is a unit
     of order 2, 11 is a zero divisor (11 * 9 = 99 = 0).
 
+(54) L-CUPS (supplied definition, 2026-09-28). A HALF L-cup is a 2 x 2 digit block
+    with three cells equal to d and one cell d + 1 ("3 x 1 plus 1"), e.g.
+        12      the rows are 2-digit numbers; the odd rows of the supplied ~ table
+        11      (12/11, 23/22, 34/33, ...) are half L-cups.
+    A FULL L-cup mirrors each row to an odd palindrome: 12 -> 121, 11 -> 111.
+    FORCED FACTS (d = 1..8, so d + 1 is a digit):
+      * Every full-cup row is = 0, 10 or 27 (mod 37), independent of d:
+            ddd = 111 d = 0          (111 = 3 * 37),
+            d(d+1)d = 111 d + 10 = 10        (10 in IC = {1,10,26}),
+            (d+1)d(d+1) = 111 d + 101 = 27   (27 in NEG_H = {11,27,36}).
+      * Half-cup rows are 11 d + {0, 1, 10}: mod 11 the raised cell is exactly
+        0, +1 or -1 -- in base 100's root ring Z/99 the half cup is the repdigit
+        11 d shifted by 0, 1 or the reversal-image 10.
+      * Digital roots: ddd -> 3d, d(d+1)d -> 3d + 1, (d+1)d(d+1) -> 3d + 2.
+      * The model cup 12/11 -> 121/111: 121 = 11^2, 111 = 3 * 37 = 0 (mod 37),
+        121 = 10 (mod 37).
+    EDGE d = 9: d + 1 is not a digit; the supplied table wraps it to 1 (91/99,
+    99/19). Then 919 = 31 and 191 = 6 (mod 37), outside {0, 10, 27}: the mod-37
+    rule holds exactly for d = 1..8.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1220,6 +1240,15 @@ assert all(n == 100 * (n // 100) + _rev(n // 100) and (n // 100) in _OPS for n i
 assert all(n % 99 == 11 * (n // 100) % 99 and n % 11 == 0 and dr(n, 10) == dr(2 * (n // 100), 10) for n in _PAL)
 assert (10 % 9, 10 % 11) == (1, 10) and (11 % 9, 11 % 11) == (2, 0) and 10 * 10 % 99 == 1 and 11 * 9 % 99 == 0
 assert all((100 * h + _rev(h)) % 99 == 11 * h % 99 for h in range(100))
+
+# (54) L-cups
+for d in range(1, 9):
+    e = d + 1
+    assert int(f"{d}{d}{d}") % 37 == 0 and int(f"{d}{e}{d}") % 37 == 10 and int(f"{e}{d}{e}") % 37 == 27
+    assert {(10 * d + d) % 11, (10 * d + e) % 11, (10 * e + d) % 11} == {0, 1, 10}
+    assert (dr(111 * d, 10), dr(111 * d + 10, 10), dr(111 * d + 101, 10)) == (dr(3 * d, 10), dr(3 * d + 1, 10), dr(3 * d + 2, 10))
+assert 121 == 11**2 and 111 == 3 * 37 and 121 % 37 == 10
+assert (919 % 37, 191 % 37) == (31, 6)
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
