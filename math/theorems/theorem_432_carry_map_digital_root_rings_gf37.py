@@ -668,6 +668,21 @@ base b.
     fixes the mod-9 state": (1,1,1), (3,3,3), (5,5,5) share dL = dR = 0 with totals
     3, 0, 6 (mod 9).
 
+(63) BASE 81 = 3^4 (m = 80 = 2^4 * 5, MIXED = Z/16 x Z/5). Eight proper islands
+    (2),(4),(5),(8),(10),(16),(20),(40). Nilradical (10), 8 elements; 10 has
+    nilpotency index 4 (10^3 = 40, 10^4 = 0). Idempotents {0,1,16,65} (65 = (1,0),
+    16 = (0,1)). Units 32 = C2 x C4 x C4 of EXPONENT 4 (every unit has order 1, 2
+    or 4) -- the smallest unit exponent in the sweep. Zero divisors 47.
+    CARRY COMPLEMENT: no fixed point (b odd); only preserved coset 3 + (5).
+    DOUBLING: settles in v2(80) = 4 steps onto (16) = Z/5 = base 6's root ring F_5:
+    the cycle (16 32 64 48) = (1 2 4 3) mod 5 starts at the idempotent 16.
+    dr_81(137) = 57 and 37 have order 4; 10 is NILPOTENT (index 4); 26 is a zero
+    divisor.
+    (Ledger notes, 2026-09-28: a supplied ledger again stated "16 of 48 units of
+    order 12" mod 65 -- the count is 24 (section 40). Its refinement is right: the
+    nonzero part of an island is a multiplicative group (identity the idempotent,
+    e.g. 40 for (5) mod 65), but the island itself is not a field.)
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1403,6 +1418,18 @@ _mu = _Ct(len(v) for v in _by.values())
 assert len(_by) == 217 and [_mu[k] for k in range(1, 10)] == [48, 42, 36, 30, 24, 18, 12, 6, 1]
 assert all((a + b + c) % 9 == (3 * (b % 3) + (c - b) - (b - a)) % 9 for a, b, c in _T)
 assert [(3 * x) % 9 for x in (1, 3, 5)] == [3, 0, 6]
+
+# (63) base 81
+m = 80
+assert [d for d in range(2, m) if m % d == 0] == [2, 4, 5, 8, 10, 16, 20, 40]
+assert [x for x in range(m) if pow(x, m, m) == 0] == list(range(0, m, 10)) and pow(10, 3, m) == 40 and pow(10, 4, m) == 0
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 16, 65]
+assert all(pow(u, 4, m) == 1 for u in range(m) if gcd(u, m) == 1)
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(5) if (1 - a) % 5 == a] == [3]
+assert all(x * 16 % m in {0, 16, 32, 48, 64} for x in range(m)) and any(x * 8 % m not in {0, 16, 32, 48, 64} for x in range(m))
+assert [2 * y % m for y in (16, 32, 64, 48)] == [32, 64, 48, 16]
+assert 137 % m == 57 and pow(57, 4, m) == 1 and pow(57, 2, m) != 1 and pow(37, 4, m) == 1 and pow(37, 2, m) != 1
+assert all(40 * y % 65 == y for y in range(0, 65, 5))                    # 40 = identity of the island (5) mod 65
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
