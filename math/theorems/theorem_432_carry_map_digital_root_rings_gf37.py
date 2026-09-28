@@ -801,6 +801,19 @@ base b.
     force -- e.g. whether a claimed special property exceeds its counted base rate
     (section 72: 24/56 units of maximal order, so "all four maximal" has chance 3.4%).
 
+(75) BASE 90 (m = 89 prime: root ring GF(89), a FIELD; b EVEN). Carry complement:
+    reflection about 45 = (m+1)/2. No coset of any subgroup of order >= 2 maps to a
+    coset. |f(QR) & QR| = 21 = (p-5)/4. No primitive sixth roots (89 = 2 mod 3).
+    DOUBLING: 89 = 1 mod 8 makes 2 a QR, and ord_89(2) = 11 (89 | M11 = 2^11 - 1 =
+    23 * 89): eight 11-cycles plus 0. Smallest primitive root 3.
+    FORCED -- 10 IS A GOLDEN RATIO MOD 89: 10^2 - 10 - 1 = 89, so 10 (and 80) are the
+    roots of x^2 - x - 1 in GF(89). This is exactly why 1/89 = sum F_k / 10^(k+1)
+    (put x = 1/10 in x/(1 - x - x^2)); and ord_89(10) = 44 = the Pisano period
+    pi(89). 89 = F_11, the Fibonacci prime of T245's 89 <-> 233 read-off cycle.
+    CONTINGENT: 137 = 48 and 26 are PRIMITIVE ROOTS mod 89; 37 has order 8. The index
+    11 in both 89 = F_11 and 89 | 2^11 - 1 is recorded as a coincidence (no mechanism
+    found).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1653,6 +1666,21 @@ def _o(u, mm):
     return k
 _els = [u for u in range(85) if gcd(u, 85) == 1 and _o(u % 5, 5) == 4 and _o(u % 17, 17) == 16]
 assert len(_els) == 16 and all(_o(u, 85) == 16 for u in _els)
+
+# (75) base 90
+p = 89
+QR89 = {x * x % p for x in range(1, p)}
+assert [r for r in range(p) if (1 - r) % p == r] == [45] and len({(1 - x) % p for x in QR89} & QR89) == 21
+assert pow(2, 11, p) == 1 and 2**11 - 1 == 23 * p and not [r for r in range(p) if (r * r - r + 1) % p == 0]
+assert 10 * 10 - 10 - 1 == p and [r for r in range(p) if (r * r - r - 1) % p == 0] == [10, 80]
+from fractions import Fraction as _Fr
+_F = [0, 1]
+for _ in range(70):
+    _F.append(_F[-1] + _F[-2])
+assert abs(sum(_Fr(_F[k], 10**(k + 1)) for k in range(1, 70)) - _Fr(1, 89)) < _Fr(1, 10**50)
+assert pow(10, 44, p) == 1 and all(pow(10, 44 // q, p) != 1 for q in (2, 11))
+assert next(k for k in range(1, 200) if _F[k] % p == 0 and _F[k + 1] % p == 1) == 44 and _F[11] == 89
+assert 137 % p == 48 and all(pow(g, 88 // q, p) != 1 for g in (48, 26) for q in (2, 11)) and pow(37, 8, p) == 1 and pow(37, 4, p) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
