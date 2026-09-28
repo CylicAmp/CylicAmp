@@ -325,6 +325,16 @@ base b.
     CONTINGENT: dr_59(137) = 21 and 37 both GENERATE the unit group (order 28);
     26 and 10 are non-units.
 
+(32) BASE 60 (sexagesimal; m = 59 prime: root ring GF(59), a FIELD; b EVEN). The
+    starkest digit/root contrast in the sweep: the digit ring Z/60 = Z/4 x Z/3 x
+    Z/5 has 8 idempotents {0,1,16,21,25,36,40,45}; the root ring has only {0,1}.
+    CARRY COMPLEMENT: fixes exactly 30 = b/2 = 2^-1. No coset of any subgroup of
+    order >= 2 maps to a coset. |f(QR) & QR| = 14 = (p-3)/4. No primitive sixth
+    roots (59 = 2 mod 3). DOUBLING: 2 is PRIMITIVE mod 59 (59 = 3 mod 8, 58 =
+    2*29): one 58-cycle on nonzero residues plus 0.
+    CONTINGENT: 37 and 10 are PRIMITIVE ROOTS mod 59 (so 1/59 has full decimal
+    period 58); dr_60(137) = 19 and 26 are QRs of order 29.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -757,6 +767,15 @@ assert [x for x in range(m) if x * x % m == x] == [0, 1, 29, 30]
 assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(29) if (1 - a) % 29 == a] == [15]
 assert all(pow(2, 28 // q, 29) != 1 for q in (2, 7))
 assert 137 % m == 21 and all(pow(g, 28 // q, m) != 1 for g in (21, 37) for q in (2, 7))
+
+# (32) base 60
+p = 59
+QR59 = {x * x % p for x in range(1, p)}
+assert [x for x in range(60) if x * x % 60 == x] == [0, 1, 16, 21, 25, 36, 40, 45]
+assert [r for r in range(p) if (1 - r) % p == r] == [30]
+assert len({(1 - x) % p for x in QR59} & QR59) == 14 and not [r for r in range(p) if (r * r - r + 1) % p == 0]
+assert all(pow(g, 58 // q, p) != 1 for g in (2, 37, 10) for q in (2, 29))
+assert 137 % p == 19 and all(pow(g, 29, p) == 1 and g in QR59 for g in (19, 26))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
