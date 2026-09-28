@@ -627,6 +627,28 @@ base b.
     The parity grid 123/456/789 -> checkerboard is FORCED (n = 3r + c + 1 = r + c + 1
     mod 2, as 3 is odd), hence invariant under every rotation and reflection.
 
+(59) BASE 79 (m = 78 = 2 * 3 * 13, square-free MIXED = F_2 x F_3 x F_13). Six islands
+    (2),(3),(6),(13),(26),(39). Nilradical {0}. Eight idempotents
+    {0,1,13,27,39,40,52,66}. Units 24 = C2 x C12. Zero divisors 53. CARRY
+    COMPLEMENT: no fixed point (b odd); preserved cosets 2+(3), 7+(13), 20+(39).
+    DOUBLING: one step onto the evens = Z/39 = base 40's root ring F_3 x F_13,
+    ord(2) = lcm(2, 12) = 12: (0), one 2-cycle, three 12-cycles.
+    dr_79(137) = 59 and 37 have maximal order 12; 26 = (0,2,0) and 10 = (0,1,10)
+    are zero divisors.
+
+(60) SUPPLIED "SHARPENED ML SYSTEM" AUDIT, checked. CORRECT: rotation R and
+    reversal X of an n-string generate the dihedral group of order 2n -- all 6
+    permutations for n = 3 (S_3), only 18 of 9! for n = 9; 32 distinct (direction,
+    |delta|, parity-pattern) states over the 81 pairs. WRONG: "the units wrap
+    n9 -> (n+1)0 always coincides with a dr-wrap 9 -> 1". Under +1 the digital root
+    ALWAYS rises by exactly one (cyclically); it wraps 9 -> 1 only after multiples
+    of 9, while the units digit wraps after n = 9 (mod 10). They coincide only for
+    n = 9 (mod 90): 12 of the 100 units-wraps below 1000 (9, 99, 189, 279, ...);
+    e.g. 19 -> 20 takes dr 1 -> 2. A units wrap is a CARRY, and carries are
+    invisible mod 9 (section 1): zero marks the mod-10 carry, not the mod-9 wrap.
+    NOT CHECKED: the supplied 9 x 9 field table A(r,c) = dr(r + c - 1) (table not
+    provided); the claim is internally consistent (it would be Z/9's Cayley table).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1323,6 +1345,27 @@ _pp = [(a, b) for a in range(1, 10) for b in range(1, 10)]
 assert len({_st(a, b) for a, b in _pp}) == 17 and len({frozenset({p, p[::-1]}) for p in _pp}) == 45
 assert (-4) % 9 == 5 and {s: 9 // gcd(s, 9) for s in range(1, 9)} == {1: 9, 2: 9, 3: 3, 4: 9, 5: 9, 6: 3, 7: 9, 8: 9}
 assert all((3 * r + c + 1) % 2 == (r + c + 1) % 2 for r in range(3) for c in range(3))
+
+# (59) base 79, (60) audit checks
+m = 78
+assert [d for d in range(2, m) if m % d == 0] == [2, 3, 6, 13, 26, 39]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 13, 27, 39, 40, 52, 66]
+assert not [r for r in range(m) if (1 - r) % m == r]
+assert {d: [a for a in range(d) if (1 - a) % d == a] for d in (3, 13, 39)} == {3: [2], 13: [7], 39: [20]}
+assert sorted({2 * x % m for x in range(m)}) == list(range(0, m, 2)) and pow(2, 12, 39) == 1 and pow(2, 6, 39) != 1 and pow(2, 4, 39) != 1
+assert 137 % m == 59 and all(pow(g, 12, m) == 1 and pow(g, 6, m) != 1 and pow(g, 4, m) != 1 for g in (59, 37))
+def _dih(n):
+    s = tuple(range(1, n + 1)); seen = {s}; fr = [s]
+    while fr:
+        t_ = fr.pop()
+        for u in (t_[1:] + t_[:1], t_[::-1]):
+            if u not in seen:
+                seen.add(u); fr.append(u)
+    return len(seen)
+assert _dih(3) == 6 and _dih(9) == 18
+_w = [n for n in range(1, 1000) if n % 10 == 9]
+assert len(_w) == 100 and [n for n in _w if dr(n, 10) == 9] == [n for n in range(1, 1000) if n % 90 == 9] and len([n for n in _w if dr(n, 10) == 9]) == 12
+assert all(dr(n + 1, 10) == dr(n, 10) % 9 + 1 for n in range(1, 5000))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
