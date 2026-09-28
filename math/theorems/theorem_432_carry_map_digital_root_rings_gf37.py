@@ -814,6 +814,16 @@ base b.
     11 in both 89 = F_11 and 89 | 2^11 - 1 is recorded as a coincidence (no mechanism
     found).
 
+(76) THE 1212 LOOP (supplied sequence 1212, 2112, 2121, 3912, 4812, ..., 9312, 1212).
+    10 distinct states, 10 transitions, closed. FORCED BY CONSTRUCTION (cannot fail):
+    every state has digit sum 6 or 15, both = 6 (mod 9), so every dr is 6 and every
+    difference is divisible by 9; the "convergence" values 33, 15, 24, 60 (and
+    48 + 12, 32 + 1, 12 + 12) are simply members of the class 6 (mod 9) -- any
+    n = 6 (mod 9) passes. GF(37) READING (not visible mod 9): the run 3912 -> 9312
+    steps by +900 and 900 = 12 (mod 37), so it is the arithmetic progression
+    27, 2, 14, 26, 1, 13, 25 (mod 37); it meets MULT = 26 (6612) and then 1 (7512)
+    consecutively because 26 + 12 = 38 = 1 -- a step fact, not a signal.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1681,6 +1691,12 @@ assert abs(sum(_Fr(_F[k], 10**(k + 1)) for k in range(1, 70)) - _Fr(1, 89)) < _F
 assert pow(10, 44, p) == 1 and all(pow(10, 44 // q, p) != 1 for q in (2, 11))
 assert next(k for k in range(1, 200) if _F[k] % p == 0 and _F[k + 1] % p == 1) == 44 and _F[11] == 89
 assert 137 % p == 48 and all(pow(g, 88 // q, p) != 1 for g in (48, 26) for q in (2, 11)) and pow(37, 8, p) == 1 and pow(37, 4, p) != 1
+
+# (76) the 1212 loop
+_seq = [1212, 2112, 2121, 3912, 4812, 5712, 6612, 7512, 8412, 9312, 1212]
+assert len(set(_seq)) == 10 and {dr(s, 10) for s in _seq} == {6}
+assert all((_seq[i + 1] - _seq[i]) % 9 == 0 for i in range(10))
+assert [s % 37 for s in _seq[3:10]] == [27, 2, 14, 26, 1, 13, 25] and 900 % 37 == 12
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
