@@ -335,6 +335,16 @@ base b.
     CONTINGENT: 37 and 10 are PRIMITIVE ROOTS mod 59 (so 1/59 has full decimal
     period 58); dr_60(137) = 19 and 26 are QRs of order 29.
 
+(33) BASE 61 (m = 60 = 2^2 * 3 * 5, MIXED = Z/4 x Z/3 x Z/5) -- base 60's DIGIT
+    ring is base 61's ROOT ring (forced: m = b - 1). Ten proper islands
+    (2),(3),(4),(5),(6),(10),(12),(15),(20),(30). Nilradical {0, 30}. Eight
+    idempotents {0,1,16,21,25,36,40,45}. Units 16 = C2 x C2 x C4. Zero divisors 43.
+    CARRY COMPLEMENT: no fixed point; preserved cosets 2+(3), 3+(5), 8+(15).
+    DOUBLING: settles in v2(60) = 2 steps onto (4) = Z/15 = base 16's root ring;
+    there ord(2) = 4: cycles (4 8 16 32), (12 24 48 36), (28 56 52 44), (20 40), (0).
+    Z/15's idempotents 1, 6, 10 appear as 16, 36, 40 -- each on a doubling cycle.
+    dr_61(137) = 17 and 37 have order 4; 26 and 10 are zero divisors.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -776,6 +786,19 @@ assert [r for r in range(p) if (1 - r) % p == r] == [30]
 assert len({(1 - x) % p for x in QR59} & QR59) == 14 and not [r for r in range(p) if (r * r - r + 1) % p == 0]
 assert all(pow(g, 58 // q, p) != 1 for g in (2, 37, 10) for q in (2, 29))
 assert 137 % p == 19 and all(pow(g, 29, p) == 1 and g in QR59 for g in (19, 26))
+
+# (33) base 61
+m = 60
+assert [d for d in range(2, m) if m % d == 0] == [2, 3, 4, 5, 6, 10, 12, 15, 20, 30]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 30]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 16, 21, 25, 36, 40, 45]
+assert {d: a for d in (3, 5, 15) for a in [[a for a in range(d) if (1 - a) % d == a]]} == {3: [2], 5: [3], 15: [8]}
+I4 = set(range(0, m, 4))
+assert all((x * 4) % m in I4 for x in range(m)) and sorted(x % 15 for x in I4) == list(range(15))
+for c in ((4, 8, 16, 32), (12, 24, 48, 36), (28, 56, 52, 44), (20, 40)):
+    assert all(c[(i + 1) % len(c)] == 2 * c[i] % m for i in range(len(c)))
+assert [16 % 15, 36 % 15, 40 % 15] == [1, 6, 10]
+assert 137 % m == 17 and pow(17, 4, m) == 1 and pow(17, 2, m) != 1 and pow(37, 4, m) == 1 and pow(37, 2, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
