@@ -781,6 +781,26 @@ base b.
     all four has chance ~0.43^4 = 3.4% -- not a signal given the many bases and
     properties examined in this sweep.
 
+(73) BASE 89 (m = 88 = 2^3 * 11, MIXED = Z/8 x F_11). Islands (2),(4),(8),(11),(22),
+    (44). Nilradical (22) = {0,22,44,66}, index 3 (22^2 = 44, 22^3 = 0). Idempotents
+    {0,1,33,56} (33 = (1,0), 56 = (0,1)). Units 40 = C2 x C2 x C10. Zero divisors 47.
+    CARRY COMPLEMENT: no fixed point (b odd); only preserved coset 6 + (11).
+    DOUBLING: settles in v2(88) = 3 steps onto (8) = F_11 = base 12's root ring; 2
+    primitive mod 11: one 10-cycle (8 16 32 64 40 80 72 56 24 48) through the
+    idempotent 56 (its identity), plus 0.
+    dr_89(137) = 49 = (1, 5) has order 5; 37 = (5, 4) has order 10; 26 and 10 are
+    zero divisors.
+
+(74) ON "TEST THE CONSEQUENCE" (supplied methodology note, 2026-09-28). Agreed that a
+    thought experiment is worth what it forces and what would falsify it. But the
+    note's own example -- "every (a, b) with component orders (4, 16) mod 85 has
+    order 16" -- CANNOT FAIL: in a CRT product the order is the lcm of the component
+    orders (a theorem). Run exhaustively it passes 16/16 (phi(4) * phi(16) = 16
+    elements), which confirms the harness, not the mathematics (null-control /
+    miss-test). A consequence with selectivity asks something the structure does NOT
+    force -- e.g. whether a claimed special property exceeds its counted base rate
+    (section 72: 24/56 units of maximal order, so "all four maximal" has chance 3.4%).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1616,6 +1636,23 @@ assert [r for r in range(m) if (1 - r) % m == r] == [44] and (44 % 3, 44 % 29) =
 assert pow(2, 28, m) == 1 and pow(2, 14, m) != 1 and pow(2, 4, m) != 1
 assert 137 % m == 50 and all(pow(g, 28, m) == 1 and pow(g, 14, m) != 1 and pow(g, 4, m) != 1 for g in (50, 26, 37, 10))
 assert sum(1 for u in range(m) if gcd(u, m) == 1 and pow(u, 28, m) == 1 and pow(u, 14, m) != 1 and pow(u, 4, m) != 1) == 24
+
+# (73) base 89, (74) the forced lcm test
+m = 88
+assert [d for d in range(2, m) if m % d == 0] == [2, 4, 8, 11, 22, 44]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 22, 44, 66] and pow(22, 2, m) == 44 and pow(22, 3, m) == 0
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 33, 56]
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(11) if (1 - a) % 11 == a] == [6]
+_C89 = [8, 16, 32, 64, 40, 80, 72, 56, 24, 48]
+assert all(_C89[(i + 1) % 10] == 2 * _C89[i] % m for i in range(10)) and all(x * 8 % m % 8 == 0 for x in range(m)) and 56 % 11 == 1
+assert 137 % m == 49 and pow(49, 5, m) == 1 and pow(37, 10, m) == 1 and pow(37, 5, m) != 1 and pow(37, 2, m) != 1
+def _o(u, mm):
+    k, x = 1, u % mm
+    while x != 1:
+        x = x * u % mm; k += 1
+    return k
+_els = [u for u in range(85) if gcd(u, 85) == 1 and _o(u % 5, 5) == 4 and _o(u % 17, 17) == 16]
+assert len(_els) == 16 and all(_o(u, 85) == 16 for u in _els)
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
