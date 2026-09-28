@@ -361,6 +361,19 @@ base b.
     CONTINGENT: dr_63(137) = 13 GENERATES the unit group (order 30); 37 has
     order 6; 26 and 10 are non-units.
 
+(36) BASE 64 (m = 63 = 3^2 * 7, MIXED = Z/9 x Z/7; b = 2^6 EVEN). Islands (3),(7),
+    (9),(21). Nilradical (21) = {0,21,42}. Idempotents {0,1,28,36} (28 = (1,0),
+    36 = (0,1)). Units 36 = C6 x C6. Zero divisors 26. CARRY COMPLEMENT: fixed
+    point 32 = b/2 = 2^-1; every island has a preserved coset (m odd): 2+(3),
+    4+(7), 5+(9), 11+(21).
+    DOUBLING: ord(2) = 6 EXACTLY, FORCED: 2^6 = 64 = b = 1 (mod b - 1). (General:
+    in base b = 2^k, ord_{b-1}(2) = k.)
+    BASE 10 INSIDE BASE 64: the island (7) is Z/9 (x -> x mod 9) with identity 28;
+    on it x2 runs (7 14 28 56 49 35) = (7 5 1 2 4 8) mod 9, base 10's doubling
+    cycle, and (21 42) = (3 6). (Cf. base 46, where Z/9 sits as the island (5).)
+    CONTINGENT: 37 is a CUBE ROOT OF UNITY mod 63 (37^2 = 46, 37*46 = 1702 =
+    27*63 + 1); dr_64(137) = 11, 26 and 10 have order 6.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -835,6 +848,23 @@ assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(31) i
 assert pow(2, 5, 31) == 1 and 31 == 2**5 - 1
 assert 137 % m == 13 and all(pow(13, 30 // q, m) != 1 for q in (2, 3, 5))
 assert pow(37, 6, m) == 1 and pow(37, 3, m) != 1 and pow(37, 2, m) != 1
+
+# (36) base 64
+m = 63
+assert [d for d in range(2, m) if m % d == 0] == [3, 7, 9, 21]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 21, 42]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 28, 36]
+assert [r for r in range(m) if (1 - r) % m == r] == [32]
+assert {d: [a for a in range(d) if (1 - a) % d == a] for d in (3, 7, 9, 21)} == {3: [2], 7: [4], 9: [5], 21: [11]}
+assert pow(2, 6, m) == 1 and all(pow(2, k, m) != 1 for k in range(1, 6))
+for k in range(2, 20):                                              # base 2^k: ord_{2^k - 1}(2) = k
+    assert next(j for j in range(1, k + 1) if pow(2, j, 2**k - 1) == 1 % (2**k - 1)) == k
+I7_64 = list(range(0, m, 7))
+assert sorted(x % 9 for x in I7_64) == list(range(9)) and 28 % 9 == 1 and 28 % 7 == 0
+assert [y % 9 for y in (7, 14, 28, 56, 49, 35)] == [7, 5, 1, 2, 4, 8] and [21 % 9, 42 % 9] == [3, 6]
+assert all(2 * a % m == b for a, b in [(7, 14), (14, 28), (28, 56), (56, 49), (49, 35), (35, 7), (21, 42), (42, 21)])
+assert 37 * 37 % m == 46 and 37 * 46 == 27 * m + 1
+assert 137 % m == 11 and all(pow(g, 6, m) == 1 and pow(g, 2, m) != 1 and pow(g, 3, m) != 1 for g in (11, 26, 10))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
