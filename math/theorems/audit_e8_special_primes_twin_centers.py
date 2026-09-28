@@ -54,6 +54,22 @@ under the fair control: it is entirely the local sieve at small primes.
 SUPPLIED-CODE NOTE: np.arange(N+1, dtype=int64)**3 overflows int64 for n > 2.1e6
 (N^3 = 8e21 > 9.2e18), which produced the spurious 4.35% density; reducing mod 37
 before multiplying gives the correct 20.24% at N = 2e7.
+A supplied 2e7 re-run (2026-09-28) confirms: range-matched by decade, twin excess
+z ~ +10, entirely in the p = 11 (odd e) and p = 7 (e = 2 mod 3) classes; fair
+control 21.82% vs twin 21.84%. Its model predictions (+1.63, +0.54 pp) omitted
+higher powers; the exact values are 1.852 and 0.702 pp (above).
+STATUS: TWIN-CENTRE THREAD RETIRED -- mechanism is residue conditioning
+(P(p | c) = 1/(p-2)); no residual link between 37 | sigma_3 and twin primality.
+
+ASYMPTOTIC DENSITY OF THE ZERO SET (Selberg-Delange, standard). n is a NON-zero
+only if every d = 2 prime (p^3 = -1 mod 37, i.e. p in 3 of the 36 unit classes,
+relative density 1/12) divides n to an EVEN power; the d = 3,4,6,12 classes need
+exponent >= 2 and change only the constant. Hence
+    #{n <= x : 37 does not divide sigma_3(n)} ~ C x (log x)^(-1/12),
+so the zero density tends to 1, as slowly as 1 - C (log x)^(-1/12). This IS the
+observed drift 18.87% (1e6) -> 20.24% (2e7): fitted C = 1.0097 at 1e6 and
+1.0091 at 2e7 (stable to 0.06%); predicted non-zero ratio 0.98378 vs observed
+0.98315. No earlier twin-vs-baseline comparison is valid unless range-matched.
 """
 from sympy import factorint, isprime, primerange
 
@@ -116,6 +132,10 @@ _e11 = [e for e in range(1, 80) if e % 2]
 assert abs(float(_P(11, 9, _e11)) - 11 / 108) < 1e-12 and abs(float(_P(11, 11, _e11)) - 11 / 132) < 1e-12
 assert round(float(_P(7, 5, [e for e in range(1, 80) if e % 3 == 2]) - _P(7, 7, [e for e in range(1, 80) if e % 3 == 2])) * 100, 3) == 0.702
 assert (2 * 10**6) ** 3 < 2**63 < (21 * 10**5) ** 3
+from math import log as _log
+_C1, _C2 = (1 - 188742 / 10**6) / _log(1e6) ** (-1 / 12), (1 - 0.2024078) / _log(2e7) ** (-1 / 12)
+assert abs(_C1 - _C2) < 1e-3 and 1.0 < _C2 < 1.02
+assert sum(1 for r in range(1, 37) if pow(r, 3, 37) == 36) == 3                    # 3 of 36 classes: 1/12
 assert sig3(243) % 37 == 0 and _ord37(27) == 6 and _ord37(pow(7, 3, 37)) == 3
 
 if __name__ == "__main__":
