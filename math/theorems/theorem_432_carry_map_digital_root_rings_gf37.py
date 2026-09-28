@@ -706,6 +706,28 @@ base b.
     20/3. 405 = 35 = -2 (mod 37) is PRIMITIVE (2 primitive, -2 = 2^19, gcd(19,36) =
     1); 405 = 10 (mod 79), order 13, cycle 1,10,21,52,46,65,18,22,62,67,38,64,8.
 
+(66) THE CARRY COMPLEMENT IS A REFLECTION (every even base; proved). For m odd and
+    r* = (m+1)/2 (2r* = 1): f(r) - r* = 1 - r - r* = -(r - r*) (mod m). So f is the
+    point reflection about the midpoint, and for every prime power p^a || m it
+    preserves the CAPPED valuation min(v_p(r - r*), a) -- the valuation of the
+    displacement in Z/p^a. Hence the shells {r : v_p(r - r*) = k} are f-invariant
+    in every even base, not only in local rings. (Capping is needed: mod 45,
+    27 and -27 = 18 have v_3 = 3, 2 but both reach the cap v_3(45) = 2.) Checked
+    for every even b <= 200. In base 82 (supplied analysis, reproduced) the shells
+    about 41 have sizes 54, 18, 6, 2, 1 -- equal to the doubling cycle lengths,
+    since both count {x : v_3(x) = k}, centred at 41 and at 0 -- and f is 1 fixed
+    point + 27 + 9 + 3 + 1 = 40 transpositions.
+
+(67) BASE 83 (m = 82 = 2 * 41, square-free MIXED = F_2 x GF(41)). Islands (2) (the 41
+    evens = GF(41) via x -> x mod 41, identity 42) and (41) = {0, 41}. Nilradical
+    {0}. Idempotents {0,1,41,42}. Units 40, cyclic. Zero divisors 41. CARRY
+    COMPLEMENT: no fixed point (b odd); only preserved coset 21 + (41) = {21, 62}
+    (21 = 2^-1 in GF(41), the base-42 midpoint). DOUBLING: one step onto the evens =
+    GF(41), where ord(2) = 20: two 20-cycles plus 0.
+    26 = (0, 26) and 10 = (0, 10) lie in the GF(41) island (cf. base 42: 26 primitive
+    mod 41, 10 of order 5); 37 = (1, 37) is a unit of order 5 (37 = 10^-1 mod 41);
+    dr_83(137) = 55 = (1, 14) has order 8.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1469,6 +1491,34 @@ assert _M == [405, 2565, 18225, 137997, 1087425, 8805645, 72723825, 609581997]
 assert [x % 81 for x in _M] == [0, 54, 0, 54, 0, 54, 0, 54]
 assert [9 * sum((j - 5)**k for j in range(1, 10)) for k in (2, 4, 6)] == [540, 6372, 88020]
 assert 405 % 37 == 35 and all(pow(35, 36 // q, 37) != 1 for q in (2, 3)) and 405 % 79 == 10
+
+# (66) reflection theorem, (67) base 83
+from sympy import factorint as _fi
+for b in range(4, 202, 2):
+    mm = b - 1; rs = (mm + 1) // 2
+    for r in range(mm):
+        fr = (1 - r) % mm
+        assert (fr - rs) % mm == (-(r - rs)) % mm
+        for p_, a_ in _fi(mm).items():
+            pa = p_**a_
+            def _vc(x, p_=p_, a_=a_, pa=pa):
+                x %= pa
+                if x == 0:
+                    return a_
+                k = 0
+                while x % p_ == 0:
+                    x //= p_; k += 1
+                return k
+            assert _vc(r - rs) == _vc(fr - rs)
+_sh = _Ct(min(4, next((k for k in range(5) if ((r - 41) % 81) % 3**(k + 1)), 4)) for r in range(81))
+assert [_sh[k] for k in range(5)] == [54, 18, 6, 2, 1]
+m = 82
+assert [d for d in range(2, m) if m % d == 0] == [2, 41] and [x for x in range(m) if x * x % m == x] == [0, 1, 41, 42]
+assert sorted(x % 41 for x in range(0, m, 2)) == list(range(41)) and 42 % 41 == 1
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(41) if (1 - a) % 41 == a] == [21]
+assert pow(2, 20, 41) == 1 and pow(2, 10, 41) != 1 and pow(2, 4, 41) != 1
+assert 137 % m == 55 and (55 % 2, 55 % 41) == (1, 14) and pow(55, 8, m) == 1 and pow(55, 4, m) != 1
+assert pow(37, 5, m) == 1 and 37 * 10 % 41 == 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
