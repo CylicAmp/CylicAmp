@@ -442,6 +442,19 @@ base b.
     CONTINGENT: dr_70(137) = 68 = -1, an involution (138 = 2 * 69); 26, 37 and 10
     all have the maximal order 22.
 
+(44) BASE 71 (m = 70 = 2 * 5 * 7, square-free MIXED = F_2 x F_5 x F_7). Six islands
+    (2),(5),(7),(10),(14),(35). Nilradical {0}. Eight idempotents
+    {0,1,15,21,35,36,50,56}. Units 24 = C4 x C6 (8 of maximal order 12). Zero
+    divisors 45. CARRY COMPLEMENT: no fixed point; preserved cosets 3+(5), 4+(7),
+    18+(35). DOUBLING: one step onto the evens = Z/35 = base 36's root ring
+    F_5 x F_7, ord(2) = lcm(4, 3) = 12: cycles 1 x (0), two 3-cycles (F_7 island),
+    one 4-cycle (F_5 island), two 12-cycles (units of Z/35).
+    dr_71(137) = 67 and 37 have maximal order 12 (base rate 8/24 = 1/3); 26 and 10
+    are zero divisors.
+    BASE RATE for "maximal order" claims (Lane 1): mod 69, 30 of 44 units (68%)
+    have maximal order 22, so base 70's "26, 37, 10 all maximal" has chance about
+    0.68^3 = 31% -- generic, not a signal (as with 24/48 mod 65).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1002,6 +1015,19 @@ assert [r for r in range(m) if (1 - r) % m == r] == [35] and 35 % 3 == 2 and 35 
 assert pow(2, 11, 23) == 1 and pow(2, 22, m) == 1 and pow(2, 11, m) != 1
 assert 137 % m == m - 1 and 138 == 2 * m
 assert all(pow(g, 22, m) == 1 and pow(g, 11, m) != 1 and pow(g, 2, m) != 1 for g in (26, 37, 10))
+
+# (44) base 71 + base-rate check
+m = 70
+assert [d for d in range(2, m) if m % d == 0] == [2, 5, 7, 10, 14, 35]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 15, 21, 35, 36, 50, 56]
+assert not [r for r in range(m) if (1 - r) % m == r]
+assert {d: [a for a in range(d) if (1 - a) % d == a] for d in (5, 7, 35)} == {5: [3], 7: [4], 35: [18]}
+assert sorted({2 * x % m for x in range(m)}) == list(range(0, m, 2)) and pow(2, 12, 35) == 1 and pow(2, 6, 35) != 1 and pow(2, 4, 35) != 1
+assert 137 % m == 67 and all(pow(g, 12, m) == 1 and pow(g, 6, m) != 1 and pow(g, 4, m) != 1 for g in (67, 37))
+from math import gcd as _g2
+_ord = lambda u, mm: next(k for k in range(1, mm) if pow(u, k, mm) == 1)
+assert sum(1 for u in range(70) if _g2(u, 70) == 1 and _ord(u, 70) == 12) == 8
+assert sum(1 for u in range(69) if _g2(u, 69) == 1 and _ord(u, 69) == 22) == 30
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
