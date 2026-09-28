@@ -455,6 +455,29 @@ base b.
     have maximal order 22, so base 70's "26, 37, 10 all maximal" has chance about
     0.68^3 = 31% -- generic, not a signal (as with 24/48 mod 65).
 
+(45) BASE 72 (m = 71 prime: root ring GF(71), a FIELD; b EVEN). Carry complement
+    fixes exactly 36 = (m+1)/2. No coset of any subgroup of order >= 2 maps to a
+    coset. |f(QR) & QR| = 17 = (p-3)/4. No primitive sixth roots (71 = 2 mod 3).
+    DOUBLING: 71 = 7 mod 8 makes 2 a QR; ord_71(2) = 35: two 35-cycles (the QRs and
+    the QNRs) plus 0. Smallest primitive root 7.
+    dr_72(137) = 66 = -5 has order 10 (QNR); 26 order 14 (QNR); 37 order 7 (QR);
+    10 order 35 (QR; 1/71 has decimal period 35).
+
+(46) CAPSTONE: THE PARITY DICHOTOMY (consolidates (9) and (41); proved).
+    With m = b - 1 = 2^a * n, n odd:
+      b EVEN (a = 0): doubling is a PERMUTATION of Z/m, and f(r) = 1 - r has
+        exactly one fixed point, r* = (m+1)/2 = b/2 -- forced for every even base.
+      b ODD  (a >= 1): f has NO fixed point, and doubling reaches the ideal
+        (2^a) = Z/n in EXACTLY a = v2(m) steps (not always one), then acts as
+        doubling on Z/n, the root ring of base n + 1.
+    Odd bases 37..71, (b: a, n): 37:2,9  39:1,19  41:3,5  43:1,21  45:2,11
+    47:1,23  49:4,3  51:1,25  53:2,13  55:1,27  57:3,7  59:1,29  61:2,15
+    63:1,31  65:6,1 (all of Z/64 collapses to {0})  67:1,33  69:2,17  71:1,35.
+    (A supplied draft said "collapses onto the evens in one step" for every odd b;
+    that holds only when v2(b-1) = 1. It also listed base 63 as even -- 63 is odd,
+    m = 62 even.) The real variation lives one level down: the cycle signature
+    (ord of 2 in each field factor) and where the project's numbers land in it.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1028,6 +1051,27 @@ from math import gcd as _g2
 _ord = lambda u, mm: next(k for k in range(1, mm) if pow(u, k, mm) == 1)
 assert sum(1 for u in range(70) if _g2(u, 70) == 1 and _ord(u, 70) == 12) == 8
 assert sum(1 for u in range(69) if _g2(u, 69) == 1 and _ord(u, 69) == 22) == 30
+
+# (45) base 72, (46) parity dichotomy across b = 3..200
+p = 71
+QR71 = {x * x % p for x in range(1, p)}
+assert [r for r in range(p) if (1 - r) % p == r] == [36] and len({(1 - x) % p for x in QR71} & QR71) == 17
+assert pow(2, 35, p) == 1 and pow(2, 5, p) != 1 and pow(2, 7, p) != 1 and 2 in QR71
+assert 137 % p == 66 and pow(66, 10, p) == 1 and pow(66, 5, p) != 1 and pow(66, 2, p) != 1
+assert pow(26, 14, p) == 1 and pow(26, 7, p) != 1 and pow(37, 7, p) == 1 and pow(10, 35, p) == 1 and pow(10, 7, p) != 1 and pow(10, 5, p) != 1
+for b in range(3, 201):
+    mm = b - 1
+    a = v2(mm)
+    n = mm >> a
+    fp = [r for r in range(mm) if (1 - r) % mm == r]
+    perm = len({2 * x % mm for x in range(mm)}) == mm
+    if b % 2 == 0:
+        assert perm and fp == [b // 2]
+    else:
+        assert not perm and not fp
+        ideal = set(range(0, mm, 2**a))
+        assert all((x * 2**a) % mm in ideal for x in range(mm))
+        assert any((x * 2**(a - 1)) % mm not in ideal for x in range(mm))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
