@@ -317,6 +317,14 @@ base b.
     CONTINGENT: 37 is an INVOLUTION mod 57 (37^2 = 1369 = 24*57 + 1);
     dr_58(137) = 23 and 10 have the maximal order 18; 26 has order 6.
 
+(31) BASE 59 (m = 58 = 2 * 29, square-free MIXED = F_2 x F_29). Islands (2), (29).
+    Nilradical {0}. Idempotents {0,1,29,30}. Units 28, cyclic. Zero divisors 29.
+    CARRY COMPLEMENT: no fixed point; only preserved coset 15 + (29) = {15, 44}
+    (15 = 2^-1 mod 29). DOUBLING: one step onto the evens = F_29; 2 is primitive
+    mod 29, so a single 28-cycle plus 0.
+    CONTINGENT: dr_59(137) = 21 and 37 both GENERATE the unit group (order 28);
+    26 and 10 are non-units.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -741,6 +749,14 @@ assert pow(2, 18, m) == 1 and pow(2, 9, m) != 1 and pow(2, 6, m) != 1
 assert [x for x in range(m) if pow(x, 3, m) == 1] == [1, 7, 49]
 assert 37 * 37 == 24 * m + 1 and 137 % m == 23
 assert all(pow(g, 18 // q, m) != 1 for g in (23, 10) for q in (2, 3)) and pow(26, 6, m) == 1 and pow(26, 3, m) != 1 and pow(26, 2, m) != 1
+
+# (31) base 59
+m = 58
+assert [d for d in range(2, m) if m % d == 0] == [2, 29]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 29, 30]
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(29) if (1 - a) % 29 == a] == [15]
+assert all(pow(2, 28 // q, 29) != 1 for q in (2, 7))
+assert 137 % m == 21 and all(pow(g, 28 // q, m) != 1 for g in (21, 37) for q in (2, 7))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")

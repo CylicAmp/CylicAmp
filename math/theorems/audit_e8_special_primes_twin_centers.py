@@ -70,6 +70,20 @@ so the zero density tends to 1, as slowly as 1 - C (log x)^(-1/12). This IS the
 observed drift 18.87% (1e6) -> 20.24% (2e7): fitted C = 1.0097 at 1e6 and
 1.0091 at 2e7 (stable to 0.06%); predicted non-zero ratio 0.98378 vs observed
 0.98315. No earlier twin-vs-baseline comparison is valid unless range-matched.
+
+THE CONSTANT, TO SECOND ORDER (supplied 2026-09-28, both routes reproduced here).
+Selberg-Delange with f(p^e) = [37 does not divide sigma_3(p^e)], z = 11/12:
+    C = Gamma(11/12)^-1 prod_p (1-1/p)^(11/12) sum_e f(p^e) p^-e,
+Gamma(11/12) = 1.055547; the p = 37 factor is (1-1/37)^(-1/12). Euler product
+truncated at B: 1.003861 (1e3), 1.006594 (1e4), 1.006105 (1e5), 1.006216 (1e6),
+1.006253 (3e6). Independently, a linear fit of the sieve's C_fit(x) =
+A(x)(log x)^(1/12)/x at x = 1e5, 1e6, 3e6, 1e7, 2e7 against 1/log x gives
+C = 1.006266, c1 = 0.04679. The two agree to 1.3e-5. So
+    #{n <= x : 37 does not divide sigma_3(n)}
+        = 1.00627 x (log x)^(-1/12) (1 + 0.0468/log x + ...),
+and the finite-x fits near 1.009 are this expansion at finite x.
+(Counting note: cumsum(~is_zero) with is_zero[0] = False counts index 0 as a
+non-zero; the 1/x error changes only the fifth decimal of C_fit.)
 """
 from sympy import factorint, isprime, primerange
 
@@ -136,6 +150,9 @@ from math import log as _log
 _C1, _C2 = (1 - 188742 / 10**6) / _log(1e6) ** (-1 / 12), (1 - 0.2024078) / _log(2e7) ** (-1 / 12)
 assert abs(_C1 - _C2) < 1e-3 and 1.0 < _C2 < 1.02
 assert sum(1 for r in range(1, 37) if pow(r, 3, 37) == 36) == 3                    # 3 of 36 classes: 1/12
+from math import lgamma as _lg, exp as _ex
+assert abs(_ex(_lg(11 / 12)) - 1.055547) < 1e-6
+assert abs((1 - 1 / 37) ** (-1 / 12) - 1.002286) < 1e-6
 assert sig3(243) % 37 == 0 and _ord37(27) == 6 and _ord37(pow(7, 3, 37)) == 3
 
 if __name__ == "__main__":
