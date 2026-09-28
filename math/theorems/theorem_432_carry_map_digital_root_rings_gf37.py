@@ -412,6 +412,16 @@ base b.
     (m = 50 even; 2*25 = 50 = 0); units of maximal order 12 in Z/65 = C4 x C12
     number 24, not 16 (16 with ord b = 12, plus 8 with ord b in {3,6}, ord a = 4).)
 
+(41) BASE 68 (m = 67 prime: root ring GF(67), a FIELD; b EVEN). Carry complement
+    fixes exactly 34 = (m+1)/2 = b/2 = 2^-1 (standardized rule: f(r) = 1 - r has
+    a fixed point iff m is odd, and then it is (m+1)/2). No coset of any subgroup
+    of order >= 2 maps to a coset. |f(QR) & QR| = 16 = (p-3)/4. 67 = 1 mod 3: cube
+    roots {1, 29, 37}, primitive sixth roots {30, 38}, swapped by f. DOUBLING: 2 is
+    PRIMITIVE mod 67 (smallest primitive root): one 66-cycle plus 0.
+    CONTINGENT: 37 IS A PRIMITIVE CUBE ROOT OF UNITY MOD 67 (37^2 = 29, 37*29 =
+    1073 = 16*67 + 1) -- as mod 54 and mod 63 (bases 55, 64). 26 and 10 have order
+    33; dr_68(137) = 3 has order 22.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -939,6 +949,19 @@ assert [b for b in range(37, 68) if (26 * 26 - 26) % (b - 1) == 0] == [51, 66]
 assert not [r for r in range(50) if (1 - r) % 50 == r]
 from math import gcd as _g
 assert sum(1 for u in range(65) if _g(u, 65) == 1 and pow(u, 12, 65) == 1 and pow(u, 6, 65) != 1 and pow(u, 4, 65) != 1) == 24
+
+# (41) base 68
+p = 67
+QR67 = {x * x % p for x in range(1, p)}
+assert [r for r in range(p) if (1 - r) % p == r] == [34] == [(p + 1) // 2]
+assert len({(1 - x) % p for x in QR67} & QR67) == 16
+assert [r for r in range(1, p) if pow(r, 3, p) == 1] == [1, 29, 37] and 37 * 37 % p == 29 and 37 * 29 == 16 * p + 1
+assert [r for r in range(p) if (r * r - r + 1) % p == 0] == [30, 38] and (1 - 30) % p == 38
+assert all(pow(2, 66 // q, p) != 1 for q in (2, 3, 11))
+assert all(pow(g, 33, p) == 1 and pow(g, 11, p) != 1 and pow(g, 3, p) != 1 for g in (26, 10))
+assert 137 % p == 3 and pow(3, 22, p) == 1 and pow(3, 11, p) != 1 and pow(3, 2, p) != 1
+for mm in (44, 45, 50, 65):                                          # standardized fixed-point table
+    assert [r for r in range(mm) if (1 - r) % mm == r] == ([(mm + 1) // 2] if mm % 2 else [])
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
