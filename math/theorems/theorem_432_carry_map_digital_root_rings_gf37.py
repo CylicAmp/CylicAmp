@@ -838,6 +838,33 @@ base b.
     (Supplied 1212-cycle ledger: agrees with section 76; 900-beat accounting checks,
     900 + (9 + 1791) + 6*900 - 8100 = 0.)
 
+(78) BASE 92 (m = 91 = 7 * 13, SQUAREFREE = F_7 x F_13). Two islands (7),(13).
+    Nilradical {0}. Four idempotents {0,1,14,78}. Units 72 = C6 x C12, max order 12.
+    Zero divisors 19 = 7 + 13 - 1. CARRY COMPLEMENT: fixed point 46 = b/2 (b even);
+    preserved cosets 4+(7), 7+(13) (2a = 1 in each factor). DOUBLING: 2 is a unit,
+    permutation of order lcm(3, 12) = 12, no collapse (v_2(91) = 0).
+    dr_92(137) = 46 = 2^-1 = the carry midpoint: FORCED, the section-(14) case
+    91 | 273 = 2*137 - 1; its order is ord(2) = 12 for the same reason.
+    26 = (5, 0) is a zero divisor (13 | 26); 37 = (2, 11) has order 12;
+    10 = (3, 10) has order 6.
+
+(79) 1212 LOOP, CONSTRUCTIVE AUDIT (supplied request: exact T, invariants, a map phi
+    with phi(T x) = 2 phi(x)).
+    T: not an arithmetic map. It is defined only by its table, a 10-cycle with
+    increments 900, 9, 1791, 900 x 6, -8100 (sum 0). The increments generate 9Z
+    (gcd 9; 1791 = 9 * 199), so the only invariant forced by them is x mod 9 = 6 --
+    already section (76).
+    phi BY REDUCTION FAILS: mod 9 every state is 6 and 2 * 6 = 3; mod 37 the states are
+    28,3,12,27,2,14,26,1,13,25 and 2 * 28 = 19 != 3. Doubling on GF(37)* has a single
+    orbit of length 36, so the only equivariant phi into Z/37 is phi = 0.
+    phi BY CHOICE ALWAYS EXISTS: a 10-cycle is conjugate to doubling on a length-10
+    orbit, which needs ord_d(2) = 10, d | 2^10 - 1 = 1023 = 3 * 11 * 31. Smallest
+    modulus: 11, phi(x_k) = 2^k mod 11. Mod 11 the states themselves read
+    2,0,9,7,5,3,1,10,8,6 (900 = -2 mod 11), not a doubling orbit. Any 10-cycle admits
+    this phi, so it carries no information specific to 1212. Into Z/9 only a
+    non-injective phi exists (doubling orbits there have lengths 1, 2, 6; a 2-cycle
+    {3,6} divides 10).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1722,6 +1749,20 @@ assert 10 * 10 % m == 10 and all(10 * x % m == x for x in _T10) and sorted(x % 9
 assert [y // 10 for y in (10, 20, 40, 80, 70, 50)] == [1, 2, 4, 8, 7, 5] and all(2 * a % m == b for a, b in [(10, 20), (20, 40), (40, 80), (80, 70), (70, 50), (50, 10), (30, 60), (60, 30)])
 assert 137 % m == 47 and pow(47, 12, m) == 1 and pow(47, 6, m) != 1 and pow(47, 4, m) != 1 and pow(37, 4, m) == 1 and pow(37, 2, m) != 1
 assert 900 + 9 + 1791 + 6 * 900 - 8100 == 0
+
+# (78) base 92
+m = 91
+assert [d for d in range(2, m) if m % d == 0] == [7, 13] and [x for x in range(m) if x * x % m == x] == [0, 1, 14, 78]
+assert [r for r in range(m) if (1 - r) % m == r] == [46] and 137 % m == 46 == pow(2, -1, m) and 273 % m == 0
+assert sum(1 for x in range(m) if gcd(x, m) == 1) == 72 and next(k for k in range(1, 99) if pow(2, k, m) == 1) == 12
+assert next(k for k in range(1, 99) if pow(37, k, m) == 1) == 12 and next(k for k in range(1, 99) if pow(10, k, m) == 1) == 6 and gcd(26, m) == 13
+
+# (79) 1212 constructive audit
+_inc = [_seq[i + 1] - _seq[i] for i in range(10)]
+assert _inc == [900, 9, 1791] + [900] * 6 + [-8100] and gcd(*_inc) == 9
+assert [s % 37 for s in _seq[:10]] == [28, 3, 12, 27, 2, 14, 26, 1, 13, 25] and 2 * 28 % 37 != 3
+assert [s % 11 for s in _seq[:10]] == [2, 0, 9, 7, 5, 3, 1, 10, 8, 6]
+assert min(d for d in range(2, 2000) if d % 2 and next(k for k in range(1, d + 1) if pow(2, k, d) == 1) == 10) == 11 and 1023 == 3 * 11 * 31
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
