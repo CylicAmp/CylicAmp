@@ -649,6 +649,25 @@ base b.
     NOT CHECKED: the supplied 9 x 9 field table A(r,c) = dr(r + c - 1) (table not
     provided); the claim is internally consistent (it would be Z/9's Cayley table).
 
+(61) BASE 80 (m = 79 prime: root ring GF(79), a FIELD; b EVEN). Carry complement
+    fixes exactly 40 = (m+1)/2. No coset of any subgroup of order >= 2 maps to a
+    coset. |f(QR) & QR| = 19 = (p-3)/4. 79 = 1 mod 3: cube roots {1, 23, 55},
+    primitive sixth roots {24, 56}, swapped by f. DOUBLING: 79 = 7 mod 8 makes 2 a
+    QR; ord_79(2) = 39: two 39-cycles plus 0; smallest primitive root 3.
+    CONTINGENT: 37 is a PRIMITIVE ROOT mod 79; 26 has order 39; 10 has order 13
+    (1/79 has decimal period 13); dr_80(137) = 58 has order 26.
+
+(62) THREE-DIGIT BOUNDARY TEST (supplied, all 729 triples reproduced). For
+    (a,b,c) in {1..9}^3 with dL = b - a, dR = c - b: the boundary pair determines
+    the triple up to the translation b; 217 pairs are realizable, 48 fix b
+    uniquely; centre-multiplicity census 48,42,36,30,24,18,12,6,1 (weighted 729).
+    FORCED: a + b + c = 3b + dR - dL, so the total is dR - dL (mod 3) and
+    3(b mod 3) + dR - dL (mod 9): the interior enters only through the coefficient
+    3, i.e. as one ternary phase b mod 3. With (direction, |delta|, parities) on both
+    boundaries: 386 realizable state pairs, 168 fix b. Counterexample to "boundary
+    fixes the mod-9 state": (1,1,1), (3,3,3), (5,5,5) share dL = dR = 0 with totals
+    3, 0, 6 (mod 9).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1366,6 +1385,24 @@ assert _dih(3) == 6 and _dih(9) == 18
 _w = [n for n in range(1, 1000) if n % 10 == 9]
 assert len(_w) == 100 and [n for n in _w if dr(n, 10) == 9] == [n for n in range(1, 1000) if n % 90 == 9] and len([n for n in _w if dr(n, 10) == 9]) == 12
 assert all(dr(n + 1, 10) == dr(n, 10) % 9 + 1 for n in range(1, 5000))
+
+# (61) base 80, (62) 729-triple boundary test
+p = 79
+QR79 = {x * x % p for x in range(1, p)}
+assert [r for r in range(p) if (1 - r) % p == r] == [40] and len({(1 - x) % p for x in QR79} & QR79) == 19
+assert [r for r in range(1, p) if pow(r, 3, p) == 1] == [1, 23, 55] and [r for r in range(p) if (r * r - r + 1) % p == 0] == [24, 56]
+assert pow(2, 39, p) == 1 and pow(2, 13, p) != 1 and pow(2, 3, p) != 1
+assert all(pow(37, 78 // q, p) != 1 for q in (2, 3, 13)) and pow(10, 13, p) == 1 and pow(26, 39, p) == 1 and pow(26, 13, p) != 1
+assert 137 % p == 58 and pow(58, 26, p) == 1 and pow(58, 13, p) != 1 and pow(58, 2, p) != 1
+from collections import defaultdict as _dd, Counter as _Ct
+_T = [(a, b, c) for a in range(1, 10) for b in range(1, 10) for c in range(1, 10)]
+_by = _dd(list)
+for a, b, c in _T:
+    _by[(b - a, c - b)].append(b)
+_mu = _Ct(len(v) for v in _by.values())
+assert len(_by) == 217 and [_mu[k] for k in range(1, 10)] == [48, 42, 36, 30, 24, 18, 12, 6, 1]
+assert all((a + b + c) % 9 == (3 * (b % 3) + (c - b) - (b - a)) % 9 for a, b, c in _T)
+assert [(3 * x) % 9 for x in (1, 3, 5)] == [3, 0, 6]
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
