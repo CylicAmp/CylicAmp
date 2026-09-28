@@ -547,6 +547,21 @@ base b.
     The inner digit b = a +- 1 (signs + + - + - - - + +) follows no rule found here;
     recorded as the supplier's choice.
 
+(53) THE TWO SUPPLIED RULES ARE ONE RING (supplied: "the pattern is the rules").
+    Read a 4-digit number as two base-100 digits; the root ring is Z/99 =
+    Z/9 x Z/11 (base 100's digital-root ring). Then
+      REVERSE  h -> rev(h)            is  x10  = (1, -1)  in Z/9 x Z/11;
+      ~        a ~ b = rev(a+b mod 99) is  10(a+b);
+      MIRROR   h -> h|rev(h) = abba   is  x11 = 1 + reversal = (2, 0),
+    since abba = 100 h + rev(h) = h + 10 h = 11 h (mod 99). Every palindrome of the
+    supplied list is h|rev(h) for a half h that is an OPERAND of the ~ table
+    (12,11,23,22,32,33,45,44,54,55,65,66,76,77,89,88,91,99). Reading the
+    coordinates: reversal keeps the digital root (mod 9: x1) and negates the mod-11
+    part; mirroring DOUBLES the digital root and KILLS the mod-11 part -- which is
+    why every palindrome is divisible by 11 and dr(abba) = dr(2h). Both rules are
+    multiplications by units/zero-divisors of the base-100 root ring: 10 is a unit
+    of order 2, 11 is a zero divisor (11 * 9 = 99 = 0).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1197,6 +1212,14 @@ _P = [1221, 2332, 3223, 4554, 5445, 6556, 7667, 8998, 9119]
 assert all(n % 11 == 0 and n % 37 == (2 * (n // 1000) - (n // 100) % 10) % 37 for n in _P)
 assert [n for n in _P if n % 37 == 0] == [1221] and 1111 == 30 * 37 + 1
 assert all(int(f"{a}{b}{b}{a}") + int(f"{b}{a}{a}{b}") == 1111 * (a + b) for a in range(1, 10) for b in range(1, 10))
+
+# (53) reversal = x10, mirror = x11 in Z/99
+_PAL = [1221, 1111, 2332, 2222, 3223, 3333, 4554, 4444, 5445, 5555, 6556, 6666, 7667, 7777, 8998, 8888, 9119, 9999]
+_OPS = {x for p in _pairs for x in p}
+assert all(n == 100 * (n // 100) + _rev(n // 100) and (n // 100) in _OPS for n in _PAL)
+assert all(n % 99 == 11 * (n // 100) % 99 and n % 11 == 0 and dr(n, 10) == dr(2 * (n // 100), 10) for n in _PAL)
+assert (10 % 9, 10 % 11) == (1, 10) and (11 % 9, 11 % 11) == (2, 0) and 10 * 10 % 99 == 1 and 11 * 9 % 99 == 0
+assert all((100 * h + _rev(h)) % 99 == 11 * h % 99 for h in range(100))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
