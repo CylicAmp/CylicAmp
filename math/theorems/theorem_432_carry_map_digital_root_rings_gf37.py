@@ -478,6 +478,18 @@ base b.
     m = 62 even.) The real variation lives one level down: the cycle signature
     (ord of 2 in each field factor) and where the project's numbers land in it.
 
+(47) BASE 73 (m = 72 = 2^3 * 3^2, MIXED = Z/8 x Z/9). Ten proper islands
+    (2),(3),(4),(6),(8),(9),(12),(18),(24),(36). Nilradical (6), 12 elements, index
+    3 (6^3 = 216 = 3*72). Idempotents {0,1,9,64} (9 = (1,0), 64 = (0,1)). Units 24
+    = C2 x C2 x C6. Zero divisors 47. CARRY COMPLEMENT: no fixed point (b odd);
+    preserved cosets 2+(3), 5+(9).
+    DOUBLING: settles in v2(72) = 3 steps onto (8) = Z/9 = BASE 10'S ROOT RING
+    (identity 64): unit cycle (8 16 32 64 56 40) = (8 7 5 1 2 4) mod 9 and
+    nilpotent cycle (24 48) = (6 3) -- base 10's doubling picture after a 3-step
+    transient. (Third embedding of base 10's ring: bases 46, 64, 73.)
+    CONTINGENT: 37 is an INVOLUTION mod 72 (37^2 = 1369 = 19*72 + 1);
+    dr_73(137) = 65 has order 6; 26 and 10 are zero divisors.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1072,6 +1084,18 @@ for b in range(3, 201):
         ideal = set(range(0, mm, 2**a))
         assert all((x * 2**a) % mm in ideal for x in range(mm))
         assert any((x * 2**(a - 1)) % mm not in ideal for x in range(mm))
+
+# (47) base 73
+m = 72
+assert [d for d in range(2, m) if m % d == 0] == [2, 3, 4, 6, 8, 9, 12, 18, 24, 36]
+assert [x for x in range(m) if pow(x, m, m) == 0] == list(range(0, m, 6)) and pow(6, 3, m) == 0 and pow(6, 2, m) != 0
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 9, 64]
+assert not [r for r in range(m) if (1 - r) % m == r]
+I8_73 = list(range(0, m, 8))
+assert all(x * 8 % m in I8_73 for x in range(m)) and any(x * 4 % m not in I8_73 for x in range(m))
+assert sorted(x % 9 for x in I8_73) == list(range(9)) and 64 % 9 == 1 and 64 % 8 == 0
+assert [y % 9 for y in (8, 16, 32, 64, 56, 40)] == [8, 7, 5, 1, 2, 4] and [24 % 9, 48 % 9] == [6, 3]
+assert 37 * 37 == 19 * m + 1 and 137 % m == 65 and pow(65, 6, m) == 1 and pow(65, 3, m) != 1 and pow(65, 2, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
