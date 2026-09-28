@@ -738,6 +738,15 @@ base b.
     (Ledger for bases 66..83 as JSON: math/ledgers/t432_bases_66_83.json, checked by
     tools/t432_ledger_check.py -- 23/23.)
 
+(69) BASE 85 (m = 84 = 2^2 * 3 * 7, MIXED = Z/4 x F_3 x F_7). Ten islands
+    (2),(3),(4),(6),(7),(12),(14),(21),(28),(42). Nilradical {0, 42}. Eight
+    idempotents {0,1,21,28,36,49,57,64}. Units 24 = C2 x C2 x C6. Zero divisors 59.
+    CARRY COMPLEMENT: no fixed point (b odd); preserved cosets 2+(3), 4+(7),
+    11+(21). DOUBLING: settles in v2(84) = 2 steps onto (4) = Z/21 = base 22's root
+    ring F_3 x F_7, ord(2) = 6: cycles (0), one 2-cycle, two 3-cycles, two 6-cycles.
+    CONTINGENT: 37 is a CUBE ROOT OF UNITY mod 84 (37^2 = 25, 37 * 25 = 925 =
+    11*84 + 1); dr_85(137) = 53 has order 6; 26 and 10 are zero divisors.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1537,6 +1546,16 @@ assert [r for r in range(p) if (1 - r) % p == r] == [42] and len({(1 - x) % p fo
 assert not [r for r in range(p) if (r * r - r + 1) % p == 0] and pow(2, 41, p) != 1 and pow(2, 2, p) != 1
 assert all(g in QR83 and pow(g, 41, p) == 1 for g in (26, 37, 10)) and len(QR83) == 41
 assert 137 % p == 54 and pow(54, 41, p) != 1 and pow(54, 2, p) != 1
+
+# (69) base 85
+m = 84
+assert len([d for d in range(2, m) if m % d == 0]) == 10 and [x for x in range(m) if pow(x, m, m) == 0] == [0, 42]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 21, 28, 36, 49, 57, 64]
+assert not [r for r in range(m) if (1 - r) % m == r]
+assert {d: [a for a in range(d) if (1 - a) % d == a] for d in (3, 7, 21)} == {3: [2], 7: [4], 21: [11]}
+assert all(x * 4 % m % 4 == 0 for x in range(m)) and pow(2, 6, 21) == 1 and pow(2, 3, 21) != 1 and pow(2, 2, 21) != 1
+assert 37 * 37 % m == 25 and 37 * 25 == 11 * m + 1
+assert 137 % m == 53 and pow(53, 6, m) == 1 and pow(53, 3, m) != 1 and pow(53, 2, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
