@@ -353,6 +353,14 @@ base b.
     CONTINGENT: 26 and 10 are PRIMITIVE ROOTS mod 61 (1/61 has full decimal period
     60); 37 has order 20; dr_62(137) = 15, a QR of order 15.
 
+(35) BASE 63 (m = 62 = 2 * 31, square-free MIXED = F_2 x F_31). Islands (2), (31).
+    Nilradical {0}. Idempotents {0,1,31,32}. Units 30, cyclic. Zero divisors 31.
+    CARRY COMPLEMENT: no fixed point; only preserved coset 16 + (31) = {16, 47}.
+    DOUBLING: one step onto the evens = F_31, where ord(2) = 5 (31 = 2^5 - 1, a
+    Mersenne prime): six 5-cycles plus 0.
+    CONTINGENT: dr_63(137) = 13 GENERATES the unit group (order 30); 37 has
+    order 6; 26 and 10 are non-units.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -818,6 +826,15 @@ assert [r for r in range(p) if (r * r - r + 1) % p == 0] == [14, 48] and (1 - 14
 assert all(pow(g, 60 // q, p) != 1 for g in (2, 26, 10) for q in (2, 3, 5))
 assert pow(37, 20, p) == 1 and all(pow(37, 20 // q, p) != 1 for q in (2, 5))
 assert 137 % p == 15 and pow(15, 15, p) == 1 and all(pow(15, 15 // q, p) != 1 for q in (3, 5))
+
+# (35) base 63
+m = 62
+assert [d for d in range(2, m) if m % d == 0] == [2, 31]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 31, 32]
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(31) if (1 - a) % 31 == a] == [16]
+assert pow(2, 5, 31) == 1 and 31 == 2**5 - 1
+assert 137 % m == 13 and all(pow(13, 30 // q, m) != 1 for q in (2, 3, 5))
+assert pow(37, 6, m) == 1 and pow(37, 3, m) != 1 and pow(37, 2, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")

@@ -84,6 +84,35 @@ C = 1.006266, c1 = 0.04679. The two agree to 1.3e-5. So
 and the finite-x fits near 1.009 are this expansion at finite x.
 (Counting note: cumsum(~is_zero) with is_zero[0] = False counts index 0 as a
 non-zero; the 1/x error changes only the fifth decimal of C_fit.)
+
+EXTENSION TO 3e8 (supplied 2026-09-28). Non-zero density 0.787396693 at 3e8,
+C_fit(3e8) = 1.008631, decreasing toward C; the Euler product oscillates at
+1.00627 (C_{3e8} = 1.006270719; numerical stabilisation, not a rigorous bound).
+Overlap check: the supplied 2e7 value 0.797592200 equals this file's 0.7975922.
+a(37n) = a(n) is EXACT (sigma_3(37^e) = 1 mod 37); 8,108,108 pairs checked. The
+supplied citation (Bordelles, Aug 2026, v_q(sigma_k(n))) is not verified here and
+is not needed: the local rule follows from sigma_3(p^e) = (r^(e+1)-1)/(r-1),
+r = p^3.
+25% zeros needs log10 x = 14.78 (x ~ 6e14) at leading order: confirmed.
+
+RESIDUE-CLASS DENSITIES AND WHY THEY FACTOR THROUGH F_37*/H_3 (proved here).
+Local obstruction depends on p^3 only, and (ph)^3 = p^3 for h in H_3 = {1,10,26}:
+EXACT. The densities of n in each residue class come from the twists
+sum a(n) chi(n); Selberg-Delange gives each size x (log x)^(z_chi - 1) with
+    z_chi = (1/36) sum_r a_r chi(r),   a_r = 0 iff r^3 = -1, i.e. r in -H_3.
+  chi trivial on H_3: z_chi = -chi(-1)/12  -> x (log x)^(-11/12) (odd chi) or
+                      x (log x)^(-13/12) (even chi);
+  chi nontrivial on H_3: z_chi = 0         -> x / log x.
+So WITHIN an H_3-coset densities differ at order 1/log x, BETWEEN cosets at order
+(log x)^(-11/12): this is why the supplied within-coset spread is 3.8e-5. All
+classes share the same limit; the near-constancy on cosets is an asymptotic
+hierarchy, not an exact identity.
+FOURIER TEST on C_12 = <2 H_3> (the supplied 12 densities, rows = 2^j H_3):
+-1 = 2^18 -> 2^6 H_3, so psi_k is odd iff k is odd; odd twists should dominate.
+|rho^(k)|, k = 1..6: 0.01188 (odd), 0.00402, 0.00406 (odd), 0.00219, 0.00296
+(odd), 0.00299. The largest harmonic is odd; beyond it the odd/even separation
+is only the factor (log x)^(1/6) = 1.64 at 3e8, so L-value constants still
+dominate. PREDICTION: the odd/even amplitude ratio grows like (log x)^(1/6).
 """
 from sympy import factorint, isprime, primerange
 
@@ -153,6 +182,8 @@ assert sum(1 for r in range(1, 37) if pow(r, 3, 37) == 36) == 3                 
 from math import lgamma as _lg, exp as _ex
 assert abs(_ex(_lg(11 / 12)) - 1.055547) < 1e-6
 assert abs((1 - 1 / 37) ** (-1 / 12) - 1.002286) < 1e-6
+assert sorted(r for r in range(1, 37) if pow(r, 3, 37) == 36) == [11, 27, 36] == sorted(36 * h % 37 for h in (1, 10, 26))
+assert pow(2, 18, 37) == 36
 assert sig3(243) % 37 == 0 and _ord37(27) == 6 and _ord37(pow(7, 3, 37)) == 3
 
 if __name__ == "__main__":
