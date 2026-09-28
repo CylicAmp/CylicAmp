@@ -502,6 +502,29 @@ base b.
     (base 57). 26 is a PRIMITIVE ROOT mod 73; 10 has order 8 (1/73 has decimal
     period 8).
 
+(49) BASE 75 (m = 74 = 2 * 37, square-free MIXED = F_2 x GF(37)) -- the root ring
+    CONTAINS GF(37). Islands (2) (the 37 evens, = GF(37) via x -> x mod 37, identity
+    38) and (37) = {0, 37}. Nilradical {0}. Idempotents {0,1,37,38}. Units 36,
+    cyclic. CARRY COMPLEMENT: no fixed point (b odd); only preserved coset
+    19 + (37) = {19, 56} (19 = 2^-1 in GF(37), the base-38 midpoint). DOUBLING: one
+    step onto the evens = GF(37), then ONE 36-cycle -- GF(37)'s own generator walk
+    (2 primitive mod 37).
+    FORCED BY 74 = 2 * 37 (not contingent): 37 is the IDEMPOTENT (1,0); 26 and 10
+    lie in the GF(37) island as (0,26), (0,10); dr_75(137) = 63 = (1, 26), so
+    multiplying by 137 acts on the GF(37) island as the 137-map x -> 26x.
+
+(50) THE "~" OPERATION (supplied digit table, decoded and proved). Every row
+    a ~ b of the supplied table equals rev((a + b) mod 99), e.g. 12 ~ 11 = rev(23) =
+    32, 56 ~ 55 = rev(111 mod 99 = 12) = 21, 99 ~ 19 = rev(118 mod 99 = 19) = 91.
+    REVERSAL IS MULTIPLICATION BY 10 MOD 99: n = 10x + y gives 10n = 100x + 10y =
+    x + 10y = rev(n) (mod 99), and 10^2 = 1 (mod 99), so reversal is an
+    involution. Hence a ~ b = 10(a + b) in Z/99 -- the ROOT RING OF BASE 100
+    (m = 99 = 9 * 11). Mod 9, 10 = 1: reversal leaves digital roots unchanged,
+    which is why each row's reduction equals dr(a + b). Mod 11, 10 = -1: reversal
+    negates the alternating digit sum. The block totals (115 -> 7, 159 -> 6,
+    871 -> 7, 429 -> 6, 241 -> 7) are running digital-root sums of the row
+    results, chained block to block.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1119,6 +1142,23 @@ assert [r for r in range(p) if (r * r - r + 1) % p == 0] == [9, 65] and (1 - 9) 
 assert len({(1 - x) % p for x in QR73} & QR73) == 17
 assert 137 % p == 64 and pow(64, 3, p) == 1
 assert all(pow(26, 72 // q, p) != 1 for q in (2, 3)) and pow(10, 8, p) == 1 and pow(10, 4, p) != 1
+
+# (49) base 75, (50) the ~ operation
+m = 74
+assert [d for d in range(2, m) if m % d == 0] == [2, 37]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 37, 38]
+assert sorted(x % 37 for x in range(0, m, 2)) == list(range(37)) and 38 % 37 == 1 and 38 % 2 == 0
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(37) if (1 - a) % 37 == a] == [19]
+assert len({pow(2, k, m) for k in range(1, 37)}) == 36
+assert (37 % 2, 37 % 37) == (1, 0) and 37 * 37 % m == 37
+assert 137 % m == 63 and (63 % 2, 63 % 37) == (1, 26)
+assert all((63 * x) % m % 37 == 26 * (x % 37) % 37 for x in range(0, m, 2))
+_rev = lambda n: int(f"{n:02d}"[::-1])
+_pairs = [(12, 11), (11, 21), (23, 22), (22, 32), (34, 33), (33, 43), (45, 44), (44, 54), (56, 55), (55, 65),
+          (67, 66), (66, 76), (78, 77), (77, 87), (89, 88), (88, 98), (91, 99), (99, 19)]
+_vals = [32, 23, 54, 45, 76, 67, 98, 89, 21, 12, 43, 34, 65, 56, 87, 78, 19, 91]
+assert all(_rev((a + b) % 99) == v == 10 * (a + b) % 99 for (a, b), v in zip(_pairs, _vals))
+assert all(_rev(n) == 10 * n % 99 for n in range(1, 99)) and 100 % 99 == 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
