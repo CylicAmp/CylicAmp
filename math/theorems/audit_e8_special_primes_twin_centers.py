@@ -113,6 +113,17 @@ FOURIER TEST on C_12 = <2 H_3> (the supplied 12 densities, rows = 2^j H_3):
 (odd), 0.00299. The largest harmonic is odd; beyond it the odd/even separation
 is only the factor (log x)^(1/6) = 1.64 at 3e8, so L-value constants still
 dominate. PREDICTION: the odd/even amplitude ratio grows like (log x)^(1/6).
+
+SIEVE-SCRIPT AUDIT (2026-09-28). A supplied vectorised sieve multiplied sig by
+(1 + r + ... + r^k) at EVERY division step k, i.e. by the product of partial
+sums instead of the single sigma_3(p^e) = 1 + r + ... + r^e (r = p^3 mod 37); it
+is wrong whenever e >= 2 and gave 199857 zeros <= 1e6 instead of 188742. Also:
+checkpoint subtraction nz[c-lo:] drops n = c (use nz[c-lo+1:]); the residue
+snapshot counted the whole segment. Corrected tool: tools/sigma3_mod37_sieve.py.
+Its 1e8 run (30 s): nonzero 82420 (1e5), 811258 (1e6), 2417653 (3e6), 8005039
+(1e7), 15951844 (2e7), 23878649 (3e7), 79132815 (1e8); C_fit 1.010333,
+1.009694, 1.009421, 1.009190, 1.009054, 1.008984, 1.008785 -- matching the
+supplied 3e8-run values at 2e7 and 1e8.
 """
 from sympy import factorint, isprime, primerange
 

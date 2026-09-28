@@ -490,6 +490,18 @@ base b.
     CONTINGENT: 37 is an INVOLUTION mod 72 (37^2 = 1369 = 19*72 + 1);
     dr_73(137) = 65 has order 6; 26 and 10 are zero divisors.
 
+(48) BASE 74 (m = 73 prime: root ring GF(73), a FIELD; b = 2 * 37 EVEN). The carry
+    complement's unique fixed point is (m+1)/2 = 37 -- the project prime is the
+    carry MIDPOINT of base 74 (FORCED by b = 2 * 37; 37 = 2^-1 mod 73). No coset of
+    any subgroup of order >= 2 maps to a coset. |f(QR) & QR| = 17 = (p-5)/4.
+    73 = 1 mod 3: cube roots {1, 8, 64} = {1, 2^3, 2^6}, primitive sixth roots
+    {9, 65}, swapped by f. DOUBLING: ord_73(2) = 9 (2^9 - 1 = 511 = 7 * 73): eight
+    9-cycles plus 0; smallest primitive root 5. 37 = 2^-1 has order 9 too.
+    CONTINGENT: dr_74(137) = 64 = 2^6 is a PRIMITIVE CUBE ROOT OF UNITY mod 73 --
+    the role 137 = 26 plays in GF(37) (the 137-map) and 137 = 25 plays mod 56
+    (base 57). 26 is a PRIMITIVE ROOT mod 73; 10 has order 8 (1/73 has decimal
+    period 8).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1096,6 +1108,17 @@ assert all(x * 8 % m in I8_73 for x in range(m)) and any(x * 4 % m not in I8_73 
 assert sorted(x % 9 for x in I8_73) == list(range(9)) and 64 % 9 == 1 and 64 % 8 == 0
 assert [y % 9 for y in (8, 16, 32, 64, 56, 40)] == [8, 7, 5, 1, 2, 4] and [24 % 9, 48 % 9] == [6, 3]
 assert 37 * 37 == 19 * m + 1 and 137 % m == 65 and pow(65, 6, m) == 1 and pow(65, 3, m) != 1 and pow(65, 2, m) != 1
+
+# (48) base 74
+p = 73
+QR73 = {x * x % p for x in range(1, p)}
+assert [r for r in range(p) if (1 - r) % p == r] == [37] and 2 * 37 % p == 1
+assert pow(2, 9, p) == 1 and pow(2, 3, p) != 1 and 511 == 7 * p and pow(37, 9, p) == 1 and pow(37, 3, p) != 1
+assert [r for r in range(1, p) if pow(r, 3, p) == 1] == [1, 8, 64] == [1, pow(2, 3, p), pow(2, 6, p)]
+assert [r for r in range(p) if (r * r - r + 1) % p == 0] == [9, 65] and (1 - 9) % p == 65
+assert len({(1 - x) % p for x in QR73} & QR73) == 17
+assert 137 % p == 64 and pow(64, 3, p) == 1
+assert all(pow(26, 72 // q, p) != 1 for q in (2, 3)) and pow(10, 8, p) == 1 and pow(10, 4, p) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
