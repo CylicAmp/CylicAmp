@@ -755,8 +755,20 @@ base b.
     ten 8-cycles.
     FORCED BY SMALL DIVISIBILITIES: dr_86(137) = 52 = (2, 1) -- its F_17 coordinate
     is 1 because 136 = 8 * 17 (the fact behind dr_69(137) = 1); 26 = (1, 9) since
-    25 | 26 - 1. ord(137) = 4, ord(26) = 8; 37 = (2, 3) has the maximal order 16;
+    25 | 26 - 1. ord(137) = 4, ord(26) = 8; 37 = (2, 3) has order 16, the maximal
+    ELEMENT order in R^x = C4 x C16 (not the order of the doubling map, which is 8);
     10 is a zero divisor.
+
+(71) BASE 87 (m = 86 = 2 * 43, square-free MIXED = F_2 x GF(43)). Islands (2) (the 43
+    evens = GF(43) via x -> x mod 43, identity 44 -- base 44's field) and (43) =
+    {0, 43}. Nilradical {0}. Idempotents {0,1,43,44}. Units 42, cyclic. Zero
+    divisors 43. CARRY COMPLEMENT: no fixed point (b odd); only preserved coset
+    22 + (43) = {22, 65} (22 = 2^-1 in GF(43), the base-44 midpoint). DOUBLING: one
+    step onto the evens = GF(43), where ord(2) = 14: three 14-cycles plus 0.
+    CARRIED OVER FROM BASE 44 (section 15): 37 = (1, 37) has order 6 -- its GF(43)
+    coordinate is the primitive sixth root of unity found there; dr_87(137) = 51 =
+    (1, 8) with 8 = 2^3 (137 = 8 mod 43), order 14; 26 = (0, 26) and 10 = (0, 10)
+    lie in the GF(43) island, with coordinate orders 42 and 21.
 
 FALSIFICATION: any assertion below failing.
 """
@@ -1576,6 +1588,15 @@ assert pow(2, 8, m) == 1 and pow(2, 4, m) != 1
 assert 137 % m == 52 and (52 % 5, 52 % 17) == (2, 1) and 136 == 8 * 17 and pow(52, 4, m) == 1 and pow(52, 2, m) != 1
 assert (26 % 5, 26 % 17) == (1, 9) and pow(26, 8, m) == 1 and pow(26, 4, m) != 1
 assert pow(37, 16, m) == 1 and pow(37, 8, m) != 1
+
+# (71) base 87
+m = 86
+assert [d for d in range(2, m) if m % d == 0] == [2, 43] and [x for x in range(m) if x * x % m == x] == [0, 1, 43, 44]
+assert sorted(x % 43 for x in range(0, m, 2)) == list(range(43)) and 44 % 43 == 1
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(43) if (1 - a) % 43 == a] == [22]
+assert pow(2, 14, 43) == 1 and pow(2, 7, 43) != 1 and pow(2, 2, 43) != 1
+assert pow(37, 6, m) == 1 and pow(37, 3, m) != 1 and pow(37, 2, m) != 1 and (37 * 37 - 37 + 1) % 43 == 0
+assert 137 % m == 51 and 137 % 43 == 8 == 2**3 and pow(51, 14, m) == 1 and pow(51, 7, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
