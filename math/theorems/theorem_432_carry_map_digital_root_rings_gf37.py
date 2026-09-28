@@ -747,6 +747,17 @@ base b.
     CONTINGENT: 37 is a CUBE ROOT OF UNITY mod 84 (37^2 = 25, 37 * 25 = 925 =
     11*84 + 1); dr_85(137) = 53 has order 6; 26 and 10 are zero divisors.
 
+(70) BASE 86 (m = 85 = 5 * 17, square-free MIXED = F_5 x F_17; b EVEN). Islands
+    (5) = F_17, (17) = F_5. Nilradical {0}. Idempotents {0,1,35,51} (51 = (1,0),
+    35 = (0,1)). Units 64 = C4 x C16. Zero divisors 20. CARRY COMPLEMENT: fixed
+    point 43 = (m+1)/2 (a reflection, section 66), in the preserved cosets 3 + (5)
+    and 9 + (17). DOUBLING: permutation, ord(2) = lcm(4, 8) = 8: (0), one 4-cycle,
+    ten 8-cycles.
+    FORCED BY SMALL DIVISIBILITIES: dr_86(137) = 52 = (2, 1) -- its F_17 coordinate
+    is 1 because 136 = 8 * 17 (the fact behind dr_69(137) = 1); 26 = (1, 9) since
+    25 | 26 - 1. ord(137) = 4, ord(26) = 8; 37 = (2, 3) has the maximal order 16;
+    10 is a zero divisor.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1556,6 +1567,15 @@ assert {d: [a for a in range(d) if (1 - a) % d == a] for d in (3, 7, 21)} == {3:
 assert all(x * 4 % m % 4 == 0 for x in range(m)) and pow(2, 6, 21) == 1 and pow(2, 3, 21) != 1 and pow(2, 2, 21) != 1
 assert 37 * 37 % m == 25 and 37 * 25 == 11 * m + 1
 assert 137 % m == 53 and pow(53, 6, m) == 1 and pow(53, 3, m) != 1 and pow(53, 2, m) != 1
+
+# (70) base 86
+m = 85
+assert [d for d in range(2, m) if m % d == 0] == [5, 17] and [x for x in range(m) if x * x % m == x] == [0, 1, 35, 51]
+assert [r for r in range(m) if (1 - r) % m == r] == [43] and (43 % 5, 43 % 17) == (3, 9)
+assert pow(2, 8, m) == 1 and pow(2, 4, m) != 1
+assert 137 % m == 52 and (52 % 5, 52 % 17) == (2, 1) and 136 == 8 * 17 and pow(52, 4, m) == 1 and pow(52, 2, m) != 1
+assert (26 % 5, 26 % 17) == (1, 9) and pow(26, 8, m) == 1 and pow(26, 4, m) != 1
+assert pow(37, 16, m) == 1 and pow(37, 8, m) != 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
