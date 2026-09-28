@@ -582,6 +582,30 @@ base b.
     99/19). Then 919 = 31 and 191 = 6 (mod 37), outside {0, 10, 27}: the mod-37
     rule holds exactly for d = 1..8.
 
+(55) BASE 77 (m = 76 = 2^2 * 19, MIXED = Z/4 x Z/19). Islands (2),(4),(19),(38).
+    Nilradical (38) = {0, 38}. Idempotents {0,1,20,57} (57 = (1,0), 20 = (0,1)).
+    Units 36 = C2 x C18. Zero divisors 39. CARRY COMPLEMENT: no fixed point (b odd);
+    only preserved coset 10 + (19). DOUBLING: settles in v2(76) = 2 steps onto
+    (4) = Z/19 = base 20's root ring F_19; 2 primitive mod 19: one 18-cycle plus 0.
+    CONTINGENT: 37 = (1, -1) is an INVOLUTION mod 76 (37^2 = 1369 = 18*76 + 1);
+    dr_77(137) = 61 has order 9; 26 and 10 are non-units.
+
+(56) SPIN COMBINATORICS OF L-CUPS AND MICHAEL L's (supplied pictures, modelled).
+    Cells of the 2 x 2 block clockwise 0 = TL, 1 = TR, 2 = BR, 3 = BL; a spin is
+    i -> i + 1 (mod 4) (the group C4).
+      L-CUP: one odd cell ("3 x 1 plus 1"): 4 placements, ONE spin-orbit; no
+        chirality. Colour rotation = which colour is the odd one (d vs d + 1).
+      MICHAEL L: two distinct marks (black, 0) and two blanks: 4 * 3 = 12
+        placements. The offset k = pos(0) - pos(black) (mod 4) is spin-invariant,
+        so there are EXACTLY 3 spin-orbits of size 4: k = 1 (adjacent clockwise),
+        k = 2 (diagonal), k = 3 (adjacent counter-clockwise). The four supplied
+        MLs have k = 3, 1, 2, 2 -- all three orbits appear.
+      With reflections (D4) or with the colour swap black <-> 0, k = 1 and k = 3
+        merge: 2 orbits (adjacent, diagonal).
+    So both shapes "spin the same way" (free C4-orbits of size 4); the difference is
+    CHIRALITY: an ML's adjacent types come in a clockwise / counter-clockwise pair
+    that only a flip or colour swap identifies; an L-cup has one mark and none.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1249,6 +1273,22 @@ for d in range(1, 9):
     assert (dr(111 * d, 10), dr(111 * d + 10, 10), dr(111 * d + 101, 10)) == (dr(3 * d, 10), dr(3 * d + 1, 10), dr(3 * d + 2, 10))
 assert 121 == 11**2 and 111 == 3 * 37 and 121 % 37 == 10
 assert (919 % 37, 191 % 37) == (31, 6)
+
+# (55) base 77, (56) spin combinatorics
+m = 76
+assert [d for d in range(2, m) if m % d == 0] == [2, 4, 19, 38]
+assert [x for x in range(m) if pow(x, m, m) == 0] == [0, 38] and [x for x in range(m) if x * x % m == x] == [0, 1, 20, 57]
+assert not [r for r in range(m) if (1 - r) % m == r] and [a for a in range(19) if (1 - a) % 19 == a] == [10]
+assert all(pow(2, 18 // q, 19) != 1 for q in (2, 3)) and all((4 * x) % m % 4 == 0 for x in range(m))
+assert 37 * 37 == 18 * m + 1 and 137 % m == 61 and pow(61, 9, m) == 1 and pow(61, 3, m) != 1
+_ML = [(a, b) for a in range(4) for b in range(4) if a != b]
+_orb = lambda confs, grp: len({frozenset(g(c) for g in grp) for c in confs})
+_C4 = [lambda c, s=s: ((c[0] + s) % 4, (c[1] + s) % 4) for s in range(4)]
+_D4 = _C4 + [lambda c, s=s: (((1 - c[0]) + s) % 4, ((1 - c[1]) + s) % 4) for s in range(4)]
+_SW = _C4 + [lambda c, s=s: ((c[1] + s) % 4, (c[0] + s) % 4) for s in range(4)]
+assert len(_ML) == 12 and _orb(_ML, _C4) == 3 and _orb(_ML, _D4) == 2 and _orb(_ML, _SW) == 2
+assert [(b - a) % 4 for a, b in [(2, 1), (0, 1), (3, 1), (1, 3)]] == [3, 1, 2, 2]
+assert len({frozenset((i + s) % 4 for s in range(4)) for i in range(4)}) == 1
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
