@@ -824,6 +824,20 @@ base b.
     27, 2, 14, 26, 1, 13, 25 (mod 37); it meets MULT = 26 (6612) and then 1 (7512)
     consecutively because 26 + 12 = 38 = 1 -- a step fact, not a signal.
 
+(77) BASE 91 (m = 90 = 2 * 3^2 * 5, MIXED = F_2 x Z/9 x F_5). Ten islands (2),(3),(5),
+    (6),(9),(10),(15),(18),(30),(45). Nilradical {0,30,60}. Eight idempotents
+    {0,1,10,36,45,46,55,81}. Units 24 = C2 x C12. Zero divisors 65. CARRY COMPLEMENT:
+    no fixed point (b odd); preserved cosets 2+(3), 3+(5), 5+(9), 8+(15), 23+(45).
+    DOUBLING: one step onto the evens = Z/45 = base 46's root ring, ord(2) = 12.
+    BASE 10 INSIDE BASE 91, LITERALLY (forced: 10 = 1 mod 9, 10 = 0 mod 2 and mod 5):
+    10 is an IDEMPOTENT (10^2 = 100 = 90 + 10) and x -> 10x embeds Z/9 as the island
+    (10) = 10 * {0..8} with identity 10. Doubling there is base 10's doubling times
+    ten: (10 20 40 80 70 50) = 10 * (1 2 4 8 7 5) and (30 60) = 10 * (3 6).
+    (Fourth embedding of base 10's ring: bases 46, 64, 73, 91.)
+    dr_91(137) = 47 has order 12; 37 = (1, 1, 2) has order 4; 26 is a zero divisor.
+    (Supplied 1212-cycle ledger: agrees with section 76; 900-beat accounting checks,
+    900 + (9 + 1791) + 6*900 - 8100 = 0.)
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1697,6 +1711,17 @@ _seq = [1212, 2112, 2121, 3912, 4812, 5712, 6612, 7512, 8412, 9312, 1212]
 assert len(set(_seq)) == 10 and {dr(s, 10) for s in _seq} == {6}
 assert all((_seq[i + 1] - _seq[i]) % 9 == 0 for i in range(10))
 assert [s % 37 for s in _seq[3:10]] == [27, 2, 14, 26, 1, 13, 25] and 900 % 37 == 12
+
+# (77) base 91
+m = 90
+assert len([d for d in range(2, m) if m % d == 0]) == 10 and [x for x in range(m) if pow(x, m, m) == 0] == [0, 30, 60]
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 10, 36, 45, 46, 55, 81]
+assert not [r for r in range(m) if (1 - r) % m == r]
+_T10 = list(range(0, m, 10))
+assert 10 * 10 % m == 10 and all(10 * x % m == x for x in _T10) and sorted(x % 9 for x in _T10) == list(range(9))
+assert [y // 10 for y in (10, 20, 40, 80, 70, 50)] == [1, 2, 4, 8, 7, 5] and all(2 * a % m == b for a, b in [(10, 20), (20, 40), (40, 80), (80, 70), (70, 50), (50, 10), (30, 60), (60, 30)])
+assert 137 % m == 47 and pow(47, 12, m) == 1 and pow(47, 6, m) != 1 and pow(47, 4, m) != 1 and pow(37, 4, m) == 1 and pow(37, 2, m) != 1
+assert 900 + 9 + 1791 + 6 * 900 - 8100 == 0
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
