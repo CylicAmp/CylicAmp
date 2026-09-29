@@ -926,6 +926,15 @@ base b.
     dr_99(137) = 39 and 37 both have order 21; 26 and 10 are even, hence zero
     divisors.
 
+(87) BASE 100 (m = 99 = 3^2 * 11, MIXED = Z/9 x F_11). Four islands (3),(9),(11),(33).
+    Nilradical {0,33,66}. Four idempotents {0,1,45,55}. Units 60 = C6 x C10, max
+    order 30. Zero divisors 39. CARRY COMPLEMENT: fixed point 50 = b/2; preserved
+    cosets 2+(3), 5+(9), 6+(11), 17+(33). DOUBLING: permutation of order
+    lcm(6, 10) = 30; orbit lengths 1, 2, 6, 10, 30.
+    10 = (1, -1) has order 2: FORCED, since 100 = 10^2 = 1 (mod 99) -- base 100 is
+    base 10 read in digit pairs. dr_100(137) = 38 has order 30 (contingent);
+    26 has order 10, 37 has order 5.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1876,6 +1885,13 @@ assert [x for x in range(m) if x * x % m == x] == [0, 1, 49, 50] and [x for x in
 assert {2 * x % m for x in range(m)} == set(range(0, m, 2)) and 50 * 2 % m == 2 and not [r for r in range(m) if (1 - r) % m == r]
 _o = lambda x, n=m: next(k for k in range(1, 99) if pow(x, k, n) == 1)
 assert _o(2, 49) == 21 and _o(2, 7) == 3 and 137 % m == 39 and _o(39) == 21 and _o(37) == 21 and max(_o(u) for u in range(m) if gcd(u, m) == 1) == 42
+
+# (87) base 100
+m = 99
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 45, 55] and [x for x in range(m) if pow(x, m, m) == 0] == [0, 33, 66]
+assert [r for r in range(m) if (1 - r) % m == r] == [50] and sum(1 for x in range(m) if gcd(x, m) == 1) == 60
+_o = lambda x, n=m: next(k for k in range(1, 99) if pow(x, k, n) == 1)
+assert _o(2) == 30 and _o(10) == 2 and 137 % m == 38 and _o(38) == 30 and _o(26) == 10 and _o(37) == 5
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
