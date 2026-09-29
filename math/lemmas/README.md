@@ -1,7 +1,8 @@
 # Lemmas
 
 A lemma here is a file that states **one small supporting fact** used as a step
-toward other results (the owner's rule, 2026-09-29). Everything else stays in
+toward other results. This wording was written by Claude as one of three
+options offered on 2026-09-29; the owner selected it. Everything else stays in
 `math/theorems/`.
 
 How the 13 were chosen: all 237 files labelled `# CLASS: THEOREM` were read
