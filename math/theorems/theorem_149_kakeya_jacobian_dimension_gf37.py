@@ -173,6 +173,14 @@ def run_assertions():
     # det = 0*(1*0-0*0) - 4*(0*0-0*2) + 1*(0*0-1*2) = 0 - 0 - 2 = -2
     jacobian_at_origin = -2
     assert jacobian_at_origin == -2
+    # Full symbolic check (added 2026-09-29): det(JF) is the constant -2 for ALL x, y, z,
+    # not only at the origin. This is what makes F a counterexample.
+    import sympy as _sp
+    _x, _y, _z = _sp.symbols('x y z')
+    _F = _sp.Matrix([(1 + _x*_y)**3*_z + _y**2*(1 + _x*_y)*(4 + 3*_x*_y),
+                     _y + 3*_x*(1 + _x*_y)**2*_z + 3*_x*_y**2*(4 + 3*_x*_y),
+                     2*_x - 3*_x**2*_y - _x**3*_z])
+    assert _sp.expand(_F.jacobian([_x, _y, _z]).det()) == -2
 
     # Mod-37 reductions of Alpöge map parameters (coincidences only)
     assert 7 in ORBITS['D7']               # degree of Alpöge map
