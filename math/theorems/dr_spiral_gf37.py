@@ -147,14 +147,9 @@ def dr(n):
     return 9 if r == 0 else r
 
 
-def sieve(n):
-    is_p = [True] * (n + 1)
-    is_p[0] = is_p[1] = False
-    for i in range(2, int(n**0.5) + 1):
-        if is_p[i]:
-            for j in range(i*i, n+1, i):
-                is_p[j] = False
-    return [i for i in range(2, n+1) if is_p[i]]
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import primes_upto as sieve
 
 
 def run():

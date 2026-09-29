@@ -142,12 +142,9 @@ print("="*62)
 print("5.  Primes p ≥ 5: p mod 6 ∈ {1,5}")
 print("="*62)
 
-def sieve(n):
-    is_p = [True]*(n+1); is_p[0]=is_p[1]=False
-    for i in range(2, isqrt(n)+1):
-        if is_p[i]:
-            for j in range(i*i, n+1, i): is_p[j]=False
-    return [i for i in range(2,n+1) if is_p[i]]
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import primes_upto as sieve
 
 primes = sieve(100)
 bad = [p for p in primes if p >= 5 and p % 6 not in {1, 5}]

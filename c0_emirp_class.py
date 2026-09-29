@@ -29,12 +29,9 @@ from collections import Counter
 
 LIMIT = int(sys.argv[1]) if len(sys.argv) > 1 else 10**6
 
-def sieve(n):
-    S = bytearray([1]) * (n + 1); S[0] = S[1] = 0
-    for i in range(2, int(n**0.5) + 1):
-        if S[i]:
-            S[i*i::i] = bytearray(len(S[i*i::i]))
-    return S
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import sieve_flags as sieve
 
 dr   = lambda n: (n - 1) % 9 + 1
 chi3 = lambda n: 0 if n % 3 == 0 else (1 if n % 3 == 1 else -1)

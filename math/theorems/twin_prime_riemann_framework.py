@@ -88,13 +88,9 @@ _sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p 
 from functions import dr_pos as dr
 
 
-def sieve(limit: int):
-    is_p = bytearray([1]) * (limit + 1)
-    is_p[0] = is_p[1] = 0
-    for i in range(2, int(limit ** 0.5) + 1):
-        if is_p[i]:
-            is_p[i * i :: i] = bytearray(len(is_p[i * i :: i]))
-    return is_p
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import sieve_flags as sieve
 
 
 # 1. Chi structure of twin primes is forced by 6n±1

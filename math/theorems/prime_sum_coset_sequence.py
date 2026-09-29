@@ -65,13 +65,9 @@ ST = {3, 12, 21, 30}
 SEED_ORBIT = {18, 24, 32}
 
 
-def sieve(limit):
-    is_p = bytearray([1]) * (limit + 1)
-    is_p[0] = is_p[1] = 0
-    for i in range(2, int(limit**0.5) + 1):
-        if is_p[i]:
-            is_p[i*i::i] = bytearray(len(is_p[i*i::i]))
-    return [n for n in range(2, limit+1) if is_p[n]]
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import primes_upto as sieve
 
 
 def build_cosets():

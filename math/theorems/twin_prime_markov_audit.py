@@ -61,13 +61,9 @@ def check(cond, label, actual, expected):
 
 # ── Sieve ─────────────────────────────────────────────────────────────────────
 
-def sieve(n):
-    ip = bytearray([1]) * (n + 1)
-    ip[0] = ip[1] = 0
-    for i in range(2, isqrt(n) + 1):
-        if ip[i]:
-            ip[i * i :: i] = bytearray(len(ip[i * i :: i]))
-    return ip
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import sieve_flags as sieve
 
 
 def dr(n):

@@ -242,3 +242,28 @@ def legendre_by_residue(a, p):
     """0 if a^((p-1)/2) = 0, -1 if it is p-1, else 1 (agrees with legendre for prime p)."""
     r = pow(a, (p - 1) // 2, p)
     return 0 if r == 0 else -1 if r == p - 1 else 1
+
+
+# -- sieve of Eratosthenes ------------------------------------------------------
+#
+# The copies named `sieve` returned three different things; each is kept.
+
+def sieve_flags(n):
+    """bytearray f of length n+1 with f[k] = 1 iff k is prime."""
+    is_p = bytearray([1]) * (n + 1)
+    is_p[0] = is_p[1] = 0
+    for i in range(2, int(n ** 0.5) + 1):
+        if is_p[i]:
+            is_p[i * i::i] = bytearray(len(is_p[i * i::i]))
+    return is_p
+
+
+def primes_upto(n):
+    """List of primes <= n, ascending."""
+    f = sieve_flags(n)
+    return [i for i in range(2, n + 1) if f[i]]
+
+
+def primes_upto_set(n):
+    """Set of primes <= n."""
+    return set(primes_upto(n))

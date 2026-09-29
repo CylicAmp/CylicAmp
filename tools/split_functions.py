@@ -27,6 +27,7 @@ TARGETS = {
     'digital_root': ['dr', 'dr_signed', 'dr_pos', 'dr_strict', 'dr9', 'dr9_signed', 'dr9_pos', 'dr_iter', 'dr9_iter'],
     'digit_sum': ['digit_sum', 'digit_sum_abs', 'digit_sum_str'],
     'is_prime': ['is_prime'],
+    'sieve': ['sieve_flags', 'primes_upto', 'primes_upto_set'],
     'legendre': ['euler_criterion', 'euler_criterion37', 'legendre', 'legendre37', 'legendre_by_residue'],
     'orbit_of': ['orbit_of', 'orbit_of_next', 'orbit_of_assert', 'orbit_of_key',
                  'orbit_of_unknown', 'orbit_of_q', 'orbit_of_v1'],
@@ -34,12 +35,13 @@ TARGETS = {
 # Targets whose copies read file-level tables (orbit_of reads ORBITS, P): the
 # copy is evaluated with the file's own top-level constants, built by running
 # only its side-effect-free top-level assignments.
-NEEDS_GLOBALS = {'orbit_of'}
+NEEDS_GLOBALS = {'orbit_of', 'sieve'}
 INTS = list(range(-500, 5001)) + [10 ** k + j for k in range(5, 40) for j in (-1, 0, 1)]
 TESTS = {
     'dr': INTS, 'digital_root': INTS, 'digit_sum': INTS,
     'is_prime': list(range(-50, 20001)) + [2 ** 31 - 1, (10 ** 4 + 7) ** 2, 10 ** 9 + 7],
     'orbit_of': list(range(-40, 400)) + [10 ** 12 + 5, None],
+    'sieve': list(range(-3, 300)) + [1000, 10007],
     'legendre': [(a, p) for p in (2, 3, 5, 7, 11, 13, 37, 73, 101) for a in range(-40, 120)]
                 + [(a, m) for m in (9, 15, 21, 25) for a in range(-5, 30)]
                 + [(a,) for a in range(-5, 80)] + [(10 ** 15 + 3, 37)],
@@ -64,8 +66,8 @@ def outputs(f, xs):
 
 
 def signature(name, f):
-    if name in MULTI_ARG:
-        return outputs(f, TESTS[name])
+    if name in MULTI_ARG or name == 'sieve':
+        return outputs(f, TESTS[name]) + (outputs(f, [2.0, 10.5]) if name == 'sieve' else [])
     return outputs(f, TESTS[name]) + outputs(f, STR_TESTS) + outputs(f, FLOAT_TESTS)
 
 

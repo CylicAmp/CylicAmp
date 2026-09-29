@@ -153,13 +153,9 @@ for d, r18 in TRACK_MOD18.items():
             assert n % 18 == r18, f"DR={d}, n={n}: n%18={n%18}, expected {r18}"
 
 # Verify against all twin prime anchors to 100,000
-def sieve(limit):
-    is_p = bytearray([1]) * (limit + 1)
-    is_p[0] = is_p[1] = 0
-    for i in range(2, isqrt(limit) + 1):
-        if is_p[i]:
-            is_p[i*i::i] = bytearray(len(is_p[i*i::i]))
-    return [i for i in range(2, limit + 1) if is_p[i]]
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import primes_upto as sieve
 
 primes_set = set(sieve(100002))
 twin_anchors = [p for p in range(5, 100001) if p in primes_set and (p+2) in primes_set]
