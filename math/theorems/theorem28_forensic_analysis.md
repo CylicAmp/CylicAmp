@@ -15,7 +15,7 @@ occupying different phi classes. Structural entanglement confirmed.
 | 2 | 2π/3 | {4, 25} | Elevated |
 | 3 | 4π/3 | EMPTY | Entropy dissipation |
 
-The third phase (4π/3) is unoccupied by any sovereign anchor.
+The third phase (4π/3) is unoccupied by any f26 anchor.
 The 32 purge nodes distribute across all three phi classes including this one.
 
 ### III. Node 30: Maximum Radial Position

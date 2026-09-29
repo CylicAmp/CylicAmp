@@ -48,7 +48,7 @@ for start in range(1, 37):
 assert len(cycles) == 12, f"Expected 12 cycles, got {len(cycles)}"
 assert len(seen) == 36
 
-# Node 30 cycle contains two DR=3 anchors
+# Node 30 cycle contains two DR=3 nodes
 node30_cycle = next(c for c in cycles if 30 in c)
 assert sorted(node30_cycle) == [3, 4, 30]
 dr3_in_cycle = [n for n in node30_cycle if dr(n) == 3]
