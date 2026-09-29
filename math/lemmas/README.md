@@ -13,7 +13,7 @@ for that reason (its only mention elsewhere is a listing).
 | File | The fact | Cited by (checked in the repo) |
 |---|---|---|
 | `heartbeat_3cycle.py` | ord_37(26)=3, so every nonzero residue lies in a 3-cycle of the 137-map | engine_integration.py, theorem_316_t120_seed_class_mod_333_gf37.py |
-| `sigma3_eisenstein_gf37.py` | For prime p, 37 | sigma_3(p) iff p = 11, 27, 36 mod 37 | theorem_424_rewrite_certificate_ledger_gf37.py |
+| `sigma3_eisenstein_gf37.py` | For prime p, 37 divides sigma_3(p) iff p = 11, 27, 36 mod 37 | theorem_424_rewrite_certificate_ledger_gf37.py |
 | `abcabc_mod37_orbit.py` | ABCABC = 1001*ABC ≡ 2*ABC (mod 37); orbit walks all of (Z/37)* since 2 primitive | engine_integration.py |
 | `theorem_310_digit_chain_seam_gf37.py` | aba with a=b is 111a ≡ 0 mod 37 for every digit a | theorem_311_triad_lock_and_subgrid_map_gf37.py, theorem_312_repdigit_chain_complete_gf37.py, theorem_315_base_ten_block_and_cofactor_gf37.py, thread_session_connections.py |
 | `twin_prime_dr_pair.py` | Twin pair (6m-1,6m+1): DR pair is (8,1),(5,7),(2,4) as m = 0,1,2 mod 3 | test_prime_engine.py, twin_prime_tripartite_audit.py |
