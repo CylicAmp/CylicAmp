@@ -905,7 +905,7 @@ base b.
     16 elements (m/rad(m) = 96/6). Four idempotents {0,1,33,64}. Units 32 =
     C2 x C8 x C2, max order 8. Zero divisors 64. CARRY COMPLEMENT: no fixed point
     (b odd); one preserved coset, 2+(3) -- every 2-power ideal has 2a = 1 unsolvable.
-    DOUBLING: the longest collapse so far among these bases, v_2(96) = 5 steps, onto
+    DOUBLING: collapses in v_2(96) = 5 steps (base 65, m = 2^6, takes 6), onto
     (32) = {0,32,64} = F_3 (identity 64 = (0, 1)); there doubling is 32 <-> 64.
     dr_97(137) = 41 = (9, 2) has order 4; 37 = (5, 1) has order 8, the maximum;
     26 and 10 are even, hence zero divisors.
