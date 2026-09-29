@@ -910,6 +910,13 @@ base b.
     dr_97(137) = 41 = (9, 2) has order 4; 37 = (5, 1) has order 8, the maximum;
     26 and 10 are even, hence zero divisors.
 
+(85) BASE 98 (m = 97, PRIME FIELD GF(97)). No islands, no zero divisors, units
+    C96 (primitive root 5). CARRY COMPLEMENT: fixed point 49 = b/2; no proper cosets
+    exist to preserve. DOUBLING: 97 = 1 mod 8, so 2 is a QR, ord(2) = 48: {0} plus
+    the two cosets of the squares as 48-cycles.
+    137 = 40, 26, 37 and 10 are ALL primitive roots mod 97 (each has chance
+    phi(96)/96 = 1/3; all four: contingent). 10 primitive: 1/97 has full period 96.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1847,6 +1854,12 @@ for _ in range(5):
 assert _S == {0, 32, 64} and {2 * x % m for x in _S} == _S and 64 * 64 % m == 64 and not [r for r in range(m) if (1 - r) % m == r]
 _o = lambda x, n=m: next(k for k in range(1, 99) if pow(x, k, n) == 1)
 assert 137 % m == 41 and _o(41) == 4 and _o(37) == 8 and max(_o(u) for u in range(m) if gcd(u, m) == 1) == 8
+
+# (85) base 98
+m = 97
+_o = lambda x, n=m: next(k for k in range(1, 99) if pow(x, k, n) == 1)
+assert [r for r in range(m) if (1 - r) % m == r] == [49] and _o(2) == 48 and 137 % m == 40
+assert all(_o(v) == 96 for v in (40, 26, 37, 10, 5))
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
