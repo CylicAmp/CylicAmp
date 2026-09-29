@@ -917,6 +917,15 @@ base b.
     137 = 40, 26, 37 and 10 are ALL primitive roots mod 97 (each has chance
     phi(96)/96 = 1/3; all four: contingent). 10 primitive: 1/97 has full period 96.
 
+(86) BASE 99 (m = 98 = 2 * 7^2, MIXED = F_2 x Z/49). Four islands (2),(7),(14),(49).
+    Nilradical = (14), 7 elements. Four idempotents {0,1,49,50}. Units 42, CYCLIC
+    (m = 2 p^k). Zero divisors 56. CARRY COMPLEMENT: no fixed point (b odd);
+    preserved cosets 4+(7), 25+(49). DOUBLING: one step onto (2) = Z/49 (identity
+    50); there ord(2) = 21, so the image is {0}, two 3-cycles on the multiples of 14
+    (ord_7(2) = 3) and two 21-cycles on the units of Z/49.
+    dr_99(137) = 39 and 37 both have order 21; 26 and 10 are even, hence zero
+    divisors.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1860,6 +1869,13 @@ m = 97
 _o = lambda x, n=m: next(k for k in range(1, 99) if pow(x, k, n) == 1)
 assert [r for r in range(m) if (1 - r) % m == r] == [49] and _o(2) == 48 and 137 % m == 40
 assert all(_o(v) == 96 for v in (40, 26, 37, 10, 5))
+
+# (86) base 99
+m = 98
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 49, 50] and [x for x in range(m) if pow(x, m, m) == 0] == list(range(0, m, 14))
+assert {2 * x % m for x in range(m)} == set(range(0, m, 2)) and 50 * 2 % m == 2 and not [r for r in range(m) if (1 - r) % m == r]
+_o = lambda x, n=m: next(k for k in range(1, 99) if pow(x, k, n) == 1)
+assert _o(2, 49) == 21 and _o(2, 7) == 3 and 137 % m == 39 and _o(39) == 21 and _o(37) == 21 and max(_o(u) for u in range(m) if gcd(u, m) == 1) == 42
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
