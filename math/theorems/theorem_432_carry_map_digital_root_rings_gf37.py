@@ -875,6 +875,14 @@ base b.
     (Supplied restatement of section (77): phi(a) = 10a maps Z/9 onto 10Z/90 as a ring
     isomorphism commuting with doubling -- checked; same content as (77).)
 
+(81) BASE 94 (m = 93 = 3 * 31, SQUAREFREE = F_3 x F_31). Two islands (3),(31).
+    Nilradical {0}. Four idempotents {0,1,31,63}. Units 60 = C2 x C30, max order 30.
+    Zero divisors 33 = 3 + 31 - 1. CARRY COMPLEMENT: fixed point 47 = b/2; preserved
+    cosets 2+(3), 16+(31). DOUBLING: permutation (v_2(93) = 0) of order lcm(2, 5) = 10;
+    31 = 2^5 - 1 (Mersenne) gives ord_31(2) = 5; orbit lengths 1, 2, 5, 10.
+    dr_94(137) = 44 = (2, 13) has order 30, the maximum (contingent, not forced).
+    26 = (2, 26) and 37 = (1, 6) have order 6; 10 = (1, 10) has order 15.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1781,6 +1789,14 @@ assert [x for x in range(m) if x * x % m == x] == [0, 1, 24, 69] and not [r for 
 assert {2 * 2 * x % m for x in range(m)} == set(range(0, m, 4)) and 24 * 4 % m == 4 and pow(2, 11, 23) == 1
 assert 137 % m == 45 and 45 * 45 % m == 1 and 138 == 6 * 23 and pow(37, 22, m) == 1 and pow(37, 11, m) != 1
 assert all(10 * a * 10 * b % 90 == 10 * a * b % 90 for a in range(9) for b in range(9))
+
+# (81) base 94
+m = 93
+assert [d for d in range(2, m) if m % d == 0] == [3, 31] and [x for x in range(m) if x * x % m == x] == [0, 1, 31, 63]
+assert [r for r in range(m) if (1 - r) % m == r] == [47] and sum(1 for x in range(m) if gcd(x, m) == 1) == 60
+assert next(k for k in range(1, 99) if pow(2, k, m) == 1) == 10 and pow(2, 5, 31) == 1
+_o = lambda x: next(k for k in range(1, 99) if pow(x, k, m) == 1)
+assert 137 % m == 44 and _o(44) == 30 and _o(26) == 6 and _o(37) == 6 and _o(10) == 15
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
