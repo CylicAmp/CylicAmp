@@ -892,6 +892,15 @@ base b.
     37 = (1, 37) has order 23; 26 and 10 are even, hence zero divisors, though both
     are primitive roots mod 47.
 
+(83) BASE 96 (m = 95 = 5 * 19, SQUAREFREE = F_5 x F_19). Two islands (5),(19).
+    Nilradical {0}. Four idempotents {0,1,20,76}. Units 72 = C4 x C18, max order 36.
+    Zero divisors 23 = 5 + 19 - 1. CARRY COMPLEMENT: fixed point 48 = b/2; preserved
+    cosets 3+(5), 10+(19). DOUBLING: permutation of order lcm(4, 18) = 36, the
+    maximum -- 2 is primitive mod 5 and mod 19; orbit lengths 1, 4, 18, 36.
+    dr_96(137) = 42 = (2, 4) also has order 36. 26 = (1, 7) has ORDER 3, as it does
+    in GF(37) (7^3 = 343 = 18*19 + 1; contingent). 37 = (2, -1) has order 4; 10 is a
+    zero divisor (5 | 10).
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1813,6 +1822,12 @@ assert [x for x in range(m) if x * x % m == x] == [0, 1, 47, 48] and not [r for 
 assert {2 * x % m for x in range(m)} == set(range(0, m, 2)) and 48 * 2 % m == 2 and pow(2, 23, 47) == 1
 _o = lambda x, n=m: next(k for k in range(1, 99) if pow(x, k, n) == 1)
 assert 137 % m == 43 and _o(43) == 46 and _o(37) == 23 and _o(26, 47) == 46 and _o(10, 47) == 46
+
+# (83) base 96
+m = 95
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 20, 76] and [r for r in range(m) if (1 - r) % m == r] == [48]
+_o = lambda x, n=m: next(k for k in range(1, 99) if pow(x, k, n) == 1)
+assert _o(2) == 36 and 137 % m == 42 and _o(42) == 36 and _o(26) == 3 and _o(37) == 4 and gcd(10, m) == 5
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
