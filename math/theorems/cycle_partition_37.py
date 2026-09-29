@@ -1,4 +1,4 @@
-# CLASS: LEMMA
+# CLASS: THEOREM
 """
 37-Cycle Partition Theorem
 

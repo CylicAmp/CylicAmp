@@ -30,7 +30,7 @@
  },
  {
   "file": "cycle_partition_37.py",
-  "location": "math/lemmas",
+  "location": "math/theorems",
   "import_graph": "THEOREM",
   "named_by_owner": "—",
   "reading": "LEMMA",
@@ -42,7 +42,7 @@
  },
  {
   "file": "decimal_trinity.py",
-  "location": "math/lemmas",
+  "location": "math/theorems",
   "import_graph": "THEOREM",
   "named_by_owner": "—",
   "reading": "LEMMA",
@@ -54,7 +54,7 @@
  },
  {
   "file": "intersection_cycle_theorem.py",
-  "location": "math/lemmas",
+  "location": "math/theorems",
   "import_graph": "THEOREM",
   "named_by_owner": "—",
   "reading": "LEMMA",
@@ -80,7 +80,7 @@
  },
  {
   "file": "sovereign_fixed_point.py",
-  "location": "math/lemmas",
+  "location": "math/theorems",
   "import_graph": "THEOREM",
   "named_by_owner": "—",
   "reading": "LEMMA",
@@ -165,7 +165,7 @@
  },
  {
   "file": "two_group_split.py",
-  "location": "math/lemmas",
+  "location": "math/theorems",
   "import_graph": "THEOREM",
   "named_by_owner": "—",
   "reading": "LEMMA",
@@ -177,7 +177,7 @@
  },
  {
   "file": "verify_local_confluence.py",
-  "location": "math/lemmas",
+  "location": "math/theorems",
   "import_graph": "THEOREM",
   "named_by_owner": "—",
   "reading": "LEMMA",

@@ -1,4 +1,4 @@
-# CLASS: LEMMA
+# CLASS: THEOREM
 """
 Layer 38 (cont.): Computational Verification of Local Confluence
 Unified 1/137 Lattice — diamond property exhaustive check.

@@ -56,7 +56,7 @@ FILES MAKING DANGLING CITATIONS (count each)
   1    math/theorems/period_999_2997.py
   1    math/theorems/reversal_ladder_2357.py
   1    math/theorems/theorem_278_twin_prime_structure_gf37.py
-  1    math/lemmas/decimal_trinity.py
+  1    math/theorems/decimal_trinity.py
   1    math/theorems/theorem_359_length_vs_digital_root.py
   1    math/theorems/three_block_ladder.py
   1    math/theorems/prime_ap_imaginary_unit.py

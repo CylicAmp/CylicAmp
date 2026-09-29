@@ -319,7 +319,7 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/lemmas/cycle_partition_37.py": {
+ "math/theorems/cycle_partition_37.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -349,7 +349,7 @@
   "secs": 0.4,
   "status": "PASS"
  },
- "math/lemmas/decimal_trinity.py": {
+ "math/theorems/decimal_trinity.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -629,7 +629,7 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/lemmas/intersection_cycle_theorem.py": {
+ "math/theorems/intersection_cycle_theorem.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -1189,7 +1189,7 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/lemmas/sovereign_fixed_point.py": {
+ "math/theorems/sovereign_fixed_point.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -2649,7 +2649,7 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/lemmas/two_group_split.py": {
+ "math/theorems/two_group_split.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -2679,7 +2679,7 @@
   "secs": 0.2,
   "status": "PASS"
  },
- "math/lemmas/verify_local_confluence.py": {
+ "math/theorems/verify_local_confluence.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"

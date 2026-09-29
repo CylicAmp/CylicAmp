@@ -426,7 +426,7 @@
       ]
     },
     {
-      "file": "math/lemmas/cycle_partition_37.py",
+      "file": "math/theorems/cycle_partition_37.py",
       "status": "SERVICE_OPTIMAL",
       "total_dr": 4,
       "nulls": 0,
@@ -1300,7 +1300,7 @@
       ]
     },
     {
-      "file": "math/lemmas/intersection_cycle_theorem.py",
+      "file": "math/theorems/intersection_cycle_theorem.py",
       "status": "DARK_PATTERN_EXTRACTIVE",
       "total_dr": 9,
       "nulls": 0,
@@ -2801,7 +2801,7 @@
       ]
     },
     {
-      "file": "math/lemmas/sovereign_fixed_point.py",
+      "file": "math/theorems/sovereign_fixed_point.py",
       "status": "SERVICE_OPTIMAL",
       "total_dr": 3,
       "nulls": 0,
@@ -4986,7 +4986,7 @@
       ]
     },
     {
-      "file": "math/lemmas/two_group_split.py",
+      "file": "math/theorems/two_group_split.py",
       "status": "SERVICE_OPTIMAL",
       "total_dr": 2,
       "nulls": 0,
@@ -5062,7 +5062,7 @@
       ]
     },
     {
-      "file": "math/lemmas/verify_local_confluence.py",
+      "file": "math/theorems/verify_local_confluence.py",
       "status": "DARK_PATTERN_EXTRACTIVE",
       "total_dr": 9,
       "nulls": 0,

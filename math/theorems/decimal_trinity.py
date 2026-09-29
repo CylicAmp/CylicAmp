@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# CLASS: LEMMA
+# CLASS: THEOREM
 """
 ================================================================================
 THEOREM 389: ord_37(10) = 3 -- The Decimal Base as Generator of H_3

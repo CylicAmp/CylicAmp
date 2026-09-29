@@ -14,7 +14,7 @@ The reading method finds 11 more; the import graph misses them because
 files in this repo build on each other by citing results in their text, not by
 importing code.
 
-Current folder layout follows the reading method (13 files in `math/lemmas/`).
+Folder layout follows the fourth method below (7 files in `math/lemmas/`).
 
 ## Every file any method calls a lemma
 
@@ -56,4 +56,5 @@ machine can repeat. 7 lemmas:
 The other 6 reading lemmas (`cycle_partition_37`, `two_group_split`,
 `decimal_trinity`, `intersection_cycle_theorem`, `sovereign_fixed_point`,
 `verify_local_confluence`) are named by no other result file, so "used as a
-step" is not shown for them. Folder layout unchanged.
+step" is not shown for them. They were moved back to `math/theorems/` on
+2026-09-29; the 22 files that refer to them produced identical output before and after.
