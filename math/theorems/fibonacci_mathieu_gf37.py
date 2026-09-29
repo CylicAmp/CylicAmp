@@ -131,9 +131,9 @@ _sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p 
 from functions import is_prime
 
 
-def legendre(a, p):
-    r = pow(a, (p-1)//2, p)
-    return 0 if r == 0 else (-1 if r == p-1 else 1)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import legendre_by_residue as legendre
 
 
 def fib_mod(n, p):

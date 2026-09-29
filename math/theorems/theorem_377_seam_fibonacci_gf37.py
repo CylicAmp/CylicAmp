@@ -53,9 +53,9 @@ def rule30(n):
     out = [padded[i-1] ^ (padded[i] | padded[i+1]) for i in range(1, len(padded)-1)]
     return int("".join(map(str, out)), 2)
 
-def legendre(a, p=37):
-    if a % p == 0: return 0
-    return 1 if pow(a, (p-1)//2, p) == 1 else -1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import legendre37 as legendre
 
 import math
 

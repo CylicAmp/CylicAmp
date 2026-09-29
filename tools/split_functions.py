@@ -27,6 +27,7 @@ TARGETS = {
     'digital_root': ['dr', 'dr_signed', 'dr_pos', 'dr_strict', 'dr9', 'dr9_signed', 'dr9_pos', 'dr_iter', 'dr9_iter'],
     'digit_sum': ['digit_sum', 'digit_sum_abs', 'digit_sum_str'],
     'is_prime': ['is_prime'],
+    'legendre': ['euler_criterion', 'euler_criterion37', 'legendre', 'legendre37', 'legendre_by_residue'],
     'orbit_of': ['orbit_of', 'orbit_of_next', 'orbit_of_assert', 'orbit_of_key',
                  'orbit_of_unknown', 'orbit_of_q', 'orbit_of_v1'],
 }
@@ -39,7 +40,12 @@ TESTS = {
     'dr': INTS, 'digital_root': INTS, 'digit_sum': INTS,
     'is_prime': list(range(-50, 20001)) + [2 ** 31 - 1, (10 ** 4 + 7) ** 2, 10 ** 9 + 7],
     'orbit_of': list(range(-40, 400)) + [10 ** 12 + 5, None],
+    'legendre': [(a, p) for p in (2, 3, 5, 7, 11, 13, 37, 73, 101) for a in range(-40, 120)]
+                + [(a, m) for m in (9, 15, 21, 25) for a in range(-5, 30)]
+                + [(a,) for a in range(-5, 80)] + [(10 ** 15 + 3, 37)],
 }
+# Targets whose copies take two arguments (possibly with a default).
+MULTI_ARG = {'legendre'}
 STR_TESTS = ['0', '7', '123', '999999', '10000000001']
 FLOAT_TESTS = [0.0, 3.0, 9.0, 12.0, 12.5, 3.7, 17.49, 17.5, -2.5, -9.0, 1e6 + 0.4]
 BOOTSTRAP = ('import sys as _sys, pathlib as _pl\n'
@@ -51,13 +57,15 @@ def outputs(f, xs):
     out = []
     for x in xs:
         try:
-            out.append(repr(f(x)))
+            out.append(repr(f(*x) if isinstance(x, tuple) else f(x)))
         except Exception as e:
             out.append('E:' + type(e).__name__)
     return out
 
 
 def signature(name, f):
+    if name in MULTI_ARG:
+        return outputs(f, TESTS[name])
     return outputs(f, TESTS[name]) + outputs(f, STR_TESTS) + outputs(f, FLOAT_TESTS)
 
 
@@ -115,10 +123,13 @@ def candidate_defs(tree):
         a = n.args
         if n.name not in TARGETS or counts[n.name] != 1 or n.decorator_list:
             continue
-        if len(a.args) != 1 or a.vararg or a.kwarg or a.kwonlyargs or a.defaults or a.posonlyargs:
+        if n.name in MULTI_ARG:
+            if len(a.args) != 2 or a.vararg or a.kwarg or a.kwonlyargs or a.posonlyargs:
+                continue
+        elif len(a.args) != 1 or a.vararg or a.kwarg or a.kwonlyargs or a.defaults or a.posonlyargs:
             continue
         stored = {x.id for x in ast.walk(n) if isinstance(x, ast.Name) and isinstance(x.ctx, ast.Store)}
-        free = {x.id for x in ast.walk(n) if isinstance(x, ast.Name)} - {a.args[0].arg} - stored - set(dir(__builtins__)) - {'math'}
+        free = {x.id for x in ast.walk(n) if isinstance(x, ast.Name)} - {x.arg for x in a.args} - stored - set(dir(__builtins__)) - {'math'}
         if free and n.name not in NEEDS_GLOBALS:
             continue
         yield n

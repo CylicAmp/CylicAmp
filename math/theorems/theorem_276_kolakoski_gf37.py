@@ -95,8 +95,9 @@ def order_mod(a, mod=37):
             return k
     raise ValueError(a)
 
-def legendre(a, p=37):
-    return pow(a, (p - 1) // 2, p)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import euler_criterion37 as legendre
 
 def kolakoski(n):
     """Generate first n terms of Kolakoski sequence A000002."""

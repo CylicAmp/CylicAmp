@@ -184,9 +184,9 @@ print(f"  255 mod 137      = {mod137} ∈ {orbit_of(mod137)}")
 # ── Part 8: QR/NQR parity of the factor triad ────────────────────────────────
 # Legendre symbols: (3|37), (5|37), (17|37)
 
-def legendre(a, p=37):
-    if a % p == 0: return 0
-    return 1 if pow(a, (p-1)//2, p) == 1 else -1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import legendre37 as legendre
 
 leg3  = legendre(3)
 leg5  = legendre(5)

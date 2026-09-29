@@ -107,9 +107,9 @@ assert 256 % 37 == 34 and orbit_of(256) == "D7"
 assert 257 % 37 == 35 and orbit_of(257) == "NQR17"
 
 # D7 and NQR17: are they QR-paired?
-def legendre(a, p=37):
-    if a % p == 0: return 0
-    return 1 if pow(a, (p-1)//2, p) == 1 else -1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import legendre37 as legendre
 
 assert all(legendre(x) == 1 for x in ORBITS["D7"])    # D7 is QR
 assert all(legendre(x) == -1 for x in ORBITS["NQR17"]) # NQR17 is NQR

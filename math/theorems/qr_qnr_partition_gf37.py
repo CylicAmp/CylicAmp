@@ -83,8 +83,9 @@ NEG_H   = {11, 27, 36}
 CASCADE = {8, 13, 24}
 
 
-def legendre(a, p):
-    return pow(a % p, (p - 1) // 2, p)  # 1 if QR, p-1 (≡-1) if QNR
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import euler_criterion as legendre
 
 
 def sieve(n):

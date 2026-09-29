@@ -144,8 +144,9 @@ _sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p 
 from functions import dr9 as dr
 
 
-def legendre(a, p):
-    return pow(a, (p - 1) // 2, p)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import euler_criterion as legendre
 
 
 def run_assertions():

@@ -79,8 +79,9 @@ SEED = {18, 24, 32}
 SA_ST_SEED = SA | ST | SEED
 
 
-def legendre(a, p):
-    return pow(a, (p - 1) // 2, p)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import euler_criterion as legendre
 
 
 def is_sovereign(x):

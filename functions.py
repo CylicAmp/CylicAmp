@@ -204,3 +204,41 @@ def orbit_of_q(x):
 def orbit_of_v1(x):
     """Earlier orbit names (ORBIT_NAMES_V1); '?' if unclassifiable."""
     return _orbit(x, lambda x, r: '?', ORBIT_NAMES_V1)
+
+
+# -- quadratic character ------------------------------------------------------
+#
+# Two different functions were both called `legendre` in the repo:
+#   * Euler's criterion as a raw residue: a^((p-1)/2) mod p, i.e. 0, 1 or p-1
+#     (NOT -1: a non-residue gives p-1);
+#   * the Legendre symbol itself: 0, 1 or -1.
+# Each comes with p required or p defaulting to 37, as the source copies had.
+
+def euler_criterion(a, p):
+    """a^((p-1)/2) mod p: 0, 1, or p-1 for prime p."""
+    return pow(a, (p - 1) // 2, p)
+
+
+def euler_criterion37(a, p=37):
+    """As euler_criterion, p defaulting to 37."""
+    return pow(a, (p - 1) // 2, p)
+
+
+def legendre(a, p):
+    """Legendre symbol (a/p): 0 if p | a, else 1 or -1 by Euler's criterion."""
+    if a % p == 0:
+        return 0
+    return 1 if pow(a, (p - 1) // 2, p) == 1 else -1
+
+
+def legendre37(a, p=37):
+    """As legendre, p defaulting to 37."""
+    if a % p == 0:
+        return 0
+    return 1 if pow(a, (p - 1) // 2, p) == 1 else -1
+
+
+def legendre_by_residue(a, p):
+    """0 if a^((p-1)/2) = 0, -1 if it is p-1, else 1 (agrees with legendre for prime p)."""
+    r = pow(a, (p - 1) // 2, p)
+    return 0 if r == 0 else -1 if r == p - 1 else 1
