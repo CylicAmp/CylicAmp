@@ -56,8 +56,9 @@ OMEGA = cmath.exp(2j * cmath.pi / 3)
 TAU   = 1e-10
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def eisenstein_norm(alpha, beta):
@@ -140,12 +141,7 @@ assert PHI_191 % 37 == 6              # 191 mod 37 = 6 (source of DR=6 coupling)
 assert dr(PHI_191)  == 2              # primitive root DR class
 assert dr(6)        == 6              # 191's F₃₇ residue is self-DR
 # 191 is prime
-def is_prime(n):
-    if n < 2: return False
-    if n % 2 == 0: return n == 2
-    for i in range(3, int(n**0.5)+1, 2):
-        if n % i == 0: return False
-    return True
+from functions import is_prime
 assert is_prime(PHI_191)
 
 # Resonance map: f(THz) = ψ · Φ₁₉₁ (symbolic; ψ=1 preserves the anchor exactly)

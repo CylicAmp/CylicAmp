@@ -28,10 +28,9 @@ import os
 # Core math
 # ---------------------------------------------------------------------------
 
-def digital_root(n: int) -> int:
-    if n <= 0:
-        return 9
-    return (n - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_pos as digital_root
 
 
 def eigenfunction(m: int, n: int, X: np.ndarray, Y: np.ndarray) -> np.ndarray:

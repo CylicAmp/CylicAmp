@@ -81,8 +81,9 @@ SOVEREIGN_ANCHORS  = {4, 9, 25, 30}
 SOVEREIGN_TARGETS  = {3, 12, 21, 30}
 ORBIT_11           = {11, 27, 36}
 
-def dr(n):
-    return (n - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_signed as dr
 
 ROW8 = [1, 8, 28, 56, 70, 56, 28, 8, 1]
 

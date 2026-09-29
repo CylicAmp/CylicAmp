@@ -172,8 +172,9 @@ PART IV — ANNIHILATION AND SURVIVAL
 """
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def f137(n):
@@ -204,9 +205,7 @@ assert f137(0) == 0
 
 # ═══ PART II: HOSE FLOW ══════════════════════════════════════════════════════
 
-def is_prime(n):
-    if n < 2: return False
-    return all(n % i != 0 for i in range(2, int(n**0.5)+1))
+from functions import is_prime
 
 
 def delta(n):

@@ -104,8 +104,9 @@ assert 12 * 4 == 48           # 12×4=48, DR(48)=3
 assert len(CYCLE) == 24
 
 # DR(48) = 3 (DR=3 equivalence class anchor {12,21,30,39,48})
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 assert dr(48) == 3
 assert all(dr(v) == 3 for v in [12, 21, 30, 39, 48])

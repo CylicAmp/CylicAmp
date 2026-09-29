@@ -126,9 +126,9 @@ print("B.  Cascade Chains")
 print("=" * 62)
 
 
-def digit_sum(x):
-    """Sum of decimal digits of integer x (x > 0)."""
-    return sum(int(d) for d in str(abs(x)))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import digit_sum_abs as digit_sum
 
 
 def digit_root(x):

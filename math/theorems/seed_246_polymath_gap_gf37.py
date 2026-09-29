@@ -70,15 +70,9 @@ def orbit_of(n):
     raise AssertionError(r)
 
 
-def is_prime(n):
-    if n < 2:
-        return False
-    d = 2
-    while d * d <= n:
-        if n % d == 0:
-            return False
-        d += 1
-    return True
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 
 def factor(n):

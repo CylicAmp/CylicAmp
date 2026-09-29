@@ -85,8 +85,9 @@ BY = {r: n for n, o in ORBITS.items() for r in o}
 IDX = {BY[pow(2, j, P)]: j for j in range(12)}
 
 
-def is_prime(m):
-    return m > 1 and all(m % k for k in range(2, int(m ** .5) + 1))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 
 def run():

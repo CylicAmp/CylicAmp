@@ -123,8 +123,9 @@ def orbit_of(n):
     return 'SEAM' if r == 0 else next(k for k, v in ORBITS.items() if r in v)
 
 
-def is_prime(m):
-    return m > 1 and all(m % k for k in range(2, int(m ** .5) + 1))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 
 def run():

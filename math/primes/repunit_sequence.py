@@ -16,11 +16,9 @@ Connection to 81-pair grid:
 import numpy as np
 
 
-def digital_root(n):
-    """Digital root: 0 for n=0, 1-9 for positive integers (= n mod 9, with 0 mapped to 9)."""
-    if n == 0:
-        return 0
-    return (n - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_signed as digital_root
 
 
 def repunit(n):

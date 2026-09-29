@@ -62,8 +62,9 @@ from collections import Counter
 from sympy import factorint
 
 
-def dr(x):
-    return 1 + (x - 1) % 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_signed as dr
 
 
 def v3(n):

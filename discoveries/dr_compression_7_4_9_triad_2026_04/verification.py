@@ -1,7 +1,6 @@
-def dr(n):
-    while n >= 10:
-        n = sum(int(d) for d in str(n))
-    return n if n != 0 else 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_iter as dr
 
 print("DR Compression – 7-4-9 Triad Verification\n")
 

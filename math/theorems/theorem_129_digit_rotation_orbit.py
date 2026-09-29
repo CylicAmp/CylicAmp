@@ -98,9 +98,9 @@ GROUP_A = [246, 624, 462]   # back-to-front rotation of 246
 GROUP_B = [642, 426, 264]   # back-to-front rotation of 642 (mirror of 246)
 
 
-def dr(n):
-    if n == 0: return 9
-    return (abs(n) - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9 as dr
 
 
 def run_assertions():

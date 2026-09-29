@@ -33,8 +33,9 @@ LoB_595: 74-HORIZON LOCK
   The 74-horizon collapses the 5×bridge back to the trinity start.
 """
 
-def digital_root(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as digital_root
 
 
 def apply_ramanujan_congruence(n):

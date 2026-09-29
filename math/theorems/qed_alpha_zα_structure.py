@@ -50,8 +50,9 @@ C          = 299_792_458        # speed of light m/s
 TAU        = 1e-6               # numerical tolerance
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 # ── Core α values ──────────────────────────────────────────────────────────

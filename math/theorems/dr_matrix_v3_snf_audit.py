@@ -48,7 +48,9 @@ DR_M_V3 = np.array([
 
 ROW_INDICES = [10, 2, 3, 4, 5, 6, 7, 8, 9]
 
-def dr(n): return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 SNF_V3        = smith_normal_form_integer(DR_M_V3.astype(object))
 RANK_Q        = int(np.linalg.matrix_rank(DR_M_V3))

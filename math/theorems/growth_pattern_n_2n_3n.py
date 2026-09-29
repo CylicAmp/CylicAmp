@@ -26,8 +26,9 @@ Alpha grid connection:
 """
 
 
-def dr(n):
-    return (n - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_signed as dr
 
 
 SOVEREIGN_ANCHORS  = {4, 9, 25, 30}

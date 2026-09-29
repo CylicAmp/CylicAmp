@@ -2,11 +2,9 @@ import itertools
 from collections import defaultdict
 
 
-def digital_root(n):
-    """Reduce a non-negative integer to its digital root (0 maps to 0)."""
-    if n == 0:
-        return 0
-    return 1 + (n - 1) % 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_signed as digital_root
 
 
 def build_full_lattice(d1, d2, d3, d4):

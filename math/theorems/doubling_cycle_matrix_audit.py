@@ -66,8 +66,9 @@ def dr(n):
     return r if r else 9
 
 
-def digit_sum(s):
-    return sum(int(c) for c in str(s))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import digit_sum
 
 
 # ── Raw strings ───────────────────────────────────────────────────────────────

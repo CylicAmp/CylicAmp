@@ -64,8 +64,9 @@ def orbit_137(start, steps=3, mod=37):
     return results
 
 
-def digital_root(n):
-    return 0 if n == 0 else 1 + (n - 1) % 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_signed as digital_root
 
 
 def multiplicative_order(a, p):

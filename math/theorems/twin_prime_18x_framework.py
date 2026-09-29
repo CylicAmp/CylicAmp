@@ -37,13 +37,9 @@ def orbit_of(x):
         if r in s: return n
     return "?"
 def f(x): return (26*x)%37
-def is_prime(n):
-    if n<2: return False
-    if n==2: return True
-    if n%2==0: return False
-    for i in range(3,int(n**0.5)+1,2):
-        if n%i==0: return False
-    return True
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 def dr(n):
     n=abs(n)
     while n>=10: n=sum(int(d) for d in str(n))

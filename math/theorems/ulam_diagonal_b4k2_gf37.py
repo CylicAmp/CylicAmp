@@ -45,19 +45,12 @@ BASIN_Y    = frozenset({17, 22, 35})
 PRIME_COUNT = 102204   # verified: primes of form 4k²+1, k=1..1,000,000
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_pos as dr
 
 
-def is_prime(n):
-    if n < 2: return False
-    if n == 2: return True
-    if n % 2 == 0: return False
-    i = 3
-    while i * i <= n:
-        if n % i == 0: return False
-        i += 2
-    return True
+from functions import is_prime
 
 
 # ── Verify small cases of B(k) ────────────────────────────────────────────────

@@ -105,8 +105,9 @@ def collapse(s):
     return total
 
 
-def digit_sum(s):
-    return sum(int(c) for c in s if c.isdigit())
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import digit_sum_str as digit_sum
 
 
 # ── String definitions ────────────────────────────────────────────────────────

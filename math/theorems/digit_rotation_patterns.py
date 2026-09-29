@@ -65,10 +65,9 @@ PARTITION_GROUPS = [
 ]
 
 
-def digital_root(n: int) -> int:
-    while n >= 10:
-        n = sum(int(d) for d in str(n))
-    return n
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_iter as digital_root
 
 
 def _rot90cw(g: List[List[int]]) -> List[List[int]]:

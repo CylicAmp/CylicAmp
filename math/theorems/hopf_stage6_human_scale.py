@@ -35,8 +35,9 @@ MU_STAGE6  = +0.3824                 # Stage 6: limit cycle (symmetric crossing)
 MU_HOPF    =  0.0                    # bifurcation threshold
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 # ── Scale domain ───────────────────────────────────────────────────────────

@@ -33,8 +33,9 @@ CEILING    = "54443333222211"
 RESONANCE8 = "11222233344345"   # perm #8
 
 
-def dr(n: int) -> int:
-    return 1 + (n - 1) % 9 if n > 0 else 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_pos as dr
 
 
 # ── Combinatorial core ─────────────────────────────────────────────────────────

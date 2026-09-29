@@ -114,21 +114,12 @@ THEOREM 6: CRT mod 333 structure of twin prime pairs.
 """
 
 
-def is_prime(n: int) -> bool:
-    if n < 2:
-        return False
-    if n == 2:
-        return True
-    if n % 2 == 0:
-        return False
-    for i in range(3, int(n**0.5) + 1, 2):
-        if n % i == 0:
-            return False
-    return True
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 
-def dr(n: int) -> int:
-    return (n - 1) % 9 + 1 if n > 0 else 0
+from functions import dr_pos as dr
 
 
 def run_verification() -> bool:

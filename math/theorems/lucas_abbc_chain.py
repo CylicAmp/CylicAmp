@@ -40,8 +40,9 @@ Errata in source document (do not propagate):
 """
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def lucas_seq(start, length):
@@ -76,11 +77,7 @@ assert dr(76) == 4   # L(9)
 assert dr(123) == 6  # L(10)
 
 # Both L(7)=29 and L(8)=47 are prime
-def is_prime(n):
-    if n < 2: return False
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0: return False
-    return True
+from functions import is_prime
 
 assert is_prime(29) and is_prime(47)
 

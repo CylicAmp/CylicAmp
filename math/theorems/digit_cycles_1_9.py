@@ -59,7 +59,9 @@ assert {4,8,9} & {3,6,9} == {9}   # Cycle C close
 
 # ── DIGIT SUMS ────────────────────────────────────────────────────────────────
 
-def dr(n): return 0 if n == 0 else 1+(n-1)%9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_signed as dr
 
 assert sum({2,5,6}) == 13 and dr(13) == 4
 assert sum({1,3,7}) == 11 and dr(11) == 2   # dr=2 = dr(137)

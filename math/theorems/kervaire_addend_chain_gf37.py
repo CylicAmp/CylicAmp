@@ -151,10 +151,9 @@ assert sum(ADDENDS) == 80 and 80 % P == TESLA_FLOW    # total ≡ TESLA_FLOW
 
 # ── Digital root sequence ─────────────────────────────────────────────────────
 
-def dr(n):
-    while n >= 10:
-        n = sum(int(c) for c in str(n))
-    return n
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_iter as dr
 
 DR_SEQ = [dr(ps) for ps in PARTIALS]
 assert DR_SEQ == [2, 6, 5, 3, 8, 2, 6, 8]

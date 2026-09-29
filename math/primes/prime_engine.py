@@ -37,11 +37,9 @@ from typing import Iterator, Tuple
 # Digital root
 # ---------------------------------------------------------------------------
 
-def digital_root(n: int) -> int:
-    """DR(n): 1-9 for n > 0, 9 for multiples of 9."""
-    if n <= 0:
-        raise ValueError("digital_root defined for n > 0")
-    return (n - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_strict as digital_root
 
 
 # ---------------------------------------------------------------------------

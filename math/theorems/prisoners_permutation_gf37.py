@@ -174,9 +174,9 @@ assert 37 <= 50                 # a 37-cycle is safe (within threshold)
 assert 37 % 37 == 0             # field prime maps to SEAM
 
 # π(100) = 25 ∈ SA
-def is_prime(n):
-    if n < 2: return False
-    return all(n % i != 0 for i in range(2, int(n**0.5)+1))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 pi_100 = sum(1 for p in range(2, 101) if is_prime(p))
 assert pi_100 == 25 and 25 in SOVEREIGN_ANCHORS

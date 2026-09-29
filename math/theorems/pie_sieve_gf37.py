@@ -96,8 +96,9 @@ SOVEREIGN_TARGETS  = {3, 12, 21, 30}
 CASCADE_BASE       = {8, 13, 24}
 ORBIT_11           = {11, 27, 36}
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 BASE = [2, 3, 5, 7]
 N = 100

@@ -24,8 +24,9 @@ def digital_root(n: int) -> int:
     return (n - 1) % 9 + 1
 
 
-def digit_sum(n: int) -> int:
-    return sum(int(d) for d in str(abs(n)))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import digit_sum_abs as digit_sum
 
 
 def build_orbit() -> list:

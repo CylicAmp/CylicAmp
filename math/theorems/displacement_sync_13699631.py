@@ -39,8 +39,9 @@ Dissonance (δ_Ω): right=99731 instead of 99631 — a perturbation of +100.
 from math import isqrt
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def is_prime(n):

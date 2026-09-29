@@ -50,19 +50,9 @@ def dr(n):
     return r if r else 9
 
 
-def is_prime(n):
-    if n < 2:
-        return False
-    if n < 4:
-        return True
-    if n % 2 == 0 or n % 3 == 0:
-        return False
-    k = 5
-    while k * k <= n:
-        if n % k == 0 or n % (k + 2) == 0:
-            return False
-        k += 6
-    return True
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 
 def prime_factors(n):

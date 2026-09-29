@@ -95,8 +95,9 @@ def dr(n):
     return 9 if r == 0 else r
 
 
-def digit_sum(n):
-    return sum(int(d) for d in str(abs(n)))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import digit_sum_abs as digit_sum
 
 
 def build_cosets():

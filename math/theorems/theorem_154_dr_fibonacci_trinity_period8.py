@@ -147,10 +147,9 @@ ORBITS = {
 TRINITY = frozenset({3, 6, 9})
 
 
-def dr(n):
-    if n == 0:
-        return 9
-    return (abs(n) - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9 as dr
 
 
 def orbit_of(v):

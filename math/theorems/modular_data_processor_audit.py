@@ -80,9 +80,9 @@ print("""
 """)
 
 # Find all primes p < 200 where (p-1)/2 is divisible by 6
-def is_prime(n):
-    if n < 2: return False
-    return all(n % k != 0 for k in range(2, int(n**0.5)+1))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 print(f"  {'p':>5}  {'center=(p-1)/2':>15}  {'center/6':>10}  {'integer?':>10}")
 print(f"  {'-'*50}")

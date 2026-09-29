@@ -120,14 +120,11 @@ VI. WHAT GF(37) ESTABLISHES
 ═══════════════════════════════════════════════════════════════
 """
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
-def is_prime(n):
-    if n < 2: return False
-    if n == 2: return True
-    if n % 2 == 0: return False
-    return all(n % i != 0 for i in range(3, int(n**0.5)+1, 2))
+from functions import is_prime
 
 def twin_pairs(limit):
     return [(p, p+2) for p in range(3, limit, 2) if is_prime(p) and is_prime(p+2)]

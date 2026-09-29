@@ -52,8 +52,9 @@ def dr(n):
 def repunit(k):
     return (10**k - 1) // 9
 
-def digit_sum(n):
-    return sum(int(c) for c in str(n))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import digit_sum
 
 SEQ = [
     1, 11, 12, 121, 212, 1221, 12121, 12321,

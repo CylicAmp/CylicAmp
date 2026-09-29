@@ -2,11 +2,9 @@ import itertools
 from collections import defaultdict
 
 
-def digital_root(n):
-    """Reduce a number to its digital root."""
-    while n >= 10:
-        n = sum(int(d) for d in str(n))
-    return n
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_iter as digital_root
 
 
 def build_full_lattice(d1, d2, d3, d4):

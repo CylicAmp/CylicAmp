@@ -67,7 +67,9 @@ def pair_sums(s):
     P = [int(s[0:2]), int(s[2:4]), int(s[4:6]), int(s[6:8])]
     return P[0]+P[3], P[1]+P[2]
 
-def dr(n): return 1 + (n-1)%9 if n>0 else 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_pos as dr
 
 
 # ── Pair sum verification ──────────────────────────────────────────────────────

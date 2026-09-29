@@ -26,8 +26,9 @@ LoB_605: SYSTEM QUIESCENCE
 """
 
 
-def digital_root(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as digital_root
 
 
 def execute_inversion():
