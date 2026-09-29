@@ -27,6 +27,7 @@ TARGETS = {
     'digital_root': ['dr', 'dr_signed', 'dr_pos', 'dr_strict', 'dr9', 'dr9_signed', 'dr9_pos', 'dr_iter', 'dr9_iter'],
     'digit_sum': ['digit_sum', 'digit_sum_abs', 'digit_sum_str'],
     'is_prime': ['is_prime'],
+    'rule30': ['rule30_step', 'rule30_ring', 'rule30_cell', 'rule30_cell_xor'],
     'sieve': ['sieve_flags', 'primes_upto', 'primes_upto_set'],
     'legendre': ['euler_criterion', 'euler_criterion37', 'legendre', 'legendre37', 'legendre_by_residue'],
     'orbit_of': ['orbit_of', 'orbit_of_next', 'orbit_of_assert', 'orbit_of_key',
@@ -41,13 +42,16 @@ TESTS = {
     'dr': INTS, 'digital_root': INTS, 'digit_sum': INTS,
     'is_prime': list(range(-50, 20001)) + [2 ** 31 - 1, (10 ** 4 + 7) ** 2, 10 ** 9 + 7],
     'orbit_of': list(range(-40, 400)) + [10 ** 12 + 5, None],
+    'rule30': list(range(-3, 600)) + [2 ** 40 + 12345]
+              + [(l, c, r) for l in range(3) for c in range(3) for r in range(3)]
+              + [(n, b) for n in range(0, 300) for b in (4, 6, 8, 12)],
     'sieve': list(range(-3, 300)) + [1000, 10007],
     'legendre': [(a, p) for p in (2, 3, 5, 7, 11, 13, 37, 73, 101) for a in range(-40, 120)]
                 + [(a, m) for m in (9, 15, 21, 25) for a in range(-5, 30)]
                 + [(a,) for a in range(-5, 80)] + [(10 ** 15 + 3, 37)],
 }
 # Targets whose copies take two arguments (possibly with a default).
-MULTI_ARG = {'legendre'}
+MULTI_ARG = {'legendre', 'rule30'}
 STR_TESTS = ['0', '7', '123', '999999', '10000000001']
 FLOAT_TESTS = [0.0, 3.0, 9.0, 12.0, 12.5, 3.7, 17.49, 17.5, -2.5, -9.0, 1e6 + 0.4]
 BOOTSTRAP = ('import sys as _sys, pathlib as _pl\n'
@@ -126,7 +130,7 @@ def candidate_defs(tree):
         if n.name not in TARGETS or counts[n.name] != 1 or n.decorator_list:
             continue
         if n.name in MULTI_ARG:
-            if len(a.args) != 2 or a.vararg or a.kwarg or a.kwonlyargs or a.posonlyargs:
+            if not 1 <= len(a.args) <= 3 or a.vararg or a.kwarg or a.kwonlyargs or a.posonlyargs:
                 continue
         elif len(a.args) != 1 or a.vararg or a.kwarg or a.kwonlyargs or a.defaults or a.posonlyargs:
             continue

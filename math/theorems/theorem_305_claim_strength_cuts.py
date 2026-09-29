@@ -177,8 +177,9 @@ def order_mod(a, p):
 
 # ─── Cut 1: the literal objects named above really are literal ──────────────
 
-def rule30(l, c, r):
-    return l ^ (c | r)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import rule30_cell_xor as rule30
 
 
 def rule90(l, c, r):

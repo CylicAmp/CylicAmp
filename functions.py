@@ -267,3 +267,36 @@ def primes_upto(n):
 def primes_upto_set(n):
     """Set of primes <= n."""
     return set(primes_upto(n))
+
+
+# -- Rule 30 ------------------------------------------------------------------
+#
+# new[i] = left XOR (center OR right). The copies named rule30 were three
+# different things; each is kept.
+
+def rule30_step(n):
+    """One Rule 30 step on the binary string of n (width = bit length, zero outside)."""
+    bits = list(map(int, bin(n)[2:]))
+    padded = [0] + bits + [0]
+    out = [padded[i - 1] ^ (padded[i] | padded[i + 1]) for i in range(1, len(padded) - 1)]
+    return int(''.join(map(str, out)), 2)
+
+
+def rule30_ring(n, bits=8):
+    """One Rule 30 step on n as a cyclic string of `bits` cells."""
+    s = format(n % (1 << bits), f'0{bits}b')
+    out = ''
+    for i in range(bits):
+        L, C, R = int(s[(i - 1) % bits]), int(s[i]), int(s[(i + 1) % bits])
+        out += str(L ^ (C | R))
+    return int(out, 2)
+
+
+def rule30_cell(l, c, r):
+    """New value of one cell from its neighbourhood, read off the rule number: (30 >> (4l+2c+r)) & 1."""
+    return 30 >> 4 * l + 2 * c + r & 1
+
+
+def rule30_cell_xor(l, c, r):
+    """l XOR (c OR r); equals rule30_cell on 0/1 inputs."""
+    return l ^ (c | r)

@@ -121,11 +121,9 @@ import sys as _sys, pathlib as _pl
 _sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
 from functions import is_prime
 
-def rule30(n):
-    bits = list(map(int, bin(n)[2:]))
-    padded = [0] + bits + [0]
-    out = [padded[i-1] ^ (padded[i] | padded[i+1]) for i in range(1, len(padded)-1)]
-    return int("".join(map(str, out)), 2)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import rule30_step as rule30
 
 # ── Part 1: Complete inverse pairing ──────────────────────────────────────────
 
