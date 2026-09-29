@@ -379,7 +379,7 @@ Your current branch holds 888 of the 1457.
 1	math/theorems/INDEX.md	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/ababab_convergence.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/abc_row_sequence.py	claude/add-torus-animation-6Ey5Z 
-1	math/theorems/abcabc_mod37_orbit.py	claude/add-torus-animation-6Ey5Z 
+1	math/lemmas/abcabc_mod37_orbit.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/adelic_valuation_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/adjacent_pair_sum_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/affine_causal_processes_gf37.py	claude/add-torus-animation-6Ey5Z 
@@ -476,7 +476,7 @@ Your current branch holds 888 of the 1457.
 1	math/theorems/data_ledger_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/dds_ca_digit_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/decimal_trade_extraction.py	claude/signature-obfuscation-audit-ZEoCd 
-1	math/theorems/decimal_trinity.py	claude/add-torus-animation-6Ey5Z 
+1	math/lemmas/decimal_trinity.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/decomposition_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/delta27_heisenberg_neutrino.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/descent_191_100_audit.py	claude/signature-obfuscation-audit-ZEoCd 
@@ -619,7 +619,7 @@ Your current branch holds 888 of the 1457.
 1	math/theorems/identity_cycle_sum_structure.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/index13_resonance_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/infinity_proof_roadmap.py	claude/signature-obfuscation-audit-ZEoCd 
-1	math/theorems/intersection_cycle_theorem.py	claude/add-torus-animation-6Ey5Z 
+1	math/lemmas/intersection_cycle_theorem.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/jacobi_theta_cascade_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/joy_framework_v25_2_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/joy_lob_45_6_correction_audit.py	claude/signature-obfuscation-audit-ZEoCd 
@@ -847,7 +847,7 @@ Your current branch holds 888 of the 1457.
 1	math/theorems/shell_octave_identity_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/sieve_eratosthenes_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/sieve_rank_audit.py	claude/signature-obfuscation-audit-ZEoCd 
-1	math/theorems/sigma3_eisenstein_gf37.py	claude/add-torus-animation-6Ey5Z 
+1	math/lemmas/sigma3_eisenstein_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/sine_map_class1_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/sliding_window_9cycle_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/smith_normal_form_z26.py	claude/signature-obfuscation-audit-ZEoCd 
@@ -1055,7 +1055,7 @@ Your current branch holds 888 of the 1457.
 1	math/theorems/theorem_280_matrix_dimension_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_281_147_258_369_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_282_admissibility_gf37.py	claude/add-torus-animation-6Ey5Z 
-1	math/theorems/theorem_283_negation_antipodal_gf37.py	claude/add-torus-animation-6Ey5Z 
+1	math/lemmas/theorem_283_negation_antipodal_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_284_operator_group_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_285_quotient_group_z12_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_286_subgroup_lattice_z12_gf37.py	claude/add-torus-animation-6Ey5Z 
@@ -1082,10 +1082,10 @@ Your current branch holds 888 of the 1457.
 1	math/theorems/theorem_307_seed_orbit_residue_breakdown_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_308_reversal_build_mod37_period_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_309_alternating_digit_swap_chain_gf37.py	claude/add-torus-animation-6Ey5Z 
-1	math/theorems/theorem_310_digit_chain_seam_gf37.py	claude/add-torus-animation-6Ey5Z 
+1	math/lemmas/theorem_310_digit_chain_seam_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_311_triad_lock_and_subgrid_map_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_312_repdigit_chain_complete_gf37.py	claude/add-torus-animation-6Ey5Z 
-1	math/theorems/theorem_313_add_nine_reversal_diagonal_gf37.py	claude/add-torus-animation-6Ey5Z 
+1	math/lemmas/theorem_313_add_nine_reversal_diagonal_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_314_twelve_double_closure_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_315_base_ten_block_and_cofactor_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/theorem_316_t120_seed_class_mod_333_gf37.py	claude/add-torus-animation-6Ey5Z 
@@ -1192,7 +1192,7 @@ Your current branch holds 888 of the 1457.
 1	math/theorems/twin_prime_chamber_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/twin_prime_consolidation.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/twin_prime_dr_convergence.py	claude/add-torus-animation-6Ey5Z 
-1	math/theorems/twin_prime_dr_pair.py	claude/add-torus-animation-6Ey5Z 
+1	math/lemmas/twin_prime_dr_pair.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/twin_prime_dr_sum_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/twin_prime_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/twin_prime_hl_audit.py	claude/signature-obfuscation-audit-ZEoCd 
@@ -1204,7 +1204,7 @@ Your current branch holds 888 of the 1457.
 1	math/theorems/twin_prime_structure.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/twin_prime_tripartite_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/two_digit_transition_gf37.py	claude/add-torus-animation-6Ey5Z 
-1	math/theorems/two_group_split.py	claude/add-torus-animation-6Ey5Z 
+1	math/lemmas/two_group_split.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/ulam_diagonal_b4k2_gf37.py	claude/add-torus-animation-6Ey5Z 
 1	math/theorems/ulam_quadratic_k5000_audit.py	claude/signature-obfuscation-audit-ZEoCd 
 1	math/theorems/ulam_tent_map_pf_audit.py	claude/signature-obfuscation-audit-ZEoCd 
@@ -1371,14 +1371,14 @@ Your current branch holds 888 of the 1457.
 9	cylicamp/viewer.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 9	math/primes/core.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 9	math/primes/display.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
-9	math/theorems/heartbeat_3cycle.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
+9	math/lemmas/heartbeat_3cycle.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 9	math/theorems/layer30_sovereign_matrix_entropy.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 9	math/theorems/medusa_137_resonance.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 9	math/theorems/medusa_guard.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 9	math/theorems/medusa_shield_jacobian.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 9	math/theorems/medusa_v3_sovereign.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 9	math/theorems/sovereign_binary_engine.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
-9	math/theorems/sovereign_fixed_point.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
+9	math/lemmas/sovereign_fixed_point.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 9	math/theorems/sovereign_identity.json	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 9	math/theorems/sovereign_qr_closure.py	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 9	security/reports/Board_Report_Node_0x1A2B3C_Obfuscation_20260412.md	claude/add-torus-animation-6Ey5Z claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
@@ -1429,7 +1429,7 @@ Your current branch holds 888 of the 1457.
 10	math/primes/verify_dr9_termination.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 10	math/primes/verify_local_confluence.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 10	math/theorems/37phi_dimensional_bridge.md	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
-10	math/theorems/cycle_partition_37.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
+10	math/lemmas/cycle_partition_37.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 10	math/theorems/dimensional_bridge.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 10	math/theorems/dr_algebra.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 10	math/theorems/eml_forensic_audit.md	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
@@ -1452,7 +1452,7 @@ Your current branch holds 888 of the 1457.
 10	math/theorems/theorem28_forensic_analysis.md	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 10	math/theorems/toroidal_projection.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 10	math/theorems/verify_dr9_termination.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
-10	math/theorems/verify_local_confluence.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
+10	math/lemmas/verify_local_confluence.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 10	math/theorems/xx_collapse_matrix.py	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 10	math/visualizations/ModalCrossingVisual.jsx	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 
 10	math/visualizations/UpgradedConsciousMathFramework.jsx	claude/add-torus-animation-6Ey5Z claude/signature-obfuscation-audit-ZEoCd claude/add-claude-documentation-otdq9 claude/verify-math-patterns-CnzDe claude/lattice-digital-root-B73jt claude/monomial-universe-ideals-wuhx40 claude/test-coverage-analysis-zg9iw0 claude/work-organization-access-y7riqg claude/modular-arithmetic-grid-sr0otx main 

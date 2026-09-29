@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# CLASS: THEOREM
+# CLASS: LEMMA
 """
 ================================================================================
 THEOREM 421: Twin Prime DR Pair Theorem — Perfect Tripartition by m mod 3

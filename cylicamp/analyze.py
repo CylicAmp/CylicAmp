@@ -12,6 +12,7 @@ _ROOT = os.path.join(_HERE, "..")
 sys.path.insert(0, _ROOT)
 sys.path.insert(0, os.path.join(_ROOT, "math", "primes"))
 sys.path.insert(0, os.path.join(_ROOT, "math", "theorems"))
+sys.path.insert(0, os.path.join(_ROOT, "math", "lemmas"))
 
 P = 37
 MULT = 26  # 137 mod 37

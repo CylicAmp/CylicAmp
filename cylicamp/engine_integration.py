@@ -32,6 +32,9 @@ from ulam_spiral import classify as ulam_classify
 _THEOREMS_DIR = os.path.join(_HERE, "..", "math", "theorems")
 if _THEOREMS_DIR not in sys.path:
     sys.path.insert(0, _THEOREMS_DIR)
+_LEMMAS_DIR = os.path.join(_HERE, "..", "math", "lemmas")
+if _LEMMAS_DIR not in sys.path:
+    sys.path.insert(0, _LEMMAS_DIR)
 
 from cascade_8_13_24 import build_cascade
 from medusa_v3_sovereign import medusa_v3_sovereign, ANCHORS, TARGETS

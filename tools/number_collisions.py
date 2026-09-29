@@ -13,7 +13,7 @@ import ast, re, pathlib, sys
 from collections import defaultdict
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-DIRS = ["math/theorems", "math/primes", "math/turbulence", "cylicamp"]
+DIRS = ["math/theorems", "math/lemmas", "math/primes", "math/turbulence", "cylicamp"]
 # a self-declaration is the FIRST line of the docstring, not a section label
 DECL = re.compile(r'^\s*(?:={3,}\s*)?(?:THEOREM|Theorem)\s+(\d{1,3})\b', re.M)
 

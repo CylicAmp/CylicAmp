@@ -102,10 +102,10 @@ After every run it saves a complete JSON to `pipeline_output.json` — this is t
 | 6 | `math/primes/ulam_spiral.py` | Ulam spiral through GF(37) classification |
 | 7 | `math/theorems/cascade_8_13_24.py` | Cascade {8,13,24} — 37 elements |
 | 8 | `math/theorems/medusa_v3_sovereign.py` | Sovereign LOCKED/GATED/PURGE classification |
-| 9 | `math/theorems/abcabc_mod37_orbit.py` | ABCABC orbit position |
+| 9 | `math/lemmas/abcabc_mod37_orbit.py` | ABCABC orbit position |
 | 10 | `math/theorems/lucas_abbc_chain.py` | Lucas sequence orbit intersection |
 | 11 | `math/theorems/sovereign_qr_closure.py` | Legendre symbol on orbit nodes |
-| 12 | `math/theorems/heartbeat_3cycle.py` | Heartbeat 3-cycle from seed residue |
+| 12 | `math/lemmas/heartbeat_3cycle.py` | Heartbeat 3-cycle from seed residue |
 | 13 | `cylicamp/provenance.py` | Provenance tracking — source of every claim |
 | 14 | `math/theorems/theorem_120/121` | T120/121 digit pair (0.007, 0.008) → seed orbit |
 

@@ -26,7 +26,7 @@ import time
 from concurrent.futures import ProcessPoolExecutor
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-DIRS = ["math/theorems", "math/primes", "math/turbulence", "cylicamp"]
+DIRS = ["math/theorems", "math/lemmas", "math/primes", "math/turbulence", "cylicamp"]
 STATE = ROOT / "tools" / "regression_state.json"
 SKIP = {"__init__.py", "CATEGORY_INDEX.py",
         "viewer.py"}   # viewer.py is an interactive REPL, not a check

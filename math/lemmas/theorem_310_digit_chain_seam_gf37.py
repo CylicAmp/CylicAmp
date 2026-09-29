@@ -1,4 +1,4 @@
-# CLASS: THEOREM
+# CLASS: LEMMA
 """
 Theorem 310: aba = 111a always hits SEAM, for every digit a
 Author: Michael Warren Song (CyclicAmp)

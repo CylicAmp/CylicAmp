@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# CLASS: THEOREM
+# CLASS: LEMMA
 """
 ================================================================================
 THEOREM 419: σ₃ Divisibility, Cube Roots of -1, and the Eisenstein Splitting

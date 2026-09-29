@@ -1,4 +1,4 @@
-# CLASS: THEOREM
+# CLASS: LEMMA
 """
 Sovereign Fixed Point Theorem
 

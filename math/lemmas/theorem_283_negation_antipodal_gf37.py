@@ -1,4 +1,4 @@
-# CLASS: THEOREM
+# CLASS: LEMMA
 """
 T283: Antipodal = negation in GF(37)
 

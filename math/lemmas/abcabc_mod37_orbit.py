@@ -1,4 +1,4 @@
-# CLASS: THEOREM
+# CLASS: LEMMA
 """
 ABCABC ≡ 2·ABC (mod 37): Full orbit analysis of Z37* via primitive root 2
 =========================================================================

@@ -40,10 +40,10 @@ FILES MAKING DANGLING CITATIONS (count each)
   2    math/theorems/cyclic_permutation_coset.py
   2    math/theorems/heartbeat_6step_chambers.py
   2    math/theorems/spectral_embedding_gf37.py
-  2    math/theorems/sigma3_eisenstein_gf37.py
+  2    math/lemmas/sigma3_eisenstein_gf37.py
   2    math/theorems/theorem_423_data_pipeline_correspondence_grade_gf37.py
   2    math/theorems/theorem_424_rewrite_certificate_ledger_gf37.py
-  2    math/theorems/twin_prime_dr_pair.py
+  2    math/lemmas/twin_prime_dr_pair.py
   2    math/theorems/selberg_maass_montgomery.py
   1    math/theorems/mws_framework_verified.py
   1    math/theorems/mws_pure_math_extract.py
@@ -56,7 +56,7 @@ FILES MAKING DANGLING CITATIONS (count each)
   1    math/theorems/period_999_2997.py
   1    math/theorems/reversal_ladder_2357.py
   1    math/theorems/theorem_278_twin_prime_structure_gf37.py
-  1    math/theorems/decimal_trinity.py
+  1    math/lemmas/decimal_trinity.py
   1    math/theorems/theorem_359_length_vs_digital_root.py
   1    math/theorems/three_block_ladder.py
   1    math/theorems/prime_ap_imaginary_unit.py

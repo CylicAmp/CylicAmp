@@ -1,4 +1,4 @@
-# CLASS: THEOREM
+# CLASS: LEMMA
 """
 Heartbeat Theorem: Universal 3-Cycle Under the 137/37 Map
 

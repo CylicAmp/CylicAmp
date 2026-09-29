@@ -3,7 +3,7 @@ import re, subprocess, sys
 from collections import Counter
 
 def scan(root="math/theorems"):
-    files = subprocess.run(["git", "ls-files", root],
+    files = subprocess.run(["git", "ls-files", root, "math/lemmas"],
                            capture_output=True, text=True).stdout.split()
     have = {int(m.group(1)) for f in files
             if (m := re.search(r"theorem_0*(\d+)", f))}

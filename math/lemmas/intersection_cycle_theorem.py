@@ -1,4 +1,4 @@
-# CLASS: THEOREM
+# CLASS: LEMMA
 """
 Intersection Cycle Theorem — GF(37)
 

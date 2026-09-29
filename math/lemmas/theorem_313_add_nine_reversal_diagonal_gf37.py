@@ -1,4 +1,4 @@
-# CLASS: THEOREM
+# CLASS: LEMMA
 """
 Theorem 313: n + 9 = rev(n) selects exactly the a-b = -1 diagonal
 Author: Michael Warren Song (CyclicAmp)
