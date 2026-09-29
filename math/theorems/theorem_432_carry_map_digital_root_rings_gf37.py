@@ -883,6 +883,15 @@ base b.
     dr_94(137) = 44 = (2, 13) has order 30, the maximum (contingent, not forced).
     26 = (2, 26) and 37 = (1, 6) have order 6; 10 = (1, 10) has order 15.
 
+(82) BASE 95 (m = 94 = 2 * 47, SQUAREFREE = F_2 x F_47). Two islands (2),(47).
+    Nilradical {0}. Four idempotents {0,1,47,48}. Units 46, CYCLIC (m = 2p). Zero
+    divisors 48. CARRY COMPLEMENT: no fixed point (b odd); one preserved coset
+    24+(47). DOUBLING: one step onto (2) = F_47 (identity 48 = (0, 1)); there
+    ord(2) = 23 (47 = 7 mod 8, so 2 is a QR), so the image is {0} plus two 23-cycles.
+    dr_95(137) = 43 = (1, -4) is a PRIMITIVE ROOT mod 94, order 46 (contingent).
+    37 = (1, 37) has order 23; 26 and 10 are even, hence zero divisors, though both
+    are primitive roots mod 47.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1797,6 +1806,13 @@ assert [r for r in range(m) if (1 - r) % m == r] == [47] and sum(1 for x in rang
 assert next(k for k in range(1, 99) if pow(2, k, m) == 1) == 10 and pow(2, 5, 31) == 1
 _o = lambda x: next(k for k in range(1, 99) if pow(x, k, m) == 1)
 assert 137 % m == 44 and _o(44) == 30 and _o(26) == 6 and _o(37) == 6 and _o(10) == 15
+
+# (82) base 95
+m = 94
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 47, 48] and not [r for r in range(m) if (1 - r) % m == r]
+assert {2 * x % m for x in range(m)} == set(range(0, m, 2)) and 48 * 2 % m == 2 and pow(2, 23, 47) == 1
+_o = lambda x, n=m: next(k for k in range(1, 99) if pow(x, k, n) == 1)
+assert 137 % m == 43 and _o(43) == 46 and _o(37) == 23 and _o(26, 47) == 46 and _o(10, 47) == 46
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
