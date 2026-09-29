@@ -901,6 +901,15 @@ base b.
     in GF(37) (7^3 = 343 = 18*19 + 1; contingent). 37 = (2, -1) has order 4; 10 is a
     zero divisor (5 | 10).
 
+(84) BASE 97 (m = 96 = 2^5 * 3, MIXED = Z/32 x F_3). Ten islands. Nilradical = (6),
+    16 elements (m/rad(m) = 96/6). Four idempotents {0,1,33,64}. Units 32 =
+    C2 x C8 x C2, max order 8. Zero divisors 64. CARRY COMPLEMENT: no fixed point
+    (b odd); one preserved coset, 2+(3) -- every 2-power ideal has 2a = 1 unsolvable.
+    DOUBLING: the longest collapse so far among these bases, v_2(96) = 5 steps, onto
+    (32) = {0,32,64} = F_3 (identity 64 = (0, 1)); there doubling is 32 <-> 64.
+    dr_97(137) = 41 = (9, 2) has order 4; 37 = (5, 1) has order 8, the maximum;
+    26 and 10 are even, hence zero divisors.
+
 FALSIFICATION: any assertion below failing.
 """
 import random
@@ -1828,6 +1837,16 @@ m = 95
 assert [x for x in range(m) if x * x % m == x] == [0, 1, 20, 76] and [r for r in range(m) if (1 - r) % m == r] == [48]
 _o = lambda x, n=m: next(k for k in range(1, 99) if pow(x, k, n) == 1)
 assert _o(2) == 36 and 137 % m == 42 and _o(42) == 36 and _o(26) == 3 and _o(37) == 4 and gcd(10, m) == 5
+
+# (84) base 97
+m = 96
+assert [x for x in range(m) if x * x % m == x] == [0, 1, 33, 64] and [x for x in range(m) if pow(x, m, m) == 0] == list(range(0, m, 6))
+_S = set(range(m))
+for _ in range(5):
+    _S = {2 * x % m for x in _S}
+assert _S == {0, 32, 64} and {2 * x % m for x in _S} == _S and 64 * 64 % m == 64 and not [r for r in range(m) if (1 - r) % m == r]
+_o = lambda x, n=m: next(k for k in range(1, 99) if pow(x, k, n) == 1)
+assert 137 % m == 41 and _o(41) == 4 and _o(37) == 8 and max(_o(u) for u in range(m) if gcd(u, m) == 1) == 8
 
 if __name__ == "__main__":
     print("T432 carry map + digital-root rings")
