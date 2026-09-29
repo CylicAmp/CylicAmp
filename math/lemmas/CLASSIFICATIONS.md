@@ -35,3 +35,25 @@ Current folder layout follows the reading method (13 files in `math/lemmas/`).
 | `verify_local_confluence.py` | THEOREM | LEMMA | math/lemmas |
 
 The other 224 files are THEOREM under all three methods.
+
+## Fourth method, from comparing the three (added 2026-09-29)
+
+**Reading + cited:** a lemma is a file the reading method calls a small single
+fact AND that another result file names (by filename or T-number; index and map
+files do not count). This joins the reading method's judgement with a check a
+machine can repeat. 7 lemmas:
+
+| File | Cited by |
+|---|---|
+| `abcabc_mod37_orbit.py` | 1: engine_integration.py |
+| `heartbeat_3cycle.py` | 2: engine_integration.py, theorem_316_t120_seed_class_mod_333_gf37.py |
+| `sigma3_eisenstein_gf37.py` | 1: theorem_424_rewrite_certificate_ledger_gf37.py |
+| `theorem_283_negation_antipodal_gf37.py` | 13: theorem_284_operator_group_gf37.py, theorem_285_quotient_group_z12_gf37.py, theorem_286_subgroup_lattice_z12_gf37.py, theorem_287_anomalous_curve_orbit_partition.py |
+| `theorem_310_digit_chain_seam_gf37.py` | 4: theorem_311_triad_lock_and_subgrid_map_gf37.py, theorem_312_repdigit_chain_complete_gf37.py, theorem_315_base_ten_block_and_cofactor_gf37.py, thread_session_connections.py |
+| `theorem_313_add_nine_reversal_diagonal_gf37.py` | 2: theorem_314_twelve_double_closure_gf37.py, theorem_315_base_ten_block_and_cofactor_gf37.py |
+| `twin_prime_dr_pair.py` | 2: test_prime_engine.py, twin_prime_tripartite_audit.py |
+
+The other 6 reading lemmas (`cycle_partition_37`, `two_group_split`,
+`decimal_trinity`, `intersection_cycle_theorem`, `sovereign_fixed_point`,
+`verify_local_confluence`) are named by no other result file, so "used as a
+step" is not shown for them. Folder layout unchanged.
