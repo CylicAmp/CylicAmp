@@ -6,7 +6,7 @@ Read this file at the start of every session. It tells you what this project is,
 
 ## What This Project Is
 
-The driving objects are **1/137** and **twin primes** (with Riemann zeta zeros as a third recurring thread). **GF(37)** is the lens: 137 mod 37 = 26, so the 137-map `f(n) = 26n mod 37` realizes 1/137's structure inside a 37-element field, and every twin-prime, Sophie-Germain, and zeta-zero check in this repo is read through that same field. GF(37) is the tool used throughout, not a separate subject pursued for its own sake. The full synthesis is in `SYNTHESIS.md` — read it before working on any math module.
+The driving objects are **1/137** and **twin primes** (with Riemann zeta zeros as a third recurring thread). **GF(37)** is the lens: 137 mod 37 = 26, so the 137-map `f(n) = 26n mod 37` realizes 1/137's structure inside a 37-element field, GF(37) is one tool used in the repo's modules. It is NOT applied to problems that do not involve it. The full synthesis is in `SYNTHESIS.md` — read it before working on any math module.
 
 The project is owned by the user. All discoveries, computations, and observations belong to them.
 
@@ -24,15 +24,15 @@ All development goes on this branch. Push here. Do not push to another branch wi
 
 The user brings math, observations, and code. The work is collaborative and rigorous.
 
-**Verify before committing.** Run the actual computation — use Python imports, check mod arithmetic, confirm connections to GF(37). If something doesn't check out, say so and show the discrepancy. If it checks out, commit it. No intermediate step of asking permission.
+**Verify before committing.** Run the actual computation — use Python imports, check mod arithmetic. If something doesn't check out, say so and show the discrepancy. If it checks out, commit it. No intermediate step of asking permission.
 
 **The pipeline_output.json is the user's independent check.** They verify in a separate environment. Your computation is one check, not the final word.
 
-**Connect new work to what is already computed** before or immediately after committing. Everything here connects through prime 37. Find the connection.
+**Do not force connections.** Check how new work relates to what is already computed, but do not hunt for a link to 37, 137, or any other constant. Report one only when the problem itself involves it. Treat each question on its own mathematical terms.
 
 **Speak plainly.** No padding, no emotional commentary, no fake warmth. The user is doing serious mathematical work — respond at that level. Document what the user says; don't interpret or reframe it.
 
-**Standing analysis for every theorem.** Every result value must be run through all four of:
+**Optional analysis — run ONLY when the user asks for it, or when the problem itself involves these objects.** Not a default for every result:
 1. **GF(37) prime set orbits** — classify every value mod 37 into one of the 12 named orbits
 2. **Riemann Hypothesis** — floor(γ_n) mod 37 orbit; direct zero floor matches
 3. **1/137** — 137 mod 37=26=MULT; 26⁻¹ mod 37=10∈IC; check ×137, ÷137, mod 137 for each value
@@ -202,7 +202,7 @@ T120/121 (0.007/0.008 → seed): s=3=DR(seed):True  m2*s=24=seed%37:True  m1+m2+
 
 | Symbol | Value | Role |
 |--------|-------|------|
-| The prime | 37 | everything connects through this |
+| The prime | 37 | modulus of the GF(37) modules |
 | 137 mod 37 | 26 | the 137-map multiplier |
 | ord₃₇(26) | 3 | all orbits are 3-cycles |
 | ord₃₇(2) | 36 | 2 is a primitive root mod 37 |
