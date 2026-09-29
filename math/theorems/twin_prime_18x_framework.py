@@ -30,12 +30,9 @@ ORBITS = {
     "SA_ST_A":{9,12,16},"NEG_H":{11,27,36},"C9":{14,29,31},
     "NQR17":{17,22,35},"SEED":{18,24,32},"SA_ST_B":{21,25,28},
 }
-def orbit_of(x):
-    r=x%37
-    if r==0: return "SEAM"
-    for n,s in ORBITS.items():
-        if r in s: return n
-    return "?"
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_q as orbit_of
 def f(x): return (26*x)%37
 import sys as _sys, pathlib as _pl
 _sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))

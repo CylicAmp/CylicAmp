@@ -99,8 +99,9 @@ BY = {r: n for n, o in ORBITS.items() for r in o}
 ANCHORS = {4, 9, 25, 30}
 
 
-def orbit_of(n):
-    return 'SEAM' if n % P == 0 else BY[n % P]
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_key as orbit_of
 
 
 def sigma(x, k=1):

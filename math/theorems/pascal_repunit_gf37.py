@@ -53,14 +53,9 @@ ORBITS = {
 }
 
 
-def orbit_of(n):
-    r = n % P
-    if r == 0:
-        return 'SEAM'
-    for name, s in ORBITS.items():
-        if r in s:
-            return name
-    raise AssertionError(r)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_assert as orbit_of
 
 
 def row(n):

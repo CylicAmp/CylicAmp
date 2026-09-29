@@ -22,6 +22,10 @@ behaviour its own copy had. The table in each docstring shows the difference.
     dr_iter               0    9   -5   -9    repeated digit sum; n < 10 returned as is
     dr9_iter              9    9   -5   -9    as dr_iter, but 0 gives 9
 
+The 12 orbits of x -> 26x mod 37 are defined once below (ORBITS). The repo
+used two naming schemes for the same 12 orbits; ORBIT_NAMES_V1 records the
+earlier names, so both vocabularies are tied to one partition.
+
 Built by tools/split_functions.py, which only swaps a file's copy for one of
 these when the copy's behaviour matches exactly on the tested inputs and the
 file's printed output is unchanged afterwards.
@@ -117,3 +121,86 @@ def is_prime(n):
         if n % i == 0:
             return False
     return True
+
+
+# -- the 12 orbits of x -> 26x on GF(37)* ------------------------------------
+#
+# The same partition appears under two naming schemes in the repo. ORBITS uses
+# the current names; ORBIT_NAMES_V1 gives the earlier name for each orbit.
+
+ORBITS = {
+    'IC':      {1, 10, 26},
+    'DARK_A':  {2, 15, 20},
+    'C3':      {3, 4, 30},
+    'CAS_EXT': {5, 13, 19},
+    'TESLA':   {6, 8, 23},
+    'D7':      {7, 33, 34},
+    'SA_ST_A': {9, 12, 16},
+    'NEG_H':   {11, 27, 36},
+    'C9':      {14, 29, 31},
+    'NQR17':   {17, 22, 35},
+    'SEED':    {18, 24, 32},
+    'SA_ST_B': {21, 25, 28},
+}
+
+ORBIT_NAMES_V1 = {
+    'IC': 'IC', 'DARK_A': 'DARK_A', 'C3': 'SOVEREIGN_SPIRAL', 'CAS_EXT': 'NQR_5',
+    'TESLA': 'TESLA_ORB', 'D7': 'D7', 'SA_ST_A': 'SA_ORB', 'NEG_H': 'ORBIT_11',
+    'C9': 'NQR_14', 'NQR17': 'NQR_17', 'SEED': 'SEED_ORB', 'SA_ST_B': 'OUTLIER_ORB',
+}
+
+_ORBIT_OF_RESIDUE = {r: name for name, s in ORBITS.items() for r in s}
+
+
+def _orbit(x, missing, names=None):
+    r = x % 37
+    if r == 0:
+        return 'SEAM'
+    name = _ORBIT_OF_RESIDUE.get(r)
+    if name is None:                       # only for inputs like 3.5
+        return missing(x, r)
+    return names[name] if names else name
+
+
+def _raise(exc):
+    def f(x, r):
+        raise exc(x)
+    return f
+
+
+# The variants differ only on inputs that are not whole numbers (e.g. 3.5);
+# on integers they all agree. Each keeps the fallback its source copies had.
+
+def orbit_of(x):
+    """Orbit name of x mod 37 ('SEAM' for 0); ValueError if unclassifiable."""
+    return _orbit(x, _raise(ValueError))
+
+
+def orbit_of_next(x):
+    """As orbit_of; StopIteration if unclassifiable."""
+    return _orbit(x, _raise(StopIteration))
+
+
+def orbit_of_assert(x):
+    """As orbit_of; AssertionError if unclassifiable."""
+    return _orbit(x, _raise(AssertionError))
+
+
+def orbit_of_key(x):
+    """As orbit_of; KeyError if unclassifiable."""
+    return _orbit(x, _raise(KeyError))
+
+
+def orbit_of_unknown(x):
+    """As orbit_of; 'UNKNOWN' if unclassifiable."""
+    return _orbit(x, lambda x, r: 'UNKNOWN')
+
+
+def orbit_of_q(x):
+    """As orbit_of; '?' if unclassifiable."""
+    return _orbit(x, lambda x, r: '?')
+
+
+def orbit_of_v1(x):
+    """Earlier orbit names (ORBIT_NAMES_V1); '?' if unclassifiable."""
+    return _orbit(x, lambda x, r: '?', ORBIT_NAMES_V1)

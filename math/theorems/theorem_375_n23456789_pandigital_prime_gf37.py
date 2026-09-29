@@ -92,12 +92,9 @@ ORBITS = {
     "SA_ST_B": {21, 25, 28},
 }
 
-def orbit_of(n: int) -> str:
-    v = n % 37
-    for name, s in ORBITS.items():
-        if v in s:
-            return name
-    return "UNKNOWN"
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_unknown as orbit_of
 
 import sys as _sys, pathlib as _pl
 _sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))

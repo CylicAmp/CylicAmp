@@ -242,9 +242,9 @@ ORBITS = {
 }
 
 
-def orbit_of(n):
-    r = n % 37
-    return 'SEAM' if r == 0 else next(k for k, v in ORBITS.items() if r in v)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_next as orbit_of
 
 
 def composites(limit):

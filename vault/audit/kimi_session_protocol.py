@@ -91,11 +91,9 @@ STATUS_ORBIT = {
 }
 
 
-def orbit_of(v: int) -> str:
-    v = v % P
-    if v == 0:
-        return 'SEAM'
-    return next((name for name, s in ORBITS.items() if v in s), '?')
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_v1 as orbit_of
 
 
 import sys as _sys, pathlib as _pl

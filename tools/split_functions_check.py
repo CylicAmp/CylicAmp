@@ -35,7 +35,6 @@ plan = json.load(open(plan_path))
 files = sorted({e['file'] for e in plan})
 a, b = os.path.join(scratch, 'before'), os.path.join(scratch, 'after')
 copy_repo(a)
-os.remove(os.path.join(a, 'functions.py'))          # baseline must not see the new module
 copy_repo(b)
 sys.path.insert(0, ROOT)
 import importlib.util

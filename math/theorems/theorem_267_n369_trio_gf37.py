@@ -71,12 +71,9 @@ ANTIPODAL = {
     "TESLA":"C9","C9":"TESLA","SA_ST_A":"SA_ST_B","SA_ST_B":"SA_ST_A",
 }
 
-def orbit_of(x):
-    r = x % 37
-    if r == 0: return "SEAM"
-    for name, s in ORBITS.items():
-        if r in s: return name
-    raise ValueError(x)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of
 
 def dr(n):
     n = abs(int(n))

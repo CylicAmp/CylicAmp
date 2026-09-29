@@ -27,11 +27,18 @@ TARGETS = {
     'digital_root': ['dr', 'dr_signed', 'dr_pos', 'dr_strict', 'dr9', 'dr9_signed', 'dr9_pos', 'dr_iter', 'dr9_iter'],
     'digit_sum': ['digit_sum', 'digit_sum_abs', 'digit_sum_str'],
     'is_prime': ['is_prime'],
+    'orbit_of': ['orbit_of', 'orbit_of_next', 'orbit_of_assert', 'orbit_of_key',
+                 'orbit_of_unknown', 'orbit_of_q', 'orbit_of_v1'],
 }
+# Targets whose copies read file-level tables (orbit_of reads ORBITS, P): the
+# copy is evaluated with the file's own top-level constants, built by running
+# only its side-effect-free top-level assignments.
+NEEDS_GLOBALS = {'orbit_of'}
 INTS = list(range(-500, 5001)) + [10 ** k + j for k in range(5, 40) for j in (-1, 0, 1)]
 TESTS = {
     'dr': INTS, 'digital_root': INTS, 'digit_sum': INTS,
     'is_prime': list(range(-50, 20001)) + [2 ** 31 - 1, (10 ** 4 + 7) ** 2, 10 ** 9 + 7],
+    'orbit_of': list(range(-40, 400)) + [10 ** 12 + 5, None],
 }
 STR_TESTS = ['0', '7', '123', '999999', '10000000001']
 FLOAT_TESTS = [0.0, 3.0, 9.0, 12.0, 12.5, 3.7, 17.49, 17.5, -2.5, -9.0, 1e6 + 0.4]
@@ -63,6 +70,42 @@ def py_files():
                 yield p
 
 
+SAFE_CALLS = {'set', 'frozenset', 'dict', 'range', 'sorted', 'list', 'tuple', 'len', 'sum', 'pow',
+              'zip', 'enumerate', 'int', 'min', 'max', 'abs', 'reversed', 'map', 'filter', 'any', 'all', 'str'}
+
+
+def _side_effect_free(node):
+    for c in ast.walk(node):
+        if isinstance(c, ast.Call):
+            f = c.func
+            if isinstance(f, ast.Name) and f.id in SAFE_CALLS:
+                continue
+            if isinstance(f, ast.Attribute) and f.attr in ('items', 'keys', 'values', 'union', 'copy'):
+                continue
+            return False
+        if isinstance(c, ast.Lambda):
+            return False
+    return True
+
+
+def file_constants(tree, path):
+    g = {'math': math}
+    for n in tree.body:
+        if isinstance(n, (ast.Import, ast.ImportFrom)):
+            mods = [a.name for a in n.names] if isinstance(n, ast.Import) else [n.module or '']
+            if all(m.split('.')[0] in ('math', 'collections', 'itertools', 'functools', 'fractions') for m in mods):
+                try:
+                    exec(compile(ast.Module([n], []), path, 'exec'), g)
+                except Exception:
+                    pass
+        elif isinstance(n, (ast.Assign, ast.AnnAssign)) and _side_effect_free(n):
+            try:
+                exec(compile(ast.Module([n], []), path, 'exec'), g)
+            except Exception:
+                pass
+    return g
+
+
 def candidate_defs(tree):
     tops = [n for n in tree.body if isinstance(n, ast.FunctionDef)]
     counts = {}
@@ -76,7 +119,7 @@ def candidate_defs(tree):
             continue
         stored = {x.id for x in ast.walk(n) if isinstance(x, ast.Name) and isinstance(x.ctx, ast.Store)}
         free = {x.id for x in ast.walk(n) if isinstance(x, ast.Name)} - {a.args[0].arg} - stored - set(dir(__builtins__)) - {'math'}
-        if free:
+        if free and n.name not in NEEDS_GLOBALS:
             continue
         yield n
 
@@ -95,7 +138,7 @@ def plan():
             for arg in n.args.args:
                 arg.annotation = None
             fdef = ast.FunctionDef(name='F', args=n.args, body=body, decorator_list=[], returns=None, type_params=[])
-            g = {'math': math}
+            g = file_constants(tree, p) if n.name in NEEDS_GLOBALS else {'math': math}
             try:
                 exec(ast.unparse(ast.fix_missing_locations(ast.Module(body=[fdef], type_ignores=[]))), g)
             except Exception:

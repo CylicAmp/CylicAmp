@@ -31,12 +31,9 @@ ORBITS = {
 QR_ORBITS  = {"C3", "D7", "IC", "NEG_H", "SA_ST_A", "SA_ST_B"}
 NQR_ORBITS = {"C9", "CAS_EXT", "DARK_A", "NQR17", "SEED", "TESLA"}
 
-def orbit_of(x):
-    r = x % 37
-    if r == 0: return "SEAM"
-    for name, s in ORBITS.items():
-        if r in s: return name
-    raise ValueError(x)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of
 
 def f(x): return (26 * x) % 37
 
