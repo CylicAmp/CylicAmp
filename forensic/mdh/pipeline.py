@@ -15,6 +15,7 @@ import json
 
 from .branching import maximum_branching
 from .jcs import CanonicalizationError, canonical_sha256, canonicalize
+from . import signatures
 
 SCHEMA_VERSION = "mdh-record/1"
 STATE_PRECEDENCE = ["QUARANTINED", "UNRESOLVED", "AMBIGUOUS", "VERIFIED", "CANDIDATE", "SINGLETON"]
@@ -78,7 +79,7 @@ class Deframer:
 
 # -- Stage 2: normalize ---------------------------------------------------------
 
-def normalize(frames, source_id):
+def normalize(frames, source_id, keyring=None):
     events, diags = [], []
     seen = {}
     for fr in frames:
@@ -119,7 +120,17 @@ def normalize(frames, source_id):
             "source_ref": ref,
             "certainty": 1.0 if (t_ok and q_ok) else (0.5 if t_ok else 0.0),
             "duplicate": False,
+            "sig_state": None,
+            "kid": None,
         }
+        if keyring is not None:                                 # Stage 2 signatures
+            try:
+                ev["sig_state"], ev["kid"] = signatures.check(obj, source_id, keyring)
+            except CanonicalizationError:
+                ev["sig_state"], ev["kid"] = "INVALID_SIGNATURE", None
+            cap = {"SIGNED_VALID": 1.0, "UNSIGNED": 0.5, "UNTRUSTED_KEY": 0.25,
+                   "REVOKED_KEY": 0.25, "INVALID_SIGNATURE": 0.0}[ev["sig_state"]]
+            ev["certainty"] = min(ev["certainty"], cap)
         if ev["event_id"] in seen:
             ev["duplicate"] = True
             seen[ev["event_id"]]["duplicate"] = True
@@ -233,19 +244,24 @@ def assign_states(events, selected, ambiguous_targets, integrity_ok):
             blocking.append("SOURCE_INTEGRITY_FAILURE")
         if any(events[i]["duplicate"] for i in comp):
             blocking.append("DUPLICATE_EVENT_ID")
+        blocking += [f"INVALID_SIGNATURE:{events[i]['event_id']}" for i in comp
+                     if events[i]["sig_state"] == "INVALID_SIGNATURE"]
+        signed_mode = any(events[i]["sig_state"] is not None for i in comp)
+        all_signed = all(events[i]["sig_state"] == "SIGNED_VALID" for i in comp)
         missing = [events[i]["event_id"] for i in comp if events[i]["t_state"] == "MISSING"]
         dangling = [events[i]["event_id"] for i in comp
                     if events[i]["parent"] is not None and events[i]["parent"] not in known]
         amb = [events[i]["event_id"] for i in comp if i in ambiguous_targets]
         if blocking:
-            state, rule = "QUARANTINED", "integrity or identity failure"
+            state, rule = "QUARANTINED", "integrity, identity or signature failure"
         elif missing or dangling:
             state, rule = "UNRESOLVED", "missing timestamp or dangling reference"
             blocking += [f"MISSING_TIMESTAMP:{x}" for x in missing] + [f"DANGLING_PARENT:{x}" for x in dangling]
         elif amb:
             state, rule = "AMBIGUOUS", "equal-weight competing in-edge"
-        elif cedges and all(e["evidence"] == "REFERENCE" for e in cedges):
-            state, rule = "VERIFIED", "all selected edges are explicit references"
+        elif cedges and all(e["evidence"] == "REFERENCE" for e in cedges) and (not signed_mode or all_signed):
+            state, rule = "VERIFIED", "all selected edges are explicit references" + (
+                " and every event carries a valid signature" if signed_mode else "")
         elif cedges:
             state, rule = "CANDIDATE", "selected edges include correlation evidence"
         else:
@@ -268,14 +284,14 @@ def assign_states(events, selected, ambiguous_targets, integrity_ok):
 
 # -- Stage 6: audit emission ----------------------------------------------------
 
-def reconstruct(raw_chunks, source_id, max_horizon=None):
+def reconstruct(raw_chunks, source_id, max_horizon=None, keyring=None):
     """Run all six stages. raw_chunks: iterable of bytes. Returns (record, canonical_text)."""
     d = Deframer(source_id)
     for c in raw_chunks:
         d.feed(c)
     tail = d.finish()
     source_hash = sha256(bytes(d.raw))
-    events, diags = normalize(d.frames, source_id)
+    events, diags = normalize(d.frames, source_id, keyring)
     integrity_ok = not any(x["classification"] == "HASH_MISMATCH" for x in diags)
     edges = candidate_edges(events, max_horizon)
     selected, alternatives, amb = optimize(events, edges)
@@ -284,12 +300,14 @@ def reconstruct(raw_chunks, source_id, max_horizon=None):
         "schema": SCHEMA_VERSION,
         "source_id": source_id,
         "source_bytes_sha256": source_hash,
-        "constraints": {"max_horizon": max_horizon, "cross_source_ties": "rejected"},
+        "constraints": {"max_horizon": max_horizon, "cross_source_ties": "rejected"}
+        | ({"keyring_sha256": signatures.keyring_fingerprint(keyring)} if keyring is not None else {}),
         "tail": tail,
         "frames": [{k: f[k] for k in ("frame_id", "offset", "length", "sha256")} for f in d.frames],
         "diagnostics": diags,
         "events": [{"vertex_id": _vid(ev, i), "event_id": ev["event_id"], "t": ev["t"], "t_state": ev["t_state"],
                     "q": ev["q"], "certainty": ev["certainty"], "source_ref": ev["source_ref"]}
+                   | ({"signature": {"state": ev["sig_state"], "key_id": ev["kid"]}} if keyring is not None else {})
                    for i, ev in enumerate(events)],
         "edges": [{k: e[k] for k in ("edge_id", "evidence", "weight", "score", "classification")}
                   | {"u": _vid(events[e["u"]], e["u"]), "v": _vid(events[e["v"]], e["v"])}

@@ -2,7 +2,10 @@
 Returns a list of violations; an empty list means the record passes."""
 import hashlib
 
+import json
+
 from .jcs import CanonicalizationError, canonical_sha256
+from . import signatures
 from .pipeline import SCHEMA_VERSION, STATE_PRECEDENCE
 
 REQUIRED = {"schema": str, "source_id": str, "source_bytes_sha256": str, "constraints": dict,
@@ -11,7 +14,7 @@ REQUIRED = {"schema": str, "source_id": str, "source_bytes_sha256": str, "constr
             "certainty_limit": (int, float), "optimizer_status": str, "audit_manifest": dict}
 
 
-def validate(rec, raw_bytes=None):
+def validate(rec, raw_bytes=None, keyring=None):
     v = []
     if rec.get("status") == "QUARANTINED":
         if not rec.get("blocking_conditions"):
@@ -90,6 +93,25 @@ def validate(rec, raw_bytes=None):
         v.append("states do not cover every event exactly once")
     if rec["certainty_limit"] > min([s["certainty_limit"] for s in rec["states"]], default=1.0):
         v.append("record certainty exceeds its weakest component")
+    # signatures: every claimed state must be what re-verification gives
+    if keyring is not None:
+        if rec["constraints"].get("keyring_sha256") != signatures.keyring_fingerprint(keyring):
+            v.append("record was built with a different keyring")
+        elif raw_bytes is not None:
+            for e in rec["events"]:
+                r = e["source_ref"]
+                obj = json.loads(raw_bytes[r["byte_offset"]:r["byte_offset"] + r["byte_length"]])
+                try:
+                    real, _ = signatures.check(obj, rec["source_id"], keyring)
+                except CanonicalizationError:
+                    real = "INVALID_SIGNATURE"
+                claimed = e.get("signature", {}).get("state")
+                if claimed != real:
+                    v.append(f"event {e['vertex_id']} claims signature {claimed}, re-verification gives {real}")
+        for s in rec["states"]:
+            if s["state"] == "VERIFIED" and any(ev[x].get("signature", {}).get("state") != "SIGNED_VALID"
+                                                for x in s["event_refs"]):
+                v.append(f"{s['state_record_id']} VERIFIED with an event lacking a valid signature")
     # canonical hash (AT-14, AT-16)
     body = {k: x for k, x in rec.items() if k != "audit_manifest"}
     try:

@@ -6,7 +6,8 @@ component states → canonical audit record (`MDHRecord`).
 
 ```
 python3 -m forensic.mdh.cli forensic/mdh/sample.ndjson --source-id demo
-python3 -m pytest forensic/mdh -q          # 24 tests
+python3 -m pytest forensic/mdh -q          # 42 tests
+python3 -m forensic.mdh.cli events.ndjson --source-id plant-a --keyring keys.json   # with signatures
 ```
 
 ## Stages
@@ -48,3 +49,27 @@ provenance, changed field, unknown state).
 - Event certainty: 1.0 with `t` and `q`, 0.5 with `t` only, 0 without `t`.
 - Ambiguity is detected locally (a competing admissible in-edge of equal
   weight), not by enumerating every optimal branching.
+
+## Signatures (Stage 2 extension, `signatures.py`)
+
+With `--keyring`, every event is checked for an Ed25519 signature (fields `kid`,
+`sig`). The signed bytes are `"mdh-event-v1\0" + source_id + "\0" + JCS(event
+without sig)`: a signature cannot be moved to another event, another key id or
+another source, and whitespace or key order in the file does not matter.
+
+| Signature state | Effect |
+|---|---|
+| SIGNED_VALID | none; required for VERIFIED when a keyring is used |
+| UNSIGNED | certainty capped at 0.5; blocks VERIFIED (component becomes CANDIDATE) |
+| UNTRUSTED_KEY, REVOKED_KEY | certainty capped at 0.25 |
+| INVALID_SIGNATURE | certainty 0, component QUARANTINED |
+
+Only Ed25519 (via the `cryptography` library). The validator re-verifies every
+claimed signature state against the raw bytes and rejects records built with a
+different keyring. Tests use real keys: tampered value, wrong key, unknown and
+revoked keys, unsigned event, signature copied to another event, signature from
+another source, swapped key id, five malformed signatures, and a verifier that
+accepts everything (the validator catches it). Without `--keyring` the output is
+unchanged from before.
+
+Still true: a signature proves which key signed, not that the signer told the truth.
