@@ -12,6 +12,21 @@ for some k.
 
 Example: 130 has smallest divisors 1, 2, 5, 10, and 1 + 4 + 25 + 100 = 130.
 
+## Prior work
+
+This question is OEIS sequence **A185584**, "Numbers equal to the sum of the
+squares of their first k divisors for some k" (Claudio Meller, 2011; extended
+by Charles R Greathouse IV, Donovan Johnson and others, with a new term added
+24 September 2026). It lists 19 terms up to 9335069854188787800.
+
+All 19 check out here. Ten of them are members of the family below; nine are
+not (1, 130, 148480, 3039520, 4172437680, 5788838100, 38341734200,
+343869932366333100 and 5447947283895097800).
+
+The family list here agrees with every OEIS term in the overlap: exactly the
+same 10 family members up to 9.34 × 10¹⁸. It then continues to
+n ≈ 6.0 × 10⁴³, adding 577 family members beyond the published range.
+
 ## Known solutions below 10⁹ (all k)
 
 | n | k | factorization |
@@ -87,8 +102,8 @@ The largest member is m = 9933475307461748064000, with τ(m) = 103680.
 ## What is open
 
 - **Whether the family is finite.** No finite search can settle this.
-- **How many solutions lie outside the family.** Below 10⁹ three of the
-  four solutions (130, 148480, 3039520) are not family members.
+- **How many solutions lie outside the family.** At least nine are known
+  (see *Prior work*). This write-up does not search for them above 10⁹.
 - **One sub-case needs a statement of odd-perfect-number type.** Some members
   would have m = 108·s², with gcd(s, 6) = 1. Such members exist only if
   s² divides 1435·σ₂(s²). The case where s is a power of a single prime is
