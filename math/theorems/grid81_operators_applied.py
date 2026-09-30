@@ -16,7 +16,8 @@ prime types applied to every cell.
  7. Row and column sums: sum_c G = 81r + 45, sum_r G = 324 + 9c.
 
 AXIOMS: every result above follows from three.
-  A1. 10 = 1 (mod 9), so dr(n) = n mod 9 with representatives 1..9.
+  A1. 10 = 1 (mod 9), so dr(n) = n mod 9 with representatives 1..9, for n >= 1
+      (the formula 1 + (n-1) mod 9 gives 9 at n = 0, where the digit sum is 0).
       (This makes the "sum collapse" and the "mod-9 collapse" one axiom. The
       grid's column index runs 1..9, so it fixes the convention: residue 0 is
       column 9.)
@@ -35,14 +36,16 @@ CONNECTIONS (each asserted below)
   - prime_gap_dr_audit: dr(n + g) = dr(dr(n) + dr(g)) for all n, g. Results 4-6
     are this rule with g = 2, doubling-plus-1, and g = 6.
   - T336 / T433 part 14 (contrast): mod 9 restricts twin primes to 3 of the 9
-    columns; mod 37 restricts them to nothing (35 of the 36 nonzero residues
-    occur). Mod 9 carries the mod-3 information that A3 uses; mod 37 does not.
+    columns (excludes 6 of 9); mod 37 excludes only 1 of its 36 nonzero residues
+    (p = 35, since then 37 | p + 2). Mod 9 carries the mod-3 information that A3
+    uses; mod 37 carries almost none.
     That is why T336's orbit alignment is null while the grid's columns are not.
 
   - prime_engine.py (math/primes): where the grid stops separating primes from
     composites (it tracks only the prime 3; first odd composite in an allowed
     column is 25), prime_engine hands off to deterministic Miller-Rabin with
-    witnesses 2..37 (exact below 3.3e24). Checked: agrees with a sieve on every
+    witnesses 2..41 (exact below 3.3e24; with 2..37 only it was exact below
+    3.2e23 and called 318665857834031151167461 prime -- fixed 2026-09-30). Checked: agrees with a sieve on every
     n <= 10^6. Same shape as T431's handoff: fixed residue filter, then a check
     that adapts to each number.
 
@@ -90,7 +93,7 @@ for p in TW:
     tri.setdefault(((p + 1) // 6) % 3, set()).add((dr(p), dr(p + 2)))
 assert tri == {1: {(5, 7)}, 2: {(2, 4)}, 0: {(8, 1)}}                                    # T421
 assert all(dr(n + g) == dr(dr(n) + dr(g)) for n in range(1, 500) for g in range(1, 200))  # prime_gap_dr_audit
-assert sorted({dr(p) for p in TW}) == [2, 5, 8] and len({p % 37 for p in TW}) == 35     # T336 contrast
+assert sorted({dr(p) for p in TW}) == [2, 5, 8] and set(range(1, 37)) - {p % 37 for p in TW} == {35}   # T336 contrast
 
 # grid falls off at 25; prime_engine picks up there
 assert [n for n in range(3, 60, 2) if dr(n) not in (3, 6, 9) and not isprime(n)][:3] == [25, 35, 49]
@@ -98,6 +101,8 @@ import os as _os
 _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "primes"))
 import prime_engine as _pe
 assert all(_pe.is_prime(n) == isprime(n) for n in range(0, 20001))
+assert _pe.is_prime(318665857834031151167461) is False          # psi_12, fooled the old 12-witness test
+assert dr(0) == 9 and sum(int(d) for d in str(0)) == 0           # A1 needs n >= 1
 
 if __name__ == "__main__":
     print("grid81: all assertions pass;", len(P), "primes; twin column moves", sorted({(dr(p), dr(q)) for p, q in twins}))
