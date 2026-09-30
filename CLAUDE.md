@@ -32,6 +32,8 @@ The user brings math, observations, and code. The work is collaborative and rigo
 
 **Save every verified result to the repo in the same turn.** Anything checked in chat — audits of supplied material, corrections, derivations, verdicts — goes into a runnable file with assertions and is committed and pushed before the reply ends. Nothing verified may exist only in chat.
 
+**Keep the skills current.** When a session uses a method that is not yet a skill in `.claude/skills/`, write it as one; when a skill proves incomplete or wrong in use, update it in the same turn, with the example that exposed it. Skills record how the owner's work is done.
+
 **Repository decisions are Claude's job.** The user does the mathematics and has said plainly that they do not know GitHub and do not want to be asked about it. Decide file layout, branches, merges, cleanup and tooling from the evidence, do it, verify it, and report what was done. Ask only about the mathematics.
 
 **No statements about the user.** The user's standing instruction, repeated many times: do not make statements about the user — their feelings, state, pain, stress, or mental health — and do not use "I want / I hear / I'm here" statements. Respond to what the user says about the work and the tool, with actions and facts.
