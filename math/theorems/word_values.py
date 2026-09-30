@@ -39,6 +39,10 @@ SWAPS = {W[:i] + W[i + 1] + W[i] + W[i + 2:] for i in range(len(W) - 1)} - {W}
 assert len(DROPS) == 8 and len(SWAPS) == 7 and len(DROPS | SWAPS | {W}) == 16
 assert len(DROPS | SWAPS | {W} | {"OK", "OKLA."}) == 18
 
+# EXCEL and OKLAHOMA collapse to the same class (owner's count, 2026-09-30)
+assert sum(values("EXCEL")[1]) == 49 and dr(49) == 4 == dr(76)
+assert dr(sum(values("MICROSOFT")[1])) == 1 and dr(sum(values("SPREADSHEET")[1])) == 3
+
 if __name__ == "__main__":
     for word in sys.argv[1:] or ["OKLAHOMA"]:
         w, v, d = values(word)
