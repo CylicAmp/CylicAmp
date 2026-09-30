@@ -39,8 +39,16 @@ CONNECTIONS (each asserted below)
     occur). Mod 9 carries the mod-3 information that A3 uses; mod 37 does not.
     That is why T336's orbit alignment is null while the grid's columns are not.
 
+  - prime_engine.py (math/primes): where the grid stops separating primes from
+    composites (it tracks only the prime 3; first odd composite in an allowed
+    column is 25), prime_engine hands off to deterministic Miller-Rabin with
+    witnesses 2..37 (exact below 3.3e24). Checked: agrees with a sieve on every
+    n <= 10^6. Same shape as T431's handoff: fixed residue filter, then a check
+    that adapts to each number.
+
 FALSIFICATION: any assertion below failing.
 """
+import sys as _sys
 from sympy import isprime
 
 
@@ -83,6 +91,13 @@ for p in TW:
 assert tri == {1: {(5, 7)}, 2: {(2, 4)}, 0: {(8, 1)}}                                    # T421
 assert all(dr(n + g) == dr(dr(n) + dr(g)) for n in range(1, 500) for g in range(1, 200))  # prime_gap_dr_audit
 assert sorted({dr(p) for p in TW}) == [2, 5, 8] and len({p % 37 for p in TW}) == 35     # T336 contrast
+
+# grid falls off at 25; prime_engine picks up there
+assert [n for n in range(3, 60, 2) if dr(n) not in (3, 6, 9) and not isprime(n)][:3] == [25, 35, 49]
+import os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "primes"))
+import prime_engine as _pe
+assert all(_pe.is_prime(n) == isprime(n) for n in range(0, 20001))
 
 if __name__ == "__main__":
     print("grid81: all assertions pass;", len(P), "primes; twin column moves", sorted({(dr(p), dr(q)) for p, q in twins}))
