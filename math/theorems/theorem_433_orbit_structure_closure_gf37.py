@@ -292,7 +292,7 @@ def run():
                 D[j[r]][j[(r + gap) % P]] += 1
         assert D == [[C[(a - sh) % E][(c - sh) % E] for c in range(E)] for a in range(E)]
         assert sum(D[a][a] for a in range(E)) == 2 and sum(D[a][(a + 6) % E] for a in range(E)) == 3
-    assert [r for r in range(1, P) if j[r] == j[(r + 2) % P]] == [6, 29]            # T336
+    assert [r for r in range(1, P) if (r + 2) % P and j[r] == j[(r + 2) % P]] == [6, 29]   # T336
     return {"orbit_sums": sums, "outcomes": (min(outcomes), max(outcomes)), "period_poly": ints,
             "J4": (a4, b4), "J3": (A, B), "L": L}
 
