@@ -87,6 +87,21 @@ WHAT IS AND IS NOT FORCED
     of labeling, not an invariant. The split depends on representatives in
     1..36, an ordering property the group does not see.
 
+THE TWIN-PRIME / PRIME-GAP BASELINES FOLLOW FROM PART 7
+14. For any gap g (1 <= g <= 36) and residue r with r + g != 0, the orbit of
+    r + g given the orbit of r is the cyclotomic table shifted by j(g):
+        #{r in O_a : r + g in O_c} = (a - j(g), c - j(g)).
+    So the transition matrix for every gap is a relabeling of ONE table, and its
+    diagonal sums sum_b (b, b + d) are 2 for d = 0 and 3 for each d != 0
+    (2 + 11*3 = 35). Hence, for every gap:
+        P(orbit(r+g) = orbit(r))            = 2/35
+        P(orbit(r+g) = negation dual)       = 3/35
+        P(orbit shift = d), d != 0          = 3/35 each
+    These are the baselines in T336 (twin primes: 2/35 at r = 6, 29; duals
+    3/35), T347 (orbit(p) = orbit(p+g) iff 1 + g/p in <10>) and T362 (dj = 0 ->
+    2/35, dj != 0 -> 3/35). They are not properties of twin primes or of any
+    gap: they are the diagonal sums of the order-12 cyclotomic numbers of 37.
+
 SCOPE. Parts 7-11 are classical theory (Gauss periods, Dickson's cyclotomic
 numbers, Jacobi sums) evaluated at p = 37, e = 12. They hold in the same form
 for every prime p = ef + 1; the specific tables and values are 37's. What is new
@@ -266,6 +281,18 @@ def run():
         if any(t == {(st + i) % E for i in range(6)} for st in range(E)):
             arcs.append(g)
     assert arcs == [2, 5, 13, 15, 19, 20]
+    # 14. every gap's orbit-transition matrix is the cyclotomic table shifted by j(g)
+    diag = [sum(C[b][(b + d) % E] for b in range(E)) for d in range(E)]
+    assert diag == [2] + [3] * 11
+    for gap in range(1, P):
+        sh = j[gap]
+        D = [[0] * E for _ in range(E)]
+        for r in range(1, P):
+            if (r + gap) % P:
+                D[j[r]][j[(r + gap) % P]] += 1
+        assert D == [[C[(a - sh) % E][(c - sh) % E] for c in range(E)] for a in range(E)]
+        assert sum(D[a][a] for a in range(E)) == 2 and sum(D[a][(a + 6) % E] for a in range(E)) == 3
+    assert [r for r in range(1, P) if j[r] == j[(r + 2) % P]] == [6, 29]            # T336
     return {"orbit_sums": sums, "outcomes": (min(outcomes), max(outcomes)), "period_poly": ints,
             "J4": (a4, b4), "J3": (A, B), "L": L}
 
