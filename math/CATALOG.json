@@ -6560,6 +6560,14 @@
   "in_lemmas_folder": false
  },
  {
+  "file": "math/theorems/theorem_433_orbit_structure_closure_gf37.py",
+  "primary": "Theorem",
+  "secondary": "Identity",
+  "statement": "Full structure of the 12 orbits: Z/12 quotient, cyclotomic numbers, Gauss periods, period polynomial, Jacobi sums",
+  "evidence": "13 parts, all asserted; parts 7-11 new to the repo; cites T138/T200/T283/T285/T331/T339 for parts 2-5",
+  "in_lemmas_folder": false
+ },
+ {
   "file": "math/theorems/theorem_58_sector_axiom_completion.py",
   "primary": "Definition",
   "secondary": "",

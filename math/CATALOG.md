@@ -35,6 +35,10 @@ only compute, and are catalogued as Algorithm.
 
 ## Worth knowing
 
+- **T433 (added 2026-09-30)** connects the 12 named orbits to the classical theory of
+  cyclotomic classes: orbit addition is governed by the order-12 cyclotomic numbers,
+  which are also the multiplication table of the Gauss periods. See the file.
+
 - **T149 contains a counterexample to the Jacobian Conjecture in dimension 3.** Verified here: the
   map's Jacobian determinant is the constant -2 for all x, y, z (symbolic, sympy), and three distinct
   points map to (-1/4, 0, 0). The file's own check now computes the determinant instead of
