@@ -46,6 +46,9 @@ D. THE HANDWRITTEN PAGE
    and c = dr(3a); since c = 3k identically, the rule is 4k (one parameter).
    aaa = 3 * 37 * a, so the largest prime factor of every repdigit is 37.
    Undecoded: (PF-13)1x3, (PF-23)2x3, (PF-33)3x3; how 3 + 999 becomes 10 + 11.
+   [2026-10-02: full repdigit page decoded as far as it determines in
+   repdigit_pf_page_2026_10_02.py -- PF = "prime foundational"; two rules fit
+   all 8 lines and the missing 777 line decides between them.]
 
 E. PRIME-TYPE TABLE, 1..81: 22 primes; every row correct; counts twin 15,
    Sophie 8, sexy 19, safe 6, palindromic 5. With partners restricted to 1..81,
