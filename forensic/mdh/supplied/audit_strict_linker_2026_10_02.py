@@ -52,7 +52,12 @@ import os
 import sys
 from datetime import datetime, timedelta
 
-import networkx as nx
+try:
+    import networkx as nx
+except ImportError:      # the SUPPLIED engine imports networkx; it cannot run without it
+    print("audit_strict_linker: the supplied engine needs networkx (pip install networkx). "
+          "The fixed engine, forensic/mdh/strict_linker.py, does not.")
+    raise SystemExit(0)
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import strict_linker_2026_10_02 as S  # noqa: E402

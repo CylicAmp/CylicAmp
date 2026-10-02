@@ -70,8 +70,6 @@ import os
 import re
 import sys
 
-import networkx as nx
-
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 sys.path.insert(0, ROOT)
 from forensic.mdh.branching import maximum_branching  # noqa: E402
@@ -81,21 +79,15 @@ from forensic.mdh.pipeline import STATE_PRECEDENCE     # noqa: E402
 # 1. inversion needs a spanning arborescence; maximum branching does not
 edges = [("r", "a", 1.0, "r->a"), ("a", "c", 5.0, "a->c"), ("r", "c", 4.0, "r->c")]
 assert maximum_branching(["r", "a", "b", "c"], edges) == {"r->a", "a->c"}
-G = nx.DiGraph([(u, v, {"weight": w}) for u, v, w, _ in edges]); G.add_node("b")
-try:
-    nx.maximum_spanning_arborescence(G)
-    spans = True
-except nx.NetworkXException:
-    spans = False
-assert spans is False                                            # 'b' unreachable: no spanning tree
+reach = S._descendants([(u, v) for u, v, _, _ in edges], "r") | {"r"}
+assert "b" not in reach                                          # 'b' unreachable: no spanning tree exists
 
 # 2. state space
 assert STATE_PRECEDENCE == ["QUARANTINED", "UNRESOLVED", "AMBIGUOUS", "VERIFIED", "CANDIDATE", "SINGLETON"]
 assert {"AMBIGUOUS_COMPONENT", "QUARANTINED"} <= {s.value for s in S.GraphComponentStatus}
 
 # 4. a no-edge component is a single vertex
-H = nx.DiGraph(); H.add_nodes_from("abc")
-assert all(len(c) == 1 for c in nx.weakly_connected_components(H))
+assert S._weak_components(list("abc"), []) == [{"a"}, {"b"}, {"c"}]
 
 # 5. implemented test names
 names = re.findall(r"def (test_AT\d+\w*)", open(os.path.join(ROOT, "forensic/mdh/test_mdh.py")).read())
@@ -107,9 +99,9 @@ assert not any("FIX-0" in open(os.path.join(dp, f)).read()
                if f.endswith(".py") and not f.startswith("audit_paper"))
 
 # 6. direction and the repo's import graph
-toy = nx.DiGraph([("theorem", "lemma")])                     # theorem imports lemma
-assert [n for n in toy if toy.out_degree(n) == 0] == ["lemma"]          # paper calls this the theorem
-assert [n for n in toy if toy.in_degree(n) == 0] == ["theorem"]
+toy = [("theorem", "lemma")]                                 # theorem imports lemma
+assert [n for n in ("theorem", "lemma") if not any(u == n for u, _ in toy)] == ["lemma"]    # out-degree 0
+assert [n for n in ("theorem", "lemma") if not any(v == n for _, v in toy)] == ["theorem"]  # in-degree 0
 mods = {}
 for d in ("math/theorems", "math/lemmas", "math/primes"):
     for f in os.listdir(os.path.join(ROOT, d)):

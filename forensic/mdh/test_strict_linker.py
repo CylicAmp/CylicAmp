@@ -6,12 +6,45 @@ import os
 import random
 from datetime import datetime, timedelta
 
-import networkx as nx
 import pytest
 
 from forensic.mdh import strict_linker as S
 
+try:
+    import networkx as nx            # optional: only an extra cross-check uses it
+except ImportError:
+    nx = None
+
 T0 = datetime(2026, 3, 8, 12, 0, 0)
+
+
+def roots(edges):
+    heads = {v for _, v in edges}
+    return sorted({u for u, _ in edges} - heads)
+
+
+def is_dag(nodes, edges):
+    indeg = {n: 0 for n in nodes}
+    for _, v in edges:
+        indeg[v] += 1
+    ready = [n for n in nodes if indeg[n] == 0]
+    seen = 0
+    while ready:
+        n = ready.pop(); seen += 1
+        for u, v in edges:
+            if u == n:
+                indeg[v] -= 1
+                if indeg[v] == 0:
+                    ready.append(v)
+    return seen == len(nodes)
+
+
+def is_arborescence(nodes, edges):
+    nodes = set(nodes); heads = [v for _, v in edges]
+    if len(edges) != len(nodes) - 1 or len(set(heads)) != len(heads):
+        return False
+    r = nodes - set(heads)
+    return len(r) == 1 and S._descendants(edges, next(iter(r))) == nodes - r
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -63,8 +96,7 @@ def test_D1_explicit_root_with_earlier_event_is_conflict_not_mislabel():
 def test_D1_explicit_root_is_tree_root():
     L = S.StrictForensicLinker()
     c = L.reconstruct([ev("e0", 0, is_explicit_root=True), ev("e1", 1, role="model"), ev("e2", 2)])[0]
-    G = nx.DiGraph([(e.source_id, e.target_id) for e in c.selected_arborescence])
-    assert [n for n in G if G.in_degree(n) == 0] == [c.root_id] == ["e0"]
+    assert roots([(e.source_id, e.target_id) for e in c.selected_arborescence]) == [c.root_id] == ["e0"]
 
 
 # ---- D2 rejected edges kept ----
@@ -147,7 +179,6 @@ def test_axioms_random(seed):
     ids = sorted(e.event_id for c in out for e in c.events)
     assert ids == sorted(e.event_id for e in events)
     work = [e for e in events if e.payload_integrity != S.PayloadIntegrity.MALFORMED and e.timestamp]
-    G = nx.DiGraph()
     passing = set()
     for u in work:
         for v in work:
@@ -160,16 +191,15 @@ def test_axioms_random(seed):
                     assert u.role is not None and v.role is not None and u.timestamp < v.timestamp
                 else:
                     assert u.timestamp == v.timestamp and u.source_sequence < v.source_sequence
-                G.add_edge(u.event_id, v.event_id)
-    assert nx.is_directed_acyclic_graph(G)                                    # A2
+    assert is_dag([e.event_id for e in work], list(passing))                 # A2
     ledger = [(e.source_id, e.target_id) for c in out
               for e in c.selected_arborescence + c.discarded_edges + c.rejected_edges]
     assert sorted(ledger) == sorted(passing)                                  # A3 exactly once
     for c in out:
         if c.selected_arborescence:                                           # A4
-            T = nx.DiGraph([(e.source_id, e.target_id) for e in c.selected_arborescence])
-            assert [n for n in T if T.in_degree(n) == 0] == [c.root_id]
-            assert T.number_of_nodes() == len(c.events) and nx.is_arborescence(T)
+            T = [(e.source_id, e.target_id) for e in c.selected_arborescence]
+            assert roots(T) == [c.root_id]
+            assert is_arborescence([e.event_id for e in c.events], T)
         if c.component_confidence is not None and c.mean_event_confidence is not None:   # A5
             assert c.component_confidence <= min(c.bottleneck_score, c.mean_event_confidence) + 1e-12 \
                 or c.status not in (S.GraphComponentStatus.VERIFIED, S.GraphComponentStatus.CANDIDATE)
@@ -214,8 +244,7 @@ def _all_trees(nodes, edges, root):
     others = [v for v in nodes if v != root]
     choices = [[(u, v) for (u, v) in edges if v == x] for x in others]
     for pick in itertools.product(*choices):
-        T = nx.DiGraph(list(pick)); T.add_nodes_from(nodes)
-        if nx.is_arborescence(T):
+        if is_arborescence(nodes, list(pick)):
             yield pick
 
 
@@ -229,8 +258,7 @@ def test_dag_best_parent_is_optimal_and_ties_exact(seed):
             if R.random() < 0.6:
                 W[(f"n{i}", f"n{j}")] = R.choice([0.4, 0.5, 0.7, 0.9])     # coarse weights -> ties occur
     nodes = [f"n{i}" for i in range(n)]
-    G = nx.DiGraph(list(W)); G.add_nodes_from(nodes)
-    if not all(v == "n0" or v in nx.descendants(G, "n0") for v in nodes):
+    if not all(v == "n0" or v in S._descendants(list(W), "n0") for v in nodes):
         return
     L = S.StrictForensicLinker()
     L.evaluate_directed_edge = lambda u, v: (S.EdgeEvidence(u.event_id, v.event_id, W[(u.event_id, v.event_id)],
@@ -242,5 +270,6 @@ def test_dag_best_parent_is_optimal_and_ties_exact(seed):
     best = max(totals)
     assert got == best                                                        # optimal
     assert (totals.count(best) > 1) == (c.status == S.GraphComponentStatus.AMBIGUOUS)   # tie test exact
-    assert got == round(nx.maximum_spanning_arborescence(G.edge_subgraph(W).copy() if False else
-                        nx.DiGraph([(u, v, {"weight": w}) for (u, v), w in W.items()])).size(weight="weight"), 9)
+    if nx is not None:                                                        # independent cross-check
+        assert got == round(nx.maximum_spanning_arborescence(
+            nx.DiGraph([(u, v, {"weight": w}) for (u, v), w in W.items()])).size(weight="weight"), 9)

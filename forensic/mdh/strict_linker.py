@@ -61,7 +61,6 @@ from datetime import datetime, timedelta
 from enum import Enum
 from typing import Any, Optional
 
-import networkx as nx
 
 
 class PayloadIntegrity(str, Enum):
@@ -193,6 +192,37 @@ def _key(e: EdgeEvidence):
     return (e.source_id, e.target_id)
 
 
+# ---- plain-Python graph helpers (no networkx needed) ----
+def _weak_components(nodes, edges):
+    """weakly connected components, as sets, ordered by smallest id"""
+    parent = {n: n for n in nodes}
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+    for u, v in edges:
+        parent[find(u)] = find(v)
+    groups = {}
+    for n in nodes:
+        groups.setdefault(find(n), set()).add(n)
+    return sorted(groups.values(), key=min)
+
+
+def _descendants(edges, root):
+    out = {}
+    for u, v in edges:
+        out.setdefault(u, []).append(v)
+    seen, stack = set(), [root]
+    while stack:
+        for w in out.get(stack.pop(), []):
+            if w not in seen:
+                seen.add(w)
+                stack.append(w)
+    return seen
+
+
 class StrictForensicLinker:
     def __init__(self, horizon_minutes=45, accept_threshold=0.70, ambiguous_threshold=0.35):
         self.horizon = timedelta(minutes=horizon_minutes)
@@ -280,8 +310,6 @@ class StrictForensicLinker:
             else:
                 work.append(e)
 
-        G = nx.DiGraph()
-        G.add_nodes_from(e.event_id for e in work)
         cand, rejected = {}, []
         for u in work:
             for v in work:
@@ -291,10 +319,9 @@ class StrictForensicLinker:
                 if ed.classification == EdgeClassification.REJECTED:
                     rejected.append(ed)
                 else:
-                    G.add_edge(ed.source_id, ed.target_id, weight=ed.weight)
                     cand[_key(ed)] = ed
 
-        for ids in sorted(nx.weakly_connected_components(G), key=lambda s: min(s)):
+        for ids in _weak_components([e.event_id for e in work], cand):
             nodes = [emap[i] for i in ids]
             rej = [r for r in rejected if r.target_id in ids]
             if len(nodes) == 1:
@@ -303,10 +330,11 @@ class StrictForensicLinker:
                                            n.event_id, nodes, [], [], rej, 0.0,
                                            ["No causal edges survived feasibility pass."]))
                 continue
-            sub = G.subgraph(ids).copy()
-            all_edges = [cand[e] for e in sub.edges()]
+            sub_edges = [k for k in cand if k[0] in ids]
+            in_edges = {v: [k for k in sub_edges if k[1] == v] for v in ids}
+            all_edges = [cand[k] for k in sub_edges]
             explicit = sorted(n.event_id for n in nodes if n.is_explicit_root)
-            zero_in = sorted(i for i in ids if sub.in_degree(i) == 0)
+            zero_in = sorted(i for i in ids if not in_edges[i])
             if len(explicit) == 1:
                 root = explicit[0]
             elif len(explicit) == 0 and len(zero_in) == 1:
@@ -320,8 +348,7 @@ class StrictForensicLinker:
             # every node is reachable from root, root has no incoming edge (an
             # in-neighbour would be a descendant: a cycle) and every spanning
             # arborescence is rooted there.  Reachability is the whole check.
-            forced = sub
-            unreachable = sorted(set(ids) - {root} - nx.descendants(sub, root))
+            unreachable = sorted(set(ids) - {root} - _descendants(sub_edges, root))
             if unreachable:
                 out.append(self._component(f"unresolved_{root}", GraphComponentStatus.UNRESOLVED, None,
                                            nodes, [], all_edges, rej, 0.0,
@@ -336,7 +363,7 @@ class StrictForensicLinker:
             # means the optimum is not unique: status AMBIGUOUS (paper, Inv. 5).
             sel, diags, tied = [], [], False
             for v in sorted(set(ids) - {root}):
-                ins = sorted((cand[(u, v)] for u, _ in sub.in_edges(v)),
+                ins = sorted((cand[k] for k in in_edges[v]),
                              key=lambda e: (-e.weight, e.source_id, e.target_id, e.edge_type.value))
                 sel.append(ins[0])
                 rivals = [e.source_id for e in ins[1:] if e.weight == ins[0].weight]
@@ -345,7 +372,7 @@ class StrictForensicLinker:
                     diags.append(f"TIED_PARENT: {v} has equal-weight parents "
                                  f"{sorted([ins[0].source_id] + rivals)}; canonical choice {ins[0].source_id}.")
             sel_keys = {_key(e) for e in sel}
-            disc = [cand[k] for k in sub.edges() if k not in sel_keys]
+            disc = [cand[k] for k in sub_edges if k not in sel_keys]
             bott = min(e.weight for e in sel)
             all_acc = all(e.classification == EdgeClassification.ACCEPTED for e in sel)
             if not all_acc:

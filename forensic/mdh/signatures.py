@@ -25,10 +25,27 @@ truth.
 """
 import hashlib
 
-from cryptography.exceptions import InvalidSignature
-from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
-
 from .jcs import canonicalize
+
+# Filled on first verification (see _load_crypto), so the rest of forensic.mdh
+# runs without the `cryptography` package.  Module-level so tests can replace them.
+Ed25519PublicKey = None
+InvalidSignature = None
+
+
+def _load_crypto():
+    global Ed25519PublicKey, InvalidSignature
+    try:
+        if Ed25519PublicKey is None:
+            from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey as _K
+            Ed25519PublicKey = _K
+        if InvalidSignature is None:
+            from cryptography.exceptions import InvalidSignature as _E
+            InvalidSignature = _E
+    except ImportError as err:
+        raise ImportError("verifying Ed25519 signatures needs the 'cryptography' package "
+                          "(pip install cryptography)") from err
+
 
 DOMAIN = b"mdh-event-v1\x00"
 SIG_STATES = ["SIGNED_VALID", "UNSIGNED", "UNTRUSTED_KEY", "REVOKED_KEY", "INVALID_SIGNATURE"]
@@ -65,6 +82,7 @@ def check(event_obj, source_id, keyring):
         return "UNTRUSTED_KEY", kid
     if entry.get("revoked"):
         return "REVOKED_KEY", kid
+    _load_crypto()
     try:
         pub = Ed25519PublicKey.from_public_bytes(bytes.fromhex(entry["public_key_hex"]))
     except (KeyError, ValueError, TypeError):

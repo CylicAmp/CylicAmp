@@ -10,6 +10,12 @@ python3 -m pytest forensic/mdh -q          # 42 tests
 python3 -m forensic.mdh.cli events.ndjson --source-id plant-a --keyring keys.json   # with signatures
 ```
 
+Dependencies: plain Python 3 for everything except Ed25519 signature
+verification (`cryptography`, loaded only when a keyring is supplied). The
+StrictForensicLinker needs nothing extra; `networkx` is only an optional
+cross-check in its tests. (The supplied original in `supplied/` imports
+networkx, as written.)
+
 ## Stages
 
 | Stage | File | What it enforces |
