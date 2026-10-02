@@ -2014,6 +2014,12 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
       pinning are mutually unsatisfiable there, and nothing reaches the
       divisor check.  Whether that is provable rather than range-limited is
       worth asking; it would upgrade four rows from search to proof.
+      SETTLED 2026-10-02 (k8_case_b_shape_mod8.py): all four are PROVED
+      empty -- three by shape-level mod 8 (a shape fixes n mod 8 AND whether
+      8 is listed, hence whether 8 | n), one by size (n >= 4pqr > 16p^3 >
+      21 + 53p^2 > n).  The same mod-8 test also kills
+      1 2 2^2 p q 2p 2q r, 1 2 2^2 2^3 p q 2p r and 1 2 2^2 2^3 p 2p q r:
+      7 of the 13 proved, 6 open.
 
   (b) LOWERING the bound STRENGTHENED two rows.  At p < 100000 the skip
       column is 989 -- primes where C_2 exceeded the 1e16 factoring cap and
