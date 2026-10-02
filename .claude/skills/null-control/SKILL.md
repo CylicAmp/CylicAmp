@@ -60,3 +60,14 @@ theorem_423 asserted exactly one file defines the four-tier ledger. True,
 passing, and empty — three other files defining it were on branches the
 check could not see. Run the null control after any change to what the check
 can observe, not just after changing the check.
+
+## Undo each fix (added 2026-10-02)
+
+After fixing N defects, revert each fix alone in a scratch copy and rerun the
+tests. A fix whose reversal changes nothing is either untested or dead code;
+find out which. Example, `forensic/mdh/strict_linker.py`: undoing D2-D5 and
+the tie rule each failed tests, but undoing D1's "delete the root's incoming
+edges" passed all 163. The cause was not a test gap: the graph is a DAG, so
+once every node is reachable from the root the root already has no in-edges.
+The line was removed and the reachability check, whose reversal fails 16
+tests, was documented as the whole of D1.
