@@ -14,6 +14,6 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install dependencies
-        run: pip install pytest
+        run: pip install -r requirements-dev.txt
       - name: Run validation matrix
         run: python -m pytest -v

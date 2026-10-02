@@ -136,8 +136,8 @@ def test_async_pipeline_saves_correct_metrics_to_db(
     ).first()
 
     assert persisted_log is not None
-    assert persisted_log.observed_variance == mock_statistical_returns
-    assert persisted_log.empirical_p_value == mock_statistical_returns
+    assert persisted_log.observed_variance == mock_statistical_returns[0]
+    assert persisted_log.empirical_p_value == mock_statistical_returns[1]
     assert persisted_log.is_significant_tti_violation is True
 
     # Decode JSON text fields to verify metadata compliance
