@@ -25,6 +25,19 @@ goldilocks_prime produce byte-identical output before and after the fix, so
 no search in them met psi_12. monte_carlo_prime_streams is unseeded and
 differs run to run regardless.
 
+SUPPLIED REVIEW OF THE GOLDILOCKS PATCH (2026-10-02), audited
+  1. "The fix is correct: removes witness = n false negatives for primes <= 41
+     and handles n < 2."  CORRECT; asserted below.
+  2. "The 13-witness set is only conjecturally deterministic above 3e23."
+     INCORRECT. Sorenson and Webster (Math. Comp. 86, 2017) computed
+     psi_12 = 318665857834031151167461 and psi_13 = 3317044064679887385961981.
+     So witnesses 2..41 are PROVEN exact for n < psi_13 ~ 3.3e24, which is the
+     range the docstring states. 3e23 is the 12-witness bound, not the 13. Above
+     psi_13 the set is not conjectural: it fails at psi_13 itself (asserted).
+  3. "The sibling is_prime census matters."  Agreed, and it was run: every
+     function named is_prime / miller / rabin in the repo was tested against a
+     sieve and the known strong pseudoprimes; the defective ones are listed above.
+
 FALSIFICATION: any assertion failing.
 """
 import ast
@@ -55,7 +68,7 @@ def _strong(n, a):
 
 W12 = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)
 assert all(_strong(PSI12, a) for a in W12) and not _strong(PSI12, 41)
-assert all(_strong(PSI13, a) for a in W12 + (41,))
+assert all(_strong(PSI13, a) for a in W12 + (41,)) and not _strong(PSI13, 43)   # 13 witnesses fail at psi_13
 
 
 def load(fname, fn):
@@ -79,6 +92,9 @@ for fname, fn in TARGETS:
     assert not any(f(c) for c in (2152302898747, 3474749660383, 341550071728321, 3825123056546413051))
     assert all(f(n) == isprime(n) for n in range(2, 20000)), fname
     assert f(2 ** 64 - 2 ** 32 + 1) is True
+
+_g = load("goldilocks_prime.py", "is_prime_deterministic")
+assert [n for n in range(-5, 50) if _g(n)] == [p for p in range(50) if isprime(p)]   # supplied point 1
 
 if __name__ == "__main__":
     print("MR witness audit 2026-10-02: all assertions pass")
