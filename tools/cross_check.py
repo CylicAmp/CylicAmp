@@ -16,7 +16,7 @@ runs on Termux.
     python3 tools/cross_check.py -m anthropic/claude-sonnet-4.5 -m openai/gpt-5 "question"
     python3 tools/cross_check.py --list            # model ids available to your key
 
-Model ids change; `--list` shows the current ones. No system prompt is sent
+Defaults were looked up on 2026-10-02; ids change, `--list` shows the current ones. No system prompt is sent
 unless you pass --system, so each model answers with only your words.
 """
 import argparse
@@ -29,8 +29,17 @@ import urllib.error
 import urllib.request
 
 API = "https://openrouter.ai/api/v1"
-DEFAULT_MODELS = ["anthropic/claude-sonnet-4.5", "openai/gpt-5", "google/gemini-2.5-pro",
-                  "meta-llama/llama-3.3-70b-instruct", "deepseek/deepseek-chat"]
+# Each provider's top model on OpenRouter, looked up 2026-10-02 from
+# https://openrouter.ai/api/v1/models (466 models listed). Price per million
+# tokens, input / output. DeepSeek and Llama publish open weights.
+DEFAULT_MODELS = [
+    "anthropic/claude-opus-5.5",      # $4 / $20
+    "openai/gpt-6.1-sol-pro",         # $2 / $10
+    "google/gemini-3.1-pro-preview",  # $2 / $12
+    "x-ai/grok-4.7",                  # $2 / $6
+    "deepseek/deepseek-v4-pro",       # $0.21 / $0.42  (open weights)
+    "meta-llama/llama-4-maverick",    # $0.19 / $0.65  (open weights)
+]
 OUT = pathlib.Path(__file__).resolve().parent.parent / "records" / "cross_check"
 
 
