@@ -20,11 +20,15 @@ FIXES
  D5 The audit artifact is produced by the code (to_record), and
     forensic/mdh/strict_linker_example.json is regenerated from it and checked
     byte for byte by the tests.
- Also: a selected edge whose target has another candidate parent of EQUAL
-    weight makes the selection non-unique: diagnostic TIED_PARENT and status
-    CANDIDATE, not VERIFIED (the same rule as the repo engine's AT-15).  The
-    section IV scenario is exactly this case: evt_301 -> evt_303 and
-    evt_302 -> evt_303 both weigh 0.964.
+ Also (v3, from the 2026-10-02 paper, Invariant 5): a node with two or more
+    equal-weight best parents makes the optimum non-unique.  The choice is the
+    canonical tuple (source_id, target_id, edge_type), the diagnostic is
+    TIED_PARENT, and the status is AMBIGUOUS_COMPONENT (same rule as the repo
+    engine's AT-15).  On a DAG this per-node test is exact: two trees of equal
+    total weight exist iff some node has tied best parents.  The section IV
+    scenario is this case: evt_301 -> evt_303 and evt_302 -> evt_303 both 0.964.
+ Also (v3): EvidenceCompleteness has the paper's total order
+    EMPTY < FRAGMENTED < PARTIAL < SUFFICIENT.
  Also: event_confidence defaults to None ("not supplied"), and a component
     whose events lack it reports component_confidence None with a diagnostic,
     instead of a VERIFIED component at confidence 0.0.  Output order is
@@ -91,10 +95,34 @@ class PayloadIntegrity(str, Enum):
 
 
 class EvidenceCompleteness(str, Enum):
+    """Paper section 2.2: EMPTY < FRAGMENTED < PARTIAL < SUFFICIENT (total order)."""
     SUFFICIENT = "SUFFICIENT"
     PARTIAL = "PARTIAL"
     FRAGMENTED = "FRAGMENTED"
     EMPTY = "EMPTY"
+
+    @property
+    def rank(self) -> int:
+        return ["EMPTY", "FRAGMENTED", "PARTIAL", "SUFFICIENT"].index(self.value)
+
+    def _cmp(self, other):
+        if not isinstance(other, EvidenceCompleteness):
+            return NotImplemented
+        return self.rank - other.rank
+
+    def __lt__(self, other):
+        c = self._cmp(other); return c if c is NotImplemented else c < 0
+
+    def __le__(self, other):
+        c = self._cmp(other); return c if c is NotImplemented else c <= 0
+
+    def __gt__(self, other):
+        c = self._cmp(other); return c if c is NotImplemented else c > 0
+
+    def __ge__(self, other):
+        c = self._cmp(other); return c if c is NotImplemented else c >= 0
+
+    __hash__ = str.__hash__
 
 
 class EdgeType(str, Enum):
@@ -113,6 +141,7 @@ class EdgeClassification(str, Enum):
 class GraphComponentStatus(str, Enum):
     VERIFIED = "VERIFIED_COMPONENT"
     CANDIDATE = "CANDIDATE_COMPONENT"
+    AMBIGUOUS = "AMBIGUOUS_COMPONENT"
     SINGLETON = "SINGLETON"
     UNRESOLVED = "UNRESOLVED"
     QUARANTINED = "QUARANTINED"
@@ -228,7 +257,8 @@ class StrictForensicLinker:
         else:
             mean = round(sum(confs) / len(confs), 3)
             comp = round(min(bott, mean), 3) if status in (GraphComponentStatus.VERIFIED,
-                                                           GraphComponentStatus.CANDIDATE) else 0.0
+                                                           GraphComponentStatus.CANDIDATE,
+                                                           GraphComponentStatus.AMBIGUOUS) else 0.0
         for n in nodes:
             n.graph_status = status
         return ForensicComponent(cid, status, root, sorted(nodes, key=lambda e: e.event_id),
@@ -297,21 +327,31 @@ class StrictForensicLinker:
                                            nodes, [], all_edges, rej, 0.0,
                                            [f"EXPLICIT_ROOT_CONFLICT: {unreachable} not reachable from {root}"]))
                 continue
-            A = nx.maximum_spanning_arborescence(forced, attr="weight")
-            sel_keys = set(A.edges())
-            sel = [cand[k] for k in sel_keys]
+            # Selection.  The candidate graph is a DAG (A2) and every node is
+            # reachable from root, so ANY choice of one in-edge per non-root node
+            # is a spanning arborescence, and the weight is a sum of independent
+            # per-node terms: the maximum tree takes each node's best parent
+            # (Edmonds' contraction step never fires on a DAG).  Ties resolve by
+            # the canonical tuple (source_id, target_id, edge_type), and a tie
+            # means the optimum is not unique: status AMBIGUOUS (paper, Inv. 5).
+            sel, diags, tied = [], [], False
+            for v in sorted(set(ids) - {root}):
+                ins = sorted((cand[(u, v)] for u, _ in sub.in_edges(v)),
+                             key=lambda e: (-e.weight, e.source_id, e.target_id, e.edge_type.value))
+                sel.append(ins[0])
+                rivals = [e.source_id for e in ins[1:] if e.weight == ins[0].weight]
+                if rivals:
+                    tied = True
+                    diags.append(f"TIED_PARENT: {v} has equal-weight parents "
+                                 f"{sorted([ins[0].source_id] + rivals)}; canonical choice {ins[0].source_id}.")
+            sel_keys = {_key(e) for e in sel}
             disc = [cand[k] for k in sub.edges() if k not in sel_keys]
             bott = min(e.weight for e in sel)
             all_acc = all(e.classification == EdgeClassification.ACCEPTED for e in sel)
-            diags = [] if all_acc else ["Selected edges contain unverified candidates."]
-            for e in sorted(sel, key=_key):
-                rivals = sorted(u for u, _ in forced.in_edges(e.target_id)
-                                if u != e.source_id and forced[u][e.target_id]["weight"] == e.weight)
-                if rivals:
-                    diags.append(f"TIED_PARENT: {e.target_id} has equal-weight parents "
-                                 f"{sorted([e.source_id] + rivals)}; selection not unique.")
-            unique = not any(d.startswith("TIED_PARENT") for d in diags)
-            status = GraphComponentStatus.VERIFIED if all_acc and unique else GraphComponentStatus.CANDIDATE
+            if not all_acc:
+                diags.insert(0, "Selected edges contain unverified candidates.")
+            status = (GraphComponentStatus.AMBIGUOUS if tied else
+                      GraphComponentStatus.VERIFIED if all_acc else GraphComponentStatus.CANDIDATE)
             out.append(self._component(f"comp_{root}", status, root, nodes, sel, disc, rej, bott, diags))
         return out
 

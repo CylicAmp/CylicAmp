@@ -103,7 +103,7 @@ def test_D5_artifact_matches_code():
     with open(os.path.join(HERE, "strict_linker_example.json")) as f:
         assert f.read() == S.example_json()
     d = json.loads(S.example_json())[0]
-    assert d["status"] == "CANDIDATE_COMPONENT"                               # tie, see below
+    assert d["status"] == "AMBIGUOUS_COMPONENT"                               # tie, see below
     assert any(x.startswith("TIED_PARENT") for x in d["diagnostics"])
 
 
@@ -112,7 +112,9 @@ def test_tie_is_not_verified():
     c = L.reconstruct(S.example_events())[0]
     w = {(e.source_id, e.target_id): e.weight for e in c.selected_arborescence + c.discarded_edges}
     assert w[("evt_301", "evt_303")] == w[("evt_302", "evt_303")] == 0.964
-    assert c.status == S.GraphComponentStatus.CANDIDATE
+    assert c.status == S.GraphComponentStatus.AMBIGUOUS
+    chosen = [e.source_id for e in c.selected_arborescence if e.target_id == "evt_303"]
+    assert chosen == ["evt_301"]                                              # canonical (smallest source id)
 
 
 def test_confidence_not_supplied():
@@ -195,3 +197,50 @@ def test_weight_nonincreasing_in_gap():
     L = S.StrictForensicLinker()
     ws = [L.evaluate_directed_edge(ev("u", 0), ev("v", m / 4, role="model")).weight for m in range(1, 181)]
     assert all(ws[i + 1] <= ws[i] for i in range(len(ws) - 1))
+
+
+# ---- v3: paper 2.2 order, Invariant 5 tie rule, DAG best-parent lemma ----
+def test_evidence_completeness_total_order():
+    C = S.EvidenceCompleteness
+    assert sorted(C) == [C.EMPTY, C.FRAGMENTED, C.PARTIAL, C.SUFFICIENT]
+    for a in C:
+        for b in C:
+            assert [a < b, a == b, a > b].count(True) == 1 and (a < b) == (b > a)
+
+
+def _all_trees(nodes, edges, root):
+    """every spanning arborescence of a DAG rooted at root: one parent per node"""
+    import itertools
+    others = [v for v in nodes if v != root]
+    choices = [[(u, v) for (u, v) in edges if v == x] for x in others]
+    for pick in itertools.product(*choices):
+        T = nx.DiGraph(list(pick)); T.add_nodes_from(nodes)
+        if nx.is_arborescence(T):
+            yield pick
+
+
+@pytest.mark.parametrize("seed", range(120))
+def test_dag_best_parent_is_optimal_and_ties_exact(seed):
+    R = random.Random(1000 + seed)
+    n = R.randrange(3, 7)
+    W = {}
+    for i in range(n):
+        for j in range(i + 1, n):
+            if R.random() < 0.6:
+                W[(f"n{i}", f"n{j}")] = R.choice([0.4, 0.5, 0.7, 0.9])     # coarse weights -> ties occur
+    nodes = [f"n{i}" for i in range(n)]
+    G = nx.DiGraph(list(W)); G.add_nodes_from(nodes)
+    if not all(v == "n0" or v in nx.descendants(G, "n0") for v in nodes):
+        return
+    L = S.StrictForensicLinker()
+    L.evaluate_directed_edge = lambda u, v: (S.EdgeEvidence(u.event_id, v.event_id, W[(u.event_id, v.event_id)],
+                                             S.EdgeType.CAUSAL_REPLY, S.EdgeClassification.ACCEPTED, {}, "t")
+                                             if (u.event_id, v.event_id) in W else None)
+    c = L.reconstruct([ev(x, i) for i, x in enumerate(nodes)])[0]
+    got = round(sum(e.weight for e in c.selected_arborescence), 9)
+    totals = [round(sum(W[e] for e in t), 9) for t in _all_trees(nodes, list(W), "n0")]
+    best = max(totals)
+    assert got == best                                                        # optimal
+    assert (totals.count(best) > 1) == (c.status == S.GraphComponentStatus.AMBIGUOUS)   # tie test exact
+    assert got == round(nx.maximum_spanning_arborescence(G.edge_subgraph(W).copy() if False else
+                        nx.DiGraph([(u, v, {"weight": w}) for (u, v), w in W.items()])).size(weight="weight"), 9)

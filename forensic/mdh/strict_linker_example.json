@@ -4,7 +4,7 @@
     "component_confidence": 0.95,
     "component_id": "comp_evt_301",
     "diagnostics": [
-      "TIED_PARENT: evt_303 has equal-weight parents ['evt_301', 'evt_302']; selection not unique."
+      "TIED_PARENT: evt_303 has equal-weight parents ['evt_301', 'evt_302']; canonical choice evt_301."
     ],
     "discarded_edges": [
       {
@@ -26,7 +26,7 @@
         "event_confidence": 1.0,
         "event_id": "evt_301",
         "evidence_completeness": "SUFFICIENT",
-        "graph_status": "CANDIDATE_COMPONENT",
+        "graph_status": "AMBIGUOUS_COMPONENT",
         "payload_integrity": "COMPLETE",
         "role": "user",
         "session_id": "sess_900",
@@ -38,7 +38,7 @@
         "event_confidence": 0.9,
         "event_id": "evt_302",
         "evidence_completeness": "SUFFICIENT",
-        "graph_status": "CANDIDATE_COMPONENT",
+        "graph_status": "AMBIGUOUS_COMPONENT",
         "payload_integrity": "COMPLETE",
         "role": "user",
         "session_id": "sess_900",
@@ -50,7 +50,7 @@
         "event_confidence": 0.95,
         "event_id": "evt_303",
         "evidence_completeness": "SUFFICIENT",
-        "graph_status": "CANDIDATE_COMPONENT",
+        "graph_status": "AMBIGUOUS_COMPONENT",
         "payload_integrity": "COMPLETE",
         "role": "model",
         "session_id": "sess_900",
@@ -90,6 +90,6 @@
         "weight": 0.964
       }
     ],
-    "status": "CANDIDATE_COMPONENT"
+    "status": "AMBIGUOUS_COMPONENT"
   }
 ]
