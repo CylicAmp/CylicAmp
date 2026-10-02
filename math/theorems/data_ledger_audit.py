@@ -115,7 +115,7 @@ def is_prime_miller_rabin(n):
     r, d = 0, n - 1
     while d % 2 == 0:
         r += 1; d //= 2
-    for a in (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37):
+    for a in (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41):
         if a >= n: continue
         x = pow(a, d, n)
         if x in (1, n-1): continue
