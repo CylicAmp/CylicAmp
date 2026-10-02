@@ -35,3 +35,5 @@ One result, four statements. T276 is not in it.
 T276 (Kolakoski gaps {2,3,4}) uses the orbit names as labels. log_2(3) = 26 is 2^26 ≡ 3 (mod 37), which is the multiplier sitting in IC, not a theorem about the quotient. Do not fold it in.
 
 Re-checked independently: 12 cosets of {1,10,26}, identical to the orbit partition; unique subgroup per divisor of 36.
+
+Asserted: `dedup_t299_quotient_check.py` (2026-10-02) runs every check in this note.
