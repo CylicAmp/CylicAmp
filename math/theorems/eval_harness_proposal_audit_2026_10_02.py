@@ -36,9 +36,36 @@ INCORRECT OR OVERSTATED (asserted below where computable)
  6. "Toy": the T245 layers in this repo are proofs (k = 2, 3, 4, 6, 8
     impossible), not string checks.
 
-NOT CHECKED HERE: what Lean 4 mathlib, Isabelle or Coq currently formalize
-(L-functions at s = 1, Sobolev embeddings, circuit-complexity libraries).
-No theorem prover is installed in this environment.
+LIBRARY CLAIMS, CHECKED 2026-10-02
+Lean 4 mathlib -- read from source, commit 014e37aeb813 (2026-10-02):
+ - Elliptic curve L-function: DEFINED only, AlgebraicGeometry/EllipticCurve/
+   LFunction.lean (89 lines): the Euler product as a formal Dirichlet series
+   (ArithmeticFunction Z) and its LSeries.  No analytic continuation, no
+   value at s = 1, no rank.  "Formally compute L-function values at s = 1"
+   is NOT available.  Mordell-Weil: absent; only the naive height and the
+   approximate parallelogram law (NumberTheory/Height/EllipticCurve.lean).
+ - Dirichlet L-functions: L(chi, s) != 0 for Re s >= 1
+   (LFunction_ne_zero_of_one_le_re), incl. s = 1, and zeta != 0 on Re s >= 1.
+   The file calls these PNT prerequisites; the PNT itself is not in mathlib
+   (it is in the separate PrimeNumberTheoremAnd project).  Zeta zeros:
+   only closed and discrete (LSeries/ZetaZeros.lean).  No zero-free region
+   beyond Re s >= 1.
+ - Sobolev: Gagliardo-Nirenberg-Sobolev inequality PROVED for compactly
+   supported C^1 functions (FunctionalSpaces/SobolevInequality.lean), and
+   Sobolev spaces H^{s,p} DEFINED via the Bessel potential
+   (Distribution/Sobolev.lean).  So "verified Sobolev embedding lemmas" is
+   partly true.  Navier-Stokes: no file mentions it.
+ - Computability: Turing machines, partial recursive functions, halting,
+   automata.  No circuits, no P, no NP, no AC^0.  The P vs NP row's
+   "circuit complexity libraries" do not exist in mathlib.
+Isabelle AFP -- read from the AFP topic pages:
+ - Prime Number Theorem, Eberl and Paulson 2018 (with Mertens' theorems);
+   Dirichlet L-functions and Dirichlet's theorem (Eberl 2017); Hurwitz and
+   Riemann zeta (Eberl 2017); General Weierstrass Equations (2026).
+ - Analysis topic: "Lp spaces"; nothing on Sobolev, Navier-Stokes or PDE.
+Coq/Rocq -- web search only (weaker): an elliptic-curve group-law library
+   (SSReflect) and MathComp-Analysis exist; no L-function, Sobolev or
+   zero-free-region formalization was found.
 
 FALSIFICATION: any assertion failing.
 """
