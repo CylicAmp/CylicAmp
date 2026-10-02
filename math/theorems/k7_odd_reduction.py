@@ -20,8 +20,12 @@ STEP 3  SIZE: lcm(listed) <= n <= 7 d_7^2 in the LP of each branch.  All
         and then the product of the primes exceeds 7 d_7^2).
 STEP 4  BOUNDED BRANCHES (the LP caps every prime; all have p <= 7):
         exhausted over all primes up to the caps.  No solution.
-OPEN    224 branches in which the LP leaves some prime unbounded, over
-        2, 3 or 4 primes (55 / 127 / 42).  They are listed in
+STEP 5  PIN: x | n and n = sum of the squares of the listed divisors free of
+        x (mod x), a positive integer, so x <= (their number) * (largest)^2.
+        Bounds 2 more branches (both p = 3); exhausted, no solution.
+OPEN    222 branches in which some prime stays unbounded, over 2, 3 or 4
+        primes.  They are scale-invariant: every constraint survives
+        scaling all the primes up together.  They are listed in
         math/theorems/k7_odd_open_branches.txt.  Their conditions are of the
         two-prime-system type T245 already records as open (Theorem C,
         Wieferich-type).
@@ -137,6 +141,37 @@ for s, br, cap in bounded:
             if i == 0 or x > P[-1]:
                 go(i + 1, P + [x])
     go(0, [])
+
+# STEP 5 (pin): x | n forces x <= #(x-free tokens) * (largest x-free token)^2.
+# It bounds exactly two of the 224; both are exhausted here.
+pinned = []
+for s, br, _ in openb:
+    cap = E.bounds(s, br, pin=True)
+    if cap is not None and all(v < math.inf for v in cap):
+        pinned.append((s, br, cap))
+assert sorted((s, br) for s, br, _ in pinned) == [("1 p p^2 q pq p^2q q^2", "p=3"),
+                                                  ("1 p q p^2 pq p^2q r", "p=3")]
+for s, br, cap in pinned:
+    t = len(cap)
+    pools = [[3]] + [list(primerange(5, int(c + 1e-6) + 1)) for c in cap[1:]]
+
+    def go2(i, P):
+        global checked
+        if i == t:
+            v = [val(x, P) for x in s.split()]
+            if v != sorted(v) or len(set(v)) != K:
+                return
+            n = sum(x * x for x in v)
+            checked += 1
+            if all(n % x == 0 for x in v):
+                assert divisors(n)[:K] != v, (s, P, n)
+            return
+        for x in pools[i]:
+            if i == 0 or x > P[-1]:
+                go2(i + 1, P + [x])
+    go2(0, [])
+openb = [x for x in openb if (x[0], x[1]) not in {(s, br) for s, br, _ in pinned}]
+assert len(openb) == 222
 
 with open(os.path.join(HERE, "k7_odd_open_branches.txt"), "w") as f:
     f.write("# k=7, n odd: branches with an unbounded prime (shape | branch | LP caps)\n")

@@ -1133,7 +1133,7 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
     k=7: n EVEN IMPOSSIBLE by proof.  4∤n (2026-09-20); 4|n (2026-10-02,
          k7_even_complete.py).  n odd OPEN, reduced
          (k7_odd_reduction.py): complete superset of 512 shapes; all with 5-6
-         primes and 65 bounded branches proved empty; 224 unbounded branches
+         primes and 67 bounded branches proved empty; 222 unbounded branches
          (2-4 primes) remain, listed in k7_odd_open_branches.txt.
     k=8: IMPOSSIBLE by proof.  4∤n (2026-09-19); 4|n (2026-10-02,
          k8_case_b_complete.py: complete superset of 304 shapes, all killed).

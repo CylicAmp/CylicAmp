@@ -108,7 +108,7 @@ def superset():
     return res
 
 
-def branch_lp(shape, branch, obj=None):
+def branch_lp(shape, branch, obj=None, pin=False):
     S = [parse(x) for x in shape.split()]
     t = 1 + max(i for a in S for i in range(6) if a[i])
     S = [a[:t] for a in S]
@@ -121,16 +121,23 @@ def branch_lp(shape, branch, obj=None):
             A.append([float(S[-1][j] - g[j]) for j in range(t)])
     b = [0.0] * len(A)
     A.append([float(E[j] - 2 * S[-1][j]) for j in range(t)]); b.append(math.log(K))     # size
+    if pin:
+        # x | n and n = sum over x-free listed d of d^2 (mod x), a positive integer,
+        # so x <= (number of x-free tokens) * (largest x-free token)^2
+        for x in range(t):
+            free = [a for a in S if a[x] == 0]
+            row = [-2.0 * free[-1][j] for j in range(t)]; row[x] += 1.0
+            A.append(row); b.append(math.log(len(free)))
     lo = (3, 5, 7, 11, 13, 17) if branch == "p=3" else (5, 7, 11, 13, 17, 19)
     return _lp(t, A, b, lo, fix3=(branch == "p=3"), obj=obj), t
 
 
-def bounds(shape, branch):
-    r, t = branch_lp(shape, branch)
+def bounds(shape, branch, pin=False):
+    r, t = branch_lp(shape, branch, pin=pin)
     if r.status != 0:
         return None
     out = []
     for j in range(t):
-        rj, _ = branch_lp(shape, branch, j)
+        rj, _ = branch_lp(shape, branch, j, pin=pin)
         out.append(math.inf if rj.status == 3 else math.exp(rj.x[j]))
     return out
