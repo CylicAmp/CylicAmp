@@ -67,3 +67,18 @@ The census proves your tree is incomplete; it cannot prove it is complete.
 Shapes that first occur above your range are invisible. Say the range with
 the result, and prefer a shape function whose image is provably finite —
 then a census that stabilises is an argument, not just evidence.
+
+## Closing a branch from a superset (added 2026-10-02)
+
+When the census cannot certify the shape list, enumerate a PROVABLE SUPERSET
+(order ideals + log-space LP with non-strict inequalities, in-box ghosts
+only), then run cheap filters in sequence and hand-kill what is left:
+shape-level congruence -> size LP (lcm <= n < k d_k^2) -> strictness (LP
+solutions that sit on a tie between an odd and an even monomial) -> finite
+check where the LP bounds every prime. Negative control: every shape a
+census realizes must be inside the superset.
+
+Example: T245 k=8 case B, `math/theorems/k8_case_b_complete.py` with
+`tools/k8_caseb_shape_enumerator.py`: 304 -> 122 (labels) -> 38 (mod 8) ->
+12 (size) -> 0. Census below 4e5 realizes 33 shapes, all inside. This
+closed k=8.
