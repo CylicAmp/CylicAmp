@@ -11,3 +11,4 @@ build/
 *.log
 .DS_Store
 api/mws_audit.db
+mws_audit.db
