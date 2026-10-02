@@ -25,7 +25,8 @@ DR_NATURAL_RATIO  = 1 / 3      # spine theorem: organic data hits {3,6,9} ≈ 33
 # ── Primality ─────────────────────────────────────────────────────────────────
 
 def miller_rabin_primality(n: int) -> bool:
-    """Deterministic for n < 3,215,031,751 with witnesses [2,3,5,7,11]."""
+    """Deterministic for n < 3,317,044,064,679,887,385,961,981 with witnesses 2..41.
+    (Witnesses 2..11 alone accept the composite 2,152,302,898,747.)"""
     if n < 2:
         return False
     small_primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
@@ -39,7 +40,7 @@ def miller_rabin_primality(n: int) -> bool:
         r += 1
         d //= 2
 
-    for a in [2, 3, 5, 7, 11]:
+    for a in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41]:
         if a >= n:
             continue
         x = pow(a, d, n)

@@ -15,6 +15,10 @@ psi_13 = 3317044064679887385961981. Several modules used 2..37 while stating
   goldilocks_prime.is_prime_deterministic         psi_12 -> True (fixed); also
       returned False for primes 2..41 (witness = n). Fixed with a
       small-prime guard. Its only callers test the Goldilocks prime.
+  cylicamp/rsa_dr_engine.miller_rabin_primality  witnesses 2..11 only; accepted
+      2152302898747, 3474749660383, 341550071728321, 3825123056546413051 and
+      psi_12. It gates RSA p, q in VerifiedRSAEngine.rsa_key_roundtrip.
+      Now 2..41.
 
 Effect on recorded results: k5_odd_shapes, data_ledger_audit and
 goldilocks_prime produce byte-identical output before and after the fix, so
@@ -64,13 +68,15 @@ def load(fname, fn):
     return ns[fn]
 
 
-TARGETS = [("k5_odd_shapes.py", "is_prime"),
+TARGETS = [("../../cylicamp/rsa_dr_engine.py", "miller_rabin_primality"),
+           ("k5_odd_shapes.py", "is_prime"),
            ("monte_carlo_prime_streams.py", "is_prime_miller_rabin"),
            ("data_ledger_audit.py", "is_prime_miller_rabin"),
            ("goldilocks_prime.py", "is_prime_deterministic")]
 for fname, fn in TARGETS:
     f = load(fname, fn)
     assert f(PSI12) is False, (fname, "psi_12")
+    assert not any(f(c) for c in (2152302898747, 3474749660383, 341550071728321, 3825123056546413051))
     assert all(f(n) == isprime(n) for n in range(2, 20000)), fname
     assert f(2 ** 64 - 2 ** 32 + 1) is True
 
