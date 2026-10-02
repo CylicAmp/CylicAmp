@@ -1130,7 +1130,8 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
     k=4: EXACTLY ONE solution: n = 130 — PROVED 2026-09-19, see below.
     k=5: n EVEN impossible by proof (2026-09-19). n odd: open, search only.
     k=6: IMPOSSIBLE by proof — PROVED 2026-09-19, see below.
-    k=7: 4∤n IMPOSSIBLE by proof (2026-09-20); 4|n and n odd open.
+    k=7: n EVEN IMPOSSIBLE by proof.  4∤n (2026-09-20); 4|n (2026-10-02,
+         k7_even_complete.py).  n odd OPEN.
     k=8: IMPOSSIBLE by proof.  4∤n (2026-09-19); 4|n (2026-10-02,
          k8_case_b_complete.py: complete superset of 304 shapes, all killed).
     k=9: both EVEN branches empty under search (2026-09-21), shape lists
@@ -1859,6 +1860,9 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
   check.  Every 'cand' figure elsewhere in this file counts the same weak
   thing and should be read that way.
 
+  [UPDATE 2026-10-02: all ten -- and the whole 4|n branch -- are now PROVED
+   empty in k7_even_complete.py (complete LP superset of 22 shapes, size
+   bound, finite p = 3 check).  k=7 is impossible for even n.]
   STATUS WORDING.  These ten rows are SEARCH certificates over p < 20000,
   not impossibility certificates.  k=7 as a whole is OPEN: one shape proved,
   eighty searched.
@@ -3036,7 +3040,7 @@ def main():
         assert _r <= _dk * _dk and (_r == 1 or _ip(_r)) and _n // _r >= _k, _n
     print("      r in {1, one prime} and r <= d_k^2 on all eight solutions")
 
-    print("\n  k=2,3,4,6,8 PROVED (k=8 case B: k8_case_b_complete.py); k=5 even proved; rest open.")
+    print("\n  k=2,3,4,6,8 PROVED; k=5 even and k=7 even proved (k7_even_complete.py); rest open.")
 
     print("\n" + "=" * 70)
     print("THEOREM 245 VERIFIED")
