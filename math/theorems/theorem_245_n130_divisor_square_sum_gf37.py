@@ -2019,7 +2019,9 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
       8 is listed, hence whether 8 | n), one by size (n >= 4pqr > 16p^3 >
       21 + 53p^2 > n).  The same mod-8 test also kills
       1 2 2^2 p q 2p 2q r, 1 2 2^2 2^3 p q 2p r and 1 2 2^2 2^3 p 2p q r:
-      7 of the 13 proved, 6 open.
+      7 of the 13 proved, 6 open.  The other six: PROVED 2026-10-02 by the
+      missing-divisor rule plus size (k8_case_b_last_six.py).  All 13 are
+      now proved empty; case B is closed iff the 33-shape list is complete.
 
   (b) LOWERING the bound STRENGTHENED two rows.  At p < 100000 the skip
       column is 989 -- primes where C_2 exceeded the 1e16 factoring cap and
