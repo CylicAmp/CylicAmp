@@ -15,8 +15,12 @@ STEP 1  COMPLETE SHAPE LIST.  tools/k8_caseb_shape_enumerator.py enumerates
 STEP 2  SHAPE-LEVEL MOD 8 (k8_case_b_shape_mod8.py): 8 | n iff 8 is listed,
         since d_8 > 8 whenever 8 is not listed.  122 -> 38.
 STEP 3  SIZE LP: lcm(listed) <= n < 8 d_8^2, p >= 5 if p follows 4, p = 3 if
-        p precedes 4.  38 -> 12.
-STEP 4  the twelve:
+        p precedes 4.  38 -> 15.
+        CORRECTED 2026-10-02: the first version also forced q >= 7, r >= 11
+        when p = 3; the right lower bounds there are q >= 5, r >= 7.  With
+        them three more shapes survive the LP (the Q5 group below); all three
+        die by the 10 | n argument.
+STEP 4  the fifteen:
    proved in k8_case_b_last_six.py / k8_case_b_shape_mod8.py (size lemma):
         1 2 4 p 2p 4p p^2 q   1 2 4 p 2p 4p q p^2   1 2 4 p 2p q 4p p^2
         1 2 4 p 2p q r 4p
@@ -25,7 +29,10 @@ STEP 4  the twelve:
         both need q < 2p and, since the in-box ghost 2q is unlisted, 2q > 4p.
    p = 3, by hand:  1 2 3 4 6 12 q r.  2q unlisted so r < 2q; 12qr | n, so
         12 q^2 < n = 210 + q^2 + r^2 < 210 + 5 q^2, q^2 < 30, but q > 12.
-   p = 3, FINITE (LP gives q <= 18, r <= 24; checked to 100):
+   p = 3, q = 5 FORCED (q lies between 4 and 2p = 6), so 10 | n with
+        10 < 12 = 4p listed and 10 unlisted:
+        1 2 3 4 q 6 12 r    1 2 3 4 q 6 9 12    1 2 3 4 q 6 r 12
+   p = 3, FINITE (LP upper bounds on q, r asserted below 100; checked to 100):
         1 2 3 4 6 9 12 q    1 2 3 4 6 9 q 12    1 2 3 4 6 q 12 r
         1 2 3 4 6 q 9 12    1 2 3 4 6 q r 12
 Every shape is empty, so case B has no solution.                        QED
@@ -81,7 +88,7 @@ def mod8_ok(s):
     return (m8 == 0) if a >= 3 else (m8 == 4)
 
 
-def size_ok(shape):
+def size_lp(shape, obj=None):
     import itertools
     S = [parse(t) for t in shape.split()]
     t = 1 + max(i for a in S for i in range(4) if a[i])
@@ -101,15 +108,27 @@ def size_ok(shape):
     A.append([float(E[i] - D2[i]) for i in range(1, t)]); b.append(float(D2[0] - E[0]) * L2 + math.log(8))
     toks = shape.split()
     after4 = toks.index("2^2") < toks.index("p")
-    lo = [math.log(5 if after4 else 3), math.log(7), math.log(11)]
+    lo = [math.log(x) for x in ((5, 7, 11) if after4 else (3, 5, 7))]
     for i in range(nv):
         e = [0.0] * nv; e[i] = -1; A.append(e); b.append(-lo[i])
     if not after4:
         e = [0.0] * nv; e[0] = 1; A.append(e); b.append(math.log(3))
     for i in range(nv - 1):
         e = [0.0] * nv; e[i] = 1; e[i + 1] = -1; A.append(e); b.append(0.0)
-    return linprog([0] * nv, A_ub=np.array(A), b_ub=np.array(b), bounds=[(None, None)] * nv,
-                   method="highs").status == 0
+    c = [0.0] * nv
+    if obj is not None:
+        c[obj] = -1.0
+    return linprog(c, A_ub=np.array(A), b_ub=np.array(b), bounds=[(None, None)] * nv, method="highs")
+
+
+def size_ok(shape):
+    return size_lp(shape).status == 0
+
+
+def lp_max(shape, j):
+    """largest value of prime j (0 = p, 1 = q, 2 = r) the size LP allows; inf if unbounded"""
+    r = size_lp(shape, j)
+    return math.inf if r.status == 3 else math.exp(r.x[j])
 
 
 ALL = set()
@@ -129,9 +148,20 @@ PROVED = {"1 2 2^2 p 2p 2^2p p^2 q", "1 2 2^2 p 2p 2^2p q p^2", "1 2 2^2 p 2p q 
           "1 2 2^2 p 2p q r 2^2p"}
 STRICT = {"1 2 2^2 p q 2p r 2^2p", "1 2 2^2 p q r 2p 2^2p"}
 HAND3 = {"1 2 p 2^2 2p 2^2p q r"}
+Q5 = {"1 2 p 2^2 q 2p 2^2p r", "1 2 p 2^2 q 2p p^2 2^2p", "1 2 p 2^2 q 2p r 2^2p"}
 FIN3 = {"1 2 p 2^2 2p p^2 2^2p q", "1 2 p 2^2 2p p^2 q 2^2p", "1 2 p 2^2 2p q 2^2p r",
         "1 2 p 2^2 2p q p^2 2^2p", "1 2 p 2^2 2p q r 2^2p"}
-assert set(LIVE) == PROVED | STRICT | HAND3 | FIN3
+assert set(LIVE) == PROVED | STRICT | HAND3 | FIN3 | Q5
+# Q5: p = 3 and 4 < q < 2p = 6 force q = 5, so 10 | n; 10 < 12 = 4p, which is
+# listed, but 10 is not -- impossible.
+for sh in Q5:
+    T = sh.split()
+    assert T.index("q") < T.index("2p") and "2q" not in T and T.index("2^2p") <= 7
+assert [x for x in range(5, 6) if all(x % d for d in range(2, x))] == [5] and 10 < 12
+# FIN3: the LP bounds every prime below the brute-force limit of 100
+for sh in FIN3:
+    for j in range(1, 1 + len({c for c in sh if c in "qr"})):
+        assert lp_max(sh, j) < 100, (sh, j, lp_max(sh, j))
 
 # strictness: q < 2p and 2q > 4p are incompatible
 assert all(not (q < 2 * p and 2 * q > 4 * p) for p in range(1, 500) for q in range(1, 1000))
@@ -183,4 +213,4 @@ NREAL = len(realized)
 
 if __name__ == "__main__":
     print("realized case-B shapes below 400000:", NREAL, "all inside the enumerated superset")
-    print("k=8 case B complete: 304 -> 122 -> 38 (mod 8) -> 12 (size) -> 0; all assertions pass")
+    print("k=8 case B complete: 304 -> 122 -> 38 (mod 8) -> 15 (size) -> 0; all assertions pass")
