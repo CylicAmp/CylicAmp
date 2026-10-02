@@ -32,6 +32,8 @@ The user brings math, observations, and code. The work is collaborative and rigo
 
 **Save every verified result to the repo in the same turn.** Anything checked in chat — audits of supplied material, corrections, derivations, verdicts — goes into a runnable file with assertions and is committed and pushed before the reply ends. Nothing verified may exist only in chat.
 
+**Check CI after every push.** A local run is one check; the GitHub Actions run on PR #7 is the one the owner gets emailed about. After each push, read the workflow run's result (GitHub MCP `actions_list` / `get_job_logs`) and do not report the push as passing until it has passed. Every Tests run from 2026-09-22 to 2026-10-02 failed at collection (the workflow installed only pytest) while commits were reported as passing on local runs alone.
+
 **Keep the skills current.** When a session uses a method that is not yet a skill in `.claude/skills/`, write it as one; when a skill proves incomplete or wrong in use, update it in the same turn, with the example that exposed it. Skills record how the owner's work is done.
 
 **Repository decisions are Claude's job.** The user does the mathematics and has said plainly that they do not know GitHub and do not want to be asked about it. Decide file layout, branches, merges, cleanup and tooling from the evidence, do it, verify it, and report what was done. Ask only about the mathematics.
