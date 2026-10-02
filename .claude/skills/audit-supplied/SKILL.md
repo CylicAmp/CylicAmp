@@ -51,6 +51,19 @@ re-weighted by a fixed sign — gap 6 alone contributed 119% of the excess,
 because the commonest gap happens to be a non-residue. That is one sentence
 about 6, not a fact about consecutive primes.
 
+## 4a. Reconstruct unlabeled lines
+
+When a line of supplied output has no stated origin, find the sequence that
+produces it exactly before judging it. Try the obvious variants (wrap a digit,
+hold a digit, reduce mod 10 / 9 / 7) and assert the one that reproduces every
+entry. Say if more than one reading fits.
+
+Example (2026-10-02, `math/theorems/ap_147_step20_audit.py`): output for the
+progression 147, 167, 187, 207 included "alt diffs [20, 20, -80, 20, 20]"
+with no definition. It is the difference list of 147, 167, 187, 107, 127, 147
+-- hundreds digit held at 1, tens digit taken mod 10; the -80 is the wrap
+8 -> 0 (+20 - 100). Asserted, not described.
+
 ## 5. Report in this order
 
 1. what reproduces — all of it, explicitly
