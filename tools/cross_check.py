@@ -16,6 +16,13 @@ runs on Termux.
     python3 tools/cross_check.py -m anthropic/claude-sonnet-4.5 -m openai/gpt-5 "question"
     python3 tools/cross_check.py --list            # model ids available to your key
 
+Each answer records what the response says served it (model name, provider,
+system_fingerprint, response id). If any of these differ from the previous
+record for the same requested model, the run prints CHANGED SINCE LAST RECORD
+and writes it into the record: a renamed or re-routed model shows up in your
+own files. A change of weights behind an unchanged name and fingerprint cannot
+be seen this way; only weights you hold and hash can rule that out.
+
 Defaults were looked up on 2026-10-02; ids change, `--list` shows the current ones. No system prompt is sent
 unless you pass --system, so each model answers with only your words.
 """
@@ -50,17 +57,52 @@ def call(path, key, body=None, timeout=180):
         return json.loads(r.read())
 
 
+def served(d):
+    """What actually answered, as the response reports it. An alias such as
+    "anthropic/claude-opus-5.5" can be pointed at new weights without notice;
+    these fields are what a later record can be compared against."""
+    return {"served_by": d.get("model"), "provider": d.get("provider"),
+            "system_fingerprint": d.get("system_fingerprint"), "response_id": d.get("id")}
+
+
+NO_SERVE = {"served_by": None, "provider": None, "system_fingerprint": None, "response_id": None}
+
+
 def ask(model, question, key, system=None):
     msgs = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": question}]
     try:
         d = call("/chat/completions", key, {"model": model, "messages": msgs})
-        return {"model": model, "answer": d["choices"][0]["message"]["content"],
-                "served_by": d.get("model"), "error": None}
+        return {"model": model, "answer": d["choices"][0]["message"]["content"], **served(d), "error": None}
     except urllib.error.HTTPError as e:
-        return {"model": model, "answer": None, "served_by": None,
+        return {"model": model, "answer": None, **NO_SERVE,
                 "error": f"HTTP {e.code}: {e.read().decode(errors='replace')[:300]}"}
     except Exception as e:  # network, timeout, malformed reply
-        return {"model": model, "answer": None, "served_by": None, "error": repr(e)[:300]}
+        return {"model": model, "answer": None, **NO_SERVE, "error": repr(e)[:300]}
+
+
+def last_served(out=None):
+    """requested model -> (served_by, provider, system_fingerprint, utc) from the newest earlier record."""
+    seen = {}
+    for f in sorted((out or OUT).glob("*.json")):
+        try:
+            rec = json.loads(f.read_text())
+        except (OSError, ValueError):
+            continue
+        for r in rec.get("results", []):
+            if r.get("served_by"):
+                seen[r["model"]] = (r.get("served_by"), r.get("provider"), r.get("system_fingerprint"), rec.get("utc"))
+    return seen
+
+
+def changes(results, seen):
+    """One line per model whose served name, provider or fingerprint differs from the last record."""
+    out = []
+    for r in results:
+        prev = seen.get(r["model"])
+        now = (r.get("served_by"), r.get("provider"), r.get("system_fingerprint"))
+        if prev and r.get("served_by") and now != prev[:3]:
+            out.append(f"{r['model']}: was {prev[:3]} at {prev[3]}, now {now}")
+    return out
 
 
 def main(argv=None):
@@ -82,16 +124,23 @@ def main(argv=None):
         ap.error("give a question")
     models = a.model or DEFAULT_MODELS
     stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    seen = last_served()
     results = []
     for m in models:
         print(f"... {m}", flush=True)
         results.append(ask(m, a.question, key, a.system))
-    rec = {"utc": stamp, "question": a.question, "system": a.system, "results": results}
+    shifted = changes(results, seen)
+    for line in shifted:
+        print("CHANGED SINCE LAST RECORD:", line)
+    rec = {"utc": stamp, "question": a.question, "system": a.system, "results": results, "changed": shifted}
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / f"{stamp}.json").write_text(json.dumps(rec, indent=2, ensure_ascii=False) + "\n")
     md = [f"# Cross-check {stamp}", "", f"**Question:** {a.question}", ""]
+    if shifted:
+        md += ["**Changed since last record:**", ""] + [f"- {x}" for x in shifted] + [""]
     for r in results:
-        md += [f"## {r['model']}" + (f" (served: {r['served_by']})" if r["served_by"] else ""), "",
+        tag = ", ".join(f"{k}: {r[k]}" for k in ("served_by", "provider", "system_fingerprint") if r[k])
+        md += [f"## {r['model']}" + (f" ({tag})" if tag else ""), "",
                r["answer"] if r["answer"] else f"_error: {r['error']}_", ""]
     (OUT / f"{stamp}.md").write_text("\n".join(md))
     print(f"saved records/cross_check/{stamp}.json and .md")
