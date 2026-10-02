@@ -1131,7 +1131,8 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
     k=5: n EVEN impossible by proof (2026-09-19). n odd: open, search only.
     k=6: IMPOSSIBLE by proof — PROVED 2026-09-19, see below.
     k=7: 4∤n IMPOSSIBLE by proof (2026-09-20); 4|n and n odd open.
-    k=8: 4∤n IMPOSSIBLE by proof (2026-09-19); 4|n open, 23 live shapes.
+    k=8: IMPOSSIBLE by proof.  4∤n (2026-09-19); 4|n (2026-10-02,
+         k8_case_b_complete.py: complete superset of 304 shapes, all killed).
     k=9: both EVEN branches empty under search (2026-09-21), shape lists
          SATURATED. n odd: shape list now BUILT from the count lemma, not
          sampled — 7180 shapes, all EMPTY; t=6 (5927) PROVED empty by
@@ -1907,6 +1908,8 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
   the structure produces, not a proof that no other a occurs higher up.)
 
   ADDED 2026-09-19 — k=8: HALF PROVED, HALF OPEN.
+  [UPDATE 2026-10-02: the open half is PROVED -- see k8_case_b_complete.py.
+   k=8 is impossible.]
   The parity lemma fires (k even, so p = 2), but k=8 does NOT close the way
   k=6 did, and the reason is countable: k=6 leaves four terms after 1 and 4,
   so mod 4 gives a in {1,3}; k=8 leaves six, so a in {1,3,5}. The extra
@@ -3033,7 +3036,7 @@ def main():
         assert _r <= _dk * _dk and (_r == 1 or _ip(_r)) and _n // _r >= _k, _n
     print("      r in {1, one prime} and r <= d_k^2 on all eight solutions")
 
-    print("\n  k=2,3,4,6 PROVED; k=5 even and k=8 with 4∤n proved; rest open.")
+    print("\n  k=2,3,4,6,8 PROVED (k=8 case B: k8_case_b_complete.py); k=5 even proved; rest open.")
 
     print("\n" + "=" * 70)
     print("THEOREM 245 VERIFIED")
