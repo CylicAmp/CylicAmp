@@ -25,6 +25,16 @@ goldilocks_prime produce byte-identical output before and after the fix, so
 no search in them met psi_12. monte_carlo_prime_streams is unseeded and
 differs run to run regardless.
 
+FULL SWEEP (2026-10-02): 57 files define a function named *is_prime*, *miller*,
+*rabin* or *isprime*. 51 top-level functions in 48 files were run against sympy
+on n = -2..4999 and, if they use pow() (Miller-Rabin), on 12 known strong
+pseudoprimes up to psi_12: all 51 agree after the fixes above. The other 9
+files: 7 nested trial-division functions (eisenstein_prime_split,
+board_row_col_numbers_mod37, fps37_scanner, pascal_row8_mod37,
+prime_power_sovereign_collapse, T143, T326) -- correct by inspection, divisors
+checked up to the square root; 2 name matches that are not primality tests
+(api.get_rabinowitsch, gf37_engine.rabinowitsch_residues).
+
 SUPPLIED REVIEW OF THE GOLDILOCKS PATCH (2026-10-02), audited
   1. "The fix is correct: removes witness = n false negatives for primes <= 41
      and handles n < 2."  CORRECT; asserted below.
