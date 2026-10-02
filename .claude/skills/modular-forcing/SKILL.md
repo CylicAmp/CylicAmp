@@ -76,3 +76,18 @@ odd layer. It cannot handle a congruence with three or more free squares on
 one side — the quadratic-residue step that closed k=3 needs a *lone* square,
 and with three there is nothing to invert. When either is true, hand off:
 `case-tree` for branching, `search-bounds` for a bounded check.
+
+## Re-run the ladder after refining the cases (added 2026-10-02)
+
+A rung that "does not fire" at one level of the case tree can fire one level
+down. The ladder must be re-run on every refinement, not only on the coarse
+cases.
+
+Example: T245 k=8 case B. At the parity-shape level mod 8 gives n = 4b
+(mod 8), and "8 | n needs b even, 4 || n needs b odd; both reachable" was
+recorded as the ladder's stopping point. But a NAMED shape fixes b AND
+whether 8 is a listed divisor -- and since d_8 >= 9, 8 | n iff 8 is listed.
+Re-run shape by shape, mod 8 killed 6 of the 13 shapes that had been left
+to search to p < 20000 (`math/theorems/k8_case_b_shape_mod8.py`). Pair it
+with the size check n >= lcm(listed divisors) against n <= 8 d_8^2 whenever
+d_8 is a fixed multiple of p: that killed a seventh.
