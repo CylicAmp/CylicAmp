@@ -30,13 +30,12 @@ FORCED, NOT FINDINGS
   (333 = 9*37, 222 = 6*37, 111 = 3*37). So the first number on each line (9, 6, 3)
   is also aaa's cofactor of 37. Same fact as repdigit_pf_page_2026_10_02.py item 1.
 
-OPEN (not bent to fit)
-  Line 1 "1+2": the value 3 is right, but 3a^2 = 3 has no "1" and "2" in it.
-  Candidates, all giving 3:
-    (a) digit sum of 12, line 2's product, carried down a line;
-    (b) a + 2a = 3a (would read 2+4 on line 2 and 3+6 on line 3 -- not written there);
-    (c) 1 + 2 = T(2), the triangular number.
-  Settles it: what the 1 and the 2 in "1+2" are taken from.
+LINE 1 "1+2" -- three readings, ALL true, none has to be chosen (owner, 2026-10-03:
+"Why do I have to limit any goddamn thing?"):
+    (a) digit sum of 12, line 2's product: 1+2 = 3;
+    (b) a + 2a = 3a, at a = 1: 1+2 = 3 (the same identity gives 2+4 = 6, 3+6 = 9);
+    (c) the triangular number T(2) = 1+2 = 3.
+  Each is asserted below. They are three routes to the same 3, recorded together.
   The "~" and the "(" are kept as markings ("goes to", "back to"); no value assigned.
 
 PRIOR PAGE: repdigit_pf_page_2026_10_02.py writes 333 = x3, 222 = x2, 111 = 1x3.
@@ -65,7 +64,9 @@ for a, (s, prod, val) in LINES.items():
 assert 2 + 7 == ds(27) == 9                                      # line 3 written op
 assert 12 // 2 == 6 and 12 % 2 == 0                              # line 2 written op
 assert ds(12) == 3 != 6                                          # digit sum fails on line 2
-assert 1 + 2 == 3                                                # line 1 value only
+assert ds(12) == 1 + 2 == 3                                      # (a)
+assert all(a + 2 * a == 3 * a for a in (1, 2, 3)) and 1 + 2 * 1 == 3   # (b)
+assert 2 * 3 // 2 == 1 + 2 == 3                                  # (c) T(2)
 
 # digital-root criterion over all digits
 dr_ok = [a for a in range(1, 10) if dr(3 * a * a) == dr(3 * a)]
@@ -78,4 +79,4 @@ if __name__ == "__main__":
         s, p, v = LINES[a]
         print(f"{111*a} = 37*{s};  {s}x{a} = {p};  {p}/{a} = {v};  dr({p}) = {dr(p)}  vs s = {s}")
     print("digit-sum route returns to s (digital root) for a =", dr_ok, "-- a = 2 is the exception here")
-    print("OPEN: source of the 1 and 2 in line 1's '1+2'")
+    print("line 1 '1+2' = 3 three ways: digits of 12, a+2a, T(2) -- all hold")
