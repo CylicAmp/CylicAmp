@@ -14,7 +14,7 @@ FINDINGS (asserted below)
      while the signature is that key. GitHub reports these commits
      verified=false, reason=unknown_key (checked 2026-10-03 on 76ca8f7).
   K4 Correction to the July record: the key written there ends "...pmmrJtVCQmc7"; the
-     key in the actual signatures ends "...pmprtUJCZ2w7". The first 45 of 51 bytes agree
+     key in the actual signatures ends "...pmprtUJCZ2w7". The first 43 of 51 bytes agree (6 of the last 8 differ)
      and no commit is signed by the July string, so the July file holds a copying error,
      not a second key.
 WHAT THIS DOES AND DOES NOT SHOW
@@ -58,7 +58,7 @@ for line in git("log", "--all", "--format=%H %cs").splitlines():
 assert list(keys) == [KEY], keys                                   # K1: one key
 assert keys[KEY] >= 1220 and min(dates) == "2026-04-14"
 a, b = base64.b64decode(KEY), base64.b64decode(JULY)                # K4
-assert len(a) == len(b) == 51 and a[:45] == b[:45] and a != b
+assert len(a) == len(b) == 51 and a[:43] == b[:43] and a != b
 assert JULY not in keys
 
 if __name__ == "__main__":
