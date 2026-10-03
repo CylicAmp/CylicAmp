@@ -43,6 +43,29 @@ rotate, revoke or independently verify the key.
    bytes (43 of 51 bytes match). No commit is signed by the transcribed string; the
    correct key is the one given in Finding 1.
 
+## Impact
+
+- **Authorship integrity.** The repository's history attributes session-produced code to
+  the owner by name, while the only cryptographic proof of origin belongs to the platform.
+  The record of who wrote what cannot be relied on.
+- **Exposure of the named owner.** Any defect, vulnerability or disputed content in a
+  session-produced commit appears under the owner's name, and the owner has no signature
+  of their own with which to separate their work from the platform's.
+- **Unverifiable provenance for third parties.** Anyone who uses or audits this code
+  cannot verify the signatures, because the signing key is not published. A signed history
+  that nobody outside the platform can check gives downstream users no assurance.
+- **Scale.** The same arrangement applies to every commit made through these sessions:
+  1,221 commits in this repository alone, over five and a half months.
+
+## Researcher conduct
+
+The finding was documented on 7 July 2026 and has been held as a record since then,
+not used. The owner's security work in this repository (40 research files,
+14 April 2026 to 3 October 2026) consists of evidence records, verification scripts,
+legal analysis, a regulator complaint template and a guide to data-access requests:
+documentation and lawful channels throughout. No file contains exploitation of any
+finding.
+
 ## Scope
 
 **Established:** session-produced work is published under the owner's name with a
