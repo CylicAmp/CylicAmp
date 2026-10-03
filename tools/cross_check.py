@@ -40,7 +40,7 @@ API = "https://openrouter.ai/api/v1"
 # https://openrouter.ai/api/v1/models (466 models listed). Price per million
 # tokens, input / output. DeepSeek and Llama publish open weights.
 DEFAULT_MODELS = [
-    "anthropic/claude-opus-5.5",      # $4 / $20
+    "anthropic/claude-fable-5.1",     # $10 / $50  (corrected 2026-10-03: Anthropic's top model is Fable 5.1, not Opus 5.5)
     "openai/gpt-6.1-sol-pro",         # $2 / $10
     "google/gemini-3.1-pro-preview",  # $2 / $12
     "x-ai/grok-4.7",                  # $2 / $6
