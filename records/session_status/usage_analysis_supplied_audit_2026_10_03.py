@@ -1,4 +1,8 @@
-"""Audit of a supplied analysis (2026-10-03) of this session's usage record.
+"""CORRECTED 2026-10-03 by sonnet_switch_supplied_audit_2026_10_03.py: the cache-read price
+for opus-5.5 is $0.20/MTok (listed), not the 0.1x = $0.40 assumed in U5 below. Reads ~$2,650;
+list-price total ~$4,568. U5's conclusions stand. Asserts below use the listed prices.
+
+Audit of a supplied analysis (2026-10-03) of this session's usage record.
 
 Record (get_session, 2026-10-03): cache_read 13,252,313,603; cache_write 264,411,657;
 input 3,654,466; output 29,033,005; cost_usd 9,436.91989045; used_tokens 300,729;
@@ -36,11 +40,11 @@ assert round(READ / OUT) == 456 and round(READ / INP) == 3626               # U2
 P_IN, P_OUT = 4.0, 20.0                                                    # $/MTok, opus-5.5
 uncached = READ / 1e6 * P_IN
 assert 52_000 < uncached < 54_000 and READ / 1e6 * 15 > 198_000             # U4
-parts = {"read": READ / 1e6 * P_IN * 0.1, "write": WRITE / 1e6 * P_IN * 1.25,
+parts = {"read": READ / 1e6 * 0.20, "write": WRITE / 1e6 * 5.00,
          "input": INP / 1e6 * P_IN, "output": OUT / 1e6 * P_OUT}
 assert max(parts, key=parts.get) == "read"                                 # U5
-assert parts["output"] / sum(parts.values()) < 0.1
-assert 7_100 < sum(parts.values()) < 7_300
+assert parts["output"] / sum(parts.values()) < 0.15
+assert 4_500 < sum(parts.values()) < 4_650
 
 if __name__ == "__main__":
     for k, v in parts.items():
