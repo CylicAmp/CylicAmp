@@ -16,7 +16,7 @@ Verdict per claim:
      (91,391,690 bytes, 2026-09-06 onward, 2,356 owner messages) survived on disk.
 Grade (claim-grade): the institutional "translation" is an analogy (correspondence),
 not a consequence of thermodynamics; real institutional costs are engineering and
-attention costs, ~10^12+ times larger than the Landauer floor, so the floor never binds.
+attention costs, which sit far above the Landauer floor (ratio not computed here).
 """
 import math
 
