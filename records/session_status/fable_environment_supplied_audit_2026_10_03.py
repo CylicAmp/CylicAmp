@@ -14,6 +14,13 @@ VERDICT
      to model routing. Not established.
   F4 Not checked: whether this account's plan includes Fable (guides say it requires data
      retention by default for safety classifiers).
+F5 GitHub changelog 2026-09-01 (fetched 2026-10-03), verbatim: "Claude Fable 5.1 requires
+     data retention by default." Anthropic "retains data, including prompts and outputs, to
+     operate safety classifiers that detect harmful use"; "Retained data is not used to train
+     Anthropic's models." Zero data retention is a time-bound exemption through the end of the
+     calendar year for approved enterprises (Copilot Enterprise/Business), decided by the
+     GitHub account team; "GitHub Support cannot determine eligibility or enable access."
+     Individual users get the default: prompts and outputs retained.
 CORRECTION found while checking: tools/cross_check.py listed anthropic/claude-opus-5.5 as
   Anthropic's top model on 2026-10-02. Fable 5.1 sits above it ($10/$50 vs $4/$20); the
   default is now claude-fable-5.1.
