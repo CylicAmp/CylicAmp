@@ -24,6 +24,16 @@ NOT ESTABLISHED / WRONG
   S6 "24 = 4!, 27 = 3^3": both true, offered as a guess for why they are unreduced;
      nothing on the pages says so.
 
+OWNER'S DEFINITION (2026-10-03, verbatim): "I didn't put path dependent. ... one of these
+algorithms changed what PF means. PF has always stood for prime foundational, which is
+numbers that equal 12."  The "path-dependent" reading came from the supplied text, not
+the owner, and it redefines PF; under the owner's definition it is set aside.
+Checked against the PF lines of the 2026-10-02 page (111, 444, 888):
+  444: digit sum 12 and 444/37 = 12          -- equals 12
+  888: digit sum 24 and 888/37 = 24 = 2 x 12 -- a multiple of 12, not 12
+  111: digit sum 3 and 111/37 = 3            -- how 111 equals 12 is not on the page yet
+Among all nine repdigits, only 444 gives exactly 12 by digit sum or by /37.
+
 What stands from the owner's own lines: repdigit_return_lines_2026_10_03.py.
 FALSIFICATION: any assertion failing.
 """
@@ -52,6 +62,10 @@ ds = lambda m: sum(map(int, str(m)))
 assert [ds(3 * n) for n in (4, 5)] == [TABLE_PF[4], TABLE_PF[5]]
 assert [ds(3 * n) for n in (6, 7, 8, 9)] == [9, 3, 6, 9]
 assert (TABLE_PF[7], TABLE_PF[8], TABLE_PF[9]) == (1, 24, 27)
+
+DS = lambda m: sum(map(int, str(m)))
+assert [n for n in range(1, 10) if 111 * n // 37 == 12 or DS(111 * n) == 12] == [4]
+assert (DS(888), 888 // 37, DS(111), 111 // 37) == (24, 24, 3, 3)
 
 import math
 assert math.factorial(4) == 24 and 3 ** 3 == 27                                 # S6
