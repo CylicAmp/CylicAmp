@@ -52,7 +52,9 @@ CYCLIC PERMUTATION CLUSTER {412, 241, 124}
   Cipher encodes a +1 step from the cluster (7) to the sealed output (8).
 """
 
-def dr(n): return (n - 1) % 9 + 1 if n > 0 else 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_pos as dr
 def ds(n): return sum(int(d) for d in str(n))
 
 

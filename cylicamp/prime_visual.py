@@ -16,17 +16,9 @@ def digital_root(n: int) -> int:
     return n
 
 
-def is_prime(n: int) -> bool:
-    if n < 2:
-        return False
-    if n == 2:
-        return True
-    if n % 2 == 0:
-        return False
-    for i in range(3, int(n ** 0.5) + 1, 2):
-        if n % i == 0:
-            return False
-    return True
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 
 def is_dr7_prime(n: int) -> bool:

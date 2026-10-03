@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 LoB 25 — Legendre Symbol Applications in the 37-Field
 
@@ -31,12 +32,9 @@ LoB_25d: QUADRATIC RECIPROCITY SCAN OF 37
 """
 
 
-def legendre(a, p=37):
-    a = a % p
-    if a == 0:
-        return 0
-    val = pow(a, (p - 1) // 2, p)
-    return 1 if val == 1 else -1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import legendre37 as legendre
 
 
 QR_MOD37 = frozenset((n * n) % 37 for n in range(37))
@@ -63,7 +61,7 @@ assert TIER_STATUS[6]  == 'EXTENDED'  # 240 ≡ 18 (non-QR)
 assert TIER_STATUS[7]  == 'NATIVE'    # 280 ≡ 21 (QR)
 assert TIER_STATUS[8]  == 'EXTENDED'  # 320 ≡ 24 (non-QR)
 assert TIER_STATUS[9]  == 'NATIVE'    # 360 ≡ 27 (QR)
-assert TIER_STATUS[10] == 'NATIVE'    # 400 ≡ 30 (QR, f26 anchor)
+assert TIER_STATUS[10] == 'NATIVE'    # 400 ≡ 30 (QR, sovereign anchor)
 assert TIER_STATUS[11] == 'NATIVE'    # 440 ≡ 33 (QR)
 assert TIER_STATUS[12] == 'NATIVE'    # 480 ≡ 36 (QR, inverse unity)
 

@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Medusa Guard — 137/37 Packet Verification
 
@@ -20,8 +21,9 @@ Note: the previous pillar set {3,30,9,21,25,15} was incorrect.
 PILLARS = {4, 9, 25, 30}
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def medusa_stress_test(packet_node):

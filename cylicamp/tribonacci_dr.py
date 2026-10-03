@@ -9,11 +9,9 @@ Displayed in rows of 10 to reveal block structure.
 """
 
 
-def dr(n: int) -> int:
-    """Digital root, maps 0 to 9."""
-    while n >= 10:
-        n = sum(int(d) for d in str(n))
-    return n if n != 0 else 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_iter as dr
 
 
 CYCLE = [2, 4, 7, 4, 6, 8, 9, 5, 4, 9, 9, 4, 4, 8, 7, 1, 7, 6, 5, 9,

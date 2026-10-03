@@ -1,7 +1,8 @@
+# CLASS: THEOREM
 """
 Errata Prevention Protocol — MWS v37.21+
 
-Three classes of errors found in this framework:
+Three classes of errors found in GF(37):
   E1: Geometric incidence claim from memory (120-cell cells/edge: 4 → 3)
   E2: QR membership claimed without computation (5 is QR → false, Legendre=-1)
   E3: Duplicate structural fields (is_square == has_sqrt before LoB 23b fix)
@@ -29,11 +30,11 @@ CLASS C — STRUCTURAL FIELD DUPLICATION
   Audit hook: compute pairwise equality of field values across all 37 residues.
 
 LEGENDRE ORACLE (production-ready)
-  Covers all framework-critical checks:
+  Covers all GF(37)-critical checks:
   - Is residue r a QR mod 37?
   - What is its square root?
   - Is the map multiplier (26) QR? (yes, sqrt=10)
-  - Are all f26 anchors/targets QR? (yes — F26 QR Closure Theorem)
+  - Are all sovereign anchors/targets QR? (yes — Sovereign QR Closure Theorem)
 """
 
 import math
@@ -88,7 +89,7 @@ assert legendre_37(25) == 1   # anchor
 assert legendre_37(30) == 1   # anchor
 assert legendre_37(3)  == 1   # target
 assert legendre_37(5)  == -1  # PIVOT — non-residue
-assert legendre_37(26) == 1   # 26 — QR
+assert legendre_37(26) == 1   # SCALAR_137 — QR
 assert sqrt_mod37(26)  == 10  # 10² ≡ 26 mod 37
 
 # CLASS B: Geometric oracle
@@ -116,7 +117,7 @@ if __name__ == "__main__":
     print()
     print("CLASS A — Legendre oracle:")
     for r, name in [(4,'anchor'), (9,'anchor'), (25,'anchor'), (30,'anchor/target'),
-                     (5,'PIVOT'), (26,'26')]:
+                     (5,'PIVOT'), (26,'SCALAR_137')]:
         L = legendre_37(r)
         s = sqrt_mod37(r)
         print(f"  ({r:2d}|37) = {L:+d}   {name}   sqrt={s}")

@@ -29,7 +29,9 @@ The resulting signature uses ed25519 key:
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKy87HxSEheG8vEPhSs9u2KZCtVErAQfpmmrJtVCQmc7
 ```
 
-This key belongs to Anthropic's infrastructure. Michael Warren Song cannot export it,
+This key belongs to Anthropic's infrastructure.
+
+> **Correction 2026-10-03** (`signing_key_verification_2026_10_03.py`): the key string above has a copying error in its last bytes. The key in every signed commit of this repository (1,220 commits, 2026-04-14 to 2026-10-03) is `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKy87HxSEheG8vEPhSs9u2KZCtVErAQfpmprtUJCZ2w7`. Michael Warren Song cannot export it,
 rotate it, revoke it, or verify its chain of custody independently.
 
 ---

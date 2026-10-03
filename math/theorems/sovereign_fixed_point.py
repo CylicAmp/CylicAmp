@@ -1,3 +1,4 @@
+# CLASS: THEOREM
 """
 Sovereign Fixed Point Theorem
 

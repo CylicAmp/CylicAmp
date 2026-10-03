@@ -87,7 +87,9 @@ assert 456 % 24 == 0    # exact multiple of Layer 58 period
 assert 456 % 76 == 0    # exact multiple of pi(37)
 
 # 456 DR
-def dr(n): return (n-1)%9+1 if n>0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 assert dr(456) == 6     # DR=6 matches unified k coupling signature
 
 # pi(37) structure: 76 = 2×38 = 2×(37+1)

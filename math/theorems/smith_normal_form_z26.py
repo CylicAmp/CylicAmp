@@ -127,7 +127,9 @@ def elementary_divisors_mod_n(A, n):
 import sys
 sys.path.insert(0, '.')
 
-def dr(n): return (n-1)%9+1 if n>0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 def digit_sum_once(n): return sum(int(d) for d in str(abs(n)))
 def T_op(n):
     if n < 10: return n

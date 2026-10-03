@@ -41,8 +41,9 @@ def check(label, cond):
 def dr(n):
     return 0 if n == 0 else 1 + (abs(int(n)) - 1) % 9
 
-def digit_sum(n):
-    return sum(int(c) for c in str(n))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import digit_sum
 
 def rev(n):
     return int(str(n)[::-1])

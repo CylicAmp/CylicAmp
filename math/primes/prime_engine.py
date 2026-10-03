@@ -10,7 +10,8 @@ THEOREM (DR primality necessary condition):
   Equivalently: DR(p) ∈ {3,6,9} ↔ 3|p ↔ p not prime for p > 3.
 
 THEOREM (DR filter is 6k±1 wheel sieve):
-  {n ∈ ℤ⁺ : n odd, DR(n) ∉ {3,6,9}} = {n : gcd(n,6) = 1} = {6k±1 : k ≥ 1}
+  {n > 1 : n odd, DR(n) ∉ {3,6,9}} = {n > 1 : gcd(n,6) = 1} = {6k±1 : k ≥ 1}
+  (n = 1 is odd with DR 1 but is not of the form 6k±1 with k ≥ 1.)
   PROOF sketch: DR(n) ∈ {3,6,9} ↔ 3|n; n even ↔ 2|n.
                 Removing both gives gcd(n,6)=1 candidates. ∎
 
@@ -37,11 +38,9 @@ from typing import Iterator, Tuple
 # Digital root
 # ---------------------------------------------------------------------------
 
-def digital_root(n: int) -> int:
-    """DR(n): 1-9 for n > 0, 9 for multiples of 9."""
-    if n <= 0:
-        raise ValueError("digital_root defined for n > 0")
-    return (n - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_strict as digital_root
 
 
 # ---------------------------------------------------------------------------
@@ -77,11 +76,14 @@ def grid_label(n: int) -> str:
 # Witness sets sufficient for deterministic results up to stated bounds.
 # Source: https://miller-rabin.appspot.com/
 
-_MR_WITNESSES = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)
+_MR_WITNESSES = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41)
+# The first 12 primes (2..37) are exact only below psi_12 = 318665857834031151167461
+# = 399165290221 * 798330580441, which fools all of them. Adding 41 makes the test
+# exact below psi_13 = 3317044064679887385961981 (corrected 2026-09-30).
 
 
 def _miller_rabin(n: int) -> bool:
-    """Deterministic Miller-Rabin for n < 3.3 × 10²⁴ using 12 fixed witnesses."""
+    """Deterministic Miller-Rabin for n < 3.3 × 10²⁴ using the first 13 primes as witnesses."""
     if n < 2:
         return False
     if n == 2 or n == 3:

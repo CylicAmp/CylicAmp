@@ -47,10 +47,9 @@ print("="*60)
 print("2.  1 is genesis of {1,2,4,8,7,5} bypassing {3,6,9}")
 print("="*60)
 
-def dr(n):
-    if n <= 0:
-        raise ValueError
-    return (n - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_strict as dr
 
 # Trace the 6-cycle from 1
 cycle_from_1 = []
@@ -116,7 +115,7 @@ def is_prime_miller_rabin(n):
     r, d = 0, n - 1
     while d % 2 == 0:
         r += 1; d //= 2
-    for a in (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37):
+    for a in (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41):
         if a >= n: continue
         x = pow(a, d, n)
         if x in (1, n-1): continue

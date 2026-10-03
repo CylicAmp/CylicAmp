@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="634" height="704" viewBox="0 0 634 704">
+<rect width="634" height="704" fill="#12151a"/>
+<text x="28" y="34" fill="#e8e3d8" font-size="15" font-family="ui-monospace,monospace">The 9 lift grids — seed on top, R0+3 and R0+6 below</text>
+<text x="28" y="54" fill="#707a88" font-size="11.5" font-family="ui-monospace,monospace">colour = +3-orbit: blue {1,4,7}  amber {2,5,8}  green {3,6,9}. Every COLUMN is one whole orbit — that is why the grid covers 1..9.</text>
+<text x="28" y="72" fill="#8a94a6" font-size="12.5" font-family="ui-monospace,monospace">seed 123   (consecutive)</text>
+<rect x="28" y="82" width="49" height="41" rx="5" fill="#1e242c" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="52" y="108" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="82" y="82" width="49" height="41" rx="5" fill="#1e242c" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="106" y="108" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="136" y="82" width="49" height="41" rx="5" fill="#1e242c" stroke="#7fae72" stroke-width="2.2"/>
+<text x="160" y="108" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<text x="194" y="107" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">R0</text>
+<rect x="28" y="128" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="52" y="154" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="82" y="128" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="106" y="154" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="136" y="128" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="160" y="154" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<text x="194" y="153" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+3</text>
+<rect x="28" y="174" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="52" y="200" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="82" y="174" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="106" y="200" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="136" y="174" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="160" y="200" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="194" y="199" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+6</text>
+<text x="236" y="72" fill="#8a94a6" font-size="12.5" font-family="ui-monospace,monospace">seed 126</text>
+<rect x="236" y="82" width="49" height="41" rx="5" fill="#1e242c" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="260" y="108" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="290" y="82" width="49" height="41" rx="5" fill="#1e242c" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="314" y="108" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="344" y="82" width="49" height="41" rx="5" fill="#1e242c" stroke="#7fae72" stroke-width="2.2"/>
+<text x="368" y="108" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<text x="402" y="107" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">R0</text>
+<rect x="236" y="128" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="260" y="154" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="290" y="128" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="314" y="154" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="344" y="128" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="368" y="154" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="402" y="153" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+3</text>
+<rect x="236" y="174" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="260" y="200" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="290" y="174" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="314" y="200" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="344" y="174" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="368" y="200" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<text x="402" y="199" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+6</text>
+<text x="444" y="72" fill="#8a94a6" font-size="12.5" font-family="ui-monospace,monospace">seed 129</text>
+<rect x="444" y="82" width="49" height="41" rx="5" fill="#1e242c" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="468" y="108" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="498" y="82" width="49" height="41" rx="5" fill="#1e242c" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="522" y="108" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="552" y="82" width="49" height="41" rx="5" fill="#1e242c" stroke="#7fae72" stroke-width="2.2"/>
+<text x="576" y="108" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="610" y="107" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">R0</text>
+<rect x="444" y="128" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="468" y="154" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="498" y="128" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="522" y="154" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="552" y="128" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="576" y="154" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<text x="610" y="153" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+3</text>
+<rect x="444" y="174" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="468" y="200" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="498" y="174" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="522" y="200" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="552" y="174" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="576" y="200" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<text x="610" y="199" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+6</text>
+<text x="28" y="282" fill="#8a94a6" font-size="12.5" font-family="ui-monospace,monospace">seed 135</text>
+<rect x="28" y="292" width="49" height="41" rx="5" fill="#1e242c" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="52" y="318" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="82" y="292" width="49" height="41" rx="5" fill="#1e242c" stroke="#7fae72" stroke-width="2.2"/>
+<text x="106" y="318" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="136" y="292" width="49" height="41" rx="5" fill="#1e242c" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="160" y="318" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<text x="194" y="317" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">R0</text>
+<rect x="28" y="338" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="52" y="364" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="82" y="338" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="106" y="364" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="136" y="338" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="160" y="364" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<text x="194" y="363" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+3</text>
+<rect x="28" y="384" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="52" y="410" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="82" y="384" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="106" y="410" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="136" y="384" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="160" y="410" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<text x="194" y="409" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+6</text>
+<text x="236" y="282" fill="#8a94a6" font-size="12.5" font-family="ui-monospace,monospace">seed 138</text>
+<rect x="236" y="292" width="49" height="41" rx="5" fill="#1e242c" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="260" y="318" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="290" y="292" width="49" height="41" rx="5" fill="#1e242c" stroke="#7fae72" stroke-width="2.2"/>
+<text x="314" y="318" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="344" y="292" width="49" height="41" rx="5" fill="#1e242c" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="368" y="318" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<text x="402" y="317" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">R0</text>
+<rect x="236" y="338" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="260" y="364" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="290" y="338" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="314" y="364" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="344" y="338" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="368" y="364" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<text x="402" y="363" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+3</text>
+<rect x="236" y="384" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="260" y="410" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="290" y="384" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="314" y="410" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="344" y="384" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="368" y="410" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<text x="402" y="409" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+6</text>
+<text x="444" y="282" fill="#8a94a6" font-size="12.5" font-family="ui-monospace,monospace">seed 156</text>
+<rect x="444" y="292" width="49" height="41" rx="5" fill="#1e242c" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="468" y="318" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="498" y="292" width="49" height="41" rx="5" fill="#1e242c" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="522" y="318" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="552" y="292" width="49" height="41" rx="5" fill="#1e242c" stroke="#7fae72" stroke-width="2.2"/>
+<text x="576" y="318" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<text x="610" y="317" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">R0</text>
+<rect x="444" y="338" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="468" y="364" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="498" y="338" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="522" y="364" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="552" y="338" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="576" y="364" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="610" y="363" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+3</text>
+<rect x="444" y="384" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="468" y="410" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="498" y="384" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="522" y="410" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="552" y="384" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="576" y="410" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<text x="610" y="409" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+6</text>
+<text x="28" y="492" fill="#8a94a6" font-size="12.5" font-family="ui-monospace,monospace">seed 159</text>
+<rect x="28" y="502" width="49" height="41" rx="5" fill="#1e242c" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="52" y="528" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="82" y="502" width="49" height="41" rx="5" fill="#1e242c" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="106" y="528" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="136" y="502" width="49" height="41" rx="5" fill="#1e242c" stroke="#7fae72" stroke-width="2.2"/>
+<text x="160" y="528" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="194" y="527" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">R0</text>
+<rect x="28" y="548" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="52" y="574" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="82" y="548" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="106" y="574" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="136" y="548" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="160" y="574" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<text x="194" y="573" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+3</text>
+<rect x="28" y="594" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="52" y="620" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="82" y="594" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="106" y="620" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="136" y="594" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="160" y="620" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<text x="194" y="619" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+6</text>
+<text x="236" y="492" fill="#8a94a6" font-size="12.5" font-family="ui-monospace,monospace">seed 168</text>
+<rect x="236" y="502" width="49" height="41" rx="5" fill="#1e242c" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="260" y="528" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="290" y="502" width="49" height="41" rx="5" fill="#1e242c" stroke="#7fae72" stroke-width="2.2"/>
+<text x="314" y="528" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="344" y="502" width="49" height="41" rx="5" fill="#1e242c" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="368" y="528" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<text x="402" y="527" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">R0</text>
+<rect x="236" y="548" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="260" y="574" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="290" y="548" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="314" y="574" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="344" y="548" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="368" y="574" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<text x="402" y="573" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+3</text>
+<rect x="236" y="594" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="260" y="620" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="290" y="594" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="314" y="620" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="344" y="594" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="368" y="620" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<text x="402" y="619" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+6</text>
+<text x="444" y="492" fill="#8a94a6" font-size="12.5" font-family="ui-monospace,monospace">seed 189</text>
+<rect x="444" y="502" width="49" height="41" rx="5" fill="#1e242c" stroke="#4a8fb5" stroke-width="2.2"/>
+<text x="468" y="528" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="498" y="502" width="49" height="41" rx="5" fill="#1e242c" stroke="#d98c3f" stroke-width="2.2"/>
+<text x="522" y="528" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="552" y="502" width="49" height="41" rx="5" fill="#1e242c" stroke="#7fae72" stroke-width="2.2"/>
+<text x="576" y="528" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="610" y="527" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">R0</text>
+<rect x="444" y="548" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="468" y="574" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="498" y="548" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="522" y="574" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="552" y="548" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="576" y="574" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<text x="610" y="573" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+3</text>
+<rect x="444" y="594" width="49" height="41" rx="5" fill="#171b21" stroke="#4a8fb5" stroke-width="1.1"/>
+<text x="468" y="620" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="498" y="594" width="49" height="41" rx="5" fill="#171b21" stroke="#d98c3f" stroke-width="1.1"/>
+<text x="522" y="620" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="552" y="594" width="49" height="41" rx="5" fill="#171b21" stroke="#7fae72" stroke-width="1.1"/>
+<text x="576" y="620" fill="#e8e3d8" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<text x="610" y="619" fill="#4b5563" font-size="10.5" font-family="ui-monospace,monospace">+6</text>
+<text x="28" y="688" fill="#525c6a" font-size="11" font-family="ui-monospace,monospace">27 valid seed-sets, 9 distinct grids. Seed meets each orbit once &lt;=&gt; the lift partitions 1..9.</text>
+</svg>

@@ -27,13 +27,9 @@ def check(cond, label, actual, stated):
         FAIL.append(f"{label}: actual={actual}, stated={stated}")
     return cond
 
-def sieve(limit):
-    is_p = bytearray([1]) * (limit + 1)
-    is_p[0] = is_p[1] = 0
-    for i in range(2, isqrt(limit) + 1):
-        if is_p[i]:
-            is_p[i*i::i] = bytearray(len(is_p[i*i::i]))
-    return [i for i in range(2, limit + 1) if is_p[i]]
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import primes_upto as sieve
 
 def twin_pairs(limit):
     """Count (p, p+2) pairs with p ≤ limit and p+2 prime."""

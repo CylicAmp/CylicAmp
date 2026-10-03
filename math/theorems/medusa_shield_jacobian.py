@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Medusa Shield v2.5 + Jacobian Wobble Test
 
@@ -15,8 +16,9 @@ JACOBIAN: df/dn of f(n) = (137n) mod 37 equals 137 everywhere except
 PILLARS = {4, 9, 25, 30}
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def medusa_shield(node):

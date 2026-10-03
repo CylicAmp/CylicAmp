@@ -1,0 +1,617 @@
+{
+  "date": "2026-08-14",
+  "total_files": 32,
+  "summary": {
+    "SERVICE_OPTIMAL": 23,
+    "DARK_PATTERN_EXTRACTIVE": 9
+  },
+  "files": [
+    {
+      "file": "cylicamp/api.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 1,
+      "nulls": 0,
+      "segments": 117,
+      "weights_head": [
+        33,
+        18,
+        7,
+        13,
+        21,
+        11,
+        29,
+        2,
+        21,
+        0
+      ]
+    },
+    {
+      "file": "cylicamp/avatar.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 4,
+      "nulls": 0,
+      "segments": 114,
+      "weights_head": [
+        30,
+        35,
+        33,
+        16,
+        8,
+        25,
+        23,
+        21,
+        25,
+        14
+      ]
+    },
+    {
+      "file": "cylicamp/cli.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 4,
+      "nulls": 0,
+      "segments": 24,
+      "weights_head": [
+        6,
+        15,
+        18,
+        21,
+        7,
+        21,
+        10,
+        21,
+        25,
+        36
+      ]
+    },
+    {
+      "file": "cylicamp/core.py",
+      "status": "DARK_PATTERN_EXTRACTIVE",
+      "total_dr": 9,
+      "nulls": 0,
+      "segments": 39,
+      "weights_head": [
+        31,
+        28,
+        15,
+        16,
+        21,
+        21,
+        35,
+        17,
+        15,
+        7
+      ]
+    },
+    {
+      "file": "cylicamp/cycle_triples.py",
+      "status": "DARK_PATTERN_EXTRACTIVE",
+      "total_dr": 9,
+      "nulls": 0,
+      "segments": 36,
+      "weights_head": [
+        18,
+        18,
+        31,
+        23,
+        14,
+        21,
+        14,
+        19,
+        17,
+        21
+      ]
+    },
+    {
+      "file": "cylicamp/degradation_monitor.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 2,
+      "nulls": 0,
+      "segments": 155,
+      "weights_head": [
+        20,
+        22,
+        31,
+        25,
+        0,
+        26,
+        25,
+        25,
+        27,
+        36
+      ]
+    },
+    {
+      "file": "cylicamp/diff_geometry.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 5,
+      "nulls": 0,
+      "segments": 567,
+      "weights_head": [
+        25,
+        21,
+        21,
+        27,
+        21,
+        2,
+        25,
+        11,
+        21,
+        15
+      ]
+    },
+    {
+      "file": "cylicamp/display.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 7,
+      "nulls": 0,
+      "segments": 9,
+      "weights_head": [
+        22,
+        19,
+        16,
+        18,
+        21,
+        30,
+        6,
+        29,
+        17
+      ]
+    },
+    {
+      "file": "cylicamp/duality.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 5,
+      "nulls": 0,
+      "segments": 35,
+      "weights_head": [
+        15,
+        25,
+        16,
+        1,
+        35,
+        21,
+        21,
+        22,
+        33,
+        0
+      ]
+    },
+    {
+      "file": "cylicamp/engine_integration.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 3,
+      "nulls": 0,
+      "segments": 194,
+      "weights_head": [
+        15,
+        18,
+        19,
+        20,
+        7,
+        14,
+        0,
+        36,
+        23,
+        0
+      ]
+    },
+    {
+      "file": "cylicamp/entropy_120cell.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 4,
+      "nulls": 0,
+      "segments": 116,
+      "weights_head": [
+        34,
+        25,
+        25,
+        14,
+        22,
+        13,
+        21,
+        10,
+        25,
+        25
+      ]
+    },
+    {
+      "file": "cylicamp/euler_totient.py",
+      "status": "DARK_PATTERN_EXTRACTIVE",
+      "total_dr": 4,
+      "nulls": 0,
+      "segments": 47,
+      "weights_head": [
+        28,
+        21,
+        22,
+        8,
+        17,
+        5,
+        35,
+        34,
+        19,
+        19
+      ]
+    },
+    {
+      "file": "cylicamp/fib_dr.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 2,
+      "nulls": 0,
+      "segments": 70,
+      "weights_head": [
+        33,
+        2,
+        23,
+        7,
+        36,
+        15,
+        27,
+        13,
+        22,
+        21
+      ]
+    },
+    {
+      "file": "cylicamp/framework_runner.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 1,
+      "nulls": 0,
+      "segments": 163,
+      "weights_head": [
+        11,
+        28,
+        22,
+        6,
+        14,
+        0,
+        15,
+        21,
+        7,
+        23
+      ]
+    },
+    {
+      "file": "cylicamp/g5_solver.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 7,
+      "nulls": 0,
+      "segments": 251,
+      "weights_head": [
+        14,
+        10,
+        16,
+        16,
+        0,
+        22,
+        11,
+        18,
+        23,
+        18
+      ]
+    },
+    {
+      "file": "cylicamp/gate_audit.py",
+      "status": "DARK_PATTERN_EXTRACTIVE",
+      "total_dr": 3,
+      "nulls": 0,
+      "segments": 41,
+      "weights_head": [
+        1,
+        28,
+        20,
+        15,
+        16,
+        18,
+        21,
+        22,
+        16,
+        10
+      ]
+    },
+    {
+      "file": "cylicamp/gf37_engine.py",
+      "status": "DARK_PATTERN_EXTRACTIVE",
+      "total_dr": 5,
+      "nulls": 0,
+      "segments": 259,
+      "weights_head": [
+        19,
+        16,
+        34,
+        27,
+        11,
+        6,
+        18,
+        18,
+        13,
+        11
+      ]
+    },
+    {
+      "file": "cylicamp/insights.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 8,
+      "nulls": 0,
+      "segments": 23,
+      "weights_head": [
+        21,
+        33,
+        21,
+        26,
+        18,
+        5,
+        21,
+        20,
+        0,
+        6
+      ]
+    },
+    {
+      "file": "cylicamp/law_of_12.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 4,
+      "nulls": 0,
+      "segments": 122,
+      "weights_head": [
+        0,
+        0,
+        5,
+        18,
+        11,
+        11,
+        33,
+        27,
+        15,
+        27
+      ]
+    },
+    {
+      "file": "cylicamp/magnitude_tiers.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 7,
+      "nulls": 0,
+      "segments": 78,
+      "weights_head": [
+        5,
+        27,
+        13,
+        0,
+        21,
+        34,
+        6,
+        15,
+        1,
+        21
+      ]
+    },
+    {
+      "file": "cylicamp/pattern_mech.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 6,
+      "nulls": 0,
+      "segments": 515,
+      "weights_head": [
+        30,
+        36,
+        21,
+        29,
+        22,
+        7,
+        27,
+        28,
+        0,
+        2
+      ]
+    },
+    {
+      "file": "cylicamp/pipeline.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 1,
+      "nulls": 0,
+      "segments": 22,
+      "weights_head": [
+        8,
+        0,
+        16,
+        21,
+        7,
+        18,
+        5,
+        26,
+        6,
+        14
+      ]
+    },
+    {
+      "file": "cylicamp/prime_visual.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 3,
+      "nulls": 0,
+      "segments": 63,
+      "weights_head": [
+        0,
+        19,
+        7,
+        19,
+        13,
+        21,
+        21,
+        22,
+        33,
+        0
+      ]
+    },
+    {
+      "file": "cylicamp/provenance.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 1,
+      "nulls": 0,
+      "segments": 69,
+      "weights_head": [
+        5,
+        10,
+        10,
+        21,
+        8,
+        20,
+        10,
+        14,
+        8,
+        28
+      ]
+    },
+    {
+      "file": "cylicamp/safety_script.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 3,
+      "nulls": 0,
+      "segments": 72,
+      "weights_head": [
+        36,
+        27,
+        34,
+        18,
+        11,
+        21,
+        8,
+        17,
+        35,
+        29
+      ]
+    },
+    {
+      "file": "cylicamp/session_protocol.py",
+      "status": "DARK_PATTERN_EXTRACTIVE",
+      "total_dr": 9,
+      "nulls": 0,
+      "segments": 123,
+      "weights_head": [
+        21,
+        22,
+        20,
+        15,
+        14,
+        33,
+        21,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "file": "cylicamp/symposium.py",
+      "status": "DARK_PATTERN_EXTRACTIVE",
+      "total_dr": 8,
+      "nulls": 0,
+      "segments": 96,
+      "weights_head": [
+        10,
+        13,
+        36,
+        11,
+        15,
+        25,
+        6,
+        30,
+        13,
+        13
+      ]
+    },
+    {
+      "file": "cylicamp/time_dr.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 5,
+      "nulls": 0,
+      "segments": 87,
+      "weights_head": [
+        21,
+        18,
+        13,
+        21,
+        21,
+        21,
+        35,
+        15,
+        29,
+        35
+      ]
+    },
+    {
+      "file": "cylicamp/trajectory.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 6,
+      "nulls": 0,
+      "segments": 25,
+      "weights_head": [
+        15,
+        27,
+        11,
+        31,
+        18,
+        10,
+        20,
+        18,
+        28,
+        1
+      ]
+    },
+    {
+      "file": "cylicamp/tribonacci_dr.py",
+      "status": "DARK_PATTERN_EXTRACTIVE",
+      "total_dr": 9,
+      "nulls": 0,
+      "segments": 34,
+      "weights_head": [
+        6,
+        25,
+        25,
+        20,
+        23,
+        19,
+        5,
+        22,
+        33,
+        23
+      ]
+    },
+    {
+      "file": "cylicamp/trinity.py",
+      "status": "SERVICE_OPTIMAL",
+      "total_dr": 8,
+      "nulls": 0,
+      "segments": 95,
+      "weights_head": [
+        23,
+        20,
+        15,
+        2,
+        22,
+        35,
+        6,
+        0,
+        30,
+        20
+      ]
+    },
+    {
+      "file": "cylicamp/viewer.py",
+      "status": "DARK_PATTERN_EXTRACTIVE",
+      "total_dr": 8,
+      "nulls": 0,
+      "segments": 43,
+      "weights_head": [
+        1,
+        0,
+        18,
+        11,
+        15,
+        15,
+        17,
+        33,
+        18,
+        25
+      ]
+    }
+  ]
+}

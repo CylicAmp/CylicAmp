@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 Medusa Scan: 137-Resonance DR=3 Sovereign Anchors
 
@@ -5,7 +6,7 @@ The scan identifies nodes n where (n × 137) mod 37 has digital root 3.
 
 Key structural result:
   137 mod 37 = 26  — the modular stride (matches '26 mod 37' invariant
-                     from the 1/137 framework)
+                     from the 1/137 GF(37))
 
   Since gcd(26, 37) = 1 (37 is prime), the map n → (26n) mod 37
   is a bijection on {0..36}, cycling with period 37.
@@ -18,8 +19,9 @@ Key structural result:
 """
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def medusa_scan(limit=100):

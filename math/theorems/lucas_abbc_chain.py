@@ -1,3 +1,4 @@
+# CLASS: CONJECTURE
 """
 Lucas Sequence in the ABBC Manifold — Chain L(3..10)
 
@@ -10,7 +11,7 @@ Lucas sequence: L(0)=2, L(1)=1, L(n)=L(n-1)+L(n-2)
   L(0)=2  L(1)=1  L(2)=3  L(3)=4  L(4)=7
   L(5)=11  L(6)=18  L(7)=29  L(8)=47  L(9)=76  L(10)=123
 
-Framework anchors in the sequence:
+GF(37) anchors in the sequence:
   L(3)=4  — bridge DR (prime anchor DR=4 from DR(11)=2, 11 prime)
   L(4)=7  — bridge constant (U+B=3+4=7)
   L(8)=47 — prime (47 is prime, DR=2=11 anchor)
@@ -39,8 +40,9 @@ Errata in source document (do not propagate):
 """
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def lucas_seq(start, length):
@@ -65,7 +67,7 @@ assert CHAIN == lucas_3_10, f"Chain mismatch: {CHAIN} vs {lucas_3_10}"
 for i in range(2, len(CHAIN)):
     assert CHAIN[i] == CHAIN[i-1] + CHAIN[i-2]
 
-# Framework anchor DRs
+# GF(37) anchor DRs
 assert dr(4) == 4    # L(3): bridge DR
 assert dr(7) == 7    # L(4): bridge constant
 assert dr(11) == 2   # L(5): Prime Anchor
@@ -75,11 +77,7 @@ assert dr(76) == 4   # L(9)
 assert dr(123) == 6  # L(10)
 
 # Both L(7)=29 and L(8)=47 are prime
-def is_prime(n):
-    if n < 2: return False
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0: return False
-    return True
+from functions import is_prime
 
 assert is_prime(29) and is_prime(47)
 

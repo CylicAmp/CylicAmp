@@ -1,0 +1,67 @@
+1 p q r pq pr s                            p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q pq q^2 pq^2 r                        p<300  q<2000  cand 0       skip 11321 n<=0.0e+00  EMPTY
+1 p q p^2 pq r p^2q                        p<300  q<2000  cand 1       skip 4960  n<=1.0e+09  EMPTY
+1 p q r pq s pr                            p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q p^2 pq p^3 p^2q                      p<300  q<2000  cand 2       skip 0     n<=3.9e+12  EMPTY
+1 p p^2 q pq r p^2q                        p<300  q<2000  cand 1       skip 4960  n<=2.2e+08  EMPTY
+1 p q r p^2 pq pr                          p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q p^2 r pq pr                          p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 q p^3 pq p^2q                      p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 p^3 p^4 q pq                       p<300  q<2000  cand 0       skip 41    n<=0.0e+00  EMPTY
+1 p q r pq pr q^2                          p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q pq r pr s                            p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q pq q^2 r pq^2                        p<300  q<2000  cand 0       skip 11321 n<=0.0e+00  EMPTY
+1 p q p^2 pq q^2 p^2q                      p<300  q<2000  cand 3       skip 0     n<=1.2e+08  EMPTY
+1 p q r pq q^2 pr                          p<300  q<2000  cand 1       skip 0     n<=8.1e+04  EMPTY
+1 p q pq r q^2 pr                          p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q p^2 r pq p^3                         p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 q p^3 pq r                         p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 p^3 q r pq                         p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 q p^3 pq p^4                       p<300  q<2000  cand 0       skip 41    n<=0.0e+00  EMPTY
+1 p q p^2 pq r p^3                         p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q pq q^2 pq^2 q^3                      p<300  q<2000  cand 3       skip 0     n<=4.4e+19  EMPTY
+1 p q p^2 pq q^2 p^3                       p<300  q<2000  cand 5       skip 0     n<=2.0e+14  EMPTY
+1 p p^2 p^3 q pq r                         p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 p^3 q p^4 pq                       p<300  q<2000  cand 1       skip 41    n<=5.9e+15  EMPTY
+1 p p^2 p^3 p^4 p^5 q                      p<300  q<2000  cand 0       skip 51    n<=0.0e+00  EMPTY
+1 p q p^2 pq p^3 r                         p<300  q<2000  cand 1       skip 0     n<=1.1e+06  EMPTY
+1 p q p^2 r pq s                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q p^2 pq r s                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q r p^2 s pq                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 q p^3 r pq                         p<300  q<2000  cand 1       skip 0     n<=2.9e+03  EMPTY
+1 p p^2 q r p^3 pq                         p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 q pq p^2q q^2                      p<300  q<2000  cand 1       skip 0     n<=4.4e+04  EMPTY
+1 p q p^2 r pq q^2                         p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 p^3 p^4 q p^5                      p<300  q<2000  cand 0       skip 51    n<=0.0e+00  EMPTY
+1 p q p^2 pq r q^2                         p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q r p^2 pq s                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 q r s pq                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 q r pq s                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q p^2 r s pq                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q p^2 pq q^2 r                         p<300  q<2000  cand 1       skip 0     n<=3.5e+06  EMPTY
+1 p q r pq s q^2                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q pq r pr q^2                          p<300  q<2000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q p^2 pq p^3 q^2                       p<300  q<2000  cand 1       skip 0     n<=2.9e+10  EMPTY
+1 p q pq q^2 r s                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q r s pq t                             UNRESOLVED even at p<20,q<120
+1 p p^2 p^3 q r p^4                        p<300  q<2000  cand 0       skip 10701 n<=0.0e+00  EMPTY
+1 p q r s p^2 pq                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q r pq s t                             UNRESOLVED even at p<20,q<120
+1 p q pq r q^2 s                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q r s pq q^2                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q r s t pq                             UNRESOLVED even at p<20,q<120
+1 p q r p^2 pq q^2                         p<300  q<2000  cand 1       skip 0     n<=6.7e+12  EMPTY
+1 p q pq r s q^2                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q r pq q^2 s                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 q r s p^3                          p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 q r p^3 s                          p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p p^2 p^3 p^4 p^5 p^6                    p<300  q<2000  cand 0       skip 1     n<=0.0e+00  EMPTY
+1 p q pq r s t                             UNRESOLVED even at p<20,q<120
+1 p p^2 q pq r s                           p<100  q<1000  cand 0       skip 0     n<=0.0e+00  EMPTY
+1 p q r p^2 s t                            UNRESOLVED even at p<20,q<120
+1 p q p^2 r s t                            UNRESOLVED even at p<20,q<120
+1 p p^2 p^3 q p^4 r                        p<300  q<2000  cand 1       skip 10701 n<=3.3e+04  EMPTY
+
+EMPTY 57   HIT 0   UNRESOLVED 6   of 63
+
+[exited with code 0]

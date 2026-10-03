@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 37phi Dimensional Bridge — computational verification.
 
@@ -13,20 +14,14 @@ PHI = (1 + math.sqrt(5)) / 2
 COHERENCE_TARGET = 37 * PHI  # 59.867258...
 
 
-def digital_root(n):
-    if n == 0:
-        return 0
-    return 1 + (n - 1) % 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_signed as digital_root
 
 
-def sieve(limit):
-    is_prime = [True] * (limit + 1)
-    is_prime[0] = is_prime[1] = False
-    for i in range(2, int(limit**0.5) + 1):
-        if is_prime[i]:
-            for j in range(i*i, limit + 1, i):
-                is_prime[j] = False
-    return [i for i in range(2, limit + 1) if is_prime[i]]
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import primes_upto as sieve
 
 
 primes = sieve(200)

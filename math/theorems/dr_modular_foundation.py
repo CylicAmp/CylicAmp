@@ -37,9 +37,9 @@ This proof is the axiomatic foundation for:
 from math import log10
 
 
-def dr(n):
-    """Digital root: (n−1)%9+1 for n>0, else 0. Method 4 (most efficient)."""
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def dr_iterated(n):
@@ -51,9 +51,7 @@ def dr_iterated(n):
     return n
 
 
-def digit_sum(n):
-    """Single digit sum (not iterated)."""
-    return sum(int(d) for d in str(n))
+from functions import digit_sum
 
 
 # ── Lemma: 10 ≡ 1 (mod 9) and 10 ≡ 1 (mod 3) ────────────────────────────

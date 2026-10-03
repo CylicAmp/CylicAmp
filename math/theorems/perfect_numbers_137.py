@@ -38,8 +38,9 @@ Mersenne prime DR and QR:
 """
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def proper_divisors(n):
@@ -65,11 +66,7 @@ for n, (a, b) in zip(PERFECT, EULER_PARAMS):
     assert a * b == n, f"Euclid-Euler fails for {n}"
 
 # Mersenne factors are prime
-def is_prime(n):
-    if n < 2: return False
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0: return False
-    return True
+from functions import is_prime
 
 for m in MERSENNE_PRIMES:
     assert is_prime(m), f"{m} is not prime"

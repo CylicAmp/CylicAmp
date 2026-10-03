@@ -1,3 +1,4 @@
+# CLASS: COMPUTATION
 """
 LoB 601/602/605 — Inversion, Trinity Invariant, Quiescence
 
@@ -19,14 +20,15 @@ LoB_605: SYSTEM QUIESCENCE
   The quiescence step passes through A51 center in its orbit.
 
   Residue sequence (+5 steps, mod-37 space):
-    595 % 37 = 3   (f26 range start)
+    595 % 37 = 3   (sovereign range start)
     600 % 37 = 8   (AHL node, Group A cycle [6,8,23])
     605 % 37 = 13  (M1 anchor, cycle [13,5,19] through A51)
 """
 
 
-def digital_root(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as digital_root
 
 
 def execute_inversion():

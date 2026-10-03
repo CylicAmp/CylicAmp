@@ -26,15 +26,9 @@ from prime_engine import (
 # Reference sieve (Eratosthenes) for ground truth
 # ---------------------------------------------------------------------------
 
-def sieve(limit):
-    """Return set of primes up to limit."""
-    is_p = [True] * (limit + 1)
-    is_p[0] = is_p[1] = False
-    for i in range(2, int(limit**0.5) + 1):
-        if is_p[i]:
-            for j in range(i*i, limit+1, i):
-                is_p[j] = False
-    return {i for i in range(2, limit+1) if is_p[i]}
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import primes_upto_set as sieve
 
 
 PRIMES_10000 = sieve(10000)

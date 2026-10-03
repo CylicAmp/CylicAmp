@@ -1,0 +1,141 @@
+#!/usr/bin/env python3
+"""
+Corpus index: name, claim, class, constants touched, cross-references.
+
+Built because 510 files with no map is why the Z/12 quotient got written
+three times (T138, T200, T339) before anyone noticed.
+
+    python3 tools/build_index.py            # write INDEX.md + report
+    python3 tools/build_index.py --dupes    # collision report only
+"""
+import ast
+import re
+import sys
+import pathlib
+from collections import defaultdict
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+DIRS = ["math/theorems", "math/lemmas", "math/primes", "math/turbulence", "cylicamp"]
+ORBITS = ["IC", "DARK_A", "C3", "CAS_EXT", "TESLA", "D7", "SA_ST_A",
+          "NEG_H", "C9", "NQR17", "SEED", "SA_ST_B", "SEAM"]
+
+# Regions that CITE an earlier result must not count as restating it --
+# otherwise adding a prior-art note makes a file collide with the very file
+# it credits, and the report gets noisier the more carefully it is filed.
+# Found 2026-09-16: T285 collided with T138 on "DR wrap law" purely because
+# its new prior-art note names T138's DR subtraction law.
+CITE_BLOCK = re.compile(
+    r"^[ \t]*(?:={3,}\s*)?(?:PRIOR ART|PRIORITY|ALSO PRIOR|PRIOR SIGHTING|"
+    r"AUDIT \d{4}-\d{2}-\d{2}|ADDED \d{4}-\d{2}-\d{2}|RESOLVED \d{4}-\d{2}-\d{2})"
+    r"\b.*?(?=\n[ \t]*(?:={3,}|\n)|\Z)", re.I | re.M | re.S)
+
+# terms whose co-occurrence signals the same underlying result
+TOPICS = {
+    "quotient Z/12": [r"Z/12", r"Z_12", r"quotient group", r"orbit index"],
+    "orbit zero-sum": [r"1 \+ 10 \+ 26", r"orbit sum", r"sums? to (?:37|74)"],
+    "Phi_3 / cube roots": [r"Phi_3", r"x\^2 ?\+ ?x ?\+ ?1", r"cube root"],
+    # was r"37 ?== ?1" alone, which fired on any `(a*b) % 37 == 1` assertion
+    "DR wrap law": [r"37 ?[=≡]=? ?1 ?\(mod ?9\)", r"DR subtraction", r"wrap count"],
+    "negation duality": [r"negation dual", r"37 ?- ?x"],
+    # "permutation matrix" alone matched T229, which only mentions the phrase
+    # in passing; Koopman work always names Koopman.
+    "Koopman": [r"Koopman"],
+    "twin primes": [r"twin prime"],
+    "Sophie Germain": [r"Sophie ?Germain"],
+    "Rule 30": [r"Rule ?30"],
+    "Riemann zeros": [r"Riemann zero", r"zeta zero", r"floor\(gamma"],
+    "golden ratio": [r"golden ratio", r"Fibonacci", r"Pisano"],
+}
+# A file that DESCRIBES a resolved loose end is not itself loose. T348 was
+# flagged 2026-09-16 purely for the phrase 'its own "Wait:" line', quoted
+# while explaining that T223 had already resolved it. Quoted markers skip.
+LOOSE = re.compile(r"(?<![\"“‘'])\b(?:wait[:.]{1,3}|\?\?\?|TODO|FIXME)", re.I)
+FLAG = re.compile(r"UNVERIFIED|\[U\]")
+
+
+def read(path):
+    try:
+        return path.read_text(errors="replace")
+    except OSError:
+        return ""
+
+
+def entry(path, text):
+    try:
+        doc = ast.get_docstring(ast.parse(text)) or ""
+    except (SyntaxError, ValueError):
+        doc = ""
+    lines = [l.strip() for l in doc.splitlines() if l.strip()]
+    body = CITE_BLOCK.sub(" ", text)      # topic match ignores citation blocks
+    m = re.match(r"theorem_(\d+)_", path.name)
+    cls = re.search(r"#\s*CLASS:\s*(\w+)", text)
+    return {
+        "file": str(path.relative_to(ROOT)),
+        "num": int(m.group(1)) if m else None,
+        "title": lines[0][:90] if lines else "(no docstring)",
+        "cls": cls.group(1) if cls else "-",
+        "orbits": [o for o in ORBITS if re.search(r"\b%s\b" % o, text)],
+        "refs": sorted({int(x) for x in re.findall(r"\bT(\d{2,3})\b", doc)}),
+        "topics": sorted(t for t, pats in TOPICS.items()
+                         if any(re.search(p, body, re.I) for p in pats)),
+        "why": {t: sorted({re.search(p, body, re.I).group(0)[:28]
+                           for p in pats if re.search(p, body, re.I)})
+                for t, pats in TOPICS.items()
+                if any(re.search(p, body, re.I) for p in pats)},
+        "flagged": bool(FLAG.search(text)),
+        "loose": bool(LOOSE.search(body))
+                 and not re.search(r"RESOLVED|RETRACT", body),
+    }
+
+
+def main():
+    files = []
+    for d in DIRS:
+        p = ROOT / d
+        if p.is_dir():
+            files.extend(sorted(p.glob("*.py")))
+    entries = [entry(f, read(f)) for f in files]
+
+    bytopic = defaultdict(list)
+    for e in entries:
+        for t in e["topics"]:
+            bytopic[t].append(e)
+
+    def tag(e):
+        return "T%d" % e["num"] if e["num"] else pathlib.Path(e["file"]).stem
+
+    print("%d files indexed\n" % len(entries))
+    print("=== COLLISIONS: same topic across 3+ files ===")
+    for t, group in sorted(bytopic.items(), key=lambda kv: -len(kv[1])):
+        if len(group) >= 3:
+            ids = [tag(e) for e in group]
+            print("  %-20s %3d  %s%s" % (t, len(group), ", ".join(ids[:12]),
+                                         " ..." if len(ids) > 12 else ""))
+            if "--why" in sys.argv:       # what each file matched on
+                for e in group:
+                    print("       %-28s %s" % (tag(e),
+                                               ", ".join(e["why"].get(t, []))))
+    flagged = [tag(e) for e in entries if e["flagged"]]
+    loose = [tag(e) for e in entries if e["loose"]]
+    print("\n  self-flagged UNVERIFIED (%d): %s" % (len(flagged), flagged))
+    print("  loose notes, no RESOLVED (%d): %s" % (len(loose), loose))
+
+    if "--dupes" in sys.argv:
+        return
+
+    out = ["# Corpus index — %d files" % len(entries), "",
+           "Generated by `tools/build_index.py`. Do not edit by hand.", "",
+           "| # | file | class | topics | orbits | cites |",
+           "|---|------|-------|--------|--------|-------|"]
+    for e in sorted(entries, key=lambda e: (e["num"] is None, e["num"] or 0,
+                                            e["file"])):
+        out.append("| %s | `%s` | %s | %s | %s | %s |" % (
+            e["num"] or "", pathlib.Path(e["file"]).name, e["cls"],
+            ", ".join(e["topics"]), " ".join(e["orbits"][:5]),
+            " ".join("T%d" % r for r in e["refs"][:8])))
+    (ROOT / "INDEX.md").write_text("\n".join(out) + "\n")
+    print("\nwrote INDEX.md (%d rows)" % len(entries))
+
+
+if __name__ == "__main__":
+    main()

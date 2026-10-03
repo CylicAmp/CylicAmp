@@ -2,7 +2,7 @@
 TENSORS, RIEMANN CURVATURE, AND PARALLEL TRANSPORT
 ================================================================
 
-This module extends the differential geometry framework with:
+This module extends the differential geometry GF(37) with:
 - Tensor operations (index raising/lowering, contraction)
 - Riemann curvature tensor
 - Ricci tensor and scalar curvature

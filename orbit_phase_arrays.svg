@@ -1,0 +1,529 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1116" height="576" viewBox="0 0 1116 576">
+<rect width="1116" height="576" fill="#12151a"/>
+<text x="26" y="30" fill="#e8e3d8" font-size="15" font-family="ui-monospace,monospace">The two coordinate arrays for all 9 lift grids</text>
+<text x="26" y="50" fill="#707a88" font-size="11.5" font-family="ui-monospace,monospace">digits  |  L_orb (columns always CONSTANT, never Latin)  |  L_ph (columns always cycle; rows Latin only when the seed hits all 3 phases)</text>
+<text x="26" y="70" fill="#8a94a6" font-size="11.5" font-family="ui-monospace,monospace">seed 123   sums 6,15,24</text>
+<rect x="26" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="40" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="58" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="72" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="90" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="104" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="26" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="40" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="58" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="72" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="90" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="104" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="26" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="40" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="58" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="72" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="90" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="104" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<text x="26" y="188" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">digits</text>
+<rect x="142" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="156" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="174" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="188" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="206" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="220" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="142" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="156" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="174" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="188" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="206" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="220" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="142" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="156" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="174" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="188" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="206" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="220" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<text x="142" y="188" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_orb</text>
+<rect x="258" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="272" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="290" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="304" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="322" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="336" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="258" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="272" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="290" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="304" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="322" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="336" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="258" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="272" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="290" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="304" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="322" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="336" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<text x="258" y="188" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_ph</text>
+<text x="394" y="70" fill="#8a94a6" font-size="11.5" font-family="ui-monospace,monospace">seed 126   sums 9,18,18</text>
+<rect x="394" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="408" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="426" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="440" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="458" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="472" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="394" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="408" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="426" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="440" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="458" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="472" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="394" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="408" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="426" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="440" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="458" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="472" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<text x="394" y="188" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">digits</text>
+<rect x="510" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="524" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="542" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="556" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="574" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="588" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="510" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="524" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="542" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="556" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="574" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="588" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="510" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="524" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="542" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="556" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="574" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="588" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<text x="510" y="188" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_orb</text>
+<rect x="626" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="640" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="658" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="672" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="690" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="704" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="626" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="640" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="658" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="672" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="690" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="704" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="626" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="640" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="658" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="672" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="690" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="704" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<text x="626" y="188" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_ph</text>
+<text x="762" y="70" fill="#8a94a6" font-size="11.5" font-family="ui-monospace,monospace">seed 129   sums 12,12,21</text>
+<rect x="762" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="776" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="794" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="808" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="826" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="840" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="762" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="776" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="794" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="808" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="826" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="840" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="762" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="776" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="794" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="808" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="826" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="840" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<text x="762" y="188" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">digits</text>
+<rect x="878" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="892" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="910" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="924" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="942" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="956" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="878" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="892" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="910" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="924" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="942" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="956" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="878" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="892" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="910" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="924" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="942" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="956" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<text x="878" y="188" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_orb</text>
+<rect x="994" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="1008" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="1026" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="1040" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="1058" y="78" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="1072" y="97" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="994" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="1008" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="1026" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="1040" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="1058" y="110" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="1072" y="129" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="994" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="1008" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="1026" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="1040" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="1058" y="142" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="1072" y="161" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<text x="994" y="188" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_ph</text>
+<text x="26" y="230" fill="#8a94a6" font-size="11.5" font-family="ui-monospace,monospace">seed 135   sums 9,18,18</text>
+<rect x="26" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="40" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="58" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="72" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="90" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="104" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="26" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="40" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="58" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="72" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="90" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="104" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="26" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="40" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="58" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="72" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="90" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="104" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<text x="26" y="348" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">digits</text>
+<rect x="142" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="156" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="174" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="188" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="206" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="220" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="142" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="156" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="174" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="188" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="206" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="220" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="142" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="156" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="174" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="188" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="206" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="220" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<text x="142" y="348" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_orb</text>
+<rect x="258" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="272" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="290" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="304" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="322" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="336" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="258" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="272" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="290" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="304" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="322" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="336" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="258" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="272" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="290" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="304" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="322" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="336" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<text x="258" y="348" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_ph</text>
+<text x="394" y="230" fill="#8a94a6" font-size="11.5" font-family="ui-monospace,monospace">seed 138   sums 12,12,21</text>
+<rect x="394" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="408" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="426" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="440" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="458" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="472" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="394" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="408" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="426" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="440" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="458" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="472" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="394" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="408" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="426" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="440" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="458" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="472" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<text x="394" y="348" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">digits</text>
+<rect x="510" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="524" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="542" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="556" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="574" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="588" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="510" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="524" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="542" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="556" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="574" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="588" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="510" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="524" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="542" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="556" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="574" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="588" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<text x="510" y="348" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_orb</text>
+<rect x="626" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="640" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="658" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="672" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="690" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="704" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="626" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="640" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="658" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="672" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="690" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="704" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="626" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="640" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="658" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="672" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="690" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="704" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<text x="626" y="348" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_ph</text>
+<text x="762" y="230" fill="#8a94a6" font-size="11.5" font-family="ui-monospace,monospace">seed 156   sums 12,21,12</text>
+<rect x="762" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="776" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="794" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="808" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="826" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="840" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="762" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="776" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="794" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="808" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="826" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="840" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="762" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="776" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="794" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="808" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="826" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="840" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<text x="762" y="348" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">digits</text>
+<rect x="878" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="892" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="910" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="924" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="942" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="956" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="878" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="892" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="910" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="924" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="942" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="956" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="878" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="892" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="910" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="924" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="942" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="956" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<text x="878" y="348" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_orb</text>
+<rect x="994" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="1008" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="1026" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="1040" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="1058" y="238" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="1072" y="257" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="994" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="1008" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="1026" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="1040" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="1058" y="270" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="1072" y="289" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="994" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="1008" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="1026" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="1040" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="1058" y="302" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="1072" y="321" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<text x="994" y="348" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_ph</text>
+<text x="26" y="390" fill="#d98c3f" font-size="11.5" font-family="ui-monospace,monospace">seed 159   sums 15,15,15   L_ph LATIN</text>
+<rect x="26" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="40" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="58" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="72" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="90" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="104" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="26" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="40" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="58" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="72" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="90" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="104" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="26" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="40" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="58" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="72" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="90" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="104" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<text x="26" y="508" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">digits</text>
+<rect x="142" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="156" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="174" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="188" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="206" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="220" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="142" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="156" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="174" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="188" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="206" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="220" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="142" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="156" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="174" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="188" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="206" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="220" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<text x="142" y="508" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_orb</text>
+<rect x="258" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="272" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="290" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="304" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="322" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="336" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="258" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="272" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="290" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="304" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="322" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="336" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="258" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="272" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="290" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="304" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="322" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="336" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<text x="258" y="508" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_ph</text>
+<text x="394" y="390" fill="#d98c3f" font-size="11.5" font-family="ui-monospace,monospace">seed 168   sums 15,15,15   L_ph LATIN</text>
+<rect x="394" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="408" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="426" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="440" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<rect x="458" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="472" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="394" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="408" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="426" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="440" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="458" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="472" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="394" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="408" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="426" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="440" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="458" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="472" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<text x="394" y="508" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">digits</text>
+<rect x="510" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="524" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="542" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="556" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="574" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="588" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="510" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="524" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="542" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="556" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="574" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="588" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="510" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="524" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="542" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="556" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="574" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="588" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<text x="510" y="508" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_orb</text>
+<rect x="626" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="640" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="658" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="672" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="690" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="704" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="626" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="640" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="658" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="672" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="690" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="704" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="626" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="640" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="658" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="672" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="690" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="704" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<text x="626" y="508" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_ph</text>
+<text x="762" y="390" fill="#8a94a6" font-size="11.5" font-family="ui-monospace,monospace">seed 189   sums 18,9,18</text>
+<rect x="762" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="776" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="794" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="808" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">8</text>
+<rect x="826" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="840" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">9</text>
+<rect x="762" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="776" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">4</text>
+<rect x="794" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="808" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="826" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="840" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">3</text>
+<rect x="762" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="776" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">7</text>
+<rect x="794" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="808" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">5</text>
+<rect x="826" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#2b323b" stroke-width="1.4"/>
+<text x="840" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">6</text>
+<text x="762" y="508" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">digits</text>
+<rect x="878" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="892" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="910" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="924" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="942" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="956" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="878" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="892" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="910" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="924" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="942" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="956" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<rect x="878" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#4a8fb5" stroke-width="1.4"/>
+<text x="892" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<rect x="910" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#d98c3f" stroke-width="1.4"/>
+<text x="924" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+<rect x="942" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#7fae72" stroke-width="1.4"/>
+<text x="956" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">C</text>
+<text x="878" y="508" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_orb</text>
+<rect x="994" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="1008" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="1026" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="1040" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="1058" y="398" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="1072" y="417" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="994" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="1008" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="1026" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="1040" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="1058" y="430" width="28" height="28" rx="3" fill="#171b21" stroke="#5e7ea8" stroke-width="1.4"/>
+<text x="1072" y="449" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<rect x="994" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#8a7fb5" stroke-width="1.4"/>
+<text x="1008" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">2</text>
+<rect x="1026" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="1040" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<rect x="1058" y="462" width="28" height="28" rx="3" fill="#171b21" stroke="#b07a4a" stroke-width="1.4"/>
+<text x="1072" y="481" fill="#e8e3d8" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<text x="994" y="508" fill="#525c6a" font-size="10" font-family="ui-monospace,monospace">L_ph</text>
+<text x="26" y="544" fill="#707a88" font-size="11" font-family="ui-monospace,monospace">L_orb is constant down every column in all 9 — that is the lift. L_ph cycles down every column in all 9.</text>
+<text x="26" y="560" fill="#525c6a" font-size="11" font-family="ui-monospace,monospace">Only 159 and 168 have L_ph Latin, and those are exactly the two grids whose row sums are all 15.</text>
+</svg>

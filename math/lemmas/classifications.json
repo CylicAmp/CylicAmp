@@ -1,0 +1,3304 @@
+[
+ {
+  "file": "abcabc_mod37_orbit.py",
+  "location": "math/lemmas",
+  "import_graph": "LEMMA",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "ABCABC = 1001*ABC ≡ 2*ABC (mod 37); orbit walks all of (Z/37)* since 2 primitive",
+  "used_by": "cylicamp/engine_integration.py (step 9); compact_generation.py",
+  "reviewer_note": "Single congruence with immediate corollary; serves pipeline step 9",
+  "cited_by": [
+   "engine_integration.py"
+  ],
+  "reading_and_cited": "LEMMA"
+ },
+ {
+  "file": "heartbeat_3cycle.py",
+  "location": "math/lemmas",
+  "import_graph": "LEMMA",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "ord_37(26)=3, so every nonzero residue lies in a 3-cycle of the 137-map",
+  "used_by": "engine_integration.py step 12, T316",
+  "reviewer_note": "Single order fact used as a pipeline step and by T316",
+  "cited_by": [
+   "engine_integration.py",
+   "theorem_316_t120_seed_class_mod_333_gf37.py"
+  ],
+  "reading_and_cited": "LEMMA"
+ },
+ {
+  "file": "cycle_partition_37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "Every 137-map 3-cycle sums to 37 or 74, six of each",
+  "used_by": "orbit sum results (orbit_negation_duality, T331/T332)",
+  "reviewer_note": "One short identity with one-line proof, step toward orbit-sum results",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "decimal_trinity.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "ord_37(10)=3, so <10>={1,10,26}=H_3",
+  "used_by": "twin_gap_dr_chain.py, nines_complement_sa_h.py (T389)",
+  "reviewer_note": "Single order computation cited as a step by other theorems",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "intersection_cycle_theorem.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "(3,4,30) is the only 137-map 3-cycle with all elements in SA∪ST",
+  "used_by": "sovereign classification (medusa_v3_sovereign)",
+  "reviewer_note": "Single exhaustive finite check; supports sovereign structure",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "sigma3_eisenstein_gf37.py",
+  "location": "math/lemmas",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "For prime p, 37 | sigma_3(p) iff p = 11, 27, 36 mod 37",
+  "used_by": "T262 (theorem_262_e8_theta_mod37.py)",
+  "reviewer_note": "Single congruence; T262 uses it to classify prime zeros",
+  "cited_by": [
+   "theorem_424_rewrite_certificate_ledger_gf37.py"
+  ],
+  "reading_and_cited": "LEMMA"
+ },
+ {
+  "file": "sovereign_fixed_point.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "Two classification branches unreachable because 26n mod 37 is a bijection",
+  "used_by": "medusa_v3_sovereign.py",
+  "reviewer_note": "Short structural fact supporting the sovereign classifier",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_283_negation_antipodal_gf37.py",
+  "location": "math/lemmas",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "The six antipodal orbit pairs are exactly the negation pairs x -> -x mod 37",
+  "used_by": "T284, T285, T303",
+  "reviewer_note": "Single structural fact used as a step by T284, T285, T303",
+  "cited_by": [
+   "theorem_284_operator_group_gf37.py",
+   "theorem_285_quotient_group_z12_gf37.py",
+   "theorem_286_subgroup_lattice_z12_gf37.py",
+   "theorem_287_anomalous_curve_orbit_partition.py",
+   "theorem_288_j0_isomorphism_classes_gf37.py",
+   "theorem_291_iterated_squaring_sylow3_gf37.py",
+   "theorem_296_36gon_rotation_model.py",
+   "theorem_297_block_separation.py",
+   "theorem_301_cyclotomic_slot_table.py",
+   "theorem_303_block_map_is_27.py",
+   "theorem_304_three_lists_meet_at_37.py",
+   "theorem_331_orbit_sum_37_74_negation_gf37.py",
+   "theorem_332_six_six_forced_inversion_closed_gf37.py"
+  ],
+  "reading_and_cited": "LEMMA"
+ },
+ {
+  "file": "theorem_310_digit_chain_seam_gf37.py",
+  "location": "math/lemmas",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "aba with a=b is 111a ≡ 0 mod 37 for every digit a",
+  "used_by": "T311, T312, T315",
+  "reviewer_note": "Single forced identity used by later digit-chain theorems",
+  "cited_by": [
+   "theorem_311_triad_lock_and_subgrid_map_gf37.py",
+   "theorem_312_repdigit_chain_complete_gf37.py",
+   "theorem_315_base_ten_block_and_cofactor_gf37.py",
+   "thread_session_connections.py"
+  ],
+  "reading_and_cited": "LEMMA"
+ },
+ {
+  "file": "theorem_313_add_nine_reversal_diagonal_gf37.py",
+  "location": "math/lemmas",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "For two-digit n, n+9=rev(n) iff b=a+1: exactly 12,23,...,89",
+  "used_by": "T314",
+  "reviewer_note": "Single forced identity used as step B in T314",
+  "cited_by": [
+   "theorem_314_twelve_double_closure_gf37.py",
+   "theorem_315_base_ten_block_and_cofactor_gf37.py"
+  ],
+  "reading_and_cited": "LEMMA"
+ },
+ {
+  "file": "twin_prime_dr_pair.py",
+  "location": "math/lemmas",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "Twin pair (6m-1,6m+1): DR pair is (8,1),(5,7),(2,4) as m = 0,1,2 mod 3",
+  "used_by": "T336",
+  "reviewer_note": "Single congruence fact; T336 uses it as contrast step",
+  "cited_by": [
+   "test_prime_engine.py",
+   "twin_prime_tripartite_audit.py"
+  ],
+  "reading_and_cited": "LEMMA"
+ },
+ {
+  "file": "two_group_split.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "Each 137-map 3-cycle sums to 37 or 74; six cycles each",
+  "used_by": "cycle_symmetry_maps.py",
+  "reviewer_note": "Single structural fact; used for Group A/B in cycle_symmetry_maps",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "verify_local_confluence.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "LEMMA",
+  "fact": "Diamond property holds on 144-state lattice, zero counterexamples",
+  "used_by": "one_over_137_framework.md layer 38 (Newman's Lemma)",
+  "reviewer_note": "Finite check serving as local-confluence step for Newman's Lemma",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "CATEGORY_INDEX.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Index of mathematical categories and file list; no single stated fact",
+  "used_by": "",
+  "reviewer_note": "Index file, not a supporting fact; not a step",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "ababab_convergence.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "ABABAB ≡ 0 mod 37; A+B=10 gives digit sum 30; plus cluster and triplet results",
+  "used_by": "",
+  "reviewer_note": "Several theorems and a corollary; not a single step",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "abbc_manifold_grid.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "ABBC digit-pair grid: sum blocks, DR sequences, row-sum triples, 13/14 conjecture",
+  "used_by": "",
+  "reviewer_note": "Several unrelated observations plus a conjecture; not one fact",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "affine_fixed_point_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Census of all 1369 affine maps on Z/37: fixed-point counts 1332/36/1, plus framework-map fixed points",
+  "used_by": "",
+  "reviewer_note": "Complete census/classification with several parts",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "all_prime_grids_coset.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Row residues of all-prime 3x3 digit grids form a coset (b-s)H; (7,3) grid uniquely gives C_3",
+  "used_by": "",
+  "reviewer_note": "Master identity plus consequences and uniqueness claim; several parts",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "basin_sum_wraparound_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Basin sums S(a)=37(a-k1-k2) in {37,74}; 6/6 split totalling 666",
+  "used_by": "",
+  "reviewer_note": "Several parts: general identity, bound, split; origin of result",
+  "cited_by": [
+   "theorem_331_orbit_sum_37_74_negation_gf37.py",
+   "theorem_332_six_six_forced_inversion_closed_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "burau_braid_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Burau faithfulness range n≤4 read through GF(37) classes, dimensions and year residues",
+  "used_by": "",
+  "reviewer_note": "Multi-part reading of an external result; destination file",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "compact_generation.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Several structures with measured compression ratios as compact generation",
+  "used_by": "",
+  "reviewer_note": "Survey of multiple structures; destination file",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "comprehensive_structures.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Collection: Reed-Solomon GF(37), BCH(7,4), narcissistic numbers, dash splits, anchor codes",
+  "used_by": "",
+  "reviewer_note": "Many unrelated parts; a collection, not one fact",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "concatenation_123_repunit.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "N_n (n ones,twos,threes) group-sum = 6*R_n; N_n mod 37 period-3 law; digit-triplet facts",
+  "used_by": "repdigit_self_similarity_gf37, multi_layer_obstruction_gf37",
+  "reviewer_note": "Several parts (identity, period law, triplet, sequence); cited but multi-part",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "connection_map.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Map of connections between repository theorems through named GF(37) residues",
+  "used_by": "",
+  "reviewer_note": "Large compilation file, not a single supporting fact",
+  "cited_by": [
+   "theorem_299_two_maps_from_phi3.py",
+   "theorem_371_12321_rotation_reversal_d5.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "constants_gf37_decimal.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "sqrt(3) first-10-digit sum is 37; pi, e digit sums; Loeschian link",
+  "used_by": "",
+  "reviewer_note": "Multiple results on several constants",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "cubic_residue_cycle_structure.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "137-map cycles are cosets of <26>; cube fingerprint bijects cycles to cubic residues",
+  "used_by": "",
+  "reviewer_note": "Four theorems plus fingerprint classification",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "cubic_shift_33_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "x^3+33 mod 37 has one 6-cycle, whole-field basin; fibers; birthday residue landings",
+  "used_by": "",
+  "reviewer_note": "Multi-part: fibers, cycle, shift comparison, residue paths",
+  "cited_by": [
+   "phi12_cut_and_t33_gf37.py",
+   "t33_orbit_invariance_and_transversal_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "cycle_symmetry_maps.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Negation, squaring, inversion induce maps on the 12 three-cycles; four stated theorems",
+  "used_by": "",
+  "reviewer_note": "Four separate results; a classification",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "cyclic_142857_decimal_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "10 and 26 are inverses mod 37; decimal period hierarchy; cyclic number 142857 structure",
+  "used_by": "",
+  "reviewer_note": "Several parts (inverse, period hierarchy, 142857); not used as a step",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "dark_sector_algebra.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "QR/NQR partition matches named sets; all primitive roots are NQR",
+  "used_by": "",
+  "reviewer_note": "Several parts: partition, PR subset NQR, gap residues",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "digit_extension_operator_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Repdigit operator paths: DR period 9, mod-37 period 3, watershed placements",
+  "used_by": "",
+  "reviewer_note": "Multiple paths and classifications; several parts",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "dr_ring_homomorphism_emirp_palindrome.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "DR is a ring homomorphism; emirp DR invariance; palindromic prime sovereign exclusion",
+  "used_by": "",
+  "reviewer_note": "Three separate results",
+  "cited_by": [
+   "theorem_359_length_vs_digital_root.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "dr_spiral_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "DR-collapsed 41..440 spiral: ST unique monochromatic set, 37=1 mod 9 transparency, more",
+  "used_by": "",
+  "reviewer_note": "Multiple numbered theorems from one source",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "drift_loeschian_delta2.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Three linked threads: Loeschian norm surjectivity mod 37, drift, Delta^2 torus",
+  "used_by": "",
+  "reviewer_note": "Multi-thread result",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "eisenstein_chi_m3_connection.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Seven connections between chi_-3, DR columns, and Eisenstein splitting of 37",
+  "used_by": "",
+  "reviewer_note": "Seven-part connection list",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "emirp_product_col1_theorem.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "DR(p·rev(p)) ∈ {1,4,7} for emirp p>3; DR squaring map",
+  "used_by": "",
+  "reviewer_note": "Main result with extra squaring-map result; no theorem uses it",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "errata_prevention_protocol.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Protocol classifying three error classes with oracles for prevention",
+  "used_by": "",
+  "reviewer_note": "Protocol/tooling, not a single supporting fact",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "eta24_ramanujan_tau_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Ramanujan tau / eta^24 constants classified in GF(37) named sets",
+  "used_by": "",
+  "reviewer_note": "Several-part classification; destination file",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "five_six_orbit.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "5+6=11, 5x6=30; 30^2 identity; Z/9 doubling; DR 0-9 swap; concatenated triplet = 28 mod 37",
+  "used_by": "",
+  "reviewer_note": "Collection of several independent results",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "fixed_line_3cycle_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "3-cycle affine process on GF(37)^3: fixed line iff uvw=rst, kernels, solvability count, distribution",
+  "used_by": "",
+  "reviewer_note": "Several parts: determinant, kernels, solvability, distribution",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "formal_definitions_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Definitions plus theorems H1, F1, F2 on 137-map and flow model",
+  "used_by": "",
+  "reviewer_note": "Multi-part definitions and several theorems",
+  "cited_by": [
+   "lights_out_gf2_gf37.py",
+   "permutation_132_bipartite_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "gamma_22_inverse_seed_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "{17,22,35} is the inverse basin of seed orbit {18,24,32}",
+  "used_by": "",
+  "reviewer_note": "Multi-section result about 22; destination file",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "gaussian_integers_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "37=(6+i)(6-i); Z[i]/(6+i)=GF(37); units, cascade lifts, norms mapped",
+  "used_by": "",
+  "reviewer_note": "Multi-part (Parts I-...) structural development",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "ghost_kervaire_chain_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Partial sums 6,13,30,62,80 chain through named sets; gap and sum identities",
+  "used_by": "",
+  "reviewer_note": "Multi-part result, destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "goldbach_proof_attempt_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Goldbach structured through residues mod 37: residue saturation, seam invariance, coverage checks",
+  "used_by": "",
+  "reviewer_note": "Multi-part research file on a main conjecture",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "goldilocks_prime.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Goldilocks prime 2^64-2^32+1 is prime with p-1 = 2^32 times Fermat primes",
+  "used_by": "",
+  "reviewer_note": "Several verified facts; standalone destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "group_framework_primitives.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Payload X=8 mod 37,11,407; primitive roots 20,17 orbital symmetry facts",
+  "used_by": "",
+  "reviewer_note": "Several separate facts about one construction",
+  "cited_by": [
+   "payload_digit_structure.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "holographic_manifold_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "GF(37) with 137-map realizes binding, superposition, retrieval of an HMM",
+  "used_by": "",
+  "reviewer_note": "Multi-part framework result; destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "lob_26_collatz_f37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Parity-branched Collatz map on F_37 has exactly 3 cycles, lengths 1,3,9",
+  "used_by": "T425",
+  "reviewer_note": "Exhaustive cycle classification, not a single small fact",
+  "cited_by": [
+   "collatz_mod37_basin.py",
+   "theorem_425_collatz_lob26_dynamics_descent_gf37.py",
+   "theorem_426_5n_plus_1_map_gf37.py",
+   "theorem_427_7n_plus_1_map_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "lob_591_592_595.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Three results: Ramanujan node sequence, Hardy-Ramanujan pulse, 595 mod 74 = 3",
+  "used_by": "",
+  "reviewer_note": "Three separate results in one file",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "mersenne_seam_kervaire_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "S_k=0 mod p iff p=2^k-1 Mersenne; ghost-step classification; Kervaire continuation",
+  "used_by": "",
+  "reviewer_note": "Several parts and tables; a main result",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "nine_tower_dr_invariant.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "DR(9↑↑k)=9 for all k, plus ord_37(26)=3, ord_37(2)=36 and further theorems",
+  "used_by": "",
+  "reviewer_note": "Theorem sheet with five-plus results",
+  "cited_by": [
+   "formal_definitions_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "ocb_quantum_process_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "OCB process-matrix validity as fixed point; causal bound residues",
+  "used_by": "",
+  "reviewer_note": "Several connections; destination file",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "orbit_negation_duality_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Negation commutes with 137-map; no self-dual orbits; six dual pairs summing to 111",
+  "used_by": "",
+  "reviewer_note": "Several parts; used by many but itself multi-part",
+  "cited_by": [
+   "theorem_283_negation_antipodal_gf37.py",
+   "theorem_331_orbit_sum_37_74_negation_gf37.py",
+   "theorem_332_six_six_forced_inversion_closed_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "orbit_sector_geometry_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Orbit partition geometry: 6 QR/6 NQR orbits, sovereign spiral, meta-3-cycle of sovereign orbits",
+  "used_by": "",
+  "reviewer_note": "Several structures and classifications",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "pascal_repunit_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Pascal row n read as digits equals 11^n iff all entries <10; 11^n alternates IC/NEG_H mod 37",
+  "used_by": "",
+  "reviewer_note": "Two-part result; no other file uses it as a step",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "perfect_496_dr_structure.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Seven DR-structure facts about 496 and perfect numbers",
+  "used_by": "",
+  "reviewer_note": "Seven-part result",
+  "cited_by": [
+   "sophie_germain_perfect_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "phi12_cut_and_t33_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Phi_12 splits over F_37 as {8,14,23,29}; T_33 collapses the cut to {2,27}",
+  "used_by": "",
+  "reviewer_note": "Several numbered theorems",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "phi12_order_and_cut_string_link_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Prime factors of Phi_12(137) are 1 mod 12; 13 links to cut string; ord_137(10)=8",
+  "used_by": "",
+  "reviewer_note": "Three separate statements; no file uses it",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "pinn_rt_phase_field.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Correspondence table between GF(37) 137-map and PINN two-phase flow residuals",
+  "used_by": "",
+  "reviewer_note": "Multi-part correspondence, destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "power_tower_collapse_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Power towers of 9, 6, 3 mod 37 and mod 9 collapse to fixed values",
+  "used_by": "",
+  "reviewer_note": "Multi-part tetration analysis over several bases",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "prime_streams_z9_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Six prime streams are (Z/9Z)*, cyclic generated by 2; mirror and QR stream structures",
+  "used_by": "",
+  "reviewer_note": "Several structures described; destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "primitive_root_test.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "g primitive root mod p iff g^((p-1)/q)!=1 for every prime q|p-1",
+  "used_by": "compact_generation.py (listed); serves 2-primitive-root certificate",
+  "reviewer_note": "Single standard criterion; stated role is certificate for x2 orbit completeness",
+  "cited_by": [
+   "api.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "principle_1_substrate_principle.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Biology implements substrate rules before Newton; GF(37) as substrate",
+  "used_by": "",
+  "reviewer_note": "Philosophical principle, not a supporting fact",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "prisoners_permutation_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "100-prisoners survival iff no cycle >50; cycle probabilities; GF(37) links",
+  "used_by": "",
+  "reviewer_note": "Several theorems P1, P2, ...; main result",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "qr_qnr_partition_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Named sets are QR-homogeneous; 137-map preserves QR/QNR",
+  "used_by": "",
+  "reviewer_note": "Two theorems plus classification",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "repunit_37_identity.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "nnn/(n+n+n)=37 for digits 1..9, with denominator named-set tour",
+  "used_by": "",
+  "reviewer_note": "Single identity but not used by any other file; destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "repunit_square_998001.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "1/998001 decimal concatenates 000..997 with period 2997; grid and diagonal structure",
+  "used_by": "",
+  "reviewer_note": "Proof with several parts (series, period, grid diagonals)",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "reversal_sovereign_collapse.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "DR(|n-rev(n)|)=9; DR(6n) in {3,6,9} determined by chi_-3(n)",
+  "used_by": "",
+  "reviewer_note": "Two theorems plus distribution data",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "rubiks_cube_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "137-map as cube permutation; 12 orbits and cube-group correspondences",
+  "used_by": "",
+  "reviewer_note": "Multi-part correspondence file",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "sector_invariance_137map.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "137-map preserves Legendre symbol; 12 cycles classified 2x2 by sector and sum group",
+  "used_by": "",
+  "reviewer_note": "Includes a classification corollary; only cited in connection_map index",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "seed_246_polymath_gap_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "246 equals the Polymath8b unconditional prime gap bound",
+  "used_by": "",
+  "reviewer_note": "Destination identification, not a step",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "selberg_maass_montgomery.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Research record on Selberg trace, Maass forms, Montgomery pair correlation, GF(37) remarks",
+  "used_by": "",
+  "reviewer_note": "Broad research record, not a single fact",
+  "cited_by": [
+   "hejhal_maass_level1.py",
+   "theorem_193_process_functions_zp.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "selberg_maass_montgomery_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "List of residue connections of Selberg/Maass/Montgomery constants mod 37",
+  "used_by": "",
+  "reviewer_note": "Multi-item compilation, not one supporting fact",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "self_square_divisor_130.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "130 is the unique n equal to sum of squares of its first k divisors",
+  "used_by": "",
+  "reviewer_note": "Uniqueness/search result; destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "shell_octave_identity_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Concentric square shells have 8k cells and tile (2k+1)^2",
+  "used_by": "",
+  "reviewer_note": "Single identity but no theorem uses it; unsure so THEOREM",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "stark_heegner_theorem.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Exactly nine class-number-1 imaginary quadratic fields; Rabinowitsch primes finite and complete",
+  "used_by": "",
+  "reviewer_note": "Major classification result with consequences",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "t33_orbit_invariance_and_transversal_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "x^3+33 is constant on mu_3-cosets; its 6-cycle is a transversal of six orbits",
+  "used_by": "t33_node_level_coordinates_gf37.py",
+  "reviewer_note": "Two theorems plus consequence and transient distribution; multi-part",
+  "cited_by": [
+   "t33_node_level_coordinates_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_101_sophie_germain_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Seven residue facts for largest known Sophie Germain prime mod 37",
+  "used_by": "",
+  "reviewer_note": "Seven-part statement proved from lemmas",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_103_easter_cycle_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Easter computus constants map onto named GF(37) orbit classes",
+  "used_by": "",
+  "reviewer_note": "Nine-part statement",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_104_lo_shu_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Lo Shu magic square: six GF(37) facts (constant, total, center, anchors, product)",
+  "used_by": "",
+  "reviewer_note": "Six-part result; others cite it as prior art only",
+  "cited_by": [
+   "theorem_422_lo_shu_dr9_antidiagonal_cycle_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_105_platonic_solids_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Platonic solid V/E/F counts mapped to GF(37) orbits, five parts",
+  "used_by": "",
+  "reviewer_note": "Five-part classification",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_106_mohr_mascheroni_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Fermat primes mod 37 land in named classes; period-6 law for F_n mod 37; extra values",
+  "used_by": "",
+  "reviewer_note": "Multi-part statement with several residues",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_107_convergences_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Six convergences at seed 246: Metonic orbit sum 37, DR chains, twin-prime count 17",
+  "used_by": "",
+  "reviewer_note": "Six-part result",
+  "cited_by": [
+   "theorem_215_246_equals_2x123_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_108_serpentine_twin_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Serpentine grid gives adjacent S-path; n=35 mod 37 pair never twin",
+  "used_by": "",
+  "reviewer_note": "Multi-part, proved from its own lemmas",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_109_137_twin_prime_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "137 ≡ 26 mod 37 is the map multiplier; five further twin-prime results",
+  "used_by": "",
+  "reviewer_note": "Main result with five parts",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_110_mirror_reversal_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "ABC-CBA=99(A-C), 99=25 mod 37, and five further results",
+  "used_by": "",
+  "reviewer_note": "Central fact plus five derived results",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_111_ascending_descending_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "987654321≡1, 123456789≡-1 mod 37 with sum/diff/product, lemmas",
+  "used_by": "",
+  "reviewer_note": "Main result with own lemmas",
+  "cited_by": [
+   "theorem_210_trinity_dr_arithmetic_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_115_primitive_roots_difference_structure.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Nine exact differences from Heegner/Rabinowitsch sets are primitive roots mod 37",
+  "used_by": "",
+  "reviewer_note": "Search/enumeration result with several parts",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_116_multiplicative_orders_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Complete table of multiplicative orders mod 37 and partition by order",
+  "used_by": "",
+  "reviewer_note": "Complete classification table",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_117_discrete_log_base2_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "137-map is shift by 12 in base-2 log space; full table and corollaries",
+  "used_by": "",
+  "reviewer_note": "Several parts: table, core, corollary, halfway symmetry, CB",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_118_coset_structure_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Subgroup lattice of (Z/37Z)*; cosets of H_3 and H_9",
+  "used_by": "",
+  "reviewer_note": "Structural classification with several parts",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_119_rabinowitsch_class_numbers_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Rabinowitsch primes and class numbers h(1-4q) classified in GF(37)",
+  "used_by": "",
+  "reviewer_note": "Classification across class numbers",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_123_cayley_dickson_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Cayley-Dickson dimensions 2^k mod 37 classified; sector flip",
+  "used_by": "",
+  "reviewer_note": "Classification with multiple parts",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_131_zeta_zero_bridge_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Four zeta-zero bridges graded (three sound, one broken) with GF(37) placement",
+  "used_by": "",
+  "reviewer_note": "Multi-part analysis and classification",
+  "cited_by": [
+   "theorem_307_seed_orbit_residue_breakdown_gf37.py",
+   "theorem_368_matrix_operator_rh_digits_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_135_triangular_numbers_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Triangular numbers mod 37 hit exactly 19 residues; orbit-by-orbit coverage",
+  "used_by": "",
+  "reviewer_note": "Classification with orbit breakdown",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_137_369_digital_roots_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "DR partition of GF(37)* is flat; 12 elements are 3-6-9; 2 hits all DRs",
+  "used_by": "",
+  "reviewer_note": "Several parts",
+  "cited_by": [
+   "theorem_347_prime_gap_chi_baselines_gf37.py",
+   "theorem_355_conjugate_orbit_and_layer3_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_138_dr_law_orbit_multiplication.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "DR subtraction law via 37≡1 mod 9; orbits form quotient Z/12Z",
+  "used_by": "",
+  "reviewer_note": "Two linked main results",
+  "cited_by": [
+   "theorem_137_369_digital_roots_gf37.py",
+   "theorem_285_quotient_group_z12_gf37.py",
+   "theorem_329_dr_orbit_invariance_refuted_gf37.py",
+   "theorem_343_eisenstein_reconciliation_gf37.py",
+   "theorem_347_prime_gap_chi_baselines_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_424_rewrite_certificate_ledger_gf37.py",
+   "theorem_432_carry_map_digital_root_rings_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_139_gf7_gf37_structural_parallel.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "GF(7) and GF(37) structural parallel: Sylow, mu_3, quotients, doubling action",
+  "used_by": "",
+  "reviewer_note": "Multi-part comparison",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_141_pisano_period_76_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Pisano period 76 mod 37, zeros, antisymmetry, coset distribution",
+  "used_by": "",
+  "reviewer_note": "Several-part result",
+  "cited_by": [
+   "theorem_344_no_golden_ratio_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_143_rsa_totient_twin_primes.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Totient, RSA over F_37, and twin prime analysis",
+  "used_by": "",
+  "reviewer_note": "Several topics combined; not one fact",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_149_kakeya_jacobian_dimension_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Kakeya and Jacobian at dimension 3 and their finite-field versions",
+  "used_by": "",
+  "reviewer_note": "Two results plus finite-field discussion",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_150_phi3_forcing_lucas_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Three proofs: 137-map orbit is IC, uniqueness of order-3 subgroup, Lucas link",
+  "used_by": "",
+  "reviewer_note": "Three-part result closing an epistemic gap",
+  "cited_by": [
+   "theorem_155_first_primes_ic_collapse.py",
+   "theorem_157_repdigit_triple_seam.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_163_gf37_c6_decomposition.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "x→27x gives six radial shells, each a complement orbit pair",
+  "used_by": "",
+  "reviewer_note": "Decomposition/classification result",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_164_hmod_operator_algebra.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Operator algebra on C[GF(37)*]: T3=T6^2, six T6-orbits, Fourier eigenmodes",
+  "used_by": "",
+  "reviewer_note": "Several parts: identity, orbit decomposition, spectra",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_168_signed_digits_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Complete orbit map of ±1..±9 in GF(37)",
+  "used_by": "",
+  "reviewer_note": "Complete classification",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_170_qho_operator_separation.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Features of C6 QHO belong to exactly one of six layers; commutator/eigen tests",
+  "used_by": "",
+  "reviewer_note": "Classification with quantitative tests",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_173_hexagonal_homothety_orbit_products.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Three orbit product laws from hexagon dimensions and a squaring 2-cycle",
+  "used_by": "",
+  "reviewer_note": "Three laws plus squaring chain",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_178_3sat_lyapunov_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "137-map has Lyapunov exponent 0; complexity comparison argument",
+  "used_by": "",
+  "reviewer_note": "Argument-level destination, several parts",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_180_periodic_table_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Periodic table element numbers read as GF(37) residues",
+  "used_by": "",
+  "reviewer_note": "Multi-part correspondence file",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_183_boundary_principle_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Boundary measure equals interior at r=n; crossover radii placed in GF(37)",
+  "used_by": "",
+  "reviewer_note": "Multiple derivations and interpretive destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_184_skin_boundary_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Skin numerical correspondences read in GF(37)",
+  "used_by": "",
+  "reviewer_note": "Multi-part observations; destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_186_fractal_uncertainty_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Fractal uncertainty principle read against GF(37) orbits and Fourier concentration",
+  "used_by": "",
+  "reviewer_note": "Multi-part exposition; destination file",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_188_consolidated_framework.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Session compilation: tetranacci, pentanacci, GF(37) classification, theme propagation",
+  "used_by": "",
+  "reviewer_note": "Multi-section compilation",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_189_three_zero_kdf_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "KDF design invariants: length 59, target 22, DR 5 basin, PBKDF2 params",
+  "used_by": "",
+  "reviewer_note": "Construction description with several invariants",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_190_mws_framework_integrity.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Framework axiom constants evaluated in GF(37)",
+  "used_by": "",
+  "reviewer_note": "List of several axioms and readings",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_192_hilbert_polya_delta_critique.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Critique of delta-function Hilbert-Polya RH construction: correct, imprecise, failing parts",
+  "used_by": "",
+  "reviewer_note": "Audit with many parts; destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_193_process_functions_zp.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Three-party process functions over Z_p: affine rigidity, constant-slice lemma, non-causal existence",
+  "used_by": "",
+  "reviewer_note": "Three theorems plus exhaustive scans",
+  "cited_by": [
+   "selberg_maass_montgomery.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_198_trinity_sequence_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "{3,6,9} DR trinity closure, ST = DR-3 elements, user sequence analysis",
+  "used_by": "",
+  "reviewer_note": "Several parts including sequence analysis",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_201_additive_coset_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Coset positions add under multiplication in Z/12Z; doubling and sum-factorization laws",
+  "used_by": "T204, T211, T215",
+  "reviewer_note": "Several laws plus worked equations",
+  "cited_by": [
+   "theorem_204_lucas_sovereign_gf37.py",
+   "theorem_211_permutation_diamond_gf37.py",
+   "theorem_215_246_equals_2x123_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_202_harmonic_pairs_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Enumeration of 18 harmonic pairs a+b=ab mod 37 and classifications",
+  "used_by": "",
+  "reviewer_note": "Enumeration/classification",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_203_diagonal_coset_sum_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Coset diagonal sum is well-defined; table of sovereign diagonal sums",
+  "used_by": "",
+  "reviewer_note": "Definition plus several computed results",
+  "cited_by": [
+   "theorem_204_lucas_sovereign_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_220_barrier_c_mod3.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "c = 1 mod 3, so c is never in a 3-map orbit of a multiple of 3",
+  "used_by": "",
+  "reviewer_note": "Destination with orbit density and GF(37) parts; no theorem uses it",
+  "cited_by": [
+   "reversal_ladder_2357.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_223_orbit_partition_riemann_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "12 orbits partition GF(37)*; Riemann zero floors classified",
+  "used_by": "",
+  "reviewer_note": "Classification/completeness result",
+  "cited_by": [
+   "shell_buckling_gf37.py",
+   "theorem_307_seed_orbit_residue_breakdown_gf37.py",
+   "theorem_348_cycle_495_c9_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_225_manifold_m_d7_consistency.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Stability manifold M: area 12, filling 1/2, D7-consistency conditions for trajectories",
+  "used_by": "T226, T227",
+  "reviewer_note": "Definitions plus area theorem plus several conditions",
+  "cited_by": [
+   "decimal_trinity.py",
+   "theorem_226_cage_integrity_check.py",
+   "theorem_227_s_old_d7_crossing.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_228_affine_doubling_topology.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Doubling map on Z_{B-1}: cycles/transients determined by v_2(B-1), across bases",
+  "used_by": "",
+  "reviewer_note": "General theorem with cases and base table",
+  "cited_by": [
+   "prime_sum_coset_sequence.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_236_rule30_block_universality_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Rule 30 center-column k-bit block completion steps k=1..10, classified",
+  "used_by": "",
+  "reviewer_note": "Search/computation result",
+  "cited_by": [
+   "fvk_gamma_extension.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_238_rule30_complexity_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Rule 30 center bit: O(n²) naive cost, entropy, GF(37) prediction",
+  "used_by": "",
+  "reviewer_note": "Multi-part complexity analysis",
+  "cited_by": [
+   "all_prime_grids_coset.py",
+   "theorem_239_rule30_autocorrelation_gf37.py",
+   "theorem_242_rule30_left_vs_right_boundary_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_240_rule30_path_to_problem2_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Implication chain toward Rule 30 Problem 2; proves orbit bias vanishing implies Problem 2",
+  "used_by": "",
+  "reviewer_note": "Chain of propositions with data; main result",
+  "cited_by": [
+   "cyclic_permutation_coset.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_241_rule30_right_boundary_2adic_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Rule 30 left-permutivity, right boundary 2-adic periods, GF(37) classification",
+  "used_by": "",
+  "reviewer_note": "Multi-part result",
+  "cited_by": [
+   "hydrogen_orbital_gf37.py",
+   "theorem_242_rule30_left_vs_right_boundary_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_242_rule30_left_vs_right_boundary_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Rule 30 left boundary depths derived and contrasted with right-boundary period table",
+  "used_by": "",
+  "reviewer_note": "Multi-depth derivation and comparison",
+  "cited_by": [
+   "consecutive_digit_triples.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_245_n130_divisor_square_sum_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "n=130 unique divisor-square-sum solution at k=4; other k give 1860, 148480",
+  "used_by": "",
+  "reviewer_note": "Main search/classification result, large",
+  "cited_by": [
+   "all_prime_grids_full.py",
+   "audit_leibniz_row37.py",
+   "theorem_246_n167_cas_ext_prime_gf37.py",
+   "theorem_251_n251_parity_architecture_gf37.py",
+   "theorem_261_n261_dark_a_sa_st_a_c9_gf37.py",
+   "theorem_264_a078358_oblong_gf37.py",
+   "theorem_378_n262_c3_dark_a_square_gf37.py",
+   "theorem_431_factorial_square_residue_handoff_gf37.py",
+   "theorem_432_carry_map_digital_root_rings_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_250_n250_twin_prime_engine_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Twin midpoint DR(6k) 3-cycle by k mod 3; boundary, sequence, power tower",
+  "used_by": "",
+  "reviewer_note": "Main result plus several parts",
+  "cited_by": [
+   "seed_orbit_convergence.py",
+   "theorem_278_twin_prime_structure_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_253_gf37_motive_framework.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "GF(37) orbit structure as a finite instance of motivic concepts",
+  "used_by": "",
+  "reviewer_note": "Large correspondence framework",
+  "cited_by": [
+   "repunit_square_998001.py",
+   "theorem_256_mahalanobis_gf37_orbits.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_256_mahalanobis_gf37_orbits.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "137-map as covariance operator; 12 orbits are Mahalanobis equivalence classes",
+  "used_by": "",
+  "reviewer_note": "Framework result with several parts",
+  "cited_by": [
+   "pinn_rt_phase_field.py",
+   "theorem_257_fermat_prime_f3_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_259_jc3_falsification.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Eight stress tests of the JC(3) counterexample map",
+  "used_by": "",
+  "reviewer_note": "Several-part audit, destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_264_a078358_oblong_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "n(n+1)=r mod 37 solvable iff 1+4r QR; orbit partition into oblong/non-oblong",
+  "used_by": "T267, T268, T271",
+  "reviewer_note": "Criterion plus orbit classification; several parts",
+  "cited_by": [
+   "theorem_267_n369_trio_gf37.py",
+   "theorem_268_cubic_k3_33_gf37.py",
+   "theorem_271_collatz_map_gf37.py",
+   "theorem_272_easter_dates_gf37.py",
+   "theorem_275_inverse_orbit_map_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_268_cubic_k3_33_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Cubic trajectory x_k=k^3+33 mod 37 for k=1..5 and its orbit properties",
+  "used_by": "",
+  "reviewer_note": "Five-part observation file",
+  "cited_by": [
+   "cubic_shift_33_gf37.py",
+   "theorem_269_sophie_map_gf37.py",
+   "theorem_270_birthday_march3_gf37.py",
+   "theorem_313_add_nine_reversal_diagonal_gf37.py",
+   "theorem_317_cubic_quotient_mu3_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_269_sophie_map_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "S(x)=2x+1 mod 37: fixed point 36, SEAM preimage 18, chains, orbits",
+  "used_by": "",
+  "reviewer_note": "Several parts",
+  "cited_by": [
+   "theorem_271_collatz_map_gf37.py",
+   "theorem_273_easter_37year_gf37.py",
+   "theorem_274_seed_nqr17_inverse_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_271_collatz_map_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "3x+1 mod 37: fixed point 18, seam preimage 12, relation to Sophie map",
+  "used_by": "",
+  "reviewer_note": "Several results on one map",
+  "cited_by": [
+   "lob_26_collatz_f37.py",
+   "theorem_272_easter_dates_gf37.py",
+   "theorem_273_easter_37year_gf37.py",
+   "theorem_274_seed_nqr17_inverse_gf37.py",
+   "theorem_278_twin_prime_structure_gf37.py",
+   "theorem_280_matrix_dimension_gf37.py",
+   "theorem_281_147_258_369_gf37.py",
+   "theorem_346_collatz_137_proper_subgroup_gf37.py",
+   "theorem_425_collatz_lob26_dynamics_descent_gf37.py",
+   "theorem_426_5n_plus_1_map_gf37.py",
+   "theorem_427_7n_plus_1_map_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_273_easter_37year_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Easter dates 2016-2052 classified by GF(37) orbit; absent orbits, extremes",
+  "used_by": "",
+  "reviewer_note": "Classification over a 37-year window; several results",
+  "cited_by": [
+   "theorem_272_easter_dates_gf37.py",
+   "theorem_277_planck_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_276_kolakoski_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Kolakoski gap set exactly {2,3,4}, with GF(37) classification",
+  "used_by": "",
+  "reviewer_note": "Proof plus nine-part analysis",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_278_twin_prime_structure_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Complete statement of proved structural conditions on twin prime pairs mod 37",
+  "used_by": "",
+  "reviewer_note": "Multi-part synthesis built from other steps",
+  "cited_by": [
+   "theorem_279_twin_antipodal_gate_gf37.py",
+   "theorem_282_admissibility_gf37.py",
+   "theorem_285_quotient_group_z12_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_291_iterated_squaring_sylow3_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Iterated squaring on Z/12Z descends to H_3 after 2 steps; loses antipodal pairs",
+  "used_by": "T292",
+  "reviewer_note": "Used by T292 but has two parts (chain plus antipodal consequence); unsure",
+  "cited_by": [
+   "theorem_292_forced_extension_limits_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_292_forced_extension_limits_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Only p∈{7,37,73} carry order-3 137-map; four extension options resolved",
+  "used_by": "",
+  "reviewer_note": "Complete classification with four parts",
+  "cited_by": [
+   "cubic_shift_33_gf37.py",
+   "theorem_293_anomalous_uniqueness_p37.py",
+   "theorem_294_complete_cross_prime_table.py",
+   "theorem_295_glv_generalization_secp256k1.py",
+   "theorem_297_block_separation.py",
+   "theorem_298_j1728_gaussian_cm.py",
+   "theorem_299_two_maps_from_phi3.py",
+   "theorem_300_what_is_special_about_37.py",
+   "theorem_301_cyclotomic_slot_table.py",
+   "theorem_302_137map_is_decimal_shift.py",
+   "theorem_304_three_lists_meet_at_37.py",
+   "theorem_306_discrete_rope_circle_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_293_anomalous_uniqueness_p37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "p=37 is the unique admissible prime with orbit-aligned anomalous curve",
+  "used_by": "",
+  "reviewer_note": "Uniqueness result from two conditions across three primes",
+  "cited_by": [
+   "theorem_295_glv_generalization_secp256k1.py",
+   "theorem_297_block_separation.py",
+   "theorem_298_j1728_gaussian_cm.py",
+   "theorem_300_what_is_special_about_37.py",
+   "theorem_306_discrete_rope_circle_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_295_glv_generalization_secp256k1.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "137-map structure generalizes via mu_3 to every p≡1 mod 3, GLV secp256k1",
+  "used_by": "",
+  "reviewer_note": "Generalization result, destination",
+  "cited_by": [
+   "theorem_297_block_separation.py",
+   "theorem_298_j1728_gaussian_cm.py",
+   "theorem_300_what_is_special_about_37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_296_36gon_rotation_model.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "F_37* as regular 36-gon; multiplicative maps are rotations; orbits are inscribed triangles",
+  "used_by": "",
+  "reviewer_note": "Geometric dictionary with many parts",
+  "cited_by": [
+   "theorem_297_block_separation.py",
+   "theorem_299_two_maps_from_phi3.py",
+   "theorem_301_cyclotomic_slot_table.py",
+   "theorem_303_block_map_is_27.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_303_block_map_is_27.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Decimal block of k/37 is 27k; block map is x(-10), cycles are antipodal pairs",
+  "used_by": "T311, T315",
+  "reviewer_note": "Identity plus operator/cycle structure; several parts",
+  "cited_by": [
+   "theorem_304_three_lists_meet_at_37.py",
+   "theorem_311_triad_lock_and_subgrid_map_gf37.py",
+   "theorem_315_base_ten_block_and_cofactor_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "thread_session_connections.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_304_three_lists_meet_at_37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Three independent prime lists intersect only in 37",
+  "used_by": "",
+  "reviewer_note": "Synthesis result from other theorems",
+  "cited_by": [
+   "theorem_333_tier_test_base_dependence_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_305_claim_strength_cuts.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Four orthogonal cuts for grading correspondence claims, Rule 30 worked",
+  "used_by": "",
+  "reviewer_note": "Method framework, a destination",
+  "cited_by": [
+   "theorem_306_discrete_rope_circle_gf37.py",
+   "theorem_340_phi3_seam_interference_gf37.py",
+   "theorem_423_data_pipeline_correspondence_grade_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_306_discrete_rope_circle_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Norm-1 circle over F_37 is isomorphic to F_37*; order-3 subgroup is IC",
+  "used_by": "",
+  "reviewer_note": "Corrects a claim; destination, no theorem uses it",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_311_triad_lock_and_subgrid_map_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "dr(2A)=dr(T_A) iff A=0 mod 3, plus 9x9 sub-grid map facts and corrections",
+  "used_by": "",
+  "reviewer_note": "Main lock result plus several sub-grid parts",
+  "cited_by": [
+   "theorem_315_base_ten_block_and_cofactor_gf37.py",
+   "theorem_316_t120_seed_class_mod_333_gf37.py",
+   "theorem_326_all_roads_ap_triples_gf37.py",
+   "thread_session_connections.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_314_twelve_double_closure_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "12 is the unique n closed under both readings of n+9",
+  "used_by": "",
+  "reviewer_note": "Uniqueness/completeness result",
+  "cited_by": [
+   "theorem_315_base_ten_block_and_cofactor_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_315_base_ten_block_and_cofactor_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "10+11 unique reversal-surviving split of 21; block 10..18 and 10→27 chain",
+  "used_by": "",
+  "reviewer_note": "Multi-part result",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_316_t120_seed_class_mod_333_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Pipeline T120/121 gate passes exactly for seed = 246 mod 333; three tiers",
+  "used_by": "",
+  "reviewer_note": "Sweep plus classification into tiers; main result",
+  "cited_by": [
+   "theorem_326_all_roads_ap_triples_gf37.py",
+   "theorem_327_counting_stack_123_246_369_gf37.py",
+   "theorem_333_tier_test_base_dependence_gf37.py",
+   "verify_325_326_327_portable.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_317_cubic_quotient_mu3_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "x^3+33 descends to 12-point graph on F37*/mu3; depth is graph distance",
+  "used_by": "",
+  "reviewer_note": "Several parts, full dynamics description",
+  "cited_by": [
+   "theorem_318_permutation_vs_functional_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_318_permutation_vs_functional_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "26x cycles are mu_3 cosets; x^3+33 acts on them as a non-bijection; power maps",
+  "used_by": "",
+  "reviewer_note": "Several parts distinguishing two structures",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_319_lift_machine_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Seed row forces lift grid; lift partitions 1..9 iff seed meets each +3-orbit once",
+  "used_by": "",
+  "reviewer_note": "Construction with commutation and classification (27 seeds, 9 grids)",
+  "cited_by": [
+   "theorem_320_ag23_lift_geometry_gf37.py",
+   "theorem_321_latin_phase_criterion_gf37.py",
+   "theorem_322_lift_criterion_theorem_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_320_ag23_lift_geometry_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Lift machine is AG(2,3); columns one parallel class, rows lines for 3 of 9 grids",
+  "used_by": "",
+  "reviewer_note": "Classification with several parts",
+  "cited_by": [
+   "theorem_321_latin_phase_criterion_gf37.py",
+   "theorem_322_lift_criterion_theorem_gf37.py",
+   "theorem_324_general_lift_magic_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_321_latin_phase_criterion_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Lift grid: phase-transversal ⇔ phase-Latin ⇔ equal row sums (=15)",
+  "used_by": "",
+  "reviewer_note": "Equivalence of three conditions over full census",
+  "cited_by": [
+   "theorem_322_lift_criterion_theorem_gf37.py",
+   "theorem_324_general_lift_magic_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_322_lift_criterion_theorem_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Lift criterion: covering, orbit array, phase array, Latin equivalence conditions",
+  "used_by": "",
+  "reviewer_note": "Multi-part theorem compressing T319-T321",
+  "cited_by": [
+   "theorem_323_order4_split_gf37.py",
+   "theorem_324_general_lift_magic_gf37.py",
+   "theorem_325_rotation_walk_shapes_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_323_order4_split_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Order-4 Latin squares split into two isotopy classes; counts and transversal profiles",
+  "used_by": "",
+  "reviewer_note": "Enumeration/classification result",
+  "cited_by": [
+   "theorem_324_general_lift_magic_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_324_general_lift_magic_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Lift G(s) row-magic at n(n^2+1)/2 iff f injective; never magic; counts",
+  "used_by": "",
+  "reviewer_note": "General theorem with parts (a)-(d)",
+  "cited_by": [
+   "theorem_422_lo_shu_dr9_antidiagonal_cycle_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_325_rotation_walk_shapes_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Rotation stack is a cyclic Latin square; reversal swaps classes; walks give four figures",
+  "used_by": "",
+  "reviewer_note": "Several parts",
+  "cited_by": [
+   "theorem_326_all_roads_ap_triples_gf37.py",
+   "theorem_327_counting_stack_123_246_369_gf37.py",
+   "theorem_328_splits_percent_repunit_gf37.py",
+   "theorem_348_cycle_495_c9_gf37.py",
+   "theorem_350_kaprekar_rotation_decomposition_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "verify_325_326_327_portable.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_326_all_roads_ap_triples_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "AP digit triple a,a+d,a+2d has residue 12d mod 37",
+  "used_by": "T327",
+  "reviewer_note": "Used by T327 but file has several parts (reversal, 246, rotation sums)",
+  "cited_by": [
+   "theorem_137_369_digital_roots_gf37.py",
+   "theorem_327_counting_stack_123_246_369_gf37.py",
+   "theorem_328_splits_percent_repunit_gf37.py",
+   "theorem_330_row5_closure_residue_gf37.py",
+   "theorem_331_orbit_sum_37_74_negation_gf37.py",
+   "theorem_332_six_six_forced_inversion_closed_gf37.py",
+   "theorem_333_tier_test_base_dependence_gf37.py",
+   "theorem_348_cycle_495_c9_gf37.py",
+   "theorem_350_kaprekar_rotation_decomposition_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_371_12321_rotation_reversal_d5.py",
+   "verify_325_326_327_portable.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_327_counting_stack_123_246_369_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "123/246/369 counting stack differs from rotation stack; is T326 a=d diagonal",
+  "used_by": "",
+  "reviewer_note": "Multi-part comparison",
+  "cited_by": [
+   "theorem_137_369_digital_roots_gf37.py",
+   "theorem_325_rotation_walk_shapes_gf37.py",
+   "theorem_328_splits_percent_repunit_gf37.py",
+   "theorem_331_orbit_sum_37_74_negation_gf37.py",
+   "theorem_333_tier_test_base_dependence_gf37.py",
+   "verify_325_326_327_portable.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_328_splits_percent_repunit_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Four readings of 123/246/369: percentage, splits, prefix=residue, 37^2 chevron",
+  "used_by": "",
+  "reviewer_note": "Four separate readings",
+  "cited_by": [
+   "theorem_330_row5_closure_residue_gf37.py",
+   "theorem_333_tier_test_base_dependence_gf37.py",
+   "theorem_371_12321_rotation_reversal_d5.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_329_dr_orbit_invariance_refuted_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "DR not invariant on 137-orbits; wrap-count law replaces it",
+  "used_by": "",
+  "reviewer_note": "Refutation plus replacement law",
+  "cited_by": [
+   "theorem_137_369_digital_roots_gf37.py",
+   "theorem_145_six_seven_triangles_gf37.py",
+   "theorem_331_orbit_sum_37_74_negation_gf37.py",
+   "theorem_336_twin_prime_orbit_alignment_null_gf37.py",
+   "theorem_337_sophie_germain_map_gf37.py",
+   "theorem_343_eisenstein_reconciliation_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_357_two_quotients_separated_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_330_row5_closure_residue_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Row 5 (38515) = rows 2+3+4 = 35 mod 37; graded post hoc, not established",
+  "used_by": "",
+  "reviewer_note": "Destination closing T328, with grading",
+  "cited_by": [
+   "theorem_331_orbit_sum_37_74_negation_gf37.py",
+   "theorem_333_tier_test_base_dependence_gf37.py",
+   "theorem_335_transfer_gate_audit_falsified_gf37.py",
+   "theorem_371_12321_rotation_reversal_d5.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_331_orbit_sum_37_74_negation_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Every 137-orbit sums to 37 or 74, and negation swaps the halves",
+  "used_by": "",
+  "reviewer_note": "Two-part result with corrections",
+  "cited_by": [
+   "basin_sum_wraparound_gf37.py",
+   "theorem_283_negation_antipodal_gf37.py",
+   "theorem_332_six_six_forced_inversion_closed_gf37.py",
+   "theorem_334_base_inversion_negates_slope_orbit_gf37.py",
+   "theorem_336_twin_prime_orbit_alignment_null_gf37.py",
+   "theorem_340_phi3_seam_interference_gf37.py",
+   "theorem_341_koopman_spectra_gf37.py",
+   "theorem_343_eisenstein_reconciliation_gf37.py",
+   "theorem_344_no_golden_ratio_gf37.py",
+   "theorem_345_twin_midpoint_forbidden_gf37.py",
+   "theorem_349_cubic_map_conjugacy_gf37.py",
+   "theorem_351_anchor_gap5_pairing_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_356_T_functional_graph_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_332_six_six_forced_inversion_closed_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "6/6 orbit-sum split forced by 666; exactly two orbits inversion-closed",
+  "used_by": "",
+  "reviewer_note": "Two-part result",
+  "cited_by": [
+   "basin_sum_wraparound_gf37.py",
+   "theorem_283_negation_antipodal_gf37.py",
+   "theorem_331_orbit_sum_37_74_negation_gf37.py",
+   "theorem_333_tier_test_base_dependence_gf37.py",
+   "theorem_338_sg_137_generate_agl_gf37.py",
+   "theorem_345_twin_midpoint_forbidden_gf37.py",
+   "theorem_346_collatz_137_proper_subgroup_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_333_tier_test_base_dependence_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Tier assigned by re-running construction in other bases; base 10 not arbitrary",
+  "used_by": "",
+  "reviewer_note": "Method result plus base comparison",
+  "cited_by": [
+   "theorem_330_row5_closure_residue_gf37.py",
+   "theorem_331_orbit_sum_37_74_negation_gf37.py",
+   "theorem_334_base_inversion_negates_slope_orbit_gf37.py",
+   "theorem_335_transfer_gate_audit_falsified_gf37.py",
+   "theorem_340_phi3_seam_interference_gf37.py",
+   "theorem_341_koopman_spectra_gf37.py",
+   "theorem_343_eisenstein_reconciliation_gf37.py",
+   "theorem_344_no_golden_ratio_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_334_base_inversion_negates_slope_orbit_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Inverting base 10<->26 negates slope orbit via Vieta; universal over p=1 mod 3",
+  "used_by": "",
+  "reviewer_note": "Law plus universality and grading; others cite for comparison only",
+  "cited_by": [
+   "theorem_336_twin_prime_orbit_alignment_null_gf37.py",
+   "theorem_343_eisenstein_reconciliation_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_335_transfer_gate_audit_falsified_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "T333 transfer gate row 5 falsified; gate under-constrained",
+  "used_by": "",
+  "reviewer_note": "Multi-exclusion audit, destination",
+  "cited_by": [
+   "theorem_330_row5_closure_residue_gf37.py",
+   "theorem_333_tier_test_base_dependence_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_336_twin_prime_orbit_alignment_null_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Pre-registered test: twin primes do not align with 137-orbit structure; all three miss",
+  "used_by": "",
+  "reviewer_note": "Statistical null result with three hypotheses",
+  "cited_by": [
+   "theorem_337_sophie_germain_map_gf37.py",
+   "theorem_345_twin_midpoint_forbidden_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_357_two_quotients_separated_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_337_sophie_germain_map_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "2x+1 conjugate to x2; sigma^12 = 26x+25; primes show no orbit bias",
+  "used_by": "",
+  "reviewer_note": "Three-part result",
+  "cited_by": [
+   "theorem_338_sg_137_generate_agl_gf37.py",
+   "theorem_341_koopman_spectra_gf37.py",
+   "theorem_342_sandwich_numbers_sigma_gf37.py",
+   "theorem_346_collatz_137_proper_subgroup_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_426_5n_plus_1_map_gf37.py",
+   "theorem_427_7n_plus_1_map_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_338_sg_137_generate_agl_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Sophie map and 137-map generate AGL(1,37); no joint orbit taxonomy",
+  "used_by": "",
+  "reviewer_note": "Main result with consequence",
+  "cited_by": [
+   "theorem_341_koopman_spectra_gf37.py",
+   "theorem_346_collatz_137_proper_subgroup_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_426_5n_plus_1_map_gf37.py",
+   "theorem_427_7n_plus_1_map_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_339_orbit_index_safe_semiprimes_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Orbit index F_37*/<10> ≅ Z/12 additive; explains safe-prime and semiprime hits",
+  "used_by": "",
+  "reviewer_note": "Main tool result with several applications",
+  "cited_by": [
+   "theorem_332_six_six_forced_inversion_closed_gf37.py",
+   "theorem_341_koopman_spectra_gf37.py",
+   "theorem_342_sandwich_numbers_sigma_gf37.py",
+   "theorem_343_eisenstein_reconciliation_gf37.py",
+   "theorem_344_no_golden_ratio_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_362_prime_pair_baseline_2_over_35.py",
+   "theorem_424_rewrite_certificate_ledger_gf37.py",
+   "theorem_432_carry_map_digital_root_rings_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_340_phi3_seam_interference_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "T331 seam and three-path cancellation are both Phi_3; post errors checked",
+  "used_by": "",
+  "reviewer_note": "Audit, correction and analogy grading; several parts",
+  "cited_by": [
+   "theorem_331_orbit_sum_37_74_negation_gf37.py",
+   "theorem_341_koopman_spectra_gf37.py",
+   "theorem_343_eisenstein_reconciliation_gf37.py",
+   "theorem_344_no_golden_ratio_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_379_shell_riemann_exact_error.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_341_koopman_spectra_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Koopman spectra of 137-map and 2x+1 map; characters diagonalize mu",
+  "used_by": "",
+  "reviewer_note": "Several-part result",
+  "cited_by": [
+   "theorem_343_eisenstein_reconciliation_gf37.py",
+   "theorem_344_no_golden_ratio_gf37.py",
+   "theorem_346_collatz_137_proper_subgroup_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_342_sandwich_numbers_sigma_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "26+27 and 8+9 are sigma(n); 26 and 8,9 are classical uniqueness numbers; GF(37) null",
+  "used_by": "",
+  "reviewer_note": "Several parts; destination file",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_343_eisenstein_reconciliation_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Six earlier results are all equivalent to 37 = 1 mod 3",
+  "used_by": "",
+  "reviewer_note": "Reconciliation proved from other steps; destination",
+  "cited_by": [
+   "theorem_344_no_golden_ratio_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_344_no_golden_ratio_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "x^2-x-1 has no root mod 37 since 37=2 mod 5; Pisano maximal",
+  "used_by": "",
+  "reviewer_note": "Several parts including Pisano and contrast",
+  "cited_by": [
+   "theorem_352_why_37_uniqueness_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_345_twin_midpoint_forbidden_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Twin midpoints avoid exactly residues 1 and -1 mod 37",
+  "used_by": "",
+  "reviewer_note": "Settles T167 conjecture; destination result",
+  "cited_by": [
+   "theorem_332_six_six_forced_inversion_closed_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_346_collatz_137_proper_subgroup_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Collatz map and 137-map generate index-2 subgroup of AGL(1,37); invariant is QR of differences",
+  "used_by": "",
+  "reviewer_note": "Group-generation result with multiple cases",
+  "cited_by": [
+   "theorem_347_prime_gap_chi_baselines_gf37.py",
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_425_collatz_lob26_dynamics_descent_gf37.py",
+   "theorem_426_5n_plus_1_map_gf37.py",
+   "theorem_427_7n_plus_1_map_gf37.py",
+   "theorem_430_rank_one_trace_law_all_ones_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_347_prime_gap_chi_baselines_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Prime-gap chi bias and orbit self-transition rate measured against wrong nulls",
+  "used_by": "",
+  "reviewer_note": "Multi-part audit with corrections",
+  "cited_by": [
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_355_conjugate_orbit_and_layer3_gf37.py",
+   "theorem_362_prime_pair_baseline_2_over_35.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_348_cycle_495_c9_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Rotations of 495 give C9={14,29,31}: zeta floor and twin pair together",
+  "used_by": "",
+  "reviewer_note": "Destination observation, not used as a step",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_349_cubic_map_conjugacy_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "x^3+33 has the twelve orbits as fibres; conjugacy classes of four maps verified",
+  "used_by": "",
+  "reviewer_note": "Audit of supplied analysis with several parts",
+  "cited_by": [
+   "theorem_352_why_37_uniqueness_gf37.py",
+   "theorem_353_fa_trajectory_correction_gf37.py",
+   "theorem_355_conjugate_orbit_and_layer3_gf37.py",
+   "theorem_356_T_functional_graph_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_350_kaprekar_rotation_decomposition_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Kaprekar step equals 99(a-c) and is a rotation-class difference",
+  "used_by": "",
+  "reviewer_note": "Closed form plus decomposition and consequences",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_351_anchor_gap5_pairing_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "SA={4,9,25,30} carries two crossing pairings: gap-5 and equal-sum 34",
+  "used_by": "",
+  "reviewer_note": "Several structural facts; not used by another theorem",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_352_why_37_uniqueness_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "37 is the only prime with ord_p(10)=3",
+  "used_by": "",
+  "reviewer_note": "Stated as the destination uniqueness statement",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_353_fa_trajectory_correction_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Orbit of 18 under f_a is preperiod 5 into 3-cycle, not 7-cycle",
+  "used_by": "",
+  "reviewer_note": "Correction audit with full cycle type; destination",
+  "cited_by": [
+   "theorem_354_fb_trajectory_gf37.py",
+   "theorem_355_conjugate_orbit_and_layer3_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_354_fb_trajectory_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "f_b orbit of 18 equals f_a orbit mapped through C, since C fixes 18",
+  "used_by": "T355",
+  "reviewer_note": "Derived from T353 conjugacy; includes global-shape comparison",
+  "cited_by": [
+   "theorem_355_conjugate_orbit_and_layer3_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_355_conjugate_orbit_and_layer3_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Conjugate CTC^-1 orbit of 18 completes series; Layer III d=7 intersection forced",
+  "used_by": "",
+  "reviewer_note": "Two parts, series completion",
+  "cited_by": [
+   "theorem_356_T_functional_graph_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_356_T_functional_graph_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "T constant on cubing classes; quotient graph is 6-cycle with two length-3 chains",
+  "used_by": "",
+  "reviewer_note": "Complete characterisation of a map",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_357_two_quotients_separated_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "13-state cubic quotient and 9-state doubling system differ in kind",
+  "used_by": "",
+  "reviewer_note": "Comparison of two full dynamical classifications",
+  "cited_by": [
+   "theorem_358_no_semiconjugacy_gf37.py",
+   "theorem_360_count_sum_operator_base_generic.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_358_no_semiconjugacy_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "No surjective semiconjugacy from cubic quotient onto mod-9 doubling system",
+  "used_by": "",
+  "reviewer_note": "Proved from internal lemmas; destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_359_length_vs_digital_root.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Three information levels of R_k: length, k mod 9, constant DR 9",
+  "used_by": "",
+  "reviewer_note": "Several-part result",
+  "cited_by": [
+   "theorem_360_count_sum_operator_base_generic.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_360_count_sum_operator_base_generic.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Count-sum operator T_C dynamics: basin [1,99], attractors 22 and 9-cycle; base-generic",
+  "used_by": "",
+  "reviewer_note": "Audit with dynamics and four corrections",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_361_index_shift_primes_composites.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Zero set of c_n-(p_{n+1}+1) is exactly {1,2,3}",
+  "used_by": "",
+  "reviewer_note": "Complete zero-set result; destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_362_prime_pair_baseline_2_over_35.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Orbit self-transition baseline for prime pairs is 2/35, not 1/18",
+  "used_by": "T347 (superseded note)",
+  "reviewer_note": "Correction with measurement, twin case, all even gaps",
+  "cited_by": [
+   "theorem_347_prime_gap_chi_baselines_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_363_ac_lead_oscillates_quadratic_census.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "A and C quadratic prime counts trade lead 90 times below 300000",
+  "used_by": "",
+  "reviewer_note": "Census/search result",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_364_complement_involution_3663.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "9s-complement on Z_3663 is global involution; F_37 invariant fibre; 18 two-cycles",
+  "used_by": "",
+  "reviewer_note": "Four-part statement",
+  "cited_by": [
+   "theorem_371_12321_rotation_reversal_d5.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_365_37_first_irregular_prime.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "37 is the first irregular prime, pair (37,32)",
+  "used_by": "",
+  "reviewer_note": "Destination result, not a step; unsure so THEOREM",
+  "cited_by": [
+   "theorem_366_cyclotomic_membership_is_vacuous.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_366_cyclotomic_membership_is_vacuous.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Every prime except 2,5 divides some Phi_m(10), so the cyclotomic sieve filters nothing",
+  "used_by": "",
+  "reviewer_note": "Audit destination; not used as a step elsewhere",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_368_matrix_operator_rh_digits_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Matrix operator T(n)=DS(n)+DS(n-4) invariant 5 mod 9; Riemann zero digit structure",
+  "used_by": "",
+  "reviewer_note": "Multi-part",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_370_gauge_holonomy_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Gauge covariance, holonomy checks and GF(37) discrete bundle structure",
+  "used_by": "",
+  "reviewer_note": "Multi-part",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_371_12321_rotation_reversal_d5.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Rotation/reversal of 12321 generate D_5; length-5 rotation is not 137-map",
+  "used_by": "",
+  "reviewer_note": "Group-action result with several parts",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_372_cot_serial_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Chain-of-thought serialization compared with fixed-depth 137-map orbit structure",
+  "used_by": "",
+  "reviewer_note": "Interpretive multi-part file",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_373_nuclear_stability_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Nuclear magic numbers classified in GF(37) named sets",
+  "used_by": "",
+  "reviewer_note": "Classification",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_374_rule30_normality_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Rule 30 center column block-frequency chi-squared convergence and GF(37) extremes",
+  "used_by": "",
+  "reviewer_note": "Multi-k measurement and classification",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_379_shell_riemann_exact_error.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Shell Riemann sum error is exactly pi r^2/n; midpoint rule exact for every n",
+  "used_by": "",
+  "reviewer_note": "Several exact results; destination",
+  "cited_by": [
+   "theorem_381_napkin_ring_volume_invariance.py",
+   "theorem_423_data_pipeline_correspondence_grade_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_380_birthday_253_over_365_vs_ln2.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "253/365 approximates ln2 to 3.5e-6; Poisson estimate vs exact birthday answer",
+  "used_by": "",
+  "reviewer_note": "Several parts; destination",
+  "cited_by": [
+   "theorem_423_data_pipeline_correspondence_grade_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_381_napkin_ring_volume_invariance.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Napkin-ring volume πh³/6 is R-free; surface area is not",
+  "used_by": "",
+  "reviewer_note": "Main result with two parts",
+  "cited_by": [
+   "theorem_423_data_pipeline_correspondence_grade_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_422_lo_shu_dr9_antidiagonal_cycle_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "DR-9 family has 72 members, calibration 24, anti-diagonal graph Hamiltonian",
+  "used_by": "",
+  "reviewer_note": "Audit with three results and corrections",
+  "cited_by": [
+   "theorem_245_n130_divisor_square_sum_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_424_rewrite_certificate_ledger_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Rewrite-certificate ledger as subgroup filtration of (Z/37)*; grading",
+  "used_by": "",
+  "reviewer_note": "Construction plus multi-part grading",
+  "cited_by": [
+   "theorem_423_data_pipeline_correspondence_grade_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_425_collatz_lob26_dynamics_descent_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Parity-branched Collatz on {0..36}: not induced, 9-cycle artifact, full dynamics, no semiconjugacy",
+  "used_by": "",
+  "reviewer_note": "Several-part result built on prior files",
+  "cited_by": [
+   "lob_26_collatz_f37.py",
+   "theorem_426_5n_plus_1_map_gf37.py",
+   "theorem_427_7n_plus_1_map_gf37.py",
+   "theorem_428_parity_word_determinant_sieve.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_426_5n_plus_1_map_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "5x+1 on GF(37) gives full affine group; parity-branched map has a 7-cycle",
+  "used_by": "",
+  "reviewer_note": "Multi-part analysis",
+  "cited_by": [
+   "theorem_346_collatz_137_proper_subgroup_gf37.py",
+   "theorem_427_7n_plus_1_map_gf37.py",
+   "theorem_428_parity_word_determinant_sieve.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_427_7n_plus_1_map_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "7n+1 map on GF(37) and general order formula 37*lcm(ord(m),3)",
+  "used_by": "",
+  "reviewer_note": "General formula subsuming others; multi-part",
+  "cited_by": [
+   "theorem_346_collatz_137_proper_subgroup_gf37.py",
+   "theorem_428_parity_word_determinant_sieve.py",
+   "theorem_430_rank_one_trace_law_all_ones_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_428_parity_word_determinant_sieve.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Parity-word determinant sieve closes band of positive cycles; verdict corrections",
+  "used_by": "",
+  "reviewer_note": "Large sieve result with several parts",
+  "cited_by": [
+   "theorem_427_7n_plus_1_map_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_429_transversal_triple_partitions_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Grid is transversality of two triple-partitions; permutations hit two orbits; 84-triple census",
+  "used_by": "",
+  "reviewer_note": "Multi-part with census",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_430_rank_one_trace_law_all_ones_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Rank-one A satisfies A^2=tr(A)A; all-ones J^k law, nilpotent at 37|n",
+  "used_by": "",
+  "reviewer_note": "General law plus several consequences",
+  "cited_by": [
+   "theorem_229_m9_terminal_singularity.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_431_factorial_square_residue_handoff_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "n! is never a square for n>1; fixed residue oracles fail, moving witness succeeds",
+  "used_by": "",
+  "reviewer_note": "Main result with proof and handoff analysis",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "theorem_432_carry_map_digital_root_rings_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Kummer carry identity, boundary carries, and structure of digital-root rings Z/(b-1)",
+  "used_by": "",
+  "reviewer_note": "Large multi-part result",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "triple_coupling_666_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "666=lcm(2,9,37) with five identities",
+  "used_by": "",
+  "reviewer_note": "Five identities",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "twin_midpoint_dr_axis.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Twin midpoint DR ∈ {3,6,9} for p>3",
+  "used_by": "",
+  "reviewer_note": "Single identity but no theorem uses it; unsure so THEOREM",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "twin_prime_chamber_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Twin primes: chi_-3 pattern (-1,0,+1); centers classified C3/C6/C9",
+  "used_by": "",
+  "reviewer_note": "Includes classification",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "twin_prime_consolidation.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Twin prime anatomy via GF(37); imaginary unit gate n≡±6",
+  "used_by": "",
+  "reviewer_note": "Consolidation with several theorems",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "twin_prime_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Twin primes through GF(37): forbidden residue 35, +2 staircase, observed residue pairs",
+  "used_by": "",
+  "reviewer_note": "Several parts",
+  "cited_by": [
+   "theorem_108_serpentine_twin_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "twin_prime_pipe.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Twin primes p>3 sit at 5 and 1 mod 6 around a 6-divisible center; 3-6-9 structure",
+  "used_by": "",
+  "reviewer_note": "Multi-part structure",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "twin_prime_rh_qr_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Lower twin DR is QNR mod 37, upper twin DR is QR; further RH sections",
+  "used_by": "",
+  "reviewer_note": "Multiple theorems",
+  "cited_by": [
+   "twin_prime_chamber_gf37.py"
+  ],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "twin_prime_riemann_framework.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Twin prime chi_-3 structure, forbidden mod-37 residues, emirp and Riemann gap",
+  "used_by": "",
+  "reviewer_note": "Several parts; framework",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "twin_prime_structure.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Twin primes are (6n-1,6n+1); midpoint divisible by 6; no triplets; more",
+  "used_by": "",
+  "reviewer_note": "Several theorems",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "unified_field_architecture.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Five-part architecture: ground state, generators, prime convergence, digital fold, closure",
+  "used_by": "",
+  "reviewer_note": "Multi-part",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "unit_scalar_init_gf37.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Basin-preserving scalars are exactly IC={1,10,26}; C=1 consequences",
+  "used_by": "",
+  "reviewer_note": "Five-part result",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ },
+ {
+  "file": "zero_ground_decimal.py",
+  "location": "math/theorems",
+  "import_graph": "THEOREM",
+  "named_by_owner": "—",
+  "reading": "THEOREM",
+  "fact": "Zero-ground decimal architecture: 45+81=126, DR 9, and related readings",
+  "used_by": "",
+  "reviewer_note": "Multiple observations; destination",
+  "cited_by": [],
+  "reading_and_cited": "THEOREM"
+ }
+]

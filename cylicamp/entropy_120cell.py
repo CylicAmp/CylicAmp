@@ -1,7 +1,7 @@
 """
 Symbolic Derivation of Black-Hole Entropy from 120-cell Geometry.
 
-The 120-cell {5,3,3} is the geometric seed of the framework.
+The 120-cell {5,3,3} is the geometric seed of GF(37).
 Its combinatorial structure supplies the microstate count for horizon entropy.
 
 Axiom E:  S = 120 ln 2

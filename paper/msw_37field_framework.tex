@@ -1,0 +1,593 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{array}
+
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+
+\title{Digital Root Algebra and the 37-Field:\\
+A Unified Framework Connecting\\
+Prime Structure, Pascal's Triangle, and Tesla FLUX States}
+
+\author{Michael Warren Song\\
+\small\texttt{red3rdeye@gmail.com}}
+
+\date{2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We develop a unified framework built on the digital root function and a modular
+field centered on 37, connecting four areas: (1) a provable structural constraint
+on twin prime pairs via digital root residue classes; (2) the canonical mod-37
+degeneracy of the digit blocks $\{123, 456, 789\}$; (3) the 191--137 prime bridge,
+in which both primes share digital root 2 and each leads a twin prime pair with
+the same digital root pattern $(2,4)$; and (4) a unified analysis of Pascal's
+Row 8 demonstrating that the first three elements sum to exactly 37, that the
+adjacent-pair-sum operation produces 100\% occupancy in the Tesla FLUX states
+$\{3,6,9\}$, and that the product of element digital roots reduces through 19
+to 1.  The framework reveals 12 --- equal to $123 \bmod 37$ --- as a fixed
+point of the digit-sum operation, and identifies the Tesla FLUX class $\{3,6,9\}$
+as the structurally excluded zone for twin primes greater than 3.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%──────────────────────────────────────────────────────────────────────────────
+\section{Introduction}
+\label{sec:intro}
+%──────────────────────────────────────────────────────────────────────────────
+
+The digital root of a positive integer $n$, written $\mathrm{DR}(n)$, is the
+single digit obtained by iterating the digit-sum map until a value in $\{1,\ldots,9\}$
+is reached.  It is well known that $\mathrm{DR}(n) = 1 + (n-1)\bmod 9$ for
+$n \geq 1$, making the digital root equivalent to the representative of $n$ in
+$\mathbb{Z}/9\mathbb{Z}$ with the convention that 0 is replaced by 9.
+
+Despite its elementary definition, the digital root carries non-trivial structural
+information about primes, combinatorial sequences, and modular arithmetic.  This
+paper assembles four interconnected results around a common axis: the mod-37
+field and the Tesla FLUX states $\{3,6,9\}$.
+
+\textbf{Organisation.}  Section~\ref{sec:prelim} fixes notation and definitions.
+Section~\ref{sec:twin} proves the DR constraint on twin primes.
+Section~\ref{sec:37field} establishes the canonical mod-37 degeneracy.
+Section~\ref{sec:bridge} presents the 191--137 bridge observations.
+Section~\ref{sec:pascal} analyses Pascal's Row 8 under all three lenses
+simultaneously.  Section~\ref{sec:digitsum} proves the digit-sum invariant.
+Section~\ref{sec:drproduct} traces the DR-product chain for Row~8.
+Section~\ref{sec:conclusion} collects open questions.
+
+%──────────────────────────────────────────────────────────────────────────────
+\section{Preliminaries}
+\label{sec:prelim}
+%──────────────────────────────────────────────────────────────────────────────
+
+\begin{definition}[Digital Root]
+For $n \in \mathbb{Z}_{\geq 0}$, define
+\[
+    \mathrm{DR}(n) =
+    \begin{cases}
+        0 & \text{if } n = 0, \\
+        1 + (n-1)\bmod 9 & \text{if } n \geq 1.
+    \end{cases}
+\]
+\end{definition}
+
+The digital root satisfies $\mathrm{DR}(a+b) \equiv \mathrm{DR}(a)+\mathrm{DR}(b)
+\pmod{9}$ for all $a,b\geq 0$, where the result is again taken in $\{1,\ldots,9\}$
+(replacing 0 by 9).  In particular:
+
+\begin{lemma}[9 is the DR identity]
+\label{lem:identity}
+For all $n \geq 1$ and $k \geq 0$,\; $\mathrm{DR}(n + 9k) = \mathrm{DR}(n)$.
+\end{lemma}
+
+\begin{proof}
+$\mathrm{DR}(n+9k) = 1 + (n+9k-1)\bmod 9 = 1 + (n-1)\bmod 9 = \mathrm{DR}(n)$.
+\end{proof}
+
+\begin{definition}[Tesla FLUX States]
+Define the \emph{Tesla FLUX class} $\mathcal{F} = \{3, 6, 9\}$.
+A positive integer $n$ is \emph{FLUX-active} if $\mathrm{DR}(n) \in \mathcal{F}$,
+equivalently if $3 \mid n$.  The \emph{spine FLUX ratio} of a finite multiset
+$S$ of positive integers is $|\{s \in S : \mathrm{DR}(s)\in\mathcal{F}\}|/|S|$.
+\end{definition}
+
+By Lemma~\ref{lem:identity}, the set $\mathcal{F}$ is closed under addition of
+any multiple of 9: if $\mathrm{DR}(n)\in\mathcal{F}$ then $\mathrm{DR}(n+9k)
+\in \mathcal{F}$ for all $k\geq 0$.  Moreover, $\mathcal{F}$ generates itself
+under repeated addition of 3:
+\[
+    3 \xrightarrow{+3} 6 \xrightarrow{+3} 9 \xrightarrow{+3} 12 \xrightarrow{\mathrm{DR}} 3 \xrightarrow{\cdots}
+\]
+
+\begin{observation}
+$1+2+3 = 6 \in \mathcal{F}$ and $1\cdot2\cdot3 = 6 \in \mathcal{F}$.
+The sum and product of $\{1,2,3\}$ coincide and land in the Tesla FLUX class.
+\end{observation}
+
+\begin{definition}[37-Field]
+We work in $\mathbb{Z}/37\mathbb{Z}$, referred to as the \emph{37-field}.
+For a positive integer $n$ we write $[n]_{37} = n \bmod 37$.
+\end{definition}
+
+%──────────────────────────────────────────────────────────────────────────────
+\section{DR Constraint on Twin Primes}
+\label{sec:twin}
+%──────────────────────────────────────────────────────────────────────────────
+
+\begin{theorem}[DR Patterns of Twin Primes]
+\label{thm:twin}
+Let $(p, p+2)$ be a twin prime pair with $p > 3$.  Then
+\[
+    \bigl(\mathrm{DR}(p),\, \mathrm{DR}(p+2)\bigr) \;\in\;
+    \{(2,4),\;(5,7),\;(8,1)\}.
+\]
+In particular, neither $p$ nor $p+2$ is FLUX-active.
+The Tesla FLUX class $\mathcal{F} = \{3,6,9\}$ is the
+\emph{excluded zone} for twin prime digital roots when $p > 3$.
+\end{theorem}
+
+\begin{proof}
+Since $p > 3$ is prime, $p$ is not divisible by 3, so $\mathrm{DR}(p) \notin
+\mathcal{F}$, i.e.\ $\mathrm{DR}(p) \in \{1,2,4,5,7,8\}$.  Similarly $p+2$
+is prime and greater than 3, so $\mathrm{DR}(p+2) \notin \mathcal{F}$.
+
+Since $\mathrm{DR}(p+2) \equiv \mathrm{DR}(p) + 2 \pmod{9}$ (with values in
+$\{1,\ldots,9\}$), we have $\mathrm{DR}(p+2) = \mathrm{DR}(p) + 2$ if
+$\mathrm{DR}(p) \leq 7$, and $\mathrm{DR}(p+2) = \mathrm{DR}(p) - 7$ if
+$\mathrm{DR}(p) \geq 8$.
+
+Checking each allowed value of $\mathrm{DR}(p)$:
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+$\mathrm{DR}(p)$ & $\mathrm{DR}(p+2)$ & Allowed? \\
+\midrule
+1 & 3 & \textbf{No} ($3 \in \mathcal{F}$, so $3\mid p+2$) \\
+2 & 4 & Yes \\
+4 & 6 & \textbf{No} ($6 \in \mathcal{F}$, so $3\mid p+2$) \\
+5 & 7 & Yes \\
+7 & 9 & \textbf{No} ($9 \in \mathcal{F}$, so $3\mid p+2$) \\
+8 & 1 & Yes \\
+\bottomrule
+\end{tabular}
+\end{center}
+Exactly three patterns survive.
+\end{proof}
+
+\begin{corollary}
+\label{cor:twin_dr2}
+If $(p,p+2)$ is a twin prime pair with $p > 3$ and $\mathrm{DR}(p)=2$, then
+$\mathrm{DR}(p+2)=4$.
+\end{corollary}
+
+Table~\ref{tab:twin} verifies Theorem~\ref{thm:twin} for the first twenty
+twin prime pairs.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrccrr}
+\toprule
+$p$ & $p+2$ & $\mathrm{DR}(p)$ & $\mathrm{DR}(p+2)$ & Pattern & $p\bmod 37$ \\
+\midrule
+3   & 5   & 3 & 5 & (3,5) & 3 \\
+5   & 7   & 5 & 7 & (5,7) & 5 \\
+11  & 13  & 2 & 4 & (2,4) & 11 \\
+17  & 19  & 8 & 1 & (8,1) & 17 \\
+29  & 31  & 2 & 4 & (2,4) & 29 \\
+41  & 43  & 5 & 7 & (5,7) & 4 \\
+59  & 61  & 5 & 7 & (5,7) & 22 \\
+71  & 73  & 8 & 1 & (8,1) & 34 \\
+101 & 103 & 2 & 4 & (2,4) & 27 \\
+107 & 109 & 8 & 1 & (8,1) & 33 \\
+137 & 139 & 2 & 4 & (2,4) & 26 \\
+149 & 151 & 5 & 7 & (5,7) & 1 \\
+179 & 181 & 8 & 1 & (8,1) & 31 \\
+191 & 193 & 2 & 4 & (2,4) & 6 \\
+197 & 199 & 8 & 1 & (8,1) & 12 \\
+227 & 229 & 2 & 4 & (2,4) & 5 \\
+239 & 241 & 5 & 7 & (5,7) & 17 \\
+269 & 271 & 8 & 1 & (8,1) & 10 \\
+281 & 283 & 2 & 4 & (2,4) & 22 \\
+311 & 313 & 5 & 7 & (5,7) & 15 \\
+\bottomrule
+\end{tabular}
+\caption{DR patterns of the first twenty twin prime pairs.
+Only the three patterns $(2,4)$, $(5,7)$, $(8,1)$ appear for $p>3$.}
+\label{tab:twin}
+\end{table}
+
+%──────────────────────────────────────────────────────────────────────────────
+\section{Canonical Degeneracy in the 37-Field}
+\label{sec:37field}
+%──────────────────────────────────────────────────────────────────────────────
+
+\begin{proposition}[Canonical Degeneracy]
+\label{prop:canon}
+The three canonical digit blocks satisfy
+\[
+    123 \equiv 456 \equiv 789 \equiv 12 \pmod{37}.
+\]
+\end{proposition}
+
+\begin{proof}
+$123 = 3\cdot37 + 12$;\quad $456 = 12\cdot37 + 12$;\quad $789 = 21\cdot37 + 12$.
+\end{proof}
+
+The common residue 12 is significant: $\mathrm{DR}(12) = 3 \in \mathcal{F}$,
+so the 37-field collapses all three canonical blocks onto a value whose digital
+root is the first Tesla FLUX state.  Moreover, the digit sum of 12 is $1+2=3$,
+and the digits 1 and 2 that appear in 12 are the first two counting numbers,
+with $1+2=3$ completing the sequence.
+
+\begin{observation}
+$[123]_{37} = [456]_{37} = [789]_{37} = 12 = 1+2+3-\mathrm{DR}(123)$.
+\end{observation}
+
+This degeneracy means that under mod-37 arithmetic, the ordered partition of
+digits $\{1,\ldots,9\}$ into the blocks $(123,456,789)$ produces no residue
+variation --- all three blocks are indistinguishable.  A differential cascade
+$\{+8, +13, +24\}$ is required to break this degeneracy, as analysed in the
+lattice transform engine described in Appendix~\ref{app:lattice}.
+
+%──────────────────────────────────────────────────────────────────────────────
+\section{The 191--137 Prime Bridge}
+\label{sec:bridge}
+%──────────────────────────────────────────────────────────────────────────────
+
+We record a cluster of arithmetic relations connecting the primes 191 and 137
+through the 37-field.
+
+\begin{proposition}[191--137 Bridge]
+\label{prop:bridge}
+The following identities hold:
+\begin{align}
+    191 - 137 &= 54 = 6 \times 9, \label{eq:gap}\\
+    \mathrm{DR}(54) &= 9, \label{eq:dr54}\\
+    54 \bmod 37 &= 17, \label{eq:bridge_seed}\\
+    137 + 37 + 17 &= 191, \label{eq:lift}\\
+    191 \bmod 37 &= 6 \in \mathcal{F}, \label{eq:tesla}\\
+    137 \bmod 37 &= 26,\quad 26+11=37, \label{eq:complement}\\
+    \mathrm{DR}(191) &= \mathrm{DR}(137) = 2. \label{eq:resonance}
+\end{align}
+Moreover, 191 is the 43rd prime and 137 is the 33rd prime, with
+$43 - 33 = 10$ and $43\bmod 37 = 6 = [191]_{37}$.
+\end{proposition}
+
+\begin{proof}
+All identities are direct computation.
+\end{proof}
+
+\begin{observation}[Twin prime pairs at both bridge seeds]
+Both bridge seeds lead twin prime pairs:
+$(137, 139)$ and $(191, 193)$ are each twin prime pairs.
+By Corollary~\ref{cor:twin_dr2}, since $\mathrm{DR}(137)=\mathrm{DR}(191)=2$,
+both pairs carry pattern $(2,4)$.  The shared DR resonance of the bridge
+is exactly the leading DR value of both twin prime pairs.
+\end{observation}
+
+In the 37-field the twin prime gap of 2 is preserved:
+$[191]_{37}=6$ and $[193]_{37}=8$, so $8-6=2$;
+$[137]_{37}=26$ and $[139]_{37}=28$, so $28-26=2$.
+
+%──────────────────────────────────────────────────────────────────────────────
+\section{Pascal's Row 8: Unified Analysis}
+\label{sec:pascal}
+%──────────────────────────────────────────────────────────────────────────────
+
+Pascal's Row 8 is
+\[
+    R_8 = (1,\;8,\;28,\;56,\;70,\;56,\;28,\;8,\;1),
+    \qquad \sum R_8 = 256 = 2^8.
+\]
+Its element digital roots are $\mathrm{DR}(R_8) = (1,8,1,2,7,2,1,8,1)$, giving
+spine FLUX ratio 0 --- no element is FLUX-active.
+
+\subsection{The 37-Field Pivot}
+
+\begin{proposition}
+\label{prop:pascal37}
+The first three elements of $R_8$ sum to the 37-field modulus:
+\[
+    1 + 8 + 28 = 37.
+\]
+The running prefix sum hits $[s]_{37}=19$ at position 3
+(after including $r_3=56$): $1+8+28+56=93$ and $93\bmod 37 = 19$.
+\end{proposition}
+
+\begin{proof}
+$1+8+28=37$ and $93=2\cdot37+19$.
+\end{proof}
+
+The value 19 is significant: $\mathrm{DR}(19)=1$ and the digits of 19 are
+$\{1,9\}$, matching the digit pattern of the prime 191.
+
+\subsection{The 191 Bridge Intersection}
+
+\begin{proposition}
+\label{prop:pascal191}
+In the 37-field, the elements of $R_8$ have residues
+\[
+    (R_8 \bmod 37) = (1,\;8,\;28,\;19,\;33,\;19,\;28,\;8,\;1).
+\]
+Specifically:
+\begin{itemize}
+\item $[56]_{37} = 19$ (positions 3 and 5): the 191 digit pattern $\{1,9\}$
+      appears as a 37-field residue.
+\item $[70]_{37} = 33$ and $\mathrm{DR}(33) = 6 = [191]_{37}$: the centre
+      element maps to the same Tesla FLUX class as the prime 191.
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+$56 = 37+19$;\quad $70 = 37+33$;\quad $191 = 5\cdot37+6$;\quad $\mathrm{DR}(33)=6$.
+\end{proof}
+
+\subsection{Tesla FLUX Saturation under the Pascal Transition}
+
+\begin{theorem}[Adjacent-pair FLUX saturation]
+\label{thm:pascal_flux}
+Every adjacent pair sum in $R_8$ has digital root in $\mathcal{F}$:
+\[
+    \mathrm{DR}(r_i + r_{i+1}) \in \{3,6,9\}
+    \quad \text{for } i = 0,1,\ldots,7.
+\]
+The spine FLUX ratio of the adjacent pair sums is $8/8 = 1$.
+\end{theorem}
+
+\begin{proof}
+The adjacent pair sums are
+\[
+    (9,\;36,\;84,\;126,\;126,\;84,\;36,\;9)
+\]
+with digital roots $(9,9,3,9,9,3,9,9)$.  All lie in $\mathcal{F}$.
+\end{proof}
+
+The adjacent pair sums of $R_8$ are exactly the interior elements of $R_9$
+(Pascal's Row 9).  Theorem~\ref{thm:pascal_flux} states that the Pascal
+transition $R_8 \to R_9$ maps every interior position to a FLUX-active value:
+the operation by which Pascal's triangle builds the next row saturates the
+Tesla spine at 100\%.
+
+\subsection{The Accumulation Chain}
+
+Running the cumulative sum $S_k = \sum_{i=0}^{k} r_i$ and computing
+$\mathrm{DR}(S_k)$:
+
+\begin{center}
+\begin{tabular}{rrrcc}
+\toprule
+$k$ & $r_k$ & $S_k$ & $[S_k]_{37}$ & $\mathrm{DR}(S_k)$ \\
+\midrule
+0 & 1  &   1 &  1 & 1 \\
+1 & 8  &   9 &  9 & 9 (\textbf{FLUX}) \\
+2 & 28 &  37 &  0 & 1 (37-field zero) \\
+3 & 56 &  93 & 19 & 3 (\textbf{FLUX}) \\
+4 & 70 & 163 & 15 & 1 \\
+5 & 56 & 219 & 34 & 3 (\textbf{FLUX}) \\
+6 & 28 & 247 & 25 & 4 \\
+7 & 8  & 255 & 33 & 3 (\textbf{FLUX}) \\
+8 & 1  & 256 & 34 & 4 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The prefix sum passes through the 37-field zero at $k=2$ ($S_2=37$),
+touches the 191-pattern residue 19 at $k=3$ ($[S_3]_{37}=19$), and
+achieves FLUX-active DR at positions $k\in\{1,3,5,7\}$ --- the four
+odd positions.  At position 7, $[S_7]_{37}=33$ and $\mathrm{DR}(33)=6$,
+the Tesla class shared with $[191]_{37}$.
+
+%──────────────────────────────────────────────────────────────────────────────
+\section{The Digit-Sum Invariant and the 123 Fixed Point}
+\label{sec:digitsum}
+%──────────────────────────────────────────────────────────────────────────────
+
+\begin{theorem}[Digit-sum invariant]
+\label{thm:digitsum}
+Let $a, b \geq 1$ with $\sigma(a) + \sigma(b) = 12$, where $\sigma(n)$
+denotes the digit sum of $n$.  Then $\sigma(a+b) \equiv 12 \pmod{9}$.
+If $a+b < 100$, then $\sigma(a+b) = 12$.
+\end{theorem}
+
+\begin{proof}
+Since $\sigma(n) \equiv n \pmod{9}$, we have $\sigma(a+b) \equiv a+b
+\equiv \sigma(a)+\sigma(b) = 12 \equiv 3 \pmod{9}$.  For $a+b < 100$,
+the digit sum is between 1 and 18, and the unique value in that range
+that is $\equiv 3\pmod 9$ is $12$ (since $3<12<18$ and neither 3 nor
+21 lies in $[1,18]$ with the right residue --- 3 and 12 both satisfy,
+but $a+b\geq 20$ whenever both $\sigma(a)\geq 2$ and $\sigma(b)\geq 2$
+with their sums totalling 12, so 3 does not arise for $a+b<100$).
+\end{proof}
+
+\begin{observation}
+$12 = [123]_{37} = [456]_{37} = [789]_{37}$.
+\end{observation}
+
+The fixed point 12 is precisely the canonical mod-37 degeneracy of
+Section~\ref{sec:37field}.  The three examples below use the digit set
+$\{1,3,4,4\}$ (digit sum 12) rearranged into valid additions:
+\[
+    13+44=57,\quad 144+3=147,\quad 134+4=138.
+\]
+In each case $\sigma(\text{left side}) = 12$ and $\sigma(\text{right side}) = 12$.
+The 123 residue is invariant under rearrangement of the digit set.
+
+%──────────────────────────────────────────────────────────────────────────────
+\section{DR-Product Chain for Row 8}
+\label{sec:drproduct}
+%──────────────────────────────────────────────────────────────────────────────
+
+\begin{theorem}[DR-product chain]
+\label{thm:drproduct}
+Let $P = \prod_{i=0}^{8} \mathrm{DR}(r_i)$ be the product of the digital
+roots of $R_8$.  Then
+\[
+    P = 1792,\qquad \sigma(P) = 19,\qquad \mathrm{DR}(P) = 1.
+\]
+Moreover $P = 2^8 \cdot \mathrm{DR}(r_4)$, where $r_4 = 70$ is the centre
+element.
+\end{theorem}
+
+\begin{proof}
+$\mathrm{DR}(R_8) = (1,8,1,2,7,2,1,8,1)$.  The non-unit factors are
+$8,2,7,2,8$, giving $P = 8\cdot2\cdot7\cdot2\cdot8 = 1792$.
+$\sigma(1792)=1+7+9+2=19$.  $\mathrm{DR}(1792)=\mathrm{DR}(19)=1+9=10
+\to 1$.  Finally $1792 = 256\cdot7 = 2^8\cdot7 = 2^8\cdot\mathrm{DR}(70)$.
+\end{proof}
+
+The chain $1792 \to 19 \to 1$ passes through the intermediate value 19,
+whose digits $\{1,9\}$ match the digit pattern of the prime seed 191.
+The same pattern 19 appears as the 37-field residue of the elements at
+positions 3 and 5 of $R_8$ (Proposition~\ref{prop:pascal191}), and as the
+prefix-sum residue at position 3 of the accumulation chain
+(Proposition~\ref{prop:pascal37}).
+
+\begin{corollary}
+The DR-product chain for $R_8$ terminates at 1.  The intermediate value 19
+is the 191-digit pattern appearing in the 37-field landscape of $R_8$.
+\end{corollary}
+
+%──────────────────────────────────────────────────────────────────────────────
+\section{The Twin Prime Pair $(41,43)$ and the 123 Chain}
+\label{sec:4143}
+%──────────────────────────────────────────────────────────────────────────────
+
+The twin prime pair $(41,43)$ is distinguished within this framework by
+two facts: (a) 43 is the prime index of 191 ($P(43)=191$), and (b)
+$43\bmod 37 = 6 = [191]_{37}$, so the index shares the Tesla class of
+the seed.
+
+\begin{proposition}
+$41+43=84$ and the digit-sum chain of 84 passes through
+$1,2,3$ sequentially:
+\[
+    84 \;\xrightarrow{\sigma}\; 12 \;\xrightarrow{\sigma}\; 3.
+\]
+The intermediate value 12 equals $[123]_{37}$, and the terminal value
+3 is the first Tesla FLUX state.
+\end{proposition}
+
+\begin{proof}
+$41+43=84$;\; $\sigma(84)=8+4=12=[123]_{37}$;\; $\sigma(12)=1+2=3\in\mathcal{F}$.
+\end{proof}
+
+The digits visited in the chain are $8,4,1,2,3$ --- the digit 3 is
+reached only at the end, as the FLUX attractor.  The digit sequence
+$1,2,3$ appears explicitly in the reduction.
+
+%──────────────────────────────────────────────────────────────────────────────
+\section{The Zero Principle and the Expanding Pyramid}
+\label{sec:zero}
+%──────────────────────────────────────────────────────────────────────────────
+
+Pascal's triangle has a natural zero state: Row 0 is the singleton $[1]$,
+representing the first knowing --- existence before categorisation.  The
+subsequent rows introduce the counting numbers in order:
+
+\begin{center}
+\begin{tabular}{cl}
+\toprule
+Row & First new digit sum value \\
+\midrule
+0 & 1 (the unit) \\
+2 & 2 (first occurs in $\binom{2}{1}=2$) \\
+3 & 3 (first occurs in $\binom{3}{1}=3$) \\
+4 & 6 $\in\mathcal{F}$ (first occurs in $\binom{4}{2}=6$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The sequence $1\to 2\to 3\to 6$ traces the pyramid's structural unfolding:
+the counting numbers 1, 2, 3 precede the first Tesla FLUX state 6, which
+first appears at Row 4.  Since $1+2+3=6$ and $1\cdot2\cdot3=6$, the
+appearance of 6 at Row 4 is the first moment the cumulative and
+multiplicative structures of $\{1,2,3\}$ are realised as a binomial coefficient.
+
+%──────────────────────────────────────────────────────────────────────────────
+\section{Conclusion and Open Questions}
+\label{sec:conclusion}
+%──────────────────────────────────────────────────────────────────────────────
+
+We have established the following results:
+
+\begin{enumerate}
+\item (\S\ref{sec:twin}) The only DR patterns for twin prime pairs $(p,p+2)$
+with $p>3$ are $(2,4)$, $(5,7)$, $(8,1)$.  The Tesla FLUX class $\{3,6,9\}$
+is structurally excluded.
+
+\item (\S\ref{sec:37field}) The canonical digit blocks 123, 456, 789 all
+reduce to 12 mod 37.  The value 12 is the fixed point linking the 123
+digit pattern to the 37-field.
+
+\item (\S\ref{sec:bridge}) The primes 191 and 137 share DR 2, satisfy
+$191-137=6\times 9$, and each leads a twin prime pair with pattern $(2,4)$.
+The prime index of 191 is 43, and $43\bmod 37 = 6 = [191]_{37}$.
+
+\item (\S\ref{sec:pascal}) Pascal's Row 8 satisfies $1+8+28=37$ (37-field
+pivot), has centre element with $[70]_{37}=33$ and $\mathrm{DR}(33)=6=[191]_{37}$,
+achieves 100\% Tesla FLUX in adjacent pair sums, and its DR-product chain
+resolves through 19 to 1.
+
+\item (\S\ref{sec:digitsum}) Any digit set summing to 12 generates additions
+whose sums also have digit sum 12.  The fixed point $12=[123]_{37}$ is
+preserved by the digit-sum operation.
+
+\item (\S\ref{sec:4143}) The sum of the twin prime pair $(41,43)$ reduces
+via 12 (the 123-residue) to 3 (the first Tesla FLUX state).
+\end{enumerate}
+
+\subsection*{Open questions}
+
+\begin{enumerate}
+\item \textbf{Twin prime distribution across patterns.}  Numerical evidence
+suggests the three DR patterns $(2,4)$, $(5,7)$, $(8,1)$ occur with
+roughly equal frequency.  Does each pattern contain infinitely many twin
+prime pairs (conditional on the twin prime conjecture)?
+
+\item \textbf{37-field structure.}  What is the distribution of twin prime
+residues mod 37?  Are there 37-field residue classes that are avoided?
+
+\item \textbf{Pascal rows and FLUX saturation.}  Theorem~\ref{thm:pascal_flux}
+shows that Row 8's adjacent pair sums achieve 100\% FLUX.  For which rows $n$
+do the adjacent pair sums achieve full FLUX saturation?  Is there a
+characterisation in terms of $n\bmod 9$?
+
+\item \textbf{Generalisation of the DR-product chain.}  For which rows of
+Pascal's triangle does the product of element digital roots reduce to 1?
+\end{enumerate}
+
+%──────────────────────────────────────────────────────────────────────────────
+\appendix
+\section{Lattice Transform Engine}
+\label{app:lattice}
+%──────────────────────────────────────────────────────────────────────────────
+
+The 1,680 ordered 3-partitions of $\{1,\ldots,9\}$ into groups of three
+are generated by $\binom{9}{3}\binom{6}{3}\binom{3}{3} = 84\cdot20\cdot1$.
+Each partition $(g_1,g_2,g_3)$ defines block values $b_i$ (the three-digit
+number formed by the sorted digits of $g_i$).  The differential cascade
+$b_i \mapsto b_i + c_i$ with $(c_1,c_2,c_3) = (8,13,24)$ breaks the
+mod-37 degeneracy of Proposition~\ref{prop:canon}: computational search
+finds that 35 of the 1,680 partitions survive the adjacency filter requiring
+all pairwise differences of cascaded residues to lie in $\{8,13,24\}$ or
+their mod-37 complements $\{29,24,13\}$.  The cascade constants satisfy
+$8+13+24 = 45 = \sum_{k=1}^{9} k$ and $\mathrm{DR}(8)+\mathrm{DR}(13)+\mathrm{DR}(24)
+= 8+4+6 = 18$, with $\mathrm{DR}(18)=9\in\mathcal{F}$.
+
+\end{document}

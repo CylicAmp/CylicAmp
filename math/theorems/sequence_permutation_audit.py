@@ -65,7 +65,9 @@ SECTION 6: DECAY SEQUENCE 11123 → 101  — MISLABELED BREAK
   212→101: 2-1=1, 1-1=0, 2-1=1 ✓  NOT a break.
 """
 
-def dr(n): return (n - 1) % 9 + 1 if n > 0 else 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_pos as dr
 def ds(n): return sum(int(d) for d in str(n))
 
 def rotR(n):

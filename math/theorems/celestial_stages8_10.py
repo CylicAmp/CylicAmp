@@ -38,15 +38,12 @@ C_RES     = 1.3824          # Resonance C = 3 − φ
 PSI       = 1.0
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
-def is_prime(n):
-    if n < 2: return False
-    for i in range(2, int(n**0.5)+1):
-        if n % i == 0: return False
-    return True
+from functions import is_prime
 
 
 QR37 = frozenset((x * x) % 37 for x in range(1, 37))

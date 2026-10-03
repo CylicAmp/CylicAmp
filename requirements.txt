@@ -1,2 +1,7 @@
-spacy>=3.7.0
-pandas>=2.0.0
+# Android/Termux: run `bash tools/setup_termux.sh` instead -- pip cannot build
+# matplotlib/numpy/scipy there; Termux ships them prebuilt.
+sympy>=1.12
+matplotlib>=3.7
+numpy>=1.24
+scipy>=1.10
+pillow>=9.0
