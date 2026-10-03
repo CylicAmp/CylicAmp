@@ -32,7 +32,9 @@ PRIOR USE IN THIS REPO, CORRECTED
   math/theorems/goldbach_proof_attempt_gf37.py line 69 says "By the Green-Tao / Dirichlet
   density argument, this covers 'most' n" for n - 37 prime. Green-Tao says nothing about
   that: n - 37 is prime for a density-zero set of n (prime number theorem), so it covers
-  almost no n. Checked below for n <= 10^5.
+  almost no n. Checked below for n <= 10^5: 19.2% of EVEN n (the Goldbach case).
+  (A first version of this file counted all n, odd included, and reported 9.6%; odd n
+  make n - 37 even, so that figure was diluted. The even-n share is the right one.)
 FALSIFICATION: any assertion failing.
 """
 from fractions import Fraction as F
@@ -62,9 +64,10 @@ assert local_factor(5, 3) != F(5, 4) ** 2                                # bare 
 assert all(d == 0 for a in range(5) for d in range(5) if all((a + j * d) % 5 for j in range(7)))
 
 N = 10 ** 5                                                             # goldbach file, line 69
-share = sum(1 for n in range(38, N + 1) if isprime(n - 37)) / (N - 37)
-assert share < 0.1, share
+evens = range(40, N + 1, 2)
+share = sum(1 for n in evens if isprime(n - 37)) / len(evens)
+assert 0.19 < share < 0.2, share
 
 if __name__ == "__main__":
     print("G5 local factors verified for k = 2..8, p <= 13")
-    print(f"goldbach file: n - 37 prime for {share:.3%} of n <= {N} -- not 'most'")
+    print(f"goldbach file: n - 37 prime for {share:.1%} of even n <= {N} -- not 'most'")
