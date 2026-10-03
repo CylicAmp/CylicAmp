@@ -40,6 +40,20 @@ WRONG
      1.7e-6 (k = 3) and 3.4e-3 (k = 10). The 1/B bound ignores that primes are sparse; an
      explicit prime-counting bound would narrow it by about a factor log B.
 
+FOLLOW-UP (second supplied text, same day): "The trap is in Section 1"
+  F1 Normalization (1/p at fixed d): agrees with W2. CORRECT.
+  F2 Prefactor 1/(2(k-1)) is the area of {(n, d): n + (k-1)d <= N, d >= 1} / N^2, so it
+     belongs to the count over all d, not to one fixed d. CORRECT (area checked below).
+  F3 "For p > k the factor (1-(k-1)/p)(p/(p-1))^(k-1) shifts k -> k-1 and corresponds to
+     an entirely different prime constellation": WRONG as stated. That factor is exactly
+     the fixed-d factor (1 - k/p)/(1 - 1/p)^k AVERAGED over d (weight 1 - 1/p for p not | d,
+     weight 1/p for p | d, where nu_p = 1):
+        (1-1/p)(1-k/p)/(1-1/p)^k + (1/p)(1-1/p)/(1-1/p)^k = (1-(k-1)/p)/(1-1/p)^(k-1).
+     Checked by exact counting below. It coincides in FORM with the fixed-d factor of a
+     (k-1)-term pattern, but it is derived from k terms by averaging -- the same averaging
+     as F1 and F2. So F1-F3 are one fact, W2: the formula is the AP-count constant
+     throughout, and it is wrong only as a description of the fixed d = k# pattern.
+
 FALSIFICATION: any assertion failing.
 """
 import math
@@ -110,6 +124,23 @@ assert abs(float(fixed_d_k3) * C2 / (float(lo3) + float(hi3)) * 2 - 2 * (3 - 1) 
 # W4: widths
 h10, lo10, hi10 = sup.compute_singular_series_interval(10, B=200_000, precision=40)
 assert 1e-6 < float(hi3 - lo3) < 2e-6 and 3e-3 < float(hi10 - lo10) < 4e-3
+
+# F2: area of n + (k-1)d <= N, d >= 1 -> N^2 / (2(k-1))
+for kk in (3, 5, 10):
+    N = 6000
+    cnt = sum(N - (kk - 1) * d for d in range(1, N // (kk - 1) + 1))
+    assert abs(cnt / N**2 - 1 / (2 * (kk - 1))) < 1e-3
+
+# F3: averaged fixed-d factor = (1-(k-1)/p)(p/(p-1))^(k-1), by exact counting
+for kk in range(2, 8):
+    for p in (q for q in (2, 3, 5, 7, 11, 13, 17) if q > kk):
+        fixed_not_div = F(p - kk, p) / F(p - 1, p) ** kk            # p not | d: nu_p = k
+        fixed_div = F(p - 1, p) / F(p - 1, p) ** kk                  # p | d: nu_p = 1
+        avg = F(p - 1, p) * fixed_not_div + F(1, p) * fixed_div
+        assert avg == f(kk, p)
+        count = sum(1 for a in range(p) for d in range(p) if all((a + j * d) % p for j in range(kk)))
+        assert F(count, p * p) / F(p - 1, p) ** kk == avg
+        assert fixed_not_div != avg                                  # fixed d differs, as W2 says
 
 if __name__ == "__main__":
     print("p^-4 coefficient: (k-1)(k-2)(k^2-k+1)/4, not (k-1)(k^2+k-1)/4")
