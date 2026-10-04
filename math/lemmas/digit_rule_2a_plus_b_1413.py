@@ -60,6 +60,25 @@ at row 3 ... in the middle is 44 outside 88"):
   The two crosses: 3 + 3 = 6. The whole block: 44 + 88 = 132 -> 6, the same
   as 8 + 7 = 15 -> 6. ("3+3+6" read as 3 + 3 -> 6.)
 
+LADDER ROW 3, 34716-25 (owner: "run it on ladder row 3"):
+  Pieces 3 | 4 | 7 | 16 | 25; 3+4 = 7, the middle. Chain 7, 16, 25, 34, 43, 52
+  (digit_ladder_opening_return.py): every piece has digit sum 7, so the
+  three-step rule 2(a+b) gives 14 -> 5 on every one of them; the two-step
+  2a+b differs: 34 -> 10 -> 1, 43 -> 11 -> 2, 16 -> 8, 25 -> 9.
+  Block built like 26, 13, 31, 62 from the opening 34, its reversal 43 and
+  their doubles 68, 86:
+    inside  34 + 43 = 77,  digit sums 7, 7:    7+7 = 14 -> 5
+    outside 68 + 86 = 154, digit sums 14, 14:  14+14 = 28 -> 1
+    crosses 86 + 34 = 120 -> 3,  68 + 43 = 111 -> 3   (carries, so not reversals)
+    block   77 + 154 = 231 -> 6 = 3 + 3
+  The same 3, 3, 6 as the 13/31 block. Forced: each cross is ab + 2ba (or
+  2ab + ba) = 3(a+b) mod 9, and the block is 33(a+b) = 6(a+b) mod 9, so only
+  (a+b) mod 3 matters -- 1+3 = 4 and 3+4 = 7 both leave 1. Over the nine
+  ladder rows: rows 3, 6, 9 give 3, 3, 6; rows 2, 5, 8 give 6, 6, 3;
+  rows 1, 4, 7 give 9, 9, 9.
+  Inside row 3's own chain, 16, 25, 34, 43: outside 16+43 = inside 25+34 = 59,
+  forced because the chain steps by 9 (any four in a row: ends sum = middles sum).
+
 FALSIFICATION: any assertion below failing.
 """
 def dr(n):
@@ -105,6 +124,20 @@ assert (13 + 31, 26 + 62) == (44, 88) and 88 == 2 * 44
 assert [ds(n) for n in (13, 31, 26, 62)] == [4, 4, 8, 8] and dr(8 + 8) == 7
 assert (62 + 13, 26 + 31) == (75, 57) and dr(75) == dr(57) == 3 == dr(4 + 8)
 assert dr(3 + 3) == dr(44 + 88) == dr(8 + 7) == 6 and 44 + 88 == 132
+
+for n in (16, 25, 34, 43, 52):
+    assert ds(n) == 7 and rule2(n) == 14 and dr(14) == 5
+assert [rule(n) for n in (34, 43, 16, 25)] == [10, 11, 8, 9]
+assert (34 + 43, 68 + 86) == (77, 154) and [ds(n) for n in (34, 43, 68, 86)] == [7, 7, 14, 14]
+assert dr(7 + 7) == 5 and dr(14 + 14) == 1
+assert (86 + 34, 68 + 43) == (120, 111) and dr(120) == dr(111) == 3 and dr(231) == 6 == dr(3 + 3)
+def block(o):
+    r = int(str(o)[::-1])
+    return dr(o + 2 * r), dr(2 * o + r), dr(3 * (o + r))
+ROWS = [int(f"{dr(a)}{dr(a + 1)}") for a in range(1, 10)]
+assert [block(o) for o in ROWS] == [(9, 9, 9), (6, 6, 3), (3, 3, 6)] * 3
+assert block(13) == block(34) == (3, 3, 6)
+assert 16 + 43 == 25 + 34 == 59
 
 if __name__ == "__main__":
     print("all assertions pass")
