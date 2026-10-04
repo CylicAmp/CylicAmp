@@ -73,6 +73,16 @@ MIXING, THE OWNER'S RULE (2026-10-04): take 1 from one digit and give it to
   stay evenly spaced, so their rotation grids still balance (centre 4, every
   line 12). Moving to or from the middle breaks it (156, 336, 237, 255).
 
+MIX TO ONE NUMBER (owner: "we can do this until we only have 1 number left ...
+  my way of showing why 2+4=6+6=(1+2=3)"): keep mixing until every slot but
+  one is 0. Each move keeps the total, so the last slot always holds 12, and
+  12 -> 1+2 = 3, whichever slot and in whatever order (2000 random routes: only
+  0 0 12, 0 12 0, 12 0 0). It takes 6 moves into the 6's slot (2+4 units), 8
+  into the 4's, 10 into the 2's. The owner's line is the route into the 6:
+  2 goes into 4 -> 6, then 6 + 6 = 12 -> 3. This is why adding the digits and
+  reducing gives the same answer as any amount of mixing: the total is the
+  one thing mixing cannot change.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -180,6 +190,21 @@ for a, b, c in product(range(10), repeat=3):
     t = f"{a}{b}{c}"
     assert new_set(t) == [dr(a + b + c + x) for x in (a, b, c)]
 assert [m for m in MIX if has_magic_rotation(m)] == ["147", "345"]
+
+import random
+_rng = random.Random(5)
+ENDS = set()
+for _ in range(2000):
+    d, tgt, n = [2, 4, 6], _rng.randrange(3), 0
+    while sum(x > 0 for x in d) > 1:
+        i = _rng.choice([k for k in range(3) if k != tgt and d[k] > 0])
+        d[i] -= 1
+        d[tgt] += 1
+        n += 1
+        assert sum(d) == 12
+    assert n == 12 - [2, 4, 6][tgt]
+    ENDS.add(tuple(d))
+assert ENDS == {(0, 0, 12), (0, 12, 0), (12, 0, 0)} and dr(12) == 3 == dr(2 + 4 + 6)
 
 if __name__ == "__main__":
     for m in MAGIC:
