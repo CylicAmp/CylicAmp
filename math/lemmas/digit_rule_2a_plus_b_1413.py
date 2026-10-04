@@ -154,6 +154,16 @@ THE 832 CHAIN (owner, 2026-10-04: "run the 832 chain on all 9 ladder rows";
   mathematical tie to the digit chain: the shared idea is pictorial -- the
   chain is a closed loop (8 ... 8) and the three triples lay it out as a 3x3
   square, corners 8, 2, 2, 8, centre 6.
+  OWNER'S COMMENT ON THE VIDEO (2026-10-04): "as complexity grows it creates
+  more points perhaps leading to triangles that are able to make squares",
+  with the cut list 12-3 ... 2-31, 30-0, 0-03. Matches the real lines of
+  attack: approximating a wild curve by curves/polygons with more points
+  (each has an inscribed square; the open difficulty is that the squares can
+  shrink to a point in the limit), and triangles, which are settled -- every
+  Jordan curve inscribes triangles of every shape (Nielsen 1992); a square is
+  two right isosceles triangles on a shared hypotenuse, and the fourth vertex
+  is the hard part. The six cuts are the 3! = 6 orderings of 1, 2, 3, the
+  labelings of a triangle's three vertices.
   WHERE 832 STANDS IN THE WORK: running sum at 70 of the span 58 -> 85
   (58 + 59 + ... + 70 = 832; reversal_spans_all_tables.md).
   ON THE NINE LADDER ROWS (chain on each row's first three pieces):
