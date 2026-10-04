@@ -54,6 +54,13 @@ get back to 1+2, but if I had put plus 2+1 ... the 12 on either side"):
   12 IS THE ONLY TWO-DIGIT NUMBER WITH BOTH (proved): ab - 9 = a + b forces
   9a = 9, a = 1; ab + 9 = ba forces b = a + 1. Together: 12.
 
+CLOSE OR GROW (owner, 2026-10-04: "one continues, the other counts down back to
+where it began ... close the loop at will or keep it going"):
+  Every n is DR(n) + 9k. Subtracting 9 repeatedly stops at DR(n) after k steps
+  -- the loop closes on its start (12 -> 3 = 1+2). Adding 9 never stops and
+  never changes DR(n) (12 -> 21 -> 30 -> 39 -> ... all DR 3). The digital root
+  is the anchor: down closes to it, up grows away from it without leaving it.
+
 FALSIFICATION: any assertion below failing.
 """
 def centre(a):
@@ -92,6 +99,22 @@ assert 12 - 9 == 1 + 2 and 12 + 9 == 21
 BOTH = [n for n in range(10, 100) if n - 9 == sum(map(int, str(n))) and n % 10 and n + 9 == int(str(n)[::-1])]
 assert BOTH == [12]
 assert [n for n in range(10, 100) if n - 9 == sum(map(int, str(n)))] == list(range(10, 20))
+
+def dr(n):
+    return 0 if n == 0 else 1 + (n - 1) % 9
+
+def count_down(n):
+    steps = 0
+    while n > 9:
+        n -= 9
+        steps += 1
+    return n, steps
+
+for n in range(1, 5000):
+    end, k = count_down(n)
+    assert end == dr(n) and n == end + 9 * k
+    assert all(dr(n + 9 * j) == dr(n) for j in range(1, 30))
+assert count_down(12) == (3, 1) and [12 + 9 * j for j in range(5)] == [12, 21, 30, 39, 48]
 
 if __name__ == "__main__":
     for c in range(11, 100, 11):
