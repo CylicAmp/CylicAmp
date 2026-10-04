@@ -31,6 +31,14 @@ n, order counting -- 1, 3, 7, 15, 31, 63 (= 2^(n-1) - 1). Searched every
 branch of the repository (2026-10-04): this rule was not written down
 anywhere before this file.
 
+THE ZEROS PROOF (owner, 2026-10-04: "0-000 / 00-00 / 000-0 / 321123 notice the
+flip"): n zeros have n-1 gaps; a way to build n is a choice of which gaps to
+cut. Each gap is cut or not, so there are 2^(n-1) ways -- every new zero adds a
+gap and doubles the count. For 4: 3 gaps, 8 ways (4 itself + the 7 above).
+By number of cuts the counts are 1, 3, 3, 1 (Pascal's row), which mirror.
+The one-cut row 0-000, 00-00, 000-0 has left pieces 1, 2, 3 and right pieces
+3, 2, 1: written together 321123, which reads the same backwards (the flip).
+
 FALSIFICATION: any assertion below failing.
 """
 def comps(n, parts):
@@ -54,6 +62,27 @@ assert [len(comps(n, (1, 2, 3))) for n in range(1, 8)] == [1, 2, 4, 7, 13, 24, 4
 T = [len(comps(n, (1, 2, 3))) for n in range(1, 15)]
 assert all(T[i] == T[i - 1] + T[i - 2] + T[i - 3] for i in range(3, len(T)))
 assert len([c for c in comps(5, (1, 2, 3)) if len(c) > 1]) == 13 and len(comps(5, range(1, 5))) == 15
+
+from itertools import product
+from math import comb
+for n in range(1, 12):
+    ways = set()
+    for cuts in product((0, 1), repeat=n - 1):
+        parts, run = [], 1
+        for c in cuts:
+            if c:
+                parts.append(run)
+                run = 1
+            else:
+                run += 1
+        ways.add(tuple(parts + [run]))
+    assert len(ways) == 2 ** (n - 1) == len(comps(n, range(1, n + 1)))
+assert [comb(3, k) for k in range(4)] == [1, 3, 3, 1]
+ONE_CUT = ["0-000", "00-00", "000-0"]
+L = [len(x.split("-")[0]) for x in ONE_CUT]
+R = [len(x.split("-")[1]) for x in ONE_CUT]
+assert (L, R) == ([1, 2, 3], [3, 2, 1])
+assert "".join(map(str, R)) + "".join(map(str, L)) == "321123" == "321123"[::-1]
 
 if __name__ == "__main__":
     print("4 =", ", ".join(FOUR))
