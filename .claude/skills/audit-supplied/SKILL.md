@@ -79,3 +79,12 @@ and what makes the correction land.
 State the defect and the repair in the same breath, with no verdict on the
 author. "The pair (12, 33) mixes levels — 12 is a road residue, 33 a stack
 sum" is a correction. "This is wrong" is not.
+
+## Audit the mathematics only (owner, 2026-10-03)
+
+"Do you think I listen to algorithms when they ramble on about anything but math?"
+Supplied text from other assistants comes with openers ("You are completely right"),
+flourishes ("the DNA of the universe") and closing questions. The owner takes only the
+mathematics from it. Check every mathematical claim; do not grade or report the rhetoric.
+Example that exposed it: prime_digital_root_supplied_audit_2026_10_03.py item D6 audited
+the opener instead of the math.
