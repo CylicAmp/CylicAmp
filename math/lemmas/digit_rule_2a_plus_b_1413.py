@@ -114,7 +114,14 @@ THE 832 PAGE (owner, 2026-10-04) -- decoded parts:
   threes; it starts on 8 and closes on 8.
   As a 3x3 grid (8 3 2 / 4 6 2 / 2 6 8): rows 13, 12, 16; columns 14, 15, 12;
   diagonals 22 and 10.
-  OPEN: whether 14 is 13; whether 1060 is 1070;
+  OWNER'S CORRECTION (2026-10-04): the 14 under 832 is 13 (8+3+2), so the
+  line reads 13 === 12 === 16 -- the three row sums of the grid. Its zero form
+  is 1030 = 1020 = 1060.
+  NEXT LINES: 2+2+6 = 10 (the anti-diagonal 2, 6, 2 in some order), and
+  10 + 16 = 26 -> 2+6 = 8, back to the chain's 8. 16 is the bottom row 2+6+8.
+  "2+4+6=16" does not add up: 2+4+6 = 12 (the middle row 4+6+2); 16 is 2+6+8.
+  The three rows 13 + 12 + 16 = 41 -> 5, the same as 832 + 462 + 268 = 1562 -> 5.
+  OPEN: whether 1060 is 1070 in the +1 line;
   the last steps "=6+6=3".
 
 FALSIFICATION: any assertion below failing.
@@ -199,6 +206,9 @@ assert DIG == "832462268" and [DIG[i:i + 3] for i in (0, 3, 6)] == ["832", "462"
 assert DIG[0] == DIG[-1] == "8"
 GRID = [[8, 3, 2], [4, 6, 2], [2, 6, 8]]
 assert [sum(r) for r in GRID] == [13, 12, 16] and [sum(c) for c in zip(*GRID)] == [14, 15, 12]
+
+assert 8 + 3 + 2 == 13 and 2 + 2 + 6 == 10 and dr(10 + 16) == 8 and 2 + 4 + 6 == 12 != 16
+assert 2 + 6 + 8 == 16 and dr(13 + 12 + 16) == dr(832 + 462 + 268) == 5
 
 if __name__ == "__main__":
     print("all assertions pass")
