@@ -6,6 +6,7 @@ SHA-256 token hashing, and transaction-locked refresh operations.
 """
 
 import os
+import sys
 import hashlib
 import secrets
 from datetime import datetime, timedelta, timezone
@@ -24,14 +25,45 @@ from sqlalchemy.exc import IntegrityError
 from .models import Base, User as DBUser, Role as DBRole, UserRole as DBUserRole, RefreshToken as DBRefreshToken
 
 # ---------------------------------------------------------------------------
-# Configuration
+# Configuration: Strict Environment Variable Validation
 # ---------------------------------------------------------------------------
 
-DATABASE_URL = os.environ["DATABASE_URL"]  # Required: PostgreSQL connection string
-SECRET_KEY = os.environ["JWT_SECRET"]  # Required: min 32 chars, high entropy
-ALGORITHM = "HS256"
+# 1. DATABASE_URL: Required PostgreSQL connection string
+try:
+    DATABASE_URL = os.environ["DATABASE_URL"]
+    if not DATABASE_URL.startswith(("postgresql://", "postgres://")):
+        raise ValueError("DATABASE_URL must be a valid PostgreSQL connection string")
+except KeyError:
+    sys.stderr.write("FATAL: Environment variable 'DATABASE_URL' is not set.\n")
+    sys.stderr.write("Set DATABASE_URL='postgresql://user:password@host:5432/dbname'\n")
+    raise
+except ValueError as e:
+    sys.stderr.write(f"FATAL: Invalid DATABASE_URL: {e}\n")
+    raise
+
+# 2. JWT_SECRET: Required, minimum 32 characters, high entropy
+try:
+    SECRET_KEY = os.environ["JWT_SECRET"]
+    if len(SECRET_KEY.strip()) < 32:
+        raise ValueError("JWT_SECRET must contain at least 32 characters for adequate entropy")
+except KeyError:
+    sys.stderr.write("FATAL: Environment variable 'JWT_SECRET' is not set.\n")
+    sys.stderr.write("Generate a secure key: python -c \"import secrets; print(secrets.token_urlsafe(32))\"\n")
+    raise
+except ValueError as e:
+    sys.stderr.write(f"FATAL: Invalid JWT_SECRET: {e}\n")
+    raise
+
+# 3. Optional configuration with sensible defaults
+ALGORITHM = os.environ.get("JWT_ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.environ.get("JWT_EXPIRE_MINUTES", "15"))
 REFRESH_TOKEN_EXPIRE_DAYS = int(os.environ.get("JWT_REFRESH_DAYS", "7"))
+
+# Validate token expiration is sensible
+if ACCESS_TOKEN_EXPIRE_MINUTES < 1 or ACCESS_TOKEN_EXPIRE_MINUTES > 1440:  # 1 min to 24 hours
+    sys.stderr.write(f"WARNING: JWT_EXPIRE_MINUTES={ACCESS_TOKEN_EXPIRE_MINUTES} is unusual\n")
+if REFRESH_TOKEN_EXPIRE_DAYS < 1 or REFRESH_TOKEN_EXPIRE_DAYS > 365:  # 1 day to 1 year
+    sys.stderr.write(f"WARNING: JWT_REFRESH_DAYS={REFRESH_TOKEN_EXPIRE_DAYS} is unusual\n")
 
 # Database setup
 engine = create_engine(DATABASE_URL, echo=False, pool_pre_ping=True)
