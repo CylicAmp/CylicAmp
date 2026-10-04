@@ -41,8 +41,8 @@ here bears on it either way.
 
 OWNER'S CHAIN (2026-10-04): (1+2) = 32-9 = 23-9 = 12-9 = 3-(2 = 1).
   32 - 9 = 23: the flip (subtracting 9 reverses consecutive digits).
-  23 -> 12 is -11 (both digits down by one); 23 - 9 is 14. Which step is meant
-  is open (owner asked).
+  Written 23 - 9 = 12; 23 - 9 is 14. (Getting from 23 to 12 would take -11;
+  that step is not in the owner's line.) Open.
   12 - 9 = 3 = 1+2: for a number in the teens, minus 9 is its digit sum
   (10 + b - 9 = 1 + b) -- the chain returns to its opening (1+2).
   3 - 2 = 1.
