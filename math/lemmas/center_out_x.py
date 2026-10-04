@@ -1,0 +1,76 @@
+# CLASS: LEMMA
+"""
+The center-out X on all 36 ladder rows (owner, 2026-10-04). The X is grown
+from a centre outward (ladder_loops_squares.py: rows 8 and 17 meet at 44,
+26 35 [44] 53 62). Here every row's chain of pieces 2a+1 + 9j is laid on its
+line and the centre is the two-digit repdigit on that line.
+
+THE NINE LINES (forced): a chain stays in one class mod 9 (2a+1), and every
+class holds exactly one repdigit 11k, so rows a, a+9, a+18, a+27 share a line
+and a centre. Stepping 9 out from a repdigit raises one digit and lowers the
+other, so equal steps out on either side are reversals, until a digit leaves
+0..9. Arm length (pairs) = min(t, 9-t) for centre tt:
+    centre 11: 02 [11] 20                                  1 pair
+    centre 22: 04 13 [22] 31 40                            2
+    centre 33: 06 15 24 [33] 42 51 60                      3
+    centre 44: 08 17 26 35 [44] 53 62 71 80                4
+    centre 55: 19 28 37 46 [55] 64 73 82 91                4
+    centre 66: 39 48 57 [66] 75 84 93                      3
+    centre 77: 59 68 [77] 86 95                            2
+    centre 88: 79 [88] 97                                  1
+    centre 99: [99]                                        0
+  The arms grow and shrink 1, 2, 3, 4, 4, 3, 2, 1, 0 -- a diamond profile.
+
+WHICH ROWS (tail = 2a+10, 2a+19, 2a+28):
+  ROWS CENTRED ON THEIR OWN X -- the middle piece is the repdigit, so the tail
+  mirrors itself: row 7 (24 [33] 42), row 18 (46 [55] 64), row 29 (68 [77] 86).
+  Forced: 2a+19 = 11k needs k odd, a = (11k-19)/2 = 7, 18, 29, (40): every
+  11 rows. Row 7 is also the row whose 3x3 grid X has equal arms
+  (ladder_x_grid.py).
+  ROW PAIRS THAT MIRROR EACH OTHER ACROSS A CENTRE -- row a ends on the
+  repdigit and row a+9 starts there: (8, 17) at 44, (19, 28) at 66
+  (48 57 [66] 75 84), (30, 39) at 88. Forced: 2a+28 = 11k, k even,
+  a = 8, 19, 30: every 11 rows. Only (8, 17) is also a mirror of the whole
+  loop, because only its opening 898 reads the same both ways.
+  ROWS LYING WHOLLY ON A FULL-LENGTH LINE (centres 44 and 55): rows 8, 17, 26
+  and 9, 18, 27 have all three tail pieces on the line.
+
+THE JAGGED CASE (owner's image, "zigzags on zigzags, forever"): that is the
+open square-peg problem. Digit lines and smooth loops do not reach it; nothing
+here bears on it either way.
+
+FALSIFICATION: any assertion below failing.
+"""
+def centre(a):
+    return next(11 * k for k in range(1, 10) if (11 * k - (2 * a + 1)) % 9 == 0)
+
+def line(c):
+    t = c // 10
+    n = min(t, 9 - t)
+    return [c + 9 * m for m in range(-n, n + 1)]
+
+def tail(a):
+    return [2 * a + 10, 2 * a + 19, 2 * a + 28]
+
+for c in range(11, 100, 11):
+    L = line(c)
+    assert all(f"{L[i]:02d}" == f"{L[-1 - i]:02d}"[::-1] for i in range(len(L)))
+    lo, hi = L[0] - 9, L[-1] + 9
+    assert not (0 <= lo and hi <= 99 and f"{lo:02d}" == f"{hi:02d}"[::-1])
+assert [min(t, 9 - t) for t in range(1, 10)] == [1, 2, 3, 4, 4, 3, 2, 1, 0]
+assert line(44) == [8, 17, 26, 35, 44, 53, 62, 71, 80] and line(99) == [99]
+assert all(centre(a) == centre(a + 9) for a in range(1, 28))
+
+SELF = [a for a in range(1, 37) if sorted(tail(a)) == sorted(2 * centre(a) - x for x in tail(a))]
+assert SELF == [7, 18, 29] and [tail(a)[1] for a in SELF] == [33, 55, 77]
+PAIRS = [(a, a + 9) for a in range(1, 37) if tail(a)[2] == centre(a) and tail(a)[2] == tail(a + 9)[0]
+         and sorted(tail(a)) == sorted(2 * centre(a) - x for x in tail(a + 9))]
+assert PAIRS == [(8, 17), (19, 28), (30, 39)]
+FULL = [a for a in range(1, 37) if all(x in line(centre(a)) for x in tail(a))]
+assert {8, 17, 26, 9, 18, 27} <= set(FULL)
+
+if __name__ == "__main__":
+    for c in range(11, 100, 11):
+        print(c, " ".join(f"{x:02d}" for x in line(c)))
+    print("self-centred rows", SELF, "| mirror pairs", PAIRS)
+    print("all assertions pass")
