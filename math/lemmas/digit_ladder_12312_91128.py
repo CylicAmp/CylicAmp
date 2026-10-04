@@ -27,8 +27,8 @@ EXTENSION PAST ROW 9 (owner, 2026-10-04: "At row 9 we get 12=3")
     row a = DR(a) | DR(a+1) | DR(2a+1) | 2a+10
     rows 10..18: 12330 23532 34734 45936 56238 67440 78642 89844 91146
   The first three pieces repeat with period 9; only the last piece grows, by
-  18 every 9 rows, so row a+9 = row a + 18 while the last piece has 2 digits
-  (a <= 44). At a = 45 the last piece reaches 100 and the row gains a digit
+  18 every 9 rows, so row a+9 = row a + 18 while both last pieces have 2 digits
+  (a + 9 <= 44). At a = 45 the last piece reaches 100 and the row gains a digit
   (row 45 = 911100, row 54 = 911118).
   Reading the first piece literally as a gives 102330, 113532, ... instead;
   both readings agree on rows 1..9 and the image does not decide between them.
@@ -81,7 +81,8 @@ assert [row_dr(a) for a in range(1, 10)] == [row_lit(a) for a in range(1, 10)] =
 assert [row_dr(a) for a in range(10, 19)] == [12330, 23532, 34734, 45936, 56238,
                                               67440, 78642, 89844, 91146]
 assert [row_lit(a) for a in range(10, 13)] == [102330, 113532, 124734]
-assert all(row_dr(a + 9) - row_dr(a) == 18 for a in range(1, 37))
+assert all(row_dr(a + 9) - row_dr(a) == 18 for a in range(1, 36))
+assert row_dr(45) - row_dr(36) != 18
 assert row_dr(44) == 89898 and row_dr(45) == 911100 and row_dr(54) == 911118
 
 if __name__ == "__main__":
