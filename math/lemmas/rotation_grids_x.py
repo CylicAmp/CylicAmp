@@ -154,6 +154,12 @@ THE FOLD AND THE HALF-5 (owner, 2026-10-04):
   10 = 1 mod 9, so 5/2 = 25/10 = 25 = 7 mod 9 (2 x 5 = 10 = 1: halving is x5).
   Both lines read the same backwards around the centre.
 
+GATES (owner, 2026-10-04): 1234(5+9 = 1+4 = 5 / 5678(9+5 = 1+4 = 5 /
+  7924(77)4297. In 123456789 the block 1234 is followed by 5 and 5678 by 9;
+  the two gates add 5 + 9 = 14 -> 5, the centre. 7924(77)4297 mirrors around
+  the half-5 seam 77, and 7924 + 4297 = 12221 also reads the same backwards.
+  Where 7924 comes from is open (asked).
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -331,6 +337,9 @@ assert dr(1 + 1 + 1 + 1 + 5) == dr(45) == 9
 assert dr(7 + 7) == 5 and 2 + 5 == 7 and (5 * pow(2, -1, 9)) % 9 == 7 and 2.5 + 2.5 == 5
 assert all((10 * x) % 9 == x % 9 for x in range(100))
 assert "1111" + "2.55.2" + "1111" == ("1111" + "2.55.2" + "1111")[::-1] and "1111771111" == "1111771111"[::-1]
+
+assert "123456789"[4] == "5" and "123456789"[8] == "9" and dr(5 + 9) == 5
+assert "7924" + "77" + "4297" == ("7924" + "77" + "4297")[::-1] and 7924 + 4297 == 12221 and str(12221) == str(12221)[::-1]
 
 if __name__ == "__main__":
     for m in MAGIC:
