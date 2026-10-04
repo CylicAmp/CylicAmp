@@ -196,6 +196,15 @@ EVERY NUMBER CUT IN HALF (owner, 2026-10-04: "1 = 55 = 2, 2 = 5555 = 4,
   bound, math/theorems/seed_246_polymath_gap_gf37.py). The fives read back to
   n: each pair is 10 -> 1, so 2n fives = 10n -> DR(n).
 
+TWO LOOPS ON 5 (owner, 2026-10-04):
+    1x5=(5)x1=(5)                  -- two (5)s
+    1x5=(5)x1=(5)x1=(5)x1=(5)      -- four
+    ... six (5)s ...               -- 2, 4, 6 again (as 55, 5555, 555555)
+    (5)+1=6-1=(5)+1=6-1=(5)
+  x1 changes nothing: the 5 stands still however long the line runs (a loop
+  of one step). +1 then -1 is a loop of two steps, 5 -> 6 -> 5, always back
+  on 5; the pair 5, 6 sums to 11, the middle pair of the fold of 2..9.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -402,6 +411,17 @@ HALVES = {n: "5" * (2 * n) for n in (1, 2, 3)}
 assert HALVES == {1: "55", 2: "5555", 3: "555555"}
 assert "".join(str(len(HALVES[n])) for n in (1, 2, 3)) == "246"
 assert all(dr(sum(map(int, "5" * (2 * n)))) == dr(n) and 0.5 * 2 * n == n for n in range(1, 200))
+
+LINES5 = ["1×5=(5)×1=(5)", "1×5=(5)×1=(5)×1=(5)×1=(5)", "1×5=(5)×1=(5)×1=(5)×1=(5)×1=(5)×1=(5)"]
+assert [ln.count("(5)") for ln in LINES5] == [2, 4, 6]
+x = 5
+for _ in range(100):
+    x *= 1
+assert x == 5
+seq = [5]
+for k in range(8):
+    seq.append(seq[-1] + 1 if k % 2 == 0 else seq[-1] - 1)
+assert seq == [5, 6, 5, 6, 5, 6, 5, 6, 5] and 5 + 6 == 11
 
 if __name__ == "__main__":
     for m in MAGIC:
