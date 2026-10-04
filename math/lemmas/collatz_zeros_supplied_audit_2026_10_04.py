@@ -38,7 +38,11 @@ OWNER'S READING OF 14.13 (2026-10-04):
   (10 = 1 mod 9), and 1413 = 9 x 157, so ALL EIGHT splits reduce to 9:
     1413, 1+413 = 414, 14+13 = 27, 1+4+13 = 18, 141+3 = 144, 1+41+3 = 45,
     14+1+3 = 18, 1+4+1+3 = 9.
-  Likewise 5 + 4 = 9 (the digit sums of 14 and 13). 144 = 12^2. Row 144 of the
+  Likewise 5 + 4 = 9 (the digit sums of 14 and 13).
+  PRIOR ART: math/theorems/riemann_first_zero_141.py already has 1413 from the
+  first zero, its running sums 1+4=5+1=6+3=9, and 1413 reversed = 3141 =
+  floor(1000 pi). What this section adds: all eight splits, not only the
+  running sum, reduce to 9, and why (splitting keeps the value mod 9). 144 = 12^2. Row 144 of the
   ladder is computed in digit_ladder_collatz.py.
 
 NOT CHECKABLE HERE: the "14-13" and "1-13" readings are not defined in the
