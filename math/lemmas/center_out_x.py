@@ -39,6 +39,14 @@ THE JAGGED CASE (owner's image, "zigzags on zigzags, forever"): that is the
 open square-peg problem. Digit lines and smooth loops do not reach it; nothing
 here bears on it either way.
 
+OWNER'S CHAIN (2026-10-04): (1+2) = 32-9 = 23-9 = 12-9 = 3-(2 = 1).
+  32 - 9 = 23: the flip (subtracting 9 reverses consecutive digits).
+  23 -> 12 is -11 (both digits down by one); 23 - 9 is 14. Which step is meant
+  is open (owner asked).
+  12 - 9 = 3 = 1+2: for a number in the teens, minus 9 is its digit sum
+  (10 + b - 9 = 1 + b) -- the chain returns to its opening (1+2).
+  3 - 2 = 1.
+
 FALSIFICATION: any assertion below failing.
 """
 def centre(a):
@@ -68,6 +76,10 @@ PAIRS = [(a, a + 9) for a in range(1, 37) if tail(a)[2] == centre(a) and tail(a)
 assert PAIRS == [(8, 17), (19, 28), (30, 39)]
 FULL = [a for a in range(1, 37) if all(x in line(centre(a)) for x in tail(a))]
 assert {8, 17, 26, 9, 18, 27} <= set(FULL)
+
+assert 32 - 9 == 23 and 23 - 9 == 14 and 23 - 11 == 12 and 12 - 9 == 3 == 1 + 2 and 3 - 2 == 1
+assert all(10 + b - 9 == 1 + b for b in range(10))
+assert all(int(f"{d + 1}{d}") - 9 == int(f"{d}{d + 1}") for d in range(1, 9))
 
 if __name__ == "__main__":
     for c in range(11, 100, 11):
