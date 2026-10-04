@@ -66,6 +66,22 @@ METHOD 4 -- T368 substring search (theorem_368_matrix_operator_rh_digits_gf37.py
   at 15, row 40 (45990) in zero 110 at 20. Chance gives about 7.4 (0.0517
   per row). Ordinary.
 
+ZERO 39 (owner, 2026-10-04: "the 39th zero, 3+9=3"):
+  gamma_39 = 121.370125002420645918945532970499922723001311
+  39 -> 3+9 = 12 -> 1+2 = 3. The zero itself opens with 12 -> 1+2 = 3, the
+  same reduction (the riemann_zeta_zeros.py chain: DR(1+2) = 3, chain = 4).
+  Row 4 of the ladder, 45918, sits at digit 16: ...20645918945...
+    floor 121 = 11^2, DR 4 -- the row number of the row inside it.
+    121 mod 37 = 10 and 45918 mod 37 = 1: both in orbit IC = {1, 10, 26}.
+    The 16 digits before 45918 sum to 36 (DR 9); 45918's digits sum to 27
+    (DR 9). Row 4 is the all-nines row (its chain 9, 18, 27, 36, 45).
+    3-digit blocks (riemann_first_zero_141.py style): 121 370 125 002 420 645
+    918 945 -- 918 is row 4's tail, and 945 follows it.
+  CHANCE CHECK: these were found by looking at one zero after the fact. One
+  5-digit row inside the first 40 digits of some zero is expected (about 7
+  over all 144 rows); each match above has odds of about 1 in 9 or 1 in 12,
+  and many properties were checked. Recorded as found, not as evidence.
+
 SUMMARY: the one method that ties the zeros to numbers -- the explicit formula
 -- works at every ladder row once corrected. The digit and orbit methods find
 no alignment between rows and zeros beyond chance.
@@ -126,6 +142,17 @@ assert all(chain2(dr(a), dr(a + 1))[0] == dr(2 * a + 1) for a in range(1, 1000))
 mp.mp.dps = 45
 for n, s, pos in ((39, "45918", 16), (77, "23532", 15), (144, "89880", 15)):
     assert mp.nstr(mp.zetazero(n).imag, 40).replace(".", "").find(s) == pos
+
+G39 = mp.nstr(mp.mpf(0), 1)
+mp.mp.dps = 50
+g39 = mp.nstr(mp.zetazero(39).imag, 45)
+assert g39 == "121.370125002420645918945532970499922723001311"
+d39 = g39.replace(".", "")
+assert d39.find("45918") == 16 and d39[:2] == "12" and dr(39) == dr(12) == 3
+assert int(float(g39)) == 121 == 11 ** 2 and dr(121) == 4 and row(4) == 45918
+assert cov.orbit_label(121) == cov.orbit_label(45918) == "IC"
+assert dr(sum(map(int, d39[:16]))) == 9 == dr(45918) and sum(map(int, "45918")) == 27
+assert [d39[k:k + 3] for k in range(0, 24, 3)] == ["121", "370", "125", "002", "420", "645", "918", "945"]
 
 import json
 DATA = ROOT / "math/lemmas/data"
