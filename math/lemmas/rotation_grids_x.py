@@ -99,6 +99,22 @@ SIX AS FACTOR PAIRS (owner, 2026-10-04):
   mirror circle is 761, 617, 176. 167, 761 and 617 are prime. 167 is also the
   first value of prime_insertion_sequence_audit.py (1, 7 with 6 inserted).
 
+SEAM LINES (owner, 2026-10-04):
+    12332(11)23321 / 21331(22)13312 / 32112(33)21123
+    "the 11 22 33 can be fitted in a finite number of ways by going through the
+     7 rotations of 123, make 3 the same and 4 different, 3+4 = 7;
+     4+3 = 7+7 = 1+4 = 5"
+  Each line is an order p of 1, 2, 3 joined to its mirror and written twice:
+  123321|123321, 213312|213312, 321123|321123. The repdigit is the seam where
+  the copies meet -- p's first digit doubled (forced) -- and the line reads the
+  same backwards around it. Over all six orders there are exactly six lines,
+  11, 22, 33 each fitted twice:
+    123 -> 12332(11)23321    132 -> 13223(11)32231
+    213 -> 21331(22)13312    231 -> 23113(22)31132
+    321 -> 32112(33)21123    312 -> 31221(33)12213
+  3 + 4 = 7 and 7 + 7 = 14 -> 1+4 = 5 check. The "3 the same, 4 different"
+  count is not yet decoded (asked).
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -229,6 +245,15 @@ assert 2332 == 11 * 212 and 3223 == 11 * 293 and "2332" == "23" + "32" and "3223
 assert 61 * 11 == 671 and 16 * 11 == 176 and 6 + 1 == 7
 assert set(cycle("167", rot_r)) == {"167", "716", "671"} and set(cycle("761", rot_r)) == {"761", "617", "176"}
 assert [x for x in (167, 716, 671, 761, 617, 176) if isprime(x)] == [167, 761, 617]
+
+SEAMS = {}
+for p in ("".join(q) for q in permutations("123")):
+    full = (p + p[::-1]) * 2
+    assert full == full[::-1] and full[5:7] == p[0] * 2
+    SEAMS[p] = f"{full[:5]}({full[5:7]}){full[7:]}"
+assert {"12332(11)23321", "21331(22)13312", "32112(33)21123"} <= set(SEAMS.values())
+assert sorted(v[6:8] for v in SEAMS.values()) == ["11", "11", "22", "22", "33", "33"]
+assert 3 + 4 == 4 + 3 == 7 and dr(7 + 7) == 5
 
 if __name__ == "__main__":
     for m in MAGIC:
