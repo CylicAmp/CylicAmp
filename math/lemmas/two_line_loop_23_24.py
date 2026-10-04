@@ -26,6 +26,11 @@ the 832 chain closing on 8. Ending on the reversal pair 32 / 23 is common
 back to the starting number is not.
 23 and 29 are prime; (29, 31) is a twin-prime pair.
 
+THE ENDING PAIR (owner: "23+32=55=1"): 23 + 32 = 55 -> 5+5 = 10 -> 1.
+  A number plus its reversal is 11 x (digit sum): 11 x 5 = 55. 14 + 41 is also
+  55 (same digit sum 5, reversal_spans_supplied_audit_2026_10_04.py), and 55 is
+  1+2+...+10 and the digit total of 10..19. It reduces to 1 = DR(2 x 5).
+
 FALSIFICATION: any assertion below failing.
 """
 from math import prod
@@ -51,6 +56,8 @@ assert len(PAIRS) == 72
 assert all(dr(lines(n)[0][3]) == dr(lines(n)[1][3]) for n in PAIRS)
 assert [n for n in PAIRS if lines(n)[1][3] == n] == [23]
 assert isprime(23) and isprime(29) and isprime(31)
+
+assert 23 + 32 == 55 == 11 * 5 == 14 + 41 == sum(range(1, 11)) and dr(55) == 1 == dr(2 * 5)
 
 if __name__ == "__main__":
     print(L1, L2)
