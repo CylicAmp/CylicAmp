@@ -23,6 +23,14 @@ WHY 4 IS WHERE IT GETS COMPLICATED:
     With pieces 1, 2, 3 only, the counts 1, 2, 4, 7, 13, 24, 44 (including the
     number itself up to 3) each equal the sum of the previous three.
 
+THE OWNER'S RULE (2026-10-04): "the next number can only be made by the
+previous number(s)" -- 2 only from 1 (1+1 is the first 2; "11", two 1s side by
+side, the owner calls the second 2), 3 only from 1 and 2, 4 only from 1, 2, 3.
+That is exactly the count above: every way to make n from numbers smaller than
+n, order counting -- 1, 3, 7, 15, 31, 63 (= 2^(n-1) - 1). Searched every
+branch of the repository (2026-10-04): this rule was not written down
+anywhere before this file.
+
 FALSIFICATION: any assertion below failing.
 """
 def comps(n, parts):
