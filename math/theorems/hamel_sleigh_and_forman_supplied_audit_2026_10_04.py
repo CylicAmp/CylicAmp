@@ -28,6 +28,13 @@ FORMAN CURVATURE PLOT -- the reported values follow from the formula
   F2 NOT CHECKED: the slope of the mean (-4 to about -5.1 over 20 shortcuts) depends on the graph
      size, which the description does not give (on the 8 x 8 torus, 20 shortcuts on distinct
      vertices would give -5.35).
+FOLLOW-UP (same day, owner-supplied status note): "the conditional arithmetic checks; the
+  reported curvature values and scaling remain unverified" -- agreed, with one sharpening. F1 is
+  conditional on the start: a uniform -4 only says deg(u) + deg(v) = 8 on every edge, which holds
+  on a 4-regular graph but also on a bipartite (3,5)-biregular one; there one shortcut gives
+  different values (e.g. 4 - 4 - 6 = -6 or 4 - 6 - 6 = -8). To verify or predict the trajectory
+  one needs, as the note lists: the initial graph, the curvature definition and averaging rule,
+  the shortcut endpoints and order, and whether averages include the new edges.
 FALSIFICATION: any assertion failing.
 """
 import sympy as sp
@@ -59,3 +66,4 @@ assert (F(4, 4), F(5, 5), F(6, 5)) == (-4, -6, -7)
 Tdag = Tb.subs(W, 0)                     # substituted ("illegitimate") energy: depends on U, Om only
 assert sp.expand(Tdag) == sp.expand(sp.Rational(1, 2) * m * U ** 2 + sp.Rational(1, 2) * (I + m * s ** 2) * Om ** 2)
 assert not Tdag.free_symbols & {s * 0}   # no position dependence -> naive Lagrange gives m U' = 0, (I + m s^2) Om' = 0
+assert F(3, 5) == -4 == F(4, 4) and F(4, 6) == -6 and F(6, 6) == -8                         # follow-up
