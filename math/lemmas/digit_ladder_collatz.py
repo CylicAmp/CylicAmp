@@ -87,6 +87,21 @@ RISING ABOVE THE START -- decided by the parity of the row number:
   as F4 forces. 23 of the 36 odd rows (64%); random multiples of 12 of the
   same size stay below 58% of the time, so the odd-row rate is ordinary.
 
+ROWS 73-144 (owner: "keep going to row 144"; 141 + 3 = 144):
+  Steps for rows 73..144:
+    56 137 166 81 84 216 131 113 56 180 137 166 169 133 48 131 201 95
+    149 49 166 112 146 48 193 87 56 149 168 78 81 177 84 69 201 108
+    149 150 166 81 177 84 162 87 56 180 106 78 200 177 198 131 201 188
+    56 106 78 231 146 198 69 224 56 149 137 122 107 177 110 69 219 108
+  Row 141 = 674292 (110 steps), row 144 = 911298 (108 steps); row 144 has the
+  same opening 9|1|1 as row 9, since 144 = 16 x 9.
+  Longest of rows 1-144: row 46, 123102, 255 steps. Shortest: row 1, 37.
+  F4 holds for all 144: every even row rises above its start; the 44 rows
+  that never do are all odd (44 of 72 = 61%; random 6-digit multiples of 12:
+  57%). 167 equal pairs; same-layout null mean 162, 167 or more in 39%.
+  Largest group: 56 steps at rows 54, 63, 70, 72, 73, 81, 99, 117, 127, 135.
+  Nothing in rows 73-144 departs from its baseline.
+
 FALSIFICATION: any assertion below failing.
 """
 def dr(n):
@@ -106,9 +121,13 @@ def row(a, P=4):
 STEPS4 = [37, 82, 173, 176, 91, 130, 138, 133, 208, 37, 144, 111, 83, 47, 161, 50, 71, 133,
           112, 126, 142, 176, 153, 68, 50, 133, 133, 156, 100, 85, 176, 83, 60, 200, 89, 58,
           125, 100, 204, 83, 153, 60, 107, 164, 201, 255, 168, 73, 200, 133, 48, 74, 188, 56,
-          149, 199, 78, 63, 177, 84, 74, 188, 56, 211, 150, 166, 81, 177, 84, 56, 201, 56]
+          149, 199, 78, 63, 177, 84, 74, 188, 56, 211, 150, 166, 81, 177, 84, 56, 201, 56,
+          56, 137, 166, 81, 84, 216, 131, 113, 56, 180, 137, 166, 169, 133, 48, 131, 201, 95,
+          149, 49, 166, 112, 146, 48, 193, 87, 56, 149, 168, 78, 81, 177, 84, 69, 201, 108,
+          149, 150, 166, 81, 177, 84, 162, 87, 56, 180, 106, 78, 200, 177, 198, 131, 201, 188,
+          56, 106, 78, 231, 146, 198, 69, 224, 56, 149, 137, 122, 107, 177, 110, 69, 219, 108]
 STEPS5 = [54, 192, 252, 105, 157, 147, 173, 212, 225]
-assert [len(traj(row(a))) - 1 for a in range(1, 73)] == STEPS4
+assert [len(traj(row(a))) - 1 for a in range(1, 145)] == STEPS4
 assert [len(traj(row(a, 5))) - 1 for a in range(1, 10)] == STEPS5
 
 for a in range(1, 200):
@@ -165,9 +184,15 @@ NEVER = [a for a in range(1, 73) if max(traj(row(a))) == row(a)]
 assert NEVER == [1, 7, 13, 15, 21, 23, 25, 29, 33, 35, 37, 41, 47, 51, 53, 55, 59,
                  61, 63, 65, 67, 69, 71]
 assert all(a % 2 for a in NEVER) and len(NEVER) == 23
+NEVER144 = [a for a in range(1, 145) if max(traj(row(a))) == row(a)]
+assert all(a % 2 for a in NEVER144) and len(NEVER144) == 44
+assert sum(STEPS4[i] == STEPS4[j] for i in range(144) for j in range(i + 1, 144)) == 167
+assert (row(141), STEPS4[140], row(144), STEPS4[143]) == (674292, 110, 911298, 108)
+assert max(range(1, 145), key=lambda a: STEPS4[a - 1]) == 46 and STEPS4[45] == 255
+assert [a for a in range(1, 145) if STEPS4[a - 1] == 56] == [54, 63, 70, 72, 73, 81, 99, 117, 127, 135]
 assert all(row(a + 9) - row(a) == 18 for a in range(1, 28))
 
 if __name__ == "__main__":
-    for a in range(1, 73):
+    for a in range(1, 145):
         print(a, row(a), len(traj(row(a))) - 1)
     print("all assertions pass")

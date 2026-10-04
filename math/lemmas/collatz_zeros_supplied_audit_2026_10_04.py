@@ -30,6 +30,17 @@ CORRECTIONS:
       in outline: even n takes steps(n/2) + 1 with n/2 smaller, odd n takes
       steps(3n+1) + 1 with 3n+1 larger.
 
+OWNER'S READING OF 14.13 (2026-10-04):
+    1+4 = 5,  1+3 = 4,  2+7 = 9,  14+13 = 27 -> 2+7 = 9,  141+3 = 144
+  14.13 is the first zero, 14.134725..., cut to two decimals. Its digits 1413
+  split two ways: 14|13 -> 27 and 141|3 -> 144, and both reduce to 9. Forced:
+  splitting a digit string anywhere and adding the parts keeps the value mod 9
+  (10 = 1 mod 9), and 1413 = 9 x 157, so ALL EIGHT splits reduce to 9:
+    1413, 1+413 = 414, 14+13 = 27, 1+4+13 = 18, 141+3 = 144, 1+41+3 = 45,
+    14+1+3 = 18, 1+4+1+3 = 9.
+  Likewise 5 + 4 = 9 (the digit sums of 14 and 13). 144 = 12^2. Row 144 of the
+  ladder is computed in digit_ladder_collatz.py.
+
 NOT CHECKABLE HERE: the "14-13" and "1-13" readings are not defined in the
 supplied text or in this session, so only the stated arithmetic was tested.
 
@@ -78,6 +89,26 @@ for a in range(1, 10):
     assert len(win) == 41
     assert round(steps(n) - mean(win), 1) == DELTA[a - 1]
 assert round(mean([steps(row(3) + k) for k in range(-20, 21)]), 1) == 102.1
+
+def splits(s):
+    out = []
+    for k in range(1 << (len(s) - 1)):
+        parts, cur = [], s[0]
+        for i in range(len(s) - 1):
+            if k >> i & 1:
+                parts.append(cur)
+                cur = s[i + 1]
+            else:
+                cur += s[i + 1]
+        out.append(sum(map(int, parts + [cur])))
+    return out
+
+assert sorted(splits("1413")) == sorted([1413, 414, 27, 18, 144, 45, 18, 9])
+assert all(dr(v) == 9 for v in splits("1413")) and 1413 == 9 * 157
+assert 14 + 13 == 27 and 141 + 3 == 144 == 12 ** 2 and dr(14) + dr(13) == 9
+assert str(IMS[0]).startswith("14.13")
+for n in range(1, 5000):
+    assert len({v % 9 for v in splits(str(n))}) == 1
 
 if __name__ == "__main__":
     print("all assertions pass")
