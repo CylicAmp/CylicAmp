@@ -145,6 +145,15 @@ THE ULTIMATE ROTATION, 1..9 (owner, 2026-10-04):
   four lines through the centre -- the X (1+5+9, 3+5+7) and the cross (4+5+6,
   2+5+8) -- are 15. Nine is the most digits with no repeats (all of 1..9).
 
+THE FOLD AND THE HALF-5 (owner, 2026-10-04):
+    1234(5)6789 folded: 1234 over 9876 -> 1111 (each column 10 -> 1);
+    5 split as 2.5+2.5 or 7+7 = 1+4 = 5:  1111(2.55.2)1111,  1111(77)1111
+  Columns 1+9, 2+8, 3+7, 4+6 are 10 each -> 1111; 1+1+1+1 + 5 = 9 = DR(45).
+  2.5 AND 7 ARE THE SAME HALF OF 5 under digital roots: 7+7 = 14 -> 5, and
+  2.5 has digit sum 2+5 = 7. Forced: the decimal point divides by 10, and
+  10 = 1 mod 9, so 5/2 = 25/10 = 25 = 7 mod 9 (2 x 5 = 10 = 1: halving is x5).
+  Both lines read the same backwards around the centre.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -316,6 +325,12 @@ assert ("1234567891" * 2)[9:11] == "11"
 P = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 assert all(P[i][j] + P[2 - i][2 - j] == 10 for i in range(3) for j in range(3) if (i, j) != (1, 1))
 assert {1 + 5 + 9, 3 + 5 + 7, 4 + 5 + 6, 2 + 5 + 8} == {15}
+
+assert [a + b for a, b in zip([1, 2, 3, 4], [9, 8, 7, 6])] == [10] * 4 and dr(10) == 1
+assert dr(1 + 1 + 1 + 1 + 5) == dr(45) == 9
+assert dr(7 + 7) == 5 and 2 + 5 == 7 and (5 * pow(2, -1, 9)) % 9 == 7 and 2.5 + 2.5 == 5
+assert all((10 * x) % 9 == x % 9 for x in range(100))
+assert "1111" + "2.55.2" + "1111" == ("1111" + "2.55.2" + "1111")[::-1] and "1111771111" == "1111771111"[::-1]
 
 if __name__ == "__main__":
     for m in MAGIC:
