@@ -143,7 +143,6 @@ mp.mp.dps = 45
 for n, s, pos in ((39, "45918", 16), (77, "23532", 15), (144, "89880", 15)):
     assert mp.nstr(mp.zetazero(n).imag, 40).replace(".", "").find(s) == pos
 
-G39 = mp.nstr(mp.mpf(0), 1)
 mp.mp.dps = 50
 g39 = mp.nstr(mp.zetazero(39).imag, 45)
 assert g39 == "121.370125002420645918945532970499922723001311"
