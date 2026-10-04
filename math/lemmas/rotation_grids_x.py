@@ -164,6 +164,20 @@ GATES (owner, 2026-10-04): 1234(5+9 = 1+4 = 5 / 5678(9+5 = 1+4 = 5 /
   7 + 7 (= 2.5 + 2.5 under digital roots) is the seam 77. 6+8+1+3 = 18 -> 9.
   The line reads the same backwards.
 
+MIRRORED STACKING (owner, 2026-10-04):
+    4321(5)1234 / 9876(5)6789 / 4297(5)7924
+  Column sums of the first two rows: 4+9, 3+8, 2+7, 1+6 = 13, 11, 9, 7 ->
+  4, 2, 9, 7 (and mirrored 7, 9, 2, 4): the third line. So 7924 is the
+  stacking of the mirrored fold.
+  Growing mirrors from its 4 and 9: 4, 94, 494 / 4, 49, 949 / 9, 49, 949 /
+  9, 94, 494 -- each adds a digit on alternate sides; 494 and 949 read the
+  same backwards.
+  Sum triples 167, 382, 279: the third digit is the digital root of the first
+  two (1+6 = 7, 3+8 = 11 -> 2, 2+7 = 9). Each makes rotation grids with every
+  row and column equal (14, 13, 18), but none is evenly spaced, so none
+  balances the X (rule above). Stacked together as 167/382/279: rows 14, 13,
+  18; columns 6, 21, 18; diagonals 18, 17.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -347,6 +361,17 @@ COLS = [a + b for a, b in zip([1, 2, 3, 4, 5], [5, 6, 7, 8, 9])]
 assert COLS == [6, 8, 10, 12, 14] and [dr(c) for c in COLS] == [6, 8, 1, 3, 5]
 assert "".join(str(dr(c)) for c in COLS[:4]) == "6813" and dr(7 + 7) == dr(COLS[4]) == 5
 assert "6813" + "77" + "3186" == ("6813" + "77" + "3186")[::-1] and dr(6 + 8 + 1 + 3) == 9
+
+assert "".join(str(dr(int(a) + int(b))) for a, b in zip("4321", "9876")) == "4297"
+assert "".join(str(dr(int(a) + int(b))) for a, b in zip("1234", "6789")) == "7924"
+assert all(x == x[::-1] for x in ("494", "949"))
+for t in ("167", "382", "279"):
+    a, b, c = map(int, t)
+    assert c == dr(a + b) and not has_magic_rotation(t)
+    g = grid(cycle(t, rot_r))
+    assert len({sum(r) for r in g} | {sum(c) for c in zip(*g)}) == 1
+G3 = [[1, 6, 7], [3, 8, 2], [2, 7, 9]]
+assert [sum(r) for r in G3] == [14, 13, 18] and [sum(c) for c in zip(*G3)] == [6, 21, 18]
 
 if __name__ == "__main__":
     for m in MAGIC:
