@@ -47,6 +47,13 @@ OWNER'S CHAIN (2026-10-04): (1+2) = 32-9 = 23-9 = 12-9 = 3-(2 = 1).
   (10 + b - 9 = 1 + b) -- the chain returns to its opening (1+2).
   3 - 2 = 1.
 
+THE FIELD AROUND 12 (owner, 2026-10-04: "if we add it flips ... I did minus to
+get back to 1+2, but if I had put plus 2+1 ... the 12 on either side"):
+    3  <- -9 -  12  - +9 ->  21
+  minus 9 gives the digit sum 1+2, plus 9 gives the flip 21 (2+1).
+  12 IS THE ONLY TWO-DIGIT NUMBER WITH BOTH (proved): ab - 9 = a + b forces
+  9a = 9, a = 1; ab + 9 = ba forces b = a + 1. Together: 12.
+
 FALSIFICATION: any assertion below failing.
 """
 def centre(a):
@@ -80,6 +87,11 @@ assert {8, 17, 26, 9, 18, 27} <= set(FULL)
 assert 32 - 9 == 23 and 23 - 9 == 14 and 23 - 11 == 12 and 12 - 9 == 3 == 1 + 2 and 3 - 2 == 1
 assert all(10 + b - 9 == 1 + b for b in range(10))
 assert all(int(f"{d + 1}{d}") - 9 == int(f"{d}{d + 1}") for d in range(1, 9))
+
+assert 12 - 9 == 1 + 2 and 12 + 9 == 21
+BOTH = [n for n in range(10, 100) if n - 9 == sum(map(int, str(n))) and n % 10 and n + 9 == int(str(n)[::-1])]
+assert BOTH == [12]
+assert [n for n in range(10, 100) if n - 9 == sum(map(int, str(n)))] == list(range(10, 20))
 
 if __name__ == "__main__":
     for c in range(11, 100, 11):
