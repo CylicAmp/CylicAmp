@@ -134,6 +134,29 @@ THE 832 PAGE (owner, 2026-10-04) -- decoded parts:
   OPEN: whether 1060 is 1070 in the +1 line;
   the last steps "=6+6=3".
 
+THE 832 CHAIN (owner, 2026-10-04: "run the 832 chain on all 9 ladder rows";
+"832 is it something I randomly picked out?"):
+  Chain on abc: a x b, sum the product's digits, add c. 832: 8x3 = 24 -> 6,
+  6+2 = 8. Written out it reads a, b, the product, its digit sum, c, c, the digit
+  sum, the result: 8 3 24 6 2 2 6 8 = 832 | 462 | 268.
+  WHAT 832 DOES: (1) the written chain starts with the number itself, because
+  the product 24 begins with 832's last digit 2; (2) it ends exactly on its
+  first digit, 8. Of the 900 three-digit numbers, 81 do (1), 46 do (2) exactly,
+  and 8 do both: 251, 431, 452, 653, 821, 832, 843, 854. So 832 is one of 8 in
+  900 -- rare, not unique.
+  WHERE 832 STANDS IN THE WORK: running sum at 70 of the span 58 -> 85
+  (58 + 59 + ... + 70 = 832; reversal_spans_all_tables.md).
+  ON THE NINE LADDER ROWS (chain on each row's first three pieces):
+    123 -> 1x2 = 2, +3 = 5        235 -> 6, +5 = 11 -> 2   (back to 2)
+    347 -> 12 -> 3, +7 = 10 -> 1  459 -> 20 -> 2, +9 = 11 -> 2
+    562 -> 30 -> 3, +2 = 5  (back to 5)                    674 -> 42 -> 6, +4 = 10 -> 1
+    786 -> 56 -> 11, +6 = 17 -> 8 898 -> 72 -> 9, +8 = 17 -> 8 (back to 8)
+    911 -> 9, +1 = 10 -> 1
+  Rows 2, 5, 8 return to their first digit; forced: the chain on the head
+  DR(a), DR(a+1), DR(2a+1) is a(a+1) + 2a+1 mod 9, which equals a exactly when
+  (a+1)^2 = 0 mod 9, i.e. a = 2 mod 3. None of the heads starts its own
+  written chain the way 832 does.
+
 FALSIFICATION: any assertion below failing.
 """
 def dr(n):
@@ -224,6 +247,26 @@ assert 1030 + 1020 + 1060 == 3110 != 3310 and 31 + 10 == 41 == 13 + 12 + 16 and 
 assert dr(4 + 3 + 4 + 3) == dr(43 + 43) == 5 == dr(41) and dr(41 + 41) == 1
 
 assert 832 - 462 == 370 and 370 - 268 == 102 and dr(102) == 3
+
+def chain832(n):
+    a, b, c = map(int, str(n))
+    p = a * b
+    return p, ds(p) + c
+
+assert chain832(832) == (24, 8)
+_p, _r = chain832(832)
+assert f"8{3}{_p}{ds(_p)}{2}{2}{ds(_p)}{_r}" == "832462268"
+starts = [n for n in range(100, 1000) if "0" not in str(n) and str(chain832(n)[0])[0] == str(n)[2]]
+exact = [n for n in range(100, 1000) if chain832(n)[1] == int(str(n)[0])]
+assert len(starts) == 81 and len(exact) == 46
+assert [n for n in exact if n in starts] == [251, 431, 452, 653, 821, 832, 843, 854]
+assert sum(range(58, 71)) == 832
+HEADS = [int(str(int(f"{dr(a)}{dr(a + 1)}{dr(2 * a + 1)}{2 * a + 10}"))[:3]) for a in range(1, 10)]
+assert HEADS == [123, 235, 347, 459, 562, 674, 786, 898, 911]
+back = [i + 1 for i, h in enumerate(HEADS) if dr(chain832(h)[1]) == dr(int(str(h)[0]))]
+assert back == [2, 5, 8]
+for a in range(1, 300):
+    assert (dr(a * (a + 1) + 2 * a + 1) == dr(a)) == (a % 3 == 2)
 
 if __name__ == "__main__":
     print("all assertions pass")
