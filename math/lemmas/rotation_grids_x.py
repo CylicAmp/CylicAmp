@@ -189,6 +189,13 @@ PLUS ONE AND THE ONE HALF (owner, 2026-10-04):
   digital-root half 5n mod 9: 0.5 -> 5, 1.5 -> 6, 2.5 -> 7, 3.5 -> 8, 4.5 -> 9,
   and 1, 2, 3, 4 for the even digits.
 
+EVERY NUMBER CUT IN HALF (owner, 2026-10-04: "1 = 55 = 2, 2 = 5555 = 4,
+  3 = 555555 = 6 -- right back to 246 polymath"):
+  Writing n as halves (0.5s) gives a string of 2n fives: 55, 5555, 555555.
+  The counts 2, 4, 6 spell 246, the reference seed (the Polymath8b prime-gap
+  bound, math/theorems/seed_246_polymath_gap_gf37.py). The fives read back to
+  n: each pair is 10 -> 1, so 2n fives = 10n -> DR(n).
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -390,6 +397,11 @@ for n in range(1, 10):
     half = str(n / 2).rstrip("0").rstrip(".")
     assert dr(sum(int(ch) for ch in half if ch.isdigit())) == dr(5 * n)
     assert len([d for d in range(1, 10) if dr(2 * d) == dr(n)]) == 1
+
+HALVES = {n: "5" * (2 * n) for n in (1, 2, 3)}
+assert HALVES == {1: "55", 2: "5555", 3: "555555"}
+assert "".join(str(len(HALVES[n])) for n in (1, 2, 3)) == "246"
+assert all(dr(sum(map(int, "5" * (2 * n)))) == dr(n) and 0.5 * 2 * n == n for n in range(1, 200))
 
 if __name__ == "__main__":
     for m in MAGIC:
