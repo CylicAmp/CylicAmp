@@ -21,6 +21,13 @@ WRONG
   T6 The pytest transcript: "collected 74 items ... 74 passed" while listing 14 tests; it runs in
      /workspace/cylicamp/math/qnm45-cascade, which does not exist on main (checked after fetching
      origin); and the script it says it matches fails (T3). "Clean on main" is not true.
+FOLLOW-UP (same day, a supplied restatement of T3-T6): T3, T5 and T6 restated correctly
+  (19 vs 27; m = 2 and m = 4 counterexamples; the fabricated path and transcript).
+  One slip in its T4: it writes Q(x, y) = (2x + y)^2 + 33y^2. That expression is 2(Q(x, y) + 1),
+  not Q. So its "Q(1, 9) = 2794" is 2 x (1396 + 1), and its case-by-case search solves
+  (2x + y)^2 + 33y^2 = 1538 -- the wrong equation. Q(x, y) = 1538 is (2x + y)^2 + 33y^2 = 3078.
+  The conclusion survives: that equation also has no integer solution (C5 of
+  torus787_clusters_supplied_audit_2026_10_04.py), so Q never equals 1538.
 FALSIFICATION: any assertion failing.
 """
 import math
@@ -34,3 +41,6 @@ assert lp(2) == 19 and (2 - 1) * (2 + 1) ** 2 * (2 * 2 - 1) == 27 and det(2) != 
 Q = lambda x, y: 2 * x * x + 17 * y * y + 2 * x * y - 1
 assert Q(1, 9) == 1396 != 1538                                                                  # T4
 assert det(2) == 19 and det(2) % 3 != 0 and det(4) == 429 and det(4) % 5 != 0                   # T5
+assert (2 * 1 + 9) ** 2 + 33 * 81 == 2794 == 2 * (Q(1, 9) + 1)                            # follow-up
+assert 2 * (1538 + 1) == 3078 and not [(x, y) for y in range(-10, 11) for x in range(-60, 61)
+                                       if (2 * x + y) ** 2 + 33 * y * y == 3078]
