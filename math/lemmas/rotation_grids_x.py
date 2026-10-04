@@ -178,6 +178,17 @@ MIRRORED STACKING (owner, 2026-10-04):
   balances the X (rule above). Stacked together as 167/382/279: rows 14, 13,
   18; columns 6, 21, 18; diagonals 18, 17.
 
+PLUS ONE AND THE ONE HALF (owner, 2026-10-04):
+  "7924 is plus 1 added to 6813": 6813 + 1111 = 7924 (and 3186 + 1111 =
+  4297). Forced: 6813 is 1234 over 5678, 7924 is 1234 over 6789 -- the bottom
+  row up by 1 raises every column by 1.
+  "only 2 things that are the same can make the 5": the only equal pair is
+  2.5 + 2.5, and under digital roots the only one is 7 + 7 (doubling hits each
+  remainder mod 9 once, so 2d = 5 has the single answer d = 7). They are the
+  same half: 2.5 -> 2+5 = 7. For every digit n, the digit sum of n/2 equals its
+  digital-root half 5n mod 9: 0.5 -> 5, 1.5 -> 6, 2.5 -> 7, 3.5 -> 8, 4.5 -> 9,
+  and 1, 2, 3, 4 for the even digits.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -372,6 +383,13 @@ for t in ("167", "382", "279"):
     assert len({sum(r) for r in g} | {sum(c) for c in zip(*g)}) == 1
 G3 = [[1, 6, 7], [3, 8, 2], [2, 7, 9]]
 assert [sum(r) for r in G3] == [14, 13, 18] and [sum(c) for c in zip(*G3)] == [6, 21, 18]
+
+assert 6813 + 1111 == 7924 and 3186 + 1111 == 4297
+assert [d for d in range(1, 10) if dr(2 * d) == 5] == [7]
+for n in range(1, 10):
+    half = str(n / 2).rstrip("0").rstrip(".")
+    assert dr(sum(int(ch) for ch in half if ch.isdigit())) == dr(5 * n)
+    assert len([d for d in range(1, 10) if dr(2 * d) == dr(n)]) == 1
 
 if __name__ == "__main__":
     for m in MAGIC:
