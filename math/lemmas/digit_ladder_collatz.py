@@ -35,7 +35,35 @@ TESTED AGAINST A BASELINE -- NOT FINDINGS:
   Seven of the nine pass through 1732: random 5-digit numbers do 40% of the
   time, and 1732 was picked after looking, so this is not established.
   Repdigit/opening pairs with equal totals (44/45 16, 66/67 27, 99/100 25):
-  37% of consecutive n < 1000 share a total; not special.
+  common among neighbours -- see the next section.
+
+THE "37%" (owner, 2026-10-04: "37% not a coincidence") -- TESTED, IT IS NOT A
+CONSTANT. The share of n whose total equals that of n+1 depends on the range:
+    n <= 999        365 / 999          0.365
+    n <= 9,999      4,161 / 9,999      0.416
+    n <= 99,999     45,022 / 99,999    0.450
+    n <= 999,999    477,245 / 999,999  0.477
+    n <= 1,999,999  966,531 / 1,999,999 0.483
+  It keeps rising; "37%" was 36.5% at the cutoff 1000, rounded. 365/999 =
+  0.365365... repeats because the denominator is 999 (any k/999 repeats k).
+  Proved part: 8k+4 and 8k+5 always share a total -- both reach 6k+4 in three
+  steps (8k+4 -> 4k+2 -> 2k+1 -> 6k+4; 8k+5 -> 24k+16 -> 12k+8 -> 6k+4) -- so the
+  share is at least 1/8 for every range.
+
+ROWS 19-36 (4 pieces, first piece DR(a)):
+    12348 112 | 23550 126 | 34752 142 | 45954 176 | 56256 153 | 67458 68 |
+    78660 50 | 89862 133 | 91164 133 | 12366 156 | 23568 100 | 34770 85 |
+    45972 176 | 56274 83 | 67476 60 | 78678 200 | 89880 89 | 91182 58
+  Never above start: also 34752, 56256, 78660, 23568, 67476, 89880.
+  Shared totals across rows 1-36:
+    133: rows 8, 18, 26, 27 (89826, 91146, 89862, 91164)
+    176: rows 4, 22, 31 (45918, 45954, 45972)
+    37: rows 1, 10 | 83: rows 13, 32 | 50: rows 16, 25
+  12 equal pairs among 36 rows. Against 36 random multiples of 6 (10k-100k):
+  mean 4.9, 12 or more in 1.2% -- looks unusual. But ladder rows come in
+  families 18 apart (row a+9 = row a + 18) and close numbers merge early.
+  Random bases with the SAME layout give mean 13.2, 12 or more in 59%.
+  So the shared totals are explained by the +18 layout, not by anything else.
 
 FALSIFICATION: any assertion below failing.
 """
@@ -53,9 +81,10 @@ def row(a, P=4):
     parts = [dr(a), dr(a + 1), dr(2 * a + 1)] + [2 * a + 1 + 9 * j for j in range(1, P - 2)]
     return int("".join(map(str, parts)))
 
-STEPS4 = [37, 82, 173, 176, 91, 130, 138, 133, 208, 37, 144, 111, 83, 47, 161, 50, 71, 133]
+STEPS4 = [37, 82, 173, 176, 91, 130, 138, 133, 208, 37, 144, 111, 83, 47, 161, 50, 71, 133,
+          112, 126, 142, 176, 153, 68, 50, 133, 133, 156, 100, 85, 176, 83, 60, 200, 89, 58]
 STEPS5 = [54, 192, 252, 105, 157, 147, 173, 212, 225]
-assert [len(traj(row(a))) - 1 for a in range(1, 19)] == STEPS4
+assert [len(traj(row(a))) - 1 for a in range(1, 37)] == STEPS4
 assert [len(traj(row(a, 5))) - 1 for a in range(1, 10)] == STEPS5
 
 for a in range(1, 200):
@@ -85,7 +114,25 @@ assert all(max(traj(n)) == n for n in (12312, 78624, 45936, 67440))
 assert all(40 in traj(row(a)) for a in range(1, 10))
 assert sum(1732 in traj(row(a)) for a in range(1, 10)) == 7
 
+def steps(n):
+    c = 0
+    while n != 1:
+        n = n // 2 if n % 2 == 0 else 3 * n + 1
+        c += 1
+    return c
+
+ST = [0, 0] + [steps(n) for n in range(2, 10001)]
+assert sum(ST[n] == ST[n + 1] for n in range(1, 1000)) == 365
+assert sum(ST[n] == ST[n + 1] for n in range(1, 10000)) == 4161
+assert all(ST[8 * k + 4] == ST[8 * k + 5] for k in range(1, 1249))
+assert all(traj(8 * k + 4)[3] == traj(8 * k + 5)[3] == 6 * k + 4 for k in range(1, 5000))
+assert all(max(traj(row(a))) == row(a) for a in (21, 23, 25, 29, 33, 35))
+assert [a for a in range(1, 37) if STEPS4[a - 1] == 133] == [8, 18, 26, 27]
+assert [a for a in range(1, 37) if STEPS4[a - 1] == 176] == [4, 22, 31]
+assert sum(STEPS4[i] == STEPS4[j] for i in range(36) for j in range(i + 1, 36)) == 12
+assert all(row(a + 9) - row(a) == 18 for a in range(1, 28))
+
 if __name__ == "__main__":
-    for a in range(1, 19):
+    for a in range(1, 37):
         print(a, row(a), len(traj(row(a))) - 1)
     print("all assertions pass")
