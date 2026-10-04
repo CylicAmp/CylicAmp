@@ -115,6 +115,22 @@ SEAM LINES (owner, 2026-10-04):
   3 + 4 = 7 and 7 + 7 = 14 -> 1+4 = 5 check. The "3 the same, 4 different"
   count is not yet decoded (asked).
 
+THE LONGER ROTATION, 123321 (owner, 2026-10-04: "the rotation longer ... same
+rules, same mirror and X or diamond configuration"):
+  Circle of 123321 (6 turns): 123321, 112332, 211233, 321123, 332112, 233211.
+  The owner's list slips at the second step (211332 for 211233); everything
+  after it is a full circle of its own, 113322 = 11, 22, 33 side by side:
+  113322, 211332, 221133, 322113, 332211, 133221.
+  MIRROR: 123321 reads the same backwards, so its circle holds its own
+  mirrors; 113322's circle does not (113322 reversed is 223311, another circle).
+  6x6 GRIDS: stacking either circle, every row and column sums to 12. Four
+  stackings of each circle also balance the X at 12 (both diagonals 12):
+    123321: starting 112332 (left), 211233 (right), 332112 (left),
+            233211 (right) -- again one grid with its mirror, flip and double
+            mirror, as with 246.
+    113322: starting 113322 (left), 211332 (right and left), 221133 (right)
+            -- flips of each other only, since the circle is not mirror-closed.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -254,6 +270,28 @@ for p in ("".join(q) for q in permutations("123")):
 assert {"12332(11)23321", "21331(22)13312", "32112(33)21123"} <= set(SEAMS.values())
 assert sorted(v[6:8] for v in SEAMS.values()) == ["11", "11", "22", "22", "33", "33"]
 assert 3 + 4 == 4 + 3 == 7 and dr(7 + 7) == 5
+
+C6 = cycle("123321", rot_r)
+D6 = cycle("113322", rot_r)
+assert C6 == ["123321", "112332", "211233", "321123", "332112", "233211"]
+assert D6 == ["113322", "211332", "221133", "322113", "332211", "133221"]
+assert rot_r("112332") == "211233" != "211332"
+assert set(["211332", "221133", "322113", "332211", "133221", "113322"]) == set(D6)
+assert all(x[::-1] in C6 for x in C6) and "113322"[::-1] not in D6
+def bal6(circ):
+    out = []
+    for st in circ:
+        for f, d in ((rot_r, "R"), (rot_l, "L")):
+            g = grid(cycle(st, f))
+            assert all(sum(r) == 12 for r in g) and all(sum(c) == 12 for c in zip(*g))
+            if sum(g[i][i] for i in range(6)) == sum(g[i][5 - i] for i in range(6)) == 12:
+                out.append(cycle(st, f))
+    return out
+B6 = bal6(C6)
+assert len(B6) == 4 and len(bal6(D6)) == 4
+G6 = B6[0]
+fam = [G6, [r[::-1] for r in G6], G6[::-1], [r[::-1] for r in G6[::-1]]]
+assert sorted(fam) == sorted(B6)
 
 if __name__ == "__main__":
     for m in MAGIC:
