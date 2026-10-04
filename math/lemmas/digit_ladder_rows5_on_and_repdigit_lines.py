@@ -38,9 +38,20 @@ PART 2 -- THE FOUR LINES: one walk, written four ways
   opening pair, O = 11a+1 (12 = 11+1, ..., 67 = 66+1). So 66 + 1 = 67, the
   opening of row 6 (67422), whose digit sum 13 -> 4 is row 6's middle piece.
   The walk 4, 6, 8, 1, 3 is the chain residue of rows 6, 7, 8, 9, 10.
-  "1,111": four ones, 1+1+1+1 = 4, the value both L1 and L2 close on. Read as
-  a tally; 1111 = 11*101 is the other reading and no line distinguishes them.
-  L4 stops at 3 without the +1 (66, not 67).
+  FOUR, WRITTEN THREE WAYS (owner, 2026-10-04): the lines open and close on 4.
+    open:  1,1 + 1,1  -- one-one put together is 2, plus another 2: 2+2, half and half
+           2+2        -- L2's opening
+    close: 3+1        -- what is really going on at the end
+           1,111      -- four ones, 1+1+1+1
+  2+2, 3+1 and 1+1+1+1 are three of the five partitions of 4 (4, 3+1, 2+2,
+  2+1+1, 1+1+1+1). L4 stops at 3 without the +1 (66, not 67).
+
+  THREE PLUS ONE: the problem is the Collatz (3n+1) problem: odd n -> 3n+1,
+  even n -> n/2. Conjecture (OPEN, unproved): every start reaches 4 -> 2 -> 1.
+  The closing 3+1 = 4 is 3*1+1, the step from 1 into that cycle, and 4 halves
+  to 2+2's 2, then 1. Every 3n+1 has digital root 1, 4 or 7 (3n+1 = 1 mod 3);
+  the walk's 3+1 = 4 is in that set. Collatz work already in the repo:
+  T271, T346, T425, T428, lob_26_collatz_f37.py, collatz_mod37_basin.py.
 
 FALSIFICATION: any assertion below failing.
 """
@@ -88,6 +99,11 @@ assert [dr(x) for x in (4, 6, 8, 10, 12)] == [4, 6, 8, 1, 3]
 assert all(11 * a + 1 == int(f"{a}{a + 1}") for a in range(1, 9))
 assert 66 + 1 == 67 == O(6) and dr(67) == 4 == dr(2 * 6 + 1)
 assert [(2 * a + 1) % 9 for a in (6, 7, 8, 9, 10)] == [4, 6, 8, 1, 3]
+
+assert 2 + 2 == 1 + 1 + 1 + 1 == 3 + 1 == 4 == 3 * 1 + 1
+collatz = lambda n: n // 2 if n % 2 == 0 else 3 * n + 1
+assert [collatz(1), collatz(4), collatz(2)] == [4, 2, 1]
+assert all(dr(3 * n + 1) in (1, 4, 7) for n in range(1, 10000))
 
 if __name__ == "__main__":
     for a in range(5, 15):
