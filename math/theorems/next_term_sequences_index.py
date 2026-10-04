@@ -24,6 +24,9 @@ rule gives, and the file where it is proved. Pulled together 2026-10-04.
   back to 3a. Next: 444 -> 12 x 4 = 48 -> 12; 555 -> 15 x 5 = 75 -> 15.
   repdigit_return_lines_2026_10_03.py.
 
+6 THE TWO-DIGIT ROADS (12 23 34 45 56 67 78 89 91 12). Same rule as 1 on two digits; period 9.
+  Next after 91: 12. outer_step_parity_supplied_audit_2026_10_04.py.
+
 NOT PREDICTIVE (checked, recorded so they are not reused as rules):
   - the 2-4-8 prime blocks every +90 (fails at 287 = 7 x 41): prime_root_mirror_53_...py
   - "roots alternate even/odd" for consecutive primes (55.3% flips): ending_vs_root_...py
@@ -55,6 +58,11 @@ assert all(9 * k + k == 10 * k for k in range(1, 50))
 out_back = lambda a: (3 * a, 3 * a * a, 3 * a * a // a)                                  # 5
 assert out_back(4) == (12, 48, 12) and out_back(5) == (15, 75, 15)
 assert all(sum(map(int, str(111 * a))) == 3 * a for a in range(1, 10))
+
+two = [12]                                                                               # 6
+for _ in range(9):
+    two.append(road(two[-1]))
+assert two == [12, 23, 34, 45, 56, 67, 78, 89, 91, 12]
 
 if __name__ == "__main__":
     print("roads:", seq)
