@@ -61,6 +61,15 @@ where it began ... close the loop at will or keep it going"):
   never changes DR(n) (12 -> 21 -> 30 -> 39 -> ... all DR 3). The digital root
   is the anchor: down closes to it, up grows away from it without leaving it.
 
+"CLOSING MAKES 11 WHEN STARTING AGAIN" (owner, 2026-10-04) -- two readings,
+both checked, owner to say which:
+  (A) Joining 12 with its flip closes onto 11 x the start:
+      12 + 21 = 33 = 11 x 3 = 11 x (1+2). Forced for every two-digit number:
+      ab + ba = 11(a+b) -- the +9 side (the flip) and the -9 side (the digit
+      sum) are tied by 11.
+  (B) Counting: 1..9 closes on 9; starting again writes 10 (-> 1) and then 11,
+      the first number made only of the restart digit, 1 and 1.
+
 FALSIFICATION: any assertion below failing.
 """
 def centre(a):
@@ -115,6 +124,10 @@ for n in range(1, 5000):
     assert end == dr(n) and n == end + 9 * k
     assert all(dr(n + 9 * j) == dr(n) for j in range(1, 30))
 assert count_down(12) == (3, 1) and [12 + 9 * j for j in range(5)] == [12, 21, 30, 39, 48]
+
+assert 12 + 21 == 33 == 11 * (1 + 2)
+assert all(int(f"{a}{b}") + int(f"{b}{a}") == 11 * (a + b) for a in range(1, 10) for b in range(1, 10))
+assert dr(10) == 1 and str(11) == "1" * 2
 
 if __name__ == "__main__":
     for c in range(11, 100, 11):
