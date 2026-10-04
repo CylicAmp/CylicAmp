@@ -20,9 +20,9 @@ from pydantic import BaseModel
 # Configuration
 # ---------------------------------------------------------------------------
 
-SECRET_KEY = os.environ.get("JWT_SECRET", "super-secret-jwt-key-change-in-production")
+SECRET_KEY = os.environ["JWT_SECRET"]  # Required: set in production environment
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.environ.get("JWT_EXPIRE_MINUTES", "60"))
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.environ.get("JWT_EXPIRE_MINUTES", "15"))
 REFRESH_TOKEN_EXPIRE_DAYS = int(os.environ.get("JWT_REFRESH_DAYS", "7"))
 
 # ---------------------------------------------------------------------------
@@ -58,32 +58,19 @@ class UserInDB(User):
     hashed_password: str
 
 # ---------------------------------------------------------------------------
-# Mock User Database (Replace with PostgreSQL in production)
+# User Database
+# Note: This simple implementation is for reference/testing only.
+# Use auth_postgres.py with a real PostgreSQL database for production.
+# Test user credentials must be loaded from environment or test fixtures, not hardcoded.
 # ---------------------------------------------------------------------------
 
-_USERS_DB = {
-    "admin": UserInDB(
-        username="admin",
-        email="admin@securescope.local",
-        full_name="Administrator",
-        hashed_password=get_password_hash("admin"),  # CHANGE IN PRODUCTION
-        roles=[Role.ADMIN, Role.ANALYST, Role.SCANNER, Role.VIEWER],
-    ),
-    "analyst": UserInDB(
-        username="analyst",
-        email="analyst@securescope.local",
-        full_name="Security Analyst",
-        hashed_password=get_password_hash("analyst"),
-        roles=[Role.ANALYST, Role.VIEWER],
-    ),
-    "scanner": UserInDB(
-        username="scanner",
-        email="scanner@securescope.local",
-        full_name="Scan Service",
-        hashed_password=get_password_hash("scanner"),
-        roles=[Role.SCANNER],
-    ),
-}
+def _load_test_users() -> Dict[str, UserInDB]:
+    """Load test users from environment. Not for production."""
+    # Example: set TEST_USERS='admin:hashed_pw,analyst:hashed_pw' in env
+    # Or use a fixture file: load_from_json(os.environ.get("TEST_USERS_FILE"))
+    return {}
+
+_USERS_DB = _load_test_users()
 
 def get_user(username: str) -> Optional[UserInDB]:
     return _USERS_DB.get(username)

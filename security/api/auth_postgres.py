@@ -27,8 +27,8 @@ from .models import Base, User as DBUser, Role as DBRole, UserRole as DBUserRole
 # Configuration
 # ---------------------------------------------------------------------------
 
-DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://user:password@localhost/securescope")
-SECRET_KEY = os.environ.get("JWT_SECRET", "super-secret-jwt-key-change-in-production")
+DATABASE_URL = os.environ["DATABASE_URL"]  # Required: PostgreSQL connection string
+SECRET_KEY = os.environ["JWT_SECRET"]  # Required: min 32 chars, high entropy
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.environ.get("JWT_EXPIRE_MINUTES", "15"))
 REFRESH_TOKEN_EXPIRE_DAYS = int(os.environ.get("JWT_REFRESH_DAYS", "7"))
