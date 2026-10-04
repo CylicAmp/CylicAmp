@@ -2,7 +2,7 @@
 """
 Right extension of the digit ladder (owner, 2026-10-04):
     12312-21
-    23515-23
+    23515-23   (typo for 23514, confirmed by owner)
     34716-25
 Builds on math/lemmas/digit_ladder_12312_91128.py (row a = a | DR(a+1) | DR(2a+1) | 2a+10).
 
@@ -15,7 +15,7 @@ ROW 2 AS WRITTEN DOES NOT FIT: 23515 has last piece 15, but the ladder image has
 23514 (2a+10 = 14), and 14 + 9 = 23 matches the supplied 23. With 15 the step
 would be 8. The whole-row step also breaks: with 23514 the rows 1231221,
 2351423, 3471625 step by 1120202 twice; with 23515 the steps are 1120302 and
-1120102. Read here as 23514 (image), flagged, not silently changed.
+1120102. Owner confirmed 2026-10-04: typo, the row is 23514.
 
 PROVED FOR EVERY ROW LENGTH P (pieces) AND EVERY a:
   - DR(row) = DR((P-1)(2a+1)): the first two pieces sum to 2a+1 and every later
