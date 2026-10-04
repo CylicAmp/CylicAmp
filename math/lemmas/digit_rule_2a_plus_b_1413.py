@@ -79,6 +79,38 @@ LADDER ROW 3, 34716-25 (owner: "run it on ladder row 3"):
   Inside row 3's own chain, 16, 25, 34, 43: outside 16+43 = inside 25+34 = 59,
   forced because the chain steps by 9 (any four in a row: ends sum = middles sum).
 
+ALL NINE LADDER ROWS (owner: "run it on all 9 ladder rows"):
+  row  opening/rev  doubles   inside     outside    crosses             block
+   1   12/21        24/42     33 -> 6    66 -> 3    54, 45 -> 9, 9      99 -> 9
+   2   23/32        46/64     55 -> 1    110 -> 2   87, 78 -> 6, 6      165 -> 3
+   3   34/43        68/86     77 -> 5    154 -> 1   120, 111 -> 3, 3    231 -> 6
+   4   45/54        90/108    99 -> 9    198 -> 9   153, 144 -> 9, 9    297 -> 9
+   5   56/65        112/130   121 -> 4   242 -> 8   186, 177 -> 6, 6    363 -> 3
+   6   67/76        134/152   143 -> 8   286 -> 7   219, 210 -> 3, 3    429 -> 6
+   7   78/87        156/174   165 -> 3   330 -> 6   252, 243 -> 9, 9    495 -> 9
+   8   89/98        178/196   187 -> 7   374 -> 5   285, 276 -> 6, 6    561 -> 3
+   9   91/19        182/38    110 -> 2   220 -> 4   129, 201 -> 3, 3    330 -> 6
+  Inside = 11(a+b) for the opening a,b; outside = 2 x inside; block = 3 x inside.
+  Rows 1-8 blocks run 99, 165, 231, ..., 561, stepping by 66; row 9 breaks
+  because its opening is 91 (DR(10) = 1), not 9,10.
+
+THE 832 PAGE (owner, 2026-10-04) -- decoded parts:
+  8x3 = 24 -> 2+4 = 6, +2 = 8;  83 + 6 = 89 -> 8+9 = 17 -> 1+7 = 8;
+  11 + 24 = 35 -> 3+5 = 8 (11 = 8+3, 24 = 8x3);  2 + 24 = 26 -> 2+6 = 8;  8+0 = 8.
+  Every route on 832 gives 8. These use the product 8x3, and products do not keep
+  the value mod 9: 832 itself reduces to 4 (8+3+2 = 13). 462 gives the same 8 by
+  the first route (4x6 = 24 -> 6, +2 = 8): 832 and 462 share 24 and the last 2.
+  462 -> 4+6+2 = 12 and 268 -> 2+6+8 = 16 match "12" and "16"; 832 -> 13, not
+  the 14 written. 1040, 1020, 1060 are 14, 12, 16 with a 0 after each digit;
+  15, 13, 17 -> 1050, 1030, and 17 would give 1070 (written 1060).
+  5+3+7 = 15 -> 6 and 15 = 6 + 9; 6+4+8 = 18 -> 9.
+  The cut pairs 12-3, 3-12, 21-3, 3-21, 13-2, 2-13, 31-2, 2-31 are the
+  permutations 123, 312, 213, 321, 132, 213, 312, 231 cut into two pieces;
+  every pair sums to 15, 24 or 33, all -> 6, forced since 1+2+3 = 6.
+  30-0 and 0-03 have digits 3, 0, 0 -> 3.
+  OPEN: where 832, 462, 268 come from; whether 14 is 13; whether 1060 is 1070;
+  the last steps "=6+6=3".
+
 FALSIFICATION: any assertion below failing.
 """
 def dr(n):
@@ -138,6 +170,22 @@ ROWS = [int(f"{dr(a)}{dr(a + 1)}") for a in range(1, 10)]
 assert [block(o) for o in ROWS] == [(9, 9, 9), (6, 6, 3), (3, 3, 6)] * 3
 assert block(13) == block(34) == (3, 3, 6)
 assert 16 + 43 == 25 + 34 == 59
+
+TABLE = []
+for a in range(1, 10):
+    o = int(f"{dr(a)}{dr(a + 1)}")
+    r = int(str(o)[::-1])
+    TABLE.append((o + r, 2 * (o + r), 2 * r + o, 2 * o + r, 3 * (o + r)))
+assert [t[0] for t in TABLE] == [33, 55, 77, 99, 121, 143, 165, 187, 110]
+assert [t[4] for t in TABLE] == [99, 165, 231, 297, 363, 429, 495, 561, 330]
+assert [(t[2], t[3]) for t in TABLE][2] == (120, 111) and [(t[2], t[3]) for t in TABLE][8] == (129, 201)
+assert [dr(t[4]) for t in TABLE] == [9, 3, 6] * 3
+assert ds(8 * 3) + 2 == 8 and dr(83 + 6) == 8 and dr(11 + 24) == 8 and dr(2 + 24) == 8 and dr(832) == 4
+assert ds(4 * 6) + 2 == 8 and (ds(462), ds(268), ds(832)) == (12, 16, 13)
+assert dr(5 + 3 + 7) == 6 and dr(6 + 4 + 8) == 9 and 6 + 9 == 15
+CUTS = [(12, 3), (3, 12), (21, 3), (3, 21), (13, 2), (2, 13), (31, 2), (2, 31)]
+assert sorted(set(int(f"{x}{y}") for x, y in CUTS)) == [123, 132, 213, 231, 312, 321]
+assert all(dr(x + y) == 6 for x, y in CUTS)
 
 if __name__ == "__main__":
     print("all assertions pass")
