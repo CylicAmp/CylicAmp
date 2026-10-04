@@ -27,6 +27,15 @@ rule gives, and the file where it is proved. Pulled together 2026-10-04.
 6 THE TWO-DIGIT ROADS (12 23 34 45 56 67 78 89 91 12). Same rule as 1 on two digits; period 9.
   Next after 91: 12. outer_step_parity_supplied_audit_2026_10_04.py.
 
+PREDICTIONS STATED IN ADVANCE AND THEN TESTED (each file runs and passes):
+  - theorem_336_twin_prime_orbit_alignment_null_gf37.py: "twin primes will NOT favour any
+    137-orbit" -- declared before the primes were generated (T329's CRT independence predicts
+    it); the sieve confirmed the miss.
+  - theorem_345_twin_midpoint_forbidden_gf37.py: twin midpoints never 1 or 36 mod 37 (forced),
+    and the other 35 residues equidistributed -- fixed before the sieve; chi-square 3.15,
+    confirmed.
+  - theorem_337_sophie_germain_map_gf37.py: the Sophie Germain map p -> 2p+1 settled the same way.
+
 NOT PREDICTIVE (checked, recorded so they are not reused as rules):
   - the 2-4-8 prime blocks every +90 (fails at 287 = 7 x 41): prime_root_mirror_53_...py
   - "roots alternate even/odd" for consecutive primes (55.3% flips): ending_vs_root_...py
