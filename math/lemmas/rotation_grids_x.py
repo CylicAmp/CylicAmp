@@ -83,6 +83,22 @@ MIX TO ONE NUMBER (owner: "we can do this until we only have 1 number left ...
   reducing gives the same answer as any amount of mixing: the total is the
   one thing mixing cannot change.
 
+SIX AS FACTOR PAIRS (owner, 2026-10-04):
+    6 = 33, 222, 111111   "two 3s, three 2s, six 1s"
+    6 = 321, 123, 213     (3+2+1 = 6; 321 and 213 share a circle, 123 is in
+                           the mirror circle -- all are orders of 1, 2, 3)
+    2332 + (61 = 7) / 3223 / 2332 ;  3223 + (6+1 = 7) / 2332 / 3223
+    167 / 716 / 671
+  Each equal split of 6 is a count and a value with count x value = 6:
+  two 3s = 23, three 2s = 32, six 1s = 61 (and one 6 = 16). Swapping count
+  and value reverses the pair: 23 <-> 32, 61 <-> 16. 2332 and 3223 are a pair
+  followed by its reverse -- even-length palindromes, so both divisible by 11
+  (2332 = 11 x 212, 3223 = 11 x 293).
+  61 -> 6+1 = 7: x 11 puts the digit sum in the middle, 61 x 11 = 671 = 6|7|1,
+  and 16 x 11 = 176. 167, 671, 716 is one circle (the owner's list), and its
+  mirror circle is 761, 617, 176. 167, 761 and 617 are prime. 167 is also the
+  first value of prime_insertion_sequence_audit.py (1, 7 with 6 inserted).
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -205,6 +221,14 @@ for _ in range(2000):
     assert n == 12 - [2, 4, 6][tgt]
     ENDS.add(tuple(d))
 assert ENDS == {(0, 0, 12), (0, 12, 0), (12, 0, 0)} and dr(12) == 3 == dr(2 + 4 + 6)
+
+from sympy import isprime
+assert sorted([("321" in cycle("123", rot_r)), ("213" in cycle("321", rot_r))]) == [False, True]
+assert [(c, 6 // c) for c in (1, 2, 3, 6)] == [(1, 6), (2, 3), (3, 2), (6, 1)]
+assert 2332 == 11 * 212 and 3223 == 11 * 293 and "2332" == "23" + "32" and "3223" == "32" + "23"
+assert 61 * 11 == 671 and 16 * 11 == 176 and 6 + 1 == 7
+assert set(cycle("167", rot_r)) == {"167", "716", "671"} and set(cycle("761", rot_r)) == {"761", "617", "176"}
+assert [x for x in (167, 716, 671, 761, 617, 176) if isprime(x)] == [167, 761, 617]
 
 if __name__ == "__main__":
     for m in MAGIC:
