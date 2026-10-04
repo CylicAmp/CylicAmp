@@ -114,7 +114,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", help="also write raw findings here")
     a = ap.parse_args()
-    files = sorted(glob.glob(D + "*.py"))
+    files = sorted(glob.glob(D + "*.py") + glob.glob(D.replace(os.sep + "theorems" + os.sep, os.sep + "lemmas" + os.sep) + "*.py"))
     dup, tauto, subsume = scan(files)
     if a.json:
         json.dump(dict(dup=dup, tauto=tauto, subsume=subsume),

@@ -49,12 +49,12 @@ def orbit_of(n):
     return _BY_R.get(n % P, 'SEAM')
 
 
-def is_prime(m):
-    return m > 1 and all(m % k for k in range(2, int(m ** .5) + 1))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 
-def dr(n):
-    return 0 if n == 0 else 1 + (n - 1) % 9
+from functions import dr_signed as dr
 
 
 def check(label, cond):

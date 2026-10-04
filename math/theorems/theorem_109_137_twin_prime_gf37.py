@@ -208,11 +208,9 @@ PR         = frozenset({2, 5, 13, 15, 17, 18, 19, 20, 22, 24, 32, 35})
 D7_ORBIT   = frozenset({7, 33, 34})
 
 
-def is_prime(n):
-    if n < 2: return False
-    if n == 2: return True
-    if n % 2 == 0: return False
-    return all(n % i != 0 for i in range(3, int(n**0.5) + 1, 2))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 
 def fw(r):

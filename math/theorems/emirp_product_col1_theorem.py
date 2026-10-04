@@ -56,8 +56,9 @@ Product DR distribution: {1: 3776, 4: 3638, 7: 3770} (near-uniform over COL1).
 """
 
 
-def dr(n: int) -> int:
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def chi_m3(n: int) -> int:
@@ -73,13 +74,9 @@ def rev_num(n: int) -> int:
     return int(str(n)[::-1])
 
 
-def sieve(limit: int):
-    is_p = bytearray([1]) * (limit + 1)
-    is_p[0] = is_p[1] = 0
-    for i in range(2, int(limit ** 0.5) + 1):
-        if is_p[i]:
-            is_p[i * i :: i] = bytearray(len(is_p[i * i :: i]))
-    return is_p
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import sieve_flags as sieve
 
 
 COL1 = {1, 4, 7}

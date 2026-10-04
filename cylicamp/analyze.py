@@ -12,6 +12,7 @@ _ROOT = os.path.join(_HERE, "..")
 sys.path.insert(0, _ROOT)
 sys.path.insert(0, os.path.join(_ROOT, "math", "primes"))
 sys.path.insert(0, os.path.join(_ROOT, "math", "theorems"))
+sys.path.insert(0, os.path.join(_ROOT, "math", "lemmas"))
 
 P = 37
 MULT = 26  # 137 mod 37
@@ -152,17 +153,9 @@ def orbit_137(n):
     return seen
 
 
-def is_prime(n):
-    if n < 2:
-        return False
-    if n == 2:
-        return True
-    if n % 2 == 0:
-        return False
-    for i in range(3, int(n**0.5) + 1, 2):
-        if n % i == 0:
-            return False
-    return True
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 
 def prime_index(n):

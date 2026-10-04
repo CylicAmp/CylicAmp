@@ -61,11 +61,9 @@ _CONSTANTS = {
 
 # ── Core functions ──────────────────────────────────────────────────────────────
 
-def dr(n: int) -> int:
-    """Digital root (1-9 convention; 0 maps to 9)."""
-    if n == 0:
-        return 9
-    return (abs(n) - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9 as dr
 
 
 def dr_chain(n: int) -> str:

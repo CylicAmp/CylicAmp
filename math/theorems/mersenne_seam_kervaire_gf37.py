@@ -83,14 +83,10 @@ TESLA_FLOW = 6
 SEED_NODE  = 18
 
 def f137(n): return (26*n)%P
-def dr(n):
-    while n>=10: n=sum(int(c) for c in str(n))
-    return n
-def is_prime(n):
-    if n<2: return False
-    for d in range(2,int(n**0.5)+1):
-        if n%d==0: return False
-    return True
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_iter as dr
+from functions import is_prime
 
 # ── Mersenne-SEAM theorem ─────────────────────────────────────────────────────
 

@@ -54,12 +54,9 @@ PHI_37     = 36    # φ(37) = 37 − 1; ord₃₇(2) = 36
 
 # ── Legendre symbol and sector classification ─────────────────────────────────
 
-def legendre(n, p=37):
-    """Legendre symbol (n/p): +1 QR, −1 NQR, 0 if p|n."""
-    n = n % p
-    if n == 0:
-        return 0
-    return 1 if pow(n, (p - 1) // 2, p) == 1 else -1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import legendre37 as legendre
 
 
 def sector(n):

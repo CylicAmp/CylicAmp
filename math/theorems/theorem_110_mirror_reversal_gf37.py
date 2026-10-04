@@ -261,11 +261,9 @@ assert total % P == 3 and 3 in ST
 assert dr(total) == 5 and 5 in PR
 
 # Three twin prime lower elements
-def is_prime(n):
-    if n < 2: return False
-    if n == 2: return True
-    if n % 2 == 0: return False
-    return all(n % i != 0 for i in range(3, int(n**0.5) + 1, 2))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 assert is_prime(5) and is_prime(7)   # (5,7) twin prime
 assert is_prime(11) and is_prime(13) # (11,13) twin prime

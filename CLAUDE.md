@@ -6,7 +6,7 @@ Read this file at the start of every session. It tells you what this project is,
 
 ## What This Project Is
 
-The driving objects are **1/137** and **twin primes** (with Riemann zeta zeros as a third recurring thread). **GF(37)** is the lens: 137 mod 37 = 26, so the 137-map `f(n) = 26n mod 37` realizes 1/137's structure inside a 37-element field, and every twin-prime, Sophie-Germain, and zeta-zero check in this repo is read through that same field. GF(37) is the tool used throughout, not a separate subject pursued for its own sake. The full synthesis is in `SYNTHESIS.md` — read it before working on any math module.
+The driving objects are **1/137** and **twin primes** (with Riemann zeta zeros as a third recurring thread). **GF(37)** is the lens: 137 mod 37 = 26, so the 137-map `f(n) = 26n mod 37` realizes 1/137's structure inside a 37-element field, GF(37) is one tool used in the repo's modules. It is NOT applied to problems that do not involve it. The full synthesis is in `SYNTHESIS.md` — read it before working on any math module.
 
 The project is owned by the user. All discoveries, computations, and observations belong to them.
 
@@ -24,15 +24,27 @@ All development goes on this branch. Push here. Do not push to another branch wi
 
 The user brings math, observations, and code. The work is collaborative and rigorous.
 
-**Verify before committing.** Run the actual computation — use Python imports, check mod arithmetic, confirm connections to GF(37). If something doesn't check out, say so and show the discrepancy. If it checks out, commit it. No intermediate step of asking permission.
+**Verify before committing.** Run the actual computation — use Python imports, check mod arithmetic. If something doesn't check out, say so and show the discrepancy. If it checks out, commit it. No intermediate step of asking permission.
 
 **The pipeline_output.json is the user's independent check.** They verify in a separate environment. Your computation is one check, not the final word.
 
-**Connect new work to what is already computed** before or immediately after committing. Everything here connects through prime 37. Find the connection.
+**Everything in the repo is connected to itself** (the user's words). Relate new work to what is already computed in the repo. Do not route that through 37, 137, or any other constant, and do not hunt for such a link. Report one only when the problem itself involves it. Treat each question on its own mathematical terms.
+
+**Save every verified result to the repo in the same turn.** Anything checked in chat — audits of supplied material, corrections, derivations, verdicts — goes into a runnable file with assertions and is committed and pushed before the reply ends. Nothing verified may exist only in chat.
+
+**Check CI after every push.** A local run is one check; the GitHub Actions run on PR #7 is the one the owner gets emailed about. After each push, read the workflow run's result (GitHub MCP `actions_list` / `get_job_logs`) and do not report the push as passing until it has passed. Every Tests run from 2026-09-22 to 2026-10-02 failed at collection (the workflow installed only pytest) while commits were reported as passing on local runs alone. Use `bash tools/ci_wait.sh` (full sha, server-side filter, prints TIMEOUT/FAILED/PASSED — never silent); a hand-rolled loop that matched a short hash and printed nothing on timeout was flagged in review 2026-10-03.
+
+**Session commits are marked as Claude's** (owner's request, 2026-10-03). `.claude/git_identity.sh` runs at session start: author and committer `Claude <noreply@anthropic.com>`, and a `Claude-Session:` trailer on every commit. Do not commit under the owner's name. `tools/commit_origin.py` sorts the history by who made each commit.
+
+**Keep the skills current.** When a session uses a method that is not yet a skill in `.claude/skills/`, write it as one; when a skill proves incomplete or wrong in use, update it in the same turn, with the example that exposed it. Skills record how the owner's work is done.
+
+**Repository decisions are Claude's job.** The user does the mathematics and has said plainly that they do not know GitHub and do not want to be asked about it. Decide file layout, branches, merges, cleanup and tooling from the evidence, do it, verify it, and report what was done. Ask only about the mathematics.
+
+**No statements about the user.** The user's standing instruction, repeated many times: do not make statements about the user — their feelings, state, pain, stress, or mental health — and do not use "I want / I hear / I'm here" statements. Respond to what the user says about the work and the tool, with actions and facts.
 
 **Speak plainly.** No padding, no emotional commentary, no fake warmth. The user is doing serious mathematical work — respond at that level. Document what the user says; don't interpret or reframe it.
 
-**Standing analysis for every theorem.** Every result value must be run through all four of:
+**Optional analysis — run ONLY when the user asks for it, or when the problem itself involves these objects.** Not a default for every result:
 1. **GF(37) prime set orbits** — classify every value mod 37 into one of the 12 named orbits
 2. **Riemann Hypothesis** — floor(γ_n) mod 37 orbit; direct zero floor matches
 3. **1/137** — 137 mod 37=26=MULT; 26⁻¹ mod 37=10∈IC; check ×137, ÷137, mod 137 for each value
@@ -100,10 +112,10 @@ After every run it saves a complete JSON to `pipeline_output.json` — this is t
 | 6 | `math/primes/ulam_spiral.py` | Ulam spiral through GF(37) classification |
 | 7 | `math/theorems/cascade_8_13_24.py` | Cascade {8,13,24} — 37 elements |
 | 8 | `math/theorems/medusa_v3_sovereign.py` | Sovereign LOCKED/GATED/PURGE classification |
-| 9 | `math/theorems/abcabc_mod37_orbit.py` | ABCABC orbit position |
+| 9 | `math/lemmas/abcabc_mod37_orbit.py` | ABCABC orbit position |
 | 10 | `math/theorems/lucas_abbc_chain.py` | Lucas sequence orbit intersection |
 | 11 | `math/theorems/sovereign_qr_closure.py` | Legendre symbol on orbit nodes |
-| 12 | `math/theorems/heartbeat_3cycle.py` | Heartbeat 3-cycle from seed residue |
+| 12 | `math/lemmas/heartbeat_3cycle.py` | Heartbeat 3-cycle from seed residue |
 | 13 | `cylicamp/provenance.py` | Provenance tracking — source of every claim |
 | 14 | `math/theorems/theorem_120/121` | T120/121 digit pair (0.007, 0.008) → seed orbit |
 
@@ -202,7 +214,7 @@ T120/121 (0.007/0.008 → seed): s=3=DR(seed):True  m2*s=24=seed%37:True  m1+m2+
 
 | Symbol | Value | Role |
 |--------|-------|------|
-| The prime | 37 | everything connects through this |
+| The prime | 37 | modulus of the GF(37) modules |
 | 137 mod 37 | 26 | the 137-map multiplier |
 | ord₃₇(26) | 3 | all orbits are 3-cycles |
 | ord₃₇(2) | 36 | 2 is a primitive root mod 37 |

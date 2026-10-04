@@ -1,8 +1,28 @@
-# CLASS: THEOREM
+# CLASS: COMPUTATION
 """
 Goldbach's Conjecture — Proof Attempt via GF(37)
 
 Goldbach (1742): every even integer > 2 is the sum of two primes.
+
+CORRECTIONS 2026-10-03 (green_tao_supplied_audit_2026_10_03.py found the first):
+  C1 Section III cited "the Green-Tao / Dirichlet density argument" for n - 37 being
+     prime for "most" n. Green-Tao (long progressions of primes) says nothing about
+     n - 37, and the claim is backwards: n - 37 is prime for a share of n that falls
+     to 0 (prime number theorem). Measured over even n: 45.7% (n <= 200), 30.2% (2000),
+     22.6% (20000), 19.2% (10^5). Rewritten.
+  C2 Section III said n - 37 is composite "with density -> 0". Backwards: the
+     composite share tends to 1. Rewritten.
+  C3 Section III said the remaining n are "handled by the residue saturation in
+     Section I". Residues mod 37 cannot show that two actual primes sum to n
+     (this file's own Section II says so). Removed.
+  C4 Header item 2 said 37-multiples decompose as 37k + 37 = 37(k+1) with the field
+     prime "always a partner". 37k is not prime for k > 1, so 37 is a partner of n
+     only when n - 37 is prime. Rewritten.
+  C5 Residue saturation (Section II) holds for EVERY modulus m (0 + t, with a prime in
+     each class coprime to m and m itself prime here) -- it carries no information about
+     37 and none about Goldbach. Stated in Section V.
+  C6 CLASS changed THEOREM -> COMPUTATION: the file proves no theorem (its own
+     Section V says the existence question remains open).
 
 This file structures the argument through GF(37). The GF(37) does not
 produce a classical proof — no finite-field argument can, because primality
@@ -11,8 +31,9 @@ is not a mod-37 property. What it produces is:
   1. RESIDUE SATURATION: every even residue mod 37 decomposes as p_r + q_r
      where p_r, q_r are residues of actual primes. (Verified computationally.)
 
-  2. SEAM INVARIANCE: 37-multiples (SEAM nodes) admit trivial decomposition
-     37k + 37 = 37(k+1) — field prime is always a partner.
+  2. SEAM PAIRS: for n = 37 + q the field prime 37 is a partner exactly when q = n - 37
+     is prime. (Corrected 2026-10-03, C4: 37k is not prime for k > 1, so 37 is not
+     "always a partner".)
 
   3. FLOW COMPLETENESS: primes carry the "complete flow" property; the
      conjecture is equivalent to saying every even number is a two-complete-
@@ -62,13 +83,16 @@ III. THE 37-COMPONENT GUARANTEE
   For every even n ≥ 40:
     n = 37 + (n-37)
   If n-37 is prime, we're done. When is n-37 composite?
-  n-37 is composite only when n-37 has a prime factor ≤ sqrt(n-37).
-  For large n, this happens with density → 0 (primes have density 1/ln(n)).
+  n-37 is composite exactly when it has a prime factor ≤ sqrt(n-37).
+  Primes have density about 1/ln(n), so n-37 is prime for a share of n that
+  FALLS TO 0, and composite for a share that tends to 1 (corrected 2026-10-03,
+  C1-C2; measured below over even n: 45.7%, 30.2%, 22.6%, 19.2% up to
+  200, 2000, 20000, 10^5).
 
-  So the 37-component pairs n=37+q work whenever q=n-37 is prime.
-  By the Green-Tao / Dirichlet density argument, this covers "most" n.
-  The remaining n require a different decomposition — handled by the
-  residue saturation in Section I.
+  So the 37-component pairs n=37+q work whenever q=n-37 is prime -- a
+  shrinking minority of n. The other n need a pair not involving 37; nothing
+  in this file shows such a pair exists (C3). Goldbach for them rests on the
+  direct check (Section IV, n ≤ 10000) and the external check to 4×10^18.
 
 IV. FRAMEWORK INTERPRETATION
 
@@ -98,8 +122,11 @@ V. GOLDBACH CONJECTURE STATUS
 
   WHAT THE FRAMEWORK ESTABLISHES (verified computationally):
     • Every even residue mod 37 is the sum of two prime residues (mod 37).
-    • For all even n in [4, 10000], Goldbach holds and the decomposition
-      touches the GF(37) structure.
+      (Forced, C5: true for every prime modulus, so it says nothing about 37
+      or about Goldbach.)
+    • For all even n in [4, 10000], Goldbach holds. (Every prime has some
+      residue mod 37, so "the decomposition touches the GF(37) structure"
+      adds no condition.)
     • The SEAM pairs (p + (n-p) ≡ 0 mod 37) arise whenever n ≡ 0 mod 37.
     • PRIME_MIRROR(31) + TESLA_FLOW(6) = SEAM is the canonical seam split.
 
@@ -200,6 +227,15 @@ for n in no_37_component:
 # The 37-component covers a substantial fraction (prime density ~1/ln(n));
 # composites are slightly more common in this range but both are plentiful
 assert len(have_37_component) > 30 and len(no_37_component) > 30
+
+# C1-C2 (2026-10-03): the share of even n with n-37 prime FALLS as n grows --
+# it is not "most" n, and the composite share does not go to 0.
+def share_37_component(N):
+    ns = range(40, N + 1, 2)
+    return sum(1 for n in ns if is_prime(n - 37)) / len(ns)
+SHARES = [share_37_component(N) for N in (200, 2000, 20000, 100000)]
+assert SHARES == sorted(SHARES, reverse=True), SHARES
+assert SHARES[-1] < 0.2           # 19.2% of even n <= 10^5
 
 # ── IV. Verified bound: Goldbach holds for all even n in [4, 10000] ───────────
 

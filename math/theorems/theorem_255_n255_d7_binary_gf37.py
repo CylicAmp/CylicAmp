@@ -31,12 +31,9 @@ ORBITS = {
 QR_ORBITS  = {"C3", "D7", "IC", "NEG_H", "SA_ST_A", "SA_ST_B"}
 NQR_ORBITS = {"C9", "CAS_EXT", "DARK_A", "NQR17", "SEED", "TESLA"}
 
-def orbit_of(x):
-    r = x % 37
-    if r == 0: return "SEAM"
-    for name, s in ORBITS.items():
-        if r in s: return name
-    raise ValueError(x)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of
 
 def f(x): return (26 * x) % 37
 
@@ -45,19 +42,13 @@ def dr(n):
     while n >= 10: n = sum(int(d) for d in str(n))
     return n if n else 9
 
-def is_prime(n):
-    if n < 2: return False
-    if n == 2: return True
-    if n % 2 == 0: return False
-    for i in range(3, int(n**0.5)+1, 2):
-        if n % i == 0: return False
-    return True
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
-def rule30(n):
-    bits = list(map(int, bin(n)[2:]))
-    padded = [0] + bits + [0]
-    out = [padded[i-1] ^ (padded[i] | padded[i+1]) for i in range(1, len(padded)-1)]
-    return int("".join(map(str, out)), 2)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import rule30_step as rule30
 
 import math
 
@@ -191,9 +182,9 @@ print(f"  255 mod 137      = {mod137} ∈ {orbit_of(mod137)}")
 # ── Part 8: QR/NQR parity of the factor triad ────────────────────────────────
 # Legendre symbols: (3|37), (5|37), (17|37)
 
-def legendre(a, p=37):
-    if a % p == 0: return 0
-    return 1 if pow(a, (p-1)//2, p) == 1 else -1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import legendre37 as legendre
 
 leg3  = legendre(3)
 leg5  = legendre(5)

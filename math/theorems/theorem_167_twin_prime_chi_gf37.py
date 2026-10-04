@@ -101,11 +101,9 @@ ORBITS = {
 }
 
 
-def orbit_of(v):
-    v = v % P
-    if v == 0:
-        return 'SEAM'
-    return next((name for name, s in ORBITS.items() if v in s), '?')
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_v1 as orbit_of
 
 
 def chi_m3(n):
@@ -117,13 +115,9 @@ def chi_m3(n):
     return 0
 
 
-def sieve(limit):
-    is_p = bytearray([1]) * (limit + 1)
-    is_p[0] = is_p[1] = 0
-    for i in range(2, int(limit**0.5) + 1):
-        if is_p[i]:
-            is_p[i*i::i] = bytearray(len(is_p[i*i::i]))
-    return is_p
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import sieve_flags as sieve
 
 
 def run_assertions():

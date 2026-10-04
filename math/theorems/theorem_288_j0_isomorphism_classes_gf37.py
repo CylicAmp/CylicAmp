@@ -34,6 +34,23 @@ Full table:
 Note: trace sign convention t = p+1 - #E = 38 - #E.  The six traces
 {-10, -11, -1, 10, 11, 1} = ±{1, 10, 11} are the elements of <11> under
 the isomorphism GF(37)* → Z that maps x to min(x, 37-x) with sign.
+ISOGENY CHECK (added 2026-09-26, against a supplied "isogeny graph").
+  Point counts and traces above are confirmed; twist pairs sum to
+  2(p+1) = 76. What does NOT hold:
+  * "Six isomorphism classes over F-bar_37": over the algebraic closure
+    all six are ONE class (j = 0 fixes the curve up to isomorphism).
+  * "3-isogeny perfect matching 1-6, 2-9, 3-5" and "2-regular l-graphs"
+    over F_37: by Tate, curves over F_p are F_p-isogenous iff #E is
+    equal. The six counts 48,49,39,37,28,27 are distinct, so there is NO
+    F_37-isogeny of any degree between two different classes.
+  * The degree-3 map that does exist is the CM endomorphism 1 + 2w
+    (= sqrt(-3)), defined over F_37 since 37 = 1 (mod 3). It is a loop
+    E -> E, not an edge to the twist. Its kernel {O, (0, +-sqrt a)} is
+    F_37-rational iff a is a square: a = 1, 3, 9 (the classes with
+    3 | #E: 48, 39, 27).
+  * Over F_37^2 the quadratic twists become isomorphic: 3 classes with
+    #E = 1344 (t = +-10), 1323 (+-11), 1443 (+-1) -- still pairwise
+    non-isogenous (distinct counts). Over F_37^6 all six coincide.
 """
 
 ORBITS = {

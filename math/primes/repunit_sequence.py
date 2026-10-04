@@ -3,7 +3,7 @@ REPUNIT SEQUENCE AND 81-PAIR CONNECTION
 ================================================================
 
 The repunit sequence reveals the 2n-1 (skip-2) pattern:
-- 0 → 3 → 5 → 7 → 9 → 2 → 4 → 6 → 8 → 1
+- 0 → 1 → 3 → 5 → 7 → 9 → 2 → 4 → 6 → 8 → 1
 - Formula: 2n - 1
 - 10th line resets to 1 (10 ≡ 1 mod 9)
 
@@ -16,11 +16,9 @@ Connection to 81-pair grid:
 import numpy as np
 
 
-def digital_root(n):
-    """Digital root 1-9."""
-    if n == 0:
-        return 9
-    return (n - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_signed as digital_root
 
 
 def repunit(n):
@@ -32,7 +30,7 @@ def repunit_sequence():
     """Generate the repunit sequence and DR pattern."""
     sequence = [(0, 0)]  # (n, dr)
 
-    for n in range(2, 11):
+    for n in range(1, 11):
         r = repunit(n)
         k = n - 1
         val = r + k
@@ -45,7 +43,7 @@ def repunit_sequence():
 def verify_2n_minus_1():
     """Verify the 2n-1 formula."""
     results = {}
-    for n in range(2, 11):
+    for n in range(1, 11):
         result = 2 * n - 1
         dr = digital_root(result)
         results[n] = (result, dr)

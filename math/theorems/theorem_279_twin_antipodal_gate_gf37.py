@@ -62,20 +62,13 @@ ANTIPODAL = {
     "SA_ST_A":"SA_ST_B","SA_ST_B":"SA_ST_A",
 }
 
-def orbit_of(x):
-    r = x % 37
-    if r == 0: return "SEAM"
-    for name, s in ORBITS.items():
-        if r in s: return name
-    raise ValueError(x)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of
 
-def sieve(limit):
-    is_p = bytearray([1]) * (limit + 1)
-    is_p[0] = is_p[1] = 0
-    for i in range(2, int(limit**0.5)+1):
-        if is_p[i]:
-            is_p[i*i::i] = bytearray(len(is_p[i*i::i]))
-    return is_p
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import sieve_flags as sieve
 
 IS_PRIME = sieve(10**6)
 TWINS = [(p, p+2) for p in range(5, 10**6-1) if IS_PRIME[p] and IS_PRIME[p+2]]

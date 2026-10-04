@@ -22,13 +22,9 @@ TESLA_ORB = frozenset({6, 8, 23})
 CB = frozenset({8, 13, 24})
 
 
-def sieve(limit: int) -> list:
-    is_prime = bytearray([1]) * (limit + 1)
-    is_prime[0] = is_prime[1] = 0
-    for i in range(2, int(limit**0.5) + 1):
-        if is_prime[i]:
-            is_prime[i*i::i] = bytearray(len(is_prime[i*i::i]))
-    return is_prime
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import sieve_flags as sieve
 
 
 def analyze_twin_primes(limit: int = 1_000_000):

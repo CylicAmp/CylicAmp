@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0",
+  "source": "supplied ledger 2026-09-28, corrected; values recomputed by tools/t432_ledger_check.py",
+  "definitions": {
+    "ring": "Z/(b-1)",
+    "carry_map": "f(r) = 1 - r mod m",
+    "island": "proper nonzero ideal (d), 1 < d < m, d | m; count tau(m) - 2",
+    "carry_centered_form": "if m odd, r* = (m+1)/2 and f(r) - r* = -(r - r*) (T432 section 66)"
+  },
+  "base_66": {
+    "modulus": 65,
+    "crt": "F5 x F13",
+    "idempotents": [
+      0,
+      1,
+      26,
+      40
+    ],
+    "units": 48,
+    "max_unit_order": 12,
+    "units_of_max_order": 24,
+    "carry_fixed_point": 33,
+    "doubling_cycles": {
+      "1": 1,
+      "4": 1,
+      "12": 5
+    },
+    "island_identities": {
+      "(5)": 40,
+      "(13)": 26
+    }
+  },
+  "base_81": {
+    "modulus": 80,
+    "crt": "Z/16 x F5",
+    "islands": 8,
+    "nilradical": "(10)",
+    "nilpotency_index_of_10": 4,
+    "idempotents": [
+      0,
+      1,
+      16,
+      65
+    ],
+    "units": 32,
+    "unit_exponent": 4,
+    "carry_fixed_point": null,
+    "carry_two_cycles": 40,
+    "doubling_settling_steps": 4,
+    "doubling_terminal_cycle": [
+      16,
+      32,
+      64,
+      48
+    ]
+  },
+  "base_82": {
+    "modulus": 81,
+    "ring": "Z/81 (local)",
+    "nilradical_size": 27,
+    "idempotents": [
+      0,
+      1
+    ],
+    "units": 54,
+    "max_unit_order": 54,
+    "carry_fixed_point": 41,
+    "invariant_cosets": [
+      "2+(3)",
+      "5+(9)",
+      "14+(27)",
+      "{41}"
+    ],
+    "shells_v3(r-41)=0,1,2,3,>=4": [
+      54,
+      18,
+      6,
+      2,
+      1
+    ],
+    "carry_cycles": "1 fixed + 40 transpositions"
+  },
+  "base_83": {
+    "modulus": 82,
+    "crt": "F2 x F41",
+    "units": 40,
+    "max_unit_order": 40,
+    "ord_41(2)": 20,
+    "doubling_settling_steps": 1,
+    "terminal": "evens = GF(41)"
+  },
+  "thread_3": {
+    "status": "mechanism derived (T245: q = eps*tau(u)/3^b*prod C - m mod 9, checked on all 552 candidates at 1e12)",
+    "pm2_share_candidates_1e12": "394/552 = 71.4%",
+    "members_pm2_1e14": "38/55",
+    "by_v3_at_1e14": {
+      "v3=3": "95%",
+      "v3=4": "31%"
+    },
+    "universal_pm2_law": false
+  },
+  "corrections_to_supplied": [
+    "38/55 moved from 10^12 to 10^14",
+    "base 83 max unit order 40, not 20 (20 = ord_41(2))",
+    "island given its formal definition",
+    "A13 made executable (doubling image = evens = GF(41))"
+  ]
+}

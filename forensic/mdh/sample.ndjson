@@ -1,0 +1,9 @@
+{"id":"login","t":100,"q":1,"corr":"s1"}
+{"id":"open_file","t":105,"q":2,"parent":"login","corr":"s1"}
+{"id":"edit","t":110,"q":3,"parent":"open_file"}
+{"id":"upload","t":110,"q":4,"corr":"s1"}
+{"id":"orphan","t":50}
+{"id":"lost","q":9,"parent":"login"}
+not json
+{"id":"déjà","t":120,"q":5,"parent":"ghost"}
+{"id":"cut

@@ -124,8 +124,9 @@ def chi(d):
     return 0 if d == 0 else (1 if d in QR else -1)
 
 
-def dr(n):
-    return 1 + (n - 1) % 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_signed as dr
 
 
 def run():

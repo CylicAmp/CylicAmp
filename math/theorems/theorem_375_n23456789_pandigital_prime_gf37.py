@@ -92,27 +92,15 @@ ORBITS = {
     "SA_ST_B": {21, 25, 28},
 }
 
-def orbit_of(n: int) -> str:
-    v = n % 37
-    for name, s in ORBITS.items():
-        if v in s:
-            return name
-    return "UNKNOWN"
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_unknown as orbit_of
 
-def is_prime(n: int) -> bool:
-    if n < 2:
-        return False
-    if n % 2 == 0:
-        return n == 2
-    for i in range(3, int(n**0.5) + 1, 2):
-        if n % i == 0:
-            return False
-    return True
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
-def dr(n: int) -> int:
-    while n >= 10:
-        n = sum(int(c) for c in str(n))
-    return n
+from functions import dr_iter as dr
 
 RULE30 = [(30 >> i) & 1 for i in range(8)]
 

@@ -83,11 +83,9 @@ def chi3(n):
     return 1 if r == 1 else -1
 
 
-def is_prime(n):
-    if n < 2: return False
-    for i in range(2, int(n**0.5)+1):
-        if n % i == 0: return False
-    return True
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 
 def flags(r):

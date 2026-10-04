@@ -32,12 +32,9 @@ LoB_25d: QUADRATIC RECIPROCITY SCAN OF 37
 """
 
 
-def legendre(a, p=37):
-    a = a % p
-    if a == 0:
-        return 0
-    val = pow(a, (p - 1) // 2, p)
-    return 1 if val == 1 else -1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import legendre37 as legendre
 
 
 QR_MOD37 = frozenset((n * n) % 37 for n in range(37))

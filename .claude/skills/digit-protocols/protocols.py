@@ -50,18 +50,14 @@ ORBITS = {
 }
 
 
-def orbit_of(n):
-    r = n % P
-    if r == 0:
-        return 'SEAM'
-    for name, s in ORBITS.items():
-        if r in s:
-            return name
-    raise AssertionError(r)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_assert as orbit_of
 
 
-def dr(n):
-    return 0 if n == 0 else 1 + (n - 1) % 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_signed as dr
 
 
 def place(n):
@@ -98,8 +94,7 @@ def protocol_reversal(n):
           f"   match={diff == forced}   {place(abs(diff)) if diff else 'diff=0'}")
 
 
-def digit_sum(n):
-    return sum(int(c) for c in str(n))
+from functions import digit_sum
 
 
 def protocol_digit_sum_ladder(n):

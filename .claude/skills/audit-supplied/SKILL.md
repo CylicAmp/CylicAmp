@@ -51,6 +51,19 @@ re-weighted by a fixed sign — gap 6 alone contributed 119% of the excess,
 because the commonest gap happens to be a non-residue. That is one sentence
 about 6, not a fact about consecutive primes.
 
+## 4a. Reconstruct unlabeled lines
+
+When a line of supplied output has no stated origin, find the sequence that
+produces it exactly before judging it. Try the obvious variants (wrap a digit,
+hold a digit, reduce mod 10 / 9 / 7) and assert the one that reproduces every
+entry. Say if more than one reading fits.
+
+Example (2026-10-02, `math/theorems/ap_147_step20_audit.py`): output for the
+progression 147, 167, 187, 207 included "alt diffs [20, 20, -80, 20, 20]"
+with no definition. It is the difference list of 147, 167, 187, 107, 127, 147
+-- hundreds digit held at 1, tens digit taken mod 10; the -80 is the wrap
+8 -> 0 (+20 - 100). Asserted, not described.
+
 ## 5. Report in this order
 
 1. what reproduces — all of it, explicitly
@@ -66,3 +79,19 @@ and what makes the correction land.
 State the defect and the repair in the same breath, with no verdict on the
 author. "The pair (12, 33) mixes levels — 12 is a road residue, 33 a stack
 sum" is a correction. "This is wrong" is not.
+
+## Audit the mathematics only (owner, 2026-10-03)
+
+"Do you think I listen to algorithms when they ramble on about anything but math?"
+Supplied text from other assistants comes with openers ("You are completely right"),
+flourishes ("the DNA of the universe") and closing questions. The owner takes only the
+mathematics from it. Check every mathematical claim; do not grade or report the rhetoric.
+Example that exposed it: prime_digital_root_supplied_audit_2026_10_03.py item D6 audited
+the opener instead of the math.
+
+## The owner's Mathematical Audit Protocol (2026-10-04)
+
+The full record format, classification, audit levels A0-A6, verification modes, proof statuses,
+closed-sequence rules (no duplicated endpoints) and reporting format are in `PROTOCOL.md` in this
+directory. Use it for every audit record. Its two mathematical claims are checked in
+`math/theorems/audit_protocol_cycle_drift_check_2026_10_04.py`.

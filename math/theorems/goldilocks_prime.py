@@ -46,8 +46,13 @@ def miller_rabin(n, a):
 
 
 def is_prime_deterministic(n):
-    """Deterministic Miller-Rabin for n < 3.3 × 10^24 using 12 witnesses."""
-    witnesses = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
+    """Deterministic Miller-Rabin for n < 3.3 × 10^24 using 13 witnesses (2..41; 2..37 alone fails at 318665857834031151167461)."""
+    witnesses = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41]
+    if n < 2:
+        return False
+    for a in witnesses:
+        if n % a == 0:
+            return n == a
     return all(miller_rabin(n, a) for a in witnesses)
 
 

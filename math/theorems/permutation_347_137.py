@@ -10,12 +10,12 @@ Outliers in user sequences: 753 (sum 15), 373 (sum 13)
 from itertools import permutations
 
 
-def digit_sum(n):
-    return sum(int(d) for d in str(n))
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import digit_sum
 
 
-def digital_root(n):
-    return (n - 1) % 9 + 1 if n > 0 else 9
+from functions import dr9_pos as digital_root
 
 
 def analyze_digit_set(digits, label):

@@ -45,8 +45,9 @@ DICHORAL_144   = 33
 DECADE_ANCHOR  = 10
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def f137(n):
@@ -480,9 +481,7 @@ assert 10 + 27 == 37 and 10 + 101 == 111
 #       The 25 primes below 100 sample across multiple residue classes,
 #       confirming coverage for Goldbach.
 
-def is_prime(n):
-    if n < 2: return False
-    return all(n % i != 0 for i in range(2, int(n**0.5)+1))
+from functions import is_prime
 
 primes_100 = [p for p in range(2, 100) if is_prime(p)]
 assert len(primes_100) == 25 and 25 in SA

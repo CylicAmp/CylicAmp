@@ -6,7 +6,7 @@
 """
 import re, sys, pathlib, subprocess
 ROOT = pathlib.Path(__file__).resolve().parents[3]
-DIRS = ["math/theorems", "math/primes", "math/turbulence", "cylicamp"]
+DIRS = ["math/theorems", "math/lemmas", "math/primes", "math/turbulence", "cylicamp"]
 
 TOPICS = {
     "quotient": [r"Z/12", r"quotient group", r"orbit index", r"dlog"],
@@ -45,7 +45,8 @@ def hits(pats):
 
 def title(name):
     try:
-        t = (ROOT / "math/theorems" / name).read_text(errors="replace")
+        p = ROOT / "math/theorems" / name
+        t = (p if p.exists() else ROOT / "math/lemmas" / name).read_text(errors="replace")
     except OSError:
         return ""
     m = re.search(r'"""\s*\n\s*(.+)', t)

@@ -67,13 +67,9 @@ P = 37
 H = {1, 10, 26}   # sovereign kernel of GF(37)*
 
 
-def sieve(limit):
-    is_p = bytearray([1]) * (limit + 1)
-    is_p[0] = is_p[1] = 0
-    for i in range(2, int(limit ** 0.5) + 1):
-        if is_p[i]:
-            is_p[i * i::i] = bytearray(len(is_p[i * i::i]))
-    return is_p
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import sieve_flags as sieve
 
 
 def chi_m3(n):
@@ -81,8 +77,9 @@ def chi_m3(n):
     return 0 if r == 0 else (1 if r == 1 else -1)
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
 def imaginary_units_mod37():

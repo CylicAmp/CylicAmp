@@ -84,7 +84,7 @@
       ]
     },
     {
-      "file": "math/theorems/abcabc_mod37_orbit.py",
+      "file": "math/lemmas/abcabc_mod37_orbit.py",
       "status": "SERVICE_OPTIMAL",
       "total_dr": 2,
       "nulls": 0,
@@ -1224,7 +1224,7 @@
       ]
     },
     {
-      "file": "math/theorems/heartbeat_3cycle.py",
+      "file": "math/lemmas/heartbeat_3cycle.py",
       "status": "SERVICE_OPTIMAL",
       "total_dr": 5,
       "nulls": 0,

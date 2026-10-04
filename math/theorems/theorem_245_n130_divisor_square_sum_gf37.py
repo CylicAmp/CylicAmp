@@ -5,21 +5,1138 @@ Theorem 245: n = 130 — Unique Divisor-Square-Sum Solution (GF(37))
 PROBLEM:  Find all n ∈ ℕ such that the k smallest divisors d_1 < d_2 < ... < d_k
           satisfy  d_1² + d_2² + ... + d_k² = n.
 
-RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
-          It occurs at k = 4. No other k has any solution.
+RESULT:   n = 130 is the unique solution AT k = 4. The claim that it is
+          unique across ALL k is FALSE and is corrected below.
+
+CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
+          This file previously read "n = 130 is the UNIQUE solution across
+          ALL k >= 2 ... No other k has any solution", and reported that as
+          "verified computationally to n = 500 000 000". It is false. An
+          exhaustive search over EVERY k for n <= 3 000 000 returns three
+          solutions:
+
+              n =    130   k =  4    130 = 2 * 5 * 13
+              n =   1860   k = 11    1860 = 2^2 * 3 * 5 * 31
+              n = 148480   k = 19    148480 = 2^10 * 5 * 29
+
+          1860 = 1+4+9+16+25+36+100+144+225+400+900, over 1,2,3,4,5,6,10,
+          12,15,20,30. 148480 likewise over its nineteen smallest divisors.
+          Both are far below the claimed 5e8 verification bound.
+
+          WHY THEY WERE MISSED. The verification code in this file tests
+          specific k -- k=4, k=8 and so on -- and never swept k freely. The
+          phrase "across ALL k" was an extrapolation from the per-k sections,
+          which stop at k = 9. k = 11 and k = 19 were never examined.
+
+          WHY THEY SIT WHERE THEY DO. The two lemmas this file relies on fire
+          only on certain k: the parity lemma when 2 | k, the mod-3 lemma when
+          3 | k. For k = 11 and k = 19 neither divides, so both lemmas are
+          silent and nothing constrained those layers at all. The solutions
+          are exactly where the machinery says nothing.
+
+          WHAT SURVIVES. Every per-k proof in this file stands: k=2, k=3, k=6
+          impossible; k=4 has 130 alone; k=5 even, k=7 and k=8 with 4 not
+          dividing n impossible; the k=9 work below. None of those is touched.
+          What fails is only the global uniqueness sentence.
+
+          SEARCH EXTENDED 2026-09-25 TO n < 10^9, COMPLETE OVER ALL k.
+          Exactly FOUR solutions exist below 10^9 -- twice the bound this
+          file wrongly claimed to have checked:
+
+              n          k    factorization          n mod 37
+              130        4    2 * 5 * 13                 19
+              1860      11    2^2 * 3 * 5 * 31           10
+              148480    19    2^10 * 5 * 29              36
+              3039520   31    2^5 * 5 * 11^2 * 157        7
+
+          The method that makes this cheap: every divisor used satisfies
+          d_k^2 <= n, so only divisors below sqrt(n) can appear. A segmented
+          sieve adds them in increasing order and tests equality after each,
+          killing a candidate the moment its running total passes n. That is
+          O(N log sqrt N) rather than factoring each n, and it reproduces the
+          three previously known solutions in 0.8s for n < 3e6.
+
+          SEVEN SOLUTIONS NOW, AND THE 5 | n PATTERN IS DEAD (2026-09-25).
+          A generator over PROPER DIVISORS m reaches far past any sieve:
+          if the k smallest divisors of n all divide some m | n, then
+          n = sum of squares of the k smallest divisors of m. Searching m
+          instead of n, with every candidate verified against its own
+          divisor prefix, adds three solutions above 4e10:
+
+              n              k     factorization                    v5
+              130            4     2 * 5 * 13                        1
+              1860          11     2^2 * 3 * 5 * 31                  1
+              148480        19     2^10 * 5 * 29                     1
+              3039520       31     2^5 * 5 * 11^2 * 157              1
+              41251514850  107     2 * 3^2 * 5^2 * 7^2 * 13 * 143909   2
+              54116036100  107     2^2 * 3^2 * 5^2 * 7^3 * 175303      2
+              78936002964  107     2^2 * 3^2 * 7^2 * 13 * 17 * 202481  0
+            1059758860356  107     2^2 * 3^2 * 7^2 * 19 * 43 * 735337  0
+
+          EIGHT SOLUTIONS KNOWN. 1059758860356 also has NO factor of 5,
+          so the 5 | n conjecture now has two independent counterexamples.
+
+          THE GENERATOR SATURATES IN BOTH DIRECTIONS. Smooth m from 2e6 to
+          6e7 -- a 30x range -- returns the same seven; widening the prime
+          set from {2..43} to {2..97} returns the same seven. By the
+          census-saturation rule (flat over at least a 3x range) it is
+          saturated for this method. That is NOT completeness: the
+          generator cannot see a solution whose prefix contains a prime too
+          large to divide a smooth m, which is exactly why 3039520 is
+          missing from its output and had to come from the sieve.
+
+          A GENERATOR BUG, RECORDED BECAUSE IT NEARLY GOT FILED. An earlier
+          version assumed n/m was prime whenever it was not smooth, built
+          the divisor list from that assumption, then checked the candidate
+          against its own wrong list. It reported dozens of solutions; a
+          sample of five was checked against real factorizations and FOUR
+          WERE FALSE. Only 1059758860356 survived. The fix is to factor
+          every candidate for real before accepting it, which costs little
+          because the m % s test already rejects almost everything: at
+          m <= 6e7 only 1077 candidates reach the factoring step.
+
+          k VALUES: 4, 11, 19, 31, and four at 107. The pile-up at 107 is a
+          selection effect of the generator, which only sees prefixes
+          dividing a smooth m -- not established structure.
+
+          THEOREM (2026-09-26) -- AT MOST ONE PRIME LIES ABOVE THE PREFIX.
+          Let r be the part of n built from primes greater than d_k, and
+          m = n / r. Then r = 1 or r is a single prime p with d_k < p <= d_k^2.
+
+          PROOF. Each d_i <= d_k has every prime factor <= d_k, so d_i is
+          coprime to r and divides m. Hence tau(m) >= k. Since tau(m) <= m for
+          every m >= 1, m >= k. Also n = sum d_i^2 <= k * d_k^2. So
+              r = n / m <= k * d_k^2 / k = d_k^2.
+          Every prime dividing r exceeds d_k, so two of them, or one squared,
+          would make r > d_k^2. So r is 1 or one prime to the first power. QED
+
+          Checked on all eight known solutions: r = 13, 31, 1, 1, 143909,
+          175303, 202481, 735337 -- each 1 or prime, each <= d_k^2.
+
+          SCOPE. This forbids two primes ABOVE d_k. It does NOT forbid two
+          primes between 43 and d_k both dividing n -- the cutoff the
+          two-large-prime searches used. Those searches remain searches.
+
+          CORRECTION: THE k=107 PILE-UP IS STRUCTURE, NOT ONLY SELECTION.
+          This file said the four k=107 solutions were a selection effect of
+          the generator. In all four the prefix is EXACTLY the proper divisors
+          of m, with tau(m) = 108, d_107 = m/2, and n = m * p. So
+              n = sigma_2(m) - m^2,    p = (sigma_2(m) - m^2) / m,
+          and k = tau(m) - 1 = 107.
+
+          WHY tau(m) = 108 (2026-09-26). The family is: prefix = all proper
+          divisors of m, n = m*p. It needs
+              (i)  m | sigma_2(m),
+              (ii) p = sigma_2(m)/m - m prime and p > m/2.
+          (ii) needs sum_{d|m} 1/d^2 > 3/2 against a ceiling of zeta(2) =
+          1.6449. Without 2 the ceiling is 1.234, without 3 it is 1.462, so
+          6 | m is forced. Searching every m = 0 mod 6 up to 2e7 gives
+          EXACTLY FIVE members:
+
+              m = 60 = 2^2 * 3 * 5                 tau =  12  -> n = 1860
+              m = 286650 = 2*3^2*5^2*7^2*13        tau = 108
+              m = 308700 = 2^2*3^2*5^2*7^3         tau = 108
+              m = 389844 = 2^2*3^2*7^2*13*17       tau = 108
+              m = 1441188 = 2^2*3^2*7^2*19*43      tau = 108
+
+          So 1860 belongs to the same family -- its prefix is the proper
+          divisors of 60 -- and 108 is not universal; the family has tau in
+          {12, 108}.
+
+          THE MECHANISM. sigma_2 is multiplicative, so (i) requires every
+          prime power of m to be supplied by sigma_2 of the other
+          components. 3^2 and 7^2 supply each other:
+              sigma_2(3^2) = 91   = 7 * 13
+              sigma_2(7^2) = 2451 = 3 * 19 * 43
+              sigma_2(2^2) = 21   = 3 * 7
+          Together 21 * 91 * 2451 = 3^2 * 7^2 * 13 * 19 * 43: the pair closes
+          and throws off 13, 19, 43 as the next primes to balance. That is
+          why 13, 17, 19 and 43 appear in the members. Three squares give
+          tau factor 3*3*3 = 27; closing the leftovers costs two first-power
+          primes (x2x2) or one cube (x4). 27 * 4 = 108.
+
+          SCOPE. This explains the four observed members and shows why the
+          smallest closed configurations built on 3^2 <-> 7^2 land on 108. It
+          does not prove every family member beyond 2e7 has tau 12 or 108.
+          Code: tools/divisor_square_proper_family.py.
+
+          PAST 2e7 THE FAMILY IS NOT {12, 108} (2026-09-26). A sieve cannot
+          go further, so the family is searched instead by DFS over
+          factorisations: m is built prime by prime, and a branch is cut the
+          moment sigma_2(m)/m^2 times the product over all remaining primes
+          of 1/(1-p^-2) cannot exceed 3/2. The cut is exact, so within its
+          bounds the search is complete. It reproduces the five sieve
+          members in under a second. At m <= 1e10, primes of m below 5000:
+
+              m              tau     p              n = m*p               k
+              60               12    31             1860                 11
+              286650          108    143909         41251514850         107
+              308700          108    175303         54116036100         107
+              389844          108    202481         78936002964         107
+              1441188         108    735337         1059758860356       107
+              36580068        108    18489817       676358763167556     107
+              76698960        240    42217079       3238006053537840    239
+              826169400       864    494317729      408390181577292600  863
+              883146600       864    528199271      466477390306128600  863
+              3943157400      864    2367409897     9335069854188787800 863
+              5156436600      864    3075687521     15859587703447668600 863
+              8147739600     2160    5083430447     41418467556867601200 2159
+              8897460000      960    5077110953     45173391619879380000 959
+
+          EIGHT NEW SOLUTIONS of the original equation -- every row from
+          36580068 down. Each verified independently: n factored, all its
+          divisors built and sorted, and the squares of the first k summing
+          to exactly n. Sixteen solutions are now known.
+
+          tau takes six values: 12, 108, 240, 864, 960, 2160. So 108 is one
+          value among several and the "why 108" argument above explains only
+          the tau-108 members. The 864 members share the core
+          2^3 * 3^2 * 5^2 * 7^2 (tau 4*3*3*3 = 108) plus three further
+          primes, x8 = 864 -- the same 3^2 <-> 7^2 engine, one size up.
+
+          COVERAGE. Complete for m <= 1e10 with every prime of m below 5000.
+          Code: tools/divisor_square_family_dfs.py.
+
+          PUSHED TO m <= 1e12 (2026-09-26): 26 MEMBERS, 29 SOLUTIONS KNOWN.
+          The plain DFS grows too fast, so large primes are no longer
+          enumerated. A first-power prime q of m divides sigma_2(m/q), because
+          sigma_2(q) = 1 + q^2 = 1 (mod q) -- so q is READ OFF the factors of
+          sigma_2 of the smaller part instead of searched for. And a core can
+          only accept large primes if its own sigma_2/m^2 already sits within
+          a hair of 3/2, which rejects almost every core outright. Validated
+          by reproducing the same 13 members at 1e10 with 8x fewer nodes.
+
+              m <= 1e10    8 716 764 nodes    13 members    25s
+              m <= 1e11   34 717 677 nodes    16 members   100s
+              m <= 1e12  130 606 306 nodes    26 members   396s
+
+          All 26 verified independently, n factored from scratch without
+          reusing m or p. Thirteen are new beyond 1e10, n reaching 5.4e23:
+
+              n                              k
+              235445652691801860000        959
+              424148212955604337200       2159
+              2636858156546639844000      1727
+              7644548299825551290400      1727
+              35092558820878908663600     2159
+              50200139202212831554800     2159
+              72623409773566360804056      863
+              162844235143432035270000    1199
+              216163063203464844600000    1343
+              207032087429744760660000     959
+              231330310609111423668000    1727
+              494123300861413806601200    2159
+              537965724214259929380000     959
+
+          With 130, 148480 and 3039520 outside the family, 29 solutions of
+          the original equation are now known.
+
+          tau of m now takes NINE values: 12, 108, 240, 864, 960, 1200, 1344,
+          1728, 2160. Counts 1, 5, 1, 5, 4, 1, 1, 3, 5.
+
+          COVERAGE OF THE FAST SEARCH, which is narrower than the DFS and must
+          be stated as such: m <= 1e12, primes below 250 at any exponent, and
+          at most TWO further primes in [250, 5000) each to the first power.
+          Not covered: a prime of m >= 5000, a prime >= 250 squared, or three
+          or more primes in [250, 5000). At 1e10 the full DFS and the fast
+          search agree exactly, so the restriction lost nothing at that scale;
+          that is evidence, not proof, that it loses nothing above it.
+          Code: tools/divisor_square_family_fast.py.
+
+          CAP REMOVED (2026-09-26). The same fact covers every exponent and
+          every size: for q^e || m, q^e | sigma_2(m/q^e), since
+          sigma_2(q^e) = 1 (mod q). So a large prime of ANY size and ANY
+          exponent is read off a sigma_2 factorisation, never searched for.
+          For two large primes q1 < q2, each divides sigma_2 of the rest,
+          which leaves three cases: q2 | sigma_2(core); q1 | sigma_2(core)
+          and q2 | sigma_2(q1^e1); or neither divides sigma_2(core), making
+          them a mutual pair that depends only on themselves. Mutual pairs
+          are precomputed once: scanning all 12 032 primes q1 in
+          [250, 129099] finds NONE at M = 1e12.
+
+          The bound on what two primes >= 250 can add to sigma_2/m^2 is
+          (1 - 250^-2)^-2 ~ 1.000032; an earlier draft used 1.01, 300x
+          looser, and ran slower for it. Every member is divisible by 2 and
+          3, so the tree splits into independent subtrees at 2^a * 3^b and
+          runs on four cores.
+
+              m <= 1e12, primes < 250 any exponent, PLUS up to two primes
+              >= 250 of any size and any exponent:
+              469 roots, 125 790 130 nodes, 26 members, 310s
+
+          THE SAME 26 MEMBERS, identical as sets to the capped search. So at
+          1e12 no member has a prime >= 5000, and none has a prime >= 250
+          squared.
+
+          Code: tools/divisor_square_family_uncapped.py,
+                tools/divisor_square_family_parallel.py.
+
+          COMPLETE AT m <= 1e12 (2026-09-26): EXACTLY 26 MEMBERS.
+          No restriction remains on the size, exponent or number of large
+          primes. The argument:
+
+          (1) AT MOST FOUR PRIMES >= 250. A member's small-prime core c has
+              sigma_2(c)/c^2 > 1.5 / 1.000064, and every such c is >= 60
+              (6, 12, 18, 24, 30, 36, 42, 48, 54 all fall short). So the
+              large part is <= 1e12/60 = 1.67e10, and 250^5 > 1.67e10.
+
+          (2) REACHABLE PRIMES ARE READ OFF. Call a large prime reachable if
+              it divides sigma_2(c) times sigma_2 of large primes already
+              chosen. Reading them off recursively, any order, any exponent
+              that fits, finds every reachable set.
+
+          (3) UNREACHABLE PRIMES WOULD FORM A SELF-SUPPLYING CLUSTER. A large
+              prime not reachable from the core gets none of its power from
+              sigma_2(c) or from reachable primes, so all of q^e must divide
+              sigma_2 of the other unreachable ones -- a cluster independent
+              of the core. Exhaustive scans to 1.67e10:
+                  size 2:  12 032 primes q1 scanned      none
+                  size 3: 108 020 pairs (q1,q2) scanned  none
+                  size 4:   3 018 triples scanned        none
+              (size 4 needs exponent 1 throughout: 251^2*257*263*269 >
+              1.67e10.) So no member has an unreachable large prime.
+
+          By (1)-(3), recursive read-off to depth 4 is exhaustive. Result:
+
+              469 roots, 125 905 718 nodes, 26 members, 352s
+
+          IDENTICAL as a set to the two-prime search. The proper-divisor
+          family below m = 1e12 is therefore exactly these 26, without
+          qualification. Code: tools/divisor_square_family_complete.py,
+          tools/divisor_square_clusters.py.
+
+          A defect caught before it could matter: the first draft tested
+          "q in chosen" against a set of (prime, exponent) pairs, so the
+          test never fired and a prime could be chosen twice, giving
+          sigma_2(q)^2 where sigma_2(q^2) was meant. Fixed before the 1e12
+          run; both 1e10 runs returned the same 13.
+
+          COMPLETE AT m <= 1e14 (2026-09-26): EXACTLY 55 MEMBERS.
+          The same three-part argument, rescaled:
+
+          (1) AT MOST FIVE PRIMES >= 250: large part <= 1e14/60 = 1.667e12,
+              and 250^6 > 1.667e12.
+          (2) Reachable primes are read off recursively, now to depth 5.
+          (3) No self-supplying cluster of size 2..5, any exponent, with
+              product <= 1.667e12. The largest member is read off the
+              sigma_2 pool of the others, so only the smaller ones are
+              enumerated:
+                  prefixes scanned by size: 100 853 / 2 360 227 /
+                  1 835 676 / 100 / 0        clusters found: none   (29s)
+
+          New prune, rigorous (lifting the exponent): for odd p,
+          v_2(sigma_2(p^e)) = v_2(e+1); for p != 3, v_3(sigma_2(p^e)) =
+          v_3(e+1). Since m | sigma_2(m), a node is dropped when
+              sum_(odd p) v_2(e+1) + f       <  v_2(m)   or
+              sum_(p!=3) v_3(e+1) + f // 2   <  v_3(m),
+          f = floor(log(M/c) / log p0), an upper bound on the supply any
+          further primes >= p0 can add. Checked at 1e12 first: 33 678 794
+          nodes (3.7x fewer), 145s, the identical 26.
+
+              m <= 1e14:  461 288 337 nodes, 55 members, 2074s on 4 cores
+
+          The 26 below 1e12 are exactly the proven set. Every one of the 55
+          re-verified from scratch: n = m*p factored by sympy, divisors
+          sorted, the prefix of squares hits n exactly at k = tau(m) - 1,
+          d_k = m/2, d_(k+1) = min(m, p). 55/55.
+
+          The 29 new, 1e12 < m <= 1e14:
+              1041904500000 = 2^5*3*5^6*7*13*17*449              tau=1344  p=613809482371  m%37= 3 p%37=18
+              1132240200000 = 2^6*3*5^5*7*13*89*233              tau=1344  p=661402854439  m%37=18 p%37=25
+              1213034004000 = 2^5*3^2*5^3*7^2*13^3*313           tau=1728  p=730189277773  m%37=30 p%37= 8
+              1487741923512 = 2^3*3^2*13^2*31*37^2*43*67         tau= 864  p=750983582113  m%37= 0 p%37=23
+              1803397352400 = 2^4*3^2*5^2*7^2*17*29*89*233       tau=2160  p=1079926419071  m%37=29 p%37=16
+              2361310739424 = 2^5*3^3*7*13^2*29^2*41*67          tau=1728  p=1280313582451  m%37=23 p%37=36
+              2373420660000 = 2^5*3*5^4*13*17*71*2521            tau= 960  p=1323517707353  m%37=12 p%37=14
+              2629361732400 = 2^4*3^2*5^2*13*17*19*31^2*181      tau=2160  p=1523536102609  m%37=15 p%37=32
+              3020041034010 = 2*3^4*5*7^2*11^2*13^2*61^2         tau=1620  p=1554530857207  m%37=34 p%37= 3
+              3486201223752 = 2^3*3^2*13^2*31*37^2*43*157        tau= 864  p=1758811910623  m%37= 0 p%37=32
+              3519428348700 = 2^2*3^4*5^2*11^2*37^2*43*61        tau=1620  p=1946832150433  m%37= 0 p%37=31
+              3701554500000 = 2^5*3*5^6*7*17*89*233              tau=1344  p=2146885033547  m%37=19 p%37=22
+              3793353051600 = 2^4*3^2*5^2*7^2*17*61*89*233       tau=2160  p=2265994350079  m%37=24 p%37=25
+              4167454200000 = 2^6*3*5^5*7*13*127*601             tau=1344  p=2433908407993  m%37=11 p%37= 5
+              4660019806176 = 2^5*3^2*7^2*17*29*37*43*421        tau=1728  p=2506340165699  m%37= 0 p%37=10
+              9550973289312 = 2^5*3^3*7*13^2*29^2*41*271         tau=1728  p=5175501797563  m%37=24 p%37= 6
+             10072789511904 = 2^5*3^2*7^2*17*19*29*181*421       tau=1728  p=5441193234371  m%37=29 p%37=23
+             12077999521056 = 2^5*3^2*7^3*31*37^2*43*67          tau=1728  p=6433407557069  m%37= 0 p%37=29
+             14509672750188 = 2^2*3^4*7^5*11^2*19^2*61           tau=1620  p=7610178879337  m%37=24 p%37=13
+             17108644123872 = 2^5*3^2*7^2*17*19*89*181*233       tau=1728  p=9214236634003  m%37=25 p%37=23
+             20577136443552 = 2^5*3^3*13^2*29^2*41*61*67         tau=1728  p=10530693091573  m%37=26 p%37=10
+             23324999403888 = 2^4*3^2*7*13^2*17*29^2*61*157      tau=2160  p=12682657961737  m%37=10 p%37=15
+             25600075800000 = 2^6*3*5^5*13*43*127*601            tau=1344  p=14161619908609  m%37=20 p%37=17
+             26671600200000 = 2^6*3*5^5*7*31*127*1613            tau=1344  p=15372034881383  m%37=17 p%37=20
+             34537682190000 = 2^4*3*5^4*11^2*37*137*1877         tau=1200  p=19194944994509  m%37= 0 p%37=33
+             50396952564000 = 2^5*3^2*5^3*7^2*97*313*941         tau=1728  p=29867496472109  m%37= 1 p%37=12
+             59624179725600 = 2^5*3^3*5^2*7^2*19*181*16381       tau=1728  p=35701121220509  m%37= 4 p%37=32
+             77362580022624 = 2^5*3^2*13^3*31*37^2*43*67         tau=1728  p=39479161974251  m%37= 0 p%37=17
+             91416458626272 = 2^5*3^3*13^2*29^2*41*67*271        tau=1728  p=46748649427603  m%37=13 p%37=31
+
+          tau over all 55: 12:1  108:5  240:1  864:7  960:5  1200:2
+                           1344:7  1620:3  1728:15  2160:9
+          1620 = 2^2*3^4*5 is NEW (three members, all with 3^4 and 11^2 or
+          7^5). 108 stays at five: no new tau = 108 member between 1e12 and
+          1e14.
+
+          GF(37): 37 | m for 9 of 55 (2 of 26 below 1e12, 7 of 29 above);
+          37 | p for none. One member has both 37 and 137 as factors:
+          m = 34537682190000 = 2^4*3*5^4*11^2*37*137*1877, tau 1200. No
+          baseline for 37 | m in this family has been established, so the
+          count is recorded, not interpreted.
+
+          Solutions known: 58 = 55 family members + 130, 148480, 3039520.
+
+          TWIN PRIMES, TRIPARTITE (standing check 4). For p > 3 a twin pair
+          has DR pair (2,4), (5,7) or (8,1) and nothing else -- proven in
+          twin_prime_tripartite_audit.py; it is p = 2 (mod 3) restated.
+          Of the 55 primes p = n/m, four are twin-pair members:
+              m = 60              p = 31              upper of (29,31)   (2,4)
+              m = 76698960        p = 42217079        lower              (5,7)
+              m = 3793353051600   p = 2265994350079   upper              (5,7)
+              m = 9550973289312   p = 5175501797563   upper              (5,7)
+          Hardy-Littlewood expects 6.65 (sum of 4*C2/ln p, C2 = 0.66016,
+          conditioned on p mod 6); 4 observed, P(X <= 4) ~ 0.18. No twin
+          excess or deficit. Pair residues mod 37: (29,31) is the C9 pair;
+          the others (5,7), (23,25), (4,6).
+          p mod 6 splits 28 : 27 (5 : 1), level. p mod 9 does NOT:
+          {1:5, 2:19, 4:3, 5:5, 7:19, 8:4}, 38 of 55 at +-2. Split by v3(m)
+          and v2(m) mod 2 it stays mixed, so no forcing mechanism is
+          identified; recorded as unexplained, not as structure.
+          RESOLVED (1e16 run, below): the skew is in the CANDIDATES, not
+          the primes -- see "p mod 9 baseline".
+          Spine class 10 (mod 11): p on it 7/55 vs 5.5 expected (P >= 7 is
+          0.31); primes dividing m on it 1/28 (only 43). p^2+1 mod 11 lies
+          in {2,4,5,6,10} for every p != 11 -- forced by the quadratic
+          residues mod 11, so it filters nothing.
+
+          COMPLETE AT m <= 1e16 (2026-09-26): EXACTLY 95 MEMBERS.
+          (1) At most five primes >= 250: 1e16/60 = 1.667e14 < 250^6.
+          (2) Read-off to depth 5.
+          (3) No self-supplying cluster of size 2..5 below 1.667e14:
+              prefixes scanned 849 790 / 42 649 261 / 99 763 204 /
+              10 260 185, clusters found: none (662s).
+          Search: 240 932 items, 5 270 859 764 nodes, 95 members.
+          Speed-up used for most of the run: only primes >= 250 of the
+          sigma_2 pool are ever read off, and multiplicities are never
+          consulted, so a set of large primes is carried down the DFS
+          instead of rebuilding a Counter at every node. Checked at 1e12
+          against the previous code: identical node count (33 678 794)
+          and identical 26 members. The first 431 items ran on the old
+          code, the rest on the new; the two agree at 1e12 and the 1e16
+          members <= 1e14 are exactly the 55 above.
+          All 95 re-verified from scratch (sympy factorization of n = m*p,
+          prefix of squares = n at k = tau(m) - 1). 95/95.
+
+          The 40 new, 1e14 < m <= 1e16:
+              100339474200000 = 2^6*3*5^5*7*127*313*601                  tau= 1344 p=57667694211313 m%37= 3 p%37=18
+              101813595904944 = 2^4*3^2*7^2*11*17*61^2*89*233            tau= 2160 p=55614370228481 m%37=27 p%37= 9
+              137386439944416 = 2^5*3^3*13^2*17^2*89*157*233             tau= 1728 p=70595680577459 m%37=28 p%37=13
+              179572669800000 = 2^6*3*5^5*37*43*313*601                  tau= 1344 p=97884719469151 m%37= 0 p%37=26
+              185276754412704 = 2^5*3^2*17*31*37^2*43*89*233             tau= 1728 p=93834169440421 m%37= 0 p%37=33
+              208230048180000 = 2^5*3^2*5^4*7^2*11*19*37*43*71           tau= 8640 p=127527860101393 m%37= 0 p%37=10
+              242298676620000 = 2^5*3^3*5^4*7*11*13^2*29^2*41            tau= 8640 p=150074660368639 m%37=23 p%37= 4
+              257882492984688 = 2^4*3^2*11*13^2*17*61^2*97*157           tau= 2160 p=135056474200937 m%37=10 p%37=26
+              326683161420000 = 2^5*3*5^4*7*11*521*135721                tau=  960 p=191872812917063 m%37=36 p%37= 6
+              350287844577600 = 2^6*3*5^2*31*61*89*233*1861              tau= 1344 p=190998524091719 m%37=31 p%37= 6
+              432659182176000 = 2^8*3^2*5^3*13^3*17*19*29*73             tau= 6912 p=251636128926977 m%37= 6 p%37=32
+              439917193915056 = 2^4*3^2*11*13^2*29*61^2*97*157           tau= 2160 p=228873338343569 m%37= 4 p%37=20
+              491050873144728 = 2^3*3^2*13^2*61^2*89*233*523             tau=  864 p=246310338199897 m%37=29 p%37=29
+              540323070000000 = 2^7*3*5^7*7*17^2*29*307                  tau= 3072 p=314491356566113 m%37= 8 p%37=27
+              564754402322208 = 2^5*3^2*7^2*17*61*89*233*1861            tau= 1728 p=301967253719917 m%37=30 p%37=12
+              580936400163504 = 2^4*3^2*7^2*11*61^2*89*97*233            tau= 2160 p=314326726120321 m%37=30 p%37=31
+              597776068890000 = 2^4*3^2*5^4*7^2*11^2*13*17*37*137        tau=10800 p=371161273777939 m%37= 0 p%37= 5
+              668528049420000 = 2^5*3^2*5^4*7^2*11*37*43*61*71           tau= 8640 p=406742657845807 m%37= 0 p%37=16
+              717172801632000 = 2^8*3^3*5^3*7*19*29^2*41*181             tau= 6912 p=431346785546977 m%37=28 p%37=14
+              911273670946548 = 2^2*3^4*7^2*13^2*61^2*97*941             tau= 1620 p=470971756074647 m%37=18 p%37=32
+             1073778062112000 = 2^8*3^3*5^3*7*19*29^2*41*271             tau= 6912 p=645799538862727 m%37=27 p%37=19
+             1092893339083104 = 2^5*3^3*13^2*61^2*89*97*233              tau= 1728 p=556407349043771 m%37=32 p%37=17
+             1322367423651456 = 2^7*3*7*13*31*37^2*43*89*233             tau= 3072 p=693419204082919 m%37= 0 p%37=23
+             1325207730686112 = 2^5*3^2*7^2*13^3*41*73*14281             tau= 1728 p=714375212583013 m%37=26 p%37=10
+             2371924664098704 = 2^4*3^2*11*13^2*29*61^2*157*523          tau= 2160 p=1233658389201671 m%37=25 p%37= 7 twin-lo
+             2641936727430000 = 2^4*3^2*5^4*7^2*11^2*13*17*43*521        tau=10800 p=1639364066379181 m%37=35 p%37= 2
+             2700390068064000 = 2^8*3^2*5^3*13^3*17*19*73*181            tau= 6912 p=1565614357654273 m%37= 3 p%37=22 twin-hi
+             3132265332840336 = 2^4*3^2*7^2*11*61^2*89*233*523           tau= 2160 p=1694276612172439 m%37=21 p%37=11
+             3191571704462400 = 2^6*3^2*5^2*7^2*17*19*29*31*37*421       tau=12096 p=1938390952030807 m%37= 0 p%37=10
+             3866794397856000 = 2^8*3^3*5^3*13^2*19*61*73*313            tau= 6912 p=2229746083868063 m%37=30 p%37=30
+             4512495611490048 = 2^8*3^3*7*13*17*19*41^2*73*181           tau= 6912 p=2483202147400577 m%37=14 p%37=35
+             4905677658420000 = 2^5*3^2*5^4*7^2*11*37*43*61*521          tau= 8640 p=2983153215535057 m%37= 0 p%37=21
+             5969358305820000 = 2^5*3^3*5^4*7*13^2*29^2*41*271           tau= 8640 p=3618189597099239 m%37=15 p%37= 6
+             6185598048630000 = 2^4*3^2*5^4*7^2*11^2*13*43*89*233        tau=10800 p=3805105987618381 m%37=24 p%37=13
+             6201117698662224 = 2^4*3^2*13^2*17*29^2*61*157*1861         tau= 2160 p=3180320060175151 m%37=21 p%37= 1
+             6469261811095392 = 2^5*3^2*17^2*29*89*233*307*421           tau= 1728 p=3265719248401483 m%37=36 p%37=10
+             6828069275820000 = 2^5*3^3*5^4*13^2*31*37^2*41*43           tau= 8640 p=3931258126249631 m%37= 0 p%37=15
+             7127765905726800 = 2^4*3^2*5^2*31^3*37^2*43*1129            tau= 2160 p=4008250175694431 m%37= 0 p%37= 8
+             7482085536796416 = 2^8*3^3*7*13*19*29^2*41*67*271           tau= 6912 p=4091321262294209 m%37=28 p%37=34
+             8549730881177616 = 2^4*3^2*13^2*29*61^2*89*157*233          tau= 2160 p=4342077264028759 m%37= 1 p%37=31
+            37|m: 19 /95;  137|m: [34537682190000, 597776068890000]
+               60 (29, 31) (2, 4) (29, 31)
+               76698960 (42217079, 42217081) (5, 7) (5, 7)
+               3793353051600 (2265994350077, 2265994350079) (5, 7) (23, 25)
+               9550973289312 (5175501797561, 5175501797563) (5, 7) (4, 6)
+               2371924664098704 (1233658389201671, 1233658389201673) (2, 4) (7, 9)
+               2700390068064000 (1565614357654271, 1565614357654273) (5, 7) (20, 22)
+
+          tau over all 95: 12:1  108:5  240:1  864:8  960:6  1200:2
+             1344:10  1620:4  1728:21  2160:18  3072:2  6912:7  8640:6
+             10800:3  12096:1
+          New tau values: 3072, 6912, 8640, 10800, 12096. tau = 108 stays at
+          five members through 1e16.
+
+          p mod 9 BASELINE. Over all 95, p = +-2 (mod 9) for 62. Against the
+          Dirichlet 2/6 that is a large excess, but Dirichlet is the wrong
+          reference: p is not a random prime, it is sigma_2(m)/m - m. The
+          reference is the CANDIDATE set -- every node with m | sigma_2(m),
+          ratio > 3/2, q = sigma_2(m)/m - m > m/2, gcd(q,6) = 1, primality
+          NOT imposed. At m <= 1e12 (tools/divisor_square_family_candidates.py):
+              552 candidates, q mod 9 = {1:49, 2:190, 4:36, 5:30, 7:204, 8:43}
+              394/552 = 71% at +-2;  members 62/95 = 65%.
+          The skew is a property of the construction and the primes carry
+          it, no more. It says nothing about primality or twins.
+
+          TWINS over all 95: six p in a twin pair --
+              (29,31) (2,4); 42217079 lo (5,7); 2265994350079 hi (5,7);
+              5175501797563 hi (5,7); 1233658389201671 lo (2,4);
+              1565614357654273 hi (5,7).
+          Hardy-Littlewood expects 9.76; P(X <= 6) = 0.146. (8,1) has not
+          occurred. Given the mod-9 skew above -- p = 2 (lower) or 7 (upper)
+          both yield (2,4)/(5,7) -- the absence of (8,1) is what the
+          candidate distribution predicts, not a twin-prime effect.
+
+          37 AND 137. 37 | m for 19 of 95. 137 | m for two members, and both
+          also have 37 | m:
+              34537682190000  = 2^4*3*5^4*11^2*37*137*1877
+              597776068890000 = 2^4*3^2*5^4*7^2*11^2*13*17*37*137
+          FORCED: sigma_2(37) = 37^2 + 1 = 1370 = 10*137, i.e. 37^2 = -1
+          (mod 137), so 137 is READ OFF 37. In the first, sigma_2(137) =
+          18770 = 10*1877 then supplies 1877: the chain 37 -> 137 -> 1877.
+          The primes q with 137 | q^2 + 1 are q = +-37 (mod 137): 37, 311,
+          859, 1607, ... 37 is the smallest, which is why it is the one
+          that appears. This is an identity (37^2 + 1 = 10*137), not a
+          frequency; it needs no baseline.
+
+          Spine class 10 (mod 11) over 95: 11 of p, P(>= 11) = 0.35. None.
+
+          p mod 9 SKEW BY v3(m) (candidates, m <= 1e12):
+              v3=1: 161, 61% at +-2    v3=2: 300, 73%
+              v3=3:  74, 95%           v3=4:  17, 41%
+          Driven by the 3-adic valuation of m, not uniform across it.
+          LEMMA: for prime q != 3 write q^2 = 1 + 3t; then
+              sigma_2(q^2) = q^4 + q^2 + 1 = 3(1 + 3t + 3t^2),
+          so sigma_2(q^2)/3 = 1 or 7 (mod 9), and = 7 exactly when
+          t = 1 (mod 3), i.e. q = +-2 (mod 9). By LTE all 3-supply in
+          sigma_2(m) comes from exponents with 3 | e+1, so the 3-part is
+          built from these {1,7} residues.
+
+          DERIVED (2026-09-26): WHY THE SHARE PEAKS AT v3 = 3.
+          Write m = 3^b u, 3 does not divide u, q = sigma_2(m)/m - m.
+          (i)  For p^e || u, sigma_2(p^e)/p^e = sum of p^k, k = -e..e step 2,
+               an integer polynomial S_e(y) in y = p + 1/p. Mod 9, y = +-2
+               for every unit p (1,4,7 -> 2; 2,5,8 -> 7). Since S_e(2) = e+1
+               (set p = 1), S_e(p) = eps_p (e+1) (mod 9) whenever 3 does
+               not divide e+1; eps_p = -1 iff p = 2 (mod 3) and e odd.
+               Checked for all p < 2000, e <= 11: no failure.
+          (ii) sigma_2(3^b) = 1 (mod 9) for every b.
+          (iii) gcd(q,6) = 1 forces the 3-supply to be EXACT:
+               sum v3(e+1) = b. (A surplus puts 3 | q + m, and 3 | m.)
+          (iv) Primes with 3 | e+1 contribute +-(e+1)/3^v times a unit
+               C_p = 1 (mod 3) that depends on p mod 27; for e = 2,
+               sigma_2(p^2)/(3p^2) = 1 +- 3s (mod 9), p + 1/p = +-2 + 9s.
+          Hence, exactly,
+               q = eps * (tau(u)/3^b) * prod C_p  -  m     (mod 9),
+          verified on all 552 candidates at 1e12: 552/552.
+          When the 3-free part of tau(u)/3^b is 2^j (69/74 at v3 = 3),
+          R = eps 2^j, and 2^j = +-2 (mod 9) iff j = 1 (mod 3).
+          j = (number of primes of u at exponent 1) + (contribution of the
+          2-exponent), and each squared 3-supplier adds 0.
+            candidates <= 1e12, v3=3: j {2:5, 3:1, 4:68},   +-2 share 0.95
+            candidates <= 1e14, v3=3: j {2:10, 3:1, 4:120, 6:62}, 0.89
+            candidates <= 1e14, v3=4: j {2:59},              0.31
+          So the peak is j = 4 dominating at v3 = 3 (2^4 = 16 = -2 mod 9)
+          with prod C = 1 in 69/74; at v3 = 4 four squared suppliers use up
+          the size budget and leave j = 2 only (2^2 = 4, not +-2). The j
+          distribution is set by how many primes fit under M with ratio
+          > 3/2, so the peak is a SIZE-WINDOW effect and moves with M:
+          0.95 -> 0.89 from 1e12 to 1e14 as j = 6 (2^6 = 1 mod 9) opens.
+          Members <= 1e16 at v3 = 3: 13/16 = 0.81.
+          Overall candidate share: 0.71 (1e12, 552), 0.73 (1e14, 1368).
+
+          THEOREM (j at v3 = 4). Let m be a candidate (m | sigma_2(m),
+          q = sigma_2(m)/m - m, gcd(q,6) = 1), a = v2(m), b = v3(m).
+          (1) EXACT 2-SUPPLY. For odd p, p^2 = 1 (mod 8), so by LTE
+              v2(sigma_2(p^e)) = v2(e+1); sigma_2(2^a) is odd. If
+              sum_(odd p) v2(e+1) > a then sigma_2(m)/m = m + q is even,
+              and with m even, q is even. So sum_(odd p) v2(e+1) = a,
+              INCLUDING p = 3, which supplies v2(b+1).
+          (2) Hence  j = v2(tau(u)) = a + v2(a+1) - v2(b+1)   exactly.
+              Checked on all 1920 candidates (1e12 and 1e14): 1920/1920.
+              (A first version omitted p = 3 and failed on 834 of them.)
+          (3) MINIMUM SIZE for given (a, b). Every prime >= 5 supplies twos
+              and threes only through v2(e+1), v3(e+1), and an exchange
+              argument puts the larger exponent on the smaller prime, so the
+              minimum sits on 5, 7, 11, ... with non-increasing exponents.
+              For b = 4:
+                  a = 1  j = 2   min m = 6.899e10   (5,7,11,13)^2 * 17
+                  a = 2  j = 2   min m = 1.061e10   (5,7,11)^2 * 13*17
+                  a = 3  j = 5   min m = 1.206e14   (5,7,11,13)^2 * 17*19*23
+                  a = 4  j = 4   min m = 6.994e15
+                  a = 5  j = 6   min m = 1.076e15
+                  a = 6..12      min m >= 8.976e17
+          (4) a <= 12 whenever m <= 1e14: each unit of 2-supply costs a
+              factor >= 5 (p^e >= 5^e >= 5^v2(e+1)), so m >= 81 * 10^a.
+          CONCLUSION: every candidate with v3(m) = 4 and m < 1.206e14 has
+          v2(m) in {1, 2} and j = 2 exactly. 2^2 = 4 is not +-2 (mod 9),
+          so R = eps*tau(u)/81 = +-4 and the +-2 share at v3 = 4 comes only
+          from prod C in {4, 7}. The window first admits j = 5 at
+          m = 1.206e14 (a = 3). Code: tools/divisor_square_family_vmin.py.
+          All four v3 = 4 members <= 1e16 have a in {1, 2}.
+
+          THEOREM (window at v3 = 3). Same argument, b = 3. Now 3^3 itself
+          supplies v2(4) = 2 twos, so primes >= 5 owe a - 2, and
+          j = a + v2(a+1) - 2. a = 1 is impossible (3^3 over-supplies 2).
+          Cutoff: m >= 27 * 2^a * 5^(a-2), so a <= 13 when m <= 1e14.
+              a = 2   j = 0   min m = 1.323e5
+              a = 3   j = 3   min m = 4.162e8
+              a = 4   j = 2   min m = 1.415e10
+              a = 5   j = 4   min m = 2.573e9
+              a = 6   j = 4   min m = 2.474e13
+              a = 7   j = 8   min m = 1.435e15
+              a = 8   j = 6   min m = 1.285e12   2^8: v3(9) = 2, so ONE
+                                                 squared prime finishes b
+              a = 9..13       min m >= 9.814e19
+          CONCLUSION:
+              m < 1.285e12  =>  a in {2,...,6},     j in {0, 2, 3, 4}
+              m < 1.435e15  =>  a in {2,...,6, 8},  j in {0, 2, 3, 4, 6}
+          In that window j = 1 (mod 3) -- the only case giving R = +-2 --
+          means j = 4, i.e. a in {5, 6}. j = 6 (2^6 = 1 mod 9) is exactly
+          the a = 8 branch that opens at 1.285e12: this is why the v3 = 3
+          share fell 0.95 -> 0.89 between 1e12 and 1e14.
+          Observed a at v3 = 3: 1e12 {3:1, 4:5, 5:68}; 1e14 {3:1, 4:10,
+          5:120, 8:62}. The bounds are NECESSARY, not sufficient: a = 2
+          and a = 6 fit by size but no candidate has them to 1e14 (the
+          other primes of m must also be supplied, which the bound omits).
+
+          a = 2 AND a = 6 AT v3 = 3, SEARCHED TO 1e16 (complete: core >= 108,
+          large part <= 9.3e13 < 1.667e14 cluster bound, depth 5 suffices;
+          tools/divisor_square_family_root.py, 137 885 485 nodes, 273s).
+          "Never occur" is FALSE as a general statement:
+            a = 2: no candidate below 1e16. Not proved for all m.
+            a = 6: 22 candidates, first m = 8.537e14 -- a size effect
+                   (min m for a = 6 is 2.47e13; the first actual one is
+                   30x larger). NONE has q prime.
+          Why a = 6 fails primality: 21 of the 22 have 5^2 || m (the other
+          5^5). Since 5 | m, q = sigma_2(m)/m (mod 5), so 5 | q exactly when
+          v5(sigma_2(m)) > v5(m). sigma_2(3^3) = 820 = 2^2*5*41 supplies one
+          5; any further supplier forces the surplus:
+              sigma_2(7) = 50 = 2*5^2,   sigma_2(43) = 1850 = 2*5^2*37,
+              sigma_2(157) = 24650 = 2*5^2*17*29,  and any exponent-1
+              p = +-2 (mod 5) gives 5 | p^2 + 1  (13, 17, 37, 67, 127, 233 ...).
+          43 is itself read off the core: sigma_2(2^6) = 5461 = 43*127.
+          LEMMA: 3^3 || m, 5^2 || m, and one more 5 supplied anywhere
+          => 5 | q => q not prime.  20 of the 22 fall to it. The two
+          exceptions (only 820 + 13 supplying 5: v5 = 2 exact; and a 5^5
+          case) have q composite with no small forced factor.
+
+          a = 2 AT v3 = 3: STRUCTURE, AND ABSENCE TO 1e22.
+          (1) SURPLUS IS FINAL. Supply only grows as primes are added, and a
+              candidate needs 2- and 3-supply EXACT. So a partial m with
+              2-supply > a or 3-supply > b is dead. Added to the DFS as a
+              prune; checked on a = 6 at 1e16: the same 22 candidates in
+              698 139 nodes instead of 137 885 485.
+          (2) At (a,b) = (2,3), 3^3 supplies both twos (v2(4) = 2), so every
+              prime p >= 5 has v2(e+1) = 0: ALL EXPONENTS EVEN, m = 108 s^2,
+              gcd(s,6) = 1. 2^2 supplies one 3 (v3(3) = 1), so primes >= 5 owe
+              exactly two threes: two primes with e = 2 (mod 6), or one with
+              9 | e+1. Every other prime has even e >= 4 with 3 not dividing
+              e+1 (e = 4, 6, 10, 12, ...).
+          (3) A prime r = 2 (mod 3) of s cannot be supplied by squared
+              primes: the prime factors of p^4+p^2+1 = (p^2+p+1)(p^2-p+1)
+              other than 3 are = 1 (mod 3). The core 21*820 gives 5 and 41
+              once each, short of r^2. So r needs a source with e >= 4.
+          (4) Ratio: need prod sigma_2(p^e)/p^2e > 1.5/(21/16*820/729) =
+              1.016028. Primes = 1 (mod 3) from 13 up give at most 1.012913,
+              so if s has no prime = 2 (mod 3), then 7 | s.
+          (1)-(4) do not close the case for all m. What they buy is depth:
+              M = 1e18:  33 287 nodes    0 candidates
+              M = 1e20: 102 598 nodes    0 candidates
+              M = 1e22: 285 171 nodes    0 candidates
+          COMPLETE to 1e22: large primes enter squared, so at most 4 of
+          them fit in 1e22/108 = 9.26e19 (250^10 > that), depth 5 suffices;
+          and no self-supplying cluster of 2..4 large primes at even
+          exponents has product <= 9.26e19 (prefixes 9 650 / 72 552 / 546,
+          26s; tools/divisor_square_clusters_even.py).
+          STATUS: a = 2 at v3 = 3 has no candidate with m <= 1e22. Not
+          proved impossible for all m.
+
+          REDUCTION (all m). A candidate with (a, b) = (2, 3) exists iff some
+          s, gcd(s,6) = 1, has
+              (i)   s^2 | 1435 * sigma_2(s^2)        1435 = 5*7*41
+              (ii)  v3(sigma_2(s^2)) = 2
+              (iii) sigma_2(s^2)/s^2 > 1.016028,
+          with m = 108 s^2. Since sigma_2(m) = 2^2*3*5*7*41*sigma_2(s^2), the
+          equation is 1435 sigma_2(s^2) = 9 s^2 (108 s^2 + q). (An earlier
+          version added "sigma_2(s^2)/s^2 = k/1435, k in [1436,1573]"; that
+          was WRONG -- the 1.0966 bound is on sigma_2(s^2)/s^4, and
+          sigma_2(s^2)/s^2 grows like s^2. Retracted 2026-09-26.)
+          THE OBSTRUCTION IS (i) ALONE: for s <= 5e6, (ii) holds for
+          1 259 577 of 1 666 666 s, while (i) holds for NONE, ratio ignored.
+          Odd n with n | sigma_2(n) are common (65, 175, 525, 1105, ...) and
+          odd n | 1435 sigma_2(n) likewise (5, 7, 35, 41, 65, ...), so any
+          proof must use that s^2 is a SQUARE; no parity or congruence
+          argument separates it. Divisibility by s^2 is not a congruence to
+          a fixed modulus, so there is no local obstruction to find.
+          (i) is an odd-square abundancy equation of the same type as odd
+          perfect / odd multiperfect numbers; no proof for all s is known
+          to me. Largest-prime, smallest-prime and Omega-counting arguments
+          were tried and do not close. OPEN beyond s <= 9.6e9 (m <= 1e22).
+
+          RETRACTED (2026-09-26): a "partial proof" stood here claiming a
+          denominator window D < N < 1.0966 D for rho = sigma_2(s^2)/s^2,
+          hence "41 | s or 35 | s" and a case rho = 38/35. The window used
+          the bound 1.0966 on sigma_2(s^2)/s^2; the bound holds for
+          sigma_2(s^2)/s^4. rho is about s^2, so there is no window and
+          none of those conclusions follows.
+          WHAT STANDS -- supply lemmas, each from (i) alone:
+            If 5 | s: v5(sigma_2(s^2)) >= 2 v5(s) - 1 >= 1, and for p != 5,
+              v5(sigma_2(p^2e)) = v5(2e+1) if p = +-1 (mod 5), else 0.
+              So some p | s has p = +-1 (mod 5) and 5 | v_p(s^2) + 1.
+            If 41 | s: some p | s has ord_41(p^2) in {1, 5} (odd divisors
+              of 20), that order dividing v_p(s^2) + 1.
+            Every prime of s outside {5, 7, 41} needs FULL supply,
+              p^(2e) | sigma_2(s^2 / p^(2e)).
+          These restrict shapes; they do not rule any class out.
+
+          WHY SUPPLY LEMMAS CANNOT FINISH IT. For odd s <= 2e6 the unsupplied
+          part g(s) = s^2 / gcd(s^2, sigma_2(s^2)) gets as small as ONE prime:
+              s = 133 = 7*19 (coprime to 6): sigma_2(133^2) = 2451*130683,
+                  g = 19, so 133^2 | 19 * sigma_2(133^2);
+              s = 5: g = 25;  s = 487179: g = 37;  s = 566181: g = 43;
+              (s = 13167 = 3^2*7*11*19: g = 3.)
+          So "s^2 | c * sigma_2(s^2)" HAS solutions for c = 19; the claim
+          for c = 1435 = 5*7*41 is not a local impossibility. A proof must
+          show no odd square coprime to 6 is short by exactly a divisor of
+          1435 -- a global statement of odd-perfect type. Open.
+
+          PROVED CASES of (i) s^2 | 1435 sigma_2(s^2):
+          * s = p^e (one prime): sigma_2(p^2e) = 1 (mod p), so p^2e | 1435,
+            impossible (1435 squarefree).
+          * s = p * r^b, 5 <= p < r, any b >= 1 (two primes, smaller one to
+            the first power). sigma_2(p^2) = (p^2+p+1)(p^2-p+1): coprime
+            (odd, difference 2p, p divides neither), each < (p+1)^2 < r^2.
+            So v_r(sigma_2(p^2)) <= 1, v_r(1435 sigma_2(p^2)) <= 2, forcing
+            b = 1 and r | 1435, i.e. r in {7, 41}. Then p^2 must divide
+            1435 sigma_2(r^2):  r = 7:  1435*2451    = 3*5*7*19*41*43,
+                                r = 41: 1435*2827443 = 3*5*7*41*547*1723,
+            both squarefree. Impossible.  (Brute check p < r < 2e4, a=b=1:
+            no solution.)
+          OPEN: s = p^a r^b with a >= 2 (larger prime may appear once:
+          p^2a | 1435 (r^2+r+1)(r^2-r+1) is not size-blocked), and three or
+          more primes.
+
+          TWO PRIMES, a >= 2: REDUCTION TO A WIEFERICH-TYPE CONDITION.
+          s = p^a r^b, 5 <= p < r. alpha = [p | 1435], beta = [r | 1435],
+          w_p = v_p(r^(p-1) - 1) >= 1, w_r = v_r(p^(r-1) - 1) >= 1. By LTE
+          v_p(sigma_2(r^2b)) <= w_p + v_p(2b+1), so (i) needs
+              (A) 2a <= alpha + w_p + v_p(2b+1)
+              (B) 2b <= beta  + w_r + v_r(2a+1).
+          b = 1: v_p(3) = 0, so w_p >= 2a - alpha >= 3, i.e. r^(p-1) = 1 (mod p^3).
+          b >= 2 and w_p = w_r = 1: p^(2a-2) | 2b+1 and r^(2b-2) | 2a+1 give
+          2b+1 >= 5^(7^(2b-2) - 3): impossible.
+          THEOREM C: any two-prime solution with a >= 2 has
+              r^(p-1) = 1 (mod p^2)   or   p^(r-1) = 1 (mod r^2).
+          NOT A PROOF: for fixed p about 1/p of primes r satisfy the first,
+          so the condition is common. Brute check of (i) directly:
+          p < r < 3000, a in 2..5, b in 1..5: 1 827 560 cases, 0 solutions.
+          Two-prime a >= 2 remains OPEN beyond that range.
+
+          THEOREM E (fixed Wieferich pair => finite check). For fixed p < r,
+          (A) and (B) bound the exponents:
+              2a <= alpha + w_p + log_p(2b+1),  2b <= beta + w_r + log_r(2a+1),
+          so each pair admits finitely many (a, b), all directly checkable.
+          A proof for ALL pairs needs a uniform bound on w_p = v_p(r^(p-1)-1):
+          that is the Wieferich problem (open; even infinitely many base-2
+          non-Wieferich primes is known only under abc). Not provable here.
+          Targeted search over the pairs Theorem C allows:
+            w_p >= 2: r in the p-1 classes k^p mod p^2, p <= 1000, r < 1e7:
+                      906 792 pairs, exponent bounds a <= 5, b <= 1; 0 solutions
+            w_r >= 2: all p < r <= 3e4 with p^(r-1) = 1 (mod r^2): 425 pairs;
+                      0 solutions.
+          (tools/divisor_square_wieferich_pairs.py)
+
+          The known DOUBLE Wieferich pairs with both primes >= 5 --
+          (83, 4871), (911, 318917), (2903, 18787), (5, 1645333507) -- all
+          have w_p = w_r = 2, and the bounds give a <= 1: excluded outright
+          (a = 1 is already impossible).
+          THEOREM F (four primes, no Wieferich pair). Same count with k = 4:
+              2M <= 4 + 3 log_5(2M + 1)   =>   M <= 4   (8 <= 8.10; 10 > 8.47).
+          With M <= 4, 2e_y + 1 is in {3, 5, 7, 9}: only x = 5, 7 can gain
+          from v_x(2e_y+1). So e_x <= 2 for every x outside {5, 7};
+          e_7 <= 2 (a boost needs another prime at exponent 3, only 5 can);
+          e_5 <= 3 (needs >= 2 other primes at exponent 2).
+          This restricts shapes; it leaves infinitely many s. OPEN.
+
+          THEOREM G (five primes, no Wieferich pair): 2M <= 5 + 4 log_5(2M+1)
+          => M <= 5 (10 <= 10.96; 12 > 11.37). 2e_y+1 in {3,5,7,9,11}, so
+          only 5, 7, 11 gain from v_x(2e_y+1): e_x <= 2 elsewhere; e_11 <= 2
+          (booster needs exponent 5, unreachable); e_7 <= 3, and e_7 = 3
+          needs e_5 = 3; e_5 <= 4, and e_5 = 4 needs >= 3 others at exponent
+          2. In general k primes give 2M <= k + (k-1) log_5(2M+1): bounded
+          exponents for each k, but k is unbounded. OPEN.
+
+          THEOREM H (all k, no Wieferich pair; tools/divisor_square_kprime_caps.py).
+          Coarse caps (valid upper bounds, looser than D/F/G by hand):
+              k=6: M<=7,  generic e<=3, e_5,e_7,e_11 <= 5
+              k=7: M<=8,  generic e<=3, e_5..e_13 <= 6
+              k=8: M<=10, generic e<=4, e_5..e_13 <= 7
+              k=12: M<=18, generic e<=6, e_5 <= 17
+          Caps grow ~ linearly in k: every fixed k is a bounded-exponent
+          problem, no uniform bound exists from this argument. Closing (i)
+          needs an argument uniform in k. OPEN.
+
+          THREE PRIMES, ALL EXPONENT 1: s = pqr, 5 <= p < q < r.
+          Each factor x^2 +- x + 1 of sigma_2(p^2), sigma_2(q^2) is < r^2, so
+          r divides each at most once; r^2 therefore needs r | a factor of
+          sigma_2(q^2) AND r | a factor of sigma_2(p^2) (or r in {7, 41}).
+          r | p^2 +- p + 1 with p < r fixes p among the roots
+          (-+1 +- sqrt(-3))/2 mod r, so each q costs O(1).
+          q < 1e6: 1 753 triples meet the r-condition; 0 full solutions.
+          (tools/divisor_square_pqr.py.) Not a proof: nothing bounds q.
+          Three primes with higher exponents, and >= 4 primes: OPEN.
+
+          THEOREM D (three primes, any exponents). s = p^a q^b r^c, primes
+          >= 5, e_x = exponent of x in s, M = max e_x. Call (x, y) a
+          WIEFERICH PAIR if y^(x-1) = 1 (mod x^2). For x needing 2 e_x
+          factors, by LTE each other prime y supplies at most
+          w_x(y) + v_x(2e_y + 1), w_x(y) = v_x(y^(x-1) - 1), and 1435
+          supplies at most 1. With no Wieferich pair (all w = 1):
+              2M <= 3 + 2 log_5(2M + 1).
+          M >= 3: 6 > 3 + 2 log_5 7 = 5.42, and the left side outgrows the
+          right. M = 2: need x | 2e_y + 1 with e_y <= 2, so 2e_y+1 = 5,
+          x = 5, e_y = 2; then y also attains M and the same argument makes
+          y = 5 = x, contradiction. HENCE: without a Wieferich pair among
+          p, q, r, every exponent is 1 (s = pqr, searched to q < 1e6 above).
+          The same count for two primes gives 2M <= 2 + log_5(2M+1), so
+          M = 1 directly -- consistent with Theorem C.
+          Brute check: three primes < 160, exponents 1..3: 176 715 cases,
+          0 solutions. Four or more primes: the bound 2M <= k + (k-1)
+          log_5(2M+1) no longer caps M at 1 (k = 4 admits M = 3). OPEN.
+          Literature (checked 2026-09-27): OEIS A046762 (n | sigma_2(n)) is
+          infinite (AMM Problem 11090); Cai-Chen-Zhang: sigma_2(n)/n = b has
+          finitely many solutions per b. Nothing on square terms. The odd
+          multiperfect analogue is open in general.
+
+          READ-OFF LINKS among recurring primes (all 95 members):
+              89 <-> 233 is a 2-cycle: 89^2+1 = 2*17*233,
+                  233^2+1 = 2*5*61*89. They co-occur in all 24 members
+                  that contain either.
+              43 -> 37 -> 137: 43^2+1 = 2*5^2*37, 37^2+1 = 2*5*137.
+              41 -> 29 (41^2+1 = 2*29^2), 29 -> 421, 61 -> 1861,
+              97 -> 941, 67 -> 449.
+          Members containing: 7:61 13:50 17:36 61:27 29:24 89:24 233:24
+          43:20 37:19 41:12 157:8 67:7 97:6 137:2 23:0.
+          23 occurs in NO member (23^2+1 = 2*5*53, and 53 divides no m).
+
+          WHY 89 AND 233 (2026-09-27). Distinct primes q < r with q | r^2+1
+          and r | q^2+1 satisfy qr | q^2 + r^2 + 1, i.e. q^2 + r^2 + 1 = k q r.
+          Vieta jumping (replace r by kq - r) descends to (1,1), forcing k = 3;
+          the solutions are consecutive odd-index Fibonacci numbers
+          1, 2, 5, 13, 34, 89, 233, 610, 1597, ... (F_1, F_3, F_5, ...).
+          89^2 + 233^2 + 1 = 62211 = 3*89*233. Both-prime consecutive pairs:
+          (5, 13) and (89, 233) (= F_11, F_13); the next candidates fail
+          (610 even, 4181 = 37*113, 75025, 1346269 = 557*2417, ...). So the
+          89 <-> 233 read-off 2-cycle is the Markov-type equation
+          x^2 + y^2 + 1 = 3xy. Among pairs with product <= 1.667e18 it is the
+          only exponent-1 two-cycle above 13; whether any LARGER consecutive
+          odd-index Fibonacci pair is both prime is not known.
+          MARKOV FORM: q^2 + r^2 + 1 = 3qr is the Markov equation
+          x^2 + y^2 + z^2 = 3xyz with x = 1, so (1, F_{2n-1}, F_{2n+1}) are
+          Markov triples: (1,1,2), (1,2,5), (1,5,13), (1,13,34), (1,34,89),
+          (1,89,233), ... The 89 <-> 233 read-off cycle IS the Markov triple
+          (1, 89, 233). (Connection noted 2026-09-28 from a supplied post.)
+          SCOPE (supplied "54 evaluations" summary, audited): the Vieta result
+          covers ONLY exponent-1 two-prime read-off cycles; it does not reduce the
+          family search. Below 1e22 there are 27 pairs (28 distinct coordinates,
+          not 54); both-prime pairs (2,5), (5,13), (89,233). 3qr = q^2 + r^2 + 1^2
+          is a sum of three squares by construction; odd-index Fibonacci numbers
+          are = 1, 2, 5 (mod 8), never 4^a(8b+7). The x = 2 Markov branch
+          (4 + y^2 + z^2 = 6yz) involves y^2 + 4, not sigma_2 = q^2 + 1: not a
+          read-off relation.
+          Member counts 26 / 55 / 95 at 1e12 / 1e14 / 1e16.
+
+          Solutions known: 98 = 95 family members + 130, 148480, 3039520.
+          Code: tools/divisor_square_family_1e16.py.
+
+          COMPLETE AT m <= 1e18 (2026-09-27): EXACTLY 188 MEMBERS.
+          (1) Up to SIX primes >= 250: 1e18/60 = 1.667e16 < 250^7. Read-off
+              to depth 6.
+          (2) New prune, SURPLUS IS FINAL: members have gcd(q,6) = 1, so 2-
+              and 3-supply must be exact; supply only grows, so a partial m
+              already over-supplied is dead. Validated: identical 55 at 1e14
+              (37.5M nodes, 97s vs 461M, 2074s) and identical 95 at 1e16
+              (300M nodes, 1237s vs 5.27e9).
+          (3) CLUSTER SCAN, sizes 2..6, B = 1.667e16 (20 669 s): prefixes
+              7 353 923 / 735 921 315 / 3 389 184 156 / 1 551 189 753 /
+              19 795 630. For the first time it is NOT empty -- two
+              self-supplying clusters of large primes:
+                1291 * 4817^2 * 17977        product 5.385e14
+                  sigma_2(1291)   = 2*173*4817
+                  sigma_2(4817^2) = 3*1291*17977*7732891
+                  sigma_2(17977)  = 2*5*4817*6709
+                8011 * 8101^2 * 8191         product 4.306e15
+                  sigma_2(8011)   = 2*17*233*8101
+                  sigma_2(8101^2) = 3*7*19*271*607*8011*8191
+                  sigma_2(8191)   = 2*41*101*8101       (8191 = 2^13 - 1)
+              Each is invisible to read-off from a small core. Every m <=
+              1e18 containing one is m = c * cluster with c <= 1856 (resp.
+              232); ALL such c checked directly: no member. So the 188 is
+              complete.
+              Residues mod 37: 1291 = 33, 4817 = 7, 17977 = 32;
+              8011 = 19, 8101 = 35, 8191 = 14. Recorded, not interpreted.
+          Search: 123 974 items, 1 722 919 064 nodes, 188 members. All 188
+          re-verified from scratch (sympy): 188/188. The 95 <= 1e16 are
+          exactly the earlier set; 93 are new in (1e16, 1e18].
+          tau over all 188: 12:1 108:5 240:1 864:8 960:7 1200:2 1344:11
+             1620:4 1728:28 2160:20 3072:10 6720:1 6912:39 8640:13
+             10800:11 12096:15 12960:4 15360:1 25920:5 34560:2
+          New tau values: 6720, 12960, 15360, 25920, 34560. tau = 108 still
+          five members.
+          Members listed in math/theorems/t245_family_members_1e18.txt.
+          Solutions known: 191 = 188 family members + 130, 148480, 3039520.
+          Code: tools/divisor_square_family_1e18.py (DEPTH arg 6).
+
+          COMPLETE AT m <= 1e20 (2026-09-27): EXACTLY 358 MEMBERS.
+          (1) Up to SEVEN primes >= 250: 1e20/60 = 1.667e18 < 250^8. Read-off
+              to depth 7.
+          (2) CLUSTER SCAN REPLACED BY SUPPLY CYCLES. Every large prime of a
+              member must divide sigma_2 of some other prime power of m
+              (an in-edge y -> x when x | sigma_2(y^e)). Walking in-edges
+              backwards from any large prime ends at the small-prime core
+              (covered by read-off) or loops -- a SUPPLY CYCLE of large
+              primes. So every large prime is reachable from the core or from
+              a cycle, and it suffices to (a) enumerate all cycles with
+              product <= 1.667e18 and (b) seed the search with each.
+              Cycles are found from their smallest prime q: length >= 3, or
+              any exponent >= 2, forces q < B^(1/3) = 1 185 631; a 2-cycle with
+              both exponents 1 satisfies q^2 + r^2 + 1 = 3qr (Vieta), i.e.
+              consecutive odd-index Fibonacci primes -- none >= 250 in range.
+              Result: 55 cycles (321 717 nodes, 1528s), 1 disjoint pair
+              fitting in B, no triple. (t245_supply_cycles_1e20.json;
+              tools/divisor_square_supply_cycles.py.) At the 1e18 bound the
+              enumerator recovers the cycles inside both known clusters.
+          (3) Seeded searches (cycle primes forced into m, core + read-off
+              around them): all 56 give NO member. Positive control: seeding
+              1877 at 1e14 recovers member 34537682190000.
+          (4) Main search in RUST (tools/rust_family/), a line-for-line port
+              validated by IDENTICAL node counts and members against Python at
+              1e12 (1 832 796), 1e14 (37 450 482), 1e16 (300 318 563) and 1e18
+              (1 722 919 064; 188 members). Read-off below R = 1e6 uses
+              gcd(sigma_2(q^e), primorial(250..1e6)); checked against an
+              independent factorint on 3000 random (q,e,R): 3000/3000.
+              1e20: 159 724 items, 12 680 810 482 nodes, 11 437 s.
+          All 358 re-verified from scratch (sympy): 358/358. The 188 <= 1e18
+          are exactly the earlier set; 170 are new in (1e18, 1e20].
+          tau over all 358:
+             12:1  108:5  240:1  864:8  960:7  1200:2  1344:11  1620:4
+             1728:30  2160:20  3072:16  6720:2  6912:73  8640:17  10800:19
+             12096:47  12960:17  15360:11  21504:1  25920:26  27648:15
+             32400:2  34560:22  48384:1
+          New tau values: 21504, 27648, 32400, 48384. tau = 108: 5 members.
+          Members listed in math/theorems/t245_family_members_1e20.txt.
+          Solutions known: 361 = 358 family members + 130, 148480, 3039520.
+          Code: tools/divisor_square_family_1e14.py (resumable, chunked),
+          tools/divisor_square_clusters_general.py,
+          tools/divisor_square_family_verify.py.
+
+          COMPLETE AT m <= 1e22 (2026-09-28): EXACTLY 587 MEMBERS.
+          (1) Up to EIGHT primes >= 250: 1e22/60 = 1.667e20 < 250^9. Read-off
+              to depth 8.
+          (2) Supply cycles with product <= 1.667e20, enumerated in Rust
+              (tools/rust_family/src/bin/cycles.rs; length cap floor(log_250 B)
+              = 8, q < B^(1/3) = 5 503 212): 106 cycles, 1 285 123 nodes, 474 s;
+              no Fibonacci 2-cycle >= 250 in range. 16 disjoint cycle pairs fit
+              in B; no disjoint triple does. (t245_supply_cycles_1e22.json.)
+          (3) Seeded searches: 122 seeds (106 cycles + 16 pairs). Four give
+              members, and ALL FOUR are cycle-containing members the main search
+              cannot reach:
+                277226850795071720400 = 2^4*3^2*5^2*11*13*1291*4817^2*17977
+                  (seeds [1291, 4817^2] and [4817^2, 17977]: two 2-cycles
+                  sharing 4817^2)
+                1702491146631682328952 = 2^3*3^2*17^2*19*8011*8101^2*8191
+                3099271808728883001312 = 2^5*3^3*7^2*17*8011*8101^2*8191
+                4033972830409022319168 = 2^6*3*7*17*41*8011*8101^2*8191
+                  (seeds [8011, 8101^2] and [8101^2, 8191]: likewise sharing
+                  8101^2)
+              These are the first members outside the reach of core + read-off:
+              at 1e20 all 56 seeds gave nothing.
+          (4) Main search (Rust, depth 8): 199 793 items, 86 312 409 078 nodes,
+              34 307 s, 583 members. Overlap with the seeded set: 0.
+              583 + 4 = 587.
+          All 587 re-verified from scratch (sympy factorint of m:
+          p = sigma_2(m)/m - m integral, prime, p > m/2, p not dividing m;
+          direct divisor-square sums on the 4 cycle members and 40 random
+          others). The 358 <= 1e20 are exactly the earlier set; 229 are new in
+          (1e20, 1e22]. Largest: 9933475307461748064000
+          = 2^8*3^4*5^3*11^2*17*29*31*37^2*73*89*233, tau = 103680.
+          tau over all 587:
+             12:1  108:5  240:1  864:9  960:7  1200:2  1344:12  1620:4
+             1728:31  2160:21  3072:19  6720:2  6912:97  8640:18  10800:22
+             12096:64  12960:20  15360:38  21504:5  24576:2  25920:45
+             27648:62  32400:4  33792:13  34560:46  48384:4  60480:4
+             64800:1  76800:1  103680:27
+          New tau values: 24576, 33792, 60480, 64800, 76800, 103680.
+          Members listed in math/theorems/t245_family_members_1e22.txt.
+          Solutions known: 590 = 587 family members + 130, 148480, 3039520.
+
+          THE BLIND SPOT SEARCHED (2026-09-25). The gap left by the smooth
+          generator is a solution whose prefix CONTAINS a large prime.
+          That case has a bound of its own: if q is inside the prefix then
+          q <= d_k <= sqrt(n) = sqrt(mq), hence
+
+              q <= m.
+
+          So it is a two-parameter sweep over smooth m and prime q <= m,
+          with n = m*q. For q not dividing m the divisors of n are just
+          divs(m) merged with q*divs(m), so the merge can be done lazily and
+          abandoned the moment the running sum passes n. Code:
+          tools/divisor_square_bigprime.py.
+
+          Two slices run, both returning ONLY the already-known 3039520:
+
+              m smooth <= 3.0e5, q in [47, 20000]   30 659 612 pairs   195s
+              m smooth <= 1.5e6, q in [47,  6000]   26 425 130 pairs   218s
+
+          57 million (m,q) pairs, one solution, and it is the one already on
+          the list. 3039520 = 19360 * 157 with d_31 = 880, so 157 sits well
+          inside its prefix.
+
+          THIS IS A SEARCH, AND ITS SHAPE IS NARROW. It covers only n of the
+          form (43-smooth) * (one prime in the stated window). It does NOT
+          cover q <= 43 -- which is why 148480 = 5120 * 29, whose 29 is also
+          inside the prefix, does not appear in these runs; it was found by
+          the earlier unrestricted version. Nor does it cover two large
+          primes, nor a large prime squared.
+
+          THE TWO REMAINING GAPS CLOSED AS SEARCHES (2026-09-25).
+
+          q <= 43 IS NOT A SEPARATE FIBER -- IT IS n FULLY SMOOTH. If the
+          extra prime is at most 43 then n has no large prime at all, so
+          the case is "enumerate 43-smooth n and test the prefix". Over
+          n <= 3e9 that returns EXACTLY the three already known:
+          130, 1860, 148480. 3039520 is correctly absent, since 157 > 43
+          makes it non-smooth. Code: tools/divisor_square_smooth_n.py.
+
+          TWO LARGE PRIMES: n = m*q1*q2, m smooth, 47 <= q1 <= q2 prime
+          (q1 = q2 allowed, which covers a large prime squared). The
+          divisors are the four-way merge of A, q1A, q2A, q1q2A with
+          A = divs(m), done with a manual four-pointer merge and a
+          reachability prune -- the prefix can only use divisors below
+          sqrt(n), so a triple whose entire below-root divisor sum falls
+          short of n is skipped untested. Two slices:
+
+              m <=   5000, q in [47, 400]    2 854 272 triples   61s  none
+              m <=  60000, q in [47, 250]    5 068 765 triples  185s  none
+              m <=   5000, q in [47, 300]    1 634 825 triples   18s  none
+              m <=  25000, q in [47, 300]    4 572 473 triples   66s  none
+              m <= 100000, q in [47, 430]   20 212 677 triples  429s  none
+              m <=   2000, q in [47,2500]   26 624 731 triples  177s  none
+              m <=    800, q in [47,6000]   16 751 117 triples   86s  none
+
+          77.7 million triples, ZERO solutions. The last two slices take the
+          cheap direction -- small m, large q -- and reach q2 up to 6000.
+          Code: tools/divisor_square_twoprime.py.
+
+          THE PRUNE BARELY BITES, WHICH IS ITSELF INFORMATIVE. Precomputing
+          prefix sums of a^2 over divs(m) turns the reachability test into
+          four binary searches, doubling throughput. But it rejects only 4%
+          of triples at the widest slice -- the sum of squares of divisors
+          below sqrt(n) almost always DOES reach n. What kills each triple
+          is landing on n exactly, not failing to reach it, and no cheap
+          test sees that. Cost is therefore triples * tau(m), and the rate
+          falls from 93k/s at m <= 5000 to 50k/s at m <= 1e5 as tau grows.
+          Pushing m is expensive; pushing q is cheap.
+
+          THREE AND FOUR LARGE PRIMES (2026-09-25). The case splits before
+          any search is needed: if EVERY large prime lies outside the
+          prefix, the prefix divides m and the shape is already covered by
+          the smooth generator, which saturated. So the only new territory
+          has at least one large prime inside, and that one still obeys
+          q <= d_k <= sqrt(n).
+
+          Divisors of n = m * q1 * ... * qr are divs(m) times every subset
+          product of the q's -- 2^r sorted streams, merged lazily. The
+          reachability prune runs first: if the squares of all divisors
+          below sqrt(n) do not reach n, the merge is never started.
+
+              r = 3   m <= 3000, q in [47,150]    1 342 139 combos   44s
+              r = 3   m <= 9000, q in [47,200]   10 333 835 combos  418s
+              r = 4   m <= 4000, q in [47,130]    2 943 504 combos  209s
+
+          14.6 million combinations, ZERO solutions at r = 3 and r = 4.
+          Code: tools/divisor_square_multiprime.py.
+
+          SO ALL FOUR SHAPES HAVE NOW BEEN SWEPT, none completely:
+              n smooth                       n <= 3e9        3 found
+              smooth * one prime, outside    m <= 6e7        7 found
+              smooth * one prime, inside     57M pairs       1 found
+                        smooth * two primes           77.7M triples    0 found
+              smooth * three primes         11.7M combos     0 found
+              smooth * four primes           2.9M combos     0 found
+          Every one is a search certificate with the bounds above. No shape
+          is closed by proof. All eight known solutions carry at most ONE
+          large prime; nothing with two or more has ever been found.
+
+          WHERE THE TWO REGIMES SIT. Of the eight known solutions, 148480
+          and 3039520 have their largest prime INSIDE the prefix; the four
+          at k=107 have it just OUTSIDE -- 78936002964 has d_107 = 194922
+          and largest prime 202481. That near-miss is worth noting and is
+          not explained.
+
+          78936002964 IS NOT DIVISIBLE BY 5. It ends in 4. Its 216 divisors
+          were built from the factorization, sorted, and the 107 smallest
+          have squares summing to exactly n. So:
+
+            "5 | n"        FALSE -- 78936002964
+            "10 | n"       FALSE -- same
+            "v5(n) = 1"    FALSE -- 41251514850 and 54116036100 have 5^2
+
+          All three patterns recorded from the first four solutions are
+          refuted by the next three. The k=4 proof of 5 | n stands and is
+          unaffected: it proves 5 | n AT k=4 only, via 4 not dividing n.
+
+          The generator is a FINDER, not a complete search: it only sees
+          solutions whose whole prefix divides a proper divisor m. 3039520
+          is invisible to it, because 157, 314, 628 and 785 sit inside that
+          prefix. Completeness below 1e9 still rests on the sieve.
+          Code: tools/divisor_square_generator.py.
+
+          EMPIRICAL STRUCTURE, all four solutions, none of it proved:
+            - every n is divisible by 10
+            - every n has 5^1 EXACTLY, never 5^0 or 5^2
+            - every n carries one large prime: 13, 31, 29, 157
+            - k runs 4, 11, 19, 31 -- gaps 7, 8, 12
+            - only k=4 is even; 11, 19, 31 are all odd, and none divisible
+              by 3, so both of this file's lemmas stay silent on all three
+
+          GF(37): 19 (CAS_EXT), 10 (DECADE_ANCHOR), 36 = -1 (NEG), 7 (D7).
+          Four solutions, four different orbits, no shared residue and no
+          orbit repeated. With 12 orbits and 4 draws that is unremarkable on
+          its own -- recorded as a fact, not a pattern.
 
   130 = 1² + 2² + 5² + 10² = 1 + 4 + 25 + 100 = 130 ✓
   divisors of 130: [1, 2, 5, 10, 13, 26, 65, 130]
   130 = 2 × 5 × 13
 
-  Cross-k uniqueness (verified computationally to n = 500 000 000):
+  Per-k results (the cross-k uniqueness claim is retracted above):
     k=2: IMPOSSIBLE by proof (see below). Zero solutions for all n.
     k=3: IMPOSSIBLE by proof — PROVED 2026-09-19, see below. Not just n odd.
     k=4: EXACTLY ONE solution: n = 130 — PROVED 2026-09-19, see below.
     k=5: n EVEN impossible by proof (2026-09-19). n odd: open, search only.
     k=6: IMPOSSIBLE by proof — PROVED 2026-09-19, see below.
-    k=7: 4∤n IMPOSSIBLE by proof (2026-09-20); 4|n and n odd open.
-    k=8: 4∤n IMPOSSIBLE by proof (2026-09-19); 4|n open, 23 live shapes.
+    k=7: n EVEN IMPOSSIBLE by proof.  4∤n (2026-09-20); 4|n (2026-10-02,
+         k7_even_complete.py).  n odd OPEN, reduced
+         (k7_odd_reduction.py): complete superset of 512 shapes; all with 5-6
+         primes and 67 bounded branches proved empty; 222 unbounded branches
+         (2-4 primes) remain, listed in k7_odd_open_branches.txt.
+    k=8: IMPOSSIBLE by proof.  4∤n (2026-09-19); 4|n (2026-10-02,
+         k8_case_b_complete.py: complete superset of 304 shapes, all killed).
     k=9: both EVEN branches empty under search (2026-09-21), shape lists
          SATURATED. n odd: shape list now BUILT from the count lemma, not
          sampled — 7180 shapes, all EMPTY; t=6 (5927) PROVED empty by
@@ -354,6 +1471,32 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   It fires on ZERO shapes with c = 3, where the 3-part is never {1,3,9}
   alone, so the 91 does not appear.
 
+
+  ADDED 2026-09-22 — SATURATION CHECKED AT k=7 AND k=8, AND THE SPLIT IS
+  STRUCTURAL.  The k=9 odd branch showed a census can keep finding new
+  shapes past any bound, so the k=7 and k=8 trees quoted above were tested
+  the same way.  Shapes first realized at or below B:
+
+      k=7, all n        177 @100k   203 @600k   209 @1.2M   209 @1.5M
+      k=8, 4|n           84 @200k    85 @600k    85 @1.2M    85 @2.0M
+      k=8, n = 2 mod 4   73 @200k    77 @600k    79 @1.2M    80 @1.5M
+      k=8, n odd        197 @200k   241 @600k   265 @1.2M   272 @1.5M
+
+  NO FILED CLAIM IS THREATENED.  k=7 is flat at 209, so every k=7 branch is
+  saturated.  At k=8 the only branch still open is 4|n, and it is flat at
+  85 from 400000 to 2000000 with ZERO shapes first appearing above 600000.
+  The two branches that keep growing, n odd and n = 2 mod 4, are exactly
+  the ones closed by PROOF (4 does not divide n, 2026-09-19), where the
+  shape count is irrelevant because no shape enumeration is relied on.
+
+  THE PATTERN IS STRUCTURAL, not luck.  Every EVEN branch tested saturates
+  and every ODD branch keeps climbing: k=8 odd 197->272 and still rising,
+  k=9 odd 83->101 and still rising, while k=8 4|n, k=9 4|n and k=9 4-not-n
+  all go flat and stay flat.  The reason is the one identified for k=9: an
+  odd n has no small even divisors to fill the prefix, so the nine smallest
+  divisors can carry many distinct primes, and a shape with t primes is not
+  realizable below roughly their product.  Even branches cap t and saturate
+  quickly; odd branches do not, so only they need the enumerator.
 
   ADDED 2026-09-21 — THE t = 6 LAYER IS PROVED EMPTY.  5927 of the 7180
   shapes, 82.5% of the built list, die to a size argument with NO search
@@ -720,6 +1863,9 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   check.  Every 'cand' figure elsewhere in this file counts the same weak
   thing and should be read that way.
 
+  [UPDATE 2026-10-02: all ten -- and the whole 4|n branch -- are now PROVED
+   empty in k7_even_complete.py (complete LP superset of 22 shapes, size
+   bound, finite p = 3 check).  k=7 is impossible for even n.]
   STATUS WORDING.  These ten rows are SEARCH certificates over p < 20000,
   not impossibility certificates.  k=7 as a whole is OPEN: one shape proved,
   eighty searched.
@@ -769,6 +1915,8 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
   the structure produces, not a proof that no other a occurs higher up.)
 
   ADDED 2026-09-19 — k=8: HALF PROVED, HALF OPEN.
+  [UPDATE 2026-10-02: the open half is PROVED -- see k8_case_b_complete.py.
+   k=8 is impossible.]
   The parity lemma fires (k even, so p = 2), but k=8 does NOT close the way
   k=6 did, and the reason is countable: k=6 leaves four terms after 1 and 4,
   so mod 4 gives a in {1,3}; k=8 leaves six, so a in {1,3,5}. The extra
@@ -876,6 +2024,14 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
       pinning are mutually unsatisfiable there, and nothing reaches the
       divisor check.  Whether that is provable rather than range-limited is
       worth asking; it would upgrade four rows from search to proof.
+      SETTLED 2026-10-02 (k8_case_b_shape_mod8.py): all four are PROVED
+      empty -- three by shape-level mod 8 (a shape fixes n mod 8 AND whether
+      8 is listed, hence whether 8 | n), one by size (n >= 4pqr > 16p^3 >
+      21 + 53p^2 > n).  The same mod-8 test also kills
+      1 2 2^2 p q 2p 2q r, 1 2 2^2 2^3 p q 2p r and 1 2 2^2 2^3 p 2p q r:
+      7 of the 13 proved, 6 open.  The other six: PROVED 2026-10-02 by the
+      missing-divisor rule plus size (k8_case_b_last_six.py).  All 13 are
+      now proved empty; case B is closed iff the 33-shape list is complete.
 
   (b) LOWERING the bound STRENGTHENED two rows.  At p < 100000 the skip
       column is 989 -- primes where C_2 exceeded the 1e16 factoring cap and
@@ -1008,9 +2164,38 @@ RESULT:   n = 130 is the UNIQUE solution across ALL k ≥ 2.
       impossible for q >= 5.  So r = q', the next prime, and what is left is
           n = 10 + 10q^2 + q'^2,   q | 10 + q'^2,   q' | 10(1 + q^2).
 
-  That two-prime system has exactly ONE solution with 5 <= q < 3000 and
-  q' < 200000, namely (q, q') = (13, 17), n = 1989 = 3^2 * 13 * 17 -- which
-  fails the case's own hypothesis, since 9 | 1989.  So the case is empty as
+  ADDED 2026-09-23 -- THE SYSTEM SHARPENS, AND THERE ARE TWO SOLUTIONS.
+
+  q' | 10(1 + q^2) with q' prime and q' > q >= 5 gives q' does not divide 10,
+  so the condition is really
+
+      q' | q^2 + 1.
+
+  Hence q^2 = -1 (mod q'), so -1 is a quadratic residue mod q', so
+
+      q' = 1 (mod 4)   FORCED.
+
+  That also changes how the system is searched: enumerate the prime divisors
+  of q^2 + 1 rather than sweeping q'. Over q < 1000000 the full system
+
+      q' | q^2 + 1,   q | q'^2 + 10,   q < q' < q^2
+
+  has exactly TWO solutions, not one:
+
+      q = 13      q' = 17        n = 1989            = 3^2 * 13 * 17
+      q = 53197   q' = 69073     n = 33070287429
+
+  Both have q' = 1 (mod 4) as forced. BOTH FAIL THE CASE HYPOTHESIS: 9 | n in
+  each. The earlier line here said "exactly ONE solution with 5 <= q < 3000
+  and q' < 200000"; that was correct for its bounds and is superseded.
+
+  THE 9|n COINCIDENCE IS NOT A MECHANISM, which is worth recording because
+  two out of two looks like a law. 9 | n requires (q^2, q'^2) = (1,7), (7,1)
+  or (4,4) mod 9. Sweeping 4560 pairs with q' | q^2 + 1 and q < q' < q^2,
+  WITHOUT imposing q | q'^2 + 10, those classes occur 1548 times -- 33.9%,
+  which is the 1-in-3 the three admissible pairs out of nine predict. Two
+  solutions both landing there is p ~ 0.11, not a law. The case is still
+  open and still search-only.  So the case is empty as
   far as it has been searched and NOT proved empty: there is no congruence
   obstruction, because 1 + q^2 + q'^2 = 0 (mod 9) holds only for the residue
   pairs (1,7), (7,1), (4,4) and the others are admissible.
@@ -1814,7 +2999,51 @@ def main():
     else:
         print("      (shape file absent; enumeration check skipped)")
 
-    print("\n  k=2,3,4,6 PROVED; k=5 even and k=8 with 4∤n proved; rest open.")
+    print("\n  CORRECTION 2026-09-25: the cross-k uniqueness claim was FALSE.")
+    def _divs(x):
+        d = []; i = 1
+        while i * i <= x:
+            if x % i == 0:
+                d.append(i)
+                if i != x // i: d.append(x // i)
+            i += 1
+        return sorted(d)
+    for _n, _k in ((130, 4), (1860, 11), (148480, 19), (3039520, 31),
+                   (41251514850, 107), (54116036100, 107), (78936002964, 107),
+                   (1059758860356, 107), (676358763167556, 107),
+                   (3238006053537840, 239), (408390181577292600, 863),
+                   (466477390306128600, 863), (9335069854188787800, 863),
+                   (15859587703447668600, 863), (41418467556867601200, 2159),
+                   (45173391619879380000, 959)):
+        _D = _divs(_n) if _n < 10**7 else None
+        if _D is None:
+            continue
+        assert sum(d * d for d in _D[:_k]) == _n, (_n, _k)
+        print("      n = %-7d k = %-3d smallest %d divisors sum of squares = n OK"
+              % (_n, _k, _k))
+    print("      130 is unique AT k=4 only. Complete search over ALL k to")
+    print("      n < 10^9 gives exactly four solutions: 130, 1860, 148480,")
+    print("      3039520 -- three of them under the 5e8 bound this file")
+    print("      claimed to have verified.")
+    print("      k=11 and k=19: neither 2|k nor 3|k, so the parity and mod-3")
+    print("      lemmas are both silent there. The solutions sit exactly where")
+    print("      the machinery says nothing.")
+
+    print("\n  THEOREM: at most one prime of n exceeds d_k, and it is squarefree.")
+    from sympy import factorint as _fi, isprime as _ip
+    for _n, _k in ((130, 4), (1860, 11), (148480, 19), (3039520, 31),
+                   (41251514850, 107), (54116036100, 107),
+                   (78936002964, 107), (1059758860356, 107)):
+        _D = [1]
+        for _p, _e in _fi(_n).items(): _D = [x * _p ** i for x in _D for i in range(_e + 1)]
+        _D = sorted(_D); _dk = _D[_k - 1]
+        _r = 1
+        for _p, _e in _fi(_n).items():
+            if _p > _dk: _r *= _p ** _e
+        assert _r <= _dk * _dk and (_r == 1 or _ip(_r)) and _n // _r >= _k, _n
+    print("      r in {1, one prime} and r <= d_k^2 on all eight solutions")
+
+    print("\n  k=2,3,4,6,8 PROVED; k=5 even and k=7 even proved (k7_even_complete.py); rest open.")
 
     print("\n" + "=" * 70)
     print("THEOREM 245 VERIFIED")

@@ -166,11 +166,9 @@ ORBITS = {
 }
 
 
-def orbit_of(v):
-    v = v % P
-    if v == 0:
-        return 'SEAM'
-    return next((n for n, s in ORBITS.items() if v in s), '?')
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_v1 as orbit_of
 
 
 def phi3(n):

@@ -55,7 +55,7 @@ def is_prime_miller_rabin(n, k=12):
     while d % 2 == 0:
         r += 1
         d //= 2
-    witnesses = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
+    witnesses = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41]
     for a in witnesses:
         if a >= n: continue
         x = pow(a, d, n)

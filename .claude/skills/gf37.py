@@ -163,13 +163,9 @@ def order_mod(a, n, max_steps=None):
     return k
 
 
-def rule30(n, bits=8):
-    s = format(n % (1 << bits), f'0{bits}b')
-    out = ''
-    for i in range(bits):
-        L, C, R = int(s[(i - 1) % bits]), int(s[i]), int(s[(i + 1) % bits])
-        out += str(L ^ (C | R))
-    return int(out, 2)
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import rule30_ring as rule30
 
 
 def factor(n):

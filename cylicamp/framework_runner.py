@@ -42,17 +42,14 @@ ORBIT_137_MAP = {
 }
 
 
-def orbit_of(v):
-    v = v % P
-    if v == 0:
-        return 'SEAM'
-    return next((name for name, s in ORBITS.items() if v in s), '?')
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_v1 as orbit_of
 
 
-def dr(n):
-    if n == 0:
-        return 9
-    return (abs(n) - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9 as dr
 
 
 def map_137(n):
@@ -70,18 +67,10 @@ def orbit_cycle(n):
     return [a, b, c]
 
 
-def digit_sum(n):
-    return sum(int(d) for d in str(abs(n)))
+from functions import digit_sum_abs as digit_sum
 
 
-def is_prime(n):
-    if n < 2:
-        return False
-    if n == 2:
-        return True
-    if n % 2 == 0:
-        return False
-    return all(n % i != 0 for i in range(3, int(n**0.5) + 1, 2))
+from functions import is_prime
 
 
 def find_mirrors(numbers):

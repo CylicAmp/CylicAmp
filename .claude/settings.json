@@ -1,5 +1,17 @@
 {
   "env": {
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "8000"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/git_identity.sh\""
+          }
+        ]
+      }
+    ]
   }
 }

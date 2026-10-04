@@ -142,11 +142,9 @@ ORBITS = {
 }
 
 
-def orbit_of(v):
-    v = v % P
-    if v == 0:
-        return 'SEAM'
-    return next((name for name, s in ORBITS.items() if v in s), '?')
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_v1 as orbit_of
 
 
 def run_assertions():
@@ -175,6 +173,14 @@ def run_assertions():
     # det = 0*(1*0-0*0) - 4*(0*0-0*2) + 1*(0*0-1*2) = 0 - 0 - 2 = -2
     jacobian_at_origin = -2
     assert jacobian_at_origin == -2
+    # Full symbolic check (added 2026-09-29): det(JF) is the constant -2 for ALL x, y, z,
+    # not only at the origin. This is what makes F a counterexample.
+    import sympy as _sp
+    _x, _y, _z = _sp.symbols('x y z')
+    _F = _sp.Matrix([(1 + _x*_y)**3*_z + _y**2*(1 + _x*_y)*(4 + 3*_x*_y),
+                     _y + 3*_x*(1 + _x*_y)**2*_z + 3*_x*_y**2*(4 + 3*_x*_y),
+                     2*_x - 3*_x**2*_y - _x**3*_z])
+    assert _sp.expand(_F.jacobian([_x, _y, _z]).det()) == -2
 
     # Mod-37 reductions of Alpöge map parameters (coincidences only)
     assert 7 in ORBITS['D7']               # degree of Alpöge map

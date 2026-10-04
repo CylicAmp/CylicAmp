@@ -81,8 +81,22 @@ from the structure. Declare the miss condition before computing.
 **7. Prove** — `theorem-build`. A surviving observation becomes a statement
 with hypotheses, a proof, a runnable check, and a falsification criterion.
 
+**7a. Reduce to axioms** — `axiom-reduce`. Smallest set of axioms that
+forces the result; merge duplicates; settle conventions the numbers fix.
+
+**7b. Connect** — `connect-theorems`. Which existing theorems it reinforces,
+refines, explains or hands off to — each connection tested and asserted.
+
+**7c. Try to disprove** — `try-to-disprove`. Edge values, published bounds,
+set identities, and our own summaries. Fix what fails before going on.
+
 **8. Interpret** — `claim-grade`. Last. Level 1, 2 or 3, with the grade
 written into the record.
+
+**9. Save** — commit the asserted file in the same turn (CLAUDE.md). For
+anything the owner wants tested elsewhere, `standalone-export`. For the
+owner's own notation arriving as a page or list, start with
+`notation-decode`.
 
 ## The standing rule
 

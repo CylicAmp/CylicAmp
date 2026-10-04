@@ -53,9 +53,9 @@ ORBITS = {
 }
 
 
-def dr(n):
-    n = abs(n)
-    return 0 if n == 0 else 1 + (n - 1) % 9
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr
 
 
 def tri(n):
@@ -349,8 +349,7 @@ def rev_of(n):
     return int(str(abs(n))[::-1])
 
 
-def digit_sum(n):
-    return sum(int(c) for c in str(abs(n)))
+from functions import digit_sum_abs as digit_sum
 
 
 def pair_report(a, b):

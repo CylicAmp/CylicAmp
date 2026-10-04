@@ -1,0 +1,95 @@
+[
+  {
+    "bottleneck_score": 0.964,
+    "component_confidence": 0.95,
+    "component_id": "comp_evt_301",
+    "diagnostics": [
+      "TIED_PARENT: evt_303 has equal-weight parents ['evt_301', 'evt_302']; canonical choice evt_301."
+    ],
+    "discarded_edges": [
+      {
+        "classification": "ACCEPTED",
+        "edge_type": "CAUSAL_REPLY",
+        "evidence_vector": {
+          "session_match": 1.0,
+          "source_cohesion": 0.05,
+          "temporal_affinity": 0.82
+        },
+        "ordering_basis": "strict_timestamp_order",
+        "source_id": "evt_302",
+        "target_id": "evt_303",
+        "weight": 0.964
+      }
+    ],
+    "events": [
+      {
+        "event_confidence": 1.0,
+        "event_id": "evt_301",
+        "evidence_completeness": "SUFFICIENT",
+        "graph_status": "AMBIGUOUS_COMPONENT",
+        "payload_integrity": "COMPLETE",
+        "role": "user",
+        "session_id": "sess_900",
+        "source_sequence": 1,
+        "timestamp": "2026-03-08T18:00:00+00:00",
+        "transport_index": 0
+      },
+      {
+        "event_confidence": 0.9,
+        "event_id": "evt_302",
+        "evidence_completeness": "SUFFICIENT",
+        "graph_status": "AMBIGUOUS_COMPONENT",
+        "payload_integrity": "COMPLETE",
+        "role": "user",
+        "session_id": "sess_900",
+        "source_sequence": 2,
+        "timestamp": "2026-03-08T18:00:00+00:00",
+        "transport_index": 1
+      },
+      {
+        "event_confidence": 0.95,
+        "event_id": "evt_303",
+        "evidence_completeness": "SUFFICIENT",
+        "graph_status": "AMBIGUOUS_COMPONENT",
+        "payload_integrity": "COMPLETE",
+        "role": "model",
+        "session_id": "sess_900",
+        "source_sequence": null,
+        "timestamp": "2026-03-08T18:04:15+00:00",
+        "transport_index": 2
+      }
+    ],
+    "mean_event_confidence": 0.95,
+    "rejected_edges": [],
+    "root_id": "evt_301",
+    "selected_arborescence": [
+      {
+        "classification": "ACCEPTED",
+        "edge_type": "FRAGMENT_CONTINUATION",
+        "evidence_vector": {
+          "session_match": 1.0,
+          "source_cohesion": 0.05,
+          "temporal_affinity": 1.0
+        },
+        "ordering_basis": "protocol_sequence_continuity",
+        "source_id": "evt_301",
+        "target_id": "evt_302",
+        "weight": 1.0
+      },
+      {
+        "classification": "ACCEPTED",
+        "edge_type": "CAUSAL_REPLY",
+        "evidence_vector": {
+          "session_match": 1.0,
+          "source_cohesion": 0.05,
+          "temporal_affinity": 0.82
+        },
+        "ordering_basis": "strict_timestamp_order",
+        "source_id": "evt_301",
+        "target_id": "evt_303",
+        "weight": 0.964
+      }
+    ],
+    "status": "AMBIGUOUS_COMPONENT"
+  }
+]

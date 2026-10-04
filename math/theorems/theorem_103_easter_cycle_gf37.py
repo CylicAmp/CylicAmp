@@ -151,10 +151,9 @@ BASIN_Y    = frozenset({17, 22, 35})
 PR         = frozenset({2,5,13,15,17,18,19,20,22,24,32,35})
 
 
-def dr(n):
-    while n > 9:
-        n = sum(int(d) for d in str(n))
-    return n
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_iter as dr
 
 
 # ── Lemma 103.1 — Annual epact ────────────────────────────────────────────────

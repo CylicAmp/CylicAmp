@@ -23,7 +23,7 @@ The full multiplicative group (Z/37Z)* has order φ(37) = 36 = 4 × 9.
 
 **2 is a primitive root mod 37** with order 36 — verified by the primitive root test theorem (`math/theorems/primitive_root_test.py`): g is a primitive root mod p iff g^((p-1)/q) ≢ 1 (mod p) for every prime q dividing p-1. For p=37, p-1=36, prime factors {2,3}: checking 2^18 ≡ 36 ≠ 1 and 2^12 ≡ 26 ≠ 1 confirms ord₃₇(2) = 36.
 
-The ×2 mod 37 orbit (`math/theorems/abcabc_mod37_orbit.py`) cycles through all 36 non-zero residues. This is the **algebraic certificate** that the orbit is complete.
+The ×2 mod 37 orbit (`math/lemmas/abcabc_mod37_orbit.py`) cycles through all 36 non-zero residues. This is the **algebraic certificate** that the orbit is complete.
 
 The 12 three-cycles under the 137-map split into two groups of 6:
 - Group A: cycle sums ≡ 37 (DR = 1)
@@ -70,7 +70,7 @@ Any 3-digit number ABC forms ABCABC = ABC × 1001. Since 1001 = 27 × 37 + 2, we
 
 **ABCABC ≡ 2 · ABC (mod 37)**
 
-This means every 6-digit repunit of a 3-digit block lands in the orbit of 2 × the original value. Since 2 is a primitive root of 37, this connects every 3-digit number to the full 36-element orbit (`math/theorems/abcabc_mod37_orbit.py`).
+This means every 6-digit repunit of a 3-digit block lands in the orbit of 2 × the original value. Since 2 is a primitive root of 37, this connects every 3-digit number to the full 36-element orbit (`math/lemmas/abcabc_mod37_orbit.py`).
 
 The inverse operation: given a residue r in the orbit, recover ABC via `ABC = r × 19 mod 37` (since 2⁻¹ ≡ 19 mod 37).
 

@@ -15,7 +15,7 @@ import pathlib
 from collections import defaultdict
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-DIRS = ["math/theorems", "math/primes", "math/turbulence", "cylicamp"]
+DIRS = ["math/theorems", "math/lemmas", "math/primes", "math/turbulence", "cylicamp"]
 ORBITS = ["IC", "DARK_A", "C3", "CAS_EXT", "TESLA", "D7", "SA_ST_A",
           "NEG_H", "C9", "NQR17", "SEED", "SA_ST_B", "SEAM"]
 

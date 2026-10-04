@@ -33,19 +33,16 @@ ORBITS = {
     "SA_ST_B": {21, 25, 28},
 }
 
-def orbit_of(x):
-    r = x % 37
-    if r == 0: return "SEAM"
-    for name, s in ORBITS.items():
-        if r in s: return name
-    raise ValueError(f"{x} mod 37 unclassified")
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of
 
 def mod_inv(n, mod):
     return pow(n, mod - 2, mod)
 
-def legendre(a, p=37):
-    if a % p == 0: return 0
-    return 1 if pow(a, (p-1)//2, p) == 1 else -1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import legendre37 as legendre
 
 def on_curve(x, y, A, B, p):
     return (y*y - x**3 - A*x - B) % p == 0
@@ -103,13 +100,9 @@ def point_order(Gx, Gy, A, B, p, group_order):
             return d
     return group_order
 
-def is_prime(n):
-    if n < 2: return False
-    if n == 2: return True
-    if n % 2 == 0: return False
-    for i in range(3, int(n**0.5)+1, 2):
-        if n % i == 0: return False
-    return True
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import is_prime
 
 def dr(n):
     n = abs(n)

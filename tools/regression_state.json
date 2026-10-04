@@ -199,7 +199,7 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/theorems/abcabc_mod37_orbit.py": {
+ "math/lemmas/abcabc_mod37_orbit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -594,7 +594,7 @@
   "secs": 0.5,
   "status": "PASS"
  },
- "math/theorems/heartbeat_3cycle.py": {
+ "math/lemmas/heartbeat_3cycle.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -1159,7 +1159,7 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/theorems/sigma3_eisenstein_gf37.py": {
+ "math/lemmas/sigma3_eisenstein_gf37.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -2119,7 +2119,7 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/theorems/theorem_310_digit_chain_seam_gf37.py": {
+ "math/lemmas/theorem_310_digit_chain_seam_gf37.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -2134,7 +2134,7 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/theorems/theorem_313_add_nine_reversal_diagonal_gf37.py": {
+ "math/lemmas/theorem_313_add_nine_reversal_diagonal_gf37.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -2609,7 +2609,7 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/theorems/twin_prime_dr_pair.py": {
+ "math/lemmas/twin_prime_dr_pair.py": {
   "msg": "",
   "secs": 1.6,
   "status": "PASS"

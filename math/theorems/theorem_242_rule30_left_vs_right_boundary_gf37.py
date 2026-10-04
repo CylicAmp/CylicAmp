@@ -191,8 +191,9 @@ def orb(n):
         if r in s: return name
 
 
-def rule30(l, c, r):
-    return (30 >> (4*l + 2*c + r)) & 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import rule30_cell as rule30
 
 
 def rule30_step(row):

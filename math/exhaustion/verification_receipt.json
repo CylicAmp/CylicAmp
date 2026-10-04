@@ -1,0 +1,10 @@
+{
+  "epsilon": 0.0001,
+  "family": "n=6*2^k",
+  "first_passing_n": 768,
+  "predecessor_n": 384,
+  "g_384": 0.00021027477138657602,
+  "g_768": 5.2568692831655994e-05,
+  "all_assertions_passed": true,
+  "stages_checked_through": 1536
+}

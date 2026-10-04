@@ -85,8 +85,9 @@ SOVEREIGN_TARGETS  = {3, 12, 21, 30}
 ORBIT_11           = {11, 27, 36}
 SA_ST_CB_O11          = SOVEREIGN_ANCHORS | SOVEREIGN_TARGETS | CASCADE_BASE | ORBIT_11
 
-def dr(n):
-    return (n - 1) % 9 + 1
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr9_signed as dr
 
 # ── I. Row numbers ────────────────────────────────────────────────────────────
 

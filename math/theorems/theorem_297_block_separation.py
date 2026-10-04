@@ -120,14 +120,9 @@ def sixth_powers(p):
     return {pow(x, 6, p) for x in range(1, p)}
 
 
-def sieve(n):
-    b = [True] * (n + 1)
-    b[0] = b[1] = False
-    for i in range(2, isqrt(n) + 1):
-        if b[i]:
-            for j in range(i * i, n + 1, i):
-                b[j] = False
-    return [i for i in range(n + 1) if b[i]]
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import primes_upto as sieve
 
 
 # ─── Block 1: everything follows from C_36 ──────────────────────────────────

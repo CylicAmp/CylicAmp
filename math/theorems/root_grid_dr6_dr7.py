@@ -27,12 +27,12 @@ Logic Reduction formula: LR(a,b) = a+b+b+a = 2(a+b) = 2×digit_sum
 """
 
 
-def dr(n):
-    return (n - 1) % 9 + 1 if n > 0 else 0
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import dr_pos as dr
 
 
-def digit_sum(n):
-    return sum(int(d) for d in str(n))
+from functions import digit_sum
 
 
 def logic_reduction(n):

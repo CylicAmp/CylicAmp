@@ -129,15 +129,9 @@ _ORBIT_NAMES = {
 _CROSS_NAMES = {'SA': SA, 'ST': ST, 'CB': CB}
 
 
-def orbit_of(r: int) -> str:
-    """Return the 137-map orbit name for residue r (0 → 'SEAM')."""
-    r = r % P
-    if r == 0:
-        return 'SEAM'
-    for name, s in _ORBIT_NAMES.items():
-        if r in s:
-            return name
-    return '?'
+import sys as _sys, pathlib as _pl
+_sys.path.append(str(next(p for p in _pl.Path(__file__).resolve().parents if (p / "functions.py").exists())))
+from functions import orbit_of_v1 as orbit_of
 
 
 def cross_classes(r: int) -> list:
