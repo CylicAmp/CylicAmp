@@ -50,6 +50,14 @@ THE WINDOW LINES (owner, 2026-10-04):
   (492/357/816), as is the doubled set {1, 5, 9}. The Lo Shu has 8 lines out of
   84 possible triples, so a triple landing on one is about 1 in 10.
 
+MIXING (owner, 2026-10-04, first example): 33+53 = 8+6 = 1+4 = 5 -- the same
+  5 as 24~62. 33 = 24 + 9 and 53 = 62 - 9: moving 9 from one number to the
+  other keeps each digit sum (6 and 8) and the total (86), so the result is
+  forced to repeat. (Owner's fuller account of mixing, "instead of 246 ...",
+  still to come.)
+  Owner's lists are both circles of each set: 795 -> 579 -> 957, and
+  861 -> 186 -> 618 with the mirror circle 168 -> 816 -> 681 -- all six orders.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -126,6 +134,11 @@ LS = [[4, 9, 2], [3, 5, 7], [8, 1, 6]]
 assert magic(LS)
 LINES = [set(r) for r in LS] + [set(c) for c in zip(*LS)] + [{4, 5, 6}, {2, 5, 8}]
 assert {1, 6, 8} in LINES and {1, 5, 9} in LINES and {5, 7, 9} not in LINES
+
+assert (24 + 9, 62 - 9) == (33, 53) and 33 + 53 == 24 + 62 == 86
+assert (ds(33), ds(53)) == (ds(24), ds(62)) == (6, 8) and dr(6 + 8) == 5
+assert cycle("795", rot_l) == ["795", "957", "579"] and set(cycle("795", rot_r)) == {"795", "579", "957"}
+assert set(cycle("861", rot_r)) | set(cycle("168", rot_r)) == {"".join(p) for p in permutations("168")}
 
 if __name__ == "__main__":
     for m in MAGIC:
