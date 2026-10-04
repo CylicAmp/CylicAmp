@@ -34,6 +34,24 @@ METHOD 2 -- math/theorems/explicit_formula.py (pi_explicit), CORRECTED TODAY
      91128     8811   8856.12    8812.82     8813.13
   Li alone is 23-45 too high; the zeros remove that excess.
 
+  ALL 144 ROWS (owner: "run the ladder through the zeros to row 144"; table in
+  math/lemmas/data/ladder_explicit_formula_rows_1_144.json):
+    Li alone is 22.2 to 99.5 too high at every row.
+    10 zeros: worst error 10.51, mean 3.14.  144 zeros: worst 12.63 (row 143,
+    898296), mean 4.01; rounds to the exact count at 20 rows.
+    Rows 141-144: 674292 pi 54634 (144 zeros 54628.23), 786294 pi 62936
+    (62934.43), 898296 pi 71165 (71152.37), 911298 pi 72116 (72104.92).
+    Every error is under 0.19 x sqrt(x)/ln(x).
+  MORE ZEROS, NOT MONOTONE: 144 zeros beat 10 at only 51 of 144 rows. A
+  truncated sum over zeros oscillates as terms are added, so this is expected,
+  and it does converge -- with 1000 zeros (data/zeta_zeros_gamma_1_1000.json):
+       row       10      144      300      600     1000   (error vs exact pi)
+       12312   +0.36    -0.37    +0.09    +0.34    +0.00
+      123102   -1.67    -0.08    +0.22    -1.47    -0.51
+      674292   -3.04    -5.77    -1.53    +0.86    -0.25
+      898296   -5.48   -12.63    -4.17    -5.44    -4.22
+      911298   -8.63   -11.08    -1.94    +2.94    +1.72
+
 METHOD 3 -- math/primes/riemann_zeta_zeros.py (two-digit chain)
   For digits d1, d2: |d1-d2|, DR(d1+d2), chain = DR(DR(d1+d2) + DR(|d1-d2|)).
   On the ladder's opening pair d1 = DR(a), d2 = DR(a+1), the step DR(d1+d2) IS
@@ -108,6 +126,22 @@ assert all(chain2(dr(a), dr(a + 1))[0] == dr(2 * a + 1) for a in range(1, 1000))
 mp.mp.dps = 45
 for n, s, pos in ((39, "45918", 16), (77, "23532", 15), (144, "89880", 15)):
     assert mp.nstr(mp.zetazero(n).imag, 40).replace(".", "").find(s) == pos
+
+import json
+DATA = ROOT / "math/lemmas/data"
+T144 = json.loads((DATA / "ladder_explicit_formula_rows_1_144.json").read_text())
+Z1000 = json.loads((DATA / "zeta_zeros_gamma_1_1000.json").read_text())
+assert [r[1] for r in T144] == R
+assert all(r[3] - r[2] > 22 for r in T144) and max(r[3] - r[2] for r in T144) < 100
+assert max(abs(r[5] - r[2]) for r in T144) < 12.7 and sum(round(r[5]) == r[2] for r in T144) == 20
+assert sum(abs(r[5] - r[2]) < abs(r[4] - r[2]) for r in T144) == 51
+for n in (1, 144, 500, 1000):
+    assert abs(float(mp.zetazero(n).imag) - Z1000[n - 1]) < 1e-8
+for a in (141, 144):
+    _, xr, exact, _, _, p144 = T144[a - 1]
+    assert int(primepi(xr)) == exact and abs(ef.pi_explicit(xr, 144, Z1000) - p144) < 0.01
+assert abs(ef.pi_explicit(12312, 1000, Z1000) - 1471) < 0.05
+assert abs(ef.pi_explicit(911298, 1000, Z1000) - 72116) < 2
 
 if __name__ == "__main__":
     for xr, exact, li_v, p10, p144 in EXPLICIT:
