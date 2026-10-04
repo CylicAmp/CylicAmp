@@ -53,6 +53,25 @@ SPAN 15..51 (owner: "keep going to 15 through 51"):
   number, 19, gives the same: 1+9 = 10 -> 1. Their sum 145 = 100 + 45 also
   reduces to 1 (a sum and its digit sums agree mod 9).
 
+SUPPLIED SYNTHESIS (pasted 2026-10-04, "the pieces already computed, joined"):
+  Checked and correct: 141 at digits 0 and 8 of the first zero; 1413 = 3^2 x 157;
+  all seven splits; 3141 = floor(1000 pi) = 3^2 x 349; 314 = 2 x 157 and
+  1413/314 = 9/2; the doublings 28, 82, 26, 62, 24, 42; 14+13 = 27, 41+31 = 72,
+  82+62 = 144; 27+72 = 99, 99+45 = 144; the running sums 144, 27, 45, 99, 198,
+  315, 729; digit sums of 10..19 are 1..10 summing to 55 = 14+41; zero 39
+  facts; the cycle 4 -> 2 -> 1 -> 4 changes -2, -1, +3, sum 0 (forced for any cycle).
+  CORRECTIONS:
+    S1. "Cross addition ... returns three of the splits": 72 is not a split of
+        1413. Two of the three (27, 144) are.
+    S2. "The openings 12, 13, 21, 18, 27, 45, 99 all occur" in zero 39's digits:
+        true, but chosen after looking. Of 21 related strings, 9 do not occur in
+        the first 45 digits: 14, 41, 26, 62, 28, 82, 144, 157, 314 -- the zero's
+        own pair 14 and its reverse 41 among them. (Digits truncated from a
+        70-digit computation: ...7230013106; a rounded 45-digit print ends
+        ...001311, which is why rounding must not be used for substring tests.)
+    S3. "The nine trajectories meet at 40": 94% of random 5-digit numbers pass
+        through 40 (digit_ladder_collatz.py). Carries no information.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime
@@ -110,6 +129,17 @@ assert all(((n * n + n - 210) // 2 % 9 == 0) == (n % 9 in (3, 5)) for n in range
 tens, units = sum(n // 10 for n in range(10, 20)), sum(n % 10 for n in range(10, 20))
 assert (tens, units) == (10, 45) and sum(ds(n) for n in range(10, 20)) == 55
 assert dr(55) == dr(10) == dr(19) == dr(145) == 1 and sum(range(10, 20)) == 145 == 100 + 45
+
+import math
+assert 1413 == 9 * 157 and 3141 == math.floor(1000 * math.pi) == 9 * 349 and 314 * 9 == 1413 * 2
+assert (14 + 13, 41 + 31, 82 + 62, 27 + 72, 99 + 45) == (27, 72, 144, 99, 144)
+assert 72 not in SPLITS_1413 and 27 in SPLITS_1413 and 144 in SPLITS_1413
+assert (sum(range(12, 21)), sum(range(13, 24)), sum(range(14, 29)), sum(range(14, 41))) == (144, 198, 315, 729)
+assert [ds(n) for n in range(10, 20)] == list(range(1, 11)) and 14 + 41 == 55
+G39 = "121370125002420645918945532970499922723001310"
+assert all(t in G39 for t in ["12", "13", "21", "18", "27", "45", "99"])
+assert [t for t in ["14", "41", "26", "62", "28", "82", "144", "157", "314"] if t in G39] == []
+assert "31" in G39 and "72" in G39
 
 if __name__ == "__main__":
     print("all assertions pass")
