@@ -88,3 +88,10 @@ flourishes ("the DNA of the universe") and closing questions. The owner takes on
 mathematics from it. Check every mathematical claim; do not grade or report the rhetoric.
 Example that exposed it: prime_digital_root_supplied_audit_2026_10_03.py item D6 audited
 the opener instead of the math.
+
+## The owner's Mathematical Audit Protocol (2026-10-04)
+
+The full record format, classification, audit levels A0-A6, verification modes, proof statuses,
+closed-sequence rules (no duplicated endpoints) and reporting format are in `PROTOCOL.md` in this
+directory. Use it for every audit record. Its two mathematical claims are checked in
+`math/theorems/audit_protocol_cycle_drift_check_2026_10_04.py`.
