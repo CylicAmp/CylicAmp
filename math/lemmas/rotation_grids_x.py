@@ -58,6 +58,21 @@ MIXING (owner, 2026-10-04, first example): 33+53 = 8+6 = 1+4 = 5 -- the same
   Owner's lists are both circles of each set: 795 -> 579 -> 957, and
   861 -> 186 -> 618 with the mirror circle 168 -> 816 -> 681 -- all six orders.
 
+MIXING, THE OWNER'S RULE (2026-10-04): take 1 from one digit and give it to
+  another. From 246: 156, 147 (from the 2); 336, 237 (from the 4); 345, 255
+  (from the 6 -- written 346, 256: the 6 not lowered, a slip).
+  KEPT: the digit sum, 12 -> 3, in every mix.
+  THE NEW SET IS DIGITS + 3 (proved for every triple abc): the window-pair
+  values are DR(digit sum + a), DR(digit sum + b), DR(digit sum + c), because
+  ab + ca = 11a + b + 10c reduces to 2a + b + c. For 246 the sum is 12 -> 3, so
+  2, 4, 6 become 5, 7, 9 -- the owner's 795. Mixing keeps the sum, so every mix
+  of 246 also shifts by 3: 156 -> 4, 8, 9; 147 -> 4, 7, 1; 336 -> 6, 6, 9;
+  237 -> 5, 6, 1; 345 -> 6, 7, 8; 255 -> 5, 8, 8.
+  EVENLY SPACED SURVIVES ONLY END-TO-END: moving 1 between the two ends keeps
+  the middle 4 and changes the step by one -- 147 (step 3) and 345 (step 1)
+  stay evenly spaced, so their rotation grids still balance (centre 4, every
+  line 12). Moving to or from the middle breaks it (156, 336, 237, 255).
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -139,6 +154,32 @@ assert (24 + 9, 62 - 9) == (33, 53) and 33 + 53 == 24 + 62 == 86
 assert (ds(33), ds(53)) == (ds(24), ds(62)) == (6, 8) and dr(6 + 8) == 5
 assert cycle("795", rot_l) == ["795", "957", "579"] and set(cycle("795", rot_r)) == {"795", "579", "957"}
 assert set(cycle("861", rot_r)) | set(cycle("168", rot_r)) == {"".join(p) for p in permutations("168")}
+
+def mixes(t):
+    out = []
+    for i in range(3):
+        for j in range(3):
+            if i != j:
+                d = list(map(int, t))
+                d[i] -= 1
+                d[j] += 1
+                out.append("".join(map(str, d)))
+    return out
+
+MIX = mixes("246")
+assert MIX == ["156", "147", "336", "237", "345", "255"]
+assert all(sum(map(int, m)) == 12 for m in MIX)
+def new_set(t):
+    a, b, c = map(int, t)
+    return [dr((10 * a + b) + (10 * c + a)), dr((10 * b + c) + (10 * a + b)), dr((10 * c + a) + (10 * b + c))]
+assert new_set("246") == [5, 7, 9]
+for m in MIX:
+    assert new_set(m) == [dr(int(x) + 3) for x in m]
+from itertools import product
+for a, b, c in product(range(10), repeat=3):
+    t = f"{a}{b}{c}"
+    assert new_set(t) == [dr(a + b + c + x) for x in (a, b, c)]
+assert [m for m in MIX if has_magic_rotation(m)] == ["147", "345"]
 
 if __name__ == "__main__":
     for m in MAGIC:
