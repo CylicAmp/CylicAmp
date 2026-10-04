@@ -20,6 +20,11 @@ WRONG
      The matrix is still positive definite (det > 0, trace > 0).
   G5 "13 is the shared common divisor": true of 806 = 2 x 13 x 31, 741 = 3 x 13 x 19 and also of the
      correct 819 = 3^2 x 7 x 13, so 13 divides every entry of G and 13^2 divides det G.
+FOLLOW-UP (AUD-GRAM-WAV26, same day): restates G3-G5 correctly -- 806 = 13 x 62, 819 = 13 x 63,
+  741 = 13 x 57, trace 1625, det 111,033 = 3^2 x 13^2 x 73, eigenvalues 1553.53 / 71.47.
+  One overreach: "the asymmetry 13 is the engine that divides every coefficient". The direction
+  is reversed -- 819 - 806 = 13 is a CONSEQUENCE of 13 dividing both; a difference of 13 alone
+  does not make either number divisible by 13 (e.g. 800 and 813).
 FALSIFICATION: any assertion failing.
 """
 import sympy as sp
@@ -39,3 +44,5 @@ assert G.trace() == 1625 and G.det() == 111033 == 3 ** 2 * 13 ** 2 * 73         
 ev = sorted(float(v) for v in G.eigenvals())
 assert abs(ev[0] - 71.4715) < 1e-3 and abs(ev[1] - 1553.5285) < 1e-3
 assert all(x % 13 == 0 for x in (806, 741, 819)) and G.det() % 169 == 0                 # G5
+assert (806, 819, 741) == (13 * 62, 13 * 63, 13 * 57) and 806 * 819 == 660114 and 741 ** 2 == 549081
+assert 813 - 800 == 13 and 800 % 13 and 813 % 13                                        # follow-up
