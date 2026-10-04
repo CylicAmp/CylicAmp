@@ -18,6 +18,22 @@ FORCED CONSEQUENCES (proved, not observed):
     Middle wraps between rows 4 and 5 (9 -> 2, i.e. -900 vs no wrap): 10302.
     Second and middle both wrap between rows 8 and 9 (-9000, -900): 1302.
 
+EXTENSION PAST ROW 9 (owner, 2026-10-04: "At row 9 we get 12=3")
+  The three short pieces close on themselves:
+    middle = DR(first + second)      (1+2=3, 2+3=5, ..., 9+1=10 -> 1)
+    DR(last) = middle                (12 -> 3, 14 -> 5, ..., 28 -> 1)
+  since last = 2a+10 = a + (a+1) + 9. At row 9 the second piece wraps to 1, so
+  row 10 starts again at 1, 2 -> 3. Reading the first piece as DR(a):
+    row a = DR(a) | DR(a+1) | DR(2a+1) | 2a+10
+    rows 10..18: 12330 23532 34734 45936 56238 67440 78642 89844 91146
+  The first three pieces repeat with period 9; only the last piece grows, by
+  18 every 9 rows, so row a+9 = row a + 18 while the last piece has 2 digits
+  (a <= 44). At a = 45 the last piece reaches 100 and the row gains a digit
+  (row 45 = 911100, row 54 = 911118).
+  Reading the first piece literally as a gives 102330, 113532, ... instead;
+  both readings agree on rows 1..9 and the image does not decide between them.
+  DR(row) = DR(6a+3) and divisibility by 6 hold for every a under both readings.
+
 FALSIFICATION: any assertion below failing.
 """
 N = [12312, 23514, 34716, 45918, 56220, 67422, 78624, 89826, 91128]
@@ -50,7 +66,26 @@ for n, f in FACTORS.items():
         v *= int(p) ** int(e or 1)
     assert v == n, n
 
+def row_dr(a):
+    return int(f"{dr(a)}{dr(a + 1)}{dr(2 * a + 1)}{2 * a + 10}")
+
+def row_lit(a):
+    return int(f"{a}{dr(a + 1)}{dr(2 * a + 1)}{2 * a + 10}")
+
+for a in range(1, 2000):
+    assert dr(2 * a + 1) == dr(dr(a) + dr(a + 1))
+    assert dr(2 * a + 10) == dr(2 * a + 1)
+    for r in (row_dr(a), row_lit(a)):
+        assert dr(r) == dr(6 * a + 3) and r % 6 == 0
+assert [row_dr(a) for a in range(1, 10)] == [row_lit(a) for a in range(1, 10)] == N
+assert [row_dr(a) for a in range(10, 19)] == [12330, 23532, 34734, 45936, 56238,
+                                              67440, 78642, 89844, 91146]
+assert [row_lit(a) for a in range(10, 13)] == [102330, 113532, 124734]
+assert all(row_dr(a + 9) - row_dr(a) == 18 for a in range(1, 37))
+assert row_dr(44) == 89898 and row_dr(45) == 911100 and row_dr(54) == 911118
+
 if __name__ == "__main__":
+    print("rows 10..27 (first piece DR(a)):", [row_dr(a) for a in range(10, 28)])
     for a, n in enumerate(N, 1):
         print(a, n, f"= {a}|{dr(a+1)}|{dr(2*a+1)}|{2*a+10}", "DR", dr(n), FACTORS[n])
     print("diffs", diffs)
