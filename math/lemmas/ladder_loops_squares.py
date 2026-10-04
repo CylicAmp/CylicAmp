@@ -27,6 +27,22 @@ loop is row 8's reflected and the squares match (side 9.0995251329, corner
 radii 9.7227, 4.4786, 4.6669, 9.8108 in reverse order). It is the only such
 pair in rows 1-36, and no row is its own mirror.
 
+THE X FROM THE CENTER OUT (owner, 2026-10-04: "in my head the x is made from
+the center out / 1+7=8=44,2222,11111111=248=1+4=5"):
+  1+7 = 8: row 17 = row 8 + 9, so both open 898.
+  Rows 8 and 17 end 26, 35, 44 and 44, 53, 62 -- they meet at 44. Joined:
+      26  35  [44]  53  62
+  each pair equidistant from the centre 44 is a reversal (35/53, 26/62) and
+  sums to 88: a step of 9 is +10 - 1, so stepping out from a repdigit moves
+  the tens digit up and the units digit down by one -- the mirror. Out to the
+  edge: 08 17 26 35 44 53 62 71 80, four reversal pairs, 17 among them.
+  WHY 8/17 IS THE ONLY MIRROR PAIR (proved): a full mirror needs a palindromic
+  opening, DR(a) = DR(2a+1), i.e. a = 8 mod 9 (898), and a repdigit at the join,
+  2a+28 = 11k -- among a = 8, 17, 26 (the nine-digit rows with a = 8 mod 9)
+  only a = 8 gives one (44).
+  8 = 4+4 = 2+2+2+2 = 1+1+1+1+1+1+1+1 (halving out); the halving sizes
+  2, 4, 8 read 248, and 2+4+8 = 14 -> 1+4 = 5.
+
 WHAT THIS RUN CAN AND CANNOT SHOW: every loop here is smooth, and every
 smooth loop is already proved to carry a square (Schnirelmann 1929), so all
 36 were guaranteed. The open square-peg case is non-smooth (corners, infinite
@@ -111,6 +127,14 @@ assert ROWS[17] in _rots(ROWS[8][::-1])
 assert [(a, b) for a in ROWS for b in ROWS if a < b and len(ROWS[a]) == len(ROWS[b])
         and (ROWS[b] in _rots(ROWS[a]) or ROWS[b] in _rots(ROWS[a][::-1]))] == [(8, 17)]
 assert (LARGEST[35], LARGEST[36]) == (13.758478, 4.873784) and ROWS[36] == "9118291100"
+
+assert 1 + 7 == 8 and ROWS[8][:3] == ROWS[17][:3] == "898"
+LINE = [44 + 9 * k for k in range(-4, 5)]
+assert LINE == [8, 17, 26, 35, 44, 53, 62, 71, 80]
+assert all(f"{44 - 9 * k:02d}" == f"{44 + 9 * k:02d}"[::-1] and (44 - 9 * k) + (44 + 9 * k) == 88 for k in range(5))
+assert [a for a in range(1, 36) if dr(a) == dr(2 * a + 1)] == [8, 17, 26, 35]
+assert [a for a in (8, 17, 26) if (2 * a + 28) % 11 == 0 and len(str(2 * a + 28)) == 2] == [8]
+assert 4 + 4 == 2 * 4 == 8 * 1 == 8 and 2 + 4 + 8 == 14 and dr(248) == 5
 
 def draw(path):
     import matplotlib
