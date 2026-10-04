@@ -24,6 +24,15 @@ NOT CHECKED HERE
   S8 The current state of the n = 49 home-prime search, the bound "no other Wolstenholme primes
      below 10^9", and "the largest known Leyland prime is 5122^6753 + 6753^5122" (a 2010 record;
      larger ones may have been found since).
+CHECKED 2026-10-04 (S8):
+  - HP(49): still unknown. Wikipedia "Home prime" (2026): the search is stuck on factoring a 251-digit
+    composite in step 119 (since a December 2014 breakthrough at step 117) -- "well over 230 digits"
+    and "over 115 iterations" are both consistent.
+  - Wolstenholme primes: McIntosh and Roettger searched to 10^9 (2007), later to 10^10; Wikipedia
+    reports none other below 10^11. "None other below 10^9" is CORRECT but understated.
+  - Largest known Leyland prime: OUT OF DATE. 5122^6753 + 6753^5122 has 25,050 digits (computed
+    below); the record is now 104824^5 + 5^104824, 73,269 digits, proved prime by ECPP in February
+    2023 (Wikipedia "Leyland number").
 FALSIFICATION: any assertion failing.
 """
 from sympy import bernoulli, factorint, isprime, primerange, totient
@@ -60,3 +69,6 @@ assert S(2) == [4] and 6 - totient(6) == 4 and 8 - totient(8) == 4              
 assert {n: len(S(n)) for n in (8, 10, 12, 14, 16, 20)} == {8: 3, 10: 0, 12: 3, 14: 1, 16: 3, 20: 1}   # S5
 assert factorint(31941) == {3: 3, 7: 1, 13: 2} and 31941 == 9 * 3549 and not isprime(3549)    # S6
 assert home(9) == (311, 2) and home(10) == (773, 4) and home(11) == (11, 0)              # S7
+import math                                                                                # S8 digit counts
+assert math.floor(6753 * math.log10(5122)) + 1 == 25050
+assert math.floor(104824 * math.log10(5)) + 1 == 73269

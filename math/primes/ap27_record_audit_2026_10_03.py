@@ -24,6 +24,10 @@ VERDICT ON THE SUPPLIED TEXT
      and 23# carries a single 3.
   A6 "digital root collapses to 9": WRONG for the record. d = 18135696597948930,
      d mod 9 = 3, digital root 3.
+CHECKED 2026-10-04 (A2): the consecutive-primes record is CPAP-10 -- first found 1998 (Manfred
+  Toplic, CP10 project, common difference 7# = 210), a second in 2008 by Toplic, Dubner, Forbes,
+  Lygeros, Mizony and Zimmermann; CPAP-11 needs difference >= 11# = 2310 and is considered out of
+  reach (t5k.org Top-20 "Consecutive Primes in Arithmetic Progression"; Wikipedia).
 FALSIFICATION: any assertion failing.
 """
 from sympy import isprime, primorial, primerange

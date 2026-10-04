@@ -26,6 +26,8 @@ ADDED
      = 24 combinations are exactly the 24 = phi(90) classes coprime to 90, and the primes
      fill them evenly (Dirichlet): each between 4.13% and 4.21% up to 10^6 (1/24 = 4.17%).
      So ending and root are independent -- neither "locks" the other.
+CHECKED 2026-10-04 (E5 citation): R. J. Lemke Oliver and K. Soundararajan, "Unexpected biases in
+  the distribution of consecutive primes", PNAS 113(31), E4446-E4454 (2016) -- citation correct.
 FALSIFICATION: any assertion failing.
 """
 from collections import Counter

@@ -22,6 +22,11 @@ NOT ESTABLISHED
   G6 The geyser: an impulse on a graph spreading by the graph Laplacian is the standard heat /
      wave kernel; but the "phase shifts {2,...,9}" are asserted, not derived.
   G7 Whether the Mazur & Stein book itself ends with Gaussian primes was not checked here.
+CHECKED 2026-10-04 (G7): the book's LaTeX source (github.com/williamstein/rh, rh/rh.tex) ends with
+  Part IV "Back to Riemann", whose last chapter, "Companions to the zeta function", introduces the
+  Gaussian integers and Gaussian primes, and asks the reader to prove that a Gaussian prime has norm
+  a prime or the square of a prime -- the same correction as G3. So "the final section moves to
+  Gaussian integers" is CORRECT.
 FALSIFICATION: any assertion failing.
 """
 from sympy import isprime, primerange
