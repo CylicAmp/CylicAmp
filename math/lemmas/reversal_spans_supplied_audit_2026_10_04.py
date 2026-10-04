@@ -33,6 +33,26 @@ span; 45 is the running sum at 16 in the 14..41 span and also 1+2+...+9.)
   are NOT splits of 1413; no cut producing them is defined in the supplied text.
   All seven are multiples of 9, and running sums hit multiples of 9 often.
 
+SPAN 15..51 (owner: "keep going to 15 through 51"):
+  37 numbers (9(5-1)+1); total 1221 = 3 x 11 x 37 = 11 x 6 x 37 / 2, reduces
+  to 6 = 1+5 = 5+1. Primes 17, 19, 23, 29, 31, 37, 41, 43, 47 (nine), gaps
+  2, 4, 6, 2, 6, 4, 2, 4. Digit sum 9 at 18, 27, 36, 45. Opens and closes on
+  digit sum 6. Running sum 841 = 29^2 at 43.
+  Running sums divisible by 9 come in pairs every 9 numbers -- (21, 126),
+  (23, 171), (30, 360), (32, 423), (39, 675), (41, 756), (48, 1071), (50, 1170)
+  -- forced: the sum 15..n is (n^2 + n - 210)/2, which is 0 mod 9 exactly
+  when n = 3 or 5 mod 9.
+  The span length 37 is forced by 15 -> 51 (b - a = 4); 37 is in it because
+  the problem puts it there. (1221 reads as 12|21, the ends of the first span;
+  that is this one total, not a law.)
+
+10 THROUGH 19 (owner: "10+45=5+4=9 / 1+9=1+9=1"):
+  The ten numbers 10..19 have tens digits 1+1+...+1 = 10 and units digits
+  0+1+...+9 = 45. Their digits all together: 10 + 45 = 55 -> 5+5 = 10 -> 1.
+  45 -> 4+5 = 9 (and 5+4 = 9 reversed); 10 -> 1; 1+9 = 10 -> 1. The last
+  number, 19, gives the same: 1+9 = 10 -> 1. Their sum 145 = 100 + 45 also
+  reduces to 1 (a sum and its digit sums agree mod 9).
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime
@@ -78,6 +98,18 @@ SPLITS_1413 = {1413, 414, 27, 18, 144, 45, 9}
 CUT_VALUES = [27, 45, 99, 144, 198, 315, 729]
 assert [v for v in CUT_VALUES if v in SPLITS_1413] == [27, 45, 144]
 assert all(v % 9 == 0 for v in CUT_VALUES) and 729 == 3 ** 6
+
+ns = list(range(15, 52))
+R = [sum(ns[:i + 1]) for i in range(len(ns))]
+assert len(ns) == 37 and R[-1] == 1221 == 3 * 11 * 37 and dr(1221) == 6
+assert [p for p in ns if isprime(p)] == [17, 19, 23, 29, 31, 37, 41, 43, 47]
+assert [n for n in ns if ds(n) == 9] == [18, 27, 36, 45] and ds(15) == ds(51) == 6
+assert R[ns.index(43)] == 841 == 29 ** 2
+assert [n for n in ns if R[ns.index(n)] % 9 == 0] == [21, 23, 30, 32, 39, 41, 48, 50]
+assert all(((n * n + n - 210) // 2 % 9 == 0) == (n % 9 in (3, 5)) for n in range(15, 2000))
+tens, units = sum(n // 10 for n in range(10, 20)), sum(n % 10 for n in range(10, 20))
+assert (tens, units) == (10, 45) and sum(ds(n) for n in range(10, 20)) == 55
+assert dr(55) == dr(10) == dr(19) == dr(145) == 1 and sum(range(10, 20)) == 145 == 100 + 45
 
 if __name__ == "__main__":
     print("all assertions pass")
