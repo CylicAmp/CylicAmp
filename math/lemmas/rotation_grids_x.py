@@ -31,6 +31,25 @@ WHEN IT WORKS: it needs 3 x middle = sum, i.e. the three numbers evenly
 spaced (a+c = 2b). 246, 135 and 789 (the owner's grid rows) are evenly spaced,
 and so are 123, 456, 789; 134 and 256 are not, and give no balanced X.
 
+THE WINDOW LINES (owner, 2026-10-04):
+    24~62 = 6+8 = (1+(4 = 5) = 10 = 1
+    46~24 = (1+(6 = 7) = 1+6 = 7+7 = 1+4 = 5
+    62~46 = (8+(1 = 9) = 8+1+9 = 1+8 = 9
+    795 new set of 3 / 861 / 618
+  Reading 246 round its circle gives the two-digit windows 24, 46, 62 (digit
+  sums 6, 10 -> 1, 8). Each line pairs a window with the one before it, adds
+  the digit sums and reduces, then doubles:
+    24~62: 6+8 = 14 -> 5, doubled 10 -> 1       (24 + 62 = 86 -> 5)
+    46~24: 10+6 = 16 -> 7, doubled 14 -> 5      (46 + 24 = 70 -> 7)
+    62~46: 8+10 = 18 -> 9, doubled 18 -> 9      (62 + 46 = 108 -> 9)
+  New sets of three: the pair values 5, 7, 9 (795 is a rotation of 579) and the
+  window roots 8, 6, 1 (861, 618: rotations of 186).
+  5, 7, 9 is evenly spaced, so its rotation grid balances (centre 7, every line
+  21). 1, 6, 8 is not, so no stacking of its rotations balances -- but 1+6+8 =
+  15 and {1, 6, 8} is a line of the Lo Shu, the 3x3 magic square of 1..9
+  (492/357/816), as is the doubled set {1, 5, 9}. The Lo Shu has 8 lines out of
+  84 possible triples, so a triple landing on one is about 1 in 10.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -88,6 +107,25 @@ for a in range(1, 10):
     for b in range(a + 1, 10):
         for c in range(b + 1, 10):
             assert has_magic_rotation(f"{a}{b}{c}") == (a + c == 2 * b)
+
+def dr(n):
+    return 0 if n == 0 else 1 + (n - 1) % 9
+
+def ds(n):
+    return sum(map(int, str(n)))
+
+W = [int(w) for w in ("24", "46", "62")]
+assert [ds(w) for w in W] == [6, 10, 8] and [dr(w) for w in W] == [6, 1, 8]
+PAIRS = [(24, 62), (46, 24), (62, 46)]
+V = [dr(ds(a) + ds(b)) for a, b in PAIRS]
+assert V == [5, 7, 9] == [dr(a + b) for a, b in PAIRS]
+assert [dr(2 * v) for v in V] == [1, 5, 9]
+assert "795" in cycle("579", rot_r) and "861" in cycle("186", rot_r) and "618" in cycle("186", rot_r)
+assert has_magic_rotation("579") and not has_magic_rotation("168")
+LS = [[4, 9, 2], [3, 5, 7], [8, 1, 6]]
+assert magic(LS)
+LINES = [set(r) for r in LS] + [set(c) for c in zip(*LS)] + [{4, 5, 6}, {2, 5, 8}]
+assert {1, 6, 8} in LINES and {1, 5, 9} in LINES and {5, 7, 9} not in LINES
 
 if __name__ == "__main__":
     for m in MAGIC:
