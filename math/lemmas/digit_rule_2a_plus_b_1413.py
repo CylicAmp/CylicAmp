@@ -121,6 +121,14 @@ THE 832 PAGE (owner, 2026-10-04) -- decoded parts:
   10 + 16 = 26 -> 2+6 = 8, back to the chain's 8. 16 is the bottom row 2+6+8.
   "2+4+6=16" does not add up: 2+4+6 = 12 (the middle row 4+6+2); 16 is 2+6+8.
   The three rows 13 + 12 + 16 = 41 -> 5, the same as 832 + 462 + 268 = 1562 -> 5.
+  SUMS OF THE ROW LINE (owner, 2026-10-04):
+    13 + 12 + 16 = 41 -- correct.
+    1030 + 1020 + 1060 = 3110, not the 3310 written. Read the same way the
+    owner read 3310 (33 + 10 = 43), 3110 gives 31 + 10 = 41 -- the row total
+    again: the zero form carries the same 41.
+    (4+3) = 7, 7+7 = 14 -> 5 and 43 + 43 = 86 -> 8+6 = 14 -> 1+4 = 5: correct
+    as written, but the 43 comes from the 3310 slip. With 41: 4+1 = 5 directly,
+    the same 5 (and 832 + 462 + 268 = 1562 -> 5); 41 + 41 = 82 -> 1.
   OPEN: whether 1060 is 1070 in the +1 line;
   the last steps "=6+6=3".
 
@@ -209,6 +217,9 @@ assert [sum(r) for r in GRID] == [13, 12, 16] and [sum(c) for c in zip(*GRID)] =
 
 assert 8 + 3 + 2 == 13 and 2 + 2 + 6 == 10 and dr(10 + 16) == 8 and 2 + 4 + 6 == 12 != 16
 assert 2 + 6 + 8 == 16 and dr(13 + 12 + 16) == dr(832 + 462 + 268) == 5
+
+assert 1030 + 1020 + 1060 == 3110 != 3310 and 31 + 10 == 41 == 13 + 12 + 16 and 33 + 10 == 43
+assert dr(4 + 3 + 4 + 3) == dr(43 + 43) == 5 == dr(41) and dr(41 + 41) == 1
 
 if __name__ == "__main__":
     print("all assertions pass")
