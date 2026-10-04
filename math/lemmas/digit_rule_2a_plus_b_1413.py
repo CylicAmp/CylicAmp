@@ -144,6 +144,16 @@ THE 832 CHAIN (owner, 2026-10-04: "run the 832 chain on all 9 ladder rows";
   first digit, 8. Of the 900 three-digit numbers, 81 do (1), 46 do (2) exactly,
   and 8 do both: 251, 431, 452, 653, 821, 832, 843, 854. So 832 is one of 8 in
   900 -- rare, not unique.
+  ORIGIN (owner, 2026-10-04): the chain came first, written after watching a
+  video on the inscribed square problem ("draw any closed loop -- is there
+  always a perfect square sitting on it?"); 832, 462, 268 came after, by
+  breaking the chain's digits into threes. The square-peg problem (Toeplitz
+  1911) is proved for convex curves (Emch 1913) and smooth curves
+  (Schnirelmann 1929), rectangles of every aspect ratio on smooth curves
+  (Greene-Lobb 2020), and is OPEN for general continuous curves. No
+  mathematical tie to the digit chain: the shared idea is pictorial -- the
+  chain is a closed loop (8 ... 8) and the three triples lay it out as a 3x3
+  square, corners 8, 2, 2, 8, centre 6.
   WHERE 832 STANDS IN THE WORK: running sum at 70 of the span 58 -> 85
   (58 + 59 + ... + 70 = 832; reversal_spans_all_tables.md).
   ON THE NINE LADDER ROWS (chain on each row's first three pieces):
@@ -267,6 +277,8 @@ back = [i + 1 for i, h in enumerate(HEADS) if dr(chain832(h)[1]) == dr(int(str(h
 assert back == [2, 5, 8]
 for a in range(1, 300):
     assert (dr(a * (a + 1) + 2 * a + 1) == dr(a)) == (a % 3 == 2)
+
+assert [GRID[0][0], GRID[0][2], GRID[2][0], GRID[2][2], GRID[1][1]] == [8, 2, 2, 8, 6]
 
 if __name__ == "__main__":
     print("all assertions pass")
