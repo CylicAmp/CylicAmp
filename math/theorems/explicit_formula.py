@@ -1,14 +1,29 @@
 """
 explicit_formula.py
 
+CORRECTIONS 2026-10-04 (found running the digit ladder through this file):
+  C1. Li(x^rho) was computed as li(power(x, rho)). For complex rho the power
+      wraps its angle into (-pi, pi], so once gamma*ln(x) > pi the wrong branch
+      is taken and every zero ADDED moved the result further off: at x = 137
+      the error went -8.4 (1 zero), -68.2 (10), -1823 (300). The correct term
+      is Ei(rho * ln x). With it, 300 zeros give pi(137) = 32.50 (exact 33).
+  C2. The formula's left side is Riemann's J(x) = pi(x) + pi(x^1/2)/2 +
+      pi(x^1/3)/3 + ..., not pi(x). pi(x) is recovered by Mobius inversion:
+      pi(x) = sum_k mu(k)/k J(x^(1/k)).
+  C3. The constant is -log 2, not +log 2:
+      J(x) = Li(x) - sum_rho Li(x^rho) - log 2 + int_x^inf dt/(t(t^2-1)ln t).
+  Checks after correction (300 zeros): pi(12312) = 1471.09 (exact 1471),
+  pi(23514) = 2614.65 (2614), pi(91128) = 8813.29 (8811).
+  Asserted in math/lemmas/digit_ladder_riemann_userfiles.py.
+
 Riemann's explicit formula for the prime counting function:
 
-  π(x) = Li(x) - Σ_ρ Li(x^ρ) + log(2) + integral
+  J(x) = Li(x) - Σ_ρ Li(x^ρ) - log(2) + integral,   π(x) = Σ_k μ(k)/k · J(x^(1/k))
 
 The sum runs over all non-trivial zeros ρ = 1/2 + iγ (and conjugates).
 Each conjugate pair contributes:
 
-  -2 · Re[ Li(x^(1/2 + iγ)) ]
+  -2 · Re[ Ei(ρ · ln x) ]
 
 Truncated to the first N zeros, this approximates π(x).
 
@@ -19,7 +34,8 @@ FRAMEWORK CONNECTION:
   γ₆ ≈ 37.59   → floor = 37  (the 37-hub)
 """
 
-from mpmath import mp, li, mpc, power, re, log
+from mpmath import mp, li, mpc, power, re, log, ei, quad, inf
+from sympy import mobius
 from sympy import primepi, isprime
 
 mp.dps = 25   # 25 decimal places of precision
@@ -58,22 +74,28 @@ def Li(x):
 def zero_correction(x, gamma):
     """
     Contribution of conjugate zero pair ρ=1/2+iγ, ρ̄=1/2-iγ:
-      -2 · Re[ Li(x^(1/2 + iγ)) ]
-    x^ρ = √x · e^(iγ·ln x) = √x · [cos(γ ln x) + i sin(γ ln x)]
+      -2 · Re[ Li(x^ρ) ],  with Li(x^ρ) = Ei(ρ · ln x)  (C1: not li(power(x, ρ)))
     """
-    rho   = mpc('0.5', gamma)
-    x_rho = power(x, rho)
-    return float(-2 * re(li(x_rho)))
+    rho = mpc('0.5', gamma)
+    return float(-2 * re(ei(rho * log(x))))
 
-def pi_explicit(x, n_zeros=10):
+def J_explicit(x, gammas):
+    """Riemann's J(x) from the given zeros (C2, C3)."""
+    tail = quad(lambda t: 1 / (t * (t * t - 1) * log(t)), [x, inf])
+    return Li(x) - float(log(2)) + float(tail) + sum(zero_correction(x, g) for g in gammas)
+
+def pi_explicit(x, n_zeros=10, gammas=None):
     """
-    Truncated explicit formula:
-      π(x) ≈ Li(x) + Σ_{k=1}^{n} -2·Re[Li(x^ρₖ)]
+    Truncated explicit formula, π(x) = Σ_k μ(k)/k · J(x^(1/k)), J from the first n zeros.
     """
-    result = Li(x)
-    for gamma in ZEROS[:n_zeros]:
-        result += zero_correction(x, gamma)
-    return result
+    gs = (gammas if gammas is not None else ZEROS)[:n_zeros]
+    total, k = 0.0, 1
+    while 2 ** k <= x:
+        mu = int(mobius(k))
+        if mu:
+            total += mu * J_explicit(x ** (1.0 / k), gs) / k
+        k += 1
+    return total
 
 
 # ──────────────────────────────────────────────────────────────────────────────
