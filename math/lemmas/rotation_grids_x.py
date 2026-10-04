@@ -131,6 +131,20 @@ rules, same mirror and X or diamond configuration"):
     113322: starting 113322 (left), 211332 (right and left), 221133 (right)
             -- flips of each other only, since the circle is not mirror-closed.
 
+THE ULTIMATE ROTATION, 1..9 (owner, 2026-10-04):
+    123456789 = 45;  1234567891 -- adding the 1 makes 11 at the new count:
+    12345678911234567891;  1)23456789(1: 1+1 = 2, 9+2 = 8+3 = 7+4 = 6+5 = 11
+    "the largest set of X or diamond with no repeats"
+  1+...+9 = 45. Folding 2..9 from the outside in, every pair is 11 (and the
+  ends of 1234567891 give 1+1 = 2): forced -- folding a run of consecutive
+  numbers, each step in moves one end up and the other down, so every pair
+  keeps the ends' sum (1..9 folds to pairs of 10 around 5). The closed count
+  written twice, 1234567891|1234567891, has the seam 11 where the copies
+  meet, like 12332(11)23321.
+  THE GRID: 123/456/789. Opposite cells through the centre 5 sum to 10, so all
+  four lines through the centre -- the X (1+5+9, 3+5+7) and the cross (4+5+6,
+  2+5+8) -- are 15. Nine is the most digits with no repeats (all of 1..9).
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -292,6 +306,16 @@ assert len(B6) == 4 and len(bal6(D6)) == 4
 G6 = B6[0]
 fam = [G6, [r[::-1] for r in G6], G6[::-1], [r[::-1] for r in G6[::-1]]]
 assert sorted(fam) == sorted(B6)
+
+assert sum(range(1, 10)) == 45 and sum(range(2, 10)) == 44 == 4 * 11
+R29 = list(range(2, 10))
+assert [R29[i] + R29[-1 - i] for i in range(4)] == [11, 11, 11, 11] and 1 + 1 == 2
+assert all(a + b == lo + hi for lo in range(1, 9) for hi in range(lo + 1, 10)
+           for a, b in zip(range(lo, hi + 1), range(hi, lo - 1, -1)))
+assert ("1234567891" * 2)[9:11] == "11"
+P = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+assert all(P[i][j] + P[2 - i][2 - j] == 10 for i in range(3) for j in range(3) if (i, j) != (1, 1))
+assert {1 + 5 + 9, 3 + 5 + 7, 4 + 5 + 6, 2 + 5 + 8} == {15}
 
 if __name__ == "__main__":
     for m in MAGIC:
