@@ -49,6 +49,17 @@ and a new block that takes one more step -- digit sum, + first digit,
   26 = 2 x 13 and 62 = 2 x 31; 2(a+b) = 2n mod 9, so doubling the number
   doubles the result mod 9: 8 -> 16 -> 7.
 
+THE 26, 13, 31, 62 BLOCK, INSIDE AND OUTSIDE (owner, 2026-10-04: "look closely
+at row 3 ... in the middle is 44 outside 88"):
+    inside  13 + 31 = 44,  digit sums 4, 4:  4+4 = 8
+    outside 26 + 62 = 88,  digit sums 8, 8:  8+8 = 16 -> 7
+  Outside = 2 x inside, since 26 = 2 x 13 and 62 = 2 x 31 (forced).
+  Crosses: 62 + 13 = 75 -> 7+5 = 12 -> 1+2 = 3, and 26 + 31 = 57 -> 3.
+    75 and 57 are reversals of each other (no carries, so reversing the
+    addends reverses the sum). Digit sums agree: (1+3) + (6+2) = 4 + 8 = 12 -> 3.
+  The two crosses: 3 + 3 = 6. The whole block: 44 + 88 = 132 -> 6, the same
+  as 8 + 7 = 15 -> 6. ("3+3+6" read as 3 + 3 -> 6.)
+
 FALSIFICATION: any assertion below failing.
 """
 def dr(n):
@@ -86,6 +97,14 @@ for n in range(10, 100):
     if n % 10:
         assert rule2(n) == rule2(m) == 2 * (n + m) // 11
 assert (13 + 31, 26 + 62, 12 + 21) == (44, 88, 33) and 26 == 2 * 13 and 62 == 2 * 31
+
+def ds(n):
+    return sum(map(int, str(n)))
+
+assert (13 + 31, 26 + 62) == (44, 88) and 88 == 2 * 44
+assert [ds(n) for n in (13, 31, 26, 62)] == [4, 4, 8, 8] and dr(8 + 8) == 7
+assert (62 + 13, 26 + 31) == (75, 57) and dr(75) == dr(57) == 3 == dr(4 + 8)
+assert dr(3 + 3) == dr(44 + 88) == dr(8 + 7) == 6 and 44 + 88 == 132
 
 if __name__ == "__main__":
     print("all assertions pass")
