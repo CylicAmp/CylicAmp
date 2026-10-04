@@ -108,7 +108,13 @@ THE 832 PAGE (owner, 2026-10-04) -- decoded parts:
   permutations 123, 312, 213, 321, 132, 213, 312, 231 cut into two pieces;
   every pair sums to 15, 24 or 33, all -> 6, forced since 1+2+3 = 6.
   30-0 and 0-03 have digits 3, 0, 0 -> 3.
-  OPEN: where 832, 462, 268 come from; whether 14 is 13; whether 1060 is 1070;
+  SOURCE OF 832, 462, 268 (owner: "that number is the exact number on top"):
+  the chain line 8x3=2+4=6+2=2+6=8 written out digit by digit is
+  8 3 2 4 6 2 2 6 8 = 832 | 462 | 268. The top line is the chain itself, in
+  threes; it starts on 8 and closes on 8.
+  As a 3x3 grid (8 3 2 / 4 6 2 / 2 6 8): rows 13, 12, 16; columns 14, 15, 12;
+  diagonals 22 and 10.
+  OPEN: whether 14 is 13; whether 1060 is 1070;
   the last steps "=6+6=3".
 
 FALSIFICATION: any assertion below failing.
@@ -186,6 +192,13 @@ assert dr(5 + 3 + 7) == 6 and dr(6 + 4 + 8) == 9 and 6 + 9 == 15
 CUTS = [(12, 3), (3, 12), (21, 3), (3, 21), (13, 2), (2, 13), (31, 2), (2, 31)]
 assert sorted(set(int(f"{x}{y}") for x, y in CUTS)) == [123, 132, 213, 231, 312, 321]
 assert all(dr(x + y) == 6 for x, y in CUTS)
+
+CHAIN = "8×3=2+4=6+2=2+6=8"
+DIG = "".join(c for c in CHAIN if c.isdigit())
+assert DIG == "832462268" and [DIG[i:i + 3] for i in (0, 3, 6)] == ["832", "462", "268"]
+assert DIG[0] == DIG[-1] == "8"
+GRID = [[8, 3, 2], [4, 6, 2], [2, 6, 8]]
+assert [sum(r) for r in GRID] == [13, 12, 16] and [sum(c) for c in zip(*GRID)] == [14, 15, 12]
 
 if __name__ == "__main__":
     print("all assertions pass")
