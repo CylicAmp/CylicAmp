@@ -65,6 +65,28 @@ ROWS 19-36 (4 pieces, first piece DR(a)):
   Random bases with the SAME layout give mean 13.2, 12 or more in 59%.
   So the shared totals are explained by the +18 layout, not by anything else.
 
+ROWS 37-72 (owner: "keep going to row 72"):
+    12384 125 | 23586 100 | 34788 204 | 45990 83 | 56292 153 | 67494 60 |
+    78696 107 | 89898 164 | 911100 201 | 123102 255 | 235104 168 | 347106 73 |
+    459108 200 | 562110 133 | 674112 48 | 786114 74 | 898116 188 | 911118 56 |
+    123120 149 | 235122 199 | 347124 78 | 459126 63 | 562128 177 | 674130 84 |
+    786132 74 | 898134 188 | 911136 56 | 123138 211 | 235140 150 | 347142 166 |
+    459144 81 | 562146 177 | 674148 84 | 786150 56 | 898152 201 | 911154 56
+  From row 45 the last piece has 3 digits and the rows have 6 digits; the +18
+  family step holds for a+9 <= 44 and resumes inside the 6-digit block.
+  Shared totals over rows 1-72: 33 equal pairs (largest: 133 at rows 8, 18,
+  26, 27, 50; 56 at rows 54, 63, 70, 72). Same-layout null: mean 34.6, 33 or
+  more in 57% -- the +18 layout again, nothing more.
+
+RISING ABOVE THE START -- decided by the parity of the row number:
+  F4 (proved). Even a: the last piece 2a+10 = 2 mod 4, so the row is 2 mod 4:
+      n -> n/2 (odd) -> 3n/2 + 1 > n. Every even row rises above its start.
+      Odd a: 2a+10 = 0 mod 4, so the row is 0 mod 4 and opens with two halvings.
+  Rows 1-72 that never rise above their start: 1, 7, 13, 15, 21, 23, 25, 29,
+  33, 35, 37, 41, 47, 51, 53, 55, 59, 61, 63, 65, 67, 69, 71 -- odd rows only,
+  as F4 forces. 23 of the 36 odd rows (64%); random multiples of 12 of the
+  same size stay below 58% of the time, so the odd-row rate is ordinary.
+
 FALSIFICATION: any assertion below failing.
 """
 def dr(n):
@@ -82,9 +104,11 @@ def row(a, P=4):
     return int("".join(map(str, parts)))
 
 STEPS4 = [37, 82, 173, 176, 91, 130, 138, 133, 208, 37, 144, 111, 83, 47, 161, 50, 71, 133,
-          112, 126, 142, 176, 153, 68, 50, 133, 133, 156, 100, 85, 176, 83, 60, 200, 89, 58]
+          112, 126, 142, 176, 153, 68, 50, 133, 133, 156, 100, 85, 176, 83, 60, 200, 89, 58,
+          125, 100, 204, 83, 153, 60, 107, 164, 201, 255, 168, 73, 200, 133, 48, 74, 188, 56,
+          149, 199, 78, 63, 177, 84, 74, 188, 56, 211, 150, 166, 81, 177, 84, 56, 201, 56]
 STEPS5 = [54, 192, 252, 105, 157, 147, 173, 212, 225]
-assert [len(traj(row(a))) - 1 for a in range(1, 37)] == STEPS4
+assert [len(traj(row(a))) - 1 for a in range(1, 73)] == STEPS4
 assert [len(traj(row(a, 5))) - 1 for a in range(1, 10)] == STEPS5
 
 for a in range(1, 200):
@@ -130,9 +154,20 @@ assert all(max(traj(row(a))) == row(a) for a in (21, 23, 25, 29, 33, 35))
 assert [a for a in range(1, 37) if STEPS4[a - 1] == 133] == [8, 18, 26, 27]
 assert [a for a in range(1, 37) if STEPS4[a - 1] == 176] == [4, 22, 31]
 assert sum(STEPS4[i] == STEPS4[j] for i in range(36) for j in range(i + 1, 36)) == 12
+assert sum(STEPS4[i] == STEPS4[j] for i in range(72) for j in range(i + 1, 72)) == 33
+assert [a for a in range(1, 73) if STEPS4[a - 1] == 133] == [8, 18, 26, 27, 50]
+for a in range(1, 400):
+    n = row(a)
+    assert n % 4 == (2 if a % 2 == 0 else 0)
+    if a % 2 == 0:
+        assert traj(n)[2] == 3 * (n // 2) + 1 > n
+NEVER = [a for a in range(1, 73) if max(traj(row(a))) == row(a)]
+assert NEVER == [1, 7, 13, 15, 21, 23, 25, 29, 33, 35, 37, 41, 47, 51, 53, 55, 59,
+                 61, 63, 65, 67, 69, 71]
+assert all(a % 2 for a in NEVER) and len(NEVER) == 23
 assert all(row(a + 9) - row(a) == 18 for a in range(1, 28))
 
 if __name__ == "__main__":
-    for a in range(1, 37):
+    for a in range(1, 73):
         print(a, row(a), len(traj(row(a))) - 1)
     print("all assertions pass")
