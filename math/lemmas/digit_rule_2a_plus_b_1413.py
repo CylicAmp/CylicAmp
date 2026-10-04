@@ -123,7 +123,7 @@ THE 832 PAGE (owner, 2026-10-04) -- decoded parts:
   The three rows 13 + 12 + 16 = 41 -> 5, the same as 832 + 462 + 268 = 1562 -> 5.
   SUMS OF THE ROW LINE (owner, 2026-10-04):
     13 + 12 + 16 = 41 -- correct.
-    1030 + 1020 + 1060 = 3110, not the 3310 written. Read the same way the
+    1030 + 1020 + 1060 = 3110 (owner confirmed; 3310 was a typo). Read the same way the
     owner read 3310 (33 + 10 = 43), 3110 gives 31 + 10 = 41 -- the row total
     again: the zero form carries the same 41.
     (4+3) = 7, 7+7 = 14 -> 5 and 43 + 43 = 86 -> 8+6 = 14 -> 1+4 = 5: correct
