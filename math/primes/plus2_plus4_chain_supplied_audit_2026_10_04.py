@@ -34,6 +34,6 @@ assert all(c % 6 in (1, 5) for c in chain)
 assert chain == list(primerange(5, 24))                                              # D2
 assert chain[-1] + 2 == 25 == 5 ** 2 and not isprime(25) and nextprime(23) == 29     # D3
 lanes = [n for n in range(5, 200) if n % 6 in (1, 5)]
-assert any(not isprime(n) for n in lanes) and all(isprime(p) == (p in lanes) for p in primerange(5, 200)) or True
+assert all(p in lanes for p in primerange(5, 200)) and not all(isprime(n) for n in lanes)   # every prime > 3 on the lanes, not every lane number prime
 assert [7 + 2, 13 + 2, 19 + 2] == [9, 15, 21] and [7 + 4, 13 + 4, 19 + 4] == [11, 17, 23]   # W1
 assert nextprime(5 + 2) == 11                                                         # W3
