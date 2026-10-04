@@ -156,9 +156,13 @@ THE FOLD AND THE HALF-5 (owner, 2026-10-04):
 
 GATES (owner, 2026-10-04): 1234(5+9 = 1+4 = 5 / 5678(9+5 = 1+4 = 5 /
   7924(77)4297. In 123456789 the block 1234 is followed by 5 and 5678 by 9;
-  the two gates add 5 + 9 = 14 -> 5, the centre. 7924(77)4297 mirrors around
-  the half-5 seam 77, and 7924 + 4297 = 12221 also reads the same backwards.
-  Where 7924 comes from is open (asked).
+  the two gates add 5 + 9 = 14 -> 5, the centre.
+  The third line is 6813(77)3186 (owner's correction of a typed 7924): 1234
+  stacked over 5678 gives columns 1+5, 2+6, 3+7, 4+8 = 6, 8, 10, 12 -> 6, 8,
+  1, 3 = 6813. The columns step by 2 because both rows step by 1; the fifth
+  column is the two gates, 5 + 9 = 14 -> 5, and that 5 split into its halves
+  7 + 7 (= 2.5 + 2.5 under digital roots) is the seam 77. 6+8+1+3 = 18 -> 9.
+  The line reads the same backwards.
 
 FALSIFICATION: any assertion below failing.
 """
@@ -339,7 +343,10 @@ assert all((10 * x) % 9 == x % 9 for x in range(100))
 assert "1111" + "2.55.2" + "1111" == ("1111" + "2.55.2" + "1111")[::-1] and "1111771111" == "1111771111"[::-1]
 
 assert "123456789"[4] == "5" and "123456789"[8] == "9" and dr(5 + 9) == 5
-assert "7924" + "77" + "4297" == ("7924" + "77" + "4297")[::-1] and 7924 + 4297 == 12221 and str(12221) == str(12221)[::-1]
+COLS = [a + b for a, b in zip([1, 2, 3, 4, 5], [5, 6, 7, 8, 9])]
+assert COLS == [6, 8, 10, 12, 14] and [dr(c) for c in COLS] == [6, 8, 1, 3, 5]
+assert "".join(str(dr(c)) for c in COLS[:4]) == "6813" and dr(7 + 7) == dr(COLS[4]) == 5
+assert "6813" + "77" + "3186" == ("6813" + "77" + "3186")[::-1] and dr(6 + 8 + 1 + 3) == 9
 
 if __name__ == "__main__":
     for m in MAGIC:
