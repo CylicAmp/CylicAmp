@@ -22,6 +22,17 @@ PASTED ANSWER -- CHECKED:
   "143 primes between 100 and 999" -- correct, and the full list by hundreds
   (21, 16, 16, 17, 14, 16, 14, 15, 14) matches exactly.
 
+SECOND PAGE (owner, 2026-10-05):
+  2+9 = 1+1 = 2 (fills the blank: 2 -> 11), 3+0 = 3, 5+18 = 2+3 = 5,
+  7+36 = 4+3 = 7. The gaps 9, 18, 36 are multiples of 9 (forced: equal digital
+  roots differ by a multiple of 9) -- 9 x 1, 2, 4; "9+18x2 = (3+6 = 9) 369".
+  357 -> 15, 257 -> 14; 15 + 14 = 29 -> 11 -> 2. 515 -> 11, +2 = 13, +2 = 15 -> 6;
+  6 + 2 + 2 = 10 -> 1. 257 = 2^8 + 1 is prime; 357 = 3 x 7 x 17; 515 = 5 x 103.
+  Pasted text on three primes: minimum sum 2+2+2 = 6 and the triplet 3, 5, 7
+  (the only three primes spaced by 2) -- correct. "Goldbach's weak conjecture"
+  is now a theorem (Helfgott 2013): every odd number above 5 is a sum of
+  three primes.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -45,6 +56,15 @@ assert D12[:5] == [(11, 23), (17, 29), (19, 31), (29, 41), (31, 43)] and len(D12
 LISTED = {1: 21, 2: 16, 3: 16, 4: 17, 5: 14, 6: 16, 7: 14, 8: 15, 9: 14}
 assert all(len(list(primerange(100 * h, 100 * h + 100))) == c for h, c in LISTED.items())
 assert sum(LISTED.values()) == 143
+
+assert [q - p for p, q in ((2, 11), (5, 23), (7, 43))] == [9, 18, 36] and all(g % 9 == 0 for g in (9, 18, 36))
+assert all((q - p) % 9 == 0 for p in primerange(2, 300) for q in primerange(p + 1, 300) if dr(p) == dr(q))
+assert dr(2 + 9) == 2 and dr(5 + 18) == 5 and dr(7 + 36) == 7 and 3 + 6 == 9
+assert (3 + 5 + 7, 2 + 5 + 7) == (15, 14) and dr(15 + 14) == 2 and 5 + 1 + 5 + 2 + 2 == 15 and dr(15) == 6
+assert dr(6 + 2 + 2) == 1 and isprime(257) and 257 == 2 ** 8 + 1 and 357 == 3 * 7 * 17 and 515 == 5 * 103
+assert 2 + 2 + 2 == 6 and [p for p in primerange(2, 1000) if isprime(p + 2) and isprime(p + 4)] == [3]
+for n in range(7, 2000, 2):
+    assert any(isprime(a) and isprime(b) and isprime(n - a - b) for a in (2, 3, 5, 7, 11, 13) for b in primerange(2, n))
 
 if __name__ == "__main__":
     print("all assertions pass")
