@@ -137,6 +137,13 @@ DOUBLING CHAINS FROM 1, 2, 3 (owner, 2026-10-05):
   keeps the root 9. 12 and 24 sit in the 3-chain 3612244896, whose first two
   digits are 36.
 
+THE a | DR(2a) LADDER (owner, 2026-10-05: 12=3, 24=6, 36=9, 48=3, 51=6, 63=9,
+  75=3, 87=6, 99=9 "and all the way down"): each number is a followed by the
+  root of 2a -- 51 is 5 | DR(10) = 1, not 48 + 12 (60 has the same root 6).
+  The root of every entry is a + 2a = 3a: 3, 6, 9 forever (forced). Built with
+  DR(a) as the first digit, like the ladder, the nine entries repeat in every
+  block of nine rows.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -291,6 +298,12 @@ for st in range(1, 10):
 
 assert [dr(12 * k) for k in range(1, 10)] == [3, 6, 9] * 3 and dr(63) == dr(36) == 9
 assert "12" in dchain(3, 6) and "24" in dchain(3, 6) and dchain(3, 6).startswith("36")
+
+LAD2 = [int(f"{a}{dr(2 * a)}") for a in range(1, 10)]
+assert LAD2 == [12, 24, 36, 48, 51, 63, 75, 87, 99] and [dr(x) for x in LAD2] == [3, 6, 9] * 3
+assert dr(60) == dr(51) == 6
+assert all(int(f"{dr(a)}{dr(2 * a)}") == LAD2[(a - 1) % 9] and dr(int(f"{dr(a)}{dr(2 * a)}")) == dr(3 * a)
+           for a in range(1, 300))
 
 if __name__ == "__main__":
     print("all assertions pass")
