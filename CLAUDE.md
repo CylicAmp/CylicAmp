@@ -81,12 +81,15 @@ dispatches to the others: `prior-art`, `audit-supplied`, `forced-check`,
 Two standing rules from that chain:
 
 - **Check prior art before writing, not after.** The corpus is 568 files.
-  The Z/12 orbit quotient exists in **four** — T138 (2026-08-07, first),
-  T200, T285, T339 — each adding real content on a repeatedly-restated base,
-  and until 2026-09-16 only one citation link existed between them.
-  **T118 and T276 are not in this cluster**, though an earlier version of
-  this note listed T118: T118 is the subgroup lattice, and its only quotient
-  is (Z/37Z)*/H_9 ≅ Z/4Z; T276 is Kolakoski and never states the quotient.
+  The Z/12 orbit quotient exists in **five** — T118 (2026-08-03, first:
+  cosets of H_3 = IC are the 12 orbits, order 36/3 = 12, indexed by dlog
+  mod 12; plus the H_9 layer, quotient Z/4Z), T138 (2026-08-07, first to
+  name it Z/12Z), T200, T285, T339 — each adding real content on a
+  repeatedly-restated base. **T276 is not in this cluster** (Kolakoski; it
+  uses the orbit names as labels). An intermediate version of this note
+  (2026-09-16) wrongly excluded T118, saying its only quotient was the Z/4Z;
+  lines 13-24 of T118 state the order-12 one (re-checked 2026-10-05,
+  math/theorems/DEDUP_T299_QUOTIENT.md).
   Rediscovery is a filing problem, not misconduct — link the earlier file and
   say what is new beyond it.
 - **Never interpret a deviation until the reference distribution has been
