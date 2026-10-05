@@ -86,6 +86,18 @@ PASTED PRIME-PREFIX SCRIPT (another assistant, 2026-10-05) -- AUDIT:
   Python environment you forced open" describes no real mode; that reply
   shows code but no executed output.
 
+PRIME PREFIXES OF THE LADDER-ROW CHAINS (owner, 2026-10-05): each row starts
+  its own doubling chain (products with the 2 between them, as in 9218236);
+  every prefix up to 36 digits tested.
+    row 1 12312: 1231            row 2 23514: 2, 23, 2351
+    row 3 34716: 3, 347          row 4 45918: 4591
+    row 5 56220: 5               row 6 67422: 67, 6742221348442269688253 (22 digits),
+                                              67422213484422696882539 (23 digits)
+    row 7 78624: 7               row 8 89826: 89
+    row 9 91128: 911, 91128218225623 (14 digits)
+  The three long primes were confirmed by sympy's isprime and separately by
+  Miller-Rabin to 20 prime bases.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -185,6 +197,20 @@ while len(GEN) < 40:
 assert chain(36)[:36] == HARD and GEN[:36] != HARD and GEN.startswith("918367214428857611522304")
 assert not any(isprime(int(HARD[:i])) for i in range(1, 37))
 assert not any(isprime(int(GEN[:i])) for i in range(1, 37))
+
+from sympy.ntheory.primetest import mr
+def lchain(start, length):
+    v, out = start, str(start)
+    while len(out) < length:
+        v *= 2
+        out += "2" + str(v)
+    return out
+PP = {a: [lchain(lrow(a), 36)[:i] for i in range(1, 37) if isprime(int(lchain(lrow(a), 36)[:i]))] for a in range(1, 10)}
+assert PP == {1: ["1231"], 2: ["2", "23", "2351"], 3: ["3", "347"], 4: ["4591"], 5: ["5"],
+              6: ["67", "6742221348442269688253", "67422213484422696882539"], 7: ["7"], 8: ["89"],
+              9: ["911", "91128218225623"]}
+BASES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71]
+assert all(mr(int(x), BASES) for x in ("6742221348442269688253", "67422213484422696882539", "91128218225623"))
 
 if __name__ == "__main__":
     print("all assertions pass")
