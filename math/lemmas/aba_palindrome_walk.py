@@ -30,8 +30,10 @@ THE GRID AS INTENDED (owner, 2026-10-05: "it starts at 1,2,1 and ends with
       656 565 656 565 / 767 676 767 676 / 878 787 878 787 / 989 898 989 898
   The pasted list had uneven blocks (6-5 and 4-3 three entries, the first
   three pairs two). Each row totals 2 x 111(a+b) = 222(a+b): 666, 1110, 1554,
-  1998, 2442, 2886, 3330, 3774. Open: whether the wrap 191 919 191 919 closes
-  the grid back to 1.
+  1998, 2442, 2886, 3330, 3774. The wrap closes it (owner): after 989 comes
+  191 919 191 919 (total 2220), then 121 again -- a loop of nine rows around
+  the circle 1..9. Every digit sits in exactly two neighbouring pairs, so the
+  loop totals 222 x (2 x 45) = 19,980.
 
 FALSIFICATION: any assertion below failing.
 """
@@ -59,6 +61,8 @@ GRID = [[121, 212, 121, 212]] + [[int(f"{k+1}{k}{k+1}"), int(f"{k}{k+1}{k}")] * 
 assert GRID[1] == [323, 232, 323, 232] and GRID[-1] == [989, 898, 989, 898]
 assert [sum(r) for r in GRID] == [666, 1110, 1554, 1998, 2442, 2886, 3330, 3774]
 assert all(abs(r[0] - r[1]) == 91 for r in GRID)
+LOOP = GRID + [[191, 919, 191, 919]]
+assert sum(LOOP[-1]) == 2220 and sum(map(sum, LOOP)) == 19980 == 222 * 2 * 45
 
 if __name__ == "__main__":
     print("all assertions pass")
