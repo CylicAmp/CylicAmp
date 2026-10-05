@@ -78,6 +78,19 @@ PASTED L-PROPERTIES SCRIPT (2026-10-05) -- AUDIT:
   2.3^2.2551, 2^2.3.5.937, 2.3.17.661, 2^5.3^3.7.13, 2.3.11.1361, 2^3.3.3797;
   no 3R is a square. Its factorint(...).keys() would also drop the exponents.
 
+THE L ON THE PRIME ROW DIGIT BY DIGIT, TO 36 PRIMES (owner, 2026-10-05): the
+  row extended to the first 36 primes (2 ... 151), each reduced to its root d,
+  with the L on each: d, 2d, 4d right and 3d down.
+  The running total of the roots reaches 37 exactly at the 9th prime (23) --
+  the original prime row -- and at no other point up to 36 is it a multiple of
+  37. After 36 primes: S = 159, and the L totals are 159, 318, 636, 477 (roots
+  6, 3, 6, 9).
+  Root counts over the 36: 2 and 5 seven times each, 7 six, 1, 4, 8 five each,
+  3 once (the prime 3 itself); 6 and 9 never (forced). Primes spread evenly
+  over the six roots in the long run (Dirichlet), and 36 primes already sit
+  close to that.
+  Down-arm ends 3d reduce to 3 or 6 for every prime except 3 (-> 9).
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime, prime
@@ -192,6 +205,15 @@ assert LF[0] == {2: 3, 3: 4, 19: 1} and LF[6] == {2: 5, 3: 3, 7: 1, 13: 1} and L
 for a in range(1, 37):
     R_ = int(f"{dr(a)}{dr(a + 1)}{dr(2 * a + 1)}{2 * a + 10}")
     assert R_ % 6 == 0 and not isprime(R_) and math.isqrt(3 * R_) ** 2 != 3 * R_
+
+from collections import Counter
+P36 = [dr(prime(k)) for k in range(1, 37)]
+RUN = [sum(P36[:k]) for k in range(1, 37)]
+assert prime(36) == 151 and RUN[8] == 37 and [k + 1 for k in range(36) if RUN[k] % 37 == 0] == [9]
+S36 = RUN[-1]
+assert (S36, 2 * S36, 4 * S36, 3 * S36) == (159, 318, 636, 477) and [dr(x) for x in (159, 318, 636, 477)] == [6, 3, 6, 9]
+assert Counter(P36) == Counter({2: 7, 5: 7, 7: 6, 1: 5, 4: 5, 8: 5, 3: 1})
+assert all(dr(3 * d) in (3, 6) for d in P36 if d != 3) and dr(3 * 3) == 9
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:
