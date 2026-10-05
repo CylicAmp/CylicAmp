@@ -42,6 +42,15 @@ THE DOUBLING CHAIN 9 x 2 = 18 x 2 = 36 (owner, 2026-10-05; the gaps 9, 18, 36):
   9, so the chain's digit sum is 9s plus 2s: 9218236 -> 31 -> 4, and each further
   doubling adds 9 + 2, i.e. +2 to the root.
 
+OWNER'S FACTOR SCRIPT ON 92182362722144 (the chain after 72 x 2 = 144), run as
+  written and cross-checked with sympy -- identical:
+    92182362722144 = 2^5 x 17 x 67 x 2529147353 (all four prime)
+    48 divisors, divisor sum 195027610761648
+    sqrt 9601164.654... (not a square), cube root 45173.38... (not a cube)
+    hex 0x53d6e0fc0f60, octal 0o2475334077007540,
+    binary 0b10100111101011011100000111111000000111101100000
+  Digit sum 53 -> 8 = DR(9 + 11 x 4), the chain rule above.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -87,6 +96,16 @@ assert f"{int(chain(4)):,}" == "92,182,362,722,144"
 assert sum(map(int, chain(2))) == 31 and dr(31) == 4
 for k in range(1, 20):
     assert dr(9 * 2 ** k) == 9 and dr(sum(map(int, chain(k)))) == dr(9 + 11 * k)
+
+from sympy import factorint, divisor_count, divisor_sigma
+import math
+N = 92182362722144
+assert N == int(chain(4)) and factorint(N) == {2: 5, 17: 1, 67: 1, 2529147353: 1} and isprime(2529147353)
+assert divisor_count(N) == 48 and divisor_sigma(N) == 195027610761648
+assert math.isqrt(N) == 9601164 and math.isqrt(N) ** 2 != N and round(N ** (1 / 3)) ** 3 != N
+assert (hex(N), oct(N)) == ("0x53d6e0fc0f60", "0o2475334077007540")
+assert bin(N) == "0b10100111101011011100000111111000000111101100000"
+assert sum(map(int, str(N))) == 53 and dr(53) == 8 == dr(9 + 11 * 4)
 
 if __name__ == "__main__":
     print("all assertions pass")
