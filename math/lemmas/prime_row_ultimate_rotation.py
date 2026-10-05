@@ -97,6 +97,14 @@ THE L DIGIT BY DIGIT ON LADDER ROWS 1-36 (owner: "to 36"): totals S, 2S, 4S, 3S
   of 37. Rows 4, 13, 22, 31 all give 45 (90, 180, 135); rows 8, 17, 26 give 49;
   rows 9, 18, 27 give 41. Largest: row 35, S = 67 (134, 268, 201).
 
+THE L ON THE PRIME ROW'S ULTIMATE ROTATION (owner, 2026-10-05): all nine turns
+  of 235724815, each with its L (R, 2R, 4R right; 3R down).
+  Every turn has roots 1, 2, 4 | 3 -- forced, since every turn keeps the digit
+  sum 37. One turn is prime: 523572481.
+  The nine turns add to 4111111107 = 37 x 111111111 (each digit stands once in
+  every place), and 111111111 = 3^2 x 37 x 333667, so the sum is
+  3^2 x 37^2 x 333667.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime, prime
@@ -225,6 +233,14 @@ ST36 = [sum(map(int, r9(a))) for a in range(1, 37)]
 assert len(r9(36)) == 10 and ST36[35] == 32 and [a for a in range(1, 37) if ST36[a - 1] % 37 == 0] == [5]
 assert [ST36[a - 1] for a in (4, 13, 22, 31)] == [45] * 4 and [ST36[a - 1] for a in (8, 17, 26)] == [49] * 3
 assert [ST36[a - 1] for a in (9, 18, 27)] == [41] * 3 and max(ST36) == 67 == ST36[34]
+
+TURNS = cycle(ROW9, rot_l)
+for t in TURNS:
+    Rt = int(t)
+    assert [dr(Rt), dr(2 * Rt), dr(4 * Rt), dr(3 * Rt)] == [1, 2, 4, 3]
+assert [t for t in TURNS if isprime(int(t))] == ["523572481"]
+assert sum(int(t) for t in TURNS) == 4111111107 == 37 * 111111111
+assert factorint(4111111107) == {3: 2, 37: 2, 333667: 1}
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:

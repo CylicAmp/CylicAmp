@@ -51,3 +51,9 @@ assert any(len({coset_of[pow(g, k, P)] for k in range(12)}) == 12 for g in units
 
 if __name__ == "__main__":
     print("DEDUP T299 + quotient cluster: all assertions pass")
+
+# 2026-10-05: T118 states the order-12 quotient itself (cosets of H_3 = IC are the 12 orbits);
+# CLAUDE.md's 2026-09-16 exclusion of T118 was wrong and is corrected.
+import pathlib as _pl2
+_t118 = (_pl2.Path(__file__).parent / "theorem_118_coset_structure_gf37.py").read_text()
+assert "has order 36/3 = 12" in _t118 and "The 12 left cosets of H_3 are exactly the 12 orbits of the 137-map" in _t118
