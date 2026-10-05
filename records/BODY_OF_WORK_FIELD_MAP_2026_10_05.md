@@ -4,6 +4,24 @@ This map shows which outside fields the repo's work connects to, where it can
 contribute most, and what work would establish each contribution. It was put
 together from two surveys and some direct checks.
 
+## What stands
+
+The eight sections below are fields, not results. Each one holds many results.
+
+- **Graded results:** 161 files are graded THEOREM and 267 COMPUTATION in
+  CLASSIFICATION_INDEX, and about 500 more files are not yet graded.
+- **New to the published record:** 577 terms of OEIS A185584 beyond its
+  published range (9.3·10¹⁸), and the m-sequence 60, 286650, …, which is not in
+  OEIS. Both come with a proved lemma, proofs that k = 2, 3 and 6 are
+  impossible, and a search to 10²² that a second program confirms.
+- **Independent rediscoveries of standard theory:** cosets (Lagrange),
+  Zsigmondy, Euler's criterion, Kummer, and CM curves.
+- **Errors caught in outside material:** a Miller–Rabin prime test that
+  accepted a composite, a false "Leyland record" claim (the number is divisible
+  by 113 and 5101), and a refuted "kernel dim 5" claim.
+- **Formal proofs:** four Lean 4 theorems, written with no unfinished proof
+  steps but not yet compiled.
+
 ## How this was made, and its limits
 
 - **Mathematics survey.** Covered SYNTHESIS, WORK_SYNTHESIS, INDEX, LITERATURE_MAP
