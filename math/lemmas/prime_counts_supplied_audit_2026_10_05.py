@@ -122,6 +122,16 @@ WHAT THE DOUBLING SKIPS (owner, 2026-10-05: "9x2 = 18x2 = 36 [typed 37] -- what
   0, 1, 3, 7, 15, ... = 2^k - 1 -- the same counts as building a number from the
   numbers before it (compositions_of_n.py: 1, 3, 7, 15 ways).
 
+DOUBLING CHAINS FROM 1, 2, 3 (owner, 2026-10-05):
+    (1)248(1)632(6+4 = (1)   /   2)48163(2)64108(2)16332   /   3612244896
+  From 1: 1, 2, 4, 8, 16, 32, 64 -> 1248163264 (the (1)s mark carries; 6+4 -> 1).
+  From 3: 3, 6, 12, 24, 48, 96 -> 3612244896.
+  From 2: 2, 4, 8, 16, 32, 64, 128, 256 -> 248163264128256; the line matches to
+  64, then "108" for 128 (typo) and "16332" not mapped.
+  By digital root every start 1..9 falls in one of three loops (forced): 1, 2,
+  4, 5, 7, 8 run the cycle 1-2-4-8-7-5 (each entering at its own place); 3 and 6
+  swap; 9 stays 9.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -259,6 +269,20 @@ assert 18 * 2 == 36 and 18 + 9 == 27 == (18 + 36) // 2 and 9 == 18 // 2
 SKIP = [len(range(9 * 2 ** k + 9, 9 * 2 ** (k + 1), 9)) for k in range(8)]
 assert SKIP == [2 ** k - 1 for k in range(8)] == [0, 1, 3, 7, 15, 31, 63, 127]
 assert list(range(36 + 9, 72, 9)) == [45, 54, 63]
+
+def dchain(start, steps):
+    return "".join(str(start * 2 ** k) for k in range(steps))
+assert dchain(1, 7) == "1248163264" and dchain(3, 6) == "3612244896" and dchain(2, 8) == "248163264128256"
+CYC = [1, 2, 4, 8, 7, 5]
+for st in range(1, 10):
+    roots = [dr(st * 2 ** k) for k in range(12)]
+    if st % 3:
+        i = CYC.index(dr(st))
+        assert roots == [CYC[(i + k) % 6] for k in range(12)]
+    elif st == 9:
+        assert set(roots) == {9}
+    else:
+        assert set(roots) == {3, 6} and roots[0] != roots[1]
 
 if __name__ == "__main__":
     print("all assertions pass")
