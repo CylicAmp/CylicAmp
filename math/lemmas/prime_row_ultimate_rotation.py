@@ -61,6 +61,15 @@ THE L DIGIT BY DIGIT ON THE NINE LADDER ROWS (nine-digit forms; totals of the
   357, 369 - 111 = 258; adding 111 walks the plain grid's columns 147 -> 258 ->
   369. (The prime row's right total is 148, and 148 - 111 = 37.)
 
+PASTED "SymPy Verification Engine" SCRIPT (2026-10-05) -- AUDIT:
+  It does not run: dr() is used but never defined (NameError on the R2 line),
+  so any output attributed to it was not produced by it. R2 (digital roots of
+  the digits) would equal R1 anyway -- every digit is already its own root.
+  Run correctly: 235724815 is not prime (ends in 5); 235724815 =
+  5 x 23 x 971 x 2111 -- 23, the row's last prime, divides it.
+  The pasted L table (ladder rows 1-9): every cell checked, all correct; row 2
+  shows "->" where the others have an arrow glyph (formatting only).
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime, prime
@@ -156,6 +165,16 @@ assert LT[4] == (37, 74, 148, 111) and LT[7][3] == 147 and LT[8][3] == 123 and L
 assert all(t[2] - t[3] == t[0] for t in LT)
 assert 147 - 111 == 36 and dr(36) == 9 and 148 - 111 == 37 and 246 + 111 == 357 and 369 - 111 == 258
 assert (147 + 111, 258 + 111) == (258, 369)
+
+from sympy import factorint
+src = 'row = [2, 3, 5, 7, 2, 4, 8, 1, 5]\nR2 = int("".join(map(str, [dr(d) for d in row])))'
+try:
+    exec(src, {})
+    raise AssertionError("pasted script should fail without dr")
+except NameError:
+    pass
+assert int("".join(str(dr(d)) for d in DIG)) == 235724815 and not isprime(235724815)
+assert factorint(235724815) == {5: 1, 23: 1, 971: 1, 2111: 1}
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:
