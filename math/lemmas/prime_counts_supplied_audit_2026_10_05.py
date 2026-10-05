@@ -144,6 +144,13 @@ THE a | DR(2a) LADDER (owner, 2026-10-05: 12=3, 24=6, 36=9, 48=3, 51=6, 63=9,
   DR(a) as the first digit, like the ladder, the nine entries repeat in every
   block of nine rows.
 
+DOUBLE, THEN HALF (owner, 2026-10-05): grid 123 / 246 (typed 245) / 369 --
+  1, 2, 3 times the row number. "On the first number it's doubled; the second
+  only needs half of itself to get to the third": a -> 2a doubles, 2a -> 3a
+  adds half of 2a, for every a (3a = 2a + 2a/2): 1, 2, 3; 3, 6, 9; and 9, 18,
+  27 -- the 27 the doubling chain skipped. The grid is symmetric (rows equal
+  columns); rows sum to 6, 12, 18.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -304,6 +311,11 @@ assert LAD2 == [12, 24, 36, 48, 51, 63, 75, 87, 99] and [dr(x) for x in LAD2] ==
 assert dr(60) == dr(51) == 6
 assert all(int(f"{dr(a)}{dr(2 * a)}") == LAD2[(a - 1) % 9] and dr(int(f"{dr(a)}{dr(2 * a)}")) == dr(3 * a)
            for a in range(1, 300))
+
+T3 = [[r * c for c in (1, 2, 3)] for r in (1, 2, 3)]
+assert T3 == [[1, 2, 3], [2, 4, 6], [3, 6, 9]] and T3 == [list(c) for c in zip(*T3)]
+assert [sum(r) for r in T3] == [6, 12, 18]
+assert all(2 * a + (2 * a) // 2 == 3 * a for a in range(1, 1000)) and (9, 18, 27) == (9, 2 * 9, 18 + 9)
 
 if __name__ == "__main__":
     print("all assertions pass")
