@@ -37,6 +37,18 @@ PRIMES BY DECADE (owner, 2026-10-05):
   The owner's chain: 43 = 7, + 2 = 9, + 5 = 14 -> 1+4 = 5 (either order gives
   14 -> 5) -- landing on 14, the "1+4 = 5" that was not prime in the teens.
 
+THE L ON THE PRIME ROW (owner, 2026-10-05; the L is in
+  prime_counts_supplied_audit_2026_10_05.py: doubling right R, 2R, 4R, counting
+  down R, 2R, 3R):
+  WHOLE ROW R = 235724815: 2R = 471449630, right 4R = 942899260, down
+  3R = 707174445. Roots: right 1, 2, 4 -- the start of the forever cycle -- and
+  down 3, NOT 9 as on every ladder row: the prime row totals 37, which 3 does
+  not divide. (The ten-digit form 2357114815 gives the same roots.)
+  DIGIT BY DIGIT (each of 2, 3, 5, 7, 2, 4, 8, 1, 5 as its own corner): the four
+  positions total 37, 74, 148 (right) and 111 (down) -- 1, 2, 4 and 3 times 37,
+  forced since the digits sum to 37; the down total 111 = 3 x 37 is the
+  repdigit. Down-arm ends 3d reduce only to 3, 6, 9.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime, prime
@@ -115,6 +127,15 @@ assert list(primerange(20, 30)) == [23, 29] and (dr(23), dr(29)) == (5, 2) and d
 assert (2 + 2, dr(3 + 9)) == (4, 3) and isprime(43) and dr(43) == 7
 assert [p for p in primerange(8, 60) if dr(p) == 7] == [43]
 assert dr(43) + 5 + 2 == 14 and dr(14) == 5 and dr(43) + 2 == 9 and 9 + 5 == 14
+
+R = 235724815
+assert (2 * R, 4 * R, 3 * R) == (471449630, 942899260, 707174445)
+assert [dr(R), dr(2 * R), dr(4 * R), dr(3 * R)] == [1, 2, 4, 3]
+R10 = 2357114815
+assert [dr(R10), dr(2 * R10), dr(4 * R10), dr(3 * R10)] == [1, 2, 4, 3]
+DIG = [2, 3, 5, 7, 2, 4, 8, 1, 5]
+assert (sum(DIG), sum(2 * d for d in DIG), sum(4 * d for d in DIG), sum(3 * d for d in DIG)) == (37, 74, 148, 111)
+assert 111 == 3 * 37 and 148 == 4 * 37 and set(dr(3 * d) for d in DIG) <= {3, 6, 9}
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:
