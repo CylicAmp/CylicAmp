@@ -51,6 +51,16 @@ OWNER'S FACTOR SCRIPT ON 92182362722144 (the chain after 72 x 2 = 144), run as
     binary 0b10100111101011011100000111111000000111101100000
   Digit sum 53 -> 8 = DR(9 + 11 x 4), the chain rule above.
 
+SQUARES AND CUBES AMONG THE PREFIXES (pasted answer, 2026-10-05; owner: "keep
+  going to row 36"): checked with exact integer roots. Of the 14 prefixes of
+  92182362722144 only 9 is a square and none is a cube -- the pasted table is
+  right. Carried to 36 doublings (last product 9 x 2^36 = 618475290624; 289
+  digits, 289 prefixes): still only 9 is a square, no cubes.
+  The pasted script does not run as pasted (three statements on one line, a
+  SyntaxError) and uses float roots, which are not exact for long numbers.
+  "The digits shift too rapidly" is not a proof: the result is a check to 36
+  doublings, not a theorem for all.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -106,6 +116,20 @@ assert math.isqrt(N) == 9601164 and math.isqrt(N) ** 2 != N and round(N ** (1 / 
 assert (hex(N), oct(N)) == ("0x53d6e0fc0f60", "0o2475334077007540")
 assert bin(N) == "0b10100111101011011100000111111000000111101100000"
 assert sum(map(int, str(N))) == 53 and dr(53) == 8 == dr(9 + 11 * 4)
+
+from sympy import integer_nthroot
+def sq_cb(st):
+    sq = [int(st[:i]) for i in range(1, len(st) + 1) if math.isqrt(int(st[:i])) ** 2 == int(st[:i])]
+    cb = [int(st[:i]) for i in range(1, len(st) + 1) if integer_nthroot(int(st[:i]), 3)[1]]
+    return sq, cb
+assert sq_cb(chain(4)) == ([9], [])
+C36 = chain(36)
+assert len(C36) == 289 and 9 * 2 ** 36 == 618475290624 and sq_cb(C36) == ([9], [])
+try:
+    compile('full_str = "92182362722144"res = check_properties(full_str)', "pasted", "exec")
+    raise AssertionError("pasted line should not compile")
+except SyntaxError:
+    pass
 
 if __name__ == "__main__":
     print("all assertions pass")
