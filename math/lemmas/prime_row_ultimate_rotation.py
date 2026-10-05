@@ -49,6 +49,18 @@ THE L ON THE PRIME ROW (owner, 2026-10-05; the L is in
   forced since the digits sum to 37; the down total 111 = 3 x 37 is the
   repdigit. Down-arm ends 3d reduce only to 3, 6, 9.
 
+THE L DIGIT BY DIGIT ON THE NINE LADDER ROWS (nine-digit forms; totals of the
+  corners, doubles, right ends 4d and down ends 3d = S, 2S, 4S, 3S):
+    row 1 15 30 60 45     row 2 25 50 100 75    row 3 35 70 140 105
+    row 4 45 90 180 135   row 5 37 74 148 111   row 6 29 58 116 87
+    row 7 39 78 156 117   row 8 49 98 196 147   row 9 41 82 164 123
+  Row 5 (562202938) gives exactly the prime row's 37, 74, 148, 111 -- both total
+  37. The two arms always end S apart (4S - 3S = S).
+  OWNER'S LINES: 147 - 111 = 36 -> 3+6 = 9 (correct; 147 is row 8's down total,
+  111 row 5's and the prime row's). Stack 111 / 246 / 111 / 369: 246 + 111 =
+  357, 369 - 111 = 258; adding 111 walks the plain grid's columns 147 -> 258 ->
+  369. (The prime row's right total is 148, and 148 - 111 = 37.)
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime, prime
@@ -136,6 +148,14 @@ assert [dr(R10), dr(2 * R10), dr(4 * R10), dr(3 * R10)] == [1, 2, 4, 3]
 DIG = [2, 3, 5, 7, 2, 4, 8, 1, 5]
 assert (sum(DIG), sum(2 * d for d in DIG), sum(4 * d for d in DIG), sum(3 * d for d in DIG)) == (37, 74, 148, 111)
 assert 111 == 3 * 37 and 148 == 4 * 37 and set(dr(3 * d) for d in DIG) <= {3, 6, 9}
+
+def r9(a):
+    return "".join(map(str, [dr(a), dr(a + 1), dr(2 * a + 1)] + [2 * a + 1 + 9 * j for j in range(1, 4)]))
+LT = [(sum(map(int, r9(a))), 2 * sum(map(int, r9(a))), 4 * sum(map(int, r9(a))), 3 * sum(map(int, r9(a)))) for a in range(1, 10)]
+assert LT[4] == (37, 74, 148, 111) and LT[7][3] == 147 and LT[8][3] == 123 and LT[3][3] == 135
+assert all(t[2] - t[3] == t[0] for t in LT)
+assert 147 - 111 == 36 and dr(36) == 9 and 148 - 111 == 37 and 246 + 111 == 357 and 369 - 111 == 258
+assert (147 + 111, 258 + 111) == (258, 369)
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:
