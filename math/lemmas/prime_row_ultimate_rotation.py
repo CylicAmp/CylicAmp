@@ -24,6 +24,15 @@ TO KEEP IN MIND (owner, 2026-10-05): (2+3)57(24)81(2+3).
   two digits -- so both ends are 2+3 = 5. Inside: 57 (primes 5, 7), the
   centre 24 (11 -> 2, 13 -> 4), and 81 (17 -> 8, 19 -> 1). Total 37.
 
+PRIMES BY DECADE (owner, 2026-10-05):
+    2357 / 2481 -- roots of 2, 3, 5, 7 and of the teens 11, 13, 17, 19.
+    "5 is not part of first 1 thru 22 (1+4 = 5)"; "in the 20s we get only
+    23 + 29 = 5+2 = 7"; 42 = 6+5 = 11+2 = (1+3 = 4), "pi's rotation".
+  Below 23 the root 5 comes only from the prime 5 itself; the teens row 2481
+  has no 5 and no 7 (14 -> 5 is not prime). The 20s hold just 23 and 29
+  (roots 5 and 2): they bring 5 back, and 23 + 29 = 52 -> 7 brings 7 back.
+  42 -> 6, + 5 = 11, + 2 = 13 -> 4: ends on 1, 3, 4, pi's 3-1-4 turned.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime, prime
@@ -93,6 +102,13 @@ def draw(path):
 assert [prime(1), prime(2)] == [2, 3] and prime(9) == 23 and str(prime(9)) == "23"
 assert dr(prime(9)) == 2 + 3 == 5 and (dr(11), dr(13), dr(17), dr(19)) == (2, 4, 8, 1)
 assert (2 + 3) + 5 + 7 + 2 + 4 + 8 + 1 + (2 + 3) == 37
+
+from sympy import primerange
+assert [dr(p) for p in primerange(1, 10)] == [2, 3, 5, 7] and [dr(p) for p in primerange(10, 20)] == [2, 4, 8, 1]
+assert [p for p in primerange(1, 23) if dr(p) == 5] == [5] and 5 not in [dr(p) for p in primerange(10, 23)]
+assert 7 not in [dr(p) for p in primerange(10, 20)] and dr(14) == 5 and not isprime(14)
+assert list(primerange(20, 30)) == [23, 29] and (dr(23), dr(29)) == (5, 2) and dr(23 + 29) == 7
+assert dr(42) == 6 and 6 + 5 == 11 and 11 + 2 == 13 and dr(13) == 4 and sorted("134") == sorted("314")
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:
