@@ -23,6 +23,16 @@ back to where it began.
   2-1 four times (aba, bab, aba, bab); 6-5 (656 565 656) and 4-3 (343 434 343)
   three times each.
 
+THE GRID AS INTENDED (owner, 2026-10-05: "it starts at 1,2,1 and ends with
+  2,1,2 -- each row should be like that"): every pair is one doubled block,
+  aba bab aba bab --
+      121 212 121 212 / 323 232 323 232 / 434 343 434 343 / 545 454 545 454 /
+      656 565 656 565 / 767 676 767 676 / 878 787 878 787 / 989 898 989 898
+  The pasted list had uneven blocks (6-5 and 4-3 three entries, the first
+  three pairs two). Each row totals 2 x 111(a+b) = 222(a+b): 666, 1110, 1554,
+  1998, 2442, 2886, 3330, 3774. Open: whether the wrap 191 919 191 919 closes
+  the grid back to 1.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import groupby
@@ -44,6 +54,11 @@ for a in range(1, 10):
 SUMS = [int(f"{a}{a-1}{a}") + int(f"{a-1}{a}{a-1}") for a in range(9, 2, -1)] + [121 + 212]
 assert SUMS == [1887, 1665, 1443, 1221, 999, 777, 555, 333]
 assert 919 - 191 == 728 == 8 * 91 and 191 + 919 == 1110
+
+GRID = [[121, 212, 121, 212]] + [[int(f"{k+1}{k}{k+1}"), int(f"{k}{k+1}{k}")] * 2 for k in range(2, 9)]
+assert GRID[1] == [323, 232, 323, 232] and GRID[-1] == [989, 898, 989, 898]
+assert [sum(r) for r in GRID] == [666, 1110, 1554, 1998, 2442, 2886, 3330, 3774]
+assert all(abs(r[0] - r[1]) == 91 for r in GRID)
 
 if __name__ == "__main__":
     print("all assertions pass")
