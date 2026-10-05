@@ -202,6 +202,9 @@ THE BLOCK ON ALL NINE LADDER ROWS (owner: "run it on all 9 ladder rows"):
   ALWAYS (proved): n + DS(n) = 2n mod 9, so the inside reduces to double the
   outside in every row. EXACT only while the inside's second digit a + 2b
   stays below 10: for the openings a, a+1 that is 3a + 2 < 10, rows 1 and 2.
+  ROWS 10-36 (owner: "keep going to row 36"): the opening DR(a), DR(a+1)
+  depends only on a mod 9, so rows 10-18, 19-27 and 28-36 repeat rows 1-9
+  exactly (checked).
 
 FALSIFICATION: any assertion below failing.
 """
@@ -330,6 +333,10 @@ for a in range(1, 10):
     assert dr(ds(inside)) == dr(2 * ds(o)) and dr(inside) == dr(2 * o)
     assert (ds(inside) == 2 * ds(o)) == (a <= 2)
 assert 45 + ds(45) == 54 == rev(45)
+def block(a):
+    o = int(f"{dr(a)}{dr(a + 1)}")
+    return o, rev(o), o + ds(o), rev(o + ds(o))
+assert all(block(a) == block(a - 9) for a in range(10, 37))
 assert all(dr(n + ds(n)) == dr(2 * n) for n in range(1, 10000))
 
 if __name__ == "__main__":
