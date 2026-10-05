@@ -91,6 +91,12 @@ THE L ON THE PRIME ROW DIGIT BY DIGIT, TO 36 PRIMES (owner, 2026-10-05): the
   close to that.
   Down-arm ends 3d reduce to 3 or 6 for every prime except 3 (-> 9).
 
+THE L DIGIT BY DIGIT ON LADDER ROWS 1-36 (owner: "to 36"): totals S, 2S, 4S, 3S
+  for every row (nine digits to row 35, ten at row 36: 9118291100, S = 32).
+  Row 5 (S = 37: 37, 74, 148, 111) is the ONLY row whose total is a multiple
+  of 37. Rows 4, 13, 22, 31 all give 45 (90, 180, 135); rows 8, 17, 26 give 49;
+  rows 9, 18, 27 give 41. Largest: row 35, S = 67 (134, 268, 201).
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime, prime
@@ -214,6 +220,11 @@ S36 = RUN[-1]
 assert (S36, 2 * S36, 4 * S36, 3 * S36) == (159, 318, 636, 477) and [dr(x) for x in (159, 318, 636, 477)] == [6, 3, 6, 9]
 assert Counter(P36) == Counter({2: 7, 5: 7, 7: 6, 1: 5, 4: 5, 8: 5, 3: 1})
 assert all(dr(3 * d) in (3, 6) for d in P36 if d != 3) and dr(3 * 3) == 9
+
+ST36 = [sum(map(int, r9(a))) for a in range(1, 37)]
+assert len(r9(36)) == 10 and ST36[35] == 32 and [a for a in range(1, 37) if ST36[a - 1] % 37 == 0] == [5]
+assert [ST36[a - 1] for a in (4, 13, 22, 31)] == [45] * 4 and [ST36[a - 1] for a in (8, 17, 26)] == [49] * 3
+assert [ST36[a - 1] for a in (9, 18, 27)] == [41] * 3 and max(ST36) == 67 == ST36[34]
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:
