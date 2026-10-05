@@ -3,7 +3,7 @@
 Hejhal's algorithm on SL_2(Z), implemented and run here
 Author: Michael Warren Song (CyclicAmp)
 
-This file exists because selberg_maass_montgomery.py carried two [U] flags
+This file exists because selberg_maass_montgomery.py carried two open flags
 justified by "producing r_j requires Hejhal's algorithm, which is a
 substantial numerical program not present in this repo".  That was true.
 It is no longer true at level 1.
@@ -65,7 +65,7 @@ SCOPE, so this is not read as more than it is.
     Stromberg's block extension; that is not implemented here.
   * The solve is HEURISTIC.  A dip in g(r) is a candidate, not a proof.
     Certification is Booker-Strombergsson-Venkatesh, a separate argument.
-  * So this does NOT lift the two [U] flags in selberg_maass_montgomery.py,
+  * So this does NOT lift the two open flags in selberg_maass_montgomery.py,
     which are about Gamma_0(4).  It removes their stated REASON -- "no such
     program is present" -- and replaces it with a narrower one: the
     multi-cusp extension is not written.

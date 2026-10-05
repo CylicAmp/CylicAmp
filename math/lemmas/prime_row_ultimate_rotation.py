@@ -105,6 +105,17 @@ THE L ON THE PRIME ROW'S ULTIMATE ROTATION (owner, 2026-10-05): all nine turns
   every place), and 111111111 = 3^2 x 37 x 333667, so the sum is
   3^2 x 37^2 x 333667.
 
+THE L ON EACH LADDER ROW'S ULTIMATE ROTATION (owner, 2026-10-05): every turn of
+  a row keeps its digit sum S, so all nine turns share one root pattern
+  (R, 2R, 4R | 3R):
+    row 1 6,3,6|9   row 2 7,5,1|3   row 3 8,7,5|6   row 4 9,9,9|9   row 5 1,2,4|3
+    row 6 2,4,8|6   row 7 3,6,3|9   row 8 4,8,7|3   row 9 5,1,2|6
+  The nine turns add to S x 111111111: 1666666665, 2777777775, 3888888885,
+  4999999995, 4111111107 (row 5 = the prime row's sum), 3222222219,
+  4333333329, 5444444439, 4555555551. Prime turns: row 2 423322351; row 3
+  162534347, 625343471, 434716253; row 9 128374691, 746911283; none in the
+  other rows.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime, prime
@@ -241,6 +252,18 @@ for t in TURNS:
 assert [t for t in TURNS if isprime(int(t))] == ["523572481"]
 assert sum(int(t) for t in TURNS) == 4111111107 == 37 * 111111111
 assert factorint(4111111107) == {3: 2, 37: 2, 333667: 1}
+
+PAT = {1: (6, 3, 6, 9), 2: (7, 5, 1, 3), 3: (8, 7, 5, 6), 4: (9, 9, 9, 9), 5: (1, 2, 4, 3),
+       6: (2, 4, 8, 6), 7: (3, 6, 3, 9), 8: (4, 8, 7, 3), 9: (5, 1, 2, 6)}
+PRIME_TURNS = {2: ["423322351"], 3: ["162534347", "625343471", "434716253"], 9: ["128374691", "746911283"]}
+for a in range(1, 10):
+    rs = r9(a)
+    tns = cycle(rs, rot_l)
+    S_ = sum(map(int, rs))
+    assert {tuple(dr(k * int(t)) for k in (1, 2, 4, 3)) for t in tns} == {PAT[a]}
+    assert sum(int(t) for t in tns) == S_ * 111111111
+    assert sorted(t for t in tns if isprime(int(t))) == sorted(PRIME_TURNS.get(a, []))
+assert sum(int(t) for t in cycle(r9(5), rot_l)) == 4111111107
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:

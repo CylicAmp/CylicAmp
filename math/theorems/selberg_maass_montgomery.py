@@ -419,8 +419,8 @@ def run():
     print(f"  [V] tau(37) = -182213314 \u2261 31 (mod 37), computed above not cited")
     print(f"  [U] Specific eigenvalue r_j values from original session")
     print(f"  [U] Numerical GUE fit statistics from original session")
-    print(f"      \u2514\u2500 ASSESSED: unverifiable in this repo. Maass cusp forms need")
-    print(f"         Hejhal's algorithm, which is not here. Not a to-do item.")
+    print(f"      \u2514\u2500 ASSESSED: one-cusp Hejhal is here (hejhal_maass_level1.py);")
+    print(f"         Gamma_0(4) has three cusps and needs the block extension (not written).")
     print(f"         A GUE fit on RIEMANN zeros is easy and would not count:")
     print(f"         different spectrum, no licence to transfer the result.")
     # open question 3: the double split is shared, so state the control

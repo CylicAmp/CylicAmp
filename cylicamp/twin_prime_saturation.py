@@ -26,7 +26,10 @@ CERTIFIED RESULTS at k=4, N=30_000_000 (v4_saturation_30M):
   Type B: 6559/6561  ρ_4 ≈ 0.9997  CERTIFIED_INCOMPLETE  gaps=2
   Type C: 6559/6561  ρ_4 ≈ 0.9997  CERTIFIED_INCOMPLETE  gaps=2
   FAIL_CLOSED_ABOVE: N=30M for ρ_4=1 on all types
-  HEURISTIC_N*_all_types_6561: ~3.5×10^7  (UNVERIFIED)
+  N*_all_types_6561 = 43,068,437 (RESOLVED 2026-10-05: computed exactly; the
+  earlier heuristic ~3.5x10^7 was low). First twins in the four gap cosets:
+  B 31640 -> 33,158,129; B 43439 -> 35,472,839; C 21716 -> 43,068,437;
+  C 41345 -> 31,219,217. All four > 30M, consistent with the certified gaps.
 
 Identified gap cosets (r = p mod 59049, unfilled at N=30M):
   B: [31640, 43439]   (31640 ≡ 5 mod 9, 43439 ≡ 5 mod 9  ✓)
@@ -51,7 +54,7 @@ CERTIFIED = {
     'A': {'filled': 6561, 'total': 6561, 'rho': 1.0,       'complete': True,  'gaps': []},
     'B': {'filled': 6559, 'total': 6561, 'rho': 6559/6561, 'complete': False, 'gaps': [31640, 43439]},
     'C': {'filled': 6559, 'total': 6561, 'rho': 6559/6561, 'complete': False, 'gaps': [21716, 41345]},
-    'heuristic_N_star': 35_000_000,   # UNVERIFIED
+    'N_star': 43_068_437,   # exact: last gap coset fills at C 21716 (2026-10-05)
     'refinement_5M':    7.478,        # mean k=3→k=4 ratio at 5M
     'refinement_naive': 9.0,
 }
@@ -196,11 +199,11 @@ def run(N: int = 5_000_000, show_certified: bool = True):
         print("  CERTIFIED RESULTS (N=30M, v4_saturation_30M):")
         for t in 'ABC':
             c = CERTIFIED[t]
-            print(f"    Type {t}: {c['filled']}/{c['total']}  ρ_4={c['rho']:.6f}  "
-                  f"{'COMPLETE' if c['complete'] else f'gaps={c[\"gaps\"]}'}")
+            status = 'COMPLETE' if c['complete'] else 'gaps=' + str(c['gaps'])
+            print(f"    Type {t}: {c['filled']}/{c['total']}  ρ_4={c['rho']:.6f}  {status}")
         print()
         print("  FAIL_CLOSED_ABOVE: N=30M for ρ_4=1 on all types")
-        print(f"  HEURISTIC_N*: ~{CERTIFIED['heuristic_N_star']:,}  (UNVERIFIED)")
+        print(f"  N* (exact): {CERTIFIED['N_star']:,}")
         print(f"  Certified gap cosets (N=30M):")
         print(f"    B: {CERTIFIED['B']['gaps']}")
         print(f"    C: {CERTIFIED['C']['gaps']}")

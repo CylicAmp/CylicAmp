@@ -31,7 +31,8 @@ RECONCILIATION NOTES (supplied "all five threads closed")
     in T245 (q = eps * tau(u)/3^b * prod C - m mod 9; 71% of candidates at 1e12).
   * Thread 4 checks: 11 * 26 = 286 = 27 (mod 37); 11 in -mu_3, 26 in mu_3, product
     in -mu_3. Syracuse 37 -> 7 -> 11 (3*37+1 = 112 = 16*7; 3*7+1 = 22 = 2*11).
-  * Thread 2 (Collatz on twin centres) is not reproduced here.
+  * Thread 2 (Collatz on twin centres): reproduced 2026-10-05 in
+    thread2_collatz_twin_centres.py.
 
 CROSS-THREAD STATUS (certification rule adopted 2026-09-28: a thread is VERIFIED
 only when its result reproduces from the stated domain and generation rules and
@@ -55,7 +56,9 @@ every inference used for exhaustiveness is independently checked):
             argument written out in T245. Four members at 1e22 contain supply
             cycles (4817^2 and 8101^2 two-cycle junctions) and are found only by
             the seeded runs.
-  Thread 2  UNVERIFIED here.
+  Thread 2  VERIFIED 2026-10-05 (thread2_collatz_twin_centres.py), with one
+            correction to the 2026-09-26 source text (108's run: 113 steps,
+            max 9232, passes 3077).
 """
 from math import comb
 from collections import Counter

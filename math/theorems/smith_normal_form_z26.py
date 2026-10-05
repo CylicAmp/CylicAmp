@@ -10,7 +10,9 @@ each d_i | d_{i+1} (divisibility chain). The kernel over Z/nZ has
 free rank = #{i : gcd(d_i, n) == n} = #{i : n | d_i}.
 
 STATUS OF CLAIMED THEOREM 9 (kernel dim 5 over Z/26Z):
-  UNVERIFIED. The document presents a circular argument:
+  REFUTED (RESOLVED 2026-10-05: the code below shows the claimed construction
+  has no zero eigenvalue, so kernel dim 5 cannot hold for it). The document
+  presents a circular argument:
     1. Claims Jordan structure (one 2×2 + four 1×1 blocks at 0) without
        providing the explicit matrix.
     2. Asserts kernel dim = 5 from the assumed Jordan structure.
@@ -220,7 +222,7 @@ if __name__ == "__main__":
     print(f"  Kernel dim over Z/26Z: {k26_boost}  (NOT 5)")
     print()
 
-    print("  STATUS: Theorem 9 (kernel dim 5) is UNVERIFIED.")
+    print("  STATUS: Theorem 9 (kernel dim 5) is REFUTED for the stated construction.")
     print("  No matrix has been provided that produces kernel dim 5 over Z/26Z.")
     print("  The '+9 diagonal boost' construction gives rank 9 over Q (zero")
     print("  eigenvalue does not exist), contradicting the claimed Jordan structure.")
