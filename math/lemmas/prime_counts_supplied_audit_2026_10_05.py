@@ -33,6 +33,15 @@ SECOND PAGE (owner, 2026-10-05):
   is now a theorem (Helfgott 2013): every odd number above 5 is a sum of
   three primes.
 
+THE DOUBLING CHAIN 9 x 2 = 18 x 2 = 36 (owner, 2026-10-05; the gaps 9, 18, 36):
+  Written out in order, 9, 2, 18, 2, 36 -> 9218236; the owner's build-up 9, 92,
+  921, 9218, 92182, 921823, 9218236 is right. Pasted continuation (another
+  assistant): 36 x 2 = 72 -> 9218236272, 72 x 2 = 144 -> 92182362722144, and its
+  comma groupings -- correct. Its YouTube citation and "mathematical archives"
+  are filler, not sources. Forced: every product (18, 36, 72, 144, ...) reduces to
+  9, so the chain's digit sum is 9s plus 2s: 9218236 -> 31 -> 4, and each further
+  doubling adds 9 + 2, i.e. +2 to the root.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -65,6 +74,19 @@ assert dr(6 + 2 + 2) == 1 and isprime(257) and 257 == 2 ** 8 + 1 and 357 == 3 * 
 assert 2 + 2 + 2 == 6 and [p for p in primerange(2, 1000) if isprime(p + 2) and isprime(p + 4)] == [3]
 for n in range(7, 2000, 2):
     assert any(isprime(a) and isprime(b) and isprime(n - a - b) for a in (2, 3, 5, 7, 11, 13) for b in primerange(2, n))
+
+def chain(k):
+    v, out = 9, "9"
+    for _ in range(k):
+        v *= 2
+        out += "2" + str(v)
+    return out
+assert chain(2) == "9218236" and [chain(2)[:i] for i in range(1, 8)] == ["9", "92", "921", "9218", "92182", "921823", "9218236"]
+assert chain(3) == "9218236272" and chain(4) == "92182362722144"
+assert f"{int(chain(4)):,}" == "92,182,362,722,144"
+assert sum(map(int, chain(2))) == 31 and dr(31) == 4
+for k in range(1, 20):
+    assert dr(9 * 2 ** k) == 9 and dr(sum(map(int, chain(k)))) == dr(9 + 11 * k)
 
 if __name__ == "__main__":
     print("all assertions pass")
