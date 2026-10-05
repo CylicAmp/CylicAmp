@@ -25,6 +25,16 @@ APPLIED to each nine-digit ladder row (ladder_x_grid.py): left block = digits
   832, 933 (left digit, right digit, their root); the prime row's read 246.
   Row 8's is 832, the owner's chain number -- one match found by looking.
 
+FRAME AND INSIDE (owner, 2026-10-05: "2)357(2)481(5 / 2+2 = 4+5 = 9 / 357 over
+  481: 7+4 = 11+8 = 1+9 = 1"): the prime row's two ends and seam are the frame,
+  2 + 2 + 5 = 9; the inner blocks 357 over 481 add by column to 7, 13 -> 4, 8,
+  and 7 + 4 + 8 = 19 -> 10 -> 1. The frame (9) and the inside (28) make 37.
+  On a ladder row the frame is digits 1, 5, 9 and the inside is 234 over 678.
+
+ROWS 1-36 (owner: "keep going to row 36"): totals of the nine-digit rows 1-35
+  are in TOT35. Row 5 is the ONLY row that totals 37. Frame + inside always
+  equals the total (forced). Row 36, 9118291100, has ten digits (total 32).
+
 FALSIFICATION: any assertion below failing.
 """
 def dr(n):
@@ -53,6 +63,17 @@ assert LP == [43, 74, 105, 136, 78, 109, 140, 171, 103] and RP == [51, 55, 59, 6
 assert ST == ["3361", "4683", "5915", "6337", "7651", "9882", "1214", "2536", "3858"]
 FIRST = [row9(a)[0] + row9(a)[5] + ST[a - 1][0] for a in range(1, 10)]
 assert FIRST == ["123", "224", "325", "426", "527", "639", "731", "832", "933"]
+
+assert 2 + 2 + 5 == 9 and [dr(x + y) for x, y in zip([3, 5, 7], [4, 8, 1])] == [7, 4, 8]
+assert dr(7 + 4 + 8) == 1 and 7 + 4 + 8 == 19 and 3 + 5 + 7 + 4 + 8 + 1 == 28 and 9 + 28 == 37
+TOT35 = [sum(map(int, row9(a))) for a in range(1, 36)]
+assert all(len(row9(a)) == 9 for a in range(1, 36)) and len(row9(36)) == 10 and sum(map(int, row9(36))) == 32
+assert [a for a in range(1, 36) if TOT35[a - 1] == 37] == [5]
+for a in range(1, 36):
+    d = list(map(int, row9(a)))
+    frame, inside = d[0] + d[4] + d[8], d[1] + d[2] + d[3] + d[5] + d[6] + d[7]
+    assert frame + inside == TOT35[a - 1]
+    assert dr(sum(dr(x + y) for x, y in zip(d[1:4], d[5:8]))) == dr(inside)
 
 if __name__ == "__main__":
     print("totals", TOT)
