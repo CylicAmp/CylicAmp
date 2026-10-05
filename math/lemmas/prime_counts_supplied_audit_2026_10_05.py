@@ -132,6 +132,11 @@ DOUBLING CHAINS FROM 1, 2, 3 (owner, 2026-10-05):
   4, 5, 7, 8 run the cycle 1-2-4-8-7-5 (each entering at its own place); 3 and 6
   swap; 9 stays 9.
 
+12, 24, 36, 63 (owner, 2026-10-05): 12 x 1, 2, 3 reduce to 3, 6, 9, and the
+  multiples of 12 repeat 3, 6, 9 forever (12k -> 3k mod 9); 63, the flip of 36,
+  keeps the root 9. 12 and 24 sit in the 3-chain 3612244896, whose first two
+  digits are 36.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -283,6 +288,9 @@ for st in range(1, 10):
         assert set(roots) == {9}
     else:
         assert set(roots) == {3, 6} and roots[0] != roots[1]
+
+assert [dr(12 * k) for k in range(1, 10)] == [3, 6, 9] * 3 and dr(63) == dr(36) == 9
+assert "12" in dchain(3, 6) and "24" in dchain(3, 6) and dchain(3, 6).startswith("36")
 
 if __name__ == "__main__":
     print("all assertions pass")
