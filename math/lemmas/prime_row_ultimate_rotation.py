@@ -19,6 +19,11 @@ TEN DIGITS, 2357114815: sum 37 again; 37 is not 10 x a digit either; closest
 Figure: math/lemmas/figures/prime_row_ultimate_rotation.png (left: the cycle;
 right: the nearest grid, diagonals 36 and 37).
 
+TO KEEP IN MIND (owner, 2026-10-05): (2+3)57(24)81(2+3).
+  The row opens with the primes 2 and 3 and its last prime is 23 -- the same
+  two digits -- so both ends are 2+3 = 5. Inside: 57 (primes 5, 7), the
+  centre 24 (11 -> 2, 13 -> 4), and 81 (17 -> 8, 19 -> 1). Total 37.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime, prime
@@ -84,6 +89,10 @@ def draw(path):
         ax.set_title(f"{title}\nrows and columns 37; diagonals {a} and {b}", color="white", fontsize=10)
         ax.set_xticks([]); ax.set_yticks([])
     fig.savefig(path, dpi=140, bbox_inches="tight", facecolor=fig.get_facecolor())
+
+assert [prime(1), prime(2)] == [2, 3] and prime(9) == 23 and str(prime(9)) == "23"
+assert dr(prime(9)) == 2 + 3 == 5 and (dr(11), dr(13), dr(17), dr(19)) == (2, 4, 8, 1)
+assert (2 + 3) + 5 + 7 + 2 + 4 + 8 + 1 + (2 + 3) == 37
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:
