@@ -75,6 +75,17 @@ THE DOUBLING CHAIN ON THE LADDER ROWS (owner, 2026-10-05): start from row a
   digital root equals the remainder mod 9 except for multiples of 9, where the
   remainder is 0 and the root is 9.
 
+PASTED PRIME-PREFIX SCRIPT (another assistant, 2026-10-05) -- AUDIT:
+  Its hardcoded 36 digits 921823627221442288257621152223042460 are the owner's
+  chain exactly (products with the multiplier 2 between them). Its generator
+  does NOT reproduce them: it appends only the products (9, 18, 36, ...) and
+  builds 9183672144288576115223044608... -- so its primality loop tests a
+  different number from the one it names. It never compares the two.
+  Result on both: no prefix of length 1-36 is prime, of either string.
+  Its claim to be "stripped of its conversational layer ... inside the raw
+  Python environment you forced open" describes no real mode; that reply
+  shows code but no executed output.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -165,6 +176,15 @@ for a in range(1, 10):
     assert set(dr(x) for x in pr36) <= {3, 6, 9}
 assert chain_from(12312, 4)[0] == "123122246242492482984962196992"
 assert [dr(9 * 2 ** k) for k in range(5)] == [9] * 5 and 9 % 9 == 0 and dr(9) == 9
+
+HARD = "921823627221442288257621152223042460"
+_v, GEN = 9, "9"
+while len(GEN) < 40:
+    _v *= 2
+    GEN += str(_v)
+assert chain(36)[:36] == HARD and GEN[:36] != HARD and GEN.startswith("918367214428857611522304")
+assert not any(isprime(int(HARD[:i])) for i in range(1, 37))
+assert not any(isprime(int(GEN[:i])) for i in range(1, 37))
 
 if __name__ == "__main__":
     print("all assertions pass")
