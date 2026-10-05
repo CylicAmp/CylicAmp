@@ -186,6 +186,23 @@ THE 21, 15, 51, 12 BLOCK (owner, 2026-10-05):
   15+51 = 66 = 11x6 (ab + ba = 11(a+b)). The 26/13/31/62 block turned inside
   out: there the doubled pair was outside (88 around 44), here inside.
 
+THE BLOCK ON ALL NINE LADDER ROWS (owner: "run it on all 9 ladder rows"):
+  The 21/15/51/12 block is ladder row 1's: outside = the opening o and its
+  reversal, inside = o + DS(o) and its reversal (12 + 3 = 15).
+    row  outside   inside     digit sums out/in
+     1   12 21     15 51        3 / 6     exact double (33 -> 66)
+     2   23 32     28 82        5 / 10    exact double (55 -> 110)
+     3   34 43     41 14        7 / 5     14 -> 5
+     4   45 54     54 45        9 / 9     inside = outside flipped (all-9s row)
+     5   56 65     67 76       11 / 13
+     6   67 76     80 08       13 / 8
+     7   78 87     93 39       15 / 12
+     8   89 98    106 601      17 / 7
+     9   91 19    101 101      10 / 2
+  ALWAYS (proved): n + DS(n) = 2n mod 9, so the inside reduces to double the
+  outside in every row. EXACT only while the inside's second digit a + 2b
+  stays below 10: for the openings a, a+1 that is 3a + 2 < 10, rows 1 and 2.
+
 FALSIFICATION: any assertion below failing.
 """
 def dr(n):
@@ -303,6 +320,17 @@ BLK = [21, 15, 51, 12]
 assert [ds(n) + sum(map(int, str(n))) for n in BLK] == [6, 12, 12, 6] == [rule2(n) for n in BLK]
 assert (ds(21) + ds(12), ds(15) + ds(51)) == (6, 12)
 assert (21 + 12, 15 + 51) == (33, 66) == (11 * 3, 11 * 6) and 66 == 2 * 33
+
+def rev(n):
+    return int(str(n)[::-1])
+
+for a in range(1, 10):
+    o = int(f"{dr(a)}{dr(a + 1)}")
+    inside = o + ds(o)
+    assert dr(ds(inside)) == dr(2 * ds(o)) and dr(inside) == dr(2 * o)
+    assert (ds(inside) == 2 * ds(o)) == (a <= 2)
+assert 45 + ds(45) == 54 == rev(45)
+assert all(dr(n + ds(n)) == dr(2 * n) for n in range(1, 10000))
 
 if __name__ == "__main__":
     print("all assertions pass")
