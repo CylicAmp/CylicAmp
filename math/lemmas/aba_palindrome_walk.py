@@ -46,6 +46,16 @@ THE CUT SQUARE (owner, 2026-10-05: "1+21, 12+1 / 2+12, 21+2 [typed 21+1] --
   264, 312, 360, 408, and 240 for the wrap; the loop of nine squares totals
   24 x 90 = 2160.
 
+MIXING 4 PIECES TWO AT A TIME (owner, 2026-10-05: twelve lines 21-1, 1-12,
+  12-2, 2-21, 2-12, 21-2, 1-21, 12-1, 1-12, 21-1, 2-21, 12-2 -- "help me figure out
+  the maximum ways to mix 4 and 2"): the pieces are 1, 2, 12, 21.
+  Ordered pairs: 4 x 3 = 12; unordered: 4 x 3 / 2 = 6.
+  The owner's lines are the 8 one-digit-with-two-digit pairings (all 8 present;
+  1-12, 21-1, 2-21, 12-2 written twice). The 4 not used are the same-length
+  pairings 1-2, 2-1, 12-21, 21-12.
+  Glued, the 8 give every three-digit string of 1s and 2s except 111 and 222;
+  121 and 212 twice each, 112, 122, 211, 221 once.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import groupby
@@ -92,6 +102,20 @@ for a in range(1, 10):
     for b in range(1, 10):
         x, y = int(f"{a}{b}{a}"), int(f"{b}{a}{b}")
         assert cuts(x)[0] + cuts(y)[0] == cuts(x)[1] + cuts(y)[1] == 12 * (a + b)
+
+from itertools import permutations
+from collections import Counter
+PIECES = ["1", "2", "12", "21"]
+ORD = list(permutations(PIECES, 2))
+assert len(ORD) == 12 and len({frozenset(p) for p in ORD}) == 6
+OWN = [("21", "1"), ("1", "12"), ("12", "2"), ("2", "21"), ("2", "12"), ("21", "2"),
+       ("1", "21"), ("12", "1"), ("1", "12"), ("21", "1"), ("2", "21"), ("12", "2")]
+MIXED = [p for p in ORD if len(p[0]) != len(p[1])]
+assert set(OWN) == set(MIXED) and len(MIXED) == 8
+assert sorted(k for k, v in Counter(OWN).items() if v == 2) == sorted([("1", "12"), ("21", "1"), ("2", "21"), ("12", "2")])
+assert sorted(set(ORD) - set(MIXED)) == sorted([("1", "2"), ("2", "1"), ("12", "21"), ("21", "12")])
+GLUED = Counter(a + b for a, b in MIXED)
+assert GLUED == Counter({"121": 2, "212": 2, "112": 1, "122": 1, "211": 1, "221": 1})
 
 if __name__ == "__main__":
     print("all assertions pass")
