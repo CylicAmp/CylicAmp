@@ -151,6 +151,17 @@ DOUBLE, THEN HALF (owner, 2026-10-05): grid 123 / 246 (typed 245) / 369 --
   27 -- the 27 the doubling chain skipped. The grid is symmetric (rows equal
   columns); rows sum to 6, 12, 18.
 
+THE L (owner, 2026-10-05: "the doubling is going to the right and the 1, 2, 3 /
+  3, 6, 9 is going down ... one left and one down, like an L"): from a corner
+  R, the right arm doubles (R, 2R, 4R) and the down arm counts (R, 2R, 3R).
+  They share the corner and the second step 2R and split at the third, where
+  3R sits halfway between 2R and 4R (the skipped 27 between 18 and 36).
+  ON THE NINE LADDER ROWS: right arm roots follow the row's doubling pattern
+  (9, 9, 9 / 6, 3, 6 / 3, 6, 3); the down arm's 3R reduces to 9 in EVERY row --
+  forced, since every ladder row is a multiple of 3, so 3R is a multiple of 9.
+    row 1: 12312 -> 24624 -> right 49248, down 36936
+    ...    row 9: 91128 -> 182256 -> right 364512, down 273384
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -316,6 +327,13 @@ T3 = [[r * c for c in (1, 2, 3)] for r in (1, 2, 3)]
 assert T3 == [[1, 2, 3], [2, 4, 6], [3, 6, 9]] and T3 == [list(c) for c in zip(*T3)]
 assert [sum(r) for r in T3] == [6, 12, 18]
 assert all(2 * a + (2 * a) // 2 == 3 * a for a in range(1, 1000)) and (9, 18, 27) == (9, 2 * 9, 18 + 9)
+
+for a in range(1, 37):
+    R = lrow(a)
+    assert 3 * R - 2 * R == 4 * R - 3 * R == R and dr(3 * R) == 9
+    assert [dr(R), dr(2 * R), dr(4 * R)] == {9: [9, 9, 9], 6: [6, 3, 6], 3: [3, 6, 3]}[dr(R)]
+assert (2 * 12312, 4 * 12312, 3 * 12312) == (24624, 49248, 36936)
+assert (2 * 91128, 4 * 91128, 3 * 91128) == (182256, 364512, 273384)
 
 if __name__ == "__main__":
     print("all assertions pass")
