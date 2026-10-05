@@ -70,6 +70,12 @@ both checked, owner to say which:
   (B) Counting: 1..9 closes on 9; starting again writes 10 (-> 1) and then 11,
       the first number made only of the restart digit, 1 and 1.
 
+ADD 9 TWICE (owner, 2026-10-05):
+    1+9 = 10, +9 = 19 -> 1+9 -> 1;  2+9 = 11, +9 = 20 -> 2;
+    3+9 = 12, +9 = 21 -> 3;  4+9 = 13, +9 = 22 -> 4
+  The growing side of the 9-line: n + 9 + 9 = n + 18 always reduces to n
+  (1..9 give 19 ... 27). 12 + 9 = 21 is also the flip.
+
 FALSIFICATION: any assertion below failing.
 """
 def centre(a):
@@ -128,6 +134,9 @@ assert count_down(12) == (3, 1) and [12 + 9 * j for j in range(5)] == [12, 21, 3
 assert 12 + 21 == 33 == 11 * (1 + 2)
 assert all(int(f"{a}{b}") + int(f"{b}{a}") == 11 * (a + b) for a in range(1, 10) for b in range(1, 10))
 assert dr(10) == 1 and str(11) == "1" * 2
+
+assert [n + 9 for n in range(1, 5)] == [10, 11, 12, 13] and [n + 18 for n in range(1, 5)] == [19, 20, 21, 22]
+assert all(dr(n + 18) == dr(n) for n in range(1, 1000))
 
 if __name__ == "__main__":
     for c in range(11, 100, 11):
