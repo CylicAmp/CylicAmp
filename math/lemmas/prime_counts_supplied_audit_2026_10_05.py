@@ -115,6 +115,13 @@ ROWS 10-36 (owner: "get all those 36 done"): the three ladder runs that had
   have no prime prefix at all. Largest: row 13's 34-digit
   4593629187221837442367488273497621.
 
+WHAT THE DOUBLING SKIPS (owner, 2026-10-05: "9x2 = 18x2 = 36 [typed 37] -- what
+  got skipped: 9x2 = 18 + 9x1 = 27, which is 1/2 of 18 at 9"):
+  Between 18 and 36 doubling skips one multiple of 9, 27 = 18 + 9 (9 = half of
+  18), also the midpoint (18 + 36)/2. Multiples of 9 skipped per doubling step:
+  0, 1, 3, 7, 15, ... = 2^k - 1 -- the same counts as building a number from the
+  numbers before it (compositions_of_n.py: 1, 3, 7, 15 ways).
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -247,6 +254,11 @@ assert [(a, len(x)) for a, x in LONG36] == [(6, 22), (6, 23), (9, 14), (13, 13),
                                             (29, 10), (29, 16), (32, 28), (34, 15)]
 assert all(mr(int(x), BASES) for _, x in LONG36)
 assert ("4593629187221837442367488273497621") in [x for _, x in LONG36]
+
+assert 18 * 2 == 36 and 18 + 9 == 27 == (18 + 36) // 2 and 9 == 18 // 2
+SKIP = [len(range(9 * 2 ** k + 9, 9 * 2 ** (k + 1), 9)) for k in range(8)]
+assert SKIP == [2 ** k - 1 for k in range(8)] == [0, 1, 3, 7, 15, 31, 63, 127]
+assert list(range(36 + 9, 72, 9)) == [45, 54, 63]
 
 if __name__ == "__main__":
     print("all assertions pass")
