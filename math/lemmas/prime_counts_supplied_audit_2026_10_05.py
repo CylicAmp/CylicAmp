@@ -61,6 +61,20 @@ SQUARES AND CUBES AMONG THE PREFIXES (pasted answer, 2026-10-05; owner: "keep
   "The digits shift too rapidly" is not a proof: the result is a check to 36
   doublings, not a theorem for all.
 
+THE DOUBLING CHAIN ON THE LADDER ROWS (owner, 2026-10-05): start from row a
+  (12312 ... 91128), double four times, write it all out as with 9218236.
+    rows 1, 4, 7 (root 9): every product reduces to 9; chain string -> 8
+    rows 2, 5, 8 (root 6): products alternate 6, 3, 6, 3, 6; string -> 5
+    rows 3, 6, 9 (root 3): products alternate 3, 6, 3, 6, 3; string -> 2
+  Forced: doubling keeps 9 at 9 and swaps 3 and 6 (2 x 3 = 6, 2 x 6 = 12 -> 3),
+  so a chain that starts in 3, 6, 9 never leaves them; the string adds four 2s.
+  Checked to 36 doublings.
+  PASTED DIGITAL-ROOT TEXT on the 9 chain: every product reduces to 9 -- right,
+  and the reason (all multiples of 9) is right. Two slips: "a repeating 3-step
+  loop 9, 9, 9" is not a 3-step loop, it is one value that never changes; and a
+  digital root equals the remainder mod 9 except for multiples of 9, where the
+  remainder is 0 and the root is 9.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -130,6 +144,27 @@ try:
     raise AssertionError("pasted line should not compile")
 except SyntaxError:
     pass
+
+def lrow(a):
+    return int(f"{dr(a)}{dr(a + 1)}{dr(2 * a + 1)}{2 * a + 10}")
+
+def chain_from(start, k):
+    v, out, prods = start, str(start), [start]
+    for _ in range(k):
+        v *= 2
+        out += "2" + str(v)
+        prods.append(v)
+    return out, prods
+
+for a in range(1, 10):
+    st, pr = chain_from(lrow(a), 4)
+    want = {9: [9] * 5, 6: [6, 3, 6, 3, 6], 3: [3, 6, 3, 6, 3]}[dr(lrow(a))]
+    assert [dr(x) for x in pr] == want
+    assert dr(sum(map(int, st))) == {9: 8, 6: 5, 3: 2}[dr(lrow(a))]
+    _, pr36 = chain_from(lrow(a), 36)
+    assert set(dr(x) for x in pr36) <= {3, 6, 9}
+assert chain_from(12312, 4)[0] == "123122246242492482984962196992"
+assert [dr(9 * 2 ** k) for k in range(5)] == [9] * 5 and 9 % 9 == 0 and dr(9) == 9
 
 if __name__ == "__main__":
     print("all assertions pass")
