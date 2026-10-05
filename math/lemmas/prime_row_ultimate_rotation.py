@@ -70,6 +70,14 @@ PASTED "SymPy Verification Engine" SCRIPT (2026-10-05) -- AUDIT:
   The pasted L table (ladder rows 1-9): every cell checked, all correct; row 2
   shows "->" where the others have an arrow glyph (formatting only).
 
+PASTED L-PROPERTIES SCRIPT (2026-10-05) -- AUDIT:
+  It crashes on the first row: sympy has no top-level is_square
+  (AttributeError in sympy 1.14); only the header prints. Its data (R, 2R, 4R,
+  3R for rows 1-9) is all correct. Run correctly: no R is prime (every ladder
+  row is a multiple of 6, forced); factors 2^3.3^4.19, 2.3.3919, 2^2.3.11.263,
+  2.3^2.2551, 2^2.3.5.937, 2.3.17.661, 2^5.3^3.7.13, 2.3.11.1361, 2^3.3.3797;
+  no 3R is a square. Its factorint(...).keys() would also drop the exponents.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import isprime, prime
@@ -175,6 +183,15 @@ except NameError:
     pass
 assert int("".join(str(dr(d)) for d in DIG)) == 235724815 and not isprime(235724815)
 assert factorint(235724815) == {5: 1, 23: 1, 971: 1, 2111: 1}
+
+import math
+import sympy as _sp
+assert not hasattr(_sp, "is_square")
+LF = [factorint(int(f"{dr(a)}{dr(a + 1)}{dr(2 * a + 1)}{2 * a + 10}")) for a in range(1, 10)]
+assert LF[0] == {2: 3, 3: 4, 19: 1} and LF[6] == {2: 5, 3: 3, 7: 1, 13: 1} and LF[8] == {2: 3, 3: 1, 3797: 1}
+for a in range(1, 37):
+    R_ = int(f"{dr(a)}{dr(a + 1)}{dr(2 * a + 1)}{2 * a + 10}")
+    assert R_ % 6 == 0 and not isprime(R_) and math.isqrt(3 * R_) ** 2 != 3 * R_
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:
