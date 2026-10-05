@@ -56,6 +56,15 @@ MIXING 4 PIECES TWO AT A TIME (owner, 2026-10-05: twelve lines 21-1, 1-12,
   Glued, the 8 give every three-digit string of 1s and 2s except 111 and 222;
   121 and 212 twice each, 112, 122, 211, 221 once.
 
+BACKWARD L SQUARES (owner, 2026-10-05): two flip pairs stacked --
+      02 20 / 21 12        01 10 / 12 21
+  Rows are 11 x (digit sum): 22, 33 and 11, 33. Columns come out as flips of
+  each other: 23 / 32 and 13 / 31. Diagonals too: 14 / 41, and 22 / 22 in the
+  second square. Forced (proved for all digits with no carry): with ab, ba over
+  cd, dc the columns are (a+c)(b+d) and (b+d)(a+c), the diagonals (a+d)(b+c)
+  and (b+c)(a+d). The cut squares balance their columns as equal totals; these
+  balance them as mirrors.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import groupby
@@ -116,6 +125,22 @@ assert sorted(k for k, v in Counter(OWN).items() if v == 2) == sorted([("1", "12
 assert sorted(set(ORD) - set(MIXED)) == sorted([("1", "2"), ("2", "1"), ("12", "21"), ("21", "12")])
 GLUED = Counter(a + b for a, b in MIXED)
 assert GLUED == Counter({"121": 2, "212": 2, "112": 1, "122": 1, "211": 1, "221": 1})
+
+def flipsq(a, b, c, d):
+    ab, ba, cd, dc = 10 * a + b, 10 * b + a, 10 * c + d, 10 * d + c
+    return (ab + ba, cd + dc), (ab + cd, ba + dc), (ab + dc, ba + cd)
+assert flipsq(0, 2, 2, 1) == ((22, 33), (23, 32), (14, 41))
+assert flipsq(0, 1, 1, 2) == ((11, 33), (13, 31), (22, 22))
+for a in range(10):
+    for b in range(10):
+        for c in range(10):
+            for d in range(10):
+                rows, cols, dias = flipsq(a, b, c, d)
+                assert rows == (11 * (a + b), 11 * (c + d))
+                if a + c < 10 and b + d < 10:
+                    assert cols[1] == int(f"{cols[0]:02d}"[::-1])
+                if a + d < 10 and b + c < 10:
+                    assert dias[1] == int(f"{dias[0]:02d}"[::-1])
 
 if __name__ == "__main__":
     print("all assertions pass")
