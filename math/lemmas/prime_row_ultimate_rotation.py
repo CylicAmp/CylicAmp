@@ -34,7 +34,8 @@ PRIMES BY DECADE (owner, 2026-10-05):
   23 STACKED ON 29: 2+2 = 4 and 3+9 = 12 -> 3, giving 43 -- a prime with root
   7, the first prime after 7 itself with root 7 (16, 25, 34 are not prime).
   The two primes of the 20s build the prime that brings 7 back.
-  With 43 the owner's chain runs 43 -> 7, + 5 = 12, + 2 = 14 -> 5.
+  The owner's chain: 43 = 7, + 2 = 9, + 5 = 14 -> 1+4 = 5 (either order gives
+  14 -> 5) -- landing on 14, the "1+4 = 5" that was not prime in the teens.
 
 FALSIFICATION: any assertion below failing.
 """
@@ -113,7 +114,7 @@ assert 7 not in [dr(p) for p in primerange(10, 20)] and dr(14) == 5 and not ispr
 assert list(primerange(20, 30)) == [23, 29] and (dr(23), dr(29)) == (5, 2) and dr(23 + 29) == 7
 assert (2 + 2, dr(3 + 9)) == (4, 3) and isprime(43) and dr(43) == 7
 assert [p for p in primerange(8, 60) if dr(p) == 7] == [43]
-assert dr(43) + 5 + 2 == 14 and dr(14) == 5
+assert dr(43) + 5 + 2 == 14 and dr(14) == 5 and dr(43) + 2 == 9 and 9 + 5 == 14
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:
