@@ -35,6 +35,17 @@ THE GRID AS INTENDED (owner, 2026-10-05: "it starts at 1,2,1 and ends with
   the circle 1..9. Every digit sits in exactly two neighbouring pairs, so the
   loop totals 222 x (2 x 45) = 19,980.
 
+THE CUT SQUARE (owner, 2026-10-05: "1+21, 12+1 / 2+12, 21+2 [typed 21+1] --
+  remember L squares? same thing, and why by 4"): each mirror can be cut in two
+  places and each pair has two mirrors, so every row gives 2 x 2 = 4 cuts -- the
+  same four as aba bab aba bab.
+      121: 1+21 = 22, 12+1 = 13      212: 2+12 = 14, 21+2 = 23
+  COLUMNS ALWAYS BALANCE (proved): each column is 12(a+b) -- 36 for 1-2.
+  Rows are 13a + 11b and 11a + 13b, apart by 2|a-b| (2 for neighbours, 16 for
+  the 1-9 wrap); 212's cuts total 37. Square totals 24(a+b): 72, 120, 168, 216,
+  264, 312, 360, 408, and 240 for the wrap; the loop of nine squares totals
+  24 x 90 = 2160.
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import groupby
@@ -63,6 +74,24 @@ assert [sum(r) for r in GRID] == [666, 1110, 1554, 1998, 2442, 2886, 3330, 3774]
 assert all(abs(r[0] - r[1]) == 91 for r in GRID)
 LOOP = GRID + [[191, 919, 191, 919]]
 assert sum(LOOP[-1]) == 2220 and sum(map(sum, LOOP)) == 19980 == 222 * 2 * 45
+
+def cuts(n):
+    t = str(n)
+    return int(t[0]) + int(t[1:]), int(t[:2]) + int(t[2])
+assert (cuts(121), cuts(212)) == ((22, 13), (14, 23)) and sum(cuts(212)) == 37
+TOT = []
+for row in LOOP:
+    x, y = row[0], row[1]
+    a, b = int(str(x)[0]), int(str(x)[1])
+    cx, cy = cuts(x), cuts(y)
+    assert cx[0] + cy[0] == cx[1] + cy[1] == 12 * (a + b)
+    assert abs(sum(cx) - sum(cy)) == 2 * abs(a - b)
+    TOT.append(sum(cx) + sum(cy))
+assert TOT == [72, 120, 168, 216, 264, 312, 360, 408, 240] and sum(TOT) == 2160 == 24 * 90
+for a in range(1, 10):
+    for b in range(1, 10):
+        x, y = int(f"{a}{b}{a}"), int(f"{b}{a}{b}")
+        assert cuts(x)[0] + cuts(y)[0] == cuts(x)[1] + cuts(y)[1] == 12 * (a + b)
 
 if __name__ == "__main__":
     print("all assertions pass")
