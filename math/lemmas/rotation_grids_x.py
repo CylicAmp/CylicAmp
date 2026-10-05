@@ -214,6 +214,12 @@ THE 2357 PAGE (owner, 2026-10-05):
   nine primes 2, 3, 5, 7, 11, 13, 17, 19, 23 = 2, 3, 5, 7, (2), 4, 8, 1, 5 --
   the (2) in the middle is 11. After 3 every prime's root is 1, 2, 4, 5, 7 or 8
   (prime_digital_root_supplied_audit_2026_10_03.py).
+  WITH 11 SPLIT AS 1|1 (owner): 2, 3, 5, 7, (1|1), 4, 8, 1, 5 -- ten digits that
+  sum to 37. The owner's two running lines are the halves at the 11 seam:
+  2+3+5+7+1 = 18 -> 9 and 1+4+8+1+5 = 19 -> 1 (with the 9: 1+9 = 10 -> 1);
+  18 + 19 = 37. The primes themselves sum to 2+3+...+23 = 100 -> 1.
+  Pair lines: 23+57 = 80 -> 8; 24+81 = 105 -> 1+0+5 = 6; 52+41 = 93 -> 12 -> 3;
+  3+7 = 10 -> 1, 1+8 = 9.
   Stacked 2357 over 4815 over 6262, the first column reads 2, 4, 6 = 246.
   Column sums of 2357 and 4815: 6, 11 -> 2, 6, 12 -> 3 -- the fourth gives 3,
   where 6262 has 2 (open: whether 4815 or 6262 is meant). 6+2+6+2 = 16 -> 7,
@@ -449,6 +455,10 @@ assert seq == [5, 6, 5, 6, 5, 6, 5, 6, 5] and 5 + 6 == 11
 from sympy import prime
 assert "".join(str(dr(prime(k))) for k in range(1, 10)) == "235724815" and prime(5) == 11
 assert all(dr(prime(k)) in (1, 2, 4, 5, 7, 8) for k in range(3, 2000))
+ROW10 = [2, 3, 5, 7, 1, 1, 4, 8, 1, 5]
+assert sum(ROW10) == 37 and (sum(ROW10[:5]), sum(ROW10[5:])) == (18, 19)
+assert sum(prime(k) for k in range(1, 10)) == 100 and dr(100) == dr(37) == 1
+assert [dr(23 + 57), dr(24 + 81), dr(52 + 41)] == [8, 6, 3] and dr(dr(3 + 7) + 8) == 9
 assert "2357"[0] + "4815"[0] + "6262"[0] == "246"
 assert [dr(int(a) + int(b)) for a, b in zip("2357", "4815")] == [6, 2, 6, 3] and dr(6 + 2 + 6 + 2) == 7
 assert [f"{a}{b}" for a, b in zip("257", "314")] == ["23", "51", "74"]
