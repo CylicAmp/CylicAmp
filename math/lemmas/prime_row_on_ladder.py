@@ -42,6 +42,19 @@ ROWS 1-36 (owner: "keep going to row 36"): totals of the nine-digit rows 1-35
   together 5 = 32 -> 5. Frame + inside always
   equals the total (forced). Row 36, 9118291100, has ten digits (total 32).
 
+BLOCK ROOTS AND THE (11) (owner, 2026-10-05):
+    357 = 3+5 = 8+7 = 1+5 = 6;  481 = 4+8 = 12+1 = 1+3 = 4
+    7+4 = 11+8 = 1+9 = (1)+6 = 7+4 = (11)
+    753 -> 6;  184 -> 4  (reversals keep the root)
+  The inner columns' root always equals the root of the two blocks' roots
+  together (the columns hold the same digits), so (1) + 6 + 4 doubles them:
+  2 x (6 + 4) -> 2, written 11. For the prime row that is the (11) -- the
+  prime in its seam.
+  On the ladder rows (inner blocks = digits 2-4 and 6-8) the same three
+  numbers, column root + top root + bottom root, are in BLOCKS below; none
+  of rows 1-35 gives exactly 11. Row 36 at its two-digit seam: 118 / 110,
+  roots 1 and 2, columns 3, total 3+1+2 = 6.
+
 FALSIFICATION: any assertion below failing.
 """
 def dr(n):
@@ -92,6 +105,20 @@ for a in range(1, 36):
         EQ.append(a)
 assert EQ == [1, 2, 3, 4, 25] and dr(1 + 9) == dr(37) == 1
 assert dr(9 + 2 + 9 + 0) == 2 and [dr(int(x) + int(y)) for x, y in zip("118", "110")] == [2, 2, 8] and dr(2 + 3) == dr(32)
+
+assert dr(3 + 5 + 7) == 6 == dr(7 + 5 + 3) and dr(4 + 8 + 1) == 4 == dr(1 + 8 + 4)
+assert dr(7 + 4 + 8) + 6 + 4 == 11
+BLOCKS = []
+for a in range(1, 36):
+    r = row9(a)
+    top, bot = r[1:4], r[5:8]
+    rt, rb = dr(sum(map(int, top))), dr(sum(map(int, bot)))
+    rc = dr(sum(dr(int(x) + int(y)) for x, y in zip(top, bot)))
+    assert rc == dr(rt + rb) and dr(sum(map(int, top[::-1]))) == rt
+    BLOCKS.append(rc + rt + rb)
+    assert dr(BLOCKS[-1]) == dr(2 * (rt + rb))
+assert 11 not in BLOCKS
+assert dr(1 + 1 + 8) == 1 and dr(1 + 1 + 0) == 2 and dr(sum(dr(int(x) + int(y)) for x, y in zip("118", "110"))) == 3
 
 if __name__ == "__main__":
     print("totals", TOT)
