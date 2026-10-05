@@ -2,6 +2,7 @@
 
     python3 verify.py
 """
+import os
 from sympy import factorint, isprime, divisors
 
 # 1. The four sporadic-looking small solutions, checked by brute force:
@@ -24,7 +25,7 @@ for n, k in small.items():
 #    Then the divisors of n that are <= m/2 are exactly the proper divisors of m
 #    (any divisor not dividing m is a multiple of p > m/2), so
 #    sum of squares of the tau(m)-1 smallest divisors of n = sigma_2(m) - m^2 = n.
-rows = [l.split() for l in open("members_1e22.txt") if not l.startswith("#")]
+rows = [l.split() for l in open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "members_1e22.txt")) if not l.startswith("#")]
 assert len(rows) == 587
 for m_s, p_s, tau_s, _ in rows:
     m, p = int(m_s), int(p_s)
