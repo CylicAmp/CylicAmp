@@ -27,11 +27,14 @@ TO KEEP IN MIND (owner, 2026-10-05): (2+3)57(24)81(2+3).
 PRIMES BY DECADE (owner, 2026-10-05):
     2357 / 2481 -- roots of 2, 3, 5, 7 and of the teens 11, 13, 17, 19.
     "5 is not part of first 1 thru 22 (1+4 = 5)"; "in the 20s we get only
-    23 + 29 = 5+2 = 7"; 42 = 6+5 = 11+2 = (1+3 = 4), "pi's rotation".
+    23 + 29 = 5+2 = 7"; 43 (typed 42) = ... "pi's rotation".
   Below 23 the root 5 comes only from the prime 5 itself; the teens row 2481
   has no 5 and no 7 (14 -> 5 is not prime). The 20s hold just 23 and 29
   (roots 5 and 2): they bring 5 back, and 23 + 29 = 52 -> 7 brings 7 back.
-  42 -> 6, + 5 = 11, + 2 = 13 -> 4: ends on 1, 3, 4, pi's 3-1-4 turned.
+  23 STACKED ON 29: 2+2 = 4 and 3+9 = 12 -> 3, giving 43 -- a prime with root
+  7, the first prime after 7 itself with root 7 (16, 25, 34 are not prime).
+  The two primes of the 20s build the prime that brings 7 back.
+  With 43 the owner's chain runs 43 -> 7, + 5 = 12, + 2 = 14 -> 5.
 
 FALSIFICATION: any assertion below failing.
 """
@@ -108,7 +111,9 @@ assert [dr(p) for p in primerange(1, 10)] == [2, 3, 5, 7] and [dr(p) for p in pr
 assert [p for p in primerange(1, 23) if dr(p) == 5] == [5] and 5 not in [dr(p) for p in primerange(10, 23)]
 assert 7 not in [dr(p) for p in primerange(10, 20)] and dr(14) == 5 and not isprime(14)
 assert list(primerange(20, 30)) == [23, 29] and (dr(23), dr(29)) == (5, 2) and dr(23 + 29) == 7
-assert dr(42) == 6 and 6 + 5 == 11 and 11 + 2 == 13 and dr(13) == 4 and sorted("134") == sorted("314")
+assert (2 + 2, dr(3 + 9)) == (4, 3) and isprime(43) and dr(43) == 7
+assert [p for p in primerange(8, 60) if dr(p) == 7] == [43]
+assert dr(43) + 5 + 2 == 14 and dr(14) == 5
 
 if __name__ == "__main__":
     for r in NEAR[0][5]:
