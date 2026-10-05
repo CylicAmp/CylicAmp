@@ -177,6 +177,15 @@ THE 832 CHAIN (owner, 2026-10-04: "run the 832 chain on all 9 ladder rows";
   (a+1)^2 = 0 mod 9, i.e. a = 2 mod 3. None of the heads starts its own
   written chain the way 832 does.
 
+THE 21, 15, 51, 12 BLOCK (owner, 2026-10-05):
+    21 = 3+2+1,  15 = 6+1+5,  51 = 6+5+1,  12 = 3+1+2
+    "6+6 = 12, outside is half 3+3 = 6;  1+5 = 6, 2+1 = 3"
+  Each line is the three-step rule (digit sum + first + second = 2(a+b)):
+  6, 12, 12, 6. Outside is half of inside at every level: digit sums 3+3 vs
+  6+6, line totals 6+6 vs 12+12, and the numbers 21+12 = 33 = 11x3 vs
+  15+51 = 66 = 11x6 (ab + ba = 11(a+b)). The 26/13/31/62 block turned inside
+  out: there the doubled pair was outside (88 around 44), here inside.
+
 FALSIFICATION: any assertion below failing.
 """
 def dr(n):
@@ -289,6 +298,11 @@ for a in range(1, 300):
     assert (dr(a * (a + 1) + 2 * a + 1) == dr(a)) == (a % 3 == 2)
 
 assert [GRID[0][0], GRID[0][2], GRID[2][0], GRID[2][2], GRID[1][1]] == [8, 2, 2, 8, 6]
+
+BLK = [21, 15, 51, 12]
+assert [ds(n) + sum(map(int, str(n))) for n in BLK] == [6, 12, 12, 6] == [rule2(n) for n in BLK]
+assert (ds(21) + ds(12), ds(15) + ds(51)) == (6, 12)
+assert (21 + 12, 15 + 51) == (33, 66) == (11 * 3, 11 * 6) and 66 == 2 * 33
 
 if __name__ == "__main__":
     print("all assertions pass")
