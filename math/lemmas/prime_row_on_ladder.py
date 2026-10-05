@@ -32,7 +32,14 @@ FRAME AND INSIDE (owner, 2026-10-05: "2)357(2)481(5 / 2+2 = 4+5 = 9 / 357 over
   On a ladder row the frame is digits 1, 5, 9 and the inside is 234 over 678.
 
 ROWS 1-36 (owner: "keep going to row 36"): totals of the nine-digit rows 1-35
-  are in TOT35. Row 5 is the ONLY row that totals 37. Frame + inside always
+  are in TOT35. Row 5 is the ONLY row that totals 37.
+  THE STARRED STEP (owner: "... = 1+9* = 1"): the inside's root plus the frame's
+  root gives the whole row's root -- 1 + 9 = 10 -> 1 for the prime row (37). On
+  the ladder rows frame + inside reduces to a + 5 every time (forced). Frame and
+  inside have the SAME root only in rows 1, 2, 3, 4 and 25 (3|3, 8|8, 4|4, 9|9,
+  6|6); the prime row's are 9 and 1. Row 36 split like the prime row at a
+  two-digit seam, 9118 (2|9) 1100: frame 20 -> 2, inside columns 2, 2, 8 -> 3,
+  together 5 = 32 -> 5. Frame + inside always
   equals the total (forced). Row 36, 9118291100, has ten digits (total 32).
 
 FALSIFICATION: any assertion below failing.
@@ -74,6 +81,17 @@ for a in range(1, 36):
     frame, inside = d[0] + d[4] + d[8], d[1] + d[2] + d[3] + d[5] + d[6] + d[7]
     assert frame + inside == TOT35[a - 1]
     assert dr(sum(dr(x + y) for x, y in zip(d[1:4], d[5:8]))) == dr(inside)
+
+EQ = []
+for a in range(1, 36):
+    d = list(map(int, row9(a)))
+    f = dr(d[0] + d[4] + d[8])
+    i = dr(sum(dr(x + y) for x, y in zip(d[1:4], d[5:8])))
+    assert dr(f + i) == dr(a + 5)
+    if f == i:
+        EQ.append(a)
+assert EQ == [1, 2, 3, 4, 25] and dr(1 + 9) == dr(37) == 1
+assert dr(9 + 2 + 9 + 0) == 2 and [dr(int(x) + int(y)) for x, y in zip("118", "110")] == [2, 2, 8] and dr(2 + 3) == dr(32)
 
 if __name__ == "__main__":
     print("totals", TOT)
