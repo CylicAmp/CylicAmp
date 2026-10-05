@@ -98,6 +98,23 @@ PRIME PREFIXES OF THE LADDER-ROW CHAINS (owner, 2026-10-05): each row starts
   The three long primes were confirmed by sympy's isprime and separately by
   Miller-Rabin to 20 prime bases.
 
+ROWS 10-36 (owner: "get all those 36 done"): the three ladder runs that had
+  stopped at row 9, now to row 36.
+  DOUBLING-CHAIN ROOTS: the pattern repeats every 3
+  rows through 36: root-9 rows all 9s, root-6 rows 6, 3, ..., root-3 rows
+  3, 6, ... (forced).
+  832 CHAIN ON EACH ROW'S HEAD: returns to its first digit exactly on rows
+  a = 2 mod 3 (2, 5, 8, ..., 35) -- the (a+1)^2 rule, now checked to 36.
+  PRIME PREFIXES (to 36 digits) of more than 4 digits, rows 1-36 (LONG36):
+    row 6: 22 and 23 digits    row 9: 14 digits       row 13: 13 and 34 digits
+    row 14: 8                  row 17: 9              row 19: 10
+    row 20: 9 and 13           row 21: 8 and 13       row 23: 28
+    row 26: 21 and 22          row 29: 10 and 16      row 32: 28
+    row 34: 15
+  All confirmed by sympy and by Miller-Rabin to 20 bases. Rows 10, 22 and 28
+  have no prime prefix at all. Largest: row 13's 34-digit
+  4593629187221837442367488273497621.
+
 FALSIFICATION: any assertion below failing.
 """
 from sympy import primerange, isprime, primepi
@@ -211,6 +228,25 @@ assert PP == {1: ["1231"], 2: ["2", "23", "2351"], 3: ["3", "347"], 4: ["4591"],
               9: ["911", "91128218225623"]}
 BASES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71]
 assert all(mr(int(x), BASES) for x in ("6742221348442269688253", "67422213484422696882539", "91128218225623"))
+
+LONG36 = []
+NONE36 = []
+for a in range(1, 37):
+    st = lchain(lrow(a), 36)
+    pp = [st[:i] for i in range(1, 37) if isprime(int(st[:i]))]
+    if not pp:
+        NONE36.append(a)
+    LONG36 += [(a, x) for x in pp if len(x) > 4]
+    _, pr = chain_from(lrow(a), 4)
+    assert [dr(x) for x in pr] == {9: [9] * 5, 6: [6, 3, 6, 3, 6], 3: [3, 6, 3, 6, 3]}[dr(lrow(a))]
+    h = str(lrow(a))[:3]
+    assert (dr(sum(map(int, str(int(h[0]) * int(h[1])))) + int(h[2])) == dr(int(h[0]))) == (a % 3 == 2)
+assert NONE36 == [10, 22, 28]
+assert [(a, len(x)) for a, x in LONG36] == [(6, 22), (6, 23), (9, 14), (13, 13), (13, 34), (14, 8), (17, 9), (19, 10),
+                                            (20, 9), (20, 13), (21, 8), (21, 13), (23, 28), (26, 21), (26, 22),
+                                            (29, 10), (29, 16), (32, 28), (34, 15)]
+assert all(mr(int(x), BASES) for _, x in LONG36)
+assert ("4593629187221837442367488273497621") in [x for _, x in LONG36]
 
 if __name__ == "__main__":
     print("all assertions pass")
