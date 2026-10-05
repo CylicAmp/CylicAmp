@@ -22,5 +22,5 @@ description: Decode the owner's handwritten or shorthand notation into explicit 
 7. **Save** every decoded rule and every open line in an asserted audit file
    (operator_system_audit_2026_09_30.py, section D).
 8. **Typos are not findings.** A clear finger slip (13 written 14, 3110 written
-   3310) is fixed silently in the reading and noted in one line. Do not report
-   it as a correction to the owner's logic (owner, 2026-10-04).
+   3310) is fixed silently in the reading and NOT mentioned in the reply at all
+   (owner, 2026-10-04 and 2026-10-05). Do not report it as a correction.
