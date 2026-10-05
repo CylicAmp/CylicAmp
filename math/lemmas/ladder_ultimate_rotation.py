@@ -23,6 +23,9 @@ NINE-DIGIT ROWS 1-9 (sums 15, 25, 35, 45, 37, 29, 39, 49, 41):
   459182736, 459364554, 459546372, 459728190. Only row 4 uses each of 1..9 once.
 FIVE-DIGIT ROWS 1-9 (12312 ... 91128): only row 2, 23514, balances -- S = 15 =
   5 x 3 and 3 is in it; centre 3.
+ROW 36 (owner: "keep going to row 36"): 9118291100 has ten digits, sum 32; 32
+  is not 10 x a digit, so no stacking balances (and with n even the
+  through-every-position argument fails anyway).
 Figure: math/lemmas/figures/ladder_ultimate_rotation_row4.png.
 
 FALSIFICATION: any assertion below failing.
@@ -84,6 +87,7 @@ assert [a for a in range(1, 10) if balanced(row5(a))] == [2] and row5(2) == "235
 assert all(int(r[2][2]) == 3 for r in balanced("23514"))
 for a in range(1, 30):
     assert bool(balanced(row5(a))) == rule(row5(a))
+assert row9(36) == "9118291100" and sum(map(int, row9(36))) == 32 and not balanced(row9(36))
 
 def draw(path):
     import matplotlib

@@ -205,6 +205,25 @@ TWO LOOPS ON 5 (owner, 2026-10-04):
   of one step). +1 then -1 is a loop of two steps, 5 -> 6 -> 5, always back
   on 5; the pair 5, 6 sums to 11, the middle pair of the fold of 2..9.
 
+THE 2357 PAGE (owner, 2026-10-05):
+    2357(2)4815 / 4815 / 6262   "notice 246 the first row"
+    6262 = (16 = 7) -> 167 again;  6, 26, 626
+    23+58, 51+84, 74+43   "notice the same 314 in the middle"
+    grids 314/526/789 and 257/314/689
+  Stacked 2357 over 4815 over 6262, the first column reads 2, 4, 6 = 246.
+  Column sums of 2357 and 4815: 6, 11 -> 2, 6, 12 -> 3 -- the fourth gives 3,
+  where 6262 has 2 (open: whether 4815 or 6262 is meant). 6+2+6+2 = 16 -> 7,
+  and 1, 6, 7 is the 167 circle (rotation_grids_x, factor pairs of 6).
+  6, 26, 626: a growing mirror, like 4, 94, 494.
+  23, 51, 74 are the columns of 257 stacked on 314 (tens 2, 5, 7; units 3, 1,
+  4 -- the 314 in the middle). Each pair sums to a multiple of 9: 23+58 = 81,
+  51+84 = 135, 74+43 = 117 (digit sums add to 18 each time). Where 58, 84, 43
+  come from is open (asked).
+  Both grids use 1..9 once each: 314/526/789 rows 8, 13, 24, columns 15, 11,
+  19, X 14 and 13; 257/314/689 rows 14, 8, 23, columns 11, 14, 20, X 12 and 14.
+  314 is pi's opening (3.14; 3141 = floor(1000 pi) is 1413 reversed,
+  riemann_first_zero_141.py).
+
 FALSIFICATION: any assertion below failing.
 """
 from itertools import permutations
@@ -422,6 +441,13 @@ seq = [5]
 for k in range(8):
     seq.append(seq[-1] + 1 if k % 2 == 0 else seq[-1] - 1)
 assert seq == [5, 6, 5, 6, 5, 6, 5, 6, 5] and 5 + 6 == 11
+
+assert "2357"[0] + "4815"[0] + "6262"[0] == "246"
+assert [dr(int(a) + int(b)) for a, b in zip("2357", "4815")] == [6, 2, 6, 3] and dr(6 + 2 + 6 + 2) == 7
+assert [f"{a}{b}" for a, b in zip("257", "314")] == ["23", "51", "74"]
+assert [x + y for x, y in ((23, 58), (51, 84), (74, 43))] == [81, 135, 117] and all((x + y) % 9 == 0 for x, y in ((23, 58), (51, 84), (74, 43)))
+for G in ([[3, 1, 4], [5, 2, 6], [7, 8, 9]], [[2, 5, 7], [3, 1, 4], [6, 8, 9]]):
+    assert sorted(x for r in G for x in r) == list(range(1, 10))
 
 if __name__ == "__main__":
     for m in MAGIC:
