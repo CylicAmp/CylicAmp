@@ -1,0 +1,92 @@
+# CLASS: LEMMA
+"""
+The ultimate rotation run on the prime row (owner, 2026-10-05).
+Prime row: digital roots of the first nine primes, 235724815 (11 -> 2), or
+2357114815 with 11 split 1|1 (rotation_grids_x.py, prime_row_on_ladder.py).
+Method and rule: ultimate_rotation_1_9.py, ladder_ultimate_rotation.py --
+stacking the n turns makes every row and column sum to S; one diagonal repeats
+a digit d (sum n*d), the other (n odd) passes through every position (sum S);
+the X balances exactly when S = n*d for a digit d in the row.
+
+NINE DIGITS, 235724815: turns 235724815, 357248152, 572481523, ... back in 9.
+  Every row and column of every stacking sums to 37.
+  NO STACKING BALANCES: 37 is prime, so it is never 9 x a digit. The closest
+  are the four stackings whose repeated diagonal is all 4s: 9 x 4 = 36 against
+  37 -- one short. Starts 427532518 and 481523572 (right), 275325184 and
+  815235724 (left).
+TEN DIGITS, 2357114815: sum 37 again; 37 is not 10 x a digit either; closest
+  diagonals 48 and 50.
+Figure: math/lemmas/figures/prime_row_ultimate_rotation.png (left: the cycle;
+right: the nearest grid, diagonals 36 and 37).
+
+FALSIFICATION: any assertion below failing.
+"""
+from sympy import isprime, prime
+
+def dr(n):
+    return 0 if n == 0 else 1 + (n - 1) % 9
+
+def rot_l(s):
+    return s[1:] + s[0]
+
+def rot_r(s):
+    return s[-1] + s[:-1]
+
+def cycle(s, f):
+    out = [s]
+    while f(out[-1]) != s:
+        out.append(f(out[-1]))
+    return out
+
+def stackings(s):
+    n, out = len(s), []
+    for base in (s, s[::-1]):
+        for st in cycle(base, rot_l):
+            for f, name in ((rot_l, "L"), (rot_r, "R")):
+                rows = cycle(st, f)
+                g = [[int(c) for c in r] for r in rows]
+                a = sum(g[i][i] for i in range(n))
+                b = sum(g[i][n - 1 - i] for i in range(n))
+                out.append((abs(a - b), a, b, st, name, rows))
+    return sorted(out)
+
+ROW9 = "".join(str(dr(prime(k))) for k in range(1, 10))
+ROW10 = "2357114815"
+assert ROW9 == "235724815" and sum(map(int, ROW9)) == 37 == sum(map(int, ROW10)) and isprime(37)
+S9 = stackings(ROW9)
+for _, a, b, _, _, rows in S9:
+    g = [[int(c) for c in r] for r in rows]
+    assert all(sum(r) == 37 for r in g) and all(sum(c) == 37 for c in zip(*g))
+assert all(x[0] > 0 for x in S9) and not any(37 == 9 * int(d) for d in ROW9)
+NEAR = [x for x in S9 if x[0] == 1]
+assert len(NEAR) == 4 and all(sorted((x[1], x[2])) == [36, 37] for x in NEAR)
+assert sorted((x[3], x[4]) for x in NEAR) == sorted([("427532518", "R"), ("481523572", "R"),
+                                                    ("275325184", "L"), ("815235724", "L")])
+assert all(int(x[5][4][4]) == 4 for x in NEAR)
+S10 = stackings(ROW10)
+assert all(x[0] > 0 for x in S10) and S10[0][0] == 2
+
+def draw(path):
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    fig, axs = plt.subplots(1, 2, figsize=(12, 6.4), facecolor="#0b1020")
+    for ax, rows, title in ((axs[0], cycle(ROW9, rot_l), "prime row 235724815 turned 9 times"),
+                            (axs[1], NEAR[0][5], "nearest balance: 4s diagonal 36 vs 37")):
+        g = [[int(c) for c in r] for r in rows]
+        ax.imshow(g, cmap="twilight", vmin=0, vmax=10)
+        for i in range(9):
+            for j in range(9):
+                ax.text(j, i, g[i][j], ha="center", va="center", color="white", fontsize=13, weight="bold")
+        ax.plot([-0.5, 8.5], [-0.5, 8.5], color="#ffb347", lw=2.5)
+        ax.plot([8.5, -0.5], [-0.5, 8.5], color="#ffb347", lw=2.5)
+        a, b = sum(g[i][i] for i in range(9)), sum(g[i][8 - i] for i in range(9))
+        ax.set_title(f"{title}\nrows and columns 37; diagonals {a} and {b}", color="white", fontsize=10)
+        ax.set_xticks([]); ax.set_yticks([])
+    fig.savefig(path, dpi=140, bbox_inches="tight", facecolor=fig.get_facecolor())
+
+if __name__ == "__main__":
+    for r in NEAR[0][5]:
+        print(" ".join(r))
+    draw("math/lemmas/figures/prime_row_ultimate_rotation.png")
+    print("all assertions pass")
