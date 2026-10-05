@@ -210,6 +210,10 @@ THE 2357 PAGE (owner, 2026-10-05):
     6262 = (16 = 7) -> 167 again;  6, 26, 626
     23+58, 51+84, 74+43   "notice the same 314 in the middle"
     grids 314/526/789 and 257/314/689
+  THE TOP ROW IS THE PRIMES (owner, 2026-10-05): digital roots of the first
+  nine primes 2, 3, 5, 7, 11, 13, 17, 19, 23 = 2, 3, 5, 7, (2), 4, 8, 1, 5 --
+  the (2) in the middle is 11. After 3 every prime's root is 1, 2, 4, 5, 7 or 8
+  (prime_digital_root_supplied_audit_2026_10_03.py).
   Stacked 2357 over 4815 over 6262, the first column reads 2, 4, 6 = 246.
   Column sums of 2357 and 4815: 6, 11 -> 2, 6, 12 -> 3 -- the fourth gives 3,
   where 6262 has 2 (open: whether 4815 or 6262 is meant). 6+2+6+2 = 16 -> 7,
@@ -442,6 +446,9 @@ for k in range(8):
     seq.append(seq[-1] + 1 if k % 2 == 0 else seq[-1] - 1)
 assert seq == [5, 6, 5, 6, 5, 6, 5, 6, 5] and 5 + 6 == 11
 
+from sympy import prime
+assert "".join(str(dr(prime(k))) for k in range(1, 10)) == "235724815" and prime(5) == 11
+assert all(dr(prime(k)) in (1, 2, 4, 5, 7, 8) for k in range(3, 2000))
 assert "2357"[0] + "4815"[0] + "6262"[0] == "246"
 assert [dr(int(a) + int(b)) for a, b in zip("2357", "4815")] == [6, 2, 6, 3] and dr(6 + 2 + 6 + 2) == 7
 assert [f"{a}{b}" for a, b in zip("257", "314")] == ["23", "51", "74"]
