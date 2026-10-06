@@ -539,3 +539,25 @@ A custom surveillance extension can be caught by behavior — unusual API calls,
 This is the difference between a burglar who breaks a window and a burglar who copies the key. The copy-key method leaves no signs of entry.
 
 *Appended: 2026-07-03 | Directory: ai-safety/research/*
+
+## New paste, cross-checked (2026-10-07)
+
+The manifest pasted today matches the 2026-07-02 extraction exactly
+(version 4.6.129, same permissions, same `web_accessible_resources`).
+Nothing in the manifest is new.
+
+The `telemetry.js` grep pasted today used the pattern
+`fetch|send|XMLHttp|logpdfjs|url|documentUrl`, which surfaces line 108
+(`fetch(LOG_URL, {`) but not the extension-ID guard a few lines above it
+("Critical line in the code" above, around line 40 in this analysis),
+since neither "extension" nor "runtime.id" is in that grep pattern. Read
+on its own, line 108 alone makes the telemetry look live.
+
+It isn't, per the 2026-07-02 finding already on record: `chrome.runtime.id`
+for this extension is `gpkoddcemgbmajecfkkolkgfcchmfpge`, the check compares
+against the official Mozilla build's ID `oemmndcbldboiebfnladdacbdfmadadm`,
+they don't match, and the function returns before line 108 ever runs. The
+`fetch` call this grep surfaced is dead code in this deployment.
+
+Nothing in today's paste changes that finding or adds to it -- same file,
+a narrower grep pattern that happened to miss the one line that matters.
