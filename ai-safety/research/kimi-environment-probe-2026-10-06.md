@@ -448,3 +448,79 @@ no network reach into it, nothing beyond what gets pasted in. Any of
 those four would need the same thing every finding above needed: the
 actual command output, pasted here, the way the drive9 log and the
 process list were.
+
+## Raw output supplied for F13/F14, and two probes (2026-10-07)
+
+**pdf-viewer directory listing** matches the byte sizes already on record
+in `pdf-viewer-extension-manifest-analysis.md` exactly: `extension-router.js`
+3149 bytes, `pdfHandler.js` 13434 bytes, `telemetry.js` 6594 bytes. No new
+files. The additional URLs this grep found
+(chromium.googlesource.com, crbug.com, github.com/mozilla/pdf.js,
+w3c/webextensions issue links) are source-comment citations to Chromium
+and Mozilla bug trackers inside `pdfHandler.js`, not additional egress
+endpoints -- consistent with, and reinforcing, the existing finding that
+this file is substantially copied Mozilla source.
+
+**F13 is now directly confirmed from fresh output, matching the 2026-07-02
+finding exactly.** Line 40 of this grep -- "Only send telemetry for the
+official PDF.js extension" -- is the comment on the guard already quoted
+in that file. This version of F13 ("likely disabled fork") is accurately
+hedged, unlike the stronger "cannot be answered from inside" framing two
+messages ago. Standing finding unchanged: the ping is dead code for this
+extension ID; the live permission set (content scripts, webRequest,
+`<all_urls>`) is the channel still open.
+
+**F14: three sub-facts now confirmed by raw output; the migration claim
+is not, on this evidence alone.**
+- CONFIRMED: `/dev/vdb` is ext4 and reports "needs journal recovery"
+  (both `blkid` and `file -s` agree) -- an unclean dismount of that
+  device at some point.
+- CONFIRMED: the root overlay's `upperdir` (the writable layer) is on
+  `/run/blk-cube/vdb/disk/.../upper`, and its `lowerdir` is 60 numbered
+  directories under `/run/blk-cube/vdd/` -- consistent with a multi-layer
+  container image (OCI-style, many build layers) mounted via overlayfs.
+  That is a mundane, documented mechanism on its own -- a 60-layer image
+  is unusual only in being deep, not in anything else.
+- PRESENT BUT NOT SHOWN MOUNTED: `blkid` finds `/dev/vdc` formatted as
+  erofs (a read-only, compressed filesystem commonly used for base image
+  layers), but the `mount | grep` for vdb/vdc/pmem shows no vdc line --
+  so vdc exists as a device but is not demonstrated to be mounted right
+  now.
+- NOT ESTABLISHED BY THIS SNAPSHOT: that the lowerdir was vdc earlier in
+  THIS session and changed to vdd mid-conversation. This single `mount`
+  output shows the CURRENT configuration only. Confirming a mid-session
+  change needs two snapshots from the same session, an early one and a
+  late one, to diff -- that has not been supplied here. Per the
+  document's own evidentiary rule (documented mechanism over inferred
+  motive, PROVEN requires the mechanism actually shown): the three bullet
+  points above are PROVEN; "the environment changed beneath this specific
+  session" remains OPEN on the evidence pasted into this session.
+
+**Port 9223 probe found no owner, and the method why.** The script
+searched `/proc/*/cmdline` for the literal substrings "9223" or "18080".
+Nothing in the output contains "9223" -- the process already identified
+by `netstat -tlnp` as owning port 9223 (PID 76, `project-cdp-proxy.py`,
+recorded above) apparently does not carry that port number as literal
+text in its command line (it is likely set via an internal default or an
+environment variable instead). `netstat`'s kernel-level socket table,
+already used earlier in this file, remains the reliable source for that
+attribution; grepping cmdline text for a port number is not a general
+method for finding its owner. Separately, two of the matched lines
+(`/proc/1126/cmdline`, `/proc/1133/cmdline`) are the probe script itself,
+which quotes "9223" and "18080" as literal search terms in its own
+command line and so matches its own grep -- a self-match artifact, not a
+second process on those ports.
+
+**browser_guard.py (first 60 lines).** Builds a Chrome user-agent string
+and matching `Sec-CH-UA` headers from the actually-installed Chromium
+version. This is standard browser-automation fingerprint consistency
+(making a Playwright-driven browser present a normal, matching UA to
+sites), not something distinct from that stated purpose in what was
+shown.
+
+**jupyter_kernel.py.** The grep for `subprocess|Popen|shell=True|
+allowlist|whitelist|blocklist` found none of those terms anywhere in the
+file -- only the `def` lines matched (via the unrelated `def ` term in
+the pattern). So: no allowlist/blocklist logic is shown to exist in this
+file either, consistent with F6's finding that the execution endpoint
+carries no authentication or access control.
