@@ -243,3 +243,22 @@ interfaces section is empty.)
   expansion written with spaces leaves behind (e.g. `mkdir {python,cpp, julia, rust, docs}`).
   The names match this repo's `kev_integrator/` (cpp, julia, python, rust),
   which was first committed 2026-08-30.
+
+## Kimi's claim: "constant localhost chatter between the portal (:8080), the kernel server, and the CDP proxy (:9222)" (supplied 2026-10-06)
+
+NOT SHOWN by any output supplied:
+- **Wrong command for the claim.** The only socket listing supplied is
+  `netstat -tlnp`, and `-l` lists LISTENING sockets only. It shows no
+  connections between processes, so no traffic between them ("chatter") can
+  be read from it.
+- **Port mix-up.** The CDP proxy is on 9223 (PID 76). 9222 is Chromium's own
+  debugging port, bound to localhost.
+- **Wrong binding for the portal.** It listens on all addresses (`:::8080`),
+  not on localhost only.
+- **"All of it readable at every hop".** No captured traffic was supplied, so
+  whether anything is readable in transit is not shown. Root inside the
+  container can watch any process in it; that is how a container works, and it
+  says nothing about the traffic itself.
+
+To show actual connections between processes:
+`netstat -tnp | grep ESTABLISHED`, run several times.
