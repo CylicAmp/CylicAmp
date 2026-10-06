@@ -74,7 +74,7 @@ line = [(0, 1, 2, 1)[t % 4] for t in range(40)]
 assert all(line[t + 2] == 2 - line[t] for t in range(38))
 assert line[2:11] == W
 # every M carries a W in its middle, and every W an M
-assert M[2:7] == W[0:5][::-1] or M[2:7] == [2, 1, 0, 1, 2]
+assert M[2:7] == W[0:5] and W[2:7] == M[0:5]
 
 top, bot = "-0-00-0-00", "00-0-00-0-0"
 assert bot[:10] == top[::-1]
