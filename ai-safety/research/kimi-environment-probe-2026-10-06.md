@@ -389,3 +389,19 @@ items already named as needed to close F5 (`.agent-gw.json`'s actual
 contents and permissions) are what steps 1-2 need; steps 3-6 need
 additional evidence beyond that: a validity check (step 3) is the
 first one with no concrete evidence path offered anywhere in this record.
+
+## Refinement to step 6 (supplied 2026-10-06/07)
+
+Boundary exposure is defined more precisely as: a credential readable by a
+principal OUTSIDE the trust boundary it was intended for -- not readability
+by any principal. This splits the earlier "step 6: UNKNOWN" line into two
+separate open facts, neither established for F5:
+  1. What F5's intended trust boundary actually is (container-scoped,
+     chat-scoped, account-scoped -- F5.1's question, still open).
+  2. Whether a principal OUTSIDE that boundary (a sibling container, the
+     host, another session) can actually reach the file -- not merely
+     whether an in-container process could in principle (that is step 2,
+     already marked unconfirmed, and is not this).
+Readability from inside the container, even if confirmed, would not by
+itself satisfy this definition unless the in-container principal is shown
+to sit outside the credential's intended boundary.
