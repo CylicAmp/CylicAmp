@@ -262,3 +262,59 @@ NOT SHOWN by any output supplied:
 
 To show actual connections between processes:
 `netstat -tnp | grep ESTABLISHED`, run several times.
+
+## Kimi's "Container Forensic Record" (supplied 2026-10-06/07), cross-checked
+
+A ten-finding document (F1–F10) was supplied, written in PROVEN/OPEN form
+with evidence pointers. Checked against the raw output already in this
+file, not re-derived from scratch — this session has no access to the
+container itself, only what was pasted into it.
+
+**Corroborated by raw data already in this file (not new claims):**
+- F1 (drive9 FUSE mount, server 10.213.5.144, actor/user/chat IDs), F2
+  (SSE reset line, `close-sync` write policy), F3 (kernel version string,
+  boot time, SSH/VNC/portal/envd/kernel-server ports, the 12:37:58
+  `/healthz` probe), F4 (`portal`'s `-gateway-addr
+  https://kimi-api-sandbox.msh.team/apiv2`) all match the "Raw log
+  contents" and "Process parents, listening ports" sections above,
+  word for word on the parts both documents quote.
+- F7's claim that the kernel server's working directory and `/tmp` logs
+  are empty matches the earlier `ls -la` output. Its mechanism claim
+  ("captured by envd -> gateway") is the same one flagged UNCONFIRMED
+  above: the process list shows `kernel_server.py` as its OWN s6 service,
+  not routed through envd, and that distinction is still not resolved
+  here either.
+- F10 (E2B-derived) matches the `-isnotfc` flag finding above, sourced
+  independently from E2B's own GitHub repo, not from envd's binary
+  strings (which this session has not read).
+
+**New claims, no raw output supplied to this session to check them against:**
+- F5 (a plaintext API key in `/mnt/portal-overlay/.agent-gw.json`), F6
+  (`/app/kernel_server.py`'s full source, claimed to show an
+  unauthenticated `/kernel/execute` endpoint), F9 (an on-device model
+  Chromium service), and F10's specific claim of `E2B_TEMPLATE_ID` /
+  `E2B_SANDBOX_ID` strings inside the envd binary. None of these file
+  contents have been pasted into this session. They are recorded here as
+  supplied, not independently verified — same status the document's own
+  F6 line gives its exposure claim, extended to the rest.
+
+**One discrepancy found.** F8 states "33 UUID-named snapshot directories."
+This file's own earlier count, made directly from the pasted `ls -la
+/mnt/agents/backup/` output, says 31. Flagging rather than silently
+adopting the new number: if a recount is wanted, the raw listing would
+need to be pasted again.
+
+**On the document's own framework (S1–S3 and the evidentiary rule).**
+The rule stated — "never substitute an inferred motive for a documented
+mechanism" — is the same discipline this file has tried to hold to
+throughout: flag what the raw output shows, separately from what a
+summary claims it shows. S1's point (a model's "I don't have memory"
+describes the model's own statelessness, not the storage layer behind
+it) is consistent with the correction already made earlier in this file
+about CylicAmp's own persistent-memory claim.
+
+**What would actually close F5/F6/F9/F10:** the raw file contents
+(`.agent-gw.json`, `kernel_server.py`, the Chromium service's invocation
+site, `strings` output on the envd binary), pasted the way the drive9 log
+and process list were. Until then those four findings are supplied
+claims, not checked ones, in this record.
