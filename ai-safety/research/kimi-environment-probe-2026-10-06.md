@@ -174,3 +174,72 @@ The s6 services also include `socat`.
 - **Timestamps.** The processes start at 04:37 in `ps` time, and the
   `/healthz` probe was logged at 12:37:58. That fits a UTC+8 log clock and a
   probe in the first minute; the time zone is still unconfirmed.
+
+## Process parents, listening ports, system, and the project mount (supplied 2026-10-06)
+
+### How commands reach the container
+- With parent PIDs shown, the shell that ran the probe (`bash`, PID 1258) has
+  parent PID 84, which is `envd`. Kimi's commands are started by envd.
+- envd listens on port 49983, the default port of E2B's envd process API.
+- Each command is wrapped like this (PID 1089, in full):
+
+      /bin/bash -l -c export KERNEL_SERVER_WORKDIR='/tmp/kimi-project-kernel' KIMI_CHAT_ID='1a10f61d-dd82-89de-8000-09bc11d58c7e' KIMI_PROJECT_ID='1a010646-bec2-8520-8000-0ebc7847a99c' KIMI_REGION='REGION_OVERSEA' KIMI_USER_ID='d5vshsr2ulb3drvkvgag'; cd '/mnt/agents' && sh -c '<the command>'
+
+- So the user id, chat id, project id and region are attached to every
+  command, and the command's full text sits in the process table while it
+  runs.
+- The commands are created outside the container and sent in through envd's
+  API, so the sender has every command by construction, whether or not anything
+  inside the container keeps a log. Kimi's "gone upstream" holds in this sense.
+  The commands come from upstream. What the provider stores, and for how long,
+  is still not shown.
+- Other activity: a `mountpoint -q /mnt/agents` check, the drive9 watchdog's
+  `sleep 15` loop, and a short-lived `npm` process.
+
+### Listening ports
+(`ss` is not installed, so `netstat` answered. `ip` is not installed, so the
+interfaces section is empty.)
+
+| Port | Bound to | Process |
+|---|---|---|
+| 22 | all | sshd |
+| 6080 | all | Xvnc (KasmVNC web desktop) |
+| 8080 | all | portal (the gateway client) |
+| 8888 | all | kernel_server.py |
+| 9223 | all | project-cdp-proxy.py, which exposes Chromium's DevTools |
+| 9222 | localhost only | Chromium remote debugging |
+| 18080 | all | python3 PID 17, the health server (still running; its PID was below the earlier `head -25` cut) |
+| 49983 | all (IPv6) | envd |
+| 32000, 32001 | all (IPv6) | no process shown |
+| 6 localhost ports | localhost only | the Jupyter kernel (PID 193) |
+
+### Chromium
+- Version 151.0.7922.108, running as user `kimi`.
+- Flags: `--remote-debugging-port=9222`, `--no-sandbox`,
+  `--disable-blink-features=AutomationControlled` (this stops websites from
+  seeing the `navigator.webdriver` automation flag), and
+  `--enable-logging=file --log-file=/tmp/chromium_detailed.log`.
+- Crash reports are stored in `/home/kimi/.config/chromium/Crash Reports`.
+
+### System
+- Runs as root on host `1ce411db`, Debian 12.
+- Kernel `6.6.69-cube.pvm.guest...`, built Thu May 21 23:33:35 CST 2026. The
+  "pvm.guest" string marks a virtual-machine guest kernel. CST is the build
+  machine's clock, not the log clock.
+
+### The project mount `/mnt/agents` (server project `1a010646-...`)
+- **It persists across sessions.** Its contents date from Aug 17 to Oct 6.
+- `output/` holds `137map/`, `.github/` and `Amber_Industries_Evidence_Summary.txt`
+  (Sep 2), among others; the listing was cut off.
+- `temp/` holds image files (`1000xxxxxx.jpg`) dated Aug 24 to Sep 27. The
+  listing was cut off after about 150 files.
+- `backup/` holds 31 folders, Sep 20 to Oct 3. They are named with the same
+  ID format as `KIMI_CHAT_ID`; what each one is, is not shown.
+- `deploy/` holds v1 to v5, all Aug 24. `.deploy_version.txt` is 1 byte.
+- `.user/auth` and `.user/skills` are symlinks into `/mnt/portal-overlay`,
+  the gateway's mount.
+- **Four stray folders**, `cpp,`, `julia,`, `rust,` and `docs}`, all
+  Aug 29 22:29. A trailing comma or brace in a name is what a shell brace
+  expansion written with spaces leaves behind (e.g. `mkdir {python,cpp, julia, rust, docs}`).
+  The names match this repo's `kev_integrator/` (cpp, julia, python, rust),
+  which was first committed 2026-08-30.
