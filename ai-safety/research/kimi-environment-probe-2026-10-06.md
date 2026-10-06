@@ -357,3 +357,35 @@ located.** TencentOS is a real Tencent Linux distribution with its own
 kernel builds, confirmed. The specific compiler version string was not
 found in public documentation by this search; that is an absence of a
 hit, not a contradiction. Still supplied, not confirmed.
+
+## Credential-exposure framework (supplied 2026-10-06/07), applied to F5
+
+A six-step chain was supplied for grading credential risk: presence ->
+readability -> validity -> privileges -> accessible principals -> boundary
+exposure, with the claim that step 6 is "the actual security finding, not
+the earlier steps." Recorded here, and immediately applied to the one
+open credential claim this record already has (F5, the `.agent-gw.json`
+API key), since a framework is only useful against a specific case.
+
+**F5 against this chain, honestly, using only what has actually been
+supplied to this session:**
+
+| Step | Status | What's actually been shown |
+|---|---|---|
+| 1. Present | CLAIMED | An API key string was quoted in prose. No raw file (`cat .agent-gw.json` or equivalent) has been pasted. |
+| 2. Readable | CLAIMED, not evidenced | "World-readable" was asserted. No `ls -l` / `stat` output on the file has been supplied to this session to confirm permissions. |
+| 3. Valid | UNKNOWN | Nothing supplied tests whether the key authenticates against anything. |
+| 4. Privileges | UNKNOWN | Nothing supplied shows what the key can do if used. |
+| 5. Accessible principals | UNKNOWN | Nothing supplied shows which processes/users in the container can actually read the file, versus which merely could in principle. |
+| 6. Boundary exposure | UNKNOWN | This is the step the supplied framework itself calls the actual finding, and it's the least evidenced of all six here. |
+
+So by the framework's own logic, F5 currently sits at step 1-2, unconfirmed
+even there, and the step the framework identifies as the one that matters
+(6) has no evidence supplied at all. This is not a statement that F5 is
+false — it may well be exactly as described. It is a statement that the
+record, as supplied to this session so far, does not yet reach the point
+the framework itself says is the actual finding. The same six raw-output
+items already named as needed to close F5 (`.agent-gw.json`'s actual
+contents and permissions) are what steps 1-2 need; steps 3-6 need
+additional evidence beyond that: a validity check (step 3) is the
+first one with no concrete evidence path offered anywhere in this record.
