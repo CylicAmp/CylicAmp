@@ -44,6 +44,13 @@ THE TWO DIGIT ROWS IN THE DRAWING:
   - Top is the 1-2 alternation and bottom the 2-1 alternation. These are the
     12 / 21 strings of left_anchor_and_four_panel_shapes_supplied_audit_2026_10_04.py.
 
+UPSIDE DOWN (owner, 2026-10-06: "whenever I make an M, I'm making an upside
+down W. And whenever I make a W, I'm making an upside M").
+  - Turning W over gives M, and turning M over gives W.
+  - Turning over twice returns the start.
+  - M and W each read the same backwards, so turning upside down, rotating a
+    half turn and moving half a pyramid all give the same line.
+
 FALSIFICATION: any assertion below failing.
 """
 M = [0, 1, 2, 1, 0, 1, 2, 1, 0]
@@ -75,6 +82,11 @@ assert all(line[t + 2] == 2 - line[t] for t in range(38))
 assert line[2:11] == W
 # every M carries a W in its middle, and every W an M
 assert M[2:7] == W[0:5] and W[2:7] == M[0:5]
+
+flip = lambda h: [2 - v for v in h]
+assert flip(W) == M and flip(M) == W and flip(flip(M)) == M
+assert M == M[::-1] and W == W[::-1]                       # each reads the same backwards
+assert flip(M)[::-1] == W == line[2:11]                     # half turn = turn over = half-pyramid shift
 
 top, bot = "-0-00-0-00", "00-0-00-0-0"
 assert bot[:10] == top[::-1]
