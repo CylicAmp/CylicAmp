@@ -70,5 +70,11 @@
   "param": "p<2000,q<20000",
   "n": "1e13",
   "kind": "search"
+ },
+ {
+  "branch": "k=5 odd, 3 not| n, shapes 1pp^2p^3q + 1pp^2qp^3 (coverage hole closed)",
+  "param": "p<50000",
+  "n": "1.57e28",
+  "kind": "search"
  }
 ]

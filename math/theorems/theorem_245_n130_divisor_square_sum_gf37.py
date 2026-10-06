@@ -2237,8 +2237,8 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
   blind sweep is involved.
 
       shape             p bound   candidates  skipped   n reached
-      1 p p^2 p^3 q      400         19         31      6.1e17
-      1 p p^2 q p^3      400         22         31      1.1e14
+      1 p p^2 p^3 q      50000     see below     0       (hole closed)
+      1 p p^2 q p^3      50000     see below     0       (hole closed)
       1 p p^2 q pq       400         12          0      3.2e15
       1 p p^2 q r        400          0          0      --
       1 p q p^2 pq       400        113          0      2.9e15
@@ -2249,16 +2249,23 @@ CORRECTION 2026-09-25 -- THE CROSS-k UNIQUENESS CLAIM WAS WRONG.
       1 p q r pq         400         31          2      1.7e13
       1 p q r s          400          0          0      --
 
-  THE SKIPPED COLUMN IS A COVERAGE HOLE, not a result.  C is factored only
-  when it is below 1e14, and for the two shapes carrying p^3 and p^4 the
-  quantity C = 1 + p^2 + p^4 + p^6 exceeds that for 31 of the ~77 primes
-  below 400.  Those p are NOT covered.  The weakest shape overall is
-  (1, p, q, pq, q^2) at p < 120, and per the search-bounds rule that is the
-  figure to quote for the case, not the 6.1e17 that one lucky shape reached.
+  THE SKIPPED-COLUMN HOLE IS CLOSED, 2026-10-06
+  (k5_odd_p3_coverage_hole_close_2026_10_06.py).  The 1e14 factoring cap
+  was a tooling limit, not a computational one: sympy's factorint factors
+  C = 1 + p^2 + p^4 + p^6 for every p < 50000 (C up to ~1.57e28) in well
+  under a second each, 18.9s total for the full sweep.  Both p^3-carrying
+  shapes are now COMPLETE and empty for every prime p < 50000 -- 5131
+  primes, 3893 candidate q (prime factors of C with the right ordering),
+  zero surviving the full prefix check.  That is 67x the prime range of
+  the original 400-bound sweep, and the 31 originally-skipped primes are
+  all covered.  The weakest shape overall in this case remains
+  (1, p, q, pq, q^2) at p < 120, and per the search-bounds rule that is
+  still the figure to quote for the CASE as a whole, not the 50000 that
+  these two shapes now reach individually.
 
   So 3-not-dividing-n is now REDUCED, not closed: 1 of 12 shapes proved
-  empty, 11 searched and empty with the bounds above.  k=5 with n odd remains a search
-  result behind the 5e8 bound.
+  empty, 11 searched and empty, with the coverage hole in 2 of those 11
+  closed.  k=5 with n odd remains a search result behind the 5e8 bound.
 
   SUPPLIED CASE TREE, AUDITED 2026-09-19.  A nine-branch tree over the shape
   of (d_1..d_5) was supplied, killing seven branches and reducing k=5 to two
