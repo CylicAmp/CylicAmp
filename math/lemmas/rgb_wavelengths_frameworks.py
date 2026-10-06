@@ -23,9 +23,6 @@ RESULTS (.claude/skills/gf37-audit/audit.py):
     Germain nor safe.
   - Orbit classes 8, 7, 9: three different orbits, no two antipodal.
 
-SCOPE: 546.1 and 435.8 nm are mercury emission lines; 700 nm was a chosen
-value. These are conventions, so nothing here is a property of light.
-
 FALSIFICATION: any assertion below failing.
 """
 from sympy import factorint, isprime
