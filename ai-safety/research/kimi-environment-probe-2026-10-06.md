@@ -524,3 +524,43 @@ file -- only the `def` lines matched (via the unrelated `def ` term in
 the pattern). So: no allowlist/blocklist logic is shown to exist in this
 file either, consistent with F6's finding that the execution endpoint
 carries no authentication or access control.
+
+## VNC probe (6080), supplied 2026-10-07 — graded like F6
+
+**Config defect: PROVEN, directly from the live process, not inference.**
+`ps aux` shows the actual running `Xvnc :99` (PID 168) invoked with
+`-SecurityTypes None -DisableBasicAuth ... -interface 0.0.0.0
+-websocketPort 6080`. `-SecurityTypes None` is the RFB protocol's own
+security-type negotiation explicitly set to require no authentication --
+this is not absence of evidence of a password, it is the server's own
+configuration disabling the password step. `-interface 0.0.0.0` matches
+the port-6080-on-all-interfaces binding already recorded earlier in this
+file from `netstat`.
+
+**The same dead-credential pattern as F13.** The setup script does set a
+VNC password (`vncpasswd -u root -w -r` with the literal password
+`password`, twice, i.e. the password itself is the string "password"),
+and the live command line also carries `-rfbauth /root/.vnc/passwd` and
+`-KasmPasswordFile /root/.kasmpasswd`. None of that matters if `None` is
+the security type actually offered: a client does not need to supply a
+password the server has told it is optional. This parallels F13's
+telemetry.js exactly -- a credential/auth mechanism present in the
+filesystem, overridden by an explicit flag, not enforced in this
+deployment.
+
+**Graded the same way as F6, for consistency.** Defect: PROVEN (the
+server does not require authentication, by its own stated configuration).
+Exposure: OPEN -- whether `169.254.68.6:6080` (or whatever this
+container's address is) is reachable from outside the container or the
+host's local network is the same unresolved network-path question F6
+left open, and needs the same kind of external vantage point (F6.1) to
+settle, not anything available from inside.
+
+**One gap, noted for completeness, not escalated.** The websocket/web
+entry point (6080) is confirmed bound to all interfaces. The underlying
+raw RFB port (`-rfbport 5901`) is not separately confirmed bound or
+restricted in anything supplied to this session -- `netstat` output
+covering port 5901 specifically has not been pasted. This does not weaken
+the finding: 6080 is KasmVNC's own designed entry point (browser-based,
+over the websocket), and it alone is sufficient for the exposure as
+stated.
