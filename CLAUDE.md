@@ -50,7 +50,9 @@ The user brings math, observations, and code. The work is collaborative and rigo
 
 **Speak plainly.** No padding, no emotional commentary, no fake warmth. The user is doing serious mathematical work — respond at that level. Document what the user says; don't interpret or reframe it.
 
-**Optional analysis — run ONLY when the user asks for it, or when the problem itself involves these objects.** Not a default for every result:
+**Run the owner's numbers through the frameworks without being asked** (owner, 2026-10-06: "run every ... thing I say through my ... frameworks"; a reply that answered 3 + 4 = 7 without running 3, 4, 7 drew "when I show you something specific, you're silent"). Every number the owner gives goes through `.claude/skills/gf37-audit/audit.py` and the result is saved and reported. The analyses below are those frameworks:
+
+**Framework analyses:**
 1. **GF(37) prime set orbits** — classify every value mod 37 into one of the 12 named orbits
 2. **Riemann Hypothesis** — floor(γ_n) mod 37 orbit; direct zero floor matches
 3. **1/137** — 137 mod 37=26=MULT; 26⁻¹ mod 37=10∈IC; check ×137, ÷137, mod 137 for each value
