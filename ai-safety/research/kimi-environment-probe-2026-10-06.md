@@ -318,3 +318,42 @@ about CylicAmp's own persistent-memory claim.
 site, `strings` output on the envd binary), pasted the way the drive9 log
 and process list were. Until then those four findings are supplied
 claims, not checked ones, in this record.
+
+## Three more claims (supplied 2026-10-06/07): compiler, DNS, hypervisor
+
+As before, no raw file output (`/proc/version`, `/etc/resolv.conf`, DMI
+strings) was pasted into this session — these are claims about file
+contents, not the contents themselves. Two of the three facts cited are
+independently checkable against public documentation; one is not.
+
+**DNS resolvers 183.60.83.19 / 183.60.82.98 — CONFIRMED, against Tencent
+Cloud's own documentation.** These are listed there as the default Private
+DNS server addresses for recursive resolution inside a Tencent Cloud VPC
+(CVM / Lighthouse / cloud containers). This is a strong, specific match,
+not a generic "some Tencent IP."
+
+**Hypervisor "cube-hypervisor" / kernel string "cube.pvm.guest" —
+CONFIRMED, and more specific than the claim itself.** CubeHypervisor is a
+real, named Tencent Cloud product: a lightweight KVM-based hypervisor
+built for CubeSandbox, described in Tencent's own material as a
+sandbox-as-a-service built specifically to run untrusted AI-agent
+workloads in isolated MicroVMs, hardware-isolated via VT-x/AMD-V, with
+sub-60ms cold starts. The kernel string's "pvm.guest" is consistent with
+a guest under that hypervisor, not a generic cloud VM.
+
+**This adds a layer to F10, not a contradiction of it.** F10 found E2B
+markers (`-isnotfc`, the envd binary) and called the sandbox
+"E2B-derived." These two findings are compatible, not in conflict: envd is
+orchestration SOFTWARE (E2B's open-source sandbox agent); CubeHypervisor
+is the INFRASTRUCTURE it runs on. A deployment can run E2B-style envd
+inside Tencent Cloud's own hypervisor layer. So the picture so far is:
+Moonshot's gateway (F4) -> E2B-style envd orchestration (F10's first
+finding) -> Tencent Cloud CubeHypervisor as the actual virtualization
+layer underneath (this entry). Each layer is a separate, specific claim;
+none of the three has been shown to be wrong.
+
+**"Tencent Compiler 12.3.1.4" (TencentOS 12.3.1.4-2) — NOT independently
+located.** TencentOS is a real Tencent Linux distribution with its own
+kernel builds, confirmed. The specific compiler version string was not
+found in public documentation by this search; that is an absence of a
+hit, not a contradiction. Still supplied, not confirmed.
