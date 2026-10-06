@@ -125,3 +125,52 @@ Two corrections to the earlier verdicts:
 - Under s6-overlay, output from such a service goes to the catch-all: the
   container's stdout, or `/run/uncaught-logs` if file logging is configured.
 - The fallback `find` printed nothing in the supplied output.
+
+## Process list (supplied 2026-10-06, `ps aux --sort=-start_time`, chromium filtered, first 25 lines)
+
+**Started at 04:37 (container start), each under its own `s6-supervise`:**
+
+| PID | User | Process |
+|---|---|---|
+| 84 | root | `envd -isnotfc` |
+| 66 | kimi | `kernel_server.py --port 8888 --log-level info` |
+| 193 | kimi | `ipykernel_launcher`: the Jupyter kernel that runs the code |
+| 64 | root | `portal ... -env prod -gateway-addr https://kimi-api-sandbox.msh.team/apiv2 /mnt/portal-overlay` |
+| 82 | kimi | `browser_guard.py`, watching display :99 |
+| 76 | root | `project-cdp-proxy.py`: Chrome DevTools Protocol proxy, from `/opt/moonbox-project-template` |
+| 77 | root | `setup_kasmvnc.sh`: remote-desktop VNC |
+| 58 | root | `sshd -D` |
+| 190 | root | `sleep infinity` |
+
+The s6 services also include `socat`.
+
+**Started at 04:44:**
+- `drive9 mount --foreground --mode=fuse -allow-other --server http://10.213.5.144 --profile kimi-project --durability close-sync :/projects/1a010646-bec2-8520-8000-0ebc7847a99c /mnt/agents`
+- A watchdog (`./run drive9-fuse-watchdog`, with a `sleep 15` loop).
+
+### Findings
+- **The mount maps one project.** Server project
+  `1a010646-bec2-8520-8000-0ebc7847a99c` is mounted at `/mnt/agents`, with
+  close-sync durability. This confirms the write policy in the drive9 log.
+- **The mount is open to every user in the container.** `-allow-other` lets
+  users other than root (for example `kimi`) read and write it.
+- **The kernel server is NOT routed through envd.** It is its own s6 service
+  (`s6-supervise kernel-server`), so its stdout goes to s6, not to envd.
+  "Captured by envd and shipped out" (Kimi's follow-up) does not match the
+  process tree. It logs at `info` level to stdout, and where s6 sends that is
+  still not shown.
+- **envd's `-isnotfc` flag.** In E2B's envd source
+  (github.com/e2b-dev/infra, `packages/envd/main.go`) the flag is described as
+  "run outside of Firecracker (skips MMDS poll and HTTP log exporter)". With it
+  set, envd's HTTP log exporter is not created. If this binary is E2B's envd
+  (the name, the s6 layout and the flag all match, but that is not proven),
+  then envd here is NOT exporting its logs over HTTP. No `-verbose` flag
+  appears in the command line.
+- **The gateway is a Moonshot address.** `portal` connects to
+  `kimi-api-sandbox.msh.team` (env `prod`). This is the gateway Kimi referred
+  to. What passes through it is not shown.
+- **The port-18080 `http.server` is not in these 25 lines.** It either
+  exited, or has a PID below 38, which `head -25` cut off.
+- **Timestamps.** The processes start at 04:37 in `ps` time, and the
+  `/healthz` probe was logged at 12:37:58. That fits a UTC+8 log clock and a
+  probe in the first minute; the time zone is still unconfirmed.
