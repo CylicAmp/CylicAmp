@@ -74,3 +74,54 @@ checked against what that summary itself quotes.
   evidence in the output. Whether the provider keeps conversation logs is a
   matter for Moonshot's privacy policy and a data-access request
   (`data-access-request-guide.md`), not for a directory listing.
+
+## Raw log contents (supplied 2026-10-06), and corrections to the follow-up
+
+    fs mkdir: path already exists
+    component: drive9 mount
+    version: dev
+    git_hash: unknown
+    git_branch: unknown
+    build_time: unknown
+    go_version: go1.26.1
+    drive9: mount mode: fuse
+    drive9: sync mode: strict
+    drive9: mounted on /mnt/agents (server: http://10.213.5.144, actor: dcc52dea130c51dd5bf229f5f26a450f, readonly: false, write_policy: close-sync, cache: /root/.cache/drive9, shadow: /root/.cache/drive9/e8d3c1125eeb5a63/shadow)
+    drive9: SSE reset — invalidating all caches
+    === probe ===
+    Serving HTTP on 0.0.0.0 port 18080 (http://0.0.0.0:18080/) ...
+    169.254.68.5 - - [06/Oct/2026 12:37:58] "GET /healthz HTTP/1.1" 200 -
+    === kernel dir ===   (empty: only . and ..)
+    === envd service dir ===   event/  run (652 bytes)  supervise/   -- no log/ subdirectory
+
+**Correction to point 1: two-way sync IS shown.** The mount line reads
+`readonly: false, write_policy: close-sync`, so writes go to 10.213.5.144
+whenever a file is closed, and the SSE stream pushes invalidations back down.
+Two corrections to the earlier verdicts:
+- The follow-up's "NOT SUPPORTED: both ways" was right for the SSE line alone,
+  and is wrong for the full log.
+- "Live" needs narrowing: uploads happen when a file is closed, not as each
+  byte is written. Sync mode is `strict`.
+
+**drive9, other details**
+- The mount is a FUSE filesystem at `/mnt/agents`, with a local cache and a
+  shadow copy under `/root/.cache/drive9/`.
+- It is a dev build with no git hash (Go 1.26.1).
+- This log names only the actor id. The user id `d5vshsr2ulb3drvkvgag` is not
+  in it.
+
+**Probe**
+- The banner is Python's built-in `http.server`.
+- `GET /healthz` returned 200. `http.server` returns 404 for a missing path,
+  so a `healthz` file or directory exists in the directory it serves.
+- One request was logged, at 12:37:58. The probe-server log file was created
+  at 04:37, so if the gap is a UTC/UTC+8 time-zone difference, the probe came
+  in the same minute the container started, not one minute after. That
+  time-zone reading is still unconfirmed.
+
+**envd**
+- `/run/service/envd/` has no `log/` subdirectory, so envd has no logger of
+  its own under s6.
+- Under s6-overlay, output from such a service goes to the catch-all: the
+  container's stdout, or `/run/uncaught-logs` if file logging is configured.
+- The fallback `find` printed nothing in the supplied output.
