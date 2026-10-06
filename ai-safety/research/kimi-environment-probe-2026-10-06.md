@@ -564,3 +564,35 @@ covering port 5901 specifically has not been pasted. This does not weaken
 the finding: 6080 is KasmVNC's own designed entry point (browser-based,
 over the websocket), and it alone is sufficient for the exposure as
 stated.
+
+## Evidence table (supplied structure, 2026-10-07): Observation | Evidence | Boundary | Principal | Validity | Privilege | Accessibility | Finding | Confidence | Missing evidence
+
+Applied to the three findings in this file that are actually about
+credentials or access control. F1-F4, F7-F10, F13, F14 are a different
+kind of finding -- observed mechanism, not an access-control claim -- and
+forcing them into this ladder would be the same mislabeling the ladder
+exists to prevent. They stay as recorded above, not re-tabled here.
+
+**The governing rule, stated precisely:** ¬Exposure ⇒ ¬Impact(credential).
+If exposure to an outside principal hasn't been demonstrated,
+credential-mediated impact can't be claimed on the evidence so far --
+independently demonstrated impact (e.g. a config defect reachable with no
+credential at all, which is what F6 and VNC actually are) is a separate
+question from exposure and doesn't need it.
+
+| # | Observation | Evidence | Boundary | Principal | Validity | Privilege | Accessibility (outside boundary) | Finding | Confidence | Missing evidence |
+|---|---|---|---|---|---|---|---|---|---|---|
+| F5 | API key string in `.agent-gw.json` | Prose claim only -- no raw file pasted to this session | Not stated (chat/container/account-scoped? F5.1, still open) | Unknown | Unknown -- untested | Unknown -- untested | Not demonstrated | Presence only, and even that is unconfirmed (no raw file) | Low | Raw file + `stat`/`ls -l`, a validity test, a privilege test, a demonstrated outside-boundary reader |
+| F6 | `/kernel/execute` on :8888, no auth in the code, CORS `*` | Full source claimed read, not pasted; the `0.0.0.0:8888` binding independently confirmed via `netstat` earlier in this file | Presumably container-internal; not stated | Any TCP client that reaches the port, per the code's own design (no credential gate at all) | N/A -- the endpoint requires no credential, so there is none to validate | Full code execution as user `kimi` if reached | NOT demonstrated -- this is exactly F6.1 | Defect in the endpoint's own design: partially corroborated (the binding); full source: unconfirmed. Exposure: open | Medium (defect) / unconfirmed (exposure) | One external connection to `:8888` (F6.1) |
+| VNC | `Xvnc` live process: `-SecurityTypes None -DisableBasicAuth`, `-interface 0.0.0.0`, `-websocketPort 6080` | Raw `ps aux` output showing the actual running process's own command line -- the strongest-evidenced item of the three | Not stated | Any client reaching the websocket port, per the server's own advertised security type | N/A -- same reason as F6: the server advertises no auth required | Full interactive desktop access if reached | NOT demonstrated | Defect PROVEN directly from the live process, not inference. Exposure: open | High (defect) / unconfirmed (exposure) | One external connection to `:6080` |
+
+Both F6 and VNC land in the same place on this table: the defect itself is
+evidenced (one from independently-confirmed binding data, one directly
+from the live process command line), and both stop at the identical wall
+-- accessibility from outside the container is undemonstrated in anything
+pasted into this session. Per the stated rule, neither can be called
+"exposure" yet. What can be said, and is already evidenced without
+needing exposure: both services are configured to require no credential
+at all from whatever can reach them -- that is a statement about the
+services' own design, true regardless of whether anything outside the
+container can reach them.
