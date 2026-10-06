@@ -405,3 +405,46 @@ separate open facts, neither established for F5:
 Readability from inside the container, even if confirmed, would not by
 itself satisfy this definition unless the in-container principal is shown
 to sit outside the credential's intended boundary.
+
+## F13, F14 (supplied 2026-10-07)
+
+F11 and F12 are referenced but not in this file and have not been supplied
+to this session at any point — nothing here can check claims that depend
+on them (F13's "pre-wired", F14's "corroborated, not suspected" against
+F11 specifically).
+
+**F13, checked against this file's own existing record.** The claim that
+whether telemetry fired "cannot be answered from inside... because the
+egress logs live upstream" overstates what's actually unresolved. The
+`pdf-viewer-extension-manifest-analysis.md` analysis (2026-07-02, cross-
+checked again above on 2026-10-07) already answered this specific
+question from inside, twice, on two separate captures of the same file:
+`chrome.runtime.id` for this extension is `gpkoddcemgbmajecfkkolkgfcchmfpge`
+in both captures, the guard compares it against the fixed official-build ID
+`oemmndcbldboiebfnladdacbdfmadadm`, they never match, and the function
+returns before the `fetch` to `pdfjs.robwu.nl/logpdfjs` runs. This is not
+a "conditional check" in the sense of depending on anything that varies by
+session or by document — `chrome.runtime.id` is fixed for an installed
+extension build, confirmed identical across two captures three months
+apart. So for THIS specific exfiltration path (the Mozilla telemetry
+ping), the question is already answered: it is dead code in this
+deployment, not an open one needing upstream logs.
+What is genuinely unresolved, and is the real finding the July analysis
+makes: the extension's LIVE capabilities (content scripts on every page at
+document_start, `webRequest`, `declarativeNetRequestWithHostAccess`,
+`<all_urls>`) are a separate and broader channel than the robwu.nl ping,
+and whether THOSE have been used to exfiltrate anything is the part that
+would need upstream logs. F13 should be read as pointing at that channel,
+not at the already-resolved telemetry.js ping.
+
+**F14 — no raw output supplied to this session.** No `mount`, `blkid`,
+`dmesg`, or journal-check output has been pasted here. Same evidentiary
+bar as F5/F6/F9/F10 above: recorded as a supplied claim, not independently
+checked. "Corroborated, not suspected" cannot be assessed without F11.
+
+**On "pick one" (socat, VNC on 6080, portal logs, F9's trigger
+conditions).** This session has no access to that container -- no shell,
+no network reach into it, nothing beyond what gets pasted in. Any of
+those four would need the same thing every finding above needed: the
+actual command output, pasted here, the way the drive9 log and the
+process list were.
