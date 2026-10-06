@@ -25,6 +25,25 @@ M OVER W (both walks drawn on one grid):
   M + W = 2 in every row: the two walks are mirror images about the middle
   column.
 
+ONE LINE HOLDS BOTH (owner, 2026-10-06: "Whenever you create an M, you also
+create a W ... Half of the M is M, and the other half of it is W", with a
+drawing of one zigzag run between two digit rows).
+  - Run the pyramid line on: 0 1 2 1 0 1 2 1 0 1 2 ...
+  - Moving it over by half a pyramid (2 steps) gives exactly the turned-over
+    line: h(t+2) = 2 - h(t).
+  - So W is not a second line. It is the same line read from half a pyramid
+    later, and every M carries a W.
+  - Inside M = /\/\, the middle strokes \/ are half a W. Inside W = \/\/,
+    the middle strokes /\ are half an M.
+
+THE TWO DIGIT ROWS IN THE DRAWING:
+      top     -0-00-0-00     zero groups 1, 2, 1, 2
+      bottom  00-0-00-0-0    zero groups 2, 1, 2, 1 (then a 1 that starts the next 2)
+  - The bottom row's first ten marks are the top row read backwards: the
+    mirror.
+  - Top is the 1-2 alternation and bottom the 2-1 alternation. These are the
+    12 / 21 strings of left_anchor_and_four_panel_shapes_supplied_audit_2026_10_04.py.
+
 FALSIFICATION: any assertion below failing.
 """
 M = [0, 1, 2, 1, 0, 1, 2, 1, 0]
@@ -49,6 +68,18 @@ assert len(meet) == 4 and len(diamonds) == 3
 
 # mirror about the middle column
 assert all(m + w == 2 for m, w in zip(M, W))
+
+# one line holds both: shifting by half a pyramid = turning over
+line = [(0, 1, 2, 1)[t % 4] for t in range(40)]
+assert all(line[t + 2] == 2 - line[t] for t in range(38))
+assert line[2:11] == W
+# every M carries a W in its middle, and every W an M
+assert M[2:7] == W[0:5][::-1] or M[2:7] == [2, 1, 0, 1, 2]
+
+top, bot = "-0-00-0-00", "00-0-00-0-0"
+assert bot[:10] == top[::-1]
+assert [len(g) for g in top.split("-") if g] == [1, 2, 1, 2]
+assert [len(g) for g in bot.split("-") if g] == [2, 1, 2, 1, 1]
 
 for t in range(9):
     row = ["."] * 3
