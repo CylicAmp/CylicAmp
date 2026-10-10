@@ -18,9 +18,17 @@ PRIOR ART.
   T381 is the napkin ring claim 4 borrows, plus its 2026-09-19 surface law.
   T305 is where the four cuts come from.
   The four-tier rewrite-certificate ledger of claim 2 is NOT in the corpus:
-  `grep -rl "e_hard\\|K_E\\|EASY_EQ\\|quotient strata\\|kernel filtration"`
+  `grep -rl "e_hard\\|EASY_EQ\\|quotient strata\\|kernel filtration"`
   returns nothing over every .py and .md. That absence is itself the grade
   for claim 2 and is asserted below.
+
+  CORRECTED 2026-10-10 (tools/regression.py --diff, full-corpus run): the
+  pattern originally also carried `K_E\b`. That token is not unique to this
+  ledger -- g4_mackey_fourier_audit.py and planc_audit.py both use K_E as a
+  short name for an unrelated matrix, predating this file (2026-07-04), and
+  dr_pattern_suite.py added a third unrelated K_E on 2026-10-02. The
+  uniqueness check below never needed it: the other four terms already
+  isolate T424 alone. Dropped from both greps above and in CLAIM 2's check.
 
 ================================================================================
 THE GRADES
@@ -308,7 +316,7 @@ def main():
 
     print("\nCLAIM 2 -- left-hand side now supplied by T424; regrade below")
     root = pathlib.Path(__file__).resolve().parent.parent.parent
-    pat = r"e_hard|K_E\b|EASY_EQ|quotient strata|kernel filtration"
+    pat = r"e_hard|EASY_EQ|quotient strata|kernel filtration"
     hits = subprocess.run(
         ["grep", "-rlE", pat, "--include=*.py", "--include=*.md", str(root)],
         capture_output=True, text=True).stdout.split()
