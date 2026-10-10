@@ -9,7 +9,22 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "cylicamp/c_constant_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "cylicamp/chebyshev_bias.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
  "cylicamp/cli.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "cylicamp/cosmic_distance_ladder.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -19,6 +34,11 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "cylicamp/dashboard.py": {
+  "msg": "ImportError: cannot import name 'run_g5' from 'cylicamp.g5_solver' (/home/user/CylicAmp/cylicamp/g5_solver.py)",
+  "secs": 0.5,
+  "status": "ERROR"
+ },
  "cylicamp/degradation_monitor.py": {
   "msg": "",
   "secs": 0.1,
@@ -26,7 +46,12 @@
  },
  "cylicamp/diff_geometry.py": {
   "msg": "",
-  "secs": 0.8,
+  "secs": 0.7,
+  "status": "PASS"
+ },
+ "cylicamp/easter_temporal_sync.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "cylicamp/engine_integration.py": {
@@ -36,12 +61,12 @@
  },
  "cylicamp/entropy_120cell.py": {
   "msg": "",
-  "secs": 0.6,
+  "secs": 0.4,
   "status": "PASS"
  },
  "cylicamp/euler_totient.py": {
   "msg": "",
-  "secs": 0.4,
+  "secs": 0.3,
   "status": "PASS"
  },
  "cylicamp/fib_dr.py": {
@@ -69,12 +94,37 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "cylicamp/joy_investigator.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "cylicamp/lattice_transform_engine.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "cylicamp/law_of_12.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
  },
+ "cylicamp/ll_sequence_sympy.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "cylicamp/lucas_lehmer_verify.py": {
+  "msg": "",
+  "secs": 0.5,
+  "status": "PASS"
+ },
  "cylicamp/magnitude_tiers.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "cylicamp/pascal_unified_field.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -89,7 +139,22 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "cylicamp/pisano.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "cylicamp/prime_anchor_419.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
  "cylicamp/prime_visual.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "cylicamp/rsa_dr_engine.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -99,9 +164,24 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "cylicamp/security_ml_framework.py": {
+  "msg": "ModuleNotFoundError: No module named 'pandas'",
+  "secs": 0.2,
+  "status": "ERROR"
+ },
+ "cylicamp/seed_191_137_bridge.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
  "cylicamp/session_protocol.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "cylicamp/soft_governor_loss.py": {
+  "msg": "",
+  "secs": 0.8,
   "status": "PASS"
  },
  "cylicamp/symposium.py": {
@@ -124,19 +204,229 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/primes/dgm_hyperagent_37field.py": {
+ "cylicamp/twin_prime_lattice.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "cylicamp/twin_prime_saturation.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "cylicamp/universal_reduction_invariant.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "cylicamp/x_bot_detector.py": {
+  "msg": "ModuleNotFoundError: No module named 'pandas'",
+  "secs": 0.1,
+  "status": "ERROR"
+ },
+ "cylicamp/zero_principle.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/aba_palindrome_walk.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/lemmas/abcabc_mod37_orbit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/center_out_x.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/lemmas/collatz_zeros_supplied_audit_2026_10_04.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/lemmas/compositions_of_n.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/digit_ladder_12312_91128.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/digit_ladder_all_angles.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/lemmas/digit_ladder_collatz.py": {
+  "msg": "",
+  "secs": 0.8,
+  "status": "PASS"
+ },
+ "math/lemmas/digit_ladder_opening_return.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/digit_ladder_riemann_userfiles.py": {
+  "msg": "",
+  "secs": 7.3,
+  "status": "PASS"
+ },
+ "math/lemmas/digit_ladder_riemann_zeros.py": {
+  "msg": "",
+  "secs": 1.0,
+  "status": "PASS"
+ },
+ "math/lemmas/digit_ladder_right_extension.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/lemmas/digit_ladder_rows5_on_and_repdigit_lines.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/digit_rule_2a_plus_b_1413.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/grid_789_balanced_x.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/heartbeat_3cycle.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/infinite_growth_cycle.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/ladder_loops_squares.py": {
+  "msg": "",
+  "secs": 10.9,
+  "status": "PASS"
+ },
+ "math/lemmas/ladder_ultimate_rotation.py": {
+  "msg": "",
+  "secs": 0.8,
+  "status": "PASS"
+ },
+ "math/lemmas/ladder_x_grid.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/prime_counts_supplied_audit_2026_10_05.py": {
+  "msg": "",
+  "secs": 0.6,
+  "status": "PASS"
+ },
+ "math/lemmas/prime_row_on_ladder.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/prime_row_ultimate_rotation.py": {
+  "msg": "",
+  "secs": 1.1,
+  "status": "PASS"
+ },
+ "math/lemmas/reversal_spans_all.py": {
   "msg": "",
   "secs": 0.5,
   "status": "PASS"
  },
+ "math/lemmas/reversal_spans_supplied_audit_2026_10_04.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/lemmas/rotation_grids_x.py": {
+  "msg": "",
+  "secs": 3.5,
+  "status": "PASS"
+ },
+ "math/lemmas/sigma3_eisenstein_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/split_six_twin_primes.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/lemmas/square_peg_x.py": {
+  "msg": "",
+  "secs": 0.7,
+  "status": "PASS"
+ },
+ "math/lemmas/theorem_310_digit_chain_seam_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/theorem_313_add_nine_reversal_diagonal_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/lemmas/twin_prime_dr_pair.py": {
+  "msg": "",
+  "secs": 1.3,
+  "status": "PASS"
+ },
+ "math/lemmas/two_line_loop_23_24.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/lemmas/ultimate_rotation_1_9.py": {
+  "msg": "",
+  "secs": 0.8,
+  "status": "PASS"
+ },
+ "math/primes/ap27_record_audit_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/primes/dgm_hyperagent_37field.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
  "math/primes/dr_algebra.py": {
   "msg": "",
-  "secs": 0.1,
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/primes/ending_vs_root_supplied_audit_2026_10_04.py": {
+  "msg": "",
+  "secs": 1.0,
   "status": "PASS"
  },
  "math/primes/field_simulation.py": {
   "msg": "",
   "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/primes/green_tao_supplied_audit_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.4,
   "status": "PASS"
  },
  "math/primes/main.py": {
@@ -154,19 +444,54 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/primes/prime_digital_root_supplied_audit_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.8,
+  "status": "PASS"
+ },
+ "math/primes/prime_engine.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/primes/prime_lanes_6k_audit_2026_10_03.py": {
+  "msg": "",
+  "secs": 7.0,
+  "status": "PASS"
+ },
+ "math/primes/prime_root_mirror_53_supplied_audit_2026_10_04.py": {
+  "msg": "",
+  "secs": 1.7,
+  "status": "PASS"
+ },
  "math/primes/repunit_sequence.py": {
   "msg": "",
   "secs": 0.2,
   "status": "PASS"
  },
+ "math/primes/rsa_block_rotation_supplied_audit_2026_10_04.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
  "math/primes/rule30_scope.py": {
   "msg": "",
-  "secs": 2.6,
+  "secs": 1.5,
   "status": "PASS"
  },
  "math/primes/run_experiments.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/primes/singular_series_supplied_audit_2026_10_03.py": {
+  "msg": "",
+  "secs": 4.1,
+  "status": "PASS"
+ },
+ "math/primes/test_prime_engine.py": {
+  "msg": "",
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/primes/ulam_spiral.py": {
@@ -176,7 +501,7 @@
  },
  "math/primes/verify_dr9_termination.py": {
   "msg": "",
-  "secs": 0.1,
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/primes/verify_local_confluence.py": {
@@ -199,14 +524,14 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/lemmas/abcabc_mod37_orbit.py": {
+ "math/theorems/adjacent_pair_sum_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/affine_causal_processes_gf37.py": {
   "msg": "",
-  "secs": 1.0,
+  "secs": 0.6,
   "status": "PASS"
  },
  "math/theorems/affine_fixed_point_gf37.py": {
@@ -229,12 +554,92 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/allpaths_module2_seed.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/alpha_137_dr_extension.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/alpha_prime_inference_layer.py": {
+  "msg": "ModuleNotFoundError: No module named 'torch'",
+  "secs": 0.0,
+  "status": "ERROR"
+ },
  "math/theorems/alternating_12_structures.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/ap_147_step20_audit.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/apple_energy_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/arithmetic_progression_37field.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/arithmetic_sequence_1111.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/audit_e8_special_primes_twin_centers.py": {
+  "msg": "",
+  "secs": 0.8,
+  "status": "PASS"
+ },
+ "math/theorems/audit_leibniz_row37.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/audit_mixture_total_correlation.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/automorphic_orbit_ntt_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/base_recurrence_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/basin_sum_wraparound_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/bfs_attractor_mod9.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/bio_bridge_scaling_invariance.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/bio_harmonic_desync.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/bivariate_grid_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -249,9 +654,29 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/calign_definition_audit.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/calign_derivation_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/carmichael_37_structure.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/carmichael_dr_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/carmichael_wheel_tier_audit.py": {
+  "msg": "",
+  "secs": 7.6,
   "status": "PASS"
  },
  "math/theorems/cascade_8_13_24.py": {
@@ -259,14 +684,79 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/cascade_constants_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/cascade_dr_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/casting_out_tens_drain_system.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/celestial_stages8_10.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/chi3_twin_prime_character.py": {
   "msg": "",
-  "secs": 0.2,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/cipher_123_1234.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/cipher_42128_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/circulant_avg_37.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/claim_verification_audit.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/theorems/clifford_fibration_audit.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/closed_form_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/closing_threads.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/collatz_mod37_basin.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/collatz_v2_equidistribution.py": {
+  "msg": "",
+  "secs": 0.8,
+  "status": "PASS"
+ },
+ "math/theorems/collision_node_20979.py": {
+  "msg": "",
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/column_cross_pairing.py": {
@@ -289,9 +779,14 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/connection_7518.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
  "math/theorems/connection_map.py": {
   "msg": "",
-  "secs": 0.1,
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/consecutive_digit_triples.py": {
@@ -301,12 +796,37 @@
  },
  "math/theorems/constants_gf37_decimal.py": {
   "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/continued_fraction_R3252.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/continued_fractions_audit.py": {
+  "msg": "",
   "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/theorems/cooley_tukey_ntt_audit.py": {
+  "msg": "",
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/coset_step_alignment.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/criss_cross_17_81_audit.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/cryo_em_hopf_lift_audit.py": {
+  "msg": "",
+  "secs": 0.7,
   "status": "PASS"
  },
  "math/theorems/cubic_residue_cycle_structure.py": {
@@ -319,6 +839,11 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/cunningham_modulus_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/cycle_partition_37.py": {
   "msg": "",
   "secs": 0.0,
@@ -327,6 +852,11 @@
  "math/theorems/cycle_symmetry_maps.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/cyclic_142857.py": {
+  "msg": "",
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/cyclic_142857_decimal_gf37.py": {
@@ -344,9 +874,19 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/cylicamp_master.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
  "math/theorems/dark_sector_algebra.py": {
   "msg": "",
-  "secs": 0.4,
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/decimal_trade_extraction.py": {
+  "msg": "",
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/decimal_trinity.py": {
@@ -354,7 +894,37 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/decomposition_audit.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/theorems/dedup_sweep_2026_10_09_full_corpus.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/dedup_t299_quotient_check.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/delta27_heisenberg_neutrino.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/descent_191_100_audit.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
  "math/theorems/dhananjaya_prana_engine.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/diff_interleave_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -364,9 +934,19 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/digit_cycles_1_9.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
  "math/theorems/digit_extension_operator_gf37.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/digit_repetition_dr_audit.py": {
+  "msg": "",
+  "secs": 0.4,
   "status": "PASS"
  },
  "math/theorems/digit_rotation_patterns.py": {
@@ -379,6 +959,21 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/digits_137_and_7.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/digits_137_running_sum.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/dim6_kernel_role_audit.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
  "math/theorems/dimensional_bridge.py": {
   "msg": "",
   "secs": 0.0,
@@ -389,7 +984,57 @@
   "secs": 0.2,
   "status": "PASS"
  },
+ "math/theorems/displacement_sync_13699631.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/division_582739_937285_audit.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/divisor_prefix_ledger.py": {
+  "msg": "",
+  "secs": 45.0,
+  "status": "PASS"
+ },
  "math/theorems/divisor_strings.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/doubling_cycle_loop_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/doubling_cycle_matrix_audit.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/theorems/doubling_dr_cycle_audit.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/doubling_mirror_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/dr5_mod37_ap_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/dr6_tensor_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/dr_369_closure_mirror_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -401,7 +1046,7 @@
  },
  "math/theorems/dr_algebra.py": {
   "msg": "",
-  "secs": 0.2,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/dr_chain_52_25_41.py": {
@@ -409,9 +1054,49 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/dr_fingerprint_scraper.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/theorems/dr_fixed_point_mod9.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/dr_grid_orbit.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/dr_matrix_9x9_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/dr_matrix_v2_snf_audit.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/dr_matrix_v3_snf_audit.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/dr_modular_foundation.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/dr_number_theory_module.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/dr_pattern_suite.py": {
+  "msg": "",
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/dr_ring_homomorphism_emirp_palindrome.py": {
@@ -429,9 +1114,39 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/ds_congruence_mod9.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/e8_cartan_audit.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/e8_coset_incidence.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/e8_framework_glossary.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/eighteen_ways_to_nine.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/eisenstein_chi_m3_connection.py": {
   "msg": "",
   "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/theorems/eisenstein_primes.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/eleven_123_family.py": {
@@ -444,9 +1159,19 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/embedding_phase_orbit_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/emirp_dr_c0_eisenstein.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/emirp_k_mod37.py": {
+  "msg": "",
+  "secs": 0.5,
   "status": "PASS"
  },
  "math/theorems/emirp_mod37_nonuniformity.py": {
@@ -459,7 +1184,22 @@
   "secs": 0.2,
   "status": "PASS"
  },
+ "math/theorems/eml_branch_cut_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/eml_operator.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/equivalence_24_coupling.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/erdos_primitive_set_bound.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -479,12 +1219,97 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/euler_quadratic_twin_audit.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/eval_harness_proposal_audit_2026_10_02.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/excel_structure_connection.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/theorems/f26_anchor_target_architecture.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/f26_binary_classifier.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/f26_dr3_anchors_mod37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/f26_fixed_point_mod37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/f26_order3_cycles_mod37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/f26_pillar_verification.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/f26_pillars_jacobian.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/f26_qr_closure_mod37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/f37_hexagonal_decomposition_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/f37_subgroup_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/f37_subgroup_structure_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/fibonacci_dr_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/fibonacci_dr_chain_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/fibonacci_grid_four_readings.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/fibonacci_mathieu_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/field_55_mirror_structure.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -496,10 +1321,20 @@
  },
  "math/theorems/fixed_line_3cycle_gf37.py": {
   "msg": "",
-  "secs": 1.5,
+  "secs": 1.2,
   "status": "PASS"
  },
  "math/theorems/fixed_point_physics_math.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/flanking_palindrome_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/fold_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -514,7 +1349,42 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/four_digit_paths_supplied_audit_2026_10_04.py": {
+  "msg": "",
+  "secs": 1.5,
+  "status": "PASS"
+ },
+ "math/theorems/four_value_signature_audit.py": {
+  "msg": "",
+  "secs": 0.5,
+  "status": "PASS"
+ },
  "math/theorems/fps37_scanner.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/fractal_grid_parity_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/fraction_103_137.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/fraction_1111_12800_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/freq_37field_555_2220.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/frequency_888_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -522,6 +1392,16 @@
  "math/theorems/fvk_gamma_extension.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/g54_character_theory_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/g5_engine.py": {
+  "msg": "",
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/gamma_22_inverse_seed_gf37.py": {
@@ -561,12 +1441,42 @@
  },
  "math/theorems/goldbach_proof_attempt_gf37.py": {
   "msg": "",
-  "secs": 19.9,
+  "secs": 13.6,
+  "status": "PASS"
+ },
+ "math/theorems/golden_mean_fibonacci_audit.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/golden_path_sequence.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/goldilocks_prime.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/graham_rearrangement_audit_2026_10_02.py": {
+  "msg": "",
+  "secs": 0.9,
+  "status": "PASS"
+ },
+ "math/theorems/grid81_operators_applied.py": {
+  "msg": "",
+  "secs": 0.5,
+  "status": "PASS"
+ },
+ "math/theorems/grid_column_sum_audit.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/group_G54_structure.py": {
+  "msg": "",
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/group_framework_primitives.py": {
@@ -576,7 +1486,7 @@
  },
  "math/theorems/group_g54_representation.py": {
   "msg": "",
-  "secs": 0.1,
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/growth_pattern_full_333.py": {
@@ -589,14 +1499,24 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/gue_r3_audit.py": {
+  "msg": "",
+  "secs": 0.7,
+  "status": "PASS"
+ },
+ "math/theorems/gue_riemann_zeros_audit.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
  "math/theorems/hanlon_decomposition_gf37.py": {
   "msg": "",
   "secs": 0.5,
   "status": "PASS"
  },
- "math/lemmas/heartbeat_3cycle.py": {
+ "math/theorems/harmonic_prime_matrix_audit.py": {
   "msg": "",
-  "secs": 0.0,
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/heartbeat_6step_chambers.py": {
@@ -606,7 +1526,12 @@
  },
  "math/theorems/hejhal_maass_level1.py": {
   "msg": "",
-  "secs": 51.4,
+  "secs": 38.9,
+  "status": "PASS"
+ },
+ "math/theorems/hexacosichoron_600cell.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/holographic_manifold_gf37.py": {
@@ -614,7 +1539,17 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/hopf_stage6_human_scale.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
  "math/theorems/hose_flow_transient.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/hybrid_recurrence_16_96_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -629,9 +1564,99 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/index13_resonance_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/intersection_cycle_theorem.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/joy_framework_v25_2_audit.py": {
+  "msg": "  9999   mod 11  = 0   (stated 9;  9999 = 9\u00d711\u00d7101)",
+  "secs": 0.0,
+  "status": "ERROR"
+ },
+ "math/theorems/joy_lob_45_6_correction_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/k5_odd_p3_coverage_hole_close_2026_10_06.py": {
+  "msg": "",
+  "secs": 18.4,
+  "status": "PASS"
+ },
+ "math/theorems/k5_odd_shapes.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/theorems/k5_shape_c_general_search_2026_10_06.py": {
+  "msg": "",
+  "secs": 76.2,
+  "status": "PASS"
+ },
+ "math/theorems/k5_shape_c_q3.py": {
+  "msg": "",
+  "secs": 3.0,
+  "status": "PASS"
+ },
+ "math/theorems/k7_even_complete.py": {
+  "msg": "",
+  "secs": 3.1,
+  "status": "PASS"
+ },
+ "math/theorems/k7_odd_reduction.py": {
+  "msg": "",
+  "secs": 62.6,
+  "status": "PASS"
+ },
+ "math/theorems/k8_case_b_complete.py": {
+  "msg": "",
+  "secs": 5.2,
+  "status": "PASS"
+ },
+ "math/theorems/k8_case_b_last_six.py": {
+  "msg": "",
+  "secs": 1.4,
+  "status": "PASS"
+ },
+ "math/theorems/k8_case_b_shape_mod8.py": {
+  "msg": "",
+  "secs": 0.5,
+  "status": "PASS"
+ },
+ "math/theorems/kalman_f26_closed_loop.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/kaprekar_2481_1572_3693.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/kaprekar_6174.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/theorems/kepler_symplectic_audit.py": {
+  "msg": "",
+  "secs": 1.5,
+  "status": "PASS"
+ },
+ "math/theorems/kernel5_construction_audit.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/kernel5_generators_audit.py": {
+  "msg": "",
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/kervaire_addend_chain_gf37.py": {
@@ -646,7 +1671,37 @@
  },
  "math/theorems/kinematic_focal_zoom.py": {
   "msg": "",
-  "secs": 13.0,
+  "secs": 8.6,
+  "status": "PASS"
+ },
+ "math/theorems/klein4_z2_orbit_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/korselt_proof_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/kyber_ntt_coset_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/kyber_ring_mlkem_audit.py": {
+  "msg": "",
+  "secs": 3.2,
+  "status": "PASS"
+ },
+ "math/theorems/ladder_11_111.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/landauer_institutional_audit_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/lane_generator_246_gf37.py": {
@@ -659,9 +1714,59 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/law_of_12_period_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/layer24_error_corrections_audit.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/layer30_dr_matrix_entropy.py": {
+  "msg": "",
+  "secs": 0.9,
+  "status": "PASS"
+ },
  "math/theorems/layer30_sovereign_matrix_entropy.py": {
   "msg": "",
-  "secs": 1.1,
+  "secs": 0.9,
+  "status": "PASS"
+ },
+ "math/theorems/layer54_lucas_period24.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/layer56_period_minimality_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/layer58_pisano_period9.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/layer59_fib_oscillation_mtheory.py": {
+  "msg": "",
+  "secs": 2.4,
+  "status": "PASS"
+ },
+ "math/theorems/layer62_lucas_period_mod9.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/layer64_fib_lucas_comparison.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/layer_trinity_factor_lattice.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/lcm_convergence_dr_cycle.py": {
@@ -669,9 +1774,29 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/left_anchor_and_four_panel_shapes_supplied_audit_2026_10_04.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/leveling_ulam_audit.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
  "math/theorems/lights_out_gf2_gf37.py": {
   "msg": "",
   "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/linear_form_11n_37m_primes.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/liouville_parity_audit.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/lob_24c_errata.py": {
@@ -685,6 +1810,11 @@
   "status": "PASS"
  },
  "math/theorems/lob_26_collatz_f37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/lob_44_9_bilateral_369_lock.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -709,7 +1839,47 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/lob_88_g_ord18_cycle.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/lob_file_audit_recheck.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/lucas_abbc_chain.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/m14_scraper_engine.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/magic_1_palindrome_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/master_137.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/master_framework_audit.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/master_matrix_audit.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/master_record_dr_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -717,6 +1887,16 @@
  "math/theorems/matrix_config_ab_gf37.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/matrix_m_mod37_audit.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/mc_sensitivity_analyzer.py": {
+  "msg": "",
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/medusa_137_resonance.py": {
@@ -739,7 +1919,37 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/meromorphic_trajectory_map.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/mersenne_digit_boundary_analysis.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/mersenne_dr9_period6_theorem.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/mersenne_dr_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/mersenne_dr_boundary_53_54.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/mersenne_seam_kervaire_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/mirror_cycle_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -749,9 +1959,69 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/mirror_set_generator.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/mirror_table_mod37_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/mirror_triplet_cascade.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/mod37_qr_analysis.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/mod37_slot_audit.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/mod4_1_sequence_audit.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/mod9_11k_44k_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/mod9_grid_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/mod9_midpoint.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/modular_doubling_37_audit.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/mollified_orbit_engine.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/monomial_universe.py": {
+  "msg": "",
+  "secs": 1.4,
+  "status": "PASS"
+ },
+ "math/theorems/monomial_universe_audit_2026_10_02.py": {
+  "msg": "",
+  "secs": 1.8,
   "status": "PASS"
  },
  "math/theorems/monte_carlo_pi_gf37.py": {
@@ -761,10 +2031,45 @@
  },
  "math/theorems/monte_carlo_prime_streams.py": {
   "msg": "",
-  "secs": 1.2,
+  "secs": 0.9,
+  "status": "PASS"
+ },
+ "math/theorems/morowah_condition.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/mr_witness_audit_2026_10_02.py": {
+  "msg": "",
+  "secs": 0.8,
+  "status": "PASS"
+ },
+ "math/theorems/mult_by_2_orbit_audit.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/multi_layer_obstruction_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/multiplication_dr_chains_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/narcissistic_audit.py": {
+  "msg": "",
+  "secs": 21.9,
+  "status": "PASS"
+ },
+ "math/theorems/neural_ode_stage5_cells.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/next_term_sequences_index.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -779,7 +2084,22 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/node_verification_matrix_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/numpy_rank_audit.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
  "math/theorems/ocb_quantum_process_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/odd_perfect_zero_system.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -789,14 +2109,34 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/one_zeros_nine_pattern.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/open_closed_grid_theorem.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/open_flags_ledger_2026_10_05.py": {
+  "msg": "",
+  "secs": 7.1,
+  "status": "PASS"
+ },
+ "math/theorems/operator_system_audit_2026_09_30.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
  "math/theorems/orbit11_triple_convergence_458689_gf37.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/orbit_137_period333_audit.py": {
+  "msg": "",
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/orbit_connection_map.py": {
@@ -824,7 +2164,47 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/origami_fold_1_to_9.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/pair_addition_dr_switch.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/palindrome_1888081808881.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/palindrome_cipher_37R.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/palindrome_divisors_ord10_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/palindrome_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/parabolic_spear_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/parity_diamond_9x9.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/parity_proof_z2_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -844,7 +2224,17 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/pattern_verification_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/payload_digit_structure.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/pell_10101_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -854,7 +2244,22 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/percentage_matrix_node_progression_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/perceptual_hydrodynamics_v7.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
  "math/theorems/perfect_496_dr_structure.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/perfect_numbers_137.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -879,6 +2284,26 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/permutation_dr_99.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/pf_chain_plus9_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/phase_gap_correlation_audit.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/phenomenological_effective_model_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/phi12_cut_and_t33_gf37.py": {
   "msg": "",
   "secs": 0.0,
@@ -886,7 +2311,12 @@
  },
  "math/theorems/phi12_order_and_cut_string_link_gf37.py": {
   "msg": "",
-  "secs": 0.4,
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/phi_power_operator_precedence_audit.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/pie_sieve_gf37.py": {
@@ -895,6 +2325,16 @@
   "status": "PASS"
  },
  "math/theorems/pinn_rt_phase_field.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/pisano_period_333.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/pisot_sieve_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -924,9 +2364,39 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/primality_10343_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/prime_ap_imaginary_unit.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/prime_delta23_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/prime_dr_append_audit.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/prime_dr_append_layer3_audit.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/prime_dr_unification.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/prime_insertion_sequence_audit.py": {
+  "msg": "",
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/prime_power_sovereign_collapse.py": {
@@ -937,6 +2407,11 @@
  "math/theorems/prime_quartet_chains_palindromes.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/prime_sieve_dr_audit.py": {
+  "msg": "",
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/prime_streams_z9_gf37.py": {
@@ -954,6 +2429,21 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/primes_23_extended_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/primes_751_palindromes.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/primes_digits_23_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/primitive_root_invariants_gf37.py": {
   "msg": "",
   "secs": 0.0,
@@ -962,6 +2452,11 @@
  "math/theorems/primitive_root_test.py": {
   "msg": "",
   "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/primitive_roots_mod37.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/principle_1_substrate_principle.py": {
@@ -974,7 +2469,52 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/pseudoprime_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/psi_operator_audit.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/q6_v4_burnside_edge_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/q6_v4_spectral_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/qed_alpha_z\u03b1_structure.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/qr_qnr_partition_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/quadratic_classnum_audit.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/quadratic_regime_engine.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/quantum_bio_bridge_stage4.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/ramanujan_modular_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -986,7 +2526,12 @@
  },
  "math/theorems/ramanujan_tau_gf37.py": {
   "msg": "",
-  "secs": 24.2,
+  "secs": 16.5,
+  "status": "PASS"
+ },
+ "math/theorems/rank_elevation_audit.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/ratio_177_133_identity.py": {
@@ -996,7 +2541,7 @@
  },
  "math/theorems/reciprocal_quadrinomial_gfq2_pp.py": {
   "msg": "",
-  "secs": 0.1,
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/reciprocal_quadrinomial_pp_criterion.py": {
@@ -1005,6 +2550,26 @@
   "status": "PASS"
  },
  "math/theorems/repdigit_framework_lattice.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/repdigit_pf_page_2026_10_02.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/repdigit_pf_paths_supplied_audit_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/repdigit_product_sum_lines_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/repdigit_return_lines_2026_10_03.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -1019,6 +2584,11 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/repunit_prime_entry.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
  "math/theorems/repunit_sq_euler_phi_gf37.py": {
   "msg": "",
   "secs": 0.0,
@@ -1026,7 +2596,7 @@
  },
  "math/theorems/repunit_square_998001.py": {
   "msg": "",
-  "secs": 0.3,
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/resonance_row_1335.py": {
@@ -1046,15 +2616,40 @@
  },
  "math/theorems/reversal_sovereign_collapse.py": {
   "msg": "",
-  "secs": 0.2,
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/theorems/riemann_first_zero_141.py": {
+  "msg": "",
+  "secs": 0.4,
   "status": "PASS"
  },
  "math/theorems/riemann_gf37_coverage.py": {
   "msg": "",
-  "secs": 8.9,
+  "secs": 7.1,
   "status": "PASS"
  },
  "math/theorems/root_grid_dr6_dr7.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/rossler_attractor_audit.py": {
+  "msg": "",
+  "secs": 3.0,
+  "status": "PASS"
+ },
+ "math/theorems/rotation_alternative_123_231_321_and_357.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/rotation_shapes_new_stacks_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/rotational_spiral_analyzer.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -1069,9 +2664,19 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/run_all_math_tests.py": {
+  "msg": "exceeded 120s",
+  "secs": 120.0,
+  "status": "TIMEOUT"
+ },
  "math/theorems/sa_self_cycle_st_chain.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/scalar_triad_137_248_359.py": {
+  "msg": "",
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/scaling_sequences_gf37.py": {
@@ -1124,6 +2729,21 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/sequence_1111_cycle_1210.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/sequence_30303_doubling.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/sequence_permutation_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/sequential_morph_transform.py": {
   "msg": "",
   "secs": 0.0,
@@ -1141,7 +2761,7 @@
  },
  "math/theorems/shell_buckling_gf37.py": {
   "msg": "",
-  "secs": 1.9,
+  "secs": 1.2,
   "status": "PASS"
  },
  "math/theorems/shell_octave_identity_gf37.py": {
@@ -1159,14 +2779,24 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/lemmas/sigma3_eisenstein_gf37.py": {
+ "math/theorems/sieve_rank_audit.py": {
   "msg": "",
-  "secs": 0.0,
+  "secs": 0.1,
+  "status": "PASS"
+ },
+ "math/theorems/sigma2_divisibility_rust_audit_2026_10_02.py": {
+  "msg": "",
+  "secs": 4.4,
   "status": "PASS"
  },
  "math/theorems/sliding_window_9cycle_gf37.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/smith_normal_form_z26.py": {
+  "msg": "",
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/sofia_germain_prime_gf37.py": {
@@ -1175,6 +2805,11 @@
   "status": "PASS"
  },
  "math/theorems/sophie_germain_perfect_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/source_mirror_manifold_396.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -1192,6 +2827,11 @@
  "math/theorems/sovereign_fixed_point.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/sovereign_matrix_charpoly.py": {
+  "msg": "",
+  "secs": 0.6,
   "status": "PASS"
  },
  "math/theorems/sovereign_qr_closure.py": {
@@ -1214,17 +2854,87 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/theorems/stacked_zeros_gf37.py": {
+ "math/theorems/sphenic_191919919191_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/sphenic_happy_371113.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/split_regime_spectrum_supplied_audit_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/spoke_enumeration_ab_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/stack_count_digital_roots_supplied_audit_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.5,
+  "status": "PASS"
+ },
+ "math/theorems/stacked_zeros_gf37.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
  "math/theorems/stark_heegner_theorem.py": {
   "msg": "",
-  "secs": 0.4,
+  "secs": 0.3,
+  "status": "PASS"
+ },
+ "math/theorems/steiner_systems_framework.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/string_duality_37phi_bridge.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/structural_semantic_d_audit.py": {
+  "msg": "",
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/sylow_subgroup_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/symmetry_correction_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/t325_high_low_even_lock_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/t325_high_low_parity_split_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/t325_outer_step_mod5_2026_10_04.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/t325_uniformity_supplied_audit_2026_10_03.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/t325_workload_accelerator.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -1306,7 +3016,7 @@
  },
  "math/theorems/theorem_115_primitive_roots_difference_structure.py": {
   "msg": "",
-  "secs": 0.4,
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/theorem_116_multiplicative_orders_gf37.py": {
@@ -1321,7 +3031,7 @@
  },
  "math/theorems/theorem_118_coset_structure_gf37.py": {
   "msg": "",
-  "secs": 0.4,
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/theorem_119_rabinowitsch_class_numbers_gf37.py": {
@@ -1421,7 +3131,7 @@
  },
  "math/theorems/theorem_138_dr_law_orbit_multiplication.py": {
   "msg": "",
-  "secs": 0.0,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/theorem_139_gf7_gf37_structural_parallel.py": {
@@ -1456,7 +3166,7 @@
  },
  "math/theorems/theorem_145_six_seven_triangles_gf37.py": {
   "msg": "",
-  "secs": 0.0,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/theorem_146_look_and_say_142241_gf37.py": {
@@ -1476,7 +3186,7 @@
  },
  "math/theorems/theorem_149_kakeya_jacobian_dimension_gf37.py": {
   "msg": "",
-  "secs": 0.0,
+  "secs": 0.4,
   "status": "PASS"
  },
  "math/theorems/theorem_150_phi3_forcing_lucas_gf37.py": {
@@ -1551,7 +3261,7 @@
  },
  "math/theorems/theorem_164_hmod_operator_algebra.py": {
   "msg": "",
-  "secs": 0.1,
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/theorem_165_session_numbers_gf37.py": {
@@ -1676,7 +3386,7 @@
  },
  "math/theorems/theorem_189_three_zero_kdf_gf37.py": {
   "msg": "",
-  "secs": 0.2,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/theorem_190_mws_framework_integrity.py": {
@@ -1696,7 +3406,7 @@
  },
  "math/theorems/theorem_193_process_functions_zp.py": {
   "msg": "",
-  "secs": 4.5,
+  "secs": 3.4,
   "status": "PASS"
  },
  "math/theorems/theorem_194_mtls_ingestion_gf37.py": {
@@ -1846,7 +3556,7 @@
  },
  "math/theorems/theorem_223_orbit_partition_riemann_gf37.py": {
   "msg": "",
-  "secs": 2.1,
+  "secs": 1.6,
   "status": "PASS"
  },
  "math/theorems/theorem_224_d7_envelope_stability_gf37.py": {
@@ -1856,7 +3566,7 @@
  },
  "math/theorems/theorem_225_manifold_m_d7_consistency.py": {
   "msg": "",
-  "secs": 0.4,
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/theorem_226_cage_integrity_check.py": {
@@ -1891,7 +3601,7 @@
  },
  "math/theorems/theorem_232_f_hexad_mirror_differences.py": {
   "msg": "",
-  "secs": 0.8,
+  "secs": 0.6,
   "status": "PASS"
  },
  "math/theorems/theorem_233_rule_30.py": {
@@ -1906,13 +3616,13 @@
  },
  "math/theorems/theorem_235_rule30_open_problems_gf37.py": {
   "msg": "",
-  "secs": 8.5,
+  "secs": 5.4,
   "status": "PASS"
  },
  "math/theorems/theorem_236_rule30_block_universality_gf37.py": {
-  "msg": "exceeded 120s",
-  "secs": 120.1,
-  "status": "TIMEOUT"
+  "msg": "",
+  "secs": 81.3,
+  "status": "PASS"
  },
  "math/theorems/theorem_237_universal_scope_81_149.py": {
   "msg": "",
@@ -1920,18 +3630,18 @@
   "status": "PASS"
  },
  "math/theorems/theorem_238_rule30_complexity_gf37.py": {
-  "msg": "exceeded 120s",
-  "secs": 120.1,
-  "status": "TIMEOUT"
+  "msg": "",
+  "secs": 82.2,
+  "status": "PASS"
  },
  "math/theorems/theorem_239_rule30_autocorrelation_gf37.py": {
   "msg": "",
-  "secs": 4.2,
+  "secs": 2.0,
   "status": "PASS"
  },
  "math/theorems/theorem_240_rule30_path_to_problem2_gf37.py": {
   "msg": "",
-  "secs": 1.8,
+  "secs": 1.3,
   "status": "PASS"
  },
  "math/theorems/theorem_241_rule30_right_boundary_2adic_gf37.py": {
@@ -1941,7 +3651,7 @@
  },
  "math/theorems/theorem_242_rule30_left_vs_right_boundary_gf37.py": {
   "msg": "",
-  "secs": 0.4,
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/theorem_243_rule30_boundary_2adic_unified_gf37.py": {
@@ -1951,12 +3661,12 @@
  },
  "math/theorems/theorem_244_rule30_right_boundary_period_formula_gf37.py": {
   "msg": "",
-  "secs": 0.5,
+  "secs": 0.4,
   "status": "PASS"
  },
  "math/theorems/theorem_245_n130_divisor_square_sum_gf37.py": {
   "msg": "",
-  "secs": 35.3,
+  "secs": 24.4,
   "status": "PASS"
  },
  "math/theorems/theorem_246_n167_cas_ext_prime_gf37.py": {
@@ -1991,12 +3701,12 @@
  },
  "math/theorems/theorem_259_jc3_falsification.py": {
   "msg": "",
-  "secs": 40.1,
+  "secs": 33.1,
   "status": "PASS"
  },
  "math/theorems/theorem_262_e8_theta_mod37.py": {
   "msg": "",
-  "secs": 0.6,
+  "secs": 0.4,
   "status": "PASS"
  },
  "math/theorems/theorem_286_subgroup_lattice_z12_gf37.py": {
@@ -2056,7 +3766,7 @@
  },
  "math/theorems/theorem_297_block_separation.py": {
   "msg": "",
-  "secs": 1.9,
+  "secs": 1.3,
   "status": "PASS"
  },
  "math/theorems/theorem_298_j1728_gaussian_cm.py": {
@@ -2071,12 +3781,12 @@
  },
  "math/theorems/theorem_300_what_is_special_about_37.py": {
   "msg": "",
-  "secs": 1.1,
+  "secs": 0.7,
   "status": "PASS"
  },
  "math/theorems/theorem_301_cyclotomic_slot_table.py": {
   "msg": "",
-  "secs": 4.7,
+  "secs": 3.8,
   "status": "PASS"
  },
  "math/theorems/theorem_302_137map_is_decimal_shift.py": {
@@ -2091,12 +3801,12 @@
  },
  "math/theorems/theorem_304_three_lists_meet_at_37.py": {
   "msg": "",
-  "secs": 1.2,
+  "secs": 0.9,
   "status": "PASS"
  },
  "math/theorems/theorem_305_claim_strength_cuts.py": {
   "msg": "",
-  "secs": 0.8,
+  "secs": 0.7,
   "status": "PASS"
  },
  "math/theorems/theorem_306_discrete_rope_circle_gf37.py": {
@@ -2106,7 +3816,7 @@
  },
  "math/theorems/theorem_307_seed_orbit_residue_breakdown_gf37.py": {
   "msg": "",
-  "secs": 98.0,
+  "secs": 74.3,
   "status": "PASS"
  },
  "math/theorems/theorem_308_reversal_build_mod37_period_gf37.py": {
@@ -2119,22 +3829,12 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/lemmas/theorem_310_digit_chain_seam_gf37.py": {
-  "msg": "",
-  "secs": 0.0,
-  "status": "PASS"
- },
  "math/theorems/theorem_311_triad_lock_and_subgrid_map_gf37.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/theorem_312_repdigit_chain_complete_gf37.py": {
-  "msg": "",
-  "secs": 0.0,
-  "status": "PASS"
- },
- "math/lemmas/theorem_313_add_nine_reversal_diagonal_gf37.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -2251,12 +3951,12 @@
  },
  "math/theorems/theorem_336_twin_prime_orbit_alignment_null_gf37.py": {
   "msg": "",
-  "secs": 0.6,
+  "secs": 0.4,
   "status": "PASS"
  },
  "math/theorems/theorem_337_sophie_germain_map_gf37.py": {
   "msg": "",
-  "secs": 0.6,
+  "secs": 0.5,
   "status": "PASS"
  },
  "math/theorems/theorem_338_sg_137_generate_agl_gf37.py": {
@@ -2296,7 +3996,7 @@
  },
  "math/theorems/theorem_345_twin_midpoint_forbidden_gf37.py": {
   "msg": "",
-  "secs": 0.5,
+  "secs": 0.4,
   "status": "PASS"
  },
  "math/theorems/theorem_346_collatz_137_proper_subgroup_gf37.py": {
@@ -2306,7 +4006,7 @@
  },
  "math/theorems/theorem_347_prime_gap_chi_baselines_gf37.py": {
   "msg": "",
-  "secs": 1.0,
+  "secs": 0.6,
   "status": "PASS"
  },
  "math/theorems/theorem_348_cycle_495_c9_gf37.py": {
@@ -2316,7 +4016,7 @@
  },
  "math/theorems/theorem_349_cubic_map_conjugacy_gf37.py": {
   "msg": "",
-  "secs": 0.4,
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/theorem_350_kaprekar_rotation_decomposition_gf37.py": {
@@ -2331,7 +4031,7 @@
  },
  "math/theorems/theorem_352_why_37_uniqueness_gf37.py": {
   "msg": "",
-  "secs": 7.2,
+  "secs": 4.6,
   "status": "PASS"
  },
  "math/theorems/theorem_353_fa_trajectory_correction_gf37.py": {
@@ -2371,22 +4071,22 @@
  },
  "math/theorems/theorem_360_count_sum_operator_base_generic.py": {
   "msg": "",
-  "secs": 3.1,
+  "secs": 2.4,
   "status": "PASS"
  },
  "math/theorems/theorem_361_index_shift_primes_composites.py": {
   "msg": "",
-  "secs": 10.9,
+  "secs": 8.4,
   "status": "PASS"
  },
  "math/theorems/theorem_362_prime_pair_baseline_2_over_35.py": {
   "msg": "",
-  "secs": 0.8,
+  "secs": 0.5,
   "status": "PASS"
  },
  "math/theorems/theorem_363_ac_lead_oscillates_quadratic_census.py": {
   "msg": "",
-  "secs": 5.2,
+  "secs": 3.6,
   "status": "PASS"
  },
  "math/theorems/theorem_364_complement_involution_3663.py": {
@@ -2396,12 +4096,12 @@
  },
  "math/theorems/theorem_365_37_first_irregular_prime.py": {
   "msg": "",
-  "secs": 0.4,
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/theorem_366_cyclotomic_membership_is_vacuous.py": {
   "msg": "",
-  "secs": 0.8,
+  "secs": 0.7,
   "status": "PASS"
  },
  "math/theorems/theorem_367_1311_rotation_areas.py": {
@@ -2421,7 +4121,7 @@
  },
  "math/theorems/theorem_370_gauge_holonomy_gf37.py": {
   "msg": "",
-  "secs": 0.1,
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/theorem_371_12321_rotation_reversal_d5.py": {
@@ -2440,9 +4140,9 @@
   "status": "PASS"
  },
  "math/theorems/theorem_374_rule30_normality_gf37.py": {
-  "msg": "exceeded 120s",
-  "secs": 120.1,
-  "status": "TIMEOUT"
+  "msg": "",
+  "secs": 77.2,
+  "status": "PASS"
  },
  "math/theorems/theorem_375_n23456789_pandigital_prime_gf37.py": {
   "msg": "",
@@ -2451,7 +4151,7 @@
  },
  "math/theorems/theorem_379_shell_riemann_exact_error.py": {
   "msg": "",
-  "secs": 0.8,
+  "secs": 0.7,
   "status": "PASS"
  },
  "math/theorems/theorem_380_birthday_253_over_365_vs_ln2.py": {
@@ -2461,12 +4161,12 @@
  },
  "math/theorems/theorem_381_napkin_ring_volume_invariance.py": {
   "msg": "",
-  "secs": 0.7,
+  "secs": 0.6,
   "status": "PASS"
  },
  "math/theorems/theorem_422_lo_shu_dr9_antidiagonal_cycle_gf37.py": {
   "msg": "",
-  "secs": 0.7,
+  "secs": 0.6,
   "status": "PASS"
  },
  "math/theorems/theorem_423_data_pipeline_correspondence_grade_gf37.py": {
@@ -2491,12 +4191,12 @@
  },
  "math/theorems/theorem_427_7n_plus_1_map_gf37.py": {
   "msg": "",
-  "secs": 0.2,
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/theorem_428_parity_word_determinant_sieve.py": {
   "msg": "",
-  "secs": 2.7,
+  "secs": 1.7,
   "status": "PASS"
  },
  "math/theorems/theorem_429_transversal_triple_partitions_gf37.py": {
@@ -2509,9 +4209,39 @@
   "secs": 0.2,
   "status": "PASS"
  },
+ "math/theorems/theorem_431_factorial_square_residue_handoff_gf37.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/theorem_432_carry_map_digital_root_rings_gf37.py": {
+  "msg": "",
+  "secs": 0.6,
+  "status": "PASS"
+ },
+ "math/theorems/theorem_433_orbit_structure_closure_gf37.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/theorem_434_fermat_little_theorem_gf37.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
  "math/theorems/theorem_58_sector_axiom_completion.py": {
   "msg": "",
   "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/theorem_infinite_666_resonances.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/thread2_collatz_twin_centres.py": {
+  "msg": "",
+  "secs": 1.0,
   "status": "PASS"
  },
  "math/theorems/thread_session_connections.py": {
@@ -2529,6 +4259,16 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/tier_ds_18k_distribution.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/todd_coxeter_c2c3_audit.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
  "math/theorems/toroidal_projection.py": {
   "msg": "",
   "secs": 0.0,
@@ -2536,10 +4276,20 @@
  },
  "math/theorems/torus_animation_137map.py": {
   "msg": "",
-  "secs": 14.1,
+  "secs": 10.6,
+  "status": "PASS"
+ },
+ "math/theorems/triad_33_137_139_audit.py": {
+  "msg": "",
+  "secs": 0.3,
   "status": "PASS"
  },
  "math/theorems/triadic_seed_mu3_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/triangular_partition_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -2609,9 +4359,9 @@
   "secs": 0.0,
   "status": "PASS"
  },
- "math/lemmas/twin_prime_dr_pair.py": {
+ "math/theorems/twin_prime_dr_sum_audit.py": {
   "msg": "",
-  "secs": 1.6,
+  "secs": 0.0,
   "status": "PASS"
  },
  "math/theorems/twin_prime_gf37.py": {
@@ -2619,9 +4369,19 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/twin_prime_hl_audit.py": {
+  "msg": "",
+  "secs": 0.1,
+  "status": "PASS"
+ },
  "math/theorems/twin_prime_lattice_patches.py": {
   "msg": "",
   "secs": 0.2,
+  "status": "PASS"
+ },
+ "math/theorems/twin_prime_markov_audit.py": {
+  "msg": "",
+  "secs": 0.1,
   "status": "PASS"
  },
  "math/theorems/twin_prime_pipe.py": {
@@ -2636,7 +4396,7 @@
  },
  "math/theorems/twin_prime_riemann_framework.py": {
   "msg": "",
-  "secs": 0.3,
+  "secs": 0.2,
   "status": "PASS"
  },
  "math/theorems/twin_prime_structure.py": {
@@ -2656,7 +4416,12 @@
  },
  "math/theorems/ulam_diagonal_b4k2_gf37.py": {
   "msg": "",
-  "secs": 1.3,
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/ulam_quadratic_k5000_audit.py": {
+  "msg": "",
+  "secs": 0.4,
   "status": "PASS"
  },
  "math/theorems/unified_field_architecture.py": {
@@ -2664,7 +4429,37 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/uniform_grid_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/unit_scalar_init_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/universal_grip_supplied_audit_2026_10_04.py": {
+  "msg": "",
+  "secs": 0.4,
+  "status": "PASS"
+ },
+ "math/theorems/uri_framework_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/v4_orbit_kyber_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/v600_extract_audit.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/v600_programme.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -2684,12 +4479,27 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/vireon_stage7_planetary.py": {
+  "msg": "",
+  "secs": 0.2,
+  "status": "PASS"
+ },
  "math/theorems/visualize_gf37.py": {
   "msg": "",
-  "secs": 1.8,
+  "secs": 1.7,
   "status": "PASS"
  },
  "math/theorems/wallis_product_gf37.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/word_values.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/xdiamond_100x100_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -2699,7 +4509,32 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/z2701_37x73_qed.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/theorems/zeno_spatial_scaling.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/zero_comma_complete_theorem.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/zero_comma_label_system.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/zero_comma_label_v2.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
+ "math/theorems/zero_fill_bridge_audit.py": {
   "msg": "",
   "secs": 0.0,
   "status": "PASS"
@@ -2709,9 +4544,14 @@
   "secs": 0.0,
   "status": "PASS"
  },
+ "math/theorems/zero_space_stages1_3.py": {
+  "msg": "",
+  "secs": 0.0,
+  "status": "PASS"
+ },
  "math/turbulence/filter_scale_flux_sign.py": {
   "msg": "",
-  "secs": 0.6,
+  "secs": 0.5,
   "status": "PASS"
  }
 }
