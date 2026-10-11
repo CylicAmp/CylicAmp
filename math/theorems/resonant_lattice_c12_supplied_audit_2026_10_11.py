@@ -96,6 +96,36 @@ are listed and asserted here (POINTS).
       fact of the graph with its cyclic order; 43, 25 and 73 are facts of
       particular coordinates.
 
+=== COMPLETENESS PASS (every other mathematical claim in the paste) ===
+
+  Hold:
+    * integer coordinates; B_i mirrors A_i across y = 0; midpoints on y = 0;
+      vertical centreline x = 5.
+    * offsets mod 12 are {1,2,3,6,9,10,11}, seven distinct; the union over
+      d generates 48 pairs, of which 6 are duplicates, all from d = 6;
+      |E| = 12*7/2 = 42.
+    * the six antipodal lines A_i B_(5-i) are distinct (slopes -3, -1, -3/5,
+      3/5, 1, 3; none parallel).
+    * the supplied closed forms for t and u solve P + t(Q-P) = R + u(S-R).
+    * all 25 points are rational: 5 lattice points, all on y = 0; the other
+      20 have denominators 3, 5 or 7.
+  Does not match as worded:
+    * "a vertical concurrency axis" (introduction; section 4 is titled "Test
+      the concurrency axis"). The three concurrency points (2,0), (5,0),
+      (8,0) lie on the HORIZONTAL line y = 0, parallel to the two rows and
+      midway between them; the vertical line x = 5 carries only (5,0).
+      Section 5 itself says "on the horizontal axis". Whether this meets
+      Axiom 9 depends on that axiom's text, which is not available.
+  Undecidable:
+    * the region table: every cell arrived empty. Its labels list
+      "Far upper-right" and "Far lower-right" with no far-left rows, while
+      the point set is left-right symmetric (12 points each side of x = 5,
+      5 in each open quadrant, 5 on y = 0).
+
+  A second, independent round of the eight refutation checks (same
+  findings, fresh code) returned the same verdicts: five stand, the same
+  three refuted on wording.
+
 === CORRECTIONS (status history) ===
 
   First version, commit 9aef035 (2026-10-11). Eight independent agents, each
@@ -400,6 +430,22 @@ Xr = crossings(reg, sign=lambda z: z.sign())
 assert sum(map(len, Xr.values())) == 111 and len(Xr) == 73
 assert max(map(len, Xr.values())) == 15 and len(Xr[(Q3(0), Q3(0))]) == 15
 assert Counter(map(len, Xr.values())) == {1: 60, 3: 12, 15: 1}
+
+# --- completeness pass ---
+assert sorted({(s * d) % 12 for d in (1, 2, 3, 6) for s in (1, -1)}) == [1, 2, 3, 6, 9, 10, 11]
+gen = [tuple(sorted((i, (i + d) % 12))) for i in range(12) for d in (1, 2, 3, 6)]
+assert len(gen) == 48 and len(gen) - len(set(gen)) == 6
+assert {g for g, k in Counter(gen).items() if k == 2} == {(i, i + 6) for i in range(6)}
+assert all(k <= 2 for k in Counter(gen).values())
+slopes = sorted(F(-6, (10 - 2 * i) - 2 * i) for i in range(6))
+assert slopes == [F(-3), F(-1), F(-3, 5), F(3, 5), F(1), F(3)]
+assert sorted(p for p in POINTS if p[0].denominator == p[1].denominator == 1) == \
+    [(1, 0), (2, 0), (5, 0), (8, 0), (9, 0)]
+assert {max(p[0].denominator, p[1].denominator) for p in POINTS} == {1, 3, 5, 7}
+assert sum(p[0] < 5 for p in POINTS) == sum(p[0] > 5 for p in POINTS) == 12
+assert Counter((p[0] > 5, p[1] > 0) for p in POINTS if p[1] != 0) == \
+    {(False, False): 5, (False, True): 5, (True, False): 5, (True, True): 5}
+assert all(p[1] == 0 for p in mult)            # concurrency points line up on y = 0, not x = 5
 
 # --- standing framework run (recorded only) ---
 ORB = {"SA_ST_A": {9, 12, 16}, "D7": {7, 33, 34}, "CAS_EXT": {5, 13, 19},
