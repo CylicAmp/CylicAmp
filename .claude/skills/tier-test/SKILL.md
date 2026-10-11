@@ -40,6 +40,22 @@ rule once the axis is swept: the count of modular twist refinements is 1,
 3 or 4 according to whether n is odd, 2 mod 4, or 0 mod 4 — the 2-adic
 valuation, not the 8.
 
+Worked case, a drawn graph (2026-10-11,
+`resonant_lattice_c12_supplied_audit_2026_10_11.py`): crossing counts were
+reported for C_12(1,2,3,6) "on integer coordinates". A graph fixes which
+vertices are joined, not where edges cross, so the axis is the **embedding**.
+Re-placing the same 12 vertices in the same cyclic order:
+
+    supplied two-row grid      43 crossing pairs, 25 points, 15 pairs at one point
+    any convex position       111 pairs (chords cross iff endpoints interleave)
+    regular 12-gon            111 pairs, 73 points, 15 pairs at the centre
+    integer parabola (k,k^2)  111 pairs, 111 points, no concurrency
+
+Only 12 vertices, 42 edges and 7-regularity survive, so those are the graph
+facts and 43/25 belong to one placement. The 15-pair concurrency survives
+exactly when the placement is centrally symmetric with the offset-6
+matching — that is its mechanism, found by the sweep rather than by looking.
+
 If you cannot name the axis, you cannot tier the result. Say "not assessed"
 rather than assigning a tier by inspection.
 

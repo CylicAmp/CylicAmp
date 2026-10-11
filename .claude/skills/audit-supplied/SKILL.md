@@ -64,6 +64,21 @@ with no definition. It is the difference list of 147, 167, 187, 107, 127, 147
 -- hundreds digit held at 1, tens digit taken mod 10; the -80 is the wrap
 8 -> 0 (+20 - 100). Asserted, not described.
 
+## 4b. Count what the code throws away
+
+Matching output is not the end of reproduction. Read every `continue`,
+`return None` and strict inequality in the supplied code and count the cases
+it discards. A filter can hide the defect the output depends on.
+
+Example (2026-10-11, `math/theorems/resonant_lattice_c12_supplied_audit_2026_10_11.py`):
+a crossing count for C_12(1,2,3,6) drawn on two rows reproduced exactly (43
+pairs, 25 points). Its `den == 0` clause skipped 66 pairs of edges that lie
+on the same row line and overlap, and its strict `0 < t, u` test skipped 20
+cases of an edge running through a vertex it does not end at (A0-A3 through
+A1 and A2). 24 of the 42 edges could never cross anything, and the figure is
+not a valid straight-line drawing. None of this showed in the printed
+numbers.
+
 ## 5. Report in this order
 
 1. what reproduces — all of it, explicitly
