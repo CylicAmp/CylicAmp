@@ -32,44 +32,84 @@ are listed and asserted here (POINTS).
        placement compatible with the matching (the regular 12-gon also has
        15 pairs at its centre) and vanishes without that symmetry (C3).
   F-b  12 / 42 / 7-regular are the definition of C_12(1,2,3,6).
+  F-c  The order-4 symmetry (W2). The 12 points fill a 6 x 2 grid in the
+       non-square rectangle [0,10] x [-3,3], whose isometry group has order
+       4 (all 4 found by exact search, no more). In index terms the maps are
+       i -> 5-i, i -> 11-i, i -> i+6 -- dihedral maps of Z/12, which preserve
+       every circulant graph. Checked for all 63 connection sets
+       S in {1..6}: the symmetry does not depend on {1,2,3,6}.
 
 === 3. WHAT DOES NOT HOLD AS STATED ===
 
-  W1  "The three points on [the axis] are their own reflections." The
-      reflection named in section 1 is about the horizontal axis y = 0.
-      Five crossing points lie on it: (1,0), (2,0), (5,0), (8,0), (9,0).
-      On the vertical line x = 5 there is one, (5,0). Three fits neither.
-      (The axis symbol was lost in transit; both readings are checked.)
+  W1  "The set is symmetric about [blank] ... The three points on [blank]
+      are their own reflections." The axis symbol was lost in transit, and
+      two readings remain:
+        - over the whole 25-point set (which is what "the set" in that
+          sentence refers to): five points lie on y = 0, (1,0), (2,0),
+          (5,0), (8,0), (9,0); one lies on x = 5. Three fits neither; the
+          sentence omits (1,0) and (9,0).
+        - over the points where more than one pair crosses: exactly three,
+          (2,0), (5,0), (8,0), all on y = 0 -- matching section 5's "six-line
+          central concurrency; two additional triple-crossing centers on the
+          horizontal axis". On this reading "three" is right.
+      The text does not settle which was meant.
   W2  "bilateral reflection symmetry" undercounts. The drawing -- edges and
       coordinates together -- is invariant under a group of order 4:
       x -> 10-x (index map i -> 5-i), y -> -y (i -> 11-i), and their
-      product, the point reflection through (5,0) (i -> i+6). All three are
-      automorphisms of C_12(1,2,3,6) realised geometrically. The 25 points
-      are invariant under all four.
+      product, the point reflection through (5,0) (i -> i+6). The 25 points
+      are invariant under all four. Forced: see F-c.
   W3  Not checked in the paste: the drawing is DEGENERATE. 24 of the 42
-      edges lie on the two row lines y = +-3. Of those, 20 (edge, vertex)
-      pairs have a vertex strictly inside an edge it does not end at
-      (A0-A3 passes through A1 and A2), and 66 edge pairs are collinear and
-      overlap along a segment. The supplied code skips them without a word:
-      `den == 0` drops collinear pairs, and the strict 0 < t, u test drops
-      an edge meeting a vertex. So only the 18 edges joining the two rows
-      can cross, and 43 counts crossings of a figure that is not a valid
-      straight-line drawing of the graph -- in it, A0-A3 cannot be told apart
-      from the path A0-A1-A2-A3.
+      edges lie on the two row lines y = +-3. There are 20 (edge, vertex)
+      pairs with a vertex strictly inside an edge it does not end at
+      (A0-A3 passes through A1 and A2), and 66 edge pairs that are
+      collinear and overlap along a segment. The supplied code skips all of
+      it without a word, by three different branches: of the 66
+      overlapping pairs, 40 share an endpoint (shared-vertex check) and 26
+      reach `den == 0`; the 48 (row edge, cross-row edge) pairs that meet
+      at a vertex inside the row edge fail the strict range test, 24 at
+      u = 0 and 24 at t = 1. So only the 18 edges joining the two rows can
+      cross (16 do; A0-B0 and A5-B5 cross nothing), and 43 counts crossings
+      of a figure that is not a valid straight-line drawing of the graph --
+      in it, A0-A3 cannot be told apart from the path A0-A1-A2-A3.
 
 === 4. WHAT STANDS, AND ITS GRADE ===
 
   C1  43 = the number of strict inversions among the 18 cross-row edges
       written as (x on top, x on bottom): two such segments cross exactly
       when their order flips. Independent of the supplied code path.
-  C2  The point set: 25 exact rational points, listed in POINTS.
-  C3  The counts belong to the coordinates, not the graph. Same graph, other
-      placements in cyclic order:
-          any convex position          111 crossing pairs (chords interleave)
-          regular 12-gon (Q(sqrt 3))   111 pairs, 73 points, 15 at the centre
-          integer parabola (k, k^2)    111 pairs, 111 points, no concurrency
-          supplied two-row grid         43 pairs,  25 points, 15 at (5,0)
-      Only 12, 42 and 7-regularity are facts about C_12(1,2,3,6).
+  C2  The point set: 25 exact rational points, listed in POINTS. Besides
+      (5,0) the only multi-pair points are (2,0) and (8,0), three edges
+      each, all offset-3 chords: A0-B2, A1-B1, A2-B0 and their mirror images
+      A5-B3, A4-B4, A3-B5 under x -> 10-x.
+  C3  The counts belong to the coordinates, not the graph. Same graph, same
+      cyclic order, other placements:
+          any STRICTLY convex position  111 crossing pairs (chords cross
+                                         iff their endpoints interleave)
+          regular 12-gon (Q(sqrt 3))    111 pairs, 73 points, 15 at the centre
+                                         (60 points of 1 pair, 12 of 3, 1 of 15)
+          integer parabola (k, k^2)     111 pairs, 111 points, no concurrency
+          supplied two-row grid          43 pairs,  25 points, 15 at (5,0)
+      The supplied grid is itself in weakly convex position -- the points
+      run in cyclic order round the rectangle's boundary -- and its 111
+      interleaving pairs split 43 proper + 48 touching at a vertex + 20
+      collinear. 12, 42 and 7-regularity are facts of the graph; 111 is a
+      fact of the graph with its cyclic order; 43, 25 and 73 are facts of
+      particular coordinates.
+
+=== CORRECTIONS (status history) ===
+
+  First version, commit 9aef035 (2026-10-11). Eight independent agents, each
+  writing its own exact-arithmetic code, were set to refute the findings.
+  Five stood unchanged (reproduction, inversion route, symmetry, forced
+  concurrency, triple points); three were refuted at the level of wording,
+  each re-checked here before correcting:
+    W1  said "three fits neither axis". The multi-pair reading makes three
+        correct; both readings are now stated.
+    W3  said the code drops the degenerate cases via `den == 0` or a
+        parameter equal to 0. It uses three branches (shared vertex,
+        den == 0, t or u at 0 or 1); counts above.
+    C3  said "any convex position". It must be strictly convex: the
+        supplied grid is weakly convex and gives 43, not 111.
 
   Grade: the supplied arithmetic is correct and reproducible; the
   concurrency is forced by the chosen central symmetry; the counts 43 and
@@ -94,8 +134,10 @@ are listed and asserted here (POINTS).
          central symmetry of the placement
   RLAT-3 COMPUTATIONAL RESULT | A4 | EXHAUSTIVE-FINITE | COMPUTATIONALLY
          VERIFIED | 24 row edges, 20 edge-through-vertex, 66 overlaps (W3)
-  RLAT-4 COMPUTATIONAL RESULT | A4 | EXHAUSTIVE-FINITE | COMPUTATIONALLY
-         VERIFIED | other placements 111 / 73 / 111 (C3)
+  RLAT-4 COMPUTATIONAL RESULT | A4 | EXHAUSTIVE-FINITE, INDEPENDENT-CROSS-CHECK
+         | COMPUTATIONALLY VERIFIED | other placements 111 / 73 / 111 (C3)
+  RLAT-6 PROPOSITION | A4 | EXHAUSTIVE-FINITE, STRUCTURAL | PROVED | the
+         order-4 symmetry is forced for every circulant on this grid (F-c)
   RLAT-5 PROPOSITION | A0 | NONE | UNVERIFIED | Axioms 8, 9; nested diamonds
 
 === STANDING FRAMEWORK RUN (CLAUDE.md; recorded, no connection claimed) ===
@@ -107,6 +149,7 @@ are listed and asserted here (POINTS).
 
 FALSIFICATION: any assertion below failing.
 """
+from collections import Counter
 from fractions import Fraction as F
 from itertools import combinations
 from math import comb
@@ -170,9 +213,19 @@ through_c = [e for e in E if cr(sub(V[e[1]], V[e[0]]), sub((5, 0), V[e[0]])) == 
              and min(V[e[0]][0], V[e[1]][0]) < 5 < max(V[e[0]][0], V[e[1]][0])]
 assert sorted(through_c) == sorted(tuple(sorted((i, i + 6))) for i in range(6))
 
-# --- 3. W1: points fixed by each reflection ---
+# --- 3. W1: points fixed by each reflection, under both readings ---
 assert sorted(p for p in X if p[1] == 0) == [(1, 0), (2, 0), (5, 0), (8, 0), (9, 0)]
 assert [p for p in X if p[0] == 5] == [(5, 0)]
+assert sorted(mult) == [(2, 0), (5, 0), (8, 0)]                # the multi-pair reading: 3
+
+# --- C2: the triple points are offset-3 chords, mirror images of each other ---
+NM = [f"A{i}" for i in range(6)] + [f"B{i}" for i in range(5, -1, -1)]
+through = {pt: sorted({NM[a] + "-" + NM[b] for pair in X[pt] for a, b in pair})
+           for pt in [(2, 0), (8, 0)]}
+assert through[(2, 0)] == ["A0-B2", "A1-B1", "A2-B0"]
+assert through[(8, 0)] == ["A3-B5", "A4-B4", "A5-B3"]
+assert all(min((b - a) % 12, (a - b) % 12) == 3
+           for pt in [(2, 0), (8, 0)] for pair in X[pt] for a, b in pair)
 
 # --- 3. W2: the symmetry group has order 4 ---
 maps = {
@@ -187,6 +240,27 @@ for k, g in maps.items():
     assert perm == [index[k](i) for i in range(12)], k
     assert sorted(tuple(sorted((perm[a], perm[b]))) for a, b in E) == E, k
     assert sorted(g(p) for p in X) == POINTS, k
+
+# F-c: exactly 4 isometries of the vertex set (exact search about the centroid) ...
+C0 = [(F(x) - 5, F(y)) for x, y in V]
+iso = 0
+for q0 in C0:
+    for q1 in C0:
+        p0, p1 = C0[0], C0[1]
+        det = p0[0] * p1[1] - p0[1] * p1[0]
+        m = ((q0[0] * p1[1] - q1[0] * p0[1]) / det, (q1[0] * p0[0] - q0[0] * p1[0]) / det,
+             (q0[1] * p1[1] - q1[1] * p0[1]) / det, (q1[1] * p0[0] - q0[1] * p1[0]) / det)
+        orth = (m[0] ** 2 + m[2] ** 2 == 1 and m[1] ** 2 + m[3] ** 2 == 1
+                and m[0] * m[1] + m[2] * m[3] == 0)
+        if orth and {(m[0] * x + m[1] * y, m[2] * x + m[3] * y) for x, y in C0} == set(C0):
+            iso += 1
+assert iso == 4
+# ... and every circulant C_12(S), S in {1..6}, is preserved by the three index maps
+for mask in range(1, 64):
+    ES = sorted({tuple(sorted((i, (i + d) % 12))) for i in range(12)
+                 for d in range(1, 7) if mask >> (d - 1) & 1})
+    for g in index.values():
+        assert sorted({tuple(sorted((g(a), g(b)))) for a, b in ES}) == ES, mask
 
 # --- 3. W3: the drawing is degenerate ---
 row = [e for e in E if V[e[0]][1] == V[e[1]][1]]
@@ -213,8 +287,34 @@ def overlap(e, f):
     return min(hi1, hi2) > max(lo1, lo2)
 
 
-assert sum(overlap(e, f) for e, f in combinations(E, 2)) == 66
+OV = [(e, f) for e, f in combinations(E, 2) if overlap(e, f)]
+assert len(OV) == 66
 assert all(e not in row and f not in row for v in X.values() for e, f in v)
+
+
+def supplied_route(e, f):
+    """The branch of the supplied proper_intersection() that decides (e, f)."""
+    if set(e) & set(f):
+        return "shared"
+    p, q, r, s = V[e[0]], V[e[1]], V[f[0]], V[f[1]]
+    a, b = sub(q, p), sub(s, r)
+    den = cr(a, b)
+    if den == 0:
+        return "den0"
+    d = sub(r, p)
+    t, u = F(cr(d, b), den), F(cr(d, a), den)
+    if 0 < t < 1 and 0 < u < 1:
+        return "proper"
+    return "t0" if t == 0 else "t1" if t == 1 else "u0" if u == 0 else "u1" if u == 1 else "out"
+
+
+assert Counter(supplied_route(e, f) for e, f in OV) == {"shared": 40, "den0": 26}
+TOUCH = [tuple(sorted((r_, x))) for r_ in row for x in E if x not in row
+         if any(strictly_inside(k, r_) for k in x)]
+assert len(TOUCH) == 48
+assert Counter(supplied_route(e, f) for e, f in TOUCH) == {"u0": 24, "t1": 24}
+crossing_edges = {e for v in X.values() for pair in v for e in pair}
+assert sorted(e for e in E if e not in row and e not in crossing_edges) == [(0, 11), (5, 6)]  # A0-B0, A5-B5
 
 # --- 4. C1: 43 as inversions of the 18 cross-row edges ---
 cross_row = [e for e in E if e not in row]
@@ -226,6 +326,12 @@ assert sum((a1 - a2) * (b1 - b2) < 0 for (a1, b1), (a2, b2) in combinations(tb, 
 interleave = sum(1 for e, f in combinations(E, 2) if not set(e) & set(f)
                  and ((e[0] < f[0] < e[1]) != (e[0] < f[1] < e[1])))
 assert interleave == 111
+# the supplied grid is weakly convex (cyclic order round the rectangle) and gives 43, not 111
+turns = [cr(sub(V[(i + 1) % 12], V[i]), sub(V[(i + 2) % 12], V[(i + 1) % 12])) for i in range(12)]
+assert all(t <= 0 for t in turns) and turns.count(0) == 8
+INTER = [(e, f) for e, f in combinations(E, 2) if not set(e) & set(f)
+         and ((e[0] < f[0] < e[1]) != (e[0] < f[1] < e[1]))]
+assert Counter(supplied_route(e, f) for e, f in INTER) == {"proper": 43, "u0": 24, "t1": 24, "den0": 20}
 
 par = [(F(k), F(k * k)) for k in range(12)]
 Xp = crossings(par)
@@ -293,6 +399,7 @@ reg = [(cos30[k], cos30[(k - 3) % 12]) for k in range(12)]
 Xr = crossings(reg, sign=lambda z: z.sign())
 assert sum(map(len, Xr.values())) == 111 and len(Xr) == 73
 assert max(map(len, Xr.values())) == 15 and len(Xr[(Q3(0), Q3(0))]) == 15
+assert Counter(map(len, Xr.values())) == {1: 60, 3: 12, 15: 1}
 
 # --- standing framework run (recorded only) ---
 ORB = {"SA_ST_A": {9, 12, 16}, "D7": {7, 33, 34}, "CAS_EXT": {5, 13, 19},
@@ -305,8 +412,9 @@ if __name__ == "__main__":
     print("Supplied lattice: 12 vertices, 42 edges, 7-regular; 43 crossing pairs, "
           "25 points, 15 at (5,0) -- all reproduce.")
     print("Forced: (5,0) concurrency = central symmetry of the placement.")
-    print("W1 five points on y=0, not three; W2 symmetry group order 4; "
-          "W3 24 row edges, 20 edge-through-vertex, 66 overlaps.")
-    print("Same graph elsewhere: convex 111 pairs; regular 12-gon 73 points; "
-          "parabola 111 points.")
+    print("W1 five points on y=0 (three if only multi-pair points count); "
+          "W2 symmetry group order 4, forced; W3 24 row edges, 20 edge-through-vertex, "
+          "66 overlaps, dropped by three branches.")
+    print("Same graph elsewhere: strictly convex 111 pairs; regular 12-gon 73 points; "
+          "parabola 111 points; the weakly convex supplied grid 43.")
     print("All assertions passed.")

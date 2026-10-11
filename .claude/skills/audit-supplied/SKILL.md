@@ -72,12 +72,18 @@ it discards. A filter can hide the defect the output depends on.
 
 Example (2026-10-11, `math/theorems/resonant_lattice_c12_supplied_audit_2026_10_11.py`):
 a crossing count for C_12(1,2,3,6) drawn on two rows reproduced exactly (43
-pairs, 25 points). Its `den == 0` clause skipped 66 pairs of edges that lie
-on the same row line and overlap, and its strict `0 < t, u` test skipped 20
-cases of an edge running through a vertex it does not end at (A0-A3 through
-A1 and A2). 24 of the 42 edges could never cross anything, and the figure is
-not a valid straight-line drawing. None of this showed in the printed
-numbers.
+pairs, 25 points). 24 of the 42 edges lie on the two row lines, 66 pairs of
+them overlap, and 20 times an edge runs through a vertex it does not end at
+(A0-A3 through A1 and A2) -- the figure is not a valid straight-line drawing.
+The code discarded all of it through three different branches: 40 of the 66
+overlaps at the shared-vertex check, 26 at `den == 0`, and the 48 pairs
+meeting at a vertex inside a row edge at the strict range test (24 at u = 0,
+24 at t = 1). None of this showed in the printed numbers.
+
+Trace the branch for each discarded case rather than guessing it from the
+code: the first version of that audit named only `den == 0` and "a parameter
+equal to 0", and an independent re-check found the shared-vertex branch and
+the t = 1 cases it had missed.
 
 ## 5. Report in this order
 

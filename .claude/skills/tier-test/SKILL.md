@@ -46,15 +46,23 @@ reported for C_12(1,2,3,6) "on integer coordinates". A graph fixes which
 vertices are joined, not where edges cross, so the axis is the **embedding**.
 Re-placing the same 12 vertices in the same cyclic order:
 
-    supplied two-row grid      43 crossing pairs, 25 points, 15 pairs at one point
-    any convex position       111 pairs (chords cross iff endpoints interleave)
-    regular 12-gon            111 pairs, 73 points, 15 pairs at the centre
-    integer parabola (k,k^2)  111 pairs, 111 points, no concurrency
+    supplied two-row grid        43 crossing pairs, 25 points, 15 pairs at one point
+    any strictly convex position 111 pairs (chords cross iff endpoints interleave)
+    regular 12-gon               111 pairs, 73 points, 15 pairs at the centre
+    integer parabola (k,k^2)     111 pairs, 111 points, no concurrency
 
 Only 12 vertices, 42 edges and 7-regularity survive, so those are the graph
-facts and 43/25 belong to one placement. The 15-pair concurrency survives
-exactly when the placement is centrally symmetric with the offset-6
-matching — that is its mechanism, found by the sweep rather than by looking.
+facts; 111 is a fact of the graph with its cyclic order; 43/25 belong to one
+placement. The 15-pair concurrency survives exactly when the placement is
+centrally symmetric with the offset-6 matching — that is its mechanism,
+found by the sweep rather than by looking.
+
+Watch the qualifier when you state the sweep's rule. The first write-up
+said "any convex position" gives 111; the supplied grid is itself convex
+(its points run in order round a rectangle) and gives 43, because it is only
+WEAKLY convex — collinear rows turn interleaving chords into overlaps and
+vertex contacts. The rule needs "strictly convex". A counterexample to your
+own stated rule can be the very object under test.
 
 If you cannot name the axis, you cannot tier the result. Say "not assessed"
 rather than assigning a tier by inspection.
