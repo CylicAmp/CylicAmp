@@ -11,6 +11,18 @@ the owner did them, under the owner's names.
 | `index.json` | one sha256 per message — proof nothing was changed after it was written |
 | `TERMS.md` | the owner's names for operations, each with the owner's own sentence |
 | `drip_cycle.md` | the drip cycle: the owner's example and every instance in the record |
+| `plugged/<time>.txt` | one report per `plug.py` run: the owner's lines, then every result |
+
+**To plug your work in yourself, no Claude needed** (phone/Termux or any computer with
+this repo):
+
+    python3 plug.py              paste your lines, then END
+    python3 plug.py notes.txt    or give it a file
+
+It saves your lines here exactly as written, runs every number through the frameworks
+(six registers + the GF(37) audit), finds every number you wrote both ways (12 and 21)
+and every line you wrote both ways round (2+4=6 / 4+2=6), writes one report with your
+lines first (`plugged/<time>.txt`), and sends it to GitHub if it can.
 
 Kept current automatically: the `UserPromptSubmit` hook in `.claude/settings.json` runs
 `tools/owner_record.py --hook` on every message the owner sends. Check it any time with
