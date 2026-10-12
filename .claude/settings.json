@@ -12,6 +12,17 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/tools/owner_record.py\" --hook",
+            "timeout": 20
+          }
+        ]
+      }
     ]
   }
 }

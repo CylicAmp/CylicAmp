@@ -1,0 +1,269 @@
+Owner's messages, 2026-10-11, verbatim as written (UTC timestamps).
+Nothing below is edited, except credentials, which are removed and marked where they were.
+
+
+===== #226  2026-10-11T13:33:46.438Z =====
+### Constructive test of the Discrete Resonant Lattice
+
+We can make this precise by constructing a 12-vertex, 7-regular graph, embedding it on integer coordinates, and computing every pairwise edge intersection.
+
+The test will distinguish three things:
+
+* Graph structure: Are there exactly 12 vertices and 42 edges, with degree 7 at every vertex?
+
+* Intersection structure: Do the straight-line edges produce identifiable crossing points and a vertical concurrency axis?
+
+* Resonant geometry: Do those intersections form nested diamonds or octahedral projections, and are these properties consequences of the graph or of our chosen coordinates?
+
+One important distinction: a graph determines which vertices are connected, but not where crossings occur. We must specify both the graph and its geometric embedding.
+
+### 1\. Define the 12 integer-coordinate vertices
+
+Choose six points on the upper row and six on the lower row. The construction is deliberately symmetric about the horizontal axis .
+
+### Integer grid construction
+
+Upper and lower vertices are related by reflection across .
+
+Upper row
+
+A₀ = (0, 3) A₁ = (2, 3) A₂ = (4, 3) A₃ = (6, 3) A₄ = (8, 3) A₅ = (10, 3)
+
+Lower row
+
+B₀ = (0, −3) B₁ = (2, −3) B₂ = (4, −3) B₃ = (6, −3) B₄ = (8, −3) B₅ = (10, −3)
+
+All coordinates are integers. The midpoint between corresponding upper and lower vertices lies on , and the grid has a natural vertical centerline .
+
+This coordinate choice establishes reflection symmetry, but it does not yet establish the desired intersection pattern.
+
+### 2\. Define the graph exactly
+
+Index the vertices cyclically as
+
+v_0,v_1,\\ldots,v_{11}
+
+in the order
+
+A_0,A_1,\\ldots,A_5,B_5,B_4,\\ldots,B_0.
+
+Define the edge set by
+
+\\boxed{
+E=\\bigcup_{d\\in\\{1,2,3,6\\}}
+\\big\\{\\{v_i,v_{(i+d)\\bmod12}\\}:0\\le i<12\\big\\}
+}
+
+where duplicate undirected edges are included only once.
+
+This is the circulant graph .
+
+### Structural verification
+
+Vertices
+
+12
+
+Neighbors per vertex
+
+7
+
+Undirected edges
+
+42
+
+Degree sequence
+
+(7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7)
+
+The edge count follows directly because each vertex connects to the vertices at cyclic offsets and . These are seven distinct neighbors:
+
+|E|=\\frac{12\\cdot7}{2}=42.
+
+Axiom 8 is therefore satisfied exactly.
+
+### 3\. Calculate the segment intersections
+
+For edges with endpoints , , , and , write
+
+P+t(Q-P)=R+u(S-R).
+
+Solving for gives the intersection of their supporting lines. A proper segment crossing requires
+
+0<t<1,\\qquad 0<u<1.
+
+Pairs sharing an endpoint are excluded, as are parallel or collinear pairs.
+
+The exhaustive pairwise calculation for this construction gives:
+
+Proper crossing pairs
+
+### 43
+
+Distinct edge pairs
+
+Unique crossing points
+
+### 25
+
+Coincident crossings merged
+
+These counts distinguish crossing pairs from geometric nodes: fifteen different pairs of edges, for example, can meet at the same central point.
+
+### Complete set of unique proper intersection coordinates
+
+The following table lists all 25 distinct points. The coordinates are exact rational numbers.
+
+| Region          | Intersection coordinates |
+| --------------- | ------------------------ |
+| Central         |                          |
+| Right,          |                          |
+| Left,           |                          |
+| Upper region    |                          |
+| Lower region    |                          |
+| Far upper-right |                          |
+| Far lower-right |                          |
+
+The set is symmetric about : every crossing has a reflected crossing . The three points on are their own reflections.
+
+### 4\. Test the concurrency axis
+
+The six antipodal edges are
+
+A_iB_{5-i},\\qquad i=0,1,\\ldots,5.
+
+For each one, its endpoints have coordinates
+
+A_i=(2i,3),\\qquad
+B_{5-i}=(10-2i,-3).
+
+The midpoint of every antipodal edge is therefore
+
+\\left(
+\\frac{2i+(10-2i)}2,
+\\frac{3-3}2
+\\right)=(5,0).
+
+Thus, all six supporting lines pass through the same point:
+
+\\boxed{(x_{\\mathrm{mid}},y^\\star)=(5,0)}.
+
+### Concurrency verified
+
+The six antipodal edges are concurrent at . Their distinct edge pairs all intersect at this one point.
+
+This is a theorem of the chosen coordinates and edge construction, not a coincidence inferred from a drawing.
+
+The construction also produces triple crossings at and , each involving three edge pairs. These provide additional candidate centers for a nested geometry.
+
+### 5\. Does this prove the nested diamond or octahedral structure?
+
+Not yet. The calculation verifies the graph, the intersections, the reflection symmetry, and the principal concurrency point. It does not establish that all intersections organize into a canonical sequence of nested diamonds or the projection of nested octahedra.
+
+The current construction exhibits:
+
+* bilateral reflection symmetry;
+
+* a six-line central concurrency;
+
+* two additional triple-crossing centers on the horizontal axis;
+
+* rational intersection coordinates;
+
+* a 7-regular graph with exactly 42 edges.
+
+It does not yet establish a unique nested-diamond hierarchy. That claim needs a precise definition of a diamond layer—for example, four intersection nodes connected in cyclic order—and a rule for determining which layers belong to the same hierarchy.
+
+### 6\. Reproducible intersection test
+
+Here is a compact Python implementation of the construction and the exact geometric test. It uses rational arithmetic so intersections are not distorted by floating-point rounding.
+
+```python
+
+from fractions import Fraction as F
+from itertools import combinations
+
+# Cyclic order: A0,...,A5,B5,...,B0
+V = [(2*i, 3) for i in range(6)]
+V += [(2*i, -3) for i in range(5, -1, -1)]
+
+# Circulant graph C_12(1,2,3,6)
+E = set()
+for i in range(12):
+    for d in (1, 2, 3, 6):
+        j = (i + d) % 12
+        E.add(tuple(sorted((i, j))))
+
+assert len(V) == 12
+assert len(E) == 42
+assert all(sum(i in e for e in E) == 7
+           for i in range(12))
+
+def sub(a, b):
+    return (a[0] - b[0], a[1] - b[1])
+
+def cross(a, b):
+    return a[0]*b[1] - a[1]*b[0]
+
+def proper_intersection(e, f):
+    # Exclude shared graph vertices
+    if set(e) & set(f):
+        return None
+
+    p, q = V[e[0]], V[e[1]]
+    r, s = V[f[0]], V[f[1]]
+    a, b = sub(q, p), sub(s, r)
+    den = cross(a, b)
+
+    # Parallel or collinear
+    if den == 0:
+        return None
+
+    delta = sub(r, p)
+    t = F(cross(delta, b), den)
+    u = F(cross(delta, a), den)
+
+    # Strictly inside both segments
+    if not (0 < t < 1 and 0 < u < 1):
+        return None
+
+    return (F(p[0]) + t*a[0],
+            F(p[1]) + t*a[1])
+
+crossings = {}
+for e, f in combinations(sorted(E), 2):
+    p = proper_intersection(e, f)
+    if p is not None:
+        crossings.setdefault(p, []).append((e, f))
+
+print("Vertices:", len(V))
+print("Edges:", len(E))
+print("Degree sequence:",
+      [sum(i in e for e in E) for i in range(12)])
+print("Proper crossing pairs:",
+      sum(map(len, crossings.values())))
+print("Unique crossing points:", len(crossings))
+print("Central concurrency multiplicity:",
+      len(crossings.get((F(5), F(0)), [])))
+print("All unique intersections:")
+for p in sorted(crossings):
+    print(p, "pair count =", len(crossings[p]))
+```
+
+Expected verification output:
+
+```text
+Vertices: 12
+Edges: 42
+Degree sequence: [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7]
+Proper crossing pairs: 43
+Unique crossing points: 25
+Central concurrency multiplicity: 15
+```
+
+### Conclusion
+
+The first constructive test succeeds. We have an explicit integer-grid realization satisfying Axiom 8 and an exactly verified central concurrency satisfying the intended core of Axiom 9.
+
+The strongest next mathematical step is now to define a diamond-extraction rule on the 25 intersection nodes and test whether the rule produces a nested hierarchy uniquely. That will determine whether the proposed nested diamonds are a derived property of this lattice or a further structural axiom that must be imposed.
+

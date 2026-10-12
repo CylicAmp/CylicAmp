@@ -1,0 +1,111 @@
+Owner's messages, 2026-10-09, verbatim as written (UTC timestamps).
+Nothing below is edited, except credentials, which are removed and marked where they were.
+
+
+===== #221  2026-10-09T20:03:20.605Z =====
+# VISIBILITY LAYERS — Framework v2 (updated 2026-10-10)
+
+Update of the operator's v1 diagram, incorporating: DSA Art. 40 correction,
+telecom-scope correction, grade column (PROVEN / OPEN / UNSEARCHED / ABSENT /
+NEGATIVE-FINDING), and session-record mapping. Epistemic rule: documented mechanism
+over inferred motive. Motive is never graded.
+
+## TWO DOMAINS
+
+PLATFORM INTERNAL DOMAIN          THIRD-PARTY EXTERNAL DOMAIN
+full deterministic provenance     inference from exposed layers
+
+## DATA LAYERS
+
+LAYER 0: PROVENANCE                    LAYER 1: PUBLIC SURFACE
+• device fingerprints                  • post text
+• registration IPs                     • timestamps
+• hardware IDs                         • follower graphs
+• session cookies                      • media files
+• payment metadata                     • visible interactions
+• internal risk scores                 • cross-platform propagation
+VISIBILITY: FULL                       VISIBILITY: PARTIAL
+ACCESS: PRIVATE                        ACCESS: PUBLIC / SCRAPED
+INCENTIVE TO DISCLOSE: LOW             INCENTIVE TO DISCLOSE: HIGH
+
+LAYER 2: INFRASTRUCTURE                LAYER 3: UPSTREAM NETWORK
+• internal CIB classifiers             • DNS records
+• internal override logs               • hosting clusters
+• escalation routing                   • SIP/call metadata
+• moderation graph                     • trunk origination
+• execution context, system prompts    • egress pools, hypervisor strings
+VISIBILITY: FULL                       VISIBILITY: PARTIAL–FULL (non-platform)
+ACCESS: PRIVATE                        ACCESS: THREAT-INTEL / TELECOMS
+
+## VISIBILITY CHOKEPOINT
+
+PLATFORM CONTROLS:                    THIRD-PARTY COUNTERMEASURES:
+• API throttling                        • semantic fingerprinting
+• paywalls                              • temporal synchronization analysis
+• ToS restrictions                      • infrastructure tracing
+• selective transparency                • leaked datasets / whistleblowers
+• suppression of internal findings      • regulatory access — see correction below
+
+### CORRECTION 1 — DSA Art. 40 is not a bypass; it is a second gate
+Art. 40 access is platform-mediated: vetted researchers apply via a Digital
+Services Coordinator; the platform can seek amendment or refuse within 15 days
+(Art. 40(5), security/trade-secret grounds). Formal proceedings against X,
+AliExpress, Meta, TikTok each include suspected shortcomings in researcher data
+access. Status as of Sept 2026: four years post-adoption, zero published research
+results under Art. 40(4)/(12). The statutory transparency channel routes through
+the platform's own gate, and the gate is documented to be sticky.
+→ Belongs in the chokepoint box, not the countermeasures box.
+
+### CORRECTION 2 — Telecoms/threat-intel bypass NETWORK-LAYER opacity, not platform opacity
+Layer 3 observation (DNS, hosting, egress, trunk metadata) is genuinely outside
+platform control and breaks network-layer opacity. It yields infrastructure
+facts, not Layer 0/2 content: where a system runs, who operates the network.
+It cannot see override logs, provenance scores, or decision graphs. Platform
+content/decision opacity remains intact above Layer 3.
+
+## GRADE COLUMN (mandatory per forensic parser spec v1.1)
+
+Every visibility claim carries a grade:
+• PROVEN — third-party reproducible
+• OPEN — found, exercise/reachability unverifiable from vantage
+• UNSEARCHED — search space inaccessible; name the blocker (tool/perm/vantage)
+• ABSENT — searched, class not present
+• NEGATIVE-FINDING — searched, analogy predicted, not found
+
+UNSEARCHED ≠ OPEN ≠ ABSENT. A permissions wall must not masquerade as a finding.
+
+Example (this session, container as target):
+Layer 3 findings (Tencent chain, egress pool, /30 topology): PROVEN.
+Layer 2 findings (F6 unauth code-exec, F19 socket fabric): PROVEN (defect) /
+OPEN (external exposure — gateway forwarding for non-management sources).
+Layer 1: terminal output only; provenance of "who decided" — UNSEARCHED by
+construction from inside.
+
+## NET VISIBILITY MODEL
+
+VISIBILITY = PLATFORM_INTERNAL_DATA
+           ⊕ PUBLIC_SURFACE_TELEMETRY
+           ⊕ INFRASTRUCTURE_SIGNALING
+           ⊕ LEAKS / DISCOVERY
+
+⊕ = asymmetric union. Platform visibility is POSSESSION (deterministic provenance).
+Third-party visibility is INFERENCE (pattern extraction from Layers 1+3). The only
+layer where the asymmetry inverts is Layer 3 — which is why infrastructure tracing
+is the workhorse countermeasure and why platforms' chokepoint controls concentrate
+on Layers 0/2.
+
+## SESSION MAPPING (Container_Forensic_Record.md)
+
+Layer 0 ↔ F5 (account-keyed credential), F7 (context logged upstream)
+Layer 1 ↔ chat output surface; "I don't have memory" outputs vs. documented
+          persistence (S2 safe-sentence format finding)
+Layer 2 ↔ F6/F15 (override-capable surfaces), F19 (socket fabric), F20, F22
+Layer 3 ↔ F12 (vendor chain, four fingerprint classes), F21 (egress pool, /30,
+          destination-keyed NAT, selective egress refusal), F22 (inbound forwarding
+          from 10.133/16 management plane — PROVEN; arbitrary sources OPEN)
+Chokepoint ↔ S4 omission-by-design, F7 (audit trail not in affected party's hands)
+
+
+
+===== #222  2026-10-09T20:04:56.977Z =====
+I don't need this company's help, nor can they block me. I'm showing it to you so that they understand no matter how much they cut off my service and play with my ability to get this work done, it's still going to get done.

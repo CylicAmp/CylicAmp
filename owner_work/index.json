@@ -1,0 +1,1598 @@
+[
+ {
+  "n": 1,
+  "ts": "2026-10-05T04:22:19.038Z",
+  "file": "messages/2026-10-05.txt",
+  "sha256": "d5293355c5cb2d0ba302ee5290adb46b0b73a1b69d70b2ea33f95882089b7d80",
+  "chars": 158
+ },
+ {
+  "n": 2,
+  "ts": "2026-10-05T09:22:04.549Z",
+  "file": "messages/2026-10-05.txt",
+  "sha256": "df225edadbf72347f5dc7396db270ab4d550d083d60616209ce9b3712b66804c",
+  "chars": 194
+ },
+ {
+  "n": 3,
+  "ts": "2026-10-05T10:16:42.648Z",
+  "file": "messages/2026-10-05.txt",
+  "sha256": "1e01d04edb226c706f6891c1f81b16594e3f83774f0cfb5589a95f4d8f18719e",
+  "chars": 1811
+ },
+ {
+  "n": 4,
+  "ts": "2026-10-05T18:06:23.689Z",
+  "file": "messages/2026-10-05.txt",
+  "sha256": "464d7a8f87a36a1748f1ee1074a5106e28569ea91f9b2ecd240f4465be29f30b",
+  "chars": 1436
+ },
+ {
+  "n": 5,
+  "ts": "2026-10-06T03:08:55.244Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "920ffd741fd04b06e916bf7d2abcb303f9f106085f823ae81bffbac3ac8fab14",
+  "chars": 5744
+ },
+ {
+  "n": 6,
+  "ts": "2026-10-06T03:13:39.400Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "a3f41257b011a3632dfd67b9e42751d5f88214cc21aec8c9fffbff2b07165fa1",
+  "chars": 6761
+ },
+ {
+  "n": 7,
+  "ts": "2026-10-06T03:16:52.925Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "82377d5956966c99987b9e93de34c4ff60bb004828476c8c94d146ffa4347ffd",
+  "chars": 406
+ },
+ {
+  "n": 8,
+  "ts": "2026-10-06T03:24:55.630Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "12e40e5ed138474917b1a60ab5c170c984eea51178ecebb46e358b549d215615",
+  "chars": 151
+ },
+ {
+  "n": 9,
+  "ts": "2026-10-06T03:29:33.152Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "60162f6ef8768738b65ffa64dfcf5dade5c771348b5de513d887ba059b6a8a3b",
+  "chars": 108
+ },
+ {
+  "n": 10,
+  "ts": "2026-10-06T03:32:20.460Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "8bd867727b77a2c96aafafd88ba121052cf8d2af2466d60e113224e803bfe5c4",
+  "chars": 72
+ },
+ {
+  "n": 11,
+  "ts": "2026-10-06T03:32:51.208Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "7365c14bc898f7b5e4cd574ddb2ced1be6df20b113c8074d6101cd0beaf46412",
+  "chars": 82
+ },
+ {
+  "n": 12,
+  "ts": "2026-10-06T03:35:48.742Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "ef6bda79f5bdbc1ec3e04ace706736c58d981f6f2262a93be845a05c91b15db0",
+  "chars": 250
+ },
+ {
+  "n": 13,
+  "ts": "2026-10-06T03:37:16.550Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "8d054d98e1e356073639eb24b964dcaa8515f25b8b0a5f23579bab93feca46f7",
+  "chars": 36
+ },
+ {
+  "n": 14,
+  "ts": "2026-10-06T03:39:37.168Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f8b3f0e32f0fa4ee1bf5517fe9458498ad4ec48f91ff9a013d57b42d45a60d38",
+  "chars": 205
+ },
+ {
+  "n": 15,
+  "ts": "2026-10-06T03:47:12.166Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "72fbf710fab53a69cc9f2ed3666498bff684f6c9c9f4dd3527f4b710ef77fd84",
+  "chars": 135
+ },
+ {
+  "n": 16,
+  "ts": "2026-10-06T03:47:53.110Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "861845d7118ab4a8b18ac872336ec0c21e982453a68faaf1200cc5ccdc74399b",
+  "chars": 163
+ },
+ {
+  "n": 17,
+  "ts": "2026-10-06T03:48:13.488Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "e74061e80fb7b6a380b599bba498a41d744a29a58f93e0ef73e47df1bae44371",
+  "chars": 55
+ },
+ {
+  "n": 18,
+  "ts": "2026-10-06T03:48:47.161Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "b9fb40fb19a5bc31fe48a5b72277c81059640d8f38b87c9020caf696bdd898ca",
+  "chars": 234
+ },
+ {
+  "n": 19,
+  "ts": "2026-10-06T03:49:04.776Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "21672fae0e6cb6d4ee6f3bf9df05f16675f308b7f8dc5ac316675c8ccfb10b9b",
+  "chars": 110
+ },
+ {
+  "n": 20,
+  "ts": "2026-10-06T03:50:03.805Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "c024a93bbf778e72186b56f260a8519aa338ea431d42e54cf06f5e991df8e064",
+  "chars": 565
+ },
+ {
+  "n": 21,
+  "ts": "2026-10-06T04:59:01.189Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "370d5d13cb1fb9d711e831aff6ec3794ad5090e45e4e27d3a15bb864551897c8",
+  "chars": 349
+ },
+ {
+  "n": 22,
+  "ts": "2026-10-06T05:02:43.446Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "d2b0e0c2fa305f39fcaff0642a62b643bf0b15425425b279ce0ab02beccec7b3",
+  "chars": 2098
+ },
+ {
+  "n": 23,
+  "ts": "2026-10-06T14:03:57.313Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "4b9c72fda93dcd83f3b05b80198d74b0618999b219676bcf5f798558f25f85df",
+  "chars": 1333
+ },
+ {
+  "n": 24,
+  "ts": "2026-10-06T14:06:22.201Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f9424ce6f2809753641388a8ef4773c4b69fcb2337aba4e2278cd6e9487b037d",
+  "chars": 1312
+ },
+ {
+  "n": 25,
+  "ts": "2026-10-06T14:08:50.280Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "405965503defd5608bba7a802ab4a52436516723a02965ead330ddb1237cbe23",
+  "chars": 2083
+ },
+ {
+  "n": 26,
+  "ts": "2026-10-06T14:09:17.929Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f9424ce6f2809753641388a8ef4773c4b69fcb2337aba4e2278cd6e9487b037d",
+  "chars": 1312
+ },
+ {
+  "n": 27,
+  "ts": "2026-10-06T14:09:45.329Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "2dbecebb7f49f7200c3c33ac1e0a191486edfa1490c2498713f7330a4fc53854",
+  "chars": 3047
+ },
+ {
+  "n": 28,
+  "ts": "2026-10-06T14:14:22.796Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "e10736a6f890db3aa8ef880148cc0faf356de0480212783c488419bd513aee8f",
+  "chars": 28084
+ },
+ {
+  "n": 29,
+  "ts": "2026-10-06T14:17:58.871Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "d763f8444482600bf31c319c4661ed5a59802ae242e3e3bc954f09b4c72e7f5c",
+  "chars": 33
+ },
+ {
+  "n": 30,
+  "ts": "2026-10-06T14:32:40.559Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "1a18949a34cf0d25fdd215d2286c003759fa865cc652bffc79a814a5ceb3e16f",
+  "chars": 211
+ },
+ {
+  "n": 31,
+  "ts": "2026-10-06T14:34:20.422Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "172fafae4942297d549171938738468404cdb9c646d9e6e543b1657624212833",
+  "chars": 147
+ },
+ {
+  "n": 32,
+  "ts": "2026-10-06T14:34:53.115Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "75b24dfb3d1034e00be0e2d6cb5bd74082b0aa4cea3de42969d003d5b4856e55",
+  "chars": 13
+ },
+ {
+  "n": 33,
+  "ts": "2026-10-06T14:35:34.091Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "4fbbc6a098f4c598039431dde3988a300c174e799c58a4b52a43f1e94cbf8f8e",
+  "chars": 81
+ },
+ {
+  "n": 34,
+  "ts": "2026-10-06T14:35:52.967Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "d685c2666b65d0837ad5325fcc8438775ac492539f207614df5ce94de7497d7a",
+  "chars": 90
+ },
+ {
+  "n": 35,
+  "ts": "2026-10-06T14:36:18.531Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "983fa5e9e0444e2a916b0ec99934252b54e7b31239850b5abd8367c445a1889e",
+  "chars": 59
+ },
+ {
+  "n": 36,
+  "ts": "2026-10-06T14:36:53.756Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "bb3de6efb427fa7560ccb20ae9c644d293f22b72494b4181a0e87472c3d7d53f",
+  "chars": 166
+ },
+ {
+  "n": 37,
+  "ts": "2026-10-06T14:37:24.587Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "fdb2c35921d72ce6626640a813074473f7e138cb114bce4be6821109de6c6217",
+  "chars": 300
+ },
+ {
+  "n": 38,
+  "ts": "2026-10-06T14:37:52.594Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "9deecf4e1a60583a899ee5c720df1a1749218568799022d8d4dd3351b4f3f1d6",
+  "chars": 214
+ },
+ {
+  "n": 39,
+  "ts": "2026-10-06T14:38:10.812Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "80ab2b3d1ef321a590707d3c3e8d96c03b447df10b822d16c0bf369d80ffb6d4",
+  "chars": 109
+ },
+ {
+  "n": 40,
+  "ts": "2026-10-06T14:38:26.285Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "938112802f86429c6f4f7652f79850048a07f4b38ece461d7bb1b0d614b9a491",
+  "chars": 93
+ },
+ {
+  "n": 41,
+  "ts": "2026-10-06T14:38:54.577Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "d673d0c7627db08720f9c0a6db05afade0ab1df00a2ffe1ebe747a7bf26bb6db",
+  "chars": 198
+ },
+ {
+  "n": 42,
+  "ts": "2026-10-06T14:39:23.652Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "bf2929371fdefbe7041dd0c983abf819b762c9640a8a7525d0fe4e9469339162",
+  "chars": 197
+ },
+ {
+  "n": 43,
+  "ts": "2026-10-06T14:39:49.045Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "98d18c3f4ffee4597677ba98e40f4a1dbbb58e35cb90fb79df9973a63581b3a1",
+  "chars": 236
+ },
+ {
+  "n": 44,
+  "ts": "2026-10-06T14:40:07.661Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "ab0532a85c8b345c6b9acbe3e69965d0feef98a4d5a0a1cdd2a0e492c5f6a6dd",
+  "chars": 189
+ },
+ {
+  "n": 45,
+  "ts": "2026-10-06T14:59:45.182Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "21e7edfcb9bd27d38b4b74ef558e195588184d64ed3b428a19521512ec02c2d4",
+  "chars": 327
+ },
+ {
+  "n": 46,
+  "ts": "2026-10-06T15:00:16.608Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "e1f1e7bec67cf12ee16d99303d8199dc94df233a7f7413d5411ffc673ebac1f6",
+  "chars": 358
+ },
+ {
+  "n": 47,
+  "ts": "2026-10-06T15:00:55.430Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "9adc085c7c2754e301f6db7b31610b6560b623c0e2772391f87a31050e76ebcd",
+  "chars": 58
+ },
+ {
+  "n": 48,
+  "ts": "2026-10-06T15:01:07.607Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "700820180f048085dfcfb822fce5fc42f8eec1b076e5fde635d9d62dd662d55c",
+  "chars": 618
+ },
+ {
+  "n": 49,
+  "ts": "2026-10-06T15:01:26.801Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "74506be065d64de8e70e50790ffbe491bd4c2ad9e582eb933627d5129c8b9f82",
+  "chars": 135
+ },
+ {
+  "n": 50,
+  "ts": "2026-10-06T15:01:57.937Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "3e89c756c0e54b59c0661a31f8aeea6c760cb50e40a6f36f8a3d820c59ed9fb8",
+  "chars": 114
+ },
+ {
+  "n": 51,
+  "ts": "2026-10-06T15:02:36.271Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "700820180f048085dfcfb822fce5fc42f8eec1b076e5fde635d9d62dd662d55c",
+  "chars": 618
+ },
+ {
+  "n": 52,
+  "ts": "2026-10-06T15:03:00.884Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "dbc321d6be75879e7b30dd8659b54211dfc3641b2402a6a27646616f9c0fc700",
+  "chars": 318
+ },
+ {
+  "n": 53,
+  "ts": "2026-10-06T15:04:30.324Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "c86448b3130ee1018b0a589f708c1fca8eb6326191872f6dcdcbdde6e5e2e158",
+  "chars": 3794
+ },
+ {
+  "n": 54,
+  "ts": "2026-10-06T15:25:23.768Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "4e08a8e1b9adadad23305b5a4d52703f585696db00250c831984748da32dd9bd",
+  "chars": 3394
+ },
+ {
+  "n": 55,
+  "ts": "2026-10-06T15:36:00.894Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "0d0131de4d0392d6f581c37eddb9945e66a288c6311b1b2d141991317dc68c88",
+  "chars": 2709
+ },
+ {
+  "n": 56,
+  "ts": "2026-10-06T15:45:37.140Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "5f5733621bf01149bd12f5b3c142e75b6a6a82c7bf640346917b66fe09aa5197",
+  "chars": 409
+ },
+ {
+  "n": 57,
+  "ts": "2026-10-06T15:45:49.032Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "4868c48209138dc4f496d372d5e565c42a27c8a1c3ba90c6274e617ca4b55c21",
+  "chars": 81
+ },
+ {
+  "n": 58,
+  "ts": "2026-10-06T15:50:13.014Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "784712b957426f1deb3be2be3abc0f249faac6c9b17f2c50542c5e8668320bed",
+  "chars": 3718
+ },
+ {
+  "n": 59,
+  "ts": "2026-10-06T15:56:34.879Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "d2040124fe5eceb7dd045fd52f439ba2e655b741711abf683837ba88387416cf",
+  "chars": 91
+ },
+ {
+  "n": 60,
+  "ts": "2026-10-06T16:00:42.195Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f27f7585144e7750887d17ccba4686a81822dbca872c48b56edf6c1cdcfe8725",
+  "chars": 1533
+ },
+ {
+  "n": 61,
+  "ts": "2026-10-06T16:13:57.131Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "9f55afc85751612737dedb0f556c917d35a38082f55aa934c471d3c2deb58652",
+  "chars": 24
+ },
+ {
+  "n": 62,
+  "ts": "2026-10-06T16:25:02.957Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "5d180d8e90b99e8ebc95f3aa0d7405d99d62b89a6b990fb4e27ae9188947f370",
+  "chars": 911
+ },
+ {
+  "n": 63,
+  "ts": "2026-10-06T16:26:43.184Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "7dd9659e753fe1a8e0b25ef2809b0a7ec71b5573dc2bf4aab65d4507f76bf2d3",
+  "chars": 85
+ },
+ {
+  "n": 64,
+  "ts": "2026-10-06T16:27:51.839Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "67c7683602a2cebcee1c363ed07a6ca9a73ac7995ea4c63466080ccb2a212f4f",
+  "chars": 744
+ },
+ {
+  "n": 65,
+  "ts": "2026-10-06T16:39:11.568Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "08a718dbc0e0e3b649551a0497c32fdba9ff003a6f9a9f52ab745cef2c9a43f9",
+  "chars": 934
+ },
+ {
+  "n": 66,
+  "ts": "2026-10-06T16:42:26.089Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "ae911cc4aecb0ecac95828845a41cb9455124e74e8a0d7e4cbade4666485d311",
+  "chars": 2780
+ },
+ {
+  "n": 67,
+  "ts": "2026-10-06T17:28:15.850Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "65d7252eee73868e4263b1e714819206617ee7f6289023686753b50e35ee2453",
+  "chars": 209
+ },
+ {
+  "n": 68,
+  "ts": "2026-10-06T17:29:31.745Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "7e4669f865b38a235cc2473d011196c18236e08badc22689fd59cf1b03920b3f",
+  "chars": 194
+ },
+ {
+  "n": 69,
+  "ts": "2026-10-06T17:30:43.975Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "e9e148c3f3563fd43b4ecafef14ee33916533727664ba366fbae6f467eaa18e4",
+  "chars": 299
+ },
+ {
+  "n": 70,
+  "ts": "2026-10-06T17:31:18.451Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "fb44a46c7351ee05270fee9fcfeec5ce183e7ed8cdbf31ccc0db67fb8f5c5aaf",
+  "chars": 111
+ },
+ {
+  "n": 71,
+  "ts": "2026-10-06T17:31:49.031Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "d48cb091751ce098177071437c832751dc912db189b3cbfbc29f32c76a785dd6",
+  "chars": 219
+ },
+ {
+  "n": 72,
+  "ts": "2026-10-06T17:32:26.306Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "2da63c787b75a78019b58d6ee79ff88fd418481eb4e12d2af4367793ea27b3ce",
+  "chars": 400
+ },
+ {
+  "n": 73,
+  "ts": "2026-10-06T17:32:43.863Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "7afd187546d45eb12cfe8dcc49aae505fb7e2f6744cc116f166894846091823d",
+  "chars": 165
+ },
+ {
+  "n": 74,
+  "ts": "2026-10-06T17:33:06.305Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "7b0ef84a34a3efba0221424e30f4116c809dec398e8e9abb488c8ca8fca322ee",
+  "chars": 153
+ },
+ {
+  "n": 75,
+  "ts": "2026-10-06T18:38:25.425Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "191c696f5f624390bc6a6e559d0795f825f2ffb7474eceb0bad8c12d35b12cdc",
+  "chars": 7728
+ },
+ {
+  "n": 76,
+  "ts": "2026-10-06T18:43:21.549Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f2423ae7a0b484543b8128bbf8c0a18a4448354420e0bd2dc7efebfadb5135b9",
+  "chars": 413
+ },
+ {
+  "n": 77,
+  "ts": "2026-10-06T18:47:49.221Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f0ab0951d5ed19d1b3a348ea28d40eae2dac04d2e938b3d542369787f6dbac3a",
+  "chars": 3688
+ },
+ {
+  "n": 78,
+  "ts": "2026-10-06T19:05:45.807Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "4dfb91b4a125edc7e1d08cc9918d7eef9471386d048931fdbb1938c5ddee75f7",
+  "chars": 214
+ },
+ {
+  "n": 79,
+  "ts": "2026-10-06T19:14:33.793Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "e3af862b64ac7face81b2ad4ec2baecf60ff5382004a4472f718547de4b77959",
+  "chars": 2325
+ },
+ {
+  "n": 80,
+  "ts": "2026-10-06T19:18:06.688Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "d923869b21fa024d009597282672e5f4b9a23908c228db5b3c0d82c0b79a2314",
+  "chars": 168
+ },
+ {
+  "n": 81,
+  "ts": "2026-10-06T19:18:53.333Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "5869f1f103fc4324a53331f3b8f921677cd339036aff420fe56acb7c417e4d00",
+  "chars": 2122
+ },
+ {
+  "n": 82,
+  "ts": "2026-10-06T19:22:27.272Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "92bca6bea9955ca2aaeebc5200d54255f64d3cc45ab1340a94e9453cdd45e3c2",
+  "chars": 11114
+ },
+ {
+  "n": 83,
+  "ts": "2026-10-06T19:30:40.636Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "0c0f374c9d5079c571eb376e645831c583c54dd2a53f3366ea765298b10fa815",
+  "chars": 38
+ },
+ {
+  "n": 84,
+  "ts": "2026-10-06T19:35:45.421Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "94b663dacce6da198a7ff5f2b4183633015399127bd6eca54524bd8e935bbeed",
+  "chars": 6192
+ },
+ {
+  "n": 85,
+  "ts": "2026-10-06T20:34:49.316Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "36711f8d7579efa3bba3b0a812532169d184e4b4c6e310d730dba9f591182b6f",
+  "chars": 1943
+ },
+ {
+  "n": 86,
+  "ts": "2026-10-06T20:36:33.255Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "fe8c389954342a50f6315fd172724c9453807e6993cf67d35a1e8f937b983441",
+  "chars": 452
+ },
+ {
+  "n": 87,
+  "ts": "2026-10-06T20:37:20.175Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f408289bd232092cfcd0770e9e77915cafd264f370c45181aaa5fe6852beebe0",
+  "chars": 89
+ },
+ {
+  "n": 88,
+  "ts": "2026-10-06T20:37:43.761Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "91eed6f0e4873efe70fd7953c3b9bd2ecf7a4cbc61b7303da3409713bbb8f389",
+  "chars": 62
+ },
+ {
+  "n": 89,
+  "ts": "2026-10-06T20:38:13.786Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "79d4f3ec15ab2dc1c99791b29a3dcb237ec5d6c4fed0dc5231da3d476831f70e",
+  "chars": 221
+ },
+ {
+  "n": 90,
+  "ts": "2026-10-06T20:38:22.070Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "3d1ad3234c66754fe72b33c646f945d6c98815f87b5269b9eff45519aab92253",
+  "chars": 31
+ },
+ {
+  "n": 91,
+  "ts": "2026-10-06T20:39:03.428Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "8842223dabcd5e1c633148338bfc912b4509c4fcca94ffecbf5b7648c39cfd09",
+  "chars": 212
+ },
+ {
+  "n": 92,
+  "ts": "2026-10-06T20:39:45.564Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "68e2ad68989d172b2370432e24bc0d963756ac866c0f7fa2cd7c4867716c2b7d",
+  "chars": 331
+ },
+ {
+  "n": 93,
+  "ts": "2026-10-06T20:40:30.521Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "d5c028b90c894afa790dbfe81c5f4121e6b645cf0756d505f9200fd96991cb96",
+  "chars": 437
+ },
+ {
+  "n": 94,
+  "ts": "2026-10-06T20:40:54.228Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "ddeb98afe91f4e0af608a2992a6f49044b5ae851c6f95b4d263e24d5ae111f40",
+  "chars": 250
+ },
+ {
+  "n": 95,
+  "ts": "2026-10-06T20:42:11.491Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "111b639abfdb7a5e51fd8e54a0d4893c7acbf771d40ee2e8597a3287391b3403",
+  "chars": 51
+ },
+ {
+  "n": 96,
+  "ts": "2026-10-06T20:43:10.868Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "67eb3a4dca3f825bc6e95ca717267c7644f84482be7a48bc5925be6452339dad",
+  "chars": 252
+ },
+ {
+  "n": 97,
+  "ts": "2026-10-06T20:43:52.578Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "24361daf0749718c4e279b47c459f3b396268357c0052fd3f1d56de7fd36c7c6",
+  "chars": 262
+ },
+ {
+  "n": 98,
+  "ts": "2026-10-06T20:44:08.393Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "1fab88168660da1c1f57f58de7a00dfe449d146099fda5512ab8328196959cb3",
+  "chars": 95
+ },
+ {
+  "n": 99,
+  "ts": "2026-10-06T20:45:53.611Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "10bbaf5065092a5bbd50c52ffe091dea6c9aef8c103a981cfa63391da7099a01",
+  "chars": 3549
+ },
+ {
+  "n": 100,
+  "ts": "2026-10-06T20:53:40.032Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "edaf09498cc5eff9a81aafde656b0920cdd45b1f8cc42fd2c8965469512cec82",
+  "chars": 2026
+ },
+ {
+  "n": 101,
+  "ts": "2026-10-06T21:00:35.106Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "dcb7b84690063819a33dca85c77f18b7a3f0855fb88042410a4dd16c40916b3a",
+  "chars": 2799
+ },
+ {
+  "n": 102,
+  "ts": "2026-10-06T21:01:39.782Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "bab94f7c34771f071d0a8db9c9bcbd7763431d6d5074f54b8a0adddb101e3917",
+  "chars": 173
+ },
+ {
+  "n": 103,
+  "ts": "2026-10-06T21:02:50.860Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "8aadd16081f98993d43cc7cfa078f9f9dfd511dc68f64c1f285b4ca1951cfc7b",
+  "chars": 269
+ },
+ {
+  "n": 104,
+  "ts": "2026-10-06T21:06:52.865Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "705abef1ac2d522cedfbd8429405a0c1c7dfadff91a50fd23b78416aac86da11",
+  "chars": 516
+ },
+ {
+  "n": 105,
+  "ts": "2026-10-06T21:08:25.089Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "967fd8d84ed9300b40aa426ffb1c745ad1d92f4ef560f626a048d4c4fa1ef4e3",
+  "chars": 379
+ },
+ {
+  "n": 106,
+  "ts": "2026-10-06T21:09:18.749Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "1903da49075e3dd80e56c41eb437c5b3049daae26bd96e6f1f4fc568b9e3878d",
+  "chars": 290
+ },
+ {
+  "n": 107,
+  "ts": "2026-10-06T21:10:40.712Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "72de91bbfb7d5ba76dcafeaae3712162e364a2c756d019944e77569940f90d8c",
+  "chars": 113
+ },
+ {
+  "n": 108,
+  "ts": "2026-10-06T21:11:21.788Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "09f6749b1ce1f46b6de77168092bad1586e45b420c62c6c589bd1831d22147f7",
+  "chars": 359
+ },
+ {
+  "n": 109,
+  "ts": "2026-10-06T21:14:43.974Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "1cece0b0fc615f1ed412222d10e4cdc6c2e22681718808f669e54591196ff530",
+  "chars": 263
+ },
+ {
+  "n": 110,
+  "ts": "2026-10-06T21:19:30.165Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "9b4dcfdba7059207c2f4eabea358b5df9c08e60b579d465309d0e830a14cfeda",
+  "chars": 201
+ },
+ {
+  "n": 111,
+  "ts": "2026-10-06T21:20:41.962Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "3066de460447ab38cb8bb06917873ad31f99ccb8165d17657dc441dacbcf40bb",
+  "chars": 540
+ },
+ {
+  "n": 112,
+  "ts": "2026-10-06T21:21:51.446Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "c36c2f4a447435a7fe2c6257614943624d47cdd2d326eaeeb9cbc53bb92200f3",
+  "chars": 95
+ },
+ {
+  "n": 113,
+  "ts": "2026-10-06T21:22:22.699Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "cd45fd534f0c9e414435a0501b85e17e5bc10bc6f4d30818c9fd8c35d62f850a",
+  "chars": 124
+ },
+ {
+  "n": 114,
+  "ts": "2026-10-06T21:23:18.815Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "903040477e34bbc95691eb26d103da123b8a002e61160760dada2e7c26602d9b",
+  "chars": 245
+ },
+ {
+  "n": 115,
+  "ts": "2026-10-06T21:24:05.126Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f2784d70f0e394f6dc077e80f1db421f386c11987c3f7478d85e477a803cd11d",
+  "chars": 342
+ },
+ {
+  "n": 116,
+  "ts": "2026-10-06T21:25:19.735Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "4ef144751c7720e3f5bfa053777088d04e1c60660a315d631a361cfab93ba6f5",
+  "chars": 490
+ },
+ {
+  "n": 117,
+  "ts": "2026-10-06T21:26:22.161Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "603afe9c21bbb50283f768b1d82789184838a0af88b86e43b84bdd4ba4c9d03f",
+  "chars": 411
+ },
+ {
+  "n": 118,
+  "ts": "2026-10-06T21:28:12.607Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "341d5d7b501a9c4aaf85de6ef9bd0b1a7cbd878d4d13d2ef012d8d9461b216ea",
+  "chars": 881
+ },
+ {
+  "n": 119,
+  "ts": "2026-10-06T21:30:21.145Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "471e18579de32233296ba898fc94c0da6d8090394f5c6a367746b0747f6ba229",
+  "chars": 4190
+ },
+ {
+  "n": 120,
+  "ts": "2026-10-06T21:32:51.761Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "a8886069ba35f7fd507b2471434bf09ad7b74e526917f6a2ad3a667e6e7867a8",
+  "chars": 3392
+ },
+ {
+  "n": 121,
+  "ts": "2026-10-06T21:36:56.544Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "07d225f7cc465af4a378a13475aa7c5f735ff32a7ccf1929ce6c9118d66362ae",
+  "chars": 4989
+ },
+ {
+  "n": 122,
+  "ts": "2026-10-06T21:39:18.724Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "bc2c43306b098832243b297549c3db45466b094b654a0d87f286a9474c576d7e",
+  "chars": 2821
+ },
+ {
+  "n": 123,
+  "ts": "2026-10-06T21:48:19.236Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "b343bdf49b701af8345f14836b4f3299f21a8f82cfe43b5c8b0dd2e2a2bc0400",
+  "chars": 4457
+ },
+ {
+  "n": 124,
+  "ts": "2026-10-06T21:49:17.063Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "e2fe3ee4150d230e546bc4e168f91f58483b138918874d7e2e4ed26f7dc11689",
+  "chars": 1948
+ },
+ {
+  "n": 125,
+  "ts": "2026-10-06T21:49:54.400Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "a9b388ee07b7d09c288741d19a2bfa98cb720a093584b9c5ad700982b89c399f",
+  "chars": 155
+ },
+ {
+  "n": 126,
+  "ts": "2026-10-06T21:50:43.892Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "1a7541d549631cb4f23ddb00396598b2951e01169bf19a55efbc8d7e186c517d",
+  "chars": 587
+ },
+ {
+  "n": 127,
+  "ts": "2026-10-06T21:51:51.934Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "8e0fafc1f033f8c3bd6496b01c0337963a7e3b6dd330d13a7992bc6c0ae4c39b",
+  "chars": 541
+ },
+ {
+  "n": 128,
+  "ts": "2026-10-06T21:53:19.973Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "7257d1c641d97b62e4ee273db527f9806d57300b07ed9523f8b3241a85c8c4c3",
+  "chars": 375
+ },
+ {
+  "n": 129,
+  "ts": "2026-10-06T21:54:11.139Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "d7f6dc3c8a7c11ee3c7ee7df3c1229a38014e888f7cfda9c1ba5f9ca29738236",
+  "chars": 190
+ },
+ {
+  "n": 130,
+  "ts": "2026-10-06T21:55:06.982Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "6f853df7d9d47bb2a4379d3c03e806e99c12a5512f196df78a66bfb7dec91328",
+  "chars": 200
+ },
+ {
+  "n": 131,
+  "ts": "2026-10-06T21:56:07.929Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "52fb543e10780867d6c7aa290e794c7fc18fe6d5be8295421b3d3d9684a31f35",
+  "chars": 169
+ },
+ {
+  "n": 132,
+  "ts": "2026-10-06T21:57:25.597Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "43df7ae2b6f71340c1eaeb4393869a15a5438980174bbdb79471b7e49c0402c9",
+  "chars": 241
+ },
+ {
+  "n": 133,
+  "ts": "2026-10-06T21:58:08.660Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "9a8c2e5c29b34f8461814a87a44c9ba6d1368893c23660d0099d768f6896191d",
+  "chars": 180
+ },
+ {
+  "n": 134,
+  "ts": "2026-10-06T21:58:24.727Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "788ffefc18c1452158f10793761c8d0cf98f5a069a06f954cdfa0abd78b5033c",
+  "chars": 202
+ },
+ {
+  "n": 135,
+  "ts": "2026-10-06T21:59:38.872Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "4affbb1e275d2cc39f2d9a06d3c4ac0b596ea0c82c99bb8105e2ffaec65bf880",
+  "chars": 547
+ },
+ {
+  "n": 136,
+  "ts": "2026-10-06T22:00:19.269Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "4484cd7208fcee315050a8a8f23d28f7b7ea974f96b39369fa357c4e80ffe274",
+  "chars": 280
+ },
+ {
+  "n": 137,
+  "ts": "2026-10-06T22:01:41.843Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "2d4a087de2502d2d6e345613424c916a0d7a7955652c084be34955ff4b29b8f3",
+  "chars": 378
+ },
+ {
+  "n": 138,
+  "ts": "2026-10-06T22:02:20.591Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "223e1ec2f8afa91633ed8d869024d4b192f4bd1999a2a3f62201c94b655fd893",
+  "chars": 106
+ },
+ {
+  "n": 139,
+  "ts": "2026-10-06T22:03:20.279Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "1855888fe1be21946c27f0f188a32fdea3022ff11dba479704a9756b818d7f63",
+  "chars": 286
+ },
+ {
+  "n": 140,
+  "ts": "2026-10-06T22:03:46.462Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "2365a3ca04eb310e619cb9fcd90b73842024b3f209d611b84a2efa6f9df1c881",
+  "chars": 140
+ },
+ {
+  "n": 141,
+  "ts": "2026-10-06T22:04:00.997Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "98efa8b04c7e94d03ee0866b6d61cb9f49c393648ab886cb35f95be39bf4eab6",
+  "chars": 50
+ },
+ {
+  "n": 142,
+  "ts": "2026-10-06T22:04:48.954Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "c898978576de76c72d28603f16b55268019d45e4e48e6dedb295229622eaba83",
+  "chars": 438
+ },
+ {
+  "n": 143,
+  "ts": "2026-10-06T22:05:46.372Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "a0005574abe4d9d1f0ecaf04c9eaa77e9f1593df6859f95659ca861b4f1f474e",
+  "chars": 186
+ },
+ {
+  "n": 144,
+  "ts": "2026-10-06T22:06:36.717Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "305f62af7ce04d0dffafdce35886b38664ef376acfafed76f92bcea18b0942d5",
+  "chars": 453
+ },
+ {
+  "n": 145,
+  "ts": "2026-10-06T22:07:17.938Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "2857eecfe4d6815f7a35cc8fcda0d0fe4c785fa07f0c9f03c357cbac3fd7a3f8",
+  "chars": 232
+ },
+ {
+  "n": 146,
+  "ts": "2026-10-06T22:07:33.699Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "a228de7c4526c8c06556bfdc63cc3a5429c29116422c20c1f2b20da7e332145a",
+  "chars": 85
+ },
+ {
+  "n": 147,
+  "ts": "2026-10-06T22:08:15.183Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "61d832e11c21425ab9c28e292475c1a3a85320ebc807102e9c74b1c95a0e382f",
+  "chars": 406
+ },
+ {
+  "n": 148,
+  "ts": "2026-10-06T22:08:57.468Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "9ba7145beb1544f18c92fe1ff57c5300c431e45417b01d945b201ec33016f071",
+  "chars": 130
+ },
+ {
+  "n": 149,
+  "ts": "2026-10-06T22:09:51.683Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "e59d3d5683822ee8c5c152639fbbf5cc2e304dcb4e334c495379a4f95670868f",
+  "chars": 194
+ },
+ {
+  "n": 150,
+  "ts": "2026-10-06T22:10:39.561Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "1be494c75c7a4c79103c42c0356890006959f107c1042ed0ed0dead6ba92b064",
+  "chars": 167
+ },
+ {
+  "n": 151,
+  "ts": "2026-10-06T22:11:10.658Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "ad87c1a80abae35bef9b903670a457ce5367af4c6010c269a6d8efa3bfdd2656",
+  "chars": 278
+ },
+ {
+  "n": 152,
+  "ts": "2026-10-06T22:11:33.998Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "3c0fb419822448713b1b75cc97ca07d523a3fb3cf0d13ab23ca70386818a0e06",
+  "chars": 113
+ },
+ {
+  "n": 153,
+  "ts": "2026-10-06T22:12:28.817Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "5b70a50c6087fe59319930160ef720eefb26d5e782af9186520ceaeea1744c84",
+  "chars": 262
+ },
+ {
+  "n": 154,
+  "ts": "2026-10-06T22:14:06.402Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "7afc06fa47ae3ddebe22ef6020947fcb7aced870a9d8fb79571276e3a68610d5",
+  "chars": 504
+ },
+ {
+  "n": 155,
+  "ts": "2026-10-06T22:15:15.736Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "4a90512b8d297aa02a963093138179b49817544ea14891a75b0ce119835aa619",
+  "chars": 401
+ },
+ {
+  "n": 156,
+  "ts": "2026-10-06T22:15:52.167Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "35b20dbe11a5716af4e62ad6bd010a99075736bbf3dd6e2a9659056e98108696",
+  "chars": 253
+ },
+ {
+  "n": 157,
+  "ts": "2026-10-06T22:16:08.417Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "3b1be072b9f0cb171452114e88f1c185538f42ae50636a937c8050b6ff58260c",
+  "chars": 199
+ },
+ {
+  "n": 158,
+  "ts": "2026-10-06T22:17:02.087Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "04d78c49bc367fc424281d5ccba3b9bc8880ed559c34dbc21f577c494446b58a",
+  "chars": 670
+ },
+ {
+  "n": 159,
+  "ts": "2026-10-06T22:17:54.787Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "c7a622c0d9fa094f352e90d873b20e4f6e41c4f2f02b16ebccd29029455fe28e",
+  "chars": 394
+ },
+ {
+  "n": 160,
+  "ts": "2026-10-06T22:18:12.311Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "dc47af89885791681d3555013d07a737e7a79fef75ffe7921521d416d8fc1d8b",
+  "chars": 151
+ },
+ {
+  "n": 161,
+  "ts": "2026-10-06T22:18:24.598Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f31f9a6eebf601e7264e583f209881f7af33789c10c58f4ad4fc85cd205b3c87",
+  "chars": 141
+ },
+ {
+  "n": 162,
+  "ts": "2026-10-06T22:18:42.819Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "31911c752af8e99f995b8485340f4544d28877d9e2e0b22171b5dbe24c49da29",
+  "chars": 69
+ },
+ {
+  "n": 163,
+  "ts": "2026-10-06T22:19:03.332Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "91087c8cf075c838db1b924e770a51e733c95c7a81891e445dab241c9e75d9bb",
+  "chars": 155
+ },
+ {
+  "n": 164,
+  "ts": "2026-10-06T22:19:30.511Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "1edc227b7ed9f4dd9bb4c8e002cfed814cf2c062dc957d08e786298294e31739",
+  "chars": 86
+ },
+ {
+  "n": 165,
+  "ts": "2026-10-06T22:20:02.641Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "c7ce065b43d76d61f0421ec4b48fddce846e0dfd04f2f03ce5b95c427bfdb0c4",
+  "chars": 400
+ },
+ {
+  "n": 166,
+  "ts": "2026-10-06T22:21:06.070Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "e54b6000bc115362756deee61754034e2bbc35d0cbacf5a9398ba99ef0cebd1f",
+  "chars": 655
+ },
+ {
+  "n": 167,
+  "ts": "2026-10-06T22:22:41.741Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "5d824d97ec64ec0a7be493acfb2de756635c2d4b8b49bccabf9e1d18dfe4173f",
+  "chars": 549
+ },
+ {
+  "n": 168,
+  "ts": "2026-10-06T22:23:28.013Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "80e341c0f92f66b36ab2d644302194fb6cf6011027a34622a095ad7cb64f3e64",
+  "chars": 333
+ },
+ {
+  "n": 169,
+  "ts": "2026-10-06T22:24:08.943Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "72d3ade15e89b374e8ff46691629794791058836a77e9d427a5e6f5e272a81c3",
+  "chars": 70
+ },
+ {
+  "n": 170,
+  "ts": "2026-10-06T22:24:41.243Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "9635df10f7c8740fad46079d9e5f9ffb2233dadef6d5e4ac3feef6732b83bd75",
+  "chars": 449
+ },
+ {
+  "n": 171,
+  "ts": "2026-10-06T22:25:09.976Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "ba390b796f63b3804cdc4c871d15cfe45a3b3b74ff375f609cdce0b45c9798ac",
+  "chars": 152
+ },
+ {
+  "n": 172,
+  "ts": "2026-10-06T22:25:56.179Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "ebae7d2ef8b35f71e02af3eef11203691007f578d3920c57654a90d63a186f9c",
+  "chars": 306
+ },
+ {
+  "n": 173,
+  "ts": "2026-10-06T22:26:18.282Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "456ff6f1b3ad0b696ef2cff7ccd54491575f4961d663acf991f31b7c663ba27e",
+  "chars": 299
+ },
+ {
+  "n": 174,
+  "ts": "2026-10-06T22:27:08.598Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f67b39239c1cd4e215c3abef727b6f62f96b1d328d80b0b4acf8bfb3e7caa9e4",
+  "chars": 367
+ },
+ {
+  "n": 175,
+  "ts": "2026-10-06T22:28:06.650Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "c266c03a99ce74062cb8659e9148ef5b99317e33b298e6c8616e918b919d2d27",
+  "chars": 256
+ },
+ {
+  "n": 176,
+  "ts": "2026-10-06T22:29:07.213Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "bbf05eadc389646d3020af0f8c21e6cea943340bd72556127dcbbff3aced5f8f",
+  "chars": 412
+ },
+ {
+  "n": 177,
+  "ts": "2026-10-06T22:30:00.577Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "1c50a2f13cf9e8d256c7ab26e78bc8f7184b30f8e6dd344ba32a14de7aab480b",
+  "chars": 249
+ },
+ {
+  "n": 178,
+  "ts": "2026-10-06T22:30:57.936Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f60e5c2477d913695e5402013f5048819e0e3ca831279db3333b5f7e62bf05aa",
+  "chars": 168
+ },
+ {
+  "n": 179,
+  "ts": "2026-10-06T22:31:37.642Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "1e1910c53808b78c8c830d2367a478e6d674ed1050f63a33dc4f4f6c87fffae9",
+  "chars": 305
+ },
+ {
+  "n": 180,
+  "ts": "2026-10-06T22:32:13.209Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "6724bfed23e3a60d5b238e0f14db7b3e30b3ed1a13c609aef8540429155443fa",
+  "chars": 267
+ },
+ {
+  "n": 181,
+  "ts": "2026-10-06T22:33:14.246Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "3cc531428cbfd316ecaecbfcd320a28893be074dcd1b32b2e73e14bba9c498da",
+  "chars": 411
+ },
+ {
+  "n": 182,
+  "ts": "2026-10-06T22:33:32.889Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "394bf45c392da98ac59b9ff5e2a3a1bd9752ecd09a0ae63f254c925c90da9731",
+  "chars": 124
+ },
+ {
+  "n": 183,
+  "ts": "2026-10-06T22:33:44.907Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "a6e6c85504af726770d354e3cb07940b8a37bda5509f61c066db50c3ed867761",
+  "chars": 59
+ },
+ {
+  "n": 184,
+  "ts": "2026-10-06T22:34:12.261Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "b3ca0a635867ec2bbcf7c57282d2f8b42de197ad2093936fb01f6748625e392a",
+  "chars": 82
+ },
+ {
+  "n": 185,
+  "ts": "2026-10-06T22:34:49.153Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "b78695d994bd7dd72c275244f45bc32996c7df13310891d3228aa2eb9e3a5b35",
+  "chars": 193
+ },
+ {
+  "n": 186,
+  "ts": "2026-10-06T22:35:38.543Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "aaf0814264428e700105beabde89bdfd9ada1ef2c5736f1172d96179762b365f",
+  "chars": 179
+ },
+ {
+  "n": 187,
+  "ts": "2026-10-06T22:36:25.455Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "14c1deee0218d74a66fe8ddaaf3599925228b31ddddc56471118728c2300d674",
+  "chars": 332
+ },
+ {
+  "n": 188,
+  "ts": "2026-10-06T22:36:42.583Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "e756a547f9c33f7fad558226fbdacd7d01b9adcab78edb75a0f2986849b5b363",
+  "chars": 106
+ },
+ {
+  "n": 189,
+  "ts": "2026-10-06T22:41:02.927Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "e648c6c9bd4d5c5556ef430995ef94ba889cdd6f6efea7e591f4c95e05235257",
+  "chars": 767
+ },
+ {
+  "n": 190,
+  "ts": "2026-10-06T22:41:50.807Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "46c77432799c84f1341f604945fe72c1bbb86a95d4bf47a01ae5605a12298e96",
+  "chars": 314
+ },
+ {
+  "n": 191,
+  "ts": "2026-10-06T22:42:48.225Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "9564c01fdc52dd2bf416d9e75e52324cd825ab6ffc151bdfbf527826ccb4f099",
+  "chars": 233
+ },
+ {
+  "n": 192,
+  "ts": "2026-10-06T22:47:56.871Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "83e7f19d43ed65af1eb3d80cb089bca021de24a4d2a33cb27374f8d3e1815369",
+  "chars": 552
+ },
+ {
+  "n": 193,
+  "ts": "2026-10-06T22:49:01.264Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "85449a41904faefb1b39fc13ee831917f963ce08cdc038cb7cd8e46ab46cb03c",
+  "chars": 191
+ },
+ {
+  "n": 194,
+  "ts": "2026-10-06T22:50:10.152Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "adef722d99e299db6f23cbf3e34413480f1aaeebac3af8650bf69dd54f3fb93c",
+  "chars": 406
+ },
+ {
+  "n": 195,
+  "ts": "2026-10-06T22:50:32.946Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "85cee06237e28344b09ed9bc2bfab175d8e550c913fc126a7817b25e626a3ddf",
+  "chars": 267
+ },
+ {
+  "n": 196,
+  "ts": "2026-10-06T23:01:56.627Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "69483152a0922143d52f32a207815dd97326c0d3a680d22db9ed0daea01b40dd",
+  "chars": 135
+ },
+ {
+  "n": 197,
+  "ts": "2026-10-06T23:02:54.376Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "d44d12e283ce98167532ca4bb42dd77293afebe0e8775ad87a8915fec94d8d88",
+  "chars": 202
+ },
+ {
+  "n": 198,
+  "ts": "2026-10-06T23:03:29.072Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "0d6bd7f26c7b980e77205efb3f7cec07098dfc9539f4d84d57f3464947d6771e",
+  "chars": 54
+ },
+ {
+  "n": 199,
+  "ts": "2026-10-06T23:18:41.936Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "e3289f1f3e8cc7ab901bde38d3116a13775c034461c9acfd87135136c4a4196d",
+  "chars": 390
+ },
+ {
+  "n": 200,
+  "ts": "2026-10-06T23:19:14.728Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "99a3da623bf892d1797070ea40c766b3e9297973df61a3d8a0fc2586b1577f46",
+  "chars": 129
+ },
+ {
+  "n": 201,
+  "ts": "2026-10-06T23:19:26.081Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f254411b4eada2ac3640b4a9261ebcd4ae3f40e6853e0d7dd3efdc16836bc35b",
+  "chars": 136
+ },
+ {
+  "n": 202,
+  "ts": "2026-10-06T23:19:51.196Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "22bd82acba01b1f6daea3549522eb53d4aa0b52d6943d8972a08d614aba1267b",
+  "chars": 362
+ },
+ {
+  "n": 203,
+  "ts": "2026-10-06T23:21:26.651Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "42e6cf528d5740394306e2916c907d20187b44ffe4df7660a360995b8f1f92a4",
+  "chars": 3417
+ },
+ {
+  "n": 204,
+  "ts": "2026-10-06T23:22:23.282Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "314bb047c5fb970f46cae5ca684b9189e00252d03be7eccac4f8c7f2f24e846a",
+  "chars": 850
+ },
+ {
+  "n": 205,
+  "ts": "2026-10-06T23:24:07.710Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "cd9fa566df458821cab02c13d4ec0a773891748da483344a803950733bd95e38",
+  "chars": 711
+ },
+ {
+  "n": 206,
+  "ts": "2026-10-06T23:28:23.502Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "eb3bc6325b9987bc74e2f09f6f406845b5a5549f1bd490e16f3a280749ef42ff",
+  "chars": 9384
+ },
+ {
+  "n": 207,
+  "ts": "2026-10-06T23:29:51.755Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "026fc40380c18d34f33cea496e8657cb8971d005174fb89fd5e34fec5810d09b",
+  "chars": 2390
+ },
+ {
+  "n": 208,
+  "ts": "2026-10-06T23:31:00.484Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "208b613573641ab3f30d4771b2f07b42ffdbfc229569a034093394e6ab5ec800",
+  "chars": 130
+ },
+ {
+  "n": 209,
+  "ts": "2026-10-06T23:31:22.344Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "146ee159e1e46e0515d31957f98f2e8facbfe72eed04a064b078dfac670b01a8",
+  "chars": 28
+ },
+ {
+  "n": 210,
+  "ts": "2026-10-06T23:34:20.841Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "5f9d3d48a4df5411d5770d2acebba52a5f5ea9414ac1cc4595ca628dfde2d29a",
+  "chars": 676
+ },
+ {
+  "n": 211,
+  "ts": "2026-10-06T23:37:39.026Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "65b02646ec7c48bb62e73b26b867aa7a8ea7ca07392b05191aa6fbd4c6c4cd7c",
+  "chars": 506
+ },
+ {
+  "n": 212,
+  "ts": "2026-10-06T23:39:21.366Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "ef079db44e1bfeb8db992a07d6b7f5a62fbd55a15609db821f78db4fba76e9af",
+  "chars": 147
+ },
+ {
+  "n": 213,
+  "ts": "2026-10-06T23:39:58.470Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "add174b095f3c55ff124635f9a9d369d78957c33766f25ebc524452fa77e2e32",
+  "chars": 235
+ },
+ {
+  "n": 214,
+  "ts": "2026-10-06T23:42:20.501Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "f07f56db40a7ba9821737c7d3c5e8d6ad37ccab41efc7f810b3fedbc638dfd5b",
+  "chars": 526
+ },
+ {
+  "n": 215,
+  "ts": "2026-10-06T23:43:32.465Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "52eba4edaca02cc1b875155e6c80ed5327bf32e6ab7e98683090617fa27b8168",
+  "chars": 297
+ },
+ {
+  "n": 216,
+  "ts": "2026-10-06T23:44:02.418Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "727cdd58fb607382846e16e405907879b1533eb790f17db8b18c66c650bb4211",
+  "chars": 468
+ },
+ {
+  "n": 217,
+  "ts": "2026-10-06T23:44:19.598Z",
+  "file": "messages/2026-10-06.txt",
+  "sha256": "74b82787c4ebd66e78b1b339648caaad2d4a4b8e224569c935aa4ad899d9907e",
+  "chars": 361
+ },
+ {
+  "n": 218,
+  "ts": "2026-10-07T03:57:49.881Z",
+  "file": "messages/2026-10-07.txt",
+  "sha256": "a43bc8c00d824981334e390d9d076c474b961917d6d51b64f452a0202eb304a5",
+  "chars": 3455
+ },
+ {
+  "n": 219,
+  "ts": "2026-10-07T03:58:50.558Z",
+  "file": "messages/2026-10-07.txt",
+  "sha256": "fd898d44dce425b9bc548eec90c7004d47aa4a2745378ad270b4cbf2c4465199",
+  "chars": 48
+ },
+ {
+  "n": 220,
+  "ts": "2026-10-08T01:33:20.854Z",
+  "file": "messages/2026-10-08.txt",
+  "sha256": "6f1befaec5c767ec9632d9a74c0159b21ca8a55b93ab2ac40fd899df42665ca7",
+  "chars": 10116
+ },
+ {
+  "n": 221,
+  "ts": "2026-10-09T20:03:20.605Z",
+  "file": "messages/2026-10-09.txt",
+  "sha256": "16891024e861e3419492dd1a2658541382f0bff47109ddcaf01b1f6d1079d6ba",
+  "chars": 5200
+ },
+ {
+  "n": 222,
+  "ts": "2026-10-09T20:04:56.977Z",
+  "file": "messages/2026-10-09.txt",
+  "sha256": "25c64c0b564539932fd1372a28a32264aafc7ff8d70112e760f8025e68cee4e8",
+  "chars": 223
+ },
+ {
+  "n": 223,
+  "ts": "2026-10-10T08:00:14.648Z",
+  "file": "messages/2026-10-10.txt",
+  "sha256": "0618363ec566079a20ad057463beca2c790eec92925d758eb9871f38c06fc1f1",
+  "chars": 11865
+ },
+ {
+  "n": 224,
+  "ts": "2026-10-10T08:03:27.446Z",
+  "file": "messages/2026-10-10.txt",
+  "sha256": "833cefb674fbc1662adb9aecf5214da87da3cdd9396c75e4f09cd0f90f9c6177",
+  "chars": 1784
+ },
+ {
+  "n": 225,
+  "ts": "2026-10-10T08:20:22.407Z",
+  "file": "messages/2026-10-10.txt",
+  "sha256": "4a58ed4351a4887279a0e0472dc719875d82ecc7d866c334b99336806402580a",
+  "chars": 55
+ },
+ {
+  "n": 226,
+  "ts": "2026-10-11T13:33:46.438Z",
+  "file": "messages/2026-10-11.txt",
+  "sha256": "2481bae4cb59ba72521dbf67c32ababf9eedba473c1ba838db2b11006901cc0d",
+  "chars": 7892
+ },
+ {
+  "n": 227,
+  "ts": "2026-10-12T16:43:19.756Z",
+  "file": "messages/2026-10-12.txt",
+  "sha256": "66da6c36bc1c82bb026a1d5ec84f38f92459a89fbe7e93be1953d0e093b6726f",
+  "chars": 15382
+ },
+ {
+  "n": 228,
+  "ts": "2026-10-12T16:47:23.261Z",
+  "file": "messages/2026-10-12.txt",
+  "sha256": "021ecfaca2383c03f156178cffec7e682565d17f54bcf3bdb9f64dcea5eb0090",
+  "chars": 1513
+ }
+]

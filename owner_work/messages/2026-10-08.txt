@@ -1,0 +1,187 @@
+Owner's messages, 2026-10-08, verbatim as written (UTC timestamps).
+Nothing below is edited, except credentials, which are removed and marked where they were.
+
+
+===== #220  2026-10-08T01:33:20.854Z =====
+#!/usr/bin/env python3
+"""Polished Complete Dual-Axis Z9 Phase Diagram"""
+from PIL import Image, ImageDraw, ImageFont
+import math
+import numpy as np
+
+W, H = 1800, 1800
+img = Image.new('RGB', (W, H), (248, 250, 255))
+draw = ImageDraw.Draw(img)
+
+try:
+    font_title = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 32)
+    font_sub   = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 18)
+    font_label = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 22)
+    font_node  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 20)
+    font_small = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 14)
+    font_tiny  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 12)
+except Exception:
+    font_title = font_sub = font_label = font_node = font_small = font_tiny = ImageFont.load_default()
+
+cx, cy = W // 2, H // 2 - 50
+R = 520
+
+for r in range(R + 100, 20, -3):
+    t = r / (R + 100)
+    col = (int(248 - 30*(1-t)), int(250 - 20*(1-t)), int(255 - 5*(1-t)))
+    draw.ellipse([cx-r, cy-r, cx+r, cy+r], outline=col)
+
+draw.ellipse([cx-R-40, cy-R-40, cx+R+40, cy+R+40], outline=(60,70,120), width=3)
+draw.ellipse([cx-R, cy-R, cx+R, cy+R], outline=(20,30,80), width=5)
+draw.ellipse([cx-R+8, cy-R+8, cx+R-8, cy+R-8], outline=(100,120,180), width=1)
+
+node_list = [9, 1, 2, 3, 4, 5, 6, 7, 8]
+node_angles = {}
+for i, n in enumerate(node_list):
+    node_angles[n] = -90 + i * 40
+
+def pos(n, r=R):
+    a = math.radians(node_angles[n])
+    return (cx + r * math.cos(a), cy + r * math.sin(a))
+
+for i in range(9):
+    ang = -90 + i * 40
+    rad = math.radians(ang)
+    x1 = cx + (R + 12) * math.cos(rad); y1 = cy + (R + 12) * math.sin(rad)
+    x2 = cx + (R + 32) * math.cos(rad); y2 = cy + (R + 32) * math.sin(rad)
+    draw.line([(x1,y1), (x2,y2)], fill=(40,50,100), width=2)
+    deg = (i * 40) % 360
+    tx = cx + (R + 58) * math.cos(rad) - 14
+    ty = cy + (R + 58) * math.sin(rad) - 8
+    draw.text((tx, ty), f"{deg}deg", fill=(40,50,90), font=font_tiny)
+
+colors = {9:(255,190,0), 4:(220,20,40), 6:(20,50,200),
+          1:(0,160,180),2:(0,160,180),3:(0,160,180),5:(0,160,180),7:(0,160,180),8:(0,160,180)}
+
+hex_order = [1, 2, 4, 8, 7, 5, 1]
+for i in range(len(hex_order)-1):
+    n1, n2 = hex_order[i], hex_order[i+1]
+    x1, y1 = pos(n1); x2, y2 = pos(n2)
+    pts = []
+    for t in np.linspace(0, 1, 40):
+        mx = x1 + (x2 - x1) * t; my = y1 + (y2 - y1) * t
+        dx, dy = x2 - x1, y2 - y1
+        length = math.hypot(dx, dy) or 1
+        px, py = -dy / length, dx / length
+        wave = 22 * math.sin(t * math.pi * 3.0)
+        pts.append((mx + px * wave, my + py * wave))
+    for j in range(len(pts)-1):
+        draw.line([pts[j], pts[j+1]], fill=(255, 140, 0), width=6)
+    ax, ay = pts[-3]; bx, by = pts[-1]
+    draw.polygon([(bx, by),(ax + 8*(ay-by)/12, ay + 8*(bx-ax)/12),(ax - 8*(ay-by)/12, ay - 8*(bx-ax)/12)], fill=(255, 100, 0))
+
+x4, y4 = pos(4); x6, y6 = pos(6)
+pts46 = []
+for t in np.linspace(0, 1, 50):
+    mx = x4 + (x6 - x4) * t; my = y4 + (y6 - y4) * t
+    dx, dy = x6 - x4, y6 - y4
+    length = math.hypot(dx, dy) or 1
+    px, py = -dy / length, dx / length
+    wave = 15 * math.sin(t * math.pi * 5)
+    pts46.append((mx + px * wave, my + py * wave))
+for j in range(len(pts46)-1):
+    draw.line([pts46[j], pts46[j+1]], fill=(0, 200, 240), width=4)
+
+x3, y3 = pos(3)
+draw.line([(x3, y3), (x6, y6)], fill=(160, 40, 240), width=5)
+for rr in (45, 65, 85):
+    draw.arc([cx-rr, cy-rr, cx+rr, cy+rr], 210, 330, fill=(180, 60, 255), width=2)
+    draw.arc([cx-rr, cy-rr, cx+rr, cy+rr], 30, 150, fill=(180, 60, 255), width=2)
+
+for i in range(12):
+    r = 12 + i * 9
+    draw.ellipse([cx-r, cy-r, cx+r, cy+r], outline=(80, 140, 255), width=1)
+
+draw.ellipse([cx-18, cy-18, cx+18, cy+18], fill=(255,255,255), outline=(0,160,220), width=3)
+draw.text((cx-7, cy-12), "1", fill=(0,100,180), font=font_label)
+
+for n in range(1, 10):
+    x, y = pos(n)
+    col = colors[n]
+    r = 32 if n in (4, 6, 9) else 26
+    draw.ellipse([x-r-4, y-r-4, x+r+4, y+r+4], outline=col, width=2)
+    draw.ellipse([x-r, y-r, x+r, y+r], fill=col, outline=(10,10,30), width=3)
+    draw.arc([x-r-12, y-r-12, x+r+12, y+r+12], 40, 320, fill=(0,220,255), width=3)
+    lbl = "9=0" if n == 9 else str(n)
+    try:
+        bbox = draw.textbbox((0,0), lbl, font=font_node)
+        tw = bbox[2] - bbox[0]
+    except Exception:
+        tw = 20
+    draw.text((x - tw/2, y - 12), lbl, fill=(255,255,255), font=font_node)
+
+draw.text((pos(4)[0]-42, pos(4)[1]+38), "Mass Seed", fill=(180,10,30), font=font_small)
+draw.text((pos(6)[0]-48, pos(6)[1]+38), "Void Terminal", fill=(10,30,140), font=font_small)
+draw.text((pos(9)[0]-48, pos(9)[1]-55), "Singularity", fill=(180,130,0), font=font_small)
+
+px, py = pos(4)
+draw.rectangle([px+45, py-110, px+380, py-15], fill=(255,245,245), outline=(200,20,40), width=3)
+draw.text((px+55, py-100), "alpha_core = 4e-16", fill=(160,10,30), font=font_small)
+draw.text((px+55, py-78), "-> r_p ~ 0.8409 fm", fill=(180,0,20), font=font_label)
+draw.text((px+55, py-50), "(PDG / CODATA consensus)", fill=(120,30,40), font=font_tiny)
+draw.text((px+55, py-32), "from pi modular digital roots", fill=(100,40,50), font=font_tiny)
+
+draw.line([(cx, cy), (px, py)], fill=(220,60,60), width=2)
+mid = ((cx+px)/2 + 20, (cy+py)/2 - 15)
+draw.text(mid, "r_p = 0.84 fm", fill=(180,30,30), font=font_small)
+
+draw.text((50, cy-120), "Orbital Vector\nw_orb (perimeter)", fill=(20,50,140), font=font_small)
+draw.ellipse([65, cy-40, 95, cy-10], outline=(20,50,140), width=3)
+draw.text((W-300, cy-120), "Intrinsic Spin\nw_spin (local)", fill=(0,120,160), font=font_small)
+draw.arc([W-270, cy-50, W-235, cy-15], 0, 300, fill=(0,140,180), width=3)
+
+draw.text((cx-50, 95), "Omega = 6:1", fill=(120,40,200), font=font_label)
+draw.text((40, 200), "D = -720 deg -> 900 deg\n(2 full cycles +\n180 deg phase shift\n-> 9-attractor lock)", fill=(40,40,80), font=font_small)
+draw.text((W-250, 220), "+180 deg\nPhase Shift", fill=(40,40,80), font=font_small)
+
+box_x, box_y = 30, H - 380
+draw.rectangle([box_x, box_y, box_x + 560, box_y + 320], fill=(255,255,255), outline=(40,60,140), width=3)
+draw.text((box_x+12, box_y+8), "pi Digital-Root + Doubling Map -> Z9 Nodes", fill=(20,40,120), font=font_sub)
+draw.text((box_x+12, box_y+36), "314-145=169 -> dr=7  (node 7)", fill=(20,20,40), font=font_tiny)
+draw.text((box_x+12, box_y+54), "145+314=459 -> dr=9  (apex 9=0)", fill=(20,20,40), font=font_tiny)
+draw.text((box_x+12, box_y+72), "dr(1453)=dr(4459)=4  (Mass Seed -> r_p)", fill=(20,20,40), font=font_tiny)
+draw.text((box_x+12, box_y+90), "309 -> dr=3  (oscillator)   |  pi 3+1=4 ; 1+4=5", fill=(20,20,40), font=font_tiny)
+draw.text((box_x+12, box_y+118), "Doubling near pi (151-159)x2 -> modular residues:", fill=(60,30,80), font=font_tiny)
+draw.text((box_x+12, box_y+138), "153x2=306 ->9   154x2=308 ->2   155x2=310 ->4", fill=(30,30,50), font=font_tiny)
+draw.text((box_x+12, box_y+156), "156x2=312 ->6   157x2=314 ->8   158x2=316 ->1", fill=(30,30,50), font=font_tiny)
+draw.text((box_x+12, box_y+174), "159x2=318 ->3   (all land on doubling-orbit / core nodes)", fill=(30,30,50), font=font_tiny)
+draw.text((box_x+12, box_y+200), "Core-to-Void + 900 deg gyroscopic lock + Omega spin-orbit", fill=(140,20,30), font=font_tiny)
+draw.text((box_x+12, box_y+218), "stabilize Mass Seed geometric scale exactly at", fill=(140,20,30), font=font_tiny)
+draw.text((box_x+12, box_y+236), "measured proton rms charge radius r_p ~ 0.84 fm", fill=(180,0,20), font=font_small)
+draw.text((box_x+12, box_y+265), "alpha_void ~ 99.9999999999999996 %  |  residual -> core", fill=(50,50,80), font=font_tiny)
+draw.text((box_x+12, box_y+285), "Toroidal vortex clamp prevents energetic dissipation", fill=(50,50,80), font=font_tiny)
+
+rx = W - 400
+draw.rectangle([rx, H-380, W-30, H-60], fill=(255,255,255), outline=(100,40,160), width=3)
+draw.text((rx+12, H-370), "Dual-Axis Dynamics", fill=(100,30,140), font=font_sub)
+draw.text((rx+12, H-340), "- Carrier Hexagon: epicycloid ripples", fill=(30,30,50), font=font_tiny)
+draw.text((rx+12, H-320), "  (standing waves at Omega = 6:1)", fill=(30,30,50), font=font_tiny)
+draw.text((rx+12, H-300), "- Oscillator {3<->6}: gyroscopic precession", fill=(30,30,50), font=font_tiny)
+draw.text((rx+12, H-280), "- Complementary 4+6=1: vibrating matrix", fill=(30,30,50), font=font_tiny)
+draw.text((rx+12, H-260), "- 900 deg lock: spin + orbital alignment", fill=(30,30,50), font=font_tiny)
+draw.text((rx+12, H-240), "- Result: self-contained gyroscopic engine", fill=(30,30,50), font=font_tiny)
+draw.text((rx+12, H-210), "Perfect 40 deg modular spacing", fill=(80,40,120), font=font_tiny)
+draw.text((rx+12, H-190), "Doubling orbit 1->2->4->8->7->5->1", fill=(50,50,70), font=font_tiny)
+draw.text((rx+12, H-170), "Attractor: Singularity 9 (=0)", fill=(50,50,70), font=font_tiny)
+draw.text((rx+12, H-150), "Spin while Rotating -> 3D Vortex", fill=(50,50,70), font=font_tiny)
+draw.text((rx+12, H-120), "Higher-contrast scientific rendering", fill=(80,40,120), font=font_tiny)
+draw.text((rx+12, H-100), "All pi digital roots + new doubling", fill=(50,50,70), font=font_tiny)
+draw.text((rx+12, H-80), "sequences land on model nodes", fill=(50,50,70), font=font_tiny)
+
+draw.rectangle([20, 10, W-20, 100], fill=(255,255,255), outline=(20,30,80), width=2)
+draw.text((W//2 - 480, 20), "Complete Dual-Axis Gyroscopic Phase Diagram of the Atom on Z9", fill=(10,20,60), font=font_title)
+draw.text((W//2 - 420, 58), "Proton Radius r_p ~ 0.84 fm via pi Digital Roots & 900 deg Spin-Orbit Lock", fill=(140,20,60), font=font_sub)
+draw.text((W//2 - 320, 82), "Perfect 40 deg Modular Spacing  |  High Contrast  |  Mass Seed -> Proton", fill=(60,60,90), font=font_tiny)
+
+draw.text((W//2 - 520, H-40), "Carrier Hexagon Epicycloids - Precessing Oscillator Core - Toroidal Vortex Clamp - Modular Digital Roots of pi - Self-contained Gyroscopic Engine", fill=(50,50,80), font=font_tiny)
+
+out = "/mnt/agents/output/z9/complete_z9_polished.png"
+img.save(out, "PNG")
+print("Saved polished PNG:", out)
+print("Size:", img.size)
+
