@@ -213,7 +213,10 @@ class TestSIEMPipeline:
 
     async def test_queue_overflow_drops_oldest(self):
         exp = AsyncMock(spec=SplunkHECExporter)
-        exp.export = AsyncMock(side_effect=asyncio.sleep(1))  # slow consumer
+        async def _slow_consumer(*_args, **_kwargs):
+            await asyncio.sleep(1)
+
+        exp.export = AsyncMock(side_effect=_slow_consumer)
         pipeline = SIEMPipeline([exp], queue_size=2)
         ev = make_event()
         await pipeline.send(ev)
