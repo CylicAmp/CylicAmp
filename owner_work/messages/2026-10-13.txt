@@ -1123,3 +1123,18 @@ ord_137(10) = 8  -> 1/137 repeating block length
 - Any statement about what the Φ₁₂ cut means.
 - Any claim connecting 137 to α.
 
+
+
+===== #242  2026-10-13T16:08:39.893Z =====
+merge to main
+| Claim | Result |
+| --- | --- |
+| Φ₃(137) = 18907 = 7·37·73 | ✓ |
+| Φ₁₂(137) = 352256593 = 13·2473·10957 | ✓ |
+| 13, 2473, 10957 all prime | ✓ (double-checked by trial division) |
+| ord_p(137) = 12 for all three; p ≡ 1 (mod 12) | ✓ |
+| S = 113115117167 = 13 · 8701162859, 8701162859 prime | ✓ |
+| gcd(S, Φ₃) = 1, gcd(S, Φ₁₂) = 13 | ✓ |
+| ord₃₇(2) = 36; 2¹² ≡ 26 (mod 37); μ₃ = {1, 10, 26} | ✓ (10³ ≡ 26³ ≡ 1 mod 37) |
+| ord₁₃₇(10) = 8; 10⁴ ≡ −1 (mod 137); block `00729927` | ✓ |
+| Archive correction (period 8, not 6) | ✓ confirmed — "729927"/999999 ≠ 1/137 |
