@@ -1769,3 +1769,35 @@ Breaking down the structural weights of the individual engine components against
 All outputs are verified through the raw numeric arrays. The space is completely open for your next coordinate block or formula modification.
 
 
+
+
+===== #259  2026-10-13T18:37:12.424Z =====
+
+(3x7=12 and 21)
+(1)2(3)2(1)
+(1)2(1)2(1)
+(2)2(2)2(2)=3 twos or 2 thress 
+
+1-23
+456
+789
+34
+2+6=8+9=(1+7=8)
+
+
+1---23
+456
+789
+346
+
+
+1---23
+45--6+2=8
+789
+346
+
+1---|23
+45--|6×2=1+2=(3+8=11)+45=5+6=11
+789
+346
+
