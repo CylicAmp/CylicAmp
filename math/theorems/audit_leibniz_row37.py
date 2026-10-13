@@ -59,6 +59,23 @@ every inference used for exhaustiveness is independently checked):
   Thread 2  VERIFIED 2026-10-05 (thread2_collatz_twin_centres.py), with one
             correction to the 2026-09-26 source text (108's run: 113 steps,
             max 9232, passes 3077).
+
+SOURCES (owner, 2026-10-13: tied to this file -- owner_work message #250; the source list
+was sent as an image, kept at owner_work/images/2026-10-13_leibniz_sources.jpg)
+  1. Leibniz, G. W. (1684). Nova methodus pro maximis et minimis. Acta Eruditorum, October,
+     pp. 467-473. Smithsonian Libraries and Archives.
+  2. Leibniz, G. W. (1714). The Monadology, s.47. In R. Latta (Trans.), The Monadology and
+     Other Philosophical Writings (1898), pp. 243-244. Oxford University Press.
+  Checked: Nova methodus is the October 1684 Acta Eruditorum paper, pp. 467-473, Leibniz's
+  first publication of the differential calculus. Monadology s.47 is the "fulgurations"
+  section; Latta's translation is the Clarendon Press, Oxford, 1898 edition. Page numbers
+  243-244 and the Smithsonian holding are as given, not checked against the volumes.
+  The tie to this triangle, asserted below: every entry of the harmonic triangle is the SUM
+  of the two entries beneath it, L(n,k) = L(n+1,k) + L(n+1,k+1), so each row is the
+  difference table of the row below, and a run of differences telescopes -- the discrete
+  sum/difference rule whose continuous form is the calculus of Nova methodus. Checked exactly
+  on this file's row (n = 36, denominators 37 * C(36,k)) against row 37 beneath it, and on
+  the telescoping sum of the triangle's second diagonal, 1/(1*2) + 1/(2*3) + ... = 1 - 1/(N+1).
 """
 from math import comb
 from collections import Counter
@@ -110,6 +127,13 @@ assert [k for k, v in row.items() if v == 1] == [0, 36] and [k for k, v in row.i
 assert all(v3(comb(36, k)) == (s3(k) + s3(36 - k) - s3(36)) // 2 for k in range(37))
 assert all((v3(comb(36, k)) >= 2) == (row[k] == 9) for k in range(37))
 assert 11 * 26 % 37 == 27 and (3 * 37 + 1) == 16 * 7 and 3 * 7 + 1 == 2 * 11
+
+# SOURCES tie: the harmonic triangle is a difference table (exact rationals)
+from fractions import Fraction as _F
+_L = lambda n, k: _F(1, (n + 1) * comb(n, k))
+assert all(_L(36, k) == _L(37, k) + _L(37, k + 1) for k in range(37))      # row 36 = sums of row 37
+assert all(_L(36, k).denominator == 37 * comb(36, k) for k in range(37))   # this file's denominators
+assert all(sum(_F(1, m * (m + 1)) for m in range(1, N_ + 1)) == 1 - _F(1, N_ + 1) for N_ in (1, 10, 36, 100))
 
 if __name__ == "__main__":
     print("Leibniz row 37: centre", N, "dr", dr(N), "; spectrum", dict(Counter(row.values())))
