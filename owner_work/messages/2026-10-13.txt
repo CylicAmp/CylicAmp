@@ -1879,3 +1879,7 @@ or 11323 count commas with out
 235+111
 336-167
 167=cap plus new beginning 
+
+
+===== #266  2026-10-13T19:36:44.545Z =====
+If I start at 1, I count the comma as 2. And then I continue to count those commas from there. Then I will get to a 3. If I start at 1, I don't count the comma as adding 2. Then I get 1, 1 at the beginning of my count. Then I get 3. We get another comma, that's 2. And then 3 again.
