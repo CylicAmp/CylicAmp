@@ -28,6 +28,12 @@ FOLLOW-UP (same day, a supplied restatement of T3-T6): T3, T5 and T6 restated co
   (2x + y)^2 + 33y^2 = 1538 -- the wrong equation. Q(x, y) = 1538 is (2x + y)^2 + 33y^2 = 3078.
   The conclusion survives: that equation also has no integer solution (C5 of
   torus787_clusters_supplied_audit_2026_10_04.py), so Q never equals 1538.
+PROOF, not only search (added 2026-10-13, when the owner pasted this commit again): 3-adic
+  descent. u^2 + 33y^2 = 3078 with 3 | 3078 forces 3 | u; then 3u'^2 + 11y^2 = 1026 forces
+  3 | y, giving u'^2 + 33y'^2 = 342. The same two steps give u''^2 + 33y''^2 = 38, which needs
+  |y''| <= 1, and neither 38 nor 38 - 33 = 5 is a square. So no integer pair at all, not just
+  none in the searched box (the box |x| <= 60, |y| <= 10 already contains every candidate:
+  33y^2 <= 3078 gives |y| <= 9, (2x+y)^2 <= 3078 gives |x| <= 32).
 FALSIFICATION: any assertion failing.
 """
 import math
@@ -44,3 +50,7 @@ assert det(2) == 19 and det(2) % 3 != 0 and det(4) == 429 and det(4) % 5 != 0   
 assert (2 * 1 + 9) ** 2 + 33 * 81 == 2794 == 2 * (Q(1, 9) + 1)                            # follow-up
 assert 2 * (1538 + 1) == 3078 and not [(x, y) for y in range(-10, 11) for x in range(-60, 61)
                                        if (2 * x + y) ** 2 + 33 * y * y == 3078]
+# descent, step by step (each line: the modulus-3 fact, then the reduced equation)
+assert 3078 % 3 == 0 and 3078 // 3 - 0 == 1026 and 1026 % 3 == 0 and 1026 // 3 == 342      # 3|u, then 3|y
+assert 342 % 3 == 0 and 342 // 3 == 114 and 114 % 3 == 0 and 114 // 3 == 38                # 3|u', then 3|y'
+assert not [(u, y) for y in (-1, 0, 1) for u in range(-7, 8) if u * u + 33 * y * y == 38]   # 38 and 5: not squares
