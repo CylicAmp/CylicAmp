@@ -51,6 +51,40 @@ THE PAIRS
   33 = 12+21, 77 = 34+43; 46+64 = 110. 33 = 6, 77 = 5 (14 -> 5), 11 = 2; 110 is also 2, and 33+77 = 110.
   A two-digit number plus its reversal is 11 x its digit sum: 33 = 11x3, 77 = 11x7, 110 = 11x10.
 
+#268 (2026-10-13): the owner sent #267 again with this added, verbatim:
+    0,
+    00,
+    000,
+
+    this section goes by 369
+    like this
+    23
+    123
+    1123
+
+    when we count the comma
+
+
+    also with a comma we get 369
+
+    ,000=3
+    ,000=6
+    ,000=9=18
+    1+8=9
+    and if we add the commas
+    =18+3=21
+    =9+3=12
+
+  ,000 THREE TIMES -- holds: each ,000 adds three digits, 3, 6, 9; 3+6+9 = 18; 1+8 = 9; three commas:
+  18+3 = 21 and 9+3 = 12 -- 21 and 12 both ways round, both root 3, the pair of #267.
+  THE LEADS -- 369 = 3 x 123 (1, 2, 3 each times 3, no carries). 23 -> 123 -> 1123 each puts a 1 in
+  front (+100, +1000). Their digit sums 5, 6, 7 are the characters of 0,000 / 00,000 / 000,000
+  counting the comma (4+1, 5+1, 6+1). Open: how 23, 123, 1123 go by 3, 6, 9 -- asked.
+
+FRAMEWORKS (#268): 3 C3 (twin with 5, Sophie Germain -> 7); 6 TESLA; 9 SA_ST_A; 18 SEED; 21 SA_ST_B;
+  12 SA_ST_A; 23 TESLA, prime, Sophie Germain (47) and safe (11); 123 = 3 x 41 SA_ST_A;
+  1123 prime -> 13 CAS_EXT, not twin, not Sophie Germain (2247 = 3 x 7 x 107); 369 = 3^2 x 41 -> 36 NEG_H.
+
 FALSIFICATION: any assertion failing.
 """
 
@@ -74,5 +108,18 @@ assert (dr(33), dr(77), dr(11), dr(110)) == (6, 5, 2, 2) and 7 + 7 == 14 and 1 +
 for n in (12, 34, 46):
     assert n + int(str(n)[::-1]) == 11 * sum(map(int, str(n)))
 
+# 268
+run = [3 * k for k in (1, 2, 3)]
+assert run == [3, 6, 9] and sum(run) == 18 and 1 + 8 == 9 and 18 + 3 == 21 and 9 + 3 == 12
+assert dr(21) == dr(12) == 3 and str(21)[::-1] == "12"
+assert 369 == 3 * 123 and [3 * d for d in (1, 2, 3)] == [3, 6, 9]
+assert 123 - 23 == 100 and 1123 - 123 == 1000
+for n, sset in ((23, "0,000"), (123, "00,000"), (1123, "000,000")):
+    assert sum(map(int, str(n))) == len(sset) == len(sset.replace(",", "")) + 1
+from sympy import factorint, isprime
+assert isprime(23) and isprime(47) and isprime(11) and isprime(1123) and not isprime(2247)
+assert factorint(369) == {3: 2, 41: 1} and factorint(2247) == {3: 1, 7: 1, 107: 1}
+assert [n % 37 for n in (18, 21, 12, 23, 123, 1123, 369)] == [18, 21, 12, 23, 12, 13, 36]
+
 if __name__ == "__main__":
-    print("every line of #267 holds; 12+34 = 46, 21+43 = 64; 12+21 = 33, 34+43 = 77, 46+64 = 110 = 33+77")
+    print("every line of #267 and the ,000 lines of #268 hold; 369 = 3 x 123; 12+34 = 46, 21+43 = 64; 12+21 = 33, 34+43 = 77, 46+64 = 110 = 33+77")
