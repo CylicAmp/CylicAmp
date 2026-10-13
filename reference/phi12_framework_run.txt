@@ -1,0 +1,272 @@
+======================================================================
+n = 13
+======================================================================
+  [1] n mod 37          = 13
+  [2] SA/ST/CASCADE     = ['CASCADE']
+      orbit name        = CAS_EXT
+  [3] orbit             = CAS_EXT  [5, 13, 19]
+      position          = 1 of 3
+      Z/12Z class       = 11
+      QR mod 37         = no
+      block             = 351   (= 27 x 13)
+      orbit blocks      = ['135', '351', '513']
+      antipode          = 24 (SEED), block 648
+      block sum         = 351 + 648 = 999  (= 999, forced)
+      block-map cycle   = [13, 18, 5, 24, 19, 32]   (T303, length 6)
+                          orbits ['CAS_EXT', 'SEED', 'CAS_EXT', 'SEED', 'CAS_EXT', 'SEED']
+  [4] DR                = 4   basin = Basin
+      DR mod 3 = 1, n mod 3 = 1  (equal: True)
+  [5] mod 2,3,6,9       = 1, 1, 1, 4
+  [6] prime             = True   twin=True cousin=True sexy=True
+      Sophie Germain    = False (2n+1=27)   safe = False
+      chamber (mod 6)   = 1  (chi_-3 = +1)
+      orbit chambers    = {5: 5, 13: 1, 19: 1}
+  --- standing analysis ---
+  RH   residue 13: gamma_n = [24]
+       orbit CAS_EXT: gamma_n = [12, 21, 24]
+  137  n x137 = 5 (CAS_EXT),  n /137 = 19 (CAS_EXT)
+       n mod 137 = 13
+  R30  00001101 -> 10011001 = 153, mod 37 = 5 (CAS_EXT) <- stays in orbit
+  --- decimal period and cyclotomic slot (T301-T304) ---
+  1/13  base 10: pre=0 period=6   base 2: pre=0 period=12
+       block base 10 = 076923  (halves complementary)
+       block base  2 = 000100111011  (halves complementary)
+       Phi_6(10) = 91 = 7 x 13   -> primes of period 6: [7, 13]
+  complete lists containing 13: none   (L1 ord_p(137)=3 [7, 37, 73], L2 p=n^2+1 [5, 17, 37], L3 ord_p(10)=3 [37])
+  --- forced, carries no information (T282) ---
+  * orbit membership: the partition is complete
+  * the 137-map preserves every orbit, by definition
+  * class(a)+class(b) = class(ab) for EVERY factorization (T285)
+  * DR(a)*DR(b) = DR(ab) mod 9 for EVERY factorization
+  * block(13) = 27 x 13; the decimal route adds nothing (T303)
+  * the block sum with the antipode is 999 for every pair
+
+======================================================================
+n = 2473
+======================================================================
+  [1] n mod 37          = 31
+  [2] SA/ST/CASCADE     = none
+      orbit name        = C9
+  [3] orbit             = C9  [14, 29, 31]
+      position          = 2 of 3
+      Z/12Z class       = 9
+      QR mod 37         = no
+      block             = 837   (= 27 x 31)
+      orbit blocks      = ['378', '783', '837']
+      antipode          = 6 (TESLA), block 162
+      block sum         = 837 + 162 = 999  (= 999, forced)
+      block-map cycle   = [31, 23, 29, 6, 14, 8]   (T303, length 6)
+                          orbits ['C9', 'TESLA', 'C9', 'TESLA', 'C9', 'TESLA']
+  [4] DR                = 7   basin = Basin
+      DR mod 3 = 1, n mod 3 = 1  (equal: True)
+  [5] mod 2,3,6,9       = 1, 1, 1, 7
+  [6] prime             = True   twin=False cousin=True sexy=True
+      Sophie Germain    = False (2n+1=4947)   safe = False
+      chamber (mod 6)   = 1  (chi_-3 = +1)
+      orbit chambers    = {14: 2, 29: 5, 31: 1}
+  --- standing analysis ---
+  RH   residue 31: gamma_n = none in first 30
+       orbit C9: gamma_n = [1, 25]
+  137  n x137 = 29 (C9),  n /137 = 14 (C9)
+       n mod 137 = 7
+  R30  10101001 -> 00101111 = 47, mod 37 = 10 (IC)
+  --- decimal period and cyclotomic slot (T301-T304) ---
+  1/2473  base 10: pre=0 period=2472   base 2: pre=0 period=618
+       block base 10 = period 2472, not printed  (halves complementary)
+       block base  2 = period 618, not printed  (halves complementary)
+       Phi_2472(10) has degree 816 — too large to factor here, slot not computed
+  complete lists containing 2473: none   (L1 ord_p(137)=3 [7, 37, 73], L2 p=n^2+1 [5, 17, 37], L3 ord_p(10)=3 [37])
+  --- forced, carries no information (T282) ---
+  * orbit membership: the partition is complete
+  * the 137-map preserves every orbit, by definition
+  * class(a)+class(b) = class(ab) for EVERY factorization (T285)
+  * DR(a)*DR(b) = DR(ab) mod 9 for EVERY factorization
+  * block(31) = 27 x 31; the decimal route adds nothing (T303)
+  * the block sum with the antipode is 999 for every pair
+
+======================================================================
+n = 10957
+======================================================================
+  [1] n mod 37          = 5
+  [2] SA/ST/CASCADE     = none
+      orbit name        = CAS_EXT
+  [3] orbit             = CAS_EXT  [5, 13, 19]
+      position          = 0 of 3
+      Z/12Z class       = 11
+      QR mod 37         = no
+      block             = 135   (= 27 x 5)
+      orbit blocks      = ['135', '351', '513']
+      antipode          = 32 (SEED), block 864
+      block sum         = 135 + 864 = 999  (= 999, forced)
+      block-map cycle   = [5, 24, 19, 32, 13, 18]   (T303, length 6)
+                          orbits ['CAS_EXT', 'SEED', 'CAS_EXT', 'SEED', 'CAS_EXT', 'SEED']
+  [4] DR                = 4   basin = Basin
+      DR mod 3 = 1, n mod 3 = 1  (equal: True)
+  [5] mod 2,3,6,9       = 1, 1, 1, 4
+  [6] prime             = True   twin=False cousin=False sexy=False
+      Sophie Germain    = False (2n+1=21915)   safe = False
+      chamber (mod 6)   = 1  (chi_-3 = +1)
+      orbit chambers    = {5: 5, 13: 1, 19: 1}
+  --- standing analysis ---
+  RH   residue 5: gamma_n = [21]
+       orbit CAS_EXT: gamma_n = [12, 21, 24]
+  137  n x137 = 19 (CAS_EXT),  n /137 = 13 (CAS_EXT)
+       n mod 137 = 134
+  R30  11001101 -> 00111001 = 57, mod 37 = 20 (DARK_A)
+  --- decimal period and cyclotomic slot (T301-T304) ---
+  1/10957  base 10: pre=0 period=2739   base 2: pre=0 period=3652
+       block base 10 = period 2739, not printed
+       block base  2 = period 3652, not printed  (halves complementary)
+       Phi_2739(10) has degree 1640 — too large to factor here, slot not computed
+  complete lists containing 10957: none   (L1 ord_p(137)=3 [7, 37, 73], L2 p=n^2+1 [5, 17, 37], L3 ord_p(10)=3 [37])
+  --- forced, carries no information (T282) ---
+  * orbit membership: the partition is complete
+  * the 137-map preserves every orbit, by definition
+  * class(a)+class(b) = class(ab) for EVERY factorization (T285)
+  * DR(a)*DR(b) = DR(ab) mod 9 for EVERY factorization
+  * block(5) = 27 x 5; the decimal route adds nothing (T303)
+  * the block sum with the antipode is 999 for every pair
+
+======================================================================
+n = 18907
+======================================================================
+  [1] n mod 37          = 0
+  [2] SA/ST/CASCADE     = none
+  [3] orbit             = SEAM
+  [4] DR                = 7   basin = Basin
+      DR mod 3 = 1, n mod 3 = 1  (equal: True)
+  [5] mod 2,3,6,9       = 1, 1, 1, 7
+  [6] prime             = False   factorization = {7: 1, 37: 1, 73: 1}
+  --- standing analysis ---
+  SEAM: 37 | 18907. No orbit, no class. Rotation axis (T302).
+  cofactor n/37 = 511 = {7: 1, 73: 1}
+  --- decimal period and cyclotomic slot (T301-T304) ---
+  1/18907  base 10: pre=0 period=24   base 2: pre=0 period=36
+       block base 10 = 000052890463849367958957
+       block base  2 = 000000000000001101110111010110101101
+       Phi_24(10) = 99990001 = 99990001   -> primes of period 24: [99990001]
+       n = 7 x 37 x 73; part coprime to 10 is 18907 = 7 x 37 x 73, and ord_18907(10) = 24
+  --- forced, carries no information (T282) ---
+  * orbit membership: the partition is complete
+  * the 137-map preserves every orbit, by definition
+
+======================================================================
+n = 352256593
+======================================================================
+  [1] n mod 37          = 17
+  [2] SA/ST/CASCADE     = none
+      orbit name        = NQR17
+  [3] orbit             = NQR17  [17, 22, 35]
+      position          = 0 of 3
+      Z/12Z class       = 7
+      QR mod 37         = no
+      block             = 459   (= 27 x 17)
+      orbit blocks      = ['459', '594', '945']
+      antipode          = 20 (DARK_A), block 540
+      block sum         = 459 + 540 = 999  (= 999, forced)
+      block-map cycle   = [17, 15, 35, 20, 22, 2]   (T303, length 6)
+                          orbits ['NQR17', 'DARK_A', 'NQR17', 'DARK_A', 'NQR17', 'DARK_A']
+  [4] DR                = 4   basin = Basin
+      DR mod 3 = 1, n mod 3 = 1  (equal: True)
+  [5] mod 2,3,6,9       = 1, 1, 1, 4
+  [6] prime             = False   factorization = {13: 1, 2473: 1, 10957: 1}
+      orbit chambers    = {17: 5, 22: 4, 35: 5}
+  --- standing analysis ---
+  RH   residue 17: gamma_n = none in first 30
+       orbit NQR17: gamma_n = [13, 18]
+  137  n x137 = 35 (NQR17),  n /137 = 22 (NQR17)
+       n mod 137 = 1
+  R30  01010001 -> 01011011 = 91, mod 37 = 17 (NQR17) <- stays in orbit
+  --- decimal period and cyclotomic slot (T301-T304) ---
+  1/352256593  base 10: pre=0 period=2256936   base 2: pre=0 period=1128468
+       block base 10 = period 2256936, not printed
+       block base  2 = period 1128468, not printed
+       Phi_2256936(10) has degree 669120 — too large to factor here, slot not computed
+  --- forced, carries no information (T282) ---
+  * orbit membership: the partition is complete
+  * the 137-map preserves every orbit, by definition
+  * class(a)+class(b) = class(ab) for EVERY factorization (T285)
+  * DR(a)*DR(b) = DR(ab) mod 9 for EVERY factorization
+  * block(17) = 27 x 17; the decimal route adds nothing (T303)
+  * the block sum with the antipode is 999 for every pair
+
+======================================================================
+n = 113115117167
+======================================================================
+  [1] n mod 37          = 31
+      (same residue as 2473 audited above — all
+       mod-37 rows below will be identical)
+  [2] SA/ST/CASCADE     = none
+      orbit name        = C9
+  [3] orbit             = C9  [14, 29, 31]
+      position          = 2 of 3
+      Z/12Z class       = 9
+      QR mod 37         = no
+      block             = 837   (= 27 x 31)
+      orbit blocks      = ['378', '783', '837']
+      antipode          = 6 (TESLA), block 162
+      block sum         = 837 + 162 = 999  (= 999, forced)
+      block-map cycle   = [31, 23, 29, 6, 14, 8]   (T303, length 6)
+                          orbits ['C9', 'TESLA', 'C9', 'TESLA', 'C9', 'TESLA']
+  [4] DR                = 8   basin = Valve
+      DR mod 3 = 2, n mod 3 = 2  (equal: True)
+  [5] mod 2,3,6,9       = 1, 2, 5, 8
+  [6] prime             = False   factorization = {13: 1, 8701162859: 1}
+      orbit chambers    = {14: 2, 29: 5, 31: 1}
+  --- standing analysis ---
+  RH   residue 31: gamma_n = none in first 30
+       orbit C9: gamma_n = [1, 25]
+  137  n x137 = 29 (C9),  n /137 = 14 (C9)
+       n mod 137 = 74
+  R30  01101111 -> 01001000 = 72, mod 37 = 35 (NQR17)
+  --- decimal period and cyclotomic slot (T301-T304) ---
+  1/113115117167  base 10: pre=0 period=unknown (search bound)   base 2: pre=0 period=unknown (search bound)
+  --- forced, carries no information (T282) ---
+  * orbit membership: the partition is complete
+  * the 137-map preserves every orbit, by definition
+  * class(a)+class(b) = class(ab) for EVERY factorization (T285)
+  * DR(a)*DR(b) = DR(ab) mod 9 for EVERY factorization
+  * block(31) = 27 x 31; the decimal route adds nothing (T303)
+  * the block sum with the antipode is 999 for every pair
+
+======================================================================
+n = 8701162859
+======================================================================
+  [1] n mod 37          = 28
+  [2] SA/ST/CASCADE     = none
+      orbit name        = SA_ST_B
+  [3] orbit             = SA_ST_B  [21, 25, 28]
+      position          = 2 of 3
+      Z/12Z class       = 10
+      QR mod 37         = yes
+      block             = 756   (= 27 x 28)
+      orbit blocks      = ['567', '675', '756']
+      antipode          = 9 (SA_ST_A), block 243
+      block sum         = 756 + 243 = 999  (= 999, forced)
+      block-map cycle   = [28, 16, 25, 9, 21, 12]   (T303, length 6)
+                          orbits ['SA_ST_B', 'SA_ST_A', 'SA_ST_B', 'SA_ST_A', 'SA_ST_B', 'SA_ST_A']
+  [4] DR                = 2   basin = Valve
+      DR mod 3 = 2, n mod 3 = 2  (equal: True)
+  [5] mod 2,3,6,9       = 1, 2, 5, 2
+  [6] prime             = True   twin=True cousin=False sexy=False
+      Sophie Germain    = True (2n+1=17402325719)   safe = False
+      SG chain          = 8701162859 -> 17402325719
+      chamber (mod 6)   = 5  (chi_-3 = -1)
+      orbit chambers    = {21: 3, 25: 1, 28: 4}
+  --- standing analysis ---
+  RH   residue 28: gamma_n = [15]
+       orbit SA_ST_B: gamma_n = [2, 3, 15, 28]
+  137  n x137 = 25 (SA_ST_B),  n /137 = 21 (SA_ST_B)
+       n mod 137 = 90
+  R30  01101011 -> 01001010 = 74, mod 37 = 0 (SEAM)
+  --- decimal period and cyclotomic slot (T301-T304) ---
+  1/8701162859  base 10: pre=0 period=unknown (search bound)   base 2: pre=0 period=unknown (search bound)
+  complete lists containing 8701162859: none   (L1 ord_p(137)=3 [7, 37, 73], L2 p=n^2+1 [5, 17, 37], L3 ord_p(10)=3 [37])
+  --- forced, carries no information (T282) ---
+  * orbit membership: the partition is complete
+  * the 137-map preserves every orbit, by definition
+  * class(a)+class(b) = class(ab) for EVERY factorization (T285)
+  * DR(a)*DR(b) = DR(ab) mod 9 for EVERY factorization
+  * block(28) = 27 x 28; the decimal route adds nothing (T303)
+  * the block sum with the antipode is 999 for every pair
+
