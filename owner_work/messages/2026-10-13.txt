@@ -1809,3 +1809,18 @@ All outputs are verified through the raw numeric arrays. The space is completely
 7|8|9
 3+4=7+9=7+2=9+3=1+2=3
 
+
+
+===== #261  2026-10-13T18:51:17.867Z =====
+1---------------2-----3
+4|5
+7|8|9
+3+4=7+9=7+2=9+3=1+2=3
+
+159-7
+48-84
+7-951 
+
+
+block of 6×2=1+2=3
+

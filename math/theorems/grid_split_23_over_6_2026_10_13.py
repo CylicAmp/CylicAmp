@@ -65,6 +65,27 @@ FOLLOW-UP (owner_work #260), verbatim:
   without it the grid totals 45 - 6 = 39 -> 3. The top row has 15 dashes between 1 and 2 and
   5 between 2 and 3.
 
+FOLLOW-UP 2 (owner_work #261), verbatim:
+    1---------------2-----3
+    4|5
+    7|8|9
+    3+4=7+9=7+2=9+3=1+2=3
+    
+    159-7
+    48-84
+    7-951 
+    
+    
+    block of 6×2=1+2=3
+
+  The block reads the same backwards: 7-951 is 159-7 reversed, and 48-84 is its own reverse.
+  "block of 6x2 = 1+2 = 3": it uses exactly six digits -- 1, 5, 9, 7, 4, 8 -- each exactly twice;
+  6 x 2 = 12 -> 1+2 = 3. Left out: 2, 3, 6.
+  Both mirrored pairs land on the opposite orbits NEG_H <-> IC:
+    159 = 11 (NEG_H), 951 = 26 (IC); 159 + 951 = 1110 = 30 x 37 (forced: 1+9 = 10, middle 5);
+    48 = 11 (NEG_H), 84 = 10 (IC); 84 + 26 x 48 = 1332 = 36 x 37 (forced: 8 = 2 x 4, as 24/42).
+  159 and 48 share the residue 11 (159 - 48 = 111 = 3 x 37). 7 -> D7.
+
 FALSIFICATION: any assertion failing.
 """
 from sympy import factorint, isprime
@@ -87,6 +108,16 @@ for _a in (3, 4, 9, 2, 3):
     _r = _dr(_r + _a); _walk.append(_r)
 assert _walk == [3, 7, 7, 9, 3] and 3 + 4 == 7 and _dr(7 + 9) == 7 and 7 + 2 == 9 and 9 + 3 == 12 and 1 + 2 == 3
 assert sum((3, 4, 9, 2, 3)) == 21 and _dr(21) == 3 and sum(range(1, 10)) - 6 == 39 and _dr(39) == 3
+
+# follow-up 2: the mirrored block
+from collections import Counter as _C
+_blk = ["159-7", "48-84", "7-951"]
+assert _blk[2] == _blk[0][::-1] and _blk[1] == _blk[1][::-1]
+_cnt = _C(ch for l in _blk for ch in l if ch.isdigit())
+assert len(_cnt) == 6 and set(_cnt.values()) == {2} and set("123456789") - set(_cnt) == set("236")
+assert 6 * 2 == 12 and 1 + 2 == 3
+assert 159 % 37 == 48 % 37 == 11 and 951 % 37 == 26 and 84 % 37 == 10
+assert 159 + 951 == 1110 == 30 * 37 and 84 + 26 * 48 == 1332 == 36 * 37 and 159 - 48 == 111
 
 if __name__ == "__main__":
     print("all hold; 12321 SEAM; 12121 = 22222 = 22 mod 37; 23 over 6 with 6+2=8 = TESLA {6,8,23}; rows = 12 mod 37")
