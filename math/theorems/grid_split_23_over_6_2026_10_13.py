@@ -53,6 +53,18 @@ THE GRID SPLIT
 FRAMEWORKS (mod 37, orbit): 21 SA_ST_B; 12 SA_ST_A; 23 prime TESLA; 34 D7; 45 -> 8 TESLA;
   56 -> 19 CAS_EXT; 17 prime NQR17; 11 prime NEG_H; 8 TESLA.
 
+FOLLOW-UP (owner_work #260), verbatim:
+    1---------------2-----3
+    4|5
+    7|8|9
+    3+4=7+9=7+2=9+3=1+2=3
+
+  The chain is a running digital root: 3+4 = 7; 7+9 = 16 -> 7 (adding 9 never changes a root);
+  7+2 = 9; 9+3 = 12 -> 1+2 = 3. Its addends 3, 4, 9, 2, 3 sum to 21 -> 3, the chain's end.
+  The grid: row 2 is 4|5 -- the 6 is gone (in #259 it stood split off as 45|6 and became 6+2 = 8);
+  without it the grid totals 45 - 6 = 39 -> 3. The top row has 15 dashes between 1 and 2 and
+  5 between 2 and 3.
+
 FALSIFICATION: any assertion failing.
 """
 from sympy import factorint, isprime
@@ -67,6 +79,14 @@ assert {6, 8, 23} == {6 * 26 ** k % 37 for k in range(3)} and 6 * 26 % 37 == 8 a
 assert 45 % 37 == 8 and isprime(23)
 assert 123 % 37 == 456 % 37 == 789 % 37 == 12 and 456 - 123 == 789 - 456 == 333 == 9 * 37
 assert 346 == 2 * 173 and 346 % 37 == 13
+
+# follow-up: the running-root chain and the grid without 6
+_dr = lambda v: 0 if v == 0 else 1 + (v - 1) % 9
+_walk, _r = [], 0
+for _a in (3, 4, 9, 2, 3):
+    _r = _dr(_r + _a); _walk.append(_r)
+assert _walk == [3, 7, 7, 9, 3] and 3 + 4 == 7 and _dr(7 + 9) == 7 and 7 + 2 == 9 and 9 + 3 == 12 and 1 + 2 == 3
+assert sum((3, 4, 9, 2, 3)) == 21 and _dr(21) == 3 and sum(range(1, 10)) - 6 == 39 and _dr(39) == 3
 
 if __name__ == "__main__":
     print("all hold; 12321 SEAM; 12121 = 22222 = 22 mod 37; 23 over 6 with 6+2=8 = TESLA {6,8,23}; rows = 12 mod 37")
