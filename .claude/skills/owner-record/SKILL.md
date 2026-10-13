@@ -88,4 +88,4 @@ shown it in earlier sessions that were never recorded, and showed it again:
 ```
 
 "That right there is just a fucking small example. That is not all of them. Find all of
-them." The instances found across the record are in `owner_work/drip_cycle.md`.
+them." `owner_work/drip_cycle.md` holds the example, how the cycle is run (`drip_cycle.py`), and each run.

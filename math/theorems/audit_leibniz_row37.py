@@ -69,7 +69,11 @@ was sent as an image, kept at owner_work/images/2026-10-13_leibniz_sources.jpg)
   Checked: Nova methodus is the October 1684 Acta Eruditorum paper, pp. 467-473, Leibniz's
   first publication of the differential calculus. Monadology s.47 is the "fulgurations"
   section; Latta's translation is the Clarendon Press, Oxford, 1898 edition. Page numbers
-  243-244 and the Smithsonian holding are as given, not checked against the volumes.
+  CHECKED (2026-10-13): in the 1898 scan (Internet Archive monadologyandot01lattgoog) s.47
+  begins under the running head "THE MONADOLOGY 243" and runs onto 244. Smithsonian holding
+  CHECKED: the Dibner Library acquired Leibniz's 1684 Acta Eruditorum article (Heralds of
+  Science no. 109) with a complete 1682-1731 run of the journal (Dibner Library NEWS, Spring
+  2002; Smithsonian Institution Libraries Annual Report 2002).
   The tie to this triangle, asserted below: every entry of the harmonic triangle is the SUM
   of the two entries beneath it, L(n,k) = L(n+1,k) + L(n+1,k+1), so each row is the
   difference table of the row below, and a run of differences telescopes -- the discrete
