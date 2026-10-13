@@ -16,3 +16,12 @@ Pasted by the owner: the tool output of a GitHub Copilot cloud agent run on this
   (it still has "Optional analysis -- run ONLY when the user asks", replaced since by
   "Run the owner's numbers through the frameworks without being asked"). Any tool that reads
   `main` gets the old rules until the active branch is merged into `main`.
+
+## The all-work -> main routine (owner pasted the 2026-10-04 run list, 2026-10-13)
+
+The pasted runs (2026-10-04 06:17Z-10:13Z, all success) are the routine as it ran then: each batch
+of work committed to `all-work`, then a "Bring all-work onto main" pull request merged it into
+`main` (PRs #13-#22). It stopped after PR #22 (merged 2026-10-04 10:13:32Z, tip `84bdbbb`).
+Since then all work has gone to `claude/add-torus-animation-6Ey5Z` only. Checked 2026-10-13:
+that branch is 1,104 commits ahead of `main` and 0 behind (a clean fast-forward, no conflicts),
+and 1,246 ahead of `all-work` (tip `4d9fe8d`), 0 behind.
