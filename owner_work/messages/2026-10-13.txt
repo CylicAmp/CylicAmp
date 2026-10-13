@@ -1864,3 +1864,18 @@ one short because everything needs +1 after downloading to begin again
 
 7+7=1+4=5+1=6
 
+
+
+===== #265  2026-10-13T19:08:34.083Z =====
+a set can be 
+0,000=1+3=4
+00,000=2+3=5
+000,000=3+3=6
+0+1=0,000,000=1+6=7
+or 12333 count commas with 1
+or 11323 count commas with out
+
+134+111
+235+111
+336-167
+167=cap plus new beginning 
