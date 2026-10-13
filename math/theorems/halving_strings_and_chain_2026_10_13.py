@@ -28,6 +28,23 @@ FRAMEWORKS: 53 prime, Sophie Germain (107), -> 16 SA_ST_A; 23 prime, Sophie Germ
   3322111 = 13 x 421 x 607 -> 29 C9; 44222211111111 = 3 x 11 x 1340067003367 -> 33 D7;
   20 DARK_A; 30 C3; 14 C9; 16 and 9 SA_ST_A.
 
+FOLLOW-UP (owner_work #264), verbatim:
+    one short because everything needs +1 after downloading to begin again 
+    
+    123+1=1+6=7
+    456+1=1+6=7
+    789+1=1+9=1
+    
+    7+7=1+4=5+1=6
+
+  The owner's rule, recorded as given: the 6 string is short because "everything needs +1 after
+  downloading to begin again."
+  123+1: digit sum 6, 6+1 = 7. 456+1: 15 -> 6, 6+1 = 7. 789+1: 789's digits sum to 24 -> 6 like the
+  other two rows, so 789+1 = 790 -> 7, not 1 (9+1 = 10 -> 1 holds for 9 alone).
+  7+7 = 14 -> 1+4 = 5, +1 = 6: holds.
+  The rows 123, 456, 789 all have root 6 and are all 12 (mod 37); after +1 -- 124, 457, 790 -- all
+  have root 7 and are all 13 (mod 37), CAS_EXT. The +1 moves the three rows together.
+
 FALSIFICATION: any assertion failing.
 """
 from sympy import factorint, isprime
@@ -56,6 +73,14 @@ assert run == [3, 7, 16, 30, 53] and 5 + 3 == 8 and 14 + 23 == 37 and 53 % 37 ==
 assert isprime(53) and isprime(107) and isprime(23) and isprime(47)
 assert factorint(3322111) == {13: 1, 421: 1, 607: 1} and 3322111 % 37 == 29
 assert factorint(44222211111111) == {3: 1, 11: 1, 1340067003367: 1} and 44222211111111 % 37 == 33
+
+# follow-up: the +1 rows
+_ds = lambda v: sum(map(int, str(v)))
+_r = lambda v: 0 if v == 0 else 1 + (v - 1) % 9
+assert [_r(_ds(v)) for v in (123, 456, 789)] == [6, 6, 6] and [_r(v + 1) for v in (123, 456, 789)] == [7, 7, 7]
+assert _ds(789) == 24 and _r(9 + 1) == 1 and _r(790) == 7
+assert [v % 37 for v in (123, 456, 789)] == [12, 12, 12] and [(v + 1) % 37 for v in (123, 456, 789)] == [13, 13, 13]
+assert 7 + 7 == 14 and 1 + 4 == 5 and 5 + 1 == 6
 
 if __name__ == "__main__":
     print("8 = 44|2222|11111111 exact; 6 = 33|2211|111111 (3322111 is its first 7 digits); chain holds; 14+23 = 37")
