@@ -11,9 +11,11 @@ Every run:
   2. Every number in them goes through the frameworks: the six registers
      (digit-protocols engine) and the full GF(37) audit (gf37-audit).
   3. Every number you wrote in both orders (12 and 21) gets the full flip-pair expansion.
-  4. One report, your lines first, the results beside them:
+  4. The recursion loop (unified_operator.py) grows your numbers through your operators,
+     with compute reservation and a checkpoint every step.
+  5. One report, your lines first, the results beside them:
      owner_work/plugged/<time>.txt
-  5. It commits and pushes to GitHub if this copy of the repo can, and says plainly if not.
+  6. It commits and pushes to GitHub if this copy of the repo can, and says plainly if not.
 """
 import datetime as dt
 import importlib.util
@@ -140,6 +142,11 @@ def main(args):
     small = [str(n) for n in nums if len(str(n)) <= MAX_DIGITS]
     if small:
         out += ["", "=" * 78, "GF(37) AUDIT, every number (gf37-audit)", "=" * 78, run([str(AUDIT), *small])]
+    seeds = [n for n in nums if 0 < n < 10 ** 24][:40]
+    if seeds:
+        out += ["", "=" * 78, "GROWTH: the recursion loop on your numbers (unified_operator.py)", "=" * 78,
+                run([str(ROOT / "unified_operator.py"), *map(str, seeds), "--budget", "3000", "--width", "12",
+                     "--checkpoint", str(PLUGGED / f"{stamp}_growth.json")])]
     report = "\n".join(out) + "\n"
 
     PLUGGED.mkdir(parents=True, exist_ok=True)
