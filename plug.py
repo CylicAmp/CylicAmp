@@ -4,6 +4,8 @@
     python3 plug.py              paste your lines, then a line with just END (or Ctrl-D)
     python3 plug.py notes.txt    or give it a file
     python3 plug.py --no-push    save and run everything, but do not send it to GitHub
+    python3 plug.py --no-record  run everything without adding the lines to owner_work again
+                                 (inside a Claude session the hook has already recorded them)
 
 Every run:
   1. Your lines are saved exactly as you wrote them, numbered and timestamped
@@ -63,7 +65,8 @@ def run(cmd):
 def numbers_by_line(text):
     order, by_line = [], []
     for i, line in enumerate(text.splitlines(), 1):
-        found = [int(m) for m in re.findall(r"\d+", line)]
+        # a decimal like 0.25 stays one number: it is audited by its digits as written (0.25 -> 25)
+        found = [int(m.replace(".", "").lstrip("0") or "0") for m in re.findall(r"\d+(?:\.\d+)?", line)]
         by_line.append((i, line, found))
         for n in found:
             if n not in order:
@@ -118,8 +121,9 @@ def main(args):
 
     rec = load_recorder()
     msgs = rec.load()
-    rec.add(msgs, ts, text)
-    rec.write_all(msgs)
+    if "--no-record" not in args:
+        rec.add(msgs, ts, text)
+        rec.write_all(msgs)
     n_msg = len(msgs)
 
     nums, by_line = numbers_by_line(text)
@@ -153,7 +157,7 @@ def main(args):
     path = PLUGGED / f"{stamp}.txt"
     path.write_text(report, encoding="utf-8")
 
-    print(f"\nSaved your lines as message #{n_msg}.  {len(nums)} numbers, {len(pairs)} numbers written "
+    print(f"\n{'Your lines are' if '--no-record' in args else 'Saved your lines as'} message #{n_msg}.  {len(nums)} numbers, {len(pairs)} numbers written "
           f"both ways (like 12 and 21), {len(swaps)} line groups written both ways round.")
     print(f"Report: {path.relative_to(ROOT)}")
     if "--no-push" not in args:

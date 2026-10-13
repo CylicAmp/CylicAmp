@@ -19,3 +19,11 @@ def test_246():
     assert {a for a, o in orbit.items() if o == "SEED"} == {"246", "462", "624"}
     assert {a for a, o in orbit.items() if o == "CAS_EXT"} == {"264", "426", "642"}
     assert 246 + 642 == 888 == 24 * 37 and 42 + 26 * 24 == 666 == 18 * 37
+
+
+def test_decimal_keeps_its_zero_and_lands_on_7():
+    levels = dict(drip.drip("0.25"))
+    threes = {a for _, a in levels[3]}
+    assert threes == {"025", "052", "205", "250", "502", "520"}
+    assert all(drip.frame(a)["dr"] == 7 for a in threes)
+    assert 102 * 4 % 37 == 1 and 102 % 37 == pow(4, -1, 37) == 28

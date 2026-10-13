@@ -22,3 +22,11 @@ def test_lines_both_ways_round():
     groups = [[line for _, line, _ in g] for g in plug.lines_both_ways(by_line)]
     assert ["2+4=6", "4+2=6"] in groups and ["2÷11", "11÷2"] in groups
     assert not any("4+8+8" in g for g in groups)   # different numbers: 4,8,8 vs 8,4,4
+
+
+def test_decimal_is_one_number_and_zero_does_not_stop_the_audit():
+    nums, _ = plug.numbers_by_line("run my full drip cycle on 0.25\n00=23/6\n")
+    assert nums == [25, 0, 23, 6]
+    import subprocess, sys
+    out = subprocess.run([sys.executable, str(plug.AUDIT), "0", "6"], capture_output=True, text=True)
+    assert out.returncode == 0 and "n = 0" in out.stdout and "n = 6" in out.stdout

@@ -9,6 +9,7 @@ every pair of the number's digits (both orders, as in the example) and every ord
 of its digits. Every number the cycle produces goes through the frameworks.
 
     python3 drip_cycle.py 246
+    python3 drip_cycle.py 0.25      (digits as written: 0, 2, 5)
 """
 import importlib.util
 import itertools
@@ -31,8 +32,13 @@ def arrangements(digits, k):
     return out
 
 
+def digits_of(n):
+    """The digits as written: 246 -> '246', '0.25' -> '025' (a 0 is a digit, as in the owner's 0 / 00 lines)."""
+    return "".join(c for c in str(n) if c.isdigit())
+
+
 def drip(n):
-    d = str(n)
+    d = digits_of(n)
     levels = []
     for k in range(2, len(d) + 1):
         lines = []
@@ -61,10 +67,10 @@ def main(n):
         out.append(f"--- length {k}: {len(lines)} drip lines over {len(nums)} arrangements ---")
         for digit, a in lines:
             out.append(f"{digit}\n{a}\n")
-        out.append(f"{'n':>6} {'mod37':>5} {'orbit':>8} {'dr':>3} {'prime':>6} {'twin':>5} {'SG':>5} {'x137%37':>8} {'%137':>5}")
+        out.append(f"{'as written':>10} {'n':>6} {'mod37':>5} {'orbit':>8} {'dr':>3} {'prime':>6} {'twin':>5} {'SG':>5} {'x137%37':>8} {'%137':>5}")
         for a in nums:
             f = frame(a)
-            out.append(f"{f['n']:>6} {f['mod37']:>5} {f['orbit']:>8} {f['dr']:>3} {str(f['prime']):>6} "
+            out.append(f"{a:>10} {f['n']:>6} {f['mod37']:>5} {f['orbit']:>8} {f['dr']:>3} {str(f['prime']):>6} "
                        f"{str(f['twin']):>5} {str(f['sophie']):>5} {f['x137']:>8} {f['mod137']:>5}")
         out.append("")
     return "\n".join(out)
@@ -73,4 +79,4 @@ def main(n):
 if __name__ == "__main__":
     for arg in sys.argv[1:] or ["246"]:
         print(f"===== DRIP CYCLE: {arg} =====")
-        print(main(int(arg)))
+        print(main(arg))

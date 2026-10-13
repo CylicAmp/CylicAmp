@@ -118,6 +118,8 @@ def audit(n, seen_residues=None):
             A(f"      SG chain          = {' -> '.join(map(str, ch))}")
         A(f"      chamber (mod 6)   = {p['chamber']}  "
           f"(chi_-3 = {'+1' if p['chamber']==1 else '-1'})")
+    elif n == 0:
+        A("  [6] prime             = False   factorization = none (0 is divisible by every prime)")
     else:
         A(f"  [6] prime             = False   factorization = {G.factor(n)}")
 
@@ -216,6 +218,17 @@ if __name__ == '__main__':
     seen = {}
     for a in args:
         n = int(a)
-        print(audit(n, seen))
+        if n == 0:
+            print("=" * 70 + "\nn = 0\n" + "=" * 70)
+            print("  [1] n mod 37          = 0   SEAM: 0 is the class of 37 itself; no orbit, no Z/12Z class")
+            print("  [4] DR                = 0   (empty digit sum)")
+            print("  [6] prime             = False   0 is divisible by every integer: no factorization,")
+            print("      no primality, no decimal period (1/0 has none)")
+            print()
+            continue
+        try:                                   # one number failing must not stop the others
+            print(audit(n, seen))
+        except Exception as e:
+            print(f"n = {n}: audit stopped at {type(e).__name__}: {e} -- the remaining numbers still run")
         print()
         seen.setdefault(n % G.P, n)
