@@ -85,6 +85,32 @@ FRAMEWORKS (#268): 3 C3 (twin with 5, Sophie Germain -> 7); 6 TESLA; 9 SA_ST_A; 
   12 SA_ST_A; 23 TESLA, prime, Sophie Germain (47) and safe (11); 123 = 3 x 41 SA_ST_A;
   1123 prime -> 13 CAS_EXT, not twin, not Sophie Germain (2247 = 3 x 7 x 107); 369 = 3^2 x 41 -> 36 NEG_H.
 
+#269 (2026-10-13): the owner sent #268 again with this added after "1123", verbatim:
+    because
+    123
+    112233
+
+    10-20-30
+    11-22-33
+    3---6--9+3 zeros =1+2=3
+  and at the end:
+    no comma count should be explored also because it creates a better understanding of the bigger picture..
+
+    I look at one from the other as
+    1=1 thats i view as something like integers vs primes or odds and even or positive or negative... I'm pretty sure it's a fairly new concept. Because I've never heard of what I'm telling you, and I just made the s*** up inside my head. But it makes sense to me. So that's why I keep going forward. Do you understand what I'm saying? It is not actually positive and negative odds or evens or indigenous or primes. It might have its own category. That's what we should figure out
+  (typo: "indigenous" for "integers", as in the line before.)
+
+  123 -> 112233: each digit written twice; 112233 = 11 x 10203 = 3 x 11 x 19 x 179.
+  10-20-30 is 1, 2, 3 with a zero; 11-22-33 is 1, 2, 3 written twice. Down each column:
+  10 over 11, 20 over 22, 30 over 33 add to 21, 42, 63 -- digit sums 1+0+1+1 = 3, 2+0+2+2 = 6,
+  3+0+3+3 = 9: the 3, 6, 9. 3+6+9 = 18 -> 9; with the 3 zeros of 10-20-30: 9+3 = 12, 1+2 = 3 --
+  the same step as "=9+3=12" with the 3 commas in #268.
+  112233 is 12 mod 37, like 123 and 12333 (112233 - 123 = 37 x 3030) -- recorded, not claimed.
+
+FRAMEWORKS (#269): 10 IC; 20 DARK_A; 30 C3; 11 NEG_H, prime, twin (11, 13), Sophie Germain with
+  2 x 11 + 1 = 23 -- the 23 of "23 / 123 / 1123" (so 23 is safe); 22 NQR17; 33 D7; 42 CAS_EXT; 63 IC;
+  112233 -> 12 SA_ST_A.
+
 FALSIFICATION: any assertion failing.
 """
 
@@ -121,5 +147,14 @@ assert isprime(23) and isprime(47) and isprime(11) and isprime(1123) and not isp
 assert factorint(369) == {3: 2, 41: 1} and factorint(2247) == {3: 1, 7: 1, 107: 1}
 assert [n % 37 for n in (18, 21, 12, 23, 123, 1123, 369)] == [18, 21, 12, 23, 12, 13, 36]
 
+# 269
+assert int("".join(d * 2 for d in "123")) == 112233 == 11 * 10203 and factorint(112233) == {3: 1, 11: 1, 19: 1, 179: 1}
+tens, twins = [10, 20, 30], [11, 22, 33]
+assert [a + b for a, b in zip(tens, twins)] == [21, 42, 63]
+assert [sum(map(int, f"{a}{b}")) for a, b in zip(tens, twins)] == [3, 6, 9] == [dr(a + b) for a, b in zip(tens, twins)]
+assert "".join(map(str, tens)).count("0") == 3 and 3 + 6 + 9 == 18 and 9 + 3 == 12 and 1 + 2 == 3
+assert 112233 % 37 == 123 % 37 == 12333 % 37 == 12 and 112233 - 123 == 37 * 3030
+assert isprime(11) and isprime(13) and 2 * 11 + 1 == 23
+
 if __name__ == "__main__":
-    print("every line of #267 and the ,000 lines of #268 hold; 369 = 3 x 123; 12+34 = 46, 21+43 = 64; 12+21 = 33, 34+43 = 77, 46+64 = 110 = 33+77")
+    print("every line of #267, #268 and #269 checked holds; columns 10/11, 20/22, 30/33 -> 3, 6, 9; 369 = 3 x 123; 12+34 = 46, 21+43 = 64; 12+21 = 33, 34+43 = 77, 46+64 = 110 = 33+77")
