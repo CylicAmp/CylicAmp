@@ -44,6 +44,7 @@ THE 12 BOTH WAYS
 THE TWO SUMS
   6+4 = 10 adds the 6 and the 4 just made. 24+13 adds the numbers they came from: 24+13 = 37,
   3+7 = 10 -- the same 10, because 24+13 has no carry. (10+1) = 11 is the +1 "to begin again" (#264).
+  24+13 = 14+23 (the tens swap): the 14+23 = 37 of #263 (halving_strings_and_chain_2026_10_13.py).
 
 THE PAIRS
   12 = 3, 21 = 3;  34 = 7, 43 = 7;  46 = 1, 64 = 1 (4+6 = 10 -> 1).
@@ -124,6 +125,7 @@ for s, k in (("0,------000", (1, 3)), ("00,------00", (2, 2)), ("000,------0", (
     assert (len(lead), len(rest.replace("-", ""))) == k and sum(k) == 4 and rest.count("-") == 6
 assert 4 * 3 == 3 * 4 == 12 and 12 + 12 == 24 and 2 + 4 == 6
 assert 7 * 7 == 49 and 4 + 9 == 13 and 1 + 3 == 4
+assert 24 + 13 == 14 + 23 == 37
 assert 6 + 4 == 10 and 24 + 13 == 37 and 3 + 7 == 10 and 10 + 1 == 11
 assert dr(24) + dr(13) == 10 and (24 % 10 + 13 % 10) < 10                       # no carry
 for a, b, r in ((12, 21, 3), (34, 43, 7), (46, 64, 1)):
