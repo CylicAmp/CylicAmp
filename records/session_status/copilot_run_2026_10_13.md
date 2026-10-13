@@ -25,3 +25,10 @@ of work committed to `all-work`, then a "Bring all-work onto main" pull request 
 Since then all work has gone to `claude/add-torus-animation-6Ey5Z` only. Checked 2026-10-13:
 that branch is 1,104 commits ahead of `main` and 0 behind (a clean fast-forward, no conflicts),
 and 1,246 ahead of `all-work` (tip `4d9fe8d`), 0 behind.
+
+## Merged, 2026-10-13 (owner: "merge to main")
+
+`main` fast-forwarded from `84bdbbb` (PR #22, 2026-10-04) to `ef3baae`, identical to
+`claude/add-torus-animation-6Ey5Z` -- 1,107 commits, no merge commit, no conflicts, no history
+rewritten. Tests #378 on `main` and #377 on the branch both passed on `ef3baae`. `all-work`
+was not touched (still at `4d9fe8d`).
