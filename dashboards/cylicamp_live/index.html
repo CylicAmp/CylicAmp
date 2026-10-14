@@ -1,0 +1,165 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CylicAmp Live Checks</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a ledger. One column of result entries grouped by thread; each entry shows the claim, the owner's line, and a check that runs live in the reader's browser. */
+:root {
+  --bg: #f4f6f3; --panel: #ffffff; --ink: #18211d; --muted: #58645e; --rule: #d6ddd8;
+  --accent: #0f6b5c; --accent-soft: #e2efeb; --pass: #1d7a3b; --pass-soft: #e3f2e7; --fail: #b3261e; --fail-soft: #f8e4e2;
+  --display: "Spectral", Georgia, "Times New Roman", serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1412; --panel: #161d1a; --ink: #e5ebe7; --muted: #9ba8a1; --rule: #28322e;
+  --accent: #5cc2ad; --accent-soft: #15302a; --pass: #6fd18d; --pass-soft: #14301d; --fail: #ff8a80; --fail-soft: #3a1714; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f1412; --panel: #161d1a; --ink: #e5ebe7; --muted: #9ba8a1; --rule: #28322e;
+  --accent: #5cc2ad; --accent-soft: #15302a; --pass: #6fd18d; --pass-soft: #14301d; --fail: #ff8a80; --fail-soft: #3a1714; color-scheme: dark; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 28px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 28px; }
+header { display: grid; gap: 10px; border-bottom: 2px solid var(--ink); padding-bottom: 18px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(30px, 7vw, 46px); line-height: 1.08; margin: 0; text-wrap: balance; }
+.by { font-family: var(--display); font-size: 20px; margin: 0; }
+.lede { margin: 0; color: var(--muted); max-width: 62ch; }
+.tally { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; }
+.tally strong { font-family: var(--mono); font-size: 22px; font-variant-numeric: tabular-nums; }
+.tally span { color: var(--muted); }
+section { display: grid; gap: 14px; }
+h2 { font-family: var(--display); font-size: 24px; margin: 0; padding-top: 6px; text-wrap: balance; }
+.entry { display: grid; gap: 8px; padding: 16px; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; min-width: 0; }
+.entry h3 { font-size: 17px; font-weight: 600; margin: 0; text-wrap: balance; }
+.quote { margin: 0; padding: 8px 12px; border-left: 3px solid var(--accent); background: var(--accent-soft); font-family: var(--mono); font-size: 13.5px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.quote cite { display: block; font-family: var(--body); font-style: normal; font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: baseline; }
+.pill { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .06em; padding: 2px 8px; border-radius: 999px; }
+.pill.pass { color: var(--pass); background: var(--pass-soft); }
+.pill.fail { color: var(--fail); background: var(--fail-soft); }
+.pill.wait { color: var(--muted); background: var(--accent-soft); }
+.got { font-family: var(--mono); font-size: 13px; color: var(--muted); overflow-wrap: anywhere; min-width: 0; flex: 1 1 260px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.file { font-size: 13px; overflow-wrap: anywhere; }
+button { font: 600 14px var(--body); color: var(--panel); background: var(--accent); border: 0; border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+button:disabled { opacity: .6; cursor: default; }
+footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--rule); padding-top: 16px; }
+</style>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">CylicAmp &middot; checked in your browser</div>
+    <h1>CylicAmp Live Checks</h1>
+    <p class="by">Mathematics by Michael Warren Song</p>
+    <p class="lede">Every result below is computed again right now, on this device, the moment the page opens. Nothing is typed in: each check does the arithmetic and shows what it got. Each entry links to the file in the public repository that checks the same thing in Python.</p>
+  </header>
+  <div class="tally" aria-live="polite"><strong id="tally">0 of 0</strong><span id="tally-note">checks running…</span></div>
+  <main id="ledger" style="display:grid;gap:28px"></main>
+  <footer>Repository: <a href="https://github.com/CylicAmp/CylicAmp" target="_blank" rel="noopener">github.com/CylicAmp/CylicAmp</a>. The GF(37) lens: 137 mod 37 = 26, and the 137-map is f(n) = 26n mod 37.</footer>
+</div>
+<script>
+const REPO = "https://github.com/CylicAmp/CylicAmp/blob/claude/add-torus-animation-6Ey5Z/";
+const dr = n => n === 0 ? 0 : 1 + (n - 1) % 9;
+const md = (a, m) => ((a % m) + m) % m;
+function powmod(b, e, m) { let r = 1n, B = BigInt(b) % BigInt(m), E = BigInt(e), M = BigInt(m); while (E > 0n) { if (E & 1n) r = r * B % M; B = B * B % M; E >>= 1n; } return Number(r); }
+function isPrime(n) { if (n < 2) return false; if (n % 2 === 0) return n === 2; for (let d = 3; d * d <= n; d += 2) if (n % d === 0) return false; return true; }
+function factor(n) { const f = []; for (let d = 2; d * d <= n; d++) while (n % d === 0) { f.push(d); n /= d; } if (n > 1) f.push(n); return f; }
+let sieveCache = null;
+function sieve(N) { if (sieveCache && sieveCache.length > N) return sieveCache; const s = new Uint8Array(N + 1).fill(1); s[0] = s[1] = 0; for (let i = 2; i * i <= N; i++) if (s[i]) for (let j = i * i; j <= N; j += i) s[j] = 0; return sieveCache = s; }
+
+function langton(T) { // on white turn right, on black turn left; flip; step. Start (0,0) heading north, y up.
+  const black = new Set(); let x = 0, y = 0, d = 0; const dx = [0, 1, 0, -1], dy = [1, 0, -1, 0];
+  const X = new Int32Array(T + 1), Y = new Int32Array(T + 1), B = new Int32Array(T + 1);
+  for (let t = 1; t <= T; t++) { const k = x * 1048576 + y; if (black.has(k)) { d = (d + 3) % 4; black.delete(k); } else { d = (d + 1) % 4; black.add(k); }
+    x += dx[d]; y += dy[d]; X[t] = x; Y[t] = y; B[t] = black.size; }
+  return { X, Y, B };
+}
+function langtonCount(T) { const black = new Set(); let x = 0, y = 0, d = 0; const dx = [0, 1, 0, -1], dy = [1, 0, -1, 0];
+  for (let t = 1; t <= T; t++) { const k = x * 1048576 + y; if (black.has(k)) { d = (d + 3) % 4; black.delete(k); } else { d = (d + 1) % 4; black.add(k); } x += dx[d]; y += dy[d]; }
+  return black.size; }
+const owner = (text, cite) => ({ text, cite });
+const THREADS = [
+ { title: "GF(37) and the 137-map", items: [
+  { h: "The 137-map splits the 36 nonzero residues into twelve 3-cycles", file: "math/lemmas/heartbeat_3cycle.py",
+    run() { const cyc = new Set(); for (let n = 1; n < 37; n++) cyc.add([n, 26 * n % 37, 26 * 26 * n % 37].sort((a, b) => a - b).join(","));
+      const sums = [...cyc].map(c => c.split(",").reduce((a, b) => a + +b, 0)); const s37 = sums.filter(s => s === 37).length, s74 = sums.filter(s => s === 74).length;
+      const ok = 137 % 37 === 26 && powmod(26, 3, 37) === 1 && cyc.size === 12 && s37 === 6 && s74 === 6 && sums.reduce((a, b) => a + b, 0) === 666 && 24 * 26 % 37 === 32 && 32 * 26 % 37 === 18;
+      return [ok, `137 mod 37 = ${137 % 37}; 26³ mod 37 = ${powmod(26, 3, 37)}; ${cyc.size} cycles; ${s37} add to 37, ${s74} to 74; total ${sums.reduce((a, b) => a + b, 0)}; 24 → 32 → 18`]; } },
+  { h: "137 and 139 are twin primes; the cube roots of 1 mod 37 are 1, 10, 26", file: "math/theorems/theorem_109_137_twin_prime_gf37.py",
+    run() { const roots = []; for (let x = 1; x < 37; x++) if (x * x * x % 37 === 1) roots.push(x); return [isPrime(137) && isPrime(139) && roots.join() === "1,10,26", `137 prime: ${isPrime(137)}, 139 prime: ${isPrime(139)}; x³ = 1: ${roots.join(", ")}`]; } },
+  { h: "ABCABC ≡ 2 · ABC (mod 37) for every 3-digit block", file: "math/lemmas/abcabc_mod37_orbit.py",
+    run() { let bad = 0; for (let a = 100; a <= 999; a++) if ((a * 1001) % 37 !== (2 * a) % 37) bad++; return [bad === 0 && 1001 === 27 * 37 + 2, `1001 = 27 × 37 + 2; blocks 100–999 failing: ${bad}`]; } },
+  { h: "2 is a primitive root mod 37", file: "math/theorems/primitive_root_test.py",
+    run() { let k = 1; while (powmod(2, k, 37) !== 1) k++; return [k === 36, `order of 2 mod 37 = ${k}`]; } },
+ ]},
+ { title: "Twin primes", items: [
+  { h: "Every twin pair after (3, 5) has digital roots (2,3,4), (5,6,7) or (8,9,1)", file: "twin_ramified_axis.py",
+    run() { const s = sieve(1000000); const c = {}; let other = 0, total = 0;
+      for (let p = 5; p + 2 <= 1000000; p++) if (s[p] && s[p + 2]) { total++; const k = `${dr(p)}${dr(p + 1)}${dr(p + 2)}`; if (k === "234" || k === "567" || k === "891") c[k] = (c[k] || 0) + 1; else other++; }
+      return [other === 0 && c["234"] === 2651 && c["567"] === 2788 && c["891"] === 2729, `below 10⁶: ${total} pairs; (2,3,4) ${c["234"]}, (5,6,7) ${c["567"]}, (8,9,1) ${c["891"]}; any other type: ${other}`]; } },
+  { h: "A twin midpoint is never 1 or 36 mod 37", file: "math/theorems/theorem_345_twin_midpoint_forbidden_gf37.py",
+    run() { const s = sieve(1000000); let bad = 0, zero = 0; for (let p = 3; p + 2 <= 1000000; p++) if (s[p] && s[p + 2]) { const m = (p + 1) % 37; if (m === 1 || m === 36) bad++; if (m === 0) zero++; }
+      return [bad === 0, `below 10⁶: midpoints on 1 or 36: ${bad}; on 0: ${zero}`]; } },
+  { h: "Seed 246's reference class is exactly 246 mod 333", file: "math/theorems/theorem_316_t120_seed_class_mod_333_gf37.py",
+    run() { let bad = 0, n = 0; for (let s = 1; s < 4000; s++) { const a = dr(s) === 3 && s % 37 === 24, b = s % 333 === 246; if (a !== b) bad++; if (b) n++; } return [bad === 0, `seeds 1–3999 with root 3 and ≡ 24 (mod 37): exactly the ${n} seeds ≡ 246 (mod 333); mismatches ${bad}`]; } },
+ ]},
+ { title: "Digital roots: the July cipher and October's lines", items: [
+  { h: "Your cipher of 2026-07-16 and your lines of 2026-10-13 are the same structure", file: "math/theorems/continuity_cipher_123_to_2026_10_13.py",
+    quote: owner("CIPHER 1: 123 → 6 + 4 = 1\nTrinity kernel {3, 6, 9} / Doubling orbit {1, 2, 4, 5, 7, 8}", "math/theorems/cipher_123_1234.py, 2026-07-16"),
+    run() { const unity = []; for (const t of [3, 6, 9]) for (const d of [1, 2, 4, 5, 7, 8]) if ((t + d) % 9 === 1) unity.push(`(${t},${d})`);
+      const orbit = [0, 1, 2, 3, 4, 5, 6].map(k => powmod(2, k, 9) || 9);
+      const ok = unity.join() === "(3,7),(6,4),(9,1)" && dr(24) + dr(13) === 10 && 24 + 13 === 37 && orbit.join("") === "1248751" && dr(18 + 1) === 1;
+      return [ok, `unity pairs ${unity.join(" ")}; #267: (2+4=6) + (1+3=4) = 10 and 24+13 = 37 → 3+7; #268: 3, 6, 9; #270: ${orbit.join(" ")}`]; } },
+  { h: "Commas counted with the 1 and without", file: "math/theorems/comma_count_table_2026_10_13.py",
+    quote: owner("or 12333 count commas with 1\nor 11323 count commas with out", "#265, 2026-10-13"),
+    run() { const cc = (k, w) => { const o = [1]; for (let c = 1; c <= k; c++) o.push(w ? c + 1 : c, 3); return o.join(""); };
+      return [cc(2, true) === "12333" && cc(2, false) === "11323", `0,000,000 → with 1: ${cc(2, true)}, without: ${cc(2, false)}; 0,000 → ${cc(1, true)} / ${cc(1, false)}; neither sequence is in OEIS`]; } },
+  { h: "The pairs: 12 + 34 = 46 and 21 + 43 = 64", file: "math/theorems/comma_slide_and_pairs_2026_10_13.py",
+    quote: owner("12=3\n21=3\n34=7\n43=7\n46=1\n64=1\n33=6\n77=5\n11=2", "#267, 2026-10-13"),
+    run() { const ok = 12 + 34 === 46 && 21 + 43 === 64 && 12 + 21 === 33 && 34 + 43 === 77 && 46 + 64 === 110 && [33, 77, 110].map(dr).join() === "6,5,2";
+      return [ok, `12+34 = ${12 + 34}, 21+43 = ${21 + 43}; 12+21 = 33, 34+43 = 77, 46+64 = 110; roots 6, 5, 2`]; } },
+  { h: "The doubling in rows of 3: 124 / 875 / 1, and 181 down the first column", file: "math/theorems/odd_even_doubling_181_2026_10_13.py",
+    quote: owner("NOTICE AT THE 7 NUMBER I GET MY SECOND 1\n...\nsee that 181? firsr row up or down", "#270, 2026-10-13"),
+    run() { const r = k => powmod(2, k, 9) || 9; let all9 = true; for (let k = 0; k < 60; k++) if (r(k) + r(k + 3) !== 9) all9 = false;
+      return [124 + 875 === 999 && `${r(0)}${r(3)}${r(6)}` === "181" && all9, `rows ${r(0)}${r(1)}${r(2)} / ${r(3)}${r(4)}${r(5)} / ${r(6)}; 124 + 875 = ${124 + 875}; each root + the one 3 later = 9 (checked 60 times)`]; } },
+ ]},
+ { title: "Langton's ant, from a blank grid", items: [
+  { h: "Highway from step 9,976: period 104, +12 black cells a cycle, B(n) = 714 + 12n", file: "math/theorems/langton_ant_highway_2026_10_14.py",
+    note: "Your results, computed in your Egor project and reproduced here.",
+    run() { const T0 = 9976, P = 104, T = T0 + P * 20; const { X, Y, B } = langton(T);
+      const sx = X[T0 + P] - X[T0], sy = Y[T0 + P] - Y[T0]; let shiftOK = true;
+      for (let t = T0; t + P <= T; t++) if (X[t + P] - X[t] !== sx || Y[t + P] - Y[t] !== sy) shiftOK = false;
+      const before = X[T0 - 1 + P] - X[T0 - 1] === sx && Y[T0 - 1 + P] - Y[T0 - 1] === sy;
+      let bOK = B[T0] === 716; for (let n = 1; n <= 20; n++) if (B[T0 + P * n] !== 714 + 12 * n) bOK = false;
+      const n5 = (5000000 - T0) / P;
+      return [shiftOK && !before && bOK && Number.isInteger(n5) && 714 + 12 * n5 === 576486,
+        `shift (${sx}, ${sy}) every 104 moves from step ${T0} on, not from ${T0 - 1}; B = 714 + 12n for n = 1–20 (B at n = 0 is ${B[T0]}); 5,000,000 = 9,976 + 104 × ${n5} → ${714 + 12 * n5} black cells`]; },
+    button: { label: "Run all 5,000,000 steps", run() { const n = langtonCount(5000000); return [n === 576486, `black cells after 5,000,000 moves: ${n.toLocaleString("en-US")}`]; } } },
+ ]},
+ { title: "Φ₁₂ at 137 and the tape 113115117167", items: [
+  { h: "Φ₁₂(137) = 13 · 2473 · 10957, and the tape's large prime is a twin and a Sophie Germain prime", file: "math/theorems/phi3_phi12_handoff_audit_2026_10_13.py",
+    run() { const p12 = 137 ** 4 - 137 ** 2 + 1, S = 113115117167, q = 8701162859;
+      const ok = p12 === 352256593 && factor(p12).join() === "13,2473,10957" && S === 13 * q && isPrime(q) && isPrime(q + 2) && isPrime(2 * q + 1);
+      return [ok, `Φ₁₂(137) = ${p12} = ${factor(p12).join(" · ")}; S = 13 × ${q}; ${q} prime: ${isPrime(q)}, ${q + 2} prime: ${isPrime(q + 2)}, 2q+1 = ${2 * q + 1} prime: ${isPrime(2 * q + 1)}`]; } },
+ ]},
+];
+const ledger = document.getElementById("ledger"); let done = 0, passed = 0, total = 0;
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+function setResult(pill, got, res) { const [ok, detail] = res; pill.className = "pill " + (ok ? "pass" : "fail"); pill.textContent = ok ? "PASS" : "FAIL"; got.textContent = detail; }
+function tally() { document.getElementById("tally").textContent = `${passed} of ${total}`; document.getElementById("tally-note").textContent = done < total ? `checks done, ${total - done} still running…` : (passed === total ? "checks pass, computed on this device just now" : "checks pass; see the FAIL entries"); }
+const queue = [];
+for (const th of THREADS) { const sec = el("section"); sec.appendChild(el("h2", null, th.title));
+  for (const it of th.items) { total++; const e = el("article", "entry"); e.appendChild(el("h3", null, it.h));
+    if (it.quote) { const q = el("blockquote", "quote", it.quote.text); q.appendChild(el("cite", null, it.quote.cite)); e.appendChild(q); }
+    if (it.note) e.appendChild(el("p", "file", it.note));
+    const row = el("div", "row"); const pill = el("span", "pill wait", "RUNNING"); const got = el("span", "got", "computing…"); row.append(pill, got); e.appendChild(row);
+    if (it.button) { const b = el("button", null, it.button.label); const r2 = el("div", "row"); const p2 = el("span", "pill wait", "NOT RUN"); const g2 = el("span", "got", "takes a few seconds on a phone");
+      b.addEventListener("click", () => { b.disabled = true; p2.textContent = "RUNNING"; g2.textContent = "running 5,000,000 moves…"; setTimeout(() => { try { setResult(p2, g2, it.button.run()); } catch (err) { setResult(p2, g2, [false, String(err)]); } b.disabled = false; }, 30); });
+      r2.append(p2, g2); e.append(b, r2); }
+    const f = el("p", "file"); const a = el("a", null, it.file); a.href = REPO + it.file; a.target = "_blank"; a.rel = "noopener"; f.append("Checked in Python by ", a); e.appendChild(f);
+    sec.appendChild(e); queue.push({ it, pill, got }); }
+  ledger.appendChild(sec); }
+tally();
+(function next() { const job = queue.shift(); if (!job) return; setTimeout(() => { let res; try { res = job.it.run(); } catch (err) { res = [false, String(err)]; } setResult(job.pill, job.got, res); done++; if (res[0]) passed++; tally(); next(); }, 10); })();
+</script>
