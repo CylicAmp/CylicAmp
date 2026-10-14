@@ -1,3 +1,11 @@
+COLLATZ (3n+1) AND LANGTON'S ANT -- added 2026-10-14
+  records/collatz_langton_index_2026_10_14.md
+  Your lines about Collatz / three plus one (#168, #197, #276), every file on any
+  branch that has Collatz in it (50, plus 6 on the 3n+1 map that never use the
+  word), the date each was added and the git author, and the Langton's ant status.
+  Rebuild:  python3 tools/collatz_index.py   (--run also runs the 19 code files)
+  (The listing below is the older one; it says it was built 2026-09-22.)
+
 CYLICAMP — WHERE EVERY FILE LIVES
 built 2026-09-22 from all 11 branches on GitHub
 
