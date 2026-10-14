@@ -28,16 +28,25 @@ def git(*a):
 
 REMOTES = git('for-each-ref', '--format=%(refname)', 'refs/remotes/origin/').split()
 
-# files about the 3n+1 map that never say "Collatz" (git grep -E '3n ?\+ ?1|3x ?\+ ?1')
-# T174 (Ehrhart 3n^2+3n+1) and T250 (k = 3x+1 parametrisation) match the
-# pattern but are not the 3n+1 map, so they are left out.
+# files about the 3n+1 map that never say "Collatz", found with
+#   git grep -iE '3 ?\*? ?[nx] ?\+ ?1|3·[nx] ?\+ ?1|hailstone|syracuse'
+# (the spaced form "3 * x + 1" matters: a first search for '3n ?\+ ?1|3x ?\+ ?1'
+# alone missed LoB 20, T349, T354 and T355).
+# Left out: T174 (Ehrhart 3n^2+3n+1), T250 (k = 3x+1 parametrisation) and
+# three_block_ladder.py (3N+1 = a power) are not the 3n+1 map;
+# .claude/skills/finite-dynamics/dyn.py has "3*x+1" 37 only as a usage example.
 THREE_N_PLUS_ONE = [
+    'math/primes/modal_crossing_orbit.py',          # LoB 20, 2026-04-23: f(n) = 3n+1 mod 37
+    'math/visualizations/ModalCrossingVisual.jsx',  # LoB 20 drawing (JavaScript, not run)
     'math/theorems/lob_25_legendre_applications.py',
     'math/theorems/cascade_constants_audit.py',
     'math/theorems/lob_88_g_ord18_cycle.py',
     'math/theorems/affine_fixed_point_gf37.py',
     'math/theorems/theorem_193_process_functions_zp.py',
+    'math/theorems/theorem_349_cubic_map_conjugacy_gf37.py',
     'math/theorems/theorem_353_fa_trajectory_correction_gf37.py',
+    'math/theorems/theorem_354_fb_trajectory_gf37.py',
+    'math/theorems/theorem_355_conjugate_orbit_and_layer3_gf37.py',
 ]
 
 # code files whose subject is Collatz / 3n+1 (run with --run)
@@ -98,10 +107,12 @@ def first_add(p):
     rows = []
     out = git('log', '--all', '--full-history', '--diff-filter=A',
               '--date=format:%Y-%m-%d',
-              '--format=%at|%ad|%an|%h|%(trailers:key=Claude-Session,valueonly,separator=;)', '--', p)
+              '--format=%at|%ad|%an|%cn|%h|%(trailers:key=Claude-Session,valueonly,separator=;)', '--', p)
     for a in out.strip().splitlines():
-        t, d, an, h, tr = a.split('|', 4)
-        rows.append((int(t), d, an, h, bool(tr.strip())))
+        t, d, an, cn, h, tr = a.split('|', 5)
+        # since a078f2c (2026-10-14) session commits carry the owner's name as
+        # author and Claude as committer: show the committer when it differs
+        rows.append((int(t), d, an if an == cn else f'{an}, committer {cn}', h, bool(tr.strip())))
     rows.sort()
     t0 = rows[0][0]
     first = [r for r in rows if r[0] == t0]
@@ -168,6 +179,10 @@ def reproduce():
                 break
         lens.append(L)
     assert sorted(lens) == [1, 18, 18]                         # T346: C = 1 + two 18-cycles
+    orb0, x = [0], C(0)                                         # LoB 20 (2026-04-23): orbit_p
+    while x != 0:
+        orb0.append(x); x = C(x)
+    assert orb0 == [0, 1, 4, 13, 3, 10, 31, 20, 24, 36, 35, 32, 23, 33, 26, 5, 16, 12]
 
     def steps(n):
         k = 0
@@ -192,8 +207,8 @@ if __name__ == '__main__':
     paths = collatz_paths()
     rows = [row(p) for p in paths]
     rows3 = [row(p) for p in THREE_N_PLUS_ONE]
-    # 50 on 2026-10-14; files written later that mention Collatz raise it
-    assert len(rows) >= 50, len(rows)
+    # 51 on 2026-10-14 (50 + langton_ant_highway_2026_10_14.py); later files raise it
+    assert len(rows) >= 51, len(rows)
     assert all(r['n'] == 0 for r in rows3)
     by_date = lambda rs: sorted(rs, key=lambda r: (r['date'], r['path']))
     subject = by_date([r for r in rows if r['path'] in SUBJECT])
@@ -215,11 +230,12 @@ if __name__ == '__main__':
     print(md(index, g))
     reproduce()
     if '--run' in sys.argv:
-        bad = []
-        for f in SUBJECT:
+        bad, py = [], [f for f in SUBJECT if f.endswith('.py')]
+        for f in py:
             rc = subprocess.run([sys.executable, f], cwd=REPO, capture_output=True, timeout=600).returncode
             print(f'  rc={rc}  {f}')
             if rc:
                 bad.append(f)
         assert not bad, bad
-        print(f'all {len(SUBJECT)} Collatz / 3n+1 code files exit 0')
+        print(f'all {len(py)} Collatz / 3n+1 Python files exit 0'
+              ' (ModalCrossingVisual.jsx is JavaScript and is not run)')

@@ -34,7 +34,8 @@ It exists only in the image. The typed text of #276 in `owner_work/messages/2026
       L4  22+11=33+11=44+11=55+11=6+6=1+(2=3)
 
   The file's "THREE PLUS ONE" section (line 49) reads the closing 3+1 = 4 as the Collatz step 3·1+1.
-  That reading belongs to the file. These lines do not say it.
+  That reading belongs to the file. These lines do not say it. `math/lemmas/digit_ladder_collatz.py` (line 7) repeats it
+  ("3+1 = 3*1+1, the step 1 -> 4").
 - 2026-09-28, quoted in `math/theorems/thread2_collatz_twin_centres.py` from `owner_words_2026-09-06_to_2026-10-03.txt`:
   "Formalized under S(n) and c_odd; 27.2 sample-dependent; v_3 = 3 elongation refuted; 3077 identified as global
   trunk without twin enrichment." That ledger file is not in the repo on any branch. I can't tell whether this line
@@ -47,13 +48,17 @@ It exists only in the image. The typed text of #276 in `owner_work/messages/2026
 #270 (2026-10-13) `0=e=(4=(1+3)or(3+1=4)`.
 
 **Collatz or 3+1 inside other text in your messages.** The record does not show who wrote these lines. They are listed so that nothing is missed:
-#5 (`2026-10-06.txt` line 74, "6-state Collatz modular attractor"), #220 (`2026-10-08.txt` line 148, a code string
+#5 (`2026-10-06.txt` line 74, "6-state Collatz modular attractor"), #218 (`2026-10-07.txt` line 11, a chess
+passage, "(3 + 1 = 4)"), #220 (`2026-10-08.txt` line 148, a code string
 "pi 3+1=4"), and the LaTeX passages in #227 (`2026-10-12.txt` lines 232, 300, 396 and 402).
 
 ## Your Collatz files
 
-50 files on some branch contain the word Collatz. Another 6 work on the 3n+1 map mod 37 without using the word.
-On 2026-10-14, all 19 code files in sections A and A2 were run, and every one exited 0 with its assertions passing.
+51 files on some branch contain the word Collatz (the 51st is `math/theorems/langton_ant_highway_2026_10_14.py`,
+committed 2026-10-14, which names the Collatz conjecture once). Another 11 work on the 3n+1 map mod 37 without using the word.
+On 2026-10-14, all 23 Python files in sections A and A2 were run, and every one exited 0. 22 of them have assertions.
+`math/primes/modal_crossing_orbit.py` (LoB 20) has no assertions. It prints a check mark per check: 36 passed and 0 failed.
+`ModalCrossingVisual.jsx` is JavaScript and was not run.
 
 Main results, re-computed by `tools/collatz_index.py`:
 
@@ -62,6 +67,10 @@ Main results, re-computed by `tools/collatz_index.py`:
 - T346: ord(2) = 36, ord(3) = 18 and ord(26) = 3, and C splits into one fixed point plus two cycles of 18.
 - Digit ladder: 12312 reaches 1 in 37 steps.
 - Thread 2: on the orbits of the twin centres 108, 432, 462, 570 and 660, the largest odd value is 3077 = 17 × 181. From 108 it takes 113 steps to reach 1.
+- LoB 20 (`math/primes/modal_crossing_orbit.py`, 2026-04-23) is the oldest 3n+1 file in the repo. Its f(n) = 3n+1 mod 37 has
+  the fixed point 18 and two 18-cycles: the orbit of 0, which is 0, 1, 4, 13, 3, 10, 31, 20, 24, 36, 35, 32, 23, 33, 26, 5, 16, 12,
+  and the orbit of 2. That is the fixed point that T271 states (2026-09-01) and the 1 + 18 + 18 cycle type that T346 states
+  (2026-09-15). Neither T271 nor T346 cites LoB 20.
 
 **About the "added" column.** It gives the date of the commit that first added each file, and the author name git stores on that commit.
 Two of those commits are bulk imports: `3bc8c4c` (2026-07-04, 509 files) and `26dcd38` (2026-10-02, 1585 files).
@@ -73,7 +82,10 @@ The commit ledger `records/commit_origin_all-work.txt` lists two older commits t
 
 Authors in section A:
 
-- 8 files carry your name only (Michael Song or Michael Warren Song).
+- 8 files carry your name only (Michael Song or Michael Warren Song). The name on a commit is the git identity that was
+  set when the commit was made. It does not show who wrote the file. `tools/commit_origin.py` classes untagged commits under
+  your name before 2026-09-22 as "owner-or-unknown". T428's add commit (`102476e`) is under your name and its message says "No such implementation exists in
+  this session".
 - 4 carry Claude's name, from the 2026-10-04 and 2026-10-05 sessions.
 - LoB 26 (`lob_26_collatz_f37.py`) was added by three commits in the same second, two under Claude's name and one under yours.
 
@@ -83,8 +95,8 @@ Branch sets:
 - **B2** (8 branches): all-work, claude/add-claude-documentation-otdq9, claude/add-torus-animation-6Ey5Z, claude/signature-obfuscation-audit-ZEoCd, copilot/fix-github-actions-job, copilot/fix-github-actions-job-failure, main, merge-signature-obfuscation-into-main
 - **B3** (6 branches): all-work, claude/add-torus-animation-6Ey5Z, claude/signature-obfuscation-audit-ZEoCd, copilot/fix-github-actions-job, copilot/fix-github-actions-job-failure, main
 - **B4** (2 branches): claude/add-torus-animation-6Ey5Z, main
-- **B5** (1 branch): claude/monomial-universe-ideals-wuhx40
-- **B6** (1 branch): claude/add-torus-animation-6Ey5Z
+- **B5** (1 branch): claude/add-torus-animation-6Ey5Z
+- **B6** (1 branch): claude/monomial-universe-ideals-wuhx40
 
 ### A. Collatz is the subject (13 files, oldest first):
 
@@ -104,21 +116,26 @@ Branch sets:
 | `math/lemmas/digit_ladder_rows5_on_and_repdigit_lines.py` | B4 | Owner, 2026-10-04: "extend it to row 5 and keep going", with four lines: | 2026-10-04 `798580c` | Claude (Claude-Session trailer) | 8 |
 | `math/theorems/thread2_collatz_twin_centres.py` | B4 | Thread 2 (Collatz trajectories on twin centres) -- reproduced 2026-10-05. | 2026-10-05 `f714390` | Claude (Claude-Session trailer) | 2 |
 
-### A2. The 3n+1 map mod 37 without the word Collatz (6 files):
+### A2. The 3n+1 map mod 37 without the word Collatz (11 files):
 
 | file | branches | first docstring line | added | author (git) | "collatz" count |
 |---|---|---|---|---|---|
+| `math/primes/modal_crossing_orbit.py` | B1 | Modal Crossing Orbit Generator — LoB 20 | 2026-04-23 `c7ae396, 75ae809` | Claude / Michael Song | 0 |
+| `math/visualizations/ModalCrossingVisual.jsx` | B1 | import React, { useState, useEffect, useRef, useCallback } from 'react'; | 2026-04-23 `c7ae396, 75ae809` | Claude / Michael Song | 0 |
 | `math/theorems/lob_25_legendre_applications.py` | B1 | LoB 25 — Legendre Symbol Applications in the 37-Field | 2026-04-26 `8d76be5, b930f27, 594b287` | Claude / Michael Song | 0 |
 | `math/theorems/cascade_constants_audit.py` | B2 | φ, e, π as cascade radii: first-digit axioms, Euler identity, | 2026-07-04 `3bc8c4c` [509-file root commit] | Michael Warren Song | 0 |
 | `math/theorems/lob_88_g_ord18_cycle.py` | B2 | LoB 88: G_Ord18_Cycle — Formal Specification Audit | 2026-07-04 `3bc8c4c` [509-file root commit] | Michael Warren Song | 0 |
 | `math/theorems/affine_fixed_point_gf37.py` | B3 | Affine Fixed-Point Census on GF(37) — THEOREM 75 | 2026-07-28 `3de8c05` | Michael Song | 0 |
 | `math/theorems/theorem_193_process_functions_zp.py` | B3 | Theorem 193: Three-Party Process Functions over ℤ_p | 2026-08-14 `09edef0` | Michael Song | 0 |
+| `math/theorems/theorem_349_cubic_map_conjugacy_gf37.py` | B3 | Theorem 349: T(x) = x^3+33 has the twelve named orbits as its fibres, and | 2026-09-16 `cd930d4` | Michael Song | 0 |
 | `math/theorems/theorem_353_fa_trajectory_correction_gf37.py` | B3 | Theorem 353: the orbit of 18 under f_a is preperiod 5 into a 3-cycle, not | 2026-09-16 `231ac11` | Michael Song | 0 |
+| `math/theorems/theorem_354_fb_trajectory_gf37.py` | B3 | Theorem 354: the f_b orbit of 18 is the f_a orbit pushed through C, term by | 2026-09-16 `52c8683` | Michael Song | 0 |
+| `math/theorems/theorem_355_conjugate_orbit_and_layer3_gf37.py` | B3 | Theorem 355: the conjugate C o T o C^-1 completes the series, and the | 2026-09-16 `253c057` | Michael Song | 0 |
 
 T174 (Ehrhart polynomial 3n²+3n+1) and T250 (the parametrisation k = 3x+1) match a search for "3n+1",
 but they are not about the 3n+1 map, so they are left out.
 
-### B. Other math code that uses or cites the Collatz work (14):
+### B. Other math code that uses or cites the Collatz work (15):
 
 | file | branches | first docstring line | added | author (git) | "collatz" count |
 |---|---|---|---|---|---|
@@ -136,6 +153,7 @@ but they are not about the 3n+1 map, so they are left out.
 | `math/lemmas/digit_ladder_riemann_zeros.py` | B4 | The digit ladder run through the Riemann zeros (owner, 2026-10-04). Rows are | 2026-10-04 `430b908` | Claude (Claude-Session trailer) | 1 |
 | `math/lemmas/reversal_spans_supplied_audit_2026_10_04.py` | B4 | Audit of supplied tables (2026-10-04): the spans 12..21, 13..31, 14..41 -- each | 2026-10-04 `3d804a0` | Claude (Claude-Session trailer) | 2 |
 | `math/theorems/open_flags_ledger_2026_10_05.py` | B4 | Ledger of the eight self-flagged files reported by tools/build_index.py --dupes | 2026-10-05 `f714390` | Claude (Claude-Session trailer) | 2 |
+| `math/theorems/langton_ant_highway_2026_10_14.py` | B5 | Langton's ant highway: the Egor table re-run (owner_work #276, 2026-10-14). | 2026-10-14 `f88a5f0` | Michael Warren Song, committer Claude (Claude-Session trailer) | 1 |
 
 ### C. Indexes, catalogs, skills, records, owner_work (23):
 
@@ -154,8 +172,8 @@ but they are not about the 3n+1 map, so they are left out.
 | `.claude/skills/prior-art/prior.py` | B3 | Search the corpus before writing a theorem. Usage: | 2026-09-16 `f8819f0` | Michael Song | 2 |
 | `.claude/skills/search-bounds/SKILL.md` | B3 | (skill "search-bounds", no docstring) | 2026-09-19 `fec35ff` | Michael Song | 1 |
 | `tools/regression_state.json` | B3 | (JSON, no docstring) | 2026-09-19 `d29294c` | Michael Song | 8 |
-| `INDEX_ALL.md` | B5 | # Theorem index — all branches | 2026-09-22 `4d4dffe` | Claude (Claude-Session trailer) | 8 |
-| `WHERE_MY_WORK_IS.txt` | B3 | CYLICAMP — WHERE EVERY FILE LIVES | 2026-09-22 `4f48642` | Michael Song | 6 |
+| `INDEX_ALL.md` | B6 | # Theorem index — all branches | 2026-09-22 `4d4dffe` | Claude (Claude-Session trailer) | 8 |
+| `WHERE_MY_WORK_IS.txt` | B3 | COLLATZ (3n+1) AND LANGTON'S ANT -- added 2026-10-14 | 2026-09-22 `4f48642` | Michael Song | 11 |
 | `ALTERNATE_VERSIONS.txt` | B3 | === files that also exist on another branch with DIFFERENT content === | 2026-10-02 `26dcd38` [1585-file root commit] | Michael Song | 9 |
 | `math/CATALOG.json` | B3 | (JSON, no docstring) | 2026-10-02 `26dcd38` [1585-file root commit] | Michael Song | 10 |
 | `math/CATALOG.md` | B3 | # Catalog of math/theorems and math/lemmas by kind of result | 2026-10-02 `26dcd38` [1585-file root commit] | Michael Song | 10 |
@@ -163,12 +181,18 @@ but they are not about the 3n+1 map, so they are left out.
 | `records/commit_origin_all-work.txt` | B3 | # Commit origin ledger, all-work, generated 2026-10-03T00:40:43Z by tools/commit_origin.py --list | 2026-10-03 `aeba480` | Michael Song | 8 |
 | `owner_work/messages.json` | B4 | (JSON, no docstring) | 2026-10-12 `c232aff` | Claude (Claude-Session trailer) | 1 |
 | `owner_work/messages/2026-10-06.txt` | B4 | Owner's messages, 2026-10-06, verbatim as written (UTC timestamps). | 2026-10-12 `c232aff` | Claude (Claude-Session trailer) | 1 |
-| `owner_work/TERMS.md` | B6 | # TERMS -- the owner's names for operations, in the owner's words | 2026-10-13 `9b9c92a` | Claude (Claude-Session trailer) | 3 |
+| `owner_work/TERMS.md` | B5 | # TERMS -- the owner's names for operations, in the owner's words | 2026-10-13 `9b9c92a` | Claude (Claude-Session trailer) | 3 |
 
 ## Langton's ant
 
 - Your line is the #276 quote at the top of this page.
-- `math/theorems/langton_ant_highway_2026_10_14.py` is being built from the Egor screenshot attached to #276.
+- `math/theorems/langton_ant_highway_2026_10_14.py` (committed 2026-10-14, `f88a5f0`) re-runs the Egor table from the screenshot attached to #276.
+  The table's numbers all reproduce when moves are counted from 1, heading north, turning right on white:
+  pos(t+104) - pos(t) is the same for every t >= 9,976 (onset 9,976, no offset); period 104; +12 black cells per period;
+  576,486 black cells at 5,000,000, and 5,000,000 = 9,976 + 104 × 47,981 exactly; B(n) = 714 + 12n holds for every
+  n = 1 to 47,981, so the screenshot's n >= 2 holds; the odd-flip mask has 34 cells for windows that start at 9,976 + 104k
+  (other phases give 28 to 42 cells). The shift is (-2, -2) with y up and (-2, +2) with y down (screen rows).
 - The egor_v18_project code is not in this repo. #223 (2026-10-10) has only the commands
   `cd egor_v18_project`, `python3 igor_langton_mask_v18.py --steps 5000000 --out verification.json` and `python3 egor_v18.py`.
-  No file named egor or langton exists on any branch.
+  No Egor or Langton code exists on any branch before `f88a5f0`. The only other file with egor or langton in its name is
+  the screenshot, `owner_work/images/2026-10-14_276_egor_langton_screenshot.jpg`.
