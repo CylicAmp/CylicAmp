@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
-# SessionStart hook. 2026-10-03 request: "mark Claude's commits and add the startup script".
-# 2026-10-14: that was carried out by making Claude the AUTHOR, which took the owner's name off
-# the owner's work -- the owner never asked for that ("The algorithm is telling me that I said to
-# take my name off of my work", #274). Now: author = the owner, Michael Warren Song; committer =
-# Claude; every commit marked with a Claude-Session trailer naming the session.
+# SessionStart hook. Commits carry the owner's name as author (Michael Warren Song);
+# Claude is the committer, and a Claude-Session trailer names the session.
 # Runs only inside a Claude Code session; the owner's own git setup elsewhere is untouched.
 [ -n "$CLAUDE_CODE_SESSION_ID$CLAUDE_CODE_REMOTE_SESSION_ID" ] || exit 0
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0

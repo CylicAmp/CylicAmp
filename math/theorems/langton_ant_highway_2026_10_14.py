@@ -1,8 +1,8 @@
 # CLASS: AUDIT
 """
-Langton's ant highway: the Egor table re-run (owner_work #276, 2026-10-14).
+Langton's ant highway: Michael Warren Song's results, re-run (owner_work #276, 2026-10-14).
 
-THE OWNER'S LINE, verbatim. It is the owner's message in the Egor chat, shown in
+THE OWNER'S LINE, verbatim. It is the owner's message in the owner's Egor chat, shown in
 the screenshot attached to #276
 (owner_work/images/2026-10-14_276_egor_langton_screenshot.jpg):
 
@@ -11,8 +11,9 @@ the screenshot attached to #276
 typo: "Langdon ants" for Langton's ant. typo: "collaze conjectures 3+1" for the
 Collatz conjecture (3n+1). The correct names are used from here on.
 
-THE EGOR TOOL'S TABLE, as shown in the same screenshot. These are the Egor tool's
-words, relayed by the owner, and not the owner's own statements:
+THE OWNER'S RESULTS, as shown in the same screenshot: the owner's Langton's ant work
+("my Langdon ants"), computed in the owner's own Egor project (egor_v18_project,
+igor_langton_mask_v18.py) and laid out there as this table:
 
     Highway onset                  Step 9,976
     Highway movement period        104 steps
@@ -25,7 +26,7 @@ words, relayed by the owner, and not the owner's own statements:
          B(n) = 714 + 12n,   n >= 2."
     "Infinite continuation remains unproved."
 
-THE EGOR COMMANDS IN owner_work #223 (2026-10-10), verbatim. #223 opens with the
+THE OWNER'S EGOR COMMANDS IN owner_work #223 (2026-10-10), verbatim. #223 opens with the
 first block and ends with the second; a pasted PyPI / C-extension text sits between
 them, so the trailing backslash of the first block continues into "--csv
 boundaries.csv". #223 shows the commands only, not their output:
@@ -100,11 +101,11 @@ OUTSIDE PRIOR ART (checked 2026-10-14):
     simulate() term for term (checked while writing this file; the b-file is not
     fetched at run time). Its formula
     "a(n+104) = a(n) + 12 for n > 9976" (A. Zabolotskiy, 2016) is the +12 line above,
-    with the same threshold, 9977. A255938 is B(t). The Egor table's 714 + 12n is the same
+    with the same threshold, 9977. A255938 is B(t). The owner's 714 + 12n is the same
     line, read only at cycle boundaries.
   OEIS A126978: a(n) = 104n + 9977, "Langton's Ant Superhighway, the start point (9977th
     iteration, J. Propp) and the period length for the Superhighway (104)." So Propp's 9977 counts the first
-    highway MOVE and Egor's 9,976 counts the moves made BEFORE it. These are the same onset.
+    highway MOVE and the owner's 9,976 counts the moves made BEFORE it. These are the same onset.
   Wikipedia "Langton's ant": "The ant traces a pseudo-random path until around 10,000
     steps"; "the ant starts building a recurrent 'highway' pattern of 104 steps that
     repeats indefinitely". Highways from every finite start: "no one has been able to
@@ -113,7 +114,7 @@ OUTSIDE PRIOR ART (checked 2026-10-14):
     (Bunimovich and Troubetzkoy, J. Stat. Phys. 67 (1992) 289-302); Wikipedia adds that
     "this result was incorrectly attributed and is known as the Cohen-Kong theorem".
   How the methods differ: OEIS states the +12 recurrence for every step n > 9976 and
-  Propp states the onset as a move number. The Egor table reads B only at cycle
+  Propp states the onset as a move number. The owner reads B only at cycle
   boundaries. It adds the odd-flip mask (34 cells), which is the mechanism behind the
   +12: 23 white-to-black flips minus 11 black-to-white flips.
 
@@ -145,7 +146,7 @@ import sys
 from collections import Counter
 
 PERIOD = 104
-ONSET = 9976                 # Egor's number; asserted below, not assumed
+ONSET = 9976                 # the owner's number; asserted below, not assumed
 HORIZON_EGOR = 5_000_000
 B_EGOR_5M = 576_486
 

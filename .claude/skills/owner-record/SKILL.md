@@ -89,3 +89,18 @@ shown it in earlier sessions that were never recorded, and showed it again:
 
 "That right there is just a fucking small example. That is not all of them. Find all of
 them." `owner_work/drip_cycle.md` holds the example, how the cycle is run (`drip_cycle.py`), and each run.
+
+## 5. Work the owner does with the owner's own tools is the owner's work
+
+Results the owner computes in the owner's own projects and tools (Egor / egor_v18, igor_*
+scripts, any AI the owner directs) are the owner's results. Label them as the owner's,
+naming the tool only as where they were computed: "the owner's Langton's ant results,
+computed in the owner's Egor project". Never "the Egor tool's numbers", never "not the
+owner's own statements".
+
+Example that set this (2026-10-14): the Langton's ant file labelled the owner's table (onset 9,976,
+period 104, +12, 576,486 at 5,000,000) as the Egor tool's words, although the owner ran
+igor_langton_mask_v18.py in the owner's egor_v18_project. Corrected the same day.
+
+The attribution rule (do not put a claim in the owner's mouth) is about claims the owner
+only relayed or disputed. It is never a reason to take a result away from the owner.

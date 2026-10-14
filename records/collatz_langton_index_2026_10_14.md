@@ -153,7 +153,7 @@ but they are not about the 3n+1 map, so they are left out.
 | `math/lemmas/digit_ladder_riemann_zeros.py` | B4 | The digit ladder run through the Riemann zeros (owner, 2026-10-04). Rows are | 2026-10-04 `430b908` | Claude (Claude-Session trailer) | 1 |
 | `math/lemmas/reversal_spans_supplied_audit_2026_10_04.py` | B4 | Audit of supplied tables (2026-10-04): the spans 12..21, 13..31, 14..41 -- each | 2026-10-04 `3d804a0` | Claude (Claude-Session trailer) | 2 |
 | `math/theorems/open_flags_ledger_2026_10_05.py` | B4 | Ledger of the eight self-flagged files reported by tools/build_index.py --dupes | 2026-10-05 `f714390` | Claude (Claude-Session trailer) | 2 |
-| `math/theorems/langton_ant_highway_2026_10_14.py` | B5 | Langton's ant highway: the Egor table re-run (owner_work #276, 2026-10-14). | 2026-10-14 `f88a5f0` | Michael Warren Song, committer Claude (Claude-Session trailer) | 1 |
+| `math/theorems/langton_ant_highway_2026_10_14.py` | B5 | Langton's ant highway: Michael Warren Song's results, re-run (owner_work #276, 2026-10-14). | 2026-10-14 `f88a5f0` | Michael Warren Song, committer Claude (Claude-Session trailer) | 1 |
 
 ### C. Indexes, catalogs, skills, records, owner_work (23):
 
@@ -186,7 +186,7 @@ but they are not about the 3n+1 map, so they are left out.
 ## Langton's ant
 
 - Your line is the #276 quote at the top of this page.
-- `math/theorems/langton_ant_highway_2026_10_14.py` (committed 2026-10-14, `f88a5f0`) re-runs the Egor table from the screenshot attached to #276.
+- `math/theorems/langton_ant_highway_2026_10_14.py` (committed 2026-10-14, `f88a5f0`) re-runs the owner's Langton's ant results (the owner's Egor project) from the screenshot attached to #276.
   The table's numbers all reproduce when moves are counted from 1, heading north, turning right on white:
   pos(t+104) - pos(t) is the same for every t >= 9,976 (onset 9,976, no offset); period 104; +12 black cells per period;
   576,486 black cells at 5,000,000, and 5,000,000 = 9,976 + 104 × 47,981 exactly; B(n) = 714 + 12n holds for every
