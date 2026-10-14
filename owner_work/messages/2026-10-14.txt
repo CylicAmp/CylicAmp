@@ -1,0 +1,542 @@
+Owner's messages, 2026-10-14, verbatim as written (UTC timestamps).
+Nothing below is edited, except credentials, which are removed and marked where they were.
+
+
+===== #272  2026-10-14T09:51:02.593Z =====
+MWS UNIFIED FRAMEWORK & COMPUTATIONAL RESEARCH ARCHIVE
+Consolidated Technical Handoff & System Specification
+SECTION 1: CORE OPERATIONAL AXIOMS & METHODOLOGIES
+1. Digital Root Reduction Rules
+ * Symbol & Decimal Invariance: Decimal points, commas, and percentage signs are stripped; the digital root is extracted purely by the iterative summation of remaining digits until a single digit remains.
+   * Percentage Extraction Example: 45.0\% \rightarrow 4+5+0 = 9; 45.1\% \rightarrow 4+5+1 = 10 \rightarrow 1; 0.09\% \rightarrow 0+0+9 = 9; 12\% \rightarrow 1+2 = 3; 19\% \rightarrow 1+9 = 10 \rightarrow 1.
+   * Decimal Progression Extraction: 0 \rightarrow 0; 0.084 \rightarrow 12 \rightarrow 3; 0.232 \rightarrow 7; 0.253 \rightarrow 10 \rightarrow 1; actual primes mean 0.257 \rightarrow 14 \rightarrow 5.
+ * Convention \text{dr}(0) = 0: Locked repository convention sets the digital root of null/zero to 0, eliminating synthetic mod-9 rollover in empty states.
+ * Positional Shifting & Root Invariance: Zeros represent empty positional slots rather than values of magnitude. Non-zero digits traverse zero slots to form alternate surface permutations (e.g., 0046, 0406, 0460, 4006, 4060, 4600, 0064, 0604, 0640, 6004, 6040, 6400). Under commutative addition, all permutations collapse to the invariant digital root base (10 \rightarrow 1).
+ * Normalization Baseline: The weak consecutive prime gap correlation (-0.064) is mapped to unity (0.064 = 1) via digit summation (0+0+6+4 = 10 \rightarrow 1), defining the reference scaling for gap progression analysis.
+SECTION 2: PRIME AUDIT & MODULAR SIEVE PROFILES
+1. Audited Prime Inventory (Index Range 1002–1044)
+Systematic audit of numerical indices from the DCPG dataset isolates the following verified primes:
+ * Verified Primes: 1009, 1013, 1019, 1021, 1031, 1033, 1039.
+ * Gap Sequence (G = P_{n+1} - P_n): [4, 6, 2, 10, 2, 6]
+ * Mod 37 Residue Vector:
+   *    *    *    *    *    *    *  * Exclusions Audit:
+   * Unity: 1.
+   * Small Composites: 4, 6, 8, 9, 10, 12, 14, 15, 16, 20, 40.
+   * Even Composites: 1002, 1004, 1006, \dots, 1044.
+   * Odd Composites: 1003, 1005, 1007, 1011, 1015, 1017, 1023, 1025, 1027, 1029 (3 \times 343), 1035, 1037, 1041, 1043.
+2. Prime Gap Geometry & Phase Metrics
+ * Reversal Symmetry: \phi(a,b,c) + \phi(c,b,a) = \pi holds for \phi = \arctan2(b, c-a).
+ * Uniform Gaps: Mean evaluates to 0 for \phi = \arctan2(c-a, b) across uniform triples.
+ * Excess Asymmetry: s_{\text{prev}} > s_{\text{next}} measured at 45.0\% vs 45.1\% (excess = 0.09\%, negligible).
+ * Trend Metric: Mean (c-a) \approx 0.0019 \rightarrow 0.
+ * Consecutive Gap Correlation: Measured at approximately -0.064.
+SECTION 3: RECALIBRATED COMPUTATIONAL ARCHITECTURE
+1. Information Entropy Metric
+Recalibrated from bits to natural units (nats) using base-e Shannon entropy:
+
+ *  *  * 2. Module Specifications
+ * Module 1: Hourglass Reflection Inversion
+   * State Trajectory Vector (21 to 30): [0, 0, 0, 0, 0, 0, 0, 0, 0, 3]
+   * Digital Root Vector (21 to 30): [0, 0, 0, 0, 0, 0, 0, 0, 0, 3]
+   * Extended Boundary Convergence Vector (31 to 40): [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   * Extended Digital Root Vector (31 to 40): [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+ * Module 2: Slime-Mold Quantum Tensor Expansion (S_2)
+   * Secondary Seed: 286692321
+   * Refractive Phase Vector: [111, 30, 3, 3, 0]
+   * Cross-Medium Resonance Tensor (M):
+     
+   * Digital Root Matrix \text{dr}(M):
+     
+ * Module 3: Game-of-Life Generation 6 State Matrix (9 \times 11)
+   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0]
+[0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+[0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0]
+[0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0]
+[0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0]
+[0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+[0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+ * Module 4: Phase-Space Resonance Summary Vector
+   * Vector: [\text{DR}_{\text{peak}}: 9.0000, \, \text{Refraction}_{\text{null}}: 0.0000, \, \text{Entropy}_{\text{mean}}: 0.6730 \text{ nats}]
+SECTION 4: EMPIRICAL DIAGNOSTIC FRAMEWORK (ZETA ZERO PARITY & HURST SIEVE)
+1. Metric Hierarchy
+Testing the difference between odd and even digits D_N(\gamma_n) = \#\text{odd} - \#\text{even} across expansion length N:
+ * \alpha \approx 0.5 (Random Walk): Normal fluctuations D_N = \mathcal{O}(\sqrt{N}); parity matches are finite-sample artifacts.
+ * 0.5 < \alpha < 1.0 (Sublinear Persistence): D_N \sim N^\alpha; digits remain asymptotically balanced (D_N / N \rightarrow 0), but the sign stabilizes as D_N / \sqrt{N} \rightarrow \infty.
+ * \alpha = 1.0 (Linear Drift): Persistent density bias (D_N \approx 2\varepsilon N), indicating non-normal distribution.
+2. Optimized Colab Diagnostic Engine
+import numpy as np
+
+DATASET_PATH = "zetazeros.txt"
+
+def analyze_zeta_zero_stream(filepath, target_zeros=20, sample_depths=[100, 1000, 10000]):
+    results = []
+    with open(filepath, 'r') as f:
+        for idx, line in enumerate(f):
+            if idx >= target_zeros:
+                break
+            digits = ''.join(c for c in line.strip() if c.isdigit())
+            if not digits:
+                continue
+            
+            zero_index = idx + 1
+            d_n_vals = []
+            valid_depths = [n for n in sample_depths if n <= len(digits)]
+            
+            for n in valid_depths:
+                segment = digits[:n]
+                odds = sum(1 for ch in segment if int(ch) % 2 == 1)
+                evens = n - odds
+                d_n_vals.append(odds - evens)
+            
+            # Hurst exponent / log-log slope: log(|D_N|) vs log(N)
+            log_n = np.log([n for n, d in zip(valid_depths, d_n_vals) if abs(d) > 0])
+            log_d = np.log([abs(d) for d in d_n_vals if abs(d) > 0])
+            
+            alpha = np.polyfit(log_n, log_d, 1)[0] if len(log_n) > 1 else 0.5
+            sign_match = (d_n_vals[-1] > 0) if (zero_index % 2 == 1) else (d_n_vals[-1] < 0)
+            
+            results.append({
+                "zero_idx": zero_index,
+                "d_n_final": d_n_vals[-1] if d_n_vals else 0,
+                "alpha_slope": alpha,
+                "predicted_sign_match": sign_match
+            })
+    return results
+
+SECTION 5: COMPLETE PRODUCTION DASHBOARD CODE
+Save the following single file as index.html to run the standalone dashboard locally in any web browser:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MWS Unified Framework Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { 
+            background: #05070f; 
+            color: #e2e8f0; 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        h1 { color: #38bdf8; text-align: center; margin-bottom: 25px; }
+        .tab { 
+            display: flex; 
+            gap: 10px; 
+            margin-bottom: 20px; 
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 10px;
+            overflow-x: auto;
+        }
+        .tab button { 
+            background: #1e293b; 
+            color: #94a3b8; 
+            border: none; 
+            padding: 10px 16px; 
+            cursor: pointer; 
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .tab button:hover { background: #334155; color: #f8fafc; }
+        .tab button.active { background: #0284c7; color: #ffffff; }
+        .section { 
+            display: none; 
+            background: #0d1222; 
+            padding: 25px; 
+            border-radius: 12px; 
+            margin-bottom: 20px; 
+            border: 1px solid #1e293b;
+        }
+        .section.active { display: block; }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .dashboard-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .stat-row { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 10px 0; 
+            border-bottom: 1px solid #1e293b; 
+        }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-row span:first-child { color: #94a3b8; }
+        .stat-row span:last-child { font-family: monospace; color: #38bdf8; font-size: 1.05rem; }
+        .panel-desc { color: #64748b; font-size: 0.9rem; line-height: 1.5; }
+        .accent-box {
+            background: #1e1b4b;
+            border-left: 4px solid #818cf8;
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+        }
+        .chart-container {
+            background: #02040a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 15px;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .matrix-controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .matrix-input {
+            background: #05070f;
+            border: 1px solid #334155;
+            color: #38bdf8;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            width: 160px;
+        }
+        .btn-prime {
+            background: #10b981; 
+            color: white; 
+            border: none; 
+            padding: 10px 18px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+        .btn-prime:hover { opacity: 0.9; }
+        .console-log {
+            background: #02040a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            max-height: 180px;
+            overflow-y: auto;
+            color: #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>MWS Unified Framework Dashboard</h1>
+    
+    <div class="tab">
+        <button id="btn-yses" class="active" onclick="showSection('yses')">YSES 1 Astronomy</button>
+        <button id="btn-mersenne" onclick="showSection('mersenne')">Mersenne mod 37</button>
+        <button id="btn-percentage" onclick="showSection('percentage')">Matrix & 13.x</button>
+        <button id="btn-primes" onclick="showSection('primes')">Prime Tools</button>
+    </div>
+
+    <!-- YSES 1 Section -->
+    <div id="yses" class="section active">
+        <h3>YSES 1 Metric Framework</h3>
+        <div class="dashboard-grid">
+            <div>
+                <div class="stat-row"><span>Right Ascension:</span> <span>13h 25m 12.1263s</span></div>
+                <div class="stat-row"><span>Distance:</span> <span>307.3 ly</span></div>
+                <div class="stat-row"><span>Parallax:</span> <span>10.6124 mas</span></div>
+                <div class="stat-row"><span>Planet c Mass:</span> <span>7.2 M_J (DR: 9)</span></div>
+                <div class="stat-row"><span>Planet b Mass:</span> <span>14.0–21.8 M_J</span></div>
+                <p class="panel-desc" style="color:#f59e0b; margin-top: 15px;">Empirical astro-metric baseline dataset.</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="ysesChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mersenne Section -->
+    <div id="mersenne" class="section">
+        <h3>Mersenne mod 37 Engine</h3>
+        <div class="dashboard-grid">
+            <div>
+                <p class="panel-desc">Evaluate modular congruence under mod 37 criteria via square-and-multiply reduction.</p>
+                <div class="matrix-controls">
+                    <div>
+                        <label style="display:block; font-size:0.75rem; color:#64748b; margin-bottom:4px;">Exponent Prime (p)</label>
+                        <input type="number" id="mersenneP" class="matrix-input" value="17" min="2" max="10000">
+                    </div>
+                </div>
+                <div class="stat-row"><span>Order of 2 mod 37:</span> <span>36 (Fixed)</span></div>
+                <div class="stat-row"><span>Exponent Residue:</span> <span id="mProp">p ≡ 17 mod 36</span></div>
+                <div class="stat-row"><span>Mersenne Value:</span> <span id="mMersenneMod">M_p ≡ 17 mod 37</span></div>
+                <div class="stat-row"><span>Alignment Status:</span> <span id="mAlignment" style="font-weight:bold;">TRUE</span></div>
+            </div>
+            <div class="accent-box">
+                <strong>Algebraic Invariant:</strong><br>
+                <span class="panel-desc" style="color:#cbd5e1;">37 never divides Mersenne primes (p > 2). Self-alignment locks when p ≡ 17 mod 36, establishing boundary parity.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Percentage + 13.x Section -->
+    <div id="percentage" class="section">
+        <h3>Matrix & 13.x Sequence Engine</h3>
+        <div class="dashboard-grid">
+            <div>
+                <p class="panel-desc">Modify node and span configurations to compute transformations and cross-dot vectors.</p>
+                <div class="matrix-controls">
+                    <div>
+                        <label style="display:block; font-size:0.75rem; color:#64748b; margin-bottom:4px;">Nodes Vector</label>
+                        <input type="text" id="nodesInput" class="matrix-input" value="1,3,5,9">
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:0.75rem; color:#64748b; margin-bottom:4px;">Spans Vector</label>
+                        <input type="text" id="spansInput" class="matrix-input" value="2,4,7">
+                    </div>
+                </div>
+                <div class="stat-row"><span>Nodes Output:</span> <span id="outNodes"></span></div>
+                <div class="stat-row"><span>Spans Output:</span> <span id="outSpans"></span></div>
+                <div class="stat-row"><span>Spans Summation:</span> <span id="outSpanSum">13</span></div>
+                <div class="stat-row"><span>Cross-Dot Vector:</span> <span id="outDotProd">0</span></div>
+                <div class="stat-row"><span>Matrix Mean:</span> <span id="outSequenceAvg">13.5</span></div>
+            </div>
+            <div class="chart-container">
+                <canvas id="matrixChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prime Tools Section -->
+    <div id="primes" class="section">
+        <h3>Prime Boundary Sieve & Diagnostics</h3>
+        <p class="panel-desc">Automated Eratosthenes memory engine tracking gap variance and scale thresholds.</p>
+        <div class="matrix-controls">
+            <button class="btn-prime" onclick="runBoundarySieve()">Run Multi-Scale Sieve</button>
+            <button class="btn-prime" style="background:#0284c7;" onclick="exportDashboardConfig()">Export State (JSON)</button>
+            <label class="btn-prime" style="background:#64748b; display:inline-block;">
+                Import State
+                <input type="file" style="display:none;" onchange="importDashboardConfig(event)">
+            </label>
+        </div>
+        <div class="dashboard-grid">
+            <div class="chart-container">
+                <canvas id="primeChart"></canvas>
+            </div>
+            <div>
+                <label style="display:block; font-size:0.75rem; color:#64748b; margin-bottom:4px;">Live Log</label>
+                <div id="sieveConsole" class="console-log">Ready. Initialize diagnostic scan...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let ysesChartInstance = null;
+        let matrixChartInstance = null;
+        let primeChartInstance = null;
+
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab button').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.getElementById('btn-' + id).classList.add('active');
+            if (id === 'yses' && ysesChartInstance) ysesChartInstance.resize();
+            if (id === 'percentage' && matrixChartInstance) matrixChartInstance.resize();
+            if (id === 'primes' && primeChartInstance) primeChartInstance.resize();
+        }
+
+        function initYSESChart() {
+            const ctx = document.getElementById('ysesChart').getContext('2d');
+            ysesChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Planet c', 'Planet b (Min)', 'Planet b (Max)'],
+                    datasets: [{
+                        label: 'Mass (M_J)',
+                        data: [7.2, 14.0, 21.8],
+                        backgroundColor: ['rgba(56, 189, 248, 0.4)', 'rgba(129, 140, 248, 0.4)', 'rgba(129, 140, 248, 0.7)'],
+                        borderColor: ['#38bdf8', '#818cf8', '#818cf8'],
+                        borderWidth: 2,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                    },
+                    plugins: { legend: { labels: { color: '#e2e8f0' } } }
+                }
+            });
+        }
+
+        function calculateMersenneMod() {
+            const p = parseInt(document.getElementById('mersenneP').value) || 0;
+            const rem36 = p % 36;
+            document.getElementById('mProp').innerText = `p ≡ ${rem36} mod 36`;
+            
+            // Fast modular exponentiation: (2^p - 1) % 37
+            let base = 2, exp = p, res = 1;
+            base = base % 37;
+            while (exp > 0) {
+                if (exp % 2 === 1) res = (res * base) % 37;
+                exp = Math.floor(exp / 2);
+                base = (base * base) % 37;
+            }
+            const mVal = (res - 1 + 37) % 37;
+            document.getElementById('mMersenneMod').innerText = `M_p ≡ ${mVal} mod 37`;
+            const matches = (mVal === (p % 37));
+            const el = document.getElementById('mAlignment');
+            el.innerText = matches ? "ALIGNMENT LOCKED" : "MISALIGNED";
+            el.style.color = matches ? "#10b981" : "#f43f5e";
+        }
+
+        function runMatrixExecution() {
+            const nodes = document.getElementById('nodesInput').value.split(',').map(Number).filter(n => !isNaN(n));
+            const spans = document.getElementById('spansInput').value.split(',').map(Number).filter(n => !isNaN(n));
+            document.getElementById('outNodes').innerText = JSON.stringify(nodes);
+            document.getElementById('outSpans').innerText = JSON.stringify(spans);
+            
+            const spanSum = spans.reduce((a, b) => a + b, 0);
+            document.getElementById('outSpanSum').innerText = spanSum;
+            
+            let dot = 0;
+            const minLen = Math.min(nodes.length, spans.length);
+            for(let i = 0; i < minLen; i++) dot += (nodes[i] * spans[i]);
+            document.getElementById('outDotProd').innerText = dot;
+            
+            const all = [...nodes, ...spans];
+            const avg = all.length ? (all.reduce((a, b) => a + b, 0) / all.length).toFixed(2) : 0;
+            document.getElementById('outSequenceAvg').innerText = avg;
+            updateMatrixChart(nodes, spans);
+        }
+
+        function updateMatrixChart(nodes, spans) {
+            const labels = Array.from({length: Math.max(nodes.length, spans.length)}, (_, i) => `Idx ${i}`);
+            if (matrixChartInstance) {
+                matrixChartInstance.data.labels = labels;
+                matrixChartInstance.data.datasets[0].data = nodes;
+                matrixChartInstance.data.datasets[1].data = spans;
+                matrixChartInstance.update();
+            } else {
+                const ctx = document.getElementById('matrixChart').getContext('2d');
+                matrixChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            { label: 'Nodes Track', data: nodes, borderColor: '#38bdf8', tension: 0.2 },
+                            { label: 'Spans Track', data: spans, borderColor: '#f43f5e', tension: 0.2 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                        },
+                        plugins: { legend: { labels: { color: '#e2e8f0' } } }
+                    }
+                });
+            }
+        }
+
+        function runBoundarySieve() {
+            const boundaries = [9, 99, 999, 9999];
+            const consoleBox = document.getElementById('sieveConsole');
+            consoleBox.innerHTML = "Initializing multi-scale grid evaluation...\n";
+            const rawGaps = [];
+            
+            boundaries.forEach(limit => {
+                let primes = [];
+                let sieve = Array(limit + 1).fill(true);
+                for (let p = 2; p <= limit; p++) {
+                    if (sieve[p]) {
+                        primes.push(p);
+                        for (let i = p * p; i <= limit; i += p) sieve[i] = false;
+                    }
+                }
+                let totalGaps = 0;
+                for(let i = 1; i < primes.length; i++) totalGaps += (primes[i] - primes[i-1]);
+                const meanGap = primes.length > 1 ? (totalGaps / (primes.length - 1)).toFixed(3) : 0;
+                rawGaps.push(parseFloat(meanGap));
+                consoleBox.innerHTML += `Scale [${limit}]: ${primes.length} primes | Mean gap: ${meanGap}\n`;
+            });
+            consoleBox.innerHTML += "Scan Complete.\n";
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+            updatePrimeChart(boundaries, rawGaps);
+        }
+
+        function updatePrimeChart(labels, gapData) {
+            const ctx = document.getElementById('primeChart').getContext('2d');
+            if (primeChartInstance) {
+                primeChartInstance.data.labels = labels.map(l => `Limit ${l}`);
+                primeChartInstance.data.datasets[0].data = gapData;
+                primeChartInstance.update();
+            } else {
+                primeChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels.map(l => `Limit ${l}`),
+                        datasets: [{
+                            label: 'Mean Gap Variance',
+                            data: gapData,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                        },
+                        plugins: { legend: { labels: { color: '#e2e8f0' } } }
+                    }
+                });
+            }
+        }
+
+        function exportDashboardConfig() {
+            const state = {
+                mersenneP: document.getElementById('mersenneP').value,
+                nodes: document.getElementById('nodesInput').value,
+                spans: document.getElementById('spansInput').value,
+                timestamp: new Date().toISOString()
+            };
+            const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'mws_config.json';
+            a.click();
+        }
+
+        function importDashboardConfig(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const data = JSON.parse(e.target.result);
+                document.getElementById('mersenneP').value = data.mersenneP;
+                document.getElementById('nodesInput').value = data.nodes;
+                document.getElementById('spansInput').value = data.spans;
+                calculateMersenneMod();
+                runMatrixExecution();
+            };
+            reader.readAsText(file);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initYSESChart();
+            calculateMersenneMod();
+            runMatrixExecution();
+            runBoundarySieve();
+            document.getElementById('mersenneP').addEventListener('input', calculateMersenneMod);
+            document.getElementById('nodesInput').addEventListener('input', runMatrixExecution);
+            document.getElementById('spansInput').addEventListener('input', runMatrixExecution);
+        });
+    </script>
+</body>
+</html>
+
+
