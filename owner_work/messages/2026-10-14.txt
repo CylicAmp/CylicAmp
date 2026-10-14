@@ -668,3 +668,7 @@ Claude-Session: https://claude.ai/code/session_01Km28W4mnsqabQahvMZU2Wz" && git 
 
 
 I mean, I don't even know why. You're pulling up my messages unless it's the math that's in the messages that are mine and the explanations are being written out correctly, or you just wanna keep it in in just my words. You don't wanna have my words? And then build off of that. You wanna have my words ignore them, build some other s***. I don't know what the f*** you're talking about. Because every time this algorithm does something, I literally have to yield to it. And be like, I have no f****** clue to what's doing...
+
+
+===== #292  2026-10-14T18:55:22.627Z =====
+Yeah. Once again, the company confuses the fuck out of me. At the top it says right, right, right. At the bottom it says wrong, wrong, wrong. Yeah, I don't understand this type of logic.
