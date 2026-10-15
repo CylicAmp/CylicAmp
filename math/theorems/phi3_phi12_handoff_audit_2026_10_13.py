@@ -34,6 +34,10 @@ reference/phi3_phi12_at_137_handoff_2026_09_12.md).
      physics.nist.gov, checked 2026-10-13) is 137.035999177(21). Neither the 2.6e-4 relative
      residual nor C1 changes.
 
+=== THE OWNER MADE BOTH CORRECTIONS FIRST ===
+  math/theorems/one_over_137_framework.md (the owner's note, 2026-09-19) already gives 137.035999177(21)
+  and 1.71 x 10^6 standard deviations. C1 and C2 above re-derive the owner's own corrections.
+
 === STANDING FRAMEWORK RUN (CLAUDE.md), full output in reference/phi12_framework_run.txt ===
   13 -> CAS_EXT, twin (11, 13);  2473 -> 31 C9;  10957 -> 5 CAS_EXT;  18907 -> SEAM (37 | Phi_3(137),
   forced);  352256593 -> 17 NQR17;  S -> 31 C9;  8701162859 -> 28 SA_ST_B.
