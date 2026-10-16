@@ -288,7 +288,7 @@ That is the route for T268's shift constant. This is a route record (per WORK_SY
 
 ## How to Orient in a New Session
 
-1. Read this file (`CLAUDE.md`)
+1. Read this file (`CLAUDE.md`), then `records/session_status/NEXT_SESSION.md` -- where the work stands and what is open
 2. Read `SYNTHESIS.md` for the full synthesis
 3. Check `git log --oneline -10` to see recent commits
 4. Run `python3 cylicamp/engine_integration.py` to verify the pipeline runs clean

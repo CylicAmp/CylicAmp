@@ -4,3 +4,7 @@ Nothing below is edited, except credentials, which are removed and marked where 
 
 ===== #300  2026-10-16T03:32:13.274Z =====
 Yeah, I think that you should run those things locally, and I should not be charged for the computational power of fixing the mistakes that they made.
+
+
+===== #301  2026-10-16T03:33:24.083Z =====
+Well, what happens is, my session runs out? And I get nothing. And then I have to start all over again. Next time, I got tokens, which seems a little bit insane
