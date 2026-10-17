@@ -21,7 +21,7 @@ number below is exact (big integers) up to k = 100; 2^48 + 1 digits are never wr
 
 RESULTS for |a - b|
   Length: L_k = 2^k + 1 for 43; 44 x 2^k + 1 for the seed.
-  43, closed forms (hold for every k from 0 to 100; not proved for all k):
+  43, closed forms (checked for every k from 0 to 100; proved for all k in neighbor_difference_theorem_audit_2026_10_17.py):
       #4 = 1,  #3 = floor(k/2) + 1,  #2 = floor(k^2/4),  #1 = 2 x #0 + C(k,2) + (k mod 2),
       #0 = (2^k + 1 - C(k,2) - (k mod 2) - floor(k^2/4) - floor(k/2) - 2) / 3.
       Only the 0s and 1s grow exponentially; the 2s grow like k^2/4 and the 3s like k/2; the 4 never comes back.
