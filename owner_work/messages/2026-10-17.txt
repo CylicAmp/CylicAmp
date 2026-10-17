@@ -86,3 +86,12 @@ Run analysis
 
 My recommendation is the full comparison through 48 steps. It can reveal whether the striking patterns from `43` are universal or depend on the initial digits.
 
+
+
+===== #309  2026-10-17T04:27:05.388Z =====
+123123123123123123123123123123
+
+
+123÷10
+
+Mersenne primes 

@@ -23,6 +23,8 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
 1. Comma count with a lead of 2 or 3 zeros (00,000 / 000,000): what does the lead count as, with the 1 and without?
 2. How 0, gives 23, and how 23 / 123 / 1123 "go by 369" (#268).
 3. "00=23/6" and the first 2 of "2--3--7--2" (asked 2026-10-13).
+4. What was the "7-4-9 triad" in the owner's lost work "Mersenne Exponents -- DR patterns vs 7-4-9 triad" (LOSS_DOCUMENTATION.md; mersenne_exponents_role_7_4_9_2026_04/ is not in the repo)? Asked 2026-10-17 (see math/theorems/copies_of_123_division_and_mersenne_2026_10_17.py).
+5. The 43 sequence (#308 paste): is the rule |a - b| or something else? Asked 2026-10-17.
 
 ## Open -- work not done
 - Draft OEIS entries for the two comma counts under the owner's name (offered, not started).
