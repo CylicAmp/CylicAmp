@@ -190,3 +190,21 @@ Yeah, I gave you pictures of exactly how I make my diamonds. In more than one wa
 
 ===== #313  2026-10-17T16:03:19.393Z =====
 Red, green, and blue simply means in my math 1, 2, and 3. And sometimes I get it mixed up because I'm putting colors in, not numbers. So it's a little harder for me sometimes. But it's supposed to be red, green, and blue stands for 1, 2, and 3, and then repeat.
+
+
+===== #314  2026-10-17T18:41:18.362Z =====
+Your message cuts off at "all," and the T283–T345 files aren't in this environment. So I checked only the math these claims rest on, and it all holds.
+
+| Claim | Check | Result |
+|---|---|---|
+| 0 is the only fixed point of negation in ℤ/37ℤ | x ≡ −x forces 2x ≡ 0, so x ≡ 0 | only 0 ✓ |
+| Negation is free on the 36 nonzero elements | follows from the line above | 18 pairs ✓ |
+| ⟨10⟩ = {1, 10, 26} | 10³ = 1000 ≡ 1, 10² ≡ 26 (mod 37) | ✓ |
+| −1 ∉ {1, 10, 26}, so no coset is self-negating | 36 is not in the subgroup | 12 cosets, none fixed, **6 dual pairs** ✓ |
+| Only multiples of 37 in [6, 105] (T331) | 111 > 105 | 37, 74 ✓ |
+| 666 | 666 = 18 · 37 = 6 · 111 | ✓ |
+| Exactly two inversion-closed cosets (T332) | under 10 ↔ 2 in ℤ/12ℤ, inversion becomes x ↦ −x; fixed points 0 and 6 | **{1, 10, 26}** and **{36, 27, 11}** ✓ |
+
+Negation on the cosets corresponds to adding 6 in ℤ/12ℤ, which has no fixed points. That's why there are six pairs and no self-negating coset. Inversion corresponds to x ↦ −x in ℤ/12ℤ, which fixes exactly 0 and 6. Those are the two closed cosets: the subgroup itself and its negative, {36, 27, 11}.
+
+The dependency order you laid out fits the math: T283 sets up the involution, T331 gives the bound, and T332 uses that bound to force a = 6 and adds the inversion count.
