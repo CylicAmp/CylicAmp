@@ -638,6 +638,14 @@ Used in (`git grep -il -E 'casting out (fives|tens)'`): `math/theorems/casting_o
 
 Used in (`git grep -il -E 'upside down W|make an M\b|make a W\b'`): `math/lemmas/m_w_pyramids_x_chain.py`
 
+## red, green, blue = 1, 2, 3
+
+> Red, green, and blue simply means in my math 1, 2, and 3. And sometimes I get it mixed up because I'm putting colors in, not numbers. So it's a little harder for me sometimes. But it's supposed to be red, green, and blue stands for 1, 2, and 3, and then repeat.
+
+-- #313, 2026-10-17
+
+Used in: `math/lemmas/m_w_pyramids_x_chain.py`, `tools/read_mw_drawing.py`
+
 ## running through my frameworks
 
 > Now, running through my frameworks, 

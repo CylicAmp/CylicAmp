@@ -27,7 +27,7 @@ M OVER W (both walks drawn on one grid):
 
 ONE LINE HOLDS BOTH (owner, 2026-10-06: "Whenever you create an M, you also
 create a W ... Half of the M is M, and the other half of it is W", with a
-drawing: owner_work/images/2026-10-06_8_mw_drawing.jpg. The drawing shows THREE zigzag paths in three colours between the two digit rows -- red /\/\ (a whole M), teal /\/, blue \/ -- not one run. What the three colours stand for is not in the record; corrected 2026-10-17, the earlier text here said "one zigzag run").
+drawing: owner_work/images/2026-10-06_8_mw_drawing.jpg. The drawing shows THREE zigzag paths in three colours between the two digit rows -- red /\/\ (a whole M), teal /\/, blue \/ -- not one run. The owner's key to the colours (#313, 2026-10-17): "red, green, and blue stands for 1, 2, and 3, and then repeat" (the green stroke is drawn in teal). tools/read_mw_drawing.py reads the picture: every vertex of every path sits on a zero (top zeros numbered 1-6, bottom zeros 1-7); red (1) runs bottom1 top1 bottom3 top4 bottom6, green (2) bottom2 top2 bottom4 top5, blue (3) top3 bottom5 top6 -- green is red moved one zero right, blue is red moved two zeros right. Corrected 2026-10-17: the earlier text here said "one zigzag run").
   - Run the pyramid line on: 0 1 2 1 0 1 2 1 0 1 2 ...
   - Moving it over by half a pyramid (2 steps) gives exactly the turned-over
     line: h(t+2) = 2 - h(t).
@@ -99,3 +99,23 @@ for t in range(9):
     row[W[t]] = "X" if M[t] == W[t] else "W"
     print(" ".join(row))
 print("M over W: 4 X's, 3 diamonds. All assertions pass.")
+
+
+# THE OWNER'S THREE COLOURED PATHS (owner_work/images/2026-10-06_8_mw_drawing.jpg; read by tools/read_mw_drawing.py)
+TOP_TXT, BOT_TXT = "-0-00-0-00", "00-0-00-0-0"
+assert TOP_TXT.count("0") == 6 and BOT_TXT.count("0") == 7
+RED = [("bottom", 1), ("top", 1), ("bottom", 3), ("top", 4), ("bottom", 6)]          # colour 1
+GREEN = [("bottom", 2), ("top", 2), ("bottom", 4), ("top", 5)]                       # colour 2
+BLUE = [("top", 3), ("bottom", 5), ("top", 6)]                                       # colour 3
+
+
+def moved(path, k):
+    return [(row, z + k) for row, z in path]
+
+
+assert all(v[0] in ("top", "bottom") for p in (RED, GREEN, BLUE) for v in p)
+for path in (RED, GREEN, BLUE):
+    assert all(a[0] != b[0] for a, b in zip(path, path[1:]))                         # every stroke goes between the rows
+assert [b[1] - a[1] for a, b in zip(RED, RED[1:])] == [0, 2, 1, 2]                   # zero numbers visited: 1 1 3 4 6
+assert moved(RED, 1)[:4] == GREEN                                                     # green = red moved 1 zero right (its 5th vertex, bottom 7, is not drawn)
+assert moved(RED, 2)[1:4] == BLUE                                                     # blue = red moved 2 zeros right (its first, bottom 3, and last, bottom 8, are not drawn)
