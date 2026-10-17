@@ -182,3 +182,7 @@ The next major result is to characterize which initial seeds lead to a limiting 
 
 ===== #311  2026-10-17T15:53:03.004Z =====
 A Penrose diagram is a map of an entire spacetime, past future, and infinitely far away, squeezed into a finite picture l+ works through conformal rescaling, which shrinks distances by an amount that arows toward infinity while preserving angles. The result is one rule that governs everything: light always travels at 45°. Every light cone is c 90 wedge, and anything with mass must stay inside its cone, so its path always leans more up than sideways. You ose the true sizes of things, but you keep the causa structure perfectly, which is why physicists use these diagrams to settle who can influence whom.
+
+
+===== #312  2026-10-17T15:58:16.695Z =====
+Yeah, I gave you pictures of exactly how I make my diamonds. In more than one way, I've showed you.

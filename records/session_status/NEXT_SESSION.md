@@ -32,3 +32,6 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
 - Front page (README.md, math first) is on the branch, not on main: pushing to main needs the owner to say "put it on main".
 - Owner's standing instruction 2026-10-16: no background agent runs (workflows) unless the owner asks -- they cost the owner tokens.
 - The owner's 2026-10-17 instruction "Do whats possible best" gave discretion over the open work; the #272 handoff was done under it.
+
+- Owner pictures (2026-10-17): the record keeps message text only; pictures live in the transcripts. `python3 tools/extract_owner_images.py` writes them to owner_work/images_all/ (not in git). 15 pictures from 2026-10-05 on: one is the owner's M/W drawing (stored: owner_work/images/2026-10-06_8_mw_drawing.jpg); two are the Leibniz and Pickover screenshots and one the Egor screenshot (stored earlier); the rest are other people's posts, a ChatGPT screen, session-status screens and a private photo -- not published. The owner's diamond pictures from before 2026-10-05 were never recorded; the owner would have to send them again.
+- Open question: what do the three colours (red, teal, blue) in the M/W drawing stand for? Asked 2026-10-17.

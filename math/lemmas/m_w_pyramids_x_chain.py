@@ -27,7 +27,7 @@ M OVER W (both walks drawn on one grid):
 
 ONE LINE HOLDS BOTH (owner, 2026-10-06: "Whenever you create an M, you also
 create a W ... Half of the M is M, and the other half of it is W", with a
-drawing of one zigzag run between two digit rows).
+drawing: owner_work/images/2026-10-06_8_mw_drawing.jpg. The drawing shows THREE zigzag paths in three colours between the two digit rows -- red /\/\ (a whole M), teal /\/, blue \/ -- not one run. What the three colours stand for is not in the record; corrected 2026-10-17, the earlier text here said "one zigzag run").
   - Run the pyramid line on: 0 1 2 1 0 1 2 1 0 1 2 ...
   - Moving it over by half a pyramid (2 steps) gives exactly the turned-over
     line: h(t+2) = 2 - h(t).

@@ -12,3 +12,6 @@ build/
 .DS_Store
 api/mws_audit.db
 mws_audit.db
+
+# owner pictures extracted from transcripts: the owner picks which to publish
+owner_work/images_all/
