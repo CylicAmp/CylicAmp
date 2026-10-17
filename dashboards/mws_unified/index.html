@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MWS Unified Framework Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        body { 
+            background: #05070f; 
+            color: #e2e8f0; 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        h1 { color: #38bdf8; text-align: center; margin-bottom: 25px; }
+        .tab { 
+            display: flex; 
+            gap: 10px; 
+            margin-bottom: 20px; 
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 10px;
+            overflow-x: auto;
+        }
+        .tab button { 
+            background: #1e293b; 
+            color: #94a3b8; 
+            border: none; 
+            padding: 10px 16px; 
+            cursor: pointer; 
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .tab button:hover { background: #334155; color: #f8fafc; }
+        .tab button.active { background: #0284c7; color: #ffffff; }
+        .section { 
+            display: none; 
+            background: #0d1222; 
+            padding: 25px; 
+            border-radius: 12px; 
+            margin-bottom: 20px; 
+            border: 1px solid #1e293b;
+        }
+        .section.active { display: block; }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .dashboard-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .stat-row { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 10px 0; 
+            border-bottom: 1px solid #1e293b; 
+        }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-row span:first-child { color: #94a3b8; }
+        .stat-row span:last-child { font-family: monospace; color: #38bdf8; font-size: 1.05rem; }
+        .panel-desc { color: #64748b; font-size: 0.9rem; line-height: 1.5; }
+        .accent-box {
+            background: #1e1b4b;
+            border-left: 4px solid #818cf8;
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+        }
+        .chart-container {
+            background: #02040a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 15px;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .matrix-controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .matrix-input {
+            background: #05070f;
+            border: 1px solid #334155;
+            color: #38bdf8;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            width: 160px;
+        }
+        .btn-prime {
+            background: #10b981; 
+            color: white; 
+            border: none; 
+            padding: 10px 18px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+        .btn-prime:hover { opacity: 0.9; }
+        .console-log {
+            background: #02040a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            max-height: 180px;
+            overflow-y: auto;
+            color: #10b981;
+            white-space: pre-wrap;
+        }
+        .note { color: #64748b; font-size: 0.8rem; margin-top: 6px; min-height: 1.1em; }
+    </style>
+</head>
+<body>
+
+    <h1>MWS Unified Framework Dashboard</h1>
+    
+    <div class="tab">
+        <button id="btn-yses" class="active" onclick="showSection('yses')">YSES 1 Astronomy</button>
+        <button id="btn-mersenne" onclick="showSection('mersenne')">Mersenne mod 37</button>
+        <button id="btn-percentage" onclick="showSection('percentage')">Matrix & 13.x</button>
+        <button id="btn-primes" onclick="showSection('primes')">Prime Tools</button>
+    </div>
+
+    <!-- YSES 1 Section -->
+    <div id="yses" class="section active">
+        <h3>YSES 1 Metric Framework</h3>
+        <div class="dashboard-grid">
+            <div>
+                <div class="stat-row"><span>Right Ascension:</span> <span>13h 25m 12.1263s</span></div>
+                <div class="stat-row"><span>Distance:</span> <span>307.3 ly</span></div>
+                <div class="stat-row"><span>Parallax:</span> <span>10.6124 mas</span></div>
+                <div class="stat-row"><span>Planet c Mass:</span> <span>7.2 M_J (DR: 9)</span></div>
+                <div class="stat-row"><span>Planet b Mass:</span> <span>14.0–21.8 M_J</span></div>
+                <p class="panel-desc" style="color:#f59e0b; margin-top: 15px;">Empirical astro-metric baseline dataset.</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="ysesChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mersenne Section -->
+    <div id="mersenne" class="section">
+        <h3>Mersenne mod 37 Engine</h3>
+        <div class="dashboard-grid">
+            <div>
+                <p class="panel-desc">Evaluate modular congruence under mod 37 criteria via square-and-multiply reduction.</p>
+                <div class="matrix-controls">
+                    <div>
+                        <label style="display:block; font-size:0.75rem; color:#64748b; margin-bottom:4px;">Exponent Prime (p)</label>
+                        <input type="number" id="mersenneP" class="matrix-input" value="17" min="2" max="10000">
+                    </div>
+                </div>
+                <div class="stat-row"><span>Order of 2 mod 37:</span> <span>36 (Fixed)</span></div>
+                <div class="stat-row"><span>Exponent Residue:</span> <span id="mProp">…</span></div>
+                <div class="stat-row"><span>Mersenne Value:</span> <span id="mMersenneMod">…</span></div>
+                <div class="stat-row"><span>Alignment Status:</span> <span id="mAlignment" style="font-weight:bold;">…</span></div>
+            </div>
+            <div class="accent-box">
+                <strong>Algebraic Invariant:</strong><br>
+                <span class="panel-desc" style="color:#cbd5e1;">37 never divides 2<sup>p</sup> − 1 for a prime p (the order of 2 mod 37 is 36, and 36 does not divide a prime), so it never divides a Mersenne prime. The alignment test (2<sup>p</sup> − 1) mod 37 = p mod 37 holds for exactly one class of p mod 1332 for each residue of p mod 36. Among primes below 2000 it holds for 17, 241, 401, 647, 811, 1307, 1723, 1733, 1979. p = 17 passes; p = 53, which is also 17 mod 36, does not.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Percentage + 13.x Section -->
+    <div id="percentage" class="section">
+        <h3>Matrix & 13.x Sequence Engine</h3>
+        <div class="dashboard-grid">
+            <div>
+                <p class="panel-desc">Modify node and span configurations to compute transformations and cross-dot vectors.</p>
+                <div class="matrix-controls">
+                    <div>
+                        <label style="display:block; font-size:0.75rem; color:#64748b; margin-bottom:4px;">Nodes Vector</label>
+                        <input type="text" id="nodesInput" class="matrix-input" value="1,3,5,9">
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:0.75rem; color:#64748b; margin-bottom:4px;">Spans Vector</label>
+                        <input type="text" id="spansInput" class="matrix-input" value="2,4,7">
+                    </div>
+                </div>
+                <div class="stat-row"><span>Nodes Output:</span> <span id="outNodes"></span></div>
+                <div class="stat-row"><span>Spans Output:</span> <span id="outSpans"></span></div>
+                <div class="stat-row"><span>Spans Summation:</span> <span id="outSpanSum">…</span></div>
+                <div class="stat-row"><span>Cross-Dot Vector:</span> <span id="outDotProd">…</span></div>
+                <div class="stat-row"><span>Matrix Mean:</span> <span id="outSequenceAvg">…</span></div>
+            </div>
+            <div class="chart-container">
+                <canvas id="matrixChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prime Tools Section -->
+    <div id="primes" class="section">
+        <h3>Prime Boundary Sieve & Diagnostics</h3>
+        <p class="panel-desc">Automated Eratosthenes memory engine tracking gap variance and scale thresholds.</p>
+        <div class="matrix-controls">
+            <button class="btn-prime" onclick="runBoundarySieve()">Run Multi-Scale Sieve</button>
+            <button class="btn-prime" style="background:#0284c7;" onclick="exportDashboardConfig()">Export State (JSON)</button>
+            <label class="btn-prime" style="background:#64748b; display:inline-block;">
+                Import State
+                <input type="file" style="display:none;" onchange="importDashboardConfig(event)">
+            </label>
+        </div>
+        <div class="dashboard-grid">
+            <div class="chart-container">
+                <canvas id="primeChart"></canvas>
+            </div>
+            <div>
+                <label style="display:block; font-size:0.75rem; color:#64748b; margin-bottom:4px;">Live Log</label>
+                <div id="sieveConsole" class="console-log">Ready. Initialize diagnostic scan...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let ysesChartInstance = null;
+        let matrixChartInstance = null;
+        let primeChartInstance = null;
+
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab button').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.getElementById('btn-' + id).classList.add('active');
+            if (id === 'yses' && ysesChartInstance) ysesChartInstance.resize();
+            if (id === 'percentage' && matrixChartInstance) matrixChartInstance.resize();
+            if (id === 'primes' && primeChartInstance) primeChartInstance.resize();
+        }
+
+        function initYSESChart() {
+            if (typeof Chart === 'undefined') return;
+            const ctx = document.getElementById('ysesChart').getContext('2d');
+            ysesChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Planet c', 'Planet b (Min)', 'Planet b (Max)'],
+                    datasets: [{
+                        label: 'Mass (M_J)',
+                        data: [7.2, 14.0, 21.8],
+                        backgroundColor: ['rgba(56, 189, 248, 0.4)', 'rgba(129, 140, 248, 0.4)', 'rgba(129, 140, 248, 0.7)'],
+                        borderColor: ['#38bdf8', '#818cf8', '#818cf8'],
+                        borderWidth: 2,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                    },
+                    plugins: { legend: { labels: { color: '#e2e8f0' } } }
+                }
+            });
+        }
+
+        function calculateMersenneMod() {
+            const p = parseInt(document.getElementById('mersenneP').value) || 0;
+            const rem36 = p % 36;
+            document.getElementById('mProp').innerText = `p ≡ ${rem36} mod 36`;
+            
+            // Fast modular exponentiation: (2^p - 1) % 37
+            let base = 2, exp = p, res = 1;
+            base = base % 37;
+            while (exp > 0) {
+                if (exp % 2 === 1) res = (res * base) % 37;
+                exp = Math.floor(exp / 2);
+                base = (base * base) % 37;
+            }
+            const mVal = (res - 1 + 37) % 37;
+            document.getElementById('mMersenneMod').innerText = `M_p ≡ ${mVal} mod 37`;
+            const matches = (mVal === (p % 37));
+            const el = document.getElementById('mAlignment');
+            el.innerText = matches ? "ALIGNMENT LOCKED" : "MISALIGNED";
+            el.style.color = matches ? "#10b981" : "#f43f5e";
+        }
+
+        function runMatrixExecution() {
+            const nodes = document.getElementById('nodesInput').value.split(',').map(Number).filter(n => !isNaN(n));
+            const spans = document.getElementById('spansInput').value.split(',').map(Number).filter(n => !isNaN(n));
+            document.getElementById('outNodes').innerText = JSON.stringify(nodes);
+            document.getElementById('outSpans').innerText = JSON.stringify(spans);
+            
+            const spanSum = spans.reduce((a, b) => a + b, 0);
+            document.getElementById('outSpanSum').innerText = spanSum;
+            
+            const prods = [];
+            const minLen = Math.min(nodes.length, spans.length);
+            for(let i = 0; i < minLen; i++) prods.push(nodes[i] * spans[i]);
+            const dot = prods.reduce((a, b) => a + b, 0);
+            document.getElementById('outDotProd').innerText = JSON.stringify(prods) + ' → ' + dot;
+            
+            const all = [...nodes, ...spans];
+            const avg = all.length ? (all.reduce((a, b) => a + b, 0) / all.length).toFixed(2) : 0;
+            document.getElementById('outSequenceAvg').innerText = avg;
+            updateMatrixChart(nodes, spans);
+        }
+
+        function updateMatrixChart(nodes, spans) {
+            if (typeof Chart === 'undefined') return;
+            const labels = Array.from({length: Math.max(nodes.length, spans.length)}, (_, i) => `Idx ${i}`);
+            if (matrixChartInstance) {
+                matrixChartInstance.data.labels = labels;
+                matrixChartInstance.data.datasets[0].data = nodes;
+                matrixChartInstance.data.datasets[1].data = spans;
+                matrixChartInstance.update();
+            } else {
+                const ctx = document.getElementById('matrixChart').getContext('2d');
+                matrixChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            { label: 'Nodes Track', data: nodes, borderColor: '#38bdf8', tension: 0.2 },
+                            { label: 'Spans Track', data: spans, borderColor: '#f43f5e', tension: 0.2 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                        },
+                        plugins: { legend: { labels: { color: '#e2e8f0' } } }
+                    }
+                });
+            }
+        }
+
+        function runBoundarySieve() {
+            const boundaries = [9, 99, 999, 9999];
+            const consoleBox = document.getElementById('sieveConsole');
+            consoleBox.innerHTML = "Initializing multi-scale grid evaluation...\n";
+            const rawGaps = [];
+            
+            boundaries.forEach(limit => {
+                let primes = [];
+                let sieve = Array(limit + 1).fill(true);
+                for (let p = 2; p <= limit; p++) {
+                    if (sieve[p]) {
+                        primes.push(p);
+                        for (let i = p * p; i <= limit; i += p) sieve[i] = false;
+                    }
+                }
+                let totalGaps = 0;
+                for(let i = 1; i < primes.length; i++) totalGaps += (primes[i] - primes[i-1]);
+                const meanGap = primes.length > 1 ? (totalGaps / (primes.length - 1)).toFixed(3) : 0;
+                rawGaps.push(parseFloat(meanGap));
+                consoleBox.innerHTML += `Scale [${limit}]: ${primes.length} primes | Mean gap: ${meanGap}\n`;
+            });
+            consoleBox.innerHTML += "Scan Complete.\n";
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+            updatePrimeChart(boundaries, rawGaps);
+        }
+
+        function updatePrimeChart(labels, gapData) {
+            if (typeof Chart === 'undefined') return;
+            const ctx = document.getElementById('primeChart').getContext('2d');
+            if (primeChartInstance) {
+                primeChartInstance.data.labels = labels.map(l => `Limit ${l}`);
+                primeChartInstance.data.datasets[0].data = gapData;
+                primeChartInstance.update();
+            } else {
+                primeChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels.map(l => `Limit ${l}`),
+                        datasets: [{
+                            label: 'Mean prime gap',
+                            data: gapData,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                        },
+                        plugins: { legend: { labels: { color: '#e2e8f0' } } }
+                    }
+                });
+            }
+        }
+
+        function exportDashboardConfig() {
+            const state = {
+                mersenneP: document.getElementById('mersenneP').value,
+                nodes: document.getElementById('nodesInput').value,
+                spans: document.getElementById('spansInput').value,
+                timestamp: new Date().toISOString()
+            };
+            const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'mws_config.json';
+            a.click();
+        }
+
+        function importDashboardConfig(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const consoleBox = document.getElementById('sieveConsole');
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (data.mersenneP === undefined || data.nodes === undefined || data.spans === undefined) throw new Error('missing mersenneP, nodes or spans');
+                    document.getElementById('mersenneP').value = data.mersenneP;
+                    document.getElementById('nodesInput').value = data.nodes;
+                    document.getElementById('spansInput').value = data.spans;
+                    calculateMersenneMod();
+                    runMatrixExecution();
+                    consoleBox.textContent += 'State imported.\n';
+                } catch (err) {
+                    consoleBox.textContent += 'Import failed: ' + err.message + ' (expected a file saved by Export State)\n';
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof Chart === 'undefined') {
+                document.querySelectorAll('.chart-container').forEach(c => { c.insertAdjacentHTML('beforeend', '<div class="note">The chart library did not load (it needs an internet connection). All numbers on this page are still computed.</div>'); });
+            }
+            initYSESChart();
+            calculateMersenneMod();
+            runMatrixExecution();
+            runBoundarySieve();
+            document.getElementById('mersenneP').addEventListener('input', calculateMersenneMod);
+            document.getElementById('nodesInput').addEventListener('input', runMatrixExecution);
+            document.getElementById('spansInput').addEventListener('input', runMatrixExecution);
+        });
+    </script>
+</body>
+</html>
