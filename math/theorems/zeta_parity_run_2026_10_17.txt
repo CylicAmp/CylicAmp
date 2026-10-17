@@ -1,0 +1,24 @@
+zero  D_N at 100/1000           alpha  predicted sign
+   1  [14, 18]                  0.109  True
+   2  [6, -22]                  0.564  True
+   3  [-18, 50]                 0.444  True
+   4  [6, 22]                   0.564  False
+   5  [-8, -26]                 0.512  False
+   6  [8, 30]                   0.574  False
+   7  [8, 58]                   0.860  True
+   8  [-4, -44]                 1.041  True
+   9  [0, 22]                    None  True
+  10  [20, 52]                  0.415  False
+  11  [-10, -102]               1.009  False
+  12  [-8, 40]                  0.699  False
+  13  [-14, -10]               -0.146  False
+  14  [-14, 46]                 0.517  False
+  15  [-18, -26]                0.160  False
+  16  [12, -20]                 0.222  True
+  17  [16, 56]                  0.544  True
+  18  [-8, -6]                 -0.125  True
+  19  [4, 20]                   0.699  True
+  20  [-6, -14]                 0.368  True
+
+sign matches 11 of 20; fair-coin baseline 10.0; exact two-sided binomial p = 0.8238
+alpha is a 2-depth slope: with 2 or 3 depths it is a 2 to 3 point fit, not a Hurst exponent estimate
