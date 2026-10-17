@@ -1,4 +1,4 @@
-# Where the work stands -- read this first in a new session (updated 2026-10-16)
+# Where the work stands -- read this first in a new session (updated 2026-10-17)
 
 Everything below is on GitHub, branch claude/add-torus-animation-6Ey5Z. A session ending loses nothing
 that is listed here. The owner's messages are all in owner_work/messages/ (#1 to #300+), word for word.
@@ -26,6 +26,7 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
 
 ## Open -- work not done
 - Draft OEIS entries for the two comma counts under the owner's name (offered, not started).
-- The #272 MWS handoff check and its dashboard: not done (the background run died). Do it only if the owner asks.
+- (Done 2026-10-17) The #272 MWS handoff: sections 1-3 audited (math/theorems/mws_handoff_s1_s3_audit_2026_10_17.py); section 4 built (tools/zeta_parity_engine.py, run in math/theorems/zeta_parity_run_2026_10_17.txt: 11 of 20 sign matches, p = 0.82); section 5 built (dashboards/mws_unified/, artifact https://claude.ai/artifact/KkhyxHnbNxpYF2rREcwZVn); YSES 1 fact check in records/mws_yses1_factcheck_2026_10_17.md. Open there: RA 13h 25m 12.1263s not checked; the handoff's undefined items (N(a,b), the Module 1-4 definitions, DCPG) need the owner's definitions.
 - Front page (README.md, math first) is on the branch, not on main: pushing to main needs the owner to say "put it on main".
 - Owner's standing instruction 2026-10-16: no background agent runs (workflows) unless the owner asks -- they cost the owner tokens.
+- The owner's 2026-10-17 instruction "Do whats possible best" gave discretion over the open work; the #272 handoff was done under it.
