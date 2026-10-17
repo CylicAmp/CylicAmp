@@ -13,12 +13,14 @@ WHAT THE FIELDS SAY (as stated; "reading" = my reading of the field name, not do
   capabilities [], outbound_identities [], runtime_variables [], secrets []   nothing attached: no keys, no credentials, no variables
   source_config_id / source_config_version_id null   not created from a saved configuration (reading)
 
-CHECK OF THE ENVIRONMENT ID: the pasted id has the form ccarenv_b64_<base64>. The base64 decodes to
-"ccarenv_5522c116" followed by "!0f$8191ba1f%aa601d80" and two more characters, and the last four
-characters pasted ("4MDIINg") do not decode cleanly (they give a control character). "!", "$" and "%" do not
-belong in an id made of letters, digits and underscores, so the paste has probably been mistyped or
-mis-transcribed. Not settled: which environment this is, and whether it is the one this session runs in
-(this session does not expose its environment id).
+CHECK OF THE ENVIRONMENT ID (corrected 2026-10-17: the first version guessed that the symbols were a mistyping):
+  The pasted id has the form ccarenv_b64_<base64>. Decoded as pasted, the base64 gives "ccarenv_5522c116" then
+  "!0f$8191ba1f%aa601d80" and a last stretch that does not decode cleanly: the pasted ending "4MDIINg"
+  gives a control character. With "4MDI2Ng" instead ("I" read for "2" -- typo) the ending decodes to the digits
+  "266". The "!", "$" and "%" decode from the pasted base64 itself. Whether they belong to the id's real format
+  or come from a copying error: NOT SETTLED -- the format of this id is not known to me. Also not settled:
+  which environment this is, and whether it is the one this session runs in (this session exposes no
+  environment-id variable; checked by listing variable names, not values).
 
 FALSIFICATION: any assertion failing.
 """
@@ -26,7 +28,8 @@ import base64
 
 PREFIX_B64 = "Y2NhcmVudl81NTIyYzExNiEw"          # first 24 characters of the pasted base64
 assert base64.b64decode(PREFIX_B64) == b"ccarenv_5522c116!0"
-assert base64.b64decode("YTYwMWQ4MDIyNjY=") == b"a601d802266" and base64.b64decode("YTYwMWQ4MDIINg==")[-2:] == b"\x086"
+assert base64.b64decode("YTYwMWQ4MDI2Ng==") == b"a601d80266"                 # ending with "I2Ng": clean digits
+assert base64.b64decode("YTYwMWQ4MDIINg==")[-2:] == b"\x086"                 # ending as pasted, "IINg": control character
 
 if __name__ == "__main__":
-    print("environment status block read; the pasted id decodes to ccarenv_5522c116 plus symbols that do not belong in an id")
+    print("environment status block read; the id decodes to ccarenv_5522c116 plus symbols; ending decodes cleanly only with I2Ng; format not settled")
