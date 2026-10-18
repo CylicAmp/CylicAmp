@@ -14,6 +14,13 @@ READING: (1)23 is 123 with its first digit in brackets (the 1 of "123=1" in the 
   bracket around the 1. No other person's work is involved; none was found. NOT SETTLED: whether the final (3) is meant as the 3 of "123 = 3" (the third
   turn of the rows); the line does not say.
 
+THE SAME CHAIN WRITTEN WITHOUT REDUCING (owner_work #330, 2026-10-18), verbatim:
+    123=6+3=9+2=11+1=1+2=3
+  The running totals are kept as numbers: 6, then 6+3 = 9, then 9+2 = 11, then 11+1 = 12, and 1+2 = 3 is the root of that 12. The earlier line reduced the
+  11 to 2 first (2+1 = 3); both end at 3 because a digital root can be taken at any step (11+1 = 12 -> 3 and 2+1 = 3). The unreduced end,
+  12, is exactly the digit sum of 123 + 321 = 444 (4+4+4), since that addition has no carry. Also 123 = 3 x 37 + 12, so 12 is 123 mod 37; for
+  these digits 2 x (1+2+3) = 12 as well, a coincidence of 1, 2, 3 and not a general fact: recorded, not claimed.
+
 FRAMEWORKS (gf37-audit): 123 SA_ST_A (12 mod 37); 444 = 12 x 37 -> 0, the SEAM; 321 SA_ST_A ... see the assertions.
 FALSIFICATION: any assertion failing.
 """
@@ -33,6 +40,16 @@ assert [int(b[0]) for b in rows[1:]] == [3, 2, 1] and all(b == a[-1] + a[:-1] fo
 assert [int(a[-1]) for a in rows[:3]] == list(reversed(digits)) == [3, 2, 1]
 assert dr(6 + 3 + 2 + 1) == 3 and 123 + 321 == 444 and dr(444) == 3 and 444 == 12 * 37
 assert 123 % 37 == 12 and 321 % 37 == 25 and 444 % 37 == 0
+
+# the unreduced chain
+totals = [sum(digits)]
+for d in reversed(digits):
+    totals.append(totals[-1] + d)
+assert totals == [6, 9, 11, 12] and dr(totals[-1]) == 3 and 11 + 1 == 12 and 1 + 2 == 3
+assert all(dr(t) == v for t, v in zip(totals, [6, 9, 2, 3]))                       # same roots as the reduced line
+assert sum(map(int, "444")) == 12 == totals[-1] and 123 + 321 == 444 and (3 + 1) < 10 and all(a + b < 10 for a, b in zip((1, 2, 3), (3, 2, 1)))  # no carries
+assert 123 % 37 == 12 == 2 * sum(digits) and 123 == 3 * 37 + 12
+assert [t % 37 for t in totals] == [6, 9, 11, 12]
 
 if __name__ == "__main__":
     print("(1)23 = 6, +3 = 9, +2 = 11 -> 2, +1 = (3): the added 3, 2, 1 are the digits moved by the three rotations of 123")
