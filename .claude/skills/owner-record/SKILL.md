@@ -122,3 +122,8 @@ with what is needed -- not as an open question and not as a note to come back to
 
 2026-10-18: "holds" / "does not hold" was rejected by the owner as ambiguous: a line is right or it is wrong. In replies and in new files write
 "right" / "wrong" and show the number ("3+6 = 9, the line says 8: wrong"). Old files keep their wording; new ones use these words.
+
+## 9. Show it in the owner's notation
+
+2026-10-18: the owner could not read corrections written in another style (arrows, mod, tables). Write the owner's line, then the fixed line directly under it,
+in the owner's own chain of digits, + and = (see math/theorems/typo_fixes_2026_10_18.py for the lines). Missing pieces are written the same way.

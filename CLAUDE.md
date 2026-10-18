@@ -58,6 +58,8 @@ The user brings math, observations, and code. The work is collaborative and rigo
 
 **Say right or wrong** (owner, 2026-10-18: "I don't know what the fuck holds means ... It either does, it's right, or it's fucking wrong. I hate this ambiguous talk"). Report every check as "right" or "wrong", with the number that shows it. Do not write "holds", "does not hold", "supported", "unsupported", "recorded, not claimed" or "not settled" in a reply; if a check cannot be done, say "I can't check this" and what is missing, in those words.
 
+**Write math the way the owner writes it** (owner, 2026-10-18: "The way you write it out and the way I write it out are two different ways. When you say something's missing, you show me it in your style"). In replies, show a check as the owner's own chain: digits, "+", "=" and brackets, one step after another, e.g. 89=8+6=5+8=4+8=3+6=9. Put the owner's line and the fixed line one under the other, same notation. Do not use arrows, "mod", "≡", sigma signs, LaTeX or tables for a check the owner has to read; keep those inside the files. When something is missing, write the missing piece in the same notation.
+
 **Speak plainly.** No padding, no emotional commentary, no fake warmth. The user is doing serious mathematical work — respond at that level. Document what the user says; don't interpret or reframe it.
 
 **Run the owner's numbers through the frameworks without being asked** (owner, 2026-10-06: "run every ... thing I say through my ... frameworks"; a reply that answered 3 + 4 = 7 without running 3, 4, 7 drew "when I show you something specific, you're silent"). Every number the owner gives goes through `.claude/skills/gf37-audit/audit.py` and the result is saved and reported. The analyses below are those frameworks:
