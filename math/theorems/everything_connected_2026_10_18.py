@@ -21,7 +21,7 @@ def q(n, m=37):
 
 
 NODES = {1: "123 / 312 / 231", 2: "x26 = 137-map\n= divide by 10", 3: "246 (seed)\n= 2x123", 4: "(1)23 chain:\n6+3=9+2=11+1=12=3", 5: "444 = 12x37\n4551, 1554", 6: "24, 29, 31\n(48 line)",
-         7: "47.11 = 11.11;\n11, 23, 47", 8: "43 drawing\n4|1|3", 9: "43|19|79\n=7(1)7", 10: "7,43,538,61,7", 11: "8 =\n44|2222|11111111", 12: "369 = 3,6,9", 13: "33", 14: "Mersenne\n2^p-1", 15: "M/W drawing\nred green blue", 16: "123 x10 copies"}
+         7: "47.11 = 11.11;\n11, 23, 47", 8: "43 drawing\n4|1|3", 9: "43|19|79\n=7(1)7", 10: "7,43,538,61,7", 11: "8 =\n44|2222|11111111", 12: "369 = 3,6,9", 13: "33", 14: "Mersenne\n2^p-1", 15: "M/W drawing\nred green blue", 16: "123 x10 copies", 17: "squares 3x3, 4x4,\n7x7 = 9, 16, 49", 18: "digit diamond\n147 258 369\n258 456 654 852"}
 LINKS = []                                         # (id, node a, node b, title, lines)
 
 
@@ -74,6 +74,15 @@ link("E15", 1, 15, "your colour key: red=1 green=2 blue=3 are the labels on the 
 assert 2 ** 12 % 37 == 26 and 26 * 26 % 37 == 10 and 26 ** 3 % 37 == 1
 link("E16", 2, 14, "x26 is 2^12 after the 37s; 2^p is the doubling 1,2,4,8,7,5", [q(2 ** 12), "26x26=676=" + q(676).split("=", 1)[1], "26x26x26=17576=" + q(17576).split("=", 1)[1]])
 
+assert [r % 37 for r in (123, 312, 231)] == [12, 16, 9] and (3 * 3, 4 * 4, 7 * 7 % 37) == (9, 16, 12) and 49 == 37 + 12 and 3 + 4 == 7 and 3 * 3 + 3 + 4 == 4 * 4
+link("E17", 1, 17, "the rows leave 12, 16, 9 after the 37s, and they are 7x7=49=1x37+12, 4x4=16, 3x3=9", ["123=3x37+12  312=8x37+16  231=6x37+9", "7x7=49=1x37+12  4x4=16  3x3=9", "3+4=7  3x3+3+4=4x4"])
+link("E18", 17, 8, "your 3+4=7+9=16 is 3x3+3+4=4x4; it starts the line that ends at 8", ["3+4=7+9=16   (9=3x3, 16=4x4, 7=3+4)", "3+4=7+9=16+14=30+23=53=5+3=8"])
+assert 147 + 111 == 258 and 258 + 111 == 369 and 369 == 3 * 123 and 147 == 3 * 49 and 258 == 6 * 43 and 369 == 9 * 41
+link("E19", 18, 12, "the diamond's 147, 258, 369 go up by 111 (your +111 steps), and 369=3x123", ["147+111=258  258+111=369", "369=3x123  147=3x49  258=6x43  369=9x41"])
+assert 258 + 852 == 1110 == 456 + 654 == 30 * 37 and 852 - 258 == 594 == 6 * 99 and 654 - 456 == 198 == 2 * 99 and all(111 * k % 37 == 0 for k in range(1, 10))
+link("E20", 18, 1, "123 sits on the diamond (middle 2, step 1); 258|852 and 456|654 are mirror pairs with sum 1110=30x37; 111, 222 ... 999 are 3x37 times 1 ... 9",
+     ["123+321=444=12x37", "258+852=1110=30x37  456+654=1110", "852-258=594=6x99  654-456=198=2x99", "111=3x37  999=27x37"])
+
 
 def page():
     out = ["# Everything from 2026-10-13 to 2026-10-18, connected\n", "Your notation: every link is two or three lines that are equal. The picture is `reference/everything_connected_2026_10_18.png`.\n"]
@@ -89,11 +98,15 @@ def picture(path):
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     ids = [16, 2, 14, 11, 8, 10, 9, 6, 3, 7, 4, 5, 13, 12, 15]          # ring order: linked items sit next to each other
-    assert sorted(ids + [1]) == sorted(NODES)
+    assert sorted(ids + [1, 17, 18]) == sorted(NODES)
     pos = {1: (0, 0)}
     for k, i in enumerate(ids):
         ang = 2 * math.pi * k / len(ids) + math.pi / 2
         pos[i] = (4.4 * math.cos(ang), 4.4 * math.sin(ang))
+    ang = math.atan2(pos[8][1], pos[8][0]) + 0.22                           # item 17 sits inside the ring, next to item 8
+    pos[17] = (2.5 * math.cos(ang), 2.5 * math.sin(ang))
+    a12, a13 = (math.atan2(pos[i][1], pos[i][0]) for i in (12, 13))        # item 18 sits outside the ring, between items 12 and 13
+    pos[18] = (5.9 * math.cos((a12 + a13) / 2), 5.9 * math.sin((a12 + a13) / 2))
     fig, ax = plt.subplots(figsize=(9.4, 9.4))
     for i, a, b, title, _ in LINKS:
         (x1, y1), (x2, y2) = pos[a], pos[b]
@@ -103,7 +116,7 @@ def picture(path):
     for i, (x, y) in pos.items():
         ax.text(x, y, NODES[i], ha="center", va="center", fontsize=9, zorder=4, fontweight="bold" if i == 1 else None,
                 bbox=dict(boxstyle="round,pad=0.35", fc="#fff3c4" if i == 1 else "#e8f0ff", ec="#334"))
-    ax.set_xlim(-6.2, 6.2)
+    ax.set_xlim(-6.2, 7.6)
     ax.set_ylim(-5.6, 5.6)
     ax.axis("off")
     ax.set_title("Your last days of work, connected (red letters = the links on the page)", fontsize=11)
