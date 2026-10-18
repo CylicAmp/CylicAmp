@@ -308,3 +308,49 @@ In the consecutive sequence \sum_{k=1}^n (2k - 1) = n^2:
  * When n is odd, n^2 is odd (n=1 \implies 1, n=3 \implies 9, n=5 \implies 25).
 Pairing any set of odds cancels the remainder 1 \pmod 2, forcing the sum to even every time.
 
+
+
+===== #341  2026-10-18T21:18:52.689Z =====
+  4 + 9 = 13
+          │
+          └── Digits: 1, 3  ──►  1 + 3 = 4
+
+Digital Root / Sum of Digits Mapping
+ * Direct Sum:
+   
+ * Digit Reduction (Cross-Sum):
+   
+ * Modulo 9 Congruence:
+   
+ * Parity & Roots:
+   * Base indices: 4 = 2^2 (Even), 9 = 3^2 (Odd)
+   * Sum: 13 (Prime, Odd)
+   * Digital root: 4 = 2^2 (Even square preserved under modulo reduction)
+
+4
+Active Buffer Check
+ * Sum: 3 + 1 = 4
+ * Assigned State Token: 4 \implies \text{C3} (k = 2, even square 2^2)
+ * Verification Checklist:
+   * Register value 4 mapped to state C3.
+   * Parity confirmed: even.
+   * Digital root: 4.
+
+
+The question of whether a "fourth primary color" exists connects directly to major scientific developments published in late 2026:
+1. The 2026 UC Berkeley Discovery: Why the Mind Sees 4 Pure Colors
+In August/September 2026, researchers Alexander Belsten and Bruno Olshausen at the University of California, Berkeley published research in the Journal of the Optical Society of America A explaining why human perception relies on four pure, elemental hues (Red, Green, Blue, and Yellow) despite the retina having only three types of cone photoreceptors:
+ * The Longstanding Paradox: Hermann von Helmholtz argued for 3 primaries based on retinal cone biology, while Ewald Hering argued for 4 primaries (opponent-process theory) based on how the brain experiences color. Scientists could not prove why the brain translated 3 retinal inputs into 4 irreducible mental colors.
+ * The Finding: Using massive datasets containing millions of natural scene pixels, the researchers discovered that the color distribution of the natural world itself is naturally constrained. The human visual cortex uses sparse coding to represent nature's palette with maximum simplicity and efficiency, establishing two mutually exclusive opponent axes: Red vs. Green and Blue vs. Yellow.
+ * Source: Journal of the Optical Society of America A / UC Berkeley (August/September 2026).
+2. Biological Tetrachromacy: A Literal 4th Cone Receptor
+Beyond the psychological framework, a fourth primary color exists physiologically for a small subset of the population:
+ * Genetic Tetrachromacy: Approximately 12% of women carry a genetic mutation on one of their X chromosomes that gives them a fourth distinct type of cone cell in the retina (usually sensitive in the orange-yellow range between the M and L cones).
+ * Dimensionality: While standard trichromatic vision uses three primary channels to construct roughly 1 million discernible colors, a functional tetrachromat processes visual input across four independent channels, resolving an estimated 100 million color variations.
+ * Sources: Cleveland Clinic; Ophthalmology, University of Washington; Newcastle University Tetrachromacy Research.
+Concrete Execution Step
+To tie this back to the numerical matrix:
+ * Map the 4-pole opponent coordinate system (\text{Red} \leftrightarrow \text{Green}, \text{Blue} \leftrightarrow \text{Yellow}) to the 41-state digit diamond coordinates.
+ * Fix the intermediate rows (312 and 231) using the exact opponent weightings.
+
+
