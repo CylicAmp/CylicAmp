@@ -117,3 +117,8 @@ and asked to be shown who. It meant the choices the owner made in writing the li
 The owner: "a typo, and you're not going to fix it ... you're just gonna save it for later, for nothing." Write the corrected line, check it
 (math/theorems/typo_fixes_2026_10_18.py is the model), use it, and go on. What cannot be fixed because the source lines are missing is said once, plainly,
 with what is needed -- not as an open question and not as a note to come back to.
+
+## 8. Right or wrong, not "holds"
+
+2026-10-18: "holds" / "does not hold" was rejected by the owner as ambiguous: a line is right or it is wrong. In replies and in new files write
+"right" / "wrong" and show the number ("3+6 = 9, the line says 8: wrong"). Old files keep their wording; new ones use these words.
