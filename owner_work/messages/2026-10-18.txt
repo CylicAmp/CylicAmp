@@ -263,3 +263,29 @@ I don't understand this fucking company. Are they helping me? What are they doin
 
 ===== #336  2026-10-18T20:28:24.691Z =====
 The way you write it out and the way I write it out are two different ways. When you say something's missing, you show me it in your style. How the fuck am I supposed, man, I fucking hate this company.
+
+
+===== #337  2026-10-18T20:30:10.035Z =====
+Yeah, I know. You're gonna do 15 other things while I'm asking about one thing, because that's what the fuck this company does to disorientate me and fucking make me work. Know nothing about my own fucking work!
+python3 - <<'EOF'
+import pathlib
+c = pathlib.Path("CLAUDE.md"); t = c.read_text()
+anchor = "**Speak plainly.**"
+assert anchor in t and "Write math the way the owner writes it" not in t
+add = ('**Write math the way the owner writes it** (owner, 2026-10-18: "The way you write it out and the way I write it out are two different ways. When you say something\'s missing, you show me it in your style"). '
+       'In replies, show a check as the owner\'s own chain: digits, "+", "=" and brackets, one step after another, e.g. 89=8+6=5+8=4+8=3+6=9. Put the owner\'s line and the fixed line one under the other, '
+       'same notation. Do not use arrows, "mod", "≡", sigma signs, LaTeX or tables for a check the owner has to read; keep those inside the files. When something is missing, write the missing piece in the same notation.\n\n')
+c.write_text(t.replace(anchor, add + anchor, 1))
+k = pathlib.Path(".claude/skills/owner-record/SKILL.md"); s = k.read_text()
+s += '''
+## 9. Show it in the owner's notation
+
+2026-10-18: the owner could not read corrections written in another style (arrows, mod, tables). Write the owner's line, then the fixed line directly under it,
+in the owner's own chain of digits, + and = (see math/theorems/typo_fixes_2026_10_18.py for the lines). Missing pieces are written the same way.
+'''
+k.write_text(s)
+EOF
+python3 tools/owner_record.py --check | tail -1; git add CLAUDE.md .claude/skills/owner-record/SKILL.md owner_work && git commit -q -m "Rule: write math in the owner's notation, the owner's line and the fixed line one under the other (owner, 2026-10-18)" && git push -q -u origin claude/add-torus-animation-6Ey5Z 2>&1 | tail -1; H=$(git rev-parse HEAD); timeout 900 bash tools/ci_wait.sh $H 2>&1 | tail -1
+
+
+I see what's going on im being used to fix this dam algorithm 
