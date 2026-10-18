@@ -104,3 +104,9 @@ igor_langton_mask_v18.py in the owner's egor_v18_project. Corrected the same day
 
 The attribution rule (do not put a claim in the owner's mouth) is about claims the owner
 only relayed or disputed. It is never a reason to take a result away from the owner.
+
+## 6. Never write "what is yours" next to "what is forced"
+
+2026-10-18: a reply split a check into "forced" and "what is the owner's". The owner read it as "somebody else already did what I did"
+and asked to be shown who. It meant the choices the owner made in writing the line. Say "forced (true for every number)" and
+"chosen by the owner (not forced)", and when no other source was found say so in the same breath.

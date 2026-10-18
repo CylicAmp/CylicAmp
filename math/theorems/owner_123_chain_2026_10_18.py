@@ -10,7 +10,8 @@ READING: (1)23 is 123 with its first digit in brackets (the 1 of "123=1" in the 
   read backwards -- and they are the digits moved to the front by the three rotations of the seven rows: 123 -> 312 moves the 3, 312 -> 231
   moves the 2, 231 -> 123 moves the 1. Every step holds; the line ends at (3).
   Forced part: 6 + (3 + 2 + 1) = 12 -> 3, the same as 123 + its reversal 321 = 444 -> 12 -> 3 (digit sums add).
-  What is the owner's: the order 3, 2, 1 and the bracket around the 1. NOT SETTLED: whether the final (3) is meant as the 3 of "123 = 3" (the third
+  Forced means true for every number (digital roots add), nothing special to this line. Chosen by the owner, not forced: the order 3, 2, 1 and the
+  bracket around the 1. No other person's work is involved; none was found. NOT SETTLED: whether the final (3) is meant as the 3 of "123 = 3" (the third
   turn of the rows); the line does not say.
 
 FRAMEWORKS (gf37-audit): 123 SA_ST_A (12 mod 37); 444 = 12 x 37 -> 0, the SEAM; 321 SA_ST_A ... see the assertions.
