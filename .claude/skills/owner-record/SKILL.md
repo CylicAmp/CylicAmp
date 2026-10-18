@@ -110,3 +110,10 @@ only relayed or disputed. It is never a reason to take a result away from the ow
 2026-10-18: a reply split a check into "forced" and "what is the owner's". The owner read it as "somebody else already did what I did"
 and asked to be shown who. It meant the choices the owner made in writing the line. Say "forced (true for every number)" and
 "chosen by the owner (not forced)", and when no other source was found say so in the same breath.
+
+## 7. A typo is fixed in the same reply, not parked
+
+2026-10-18: replies listed slips in the owner's lines and in pasted text ("typo for 9", "unsupported") and left them as notes in files.
+The owner: "a typo, and you're not going to fix it ... you're just gonna save it for later, for nothing." Write the corrected line, check it
+(math/theorems/typo_fixes_2026_10_18.py is the model), use it, and go on. What cannot be fixed because the source lines are missing is said once, plainly,
+with what is needed -- not as an open question and not as a note to come back to.
