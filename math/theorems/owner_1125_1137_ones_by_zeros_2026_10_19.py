@@ -16,7 +16,8 @@ THE OWNER'S LINES, verbatim:
     its not two ones, its 11 it eleven because two ones are a 2...or its 101 and so on 1001  100010001
     2 one that make two must be separated by only zeros..Or they will immediately have their path of least resistance broken if now they have
     and numver filling the space and if all the space filled up with 9 amd no more room left than what was once sperated by space is now apart of
-  The last sentence stops at "apart of": its end is missing and is left blank here.
+  The last sentence stopped at "apart of"; the owner gave its end in #369: "now a part of the 2" -- the carry below (1991+9=2000:
+  the two ones end as one 2).
 
 CHECKED, in the owner's notation:
   9/2=4.5, 4.5/2=2.25, 2.25/2=1.125 ; 1.125 = 1+0.125 = 1 + 1/2/2/2 ("1 +3 twos")        right
