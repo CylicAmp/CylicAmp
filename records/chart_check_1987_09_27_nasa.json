@@ -1,0 +1,247 @@
+{
+ "time_UT": "1987-09-27 23:42",
+ "source": "NASA/JPL Horizons API, QUANTITIES=31, CENTER=500@399",
+ "bodies": {
+  "Sun": {
+   "command": "10",
+   "line": "1987-Sep-27 23:42:00.000     184.3272613  -0.0001502",
+   "ObsEcLon": 184.3272613,
+   "ObsEcLat": -0.0001502
+  },
+  "Moon": {
+   "command": "301",
+   "line": "1987-Sep-27 23:42:00.000     242.7560935  -4.5966402",
+   "ObsEcLon": 242.7560935,
+   "ObsEcLat": -4.5966402
+  },
+  "Mercury": {
+   "command": "199",
+   "line": "1987-Sep-27 23:42:00.000     209.1237110  -2.1709647",
+   "ObsEcLon": 209.123711,
+   "ObsEcLat": -2.1709647
+  },
+  "Venus": {
+   "command": "299",
+   "line": "1987-Sep-27 23:42:00.000     193.9692223   1.0971824",
+   "ObsEcLon": 193.9692223,
+   "ObsEcLat": 1.0971824
+  },
+  "Mars": {
+   "command": "499",
+   "line": "1987-Sep-27 23:42:00.000     173.0617058   1.0420229",
+   "ObsEcLon": 173.0617058,
+   "ObsEcLat": 1.0420229
+  },
+  "Jupiter": {
+   "command": "599",
+   "line": "1987-Sep-27 23:42:00.000      27.3199192  -1.5722694",
+   "ObsEcLon": 27.3199192,
+   "ObsEcLat": -1.5722694
+  },
+  "Saturn": {
+   "command": "699",
+   "line": "1987-Sep-27 23:42:00.000     255.7779797   1.2954010",
+   "ObsEcLon": 255.7779797,
+   "ObsEcLat": 1.295401
+  },
+  "Uranus": {
+   "command": "799",
+   "line": "1987-Sep-27 23:42:00.000     263.0130177  -0.1587954",
+   "ObsEcLon": 263.0130177,
+   "ObsEcLat": -0.1587954
+  },
+  "Neptune": {
+   "command": "899",
+   "line": "1987-Sep-27 23:42:00.000     275.2610219   1.0043173",
+   "ObsEcLon": 275.2610219,
+   "ObsEcLat": 1.0043173
+  },
+  "Pluto": {
+   "command": "999",
+   "line": "1987-Sep-27 23:42:00.000     218.5177073  15.7791331",
+   "ObsEcLon": 218.5177073,
+   "ObsEcLat": 15.7791331
+  },
+  "Chiron": {
+   "command": "2060",
+   "line": "1987-Sep-27 23:42:00.000      88.7672840  -5.7532035",
+   "ObsEcLon": 88.767284,
+   "ObsEcLat": -5.7532035
+  },
+  "Ceres": {
+   "command": "1;",
+   "line": "1987-Sep-27 23:42:00.000     267.8749904  -5.0379180",
+   "ObsEcLon": 267.8749904,
+   "ObsEcLat": -5.037918
+  },
+  "Pallas": {
+   "command": "2;",
+   "line": "1987-Sep-27 23:42:00.000     241.1416956  30.9425958",
+   "ObsEcLon": 241.1416956,
+   "ObsEcLat": 30.9425958
+  },
+  "Juno": {
+   "command": "3;",
+   "line": "1987-Sep-27 23:42:00.000     323.0403329   3.9697060",
+   "ObsEcLon": 323.0403329,
+   "ObsEcLat": 3.969706
+  },
+  "Vesta": {
+   "command": "4;",
+   "line": "1987-Sep-27 23:42:00.000     115.6372857  -1.1177565",
+   "ObsEcLon": 115.6372857,
+   "ObsEcLat": -1.1177565
+  }
+ },
+ "motion_12h_before_and_after": {
+  "Sun": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 183.8366196,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 184.8180285,
+   "deg_per_day": 0.981408899999991
+  },
+  "Moon": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 236.0032868,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 249.5659539,
+   "deg_per_day": 13.562667099999999
+  },
+  "Mercury": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 208.5190691,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 209.7213269,
+   "deg_per_day": 1.2022578000000124
+  },
+  "Venus": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 193.3469544,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 194.5915048,
+   "deg_per_day": 1.2445504000000085
+  },
+  "Mars": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 172.7416031,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 173.3818476,
+   "deg_per_day": 0.6402444999999943
+  },
+  "Jupiter": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 27.3769249,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 27.2624311,
+   "deg_per_day": -0.1144937999999911
+  },
+  "Saturn": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 255.7475918,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 255.8087127,
+   "deg_per_day": 0.06112089999999171
+  },
+  "Uranus": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 263.0019628,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 263.0242805,
+   "deg_per_day": 0.022317699999973684
+  },
+  "Neptune": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 275.2581453,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 275.2640406,
+   "deg_per_day": 0.005895299999963299
+  },
+  "Pluto": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 218.5002945,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 218.5352012,
+   "deg_per_day": 0.03490669999999341
+  },
+  "Chiron": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 88.7608719,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 88.7733771,
+   "deg_per_day": 0.012505200000020977
+  },
+  "Ceres": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 267.759913,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 267.9909184,
+   "deg_per_day": 0.23100540000001502
+  },
+  "Pallas": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 240.9673385,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 241.3164658,
+   "deg_per_day": 0.34912729999999215
+  },
+  "Juno": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 323.092318,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 322.9902624,
+   "deg_per_day": -0.10205559999997149
+  },
+  "Vesta": {
+   "before_UT": "1987-09-27 11:42",
+   "ObsEcLon_before": 115.474342,
+   "after_UT": "1987-09-28 11:42",
+   "ObsEcLon_after": 115.7996309,
+   "deg_per_day": 0.3252889000000039
+  }
+ },
+ "derived": {
+  "kernel": "DE440s",
+  "true_obliquity_deg": 23.443539962262218,
+  "planets_DE440s_apparent_of_date": {
+   "Sun": 184.32727462030303,
+   "Moon": 242.75610600865804,
+   "Mercury": 209.1237239072047,
+   "Venus": 193.96923578755855,
+   "Mars": 173.0617192534912,
+   "Jupiter": 27.31992108626354,
+   "Saturn": 255.77798273962586,
+   "Uranus": 263.01303093449053,
+   "Neptune": 275.2610346055461,
+   "Pluto": 218.51773255857657
+  },
+  "osculating_node": 2.3622288542477734,
+  "osculating_apogee": 142.10107868205407,
+  "mean_node": 2.1986465070874033,
+  "mean_apogee": 124.43108595330216,
+  "angles": {
+   "printed_header_coordinates": {
+    "lat": 37.2,
+    "lon": -93.28333333333333,
+    "RAMC": 268.4409284409783,
+    "MC": 268.5695699301426,
+    "AC": 357.46743166578295,
+    "DC": 177.4674316657829,
+    "EP": 358.3007304337395,
+    "Vertex": 178.91851584127633,
+    "PartOfFortune_day": 55.89626305413799
+   },
+   "springfield_exact_coordinates": {
+    "lat": 37.209,
+    "lon": -93.2923,
+    "RAMC": 268.4319617743117,
+    "MC": 268.5613424692924,
+    "AC": 357.45246524920566,
+    "DC": 177.45246524920572,
+    "EP": 358.2909583628325,
+    "Vertex": 178.91216701712045,
+    "PartOfFortune_day": 55.881296637560695
+   }
+  }
+ }
+}
