@@ -348,3 +348,7 @@ what about with two flips
 987
 
 do all flips counting by 3 +1
+
+
+===== #360  2026-10-19T14:02:10.608Z =====
+Derivation of a divergent lower bound for twin prime
