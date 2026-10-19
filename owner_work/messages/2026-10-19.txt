@@ -326,3 +326,25 @@ Also notable: the (6, 6, 6) alignment means the pandigital reversal preserves th
 987
 
 what about with two flips
+
+
+===== #359  2026-10-19T13:52:38.062Z =====
+123
+456
+789
+
+123
+654
+789
+
+
+123
+654
+987
+
+
+331
+654
+987
+
+do all flips counting by 3 +1
