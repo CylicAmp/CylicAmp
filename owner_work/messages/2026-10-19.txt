@@ -381,3 +381,122 @@ print(f"class size {len(cls)}; examples: {[100*a+10*b+c for a,b,c in cls[:8]]}")
 
 
 
+
+
+===== #363  2026-10-19T17:43:38.169Z =====
+Your update is correct. The key idea is that when a new zero ordinate is added, you do **not** need to recompute every pair from scratch.
+
+Let the existing ordinates be
+
+$$x_1,x_2,\dots,x_m,$$
+
+and let the new ordinate be $y>x_m$. Define
+
+$$P_f(m)=\sum_{1\le i<j\le m} f(x_j-x_i).$$
+
+The old pairs remain unchanged. The only new pairs are
+
+$$y-x_1,\;y-x_2,\;\dots,\;y-x_m.$$
+
+Therefore,
+
+$$\boxed{P_f(m+1)=P_f(m)+\sum_{i=1}^{m}f(y-x_i)}.$$
+
+---
+
+### Examples
+
+#### Pair count
+
+For $f(d)=1$,
+
+$$P_f(m)=\binom{m}{2}.$$
+
+Adding one new zero creates exactly $m$ new pairs:
+
+$$\binom{m+1}{2}-\binom{m}{2}=m.$$
+
+For $m=3$, the fourth zero creates
+
+$$\binom{4}{2}-\binom{3}{2}=6-3=3$$
+
+new pairs.
+
+---
+
+#### Total pair distance
+
+For $f(d)=d$,
+
+$$P_1(m)=\sum_{i<j}(x_j-x_i).$$
+
+For the four ordinates
+
+$$\gamma_9,\gamma_{10},\gamma_{11},\gamma_{12},$$
+
+the total is approximately
+
+$$\sum_{i<j}(\gamma_j-\gamma_i)
+\approx 28.519779447731.$$
+
+The three new distances introduced by $\gamma_{12}$ are
+
+$$\gamma_{12}-\gamma_9\approx 8.441096815896,$$
+
+$$\gamma_{12}-\gamma_{10}\approx 6.672415219391,$$
+
+$$\gamma_{12}-\gamma_{11}\approx 3.475926219349.$$
+
+Their sum is approximately
+
+$$18.589438254636.$$
+
+The previous three-zero total was therefore approximately
+
+$$28.519779447731-18.589438254636
+\approx 9.930341193095.$$
+
+---
+
+#### Total squared pair distance
+
+For $f(d)=d^2$,
+
+$$P_2(m)=\sum_{i<j}(x_j-x_i)^2.$$
+
+The identity
+
+$$\boxed{\sum_{i<j}(x_j-x_i)^2
+=m\sum_{i=1}^{m}x_i^2-\left(\sum_{i=1}^{m}x_i\right)^2}$$
+
+allows this to be computed using only:
+
+- the number of ordinates $m$,
+- their sum $\sum_i x_i$,
+- their sum of squares $\sum_i x_i^2$.
+
+For the four zeta-zero ordinates,
+
+$$\sum_{i<j}(\gamma_j-\gamma_i)^2
+\approx 165.853998967677.$$
+
+When adding a new ordinate $y$, the squared-distance total updates by
+
+$$\boxed{
+P_2(m+1)
+=P_2(m)+\sum_{i=1}^{m}(y-x_i)^2
+}
+$$
+
+or, using accumulated sums,
+
+$$\boxed{
+P_2(m+1)
+=P_2(m)+my^2-2y\sum_{i=1}^{m}x_i+\sum_{i=1}^{m}x_i^2.
+}$$
+
+---
+
+### Important interpretation
+
+This is a valid and useful way to organize statistics of zeta zeros. However, the four low-lying zeros only illustrate the computation. They do **not** by themselves establish the Riemann hypothesis or Montgomery’s pair-correlation conjecture. Those statements concern all nontrivial zeros, especially the statistical behavior at very large heights.
