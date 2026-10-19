@@ -1,0 +1,203 @@
+{
+ "time_UT": "2026-02-28 12:00",
+ "source": "NASA/JPL Horizons API, QUANTITIES=31, CENTER=500@399",
+ "bodies": {
+  "Sun": {
+   "command": "10",
+   "line": "2026-Feb-28 12:00:00.000     339.9040773   0.0001007",
+   "ObsEcLon": 339.9040773,
+   "ObsEcLat": 0.0001007
+  },
+  "Moon": {
+   "command": "301",
+   "line": "2026-Feb-28 12:00:00.000     122.1645366   3.1707629",
+   "ObsEcLon": 122.1645366,
+   "ObsEcLat": 3.1707629
+  },
+  "Mercury": {
+   "command": "199",
+   "line": "2026-Feb-28 12:00:00.000     352.1687224   3.2135393",
+   "ObsEcLon": 352.1687224,
+   "ObsEcLat": 3.2135393
+  },
+  "Venus": {
+   "command": "299",
+   "line": "2026-Feb-28 12:00:00.000     352.5910745  -1.3661274",
+   "ObsEcLon": 352.5910745,
+   "ObsEcLat": -1.3661274
+  },
+  "Mars": {
+   "command": "499",
+   "line": "2026-Feb-28 12:00:00.000     328.3497681  -1.0943457",
+   "ObsEcLon": 328.3497681,
+   "ObsEcLat": -1.0943457
+  },
+  "Jupiter": {
+   "command": "599",
+   "line": "2026-Feb-28 12:00:00.000     105.2724879   0.3439890",
+   "ObsEcLon": 105.2724879,
+   "ObsEcLat": 0.343989
+  },
+  "Saturn": {
+   "command": "699",
+   "line": "2026-Feb-28 12:00:00.000       1.6645529  -2.1311878",
+   "ObsEcLon": 1.6645529,
+   "ObsEcLat": -2.1311878
+  },
+  "Uranus": {
+   "command": "799",
+   "line": "2026-Feb-28 12:00:00.000      57.7216160  -0.1797033",
+   "ObsEcLon": 57.721616,
+   "ObsEcLat": -0.1797033
+  },
+  "Neptune": {
+   "command": "899",
+   "line": "2026-Feb-28 12:00:00.000       1.0260642  -1.3068401",
+   "ObsEcLon": 1.0260642,
+   "ObsEcLat": -1.3068401
+  },
+  "Pluto": {
+   "command": "999",
+   "line": "2026-Feb-28 12:00:00.000     304.5199062  -3.8600154",
+   "ObsEcLon": 304.5199062,
+   "ObsEcLat": -3.8600154
+  },
+  "Chiron": {
+   "command": "2060",
+   "line": "2026-Feb-28 12:00:00.000      24.0209707   0.4099314",
+   "ObsEcLon": 24.0209707,
+   "ObsEcLat": 0.4099314
+  },
+  "Ceres": {
+   "command": "1;",
+   "line": "2026-Feb-28 12:00:00.000      24.5546080  -5.8343500",
+   "ObsEcLon": 24.554608,
+   "ObsEcLat": -5.83435
+  },
+  "Pallas": {
+   "command": "2;",
+   "line": "2026-Feb-28 12:00:00.000     341.3319035   6.0566533",
+   "ObsEcLon": 341.3319035,
+   "ObsEcLat": 6.0566533
+  },
+  "Juno": {
+   "command": "3;",
+   "line": "2026-Feb-28 12:00:00.000     291.2623669  10.5447052",
+   "ObsEcLon": 291.2623669,
+   "ObsEcLat": 10.5447052
+  },
+  "Vesta": {
+   "command": "4;",
+   "line": "2026-Feb-28 12:00:00.000     324.7472063  -2.8321668",
+   "ObsEcLon": 324.7472063,
+   "ObsEcLat": -2.8321668
+  }
+ },
+ "motion_12h_before_and_after": {
+  "Sun": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 339.402026,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 340.4059897,
+   "deg_per_day": 1.0039637000000425
+  },
+  "Moon": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 115.1730886,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 129.1169573,
+   "deg_per_day": 13.943868699999996
+  },
+  "Mercury": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 352.3262191,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 351.9732711,
+   "deg_per_day": -0.35294800000002624
+  },
+  "Venus": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 351.9676113,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 353.2144267,
+   "deg_per_day": 1.2468154000000027
+  },
+  "Mars": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 327.9557835,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 328.7437488,
+   "deg_per_day": 0.7879652999999962
+  },
+  "Jupiter": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 105.2902312,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 105.2555442,
+   "deg_per_day": -0.03468699999999103
+  },
+  "Saturn": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 1.6051258,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 1.7240924,
+   "deg_per_day": 0.11896659999999315
+  },
+  "Uranus": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 57.7111136,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 57.7323186,
+   "deg_per_day": 0.021205000000009022
+  },
+  "Neptune": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 1.0081587,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 1.0440116,
+   "deg_per_day": 0.03585290000000896
+  },
+  "Pluto": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 304.506268,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 304.533473,
+   "deg_per_day": 0.02720500000003767
+  },
+  "Chiron": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 23.9978374,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 24.0442421,
+   "deg_per_day": 0.046404700000010735
+  },
+  "Ceres": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 24.3744695,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 24.7350892,
+   "deg_per_day": 0.3606197000000009
+  },
+  "Pallas": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 341.164615,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 341.4992135,
+   "deg_per_day": 0.33459849999997004
+  },
+  "Juno": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 291.0997107,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 291.4247031,
+   "deg_per_day": 0.3249923999999851
+  },
+  "Vesta": {
+   "before_UT": "2026-02-28 00:00",
+   "ObsEcLon_before": 324.4926889,
+   "after_UT": "2026-03-01 00:00",
+   "ObsEcLon_after": 325.0015644,
+   "deg_per_day": 0.5088754999999878
+  }
+ }
+}
