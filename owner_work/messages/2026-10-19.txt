@@ -177,3 +177,52 @@ Bugs and errors:
 - The complexity classes don't apply. Checking one fixed finite case has no complexity class. The containment chain itself is correct, but labeling a mod-30 prime sieve as PSPACE makes the panel look rigorous without meaning anything.
 
 The ledger, the Kahan sieve and the hash chain don't appear anywhere in this file. Want me to rebuild the Egor panel so it actually runs each check in the browser and shows a real pass or fail?
+
+
+===== #354  2026-10-19T13:07:14.309Z =====
+[3, 3, 3607, 3803]
+8 987654312
+9 1111111101
+123456790012345679
+1 123456789 9 45 9
+2 12469135679012345 17 81 9
+3 123580246790123456789 21 81 9
+4 123469135790123456789012345 25 117 9
+1368 18
+1566
+odds evens 25 20
+123456790
+12345688
+123456789
+
+Step-by-Step Output Derivation
+ * factor(123456789):
+   
+   
+   Output: [3, 3, 3607, 3803]
+ * m * n for m \in (8, 9):
+   *    *  * 111111111**2:
+   
+   
+   (Note: This is R_9^2; it is not the standard palindrome 12345678987654321, which is (111111111)^2 only when evaluated as 12345678987654321 for base-10 digit carry without overflow).
+   Specifically:
+   
+ * N(k) loop for k \in [1, 4]:
+   * R(k) = \frac{10^k - 1}{9} (the base-10 repunit R_k).
+   * For k=1: R(1) = 1, base sum is 123456789. Value = 123456789, length = 9, digit sum = 45, digital root = 9.
+   * For k=2: R(2) = 11, base sum evaluates to 11335577890011223 \dots \implies v = 12469135679012345, length = 17, digit sum = 81, digital root = 9.
+   * For k=3: R(3) = 111 \implies v = 123580246790123456789, length = 21, digit sum = 81, digital root = 9.
+   * For k=4: R(4) = 1111 \implies v = 123469135790123456789012345, length = 25, digit sum = 117, digital root = 9.
+ * Sum checks & partitions:
+   * 123 + 456 + 789 = 1368
+   * 1 + 3 + 6 + 8 = 18 (digital root = 9)
+   * 123 + 654 + 789 = 1566 (digital root = 1 + 5 + 6 + 6 = 18 \to 9)
+   * odds evens 25 20: 1+3+5+7+9 = 25, 2+4+6+8 = 20.
+ * Closed-form series relation to repunits:
+   * (10**10 - 10) // 81 = 123456790
+     
+     
+     Subtracting 1 yields the exact value without the missing 8:
+     
+   * sum(d * 10**(9 - d) for d in range(1, 10)) = 123456789
+
