@@ -19,11 +19,12 @@ FORCED (true without any twin prime, any 37 or any zeta zero):
   72x+9 = 9(8x+1) has digital root 9 for every x, prime pair or not.
   333: 37 = 1 mod 4, so -1 is a residue, the residues pair up as r and 37-r, and their sum is 18 x 37/2 = 333; the non-residues pair up too.
   (For p = 3 mod 4 the two sums differ: p = 7 gives 7 and 14.)
-CAN'T CHECK:
-  "Claim [7]", "the report", "the script verifies": none of them is in the message.
-  "Automata & Regular Languages (REG)" and "Deterministic Polynomial / PSPACE": no complexity class attaches to one fixed finite check
-    (the same note as for the Egor panel, dashboards/egor_checks/index.html); "sieve verification up to x = 500 ... match analytic
-    expectations": no figures are given.
+MISSING (asked for in the reply):
+  "Claim [7]", "the report", "the script verifies": none of them is in the message. "sieve verification up to x = 500 ... match
+  analytic expectations": no figures are given.
+COMPLEXITY LABELS: "Automata & Regular Languages (REG)" and "Deterministic Polynomial / PSPACE" say nothing about one fixed finite check:
+  it is trivially in every class (a finite set of strings is a regular language; see pasted_review_of_suite_audit_2026_10_19.py).
+  The first version of this note said "no complexity class attaches"; that was too strong and is corrected here.
 
 FALSIFICATION: any assertion failing.
 """
