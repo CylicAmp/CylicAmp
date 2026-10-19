@@ -627,3 +627,249 @@ The audit makes the essential epistemological distinction that number theorists 
   * Finite lookup tables or checking a bounded list of numbers cannot be assigned complexity classes like $\text{REG}$ or $\text{PSPACE}$, as complexity classes only describe asymptotic scaling as input size $N \to \infty$.
 
 Logging this via `math/theorems/pasted_suite_analysis_audit_2026_10_19.py` and passing CI on commit `216cf9f` ensures the mathematical record remains accurate and reproducible.
+
+
+===== #367  2026-10-19T20:36:33.577Z =====
+Search the available project files and conversation records for each missing item first. Continue every check whose inputs are available. For anything still missing, name the exact item, report where retrieval was attempted, and ask only for that item. Preserve unresolved blanks rather than inventing replacements.
+Worked for 26s
+
+The reusable results now solve three additional problems: certified ellipse approximation, exact oscillator stepping, and synchronization with the nine-state rotation.
+
+The original \(384/768\) rational certificate was rerun successfully. New calculations certified eight scaled stopping decisions and checked all 729 digit triples.
+
+Audit of the existing mathematics
+
+Result	Disposition	Reusable content
+
+Polygon enclosure, strict nesting, gap formula	Correct	Certified approximation and termination
+Rational bounds \(\ell_n<g_n<u_n\)	Correct for \(n\ge6\)	Exact acceptance/rejection comparisons
+First-passing \(768\)	Correct within \(D=\{6\cdot2^k\}\), tolerance \(10^{-4}\)	Minimality within that family
+Oscillator \(q^2+p^2=A^2\)	Correct for the specified equations	Conserved quadratic quantity
+Unary homomorphism	Requires \(C_W(1)=1\) explicitly	Then \(C_W(1^n)=n\) follows
+I.V correspondence	Still proposed	The optimization example is defined; identification with I.V’s functionals remains open
+S-shaped circular divider	Tangentially joined, but curvature jumps at the center	Suitable as a piecewise-smooth boundary; not a \(C^2\) curve
+
+
+1. Transfer exhaustion to every invertible linear image of a circle
+
+Let \(P_n^-\subset B\subset P_n^+\) be the original polygon enclosure of the unit disk. For an invertible matrix \(T\),
+
+\[
+TP_n^-\subset TB\subset TP_n^+.
+\]
+
+Area scales by \(d=|\det T|\), giving
+
+\[
+dL_n<\operatorname{area}(TB)=d\pi<dU_n,
+\qquad
+g_n^{(T)}=dg_n.
+\]
+
+This applies immediately to ellipses, rotated ellipses and sheared disks.
+
+For an ellipse with semiaxes \(a,b\),
+
+\[
+T=\operatorname{diag}(a,b),\qquad d=ab.
+\]
+
+Using the existing rational bounds, the following minimal side counts in the doubling family were certified exactly:
+
+Geometry	Area multiplier \(d\)	Gap tolerance \(10^{-4}\)	Gap tolerance \(10^{-6}\)
+
+Circle, radius \(1/2\)	\(1/4\)	384	3,072
+Unit circle	1	768	6,144
+Circle, radius 2	4	1,536	12,288
+Ellipse, semiaxes 2 and 3	6	1,536	24,576
+
+
+Each result satisfies
+
+\[
+d\ell_{n/2}>\varepsilon,\qquad du_n<\varepsilon.
+\]
+
+Thus the predecessor fails and the selected polygon passes.
+
+An area estimate is also available:
+
+\[
+\widehat A_n=\frac{d(L_n+U_n)}2,
+\qquad
+|\widehat A_n-d\pi|\le\frac{dg_n}{2}.
+\]
+
+For the \(2\times3\) ellipse, \(n=1536\) therefore certifies area-estimation error below \(5\times10^{-5}\).
+
+2. Transfer the oscillator invariant into an exact rational update
+
+The oscillator equations are
+
+\[
+\dot z=\omega Jz,\qquad
+J=\begin{pmatrix}0&1\\-1&0\end{pmatrix}.
+\]
+
+Forward Euler gives
+
+\[
+z_{k+1}=(I+h\omega J)z_k.
+\]
+
+Because \(J^\top=-J\) and \(J^\top J=I\),
+
+\[
+\|z_{k+1}\|^2=(1+h^2\omega^2)\|z_k\|^2.
+\]
+
+It artificially increases the radius.
+
+Instead use
+
+\[
+R(t)=\frac1{1+t^2}
+\begin{pmatrix}
+1-t^2&2t\\
+-2t&1-t^2
+\end{pmatrix},
+\qquad t=\frac{h\omega}{2}.
+\]
+
+Direct multiplication proves
+
+\[
+R(t)^\top R(t)=I.
+\]
+
+Consequently,
+
+\[
+\boxed{\|R(t)z\|^2=\|z\|^2}.
+\]
+
+For rational \(t,q,p\), the entire update uses exact fractions. For example,
+
+\[
+t=\frac12,\qquad
+R=\begin{pmatrix}3/5&4/5\\-4/5&3/5\end{pmatrix},
+\]
+
+so
+
+\[
+(1,0)\mapsto(3/5,-4/5),
+\qquad
+(3/5)^2+(-4/5)^2=1.
+\]
+
+Application: an oscillator animation can preserve its radius exactly in its underlying state calculations. Its angular step is \(2\arctan t\); time-discretization error remains distinct from radius preservation.
+
+3. Connect the nine-state rotation to the exhaustion mesh
+
+Use the supplied digit rotation
+
+\[
+r(d)=1+(d\bmod9),\qquad d\in\{1,\ldots,9\}.
+\]
+
+For triples, apply \(r\) coordinatewise.
+
+Every triple has period exactly nine. The two differences
+
+\[
+b-a\pmod9,\qquad c-a\pmod9
+\]
+
+are invariant.
+
+They also completely classify the orbits: triples with the same two differences differ by one common coordinate shift. Therefore
+
+\[
+\boxed{729\text{ states}=81\text{ orbits}\times9\text{ states}}.
+\]
+
+The exhaustive run confirmed all 729 states, all 81 orbits and both invariants.
+
+To place this nine-state cycle on a regular angular mesh that retains every vertex of the certified 768-gon:
+
+\[
+N=\operatorname{lcm}(768,9)=2304.
+\]
+
+Then
+
+\[
+\text{old polygon vertex }j\mapsto3j,
+\qquad
+\text{one digit-rotation step}\mapsto256\text{ mesh positions}.
+\]
+
+Closure is exact:
+
+\[
+9\cdot256=2304.
+\]
+
+The aligned 2304-gon refines the 768-gon, so its enclosure gap is smaller and retains the \(10^{-4}\) certificate. This is a proposed geometric representation of the defined digit rotation.
+
+Copy/paste verification for the new transfers:
+
+from fractions import Fraction as Q
+from itertools import product
+from math import lcm
+
+def gap_bounds(n):
+    if n < 6:
+        raise ValueError("Require n >= 6")
+    a, b = Q(3, n), Q(10, 3*n)
+    return n*(a-a**3/6)**3, n*b**3/(1-b*b/2)
+
+def certify(d, eps):
+    d, eps = Q(d), Q(eps)
+    if d <= 0 or eps <= 0:
+        raise ValueError("Require positive area scale and tolerance")
+    n = 6
+    while d*gap_bounds(n)[1] > eps:
+        n *= 2
+    minimal = n == 6 or d*gap_bounds(n//2)[0] > eps
+    return n, minimal  # False means minimality remains unresolved.
+
+for d in (Q(1, 4), Q(1), Q(4), Q(6)):
+    for eps in (Q(1, 10_000), Q(1, 1_000_000)):
+        n, proved = certify(d, eps)
+        assert proved
+        print("area scale:", d, "tolerance:", eps, "minimal n:", n)
+
+def oscillator_step(q, p, t):
+    q, p, t = Q(q), Q(p), Q(t)
+    den = 1 + t*t
+    return ((1-t*t)*q + 2*t*p)/den, \
+           (-2*t*q + (1-t*t)*p)/den
+
+q, p = oscillator_step(1, 0, Q(1, 2))
+assert (q, p) == (Q(3, 5), Q(-4, 5))
+assert q*q + p*p == 1
+
+def rotate(v):
+    return tuple(d % 9 + 1 for d in v)
+
+seen, orbit_count = set(), 0
+for start in product(range(1, 10), repeat=3):
+    if start in seen:
+        continue
+    v, orbit = start, []
+    while v not in orbit:
+        orbit.append(v)
+        v = rotate(v)
+    assert v == start and len(orbit) == 9
+    assert len({
+        ((b-a) % 9, (c-a) % 9) for a, b, c in orbit
+    }) == 1
+    seen.update(orbit)
+    orbit_count += 1
+
+assert len(seen) == 729 and orbit_count == 81
+assert lcm(768, 9) == 2304
+assert 9 * 256 == 2304
+print("729 states; 81 nine-state orbits; common mesh 2304.")
