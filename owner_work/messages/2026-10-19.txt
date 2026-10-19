@@ -265,3 +265,16 @@ Invariant Analysis and Pairwise Relations
  * Digital root:
    
 
+
+
+===== #356  2026-10-19T13:24:32.841Z =====
+| Claim | Verdict |
+| --- | --- |
+| 123456789 = 3² × 3607 × 3803 | ✓ RIGHT |
+| 8n = 987654312, 9n = 1111111101 | ✓ RIGHT |
+| T3 = 111111111² | ✓ WRONG as labelled — actual square is 12345678987654321; T3 = 12345679 × (10¹⁰+1) = 37 × 101 × 3541 × 27961 × 333667 ✓ audit's correction exact |
+| N(k) lines 2–4 | ✓ WRONG — digit sums are 68, 92, 110 (roots 5, 2, 2), not 81/81/117; **the printed numbers cannot have come from the same run as the printed sums** |
+| 1368 = 37² − 1 = 36 × 38 | ✓ RIGHT |
+| 123456789 ≡ 369 (mod 999), 369 = 9 × 41 | ✓ RIGHT |
+| 10/81 repeats 123456790; 1/81 = 012345679… | ✓ RIGHT |
+| 1/(10^k−1)² skips block 10^k−2 | ✓ RIGHT for k = 1, 2, 3 (missing 8, 98, 998; periods 9, 198, 2997) |
