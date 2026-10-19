@@ -226,3 +226,42 @@ Step-by-Step Output Derivation
      
    * sum(d * 10**(9 - d) for d in range(1, 10)) = 123456789
 
+
+
+===== #355  2026-10-19T13:11:33.503Z =====
+Arithmetic, Modulo-37, and Wheel Invariants: \{235,\, 572,\, 717\}
+| Integer | Prime Factorization | Modulo 37 (\mathbb{Z}/37\mathbb{Z}) | Modulo 11 (\mathbb{Z}/11\mathbb{Z}) | Digital Root (\text{dr}) | Modulo 30 Wheel Class |
+|---|---|---|---|---|---|
+| 235 | 5 \times 47 | 6 \times 37 + \mathbf{13} \equiv \mathbf{13} | 21 \times 11 + \mathbf{4} \equiv \mathbf{4} | 2 + 3 + 5 = 10 \to \mathbf{1} | 235 \equiv 25 (\gcd=5) |
+| 572 | 2^2 \times 11 \times 13 | 15 \times 37 + \mathbf{17} \equiv \mathbf{17} | 52 \times 11 + \mathbf{0} \equiv \mathbf{0} | 5 + 7 + 2 = 14 \to \mathbf{5} | 572 \equiv 2 (\gcd=2) |
+| 717 | 3 \times 239 | 19 \times 37 + \mathbf{14} \equiv \mathbf{14} | 65 \times 11 + \mathbf{2} \equiv \mathbf{2} | 7 + 1 + 7 = 15 \to \mathbf{6} | 717 \equiv 27 (\gcd=3) |
+Invariant Analysis and Pairwise Relations
+1. Modulo 37 Alignment & The 13+37k Family
+ * 235: Lies on the explicit linear orbit 13 + 37k for k = 6:
+   
+ * Sum Invariant (235 + 717):
+   
+   
+   Since 13 + 14 = 27, the residue addition holds without overflow in \mathbb{Z}/37\mathbb{Z}. In (\mathbb{Z}/37\mathbb{Z})^\times, the element 27 has multiplicative order 6 (27^3 \equiv -1).
+2. The Difference Sequence
+ *    * 337 is prime (\sqrt{337} \approx 18.35, coprime to 2, 3, 5, 7, 11, 13, 17).
+   * 337 = 9 \times 37 + 4 \equiv 4 \pmod{37}.
+   * Digital root: \text{dr}(337) = 3 + 3 + 7 = 13 \to \mathbf{4}.
+ *    * 145 = 5 \times 29.
+   * 145 = 3 \times 37 + 34 \equiv 34 \equiv -3 \pmod{37}.
+   * Digital root: \text{dr}(145) = 1 + 4 + 5 = \mathbf{1}.
+ *    * 241 is the 52nd prime (the prime immediately preceding the Maynard–Tao bound 246).
+3. Midpoint and Divisor-Square Probes
+ * Midpoint of [235, 717]:
+   
+   * 476 = 2^2 \times 7 \times 17.
+   * Four smallest divisors of 476: \mathcal{D}_4 = \{1, 2, 4, 7\}.
+   * Sum of squares:
+     
+4. Total Sum Invariants
+ * Prime factorization: 1524 = 2^2 \times 3 \times 127 (127 is a Mersenne prime, 2^7 - 1).
+ * Modulo 37:
+   
+ * Digital root:
+   
+
