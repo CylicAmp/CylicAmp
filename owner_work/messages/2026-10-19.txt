@@ -313,3 +313,16 @@ Meanwhile the digital root is untouched: 198 being a multiple of 9 makes the rev
 And the cross-document echo: **198 = 743 − 545** — the exact mod-9 equivalence bridge from the four-number set. The reversal offset of this construction is the same number that equated 743 and 545. One constant, two documents.
 
 Also notable: the (6, 6, 6) alignment means the pandigital reversal preserves the uniform root while relocating the mod-37 residue from 36 (the NEG_H / reverse-63 constant) to 12 — the residue class of the session's 111 (= 3×37) and of the F_37 generator layer.
+
+
+===== #358  2026-10-19T13:32:03.282Z =====
+123
+456
+789
+
+
+123
+654
+987
+
+what about with two flips
