@@ -356,3 +356,28 @@ Derivation of a divergent lower bound for twin prime
 
 ===== #361  2026-10-19T14:09:02.828Z =====
 One clarification: If by “divergent lower bound” you mean a lower bound for a different quantity—such as Chen primes, bounded-gap pairs, or a weighted sum—specify that quantity. Those are distinct mathematical targets, and some already have proved results.
+
+
+===== #362  2026-10-19T14:13:24.031Z =====
+
+
+# Theorem: 37 | n + rev(n)  <=>  digits of n in arithmetic progression
+count_div, count_ap, both, neither = 0,0,0,0
+for n in range(100, 1000):
+    a,b,c = n//100, (n//10)%10, n%10
+    div37 = (n + int(str(n)[::-1])) % 37 == 0
+    ap = (a + c == 2*b)
+    assert div37 == ap, n   # exact biconditional on all 900 cases
+    count_div += div37; count_ap += ap
+print(f"3-digit n: {count_div} divisible-condition cases = {count_ap} AP-digit cases — biconditional exact on all 900")
+# structure of the class: AP triples (a,b,c) with a>=1
+cls = [(a,b,c) for a in range(1,10) for b in range(10) for c in range(10) if a+c==2*b]
+print(f"class size {len(cls)}; examples: {[100*a+10*b+c for a,b,c in cls[:8]]}")
+# sanity: 900/37 ≈ 24.3 multiples expected if random; AP family is exact, not statistical
+
+
+
+
+
+
+

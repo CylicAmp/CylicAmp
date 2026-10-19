@@ -1442,5 +1442,9 @@
  {
   "ts": "2026-10-19T14:09:02.828Z",
   "text": "One clarification: If by “divergent lower bound” you mean a lower bound for a different quantity—such as Chen primes, bounded-gap pairs, or a weighted sum—specify that quantity. Those are distinct mathematical targets, and some already have proved results."
+ },
+ {
+  "ts": "2026-10-19T14:13:24.031Z",
+  "text": "\n\n# Theorem: 37 | n + rev(n)  <=>  digits of n in arithmetic progression\ncount_div, count_ap, both, neither = 0,0,0,0\nfor n in range(100, 1000):\n    a,b,c = n//100, (n//10)%10, n%10\n    div37 = (n + int(str(n)[::-1])) % 37 == 0\n    ap = (a + c == 2*b)\n    assert div37 == ap, n   # exact biconditional on all 900 cases\n    count_div += div37; count_ap += ap\nprint(f\"3-digit n: {count_div} divisible-condition cases = {count_ap} AP-digit cases — biconditional exact on all 900\")\n# structure of the class: AP triples (a,b,c) with a>=1\ncls = [(a,b,c) for a in range(1,10) for b in range(10) for c in range(10) if a+c==2*b]\nprint(f\"class size {len(cls)}; examples: {[100*a+10*b+c for a,b,c in cls[:8]]}\")\n# sanity: 900/37 ≈ 24.3 multiples expected if random; AP family is exact, not statistical\n\n\n\n\n\n\n"
  }
 ]
