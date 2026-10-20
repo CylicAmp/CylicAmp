@@ -523,3 +523,23 @@ on the next candidates — the primes after 136,279,841:
 
 **Checks:** 4 of the next 12 are in the triad, all with root 7; any of them that turns out to be a Mersenne exponent gives a Mersenne number of root 1.
 Of the known 50 exponents from 5 on, 13 are in the triad (26 %, against 1/3 for a fair draw: p = 0.30). File: `math/theorems/owner_749_triad_next_exponents_2026_10_20.py`.
+
+---
+
+## #393 (2026-10-20) — the triad on the gap below 136,279,841; Lehmer primes
+
+**As typed:** "run the triad on the gap below 136279841 / Lehmer Primes"
+
+**Cleaned:** the gap = the primes between 83,200,483 (everything below it double-checked, mersenne.org, 2026-09-04) and 136,279,841, where a missed Mersenne
+prime could still be. "Lehmer Primes" read as the primes the Lucas–Lehmer test proves (the owner's LoB 12.1).
+
+**Process:** list every prime in the gap, take its root, count those with root 4 or 7 (9 cannot happen). Run the Lucas–Lehmer test (s = 4, s → s × s − 2,
+p − 2 times) on every prime below 1,300 and run the triad on what it finds.
+
+**Checks:**
+
+    gap: 2,868,436 primes → root 4: 477,860, root 7: 478,282 → 956,142 in the triad = one third
+    Lucas–Lehmer below 1,300 → 2 3 5 7 13 17 19 31 61 89 107 127 521 607 1279
+    in the triad: 7 → 7, 13 → 4, 31 → 4, 61 → 7, 607 → 13 → 4 → 5 of 15
+
+File: `math/theorems/owner_749_triad_gap_and_lehmer_2026_10_20.py`.

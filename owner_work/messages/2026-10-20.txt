@@ -843,3 +843,9 @@ This reveals a second mechanism: prime-power factors can vanish when has order 3
 
 The next extension is to classify vanishing prime-power factors by the multiplicative order of , then integrate that classification into Egor's existing GF(37), prime-wheel, and evidence-ledger modules.
 
+
+
+===== #393  2026-10-20T16:35:54.775Z =====
+run the triad on the gap below 136279841
+
+Lehmer Primes 
