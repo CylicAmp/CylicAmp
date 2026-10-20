@@ -20,6 +20,8 @@ Two jobs, in this order. Both are the user's instruction, not optional.
 - Do this before any long computation. A 9.5-hour search (T245 to 1e22) was
   recommended and run without it.
 
+**Never say "known" without the source** (2026-10-20, #396). Two replies said "most of these are true facts that number theory already has" without checking any of them, and the owner asked why. The check, done afterwards on OEIS: the owner's with-zero counts 1, 17, 117, 525, ... are A056117 (as the series (1+8x)/(1-x)^9); the 37 flip counts 45, 225, 2405, 34867 are in no OEIS entry (math/theorems/outside_prior_art_owner_counts_2026_10_20.py). Search first; then name the entry and the difference in method, or say nothing about novelty.
+
 ## 2. Compare methods: the user's way vs the published way
 
 The user builds methods as they go and wants to see how their thinking differs
