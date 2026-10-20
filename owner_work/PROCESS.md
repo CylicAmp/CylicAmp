@@ -145,3 +145,42 @@ File: `math/theorems/owner_1125_1137_ones_by_zeros_2026_10_19.py`.
 **Checks:** steps 1, 2, 3, 5, 6 right; step 5 ends on 5, and 35+97+12+5 = 149 → 1+4+9 = 14 → 5 gives the same 5; step 4: 35 right, the rest missing.
 Numbers through the frameworks: 41 and 43 are twin primes; 23 and 47 a Sophie Germain pair; 5, 11, 23, 47 the chain 2 → 5 → 11 → 23 → 47.
 File: `math/theorems/owner_chains_pairs_65_54_43_2026_10_19.py`.
+
+---
+
+## #372 (2026-10-20) — ones and zeros around the comma, 1314 and 1413
+
+**As typed:** see `owner_work/messages/2026-10-20.txt`, #372 (quoted in full in the file below). The message ends on a bare "=".
+
+**Cleaned:**
+
+    1,000   → 1,0   → 1 + 1 = 2          one 1, one 0
+    11,000  → 11,00 → 2 + 2 = 4          two 1s, two 0s
+    111,000 → 3 + 3 = 6                  three 1s, three 0s
+    111,000 = 1000 × 111   an even number of odds
+    111,000 = 111 × 1000   an odd number of evens
+
+    1,000      1 + 3 = 4   (with the comma 4 + 1 = 5)     → 1314
+    10,000     2 + 3 = 5                                  → 2335
+    100,000    3 + 3 = 6                                  → 3336
+    1,000,000  (stops here)
+
+    1314 → 1413                 13 | 14 swapped to 14 | 13
+    1413 → 1+4 = 5, 1+3 = 4 → 5 4 → (1 2: step missing)
+    1413 → 4 − 3 = 1 → 1 + 1 + 1 = 3
+    14.13 → 14 | 13 → 5 + 4 = 9
+    141 + 3 → 1+4+1+3 = 9   (141 + 3 = 144 → 1+4+4 = 9)
+    1-4-1 → 141
+    = (open)
+
+**Process:**
+1. Take 1 with zeros, 11 with zeros, 111 with zeros, and count the 1s and as many 0s: 1+1, 2+2, 3+3.
+2. Read 111,000 two ways: 1000 copies of an odd number, or 111 copies of an even number.
+3. Count the digits on each side of the comma: 1+3, 2+3, 3+3, and the comma itself as one more (4 | 1 = 5).
+4. Write the counts as one number: 1314, 2335, 3336 (first digit = digits before the comma, second = digits after, last = all digits).
+5. Swap the halves of 1314 → 1413, put a point between them (14.13), add inside each half (5 and 4), add those (9).
+6. Split 1413 another way, 141 | 3: 1+4+1 = 6, 6+3 = 9, the same 9; 141 reads the same both ways.
+
+**Checks:** steps 1, 2, 3, 5, 6 right; step 4: digits 1, 2 and 4 of each code right; the third digit (1, 3, 3) has no rule written yet — asked.
+Also asked: the ends of "(2+335", "(3+3=6)+3336(" and the 1,000,000 line; the step "1--2"; the line "1-44-1-4"; what follows the last "=".
+File: `math/theorems/owner_commas_1314_1413_2026_10_20.py`.
