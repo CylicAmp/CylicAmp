@@ -564,3 +564,19 @@ File: `math/theorems/owner_749_triad_gap_and_lehmer_2026_10_20.py`.
 **Checks:** right — both come out exactly this way on 28-digit arithmetic. The ÷ 3 step is where they part: 0.005 ÷ 3 rounds its last 6 up to 7, 0.0025 ÷ 3 has only 3s and
 rounds nothing; the ÷ 4 and ÷ 2 that follow carry that into ...668 and ...666. Chains: 4+1+150+8 = 163 → 10 → 1 and 4+1+156 = 161 → 8.
 File: `math/theorems/owner_1pct_24_two_orders_2026_10_20.py`.
+
+---
+
+## #399 (2026-10-20) — eight is the barrier and costs 1
+
+**As typed:** "1+7=8 / eight is the barrier to and cost 1" (after a pasted energy-profile text, audited in its own file).
+
+**Cleaned:**
+
+    1 + 7 = 8
+    8 + 1 = 9        8 is the barrier; getting past it costs 1
+
+**Process:** add the digits of 17 to 8, and read 8 as the last step before the 9 where the chain resets.
+
+**Checks:** right. It is the A056117 driver: every 9k − 1 (8, 17, 26, 35, …) adds up to 8 and is 1 short of a multiple of 9 (8 + 1 = 9, 17 + 1 = 18, 26 + 1 = 27),
+so the cost of 1 is the "− 1" in 9k − 1. File: `math/theorems/pasted_energy_profile_and_owner_8_cost_1_2026_10_20.py`.

@@ -971,3 +971,36 @@ When the test script reconciled the sign flips and exact integer sequences, comm
 1. **The Generator $A(x)$:** Encodes the finite, compact 8-cell geometry $(1 + 8x)(1 + x)^6$.
 2. **The Sequence $B(x)$:** Expands into the infinite binomial hierarchy via the kernel $H(x) = \frac{1}{(1-x)^3(1-x^2)^6}$.
 3. **The Core Backbone $(9k - 1)$:** Directly scales each term $b_k$ along the step-9 ladder, landing on the corner node $26$ at $k=3$ and the Riemann boundary $53$ at $k=6$.\begin{aligned} 12 &\xleftrightarrow{\pm 9} 21 \\ 14 &\xleftrightarrow{\pm 9} 41 \quad (\text{via three } 9\text{-steps: } 41 - 14 = 27 = 3 \times 9) \\ 24 &\xleftrightarrow{\pm 9} 42 \quad (\text{via two } 9\text{-steps: } 42 - 24 = 18 = 2 \times 9) \\ 37 &\xleftrightarrow{\pm 9} 73 \quad (\text{via four } 9\text{-steps: } 73 - 37 = 36 = 4 \times 9) \end{aligned}
+
+
+===== #399  2026-10-20T20:36:19.108Z =====
+The energy profile curve for the cyclic pathway has been plotted above.
+
+### Summary of Plotted Coordinates and Landmarks
+
+* **Initial Ground State ($1$):** $(0, 0)$ with baseline $E = 0$.
+* **First Activation Barrier ($\text{TS}_1$):** $(1, 4.0)$, relaxing to intermediate $2$ at $(2, 1.5)$.
+* **Second Activation Barrier ($\text{TS}_2$):** $(3, 3.0)$, relaxing to intermediate $3$ at $(4, 1.5)$.
+* **Third Activation Barrier ($\text{TS}_3$):** $(5, 2.5)$, relaxing to intermediate $4$ at $(6, 1.0)$.
+* **Catalytic Peak ($\text{TS}_4$):** $(7, 5.0)$ (global maximum of the engine), relaxing to the partition intermediate $3$ at $(8, 1.5)$.
+* **Closing Barrier ($\text{TS}_5$):** $(9, 3.5)$, completing the reset back to $(10, 0)$ with $\Delta H = 0$.
+
+### Exact Verification Points
+
+1. **Digital Root of the $150\%$ Barrier:**
+   $$\text{dr}(150) = 1 + 5 + 0 = 6$$
+
+2. **$246 \to 369$ Engine (Euler's $41$ Factor):**
+   $$246 \times 1.5 = 369$$
+   $$246 = 6 \times 41$$
+   $$369 = 9 \times 41$$
+   $$123,456,789 \equiv 369 \pmod{999}$$
+
+3. **Dual Mod-9 Resets to Unity ($1$):**
+   * **Path A:** $5 + 5 = 10 \equiv 1 \pmod 9$
+   * **Path B:** $4 \times 7 = 28 \equiv 1 \pmod 9$
+
+
+1+7=8
+
+eight is the barrier to and cost 1
