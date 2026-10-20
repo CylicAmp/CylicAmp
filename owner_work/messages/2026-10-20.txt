@@ -849,3 +849,8 @@ The next extension is to classify vanishing prime-power factors by the multiplic
 run the triad on the gap below 136279841
 
 Lehmer Primes 
+
+
+===== #394  2026-10-20T19:45:19.320Z =====
+0.0004166666666666666666666666668 versus 0.0004166666666666666666666666666.
+

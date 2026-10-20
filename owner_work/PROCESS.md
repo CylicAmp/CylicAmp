@@ -543,3 +543,21 @@ p − 2 times) on every prime below 1,300 and run the triad on what it finds.
     in the triad: 7 → 7, 13 → 4, 31 → 4, 61 → 7, 607 → 13 → 4 → 5 of 15
 
 File: `math/theorems/owner_749_triad_gap_and_lehmer_2026_10_20.py`.
+
+---
+
+## #394 (2026-10-20) — ...668 versus ...666
+
+**As typed:** "0.0004166666666666666666666666668 versus 0.0004166666666666666666666666666."
+
+**Cleaned:**
+
+    1% ÷ 1 ÷ 2 ÷ 3 ÷ 4 → 0.0004166666666666666666666666668
+    1% ÷ 4 ÷ 3 ÷ 2 ÷ 1 → 0.0004166666666666666666666666666
+    true: 1% ÷ 24 = 0.000416666…  (6 for ever)
+
+**Process:** compare the same division done in two orders, read to the last digit the calculator keeps (28 digits from the 4).
+
+**Checks:** right — both come out exactly this way on 28-digit arithmetic. The ÷ 3 step is where they part: 0.005 ÷ 3 rounds its last 6 up to 7, 0.0025 ÷ 3 has only 3s and
+rounds nothing; the ÷ 4 and ÷ 2 that follow carry that into ...668 and ...666. Chains: 4+1+150+8 = 163 → 10 → 1 and 4+1+156 = 161 → 8.
+File: `math/theorems/owner_1pct_24_two_orders_2026_10_20.py`.
