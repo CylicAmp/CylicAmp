@@ -1022,3 +1022,80 @@ eight is the barrier to and cost 1
 8+10=1+8=9+8=8
 8+11=1+9=10+9=1+8=9
 
+
+
+===== #401  2026-10-20T21:04:14.070Z =====
+Here is the mathematical structure and mechanics of the sequence you laid out:
+
+---
+
+### 1. The Column Progression and the Decrement of $109$
+
+Looking at the numbers line-by-line:
+$$\begin{matrix}
+\mathbf{8} & \mathbf{9} & \mathbf{1} \\
+\mathbf{7} & \mathbf{8} & \mathbf{2} \\
+\mathbf{6} & \mathbf{7} & \mathbf{3} \\
+\mathbf{5} & \mathbf{6} & \mathbf{4} \\
+\mathbf{4} & \mathbf{5} & \mathbf{5} \\
+\mathbf{3} & \mathbf{4} & \mathbf{6} \\
+\mathbf{2} & \mathbf{3} & \mathbf{7} \\
+\mathbf{1} & \mathbf{2} & \mathbf{8} \\
+\mathbf{9} & \mathbf{1} & \mathbf{9} \\
+\mathbf{8} & \mathbf{9} & \mathbf{1}
+\end{matrix}$$
+
+Each column moves independently under simple counter rules:
+* **Hundreds place ($c_1$):** Decrements by $1$:
+  $$8 \to 7 \to 6 \to 5 \to 4 \to 3 \to 2 \to 1 \to 9 \to 8$$
+* **Tens place ($c_2$):** Decrements by $1$:
+  $$9 \to 8 \to 7 \to 6 \to 5 \to 4 \to 3 \to 2 \to 1 \to 9$$
+* **Units place ($c_3$):** Increments by $1$:
+  $$1 \to 2 \to 3 \to 4 \to 5 \to 6 \to 7 \to 8 \to 9 \to 1$$
+
+---
+
+### 2. Step Difference: $-109$
+
+For the steps from $891$ down to $128$:
+$$891 - 782 = \mathbf{109}$$
+$$782 - 673 = \mathbf{109}$$
+$$673 - 564 = \mathbf{109}$$
+$$564 - 455 = \mathbf{109}$$
+$$455 - 346 = \mathbf{109}$$
+$$346 - 237 = \mathbf{109}$$
+$$237 - 128 = \mathbf{109}$$
+
+Because the hundreds and tens drop by $1$ while the units rise by $1$:
+$$\Delta = -100 - 10 + 1 = \mathbf{-109}$$
+
+---
+
+### 3. Digital Root and Modulo $9$ Invariance
+
+Now look at the digit sum and digital root ($\text{dr}$) for each line:
+
+* $891 \implies 8 + 9 + 1 = 18 \longrightarrow 1 + 8 = \mathbf{9}$
+* $782 \implies 7 + 8 + 2 = 17 \longrightarrow 1 + 7 = \mathbf{8}$
+* $673 \implies 6 + 7 + 3 = 16 \longrightarrow 1 + 6 = \mathbf{7}$
+* $564 \implies 5 + 6 + 4 = 15 \longrightarrow 1 + 5 = \mathbf{6}$
+* $455 \implies 4 + 5 + 5 = 14 \longrightarrow 1 + 4 = \mathbf{5}$
+* $346 \implies 3 + 4 + 6 = 13 \longrightarrow 1 + 3 = \mathbf{4}$
+* $237 \implies 2 + 3 + 7 = 12 \longrightarrow 1 + 2 = \mathbf{3}$
+* $128 \implies 1 + 2 + 8 = 11 \longrightarrow 1 + 1 = \mathbf{2}$
+* $919 \implies 9 + 1 + 9 = 19 \longrightarrow 1 + 9 = 10 \longrightarrow 1 + 0 = \mathbf{1}$
+* $891 \implies 8 + 9 + 1 = 18 \longrightarrow 1 + 8 = \mathbf{9}$
+
+The digital roots count down consecutively through the complete 9-cycle:
+$$\mathbf{9} \to \mathbf{8} \to \mathbf{7} \to \mathbf{6} \to \mathbf{5} \to \mathbf{4} \to \mathbf{3} \to \mathbf{2} \to \mathbf{1} \to \mathbf{9}$$
+
+---
+
+### 4. Connection to $109 \equiv 1 \pmod 9$
+Because the decrement step is $109$:
+$$109 = 1 + 0 + 9 = 10 \equiv \mathbf{1} \pmod 9$$
+
+Subtracting $109$ at each step is algebraically identical to **subtracting $1$ modulo $9$**:
+$$N_{k+1} \equiv N_k - 1 \pmod 9$$
+
+This drives the steady single-step descent through all 9 digital roots before resetting back to $891$.
