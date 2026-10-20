@@ -50,6 +50,22 @@ FRAMEWORKS (gf37-audit): 20 DARK_A ; 25 SA_ST_B ; 5555 = 5x11x101 = 5 CAS_EXT ; 
     8 sevens as whole 7s is 8 x 7 = 56 → 2 ; 7 x 7 = 49 → 4 is seven sevens. If the 7 in front was meant as 8 (the key next to it):
       8 x (3.5 + 3.5) = 8 x 7 = 56 → 2, the root of 20. Which reading is meant is asked in the reply.
 
+#384 (2026-10-20), verbatim:
+    3.5=8
+    3.5=8+8=(1+6=7)
+    6=6.1=1
+    8=3.5=8
+    8=5.3=8
+    1=1.6=6
+  Cleaned and checked:
+    3.5 → 3+5 = 8                                                                 right
+    3.5 + 3.5 → 8 + 8 = 16 → 1+6 = 7 (the 7 the halves came from: 3.5 + 3.5 = 7)    right
+    8 → 3.5 → 3+5 = 8 ; 8 → 5.3 → 5+3 = 8 (the flip keeps the 8)                    right
+    16 → 1.6 and its flip 6.1 ; "6=6.1=1" and "1=1.6=6" name the two digits of each (6 then 1, 1 then 6) ; added, each is 7 (6+1, 1+6).
+      Which the two lines mean -- the two digits, or the 7 like the 8 lines -- is asked in the reply.
+  Forced (true every time): doubling a half's digit root gives back the whole's root (8+8 = 16 → 7 for 7 ; 7+7 = 14 → 5 for 5), because halving is x5
+    on roots and doubling is x2, and 2 x 5 = 10 → 1. A flip of two digits changes the number by a multiple of 9: 53 − 35 = 18, 61 − 16 = 45.
+
 FALSIFICATION: any assertion failing.
 """
 from fractions import Fraction as Q
@@ -88,6 +104,13 @@ assert Q(7, 2) == Q(35, 10) and Q(35, 10) * 2 == 7 and 3 + 5 == 8 and 8 + 8 == 1
 assert 7 * Q(35, 10) + Q(35, 10) == 28 == 8 * Q(35, 10) and dr(28) == 1
 assert 7 * (Q(35, 10) + Q(35, 10)) == 49 == 7 * 7 and 4 + 9 == 13 and 1 + 3 == 4 and dr(49) == 4
 assert 8 * (Q(35, 10) + Q(35, 10)) == 56 and dr(56) == 2 != dr(49)
+
+# #384
+assert 3 + 5 == 8 == 5 + 3 and 8 + 8 == 16 and 1 + 6 == 7 and Q(35, 10) + Q(35, 10) == 7
+assert 6 + 1 == 1 + 6 == 7 and 61 - 16 == 45 == 9 * 5 and 53 - 35 == 18 == 9 * 2
+for whole in range(1, 200):
+    half = Q(whole, 2)
+    assert dr(2 * digit_root_of_decimal(half)) == dr(whole)
 
 if __name__ == "__main__":
     print("#382: 1+1 = 2, 0.5x4 = 2.0 (0.20 wrong), 5 = 2.5+2.5 = two 7s, 20 = 5555 = 8 x 2.5 = 8 sevens; halving walks 1 2 4 8 7 5 backwards")

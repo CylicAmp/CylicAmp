@@ -426,3 +426,23 @@ moves the 2 down a place). The roots agree: 7 + 7 = 14 → 5; 8 × 7 = 56 → 11
 **Checks:** right — 5+5+5+5 = 20; 8 × 2.5 = 20 and 8 × 7 = 56 → 11 → 2 = 2+0; 3.5 + 3.5 = 7 and 8 + 8 = 16 → 7. "7 × 3.5 + 3.5" as written is 28 = 8 × 3.5
 (eight halves of 7); with brackets it is 7 × 7 = 49 → 4, which is seven sevens — eight sevens is 8 × 7 = 56 → 2. Asked which is meant.
 File: `math/theorems/owner_halves_sevens_20_5555_2026_10_20.py`.
+
+---
+
+## #384 (2026-10-20) — 3.5 and 5.3 read 8; 1.6 and 6.1
+
+**As typed:** "3.5=8 / 3.5=8+8=(1+6=7) / 6=6.1=1 / 8=3.5=8 / 8=5.3=8 / 1=1.6=6"
+
+**Cleaned:**
+
+    3.5 → 3 + 5 = 8
+    3.5 + 3.5 → 8 + 8 = 16 → 1 + 6 = 7
+    8 → 3.5 → 8        8 → 5.3 → 8           (the flip keeps the 8)
+    6 → 6.1 → 1        1 → 1.6 → 6           (the two digits of 16, each way round)
+
+**Process:** read a half by its digits (3.5 → 8), add the two halves the same way (8 + 8 = 16 → 7, the whole again), flip the digits around the point
+(3.5 ↔ 5.3, 1.6 ↔ 6.1).
+
+**Checks:** right — 3+5 = 5+3 = 8; 8+8 = 16 → 7 = 3.5+3.5. The 6/1 lines: added, 6+1 = 1+6 = 7; as written they name the digits — asked which is meant.
+The return to the whole is forced: doubling a half's root always gives the whole's root (halving is ×5 on roots, doubling ×2, 2×5 = 10 → 1).
+File: `math/theorems/owner_halves_sevens_20_5555_2026_10_20.py`.
