@@ -279,3 +279,20 @@ then move 1 more between neighbours (3 → 2, 1 → 2). Nothing is created or lo
 
 **Checks:** right — 1+2+5 = 2+1+2+3 = 1+1+1+2+3 = 1+1+2+2+2 = 3+2+3 = 8. The value changes each time; the sum does not. 323 = 17×19, two twin primes.
 File: `math/theorems/owner_248_back_and_forth_0125_2026_10_20.py`.
+
+---
+
+## #377 (2026-10-20) — take 2 from the 5, then take 3
+
+**As typed:** "0.125 / 5-2 / 11.123 / 2.123 / 0.323 / 5-3 / 0.122 / 2.222"
+
+**Cleaned:**
+
+    0.125 → take 2 from the 5 → 11.123   2.123   0.323
+    0.125 → take 3 from the 5 → 0.122 → 2 in front, 1 onto the first digit → 2.222
+
+**Process:** the same move as #376 with a bigger piece: take 3 off the 5 (leaving 0.122), then put the 3 back elsewhere, here as 2 in front and 1 on the
+first digit, so every digit becomes 2.
+
+**Checks:** right — 0.122 adds to 5 while the 3 is out; 2.222 adds to 2+2+2+2 = 8, the four 2s of 8 = 2+2+2+2 (#373), and it is the only way to put the 3
+back so all digits are equal. File: `math/theorems/owner_248_back_and_forth_0125_2026_10_20.py`.

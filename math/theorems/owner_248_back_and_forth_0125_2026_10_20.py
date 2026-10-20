@@ -56,6 +56,13 @@ FRAMEWORKS (gf37-audit): 24 SEED, 42 = 5 CAS_EXT, 48 = 11 NEG_H, 84 = 10 IC, 244
   The digits move, the 8 stays; the value changes (0.125, 2.123, 11.123, 11.222, 0.323 are five different numbers).
   Frameworks: 2123 = 11x193 = 14 C9 ; 323 = 17x19 (17 and 19 are twin primes) = 27 NEG_H ; 125 = 5x5x5 = 14 C9.
 
+#377 (2026-10-20), verbatim: "0.125 / 5-2 / 11.123 / 2.123 / 0.323 / 5-3 / 0.122 / 2.222"
+  Cleaned: 0.125 → take 2 from the 5 → 11.123, 2.123, 0.323 (the forms of #376) ;
+           0.125 → take 3 from the 5 → 0.122 → put 2 in front and 1 onto the first digit → 2.222.
+  Checked: 1+2+2 = 5 (0.122 is the step with the 3 still out) ; 2+2+2+2 = 8 (2.222 keeps the 8)                       right
+  2.222 is the only way to put the 3 back into 0.122 and have every digit equal; its digits are the four 2s of 8 = 2+2+2+2 (#373: 8 = 44 2222 11111111).
+  Frameworks: 122 = 2x61 = 11 NEG_H ; 2222 = 2x11x101 = 2 DARK_A.
+
 FALSIFICATION: any assertion failing.
 """
 from fractions import Fraction as Q
@@ -94,6 +101,13 @@ assert all(sum(map(int, f)) == 8 for f in forms) and sum(map(int, "333")) == 9
 assert len({Q(int(f), 1000) for f in forms}) == 5
 assert (5 - 2, 3 - 1, 1 + 1) == (3, 2, 2) and 1 + 1 == 2 and 2 + 1 == 3
 assert factorint(2123) == {11: 1, 193: 1} and factorint(323) == {17: 1, 19: 1} and (2123 % 37, 323 % 37, 125 % 37) == (14, 27, 14)
+
+# #377: take 3 from the 5
+assert 5 - 3 == 2 and sum(map(int, "0122")) == 5 and sum(map(int, "2222")) == 8 == 2 + 2 + 2 + 2
+from itertools import product as _prod
+equal = [(f, d) for f, d in _prod(range(10), range(10)) if f + d == 3 and len({f, 1 + d, 2, 2}) == 1]
+assert equal == [(2, 1)]          # 2 in front, 1 onto the first digit: 2.222, the only all-equal way
+assert 122 % 37 == 11 and factorint(122) == {2: 1, 61: 1} and 2222 % 37 == 2 and factorint(2222) == {2: 1, 11: 1, 101: 1}
 
 if __name__ == "__main__":
     print("#375: 248 -> 24 42 48 84 ; Conway 244281 ; 8/2/2/2 = 1 ; 9+3 -> 3, 9+6 -> 6 ; 0.125 - 0.002 = 0.123 ; 11.123 / 0.333 / 11.222: step missing")
