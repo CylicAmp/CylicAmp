@@ -252,7 +252,30 @@ I got 2442 4884."
 3. Halve 8 three times to reach 1 (the 2, the 8 and the 1 of "2|8|1").
 4. Add 9 to 3 and to 6 and fold: the 9 disappears and 3 and 6 come back.
 5. Take 0.125 (1 halved three times) and take 2 from its last digit: 0.123.
-6. Then 11.123, 0.333, 11.222 — the rule that gives them is the open piece.
+6. Then 11.123 and 11.222 (0.333 withdrawn by the owner in #376) — the step is explained in #376: the 2 taken from the 5 goes in front as 1 1.
 
 **Checks:** steps 1–5 right. On step 6 the numbers show: 11.123 and 11.222 both add to 8 (1+1+1+2+3, 1+1+2+2+2); 0.333 adds to 9; .123 → .222
 moves one from the 3 to the 1 (sum stays 6); .123 + .333 = .456. File: `math/theorems/owner_248_back_and_forth_0125_2026_10_20.py`.
+
+---
+
+## #376 (2026-10-20) — the last step of #375, explained by the owner
+
+**As said:** "I started with a 5 at the end. And I took minus 2 from that 5. That's how I got the 1-1. ... I could have just put 2 right there ...
+2, 1, 2, 3. But I decided to put a 1 and a 1 there. ... The 333 is not in there. ... So it's 11123 11222. Because I could just minus 1 from the 3.
+And give it to the 1 in the front, and that's how I get the 222. Now, I can also have 323. ... But that's the best it's going to get."
+
+**Cleaned:**
+
+    0.125 → take 2 from the 5 → 0.123
+          → put the 2 in front as 2    → 2.123
+          → put the 2 in front as 1 1  → 11.123
+    11.123 → take 1 from the 3, give it to the 1 in front of it → 11.222
+    0.123 → give the 2 to the first digit → 0.323
+    (0.333 is out: the owner's correction)
+
+**Process:** start with 0.125; take 2 off the last digit; place those 2 somewhere else — whole (2), split (1 1), or onto another digit (3);
+then move 1 more between neighbours (3 → 2, 1 → 2). Nothing is created or lost: every form adds to the 8 of 0.125.
+
+**Checks:** right — 1+2+5 = 2+1+2+3 = 1+1+1+2+3 = 1+1+2+2+2 = 3+2+3 = 8. The value changes each time; the sum does not. 323 = 17×19, two twin primes.
+File: `math/theorems/owner_248_back_and_forth_0125_2026_10_20.py`.
