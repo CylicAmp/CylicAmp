@@ -296,3 +296,26 @@ first digit, so every digit becomes 2.
 
 **Checks:** right — 0.122 adds to 5 while the 3 is out; 2.222 adds to 2+2+2+2 = 8, the four 2s of 8 = 2+2+2+2 (#373), and it is the only way to put the 3
 back so all digits are equal. File: `math/theorems/owner_248_back_and_forth_0125_2026_10_20.py`.
+
+---
+
+## #378 (2026-10-20) — every form of 0.125, counted
+
+**As typed:** "0.125 / 5-2 / 0.12311 / 0.1232 / 11.123 / 2.123 / 0.323 / 5-3 / 0.122 / 2.222 / 1.313", then: "You can make a bunch of different things from this
+because you can reduce from any number or you can add to any number. You can add to the length of the number. You can add one way to the number, to the
+left side or to the right side. And there's only a certain amount of things that you can do like that, and I would like the exact number."
+
+**Cleaned:**
+
+    0.125 → take 2 from the 5 → 0.123 → put the 2 on the right as 1 1 → 0.12311
+                                       → put the 2 on the right as 2   → 0.1232
+                                       → on the left as 1 1 → 11.123, as 2 → 2.123
+                                       → onto the first digit → 0.323
+    0.125 → take 3 from the 5 → 0.122 → 2.222, 1.313
+
+**Process (the rule):** take units off any digit and put them back onto any digit or as new digits on either side; the length can grow; the 8 of 0.125
+(1+2+5) is never lost.
+
+**The exact number:** 576 — every way to write digits 1–9 that add to 8 (128 ways), with the point in each place that leaves a digit after it
+(1×1 + 2×7 + 3×21 + 4×35 + 5×35 + 6×21 + 7×7 + 8×1 = 576). 704 if whole numbers with nothing after the point also count. Zeros are left out: they can be added
+without end. All of the owner's examples are in the 576. File: `math/theorems/owner_0125_all_forms_count_2026_10_20.py`.
