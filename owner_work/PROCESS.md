@@ -406,3 +406,23 @@ Open: how 0.253 is made — asked. File: `math/theorems/owner_0125_origin_12_apa
 **Checks:** all right except "0.20": 0.5 × 4 = 2.0; 0.20 is 0.5 × 0.4. Both ways with zero: 2.0 = 2 (a 0 at the end changes nothing); 0.20 = 0.2 (a 0 in front
 moves the 2 down a place). The roots agree: 7 + 7 = 14 → 5; 8 × 7 = 56 → 11 → 2 = 2 + 0. Halving again and again walks the doubling roots backwards:
 5 → 7 → 8 → 4 → 2 → 1 → 5 (2.5, 1.25, 0.625, 0.3125, 0.15625, 0.078125). File: `math/theorems/owner_halves_sevens_20_5555_2026_10_20.py`.
+
+---
+
+## #383 (2026-10-20) — 20 as 55|55 and 77|77|77|77; halving 7
+
+**As typed:** "20 is made from 55|55 even odds / 20 is made from 77|77|77|77 / 7÷2=3.5+3.5=7 / so / 8 sevens = / 7 × 3.5+3.5 / or 7x7=4+9=1-3=4"
+
+**Cleaned:**
+
+    20 = 5 + 5 | 5 + 5                          four odds, an even count
+    20 = 7 7 | 7 7 | 7 7 | 7 7                  eight halves of 5 (2.5 → 7)
+    7 ÷ 2 = 3.5 → 3.5 + 3.5 = 7,  3.5 → 3 + 5 = 8
+    8 sevens = 7 × 3.5 + 3.5   (reading asked)
+    or 7 × 7 = 49 → 4 + 9 = 13 → 1 + 3 = 4
+
+**Process:** write 20 as its odd pieces (four 5s), then as their halves read by digits (eight 7s); halve 7 the same way (two 3.5s, each read 8).
+
+**Checks:** right — 5+5+5+5 = 20; 8 × 2.5 = 20 and 8 × 7 = 56 → 11 → 2 = 2+0; 3.5 + 3.5 = 7 and 8 + 8 = 16 → 7. "7 × 3.5 + 3.5" as written is 28 = 8 × 3.5
+(eight halves of 7); with brackets it is 7 × 7 = 49 → 4, which is seven sevens — eight sevens is 8 × 7 = 56 → 2. Asked which is meant.
+File: `math/theorems/owner_halves_sevens_20_5555_2026_10_20.py`.

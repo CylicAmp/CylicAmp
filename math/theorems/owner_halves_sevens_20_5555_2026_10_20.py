@@ -30,6 +30,26 @@ THE PATTERN UNDER IT: halving walks the owner's doubling roots 1 2 4 8 7 5 backw
   → 0.15625 (19 → 1) → 0.078125 (23 → 5): 5 7 8 4 2 1 5, six steps and round again (halving is x5 on roots: 5 x 5 = 25 → 7).
 FRAMEWORKS (gf37-audit): 20 DARK_A ; 25 SA_ST_B ; 5555 = 5x11x101 = 5 CAS_EXT ; 56 = 19 CAS_EXT ; 7 D7 ; 8 TESLA.
 
+#383 (2026-10-20), verbatim:
+    20 is made from 55|55 even odds
+    20 is made from 77|77|77|77
+
+    7÷2=3.5+3.5=7
+
+    so
+    8 sevens =
+    7 × 3.5+3.5
+    or 7x7=4+9=1-3=4
+  Cleaned and checked:
+    20 = 5+5 | 5+5 : four odds, an even number of them                                                   right
+    20 = 77 | 77 | 77 | 77 : eight halves of 5 (2.5 each, each read 2+5 = 7) ; 8 x 2.5 = 20 ; 8 x 7 = 56 → 5+6 = 11 → 1+1 = 2 = the root of 20   right
+    7 ÷ 2 = 3.5 → 3.5 + 3.5 = 7 ; 3.5 → 3+5 = 8, so 7 halves into two 8s, and 8+8 = 16 → 1+6 = 7, back to 7   right
+    "8 sevens = 7 × 3.5+3.5", two readings:
+      as written, 7 x 3.5 + 3.5 = 24.5 + 3.5 = 28 = 8 x 3.5 : eight halves of 7 ; 28 → 2+8 = 10 → 1            right
+      with brackets, 7 x (3.5 + 3.5) = 7 x 7 = 49 → 4+9 = 13 → 1+3 = 4 (the "or 7x7" line)                      right as arithmetic
+    8 sevens as whole 7s is 8 x 7 = 56 → 2 ; 7 x 7 = 49 → 4 is seven sevens. If the 7 in front was meant as 8 (the key next to it):
+      8 x (3.5 + 3.5) = 8 x 7 = 56 → 2, the root of 20. Which reading is meant is asked in the reply.
+
 FALSIFICATION: any assertion failing.
 """
 from fractions import Fraction as Q
@@ -61,6 +81,13 @@ assert halves == [5, 7, 8, 4, 2, 1, 5] and [str(float(Q(5, 2 ** k))) for k in ra
 assert [pow(2, k, 9) for k in range(6)] == [1, 2, 4, 8, 7, 5] and halves[:6] == [5, 7, 8, 4, 2, 1] and (5 * 5) % 9 == 7
 
 assert (20 % 37, 25 % 37, 5555 % 37, 56 % 37) == (20, 25, 5, 19) and factorint(5555) == {5: 1, 11: 1, 101: 1}
+
+# #383
+assert 5 + 5 + 5 + 5 == 20 and 4 % 2 == 0 and 8 * Q(25, 10) == 20 and 8 * 7 == 56 and dr(56) == dr(20) == 2
+assert Q(7, 2) == Q(35, 10) and Q(35, 10) * 2 == 7 and 3 + 5 == 8 and 8 + 8 == 16 and 1 + 6 == 7
+assert 7 * Q(35, 10) + Q(35, 10) == 28 == 8 * Q(35, 10) and dr(28) == 1
+assert 7 * (Q(35, 10) + Q(35, 10)) == 49 == 7 * 7 and 4 + 9 == 13 and 1 + 3 == 4 and dr(49) == 4
+assert 8 * (Q(35, 10) + Q(35, 10)) == 56 and dr(56) == 2 != dr(49)
 
 if __name__ == "__main__":
     print("#382: 1+1 = 2, 0.5x4 = 2.0 (0.20 wrong), 5 = 2.5+2.5 = two 7s, 20 = 5555 = 8 x 2.5 = 8 sevens; halving walks 1 2 4 8 7 5 backwards")
