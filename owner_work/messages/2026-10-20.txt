@@ -43,3 +43,22 @@ now we have
 
 =
 
+
+
+===== #373  2026-10-20T00:33:02.159Z =====
+8=44,2222,111,111,11
+2442|31|31+21=5+2=7
+248
+24332
+
+248=
+its also 
+24424884
+
+Okay, here we're doing a little Conway, and we're doing a little bit of me and we've already gone over this. So I hope you find it in my GitHub, but I'm not gonna be surprised if you don't. So that's why I read a lot. I wrote a lot of this out. What am I doing here? I'm the first one I'm going there is 2 fours and 4 twos, and then I'm going there's 3 ones. And then another three ones. And then two ones
+
+
+
+
+
+Then on the second one, I'm just going 2, 4, 8 stands for each number. So there's, if I was explaining 2, 4, 8, I'd go to the other thing and I'd say, well, there's 4 fours and there's 2 twos and blah, blah, blah. You understand? And then there's what Conway does and some more.

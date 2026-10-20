@@ -184,3 +184,31 @@ File: `math/theorems/owner_chains_pairs_65_54_43_2026_10_19.py`.
 **Checks:** steps 1, 2, 3, 5, 6 right; step 4: digits 1, 2 and 4 of each code right; the third digit (1, 3, 3) has no rule written yet — asked.
 Also asked: the ends of "(2+335", "(3+3=6)+3336(" and the 1,000,000 line; the step "1--2"; the line "1-44-1-4"; what follows the last "=".
 File: `math/theorems/owner_commas_1314_1413_2026_10_20.py`.
+
+---
+
+## #373 (2026-10-20) — 8 by halvings, a little Conway and a little of the owner's own
+
+**As typed:** "8=44,2222,111,111,11 / 2442|31|31+21=5+2=7 / 248 / 24332 / 248= its also 24424884", with the owner's spoken explanation (quoted in the file).
+The owner's earlier line on the same idea (2026-10-04): "1+7=8=44,2222,11111111=248=1+4=5".
+
+**Cleaned:**
+
+    8 = 4+4 = 2+2+2+2 = 1+1+1+1+1+1+1+1  →  44  2222  111 111 11
+    44 → 24   2222 → 42   111 → 31   111 → 31   11 → 21        (count, then the digit)
+    31 + 21 = 52 → 5 + 2 = 7
+    two 4s, four 2s, eight 1s → 2 4 8
+    group sizes 2 4 3 3 2 → 24332        (2+4+3+3+2 = 14 digits)
+    2 4 8 → 24 42 48 84 → 24424884        (each neighbour pair and its flip; 2442 doubled = 4884)
+
+**Process:**
+1. Halve 8 down to ones: two 4s, four 2s, eight 1s, and write the 1s in comma groups of three (111,111,11).
+2. Read every group by saying what is in it: two 4s → 24, four 2s → 42, three 1s → 31, three 1s → 31, two 1s → 21.
+3. Add the last two readings: 31 + 21 = 52, and 5 + 2 = 7.
+4. Count each digit over the whole line: 2, 4, 8 → 248.
+5. Count each group's size: 2, 4, 3, 3, 2 → 24332.
+6. From 248, write each neighbour pair with its flip: 24 42, 48 84 → 24424884.
+7. Conway's look-and-say does step 2 without the commas: 44 2222 11111111 → 24 42 81 → 244281.
+
+**Checks:** all seven right. 2442, 4884 and 24424884 are multiples of 37 (2442 = 66×37); 248 = 26 mod 37.
+File: `math/theorems/owner_8_halvings_conway_248_2026_10_20.py`.
