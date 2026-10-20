@@ -446,3 +446,26 @@ File: `math/theorems/owner_halves_sevens_20_5555_2026_10_20.py`.
 **Checks:** right — 3+5 = 5+3 = 8; 8+8 = 16 → 7 = 3.5+3.5. The 6/1 lines: added, 6+1 = 1+6 = 7; as written they name the digits — asked which is meant.
 The return to the whole is forced: doubling a half's root always gives the whole's root (halving is ×5 on roots, doubling ×2, 2×5 = 10 → 1).
 File: `math/theorems/owner_halves_sevens_20_5555_2026_10_20.py`.
+
+---
+
+## #385 (2026-10-20) — 1 ÷ n, 1% ÷ n, and 1% ÷ 4 ÷ 3 ÷ 2 ÷ 1
+
+**As typed:** the table 1÷9 … 2÷2, the table 1%÷1 … 1%÷9 (5 to 9 left blank), "1%÷4÷3÷2÷1=0.0004166667 / 0.000 / 41666=23 / 6+7=1+3=4+23=(2+7=(9)", and the
+halves lines of #384 again with "3÷2=1.5 / 5÷2=2.5" in front.
+
+**Cleaned:**
+
+    1 ÷ 9 … 1 ÷ 1, and 1% ÷ 1 … 1% ÷ 9 = the same digits two places to the right
+    1% ÷ 5 = 0.002   1% ÷ 6 = 0.0016666667   1% ÷ 7 = 0.0014285714   1% ÷ 8 = 0.00125   1% ÷ 9 = 0.0011111111      (filled in)
+    1% ÷ 4 ÷ 3 ÷ 2 ÷ 1 = 1% ÷ 24 = 0.0004166667
+    0.000 | 41666 → 4+1+6+6+6 = 23
+    6 + 7 = 13 → 1 + 3 = 4 → 4 + 23 = 27 → 2 + 7 = 9
+    3 ÷ 2 = 1.5 → 6,   5 ÷ 2 = 2.5 → 7,   7 ÷ 2 = 3.5 → 8
+
+**Process:** divide 1 by 9 down to 1; do it again on 1%; divide 1% by 4, 3, 2, 1 in a row; set the zeros apart (0.000) from the digits (41666), add the
+digits, add the last two (6 + 7) and fold, add the two results and fold → 9.
+
+**Checks:** all right. The final 7 of 0.0004166667 is the calculator rounding endless 6s; with the digits cut instead of rounded the sum is 35 → 8, so the
+9 comes from the rounded 7. The halves of 3, 5, 7 read 6, 7, 8; 1÷2, 1÷4, 1÷8 read 5, 7, 8 — the halving walk of #382.
+File: `math/theorems/owner_reciprocals_one_percent_2026_10_20.py`.
