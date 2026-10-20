@@ -364,3 +364,21 @@ File: `math/theorems/owner_0125_all_forms_count_2026_10_20.py`.
 
 **What is new against 0.125:** a digit stops at 9, so 11 can't be one digit and 10 + 1 can't be two: 2x2x2x2x2x2x2x2x2x2 = 1024, minus those 3 = 1021.
 1021 is prime, twin with 1019. File: `math/theorems/owner_0137_all_forms_count_2026_10_20.py`.
+
+---
+
+## #381 (2026-10-20) — where 0.125 came from; 12 apart; 0.253
+
+**As typed:** "0.125 i got by dividing what times what? Its a important detail. / because / 0125+ / 0.012=0137 are exactly 12 apart / 0.253 all prime building blocks"
+
+**Cleaned:**
+
+    9 ÷ 2 = 4.5 → ÷ 2 = 2.25 → ÷ 2 = 1.125        (#368: 9 divided by 2 three times = 9 ÷ 8)
+    1.125 = 1 + 0.125, and 0.125 = 1 ÷ 2 ÷ 2 ÷ 2 = 1 ÷ 8
+    0.125 + 0.012 = 0.137 → 137 − 125 = 12
+    0.253 → 2 5 3, all prime
+
+**Process:** the start of the 0.125 work is the halving: 9 ÷ 2 ÷ 2 ÷ 2 (#368). Adding 0.012 reaches 0.137, 12 thousandths further on.
+
+**Checks:** right — 9 ÷ 8 = 1.125; 0.125 + 0.012 = 0.137; 2, 5, 3 prime; also 253 = 11 × 23 (two primes, 2×11+1 = 23) and 253 = 125 + 128.
+Open: how 0.253 is made — asked. File: `math/theorems/owner_0125_origin_12_apart_0253_2026_10_20.py`.
