@@ -66,3 +66,40 @@ Then on the second one, I'm just going 2, 4, 8 stands for each number. So there'
 
 ===== #374  2026-10-20T00:36:50.070Z =====
 Oh, I forgot to say, the one that's even, for example, if I got 2442, then I'm going, or I got 2248, right? I start with 248. What I'm doing there is I go, I got 2442 4884.
+
+
+===== #375  2026-10-20T00:45:28.609Z =====
+248 becomes 
+24.
+42
+48
+84
+
+
+
+
+
+what we get from reading back and forth 
+
+conways speak out loud 
+
+44,2222,1111|1111
+
+244281
+
+
+2|8|1
+8÷2÷2÷2=1
+9+3=1+2=3
+9+6=1+5=6
+
+0.125 
+hmm  if I minus 2 from 5
+11.123
+0.333
+11.222
+
+
+
+
+

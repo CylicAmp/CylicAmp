@@ -229,3 +229,30 @@ I got 2442 4884."
 
 **Checks:** right. Every four-digit mirror abba is a multiple of 11; when the inner digit is twice the outer (2442, 4884) it is a multiple of
 1221 = 3×11×37: 2442 = 2×1221, 4884 = 4×1221 = 2×2442. "2248" in the dictation is read as "to 248". File: `math/theorems/owner_8_halvings_conway_248_2026_10_20.py`.
+
+---
+
+## #375 (2026-10-20) — reading back and forth, Conway out loud, 0.125 → 0.123
+
+**As typed:** see the file below (quoted in full).
+
+**Cleaned:**
+
+    248 → 24 42 48 84                         read each pair, then read it back
+    44 2222 1111|1111 → 24 42 81 → 244281     Conway, out loud: two 4s, four 2s, eight 1s
+    2|8|1:  8 ÷ 2 = 4 → ÷ 2 = 2 → ÷ 2 = 1
+    9 + 3 = 12 → 1 + 2 = 3
+    9 + 6 = 15 → 1 + 5 = 6
+    0.125 → take 2 from the 5 → 0.123
+    11.123   0.333   11.222                   (step to these not written yet)
+
+**Process:**
+1. Read 248 back and forth: 24, 42, 48, 84.
+2. Say the halving line out loud the way Conway does: two 4s, four 2s, eight 1s → 244281.
+3. Halve 8 three times to reach 1 (the 2, the 8 and the 1 of "2|8|1").
+4. Add 9 to 3 and to 6 and fold: the 9 disappears and 3 and 6 come back.
+5. Take 0.125 (1 halved three times) and take 2 from its last digit: 0.123.
+6. Then 11.123, 0.333, 11.222 — the rule that gives them is the open piece.
+
+**Checks:** steps 1–5 right. On step 6 the numbers show: 11.123 and 11.222 both add to 8 (1+1+1+2+3, 1+1+2+2+2); 0.333 adds to 9; .123 → .222
+moves one from the 3 to the 1 (sum stays 6); .123 + .333 = .456. File: `math/theorems/owner_248_back_and_forth_0125_2026_10_20.py`.
