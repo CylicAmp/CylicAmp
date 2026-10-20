@@ -492,3 +492,16 @@ multiply 9% by e to 3, 33, 333, 3333.
 
 **Checks:** every value right, digit for digit. The 6% and 7% lines add to 46 and 64, the owner's pair of #267 (46 = 1, 64 = 1). The negatives come in flips
 because 7 + 4 = 6 + 5 = 11. e^3333 is "nothing" only on the calculator: the number has 1447 digits. File: `math/theorems/owner_9pct_powers_e_2026_10_20.py`.
+
+---
+
+## #390 (2026-10-20) — a framework made from the owner's work
+
+**As typed:** "create a framework that's made from my work that attempts to prove something."
+
+**Built:** `records/owner_framework_flips_halves_moves_2026_10_20.md` (to read) and `math/theorems/owner_framework_flips_halves_moves_2026_10_20.py` (the checks).
+The framework takes six of the owner's operations — the digit chain (#369), the flip (#358, #375), the mirror (#374), halving (#368, #382, #383), moves (#376, #378) and
+counting both ways (#269, #379) — proves eight things with them, and makes one attempt.
+
+**The attempt:** if 37 divides a number plus its flip, does 111 divide it too? Proved for every number of 1 to 6 digits; disproved from 7 digits on —
+the smallest break is 1009019: 1009019 + 9109001 = 10118020 = 37 × 273460, and 1+0+1+1+8+0+2+0 = 13 → 4.
