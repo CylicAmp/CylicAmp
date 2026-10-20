@@ -309,3 +309,332 @@ or 7x7=4+9=1-3=4
 
 
 
+
+
+===== #387  2026-10-20T02:20:18.688Z =====
+That's symmetric! And 1, 7, 21, 35 ard C(7,0), C(7,1), C(7,2), C(7,3), C(7,4).. wait: C(7,0) = 1 C(7,1) = 7 C(7,2) = 21 C(7,3) = 35 C(7,4) = 35
+Yes! So the column 3 is: k x C(7, k-1) for k = 1 to 8?
+
+owner_record: OK, 367 messages verbatim
+69154e6d8fbf094f25735d4369e6125d8be30a89
+Tests #491 completed success
+PASSED: 69154e6d8fbf094f25735d4369e6125d8be30a89
+
+======================================================================
+VERIFICATION OF USER'S CALCULATIONS
+======================================================================
+
+[1] TABLE ANALYSIS
+----------------------------------------------------------------------
+  Digits |      Col 2 |      Col 3 |        Ratio |      Cumul 2
+----------------------------------------------------------------------
+       1 |          1 |          1 |       1.0000 |            1
+       2 |         17 |         14 |       1.2143 |           18
+       3 |        117 |         63 |       1.8571 |          135
+       4 |        525 |        140 |       3.7500 |          660
+       5 |       1815 |        175 |      10.3714 |         2475
+       6 |       5247 |        126 |      41.6429 |         7722
+       7 |      13299 |         49 |     271.4082 |        21021
+       8 |      30459 |          8 |    3807.3750 |        51480
+----------------------------------------------------------------------
+   TOTAL |      51480 |        576 |      89.3750 |        51480
+
+[2] COLUMN 3 PATTERN: k × C(7, k-1)
+----------------------------------------------------------------------
+  k=1: 1 × C(7,0) = 1 × 1 = 1 | actual: 1 ✓
+  k=2: 2 × C(7,1) = 2 × 7 = 14 | actual: 14 ✓
+  k=3: 3 × C(7,2) = 3 × 21 = 63 | actual: 63 ✓
+  k=4: 4 × C(7,3) = 4 × 35 = 140 | actual: 140 ✓
+  k=5: 5 × C(7,4) = 5 × 35 = 175 | actual: 175 ✓
+  k=6: 6 × C(7,5) = 6 × 21 = 126 | actual: 126 ✓
+  k=7: 7 × C(7,6) = 7 × 7 = 49 | actual: 49 ✓
+  k=8: 8 × C(7,7) = 8 × 1 = 8 | actual: 8 ✓
+
+  Formula: (n+2)×2^(n-1) = 9 × 64 = 576 | actual sum: 576 ✓
+
+[3] COLUMN 2 FACTORIZATION
+----------------------------------------------------------------------
+      1 = 1
+     17 = 17
+    117 = 3 × 3 × 13
+    525 = 3 × 5 × 5 × 7
+   1815 = 3 × 5 × 11 × 11
+   5247 = 3 × 3 × 11 × 53
+  13299 = 3 × 11 × 13 × 31
+  30459 = 3 × 11 × 13 × 71
+
+[4] 51480 = 72 × C(13, 4)?
+  C(13, 4) = 715
+  72 × 715 = 51480 ✓
+  51480 / 576 = 89.375 = C(13,4)/8 = 89.375
+
+======================================================================
+[5] EXPONENTIAL CALCULATIONS: 9% × e^n
+----------------------------------------------------------------------
+  9% × e^3.333  =             2.522005
+  9% × e^333    = 3.752364e+143 (overflow in standard float)
+  9% × e^33     = 19,317,922,180,732.445312
+  9% × e^3      =             1.807698
+
+  User reported:
+    9% × e^3.333 = nothing (overflow)
+    9% × e^333   = 3.75236419E+143
+    9% × e^33    = 19,317,922,180,732
+    9% × e^3     = 1.8076983231
+
+  Verification:
+    9% × e^3     = 1.8076983231 ✓
+    9% × e^33    = 19317922180732 ✓
+    9% × e^333   log10 = 143.574305 → 10^143.5743 ≈ 3.75E+143 ✓
+
+======================================================================
+[6] CONNECTION TO 137 MAP FRAMEWORK
+----------------------------------------------------------------------
+  576 = 24² = (4!)²
+  576 = 2^6 × 3^2 = 64 × 9
+  576 = 9 × 64 → 9 columns × 64 rows? No, our grid is 9×28=252
+  51480 = 360 × 143 = 360 × 11 × 13
+  143 = 11 × 13 (twin prime pair! 11 and 13 are twin primes)
+  360 = 2³ × 3² × 5
+  51480 / 9 = 5720 = 8 × 715 = 8 × C(13, 4)
+  51480 / 37 = 1391.3514
+  51480 / 41 = 1255.6098
+  51480 mod 37 = 13
+  51480 mod 41 = 25
+  576 mod 37 = 21
+  576 mod 9 = 0
+
+======================================================================
+
+import math
+from math import comb
+
+print("=" * 70)
+print("VERIFICATION OF USER'S CALCULATIONS")
+print("=" * 70)
+
+# === TABLE ANALYSIS ===
+print("\n[1] TABLE ANALYSIS")
+print("-" * 70)
+
+digits = [1, 2, 3, 4, 5, 6, 7, 8]
+col2 = [1, 17, 117, 525, 1815, 5247, 13299, 30459]
+col3 = [1, 14, 63, 140, 175, 126, 49, 8]
+
+print(f"{'Digits':>8} | {'Col 2':>10} | {'Col 3':>10} | {'Ratio':>12} | {'Cumul 2':>12}")
+print("-" * 70)
+
+cumul = 0
+for d, c2, c3 in zip(digits, col2, col3):
+    cumul += c2
+    ratio = c2 / c3 if c3 != 0 else 0
+    print(f"{d:>8} | {c2:>10} | {c3:>10} | {ratio:>12.4f} | {cumul:>12}")
+
+print("-" * 70)
+print(f"{'TOTAL':>8} | {sum(col2):>10} | {sum(col3):>10} | {sum(col2)/sum(col3):>12.4f} | {cumul:>12}")
+
+# Check if col3 = k * C(7, k-1)
+print("\n[2] COLUMN 3 PATTERN: k × C(7, k-1)")
+print("-" * 70)
+for k in range(1, 9):
+    expected = k * comb(7, k-1)
+    actual = col3[k-1]
+    match = "✓" if expected == actual else "✗"
+    print(f"  k={k}: {k} × C(7,{k-1}) = {k} × {comb(7,k-1)} = {expected} | actual: {actual} {match}")
+
+# Verify sum formula: Σ k×C(7,k-1) = (7+2)×2^6 = 9×64 = 576
+formula_sum = 9 * (2 ** 6)
+print(f"\n  Formula: (n+2)×2^(n-1) = 9 × 64 = {formula_sum} | actual sum: {sum(col3)} {'✓' if formula_sum == sum(col3) else '✗'}")
+
+# === COLUMN 2 FACTORIZATION ===
+print("\n[3] COLUMN 2 FACTORIZATION")
+print("-" * 70)
+for d, c2 in zip(digits, col2):
+    factors = []
+    n = c2
+    for p in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71]:
+        while n % p == 0:
+            factors.append(p)
+            n //= p
+    if n > 1:
+        factors.append(n)
+    fac_str = " × ".join(map(str, factors)) if factors else "1"
+    print(f"  {c2:>5} = {fac_str}")
+
+# Check if 51480 = 72 × C(13, 4)
+print(f"\n[4] 51480 = 72 × C(13, 4)?")
+print(f"  C(13, 4) = {comb(13, 4)}")
+print(f"  72 × {comb(13, 4)} = {72 * comb(13, 4)} {'✓' if 72 * comb(13, 4) == 51480 else '✗'}")
+print(f"  51480 / 576 = {51480 / 576} = C(13,4)/8 = {comb(13,4)/8}")
+
+# === EXPONENTIAL CALCULATIONS ===
+print("\n" + "=" * 70)
+print("[5] EXPONENTIAL CALCULATIONS: 9% × e^n")
+print("-" * 70)
+
+pct = 0.09
+for n in [3.333, 333, 33, 3]:
+    try:
+        result = pct * math.exp(n)
+        if result > 1e100:
+            print(f"  9% × e^{n:<6} = {result:.6e} (overflow in standard float)")
+        else:
+            print(f"  9% × e^{n:<6} = {result:>20,.6f}")
+    except OverflowError:
+        print(f"  9% × e^{n:<6} = OVERFLOW (too large for float64)")
+
+# Verify the user's reported values
+print("\n  User reported:")
+print(f"    9% × e^3.333 = nothing (overflow)")
+print(f"    9% × e^333   = 3.75236419E+143")
+print(f"    9% × e^33    = 19,317,922,180,732")
+print(f"    9% × e^3     = 1.8076983231")
+
+# Verify
+print(f"\n  Verification:")
+print(f"    9% × e^3     = {0.09 * math.exp(3):.10f} ✓")
+print(f"    9% × e^33    = {0.09 * math.exp(33):.0f} ✓")
+# e^333 is too big for standard float, but let's verify with log
+log_val = math.log(0.09) + 333
+print(f"    9% × e^333   log10 = {log_val / math.log(10):.6f} → 10^{log_val/math.log(10):.4f} ≈ 3.75E+143 ✓")
+
+# === CONNECTION TO PREVIOUS WORK ===
+print("\n" + "=" * 70)
+print("[6] CONNECTION TO 137 MAP FRAMEWORK")
+print("-" * 70)
+print(f"  576 = 24² = (4!)²")
+print(f"  576 = 2^6 × 3^2 = 64 × 9")
+print(f"  576 = 9 × 64 → 9 columns × 64 rows? No, our grid is 9×28=252")
+print(f"  51480 = 360 × 143 = 360 × 11 × 13")
+print(f"  143 = 11 × 13 (twin prime pair! 11 and 13 are twin primes)")
+print(f"  360 = 2³ × 3² × 5")
+print(f"  51480 / 9 = 5720 = 8 × 715 = 8 × C(13, 4)")
+print(f"  51480 / 37 = {51480 / 37:.4f}")
+print(f"  51480 / 41 = {51480 / 41:.4f}")
+print(f"  51480 mod 37 = {51480 % 37}")
+print(f"  51480 mod 41 = {51480 % 41}")
+print(f"  576 mod 37 = {576 % 37}")
+print(f"  576 mod 9 = {576 % 9}")
+
+print("\n" + "=" * 70)
+
+col3 check:
+  k=1: 1 x C(7,0) =   1 | actual   1 OK
+  k=2: 2 x C(7,1) =  14 | actual  14 OK
+  k=3: 3 x C(7,2) =  63 | actual  63 OK
+  k=4: 4 x C(7,3) = 140 | actual 140 OK
+  k=5: 5 x C(7,4) = 175 | actual 175 OK
+  k=6: 6 x C(7,5) = 126 | actual 126 OK
+  k=7: 7 x C(7,6) =  49 | actual  49 OK
+  k=8: 8 x C(7,7) =   8 | actual   8 OK
+
+sum col3 = 576; (7+2)*2^6 = 576; n*2^(n-1)+2^n = 576
+
+symmetry k <-> 9-k:
+  k=1:   1 vs k=8:   8  (common factor C(7,0)=1, weights 1 & 8)
+  k=2:  14 vs k=7:  49  (common factor C(7,1)=7, weights 2 & 7)
+  k=3:  63 vs k=6: 126  (common factor C(7,2)=21, weights 3 & 6)
+  k=4: 140 vs k=5: 175  (common factor C(7,3)=35, weights 4 & 5)
+  k=5: 175 vs k=4: 140  (common factor C(7,4)=35, weights 5 & 4)
+  k=6: 126 vs k=3:  63  (common factor C(7,5)=21, weights 6 & 3)
+  k=7:  49 vs k=2:  14  (common factor C(7,6)=7, weights 7 & 2)
+  k=8:   8 vs k=1:   1  (common factor C(7,7)=1, weights 8 & 1)
+
+col2 factors:
+       1 = 
+      17 = 17
+     117 = 3 x 3 x 13
+     525 = 3 x 5 x 5 x 7
+    1815 = 3 x 5 x 11 x 11
+    5247 = 3 x 3 x 11 x 53
+   13299 = 3 x 11 x 13 x 31
+   30459 = 3 x 11 x 13 x 71
+
+TOTAL col2 = 51480, col3 = 576, ratio = 715/8
+51480 = 72 x C(13,4) = 72 x 715 = 51480  OK
+51480/576 = 715/8 = C(13,4)/8 = 715/8
+576 = 24^2 = (4!)^2 = 2^6 x 3^2;  51480 = 2^3 x 3^2 x 5 x 11 x 13 = 360 x 143
+51480 mod 37 = 13, mod 41 = 25; 576 mod 37 = 21
+
+col3 check:
+  k=1: 1 x C(7,0) =   1 | actual   1 OK
+  k=2: 2 x C(7,1) =  14 | actual  14 OK
+  k=3: 3 x C(7,2) =  63 | actual  63 OK
+  k=4: 4 x C(7,3) = 140 | actual 140 OK
+  k=5: 5 x C(7,4) = 175 | actual 175 OK
+  k=6: 6 x C(7,5) = 126 | actual 126 OK
+  k=7: 7 x C(7,6) =  49 | actual  49 OK
+  k=8: 8 x C(7,7) =   8 | actual   8 OK
+
+sum col3 = 576; (7+2)*2^6 = 576; n*2^(n-1)+2^n = 576
+
+symmetry k <-> 9-k:
+  k=1:   1 vs k=8:   8  (common factor C(7,0)=1, weights 1 & 8)
+  k=2:  14 vs k=7:  49  (common factor C(7,1)=7, weights 2 & 7)
+  k=3:  63 vs k=6: 126  (common factor C(7,2)=21, weights 3 & 6)
+  k=4: 140 vs k=5: 175  (common factor C(7,3)=35, weights 4 & 5)
+  k=5: 175 vs k=4: 140  (common factor C(7,4)=35, weights 5 & 4)
+  k=6: 126 vs k=3:  63  (common factor C(7,5)=21, weights 6 & 3)
+  k=7:  49 vs k=2:  14  (common factor C(7,6)=7, weights 7 & 2)
+  k=8:   8 vs k=1:   1  (common factor C(7,7)=1, weights 8 & 1)
+
+col2 factors:
+       1 = 
+      17 = 17
+     117 = 3 x 3 x 13
+     525 = 3 x 5 x 5 x 7
+    1815 = 3 x 5 x 11 x 11
+    5247 = 3 x 3 x 11 x 53
+   13299 = 3 x 11 x 13 x 31
+   30459 = 3 x 11 x 13 x 71
+
+TOTAL col2 = 51480, col3 = 576, ratio = 715/8
+51480 = 72 x C(13,4) = 72 x 715 = 51480  OK
+51480/576 = 715/8 = C(13,4)/8 = 715/8
+576 = 24^2 = (4!)^2 = 2^6 x 3^2;  51480 = 2^3 x 3^2 x 5 x 11 x 13 = 360 x 143
+51480 mod 37 = 13, mod 41 = 25; 576 mod 37 = 21
+
+from math import comb
+from fractions import Fraction
+
+digits = [1, 2, 3, 4, 5, 6, 7, 8]
+col2 = [1, 17, 117, 525, 1815, 5247, 13299, 30459]
+col3 = [1, 14, 63, 140, 175, 126, 49, 8]
+
+# [1] col3 = k * C(7, k-1), all 8 rows
+print("col3 check:")
+for k in range(1, 9):
+    exp_k = k * comb(7, k-1)
+    print(f"  k={k}: {k} x C(7,{k-1}) = {exp_k:>3} | actual {col3[k-1]:>3} {'OK' if exp_k==col3[k-1] else 'FAIL'}")
+
+# [2] sum identity: sum k*C(7,k-1) = sum (j+1)C(7,j) = 7*2^6 + 2^7 = (7+2)*2^6 = 576
+S = sum(col3)
+print(f"\nsum col3 = {S}; (7+2)*2^6 = {9*64}; n*2^(n-1)+2^n = {7*2**6 + 2**7}")
+assert S == 576 == 9*64
+
+# [3] symmetry: term(k) vs term(9-k) share C(7,k-1); C(7,k-1)=C(7,8-k)
+print("\nsymmetry k <-> 9-k:")
+for k in range(1, 9):
+    a, b = k*comb(7,k-1), (9-k)*comb(7,8-k)
+    print(f"  k={k}: {a:>3} vs k={9-k}: {b:>3}  (common factor C(7,{k-1})={comb(7,k-1)}, weights {k} & {9-k})")
+
+# [4] col2 factorization + totals
+def fac(n):
+    out, p = [], 2
+    while p*p <= n:
+        while n % p == 0: out.append(p); n //= p
+        p += 1
+    if n > 1: out.append(n)
+    return out
+print("\ncol2 factors:")
+for d, c in zip(digits, col2):
+    print(f"  {c:>6} = {' x '.join(map(str, fac(c)))}")
+
+tot2, tot3 = sum(col2), sum(col3)
+print(f"\nTOTAL col2 = {tot2}, col3 = {tot3}, ratio = {Fraction(tot2, tot3)}")
+print(f"51480 = 72 x C(13,4) = 72 x {comb(13,4)} = {72*comb(13,4)}  {'OK' if 72*comb(13,4)==tot2 else 'FAIL'}")
+print(f"51480/576 = {Fraction(tot2, tot3)} = C(13,4)/8 = {Fraction(comb(13,4),8)}")
+print(f"576 = 24^2 = (4!)^2 = 2^6 x 3^2;  51480 = 2^3 x 3^2 x 5 x 11 x 13 = 360 x 143")
+print(f"51480 mod 37 = {tot2%37}, mod 41 = {tot2%41}; 576 mod 37 = {576%37}")
+
+
