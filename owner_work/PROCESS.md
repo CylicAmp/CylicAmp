@@ -382,3 +382,27 @@ File: `math/theorems/owner_0125_all_forms_count_2026_10_20.py`.
 
 **Checks:** right — 9 ÷ 8 = 1.125; 0.125 + 0.012 = 0.137; 2, 5, 3 prime; also 253 = 11 × 23 (two primes, 2×11+1 = 23) and 253 = 125 + 128.
 Open: how 0.253 is made — asked. File: `math/theorems/owner_0125_origin_12_apart_0253_2026_10_20.py`.
+
+---
+
+## #382 (2026-10-20) — odds make evens; 5 is two sevens; 20 is 8 sevens
+
+**As typed:** "2 made from odd odd =even / or 4 odds even / 1÷2=0.5 +0.5 / 2=1+1=0.5×4=2.0 or 0.20 im not sure / 4 × 5 =20 / 5=2 number sevens / because /
+5÷2=2.5+2.5 / so 20 equal 5555 / thats 8 sevens"
+
+**Cleaned:**
+
+    1 + 1 = 2                      two odds → even
+    5 + 5 + 5 + 5 = 20             four odds → even
+    1 ÷ 2 = 0.5 → 0.5 + 0.5 = 1
+    2 = 1 + 1 = 0.5 × 4 = 2.0      (not 0.20)
+    4 × 5 = 20
+    5 ÷ 2 = 2.5 → 2.5 + 2.5 = 5,  2.5 → 2 + 5 = 7  → 5 is two sevens
+    20 = 5 5 5 5 = 8 × 2.5         → 8 sevens
+
+**Process:** split a number into halves, read each half by its digits (2.5 → 7), and count how many halves make the whole: 5 = two halves = two 7s;
+20 = four 5s = eight halves = eight 7s.
+
+**Checks:** all right except "0.20": 0.5 × 4 = 2.0; 0.20 is 0.5 × 0.4. Both ways with zero: 2.0 = 2 (a 0 at the end changes nothing); 0.20 = 0.2 (a 0 in front
+moves the 2 down a place). The roots agree: 7 + 7 = 14 → 5; 8 × 7 = 56 → 11 → 2 = 2 + 0. Halving again and again walks the doubling roots backwards:
+5 → 7 → 8 → 4 → 2 → 1 → 5 (2.5, 1.25, 0.625, 0.3125, 0.15625, 0.078125). File: `math/theorems/owner_halves_sevens_20_5555_2026_10_20.py`.
