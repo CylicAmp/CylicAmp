@@ -580,3 +580,23 @@ File: `math/theorems/owner_1pct_24_two_orders_2026_10_20.py`.
 
 **Checks:** right. It is the A056117 driver: every 9k − 1 (8, 17, 26, 35, …) adds up to 8 and is 1 short of a multiple of 9 (8 + 1 = 9, 17 + 1 = 18, 26 + 1 = 27),
 so the cost of 1 is the "− 1" in 9k − 1. File: `math/theorems/pasted_energy_profile_and_owner_8_cost_1_2026_10_20.py`.
+
+---
+
+## #400 (2026-10-20) — adding 8
+
+**As typed:** "1+8=9 / 2+8=1 / 3+8=2 / 4+8=3 / 5+8=4 / 6+8=5 / 7+8=6=2 / 8+8=7=9 / 8+9=8+9=8 / 8+10=1+8=9+8=8 / 8+11=1+9=10+9=1+8=9"
+
+**Cleaned:**
+
+    1 + 8 = 9      2 + 8 = 10 → 1     3 + 8 = 11 → 2
+    4 + 8 = 12 → 3     5 + 8 = 13 → 4     6 + 8 = 14 → 5
+    7 + 8 = 15 → 6     8 + 8 = 16 → 7     8 + 9 = 17 → 8
+    8 + 10 = 18 → 9 → + 8 → 17 → 8
+    8 + 11 = 19 → 10 → 1 → + 8 → 9
+
+**Process:** add 8 to each number in turn and fold the total; then add 9, 10, 11 to 8.
+
+**Checks:** all right. Adding 8 takes 1 off every time (8 = 9 − 1: adding 9 is nothing, the 8 costs 1 — #399). Adding 9 keeps 8, 10 adds 1, 11 adds 2.
+Each group of three results adds to 3 (12, 12, 21). Asked: the steps "6 = 2" (after 7 + 8) and "7 = 9" (after 8 + 8).
+File: `math/theorems/owner_adding_8_2026_10_20.py`.
