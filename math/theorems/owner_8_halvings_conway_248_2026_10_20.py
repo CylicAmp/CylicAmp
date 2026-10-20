@@ -32,6 +32,13 @@ FRAMEWORKS (gf37-audit): 248 = 2x2x2x31 = 26 mod 37 (IC, the 137-map multiplier)
   2x2x3x3x11x37x1667 are 0 mod 37 ; 24332 = 2x2x7x11x79 = 23 TESLA ; 52 = 2x2x13 = 15 DARK_A ; 2222 = 2x11x101 = 2 DARK_A ; 44 = 7 D7 ;
   244281 = 3x107x761 = 7 D7 ; 31 prime (twin with 29), 7 and 11 prime.
 
+#374 (2026-10-20), the owner adds, verbatim: "Oh, I forgot to say, the one that's even, for example, if I got 2442, then I'm going, or I got 2248,
+  right? I start with 248. What I'm doing there is I go, I got 2442 4884."
+  Cleaned: 248 → 24 → 2442 (24 and its flip 42) ; 48 → 4884 (48 and its flip 84). "2248" in the dictation reads as "to 248" (the start); as a number
+  it would be 2+2+4+8=16. "The one that's even": 2442 and 4884 have an even number of digits and only even digits; both readings fit.
+  Checked: a four-digit mirror abba = 1001a + 110b = 11 x (91a + 10b), always a multiple of 11 (forced); with b = 2a it is 1221a = 3x11x37xa:
+  2442 = 2x1221, 4884 = 4x1221 = 2x2442 ; 2442+4884 = 7326 = 6x1221.                                                         right
+
 FALSIFICATION: any assertion failing.
 """
 from sympy import factorint, isprime
@@ -67,6 +74,16 @@ assert all(n % 37 == 0 for n in (2442, 4884, 24424884)) and 2442 == 66 * 37 and 
 assert factorint(24424884) == {2: 2, 3: 2, 11: 1, 37: 1, 1667: 1} and factorint(24332) == {2: 2, 7: 1, 11: 1, 79: 1} and 24332 % 37 == 23
 assert (52 % 37, 2222 % 37, 44 % 37, 244281 % 37) == (15, 2, 7, 7) and factorint(244281) == {3: 1, 107: 1, 761: 1}
 assert isprime(31) and isprime(29) and isprime(7) and isprime(11)
+
+# #374: the mirrors of the neighbour pairs of 248
+for a in range(1, 10):
+    for b in range(10):
+        assert (1001 * a + 110 * b) % 11 == 0
+        if b == 2 * a:
+            assert 1001 * a + 110 * b == 1221 * a and (1221 * a) % 37 == 0
+assert 1221 == 3 * 11 * 37 and 2442 == 2 * 1221 and 4884 == 4 * 1221 == 2 * 2442 and 2442 + 4884 == 7326 == 6 * 1221
+assert all(int(c) % 2 == 0 for c in "24424884") and len("2442") % 2 == 0 and "2442"[::-1] == "2442" and "4884"[::-1] == "4884"
+assert 2 + 2 + 4 + 8 == 16
 
 if __name__ == "__main__":
     print("#373: 8 = 44 2222 111 111 11 -> 2442 31 31 21 ; 31+21 = 52 -> 7 ; counts 248 ; group sizes 24332 ; 248 -> 24 42 48 84 ; Conway: 244281")

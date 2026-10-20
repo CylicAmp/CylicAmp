@@ -212,3 +212,20 @@ The owner's earlier line on the same idea (2026-10-04): "1+7=8=44,2222,11111111=
 
 **Checks:** all seven right. 2442, 4884 and 24424884 are multiples of 37 (2442 = 66×37); 248 = 26 mod 37.
 File: `math/theorems/owner_8_halvings_conway_248_2026_10_20.py`.
+
+---
+
+## #374 (2026-10-20) — the even one: 248 → 2442 4884 (adds to #373)
+
+**As said:** "the one that's even, for example, if I got 2442, then I'm going, or I got 2248, right? I start with 248. What I'm doing there is I go,
+I got 2442 4884."
+
+**Cleaned:**
+
+    248 → 24 → 2442      24 and its flip 42
+        → 48 → 4884      48 and its flip 84
+
+**Process:** start with 248; take each neighbour pair (24, 48); write it followed by its flip, which makes a four-digit mirror (2442, 4884).
+
+**Checks:** right. Every four-digit mirror abba is a multiple of 11; when the inner digit is twice the outer (2442, 4884) it is a multiple of
+1221 = 3×11×37: 2442 = 2×1221, 4884 = 4×1221 = 2×2442. "2248" in the dictation is read as "to 248". File: `math/theorems/owner_8_halvings_conway_248_2026_10_20.py`.

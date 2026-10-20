@@ -62,3 +62,7 @@ Okay, here we're doing a little Conway, and we're doing a little bit of me and w
 
 
 Then on the second one, I'm just going 2, 4, 8 stands for each number. So there's, if I was explaining 2, 4, 8, I'd go to the other thing and I'd say, well, there's 4 fours and there's 2 twos and blah, blah, blah. You understand? And then there's what Conway does and some more.
+
+
+===== #374  2026-10-20T00:36:50.070Z =====
+Oh, I forgot to say, the one that's even, for example, if I got 2442, then I'm going, or I got 2248, right? I start with 248. What I'm doing there is I go, I got 2442 4884.
