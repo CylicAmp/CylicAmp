@@ -342,3 +342,25 @@ how I do.. / so totals are for both"
 With zero there is no last length (another 0 always fits), so the with-zero total is given by number of digits; up to 8 digits, the longest form without
 zero, it is 51480. Example for 2 digits: 08 17 26 35 44 53 62 71 80 → 0.08 … 0.80 (9) and 1.7 … 8.0 (8) → 17.
 File: `math/theorems/owner_0125_all_forms_count_2026_10_20.py`.
+
+---
+
+## #380 (2026-10-20) — the same with 0.137
+
+**As typed:** "now do the same with 0.137"
+
+**Cleaned:**
+
+    0.137 → 1+3+7 = 11 is the total kept
+    0.137 → take 2 from the 7 → 0.135 → 2.135   11.135   0.1352   0.13511   0.335      (each adds to 11)
+
+**Process:** the moves of #376–#378 started from 0.137 instead of 0.125; the total kept is 11 instead of 8.
+
+**Totals, both ways:**
+
+    without zero:  0 + 8 + 45 + 120 + 210 + 252 + 210 + 120 + 45 + 10 + 1 = 1021 digit strings
+                   with the point: 2x8 + 3x45 + 4x120 + 5x210 + 6x252 + 7x210 + 8x120 + 9x45 + 10x10 + 11x1 = 6139   (7160 with whole numbers)
+    with zero:     0 + 16 + 191 + 1185 + 5308 + 19292 + 60297 + 167791 + 425429 + 999091 + 2199945 = 3878545   up to 11 digits
+
+**What is new against 0.125:** a digit stops at 9, so 11 can't be one digit and 10 + 1 can't be two: 2x2x2x2x2x2x2x2x2x2 = 1024, minus those 3 = 1021.
+1021 is prime, twin with 1019. File: `math/theorems/owner_0137_all_forms_count_2026_10_20.py`.

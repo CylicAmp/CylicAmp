@@ -146,3 +146,7 @@ very good with zero amd without...
 seeing on how I covered this already before and either not saved or not made into part of the process of how I do.. 
 
 so totals are for both
+
+
+===== #380  2026-10-20T01:22:04.364Z =====
+now do the same with 0.137
