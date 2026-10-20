@@ -469,3 +469,26 @@ digits, add the last two (6 + 7) and fold, add the two results and fold → 9.
 **Checks:** all right. The final 7 of 0.0004166667 is the calculator rounding endless 6s; with the digits cut instead of rounded the sum is 35 → 8, so the
 9 comes from the rounded 7. The halves of 3, 5, 7 read 6, 7, 8; 1÷2, 1÷4, 1÷8 read 5, 7, 8 — the halving walk of #382.
 File: `math/theorems/owner_reciprocals_one_percent_2026_10_20.py`.
+
+---
+
+## #386 (2026-10-20) — 9% to small powers, 9% times negatives, 9% times e to 3, 33, 333, 3333
+
+**As typed:** the #385 tables again with "1%÷1÷2÷3÷4=0.0004166667 … 67=1+3=4+23=2+7=9" added, the #384 lines again, then "9%^(1%=0.(976)(208)(141)" … "9%^(7%=
+0.(844)(883)(785)9+1=1", "9%×(−7=−0.63" … "9%×(−4=−0.36", and "9%×e^(3,333=nothing" … "9%×e^(3=1.8076983231".
+
+**Cleaned:**
+
+    1% ÷ 1 ÷ 2 ÷ 3 ÷ 4 = 1% ÷ 24 = 0.0004166667     (same as 1% ÷ 4 ÷ 3 ÷ 2 ÷ 1)
+    0.09 ^ 0.01 = 0.976 208 141        0.09 ^ 0.05 = 0.886 568 150 6
+    0.09 ^ 0.02 = 0.952 982 334 6      0.09 ^ 0.06 = 0.865 475 046 1  → digits add to 46 → 1
+    0.09 ^ 0.03 = 0.930 309 113 2      0.09 ^ 0.07 = 0.844 883 785 9  → digits add to 64 → 1
+    0.09 ^ 0.04 = 0.908 175 33         last digits 1 and 9: 1 + 9 = 9 + 1 = 10 → 1
+    0.09 × −7 = −0.63   × −6 = −0.54   × −5 = −0.45   × −4 = −0.36      (63 ↔ 36, 54 ↔ 45)
+    0.09 × e^3 = 1.8076983231   e^33 → 19,317,922,180,732   e^333 → 3.75236419 × 10^143   e^3333 → 2.869 × 10^1446
+
+**Process:** raise 9% to 1%, 2%, … 7% and read the answer in groups of three; add the last digits of the 6% and 7% lines; multiply 9% by −7 … −4;
+multiply 9% by e to 3, 33, 333, 3333.
+
+**Checks:** every value right, digit for digit. The 6% and 7% lines add to 46 and 64, the owner's pair of #267 (46 = 1, 64 = 1). The negatives come in flips
+because 7 + 4 = 6 + 5 = 11. e^3333 is "nothing" only on the calculator: the number has 1447 digits. File: `math/theorems/owner_9pct_powers_e_2026_10_20.py`.
