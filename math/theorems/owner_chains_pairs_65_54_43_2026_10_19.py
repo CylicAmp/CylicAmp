@@ -29,13 +29,13 @@ CHECKED, in the owner's notation:
   1+2=3+4=7                                                                                        right
   1 / 23 read as 123:  123=1+2+3=6, 6+4=10=1                                                       right
     (read as 23 alone it would be 2+3=5, not 6, so the 1 above belongs to it)
-  12-23-36-34-64-47-41 are the neighbouring pairs of the two chains:
+  12 → 23 → 36 → 34 → 64 → 47 → 41 (the owner's dashes are arrows) are the neighbouring pairs of the two chains:
     1,2,3,4,7 gives 12, 23, 34, 47 ; 1,2,3,6,4,1 gives 12, 23, 36, 64, 41 ;
     the line takes 12, 23 (both chains) and then one from each in turn: 36, 34, 64, 47, 41            right, all 7 accounted for
-  35-97-12-5: 35=12+23 ; the step that gives 97, 12, 5 is missing -- asked for in the reply.
+  35 → 97 → 12 → 5: 35=12+23 ; the step that gives 97, 12, 5 is missing -- asked for in the reply.
   8+7=1+5=6+3=9+5=1+4=5 with 35=3+5=8, 97=9+7=16=7, 12=1+2=3, 5:                                   right
     and 35+97+12+5=149=1+4+9=14=1+4=5, the same 5.
-  6+5=11 ; -1 -1 gives 5+4=9 ; -1 -1 gives 4+3=7                                                   right
+  6 5 (6+5=11) → take 1 off each → 5 4 (5+4=9) → take 1 off each → 4 3 (4+3=7)                                                   right
     as two-digit numbers 65-11=54, 54-11=43: taking 1 and 1 off side by side takes off 11 (the "11, not two ones" of #368);
     the sums go 11, 9, 7 and end on the 3+4=7 of the first line.
 FRAMEWORKS (gf37-audit): 12 SA_ST_A, 23 TESLA, 36 NEG_H, 34 D7, 64=27 NEG_H, 47=10 IC, 41=4 C3, 35 NQR17, 97=23 TESLA, 5 CAS_EXT, 149=1 IC,

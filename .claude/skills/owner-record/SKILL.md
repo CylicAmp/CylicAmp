@@ -123,7 +123,21 @@ with what is needed -- not as an open question and not as a note to come back to
 2026-10-18: "holds" / "does not hold" was rejected by the owner as ambiguous: a line is right or it is wrong. In replies and in new files write
 "right" / "wrong" and show the number ("3+6 = 9, the line says 8: wrong"). Old files keep their wording; new ones use these words.
 
-## 9. Show it in the owner's notation
+## 9. Show it in the owner's notation -- corrected, with the process
 
-2026-10-18: the owner could not read corrections written in another style (arrows, mod, tables). Write the owner's line, then the fixed line directly under it,
+2026-10-18: the owner could not read corrections written in another style (mod, tables). Write the owner's line, then the fixed line directly under it,
 in the owner's own chain of digits, + and = (see math/theorems/typo_fixes_2026_10_18.py for the lines). Missing pieces are written the same way.
+
+2026-10-19 (#371), correcting how this section was first applied: the owner's phone has no arrow key, so a dash between numbers is an arrow or a space,
+not a minus ("12-23-36-34" is 12 -> 23 -> 36 -> 34; "5--4" under "6+5" is the pair 5 4). "Keep the owner's notation" never meant "leave it uncorrected":
+the cleaned version uses arrows, a minus only for subtraction, spaces between numbers. And the cleaned version documents the PROCESS: the steps the owner
+took to reach each answer, in order, each checked. Example that exposed it: #369, now written out in owner_work/PROCESS.md.
+
+## 10. The process log -- owner_work/PROCESS.md
+
+Every math message of the owner gets an entry, in the same turn, under its message number:
+1. the owner's lines as typed (or a pointer to the picture);
+2. the same lines cleaned (arrows for dashes, spaces, typos fixed and labelled);
+3. the process: what the owner did at each step, in order, in plain words and the owner's chain notation;
+4. the check of each step, right or wrong, and the file that holds the assertions.
+Pasted material from other tools is not the owner's process and does not get an entry (it is audited in its own file).
