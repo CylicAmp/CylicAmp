@@ -34,6 +34,17 @@ THE EXACT NUMBER: 576.
   All of the owner's examples are in the 576.
 FRAMEWORKS (gf37-audit): 576 = 24x24 = 21 SA_ST_B ; 704 = 64x11 = 1 IC ; 128 = 2^7 = 17 NQR17.
 
+#379 (2026-10-20), verbatim: "very good with zero amd without... / seeing on how I covered this already before and either not saved or not made into part of
+  the process of how I do.. / so totals are for both"
+  The owner's standing way of counting: every count both ways, with and without (as with the comma and without, #269: "no comma count should be explored
+  also because it creates a better understanding of the bigger picture"). Totals for both:
+  WITHOUT ZERO: 576 (704 with whole numbers) -- as above; by length 1, 14, 63, 140, 175, 126, 49, 8.
+  WITH ZERO (zeros allowed among the digits; the part before the point is "0" or does not start with 0; at least one digit after the point):
+    there is no last length, so the total is given by length: 1, 17, 117, 525, 1815, 5247, 13299, 30459 for 1 to 8 digits -- 51480 up to 8 digits, the
+    longest form without zero. For n digits: S(n) + (n-1)(S(n) - S(n-1)), where S(n) = C(n+7, 8) is the number of n-digit strings (zeros allowed) that add to 8.
+    Example n = 2: 9 strings 08 17 26 35 44 53 62 71 80 ; 0.08 .. 0.80 gives 9, 1.7 .. 8.0 gives 8 ; 17.
+  Frameworks: 51480 = 2x2x2x3x3x5x11x13 = 13 CAS_EXT.
+
 FALSIFICATION: any assertion failing.
 """
 from itertools import product
@@ -73,6 +84,26 @@ assert all(e in F for e in examples) and all(sum(int(ch) for ch in e if ch.isdig
 assert "0.122" not in F and sum(map(int, "0122")) == 5
 assert all(sum(int(ch) for ch in f if ch.isdigit()) == 8 and "0" not in f.split(".")[1] for f in F)
 assert 576 == 24 * 24 and (576 % 37, 704 % 37, 128 % 37) == (21, 1, 17) and 704 == 64 * 11
+
+# #379: with zero, by length
+def with_zero(n):
+    total = 0
+    for digs in product(range(9), repeat=n):
+        if sum(digs) != 8:
+            continue
+        for cut in range(0, n):
+            if cut >= 1 and digs[0] == 0:
+                continue
+            total += 1
+    return total
+
+
+S = lambda n: comb(n + 7, 8)
+wz = [with_zero(n) for n in range(1, 9)]
+assert wz == [1, 17, 117, 525, 1815, 5247, 13299, 30459] and sum(wz) == 51480
+assert all(wz[n - 1] == S(n) + (n - 1) * (S(n) - S(n - 1)) for n in range(1, 9))
+assert [k * comb(7, k - 1) for k in range(1, 9)] == [1, 14, 63, 140, 175, 126, 49, 8] and sum(k * comb(7, k - 1) for k in range(1, 9)) == 576
+assert S(2) == 9 and wz[1] == 9 + 8 and 51480 % 37 == 13
 
 if __name__ == "__main__":
     print("forms of 0.125 keeping the 8, digits 1-9, at least one digit after the point: 576 (704 if whole numbers count; 128 digit strings)")

@@ -141,3 +141,5 @@ Every math message of the owner gets an entry, in the same turn, under its messa
 3. the process: what the owner did at each step, in order, in plain words and the owner's chain notation;
 4. the check of each step, right or wrong, and the file that holds the assertions.
 Pasted material from other tools is not the owner's process and does not get an entry (it is audited in its own file).
+
+Every count in an entry is given both ways, with and without (zero, the comma): #269 "no comma count should be explored also", #379 "so totals are for both". The example that exposed it: #378's count was first given without zero only (576); #379 asked for both (with zero: 51480 up to 8 digits).

@@ -4,6 +4,11 @@ How the owner breaks numbers down and reaches each answer, message by message (o
 DOCUMENTING THE JOURNEY ITSELF..The way I break down numbers amd come up with answers").
 
 Each entry has: the owner's lines as typed, the same lines cleaned, the process step by step, and the check of each step with the file that holds the assertions.
+
+**Standing parts of the owner's process** (apply to every entry):
+- **Count both ways — with and without.** Every count is given with zero and without zero, as with the comma and without the comma (#269: "no comma count
+  should be explored also because it creates a better understanding of the bigger picture"; #379: "very good with zero amd without ... so totals are for
+  both"). Both totals are written down, every time.
 Notation in the cleaned lines: an arrow → is the owner's dash between numbers (the phone has no arrow key); a minus − is only real subtraction; numbers are
 separated by spaces; an "=" chain carries each result forward, and a two-digit total is written as its digits (15 → 1+5).
 
@@ -319,3 +324,21 @@ left side or to the right side. And there's only a certain amount of things that
 **The exact number:** 576 — every way to write digits 1–9 that add to 8 (128 ways), with the point in each place that leaves a digit after it
 (1×1 + 2×7 + 3×21 + 4×35 + 5×35 + 6×21 + 7×7 + 8×1 = 576). 704 if whole numbers with nothing after the point also count. Zeros are left out: they can be added
 without end. All of the owner's examples are in the 576. File: `math/theorems/owner_0125_all_forms_count_2026_10_20.py`.
+
+---
+
+## #379 (2026-10-20) — totals with zero and without
+
+**As typed:** "very good with zero amd without... / seeing on how I covered this already before and either not saved or not made into part of the process of
+how I do.. / so totals are for both"
+
+**The rule, now in the standing parts above:** every count is given with and without (zero, or the comma).
+
+**Totals for #378, both ways:**
+
+    without zero:  1 + 14 + 63 + 140 + 175 + 126 + 49 + 8 = 576         (704 with whole numbers)
+    with zero:     1 + 17 + 117 + 525 + 1815 + 5247 + 13299 + 30459 = 51480   up to 8 digits
+
+With zero there is no last length (another 0 always fits), so the with-zero total is given by number of digits; up to 8 digits, the longest form without
+zero, it is 51480. Example for 2 digits: 08 17 26 35 44 53 62 71 80 → 0.08 … 0.80 (9) and 1.7 … 8.0 (8) → 17.
+File: `math/theorems/owner_0125_all_forms_count_2026_10_20.py`.
