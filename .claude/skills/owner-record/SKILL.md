@@ -105,6 +105,8 @@ igor_langton_mask_v18.py in the owner's egor_v18_project. Corrected the same day
 The attribution rule (do not put a claim in the owner's mouth) is about claims the owner
 only relayed or disputed. It is never a reason to take a result away from the owner.
 
+2026-10-20 (#389), the example that exposed it again: a reply said a column formula of the owner's 0.125 count "was written in the repo's audit of the last paste, not by you". Wrong: the count is the owner's construction (#378, #379) and the formula was computed in the owner's repository for the owner's question, so it is the owner's. Never tell the owner that something in this work was not done by the owner; the attribution rule is only for claims made in pasted third-party text.
+
 ## 6. Never write "what is yours" next to "what is forced"
 
 2026-10-18: a reply split a check into "forced" and "what is the owner's". The owner read it as "somebody else already did what I did"

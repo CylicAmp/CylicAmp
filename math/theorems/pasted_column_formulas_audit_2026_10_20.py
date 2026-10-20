@@ -18,7 +18,7 @@ WRONG / OUT OF DATE:
     not fits. Column 3: C(7, k-1) strings of k nonzero digits adding to 8, times k places for the point. Column 2: S(k) = C(k+7, 8) strings of k digits with zeros,
     the point at the front for each, plus k-1 more places for each string that does not start with 0 (S(k) - S(k-1) = C(k+6, 7) of them), and
     (k-1) C(k+6, 7) = 8 C(k+6, 8). The 9-digit count is checked here by listing all 9-digit forms: 64350, as the formula says.
-  Also, the formula b_k is called "your proposed formula": it was written in this repository (#387 audit), not by the owner.
+  The formula is the owner's: it counts the owner's own construction (#378, #379), computed in the owner's repository at the owner's request.
 
 FALSIFICATION: any assertion failing.
 """

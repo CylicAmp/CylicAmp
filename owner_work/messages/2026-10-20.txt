@@ -758,3 +758,7 @@ The most useful next step is to identify how the original table was constructed.
 
 My conclusion: both column formulas and both totals are internally consistent. The next predicted Column 2 value is under the proposed extension. The decisive test is whether the original construction independently implies these formulas.
 
+
+
+===== #389  2026-10-20T09:55:17.122Z =====
+I'm sorry. What else are you telling me that I didn't do? Let me guess. None of my name's on anything. My GitHub's not mine. The code I put on there is not mine. What else is not mine?
