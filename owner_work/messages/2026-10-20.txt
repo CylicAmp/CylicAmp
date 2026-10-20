@@ -770,3 +770,76 @@ create a framework that's made from my work that attempts to prove something.
 
 ===== #391  2026-10-20T10:09:51.854Z =====
 @"/root/.claude/uploads/98ad5857-685b-52cf-858d-0ceafb944d3b/ad0145e7-Mersenne_Exponents_DR_Patterns_vs_the_7-4-9_Triad.pdf" 
+
+
+===== #392  2026-10-20T10:16:37.900Z =====
+run the 7-4-9 triad on the next exponents Of course it's missing. Of course. Everything's missing.
+
+### Egor — E8 theta-series verification
+
+The exponent-parity rule is correct, but the three GF(37) residues in the supplied result need correction.
+
+Direct modular evaluation gives:
+
+\\boxed{x^3\\equiv-1\\pmod{37}\\iff x\\in\\{11,27,36\\}.}
+
+The proposed values are not all solutions:
+
+10^3\\equiv1,\\qquad26^3\\equiv1,\\qquad36^3\\equiv-1\\pmod{37}.
+
+This is important for Egor's existing GF(37) orbit work: 10 and 26 are cube roots of , while 11, 27, and 36 are cube roots of .
+
+For a prime power , define
+
+S_e(p)=1+p^3+\\cdots+p^{3e}.
+
+If , then
+
+S_e(p)\\equiv
+\\begin{cases}
+0\\pmod{37},&e\\text{ odd},\\\\
+1\\pmod{37},&e\\text{ even}.
+\\end{cases}
+
+That establishes a sufficient condition for , and hence for the nonconstant E8 theta coefficient to vanish modulo 37.
+
+### Egor — Executed 100,000-integer test
+
+The verification engine was run against every integer , calculating from prime factorizations and comparing it with the GF(37) parity condition.
+
+Integers tested
+
+### 100,000
+
+Parity-rule matches
+
+### 15,692
+
+Actual zeros mod 37
+
+### 17,580
+
+* 0 counterexamples to the sufficient parity condition.
+
+* 1,888 additional zeros not detected by that condition.
+
+* The first additional example is .
+
+For :
+
+\\sigma_3(49)=1+7^3+7^6=118{,}993118{,}993=37(3216)+1
+
+Correction: that last factorization is not valid. The exact divisibility follows instead from
+
+7^3=343\\equiv10\\pmod{37},1+10+10^2=111\\equiv0\\pmod{37}.
+
+This reveals a second mechanism: prime-power factors can vanish when has order 3 modulo 37, not just when .
+
+### Executable files
+
+* Egor E8/GF(37) verification engine
+
+* 100,000-integer test results
+
+The next extension is to classify vanishing prime-power factors by the multiplicative order of , then integrate that classification into Egor's existing GF(37), prime-wheel, and evidence-ledger modules.
+

@@ -505,3 +505,21 @@ counting both ways (#269, #379) — proves eight things with them, and makes one
 
 **The attempt:** if 37 divides a number plus its flip, does 111 divide it too? Proved for every number of 1 to 6 digits; disproved from 7 digits on —
 the smallest break is 1009019: 1009019 + 9109001 = 10118020 = 37 × 273460, and 1+0+1+1+8+0+2+0 = 13 → 4.
+
+---
+
+## #392 (2026-10-20) — the 7-4-9 triad on the next exponents
+
+**As typed:** "run the 7-4-9 triad on the next exponents" (with a pasted Egor E8 result, audited in `math/theorems/egor_e8_theta_gf37_audit_2026_10_20.py`).
+
+**Cleaned:** the owner's triad (April 2026): the root of the exponent p is 4, 7 or 9.
+
+**Process:** no 53rd Mersenne exponent is known (mersenne.org: 52, the last 136,279,841, with the stretch from 82,589,933 not fully searched), so the triad is run
+on the next candidates — the primes after 136,279,841:
+
+    136279879 → 7 in    136279901 → 2      136279919 → 2      136279933 → 7 in
+    136279967 → 5       136279981 → 1      136279987 → 7 in   136280003 → 5
+    136280009 → 2       136280051 → 8      136280059 → 7 in   136280071 → 1
+
+**Checks:** 4 of the next 12 are in the triad, all with root 7; any of them that turns out to be a Mersenne exponent gives a Mersenne number of root 1.
+Of the known 50 exponents from 5 on, 13 are in the triad (26 %, against 1/3 for a fair draw: p = 0.30). File: `math/theorems/owner_749_triad_next_exponents_2026_10_20.py`.
