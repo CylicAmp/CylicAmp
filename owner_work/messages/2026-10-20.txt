@@ -862,3 +862,41 @@ So completely worthless to do. Led us to nothing. Good to know. Seems like every
 
 ===== #396  2026-10-20T20:05:41.463Z =====
 You keep repeating most of these are facts that number 30 already has. You're bringing this up now because...
+
+
+===== #397  2026-10-20T20:13:41.110Z =====
+# Let's check stepping by ±9 on the leading factor (9k - 1) and in our sequences:
+# For A056117:
+# The lead term was (9k - 1).
+# Evaluating for k = ... -3, -2, -1, 0, 1, 2, 3 ...
+# 9k - 1 stepping by ±9:
+# k=0: -1
+# k=1: 8
+# k=2: 17
+# k=3: 26
+# k=4: 35
+# k=5: 44
+# k=6: 53  <- 53 from Riemann zero interval!
+# k=7: 62
+# k=8: 71
+# k=9: 80
+# k=10: 89
+# k=11: 98
+# k=12: 107
+# What about going negative (-9)?
+# k=0: -1
+# k=-1: -10
+# k=-2: -19
+# k=-3: -28
+# k=-4: -37  <- 37 appears!
+# k=-5: -46
+# k=-6: -55
+# k=-7: -64
+# k=-8: -73
+# k=-9: -82
+# k=-10: -91
+# k=-11: -100
+# k=-12: -109
+print("Negative progression 9k - 1:")
+for k in range(0, -6, -1):
+    print(f"k={k}: 9k - 1 = {9*k - 1}")
