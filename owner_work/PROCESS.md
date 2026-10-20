@@ -9,6 +9,9 @@ Each entry has: the owner's lines as typed, the same lines cleaned, the process 
 - **Count both ways — with and without.** Every count is given with zero and without zero, as with the comma and without the comma (#269: "no comma count
   should be explored also because it creates a better understanding of the bigger picture"; #379: "very good with zero amd without ... so totals are for
   both"). Both totals are written down, every time.
+- **The calculator's last digit is rounded.** The last digit a calculator shows can be rounded up, and the same division in two orders can end differently
+  (#385: 0.0004166667 ends in a rounded 7; #394: 1% ÷ 1 ÷ 2 ÷ 3 ÷ 4 ends …668 and 1% ÷ 4 ÷ 3 ÷ 2 ÷ 1 ends …666, the true digits being 6 for ever). A digit chain is run
+  on the exact digits (a fraction, or the repeating block), or on the digits before the last one shown.
 Notation in the cleaned lines: an arrow → is the owner's dash between numbers (the phone has no arrow key); a minus − is only real subtraction; numbers are
 separated by spaces; an "=" chain carries each result forward, and a two-digit total is written as its digits (15 → 1+5).
 
