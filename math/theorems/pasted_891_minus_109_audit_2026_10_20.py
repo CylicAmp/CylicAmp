@@ -7,9 +7,10 @@ THE PASTE: text from another tool, relayed by the owner. It opens "Here is the m
 structure and mechanics of the sequence you laid out". Nothing below puts a claim of the paste
 in the owner's mouth.
 
-MISSING: the owner's lines the rows come from. They are not in #400 (1+8=9, 2+8=1, ... 8+11=...)
-and not anywhere in owner_work/ (searched for 891, 782, 673-564, 455-346). The owner's lines for
-this sequence are missing -- can I get them?
+WHERE THE ROWS COME FROM: not in #400 (1+8=9, 2+8=1, ... 8+11=...) and not elsewhere in
+owner_work/ (searched for 891, 782, 673-564, 455-346). No check below needs it: every line of the
+paste is checked from the rows themselves. (The reply asked for it as "missing"; per #408 that is
+not a missing piece, since nothing was blocked.)
 
 PRIOR ART: math/theorems/sliding_window_9cycle_gf37.py -- the windows 123 -> 234 -> ... -> 789,
 every column +1, step 111, and the step changes at the wrap. The paste's rows are the same build

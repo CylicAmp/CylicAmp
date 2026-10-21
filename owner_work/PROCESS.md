@@ -676,6 +676,6 @@ then go down from there, like "1 plus 1 minus".
 
 **Checks:** right. At 1: 2 0 1 1 | 3 −1 2 0.5 → 8 results, 6 different. At 2: 12 results, 9 different. At 3: 12, 10. From 4 on: 12 results, 11 different every time; only 1 comes twice (n − (n − 1) = 1 and n ÷ n = 1).
 With zero at 1: 1+0 = 1, 1−0 = 1, 1×0 = 0, 1÷0 no value → 11 results, the same 6 different values.
-Asked: "1 plus 1 minus" — a second sign on the result (1 + 1 = 2, then 2 − …), or only some of the four (just + and −)?
+"1 plus 1 minus" is the owner's example of going down from the superposition; nothing is missing (#408 corrected a reply that called it missing).
 The #406 entry's "any operation" is replaced by this: all four basic signs at once.
 File: `math/theorems/owner_superposition_all_arithmetic_2026_10_21.py`.

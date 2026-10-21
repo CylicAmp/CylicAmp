@@ -37,8 +37,9 @@ CHECKED:
     going down: from 4 signs, each next step gives 4 again -> 4, 16, 64, ... paths;
         up to 2 steps: 4 + 16 = 20; with zero (no step) 21.
 
-MISSING (asked): "1 plus 1 minus" -- does going down put a second sign on the result
-(1 + 1 = 2, then 2 - ...), or keep only some of the four (just + and -: 1 + 1 = 2, 1 - 1 = 0)?
+Nothing is missing. "1 plus 1 minus" is the owner's example of an option ("if you want to go
+down from there ... you can do that"); no check needs more than the message gives. A reply to
+#407 labelled it missing and asked how it continues; that was wrong (#408), and is removed here.
 
 RESIDUES mod 37: 1 IC, 2 DARK_A (#403).
 

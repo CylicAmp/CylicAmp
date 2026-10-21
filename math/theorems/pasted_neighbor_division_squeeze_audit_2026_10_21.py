@@ -7,7 +7,8 @@ THE PASTE: text from another tool, relayed by the owner. It speaks of "your star
 and "your 2-step system". Nothing below puts a claim of the paste in the owner's mouth.
 
 MISSING: the chart ("This chart graphs the entire trajectory ... up to 99") and the code ("Show
-Code") are not in the message -- can I get them? The owner's lines that set up the 2-step system
+Code") are not in the message. No check below needs them: every value the paste prints is re-run
+from (n - 1) ÷ n and n ÷ (n - 1) (per #408, not asked for). The owner's lines that set up the 2-step system
 were not in owner_work/ (searched "squeeze", "number behind", "neighborhood division"); they came
 in #403 (1, 2 and 3), in owner_three_neighbor_divisions_2026_10_21.py.
 
