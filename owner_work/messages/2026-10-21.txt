@@ -94,3 +94,7 @@ The checks are saved in `math/theorems/pasted_neighbor_division_squeeze_audit_20
 
 ===== #405  2026-10-21T02:30:55.417Z =====
 There's three operations. If you're starting at the first number, you can only do two of those operations. One, use any arithmetic or math on yourself, the number you are at. And then you can do that to the number to your right, which for one would be the number two, because one only has two things that it can add up with, which is the two right by it. Now two, it can do three different things, because it can do now one, it can do itself, and now it can do three. Do you understand? Now, the reason why I say this, one, two, and three different operations, is because we can do each one by itself without the other. And this is where we get into more interesting things too. When we start mixing, like complex math, or multiplication, or division,
+
+
+===== #406  2026-10-21T02:38:40.283Z =====
+No, I'm just pointing out the fact that you can use all mathematical knowledge, or whatever you may call it, to do to yourself, and to do to the person next to you, and to the person to the left of you, and to the right, whatever. Why are you making this fucking difficult? Do you not get what I'm getting at? Fuck, man!

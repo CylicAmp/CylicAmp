@@ -642,5 +642,20 @@ File: `math/theorems/owner_three_neighbor_divisions_2026_10_21.py`.
 Yourself is exactly halfway between behind and right for + − ×, and for ÷ after a flip.
 Adding: behind and right are the odd numbers around 2n, a twin pair when both are prime (2 → 3, 5; 3 → 5, 7; 69 → 137, 139); 15 from 2 to 99.
 Counts, both ways: line 1 to N has 3N − 2 operations (1 to 99: 295; 0 to 99: 298). Choosing which to use: 7 from 2 on (8 with zero), 3 at 1 (4 with zero). At 1 with zero, adding gives 1+0, 1+1, 1+2 = 1, 2, 3.
-Settles the two readings asked in #403. Missing: the rest after "or division,".
+Settles the two readings asked in #403. (The reply called the end cut off and asked for the rest: wrong — #406 says the message was complete.)
+File: `math/theorems/owner_three_operations_neighbours_2026_10_21.py`.
+
+## #406 (2026-10-21) — any operation, to yourself and to the ones next to you
+
+**As typed:** "No, I'm just pointing out the fact that you can use all mathematical knowledge, or whatever you may call it, to do to yourself, and to do to the person next to you, and to the person to the left of you, and to the right, whatever. Why are you making this fucking difficult? Do you not get what I'm getting at? Fuck, man!"
+
+**Cleaned:** any operation f, at any number n:
+
+    left       f(n, n − 1)
+    yourself   f(n, n)
+    right      f(n, n + 1)
+
+**Process:** the places are fixed (left, yourself, right; the first number has no left); the operation is free — all of mathematics.
+
+**Checks:** nothing to compute; this corrects the reply to #405, which asked for "the rest" of a message that was complete. The #405 file now says the signs are examples and drops the "missing" line.
 File: `math/theorems/owner_three_operations_neighbours_2026_10_21.py`.
