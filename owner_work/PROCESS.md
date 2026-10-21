@@ -600,3 +600,24 @@ so the cost of 1 is the "− 1" in 9k − 1. File: `math/theorems/pasted_energy_
 **Checks:** all right. Adding 8 takes 1 off every time (8 = 9 − 1: adding 9 is nothing, the 8 costs 1 — #399). Adding 9 keeps 8, 10 adds 1, 11 adds 2.
 Each group of three results adds to 3 (12, 12, 21). Asked: the steps "6 = 2" (after 7 + 8) and "7 = 9" (after 8 + 8).
 File: `math/theorems/owner_adding_8_2026_10_20.py`.
+
+## #403 (2026-10-21) — 1, 2 and 3: a number divided by its neighbours
+
+**As typed:** "Actually I have 1 2 and 3 / One being the number just divides itself by the number in front of it. Or simply as its own other operation, the opposite. The number divides itself by the number behind it. Then we combine those two and we get the two-step. But there's a third. And a third one works like this, and it's important. You do the one behind you, you do yourself, and then you do the one to your right."
+
+**Cleaned:**
+
+    1          n ÷ (n + 1)            2 ÷ 3 = 0.666...
+    2          n ÷ (n − 1)            2 ÷ 1 = 2
+    two-step   1 and 2 together
+    3          behind, yourself, right:   n − 1,  n,  n + 1
+
+**Process:** take a number; divide it by the one in front (1); divide it by the one behind (2); put the two together (the two-step); then take all three places, behind, yourself and right (3).
+
+**Checks:** 1 is always below 1 and 2 always above 1 — right.
+3, read the same way as 1 and 2 (you ÷ each): n ÷ (n − 1), n ÷ n = 1, n ÷ (n + 1). The outer two multiply to n × n ÷ (n × n − 1), and their average is the same number:
+3 → 3 ÷ 2 × 3 ÷ 4 = 9 ÷ 8 = 1.125 (the 1.125 of #368), 5 → 25 ÷ 24 = 1 + 1/24 (the /24 of #386), 10 → 100 ÷ 99 = 1.0101....
+It ends only at 3 (1.125) and 9 (1.0125), for every number (proved in the file). All of 3 multiplied from 2 to 99: 1.98.
+3 flipped (each ÷ you): 1 − 1/n, 1, 1 + 1/n — equal steps, 1 exactly in the middle; at 1 with zero: 0, 1, 2.
+Asked: which reading of "you do" (you ÷ each, each ÷ you, or one chain (n − 1) ÷ n ÷ (n + 1)), and whether the two-step is 1 and 2 by the same number or the pasted pairing of #402.
+File: `math/theorems/owner_three_neighbor_divisions_2026_10_21.py`.
