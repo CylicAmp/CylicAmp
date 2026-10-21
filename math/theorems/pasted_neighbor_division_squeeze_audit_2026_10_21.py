@@ -8,7 +8,12 @@ and "your 2-step system". Nothing below puts a claim of the paste in the owner's
 
 MISSING: the chart ("This chart graphs the entire trajectory ... up to 99") and the code ("Show
 Code") are not in the message -- can I get them? The owner's lines that set up the 2-step system
-are not in owner_work/ (searched "squeeze", "number behind", "neighborhood division").
+were not in owner_work/ (searched "squeeze", "number behind", "neighborhood division"); they came
+in #403 (1, 2 and 3), in owner_three_neighbor_divisions_2026_10_21.py.
+
+RE-CHECK (#404): the reply to #402 was pasted back with no other text. Every line of it re-run:
+all right. The lines the assertions above did not yet cover are asserted at the end: the pairs
+of 1 ÷ 98 to 79, the n = 2 and n = 5 values where neither step loops, 11 as Sophie Germain and safe.
 
 PRIOR ART: math/theorems/owner_reciprocals_one_percent_2026_10_20.py (#385, 1 ÷ 9 .. 1 ÷ 1) and
 the owner's doubling chain (owner_framework_flips_halves_moves_2026_10_20.py, part 3). Outside:
@@ -179,6 +184,14 @@ A051626 = [0, 0, 1, 0, 0, 1, 6, 0, 1, 0, 2, 1, 6, 6, 1, 0, 16, 1, 18, 0, 6, 2, 2
            15, 0, 2, 16, 6, 1, 3, 18, 6, 0, 5, 6, 21, 2, 1, 22, 46, 1, 42, 0, 16, 6, 13, 3, 2, 6, 18, 28, 58, 1]
 assert [len(decimal(n - 1, n)[2]) for n in range(2, 61)] == A051626[1:]
 assert [len(decimal(n, n - 1)[2]) for n in range(2, 62)] == A051626
+
+# --- RE-CHECK of the pasted-back reply (#404) ---
+pairs_98 = [(pre + loop)[i:i + 2] for i in range(0, 26, 2)]
+assert pairs_98 == ["01", "02", "04", "08", "16", "32", "65", "30", "61", "22", "44", "89", "79"]
+assert (step1(2), step2(2)) == (F(1, 2), 2) and (step1(5), step2(5)) == (F(4, 5), F(5, 4))
+assert decimal(4, 5) == (0, "8", "") and decimal(5, 4) == (1, "25", "")
+assert all(int(a) + int(b) == 9 for a, b in zip("979591", "020408"))
+assert 2 * 11 + 1 == 23 and 11 == 2 * 5 + 1 and all(n % d for n in (5, 11, 13, 23) for d in range(2, n))
 
 # --- RESIDUES mod 37 ---
 assert [x % 37 for x in (2, 11, 49, 50, 98, 99, 42)] == [2, 11, 12, 13, 24, 25, 5]
