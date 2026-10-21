@@ -77,6 +77,8 @@ Germain: 7).
 
 MISSING (asked): which reading of "you do": you ÷ each (as in 1 and 2), each ÷ you, or one chain;
 and whether the two-step is 1 and 2 by the same number or the paste's pairing.
+SETTLED in #405 (owner_three_operations_neighbours_2026_10_21.py): 3 is n with each place, one at
+a time (the chain reading drops); the two-step is 1 and 2 by the same number.
 
 FALSIFICATION: any assertion failing.
 """

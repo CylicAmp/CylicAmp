@@ -621,3 +621,26 @@ It ends only at 3 (1.125) and 9 (1.0125), for every number (proved in the file).
 3 flipped (each ÷ you): 1 − 1/n, 1, 1 + 1/n — equal steps, 1 exactly in the middle; at 1 with zero: 0, 1, 2.
 Asked: which reading of "you do" (you ÷ each, each ÷ you, or one chain (n − 1) ÷ n ÷ (n + 1)), and whether the two-step is 1 and 2 by the same number or the pasted pairing of #402.
 File: `math/theorems/owner_three_neighbor_divisions_2026_10_21.py`.
+
+## #405 (2026-10-21) — the three operations: behind, yourself, right
+
+**As typed:** "There's three operations. If you're starting at the first number, you can only do two of those operations. One, use any arithmetic or math on yourself, the number you are at. And then you can do that to the number to your right, which for one would be the number two, because one only has two things that it can add up with, which is the two right by it. Now two, it can do three different things, because it can do now one, it can do itself, and now it can do three. Do you understand? Now, the reason why I say this, one, two, and three different operations, is because we can do each one by itself without the other. And this is where we get into more interesting things too. When we start mixing, like complex math, or multiplication, or division,"
+
+**Cleaned:**
+
+    behind     n with n − 1
+    yourself   n with n
+    right      n with n + 1          (any sign: + − × ÷)
+    at 1:  yourself, right            → 2 operations
+    at 2:  behind 1, yourself 2, right 3 → 3 operations
+    each one by itself first; mixing after
+
+**Process:** stand on a number, look at the places you can reach, do each one alone. The first number has no one behind it, so it has two.
+
+**Checks:** right. From 2 on, for every number:
++ gives 2n − 1, 2n, 2n + 1 (three in a row); − gives 1, 0, −1 (the same for every number); × gives n×n − n, n×n, n×n + n; ÷ gives n ÷ (n − 1), 1, n ÷ (n + 1).
+Yourself is exactly halfway between behind and right for + − ×, and for ÷ after a flip.
+Adding: behind and right are the odd numbers around 2n, a twin pair when both are prime (2 → 3, 5; 3 → 5, 7; 69 → 137, 139); 15 from 2 to 99.
+Counts, both ways: line 1 to N has 3N − 2 operations (1 to 99: 295; 0 to 99: 298). Choosing which to use: 7 from 2 on (8 with zero), 3 at 1 (4 with zero). At 1 with zero, adding gives 1+0, 1+1, 1+2 = 1, 2, 3.
+Settles the two readings asked in #403. Missing: the rest after "or division,".
+File: `math/theorems/owner_three_operations_neighbours_2026_10_21.py`.
