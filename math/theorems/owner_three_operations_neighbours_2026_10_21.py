@@ -19,8 +19,8 @@ THE OWNER'S LINES, verbatim (#406, on the end of #405):
     may call it, to do to yourself, and to do to the person next to you, and to the person to the
     left of you, and to the right, whatever.
 
-    So #405 was complete: the point is that ANY operation can be used. The four signs below are
-    examples, not the limit. (A reply to #405 called the end of the message cut off and asked for
+    So #405 was complete. #407 adds: all four basic signs are done at once -- "that's the
+    superposition of it" (owner_superposition_all_arithmetic_2026_10_21.py). (A reply to #405 called the end of the message cut off and asked for
     the rest; that was wrong, and is removed here.)
 
 CLEANED (n is the number you are at; any operation at all -- + - x ÷ are examples):
