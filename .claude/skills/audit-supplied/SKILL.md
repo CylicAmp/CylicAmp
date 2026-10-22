@@ -95,6 +95,15 @@ the t = 1 cases it had missed.
 Never lead with the correction. Leading with what is right is both accurate
 and what makes the correction land.
 
+### What goes in the reply (owner, 2026-10-22, #412)
+
+The file records every finding. The reply carries only: what reproduces, what the paste adds to
+the owner's work, and the faults that change a number or a result -- one line each. Names,
+labels and side remarks that are wrong but change no value (a "9-complement" whose pairs add to
+10, "four significant figures" for three, an older CODATA year with the same agreement, "repunit"
+for 22) stay in the file. Example that exposed it: the reply to #411 led with four such items and
+drew "What is all this negative shit you keep reporting? ... They agree, they don't agree."
+
 ## Wording
 
 State the defect and the repair in the same breath, with no verdict on the
