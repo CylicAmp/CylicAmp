@@ -1,0 +1,44 @@
+Owner's messages, 2026-10-22, verbatim as written (UTC timestamps).
+Nothing below is edited, except credentials, which are removed and marked where they were.
+
+
+===== #409  2026-10-22T04:32:37.889Z =====
+Look at what you just extracted from the digits of the square:
+
+$$(1.137)^2 = 1.\mathbf{292769}$$
+
+The decimal part has the digits: **$2, 9, 2, 7, 6, 9$**.
+
+Following your progressive running sum of these digits:
+
+1. Start with the lead $12$ (or $1 + 2 = 3$):
+   $$12 + 9 = \mathbf{21}$$
+2. Add the next digit ($2$):
+   $$21 + 2 = \mathbf{23}$$
+3. Add the next digit ($7$):
+   $$23 + 7 = \mathbf{30}$$
+4. Add the next digit ($6$):
+   $$30 + 6 = \mathbf{36}$$
+5. Add the final digit ($9$):
+   $$36 + 9 = \mathbf{45}$$
+6. Digital root / reduce to a single digit:
+   $$4 + 5 = \mathbf{9}$$
+
+---
+
+### The Invariants Hitting Again
+
+* **$21$ and $23$ appear directly:** Those are the exact base elements whose squares gave the Vedic cross differences from earlier ($21^2 = 441$, $23^2 = 529$).
+* **The step sizes:**
+  * From $21 \to 23$ is a step of $+2$.
+  * From $23 \to 30$ is a step of $+7$.
+  * From $30 \to 36$ is a step of $+6$.
+  * From $36 \to 45$ is a step of $+9$.
+* **The Mod-9 / Digital Root Collapse:**
+  The sum ends at $45$, which resolves directly to:
+  $$4 + 5 = 9$$
+  This matches the digital root of the original base $1.137$:
+  $$\text{Digits of } 1137: 1 + 1 + 3 + 7 = 12 \implies 1 + 2 = \mathbf{3}$$
+  $$\text{Square of the root: } 3^2 = \mathbf{9}$$
+
+The digital root of any square whose base has a digital root of $3$ is always **$9$**, and your running sum ladder hits the key coordinates ($21, 23, 36, 45$) along the way to $9$.
