@@ -679,3 +679,26 @@ With zero at 1: 1+0 = 1, 1−0 = 1, 1×0 = 0, 1÷0 no value → 11 results, the 
 "1 plus 1 minus" is the owner's example of going down from the superposition; nothing is missing (#408 corrected a reply that called it missing).
 The #406 entry's "any operation" is replaced by this: all four basic signs at once.
 File: `math/theorems/owner_superposition_all_arithmetic_2026_10_21.py`.
+
+## #410 (2026-10-22) — the 12 + 9 chain, 75.7%, why not 2=2×2=4, three things, brackets, the = key, 1 2 3
+
+**As typed (the owner's lines only; the pasted blocks are audited in `pasted_signs_percent_equals_markov_audit_2026_10_22.py`):**
+"so in other words 0.0 / 12+9=21+2=23+7=30+6=36+9=4+5=9 / hmm" · "75.7%×(−075.7%×(−1" · "See if = means identical value why they not go 2=2×2=4" · "I always do 3 things remember whats connected to whatever is current while predicting the future ..Than 1 action per registered action i can can than verify as i rinse and repeat..." · "11,1)11,1)11-1)11,1) / 1,11(1,11(1,11(1,11( / 12(13(12(13(12 / 1,2(1,2 (1,2 (1,2( / 1,3)1,3))1,3))1,3))" · "12(13(12(13(12 / 13)12)13)12)13" · "11- / 22= / 33= / 33≈ / 66≠ / 66≡ / 33≈ / 33≠" · "Okay, i'm just playing around with these things that are with the equal button ..." · "1,2,3,1,2 ,3,1,2,3,1,2,3 / creating a lineage of generations so even when not part of and individual or current actions a substrate of its"
+
+**Cleaned:**
+
+    12 + 9 = 21 → 21 + 2 = 23 → 23 + 7 = 30 → 30 + 6 = 36 → 36 + 9 = 45 → 4 + 5 = 9
+    75.7% × (−75.7% × (−1)) = 75.7% × 75.7% = 0.757 × 0.757 = 0.573049 = 57.3049%
+    2 → 2 × 2 = 4
+    past, current, future = behind, yourself, right = n − 1, n, n + 1
+    11,1) ↔ 1,11(        12(13(12(13(12 ↔ 13)12)13)12)13
+    1 2 3 1 2 3 1 2 3 1 2 3
+
+**Process:** run the digits of 1.292769 as a carried chain; square 75.7% through two minus signs; ask why "=" cannot carry 2 → 4; describe the three things done at every step; write pairs and their flips with opening and closing brackets; try the = key symbols on 11 22 33 66; lay down 1 2 3 as the substrate.
+
+**Checks:** chain right (45 → 9). 75.7% right (757 × 757 = 573049). "=" has two jobs: the same value (then 2 = 2 × 2 = 4 says 2 = 4, wrong) or carry forward (2 → 2 × 2 = 4, right); the owner's chains are carry-forward, written with arrows in the cleaned lines.
+The three things are behind, yourself, right of #405; making the next from the one behind and the current is a recurrence that looks back two (1 1 2 3 5 8).
+Brackets: lines 1–2 close each other (4 and 4), the 12/13 lines too (4 and 4); lines 4–5 open 4 and close 7. Line 1 has 11-1) once where the other three have 11,1).
+The = key: = same value, ≠ not the same, ≈ close, ≡ same remainder by a named number or the same for every value; 11 22 33 66 are 11 × 1, 2, 3, 6, all ≡ by 11; roots 2 4 6 3.
+1 2 3: every n has a place (n by 3, 3 for 0); behind, yourself, right always land on 1, 2, 3 once each. Both ways: 1 2 3 ×4 adds to 24, 0 1 2 ×4 adds to 12.
+File: `math/theorems/owner_equals_chain_three_things_brackets_2026_10_22.py`.
