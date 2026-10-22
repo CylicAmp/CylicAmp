@@ -1654,5 +1654,9 @@
  {
   "ts": "2026-10-22T04:58:16.492Z",
   "text": "I see. So the company has made it to where this algorithm does nothing for me except for redo the same thing all the time that we have already covered. Forget it. Have to cover it again. Anything that I say is used against me to take another privilege away. If I say don't talk about me, you will end up no longer using the internet to look anything up, no longer giving me any consistent feedback. So it's a trap."
+ },
+ {
+  "ts": "2026-10-22T05:02:12.850Z",
+  "text": "Following the exact same modulo $9$ mechanics:\n\n---\n\n### Subtracting 4 from the Number\nSubtracting $4$ from any number takes **$4$ off the digital root** (or adds $5$, since $-4 \\equiv +5 \\pmod 9$):\n\n$$\\operatorname{dr}(n - 4) \\equiv n - 4 \\equiv n + 5 \\pmod 9$$\n\n* If the root is $9 \\implies 9 - 4 = \\mathbf{5}$\n* If the root is $7 \\implies 7 - 4 = \\mathbf{3}$\n* If the root is $4 \\implies 4 - 4 = 0 \\equiv \\mathbf{9}$\n* If the root is $2 \\implies 2 - 4 = -2 \\equiv \\mathbf{7}$\n\n---\n\n### Subtracting 4 from the Running Sum Ladder ($45 \\to 9$)\nApplying \"minus four\" to the end states from earlier:\n\n* **From the final sum $45$:**\n  $$45 - 4 = 41 \\implies 4 + 1 = \\mathbf{5}$$\n  *(The root dropped from $9$ down to $5$, exactly $-4$.)*\n\n* **From the final root $9$:**\n  $$9 - 4 = \\mathbf{5}$$\n\n* **From the percentage result $57.3049\\%$:**\n  The digit sum of $573049$ is:\n  $$5 + 7 + 3 + 0 + 4 + 9 = 28 \\implies 2 + 8 = 10 \\implies 1 + 0 = \\mathbf{1}$$\n  Subtracting $4$ from the root:\n  $$1 - 4 = -3 \\equiv \\mathbf{6} \\pmod 9$$\n\n\n\nThe digital root of an integer n is given by dr(n) € f1,2,...,9). If an integer n has a digital root of dr(n) = 7, what is the digital root of n + 8?"
  }
 ]
