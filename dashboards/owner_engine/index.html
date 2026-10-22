@@ -373,8 +373,8 @@ th { position: sticky; top: 0; background: var(--sheet); font-family: var(--font
   }
   function runWalk() {
     const a = Number($("from").value), b = Number($("to").value);
-    if (!Number.isInteger(a) || !Number.isInteger(b) || a < 1 || b < a || b > 1000000 || b - a > 200000) {
-      $("walkerr").textContent = "Use whole numbers with From ≤ To, To at most 1,000,000, and at most 200,000 numbers in one walk.";
+    if (!Number.isInteger(a) || !Number.isInteger(b) || a < 1 || b < a || b > 1000000) {
+      $("walkerr").textContent = "Use whole numbers from 1 to 1,000,000, with From at most To.";
       return;
     }
     $("walkerr").textContent = "";

@@ -259,13 +259,24 @@ def text(n):
 
 
 # ---------------------------------------------------------------- the walk
+def sieve(limit):
+    """prime[k] for k = 0 .. limit"""
+    prime = bytearray([1]) * (limit + 1)
+    prime[0:2] = b"\x00\x00"[: min(2, limit + 1)]
+    for i in range(2, int(limit ** 0.5) + 1):
+        if prime[i]:
+            prime[i * i::i] = bytearray(len(range(i * i, limit + 1, i)))
+    return prime
+
+
 def walk(a, b):
     """predict (place 3, or n = 2) -> act (2n - 1, 2n + 1) -> verify (both prime) -> repeat"""
     rows, predicted, verified, missed = [], 0, 0, []
+    prime = sieve(2 * b + 1)
     for n in range(max(a, 1), b + 1):
         guess = n == 2 or (n > 2 and place(n) == 3)
         lo, hi = 2 * n - 1, 2 * n + 1
-        hit = is_prime(lo) and is_prime(hi)
+        hit = bool(prime[lo] and prime[hi])
         predicted += guess
         verified += hit
         if hit and not guess:

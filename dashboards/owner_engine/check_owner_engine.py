@@ -10,6 +10,12 @@ Run: python3 dashboards/owner_engine/check_owner_engine.py
    OEIS A002822 ("Numbers m such that 6m-1, 6m+1 are twin primes", first 40 terms fetched 2026-10-22).
 3. The page computes the same profile as Python for a list of numbers, the same walk, and shows PASS on every rule
    and FAIL on the control.
+4. The walk to 1,000,000 (owner_work #418, "run the walk up to a million"): 1,000,000 numbers, 333,334 predicted,
+   14,871 twin pairs (2n + 1 up to 2,000,001), 0 missed; the 3-step ends at 3 and 9 only. Without the pair at n = 2
+   (3, 5): 14,870, all at place 3. The walks to 5000, 50000 and 500000 give 205, 1224 and 8169 -- the twin pairs below
+   10^4, 10^5 and 10^6 in OEIS A007508 (fetched 2026-10-22).
+   Correction: the reply to #416 said the walk from 1 to 1000 finds 35 pairs. It finds 61; 35 is the walk to 500
+   (the pairs below 1000). That number was written without running it.
 
 FALSIFICATION: any assertion failing.
 """
@@ -35,6 +41,15 @@ assert w["missed"] == [] and w["pairs"][0] == (2, 3, 5)
 hits = [n for n, lo, hi in w["pairs"] if n > 2]
 assert [n // 3 for n in hits] == A002822 and all(n % 3 == 0 for n in hits)
 assert w["three_ends"] == [3, 9]
+
+# 4. the walk to a million, and OEIS A007508
+big = E.walk(1, 1000000)
+assert (big["numbers"], big["predicted"], big["verified"], big["missed"]) == (1000000, 333334, 14871, [])
+assert big["three_ends"] == [3, 9] and big["pairs"][-1] == (999945, 1999889, 1999891)
+assert sum(1 for n, lo, hi in big["pairs"] if n == 2) == 1 and sum(1 for n, lo, hi in big["pairs"] if n % 3 == 0) == 14870
+A007508 = [2, 8, 35, 205, 1224, 8169]
+assert [E.walk(1, 10 ** k // 2)["verified"] for k in range(1, 7)] == A007508
+assert E.walk(1, 1000)["verified"] == 61 and E.walk(1, 500)["verified"] == 35
 
 # the profile of 137, spot values
 p = E.profile(137)
@@ -66,13 +81,16 @@ if sync_playwright is not None:
             jw = json.loads(page.evaluate("() => JSON.stringify(window.OwnerEngine.walk(1, 5000))"))
             pw_ = E.walk(1, 5000)
             assert [tuple(x) for x in jw["pairs"]] == pw_["pairs"] and jw["missed"] == [] and jw["predicted"] == pw_["predicted"]
+            jbig = json.loads(page.evaluate("() => { const w = window.OwnerEngine.walk(1, 1000000); "
+                                            "return JSON.stringify([w.numbers, w.predicted, w.verified, w.missed.length, w.three_ends]); }"))
+            assert jbig == [1000000, 333334, 14871, 0, [3, 9]], jbig
             checks = page.evaluate("() => window.OwnerEngineChecks")
             assert [c["ok"] for c in checks[:-1]] == [True] * 12 and checks[-1]["message"] == "control" and checks[-1]["ok"] is False
             badges = page.locator(".badge").all_inner_texts()
             assert badges == ["PASS"] * 12 + ["FAIL"], badges
             assert page.locator("#ledger .row").count() == 11
             browser.close()
-        print("page: same answers as Python for %d numbers and the walk to 5000; 12 PASS, control FAIL" % len(NUMBERS))
+        print("page: same answers as Python for %d numbers, the walk to 5000 and the walk to 1,000,000; 12 PASS, control FAIL" % len(NUMBERS))
     except Exception as e:  # a missing browser binary is not a failure of the mathematics
         if "Executable doesn't exist" in str(e) or "BrowserType.launch" in str(e):
             print("browser part skipped:", str(e).splitlines()[0])
