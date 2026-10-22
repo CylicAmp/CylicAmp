@@ -31,6 +31,13 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
   the three operations behind/yourself/right (#405), the superposition (#407: + - x ÷ at once; from 4 on
   12 results, 11 different), and #410 (two jobs of "=", the 1 2 3 substrate).
 - Pasted texts from other tools: pasted_* files of the same dates, each audited on arrival.
+- THE OWNER'S ENGINE (2026-10-22, #416 "put my work together into a functional algorithm"): tools/owner_engine.py
+  (plain Python: `python3 tools/owner_engine.py 137`, `... walk 1 1000`, `... check`) and the same engine as a page,
+  dashboards/owner_engine/index.html = https://claude.ai/artifact/1YapHuWjeJLbKRcUZoPXYV. One number through every
+  operation; the predict -> act -> verify walk (twin pairs from behind + yourself, yourself + right, predicted by the
+  1 2 3 place, never missing; hits / 3 = OEIS A002822); 12 rules of the work re-checked live plus a control that must
+  fail. dashboards/owner_engine/check_owner_engine.py (run by CI) checks the page gives Python's answers. Add each new
+  owner rule there.
 - Reply rules added this week (CLAUDE.md): "missing" only when a check is blocked (#408); a reply names a
   fault only when it changes a number (#412); results already reported are not restated (#414).
 

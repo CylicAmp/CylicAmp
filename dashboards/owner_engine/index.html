@@ -1,0 +1,436 @@
+<title>Behind, Yourself, Right</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a working notebook -- one input line, then the owner's operations as a ledger of rows, then the walk, the checks, and the map of the work. */
+:root {
+  --paper: #f2f5f8;
+  --sheet: #ffffff;
+  --ink: #1a2330;
+  --muted: #5a6779;
+  --rule: #dbe2ea;
+  --accent: #2250a0;
+  --accent-soft: #e4ecf8;
+  --pass: #1f7547;
+  --pass-soft: #e2f3e9;
+  --fail: #b03a28;
+  --fail-soft: #f8e6e2;
+  --control: #7d6410;
+  --control-soft: #f6efd6;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-num: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e131a; --sheet: #151c26; --ink: #e2e8ef; --muted: #93a0b2; --rule: #263142;
+    --accent: #8db3ff; --accent-soft: #1b2a44; --pass: #62cc93; --pass-soft: #14301f;
+    --fail: #f08c7a; --fail-soft: #3a1c17; --control: #e4c45e; --control-soft: #33290d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e131a; --sheet: #151c26; --ink: #e2e8ef; --muted: #93a0b2; --rule: #263142;
+  --accent: #8db3ff; --accent-soft: #1b2a44; --pass: #62cc93; --pass-soft: #14301f;
+  --fail: #f08c7a; --fail-soft: #3a1c17; --control: #e4c45e; --control-soft: #33290d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+.wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 28px; }
+header {
+  padding-block: 28px 20px;
+  background-image: linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 22px 22px; background-position: -1px -1px;
+  border-bottom: 2px solid var(--accent);
+}
+h1 { font-size: clamp(28px, 6vw, 42px); line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h1 span { background: var(--paper); padding: 0 6px; margin-left: -6px; }
+.sub { margin: 10px 0 0 -8px; padding: 6px 8px; color: var(--muted); max-width: 62ch; background: var(--paper); border-radius: 4px; }
+.sub b { color: var(--ink); background: var(--paper); }
+h2 { font-size: 22px; margin: 0 0 4px; text-wrap: balance; }
+.lede { color: var(--muted); margin: 0 0 14px; max-width: 68ch; }
+section { min-width: 0; }
+.panel { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 18px; min-width: 0; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+label.small { font-size: 13px; color: var(--muted); letter-spacing: 0.03em; text-transform: uppercase; }
+input[type="number"] {
+  font-family: var(--font-num); font-size: 22px; width: 11ch; max-width: 100%; padding: 8px 10px;
+  border: 2px solid var(--rule); border-radius: 6px; background: var(--sheet); color: var(--ink);
+}
+input[type="number"].small { font-size: 17px; width: 10ch; }
+input:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+button {
+  font: inherit; font-weight: 700; padding: 10px 16px; border-radius: 6px; border: 2px solid var(--accent);
+  background: var(--accent); color: var(--sheet); cursor: pointer;
+}
+button.chip { font-family: var(--font-num); font-weight: 500; padding: 5px 10px; background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+button.chip:hover { border-color: var(--accent); }
+.err { color: var(--fail); min-height: 1.5em; margin: 6px 0 0; }
+.ledger { display: grid; margin-top: 14px; }
+.row { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 4px 16px; padding: 10px 4px; border-top: 1px solid var(--rule); }
+.row:first-child { border-top: none; }
+.row .k { font-weight: 700; }
+.row .k small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; letter-spacing: 0.02em; }
+.row .v { font-family: var(--font-num); font-size: 14.5px; min-width: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.row .v div + div { margin-top: 2px; }
+.dim { color: var(--muted); }
+.yes { color: var(--pass); font-weight: 500; }
+.no { color: var(--muted); }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.pill { font-family: var(--font-num); font-size: 14px; padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--ink); }
+.pill.good { background: var(--pass-soft); color: var(--pass); font-weight: 500; }
+.tablebox { overflow-x: auto; max-height: 380px; overflow-y: auto; border: 1px solid var(--rule); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; font-family: var(--font-num); font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 6px 12px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th { position: sticky; top: 0; background: var(--sheet); font-family: var(--font-body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.checks { display: grid; gap: 8px; }
+.check { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 12px; align-items: start; padding: 10px 12px; border-radius: 6px; background: var(--sheet); border: 1px solid var(--rule); }
+.check.control { background: var(--control-soft); border-color: var(--control); }
+.badge { font-family: var(--font-num); font-weight: 500; font-size: 13px; text-align: center; padding: 3px 0; border-radius: 4px; }
+.badge.pass { background: var(--pass-soft); color: var(--pass); }
+.badge.fail { background: var(--fail-soft); color: var(--fail); }
+.badge.wait { background: var(--accent-soft); color: var(--muted); }
+.check .what { min-width: 0; }
+.check .src { font-size: 12.5px; color: var(--muted); overflow-wrap: anywhere; }
+.work { display: grid; gap: 0; }
+.work div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 9px 0; border-top: 1px solid var(--rule); }
+.work div:first-child { border-top: none; }
+.work .msg { font-family: var(--font-num); color: var(--accent); font-size: 14px; }
+.work .file { display: block; font-family: var(--font-num); font-size: 12.5px; color: var(--muted); overflow-wrap: anywhere; }
+@media (max-width: 620px) {
+  .row { grid-template-columns: minmax(0, 1fr); }
+  .work div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+@media (prefers-reduced-motion: no-preference) { button { transition: filter .15s; } button:hover { filter: brightness(1.08); } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1><span>Behind, Yourself, Right</span></h1>
+    <p class="sub"><b>Michael Warren Song's operations, put together as one engine.</b> Type a whole number. Every operation runs on it, in the order of the work: the chain, the flip, the place in 1 2 3, the neighbours, 1 2 3 division, halving, the shifts, and the frameworks.</p>
+  </header>
+
+  <section aria-labelledby="h-run">
+    <h2 id="h-run">One number, every operation</h2>
+    <div class="panel">
+      <form id="runform" class="controls">
+        <label class="small" for="num">Number</label>
+        <input id="num" type="number" min="1" max="10000000" step="1" value="137" inputmode="numeric">
+        <button type="submit" id="runbtn">Run</button>
+        <span class="controls" id="chips" aria-label="Examples"></span>
+      </form>
+      <p class="err" id="err" role="status"></p>
+      <div class="ledger" id="ledger"></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-walk">
+    <h2 id="h-walk">The walk: predict, act, verify, repeat</h2>
+    <p class="lede">At each number: <b>predict</b> from its place in 1 2 3 whether a twin pair can come; <b>act</b> with the neighbours, behind + yourself and yourself + right; <b>verify</b> that both are prime. From 3 on, a twin pair only comes at place 3, so the prediction never misses and skips two numbers in three. (Known outside: OEIS A002822 lists the m with 6m − 1, 6m + 1 twin primes; the hits here are 3 × m. Here the pair is built from the neighbours and predicted by the place.)</p>
+    <div class="panel">
+      <form id="walkform" class="controls">
+        <label class="small" for="from">From</label>
+        <input class="small" id="from" type="number" min="1" max="1000000" step="1" value="1">
+        <label class="small" for="to">To</label>
+        <input class="small" id="to" type="number" min="1" max="1000000" step="1" value="1000">
+        <button type="submit">Walk</button>
+      </form>
+      <p class="err" id="walkerr" role="status"></p>
+      <div class="pills" id="walksum"></div>
+      <div class="tablebox"><table><thead><tr><th>n</th><th>place</th><th>behind + yourself</th><th>yourself + right</th></tr></thead><tbody id="walkrows"></tbody></table></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-checks">
+    <h2 id="h-checks">Your rules, checked again in this browser</h2>
+    <p class="lede">Each rule from the work is re-run here when the page opens. The yellow row is a false rule on purpose: it has to show FAIL, which shows the checker can say no.</p>
+    <div class="checks" id="checks"></div>
+  </section>
+
+  <section aria-labelledby="h-work">
+    <h2 id="h-work">Where each part of the work is</h2>
+    <p class="lede">The owner's message numbers (owner_work/) and the file that checks each result, on the GitHub branch claude/add-torus-animation-6Ey5Z. The full steps of every message are in owner_work/PROCESS.md.</p>
+    <div class="panel work" id="work"></div>
+  </section>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  const ORBITS = {
+    IC: [1, 10, 26], NEG_H: [11, 27, 36], SA_ST_A: [9, 12, 16], C3: [3, 4, 30], D7: [7, 33, 34], SEED: [18, 24, 32],
+    TESLA: [6, 8, 23], CAS_EXT: [5, 13, 19], NQR17: [17, 22, 35], DARK_A: [2, 15, 20], SA_ST_B: [21, 25, 28], C9: [14, 29, 31]
+  };
+  const ORBIT_OF = {};
+  for (const [name, rs] of Object.entries(ORBITS)) for (const r of rs) ORBIT_OF[r] = name;
+  const LOOP_CAP = 2000, MAX_N = 10000000;
+
+  const digitsOf = x => String(x).replace(/[^0-9]/g, "").split("").map(Number);
+  const sum = a => a.reduce((s, v) => s + v, 0);
+  function chain(n) { const out = [n]; while (out[out.length - 1] > 9) out.push(sum(digitsOf(out[out.length - 1]))); return out; }
+  const root = n => n > 0 ? chain(n)[chain(n).length - 1] : 0;
+  const flip = n => Number(String(n).split("").reverse().join(""));
+  function flipFast(n) { let r = 0; while (n > 0) { r = r * 10 + n % 10; n = Math.floor(n / 10); } return r; }
+  function isPrime(n) {
+    if (n < 2) return false;
+    if (n % 2 === 0) return n === 2;
+    for (let d = 3; d * d <= n; d += 2) if (n % d === 0) return false;
+    return true;
+  }
+  function factors(n) {
+    const out = {};
+    for (let d = 2; d * d <= n; d++) while (n % d === 0) { out[d] = (out[d] || 0) + 1; n /= d; }
+    if (n > 1) out[n] = (out[n] || 0) + 1;
+    const res = {};
+    for (const k of Object.keys(out).map(Number).sort((a, b) => a - b)) res[String(k)] = out[k];
+    return res;
+  }
+  function decimal(p, q, cap = LOOP_CAP) {
+    const whole = Math.floor(p / q);
+    let r = p % q;
+    const seen = new Map(), ds = [];
+    while (r && !seen.has(r) && ds.length < cap) { seen.set(r, ds.length); r *= 10; ds.push(Math.floor(r / q)); r = r % q; }
+    if (!r) return { whole, pre: ds.join(""), loop: "", complete: true };
+    if (seen.has(r)) { const i = seen.get(r); return { whole, pre: ds.slice(0, i).join(""), loop: ds.slice(i).join(""), complete: true }; }
+    return { whole, pre: ds.join(""), loop: "", complete: false };
+  }
+  function showDecimal(dec, width = 40) {
+    let s = String(dec.whole);
+    if (!dec.complete) return s + "." + dec.pre.slice(0, width) + "… (loop longer than " + LOOP_CAP + " digits)";
+    if (dec.pre || dec.loop) s += "." + dec.pre;
+    if (dec.loop) {
+      const lp = dec.loop;
+      s += "(" + (lp.length <= width ? lp : lp.slice(0, width) + "…") + ")";
+      if (lp.length > 1) s += "  loop of " + lp.length;
+    }
+    return s;
+  }
+  const place = n => (n % 3) || 3;
+  function ends(q) { for (const p of [2, 5]) while (q % p === 0) q /= p; return q === 1; }
+
+  function profile(n) {
+    if (!Number.isInteger(n) || n < 1 || n > MAX_N) throw new Error("Type a whole number from 1 to 10,000,000.");
+    const s = String(n), rv = flip(n), p = { n, chain: chain(n), root: root(n) };
+    const total = n + rv;
+    p.flip = { flip: rv, sum: total, diff: Math.abs(n - rv), diff_by_9: Math.abs(n - rv) / 9, sum_by_37: total % 37 === 0, sum_by_111: total % 111 === 0 };
+    let t = null;
+    if (s.length === 3) { const [a, b, c] = s.split("").map(Number); t = { digits: 3, rule: a + c === 2 * b }; }
+    else if (s.length === 4) { const [a, b, c, d] = s.split("").map(Number); t = { digits: 4, rule: 2 * (a + d) === b + c }; }
+    p.test37 = t;
+    const m = BigInt(s + s.split("").reverse().join(""));
+    p.mirror = { mirror: m.toString(), by_11: m % 11n === 0n, by_37: m % 37n === 0n };
+    p.place = { behind: n > 1 ? place(n - 1) : null, yourself: place(n), right: place(n + 1) };
+    const rows = {}, values = [];
+    for (const [name, other] of [["behind", n - 1], ["yourself", n], ["right", n + 1]]) {
+      if (other < 1) continue;
+      rows[name] = { "+": n + other, "-": n - other, "x": n * other, "÷": decimal(n, other) };
+    }
+    for (const r of Object.values(rows)) {
+      values.push("i:" + r["+"], "i:" + r["-"], "i:" + r["x"]);
+      const dv = r["÷"];
+      values.push(!dv.pre && !dv.loop ? "i:" + dv.whole : "d:" + dv.whole + ":" + dv.pre + ":" + dv.loop);
+    }
+    p.neighbours = { rows, results: values.length, different: new Set(values).size };
+    p.one_two_three = {
+      one: decimal(n, n + 1),
+      two: n > 1 ? decimal(n, n - 1) : null,
+      three: n > 1 ? decimal(n * n, n * n - 1) : null,
+      three_ends: n > 1 ? ends(n * n - 1) : null
+    };
+    const halves = [0, 1, 2, 3].map(k => decimal(n, 2 ** k));
+    p.halving = { values: halves, roots: halves.map(h => root(Number(String(h.whole) + h.pre))) };
+    p.doubling = { values: [0, 1, 2, 3, 4, 5].map(k => n * 2 ** k), roots: [0, 1, 2, 3, 4, 5].map(k => root(n * 2 ** k)) };
+    p.shifts = { plus_8: root(n + 8), plus_9: root(n + 9), minus_4: n > 4 ? root(n - 4) : null };
+    let run = 0; p.ladder = digitsOf(n).map(d => (run += d));
+    const pr = isPrime(n), d1 = decimal(1, n);
+    p.frameworks = {
+      by_37: n % 37, orbit: ORBIT_OF[n % 37] || "SEAM", prime: pr, factors: factors(n),
+      twins: [n - 2, n + 2].filter(x => pr && isPrime(x)),
+      sophie_germain: pr && isPrime(2 * n + 1), safe: pr && n > 2 && isPrime(Math.floor((n - 1) / 2)),
+      by_137: n % 137, loop_of_1_over_n: d1.complete ? d1.loop.length : null
+    };
+    return p;
+  }
+
+  function sieve(limit) {
+    const c = new Uint8Array(limit + 1); c[0] = 1; if (limit >= 1) c[1] = 1;
+    for (let i = 2; i * i <= limit; i++) if (!c[i]) for (let j = i * i; j <= limit; j += i) c[j] = 1;
+    return c;
+  }
+  function walk(a, b) {
+    const lo0 = Math.max(a, 1), comp = sieve(2 * b + 1), pairs = [], missed = [];
+    let predicted = 0, verified = 0;
+    for (let n = lo0; n <= b; n++) {
+      const guess = n === 2 || (n > 2 && place(n) === 3);
+      const lo = 2 * n - 1, hi = 2 * n + 1, hit = !comp[lo] && !comp[hi];
+      predicted += guess ? 1 : 0; verified += hit ? 1 : 0;
+      if (hit && !guess) missed.push(n);
+      if (hit) pairs.push([n, lo, hi]);
+    }
+    const threeEnds = [];
+    for (let n = Math.max(a, 2); n <= b; n++) if (ends(n * n - 1)) threeEnds.push(n);
+    return { from: a, to: b, numbers: b - lo0 + 1, predicted, verified, missed, pairs, three_ends: threeEnds };
+  }
+
+  function rules() {
+    const allN = (f, lo, hi) => { for (let n = lo; n < hi; n++) if (!f(n)) return false; return true; };
+    const brings111 = n => { const t = n + flipFast(n); return t % 37 !== 0 || t % 111 === 0; };
+    const threeDigit37 = n => { const [a, b, c] = String(n).split("").map(Number); const t = n + flip(n);
+      return (t % 37 === 0) === (a + c === 2 * b) && (a + c !== 2 * b || t === 222 * b); };
+    const l137 = decimal(1, 137);
+    return [
+      ["#400", "adding 8 takes 1 off the root", "owner_adding_8_2026_10_20.py",
+        () => allN(n => root(n + 8) === ((root(n) - 2 + 9) % 9) + 1, 1, 20000)],
+      ["#415", "taking 4 off adds 5 to the root", "pasted_minus_4_and_dr_question_audit_2026_10_22.py",
+        () => allN(n => root(n - 4) === ((root(n) + 4) % 9) + 1, 5, 20000)],
+      ["#368, #382", "halving multiplies the root by 5 (1 → 5 → 7 → 8 → 4 → 2)", "owner_framework_flips_halves_moves_2026_10_20.py",
+        () => { for (let n = 1; n < 5000; n++) for (let k = 1; k < 5; k++) { const h = decimal(n, 2 ** k);
+          if (root(Number(String(h.whole) + h.pre)) !== root(5 ** k * n)) return false; }
+          return [0, 1, 2, 3, 4, 5].map(k => root(5 ** k)).join(" ") === "1 5 7 8 4 2"; }],
+      ["#358", "a flip changes a number by a multiple of 9", "owner_framework_flips_halves_moves_2026_10_20.py",
+        () => allN(n => (n - flip(n)) % 9 === 0, 1, 20000)],
+      ["#374", "37 divides abc + cba exactly when a + c = 2b, and then the sum is 222 × b", "owner_framework_flips_halves_moves_2026_10_20.py",
+        () => allN(threeDigit37, 100, 1000)],
+      ["#390", "37 brings 111: right for 1 to 6 digits, first wrong at 1009019", "owner_framework_flips_halves_moves_2026_10_20.py",
+        () => allN(brings111, 1, 1009019) && !brings111(1009019)],
+      ["#403", "the 3-step n × n ÷ (n × n − 1) ends only at 3 (1.125) and 9 (1.0125)", "owner_three_neighbor_divisions_2026_10_21.py",
+        () => { const e = []; for (let n = 2; n < 20000; n++) if (ends(n * n - 1)) e.push(n); return e.join(",") === "3,9"; }],
+      ["#405", "yourself is halfway between behind and right for + − ×", "owner_three_operations_neighbours_2026_10_21.py",
+        () => allN(n => (2 * n - 1) + (2 * n + 1) === 2 * (2 * n) && n * (n - 1) + n * (n + 1) === 2 * n * n, 2, 20000)],
+      ["#407", "the superposition: from 4 on, 12 results, 11 different", "owner_superposition_all_arithmetic_2026_10_21.py",
+        () => allN(n => profile(n).neighbours.different === 11, 4, 1500)],
+      ["#410", "behind, yourself, right land on 1, 2, 3 once each", "owner_equals_chain_three_things_brackets_2026_10_22.py",
+        () => allN(n => [place(n - 1), place(n), place(n + 1)].sort().join("") === "123", 1, 20000)],
+      ["#405, #410", "a twin pair 2n − 1, 2n + 1 comes only at place 3 (from n = 3 on)", "tools/owner_engine.py (the walk)",
+        () => { const w = walk(1, 20000); return w.missed.length === 0 && w.verified > 0 && w.predicted <= Math.floor(w.numbers / 3) + 1; }],
+      ["#343", "1 ÷ 137 = 0.(00729927); 0072 + 9927 = 9999", "repetend_998001_audit_2026_10_19.py",
+        () => l137.loop === "00729927" && Number(l137.loop.slice(0, 4)) + Number(l137.loop.slice(4)) === 9999]
+    ];
+  }
+  const CONTROL = ["control", "adding 8 adds 1 to the root (false on purpose: it must show FAIL)", "",
+    () => { for (let n = 1; n < 2000; n++) if (root(n + 8) !== (root(n) % 9) + 1) return false; return true; }];
+
+  // ------------------------------------------------------------------ the page
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const yn = b => b ? '<span class="yes">yes</span>' : '<span class="no">no</span>';
+  function row(k, tag, lines) {
+    return '<div class="row"><div class="k">' + k + (tag ? "<small>" + tag + "</small>" : "") + '</div><div class="v">' +
+      lines.map(l => "<div>" + l + "</div>").join("") + "</div></div>";
+  }
+  function render(n) {
+    const p = profile(n), L = [], ch = p.chain;
+    const steps = [];
+    for (let i = 0; i + 1 < ch.length; i++) steps.push(digitsOf(ch[i]).join("+") + " = " + ch[i + 1]);
+    L.push(row("Chain", "#369", [n + (steps.length ? " → " + steps.join(" → ") : "  (one digit)")]));
+    L.push(row("Ladder", "#410", [p.ladder.join(" → ")]));
+    const f = p.flip, fl = [n + " ↔ " + f.flip + "   " + n + " + " + f.flip + " = " + f.sum,
+      "difference " + f.diff + " = 9 × " + f.diff_by_9, "sum by 37: " + yn(f.sum_by_37) + "   by 111: " + yn(f.sum_by_111)];
+    if (p.test37) fl.push("37 test (" + (p.test37.digits === 3 ? "a + c = 2b" : "2(a + d) = b + c") + "): " + yn(p.test37.rule));
+    L.push(row("Flip", "#358, #374", fl));
+    L.push(row("Mirror", "#374", [p.mirror.mirror + "   by 11: " + yn(p.mirror.by_11) + "   by 37: " + yn(p.mirror.by_37)]));
+    L.push(row("Place in 1 2 3", "#410", ["behind " + (p.place.behind ?? "–") + "   yourself " + p.place.yourself + "   right " + p.place.right]));
+    const nb = [];
+    for (const [name, r] of Object.entries(p.neighbours.rows)) {
+      const o = { behind: n - 1, yourself: n, right: n + 1 }[name];
+      nb.push('<span class="dim">' + name + "</span>  " + n + "+" + o + " = " + r["+"] + "   " + n + "−" + o + " = " + String(r["-"]).replace("-", "−") +
+        "   " + n + "×" + o + " = " + r["x"] + "   " + n + "÷" + o + " = " + esc(showDecimal(r["÷"], 24)));
+    }
+    nb.push("superposition: " + p.neighbours.results + " results, " + p.neighbours.different + " different");
+    L.push(row("Neighbours", "#405, #407", nb));
+    const o = p.one_two_three, ot = ["1   " + n + " ÷ " + (n + 1) + " = " + esc(showDecimal(o.one))];
+    if (o.two) {
+      ot.push("2   " + n + " ÷ " + (n - 1) + " = " + esc(showDecimal(o.two)));
+      ot.push("3   " + n + "÷" + (n - 1) + " × " + n + "÷" + (n + 1) + " = " + (n * n) + " ÷ " + (n * n - 1) + " = " + esc(showDecimal(o.three)) +
+        (o.three_ends ? '   <span class="yes">ends</span>' : ""));
+    }
+    L.push(row("1, 2, 3", "#403", ot));
+    L.push(row("Halving", "#368, #382", [p.halving.values.map(v => esc(showDecimal(v, 12))).join(" → "), "roots " + p.halving.roots.join(" ")]));
+    L.push(row("Doubling", "#373", [p.doubling.values.join(" → "), "roots " + p.doubling.roots.join(" ")]));
+    L.push(row("Shifts", "#399, #400, #415", ["root " + p.root + ":   + 8 → " + p.shifts.plus_8 + "   + 9 → " + p.shifts.plus_9 +
+      (p.shifts.minus_4 ? "   − 4 → " + p.shifts.minus_4 : "")]));
+    const fw = p.frameworks;
+    const fac = Object.entries(fw.factors).map(([k, v]) => v === 1 ? k : k + "^" + v).join(" × ") || "1";
+    const fr = [n + " by 37 = " + fw.by_37 + "  " + fw.orbit,
+      "prime: " + (fw.prime ? '<span class="yes">yes</span>' : "no (" + fac + ")") + (fw.twins.length ? "   twin with " + fw.twins.join(" and ") : "")];
+    if (fw.prime) fr.push("2 × " + n + " + 1 = " + (2 * n + 1) + ": " + (fw.sophie_germain ? '<span class="yes">prime → Sophie Germain</span>' : "not prime") +
+      "   (" + n + " − 1) ÷ 2 = " + Math.floor((n - 1) / 2) + ": " + (fw.safe ? '<span class="yes">prime → safe</span>' : "not prime"));
+    const lp = fw.loop_of_1_over_n;
+    fr.push(n + " by 137 = " + fw.by_137 + "   loop of 1 ÷ " + n + ": " + (lp === null ? "longer than " + LOOP_CAP + " digits" : (lp || "none, it ends")));
+    L.push(row("Frameworks", "37, primes, 137", fr));
+    $("ledger").innerHTML = L.join("");
+  }
+  function runNumber() {
+    const n = Number($("num").value);
+    try { render(n); $("err").textContent = ""; }
+    catch (e) { $("err").textContent = e.message; }
+  }
+  function runWalk() {
+    const a = Number($("from").value), b = Number($("to").value);
+    if (!Number.isInteger(a) || !Number.isInteger(b) || a < 1 || b < a || b > 1000000 || b - a > 200000) {
+      $("walkerr").textContent = "Use whole numbers with From ≤ To, To at most 1,000,000, and at most 200,000 numbers in one walk.";
+      return;
+    }
+    $("walkerr").textContent = "";
+    const w = walk(a, b);
+    $("walksum").innerHTML = ['<span class="pill">' + w.numbers + " numbers</span>",
+      '<span class="pill">predicted ' + w.predicted + "</span>",
+      '<span class="pill">twin pairs found ' + w.verified + "</span>",
+      '<span class="pill ' + (w.missed.length ? "" : "good") + '">missed by the prediction ' + w.missed.length + "</span>",
+      '<span class="pill">3-step ends at ' + (w.three_ends.length ? w.three_ends.join(", ") : "none here") + "</span>"].join("");
+    $("walkrows").innerHTML = w.pairs.map(([n, lo, hi]) => "<tr><td>" + n + "</td><td>" + place(n) + "</td><td>" +
+      (n - 1) + " + " + n + " = " + lo + "</td><td>" + n + " + " + (n + 1) + " = " + hi + "</td></tr>").join("");
+  }
+  function runChecks() {
+    const box = $("checks"), all = rules().concat([CONTROL]);
+    box.innerHTML = all.map((r, i) => '<div class="check' + (r[0] === "control" ? " control" : "") + '" id="check' + i + '">' +
+      '<span class="badge wait">…</span><div class="what"><b>' + esc(r[0]) + "</b> " + esc(r[1]) +
+      (r[2] ? '<div class="src">' + esc(r[2]) + "</div>" : "") + "</div></div>").join("");
+    let i = 0;
+    const results = [];
+    const step = () => {
+      if (i >= all.length) { window.OwnerEngineChecks = results; return; }
+      let ok = false;
+      try { ok = !!all[i][3](); } catch (e) { ok = false; }
+      results.push({ message: all[i][0], rule: all[i][1], ok });
+      const b = $("check" + i).querySelector(".badge");
+      b.className = "badge " + (ok ? "pass" : "fail"); b.textContent = ok ? "PASS" : "FAIL";
+      i++; setTimeout(step, 0);
+    };
+    setTimeout(step, 30);
+  }
+  const WORK = [
+    ["#368", "9 ÷ 2 ÷ 2 ÷ 2 = 1.125, and 1.125 + 0.012 = 1.137", "owner_1125_1137_ones_by_zeros_2026_10_19.py"],
+    ["#376–#380", "every form of 0.125 (576 without zero, 51480 with zero) and of 0.137 (6139 and 3878545); the with-zero counts of 0.125 by length follow OEIS A056117", "owner_0125_all_forms_count_2026_10_20.py · owner_0137_all_forms_count_2026_10_20.py"],
+    ["#382–#384", "halves and sevens (20 made from 55|55; 77|77|77|77)", "owner_halves_sevens_20_5555_2026_10_20.py"],
+    ["#390", "the framework of flips, halves and moves; 37 brings 111 up to 6 digits, first wrong at 1009019", "owner_framework_flips_halves_moves_2026_10_20.py · records/owner_framework_flips_halves_moves_2026_10_20.md"],
+    ["#391–#393", "the 7-4-9 triad: 13 of the 52 known Mersenne exponents; the next exponents; the gap below 136,279,841", "owner_749_triad_next_exponents_2026_10_20.py · owner_749_triad_gap_and_lehmer_2026_10_20.py"],
+    ["#399–#400", "eight is the barrier and costs 1: adding 8 takes 1 off the root", "owner_adding_8_2026_10_20.py"],
+    ["#403", "1, 2 and 3: a number over its neighbours; the 3-step at 3 is 9 ÷ 8 = 1.125, and it ends only at 3 and 9", "owner_three_neighbor_divisions_2026_10_21.py"],
+    ["#405–#406", "the three operations: behind, yourself, right", "owner_three_operations_neighbours_2026_10_21.py"],
+    ["#407", "the superposition: + − × ÷ all at once with each place", "owner_superposition_all_arithmetic_2026_10_21.py"],
+    ["#410", "the two jobs of =; the three things (past, current, future); the 1 2 3 substrate", "owner_equals_chain_three_things_brackets_2026_10_22.py"],
+    ["#265–#269", "the comma counts, with and without; in no OEIS entry", "comma_count_category_survey_2026_10_13.py"],
+    ["#276", "Langton's ant (Egor)", "langton_ant_highway_2026_10_14.py"]
+  ];
+  function renderWork() {
+    $("work").innerHTML = WORK.map(([m, what, file]) => '<div><span class="msg">' + esc(m) + "</span><span>" + esc(what) +
+      '<span class="file">' + esc(file) + "</span></span></div>").join("");
+  }
+  window.OwnerEngine = { profile, walk, rules, CONTROL, decimal, root };
+  for (const v of [137, 1137, 246, 41, 891, 9]) {
+    const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = v;
+    b.addEventListener("click", () => { $("num").value = v; runNumber(); });
+    $("chips").appendChild(b);
+  }
+  $("runform").addEventListener("submit", e => { e.preventDefault(); runNumber(); });
+  $("walkform").addEventListener("submit", e => { e.preventDefault(); runWalk(); });
+  runNumber(); runWalk(); renderWork(); runChecks();
+})();
+</script>
