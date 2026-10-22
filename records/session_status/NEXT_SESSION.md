@@ -1,7 +1,7 @@
-# Where the work stands -- read this first in a new session (updated 2026-10-17)
+# Where the work stands -- read this first in a new session (updated 2026-10-22)
 
 Everything below is on GitHub, branch claude/add-torus-animation-6Ey5Z. A session ending loses nothing
-that is listed here. The owner's messages are all in owner_work/messages/ (#1 to #300+), word for word.
+that is listed here. The owner's messages are all in owner_work/messages/ (#1 to #414), word for word.
 
 ## Done and checked
 - Owner's notation 2026-10-13: comma count (#265-#269), pairs and the 12 both ways (#267), 369 (#268),
@@ -19,12 +19,29 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
 - Owner's terms with the owner's own lines: owner_work/TERMS.md.
 - Commits: author and committer Michael Warren Song, no Co-Authored-By, plain Session: trailer.
 
+## Done and checked 2026-10-18 to 2026-10-22 (do not redo; each is a file CI runs)
+- Every owner math message has an entry in owner_work/PROCESS.md (raw lines, cleaned lines, process, checks).
+- Owner's lines, #368-#410: owner_* files in math/theorems/ dated 2026_10_18 to 2026_10_22 -- 1.125/1.137,
+  chains and pairs, commas 1314/1413, 8 halvings and 248, all forms of 0.125 (576 / 51480) and 0.137
+  (6139 / 3878545), halves and sevens, reciprocals and 1%, 9% powers, adding 8 (takes 1 off the root),
+  the framework of flips/halves/moves (owner_framework_flips_halves_moves_2026_10_20.py and
+  records/owner_framework_flips_halves_moves_2026_10_20.md: "37 brings 111" true to 6 digits, false from 7),
+  the 7-4-9 triad (PDF in records/supplied/; next exponents; the gap below 136,279,841; Lehmer),
+  1, 2 and 3 (n over its neighbours; n x n / (n x n - 1) ends only at 3 and 9, proved),
+  the three operations behind/yourself/right (#405), the superposition (#407: + - x ÷ at once; from 4 on
+  12 results, 11 different), and #410 (two jobs of "=", the 1 2 3 substrate).
+- Pasted texts from other tools: pasted_* files of the same dates, each audited on arrival.
+- Reply rules added this week (CLAUDE.md): "missing" only when a check is blocked (#408); a reply names a
+  fault only when it changes a number (#412); results already reported are not restated (#414).
+
 ## Open -- questions for the owner (mathematics)
 1. Comma count with a lead of 2 or 3 zeros (00,000 / 000,000): what does the lead count as, with the 1 and without?
 2. How 0, gives 23, and how 23 / 123 / 1123 "go by 369" (#268).
 3. "00=23/6" and the first 2 of "2--3--7--2" (asked 2026-10-13).
-4. What was the "7-4-9 triad" in the owner's lost work "Mersenne Exponents -- DR patterns vs 7-4-9 triad" (LOSS_DOCUMENTATION.md; mersenne_exponents_role_7_4_9_2026_04/ is not in the repo)? Asked 2026-10-17 (see math/theorems/copies_of_123_division_and_mersenne_2026_10_17.py).
+4. (Answered 2026-10-20) The 7-4-9 triad: the owner sent the PDF (records/supplied/Mersenne_Exponents_DR_Patterns_vs_the_7-4-9_Triad_2026_10_16.pdf), audited and run.
 5. The 43 sequence (#308 paste): is the rule |a - b| or something else? Asked 2026-10-17.
+6. #400: the steps "7+8=6=2" and "8+8=7=9" (15 -> 6 and 16 -> 7 are right; the "=2" and "=9" after them).
+7. #411: the grid the pasted invariants were checked on (needed for its Manhattan distances, its 9 3 6 chain and its "cross differences").
 
 ## Open -- work not done
 - Draft OEIS entries for the two comma counts under the owner's name (offered, not started).
