@@ -84,7 +84,7 @@ THE QUESTION: twelve 7s, 7777|7777|7777 = 84 -> 8 + 4 = 12 -> 1 + 2 = 3 -- the n
 
 FRAMEWORKS (gf37-audit, 1/137): eight 7s, 77777777 = 7 x 11 x 73 x 101 x 137 = 137 x 567721: 137 divides every
   8-digit repdigit, because 1 ÷ 137 repeats every 8 digits (99999999 = 137 x 729927, repetend_998001_audit).
-  7777 -> 7 D7 (= 7 x 11 x 101); 77777777 -> 4 C3; twelve 7s = 3 x 7 x 7 x 11 x 13 x 37 x 101 x 9901 -> 0;
+  7777 -> 7 D7 (= 7 x 11 x 101); 77777777 -> 3 C3; twelve 7s = 3 x 7 x 7 x 11 x 13 x 37 x 101 x 9901 -> 0;
   28 SA_ST_B, 56 -> 19 CAS_EXT, 84 -> 10 IC.
 
 FALSIFICATION: any assertion failing.
@@ -120,7 +120,7 @@ assert [k for k in range(1, 40) if root(7 * k) == 3] == [3, 12, 21, 30, 39]
 assert factorint(77777777) == {7: 1, 11: 1, 73: 1, 101: 1, 137: 1} and 77777777 == 137 * 567721
 assert all(int(str(d) * 8) % 137 == 0 for d in range(1, 10)) and 99999999 == 137 * 729927
 assert factorint(int("7" * 12)) == {3: 1, 7: 2, 11: 1, 13: 1, 37: 1, 101: 1, 9901: 1}
-assert [x % 37 for x in (7777, 77777777, int("7" * 12), 28, 56, 84)] == [7, 4, 0, 28, 19, 10]
+assert [x % 37 for x in (7777, 77777777, int("7" * 12), 28, 56, 84)] == [7, 3, 0, 28, 19, 10]
 
 if __name__ == "__main__":
     print("#430: ladder and count share their roots (9s apart: 0 0 9 9 18 18 27 27); 4 x (7k) lands on k; "

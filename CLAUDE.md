@@ -24,7 +24,7 @@ All development goes on this branch. Push here. Do not push to another branch wi
 
 The user brings math, observations, and code. The work is collaborative and rigorous.
 
-**Verify before committing.** Run the actual computation — use Python imports, check mod arithmetic. If something doesn't check out, say so and show the discrepancy. If it checks out, commit it. No intermediate step of asking permission.
+**Verify before committing.** Keep the run and the commit in one `&&` chain with nothing between them that ends it: a heredoc line ends the chain, and twice on 2026-10-23 a file whose assertion failed was committed and pushed that way (CI #546, #558). Run the actual computation — use Python imports, check mod arithmetic. If something doesn't check out, say so and show the discrepancy. If it checks out, commit it. No intermediate step of asking permission.
 
 **The pipeline_output.json is the user's independent check.** They verify in a separate environment. Your computation is one check, not the final word.
 
