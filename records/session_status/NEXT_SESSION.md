@@ -42,7 +42,9 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
   math/theorems/owner_engine_walk_100m_2026_10_23.py) and to 1,000,000,000 (6,388,041 pairs, 0 missed;
   tools/owner_walk_big.py, math/theorems/owner_engine_walk_1b_2026_10_23.py) and to 10,000,000,000 (51,509,099
   pairs, 0 missed; tools/owner_walk_segmented.py, records/owner_walk_1e10.json,
-  math/theorems/owner_engine_walk_10b_2026_10_23.py); the page walks to 10,000,000.
+  math/theorems/owner_engine_walk_10b_2026_10_23.py) and to 100,000,000,000 (424,084,653 pairs, 0 missed, 44 minutes;
+  records/owner_walk_1e11.json, math/theorems/owner_engine_walk_100b_2026_10_23.py); the page walks to 10,000,000.
+- The pasted data bundle and the SSR failure (#425): math/theorems/pasted_bundle_mod37_twins_g5_audit_2026_10_23.py.
 - The NameError in the owner's SSR notebook cell (#424): math/theorems/ssr_sweep_name_error_fix_2026_10_23.py.
 - Reply rules added this week (CLAUDE.md): "missing" only when a check is blocked (#408); a reply names a
   fault only when it changes a number (#412); results already reported are not restated (#414).
