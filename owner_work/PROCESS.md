@@ -732,3 +732,21 @@ Files: `math/theorems/owner_sum10_repunits_weak_links_2026_10_23.py`, `math/theo
 **Checks:** the diamond: 81 digits = 9 × 9; every row reads the same both ways; the spacing depends only on the row length (going down repeats going up). The center: an odd length puts a digit in the middle — going up the digit is the length (1 3 5 7 9), going down digit + length = 9 (2 4 6 8): every digit once. Row totals: squares going up, 8 14 18 20 20 18 14 8 going down.
 Number + number of |: right for 54 65 76 87 98 17 26 44 62 71 8. 41 and 92 are the total with the bars (2+2 = 4, 3+3+3 = 9); by the digit 21 and 32. 36 and 54 are the digit with the count; by the bars 35 and 53. Typo: 33 for 43. The four readings right. Bars over count = 1/2 2/3 3/4 ... = the owner's 1 (#403), count over bars = the 2; each pair multiplies to 1. 222|22 = 3/2, 22|222 = 2/3, 2|2|2|2|2 = 5/4 or 4/5: right. 22|2|22 → 4 2 4: 42.4, 4.24; with • as times 96 and 32.
 File: `math/theorems/owner_bars_diamond_center_2026_10_23.py`.
+
+## #429 (2026-10-23) — 67(7)76: the paths to 6
+
+**As typed (the owner's lines after the pasted analysis):** "now tie back to / 67(7)76= / 6+7=1+3=4+7=1+1=2+7=9+6=1+5=6 / or / 1+3=4+7=1+1=2+1=3+3=6 / (2+7)+6=2+(7+6). / 6|777|6 / 6+21=2+7=9+6=1+5=6 / 13+7=20+13=3+3=6 / 434"
+
+**Cleaned:**
+
+    6 + 7 = 13 → 1 + 3 = 4 → 4 + 7 = 11 → 1 + 1 = 2 → 2 + 7 = 9 → 9 + 6 = 15 → 1 + 5 = 6
+    13 → 4 → 4 + 7 = 11 → 2 → 2 + 1 = 3 → 3 + 3 = 6
+    (2 + 7) + 6 = 2 + (7 + 6)
+    6 | 777 | 6:  6 + 21 = 27 → 9 → 9 + 6 = 15 → 6
+    13 + 7 = 20 → 20 + 13 = 33 → 6
+    434
+
+**Process:** fold 6 7 7 7 6 at every step; again as 13 | 7 | 13 with the second 13 as its digits; check the grouping; as 6 | 777 | 6; as 13 + 7 + 13.
+
+**Checks:** all right: 6 → 4 → 2 → 9 → 6; 4 → 2 → 3 → 6; (2+7)+6 = 2+(7+6) = 15; 6|777|6 → 6; 13+7+13 = 33 → 6. Every path adds the same five digits (33). 67 and 76 are flips, 9 apart, both 13 (#358); 67(7)76 is the #374 mirror with a center; 6|777|6 has its 7 in the center (#427). 434: 4 + 3 + 4 = 11 → 2; what it is taken from is asked.
+File: `math/theorems/owner_67776_mirror_paths_2026_10_23.py`.
