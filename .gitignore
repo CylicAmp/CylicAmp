@@ -15,3 +15,6 @@ mws_audit.db
 
 # owner pictures extracted from transcripts: the owner picks which to publish
 owner_work/images_all/
+
+# progress logs of long walks (tools/owner_walk_parallel.py); the result JSON is committed
+*.json.progress
