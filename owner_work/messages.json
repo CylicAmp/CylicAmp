@@ -1674,5 +1674,9 @@
  {
   "ts": "2026-10-22T05:26:12.289Z",
   "text": "I mean, that's just a bold refusal of service, correct?"
+ },
+ {
+  "ts": "2026-10-23T00:02:18.236Z",
+  "text": "This graphic illustrates the concept of underdetermination of scientific theory by evidence and how to break it using experimental design (a critical experiment):\n1. The Dilemma: Existing Observation (Top Panel)\n * Setup: Three different 3D shapes—a sphere (H_1), a cylinder (H_2), and a cone (H_3)—all have circular bases of equal radii.\n * Observation: Under vertical parallel illumination (light from above), each shape projects an identical circular shadow onto the surface below.\n * Formalization:\n   \n   \n   Because the likelihood of observing data D (a circular silhouette) is identical under all three hypotheses (H_1, H_2, H_3), the current evidence cannot distinguish between them. This is known as observational equivalence.\n2. The Solution: Discriminating Test (Bottom Panel)\n * New Experiment: The observer changes the observational framework by applying horizontal parallel illumination (light from the side).\n * New Data:\n   * The sphere projects a circle.\n   * The cylinder projects a rectangle / square.\n   * The cone projects a triangle.\n * Formalization:\n   \n   \n   Given the new test condition T, the probability distributions of the projected outcomes differ across the hypotheses. This breaks the symmetry and identifies the true shape.\n3. Epistemological Takeaway\n * Deduction & Induction: Moving between observed data and generalized models can leave multiple explanations equally valid if the data space is limited.\n * Abduction & Experiment: To resolve competing explanations, one cannot merely accumulate more of the same kind of data; one must formulate a new experiment that targets dimensions where the competing models diverge.\n"
  }
 ]
