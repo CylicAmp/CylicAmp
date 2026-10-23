@@ -119,3 +119,26 @@ Unique subgroup of order 6: confirmed by Lagrange / cyclic structure.
 Order-3 subgroup within order-6: [1, 10, 26]
 Primitive 3rd roots of unity in sub: [10, 26]
 These match the roots of x^2+x+1: True
+
+
+===== #424  2026-10-23T01:22:56.762Z =====
+run the walk up to ten billion..
+
+Error:
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[2], line 133
+    131 ssr_sweep = {}
+    132 for steps in [36, 72, 108, 144, 180, 360, 720]:
+--> 133     ssr, count, _ = simulate_ssr(steps)
+    134     ssr_sweep[steps] = {"ssr": ssr, "filtered_count": count}
+    136 # Try with reduced PSI (closer to 1 = slower growth)
+
+Cell In[2], line 125, in simulate_ssr(steps, psi_override)
+    123     if is_dr7:
+    124         stable += 1
+--> 125     details.append((n, cv, dr, is_dr7))
+    127 ssr = stable / len(filtered) if filtered else 0
+    128 return ssr, len(filtered), details
+
+NameError: name 'n' is not defined
