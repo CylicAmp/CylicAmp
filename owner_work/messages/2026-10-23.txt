@@ -99,3 +99,23 @@ Immediate Execution Steps
  * Determine whether the sequence requires strict parity preservation (\Delta \text{sgn} = 0) or periodic parity oscillation (\text{sgn}_{k+1} = -\text{sgn}_k).
  * Apply the chosen track directly into the target verification audit script to test chart invariance across all 6 base states.
 
+
+
+===== #423  2026-10-23T00:48:52.786Z =====
+run the walk up to a billion
+2 is primitive root mod 37: True
+Subgroup generator: 2^6 mod 37 = 27
+Subgroup of order 6: [1, 10, 11, 26, 27, 36]
+Matches ORDER6_SUBGROUP: True
+
+Discriminant of x^2+x+1: 34
+sqrt(34) mod 37 = 16
+Roots of x^2+x+1 mod 37: 26, 10
+Roots are in order-6 subgroup: True
+Roots equal: {26, 10}
+
+(Z/37Z)× is cyclic order 36, so every subgroup is cyclic.
+Unique subgroup of order 6: confirmed by Lagrange / cyclic structure.
+Order-3 subgroup within order-6: [1, 10, 26]
+Primitive 3rd roots of unity in sub: [10, 26]
+These match the roots of x^2+x+1: True
