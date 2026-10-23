@@ -23,9 +23,11 @@ RIGHT (re-run), every line:
    permutation: the inverse of 231 is 312, its flip is 132; the column's values are the flips, all right)
 
 NEW LINES, owner's notation:
-  moving the first digit to the end is the same as adding 1 to every digit with 3 -> 1 (the 1 2 3 substrate, #410):
-    123 -> +1 each -> 231 -> +1 each -> 312 -> +1 each -> 123
-  so the three even orders are 123 moved along the substrate, and the three odd ones are its flip 321 moved along it.
+  adding 1 to every digit, with 3 -> 1 (the 1 2 3 substrate, #410), walks each group of three round:
+    123 -> 231 -> 312 -> 123     the even orders: +1 each = the first digit moved to the end
+    321 -> 132 -> 213 -> 321     the odd orders:  +1 each = the last digit moved to the front
+  so the three even orders are 123 moved along the substrate, and the three odd ones are its flip 321 moved
+  along it, the other way round.
   all six added: 123 + 132 + 213 + 231 + 312 + 321 = 1332 = 12 x 111 (each place holds 1, 2, 3 twice: 12)
   each order plus its flip (the 37 test, a + c = 2b):
     123 + 321 = 444 = 12 x 37 (1 + 3 = 2 x 2: right)   231 + 132 = 363 (2 + 1 is not 2 x 3)   312 + 213 = 525 (3 + 2 is not 2 x 1)
@@ -93,7 +95,9 @@ assert inverse("231") == "312" != flip("231") == "132"
 
 # new lines
 plus1 = lambda w: "".join(str(int(c) % 3 + 1) for c in w)
-assert all(plus1(w) == left(w) for w in ("123", "231", "312", "321", "213", "132"))
+assert all(plus1(w) == left(w) for w in ("123", "231", "312"))
+assert all(plus1(w) == right(w) for w in ("321", "132", "213"))
+assert [plus1("321"), plus1(plus1("321")), plus1(plus1(plus1("321")))] == ["132", "213", "321"]
 assert sum(int(w) for w in words) == 1332 == 12 * 111
 assert 123 + 321 == 444 == 12 * 37 and (231 + 132, 312 + 213) == (363, 525) and 363 % 37 and 525 % 37
 assert [int(w) % 37 for w in words] == [12, 9, 16, 21, 28, 25]
@@ -102,5 +106,5 @@ assert 1000 == 27 * 37 + 1 and all(int(left(w)) % 37 == int(w) * 10 % 37 for w i
 assert 26 * 26 % 37 == 10
 
 if __name__ == "__main__":
-    print("#422 permutations: every line right; the three even orders are 123 moved along 1 2 3 (+1 each digit), "
-          "the odd ones its flip 321; by 37 the evens are SA_ST_A, the odds SA_ST_B (moving a digit to the end = x10)")
+    print("#422 permutations: every line right; +1 on every digit walks 123 -> 231 -> 312 (first digit to the end) "
+          "and 321 -> 132 -> 213 (last digit to the front); by 37 the evens are SA_ST_A, the odds SA_ST_B")
