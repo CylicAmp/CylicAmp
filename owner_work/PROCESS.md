@@ -750,3 +750,22 @@ File: `math/theorems/owner_bars_diamond_center_2026_10_23.py`.
 
 **Checks:** all right: 6 → 4 → 2 → 9 → 6; 4 → 2 → 3 → 6; (2+7)+6 = 2+(7+6) = 15; 6|777|6 → 6; 13+7+13 = 33 → 6. Every path adds the same five digits (33). 67 and 76 are flips, 9 apart, both 13 (#358); 67(7)76 is the #374 mirror with a center; 6|777|6 has its 7 in the center (#427). 434: 4 + 3 + 4 = 11 → 2; what it is taken from is asked.
 File: `math/theorems/owner_67776_mirror_paths_2026_10_23.py`.
+
+## #430 (2026-10-23) — the ladder 11 12 22 23 ..., the halves, and how many 7s reach 1+2=3
+
+**As typed:** "09=9 / 1+0=10+1=11 / 11=2=11+1=12 / 12=3=12+1= / 22=4=13 / 23=5=14 / 33=6=15 / 34=7=16 / 44=8=17 / 45=9=18" · "09=9 / 1+0=10÷2=5÷2=2.55.2 / 11=2=11=2=20÷2÷10+10=2 / 12=3=12=3=30 / 22=4=13=4=40 / ... / 45=9=18=9=90" · "5÷2=2.5 / 2÷5=0.4 / 7+7=14 / 7×7=49" · "7+7+7+7=2+8====1 / 14+14+14+14=5+6=11 / 21+21+21+21= / 28+28+28+28= / 35+35+35+35=" · "lol how many 7s can I get at count 1+2=3 exactly / 1=7777 / 11=7777|7777"
+
+**Cleaned:**
+
+    22 → 4 = 13 → 4    23 → 5 = 14 → 5    33 → 6 = 15 → 6    34 → 7 = 16 → 7    44 → 8 = 17 → 8    45 → 9 = 18 → 9
+    each root with a 0: 30 40 50 60 70 80 90
+    10 ÷ 2 = 5 → 5 ÷ 2 = 2.5 → 5.2        20 ÷ 2 = 10 → ÷ 10 = 1 → + 10 = 11 → 2
+    7 + 7 + 7 + 7 = 28 → 2 + 8 = 10 → 1        14 × 4 = 56 → 5 + 6 = 11
+    1 = 7777        11 = 7777 | 7777
+
+**Process:** count up from 09; beside the count climb the ladder 11 12 | 22 23 | 33 34 | 44 45; match roots; add a 0; halve; add 7s four at a time; ask how many 7s reach 1 + 2 = 3.
+
+**Checks:** all right. The ladder and the count share each root because they are 9s apart (0 0 9 9 18 18 27 27). A 0 after a root keeps it. The open lines: 21 × 4 = 84 → 12 → 3; 28 × 4 = 112 → 4; 35 × 4 = 140 → 5 — the k-th line lands on k (28 = 4 × 7 → 1).
+The question: twelve 7s, 7777|7777|7777 = 84 → 8 + 4 = 12 → 1 + 2 = 3, the step after 1 = 7777 and 11 = 7777|7777. Both ways: total exactly 12 at 12, 21, 39, 48, 66 sevens; root 3 at 3, 12, 21, 30, ... sevens.
+Frameworks: 77777777 = 137 × 567721 (every 8-digit repdigit, since 1 ÷ 137 repeats every 8).
+File: `math/theorems/owner_ladder_roots_sevens_2026_10_23.py`.
