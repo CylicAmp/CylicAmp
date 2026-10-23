@@ -769,3 +769,21 @@ File: `math/theorems/owner_67776_mirror_paths_2026_10_23.py`.
 The question: twelve 7s, 7777|7777|7777 = 84 → 8 + 4 = 12 → 1 + 2 = 3, the step after 1 = 7777 and 11 = 7777|7777. Both ways: total exactly 12 at 12, 21, 39, 48, 66 sevens; root 3 at 3, 12, 21, 30, ... sevens.
 Frameworks: 77777777 = 137 × 567721 (every 8-digit repdigit, since 1 ÷ 137 repeats every 8).
 File: `math/theorems/owner_ladder_roots_sevens_2026_10_23.py`.
+
+## #431 (2026-10-23) — groups of 7777, pairs to their roots, ways to write 4, 148 two ways
+
+**As typed (new lines; the message repeats #430 first):** "1=7777 / 11=7777|7777 / 111=7777|7777|7777 / 1111=7777|7777|7777|7777=3+1" · "1=7777=55 / 11=7777|7777=5555 / 1=1414=55 / ... / 1=2828=11 / ... / 1=3535=88 / ..." · "55+55=110+11=121+88=20+9=2+9=2" · "1111=...=3+1 / or 2/2 / or 0.5×4×2=4 / or 43=7 / or 34=7" · "counting to 7 by 2 / 12 / 34 / 56 / 7=at 7 in 4 count" · "12+34+46+56=148= / 1+48=4+9=1+3=4 / 14+8=2+2=4=3+1=4"
+
+**Cleaned:**
+
+    1 → 7777 (28 → 1)   11 → 7777 | 7777 (56 → 11)   111 → 3 groups (84 → 12 → 3)   1111 → 4 groups (112 → 4 = 3 + 1)
+    7777 → 14 14 → 55    1414 → 55    2828 → 10 10 → 11    3535 → 88
+    55 + 55 = 110 → + 11 = 121 → + 88 = 209 → 20 + 9 = 29 → 2 + 9 = 11 → 2
+    1 2 → 3 4 → 5 6 → 7: 4 counts
+    12 + 34 + 46 + 56 = 148 → 1 | 48 → 49 → 13 → 4    and    14 | 8 → 22 → 4 = 3 + 1
+
+**Process:** count groups of four 7s with 1s; fold each pair to its root; add the folds; write 4 several ways; count to 7 by 2; split 148 two ways.
+
+**Checks:** all right as written. The k-th group of 7777 lands on k (four 7s = 28 → 1). Each folded number is a pair written twice (ab ab = ab × 101), so its root is twice the pair's. 2/2 is 1 as a division, 4 as the bars 2|2 (#427). 148 = 4 × 37; both splits → 4. 46 is not one of the counting pairs (12 34 56 7): it is 12 + 34; with the pairs themselves 12 + 34 + 56 + 7 = 109 → 1.
+Frameworks: sixteen 7s is divisible by 137 (and 17).
+File: `math/theorems/owner_7777_groups_pairs_2026_10_23.py`.
