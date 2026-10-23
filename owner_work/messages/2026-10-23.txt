@@ -29,3 +29,73 @@ This graphic illustrates the concept of underdetermination of scientific theory 
 
 ===== #421  2026-10-23T00:07:26.235Z =====
 run the walk up to ten million
+
+
+===== #422  2026-10-23T00:25:15.256Z =====
+run the walk up to a hundred million
+
+To complete every variation across the full permutation set and resolve the missed rotational/inversion tracks, here is the exhaustive systematic breakdown across coordinate cycles, transpositions, and parity states.
+1. Complete Permutation Basis (S_3)
+| Index | Symbol | Word | Parity (\text{sgn}) | Cycle Type | Rotational / Inversion Role |
+|---|---|---|---|---|---|
+| 0 | e | 123 | +1 | Identity | Base frame / Zero rotation |
+| 1 | \sigma_1 | 231 | +1 | (1\ 2\ 3) | Forward cyclic shift (+120^\circ) |
+| 2 | \sigma_2 | 312 | +1 | (1\ 3\ 2) | Backward cyclic shift (-120^\circ) |
+| 3 | \tau_1 | 132 | -1 | (2\ 3) | Swap indices 2–3 (Right reflection) |
+| 4 | \tau_2 | 213 | -1 | (1\ 2) | Swap indices 1–2 (Left reflection) |
+| 5 | \tau_3 | 321 | -1 | (1\ 3) | Swap indices 1–3 (Full spatial reversal) |
+2. Systematic Cycle Variations
+A. The Cyclic Alternating Track (Completing Row 2)
+The repeating generator uses the alternating orbit between \sigma_1 = 231 and \tau_1 = 132:
+
+231 | 132 | 231 | 132 | 231 | 132
+
+ * Rotational observation: Toggles between an even chiral rotation (+120^\circ) and an odd flip of the trailing two coordinates.
+B. The Dual Counter-Rotating Track
+Applying the mirror generator with the opposite 3-cycle \sigma_2 = 312:
+
+312 | 132 | 312 | 132 | 312 | 132
+
+C. The Full Even Alternating Orbit (A_3 Pure Rotations)
+Cycling strictly through orientation-preserving transformations without reflections:
+123 | 231 | 312 | 123 | 231 | 312
+
+ * Step operator: x_{i+1} = \sigma_1(x_i) (pure translation mod 3).
+D. The Pure Transposition Inversion Track (Odd Sector, \text{sgn} = -1)
+Sequencing through all three reflection axes:
+132 | 213 | 321 | 132 | 213 | 321
+
+ * Observation: Exhausts the entire odd-parity subspace while holding the total sum \sum x_i = 6 fixed.
+E. The Inversion Echo Sequence (Vertical Symmetries)
+Matching the 321 / 312 transitional pair and the 123 / 321 / 123 reflection block:
+ * Reversal sandwich (Identity to Inversion to Identity):
+   123
+321
+123
+
+ * Complementary shift sandwich (\sigma_1 to Inversion to \sigma_2):
+   231
+321
+312
+
+ * Dual pair transition:
+   321  (Full reversal, odd)
+312  (Left cyclic, even)
+213  (Left swap, odd)
+231  (Right cyclic, even)
+132  (Right swap, odd)
+123  (Identity return, even)
+
+3. Verification Table: Full Permutation Coverage
+| State | Left Shift | Right Shift | Full Inversion | Even Subgroup (A_3) |
+|---|---|---|---|---|
+| 123 | 231 | 312 | 321 | Yes |
+| 231 | 312 | 123 | 132 | Yes |
+| 312 | 123 | 231 | 213 | Yes |
+| 132 | 321 | 213 | 231 | No |
+| 213 | 132 | 321 | 312 | No |
+| 321 | 213 | 132 | 123 | No |
+Immediate Execution Steps
+ * Determine whether the sequence requires strict parity preservation (\Delta \text{sgn} = 0) or periodic parity oscillation (\text{sgn}_{k+1} = -\text{sgn}_k).
+ * Apply the chosen track directly into the target verification audit script to test chart invariance across all 6 base states.
+
