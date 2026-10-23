@@ -720,3 +720,15 @@ File: `math/theorems/owner_equals_chain_three_things_brackets_2026_10_22.py`.
 The NameError: right, a missing name (brun_constant_full), fixed with one line; in the same script the Brun tail needs 4 × C2 (gives 1.774736, the direct sum) and the expected twin count needs 2 × C2.
 Mapped: pairs to 10 = the +9 rule and T111's column tens; 1, 11, 111 = 111 = 3 × 37 = 10 × 10 + 10 + 1; read in twos they are 2^n − 1, the Mersenne numbers of the 7-4-9 triad (root of 2^n − 1 runs 1 3 7 6 4 9); 2 × 5, 4 × 7, 8 × 8 → 1 = the halving chain.
 Files: `math/theorems/owner_sum10_repunits_weak_links_2026_10_23.py`, `math/theorems/pasted_unified_frame_brun_name_error_audit_2026_10_23.py`.
+
+## #427 (2026-10-23) — the bars: the diamond, its center, and "Number + number of |"
+
+**As typed:** the diamond "|1| / 2|2 / 3|3|3 / 44|44 / 55|5|55 / 666|666 / 777|7|777 / 8|888|888|8 / 9|999|9|999|9 / 1|111|111|1 / 222|2|222 / 333|333 / 44|4|44 / 55|55 / 6|6|6 / 7|7 / 8" · "here we see how the center is influenced by the numbers abd spacing" · "|1|= / 2|2=41(2/1 / 3|3|3=92(2/3 / 4|4|4|4=33(3/4 / 5|5|5|5|5=54(4/5 / ... / 9|...|9=98 / 1|1|1|1|1|1|1|1=17 / 2|2|2|2|2|2|2=26,72,6/7,7/6 / 3|3|3|3|3|3=36 / 4|4|4|4|4=44 / 5|5|5|5=54 / 6|6|6=62 / 7|7=71 / 8=8" · "each row has a 4 count" · "Number +number of |" · "222|22 I identify as 3/2 / 22|222 or 2/3 / 22|2|22 or 42.4 4.24 4•24 4•2•4 / 2|2|2|2|2=5/4 or 4/5"
+
+**Cleaned:** row length 1 → 9 → 1, digits 1 to 9 then 1 to 8, split by bars; then one bar between every two digits, read as the number followed by the number of bars; four readings a row (seven 2s → 26, 72, 6/7, 7/6); groups 222|22 → 3/2, 22|2|22 → 4 2 4.
+
+**Process:** build the diamond, look at the center; strip the spacing to one bar between digits; read number + bars, and the bars against the count both ways; then read groups by their sizes and totals.
+
+**Checks:** the diamond: 81 digits = 9 × 9; every row reads the same both ways; the spacing depends only on the row length (going down repeats going up). The center: an odd length puts a digit in the middle — going up the digit is the length (1 3 5 7 9), going down digit + length = 9 (2 4 6 8): every digit once. Row totals: squares going up, 8 14 18 20 20 18 14 8 going down.
+Number + number of |: right for 54 65 76 87 98 17 26 44 62 71 8. 41 and 92 are the total with the bars (2+2 = 4, 3+3+3 = 9); by the digit 21 and 32. 36 and 54 are the digit with the count; by the bars 35 and 53. Typo: 33 for 43. The four readings right. Bars over count = 1/2 2/3 3/4 ... = the owner's 1 (#403), count over bars = the 2; each pair multiplies to 1. 222|22 = 3/2, 22|222 = 2/3, 2|2|2|2|2 = 5/4 or 4/5: right. 22|2|22 → 4 2 4: 42.4, 4.24; with • as times 96 and 32.
+File: `math/theorems/owner_bars_diamond_center_2026_10_23.py`.
