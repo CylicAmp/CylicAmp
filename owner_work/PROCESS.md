@@ -702,3 +702,21 @@ Brackets: lines 1–2 close each other (4 and 4), the 12/13 lines too (4 and 4);
 The = key: = same value, ≠ not the same, ≈ close, ≡ same remainder by a named number or the same for every value; 11 22 33 66 are 11 × 1, 2, 3, 6, all ≡ by 11; roots 2 4 6 3.
 1 2 3: every n has a place (n by 3, 3 for 0); behind, yourself, right always land on 1, 2, 3 once each. Both ways: 1 2 3 ×4 adds to 24, 0 1 2 ×4 adds to 12.
 File: `math/theorems/owner_equals_chain_three_things_brackets_2026_10_22.py`.
+
+## #426 (2026-10-23) — pairs to 10, the ones 1 = 11 = 111, "map this to my work"
+
+**As typed (the owner's lines; the pasted NameError, calculus reading, printouts and script are audited in the two files below):**
+"If you fixed this skip but if not its not a logic error by me but rather a Sentax issue." · "112(3|1)1|2(31)1 / 1234|56|78910-11" · "19 = 1, 2+8 = 1, 3+7 = 1, 4+6 = 1, 5+5 = 1 = 11, 111" · "map this to my work"
+
+**Cleaned:**
+
+    1 + 9 = 10 → 1    2 + 8 = 10 → 1    3 + 7 = 10 → 1    4 + 6 = 10 → 1    5 + 5 = 10 → 1    → 11 → 111
+    1234 | 56 | 78910 → 11
+    112(3|1)1|2(31)1   (kept as typed)
+
+**Process:** take every pair that makes 10 and fold it to 1; then the ones, 1, 11, 111; group 1 to 10 as 1234 | 56 | 78910 and go on to 11.
+
+**Checks:** right — every pair to 10 has root 1 (10 = 9 + 1). 1+2+3+4 = 10 → 1; 5+6 = 11 → 2; 7+8+9+10 = 34 → 7 (digits 7+8+9+1+0 = 25 → 7, same both ways); 1 to 10 = 55 → 1. The digits of 112(3|1)1|2(31)1 add to 16 → 7.
+The NameError: right, a missing name (brun_constant_full), fixed with one line; in the same script the Brun tail needs 4 × C2 (gives 1.774736, the direct sum) and the expected twin count needs 2 × C2.
+Mapped: pairs to 10 = the +9 rule and T111's column tens; 1, 11, 111 = 111 = 3 × 37 = 10 × 10 + 10 + 1; read in twos they are 2^n − 1, the Mersenne numbers of the 7-4-9 triad (root of 2^n − 1 runs 1 3 7 6 4 9); 2 × 5, 4 × 7, 8 × 8 → 1 = the halving chain.
+Files: `math/theorems/owner_sum10_repunits_weak_links_2026_10_23.py`, `math/theorems/pasted_unified_frame_brun_name_error_audit_2026_10_23.py`.
