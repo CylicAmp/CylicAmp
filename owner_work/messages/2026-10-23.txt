@@ -655,3 +655,23 @@ so
 22|2|22 or 42.4  4.24 4•24 4•2•4
 2|2|2|2|2=5/4 or 4/5
 
+
+
+===== #428  2026-10-23T05:07:40.458Z =====
+run the walk up to a trillion
+
+
+That 2-decimal-place rule for cents makes the original concatenated string completely unambiguous.
+The unspaced string:
+8.702.634,456.9313,159.56
+
+Because cents terminate exactly two digits after the decimal point, the boundaries resolve cleanly:
+ * 8.702.63 — terminates after the two cent digits .63
+ * 4,456.93 — begins at 4, ending after the two cent digits .93
+ * 13,159.56 — begins at 13, ending after the two cent digits .56
+Equation Breakdown
+ * Term 1: 8{,}702.63
+ * Term 2: 4{,}456.93
+ * Balance / Sum: 
+Treating the decimal positions as standard monetary cents turns the run-together sequence into an exact accounting balance.
+
