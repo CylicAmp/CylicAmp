@@ -25,3 +25,7 @@ This graphic illustrates the concept of underdetermination of scientific theory 
  * Deduction & Induction: Moving between observed data and generalized models can leave multiple explanations equally valid if the data space is limited.
  * Abduction & Experiment: To resolve competing explanations, one cannot merely accumulate more of the same kind of data; one must formulate a new experiment that targets dimensions where the competing models diverge.
 
+
+
+===== #421  2026-10-23T00:07:26.235Z =====
+run the walk up to ten million

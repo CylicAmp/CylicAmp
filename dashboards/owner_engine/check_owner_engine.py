@@ -84,13 +84,20 @@ if sync_playwright is not None:
             jbig = json.loads(page.evaluate("() => { const w = window.OwnerEngine.walk(1, 1000000); "
                                             "return JSON.stringify([w.numbers, w.predicted, w.verified, w.missed.length, w.three_ends]); }"))
             assert jbig == [1000000, 333334, 14871, 0, [3, 9]], jbig
+            page.fill("#to", "10000000")
+            page.click("#walkform button[type=submit]")
+            page.wait_for_function("document.getElementById('walksum').textContent.includes('10000000 numbers')", timeout=180000)
+            summary = page.locator("#walksum").inner_text()
+            assert "predicted 3333334" in summary and "twin pairs found 107407" in summary and "missed by the prediction 0" in summary, summary
+            assert page.locator("#walkrows tr").count() == 107407
             checks = page.evaluate("() => window.OwnerEngineChecks")
             assert [c["ok"] for c in checks[:-1]] == [True] * 12 and checks[-1]["message"] == "control" and checks[-1]["ok"] is False
             badges = page.locator(".badge").all_inner_texts()
             assert badges == ["PASS"] * 12 + ["FAIL"], badges
             assert page.locator("#ledger .row").count() == 11
             browser.close()
-        print("page: same answers as Python for %d numbers, the walk to 5000 and the walk to 1,000,000; 12 PASS, control FAIL" % len(NUMBERS))
+        print("page: same answers as Python for %d numbers, the walks to 5000 and 1,000,000, and the Walk button to 10,000,000 "
+              "(107,407 pairs, every row shown); 12 PASS, control FAIL" % len(NUMBERS))
     except Exception as e:  # a missing browser binary is not a failure of the mathematics
         if "Executable doesn't exist" in str(e) or "BrowserType.launch" in str(e):
             print("browser part skipped:", str(e).splitlines()[0])

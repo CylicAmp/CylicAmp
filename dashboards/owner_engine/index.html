@@ -136,9 +136,9 @@ th { position: sticky; top: 0; background: var(--sheet); font-family: var(--font
     <div class="panel">
       <form id="walkform" class="controls">
         <label class="small" for="from">From</label>
-        <input class="small" id="from" type="number" min="1" max="1000000" step="1" value="1">
+        <input class="small" id="from" type="number" min="1" max="10000000" step="1" value="1">
         <label class="small" for="to">To</label>
-        <input class="small" id="to" type="number" min="1" max="1000000" step="1" value="1000">
+        <input class="small" id="to" type="number" min="1" max="10000000" step="1" value="1000">
         <button type="submit">Walk</button>
       </form>
       <p class="err" id="walkerr" role="status"></p>
@@ -373,12 +373,16 @@ th { position: sticky; top: 0; background: var(--sheet); font-family: var(--font
   }
   function runWalk() {
     const a = Number($("from").value), b = Number($("to").value);
-    if (!Number.isInteger(a) || !Number.isInteger(b) || a < 1 || b < a || b > 1000000) {
-      $("walkerr").textContent = "Use whole numbers from 1 to 1,000,000, with From at most To.";
+    if (!Number.isInteger(a) || !Number.isInteger(b) || a < 1 || b < a || b > 10000000) {
+      $("walkerr").textContent = "Use whole numbers from 1 to 10,000,000, with From at most To.";
       return;
     }
-    $("walkerr").textContent = "";
+    $("walkerr").textContent = b - a > 500000 ? "Walking " + (b - a + 1).toLocaleString() + " numbers…" : "";
+    setTimeout(() => finishWalk(a, b), 20);
+  }
+  function finishWalk(a, b) {
     const w = walk(a, b);
+    $("walkerr").textContent = "";
     $("walksum").innerHTML = ['<span class="pill">' + w.numbers + " numbers</span>",
       '<span class="pill">predicted ' + w.predicted + "</span>",
       '<span class="pill">twin pairs found ' + w.verified + "</span>",

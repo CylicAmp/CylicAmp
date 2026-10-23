@@ -37,7 +37,8 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
   operation; the predict -> act -> verify walk (twin pairs from behind + yourself, yourself + right, predicted by the
   1 2 3 place, never missing; hits / 3 = OEIS A002822); 12 rules of the work re-checked live plus a control that must
   fail. dashboards/owner_engine/check_owner_engine.py (run by CI) checks the page gives Python's answers. Add each new
-  owner rule there.
+  owner rule there. Walks run: to 1,000,000 (14,871 pairs) and to 10,000,000 (107,407 pairs, 0 missed;
+  math/theorems/owner_engine_walk_10m_2026_10_23.py); the page walks to 10,000,000 as well.
 - Reply rules added this week (CLAUDE.md): "missing" only when a check is blocked (#408); a reply names a
   fault only when it changes a number (#412); results already reported are not restated (#414).
 
