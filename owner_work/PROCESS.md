@@ -787,3 +787,20 @@ File: `math/theorems/owner_ladder_roots_sevens_2026_10_23.py`.
 **Checks:** all right as written. The k-th group of 7777 lands on k (four 7s = 28 → 1). Each folded number is a pair written twice (ab ab = ab × 101), so its root is twice the pair's. 2/2 is 1 as a division, 4 as the bars 2|2 (#427). 148 = 4 × 37; both splits → 4. 46 is not one of the counting pairs (12 34 56 7): it is 12 + 34; with the pairs themselves 12 + 34 + 56 + 7 = 109 → 1.
 Frameworks: sixteen 7s is divisible by 137 (and 17).
 File: `math/theorems/owner_7777_groups_pairs_2026_10_23.py`.
+
+## #437 (2026-10-24) — the odd/even grid and 13,579
+
+**As typed:** "oeo / eoe / oeo" · "□■□ / ■□■ / □■□" · "13,579 / 3,579 / 1,579 / 579 / ■□■" · "What are you saying is not a discovery?"
+
+**Cleaned:**
+
+    o e o    □ ■ □    1 2 3
+    e o e    ■ □ ■    4 5 6
+    o e o    □ ■ □    7 8 9
+    odd cells: 1 3 5 7 9 → 13,579 → 3,579 → 1,579 → 579        ■ □ ■ = 4 5 6 or 2 5 8
+
+**Process:** mark the grid odd and even; read the odd cells as one number; take off the 1, the 3, and both; mark the even-odd-even line.
+
+**Checks:** all right. Odd cells 25 → 7, even 20 → 2, 7 + 2 = 9. Roots 13579 → 7, 3579 → 6, 1579 → 4, 579 → 3 (off by 1, 3 and 4). 456 and 258 → 15 → 6. With the comma: 13 + 579 = 592 etc. keep the root and the remainder by 37 (1000 = 27 × 37 + 1). 13579 = 37 × 367; 1579 prime.
+The question "not a discovery" was about the long walks' outputs only (published twin counts, forced "missed 0").
+File: `math/theorems/owner_odd_even_grid_13579_2026_10_24.py`.
