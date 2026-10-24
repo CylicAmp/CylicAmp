@@ -232,3 +232,7 @@ run the walk up to a hundred trillion
 
 ===== #435  2026-10-24T07:54:01.074Z =====
 You know, before you do that, did I show you this one thing I was working on where basically there's like 360 something thousand permutations that I can make with like a 3x3 grid? But I was trying to figure out, like, how do we make that a much smaller number? Because, I mean, who wants to look through all that shit? Especially if we're trying to pinpoint certain things and have a way to organize it. And so that's what I did. Did I bring that script here for you to look at?
+
+
+===== #436  2026-10-24T08:12:17.911Z =====
+Well, what did going to 10 trillion achieve? Or a trillion?
