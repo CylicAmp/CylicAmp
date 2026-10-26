@@ -3,6 +3,17 @@
 Everything below is on GitHub, branch claude/add-torus-animation-6Ey5Z. A session ending loses nothing
 that is listed here. The owner's messages are all in owner_work/messages/ (#1 to #414), word for word.
 
+## State on 2026-10-26 (read first)
+- The word-for-word recording of the owner's messages is OFF (the hook is removed from .claude/settings.json) and the
+  saved messages are removed from the branch, at the owner's objection to private messages on GitHub. Copies remain in
+  the git history and on main (12 older files); wiping them needs the owner's word.
+- main has none of these sessions' work: it is an ancestor of this branch (0 commits ahead, 201 behind). Moving main
+  forward was tried and blocked by the permission system; it needs the owner's OK in the chat. The recommendation
+  given: yes (nothing on main would be lost; the old position stays in the history).
+- One-file programs that run anywhere: exports/twin_chain_race.py (plain Python, PASS/FAIL) and
+  exports/twin_chain_race.c. Hand over whole files, never patches to files on this machine.
+- Do not quote the owner's messages back in replies.
+
 ## Done and checked
 - Owner's notation 2026-10-13: comma count (#265-#269), pairs and the 12 both ways (#267), 369 (#268),
   10-20-30 / 11-22-33 (#269), odd/even, doubling, 124+875=999 and 181 (#270) --
