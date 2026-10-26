@@ -1,0 +1,96 @@
+Owner's messages, 2026-10-26, verbatim as written (UTC timestamps).
+Nothing below is edited, except credentials, which are removed and marked where they were.
+
+
+===== #440  2026-10-26T00:45:26.850Z =====
+put together the list of where you were wrong...n = 222_222_222
+m = n + 1
+
+print(f"{n} + 1 = {m}")
+print(f"\n{n}: even = {n % 2 == 0}, digits = {len(str(n))}")
+print(f"{m}: odd = {m % 2 == 1}, digits = {len(str(m))}")
+
+# Count digits
+digits_n = list(str(n))
+digits_m = list(str(m))
+
+from collections import Counter
+c_n = Counter(digits_n)
+c_m = Counter(digits_m)
+
+print(f"\nDigit composition of {n}:")
+for d in sorted(c_n.keys()):
+    print(f"  '{d}': {c_n[d]} times")
+
+print(f"\nDigit composition of {m}:")
+for d in sorted(c_m.keys()):
+    print(f"  '{d}': {c_m[d]} times")
+
+# The user's observation: 8 twos and 1 three
+print(f"\n{m}: eight 2's and one 3")
+print(f"  8 twos = 4 × 2")
+print(f"  1 three = 3 = 1.5 × 2")
+print(f"  Ratio: 8 : 3 = 4 : 1.5")
+
+# Structural factorization
+print(f"\nFactorization:")
+print(f"  {n} = 2 × 111,111,111")
+print(f"  111,111,111 = 37 × 3,003,003 = {37 * 3003003}")
+print(f"  So {n} = 74 × 3,003,003 = {74 * 3003003}")
+
+# Check if 222,222,223 is prime
+def is_prime(n):
+    if n < 2: return False
+    if n in (2,3): return True
+    if n % 2 == 0: return False
+    for i in range(3, int(n**0.5) + 1, 2):
+        if n % i == 0:
+            return False, i
+    return True, None
+
+result, factor = is_prime(m)
+print(f"\n{m} is prime: {result}")
+if not result:
+    print(f"  Smallest factor: {factor}")
+    print(f"  {m} = {factor} × {m // factor}")
+
+# Digital roots
+def dr(n):
+    return (n - 1) % 9 + 1 if n > 0 else 0
+
+print(f"\nDigital root of {n}: {dr(n)}")
+print(f"Digital root of {m}: {dr(m)}")
+print(f"Sum of digits of {n}: {sum(int(d) for d in str(n))}")
+print(f"Sum of digits of {m}: {sum(int(d) for d in str(m))}")
+
+
+222222222 + 1 = 222222223
+
+222222222: even = True, digits = 9
+222222223: odd = True, digits = 9
+
+Digit composition of 222222222:
+  '2': 9 times
+
+Digit composition of 222222223:
+  '2': 8 times
+  '3': 1 times
+
+222222223: eight 2's and one 3
+  8 twos = 4 × 2
+  1 three = 3 = 1.5 × 2
+  Ratio: 8 : 3 = 4 : 1.5
+
+Factorization:
+  222222222 = 2 × 111,111,111
+  111,111,111 = 37 × 3,003,003 = 111111111
+  So 222222222 = 74 × 3,003,003 = 222222222
+
+222222223 is prime: False
+  Smallest factor: 449
+  222222223 = 449 × 494927
+
+Digital root of 222222222: 9
+Digital root of 222222223: 1
+Sum of digits of 222222222: 18
+Sum of digits of 222222223: 19
