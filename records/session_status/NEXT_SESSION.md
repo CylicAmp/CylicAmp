@@ -48,6 +48,10 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
   math/theorems/owner_engine_walk_1t_2026_10_23.py) and to 10,000,000,000,000 (30,198,862,775 pairs, 0 missed,
   2 h 11 min in C; tools/owner_walk_fast.c, records/owner_walk_1e13.json, math/theorems/owner_engine_walk_10t_2026_10_24.py);
   the page walks to 10,000,000.
+- The twin chain race (#439, #443): the root of n picks the chain (3 -> (5,7), 6 -> (2,4), 9 -> (8,1)); to 10^12 the lead
+  changed 69,231 times, (8,1) leads, and the chains stay ~3,744 apart where a coin gives ~28,000 (tools/owner_race_fast.c,
+  records/owner_race_1e12.json, math/theorems/owner_twin_chain_race_1e12_2026_10_26.py). This is the walk's one result
+  that is neither forced nor published (as found).
 - The pasted data bundle and the SSR failure (#425): math/theorems/pasted_bundle_mod37_twins_g5_audit_2026_10_23.py.
 - The NameError in the owner's SSR notebook cell (#424): math/theorems/ssr_sweep_name_error_fix_2026_10_23.py.
 - Reply rules added this week (CLAUDE.md): "missing" only when a check is blocked (#408); a reply names a
