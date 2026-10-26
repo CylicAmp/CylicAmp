@@ -815,3 +815,17 @@ File: `math/theorems/owner_odd_even_grid_13579_2026_10_24.py`.
 
 **Checks:** right: 1 + 2 = 3, and 1|1 is 1 + 1 = 2 for the numbers plus 1 bar = 3. The four row readings (#427): 11 (digit, bars), 21 (count, digit), 1/2 (bars over count), 2/1 (count over bars) — 1/2 and 2/1 are the owner's 1 and 2 at their first step (#403), multiplying to 1.
 File: `math/theorems/owner_1_plus_2_bars_2026_10_26.py`.
+
+## #442 (2026-10-26) — 1|1 + 37, and the loop 1)(1 + 3 + 7
+
+**As typed:** "1|1+37=4+8=1+2=3" · "1)(1+3=4+7=1)(1+3=4+7=1)(1+3=4+7=1)(1"
+
+**Cleaned:**
+
+    11 + 37 = 48 → 4 + 8 = 12 → 1 + 2 = 3
+    1)(1 → 1 + 3 = 4 → 4 + 7 = 11 = 1)(1 → 1 + 3 = 4 → 4 + 7 = 11 = 1)(1 → 1 + 3 = 4 → 4 + 7 = 11 = 1)(1
+
+**Process:** add 37 to 11 and fold; then add 37's digits one at a time to 1, reach 11, split it at the bracket into its two 1s, start again from the second; three times.
+
+**Checks:** right. Each loop is 1 + 3 + 7 = 11 (3 + 7 = 10). The two lines are one move: +37 whole, then +3 and +7. +37 adds 1 to the root (37 → 1): 11 (2) → 48 (3). Both ways: restarting at the second 1 (the owner's way) gives 1 → 4 → 11 three times; carrying the total gives 1 4 11 14 21 24 31, roots 1 4 2 5 3 6 4. By 37, 11 and 48 leave the same 11.
+File: `math/theorems/owner_11_plus_37_loop_2026_10_26.py`.
