@@ -17,3 +17,13 @@ description: Produce a dependency-free, self-checking Python file of a result so
 5. **Give the owner** the path, the phone command
    (`cd ~/CylicAmp-real && git pull`, then `python <path>`), and the full
    code inline so it can be pasted into any Python 3 runner.
+
+## Give whole files, never a patch (2026-10-26)
+
+Code the owner may take to another assistant or computer is always a complete file that runs by itself: no edits to
+files on this machine, no paths from this machine (/tmp/claude-0/..., tools/...), only the standard library or one
+compile line. Example that exposed it: the twin chain race was handed over as a Python script that rewrote
+tools/owner_walk_fast.c into a new C file and compiled it to a /tmp path here; another assistant could not run it
+("that file isn't on my computer") and the owner had to come back for the file. The fix: exports/twin_chain_race.py
+(plain Python, PASS/FAIL against the known counts) and exports/twin_chain_race.c (one file, gcc -O3 -fopenmp).
+
