@@ -1,6 +1,6 @@
 # Where Claude was wrong in this project
 
-Put together 2026-10-26 at the owner's request (owner_work #441). Every entry points to where the record shows it:
+Put together 2026-10-26 at the owner's request (owner_work #440). Every entry points to where the record shows it:
 an owner_work message number, a commit, a CI run, CLAUDE.md, a skill, or a file. Only entries with such a pointer
 are listed. "Caught by" says who found it first.
 

@@ -1,6 +1,6 @@
 # CLASS: AUDIT
 """
-The pasted script and output on 222,222,222 + 1 = 222,222,223 (owner_work #441, 2026-10-26). Audit on arrival.
+The pasted script and output on 222,222,222 + 1 = 222,222,223 (owner_work #440, 2026-10-26). Audit on arrival.
 The script and output are from another tool, relayed by the owner; its line "The user's observation: 8 twos and 1 three"
 is the script's.
 

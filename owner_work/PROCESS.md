@@ -804,3 +804,14 @@ File: `math/theorems/owner_7777_groups_pairs_2026_10_23.py`.
 **Checks:** all right. Odd cells 25 → 7, even 20 → 2, 7 + 2 = 9. Roots 13579 → 7, 3579 → 6, 1579 → 4, 579 → 3 (off by 1, 3 and 4). 456 and 258 → 15 → 6. With the comma: 13 + 579 = 592 etc. keep the root and the remainder by 37 (1000 = 27 × 37 + 1). 13579 = 37 × 367; 1579 prime.
 The question "not a discovery" was about the long walks' outputs only (published twin counts, forced "missed 0").
 File: `math/theorems/owner_odd_even_grid_13579_2026_10_24.py`.
+
+## #441 (2026-10-26) — 1 + 2 = 1|1
+
+**As typed:** "1+2=1|1="
+
+**Cleaned:** 1 + 2 = 1|1 = ?
+
+**Process:** add 1 and 2; write the answer in the bars (#427, Number + number of |): two 1s and one bar.
+
+**Checks:** right: 1 + 2 = 3, and 1|1 is 1 + 1 = 2 for the numbers plus 1 bar = 3. The four row readings (#427): 11 (digit, bars), 21 (count, digit), 1/2 (bars over count), 2/1 (count over bars) — 1/2 and 2/1 are the owner's 1 and 2 at their first step (#403), multiplying to 1.
+File: `math/theorems/owner_1_plus_2_bars_2026_10_26.py`.
