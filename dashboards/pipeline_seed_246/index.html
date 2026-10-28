@@ -1,0 +1,84 @@
+<title>CylicAmp Pipeline — Seed 246</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@700&display=swap">
+<style>
+/* Layout: one reading column; the run output sits in a plate that scrolls sideways on its own. */
+:root {
+  --bg: #eef0f2; --panel: #ffffff; --ink: #1b2026; --muted: #5b6672; --line: #d3d8de; --plate: #f6f7f8; --accent: #1f5f8b;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-code: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #121519; --panel: #1a1f25; --ink: #e6e9ed; --muted: #9aa5b1; --line: #2e353d; --plate: #222830; --accent: #6fb3e0; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #121519; --panel: #1a1f25; --ink: #e6e9ed; --muted: #9aa5b1; --line: #2e353d; --plate: #222830; --accent: #6fb3e0; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 48px; }
+main { max-width: 760px; margin: 0 auto; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 20px; min-width: 0; }
+h1 { font-family: var(--font-display); font-size: 2rem; line-height: 1.1; margin: 0 0 8px; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 28px 0 8px; }
+p, li { max-width: 65ch; }
+ul, ol { padding-left: 1.3em; display: grid; gap: 4px; }
+strong { color: var(--accent); }
+.code { overflow-x: auto; background: var(--plate); border: 1px dashed var(--line); border-radius: 4px; }
+pre { margin: 0; padding: 12px 14px; font-family: var(--font-code); font-size: 0.88rem; line-height: 1.5; font-variant-numeric: tabular-nums; }
+code { font-family: var(--font-code); font-size: 0.92em; }
+.note { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: 28px; padding-top: 12px; }
+</style>
+<main>
+<h1>CylicAmp Pipeline Results — Seed 246</h1>
+<h2>Run Output</h2>
+<div class="code"><pre>Seed:              246
+Meta multiplier:   8  (after 3 iterations)
+Field threshold:   0.9500
+Insight Score:     104832.0000
+Spectrum Status:   FAIL
+Stability Ratio:   0.0000
+Seed DR:           3
+Seed mod 37:       24  (sovereign: False)
+Seed 137-orbit:    (18, 24, 32)
+Cascade orbit hits: 7/37  [24, 32, 61, 69, 98, 106, 135]
+Sovereign status:  Node 24 -&gt; Res 32 [PURGE]: Non-Framework Entropy
+ABCABC orbit pos:  0  (orbit start)
+Lucas orbit hits:  [(5, 18)]  — L(5)=18 is in the seed orbit
+Orbit QR status:   {24: -1, 18: -1, 32: -1}  all non-QR: True</pre></div>
+<h2>What This Means</h2>
+<p><strong>Seed 246</strong> has digital root 3 and residue 24 mod 37.</p>
+<p><strong>The orbit (18, 24, 32)</strong> under the 137-map (multiply by 26 mod 37):</p>
+<ul>
+<li>All three nodes are non-quadratic-residues mod 37</li>
+<li>The sovereign anchors {4, 9, 25, 30} are all QR — the seed orbit is their mirror</li>
+</ul>
+<p><strong>Cascade {8, 13, 24}</strong> generates 37 elements.</p>
+<ul>
+<li>7 of those 37 elements fall in the seed orbit</li>
+<li>Including 135 — the cascade terminal value</li>
+</ul>
+<p><strong>ABCABC orbit</strong> starts at residue 24 — the seed&#x27;s own residue is position 0</p>
+<p><strong>Lucas sequence</strong> L(5) = 18 hits the orbit at position 5</p>
+<p><strong>Meta-engine history:</strong></p>
+<ul>
+<li>Step 1: seed 246, DR=3, multiplier → 3</li>
+<li>Step 2: seed 244, DR=1, multiplier → 5</li>
+<li>Step 3: seed 313, DR=7, PRIME, multiplier → 8</li>
+</ul>
+<h2>Pipeline Steps Connected</h2>
+<ol>
+<li>MetaEngine — evolving multiplier from seed</li>
+<li>Field simulation — threshold feeds trajectory angle</li>
+<li>TrajectoryGenerator — PHI/PSI spiral</li>
+<li>InsightEngine — modular filter + weighted score</li>
+<li>DualityVerifier — DR=7 prime stability check</li>
+<li>Ulam spiral — GF(37) cell classification</li>
+<li>Cascade {8,13,24} — orbit hit count</li>
+<li>Medusa sovereign — LOCKED/GATED/PURGE classification</li>
+<li>ABCABC orbit — position in the 36-element primitive root orbit</li>
+<li>Lucas sequence — orbit intersection</li>
+<li>QR classification — Legendre symbol on orbit nodes</li>
+</ol>
+<h2>To Run</h2>
+<div class="code"><pre>python3 cylicamp/engine_integration.py</pre></div>
+<p class="note">Rebuilt 2026-10-28 from PIPELINE_RESULTS.md as committed on 2026-07-15 (commit 1eeed02), 24 minutes after the original page of this name was last updated. The original page link no longer opens. One line changed in the repo since: on 2026-09-05 the PURGE reason "Non-Framework Entropy" became "res not in ST".</p>
+</main>
