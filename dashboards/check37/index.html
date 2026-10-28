@@ -1,0 +1,240 @@
+<title>Check 37</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap">
+<style>
+/* Layout: one column of stamped-label panels; the code itself is the largest thing on the page. */
+:root {
+  --bg: #eef0f2;
+  --panel: #ffffff;
+  --ink: #1b2026;
+  --muted: #5b6672;
+  --line: #d3d8de;
+  --plate: #f6f7f8;
+  --accent: #1f5f8b;
+  --check-bg: #1f5f8b;
+  --check-fg: #ffffff;
+  --good: #1d7a46;
+  --good-bg: #e3f3ea;
+  --bad: #b3261e;
+  --bad-bg: #fbe7e5;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-code: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121519; --panel: #1a1f25; --ink: #e6e9ed; --muted: #9aa5b1; --line: #2e353d; --plate: #222830;
+    --accent: #6fb3e0; --check-bg: #6fb3e0; --check-fg: #0e1216;
+    --good: #5fd08f; --good-bg: #16301f; --bad: #ff8a80; --bad-bg: #3a1a18; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121519; --panel: #1a1f25; --ink: #e6e9ed; --muted: #9aa5b1; --line: #2e353d; --plate: #222830;
+  --accent: #6fb3e0; --check-bg: #6fb3e0; --check-fg: #0e1216;
+  --good: #5fd08f; --good-bg: #16301f; --bad: #ff8a80; --bad-bg: #3a1a18; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
+}
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 20px; }
+header h1 { font-family: var(--font-display); font-weight: 700; font-size: 2.4rem; line-height: 1.05; margin: 0; letter-spacing: 0.01em; }
+header p { margin: 8px 0 0; color: var(--muted); max-width: 62ch; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; display: grid; gap: 12px; min-width: 0; }
+.panel h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.08em; margin: 0; color: var(--muted); }
+label { font-weight: 500; font-size: 0.95rem; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+input[type="text"] {
+  flex: 1 1 220px; min-width: 0; font-family: var(--font-code); font-size: 1.1rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 10px 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--plate); color: var(--ink);
+}
+input[type="text"]:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button {
+  font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; padding: 10px 14px; border-radius: 4px; cursor: pointer;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--check-fg);
+}
+button.quiet { background: transparent; color: var(--accent); }
+.plate {
+  font-family: var(--font-code); font-size: clamp(1.4rem, 6vw, 2.4rem); font-weight: 600; letter-spacing: 0.08em;
+  background: var(--plate); border: 1px dashed var(--line); border-radius: 4px; padding: 14px 16px; overflow-wrap: anywhere; min-width: 0;
+}
+.plate .ck { background: var(--check-bg); color: var(--check-fg); padding: 0 0.12em; border-radius: 3px; margin-left: 0.06em; }
+.plate .hit { color: var(--bad); text-decoration: underline; text-underline-offset: 0.18em; }
+.msg { font-size: 0.95rem; color: var(--muted); min-height: 1.5em; }
+.verdict { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; padding: 6px 12px; border-radius: 999px; width: fit-content; }
+.verdict.good { color: var(--good); background: var(--good-bg); }
+.verdict.bad { color: var(--bad); background: var(--bad-bg); }
+.steps { overflow-x: auto; }
+table { border-collapse: collapse; font-family: var(--font-code); font-size: 0.9rem; font-variant-numeric: tabular-nums; min-width: 100%; }
+th, td { text-align: right; padding: 4px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-family: var(--font-body); font-weight: 600; color: var(--muted); font-size: 0.8rem; }
+td:first-child, th:first-child { text-align: center; }
+tr.final td { font-weight: 600; color: var(--accent); }
+.why { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.why li { border-left: 3px solid var(--line); padding-left: 10px; }
+.why b { font-weight: 600; }
+.small { font-size: 0.85rem; color: var(--muted); }
+code { font-family: var(--font-code); font-size: 0.92em; }
+@media (prefers-reduced-motion: no-preference) { .verdict { transition: background-color .15s ease; } }
+</style>
+
+<main>
+  <header>
+    <h1>Check 37</h1>
+    <p>Adds one check character to any code of letters and digits, then catches every single wrong symbol and every swap of two symbols. It is the international standard ISO/IEC 7064 MOD 37-2, and it runs on arithmetic by 37.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="h-make">
+    <h2 id="h-make">Make a code</h2>
+    <label for="make-in">Your code (letters A–Z, digits 0–9)</label>
+    <div class="row">
+      <input type="text" id="make-in" value="CYLICAMP" autocomplete="off" autocapitalize="characters" spellcheck="false">
+      <button type="button" id="make-btn">Add check</button>
+    </div>
+    <div class="plate" id="make-out" aria-live="polite"></div>
+    <div class="row">
+      <button type="button" class="quiet" id="copy-btn">Copy code</button>
+      <button type="button" class="quiet" id="typo-btn">Make a typo</button>
+      <button type="button" class="quiet" id="swap-btn">Swap two neighbours</button>
+    </div>
+    <div class="msg" id="make-msg"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-test">
+    <h2 id="h-test">Test a code</h2>
+    <label for="test-in">Code with its check character at the end</label>
+    <div class="row">
+      <input type="text" id="test-in" value="G123498654321H" autocomplete="off" autocapitalize="characters" spellcheck="false">
+      <button type="button" id="test-btn">Test</button>
+    </div>
+    <div id="test-out" aria-live="polite"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-steps">
+    <h2 id="h-steps">The steps</h2>
+    <p class="small">Symbols are numbers: 0–9 are 0–9, A–Z are 10–35, and * is 36. Each step: total → 2 × total + symbol, keep what is left by 37. A code is right when the whole code, check included, ends on 1.</p>
+    <div class="steps"><table id="steps"></table></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-why">
+    <h2 id="h-why">Why it catches mistakes</h2>
+    <ul class="why">
+      <li><b>One wrong symbol</b> moves the total by the difference times a power of 2. 37 is prime, so that is never a multiple of 37: always caught.</li>
+      <li><b>Two symbols swapped</b>, d places apart, move it by (a − b) × a power of 2 × (2<sup>d</sup> − 1). 2 runs through all 36 remainders before it comes back to 1, so 2<sup>d</sup> − 1 is a multiple of 37 only when d is 36. Every swap in a code of up to 36 symbols is caught.</li>
+      <li><b>A doubled symbol mistyped</b> (AA → BB) moves it by 3 × (a − b) × a power of 2: caught.</li>
+      <li><b>Several random mistakes at once</b> slip through 1 time in 37, about 2.7%.</li>
+    </ul>
+    <p class="small">Checked against python-stdnum on 200,000 codes with 0 differences. Source: <code>exports/check37.py</code> in the CylicAmp repository.</p>
+  </section>
+</main>
+
+<script>
+(() => {
+  const SYM = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ*";
+  const M = 37;
+  const $ = id => document.getElementById(id);
+  const clean = s => s.toUpperCase().replace(/\s+/g, "");
+  const total = code => { let t = 0; for (const ch of code) t = (2 * t + SYM.indexOf(ch)) % M; return t; };
+  const checkChar = code => SYM[(((1 - 2 * total(code)) % M) + M) % M];
+  const isRight = s => s.length >= 2 && [...s.slice(0, -1)].every(c => SYM.indexOf(c) >= 0 && c !== "*") && SYM.indexOf(s.slice(-1)) >= 0 && total(s) === 1;
+  const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  let made = "";
+
+  function plate(code, hits, withCheck) {
+    return [...code].map((ch, i) => {
+      const last = withCheck && i === code.length - 1;
+      const cls = hits && hits.includes(i) ? "hit" : (last ? "ck" : "");
+      return cls ? `<span class="${cls}">${esc(ch)}</span>` : esc(ch);
+    }).join("");
+  }
+
+  function steps(code) {
+    let t = 0;
+    const rows = [`<tr><th>symbol</th><th>number</th><th>2 × total + number</th><th>by 37</th></tr>`];
+    [...code].forEach((ch, i) => {
+      const v = SYM.indexOf(ch);
+      const raw = 2 * t + v;
+      t = raw % M;
+      const final = i === code.length - 1;
+      rows.push(`<tr${final ? ' class="final"' : ""}><td>${esc(ch)}</td><td>${v}</td><td>2 × ${(raw - v) / 2} + ${v} = ${raw}</td><td>${t}</td></tr>`);
+    });
+    $("steps").innerHTML = rows.join("");
+  }
+
+  function make() {
+    const code = clean($("make-in").value);
+    if (!code || [...code].some(c => SYM.indexOf(c) < 0 || c === "*")) {
+      $("make-out").textContent = "";
+      $("make-msg").textContent = "Use letters A–Z and digits 0–9 only.";
+      made = "";
+      return;
+    }
+    made = code + checkChar(code);
+    $("make-out").innerHTML = plate(made, null, true);
+    $("make-msg").textContent = `Check character: ${made.slice(-1)}. The highlighted symbol goes on the end.`;
+    steps(made);
+  }
+
+  function showTest(s, note) {
+    const ok = isRight(s);
+    $("test-out").innerHTML = `<div class="verdict ${ok ? "good" : "bad"}">${ok ? "Right" : "Wrong"}: ${esc(s)}</div>` +
+      (note ? `<div class="msg">${note}</div>` : "");
+    if (s.length && [...s].every(c => SYM.indexOf(c) >= 0)) steps(s);
+  }
+
+  function test() {
+    const s = clean($("test-in").value);
+    if (!s) { $("test-out").innerHTML = `<div class="msg">Type a code with its check character.</div>`; return; }
+    if ([...s].some(c => SYM.indexOf(c) < 0)) { $("test-out").innerHTML = `<div class="msg">Use letters A–Z, digits 0–9, and * only as the last symbol.</div>`; return; }
+    showTest(s, isRight(s) ? "The total ends on 1." : `The total ends on ${total(s)}, not 1.`);
+  }
+
+  function mistake(kind) {
+    if (!made) make();
+    if (!made) return;
+    const s = [...made];
+    let hits, what;
+    if (kind === "typo") {
+      const i = Math.floor(Math.random() * s.length);
+      const pool = (i === s.length - 1 ? SYM : SYM.slice(0, 36)).replace(s[i], "");
+      s[i] = pool[Math.floor(Math.random() * pool.length)];
+      hits = [i];
+      what = `Changed symbol ${i + 1} from ${made[i]} to ${s[i]}.`;
+    } else {
+      const pairs = [];
+      for (let i = 0; i + 1 < s.length; i++) if (s[i] !== s[i + 1]) pairs.push(i);
+      if (!pairs.length) { $("make-msg").textContent = "Every neighbour pair is the same symbol, so a swap changes nothing."; return; }
+      const i = pairs[Math.floor(Math.random() * pairs.length)];
+      [s[i], s[i + 1]] = [s[i + 1], s[i]];
+      hits = [i, i + 1];
+      what = `Swapped symbols ${i + 1} and ${i + 2}.`;
+    }
+    const bad = s.join("");
+    $("make-out").innerHTML = plate(bad, hits, false);
+    $("test-in").value = bad;
+    showTest(bad, `${what} ${isRight(bad) ? "" : "Caught."}`);
+  }
+
+  $("make-btn").addEventListener("click", make);
+  $("make-in").addEventListener("keydown", e => { if (e.key === "Enter") make(); });
+  $("test-btn").addEventListener("click", test);
+  $("test-in").addEventListener("keydown", e => { if (e.key === "Enter") test(); });
+  $("typo-btn").addEventListener("click", () => mistake("typo"));
+  $("swap-btn").addEventListener("click", () => mistake("swap"));
+  $("copy-btn").addEventListener("click", () => {
+    if (!made) return;
+    const done = () => { $("make-msg").textContent = `Copied ${made}.`; };
+    try {
+      navigator.clipboard.writeText(made).then(done, () => { $("make-msg").textContent = `Select and copy: ${made}`; });
+    } catch (e) { $("make-msg").textContent = `Select and copy: ${made}`; }
+  });
+
+  make();
+  test();
+  steps(made);
+})();
+</script>
