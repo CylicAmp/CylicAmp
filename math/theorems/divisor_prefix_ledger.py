@@ -303,7 +303,10 @@ def ledger(k: int, pool: List[int], n_vars: Optional[int] = None) -> Dict:
         "level_2_closures": sum(1 for _, c in closed if c.level == 2),
     }
 
-_NAMES = "2qrst"
+# coordinate 0 is the prime 2; the rest are generic prime names. Only ever
+# APPEND to this, so that renderings from earlier k are unchanged. It must be
+# at least as long as n_vars, which grows with k (k=6 needs 6).
+_NAMES = "2qrstuvwxyz"
 
 def render(rep: Shape) -> str:
     out = []
@@ -311,6 +314,10 @@ def render(rep: Shape) -> str:
         if sum(v) == 0:
             out.append("1")
             continue
+        if len(v) > len(_NAMES):
+            raise ValueError(
+                f"render: {len(v)} variables but only {len(_NAMES)} names; "
+                f"append more to _NAMES")
         out.append("".join(_NAMES[i] + ("" if e == 1 else f"^{e}")
                            for i, e in enumerate(v) if e))
     return "{" + ", ".join(out) + "}"
