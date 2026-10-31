@@ -245,6 +245,58 @@ def test_step1_profile_is_structural() -> None:
     print("[ok] step 1: the profile is structural, independent of realization")
 
 
+def test_step1_verified_against_realizations() -> None:
+    """INDEPENDENT check of step 1, the step that kills 35 of 86 orbits.
+
+    Rather than re-deriving the profile arithmetic, realize every orbit over
+    a pool of odd primes and confirm, on each realization, that
+      (A) sum d^2 = A + 4B (mod 8), and
+      (B) every shape whose profile step 1 kills really does fail the
+          v_2(n) branch it would have to sit in.
+    """
+    import os
+    import sys as _s
+    _s.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import divisor_prefix_ledger as ledger
+
+    reps = ledger.orbit_reps(ledger.labeled_universe(7), 7)
+    assert len(reps) == 86, len(reps)
+    odd = [3, 5, 7, 11, 13, 17]
+    killed = 0
+    tested = 0
+    for rep in reps:
+        A, B, C = profile_of(rep)
+        if (A, B, C) not in PROFILES_SURVIVING:
+            killed += 1
+        nv = len(rep[0])
+        slots = [i for i in range(nv) if i and any(v[i] for v in rep)]
+        for assign in permutations(odd, len(slots)):
+            pmap: Dict[int, int] = {0: 2}
+            pmap.update(dict(zip(slots, assign)))
+            vals = []
+            for v in rep:
+                x = 1
+                for i, e in enumerate(v):
+                    if e:
+                        x *= pmap[i] ** e
+                vals.append(x)
+            if len(set(vals)) < 7:
+                continue
+            tested += 1
+            n = sum(x * x for x in vals)
+            assert n % 8 == (A + 4 * B) % 8, (rep, vals)          # (A)
+            if (A, B, C) in PROFILES_SURVIVING:
+                continue
+            fits = ((C == 0 and B == 0 and n % 2 == 1)
+                    or (C == 0 and B > 0 and n % 4 == 2 and B <= A)
+                    or (C >= 1 and B >= 1 and n % 4 == 0 and B <= A))
+            assert not fits, (rep, (A, B, C), vals, n)            # (B)
+    assert killed == 35, killed
+    assert tested > 10000, tested
+    print(f"[ok] step 1 verified on {tested:,} realizations of all 86 orbits: "
+          f"sum d^2 = A+4B (mod 8), and all {killed} killed shapes fail their branch")
+
+
 def test_step2_profile_610() -> None:
     for p in primes_upto(3000):
         if p >= 3:
@@ -356,6 +408,7 @@ def test_does_not_prove_too_much() -> None:
 def self_test() -> None:
     test_step1_profiles()
     test_step1_profile_is_structural()
+    test_step1_verified_against_realizations()
     test_step2_profile_610()
     test_step3_profile_412()
     test_step4_chain()
