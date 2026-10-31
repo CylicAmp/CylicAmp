@@ -121,6 +121,23 @@ is only one odd number in that range. No configuration exists.
 Every case is contradicted. k = 6 is closed.
 
 --------------------------------------------------------------------
+AGREEMENT WITH THE LEDGER'S INDEPENDENT ENUMERATION
+--------------------------------------------------------------------
+divisor_prefix_ledger.py enumerates the k=6 shapes from scratch: 24 are
+admissible as a divisor prefix, and it closes 21 at Level 1 (11 by
+PARITY_EVEN_K, 10 by MODULAR_PARITY). Three it cannot finish:
+
+    {1, u, t, s, 2, 2^2}    COFACTOR_SIZE, Level 2   profile (4,1,1)
+    {1, u, t, s, 2, 2u}     COFACTOR_SIZE, Level 2   profile (4,2,0)
+    {1, u, t, 2, u^2, 2u}   OPEN                     profile (4,2,0)
+
+The profile decides which step above closes each one. The two with C = 0
+have v_2(n) = 1 and A = 4, and step 3's congruence admits only A = 2 or 6,
+so they die on the modular count alone. The one with profile (4,1,1) is
+exactly the configuration step 4 forces, and steps 5-7 finish it. So all
+three are Level 1 here, and nothing is left open at k=6.
+
+--------------------------------------------------------------------
 CONSISTENCY
 --------------------------------------------------------------------
 The argument must not prove too much. It is specific to k = 6: step 2's
@@ -383,6 +400,46 @@ def test_does_not_prove_too_much() -> None:
     print("[ok] anchors survive; 130 (A=2,B=2,v_2=1) shows exactly what k=6 breaks")
 
 
+def test_covers_the_ledger_residue() -> None:
+    """CROSS-CHECK against divisor_prefix_ledger's independent enumeration.
+
+    The ledger finds 24 admissible k=6 shapes and closes 21 at Level 1 with
+    PARITY_EVEN_K and MODULAR_PARITY, leaving three it cannot finish:
+
+        {1, u, t, s, 2, 2^2}    COFACTOR_SIZE, Level 2
+        {1, u, t, s, 2, 2u}     COFACTOR_SIZE, Level 2
+        {1, u, t, 2, u^2, 2u}   OPEN
+
+    Each is closed at Level 1 above. Which step does it is decided purely by
+    the (A, B, C) profile, so the mapping can be checked directly."""
+    u, t, sp = 7, 11, 13          # concrete odd primes, u the least
+    shapes = {
+        "{1,u,t,s,2,2^2}": [1, u, t, sp, 2, 4],
+        "{1,u,t,s,2,2u}": [1, u, t, sp, 2, 2 * u],
+        "{1,u,t,2,u^2,2u}": [1, u, t, 2, u * u, 2 * u],
+    }
+    verdicts = {}
+    for name, prefix in shapes.items():
+        A, B, C = profile(prefix)
+        assert A + B + C == 6, (name, A, B, C)
+        if C == 0:
+            # v_2(n) = 1, so n = 2 (mod 4), i.e. n mod 8 in {2, 6};
+            # step 3's congruence admits only A in {2, 6}
+            assert A not in (2, 6) or B == 4, (name, A, B)
+            assert (5 * A) % 8 not in (2, 6), (name, A, (5 * A) % 8)
+            verdicts[name] = "step 3 (mod 8: A=4 is not a solution of 5A=2,6 mod 8)"
+        else:
+            assert (A, B, C) == (4, 1, 1), (name, A, B, C)
+            verdicts[name] = "steps 5-7 (prefix rule w<2p, then lcm rule)"
+    assert set(verdicts) == set(shapes)
+    assert sum(1 for v in verdicts.values() if v.startswith("step 3")) == 2
+    assert sum(1 for v in verdicts.values() if v.startswith("steps 5-7")) == 1
+    for name, how in verdicts.items():
+        print(f"       {name:<20} profile {profile(shapes[name])}  ->  {how}")
+    print("[ok] cross-check: the ledger's 3 residual k=6 shapes are all closed "
+          "at Level 1 above")
+
+
 def self_test() -> None:
     test_step1_parity()
     test_step2_mod8_classes()
@@ -394,6 +451,7 @@ def self_test() -> None:
     test_step7_small_p_vacuous()
     test_step6_closes_every_configuration()
     test_does_not_prove_too_much()
+    test_covers_the_ledger_residue()
     test_brute_force_no_k6()
     print("\nAll self-tests passed.")
     print("THEOREM (k=6), Level 1: no n is the sum of the squares of its six")
