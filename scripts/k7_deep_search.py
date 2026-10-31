@@ -33,7 +33,14 @@ def lcm_of(vs):
     o=1
     for x in vs: o=o*x//gcd(o,x)
     return o
-def smallest(n,k):
+def smallest_divisors(n,k):
+    """The k smallest divisors of n, by trial division to sqrt(n).
+
+    Returns FEWER than k entries when tau(n) < k. Callers must check the
+    length: a short return means n cannot host a k-element prefix at all,
+    which is a different outcome from a prefix that sums wrongly, and
+    slicing hides the difference.
+    """
     d=[]
     for i in range(1,isqrt(n)+1):
         if n%i==0: d.append(i); d.append(n//i)
@@ -72,7 +79,9 @@ for name,mk,fac in JOBS:
             cand+=1
             n=sum(d*d for d in V)
             if n%lcm_of(V): continue
-            if sorted(V)!=smallest(n,7): continue
+            ds=smallest_divisors(n,7)
+            if len(ds)<7: continue          # tau(n) < 7: cannot host a prefix
+            if sorted(V)!=ds: continue
             hits.append((v,u,n))
     print(f"  {name:<30} {cand:>8} candidates   {hits if hits else 'NONE'}")
 print(f"\n  v primes tested: {len(P):,}")
