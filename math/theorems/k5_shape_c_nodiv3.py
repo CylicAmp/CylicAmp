@@ -156,6 +156,23 @@ above satisfies it. The 3-adic density of solutions decays (1/3, 2/9,
 compactness Z_3 solutions exist and no power of 3 closes the case
 either. This is further confirmation that (1e), not the discriminant,
 is the real obstruction.
+
+Concretely, and more sharply than the compactness argument: a modular
+obstruction mod 3 would need r_k = 0 (mod 3) for EVERY member of a Pell
+orbit. It does not. At q = 5 (a = 521) the orbit of the class containing
+r_0 = 46593 has r_k mod 3 of period 4, pattern [0, 2, 0, 1], so it leaves
+residue 0 on its first step; r_1 is a 22-digit integer coprime to 3 whose
+D1 is an exact square. Every member of that orbit coprime to 3 lands on
+r = +-2 (mod 9), as the lemma above requires. So the mod-3 route is not
+merely incomplete, it is unavailable.
+
+A NOTE ON THE OLD SEARCH, which was genuinely too small to see any of
+this. The Level 2 evidence this file used to rest on covered q <= 300 and
+r <= q + 800, i.e. r below about 1300. The smallest solution class at
+q = 5 sits at r = 46593, and the orbit then grows by roughly 17 decimal
+digits per step (5, 22, 39, 56, 72, 89, ... digits). A window linear in r
+cannot reach an orbit exponential in k, so that search was never evidence
+of absence. The squares were always there; (1e) is what kills them.
 """
 
 from math import isqrt, sqrt
