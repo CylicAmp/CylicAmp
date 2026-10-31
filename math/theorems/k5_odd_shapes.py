@@ -544,7 +544,9 @@ def self_test() -> None:
     print("         discriminant with no integer root.")
     print("SHAPE B: CLOSED at Level 1 -- r > q is forced, c = q^2 is forced,")
     print("         and its discriminant is never a perfect square.")
-    print("SHAPE C: q=3 branch closed in k5_shape_c_q3.py; 3-does-not-divide-n open.")
+    print("SHAPE C: CLOSED -- q=3 branch in k5_shape_c_q3.py, and the")
+    print("         3-does-not-divide-n branch in k5_shape_c_nodiv3.py.")
+    print("All three k=5 shapes are now closed at Level 1, so k=5 admits no n.")
 
 if __name__ == "__main__":
     self_test()

@@ -16,8 +16,10 @@ SCOPE, precisely: what closes is the 3 | n branch of shape C, which is
 exactly the branch that forces q = 3. The 3-does-NOT-divide-n branch of
 shape C (all three primes above 3) is a DIFFERENT case and is UNTOUCHED
 here -- with c = 0 the count lemma gives n = 5 = 2 (mod 3), consistent
-with 3 not dividing n, so it yields no contradiction. Shape C as a whole
-is therefore not yet closed.
+with 3 not dividing n, so it yields no contradiction. That branch is
+closed separately in k5_shape_c_nodiv3.py (via q^2 | n when s < qr, and
+a consecutive-square bracket when s > qr). With both branches done,
+shape C is closed.
 
 --------------------------------------------------------------------
 LEVEL 1 REDUCTIONS
@@ -464,7 +466,8 @@ def self_test() -> None:
     print("RESULT: the q=3 branch of shape C is CLOSED at Level 1 by the")
     print("        ordering argument (O1)-(O5).")
     print("SCOPE:  shape C's 3-does-not-divide-n branch (q > 3) is untouched,")
-    print("        so shape C as a whole is not yet closed.")
+    print("        The 3-does-not-divide-n branch (q > 3) is closed")
+    print("        separately in k5_shape_c_nodiv3.py, so shape C is CLOSED.")
 
 
 if __name__ == "__main__":
