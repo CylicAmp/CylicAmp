@@ -194,10 +194,9 @@ def is_prime(n: int) -> bool:
     for p in small:
         if n % p == 0:
             return n == p
-    d, s = n - 1, 0
-    while d % 2 == 0:
-        d //= 2
-        s += 1
+    m = n - 1
+    s = (m & -m).bit_length() - 1     # v_2(n-1)
+    d = m >> s
     for a in small:                       # deterministic below 3.3 * 10^24
         x = pow(a, d, n)
         if x in (1, n - 1):

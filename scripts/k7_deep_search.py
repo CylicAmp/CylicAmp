@@ -4,8 +4,9 @@ def mr(n):
     if n<2: return False
     for p in (2,3,5,7,11,13,17,19,23,29,31,37):
         if n%p==0: return n==p
-    d=n-1;s=0
-    while d%2==0: d//=2;s+=1
+    m=n-1
+    s=(m & -m).bit_length()-1        # v_2(n-1)
+    d=m>>s
     for a in (2,3,5,7,11,13,17,19,23,29,31,37):
         x=pow(a,d,n)
         if x in (1,n-1): continue
