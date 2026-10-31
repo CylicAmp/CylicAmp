@@ -257,10 +257,10 @@ prime factors of ONE specific integer -- a handful of values, found by
 factoring, rather than a range to be swept. Enumerating that candidate set
 exhaustively:
 
-    {1,v,u,v^2,uv,v^3,v^4}      v prime < 4000,  3103 candidates, none
-    {1,v,u,v^2,uv,v^3,uv^2}     v prime < 4000,  2526 candidates, none
-    {1,v,u,v^2,uv,u^2,v^3}      v prime < 4000,  2526 candidates, none
-    {1,v,u,v^2,uv,u^2,uv^2}     v prime < 4000,  2852 candidates, none
+    {1,v,u,v^2,uv,v^3,v^4}      v prime < 30000, 20127 candidates, none
+    {1,v,u,v^2,uv,v^3,uv^2}     v prime < 30000, 16371 candidates, none
+    {1,v,u,v^2,uv,u^2,v^3}      v prime < 30000, 16371 candidates, none
+    {1,v,u,v^2,uv,u^2,uv^2}     v prime < 30000, 18443 candidates, none
     {1,v,u,t,v^2,uv,uv^2}       v,u prime < 260, 17155 candidates, none
     {1,v,u,t,v^2,uv,tv}         v,u prime < 260,  6861 candidates, none
     {1,v,u,t,v^2,uv,tu}         v,u prime < 260,  6861 candidates, none
@@ -268,6 +268,12 @@ exhaustively:
 
 "none" means no realization that is coprime-product admissible, satisfies
 lcm(V) | n, AND has V equal to the seven smallest divisors of n.
+
+The two-prime rows cover all 3,244 primes v below 30000 and 71,312
+candidates in total, with the cyclotomic pieces factored by Pollard rho.
+The committed test re-runs an abridged version of this (v < 600) to keep
+the suite near three minutes; the deeper figures above were produced by
+scripts/k7_deep_search.py.
 
 A PARTIAL LEVEL 1 RESULT, on {1,v,u,v^2,uv,u^2,uv^2}. Forcing splits it:
 u^2*v divides n and is absent, so u^2*v > max(V) = max(u^2, u*v^2).
