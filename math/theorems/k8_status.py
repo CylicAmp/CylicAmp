@@ -4,11 +4,12 @@ k8_status.py
 k = 8:  is there an n with  n = d_1^2 + ... + d_8^2  for d_1 < ... < d_8 the
 EIGHT smallest divisors of n?
 
-STATUS. Three of the four surviving profiles are CLOSED at Level 1. The
-fourth leaves ONE family, and inside it p = 3 and p = 7 are Level 1 while
-the rest is Level 2. So k = 8 is very close to closed -- much closer than
-k = 7, because k is even and the parity lemma removes the whole odd sector
-that made k = 7 hard (28 shapes there, none here).
+THEOREM (k = 8), LEVEL 1. No positive integer n is the sum of the squares
+of its eight smallest divisors. All four surviving profiles are empty,
+parameter-free, with no bounded range and no search.
+
+k = 8 is easier than k = 7 because k is even: the parity lemma removes the
+whole odd sector that made k = 7 hard (28 shapes there, none here).
 
 A full structural enumeration (24,796 labelled order ideals -> 195 orbits
 with the prime 2 fixed) gives these shape counts, and the four profiles it
@@ -141,18 +142,63 @@ The odd part has four elements. Of the four order ideals of that size,
       n < 21 + 10.25 t^2 (using p < t/2 and s < 2t) while lcm > 12 t^2
       (using p >= 3), and 12 > 10.25 with room. CLOSED at Level 1.
 
-  (b) {1, p, t, p^2}  -- THE RESIDUE.
-      V = {1, 2, 4, p, 2p, 4p, t, p^2},
+  (b) {1, p, t, p^2}.  V = {1, 2, 4, p, 2p, 4p, t, p^2},
           n = 21 + 21p^2 + t^2 + p^4,     lcm(V) = 4 p^2 t.
-      The size form FAILS here: p^4 can dominate 4p^2 t, so n > lcm happens.
-      Divisibility still bites, through (M):
-          mod p:  n = 21 + t^2          so   p | 21 + t^2
-          mod t:  n = 21(1+p^2) + p^4   so   t | 21(1+p^2) + p^4 =: M(p)
-      p = 3 and p = 7 die at Level 1: both divide 21, so p | 21 + t^2 forces
-      p | t, hence t = p, contradicting that t and p are distinct primes.
-      For the remaining p the conditions are that t divides the FIXED number
-      M(p) and lies in the forced range (2p, 2p^2). No such t exists for any
-      prime p < 400. That is Level 2, and it is the whole remaining gap.
+      Closed at Level 1 in step 10 below.
+
+--------------------------------------------------------------------
+STEP 10   (4,2,2) FAMILY (b) IS EMPTY        LEVEL 1
+--------------------------------------------------------------------
+THE IDENTITY. Completing the square in t,
+
+    n - lcm(V) = p^4 + t^2 - 4p^2 t + 21p^2 + 21
+               = (t - 2p^2)^2 - (3p^4 - 21p^2 - 21),
+
+so
+
+    n < lcm(V)    <=>    (t - 2p^2)^2  <  3p^4 - 21p^2 - 21.
+
+THE ORDERING CONFINES t. With {o_2, o_3} = {t, p^2}, step 6's two
+inequalities o_2 > 2p and o_3 < 2 o_2 give, for p >= 5 (where p^2/2 > 2p),
+
+    p^2/2  <  t  <  2p^2.
+
+On that interval (t - 2p^2)^2 is largest as t tends to the left end, where
+it tends to (3p^2/2)^2 = 2.25 p^4 and does not attain it. So n < lcm(V)
+holds throughout as soon as
+
+    2.25 p^4 <= 3p^4 - 21p^2 - 21   <=>   p^4 >= 28p^2 + 28
+                                    <=>   p^2 >= 28 + 28/p^2,
+
+which is TRUE for every prime p >= 7 (49 >= 28.57) and FALSE exactly at
+p = 3 and p = 5. For p >= 7 the family is therefore empty by size alone --
+the divisibility form is not needed at all.
+
+THE TWO EXCEPTIONS, exhaustively. The same ordering bounds t to a finite
+list, and every entry dies:
+
+    p = 3:  t prime in (6, 18)  = 7, 11, 13, 17
+            t = 7:  n = 340 > lcm = 252, and 252 does not divide 340
+            t = 11: n = 412 > lcm = 396, and 396 does not divide 412
+            t = 13: n = 460 < lcm = 468
+            t = 17: n = 580 < lcm = 612
+    p = 5:  t prime in (12, 50) = 13, 17, 19, 23, 29, 31, 37, 41, 43, 47
+            t = 13: n = 1340 > lcm = 1300, and 1300 does not divide 1340
+            every other t: n < lcm
+
+So exactly three (p, t) pairs in the whole family have n >= lcm -- (3,7),
+(3,11) and (5,13) -- and each fails divisibility outright.
+
+WHAT I HAD WRONG. An earlier version of this file left family (b) at
+Level 2, on the stated ground that "the size form FAILS here: p^4 can
+dominate 4p^2 t". That was drawn from the three exceptional pairs above,
+all of which have p in {3, 5}. The size form does not fail in general; it
+fails only at p = 3 and p = 5, and completing the square shows exactly
+why. The earlier file also derived p | 21 + t^2, when lcm = 4p^2 t in fact
+requires p^2 | n and hence the stronger p^2 | t^2 + 21 -- a sharpening that
+makes the residue search linear rather than quadratic in p, and which
+confirmed no candidate up to p = 200000 before the identity made the
+search unnecessary.
 
 --------------------------------------------------------------------
 CONSISTENCY
@@ -168,7 +214,9 @@ from typing import List
 
 PROFILES_SURVIVING = {(6, 2, 0), (4, 1, 3), (4, 2, 2), (4, 3, 1)}
 LEVEL1_PROFILES = {(6, 2, 0), (4, 1, 3), (4, 3, 1)}
-RESIDUE = "(4,2,2) family (b): V = {1,2,4,p,2p,4p,t,p^2}"
+FAMILY_B = "(4,2,2) family (b): V = {1,2,4,p,2p,4p,t,p^2}"
+# the only (p,t) in family (b) with n >= lcm; each fails divisibility
+FAMILY_B_EXCEPTIONS = [(3, 7), (3, 11), (5, 13)]
 
 # From the full structural enumeration: 24,796 labelled order ideals ->
 # 195 orbits (prime 2 fixed), of which 45 fall in a surviving profile.
@@ -415,6 +463,104 @@ def test_step6_residue_search_level2() -> None:
           "in range (Level 2)")
 
 
+def test_step10_family_b_identity() -> None:
+    """n - lcm = (t - 2p^2)^2 - (3p^4 - 21p^2 - 21), exactly."""
+    ps = [x for x in primes_upto(400) if x >= 3]
+    checked = 0
+    for p in ps:
+        for t in ps:
+            if t == p:
+                continue
+            V = sorted([1, 2, 4, p, 2 * p, 4 * p, t, p * p])
+            if len(set(V)) < 8:
+                continue
+            n = residue_n(p, t)
+            assert n == sum(d * d for d in V), (p, t)
+            lc = 4 * p * p * t
+            assert lc == lcm_of(V), (p, t)
+            assert n - lc == (t - 2 * p * p) ** 2 - (3 * p ** 4 - 21 * p * p - 21)
+            checked += 1
+    assert checked > 5000, checked
+    print(f"[ok] step 10: the completed-square identity holds on {checked:,} pairs")
+
+
+def test_step10_bound_holds_from_7() -> None:
+    """2.25 p^4 <= 3p^4 - 21p^2 - 21, i.e. p^2 >= 28 + 28/p^2, iff p >= 7."""
+    for p in primes_upto(5000):
+        if p < 3:
+            continue
+        # 2.25 p^4 <= 3p^4 - 21p^2 - 21, cleared of fractions by x4:
+        #   9 p^4 <= 12 p^4 - 84 p^2 - 84   <=>   p^4 >= 28 p^2 + 28
+        cleared = 9 * p ** 4 <= 12 * p ** 4 - 84 * p * p - 84
+        direct = p ** 4 >= 28 * p * p + 28
+        assert cleared == direct, p
+        assert direct == (p >= 7), p
+    assert not (3 ** 4 >= 28 * 9 + 28) and not (5 ** 4 >= 28 * 25 + 28)
+    assert 7 ** 4 >= 28 * 49 + 28
+    print("[ok] step 10: p^4 >= 28p^2 + 28 exactly for primes p >= 7")
+
+
+def test_step10_size_kills_everything_from_7() -> None:
+    """For p >= 7, n < lcm on the whole forced interval -- no divisibility."""
+    bad = []
+    for p in [x for x in primes_upto(600) if x >= 7]:
+        lo, hi = max(2 * p, p * p // 2), 2 * p * p
+        for t in range(lo + 1, hi):
+            if t == p or not _is_prime_small(t):
+                continue
+            if residue_n(p, t) >= 4 * p * p * t:
+                bad.append((p, t))
+    assert bad == [], bad[:5]
+    print("[ok] step 10: n < lcm for every prime p >= 7 and every t in range")
+
+
+def _is_prime_small(n: int) -> bool:
+    if n < 2:
+        return False
+    if n % 2 == 0:
+        return n == 2
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 2
+    return True
+
+
+def test_step10_exceptions_are_exactly_three() -> None:
+    """Only (3,7), (3,11), (5,13) have n >= lcm, and each fails lcm | n."""
+    found = []
+    for p in (3, 5):
+        lo, hi = max(2 * p, p * p // 2), 2 * p * p
+        for t in range(lo + 1, hi):
+            if t == p or not _is_prime_small(t):
+                continue
+            n = residue_n(p, t)
+            lc = 4 * p * p * t
+            if n >= lc:
+                found.append((p, t))
+                assert n % lc != 0, (p, t, n, lc)   # divisibility finishes it
+            else:
+                assert n < lc
+    assert found == FAMILY_B_EXCEPTIONS, found
+    print(f"[ok] step 10: exactly {len(found)} exceptional pairs {found}, "
+          f"each failing lcm | n")
+
+
+def test_step10_p_squared_sharpening() -> None:
+    """lcm = 4p^2 t needs p^2 | n, hence p^2 | t^2 + 21 -- stronger than p | ."""
+    for p, t in ((3, 7), (5, 13), (11, 61), (13, 97)):
+        n = residue_n(p, t)
+        assert n % (p * p) == (21 + t * t) % (p * p), (p, t)
+    # and it really is stronger: a pair satisfying p | t^2+21 but not p^2 |
+    wit = [(p, t) for p in (11, 13, 17, 19, 23) for t in range(3, 400)
+           if _is_prime_small(t) and (21 + t * t) % p == 0
+           and (21 + t * t) % (p * p) != 0]
+    assert wit, "the two conditions should differ"
+    print(f"[ok] step 10: p^2 | t^2+21 is strictly stronger than p | t^2+21 "
+          f"({len(wit)} pairs separate them)")
+
+
 def test_no_k8_solution_by_scan() -> None:
     LIM = 1_500_000
     hits = []
@@ -449,19 +595,25 @@ def self_test() -> None:
     test_step5_shape_is_forced()
     test_step6_family_a()
     test_step6_residue_identity_and_small_p()
-    test_step6_residue_search_level2()
+    test_step10_family_b_identity()
+    test_step10_bound_holds_from_7()
+    test_step10_size_kills_everything_from_7()
+    test_step10_exceptions_are_exactly_three()
+    test_step10_p_squared_sharpening()
     test_does_not_prove_too_much()
     test_no_k8_solution_by_scan()
     print("\nAll self-tests passed.")
-    print("k=8 STATUS: 3 of 4 profiles CLOSED at Level 1; one family remains.")
+    print("THEOREM (k=8), Level 1: no n is the sum of the squares of its")
+    print("eight smallest divisors. All four profiles empty, parameter-free.")
     print("  L1  step 1  parity          n is even (removes the odd sector)")
     print("  L1  step 2  profile         4 profiles survive")
     print("  L1  step 3  (4,3,1)         8 | n, but V would fit below 8")
     print("  L1  step 4  (4,1,3)         C={4,8,16}, p>=11, 16p^3 > 341+12p^2")
     print("  L1  step 5  (6,2,0)         shape forced to 2 cases, both size-killed")
     print("  L1  step 6a (4,2,2) primes  n < lcm")
-    print(f"  L2  step 6b {RESIDUE}")
-    print("              p=3, p=7 are Level 1; the rest is a bounded search.")
+    print(f"  L1  step 10 {FAMILY_B}")
+    print("              (t-2p^2)^2 < 3p^4-21p^2-21 for all p >= 7;")
+    print("              only (3,7),(3,11),(5,13) need divisibility.")
 
 
 if __name__ == "__main__":
