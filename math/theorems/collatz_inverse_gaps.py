@@ -115,9 +115,9 @@ def accelerated_T(n: int) -> int:
     if n % 2 == 0:
         raise ValueError("accelerated_T is defined on odd integers")
     x = 3 * n + 1
-    while x % 2 == 0:
-        x //= 2
-    return x
+    # x // (x & -x) strips every factor of 2 at once: x & -x isolates the
+    # lowest set bit, which is 2^v_2(x).
+    return x // (x & -x)
 
 
 def valid_exponents(m: int, limit: int) -> List[int]:
@@ -189,11 +189,7 @@ def test_lemma2_closed_form_and_valuation() -> None:
                 k1, k2 = ks[i], ks[j]
                 g = preimage(m, k2) - preimage(m, k1)
                 assert g == gap(m, k1, k2), (m, k1, k2)
-                v = 0
-                t = g
-                while t % 2 == 0:
-                    t //= 2
-                    v += 1
+                v = (g & -g).bit_length() - 1      # v_2(g)
                 assert v == k1, (m, k1, k2, v)
     print("[ok] lemma 2: closed form holds and v_2(gap) = k_1 exactly")
 
