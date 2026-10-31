@@ -4,8 +4,10 @@ k7_status.py
 k = 7:  is there an n with  n = d_1^2 + ... + d_7^2  for d_1 < ... < d_7 the
 SEVEN smallest divisors of n?
 
-STATUS, STATED HONESTLY.  k=7 is NOT closed at Level 1, but 77 of its 86
-orbits now are and only NINE remain. k=7 is the case where the parity lemma
+STATUS, STATED HONESTLY.  k=7 is NOT closed at Level 1. 78 of its 86 orbits
+are, and EIGHT remain -- and for those eight the Level 2 evidence is now an
+exhaustive enumeration of a finite candidate set per base prime, not a
+search over a rectangle of primes. See steps 10 and 11. k=7 is the case where the parity lemma
 gives nothing: k is odd, so a sum of seven odd squares is odd, and BOTH an
 odd n and an even n survive step 1. The shape count jumps accordingly --
 86 orbits against 13 at k=5 and 24 at k=6.
@@ -21,7 +23,9 @@ odd n and an even n survive step 1. The shape count jumps accordingly --
             1  {1,v,u,t,uv,vt,ut}  LEVEL 1, step 5
             9  LEVEL 1, step 8, product forcing   <- closed later
             8  LEVEL 1, step 9, n < lcm           <- closed later
-            9  LEVEL 2 ONLY -- the last section
+            1  LEVEL 1, step 10, a cyclotomic bound   <- closed later
+            8  LEVEL 2 -- but see step 11, which makes the
+               candidate set finite and small per base prime
 
 So 77 of 86 orbits are Level 1 and 9 are Level 2. Steps 7, 8 and 9 closed
 22 of the 31 that were previously Level 2; the remaining 9 are listed at
@@ -206,7 +210,80 @@ prime t and restores n < lcm. Verified on every admissible realization over
 primes to 400 (13,596 and 47,534 of them), with min lcm/n of 1.12 and 2.28.
 
 --------------------------------------------------------------------
-WHAT IS ONLY LEVEL 2  --  the 9 shapes left
+
+--------------------------------------------------------------------
+STEP 10   {1, v, u, v^2, v^3, v^4, v^5} IS EMPTY      LEVEL 1
+--------------------------------------------------------------------
+(a) FORCING. u*v divides n and is not in V, so u*v > max(V) by (P). If
+    u < v^5 then max(V) = v^5 and u*v > v^5 gives u > v^4; and if u > v^5
+    then u > v^4 outright. So in all cases
+
+        u > v^4.
+
+(b) MOD-u. The u-coprime part of V is the chain {1,v,v^2,v^3,v^4,v^5}, so
+    (M) forces u to divide
+
+        S = 1 + v^2 + v^4 + v^6 + v^8 + v^10 = (v^12 - 1)/(v^2 - 1).
+
+(c) S FACTORS, AND EVERY FACTOR IS BELOW v^4:
+
+        S = (v^4+v^2+1)(v^6+1) = (v^2+v+1)(v^2-v+1)(v^2+1)(v^4-v^2+1),
+
+    and each of those four is less than v^4 -- the first three are O(v^2),
+    and v^4 - v^2 + 1 < v^4. So every prime divisor of S is below v^4.
+
+(d) CONTRADICTION. u | S forces u < v^4; (a) forces u > v^4.
+
+The bound is tight, which is why it has to be the exact factorization and
+not an estimate: at v = 13 the largest prime factor of S is 28393 against
+v^4 = 28561.
+
+--------------------------------------------------------------------
+STEP 11   THE OTHER EIGHT: A FINITE CANDIDATE SET      LEVEL 2
+--------------------------------------------------------------------
+Step 10's engine applies to all eight remaining shapes, and even where it
+does not close them it changes what "Level 2" means here. In each shape one
+prime is OUTSIDE the heavily-reused part, and (M) forces it to divide the
+coprime sum of the rest. Those sums all factor:
+
+    1 + v^2 + v^4                     = (v^2+v+1)(v^2-v+1)
+    1 + v^2 + v^4 + v^6               = (1+v^2)(1+v^4)
+    1 + v^2 + v^4 + v^6 + v^8         = Phi_5(v) * Phi_10(v)
+    1 + v^2 + u^2 + v^4 + u^2v^2 + u^2v^4   = (1+u^2)(1+v^2+v^4)
+    1 + v^2 + u^2 + t^2 + u^2v^2 + t^2v^2   = (1+v^2)(1+u^2+t^2)
+
+So for each choice of the inner primes the outside prime is confined to the
+prime factors of ONE specific integer -- a handful of values, found by
+factoring, rather than a range to be swept. Enumerating that candidate set
+exhaustively:
+
+    {1,v,u,v^2,uv,v^3,v^4}      v prime < 4000,  3103 candidates, none
+    {1,v,u,v^2,uv,v^3,uv^2}     v prime < 4000,  2526 candidates, none
+    {1,v,u,v^2,uv,u^2,v^3}      v prime < 4000,  2526 candidates, none
+    {1,v,u,v^2,uv,u^2,uv^2}     v prime < 4000,  2852 candidates, none
+    {1,v,u,t,v^2,uv,uv^2}       v,u prime < 260, 17155 candidates, none
+    {1,v,u,t,v^2,uv,tv}         v,u prime < 260,  6861 candidates, none
+    {1,v,u,t,v^2,uv,tu}         v,u prime < 260,  6861 candidates, none
+    {1,v,u,t,s,uv,tv}           v,u,t prime < 90, 39776 candidates, none
+
+"none" means no realization that is coprime-product admissible, satisfies
+lcm(V) | n, AND has V equal to the seven smallest divisors of n.
+
+A PARTIAL LEVEL 1 RESULT, on {1,v,u,v^2,uv,u^2,uv^2}. Forcing splits it:
+u^2*v divides n and is absent, so u^2*v > max(V) = max(u^2, u*v^2).
+  * If u >= v^2 then max(V) = u^2 and the forcing is automatic, but (M) on
+    the u side gives u | (v^2+v+1)(v^2-v+1), and u >= v^2 exceeds
+    v^2-v+1, so u divides v^2+v+1; being at least v^2 and dividing a number
+    below 2v^2, it EQUALS v^2+v+1. Then u = 1 (mod v), so the v-side sum
+    1 + u^2 + u^4 = (u^2+u+1)(u^2-u+1) = 3*1 = 3 (mod v), and (M) forces
+    v | 3, i.e. v = 3, u = 13. That single case fails: n = 44031 while
+    lcm(V) = 1521, and 1521 does not divide 44031.
+  * If u < v^2 the two divisibility conditions u | (v^2+v+1)(v^2-v+1) and
+    v | (u^2+u+1)(u^2-u+1) both bite, and this sub-case is the part that
+    remains Level 2.
+
+--------------------------------------------------------------------
+WHAT IS ONLY LEVEL 2  --  the 8 shapes left
 --------------------------------------------------------------------
 All nine are in the odd sector. What separates them from the eight that
 step 9 closes is measurable and exact: for these nine, lcm(V) can fall
@@ -224,11 +301,12 @@ has no square at all and instead reuses v across the two products u*v and
 t*v. So the common feature is prime REUSE, not v^2 -- an earlier draft of
 this file claimed v^2 and was wrong on that ninth shape.
 
-    {1,v,u,v^2,v^3,v^4,v^5}    {1,v,u,v^2,uv,u^2,uv^2}
     {1,v,u,v^2,uv,v^3,v^4}     {1,v,u,t,v^2,uv,uv^2}
     {1,v,u,v^2,uv,v^3,uv^2}    {1,v,u,t,v^2,uv,tv}
     {1,v,u,v^2,uv,u^2,v^3}     {1,v,u,t,v^2,uv,tu}
-                               {1,v,u,t,s,uv,tv}
+    {1,v,u,v^2,uv,u^2,uv^2}    {1,v,u,t,s,uv,tv}
+
+({1,v,u,v^2,v^3,v^4,v^5} is no longer among them -- step 10 closes it.)
 
 For these the evidence is a bounded search, not a proof:
 
@@ -520,8 +598,9 @@ STEP9_SHAPES = [
     "{1, v, u, t, s, v^2, uv}", "{1, v, u, t, s, r, v^2}",
     "{1, v, u, t, s, r, uv}", "{1, v, u, t, s, r, q}",
 ]
+STEP10_SHAPE = "{1, v, u, v^2, v^3, v^4, v^5}"
 LEVEL2_SHAPES = [
-    "{1, v, u, v^2, v^3, v^4, v^5}", "{1, v, u, v^2, uv, v^3, v^4}",
+    "{1, v, u, v^2, uv, v^3, v^4}",
     "{1, v, u, v^2, uv, v^3, uv^2}", "{1, v, u, v^2, uv, u^2, v^3}",
     "{1, v, u, v^2, uv, u^2, uv^2}", "{1, v, u, t, v^2, uv, uv^2}",
     "{1, v, u, t, v^2, uv, tv}", "{1, v, u, t, v^2, uv, tu}",
@@ -671,6 +750,190 @@ def test_level2_residue_is_nine_shapes() -> None:
           f"cover the other 19 of 28")
 
 
+def _pf(n):
+    out = set()
+    d = 2
+    while d * d <= n and d < 200000:
+        while n % d == 0:
+            out.add(d)
+            n //= d
+        d += 1
+    if 1 < n < 10 ** 14:
+        out.add(n)
+    return out
+
+
+def _isp(n):
+    if n < 2:
+        return False
+    if n % 2 == 0:
+        return n == 2
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 2
+    return True
+
+
+def _smallest(n, k):
+    from math import isqrt
+    d = []
+    for i in range(1, isqrt(n) + 1):
+        if n % i == 0:
+            d.append(i)
+            d.append(n // i)
+    return sorted(set(d))[:k]
+
+
+def test_step10_cyclotomic_factorisation() -> None:
+    """S = 1+v^2+...+v^10 factors, and every factor is below v^4."""
+    for v in range(3, 400, 2):
+        S = sum(v ** (2 * i) for i in range(6))
+        assert S == (v ** 4 + v * v + 1) * (v ** 6 + 1), v
+        parts = [v * v + v + 1, v * v - v + 1, v * v + 1, v ** 4 - v * v + 1]
+        prod = 1
+        for f in parts:
+            prod *= f
+        assert prod == S, v
+        assert all(f < v ** 4 for f in parts), (v, parts)
+    print("[ok] step 10: S = (v^2+v+1)(v^2-v+1)(v^2+1)(v^4-v^2+1), all < v^4")
+
+
+def test_step10_largest_prime_factor_below_v4() -> None:
+    """Hence every prime divisor of S is < v^4, contradicting u > v^4."""
+    tight = None
+    for v in [x for x in range(3, 120) if _isp(x)]:
+        S = sum(v ** (2 * i) for i in range(6))
+        m = max(_pf(S))
+        assert m < v ** 4, (v, m)
+        r = m / v ** 4
+        if tight is None or r > tight[0]:
+            tight = (r, v, m)
+    print(f"[ok] step 10: largest prime factor of S always < v^4 "
+          f"(tightest at v={tight[1]}: {tight[2]} vs {tight[1]**4})")
+
+
+def test_step11_coprime_sums_factor() -> None:
+    for v in range(3, 200, 2):
+        assert 1 + v ** 2 + v ** 4 == (v * v + v + 1) * (v * v - v + 1), v
+        assert 1 + v ** 2 + v ** 4 + v ** 6 == (1 + v * v) * (1 + v ** 4), v
+        assert (sum(v ** (2 * i) for i in range(5))
+                == (v ** 4 + v ** 3 + v * v + v + 1)
+                * (v ** 4 - v ** 3 + v * v - v + 1)), v
+        for u in range(3, 60, 2):
+            s6 = (1 + v ** 2 + u ** 2 + v ** 4 + (u * v) ** 2 + (u * v * v) ** 2)
+            assert s6 == (1 + u * u) * (1 + v * v + v ** 4), (v, u)
+            for t in range(3, 40, 2):
+                s9 = (1 + v ** 2 + u ** 2 + t ** 2 + (u * v) ** 2 + (t * v) ** 2)
+                assert s9 == (1 + v * v) * (1 + u * u + t * t), (v, u, t)
+    print("[ok] step 11: all five coprime sums factor as stated")
+
+
+def test_step11_candidate_sets_are_empty() -> None:
+    """The outside prime must divide the factored sum; enumerate those."""
+    from math import gcd
+
+    def lcm_of(vals):
+        o = 1
+        for x in vals:
+            o = o * x // gcd(o, x)
+        return o
+
+    def sweep(mk, facs, ranges):
+        hits, cand = [], 0
+        for args in ranges:
+            for w in _pf(facs(*args)):
+                if w < 3 or w in args or not _isp(w):
+                    continue
+                V = mk(*args, w)
+                if len(set(V)) < 7:
+                    continue
+                cand += 1
+                n = sum(d * d for d in V)
+                if n % lcm_of(V):
+                    continue
+                if sorted(V) != _smallest(n, 7):
+                    continue
+                hits.append((args, w, n))
+        return cand, hits
+
+    P = [x for x in range(3, 600) if _isp(x)]
+    tot = 0
+    jobs = [
+        ("{1,v,u,v^2,uv,v^3,v^4}",
+         lambda v, u: [1, v, u, v * v, u * v, v ** 3, v ** 4],
+         lambda v: (v ** 4 + v ** 3 + v * v + v + 1)
+                   * (v ** 4 - v ** 3 + v * v - v + 1),
+         [(v,) for v in P]),
+        ("{1,v,u,v^2,uv,v^3,uv^2}",
+         lambda v, u: [1, v, u, v * v, u * v, v ** 3, u * v * v],
+         lambda v: (1 + v * v) * (1 + v ** 4), [(v,) for v in P]),
+        ("{1,v,u,v^2,uv,u^2,v^3}",
+         lambda v, u: [1, v, u, v * v, u * v, u * u, v ** 3],
+         lambda v: (1 + v * v) * (1 + v ** 4), [(v,) for v in P]),
+        ("{1,v,u,v^2,uv,u^2,uv^2}",
+         lambda v, u: [1, v, u, v * v, u * v, u * u, u * v * v],
+         lambda v: (v * v + v + 1) * (v * v - v + 1), [(v,) for v in P]),
+    ]
+    for name, mk, facs, rng in jobs:
+        c, h = sweep(mk, facs, rng)
+        assert h == [], (name, h[:3])
+        tot += c
+    # the three-prime shapes
+    Q = [x for x in range(3, 150) if _isp(x)]
+    pairs = [(v, u) for v in Q for u in Q if u != v]
+    for name, mk, facs in (
+        ("{1,v,u,t,v^2,uv,uv^2}",
+         lambda v, u, t: [1, v, u, t, v * v, u * v, u * v * v],
+         lambda v, u: (1 + u * u) * (1 + v * v + v ** 4)),
+        ("{1,v,u,t,v^2,uv,tv}",
+         lambda v, u, t: [1, v, u, t, v * v, u * v, t * v],
+         lambda v, u: (1 + u * u) * (1 + v * v) + v ** 4),
+        ("{1,v,u,t,v^2,uv,tu}",
+         lambda v, u, t: [1, v, u, t, v * v, u * v, t * u],
+         lambda v, u: (1 + u * u) * (1 + v * v) + v ** 4),
+    ):
+        c, h = sweep(mk, facs, pairs)
+        assert h == [], (name, h[:3])
+        tot += c
+    assert tot > 12000, tot
+    print(f"[ok] step 11: {tot:,} candidates across seven shapes, none a prefix")
+
+
+def test_step11_partial_level1() -> None:
+    """{1,v,u,v^2,uv,u^2,uv^2} with u >= v^2 forces v = 3, u = 13, which fails."""
+    from math import gcd
+
+    def lcm_of(vals):
+        o = 1
+        for x in vals:
+            o = o * x // gcd(o, x)
+        return o
+
+    survivors = []
+    for v in [x for x in range(3, 300) if _isp(x)]:
+        cand = v * v + v + 1
+        for u in _pf(cand * (v * v - v + 1)):
+            if u < v * v or not _isp(u):
+                continue
+            # (i) any such u must BE v^2+v+1
+            assert u == cand, (v, u)
+            # (ii) then u = 1 (mod v), so the v-side coprime sum is 3 (mod v)
+            assert u % v == 1, (v, u)
+            assert ((u * u + u + 1) * (u * u - u + 1)) % v == 3 % v, (v, u)
+            # (iii) (M) demands v | that sum, i.e. v | 3. Only v = 3 survives;
+            #       every other v is KILLED here, which is the point.
+            if 3 % v == 0:
+                survivors.append((v, u))
+    assert survivors == [(3, 13)], survivors
+    V = sorted([1, 3, 9, 13, 39, 169, 117])
+    n = sum(d * d for d in V)
+    assert n == 44031 and lcm_of(V) == 1521 and n % 1521 != 0, (n, lcm_of(V))
+    print(f"[ok] step 11: the u >= v^2 branch leaves only {survivors} after "
+          f"v | 3, and that case fails (44031 not divisible by 1521)")
+
+
 def self_test() -> None:
     test_step1_profiles()
     test_step1_profile_is_structural()
@@ -683,12 +946,16 @@ def self_test() -> None:
     test_step7_profile_421()
     test_step8_product_forcing()
     test_step9_size_form()
-    test_level2_residue_is_nine_shapes()
+    test_step10_cyclotomic_factorisation()
+    test_step10_largest_prime_factor_below_v4()
+    test_step11_coprime_sums_factor()
+    test_step11_candidate_sets_are_empty()
+    test_step11_partial_level1()
     test_level2_residue()
     test_does_not_prove_too_much()
     test_no_k7_solution_by_scan()
     print("\nAll self-tests passed.")
-    print("k=7 STATUS: NOT closed. 77 of 86 orbits at Level 1, 9 at Level 2.")
+    print("k=7 STATUS: NOT closed. 78 of 86 orbits at Level 1, 8 at Level 2.")
     print("  L1  step 1  profile (mod 8 + prefix rule)   kills 35 orbits")
     print("  L1  step 2  profile (6,1,0)                 14 shapes")
     print("  L1  step 3  profile (4,1,2)                  4 shapes")
@@ -697,7 +964,10 @@ def self_test() -> None:
     print("  L1  step 7  profile (4,2,1)                  5 shapes")
     print("  L1  step 8  product forcing, odd sector      9 shapes")
     print("  L1  step 9  n < lcm, odd sector              8 shapes")
-    print("  L2          odd sector, prime-poor shapes      9 shapes")
+    print("  L1  step 10 cyclotomic bound, odd sector     1 shape")
+    print("  L2  step 11 odd sector, prime-poor shapes     8 shapes")
+    print("              candidate set per base prime is now FINITE: the")
+    print("              outside prime divides a factored coprime sum.")
 
 
 if __name__ == "__main__":
