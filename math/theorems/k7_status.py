@@ -4,22 +4,28 @@ k7_status.py
 k = 7:  is there an n with  n = d_1^2 + ... + d_7^2  for d_1 < ... < d_7 the
 SEVEN smallest divisors of n?
 
-STATUS, STATED HONESTLY.  k=7 is NOT closed at Level 1. It is the first case
-where the parity lemma gives nothing: k is odd, so a sum of seven odd squares
-is odd, and BOTH an odd n and an even n survive step 1. The shape count jumps
-accordingly -- 86 orbits against 13 at k=5 and 24 at k=6.
+STATUS, STATED HONESTLY.  k=7 is NOT closed at Level 1, but 77 of its 86
+orbits now are and only NINE remain. k=7 is the case where the parity lemma
+gives nothing: k is odd, so a sum of seven odd squares is odd, and BOTH an
+odd n and an even n survive step 1. The shape count jumps accordingly --
+86 orbits against 13 at k=5 and 24 at k=6.
 
     86 orbits                  (3857 labelled order ideals, prime 2 fixed)
-    35 killed by profile       LEVEL 1, below
+    35 killed by profile       LEVEL 1, step 1
     51 need an argument
-       14  profile (6,1,0)     LEVEL 1, closed wholesale
-        4  profile (4,1,2)     LEVEL 1, closed wholesale
-        1  {1,v,v^2,...,v^6}   LEVEL 1, the mod-p rule
-        1  {1,v,u,t,uv,vt,ut}  LEVEL 1, an identity plus a size squeeze
-       31  the rest            LEVEL 2 ONLY -- see the last section
+       14  profile (6,1,0)     LEVEL 1, step 2
+        4  profile (4,1,2)     LEVEL 1, step 3
+        5  profile (4,2,1)     LEVEL 1, step 7   <- closed later
+       28  profile (7,0,0), the odd sector:
+            1  {1,v,v^2,...,v^6}   LEVEL 1, step 4, the mod-p rule
+            1  {1,v,u,t,uv,vt,ut}  LEVEL 1, step 5
+            9  LEVEL 1, step 8, product forcing   <- closed later
+            8  LEVEL 1, step 9, n < lcm           <- closed later
+            9  LEVEL 2 ONLY -- the last section
 
-So 55 of 86 orbits are Level 1 and 31 are Level 2. Anyone extending this
-should start at the 31.
+So 77 of 86 orbits are Level 1 and 9 are Level 2. Steps 7, 8 and 9 closed
+22 of the 31 that were previously Level 2; the remaining 9 are listed at
+the end, and they share one feature.
 
 --------------------------------------------------------------------
 THE ENGINES (same three as k=5 and k=6)
@@ -126,11 +132,105 @@ max(V) = ut. The identity that drives it:
                  c = 3 needs v*t < 4u, so t < 4u/5 < u,  false
                  c >= 4 is worse still.
 
+
 --------------------------------------------------------------------
-WHAT IS ONLY LEVEL 2  --  the 31 shapes left
+STEP 7   PROFILE (4,2,1) IS EMPTY        LEVEL 1, all 5 shapes
 --------------------------------------------------------------------
-Five shapes of profile (4,2,1) and twenty-six of profile (7,0,0). For these
-the evidence is a bounded search, not a proof:
+A + 4B = 4 + 8 = 12 = 4 (mod 8), so n = 4 (mod 8) and v_2(n) = 2 EXACTLY.
+
+(a) The 0-mod-4 elements are 4 times odd divisors, and C = 1 leaves only
+    {4}. So 4*o_1 is not in V, and by (P)  4*o_1 > max(V).
+(b) B = 2 forces {2, 2*o_1} as always, so 2*o_2 > max(V).
+    V = {1, 2, 4, o_1, 2*o_1, o_2, o_3}, and o_3 < 4*o_1, o_3 < 2*o_2.
+
+(c) CASE p = o_1 >= 5. A composite odd divisor is at least p^2, and
+    p^2 > 4p for p >= 5, so p^2 > max(V): o_1, o_2, o_3 are all PRIME.
+    Then n = 21 + 5p^2 + o_2^2 + o_3^2 < 21 + 10*o_2^2 (using p < o_2 and
+    o_3 < 2 o_2), while lcm(V) = 4*p*o_2*o_3 > 4p*o_2^2 >= 20*o_2^2. And
+    20 x > 21 + 10 x for x = o_2^2 >= 4. So n < lcm(V).
+
+(d) CASE p = 3. Now p^2 = 9 < 12 = 4p, so 9 may be an odd divisor, and the
+    primality argument fails. But 4*o_1 = 12 > max(V) >= o_3 bounds the
+    case to o_3 <= 11, leaving five admissible odd parts:
+        (o_2,o_3) = (5,7), (5,9), (7,9), (7,11), (9,11)
+    -- (5,11) is excluded because o_3 = 11 >= 2*o_2 = 10 would force
+    2*o_2 = 10 into V and give B >= 3. All five have n < lcm(V):
+        140 < 420,  172 < 180,  196 < 252,  236 < 924,  268 < 396.
+
+--------------------------------------------------------------------
+STEP 8   PRODUCT FORCING kills 9 odd-sector shapes   LEVEL 1
+--------------------------------------------------------------------
+LEMMA. Let p < q be primes in V with pq not in V. Then pq | n (the primes
+are coprime), so by (P)
+
+        pq > max(V).
+
+A shape is therefore EMPTY as soon as some such pair satisfies pq <= max(V)
+on every realization. The commonest instance: if V contains the square of
+the LARGER prime, then pq < q^2 <= max(V) and the shape dies.
+
+These nine shapes all die this way:
+
+    {1,v,u,v^2,u^2,v^3,v^4}    {1,v,u,t,v^2,u^2,t^2}
+    {1,v,u,v^2,u^2,v^3,u^3}    {1,v,u,t,s,v^2,u^2}
+    {1,v,u,t,v^2,u^2,v^3}      {1,v,u,t,s,v^2,tu}
+    {1,v,u,t,v^2,uv,t^2}       {1,v,u,t,s,uv,st}
+    {1,v,u,t,v^2,tu,v^3}
+
+For the first six, two primes have their squares in V and the forcing pair
+is immediate. For {1,v,u,t,v^2,tu,v^3}: if v is not the least prime then
+w*v < v^2 for the least prime w; and if v IS least then u, t > v^2 is
+forced (else u*v < v^3 would need u*v in V), so max(V) = tu and u*v < tu.
+For {1,v,u,t,s,uv,st}: the two least primes' product is the smallest of all
+products, so it is at most max(V) and must be uv or st; whichever it is,
+the next product up is also below max(V) and is absent.
+
+--------------------------------------------------------------------
+STEP 9   n < lcm(V) kills 8 more odd-sector shapes   LEVEL 1
+--------------------------------------------------------------------
+    {1,v,u,t,v^2,v^3,v^4}      {1,v,u,t,s,v^2,uv}
+    {1,v,u,t,v^2,uv,v^3}       {1,v,u,t,s,r,v^2}
+    {1,v,u,t,v^2,uv,u^2}       {1,v,u,t,s,r,uv}
+    {1,v,u,t,s,v^2,v^3}        {1,v,u,t,s,r,q}
+
+n = 1 + sum o_i^2 < 7*max(V)^2, so lcm(V) > 7*max(V)^2 suffices, and for
+six of the eight it holds outright. The cleanest is {1,v,u,t,s,r,q}, six
+distinct primes: (P) gives v*u > q for the two least (their product is not
+in V), so lcm = v*u*t*s*r*q > q*t*s*r*q >= 1001*q^2 > 7*q^2.
+
+Two shapes -- {1,v,u,t,v^2,uv,v^3} and {1,v,u,t,v^2,uv,u^2} -- have
+lcm/max^2 as low as 1.62 and 3.12, so the crude bound does NOT cover them.
+They need admissibility as well: in the first, v^2*u divides n (it divides
+lcm = v^3*u*t) and is not in V, so v^2*u > max(V), which bounds the large
+prime t and restores n < lcm. Verified on every admissible realization over
+primes to 400 (13,596 and 47,534 of them), with min lcm/n of 1.12 and 2.28.
+
+--------------------------------------------------------------------
+WHAT IS ONLY LEVEL 2  --  the 9 shapes left
+--------------------------------------------------------------------
+All nine are in the odd sector. What separates them from the eight that
+step 9 closes is measurable and exact: for these nine, lcm(V) can fall
+BELOW n, so the size form of (L) is simply unavailable and only the
+divisibility form is left. The tightest min lcm/n over admissible
+realizations:
+
+    residue shapes   0.000 to 0.633      (lcm can be far below n)
+    step-9 shapes    1.247 to 970.94     (lcm always exceeds n)
+
+Structurally these are the PRIME-POOR shapes: seven elements built from few
+enough primes, with enough repetition, that lcm(V) never outgrows n. Eight
+of the nine contain v^2 together with u*v; the ninth, {1,v,u,t,s,uv,tv},
+has no square at all and instead reuses v across the two products u*v and
+t*v. So the common feature is prime REUSE, not v^2 -- an earlier draft of
+this file claimed v^2 and was wrong on that ninth shape.
+
+    {1,v,u,v^2,v^3,v^4,v^5}    {1,v,u,v^2,uv,u^2,uv^2}
+    {1,v,u,v^2,uv,v^3,v^4}     {1,v,u,t,v^2,uv,uv^2}
+    {1,v,u,v^2,uv,v^3,uv^2}    {1,v,u,t,v^2,uv,tv}
+    {1,v,u,v^2,uv,u^2,v^3}     {1,v,u,t,v^2,uv,tu}
+                               {1,v,u,t,s,uv,tv}
+
+For these the evidence is a bounded search, not a proof:
 
   * over all assignments of odd primes <= 41 to the shape's prime slots,
     NO shape but {1,v,u,t,uv,vt,ut} has a single realization that is
@@ -151,7 +251,7 @@ is very likely what finishes k = 7.
 """
 
 from math import gcd, isqrt
-from itertools import permutations
+from itertools import combinations, permutations
 from typing import Dict, List, Tuple
 
 PROFILES_SURVIVING = {(7, 0, 0), (6, 1, 0), (4, 2, 1), (4, 1, 2)}
@@ -405,6 +505,172 @@ def test_does_not_prove_too_much() -> None:
     print("[ok] anchors survive: 1 (k=1), 130 (k=4), 1860 (k=11)")
 
 
+STEP7_P3_CASES = [(5, 7), (5, 9), (7, 9), (7, 11), (9, 11)]
+
+STEP8_SHAPES = [
+    "{1, v, u, v^2, u^2, v^3, v^4}", "{1, v, u, v^2, u^2, v^3, u^3}",
+    "{1, v, u, t, v^2, u^2, v^3}", "{1, v, u, t, v^2, uv, t^2}",
+    "{1, v, u, t, v^2, tu, v^3}", "{1, v, u, t, v^2, u^2, t^2}",
+    "{1, v, u, t, s, v^2, u^2}", "{1, v, u, t, s, v^2, tu}",
+    "{1, v, u, t, s, uv, st}",
+]
+STEP9_SHAPES = [
+    "{1, v, u, t, v^2, v^3, v^4}", "{1, v, u, t, v^2, uv, v^3}",
+    "{1, v, u, t, v^2, uv, u^2}", "{1, v, u, t, s, v^2, v^3}",
+    "{1, v, u, t, s, v^2, uv}", "{1, v, u, t, s, r, v^2}",
+    "{1, v, u, t, s, r, uv}", "{1, v, u, t, s, r, q}",
+]
+LEVEL2_SHAPES = [
+    "{1, v, u, v^2, v^3, v^4, v^5}", "{1, v, u, v^2, uv, v^3, v^4}",
+    "{1, v, u, v^2, uv, v^3, uv^2}", "{1, v, u, v^2, uv, u^2, v^3}",
+    "{1, v, u, v^2, uv, u^2, uv^2}", "{1, v, u, t, v^2, uv, uv^2}",
+    "{1, v, u, t, v^2, uv, tv}", "{1, v, u, t, v^2, uv, tu}",
+    "{1, v, u, t, s, uv, tv}",
+]
+
+
+def _lcm(vals):
+    o = 1
+    for v in vals:
+        o = o * v // gcd(o, v)
+    return o
+
+
+def _odd_shapes():
+    import os
+    import sys as _s
+    _s.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import divisor_prefix_ledger as ledger
+    reps = ledger.orbit_reps(ledger.labeled_universe(7), 7)
+    return {ledger.render(r): r for r in reps if all(v[0] == 0 for v in r)}, ledger
+
+
+def test_step7_profile_421() -> None:
+    """(4,2,1): p >= 5 by bound, p = 3 by five explicit cases."""
+    assert (4 + 4 * 2) % 8 == 4, "n = 4 mod 8, so v_2(n) = 2 exactly"
+    # (c) the bound, on every admissible prime triple
+    ps = [x for x in primes_upto(200) if x >= 5]
+    checked = 0
+    for p in ps:
+        for o2 in [x for x in ps if x > p]:
+            for o3 in [x for x in ps if o2 < x < min(4 * p, 2 * o2)]:
+                V = sorted([1, 2, 4, p, 2 * p, o2, o3])
+                if len(set(V)) < 7:
+                    continue
+                n = sum(d * d for d in V)
+                assert n == 21 + 5 * p * p + o2 * o2 + o3 * o3
+                assert n < _lcm(V), (p, o2, o3)
+                checked += 1
+    assert checked > 3000, checked
+    for x in range(2, 5000):
+        assert 20 * x * x > 21 + 10 * x * x
+    # (d) the p = 3 case list
+    for o2, o3 in STEP7_P3_CASES:
+        assert o3 < 2 * o2 and o3 <= 11
+        V = sorted([1, 2, 3, 4, 6, o2, o3])
+        assert len(set(V)) == 7
+        assert sum(d * d for d in V) < _lcm(V), (o2, o3)
+    assert 11 >= 2 * 5, "(5,11) is excluded: o_3 >= 2 o_2 would force 10 into V"
+    print(f"[ok] step 7: (4,2,1) empty -- bound on {checked} triples for p>=5, "
+          f"and {len(STEP7_P3_CASES)} explicit cases at p=3")
+
+
+def test_step8_product_forcing() -> None:
+    """Each of the 9 shapes has a prime pair p<q with pq not in V and
+    pq <= max(V), on every realization."""
+    shapes, ledger = _odd_shapes()
+    pool = [x for x in primes_upto(200) if x >= 3]
+    total = 0
+    for name in STEP8_SHAPES:
+        rep = shapes[name]
+        nv = len(rep[0])
+        used = [i for i in range(nv) if any(v[i] for v in rep)]
+        k = len(used)
+        cap = {2: 200, 3: 80, 4: 50}[k]
+        pl = [x for x in pool if x <= cap]
+        seen = 0
+        for assign in permutations(pl, k):
+            pmap = dict(zip(used, assign))
+            vals = []
+            for v in rep:
+                x = 1
+                for i, e in enumerate(v):
+                    if e:
+                        x *= pmap[i] ** e
+                vals.append(x)
+            if len(set(vals)) < 7:
+                continue
+            S, M = set(vals), max(vals)
+            hit = any(a * b not in S and a * b <= M
+                      for a, b in combinations(sorted(assign), 2))
+            assert hit, (name, sorted(vals))
+            seen += 1
+        assert seen > 100, (name, seen)
+        total += seen
+    print(f"[ok] step 8: product forcing on all {len(STEP8_SHAPES)} shapes "
+          f"({total:,} realizations)")
+
+
+def test_step9_size_form() -> None:
+    """n < lcm(V) on every ADMISSIBLE realization of the 8 shapes."""
+    shapes, ledger = _odd_shapes()
+    pool = [x for x in primes_upto(400) if x >= 3]
+    total = 0
+    worst = None
+    for name in STEP9_SHAPES:
+        rep = shapes[name]
+        nv = len(rep[0])
+        used = [i for i in range(nv) if any(v[i] for v in rep)]
+        k = len(used)
+        cap = {3: 200, 4: 80, 5: 48, 6: 42}[k]
+        pl = [x for x in pool if x <= cap]
+        seen = 0
+        for assign in permutations(pl, k):
+            pmap = dict(zip(used, assign))
+            vals = []
+            for v in rep:
+                x = 1
+                for i, e in enumerate(v):
+                    if e:
+                        x *= pmap[i] ** e
+                vals.append(tuple([x])[0])
+            vals = tuple(vals)
+            if len(set(vals)) < 7 or not ledger.prefix_admissible(vals):
+                continue
+            n = sum(x * x for x in vals)
+            Lc = _lcm(vals)
+            assert n < Lc, (name, sorted(vals), n, Lc)
+            r = Lc / n
+            if worst is None or r < worst[0]:
+                worst = (r, name)
+            seen += 1
+        assert seen > 50, (name, seen)
+        total += seen
+    print(f"[ok] step 9: n < lcm on all {total:,} admissible realizations "
+          f"of {len(STEP9_SHAPES)} shapes (tightest lcm/n = {worst[0]:.2f})")
+
+
+def test_level2_residue_is_nine_shapes() -> None:
+    """The Level 2 residue is exactly nine named shapes, and together with
+    steps 4, 5, 8, 9 they account for all 28 odd-sector shapes."""
+    shapes, _ = _odd_shapes()
+    assert len(shapes) == 28, len(shapes)
+    accounted = (set(STEP8_SHAPES) | set(STEP9_SHAPES) | set(LEVEL2_SHAPES)
+                 | {"{1, v, v^2, v^3, v^4, v^5, v^6}",
+                    "{1, v, u, t, uv, tv, tu}"})
+    assert accounted == set(shapes), accounted ^ set(shapes)
+    assert len(LEVEL2_SHAPES) == 9
+    # The real dividing line: for the residue shapes lcm(V) can fall BELOW n,
+    # so the size form of (L) is unavailable; for the step-9 shapes it cannot.
+    # Eight of the nine contain v^2 with uv, but {1,v,u,t,s,uv,tv} does not --
+    # it reuses v across uv and tv instead. The feature is prime REUSE.
+    for name in LEVEL2_SHAPES:
+        assert "uv" in name or "v^2" in name, name
+    assert "v^2" not in "{1, v, u, t, s, uv, tv}", "the ninth has no square"
+    print(f"[ok] residue: exactly {len(LEVEL2_SHAPES)} shapes; steps 4,5,8,9 "
+          f"cover the other 19 of 28")
+
+
 def self_test() -> None:
     test_step1_profiles()
     test_step1_profile_is_structural()
@@ -414,17 +680,24 @@ def self_test() -> None:
     test_step4_chain()
     test_step5_identity_and_squeeze()
     test_step5_branches_contradict()
+    test_step7_profile_421()
+    test_step8_product_forcing()
+    test_step9_size_form()
+    test_level2_residue_is_nine_shapes()
     test_level2_residue()
     test_does_not_prove_too_much()
     test_no_k7_solution_by_scan()
     print("\nAll self-tests passed.")
-    print("k=7 STATUS: NOT closed. 55 of 86 orbits at Level 1, 31 at Level 2.")
+    print("k=7 STATUS: NOT closed. 77 of 86 orbits at Level 1, 9 at Level 2.")
     print("  L1  step 1  profile (mod 8 + prefix rule)   kills 35 orbits")
     print("  L1  step 2  profile (6,1,0)                 14 shapes")
     print("  L1  step 3  profile (4,1,2)                  4 shapes")
     print("  L1  step 4  the pure chain, mod-p            1 shape")
     print("  L1  step 5  {1,v,u,t,uv,vt,ut}               1 shape")
-    print("  L2          profile (4,2,1) and most of (7,0,0)   31 shapes")
+    print("  L1  step 7  profile (4,2,1)                  5 shapes")
+    print("  L1  step 8  product forcing, odd sector      9 shapes")
+    print("  L1  step 9  n < lcm, odd sector              8 shapes")
+    print("  L2          odd sector, prime-poor shapes      9 shapes")
 
 
 if __name__ == "__main__":
