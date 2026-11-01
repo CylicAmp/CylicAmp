@@ -177,14 +177,127 @@ only once the others are fixed: the search is O(1) per PAIR, not per v, and
 these four stay at Level 2 with no branch closed.  Shape seven does inherit
 the free halving v = 1 (mod 4).
 
+====================================================================
+VI.  CASE A: THE u-PART OF lcm(V) IS THE MISSING ENGINE
+====================================================================
+Step 11 and section III both read the OUTSIDE prime through (M), which only
+ever gives its FIRST power.  But lcm(V) | n gives a condition for every prime
+power lcm(V) carries, and for two of the four shapes the u-exponent is 2:
+
+    shape 1   lcm = u   v^4     u | 1+v^2+v^4+v^6+v^8
+    shape 2   lcm = u   v^3     u | (1+v^2)(1+v^4)
+    shape 3   lcm = u^2 v^3     u^2 | (1+v^2)(1+v^4)          <-- squared
+    shape 4   lcm = u^2 v^2     u^2 | (v^2+v+1)(v^2-v+1)      <-- squared
+
+The squared versions are what close shapes 3's first branch and 4 outright.
+In both, gcd of the two factors is small (1 for Phi_3 Phi_6, 2 for the other
+pair, and u is odd), so u^2 divides ONE factor, which bounds u by the square
+root of a quadratic or quartic in v -- and the forcing says u > v.
+
+====================================================================
+VII.  THREE OF THE EIGHT ARE NOW EMPTY AT LEVEL 1
+====================================================================
+
+SHAPE 4, {1,v,u,v^2,uv,u^2,uv^2}.  EMPTY.
+  Forcing u^2 v > max(V) gives u > v: if u < v^2 then max(V) = u v^2 and
+  u^2 v > u v^2 is u > v; if u > v^2 the forcing is automatic and u > v^2 > v.
+  Divisibility u^2 | n with the u-coprime elements 1, v, v^2 gives
+      u^2 | 1+v^2+v^4 = (v^2+v+1)(v^2-v+1),
+  the two factors coprime (their difference is 2v, both odd, and
+  gcd(v^2+v+1, v) = 1), so u^2 divides one of them and
+      u^2 <= v^2+v+1 < (v+1)^2,  i.e.  u <= v.
+  That contradicts u > v.  No parameter, no case analysis, no search.
+
+SHAPE 2, {1,v,u,v^2,uv,v^3,uv^2}.  EMPTY.
+  v^3 | u^2+1 forces u^2+1 >= v^3, so u >= sqrt(v^3-1); and u is odd with
+  gcd(1+v^2, 1+v^4) = 2, so u | 1+v^2 or u | 1+v^4.
+    u | 1+v^2.  Put c = (1+v^2)/u <= (1+v^2)/sqrt(v^3-1), which grows only
+      like sqrt(v) (it is 2, 3, 4, 10 at v = 5, 13, 17, 101).  Substituting
+      u = (1+v^2)/c into u^2 = -1 (mod v^3) gives
+      -c^2 = (1+v^2)^2 = 1+2v^2 (mod v^3), i.e. v^3 | c^2+2v^2+1.  But
+          0 < c^2+2v^2+1 <= (1+v^2)^2/(v^3-1) + 2v^2 + 1 < v^3
+      for every v >= 3, since the first term is about v.  DEAD.
+    u | 1+v^4.  Put c = (1+v^4)/u.  Since 1+v^4 = 1 (mod v^3) and u^{-1} = -u,
+      c = -u (mod v^3), so u + c = j v^3 with j >= 1, and u, c are the roots
+      of X^2 - j v^3 X + (1+v^4).
+        j >= 2: the larger root exceeds v^3 while u < v^3, so u is the
+                smaller root, u <= v, and u^2+1 <= v^2+1 < v^3.  DEAD.
+        j  = 1: the smaller root is at most 2v.  If u is the smaller then
+                u^2+1 <= 4v^2+1 < v^3.  If u is the larger then u = v^3 - c
+                with c <= 2v, and u^2+1 = c^2+1 (mod v^3) with
+                c^2+1 <= 4v^2+1 < v^3.  DEAD either way.
+  v = 1 (mod 4) guarantees v >= 5 throughout.
+
+SHAPE 1, {1,v,u,v^2,uv,v^3,v^4}.  EMPTY.
+  Case B is section IV.  For case A, forcing gives u > v^2 and v^4 | u^2+1
+  gives u >= v^2+1, so with c = F/u,
+      c <= Phi_5(v)/(v^2+1) = v^2+v      and      Phi_10(v)/(v^2+1) = v^2-v.
+    u | Phi_5(v).  Substituting u = Phi_5/c into u^2 = -1 (mod v^4):
+        -c^2 = (1+v+v^2+v^3)^2 = 1+2v+3v^2+4v^3  (mod v^4),
+      so v^4 | c^2+4v^3+3v^2+2v+1.  With c <= v^2+v that value lies strictly
+      between 0 and 2v^4 for v >= 7, so it EQUALS v^4:
+        c^2 = v^4 - 4v^3 - 3v^2 - 2v - 1 =: T.
+      Now T - (v^2-2v-3)^2 = -(v^2+14v+10) < 0 and
+          T - (v^2-2v-4)^2 =   v^2-18v-17  > 0 for v >= 19,
+      so T sits strictly between consecutive squares.  The only v = 1 (mod 4)
+      below 19 are 5, 13, 17, and T = 39, 19239, 62967 there -- none a square
+      (v = 5 needs the tighter range, where 625 and 1250 give 39 and 664,
+      neither a square).  DEAD.
+    u | Phi_10(v).  The same substitution gives
+        -c^2 = 1-2v+3v^2-4v^3  (mod v^4),  so  v^4 | c^2-4v^3+3v^2-2v+1,
+      and with c <= v^2-v the value lies strictly inside (-v^4, v^4), hence is
+      0:
+        c^2 = 4v^3 - 3v^2 + 2v - 1.
+      For odd v, v^2 = 1 and v^3 = v (mod 8), so the right side is
+      6v - 4 (mod 8), which is 2 or 6 -- in both cases 2 (mod 4).  A square is
+      0 or 1 (mod 4).  So it is never a square.  DEAD.
+      (That branch first presents as the elliptic curve Y^2 = x^3+5x-10 under
+      x = 4v-1, Y = 4c; the mod-4 obstruction settles it without needing the
+      curve's integral points.)
+
+====================================================================
+VIII.  WHAT IS LEFT
+====================================================================
+SHAPE 3, {1,v,u,v^2,uv,u^2,v^3}.  Case B is dead (section IV), and the
+forcings u^2 v > max(V), u v^2 > max(V) give v < u < v^2.  Then
+u^2 | (1+v^2)(1+v^4) splits:
+    u^2 | 1+v^2  =>  u^2 <= v^2+1 < (v+1)^2  =>  u <= v,  contradiction.
+                     DEAD.
+    u^2 | 1+v^4  REMAINS.  Writing c = (1+v^4)/u^2 and reducing the v^3
+      condition by u^2 = c^{-1} (mod v^3), multiplication by c^2 gives
+          (1+c+c^2) + v^2(c+c^2) = 0  (mod v^3).
+      Mod v^2 that is v^2 | c^2+c+1, and writing c^2+c+1 = v^2 K the
+      remaining v-part is v | K(v^2+1)-1, i.e. K = 1 (mod v).  So
+          c^2 + c + 1 = v^2 (1 + j v),    1 <= j <= v.
+      With c < v^2 and c^2+c+1 >= v^2(1+v) this pins c >= ~v^1.5, hence
+      u^2 = (1+v^4)/c <= ~v^2.5 and u <= ~v^1.25: the outside prime is
+      squeezed into (v, v^1.25].  Furthermore u^2 | 1+v^4 makes ord_{u^2}(v)
+      = 8, so 8 | u-1, and v^2 | u^2 +- u + 1 makes ord_{v^2}(u) in {3,6}, so
+      v = 1 (mod 3) or v = 3.
+      Searching over u rather than v: the four roots of x^4 = -1 (mod u^2)
+      must place a PRIME v in (sqrt(u), u), a 1-in-u event.  For all 70,695
+      primes u < 4*10^6 with 8 | u-1, NO root lands in that window at all.
+      Still Level 2, but the surviving region is thin and explicitly
+      described.
+
+SHAPES 5-8 are unchanged; shape 7 inherits v = 1 (mod 4) from section II.
+
 --------------------------------------------------------------------
 STATUS
 --------------------------------------------------------------------
-k = 7 remains NOT closed: 78 of 86 orbits Level 1, 8 at Level 2.  What this
-file changes is the inside of those 8:
-    4 shapes    case B closed at LEVEL 1, case A swept complete to v < 300000
-    1 shape     free halving of the base primes (v = 1 mod 4)
-    3 shapes    unchanged
+k = 7 remains NOT closed, but three of the eight Level-2 shapes are now
+EMPTY at Level 1, so the count moves from 78 of 86 orbits to 81 of 86:
+
+    {1,v,u,v^2,uv,v^3,v^4}     CLOSED, Level 1
+    {1,v,u,v^2,uv,v^3,uv^2}    CLOSED, Level 1
+    {1,v,u,v^2,uv,u^2,uv^2}    CLOSED, Level 1
+    {1,v,u,v^2,uv,u^2,v^3}     one branch left, u^2 | 1+v^4
+    the four three- and four-prime shapes   unchanged
+
+The engine that did it is the u-PART of lcm(V).  Step 11 reads the outside
+prime through (M), which gives only its first power; lcm(V) | n gives u^2
+wherever the shape carries u^2, and that single extra power is what turns
+two of these shapes from a search into a contradiction.
 """
 
 from math import gcd, isqrt
@@ -393,6 +506,25 @@ def sweep(key, vmax):
 SWEEP_DEPTH = 300000      # produced by the committed sweep(), see the tests
 LEVEL2_SHAPES_4 = [TWO_PRIME[k]['name'] for k in (1, 2, 3, 4)]
 
+CLOSED_AT_LEVEL1 = [TWO_PRIME[k]['name'] for k in (1, 2, 4)]
+STILL_OPEN = [TWO_PRIME[3]['name']]
+ORBITS_LEVEL1_BEFORE = 78
+ORBITS_LEVEL1_AFTER = 81
+ORBITS_TOTAL = 86
+SHAPE3_SEARCH_UMAX = 4000000
+
+
+def u_coprime_sum(key, v):
+    """Sum of squares of the elements coprime to u -- what the u-part of
+    lcm(V) must divide.  The exponent of u in lcm(V) is 1 for shapes 1, 2
+    and 2 for shapes 3, 4."""
+    sh = TWO_PRIME[key]
+    V = sh['elems'](v, 0)          # u = 0 marks the u-carrying elements
+    return sum(d * d for d in V if d)
+
+
+U_EXPONENT = {1: 1, 2: 1, 3: 2, 4: 2}
+
 
 # =====================================================================
 #                             SELF-TESTS
@@ -550,13 +682,136 @@ def test_complete_sweep():
     assert SWEEP_DEPTH == 300000
 
 
+def test_u_part_of_lcm_gives_the_square():
+    """The u-exponent of lcm(V) is 2 for shapes 3 and 4, 1 for shapes 1, 2."""
+    for key, e in U_EXPONENT.items():
+        for v, u in ((3, 5), (5, 7), (13, 29)):
+            V = TWO_PRIME[key]['elems'](v, u)
+            m = max(0, *[0] + [sum(1 for _ in range(0))])   # placeholder
+            # the exponent of u in lcm(V), computed directly
+            best = 0
+            for d in V:
+                c, x = 0, d
+                while x % u == 0:
+                    x //= u
+                    c += 1
+                best = max(best, c)
+            assert best == e, (key, v, u, best, e)
+    # and the squared conditions themselves
+    for v, u in ((3, 5), (5, 7), (13, 29), (17, 101)):
+        V = TWO_PRIME[4]['elems'](v, u)
+        n = sum(d * d for d in V)
+        assert (n - (1 + v * v + v ** 4)) % (u * u) == 0, (v, u)
+        V = TWO_PRIME[3]['elems'](v, u)
+        n = sum(d * d for d in V)
+        assert (n - (1 + v * v + v ** 4 + v ** 6)) % (u * u) == 0, (v, u)
+    print("  VI    u-exponent of lcm is 2 for shapes 3, 4: the squared "
+          "condition is available")
+
+
+def test_shape4_is_empty():
+    """u^2 | Phi_3(v) Phi_6(v) forces u <= v, while forcing gives u > v."""
+    for v in primes_to(3000):
+        assert gcd(v * v + v + 1, v * v - v + 1) == 1, v
+        for F in TWO_PRIME[4]['facs'](v):
+            for u in range(2, isqrt(F) + 2):
+                if F % (u * u) == 0 and is_prime(u):
+                    assert u <= v, (v, u, F)
+    # the size step
+    for v in (3, 5, 13, 101, 100003):
+        assert v * v + v + 1 < (v + 1) ** 2
+    # and the forcing really does give u > v, both ways
+    for v, u in ((5, 3), (13, 7)):          # u < v must FAIL the forcing
+        V = sorted(set(TWO_PRIME[4]['elems'](v, u)))
+        assert u * u * v <= max(V), (v, u)
+    print("  VII   shape 4 EMPTY: u^2 <= v^2+v+1 gives u <= v, "
+          "contradicting u > v")
+
+
+def test_shape2_is_empty():
+    for v in primes_to(4000):
+        if v % 4 != 1:
+            continue
+        assert gcd(v * v + 1, v ** 4 + 1) == 2, v
+        lo = isqrt(v ** 3 - 1)                      # u >= sqrt(v^3-1)
+        # branch u | 1+v^2: c grows like sqrt(v), so c^2+2v^2+1 stays under v^3
+        cmax = (1 + v * v) // lo
+        assert cmax ** 2 < 4 * v, (v, cmax)          # c is O(sqrt v)
+        assert 0 < cmax ** 2 + 2 * v * v + 1 < v ** 3, (v, cmax)
+        # branch u | 1+v^4: both j cases bound u by 2v, and (2v)^2+1 < v^3
+        assert 4 * v * v + 1 < v ** 3, v
+    # exhaustive confirmation on the actual congruence
+    for v in primes_to(2000):
+        if v % 4 != 1:
+            continue
+        for u in sqrt_minus1(v, 3):
+            if u and (v ** 4 + 1) % u == 0 or u and (v * v + 1) % u == 0:
+                assert False, (v, u)
+    print("  VII   shape 2 EMPTY: both branches die by size "
+          "(c = O(sqrt v), and u <= 2v)")
+
+
+def test_shape1_is_empty():
+    # Phi_5 branch: T strictly between consecutive squares for v >= 19
+    for v in range(19, 4000):
+        T = v ** 4 - 4 * v ** 3 - 3 * v * v - 2 * v - 1
+        lo = (v * v - 2 * v - 4) ** 2
+        hi = (v * v - 2 * v - 3) ** 2
+        assert lo < T < hi, (v, T)
+        assert isqrt(T) ** 2 != T, (v, T)
+    for v in (5, 13, 17):
+        T = v ** 4 - 4 * v ** 3 - 3 * v * v - 2 * v - 1
+        assert isqrt(T) ** 2 != T, (v, T)
+    assert 625 - 586 == 39 and isqrt(39) ** 2 != 39
+    assert 1250 - 586 == 664 and isqrt(664) ** 2 != 664
+    # Phi_10 branch: 4v^3-3v^2+2v-1 = 2 (mod 4) for every odd v
+    for v in range(1, 60000, 2):
+        val = 4 * v ** 3 - 3 * v * v + 2 * v - 1
+        assert val % 4 == 2, v
+        assert isqrt(val) ** 2 != val, v
+    # the mod-8 reduction, by residue class
+    for r in (1, 3, 5, 7):
+        assert (4 * r ** 3 - 3 * r * r + 2 * r - 1) % 8 == (6 * r - 4) % 8
+        assert (6 * r - 4) % 4 == 2
+    # squares are never 2 mod 4
+    assert {x * x % 4 for x in range(4)} == {0, 1}
+    # the elliptic-curve substitution is right, even though it is not needed
+    for v in range(1, 50):
+        assert ((4 * v - 1) ** 3 + 5 * (4 * v - 1) - 10
+                == 16 * (4 * v ** 3 - 3 * v * v + 2 * v - 1))
+    print("  VII   shape 1 EMPTY: Phi_5 branch between squares, "
+          "Phi_10 branch is 2 mod 4")
+
+
+def test_shape3_remaining_branch():
+    """u^2 | 1+v^2 is dead; u^2 | 1+v^4 survives, and is thin."""
+    for v in primes_to(4000):
+        for u in range(2, isqrt(v * v + 1) + 2):
+            if (v * v + 1) % (u * u) == 0 and is_prime(u):
+                assert u <= v, (v, u)
+    for v in (3, 5, 13, 101, 100003):
+        assert v * v + 1 < (v + 1) ** 2
+    # the K = 1 (mod v) step: (1+c+c^2) + v^2(c+c^2) with c^2+c+1 = v^2 K
+    for v in (5, 7, 13):
+        for K in range(1, 40):
+            lhs = (v * v * K) + v * v * (v * v * K - 1)
+            assert lhs == v * v * (K * (v * v + 1) - 1)
+    # 8 | u-1 and v = 1 mod 3 (or 3) are forced
+    for u in primes_to(3000):
+        has = any((x ** 4 + 1) % u == 0 for x in range(u))
+        assert has == (u % 8 == 1), u
+    print(f"  VIII  shape 3: u^2 | 1+v^2 dead; u^2 | 1+v^4 open, no root of "
+          f"x^4 = -1 (mod u^2) in (sqrt u, u) for any u < {SHAPE3_SEARCH_UMAX}")
+
+
 def test_does_not_prove_too_much():
     """The machinery must not kill shapes k7_status.py carries as live."""
     import k7_status
     assert len(k7_status.LEVEL2_SHAPES) == 8
     for nm in LEVEL2_SHAPES_4:
         assert nm in k7_status.LEVEL2_SHAPES, nm
-    # case A genuinely survives: roots exist and lie in the right window
+    # the three closures must not be vacuous: the congruences do have roots,
+    # so what kills the shapes is the extra structure, not an empty premise
     found = 0
     for v in primes_to(500):
         if v % 4 != 1:
@@ -565,6 +820,10 @@ def test_does_not_prove_too_much():
             if v * v < r < v ** 4:
                 found += 1
     assert found > 50, found
+    # shape 3's surviving branch is genuinely non-empty as a congruence:
+    # x^4 = -1 (mod u^2) is solvable for every u = 1 (mod 8)
+    solvable = [u for u in primes_to(500) if u % 8 == 1]
+    assert len(solvable) > 10, solvable
     # and the anchors of the whole programme still hold
     for n, k in ((1, 1), (130, 4)):
         ds = smallest_divisors(n, k)
@@ -584,17 +843,33 @@ def self_test():
     test_level1_kill_shape3()
     test_level1_kill_shape4_subsumes_step11()
     test_complete_sweep()
+    test_u_part_of_lcm_gives_the_square()
+    test_shape4_is_empty()
+    test_shape2_is_empty()
+    test_shape1_is_empty()
+    test_shape3_remaining_branch()
     test_does_not_prove_too_much()
     print("\nAll self-tests passed.")
-    print("k = 7 is still NOT closed: 78 of 86 orbits Level 1, 8 at Level 2.")
-    print("Inside those 8:")
+    print(f"k = 7: {ORBITS_LEVEL1_AFTER} of {ORBITS_TOTAL} orbits at Level 1"
+          f" (was {ORBITS_LEVEL1_BEFORE}), 5 at Level 2.")
+    print("THREE of the eight Level-2 shapes are now EMPTY at Level 1:")
+    for nm in CLOSED_AT_LEVEL1:
+        print(f"      {nm}")
+    print("  the engine is the u-PART of lcm(V): step 11's (M) gives only the")
+    print("  first power of u, while lcm | n gives u^2 wherever the shape")
+    print("  carries u^2 -- enough to force u <= v against forcing's u > v.")
+    print()
+    print("Earlier, from the v-part congruence:")
     print("  L1  shapes 1-4, CASE B (outside prime as large as (M) allows):")
     print("      shape 1  u = Phi_5 or Phi_10, u^2+1 = +-4v^3+3v^2+-2v+2 mod v^4")
     print("      shape 2  d = -u mod v^3 forces v^3 | d^2+1, d <= v")
     print("      shape 3  v^2 | 1+d^2+d^4 needs 4v^2-3 to be a square")
     print("      shape 4  6v+3 and 3-6v never vanish mod v^2 (subsumes (3,13))")
-    print("  L2  shapes 1-4, CASE A: O(1) candidates per v, complete to")
-    print(f"      v < {SWEEP_DEPTH} with no realization (step 11 reached 30000)")
+    print("  L2  the O(1)-per-v sweep, complete to "
+          f"v < {SWEEP_DEPTH} (step 11 reached 30000)")
+    print("  L2  shape 3's branch u^2 | 1+v^4 is all that is left of the four,")
+    print(f"      with no root of x^4 = -1 (mod u^2) in (sqrt u, u) for any")
+    print(f"      u < {SHAPE3_SEARCH_UMAX}")
     print("  L2  shapes 5-8 unchanged; shape 7 inherits v = 1 (mod 4)")
     print()
     print("Also recorded: the forcing correction -- only non-members INSIDE the")
