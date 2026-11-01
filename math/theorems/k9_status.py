@@ -7,9 +7,27 @@ NINE smallest divisors of n?
 STATUS.
   EVEN SECTOR   CLOSED, LEVEL 1.  All five surviving even profiles are empty,
                 parameter-free, no bounded range and no search.
-  ODD SECTOR    OPEN, but reduced from 1531 labelled shapes to 27 by two
-                parameter-free lemmas (a vacuity certificate and a refined
-                tail lemma).  All 27 are concentrated on the smallest prime.
+  ODD SECTOR    OPEN, reduced from 1531 labelled shapes to 37 by two
+                parameter-free lemmas (a vacuity certificate and a box size
+                lemma).
+
+ERRATUM, corrected in this revision.  An earlier revision forced
+val(f) > max(V) for EVERY minimal non-member f of a shape.  That is only
+justified when f divides n, and a non-member divides n for certain only when
+it divides lcm(V) -- that is, only when it lies in the BOX [0, m] of the lcm
+exponents.  A monomial outside the box, such as p_1^(m_1+1), need not divide
+n at all: n's exponent of p_1 may be exactly m_1, and then (P) says nothing
+about that power.  Three things changed:
+  * the vacuity certificate now ranges over in-box non-members only, and
+    kills 1465 of the 1531 odd-sector shapes rather than 1499;
+  * the "refined tail lemma", whose premise was M < p_1^(m_1+1), is withdrawn
+    and replaced by the BOX SIZE LEMMA of step 7b, which uses only in-box
+    forcing;
+  * the odd-sector residue is 37 shapes, not 27.
+The EVEN sector is unaffected in its conclusions -- all five profiles are
+still empty at Level 1 -- but two of its proofs needed repair, and both
+repairs are recorded in place: step 5 was missing the branch v_2(n) = 2, and
+step 6's census splits differently.  Every count below has been recomputed.
 
 k = 9 is hard for the same reason k = 7 was and k = 6, k = 8 were not: the
 PARITY LEMMA (a sum of k odd squares has the parity of k) forces n even only
@@ -98,8 +116,10 @@ triples, every one with n < lcm.  See _444_SMALL.
 --------------------------------------------------------------------
 STEP 5.  (4,3,2) is EMPTY.
 --------------------------------------------------------------------
-A = 4, B = 3, C = 2, so 8 | n (if 8 were not in V then 8 > max(V) and all
-nine elements would have to fit in {1,...,7}), and C = {4, 8} is forced.
+A = 4, B = 3, C = 2.  There are TWO branches, by v_2(n).
+
+BRANCH A, v_2(n) >= 3.  Then 8 | n, and 8 must be in V (if not, 8 > max(V)
+and all nine elements would have to fit in {1,...,7}), so C = {4, 8}.
 B = 3 gives B = {2, 2o_1, 2o_2}, so 4o_1 > max(V) >= 2o_2 and o_2 < 2o_1;
 and o_1 o_2 is not in V, so o_1 o_2 > max(V) >= o_3.
 
@@ -110,6 +130,20 @@ o_3 runs over (o_2, o_1 o_2), where the completed square is largest at the
 left end, so it suffices that  o_2^2 (8 o_1 - 6) > 85 + 5 o_1^2, and since
 o_2 > o_1 that follows from  8 o_1^3 > 85 + 11 o_1^2,  true at o_1 = 3
 (216 > 184) and after.  So n < lcm throughout.
+
+BRANCH B, v_2(n) = 2 exactly.  C = 2 does NOT force 8 | n -- that was the
+gap.  With v_2(n) = 2 every 0-mod-4 element is 4*odd, so C = {4, 4 o_1} and
+
+    V   = {1, 2, 4, o_1, o_2, o_3, 2o_1, 2o_2, 4o_1}
+    n   = 21 + 21 o_1^2 + 5 o_2^2 + o_3^2,      lcm = 4 o_1 o_2 o_3
+
+with no 8 anywhere.  The valid forcings here are 4o_2 | n and 2o_3 | n (each
+a product of coprime divisors of n), giving 2 o_1 < o_3 < 4 o_2.  Then
+o_3 < 4 o_2 gives n < 21 + 21 o_1^2 + 21 o_2^2 while o_3 > o_2 gives
+lcm > 4 o_1 o_2^2; the o_2^2 terms need o_1 >= 7, and for o_1 = 3, 5 the
+quadratic o_3^2 - 4 o_1 o_2 o_3 + (21 + 21 o_1^2 + 5 o_2^2) is negative
+across the whole forced window.  So BRANCH B is size-killed too, tightest
+n/lcm = 0.914 at (3, 5, 7).
 
 --------------------------------------------------------------------
 STEP 6.  (6,3,0) is EMPTY.
@@ -125,14 +159,20 @@ shapes (14 up to permuting the primes -- the same 14 that carried k = 8's
 profile (6,2,0), but the labelling matters here because the forcing is not
 symmetric in the primes).  They fall out as
 
-        31   killed by the VACUITY CERTIFICATE (step 7b below), outright
-         3   vacuous: O = {1,p,...,p^5}, {1,p,q,pq,p^2,p^3}, {1,p,q,pq,...}
-         4   killed by the size form, shapes A-D below
+        26   killed by the VACUITY CERTIFICATE (step 7b below), outright
+         6   vacuous: no admissible prime tuple at all
+         6   killed by the size form (n < lcm on every admissible tuple)
          1   the SANDWICH shape, which no size argument can reach
         ---
         39
 
-The four size kills, each with its threshold and its finite remainder:
+(The split was 31/3/4/1 before the erratum; the certificate is weaker now,
+so five shapes moved out of it and into the vacuous and size-killed columns.
+Nothing moved into the residue: the residue is still the single sandwich
+shape, so (6,3,0) is still EMPTY at Level 1.)
+
+Four of the six size kills, each with its threshold and its finite
+remainder:
 
    A  O = {1, p, p^2, q, pq, r},  p < q < p^2.  The window p^2 < r < pq is
       empty (there o_3 = p^2, and B = 3 wants 2p^2 > M = pq, i.e. p > q), so
@@ -205,52 +245,64 @@ the SMALLEST prime, so a shape and its mirror behave differently.
 
 7b.  TWO PARAMETER-FREE LEMMAS.
 
+     WHAT MAY BE FORCED.  (P) applies to a divisor of n.  A non-member f of
+     the shape is a divisor of n for certain exactly when f | lcm(V), i.e.
+     when f lies in the BOX [0, m] of the lcm exponents.  Only those f may
+     be required to exceed M := max(V).  Outside the box nothing is known:
+     p_1^(m_1+1) need not divide n.  Both lemmas below use in-box f only.
+     Two shapes have NO in-box non-member at all, so neither lemma reaches
+     them -- the full-box shapes, those with prod(m_i + 1) = 9:
+
+         m = (8)      V = all divisors of p_1^8
+         m = (2,2)    V = all nine divisors of p_1^2 p_2^2
+
      THE VACUITY CERTIFICATE.  Put y_i = log p_i, so 0 < y_1 <= ... <= y_r.
      That cone is generated by the vectors e_j + e_{j+1} + ... + e_r, so for
      an integer vector c,
 
         <c,y> <= 0 for EVERY such y   <=>   sum_{i>=j} c_i <= 0 for all j.
 
-     If some member e of the shape and some minimal non-member f have
+     If some member e of the shape and some IN-BOX non-member f have
      c = f - e passing that test, then val(f) <= val(e) <= M whatever the
-     primes, contradicting the forcing val(f) > M (equality is impossible:
-     distinct monomials in distinct primes have distinct values).  The shape
-     is then EMPTY outright, with no case analysis at all.
+     primes, contradicting val(f) > M (equality is impossible: distinct
+     monomials in distinct primes have distinct values).  The shape is then
+     EMPTY outright, with no case analysis at all.
 
-     THE REFINED TAIL LEMMA.  Let m_i be the exponent of p_i in lcm(V) and
-     T := m_2 + ... + m_r.  Since p_1^(m_1+1) divides no element of V, (P)
-     gives M < p_1^(m_1+1); every prime of n is itself an element of V, so
-     every p_i <= M.  Then
+     THE BOX SIZE LEMMA.  Let f be an in-box non-member and c = m - 2f.
+     Since M < val(f) and n is a sum of nine squares each at most M^2,
 
-        lcm(V) >= p_1^(m_1) * p_2^T      (every later prime is >= p_2)
-        n       = nine squares each <= M^2  <=  9 M^2  <  9 p_1^(2 m_1 + 2)
+        lcm(V) <= n <= 9 M^2 < 9 val(f)^2,   i.e.   lcm(V)/val(f)^2 < 9.
 
-     and lcm | n forces lcm <= n, so p_2^T < 9 p_1^(m_1 + 2).  Since
-     p_2 > p_1 this gives
+     Write y_i = y_1 + (increments >= 0).  Abel summation gives
+     <c,y> >= y_1 * sum(c) whenever every top partial sum of c from index 2
+     on is non-negative, and then lcm(V)/val(f)^2 >= p_1^(sum c).  Hence
 
-        p_1^(T - m_1 - 2)  <  9.
+        p_1^(sum c) < 9.
 
-        T >= m_1 + 4  =>  p_1^2 < 9  =>  p_1 < 3: no odd prime.  DEAD.
-        T  = m_1 + 3  =>  p_1 < 9, so p_1 in {3,5,7}, and then
-                          p_2 <= (9 p_1^(m_1+2))^(1/T) must exceed p_1.
-        T <= m_1 + 2  =>  no information.
+        sum c >= 2  =>  p_1^2 < 9  =>  p_1 < 3: no odd prime.  DEAD.
+        sum c  = 1  =>  p_1 < 9, so p_1 in {3,5,7}.
+        sum c <= 0  =>  no information from this f.
+
+     This replaces the withdrawn "refined tail lemma", whose premise
+     M < p_1^(m_1+1) used an out-of-box non-member.
 
      The census over the 1531 shapes:
 
-        T >= m_1 + 4   dead outright                              811
-        T  = m_1 + 3   p_1 in {3,5,7}, and the p_2 bound leaves
-                       room in NONE of them                       354
-        T <= m_1 + 2   no tail information                         366
-                       of which the certificate kills             338
+        killed by the certificate (in-box)                        1465
+        of the remaining 66:
+           box size lemma, sum c >= 2, dead outright                22
+           box size lemma, sum c  = 1, p_1 in {3,5,7} only           7
+           no handle from either lemma                              37
         ---------------------------------------------------------------
-        killed at Level 1                                        1503
-        LEFT                                                       28
-                       of which r = 1 dies by (M) in 7a             1
-        ---------------------------------------------------------------
-        STILL OPEN                                                  27
+        dead outright at Level 1                                  1487
+        confined to p_1 in {3,5,7}                                    7
+        NO HANDLE                                                    37
 
-7c.  WHAT IS LEFT.  The 27 are the shapes concentrated on the smallest prime
-     (r <= 6, and T <= m_1 + 2 for all of them).  The hardest is
+     Of the 37, one is the r = 1 shape, which dies by (M) in 7a, so 36 are
+     genuinely untouched by anything in this file.
+
+7c.  WHAT IS LEFT.  36 shapes, spread over r = 2, 3, 4 (plus the r = 1 shape
+     that (M) kills).  The hardest is
 
         {1, p, p^2, ..., p^7, q}      with      p^6 < q < p^8
 
@@ -277,8 +329,7 @@ LEDGER
     k = 7   78/86 orbits Level 1; 8 odd-sector shapes open
     k = 8   CLOSED, Level 1
     k = 9   EVEN SECTOR CLOSED, Level 1 (five profiles, all empty);
-            ODD SECTOR (9,0,0) reduced from 1531 shapes to 27, all of them
-            concentrated on the smallest prime
+            ODD SECTOR (9,0,0) reduced from 1531 shapes to 36
 
 The pattern is stable: even k closes, odd k does not, and the obstruction is
 always the same -- parity hands the even cases their whole odd sector for
@@ -463,16 +514,31 @@ def lcm_exponents(S):
     return tuple(max(e[i] for e in S) for i in range(r))
 
 
+def box_nonmembers(S):
+    """Minimal non-members of S that lie inside the box [0, m] of lcm(V).
+
+    Only these are guaranteed to divide n (they divide lcm(V), which divides
+    n), so only these may be required to exceed max(V).  A non-member outside
+    the box, such as p_1^(m_1+1), need not divide n at all.
+    """
+    S = list(S)
+    m = lcm_exponents(S)
+    r = len(m)
+    return [f for f in minimal_nonmembers(S)
+            if all(f[i] <= m[i] for i in range(r))]
+
+
 def vacuity_certificate(S, mnm=None):
     """A parameter-free witness that the shape is empty, or None.
 
-    Returns (f, e) with f a minimal non-member, e a member, and f - e having
-    every top partial sum <= 0.  That makes val(f) <= val(e) <= max(V) for
-    EVERY ordered tuple of primes, contradicting the forcing val(f) > max(V).
+    Returns (f, e) with f an IN-BOX minimal non-member, e a member, and
+    f - e having every top partial sum <= 0.  That makes val(f) <= val(e)
+    <= max(V) for every ordered tuple of primes, contradicting val(f) >
+    max(V).
     """
     S = list(S)
     if mnm is None:
-        mnm = minimal_nonmembers(S)
+        mnm = box_nonmembers(S)
     r = len(S[0])
     for f in mnm:
         for e in S:
@@ -496,49 +562,43 @@ def iroot(x, k):
     return lo
 
 
-def tail_class(S, const=9):
-    """Which branch of the refined tail lemma applies.
+def box_size_lemma(S):
+    """'dead', 'small-p1', or None -- see step 7b.
 
-    const is the numerator of the bound  p_2^T < const * p_1^(m_1+2):
-    9 for the odd sector (n <= 9 M^2, lcm = prod p_i^m_i) and 9/2 when
-    lcm carries an extra factor 2, as in profile (6,3,0).  Returns
-    'dead', 'small-p1' or 'open'.
+    For an in-box non-member f and c = m - 2f with every top partial sum of
+    c from index 2 on non-negative, lcm(V)/val(f)^2 >= p_1^(sum c) while
+    lcm(V) <= n <= 9 M^2 < 9 val(f)^2.  So p_1^(sum c) < 9.
     """
+    S = list(S)
     m = lcm_exponents(S)
-    T = sum(m) - m[0]
-    d = T - m[0] - 2
-    if d >= 2:
-        return 'dead'                 # p_1^2 < 9 has no odd solution
-    if d == 1:
-        return 'small-p1'             # p_1 < 9, so p_1 in {3,5,7}
-    return 'open'
-
-
-def tail_lemma_small_p1_room(S, const9=9):
-    """For the T = m_1 + 3 branch: does any p_1 in {3,5,7} leave room for p_2?"""
-    m = lcm_exponents(S)
-    T = sum(m) - m[0]
-    for p1 in (3, 5, 7):
-        if iroot(const9 * p1 ** (m[0] + 2), T) > p1:
-            return True
-    return False
+    r = len(m)
+    best = None
+    for f in box_nonmembers(S):
+        c = [m[i] - 2 * f[i] for i in range(r)]
+        if all(sum(c[i] for i in range(j, r)) >= 0 for j in range(1, r)):
+            tot = sum(c)
+            if tot >= 2:
+                return 'dead'
+            if tot == 1:
+                best = 'small-p1'
+    return best
 
 
 SHAPE_COUNTS = {1: 1, 2: 28, 3: 195, 4: 512, 5: 550, 6: 216, 7: 28, 8: 1}
 TOTAL_SHAPES = 1531
-TAIL_DEAD = 811            # T >= m_1 + 4
-TAIL_SMALL_P1 = 354        # T  = m_1 + 3, and none leaves room for p_2
-TAIL_NO_INFO = 366         # T <= m_1 + 2
-CERTIFIED_AMONG_NO_INFO = 338
-KILLED_LEVEL1 = 1503
-ODD_SECTOR_LEFT = 28       # of which r = 1 dies by (M), leaving 27
-ODD_SECTOR_OPEN = 27
+CERTIFIED = 1465           # in-box vacuity certificate
+BOX_DEAD = 22              # box size lemma, sum c >= 2
+BOX_SMALL_P1 = 7           # box size lemma, sum c = 1
+NO_HANDLE = 37             # neither lemma reaches these
+KILLED_LEVEL1 = 1487       # CERTIFIED + BOX_DEAD
+ODD_SECTOR_OPEN = 36       # NO_HANDLE minus the r = 1 shape, which (M) kills
+FULL_BOX_SHAPES = 2        # prod(m_i+1) = 9, so no in-box non-member exists
 
 # profile (6,3,0): the 39 labelled six-element odd parts
 SIX_SHAPES = 39
-SIX_CERTIFIED = 31
-SIX_VACUOUS = 3
-SIX_SIZE_KILLED = 4        # shapes A, B, C, D of step 6
+SIX_CERTIFIED = 26
+SIX_VACUOUS = 6
+SIX_SIZE_KILLED = 6
 SIX_SANDWICH = 1
 
 
@@ -701,6 +761,30 @@ def test_step7a_r1_dies_mod_p():
     print("  step 7a r = 1: n = 1 (mod p) but p | n -- (M) kills it outright")
 
 
+def test_only_in_box_non_members_may_be_forced():
+    """The erratum, as a test: out-of-box non-members are not forced."""
+    # k=7's shape {1,v,u,v^2,uv,u^2,uv^2} has m = (2,2)
+    S = [(0, 0), (1, 0), (0, 1), (2, 0), (1, 1), (0, 2), (2, 1)]
+    assert lcm_exponents(S) == (2, 2)
+    assert minimal_nonmembers(S) == [(0, 3), (1, 2), (3, 0)]
+    assert box_nonmembers(S) == [(1, 2)]
+    # v^3 = (3,0) sits outside the box, so it need not divide n; forcing
+    # v^3 > max(V) >= u v^2 would give v > u and empty the shape wrongly
+    v, u = 3, 5
+    V = sorted([1, v, u, v * v, u * v, u * u, u * v * v])
+    assert max(V) == u * v * v == 45
+    assert v ** 3 < max(V)        # would be a contradiction if it were forced
+    # the two full-box shapes at k=9 have no in-box non-member at all
+    L = labelled_shapes(9)
+    fb = [(r, S) for r, S in L if not box_nonmembers(S)]
+    assert len(fb) == FULL_BOX_SHAPES, len(fb)
+    from math import prod
+    for r, S in fb:
+        assert prod(x + 1 for x in lcm_exponents(list(S))) == 9
+    print(f"  erratum only in-box non-members may be forced; "
+          f"{FULL_BOX_SHAPES} full-box shapes have no forcing at all")
+
+
 def test_vacuity_certificate_is_sound():
     """The certificate's cone duality, checked against brute force."""
     import random
@@ -709,7 +793,6 @@ def test_vacuity_certificate_is_sound():
         r = random.randrange(1, 5)
         c = [random.randrange(-4, 5) for _ in range(r)]
         claim = all(sum(c[i] for i in range(j, r)) <= 0 for j in range(r))
-        # brute force over ordered positive y
         viol = False
         for _ in range(400):
             y = sorted(random.uniform(0.01, 10) for _ in range(r))
@@ -718,51 +801,76 @@ def test_vacuity_certificate_is_sound():
                 break
         if claim:
             assert not viol, (c,)
-    # and on a shape it really does witness emptiness
+    # on a shape it really does witness emptiness, and the witness is in-box
     S = [(0, 0), (0, 1), (1, 0), (2, 0), (3, 0), (4, 0), (0, 2), (0, 3), (0, 4)]
     w = vacuity_certificate(S)
-    assert w is not None, "p1*p2 > max(V) >= p2^4 would need p1 > p2^3"
+    assert w is not None
     f, e = w
+    m = lcm_exponents(S)
+    assert all(f[i] <= m[i] for i in range(len(m))), (f, m)
     for ps in ((3, 5), (5, 7), (11, 13), (101, 211)):
         vf = ps[0] ** f[0] * ps[1] ** f[1]
         ve = ps[0] ** e[0] * ps[1] ** e[1]
         assert vf < ve, (ps, vf, ve)
-    print("  step 7b certificate: cone duality verified, witness checks out")
+    print("  step 7b certificate: cone duality verified, witness is in-box")
 
 
-def test_step7b_shape_census_and_tail_lemma():
+def test_box_size_lemma_is_sound():
+    """lcm/val(f)^2 >= p_1^(sum c) under the partial-sum condition."""
+    import random
+    random.seed(7)
+    L = labelled_shapes(9)
+    checked = 0
+    for r, S in L:
+        Sl = list(S)
+        m = lcm_exponents(Sl)
+        for f in box_nonmembers(Sl):
+            c = [m[i] - 2 * f[i] for i in range(r)]
+            if not all(sum(c[i] for i in range(j, r)) >= 0 for j in range(1, r)):
+                continue
+            for _ in range(10):
+                ps = sorted(random.sample(
+                    [q for q in range(3, 200) if is_prime(q)], r))
+                lcm_v = 1
+                vf = 1
+                for i in range(r):
+                    lcm_v *= ps[i] ** m[i]
+                    vf *= ps[i] ** f[i]
+                # exact integer form of  lcm >= p_1^(sum c) * val(f)^2,
+                # valid for negative sum(c) too (no float exponents)
+                t = sum(c)
+                lhs = lcm_v * ps[0] ** max(0, -t)
+                rhs = ps[0] ** max(0, t) * vf * vf
+                assert lhs >= rhs, (S, f, ps, t)
+                checked += 1
+    assert checked > 500, checked
+    print(f"  step 7b box size lemma: the Abel bound holds on {checked:,} "
+          f"random instances")
+
+
+def test_step7b_shape_census_and_lemmas():
     L = labelled_shapes(9)
     from collections import Counter
     c = dict(Counter(r for r, _ in L))
     assert c == SHAPE_COUNTS, c
     assert len(L) == TOTAL_SHAPES, len(L)
-    dead = [S for _, S in L if tail_class(S) == 'dead']
-    small = [S for _, S in L if tail_class(S) == 'small-p1']
-    noinf = [S for _, S in L if tail_class(S) == 'open']
-    assert len(dead) == TAIL_DEAD, len(dead)
-    assert len(small) == TAIL_SMALL_P1, len(small)
-    assert len(noinf) == TAIL_NO_INFO, len(noinf)
-    assert len(dead) + len(small) + len(noinf) == TOTAL_SHAPES
-    # the T = m_1 + 3 branch leaves room for p_2 in none of them
-    assert not any(tail_lemma_small_p1_room(S) for S in small)
-    cert = [S for S in noinf if vacuity_certificate(S)]
-    assert len(cert) == CERTIFIED_AMONG_NO_INFO, len(cert)
-    killed = len(dead) + len(small) + len(cert)
-    assert killed == KILLED_LEVEL1, killed
-    left = [(r, S) for r, S in L
-            if tail_class(S) == 'open' and not vacuity_certificate(S)]
-    assert len(left) == ODD_SECTOR_LEFT, len(left)
-    # r = 1 is among them and dies by (M)
+    cert = [(r, S) for r, S in L if vacuity_certificate(S)]
+    assert len(cert) == CERTIFIED, len(cert)
+    rest = [(r, S) for r, S in L if not vacuity_certificate(S)]
+    dead = [x for x in rest if box_size_lemma(x[1]) == 'dead']
+    small = [x for x in rest if box_size_lemma(x[1]) == 'small-p1']
+    left = [x for x in rest if box_size_lemma(x[1]) is None]
+    assert len(dead) == BOX_DEAD, len(dead)
+    assert len(small) == BOX_SMALL_P1, len(small)
+    assert len(left) == NO_HANDLE, len(left)
+    assert len(cert) + len(dead) == KILLED_LEVEL1
+    assert len(cert) + len(dead) + len(small) + len(left) == TOTAL_SHAPES
+    # the r = 1 shape is among the no-handle set and (M) kills it
     assert any(r == 1 for r, _ in left)
     assert len(left) - 1 == ODD_SECTOR_OPEN
-    # every survivor is concentrated on the smallest prime
-    for r, S in left:
-        m = lcm_exponents(S)
-        assert sum(m) - m[0] <= m[0] + 2, (r, S, m)
-    print(f"  step 7b odd sector: {TOTAL_SHAPES} labelled shapes -> "
-          f"{KILLED_LEVEL1} dead at Level 1 "
-          f"({TAIL_DEAD} tail + {TAIL_SMALL_P1} small-p1 + {len(cert)} "
-          f"certificate), {ODD_SECTOR_OPEN} open after (M) takes r = 1")
+    print(f"  step 7b census: {CERTIFIED} certificate + {BOX_DEAD} box-size "
+          f"= {KILLED_LEVEL1} dead; {BOX_SMALL_P1} confined to p1 in {{3,5,7}}; "
+          f"{ODD_SECTOR_OPEN} open after (M)")
 
 
 def _six_shapes():
@@ -779,69 +887,83 @@ def _build630(O):
     return V
 
 
-def test_step6_census_and_the_four_size_kills():
+def test_step5_branch_b_is_size_killed():
+    """The branch v_2(n) = 2, C = {4, 4 o_1}, missed by the old step 5."""
+    P = [q for q in range(3, 320) if is_prime(q)]
+    tot = 0
+    worst = (0.0, None)
+    for i, o1 in enumerate(P):
+        for o2 in P[i + 1:]:
+            for o3 in P:
+                if not (2 * o1 < o3 < 4 * o2) or o3 <= o2:
+                    continue
+                V = sorted({1, 2, 4, o1, o2, o3, 2 * o1, 2 * o2, 4 * o1})
+                if len(V) != 9:
+                    continue
+                M = max(V)
+                if 4 * o2 <= M or 2 * o3 <= M:   # the two VALID forcings
+                    continue
+                n = 21 + 21 * o1 * o1 + 5 * o2 * o2 + o3 * o3
+                assert n == sum(d * d for d in V), (o1, o2, o3)
+                Lc = 4 * o1 * o2 * o3
+                assert Lc == lcm_of(V), (o1, o2, o3)
+                tot += 1
+                assert n < Lc, (o1, o2, o3, n, Lc)
+                if n / Lc > worst[0]:
+                    worst = (n / Lc, (o1, o2, o3))
+    assert tot > 30000, tot
+    assert worst[1] == (3, 5, 7)
+    print(f"  step 5  branch B (v_2 = 2, C = {{4, 4o_1}}): n < lcm on all "
+          f"{tot:,} admissible triples, tightest {worst[0]:.4f} at {worst[1]}")
+
+
+def test_step6_census_and_the_size_kills():
+    import itertools
     L6 = _six_shapes()
     assert len(L6) == SIX_SHAPES, len(L6)
     cert = [(r, S) for r, S in L6 if vacuity_certificate(S)]
     assert len(cert) == SIX_CERTIFIED, len(cert)
     rest = [(r, S) for r, S in L6 if not vacuity_certificate(S)]
     assert len(rest) == SIX_VACUOUS + SIX_SIZE_KILLED + SIX_SANDWICH
-    # shape D: the refined tail lemma with the extra factor 2 in lcm
-    D = (1, 1, 1, 1, 1)
-    for p1 in (3, 5, 7):
-        bound = iroot((9 * p1 ** 3) // 2, 4)
-        nxt = next(q for q in range(p1 + 1, 100) if is_prime(q))
-        assert nxt > bound, (p1, bound, nxt)
-    # shapes A, B, C: the thresholds
-    for p in (3, 5):
-        assert not p ** 5 > 6 * p ** 4 + 10 * p * p + 5
-    for p in (7, 11, 13, 101):
-        assert p ** 5 > 6 * p ** 4 + 10 * p * p + 5
-    assert not 2 * 5 > 13 and 2 * 7 > 13          # B and C thresholds
-    # and the finite remainders, all with n < lcm
-    P = [x for x in range(3, 4000) if is_prime(x)]
-    counts = {}
-    def run(tag, gen):
+    # classify the survivors with VALID forcing only
+    P = [q for q in range(3, 200) if is_prime(q)]
+    vac = size = sand = 0
+    for r, S in rest:
+        Sl = list(S)
+        bnm = box_nonmembers(Sl)
         adm = sz = 0
-        for O, mnm in gen:
-            V = _build630(sorted(O))
+        for ps in itertools.combinations(P, r):
+            O = sorted(_val(e, ps) for e in Sl)
+            if len(set(O)) != 6:
+                continue
+            V = _build630(O)
             if V is None:
                 continue
             M = max(V)
-            if any(x <= M for x in mnm):
+            if any(_val(f, ps) <= M for f in bnm):
                 continue
             adm += 1
-            n = sum(d * d for d in V)
-            assert n < lcm_of(V), (tag, O, n, lcm_of(V))
-            sz += 1
-        counts[tag] = adm
-    def genA(ps):
-        for p in ps:
-            for q in [x for x in P if p < x < p * p]:
-                for r in [x for x in P if q < x < 2 * p * p and x != p * q]:
-                    yield ([1, p, p * p, q, p * q, r],
-                           [p ** 3, p * p * q, q * q, p * r, q * r, r * r])
-    def genB(ps):
-        for p in ps:
-            for q in [x for x in P if p * p < x < p ** 4]:
-                for r in [x for x in P if q < x < min(p * q, p ** 4)]:
-                    yield ([1, p, p * p, p ** 3, q, r],
-                           [p ** 4, p * q, q * q, p * r, q * r, r * r])
-    def genC(pairs):
-        for p, q in pairs:
-            w = [x for x in P if q < x < p * q]
-            for i in range(len(w)):
-                for j in range(i + 1, len(w)):
-                    yield ([1, p, p * p, q, w[i], w[j]],
-                           [p ** 3, p * q, q * q])
-    run('A', genA([3, 5]))
-    run('B', genB([3, 5]))
-    run('C', genC([(3, 5)]))
-    assert counts == {'A': 11, 'B': 486, 'C': 3}, counts
-    print(f"  step 6  (6,3,0) census: {SIX_SHAPES} labelled odd parts = "
-          f"{SIX_CERTIFIED} certificate + {SIX_VACUOUS} vacuous + "
-          f"{SIX_SIZE_KILLED} size (A-D) + {SIX_SANDWICH} sandwich; "
-          f"finite remainders {counts}")
+            if sum(d * d for d in V) < lcm_of(V):
+                sz += 1
+        if adm == 0:
+            vac += 1
+        elif sz == adm:
+            size += 1
+        else:
+            sand += 1
+            assert lcm_exponents(Sl) == (2, 2), Sl   # the sandwich shape
+    assert (vac, size, sand) == (SIX_VACUOUS, SIX_SIZE_KILLED, SIX_SANDWICH), \
+        (vac, size, sand)
+    print(f"  step 6  (6,3,0) census: {SIX_SHAPES} = {SIX_CERTIFIED} certificate"
+          f" + {vac} vacuous + {size} size-killed + {sand} sandwich")
+
+
+def _val(e, ps):
+    v = 1
+    for i, a in enumerate(e):
+        if a:
+            v *= ps[i] ** a
+    return v
 
 
 def test_step7c_residue_family_is_really_open():
@@ -908,10 +1030,13 @@ def self_test():
     test_step4_bound_and_small_cases()
     test_step5_completed_square_and_bound()
     test_step6_sandwich()
-    test_step6_census_and_the_four_size_kills()
+    test_step5_branch_b_is_size_killed()
+    test_step6_census_and_the_size_kills()
     test_step7a_r1_dies_mod_p()
+    test_only_in_box_non_members_may_be_forced()
     test_vacuity_certificate_is_sound()
-    test_step7b_shape_census_and_tail_lemma()
+    test_box_size_lemma_is_sound()
+    test_step7b_shape_census_and_lemmas()
     test_step7c_residue_family_is_really_open()
     test_does_not_prove_too_much()
     test_no_k9_solution_by_scan()
@@ -924,20 +1049,25 @@ def self_test():
     print("  L1  step 3  (4,1,4)   C = {4,8,16,32}, p >= 17, 32p^3 > 1365+12p^2")
     print("  L1  step 4  (4,4,1)   4p^3 > 21+60p^2 from 17; seven small triples")
     print("  L1  step 5  (4,3,2)   completed square, 8o^3 > 85+11o^2 from 3")
-    print("  L1  step 6  (6,3,0)   39 odd parts: 31 certificate, 3 vacuous,")
-    print("                        4 size (A-D), 1 SANDWICH lcm < n < 2 lcm")
+    print("  L1  step 5b (4,3,2)   branch v_2 = 2, C = {4, 4o_1}: size-killed")
+    print(f"  L1  step 6  (6,3,0)   39 odd parts: {SIX_CERTIFIED} certificate,"
+          f" {SIX_VACUOUS} vacuous,")
+    print(f"                        {SIX_SIZE_KILLED} size, "
+          f"{SIX_SANDWICH} SANDWICH lcm < n < 2 lcm")
     print()
     print("k = 9, ODD SECTOR (9,0,0): OPEN, reduced "
           f"{TOTAL_SHAPES} -> {ODD_SECTOR_OPEN}.")
     print("  step 7a r = 1 dies by (M): n = 1 (mod p)")
-    print(f"  step 7b vacuity certificate + refined tail lemma kill"
-          f" {KILLED_LEVEL1} of {TOTAL_SHAPES},")
-    print(f"          parameter-free: {TAIL_DEAD} with T >= m1+4,"
-          f" {TAIL_SMALL_P1} with T = m1+3,")
-    print(f"          {CERTIFIED_AMONG_NO_INFO} by the certificate")
-    print(f"  step 7c {ODD_SECTOR_OPEN} shapes remain, all concentrated on the"
-          f" smallest prime;")
+    print(f"  step 7b certificate {CERTIFIED} + box size lemma {BOX_DEAD}"
+          f" = {KILLED_LEVEL1} dead outright;")
+    print(f"          {BOX_SMALL_P1} confined to p_1 in {{3,5,7}};"
+          f" {NO_HANDLE} with no handle")
+    print(f"  step 7c {ODD_SECTOR_OPEN} shapes remain after (M) takes r = 1;")
     print("          the hardest is {1,p,...,p^7,q} with p^6 < q < p^8")
+    print()
+    print("  ERRATUM: an earlier revision forced every minimal non-member to")
+    print("  exceed max(V).  Only IN-BOX ones may be.  Even sector unaffected")
+    print("  in its conclusions; odd-sector residue is 36, not 27.")
 
 
 if __name__ == "__main__":
