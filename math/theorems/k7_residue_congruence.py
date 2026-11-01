@@ -256,48 +256,103 @@ SHAPE 1, {1,v,u,v^2,uv,v^3,v^4}.  EMPTY.
       curve's integral points.)
 
 ====================================================================
-VIII.  WHAT IS LEFT
+VIII.  SHAPE 3's LAST BRANCH: THE SANDWICH ON n/lcm
 ====================================================================
-SHAPE 3, {1,v,u,v^2,uv,u^2,v^3}.  Case B is dead (section IV), and the
-forcings u^2 v > max(V), u v^2 > max(V) give v < u < v^2.  Then
-u^2 | (1+v^2)(1+v^4) splits:
-    u^2 | 1+v^2  =>  u^2 <= v^2+1 < (v+1)^2  =>  u <= v,  contradiction.
-                     DEAD.
-    u^2 | 1+v^4  REMAINS.  Writing c = (1+v^4)/u^2 and reducing the v^3
-      condition by u^2 = c^{-1} (mod v^3), multiplication by c^2 gives
-          (1+c+c^2) + v^2(c+c^2) = 0  (mod v^3).
-      Mod v^2 that is v^2 | c^2+c+1, and writing c^2+c+1 = v^2 K the
-      remaining v-part is v | K(v^2+1)-1, i.e. K = 1 (mod v).  So
-          c^2 + c + 1 = v^2 (1 + j v),    1 <= j <= v.
-      With c < v^2 and c^2+c+1 >= v^2(1+v) this pins c >= ~v^1.5, hence
-      u^2 = (1+v^4)/c <= ~v^2.5 and u <= ~v^1.25: the outside prime is
-      squeezed into (v, v^1.25].  Furthermore u^2 | 1+v^4 makes ord_{u^2}(v)
-      = 8, so 8 | u-1, and v^2 | u^2 +- u + 1 makes ord_{v^2}(u) in {3,6}, so
-      v = 1 (mod 3) or v = 3.
-      Searching over u rather than v: the four roots of x^4 = -1 (mod u^2)
-      must place a PRIME v in (sqrt(u), u), a 1-in-u event.  For all 70,695
-      primes u < 4*10^6 with 8 | u-1, NO root lands in that window at all.
-      Still Level 2, but the surviving region is thin and explicitly
-      described.
+SHAPE 3, {1,v,u,v^2,uv,u^2,v^3}.  EMPTY.  Case B is section IV; case A has
+u^2 | (1+v^2)(1+v^4), and u^2 | 1+v^2 dies at once since u^2 <= v^2+1 forces
+u <= v against forcing's u > v.  This is the branch u^2 | 1+v^4.
 
-SHAPES 5-8 are unchanged; shape 7 inherits v = 1 (mod 4) from section II.
+Put c = (1+v^4)/u^2.
+
+(1) THE v^3 CONDITION BECOMES A CONIC IN c.  Since 1+v^4 = 1 (mod v^3), the
+    relation u^2 c = 1+v^4 gives u^2 = c^{-1} (mod v^3).  Multiplying
+    v^3 | (u^4+u^2+1) + v^2(u^2+1) through by c^2:
+
+        (1+c+c^2) + v^2(c+c^2) = 0   (mod v^3).
+
+    Mod v^2 that is v^2 | c^2+c+1; writing c^2+c+1 = v^2 K, the rest reads
+    v | K(v^2+1) - 1, i.e. K = 1 (mod v).  So
+
+        c^2 + c + 1 = v^2 (1 + j v),      j >= 0,
+
+    and j = 0 is impossible: c^2+c+1 = v^2 makes 4v^2-3 a square, which
+    forces (2v-y)(2v+y) = 3 and v = 1.  So j >= 1 and c^2+c+1 >= v^3+v^2.
+
+(2) max(V) = v^3.  max(V) = max(v^3, u^2) (uv is below both).  If u^2 > v^3
+    then forcing u v^2 > max(V) = u^2 gives u < v^2, hence
+    c = (1+v^4)/u^2 <= v, hence c^2+c+1 <= v^2+v+1 < v^3+v^2, contradicting
+    (1).  (u^2 = v^3 would make v a square.)  So u^2 < v^3.
+
+(3) THE SANDWICH.  Put r = u^2/v^3.  Forcing gives u > v, so v^2 < u^2 < v^3
+    and r lies strictly in (1/v, 1).  Dividing n by lcm(V) = u^2 v^3 term by
+    term,
+
+        Q := n/lcm = 1/r + r + 1/v + 1/v^3 + v/u^2 + 1/(u^2 v) + 1/(u^2 v^3).
+
+    LOWER: 1/r + r > 2 by AM-GM, since r is not 1, and every other term is
+           positive.  So Q > 2, and Q is an integer, so Q >= 3.
+    UPPER: 1/r < v because r > 1/v; r < 1; and v/u^2 < 1/v because u > v.
+           So Q < v + 1 + 2/v + 1/v^3 + (two smaller terms) <= v + 2 for
+           v >= 3, giving Q <= v+1.
+
+(4) Q IS 1 OR v.  Every prime factor of n other than v and u divides n, is
+    not in V, and so exceeds max(V) = v^3 by (P); if one occurred then
+    Q > v^3 > v+1.  So n = v^a u^b with a >= 3, b >= 2 and
+    Q = v^(a-3) u^(b-2).  Since u and v are distinct ODD primes, u >= v+2,
+    so Q = u already exceeds v+1 -- and v^2, u^2, uv all the more.  The only
+    products of v's and u's at most v+1 are 1 and v, and Q >= 3 rules out 1.
+
+    Hence  Q = v  exactly, i.e.  n = u^2 v^4.
+
+(5) n = u^2 v^4 IS IMPOSSIBLE.  With X = u^2 the equation
+    1+v^2+X+v^4+Xv^2+X^2+v^6 = X v^4 reads
+
+        X^2 + X(v^2 + 1 - v^4) + (1 + v^2 + v^4 + v^6) = 0,
+
+    whose discriminant is  D = v^8 - 6v^6 - 5v^4 - 2v^2 - 3.  Now
+
+        D - (v^4-3v^2-7)^2 = -(44v^2 + 52)   < 0   for all v,
+        D - (v^4-3v^2-8)^2 =  2v^4 - 50v^2 - 67 > 0   for v >= 6,
+
+    so D lies strictly between two consecutive squares and cannot be one.
+
+(6) SMALL v.  Shape 3 needs v = 1 (mod 3) or v = 3 (section II).  v = 5 is
+    excluded by that; and v = 3 is VACUOUS for this branch, because
+    1 + 3^4 = 82 = 2 * 41 is squarefree, so no prime u has u^2 | 1+v^4.
+    So v >= 7 throughout, where (3) gives Q <= v+1 and (5) applies.
+
+That closes the shape, and with it the last of the four two-prime shapes.
+
+====================================================================
+IX.  WHAT IS LEFT
+====================================================================
+Only the four three- and four-prime shapes, listed with their (M) sums in
+section V.  Their v-congruence carries TWO unknowns, so no single prime is
+pinned and the O(1)-per-v method of section III does not apply; shape 7 does
+inherit v = 1 (mod 4) from section II.  They remain at Level 2.
 
 --------------------------------------------------------------------
 STATUS
 --------------------------------------------------------------------
-k = 7 remains NOT closed, but three of the eight Level-2 shapes are now
-EMPTY at Level 1, so the count moves from 78 of 86 orbits to 81 of 86:
+k = 7 remains NOT closed, but ALL FOUR two-prime Level-2 shapes are now
+EMPTY at Level 1, so the count moves from 78 of 86 orbits to 82 of 86:
 
-    {1,v,u,v^2,uv,v^3,v^4}     CLOSED, Level 1
-    {1,v,u,v^2,uv,v^3,uv^2}    CLOSED, Level 1
-    {1,v,u,v^2,uv,u^2,uv^2}    CLOSED, Level 1
-    {1,v,u,v^2,uv,u^2,v^3}     one branch left, u^2 | 1+v^4
-    the four three- and four-prime shapes   unchanged
+    {1,v,u,v^2,uv,v^3,v^4}     CLOSED, Level 1   (IV, VII)
+    {1,v,u,v^2,uv,v^3,uv^2}    CLOSED, Level 1   (IV, VII)
+    {1,v,u,v^2,uv,u^2,v^3}     CLOSED, Level 1   (IV, VIII)
+    {1,v,u,v^2,uv,u^2,uv^2}    CLOSED, Level 1   (IV, VII)
+    the four three- and four-prime shapes   unchanged, Level 2
 
-The engine that did it is the u-PART of lcm(V).  Step 11 reads the outside
-prime through (M), which gives only its first power; lcm(V) | n gives u^2
-wherever the shape carries u^2, and that single extra power is what turns
-two of these shapes from a search into a contradiction.
+Three engines did it, in this order of discovery:
+  * the v-PART of lcm(V) as a CONGRUENCE rather than a divisibility, which
+    pins the outside prime to O(1) candidates per v (III) and kills the
+    large-u branch of every shape (IV);
+  * the u-PART of lcm(V), which gives u^2 wherever the shape carries u^2 and
+    turns two shapes into the flat contradiction u <= v against u > v (VI,
+    VII);
+  * the SANDWICH on Q = n/lcm, which for the last shape forces Q into {1, v}
+    and hence n = u^2 v^4, an equation whose discriminant lies between
+    consecutive squares (VIII).
 """
 
 from math import gcd, isqrt
@@ -506,12 +561,24 @@ def sweep(key, vmax):
 SWEEP_DEPTH = 300000      # produced by the committed sweep(), see the tests
 LEVEL2_SHAPES_4 = [TWO_PRIME[k]['name'] for k in (1, 2, 3, 4)]
 
-CLOSED_AT_LEVEL1 = [TWO_PRIME[k]['name'] for k in (1, 2, 4)]
-STILL_OPEN = [TWO_PRIME[3]['name']]
+CLOSED_AT_LEVEL1 = [TWO_PRIME[k]['name'] for k in (1, 2, 3, 4)]
+STILL_OPEN = []           # of the two-prime shapes; 5-8 remain
 ORBITS_LEVEL1_BEFORE = 78
-ORBITS_LEVEL1_AFTER = 81
+ORBITS_LEVEL1_AFTER = 82
 ORBITS_TOTAL = 86
 SHAPE3_SEARCH_UMAX = 4000000
+
+
+def shape3_discriminant(v):
+    """D of X^2 + X(v^2+1-v^4) + (1+v^2+v^4+v^6) = 0, X = u^2, from n = u^2v^4."""
+    return v ** 8 - 6 * v ** 6 - 5 * v ** 4 - 2 * v ** 2 - 3
+
+
+def shape3_Q(v, u):
+    """n / lcm(V) for shape 3, as an exact rational numerator/denominator."""
+    V = TWO_PRIME[3]['elems'](v, u)
+    n = sum(d * d for d in V)
+    return n, u * u * v ** 3
 
 
 def u_coprime_sum(key, v):
@@ -783,25 +850,63 @@ def test_shape1_is_empty():
           "Phi_10 branch is 2 mod 4")
 
 
-def test_shape3_remaining_branch():
-    """u^2 | 1+v^2 is dead; u^2 | 1+v^4 survives, and is thin."""
+def test_shape3_is_empty():
+    """The last two-prime shape: the sandwich on Q = n/lcm closes it."""
+    # (1) j = 0 is impossible: c^2+c+1 = v^2 needs 4v^2-3 to be a square
+    for v in range(2, 200000):
+        y = isqrt(4 * v * v - 3)
+        assert y * y != 4 * v * v - 3, v
+    # the K = 1 (mod v) reduction
+    for v in (7, 13, 19):
+        for K in range(1, 50):
+            assert v * v * K + v * v * (v * v * K - 1) == v * v * (K * (v * v + 1) - 1)
+    # (2) u^2 | 1+v^2 branch dies: u^2 <= v^2+1 forces u <= v
     for v in primes_to(4000):
         for u in range(2, isqrt(v * v + 1) + 2):
             if (v * v + 1) % (u * u) == 0 and is_prime(u):
                 assert u <= v, (v, u)
-    for v in (3, 5, 13, 101, 100003):
-        assert v * v + 1 < (v + 1) ** 2
-    # the K = 1 (mod v) step: (1+c+c^2) + v^2(c+c^2) with c^2+c+1 = v^2 K
-    for v in (5, 7, 13):
-        for K in range(1, 40):
-            lhs = (v * v * K) + v * v * (v * v * K - 1)
-            assert lhs == v * v * (K * (v * v + 1) - 1)
-    # 8 | u-1 and v = 1 mod 3 (or 3) are forced
-    for u in primes_to(3000):
-        has = any((x ** 4 + 1) % u == 0 for x in range(u))
-        assert has == (u % 8 == 1), u
-    print(f"  VIII  shape 3: u^2 | 1+v^2 dead; u^2 | 1+v^4 open, no root of "
-          f"x^4 = -1 (mod u^2) in (sqrt u, u) for any u < {SHAPE3_SEARCH_UMAX}")
+    # (2) max(V) = u^2 is impossible: there c <= v and c^2+c+1 < v^3+v^2
+    for v in primes_to(4000):
+        assert v * v + v + 1 < v ** 3 + v * v, v
+    # (3) the sandwich, on every admissible pair
+    tot = 0
+    worst = 9e9
+    for v in primes_to(700):
+        if v % 3 != 1:
+            continue
+        for u in primes_to(isqrt(v ** 3)):
+            if u <= v:
+                continue
+            V = sorted(set(TWO_PRIME[3]['elems'](v, u)))
+            if len(V) != 7 or max(V) != v ** 3:
+                continue
+            if u * u * v <= v ** 3 or u * v * v <= v ** 3:
+                continue
+            n, L = shape3_Q(v, u)
+            tot += 1
+            assert n > 2 * L, (v, u)                 # Q > 2
+            assert n <= (v + 1) * L, (v, u)          # Q <= v+1
+            worst = min(worst, n / L)
+    assert tot > 20000, tot
+    assert worst > 2
+    # (4) u >= v+2 for distinct odd primes, so Q = u is excluded by Q <= v+1
+    for v in primes_to(2000):
+        nxt = next(q for q in range(v + 1, 4 * v) if is_prime(q))
+        assert nxt >= v + 2, v
+    # (5) the discriminant is never a square
+    for v in range(6, 4000):
+        D = shape3_discriminant(v)
+        assert (v ** 4 - 3 * v * v - 8) ** 2 < D < (v ** 4 - 3 * v * v - 7) ** 2, v
+    for v in range(3, 200000):
+        D = shape3_discriminant(v)
+        assert isqrt(D) ** 2 != D, v
+    assert shape3_discriminant(2) < 0          # the test starts at v = 3
+    # (6) v = 3 is vacuous and v = 5 is excluded
+    assert 1 + 3 ** 4 == 82 == 2 * 41          # squarefree
+    assert all((82 % (q * q)) for q in (2, 41))
+    assert 5 % 3 == 2                          # shape 3 needs v = 1 mod 3
+    print(f"  VIII  shape 3 EMPTY: Q in (2, v+1] forces n = u^2 v^4, whose "
+          f"discriminant is between squares ({tot:,} pairs sandwiched)")
 
 
 def test_does_not_prove_too_much():
@@ -847,17 +952,19 @@ def self_test():
     test_shape4_is_empty()
     test_shape2_is_empty()
     test_shape1_is_empty()
-    test_shape3_remaining_branch()
+    test_shape3_is_empty()
     test_does_not_prove_too_much()
     print("\nAll self-tests passed.")
     print(f"k = 7: {ORBITS_LEVEL1_AFTER} of {ORBITS_TOTAL} orbits at Level 1"
           f" (was {ORBITS_LEVEL1_BEFORE}), 5 at Level 2.")
-    print("THREE of the eight Level-2 shapes are now EMPTY at Level 1:")
+    print("ALL FOUR two-prime Level-2 shapes are now EMPTY at Level 1:")
     for nm in CLOSED_AT_LEVEL1:
         print(f"      {nm}")
-    print("  the engine is the u-PART of lcm(V): step 11's (M) gives only the")
-    print("  first power of u, while lcm | n gives u^2 wherever the shape")
-    print("  carries u^2 -- enough to force u <= v against forcing's u > v.")
+    print("  engines: the v-part of lcm as a CONGRUENCE (O(1) candidates per")
+    print("  v, and the large-u branch dead); the u-PART of lcm, giving u^2")
+    print("  where the shape carries u^2, hence u <= v against u > v; and the")
+    print("  SANDWICH 2 < n/lcm <= v+1, which forces n = u^2 v^4 and then a")
+    print("  discriminant strictly between consecutive squares.")
     print()
     print("Earlier, from the v-part congruence:")
     print("  L1  shapes 1-4, CASE B (outside prime as large as (M) allows):")
@@ -867,10 +974,8 @@ def self_test():
     print("      shape 4  6v+3 and 3-6v never vanish mod v^2 (subsumes (3,13))")
     print("  L2  the O(1)-per-v sweep, complete to "
           f"v < {SWEEP_DEPTH} (step 11 reached 30000)")
-    print("  L2  shape 3's branch u^2 | 1+v^4 is all that is left of the four,")
-    print(f"      with no root of x^4 = -1 (mod u^2) in (sqrt u, u) for any")
-    print(f"      u < {SHAPE3_SEARCH_UMAX}")
-    print("  L2  shapes 5-8 unchanged; shape 7 inherits v = 1 (mod 4)")
+    print("  L2  only shapes 5-8 remain, where the v-congruence carries two")
+    print("      unknowns; shape 7 inherits v = 1 (mod 4)")
     print()
     print("Also recorded: the forcing correction -- only non-members INSIDE the")
     print("box of the lcm exponents may be required to exceed max(V).")
