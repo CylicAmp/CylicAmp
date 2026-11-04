@@ -20,6 +20,9 @@ IS the proof; the two structural theorems (4 and 1b) are proved outright.
               commutes with every digitwise map.                 Level 1
   THEOREM 2   tripling lands in {3,6,9} = 3Z/9Z for every input, and
               that set is closed under doubling and tripling.    Level 1
+              (digitwise_operations.py THEOREM 10 says WHY: {3,6,9} is
+              the maximal ideal of the local ring Z/9Z and squares to
+              zero.  Under + and doubling it traps; under x it kills.)
   THEOREM 3   digitwise doubling on two-digit states: period is the lcm
               of the two digit periods; 17 orbits over 81 states, one
               fixed, four of period 2, twelve of period 6.       Level 1
