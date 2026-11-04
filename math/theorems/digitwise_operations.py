@@ -52,8 +52,15 @@ Everything here is Level 1.
               commutative.  Both directions proved.              Level 1
   THEOREM 14  for non-commutative o with a o b = -(b o a) -- subtraction
               and division -- the result is an ANTIpalindrome, and for
-              odd r the middle column is forced to 9, since it is its
-              own negative and 2 is invertible.                  Level 1
+              odd r the middle column is 9.
+              NOTE on the proof: that column pairs with ITSELF, so it is
+              literally d - d and is the zero class in EVERY base.  An
+              earlier draft derived it from "it is its own negative, and
+              2 is invertible" -- true, but strictly weaker than needed,
+              and it made the result look base-dependent when it is not.
+              What 2-invertibility actually governs is THEOREM 15's
+              decomposition; see digitwise_backbone.py THEOREM 18.
+                                                                 Level 1
   THEOREM 15  (Z/9Z)^r = Pal (+) Anti as Z/2Z-modules under reversal.
               For r = 5 the ranks are 3 and 2.  N (+) rev(N) and
               N (-) rev(N) are twice the projections and sum to 2N, so
@@ -413,9 +420,10 @@ def test_antipalindrome_and_the_forced_middle():
     assert text(A) == '15948'
     assert is_antipalindrome(A)
     assert not is_palindrome(A)
-    # the middle column of an odd-length antipalindrome is forced to 9,
-    # because it is its own negative and 2 is a unit
-    assert pow(2, -1, 9) == 5
+    # the middle column is d - d, so it is the zero class outright; no
+    # appeal to 2 being a unit is needed, and none is made
+    assert c_sub(v[2], v[2]) == 9
+    assert all(c_sub(d, d) == 9 for d in RING)
     for r in (3, 5, 7):
         lo, hi = 10 ** (r - 1), 10 ** r
         step = max(1, (hi - lo) // 3000)
