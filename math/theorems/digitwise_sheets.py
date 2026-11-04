@@ -74,6 +74,17 @@ def digits(x):
     return [int(c) for c in str(x)]
 
 
+def ring_digits(x):
+    """Digits as ring representatives: a literal 0 is the class 9.
+
+    Needed wherever a value is fed back into a digitwise map.  Those maps
+    send 1..9 into 1..9 and never produce 0, so a vector carrying a
+    literal 0 is not in their image and an orbit started there could
+    never return to its own start.
+    """
+    return [digital_root(int(c)) for c in str(x)]
+
+
 def text(v):
     return ''.join(str(d) for d in v)
 
@@ -145,17 +156,24 @@ def digit_period(d):
 
 
 def orbit(v):
-    """Orbit of a digit vector under D, as a list starting at v."""
+    """Orbit of a digit vector under D, as a list starting at v.
+
+    The input is normalised to ring representatives first.  D never
+    outputs 0, so an orbit started at a vector holding a literal 0 could
+    never revisit it and the loop would not halt.
+    """
+    v = [digital_root(d) for d in v]
     out, x = [list(v)], D(v)
     while x != list(v):
         out.append(x)
         x = D(x)
+        assert len(out) <= 6 * len(v) + 6, 'orbit failed to close'
     return out
 
 
 def orbit_of(n):
     """Orbit of an integer under D, as integers."""
-    return [int(text(w)) for w in orbit(digits(n))]
+    return [int(text(w)) for w in orbit(ring_digits(n))]
 
 
 def two_digit_orbit_census():
@@ -385,6 +403,30 @@ def test_bottom_third_is_closed():
     assert text(T(v)) == '33969'
     assert text(cscale(6, v)) == '66939'
     assert text(cscale(9, v)) == '99999'
+
+
+def test_orbit_terminates_on_a_zero_digit():
+    """Regression: D never outputs 0, so an orbit must normalise first.
+
+    orbit() used the raw digits, so any input carrying a literal 0 --
+    1000, 100, 10234 -- could never be revisited and the loop spun
+    forever.  Every committed test happened to use 0-free values, so
+    nothing caught it until a sweep over all 4-digit numbers hung.
+    """
+    assert digits(1000) == [1, 0, 0, 0]
+    assert ring_digits(1000) == [1, 9, 9, 9]
+    assert 0 not in D([1, 0, 0, 0])              # D cannot output 0
+    for n in (10, 100, 1000, 10234, 90009, 50505):
+        o = orbit_of(n)                           # must simply halt
+        assert o[0] == int(text(ring_digits(n)))
+        assert len(set(o)) == len(o) <= 6
+    # every 3- and 4-digit integer terminates now
+    for n in list(range(100, 1000)) + list(range(1000, 3000)):
+        assert 1 <= len(orbit_of(n)) <= 6, n
+    # 0-free values are untouched by the fix
+    for n in (93, 37, 99, 14689, 33969, 99999):
+        assert orbit_of(n)[0] == n
+    assert orbit_of(93) == ORBIT_93 and orbit_of(37) == ORBIT_37
 
 
 def test_digit_periods_and_orbit_census():
@@ -649,6 +691,7 @@ def self_test():
     tests = [test_module_action,
              test_reversal_commutes,
              test_bottom_third_is_closed,
+             test_orbit_terminates_on_a_zero_digit,
              test_digit_periods_and_orbit_census,
              test_bar_sum_is_always_a_palindrome,
              test_digit_split_is_primes_against_nonprimes,
