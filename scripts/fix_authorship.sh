@@ -22,9 +22,20 @@
 #
 set -euo pipefail
 
-NAME="Michael Warren Song"
+# ---- who the commits should be attributed to -------------------------------
+# Change these two lines if you want a different name on them.  GitHub links
+# a commit to your account by EMAIL, not by name, so the email is what makes
+# the commit count as yours; the name is the label shown next to it.
+NAME="Cyclic-Amp (Michael.W.Song)"
 EMAIL="red3rdeye@gmail.com"
+
 OLD_EMAIL="noreply@anthropic.com"
+
+# NOTE: this rewrites ONLY commits authored by OLD_EMAIL.  Your own commits
+# are left exactly as they are, under whichever of your spellings they carry
+# (Michael Song, Michael Warren Song, CylicAmp, CYLIC-AMP -- all already on
+# your address, so all already attributed to you).  Collapsing those into one
+# name is a separate job and is deliberately not attempted here.
 
 say() { printf '\n== %s\n' "$*"; }
 
