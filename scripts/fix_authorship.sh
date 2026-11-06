@@ -26,8 +26,8 @@ set -euo pipefail
 # Change these two lines if you want a different name on them.  GitHub links
 # a commit to your account by EMAIL, not by name, so the email is what makes
 # the commit count as yours; the name is the label shown next to it.
-NAME="Cyclic-Amp (Michael.W.Song)"
-EMAIL="red3rdeye@gmail.com"
+NAME="Michael Warren Song"
+EMAIL="Red3rdeye@gmail.com"
 
 OLD_EMAIL="noreply@anthropic.com"
 
