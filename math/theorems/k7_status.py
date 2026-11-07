@@ -7,7 +7,15 @@ SEVEN smallest divisors of n?
 STATUS, STATED HONESTLY.  k=7 is NOT closed at Level 1. 78 of its 86 orbits
 are, and EIGHT remain -- and for those eight the Level 2 evidence is now an
 exhaustive enumeration of a finite candidate set per base prime, not a
-search over a rectangle of primes. See steps 10 and 11. k=7 is the case where the parity lemma
+search over a rectangle of primes. See steps 10 and 11.
+
+SUPERSEDED IN PART.  78/86 is what THIS module establishes, not the current
+state of k=7.  k7_three_and_four_prime.py closes two of the eight at Level 1
+(THEOREM 27, shape 7; THEOREM 28, shape 5), leaving 84/86 at Level 1 and two
+shapes at Level 2 -- {1,v,u,t,v^2,uv,tv} and {1,v,u,t,s,uv,tv} -- each
+reduced to a finite test there by THEOREM 30 and THEOREM 29.  That module
+does not import back into here, so this is the reading order: run this one,
+then that one.  README.md carries the same chain for every k. k=7 is the case where the parity lemma
 gives nothing: k is odd, so a sum of seven odd squares is odd, and BOTH an
 odd n and an even n survive step 1. The shape count jumps accordingly --
 86 orbits against 13 at k=5 and 24 at k=6.
@@ -974,6 +982,16 @@ def self_test() -> None:
     print("  L2  step 11 odd sector, prime-poor shapes     8 shapes")
     print("              candidate set per base prime is now FINITE: the")
     print("              outside prime divides a factored coprime sum.")
+    print()
+    print("  SUPERSEDED IN PART.  The 78/86 above is this module's own figure")
+    print("  and is not the current state of k=7.  k7_three_and_four_prime.py")
+    print("  closes two more of the eight Level 2 shapes at Level 1:")
+    print("      THEOREM 27  shape 7 empty, tv | lcm with tv not in V")
+    print("      THEOREM 28  shape 5 empty, sandwich then discriminant")
+    print("  Current state of k=7:  84 of 86 at Level 1, 2 still at Level 2,")
+    print("  namely {1,v,u,t,v^2,uv,tv} and {1,v,u,t,s,uv,tv}, reduced to")
+    print("  finite tests by THEOREM 29 and THEOREM 30 in that module.")
+    print("  Run k7_three_and_four_prime.py after this one.")
 
 
 if __name__ == "__main__":

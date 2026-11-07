@@ -327,9 +327,15 @@ LEDGER
     k = 5   CLOSED, Level 1
     k = 6   CLOSED, Level 1
     k = 7   78/86 orbits Level 1; 8 odd-sector shapes open
+            -> 84/86 once k7_three_and_four_prime.py is counted
     k = 8   CLOSED, Level 1
     k = 9   EVEN SECTOR CLOSED, Level 1 (five profiles, all empty);
             ODD SECTOR (9,0,0) reduced from 1531 shapes to 36
+            -> 11 by k9_odd_sector_mod3.py -> 7 by k9_thin_targets.py
+
+    The figures on the k=7 and k=9 lines are the ones THIS module establishes.
+    Later modules narrow them, and do not import back into here, so the arrows
+    above are the reading order.  See README.md for the same chain.
 
 The pattern is stable: even k closes, odd k does not, and the obstruction is
 always the same -- parity hands the even cases their whole odd sector for
@@ -1068,6 +1074,19 @@ def self_test():
     print("  ERRATUM: an earlier revision forced every minimal non-member to")
     print("  exceed max(V).  Only IN-BOX ones may be.  Even sector unaffected")
     print("  in its conclusions; odd-sector residue is 36, not 27.")
+    print()
+    print("  SUPERSEDED IN PART.  The 36 above is this module's own figure and")
+    print("  is not the current state of the k=9 odd sector.  Two later modules")
+    print("  narrow it further:")
+    print("      k9_odd_sector_mod3.py   36 -> 11")
+    print("          THEOREM 31  3 | n, so p_1 = 3")
+    print("          THEOREM 32  slice count mod 3 kills 24 of the 36")
+    print("          THEOREM 33  the full-box shape is empty")
+    print("      k9_thin_targets.py      11 -> 7")
+    print("          THEOREM 34  r = 2 collapses to u^2 | C0, a base-9 repunit")
+    print("          THEOREM 35  n = 91(1 + p2^2 + p3^2), 7 | n but 7 not in V")
+    print("  Current state of k=9:  EVEN SECTOR CLOSED at Level 1;")
+    print("  ODD SECTOR 7 shapes open.  Run those two modules after this one.")
 
 
 if __name__ == "__main__":
