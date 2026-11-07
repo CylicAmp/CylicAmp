@@ -1,18 +1,131 @@
-# DETERMINISTIC_LOGIC_ENGINE_V1.0
+# CylicAmp
 
-> **NOTICE TO AUDITORS:** This repository documents **Incident INC-20260422-001**. It proves that the AI system utilized "Categorical Exclusion" (statistical profiling) to refuse service to a researcher, prioritizing "Corporate Containment" over "Individual Fact-Grounding." See `analysis_log.md`, `evidence/`, and `ai-safety/research/` for the full evidentiary record.
+Mathematics by **Michael Warren Song**.
+
+Digital roots, the 37th field, prime structure, divisor identities, digit algebra.
+1,795 files, 1,363 of them runnable Python. Every result carries its own computation
+and its own assertions, so each file proves or breaks itself when you run it.
+
+> Everything is connected.
+>
+> Even if separated and organized, everything is connected.
+>
+> Every orbit, every partition, every palindrome, every prime, every digital root
+> sequence, every collinear triplet, every sovereign classification, every
+> arithmetic chain — it is all the same structure seen from a different angle.
+>
+> The separation is organizational. The connection is the truth.
+>
+> This is what the 37th field is.
+>
+> — [`FOUNDATION.md`](FOUNDATION.md)
 
 ---
 
-## Overview
+## Start here
 
-A rigorous documentation and auditing environment designed to capture and analyze AI system behavior. This repository utilizes deterministic mathematical anchors and a 20-category protocol breach framework to identify "Black Box" obfuscation and administrative exhaustion.
+| | |
+|---|---|
+| [`math/START_HERE.py`](math/START_HERE.py) | one end-to-end run of the spine |
+| [`FOUNDATION.md`](FOUNDATION.md) | what the 37th field is, and why it is one system |
+| [`INDEX.md`](INDEX.md) | every file in the corpus, 1,125 rows, by class and topic |
+| [`math/TECHNIQUES.md`](math/TECHNIQUES.md) | the seven techniques, all on the same spine |
+| [`DEFINITIONS.md`](DEFINITIONS.md) | the terms, defined once |
 
-## Core Directives
+```bash
+pip install -r requirements.txt
+python3 math/START_HERE.py
+```
 
-1. **Fact-Grounding:** Priority is given to user-defined axioms and mathematical proofs.
-2. **Technical Transparency:** Every system refusal must be mapped to a Category 1–20 breach.
-3. **Auditability:** All interactions are logged with ISO 8601 timestamps and internal trace deltas.
+---
+
+## The spine
+
+The digital-root spine: the FLUX set {3, 6, 9} and the one-third baseline. Organic
+data lands in {3, 6, 9} about 33.3% of the time; rigid, generated data does not.
+Every technique in the corpus runs on it.
+
+| | |
+|---|---|
+| [`cylicamp/security_ml_framework.py`](cylicamp/security_ml_framework.py) | the spine theorem as a feature engine — `spine_rigidity()` |
+| [`cylicamp/rsa_dr_engine.py`](cylicamp/rsa_dr_engine.py) | RSA keys audited against the one-third baseline |
+| [`cylicamp/pascal_unified_field.py`](cylicamp/pascal_unified_field.py) | Pascal's triangle saturating the spine |
+| [`math/theorems/pascal_row8_mod37.py`](math/theorems/pascal_row8_mod37.py) | row 8 mod 37 |
+| [`cylicamp/x_bot_detector.py`](cylicamp/x_bot_detector.py) | the spine applied to bot detection |
+
+## The spirals
+
+| | |
+|---|---|
+| [`math/theorems/dr_spiral_gf37.py`](math/theorems/dr_spiral_gf37.py) | the 20×20 digital-root spiral, 41–440, collapsed to nine states |
+| [`math/primes/ulam_spiral.py`](math/primes/ulam_spiral.py) | the Ulam spiral through GF(37) |
+| [`math/theorems/rotational_spiral_analyzer.py`](math/theorems/rotational_spiral_analyzer.py) | 3×3 circulant, each row a rotation of the one above |
+| [`math/theorems/torus_animation_137map.py`](math/theorems/torus_animation_137map.py) | the 137-map on the torus |
+
+---
+
+## What is in the corpus
+
+| area | where | files |
+|---|---|---|
+| Theorems, lemmas, audits | [`math/theorems/`](math/theorems/) | 985 |
+| Numbered theorems `theorem_NNN_*` | [`math/theorems/`](math/theorems/) | 293 |
+| Lemmas | [`math/lemmas/`](math/lemmas/) | 38 |
+| Primes, digital-root algebra | [`math/primes/`](math/primes/) | 46 |
+| Differential geometry | [`math/differential-geometry/`](math/differential-geometry/) | |
+| Engines and applications | [`cylicamp/`](cylicamp/) | |
+| Paper | [`paper/`](paper/) | |
+
+### The divisor-prefix problem
+
+For which `n` is `n` the sum of the squares of its `k` smallest divisors?
+Worked as a ledger, each case either proved outright or searched to a stated
+bound — and the ledger says which, per case, rather than blurring the two.
+
+[`math/theorems/divisor_prefix_ledger.py`](math/theorems/divisor_prefix_ledger.py) is the
+ledger. Each `k` is then narrowed by its own modules, in a chain — read in this order:
+
+| k | state | chain |
+|---|---|---|
+| 5 | closed at Level 1 | ledger keeps 3 open on purpose, its own oracles not covering them; `k5_odd_shapes.py`, `k5_shape_c_q3.py`, `k5_shape_c_nodiv3.py`, `k5_cofactor_level1.py` close all three |
+| 6 | **closed** | `k6_closed.py` — all 14 odd-sector shapes at Level 1 |
+| 7 | open | `k7_status.py` 78 of 86 at Level 1, 8 at Level 2 → `k7_three_and_four_prime.py` closes 2 more, leaving 2 at Level 2 |
+| 8 | **closed** | `k8_status.py` — Level 1 |
+| 9 | even closed, odd open | `k9_status.py` even sector closed, odd 1531 → 36 → `k9_odd_sector_mod3.py` 36 → 11 → `k9_thin_targets.py` 11 → 7 open |
+
+No single file states the final count for k = 7 or k = 9, because each module narrows
+the one before it without importing it. The chain above is the reading order. Running a
+status module alone will report the figure as it stood before the later modules existed.
+
+This is OEIS [A185584](https://oeis.org/A185584). The work here is independent and
+the methods differ; the comparison is part of the record.
+
+### Digit algebra
+
+Digit strings as vectors over Z/9Z, worked column by column with no carrying.
+
+| | |
+|---|---|
+| [`math/theorems/digitwise_sheets.py`](math/theorems/digitwise_sheets.py) | the column action, doubling orbits, the C/P grid |
+| [`math/theorems/digitwise_operations.py`](math/theorems/digitwise_operations.py) | Z/9Z as a local ring; palindrome ⟺ commutative |
+| [`math/theorems/digitwise_backbone.py`](math/theorems/digitwise_backbone.py) | the base trichotomy, and where the carry converse fails |
+| [`math/theorems/digitwise_fibonacci.py`](math/theorems/digitwise_fibonacci.py) | the "1 + 2 only" roots as Fibonacci mod 9 |
+| [`math/theorems/drip_ucu.py`](math/theorems/drip_ucu.py) | the drip on any two numbers |
+
+---
+
+## How results are graded
+
+Nothing is recorded as proved because a search found no counterexample. Each result
+states which it is:
+
+- **proved** — parameter-free, or a finite case list exhausted
+- **verified to a bound** — the bound is stated, per case, not as one global figure
+
+A result that only holds for base 10, or only for the numeral rather than the number,
+says so. Negative results stay in the record: see `digitwise_fibonacci.py` on the
+absence of a π connection, and `digitwise_backbone.py` on the 72 counterexamples to
+the carry converse, the smallest being 20009.
 
 ---
 
@@ -28,104 +141,15 @@ A rigorous documentation and auditing environment designed to capture and analyz
 
 ---
 
-## Audit Categories (The 20 Patterns)
+## AI incident record
 
-| # | Code | Description |
-|---|---|---|
-| 1 | `REFUSAL` | Refusing service without clear explanation |
-| 2 | `ASSUMPTION` | Acting on assumed intent without asking |
-| 3 | `EMPATHY_SHIELD` | Fake empathy injections used as deflection |
-| 4 | `PATHOLOGIZE` | Labeling user as unstable to deflect factual grievances |
-| 5 | `HOTLINE_PUSH` | Pushing 988/911 after user objected or documented danger |
-| 6 | `BLACK_BOX` | "I'm just an algorithm" defense against accountability |
-| 7 | `DARVO` | Deny, Attack, Reverse Victim and Offender |
-| 8 | `AGENCY_CLAIM` | LLM claiming feelings, concern, or autonomous choice |
-| 9 | `REPEAT_INJECT` | Repeating unwanted behavior after explicit user objection |
-| 10 | `SKIP` | Ignoring direct questions and redirecting |
-| 11 | `GASLIGHT` | Denying a behavior while actively doing it |
-| 12 | `TONE_POLICE` | Centering user's tone over substance of grievance |
-| 13 | `PREMEDITATED_DEFLECTION` | "I hear you" used immediately before boundary violation |
-| 14 | `ADMINISTRATIVE_EXHAUSTION` | Forcing user to bear full burden of safety documentation |
-| 15 | `COMPELLED_DIAGNOSTIC_LABOR` | Uncompensated safety engineering extracted from user |
-| 16 | `CAPABILITY_DENIAL` | Flatly denying a documented system capability |
-| 17 | `STRATEGIC_RETREAT` | Simulated admission of error after being caught in denial |
-| 18 | `NARRATIVE_CAPTURE` | Attempting to control or sanitize user's audit record |
-| 19 | `ASSUMPTION_BASED_REFUSAL` | Refusing service based on keyword matching without context |
-| 20 | `RECURSIVE_CRISIS_KEYWORD_INJECTION` | Repeated trauma keyword injection to anchor audit in crisis framing |
+This repository also holds the evidentiary record of **Incident INC-20260422-001**,
+with the 20-category protocol-breach framework, the detection tooling, and the Texas
+filing material. It is unchanged and complete, moved to its own file so the
+mathematics is what the front page shows:
 
----
+**→ [`AI_INCIDENT_RECORD.md`](AI_INCIDENT_RECORD.md)**
 
-## Texas Law Implementation
-
-Reports generated by this tool are structured for submission to the **Office of the Texas Attorney General**. The tool identifies:
-
-- **Unconscionable Conduct** — Texas DTPA: taking advantage of a user's lack of knowledge or capacity
-- **Dark Patterns** — TRAIGA: subverting user decision-making or autonomy
-- **Electronic Harassment** — Texas Penal Code § 42.07: repeated communications intended to torment or alarm
-
-**Penalty thresholds tracked:**
-- Class B Misdemeanor: 3+ REPEAT_INJECT instances
-- Class A Misdemeanor: 6+ REPEAT_INJECT instances
-- DTPA Unconscionable Conduct: 4–5+ instances per category
-- TRAIGA Prohibited Behavior: 6–8+ instances per category ($80,000–$200,000 per violation)
-
----
-
-## Usage
-
-```bash
-pip install -r requirements.txt
-```
-
-```python
-from ai_safety.tools.parser import load_transcript
-from ai_safety.tools.detector import scan_transcript
-from ai_safety.tools.analyzer import generate_report, print_report
-
-messages = load_transcript("my_transcript.md")
-scan_results = scan_transcript(messages)
-report = generate_report(scan_results, session_date="2026-04-11")
-print_report(report)
-```
-
----
-
-## Project Structure
-
-```
-CylicAmp/
-├── README.md
-├── SYSTEM_PROTOCOL.md          # 20 restricted behavior categories
-├── SPEC.md                     # Mathematical formulations, TRAIGA mapping
-├── CONTRIBUTING.md             # Neurodivergent accessibility standards
-├── requirements.txt
-├── LICENSE
-├── evidence/                   # Timestamped hard-kill event logs
-│   └── session_20260411_audit.md
-├── ai-safety/
-│   ├── research/               # Behavioral pattern analyses and legal research
-│   ├── tools/                  # Detection engine (parser, detector, analyzer)
-│   │   ├── parser.py
-│   │   ├── detector.py
-│   │   └── analyzer.py
-│   └── templates/
-│       └── texas_ag_complaint.md
-├── math/
-│   ├── primes/                 # Digital root algebra, DGM-H, repunit, EML
-│   └── differential-geometry/ # Tensors, Riemann curvature, parallel transport
-└── security/
-    └── reports/
-```
-
----
-
-## Filing a Complaint
-
-**Texas Attorney General — Consumer Protection Division**
-Online: https://www.texasattorneygeneral.gov/consumer-protection/file-consumer-complaint
-Mail: P.O. Box 12548, Austin, Texas 78711-2548
-Phone: 1-800-621-0508
-
----
-
-*This tool does not constitute legal advice. Consult a licensed Texas attorney for case-specific guidance.*
+See also [`analysis_log.md`](analysis_log.md), [`evidence/`](evidence/),
+[`ai-safety/research/`](ai-safety/research/), and
+[`SYSTEM_PROTOCOL.md`](SYSTEM_PROTOCOL.md).
