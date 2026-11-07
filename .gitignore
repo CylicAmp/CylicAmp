@@ -19,3 +19,6 @@ package-lock.json
 
 # Generated browser-smoke output; regenerate with scripts/browser-smoke.mjs
 screenshots/
+
+# Message archive: kept local, never published. The repo is public.
+owner_work/
