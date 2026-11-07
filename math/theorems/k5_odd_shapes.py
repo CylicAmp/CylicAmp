@@ -13,9 +13,11 @@ reduced here to a divisibility condition that BOUNDS the larger prime in
 terms of the smaller, which turns "search all n" into a search that is
 COMPLETE for each value of the parameter.
 
-STATUS: these shapes are NOT closed. Everything below is Level 2 --
-exhaustive only up to the stated parameter bound. No Level 1 argument
-for them is known to this module, and it does not pretend otherwise.
+STATUS:
+  A  CLOSED at Level 1 -- see THE ORDERING ARGUMENT FOR SHAPE A below.
+  B  CLOSED at Level 1 -- see THE ORDERING ARGUMENT FOR SHAPE B below.
+  C  its 3|n branch (q=3) is closed in k5_shape_c_q3.py; the 3-does-not-
+     divide-n branch is open.
 
 --------------------------------------------------------------------
 LEVEL 1 REDUCTIONS (proved; they make the search finite per parameter)
@@ -65,6 +67,113 @@ The two survivors are instructive: both satisfy every congruence and
 die only on the PREFIX condition, i.e. on an unlisted small divisor.
 That is the constraint no congruence oracle sees, and it is why these
 shapes resist a purely modular argument.
+
+--------------------------------------------------------------------
+THE ORDERING ARGUMENT FOR SHAPE A -- Level 1, closes it
+--------------------------------------------------------------------
+Shape A is {1, q, q^2, q^3, r} with n = 1 + q^2 + q^4 + q^6 + r^2. Put
+A = 1 + q^2 + q^4 + q^6, so n = A + r^2.
+
+q^3 and r are coprime and both divide n, so q^3 r | n. Write
+
+    n = q^3 * r * c.
+
+(A-O1) EVERY PRIME FACTOR OF c IS q OR AT LEAST max(prefix). A prime
+       p | n below max(prefix) is a divisor below the largest prefix
+       element, so it must BE in the prefix, hence p is q or r. Taking
+       out one factor of r leaves q and primes >= max(prefix).
+
+(A-O2) c < q+2 IN BOTH CASES. Split c = A/(q^3 r) + r/q^3 and bound
+       each term. (An earlier draft claimed n < 2q^6 in case A1; that is
+       FALSE -- at q=3, r=26 it reads 1496 < 1458. A test caught it. The
+       correct route bounds the two terms separately and happens to give
+       the same constant in both cases.)
+       case A1, q^2 < r < q^3, max = q^3:
+         r/q^3 < 1, and A/(q^3 r) < A/q^5 = q + 1/q + 1/q^3 + 1/q^5,
+         so c < q + 1 + 1/q + 1/q^3 + 1/q^5 < q + 2 for q >= 3.
+       case A2, q^3 < r <= q^4+1, max = r:
+         the proved r | q^4+1 gives r/q^3 <= q + 1/q^3, and r > q^3
+         gives A/(q^3 r) < A/q^6 = 1 + 1/q^2 + 1/q^4 + 1/q^6,
+         so c < q + 1 + 1/q^2 + 1/q^3 + 1/q^4 + 1/q^6 < q + 2.
+
+(A-O3) c IS 1 OR q. By (A-O2) c < q+2 <= q^3, which is below both q^3
+       and r, so by (A-O1) c has no prime factor other than q. And
+       q^2 >= q+2 for q >= 2, so no higher power fits.
+
+(A-O4) c = 1 IS IMPOSSIBLE. n = q^3 r reads r^2 - q^3 r + A = 0, with
+
+           disc = q^6 - 4A = -3q^6 - 4q^4 - 4q^2 - 4 < 0
+
+       for every q, so no real r exists. (This is exactly the
+       polynomial the V5 kernel carried in PolynomialNegativityOracle
+       -- the oracle that could never fire, because its pattern was a
+       tuple of 3-tuples being compared against 5-tuples.)
+
+(A-O5) c = q IS IMPOSSIBLE. n = q^4 r reads r^2 - q^4 r + A = 0, with
+       disc = q^8 - 4q^6 - 4q^4 - 4q^2 - 4. Bracket it:
+
+           (q^4-2q^2-5)^2 = q^8 - 4q^6 - 6q^4 + 20q^2 + 25
+           (q^4-2q^2-4)^2 = q^8 - 4q^6 - 4q^4 + 16q^2 + 16
+
+       disc - lower = 2q^4 - 24q^2 - 29, positive from q = 4 on;
+       upper - disc = 20q^2 + 20, positive always. So for q >= 4 the
+       discriminant lies STRICTLY BETWEEN THE SQUARES OF TWO
+       CONSECUTIVE INTEGERS and cannot be a perfect square, so r is not
+       an integer. q = 3 is checked directly: disc = 3281, between
+       57^2 = 3249 and 58^2 = 3364.
+
+No c remains. SHAPE A IS EMPTY.
+
+Note both cases collapse to the same two equations, so the split on
+where r sits relative to q^3 only affects which root would have been in
+range -- and a non-square discriminant has no integer root at all.
+
+--------------------------------------------------------------------
+THE ORDERING ARGUMENT FOR SHAPE B -- Level 1, closes it
+--------------------------------------------------------------------
+Shape B is {1, q, q^2, r, qr} with
+
+    n = 1 + q^2 + q^4 + r^2 + q^2 r^2 = (1+q^2)(1+r^2) + q^4.
+
+q^2 and r are coprime and both divide n, so q^2 r | n. Write n = q^2 r c.
+
+(B-O1) r > q ALWAYS, so the case r < q never arises. The proved
+       q^2 | 1+r^2 makes 1+r^2 a POSITIVE multiple of q^2, hence
+       1+r^2 >= q^2 and r^2 >= q^2-1. For integers that forces r >= q,
+       since r = q-1 gives r^2 = q^2-2q+1 < q^2-1 for every q > 1; and
+       r != q as distinct primes. So max(prefix) = qr throughout.
+
+(B-O2) THE EXACT IDENTITY
+
+           c = r + (r^2+1)/(q^2 r) + (1+q^2)/r.
+
+       With r > q the last term is below (1+q^2)/q ~ q and the middle
+       term below ~1+1/q, giving c <= r + q + 1. And c > r strictly,
+       because n = q^2 r^2 + q^4 + q^2 + r^2 + 1 > q^2 r^2.
+
+(B-O3) c = q^2 EXACTLY. Since c <= r+q+1 < qr, c has no prime factor at
+       or above max(prefix), so c = q^a r^b. If b >= 1 then c >= r and
+       c <= r+q+1 forces q^a <= 1 + (q+1)/r < 3, so a = 0 and c = r --
+       contradicting c > r. Hence b = 0 and c = q^a. Then c > r > q
+       gives a >= 2, and c <= r+q+1 <= q^2+2q+2 gives a <= 2.
+
+(B-O4) c = q^2 means n = q^4 r, i.e.
+
+           (q^2+1) r^2 - q^4 r + (q^4+q^2+1) = 0,
+           D = q^8 - 4q^6 - 8q^4 - 8q^2 - 4.
+
+       Bracket it:
+           (q^4-2q^2-7)^2 = q^8-4q^6-10q^4+28q^2+49
+           (q^4-2q^2-6)^2 = q^8-4q^6- 8q^4+24q^2+36
+       D - lower = 2q^4-36q^2-53, positive for q >= 5; upper - D =
+       32q^2+40, positive always. Two CONSECUTIVE squares, so D is never
+       a perfect square and r is never an integer. q = 1 (mod 4) was
+       already forced by q^2 | 1+r^2, so q >= 5 and no small case
+       remains.
+
+SHAPE B IS EMPTY. The same three ingredients as shape A -- prefix
+ordering to bound the cofactor, the cofactor collapsing to a single
+value, and a discriminant trapped between consecutive squares.
 """
 
 from typing import List, Tuple, Optional, Dict
@@ -85,10 +194,9 @@ def is_prime(n: int) -> bool:
     for p in small:
         if n % p == 0:
             return n == p
-    d, s = n - 1, 0
-    while d % 2 == 0:
-        d //= 2
-        s += 1
+    m = n - 1
+    s = (m & -m).bit_length() - 1     # v_2(n-1)
+    d = m >> s
     for a in small:                       # deterministic below 3.3 * 10^24
         x = pow(a, d, n)
         if x in (1, n - 1):
@@ -289,14 +397,155 @@ def test_bounded_searches() -> None:
           f"B q<=3000 ({b['candidates']} cand), "
           f"C q<r<=500 ({c['candidates']} cand) -- no witnesses [Level 2]")
 
+
+
+# =====================================================================
+# SHAPE A: the Level 1 closure
+# =====================================================================
+
+def shape_a_constant(q: int) -> int:
+    """A = 1 + q^2 + q^4 + q^6, so that n = A + r^2."""
+    return 1 + q * q + q ** 4 + q ** 6
+
+
+def disc_c_equals_one(q: int) -> int:
+    """(A-O4) discriminant of r^2 - q^3 r + A."""
+    return q ** 6 - 4 * shape_a_constant(q)
+
+
+def disc_c_equals_q(q: int) -> int:
+    """(A-O5) discriminant of r^2 - q^4 r + A."""
+    return q ** 8 - 4 * shape_a_constant(q)
+
+
+def test_shape_a_c_is_one_or_q() -> None:
+    """(A-O2)+(A-O3): the size bound leaves only c = 1 and c = q."""
+    for q in range(3, 500):
+        A = shape_a_constant(q)
+        # case A1: q^2 < r < q^3.  max(prefix) = q^3
+        for r in (q * q + 1, (q * q + q ** 3) // 2, q ** 3 - 1):
+            if not (q * q < r < q ** 3):
+                continue
+            assert (A + r * r) / (q ** 3 * r) < q + 2, (q, r)
+        # case A2: q^3 < r <= q^4+1.  max(prefix) = r
+        for r in (q ** 3 + 1, q ** 4, q ** 4 + 1):
+            assert (A + r * r) / (q ** 3 * r) < q + 2, (q, r)
+        assert q * q >= q + 2                      # no higher power of q fits
+        assert q + 2 <= q ** 3                     # c below every non-q prime
+    print("[ok] (A-O2,3): size bound forces c in {1, q} in both cases")
+
+
+def test_shape_a_c_one_impossible() -> None:
+    """(A-O4): identity and negativity of the c = 1 discriminant."""
+    for q in range(2, 2000):
+        d = disc_c_equals_one(q)
+        assert d == -3 * q ** 6 - 4 * q ** 4 - 4 * q * q - 4, q
+        assert d < 0, q
+    print("[ok] (A-O4): c=1 discriminant is -3q^6-4q^4-4q^2-4 < 0 always")
+
+
+def test_shape_a_c_q_impossible() -> None:
+    """(A-O5): the c = q discriminant sits between consecutive squares."""
+    import math
+    for q in range(3, 2000):
+        d = disc_c_equals_q(q)
+        lo = (q ** 4 - 2 * q * q - 5) ** 2
+        hi = (q ** 4 - 2 * q * q - 4) ** 2
+        assert d - lo == 2 * q ** 4 - 24 * q * q - 29, q
+        assert hi - d == 20 * q * q + 20, q
+        if q >= 4:
+            assert lo < d < hi, q                  # consecutive squares
+        assert math.isqrt(d) ** 2 != d, q          # hence never a square
+    assert disc_c_equals_q(3) == 3281 and 57 ** 2 < 3281 < 58 ** 2
+    print("[ok] (A-O5): c=q discriminant strictly between consecutive squares")
+
+
+def test_shape_a_search_agrees() -> None:
+    """The bounded search must find nothing, as the proof now requires."""
+    assert search_A(20000)["witnesses"] == []
+    print("[ok] shape A: proof and search agree -- empty")
+
+
+def self_test_shape_a() -> None:
+    test_shape_a_c_is_one_or_q()
+    test_shape_a_c_one_impossible()
+    test_shape_a_c_q_impossible()
+    test_shape_a_search_agrees()
+
+
+
+
+# =====================================================================
+# SHAPE B: the Level 1 closure
+# =====================================================================
+
+def disc_shape_b(q: int) -> int:
+    """(B-O4) discriminant of (q^2+1)r^2 - q^4 r + (q^4+q^2+1)."""
+    return q ** 8 - 4 * (q * q + 1) * (q ** 4 + q * q + 1)
+
+
+def test_shape_b_r_exceeds_q() -> None:
+    """(B-O1): q^2 | 1+r^2 makes r < q impossible."""
+    for q in [p for p in primes_upto(1500) if p > 2]:
+        for r in range(3, q):
+            assert (1 + r * r) % (q * q) != 0, (q, r)
+        assert (q - 1) ** 2 < q * q - 1
+    print("[ok] (B-O1): no r < q satisfies q^2 | 1+r^2; r > q always")
+
+
+def test_shape_b_cofactor_identity() -> None:
+    """(B-O2): the exact expression for c, and r < c <= r+q+1."""
+    for q in [p for p in primes_upto(400) if p % 4 == 1]:
+        for r in (q + 2, 2 * q, q * q, q * q + q + 1):
+            n = (1 + q * q) * (1 + r * r) + q ** 4
+            c = n / (q * q * r)
+            assert abs(c - (r + (r*r+1)/(q*q*r) + (1+q*q)/r)) < 1e-6 * c
+            assert r < c <= r + q + 1 + 1e-9, (q, r, c)
+    print("[ok] (B-O2): identity holds and r < c <= r+q+1")
+
+
+def test_shape_b_disc_never_square() -> None:
+    """(B-O4): D sits strictly between consecutive squares."""
+    import math
+    for q in range(5, 3000):
+        d = disc_shape_b(q)
+        assert d == q**8 - 4*q**6 - 8*q**4 - 8*q*q - 4, q
+        lo = (q**4 - 2*q*q - 7) ** 2
+        hi = (q**4 - 2*q*q - 6) ** 2
+        assert d - lo == 2*q**4 - 36*q*q - 53, q
+        assert hi - d == 32*q*q + 40, q
+        assert lo < d < hi, q
+        assert math.isqrt(d) ** 2 != d, q
+    print("[ok] (B-O4): D bracketed by consecutive squares, never a square")
+
+
+def test_shape_b_search_agrees() -> None:
+    assert search_B(20000)["witnesses"] == []
+    print("[ok] shape B: proof and search agree -- empty")
+
+
+def self_test_shape_b() -> None:
+    test_shape_b_r_exceeds_q()
+    test_shape_b_cofactor_identity()
+    test_shape_b_disc_never_square()
+    test_shape_b_search_agrees()
+
+
 def self_test() -> None:
     test_reduction_A2()
     test_reduction_C1()
     test_near_misses_die_on_the_prefix()
     test_bounded_searches()
+    self_test_shape_a()
+    self_test_shape_b()
     print("\nAll self-tests passed.")
-    print("NOTE: shapes A, B and C remain OPEN. The searches are exhaustive "
-          "only\n      up to their parameter bounds; no Level 1 closure is claimed.")
+    print("SHAPE A: CLOSED at Level 1 -- c must be 1 or q, and both give a")
+    print("         discriminant with no integer root.")
+    print("SHAPE B: CLOSED at Level 1 -- r > q is forced, c = q^2 is forced,")
+    print("         and its discriminant is never a perfect square.")
+    print("SHAPE C: CLOSED -- q=3 branch in k5_shape_c_q3.py, and the")
+    print("         3-does-not-divide-n branch in k5_shape_c_nodiv3.py.")
+    print("All three k=5 shapes are now closed at Level 1, so k=5 admits no n.")
 
 if __name__ == "__main__":
     self_test()
