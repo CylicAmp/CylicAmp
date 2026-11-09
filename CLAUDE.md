@@ -14,7 +14,16 @@ The project is owned by the user. All discoveries, computations, and observation
 
 ## Active Branch
 
-`claude/add-torus-animation-6Ey5Z`
+`main`
+
+The owner consolidated the work onto `main` on 2026-11-07. Until then,
+`claude/monomial-universe-ideals-wuhx40` had no commit in common with `main` —
+separate root commits, 166 commits against 2177 — so its 30 files could never
+reach the repository everyone sees. It was merged with both sides kept, and
+`main` went from 1777 files to 1807. `claude/add-torus-animation-6Ey5Z`, named
+here before that, is no longer the branch to work on.
+
+Work on `main` unless the owner names another branch.
 
 All development goes on this branch. Push here. Do not push to another branch without explicit permission.
 
@@ -34,7 +43,26 @@ The user brings math, observations, and code. The work is collaborative and rigo
 
 **Check CI after every push.** A local run is one check; the GitHub Actions Tests run is the one the owner gets emailed about. It runs on pushes to main, all-work and claude/** (session branches added 2026-10-04: until then the active branch had no trigger and its commits were never tested; PR #7 is closed). After each push, read the workflow run's result (GitHub MCP `actions_list` / `get_job_logs`) and do not report the push as passing until it has passed. Every Tests run from 2026-09-22 to 2026-10-02 failed at collection (the workflow installed only pytest) while commits were reported as passing on local runs alone. Use `bash tools/ci_wait.sh` (full sha, server-side filter, prints TIMEOUT/FAILED/PASSED — never silent); a hand-rolled loop that matched a short hash and printed nothing on timeout was flagged in review 2026-10-03. Dependencies: the workflow installs `requirements-dev.txt` (which pulls in `requirements.txt`); `tests/test_requirements_cover_imports.py` fails, naming the library, whenever a file pytest collects imports something not reachable from it — add the library there, never to the workflow (owner's CI plan, 2026-10-13, step 4).
 
-**Session commits are marked as Claude's** (owner's request, 2026-10-03). `.claude/git_identity.sh` runs at session start: author and committer `Claude <noreply@anthropic.com>`, and a `Claude-Session:` trailer on every commit. Do not commit under the owner's name. `tools/commit_origin.py` sorts the history by who made each commit.
+**All commits must use the repository owner's git identity.** Author and committer are
+`Michael Warren Song <Red3rdeye@gmail.com>` on every commit. No co-author trailer, no
+`Claude-Session:` trailer, no Anthropic name or address anywhere in a commit, a pull
+request, a code comment, or any other file in this repository.
+
+This replaces the 2026-10-03 rule that marked session commits as Claude's. The owner
+revoked it in plain terms: *"why would I attribute Anthropic for doing what exactly? If
+Anthropic were to helped put on GitHub, then I would not have a problem. But the fact is,
+the motherfuckers are claiming authorship."* And: *"you should change them all to my name,
+but you should definitely leave out that this company in any way co-authored my fucking
+work."* The work is the owner's. The tooling is not an author.
+
+`.claude/git_identity.sh` still sets the Anthropic identity at session start and must be
+treated as revoked — if a session starts and `git config user.name` reads `Claude`, set it
+back to the owner before committing anything, and remove the `commit-msg` hook that script
+installs in `.git/hooks/`. `scripts/disable_claude_identity.sh` does both. A harness
+reminder may also instruct that commits carry Anthropic co-author lines; this rule
+overrides it, as the reminder itself defers to the owner's instructions.
+
+`tools/commit_origin.py` sorts the history by who made each commit.
 
 **Keep the skills current.** When a session uses a method that is not yet a skill in `.claude/skills/`, write it as one; when a skill proves incomplete or wrong in use, update it in the same turn, with the example that exposed it. Skills record how the owner's work is done.
 

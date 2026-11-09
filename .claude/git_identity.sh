@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+exit 0  # disabled: CLAUDE.md requires the owner identity on every commit.
+        # This script set author/committer to Claude <noreply@anthropic.com>.
+        # Left in place rather than deleted so the change is visible in git log.
 # SessionStart hook (owner's request, 2026-10-03: "mark Claude's commits and add the
 # startup script"). Commits made by a Claude session are marked as Claude's:
 # author and committer = Claude <noreply@anthropic.com>, plus a Claude-Session trailer
