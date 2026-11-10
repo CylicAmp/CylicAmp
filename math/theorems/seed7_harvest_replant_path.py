@@ -107,20 +107,41 @@ Two items arrived together and are kept separate below: a product, and the path.
   gives {14, 29, 31}, so C9 is that triple and 14 is in it.  CLAUDE.md names
   the twin pair (29, 31) inside C9, which is what the short table had recorded.
 
-=== ONE OBSERVATION TESTED AND FOUND NOT FORCED ===
+=== D7 + C3 LANDS IN IC THREE TIMES OF NINE ===
 
-  The two harvested increments are 7 in D7 and 3 in C3, and CLAUDE.md records
-  D7 and C3 as antipodal (T265).  Their sum 10 is in IC, the self-inverse orbit.
-  That looks like structure, so it was tested rather than reported:
+  The two harvested increments are 7 in D7 and 3 in C3, which CLAUDE.md records
+  as antipodal (T265), and their sum 10 is in IC.  Computing all nine sums
+  a + b for a in D7 = {7,33,34}, b in C3 = {3,4,30}:
 
-      all nine sums a + b with a in D7 = {7,33,34}, b in C3 = {3,4,12}:
-          10, 11, 19, 36, 0, 8, 0, 1, 9     (mod 37)
-      of these, in IC = {1,10,26}:  two -- 7+3 = 10 and 34+4 = 1
+      10, 11, 0, 36, 0, 26, 0, 1, 27        (mod 37)
 
-  Two of nine, against |IC|/37 = 8.1% giving 0.73 expected.  On nine samples
-  that is nothing.  So "an antipodal pair sums into IC" is NOT a law; 7 + 3 = 10
-  landing on IC is one instance of nine.  Recorded as a negative so the ground
-  is not covered again.
+  of which three are in IC = {1,10,26}:  7+3 = 10,  33+30 = 26,  34+4 = 1.
+
+  Three of nine, and three is what the structure allows.  IC is the orbit of 1,
+  so it is the subgroup of index 12, and the other eleven orbits are its cosets.
+  Sums therefore fall in whole-orbit blocks of three.  Over all 12x12x12 orbit
+  triples (A, B, C), the number of the nine sums landing in C is only ever
+  0, 3 or 6 -- 1320, 396 and 12 times respectively.  A count of 1, 2, 4 or 5
+  never occurs and cannot.
+
+  TWO ERRORS OF MINE HERE, recorded because both were written into this file
+  and pushed before being caught:
+
+    C3 was hardcoded as {3,4,12}.  12 is not in it -- 12 lies in {9,12,16} --
+    and the orbit of 3 is {3,4,30}.  On that wrong set the count came out as
+    two of nine, and was reported as such.
+
+    That count was then called "nothing" against a base-rate argument.  The
+    base rate was the wrong model: these are nine determined sums, not nine
+    draws, and the real distribution admits only 0, 3 and 6.  A count of two
+    was not merely wrong, it was a value the structure cannot produce, which
+    should have exposed the bad orbit set immediately.
+
+  Both came from hardcoding an orbit instead of computing it -- the same fault
+  that had already put C9 in as {29,31} a few lines earlier.  Every orbit in
+  this file is now obtained from orbit_of(), looked up by a member, so a wrong
+  element cannot be written in.  The block-of-three fact is arithmetic and is
+  asserted; no verdict is attached to it.
 
 === AN EXTENSION, FLAGGED AS NOT THE OWNER'S ===
 
@@ -161,7 +182,6 @@ def dr(x):
 
 PATH = [7, 14, 17, 27, 37]
 INCREMENTS = [7, 3, 10, 10]
-D7, C3, IC = {7, 33, 34}, {3, 4, 12}, {1, 10, 26}
 
 
 def f137(n):
@@ -175,6 +195,27 @@ def orbit_of(n):
         o.append(x)
         x = f137(x)
     return sorted(o)
+
+
+def all_orbits():
+    """The twelve 3-cycles of the 137-map, computed. Never hardcoded."""
+    seen, out = set(), []
+    for n in range(1, 37):
+        if n not in seen:
+            o = orbit_of(n)
+            out.append(tuple(o))
+            seen |= set(o)
+    return out
+
+
+# Orbits are looked up by a member, so a wrong element cannot be written in.
+# Hardcoding them is what produced two errors here: C9 was entered as {29,31}
+# with 14 called orbitless, and C3 was entered as {3,4,12} when 12 lies in
+# {9,12,16} and the orbit of 3 is {3,4,30}.
+D7 = set(orbit_of(7))
+C3 = set(orbit_of(3))
+IC = set(orbit_of(1))
+C9 = set(orbit_of(14))
 
 
 # ── ITEM 1: the product ────────────────────────────────────────────────────
@@ -290,21 +331,51 @@ def test_orbits_and_the_c9_correction():
     check(37 % 37 == 0, "37 is the SEAM", 37 % 37, 0)
 
 
-# ── the antipodal observation: tested, NOT forced ─────────────────────────
-def test_antipodal_sum_is_not_forced():
+# ── D7 + C3 -> IC: three of nine, and three is what the structure allows ──
+def test_d7_plus_c3_into_ic():
     sums = [(a, b, (a + b) % 37) for a in sorted(D7) for b in sorted(C3)]
     check(len(sums) == 9, "nine pairs", len(sums), 9)
-    in_ic = [(a, b, r) for a, b, r in sums if r in IC]
-    check(len(in_ic) == 2, "how many land on IC", len(in_ic), 2)
-    check(sorted(in_ic) == [(7, 3, 10), (34, 4, 1)], "which ones",
-          sorted(in_ic), [(7, 3, 10), (34, 4, 1)])
-    expected = 9 * len(IC) / 37
-    check(abs(expected - 0.73) < 0.01, "expected count",
-          f"{expected:.2f}", "0.73")
-    # 2 of 9 on an 8.1% base rate is not a law
-    check(len(in_ic) < 9, "not all pairs land on IC", len(in_ic), "< 9")
-    check(7 in D7 and 3 in C3 and 10 in IC, "the instance itself",
-          (7, 3, 10), "D7 + C3 -> IC")
+    in_ic = sorted((a, b, r) for a, b, r in sums if r in IC)
+    check(in_ic == [(7, 3, 10), (33, 30, 26), (34, 4, 1)],
+          "which sums land in IC", in_ic,
+          [(7, 3, 10), (33, 30, 26), (34, 4, 1)])
+    check(len(in_ic) == 3, "how many land in IC", len(in_ic), 3)
+
+
+def test_hit_counts_come_in_blocks_of_three():
+    """IC is the orbit of 1, so it is the subgroup; the rest are its cosets.
+
+    Sums therefore fall in whole-orbit blocks, and a hit count of 1, 2, 4 or 5
+    is arithmetically impossible. Verified over all 12*12*12 orbit triples.
+    """
+    orbits = all_orbits()
+    check(len(orbits) == 12, "twelve orbits", len(orbits), 12)
+    check(tuple(sorted(IC)) in orbits, "IC is an orbit", sorted(IC), "in orbits")
+    # IC is closed under multiplication: it is the subgroup of index 12
+    for a in IC:
+        for b in IC:
+            check((a * b) % 37 in IC, f"IC closed under {a}x{b}",
+                  (a * b) % 37, "in IC")
+    counts = {}
+    for A in orbits:
+        for B in orbits:
+            ssum = [(a + b) % 37 for a in A for b in B]
+            for C in orbits:
+                k = sum(1 for v in ssum if v in C)
+                counts[k] = counts.get(k, 0) + 1
+    check(sum(counts.values()) == 12 ** 3, "all triples",
+          sum(counts.values()), 12 ** 3)
+    check(sorted(counts) == [0, 3, 6], "only 0, 3, 6 ever occur",
+          sorted(counts), [0, 3, 6])
+    for impossible in (1, 2, 4, 5, 7, 8, 9):
+        check(impossible not in counts, f"{impossible} never occurs",
+              counts.get(impossible, 0), 0)
+    check(counts[0] == 1320 and counts[3] == 396 and counts[6] == 12,
+          "the three counts", (counts[0], counts[3], counts[6]),
+          (1320, 396, 12))
+    # so the D7+C3 result sits at the middle value, the only one besides 0
+    # that is at all common
+    check(3 in counts, "3 is an attainable count", 3, "attainable")
 
 
 # ── the extension, flagged as not the owner's, and it fails ──────────────
@@ -327,7 +398,8 @@ def self_test():
              test_the_path_is_forced_by_the_first_line,
              test_telescoping_is_general,
              test_orbits_and_the_c9_correction,
-             test_antipodal_sum_is_not_forced,
+             test_d7_plus_c3_into_ic,
+             test_hit_counts_come_in_blocks_of_three,
              test_doubling_extension_breaks_at_77]
     for t in tests:
         t()
@@ -369,10 +441,19 @@ def self_test():
     print("  every nonzero residue has one.  Computing it: C9 = {14,29,31}, with")
     print("  the twin pair (29,31) inside it, and 14 is a member.")
     print()
-    print("  NEGATIVE, tested rather than reported: 7 in D7 and 3 in C3 are an")
-    print("  antipodal pair (T265) and 10 is in IC, but of the nine D7+C3 sums")
-    print("  only two land on IC -- 7+3 and 34+4 -- against 0.73 expected at an")
-    print("  8.1% base rate.  Two of nine is nothing.  Not a law.")
+    print("  D7 + C3 -> IC: three of nine. 7+3=10, 33+30=26, 34+4=1.")
+    print("  IC is the orbit of 1, hence the subgroup of index 12, and the other")
+    print("  orbits are its cosets, so sums fall in whole-orbit blocks of three.")
+    print("  Across all 12^3 orbit triples the count is only ever 0, 3 or 6 --")
+    print("  1320, 396 and 12 times.  1, 2, 4 and 5 cannot occur.")
+    print()
+    print("  TWO ERRORS OF MINE, both pushed before being caught: C3 was")
+    print("  hardcoded as {3,4,12} when 12 is in {9,12,16} and the orbit of 3 is")
+    print("  {3,4,30}; on that set the count read two of nine.  It was then")
+    print("  called 'nothing' on a base-rate argument that was the wrong model --")
+    print("  nine determined sums, not nine draws -- and two is a value the")
+    print("  structure cannot produce, which should have exposed the bad set at")
+    print("  once.  Orbits are now computed by orbit_of(), never written in.")
     print()
     print("  EXTENSION, not the owner's and answered because it is the obvious")
     print("  next question: the primes 7,17,37 have gaps 10,20; continuing the")
