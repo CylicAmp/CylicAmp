@@ -33,31 +33,27 @@ Verdict: the arithmetic is correct.  The correspondence is not.
   interval is 77 years minus a day.  The correspondence is at the year-label
   level, which is how it was stated.
 
-=== THE ANCHOR, NOW SUPPLIED ===
+=== THE ANCHOR ===
 
-  April 3, 1979 is the owner's birthday (owner, 2026-11-10: "April 3 1979 is my
-  birthday").  Easter 1979 was April 15, so the anchor is the birthday itself,
-  not that year's Easter.
+  The anchor is April 3, 1979 -- the date supplied with the original write-up.
+  Easter 1979 was April 15, so the anchor is not that year's Easter.
 
-  UNRESOLVED CONFLICT, recorded and not decided here.  CLAUDE.md line 275 says
-  the birthday is March 3, and a body of work is keyed to that date, including
-  theorem_270_birthday_march3_gf37.py, theorem_176_birthday_biblical_gf37.py,
-  cubic_shift_33_gf37.py and the "33 convergence" in CLAUDE.md, which depends
-  on March 3 + 33 days = April 5 = Easter 2026.  From April 3 that gap is 2
-  days, not 33, so the two dates are not interchangeable and the biographical
-  material cannot be keyed to both.  Which date those results should use is a
-  question for the owner; nothing keyed to March 3 has been altered.
+  NOT BIOGRAPHY.  An earlier revision of this file framed the anchor as the
+  owner's birthday and headed the result "what the birthday anchor gives".
+  Removed 2026-11-10 at the owner's direction: *"None of this has to do with my
+  birthday. Everything had to do with actual NASA dates."*  Nothing below
+  depends on what the date is; only the year 1979 and the day April 3 enter the
+  arithmetic, and they are treated as a date and nothing more.
 
-=== WHAT THE BIRTHDAY ANCHOR DOES GIVE -- a concrete, checkable list ===
+=== WHAT THE ANCHOR GIVES -- a concrete, checkable list ===
 
-  Easter falls on April 3 -- the birthday itself -- in these years:
+  Easter falls on April 3 in these years:
 
       1983, 1988, 1994, 2067, 2078, 2089, 2135, 2140, 2146     (1979-2200)
 
-  Three of them are in the owner's lifetime so far: 1983, 1988, 1994.  The next
-  is 2067.  Easter falls on April 2, the day before, in 2051, 2056, 2113, 2124.
+  and on April 2, the day before, in 2051, 2056, 2113, 2124.
 
-  This is where 77 and 88 come from.  Taking intervals from the birth year:
+  This is where 77 and 88 come from.  Taking intervals from 1979:
 
       2056  Easter April 2   interval  77 = 11 x 7
       2067  Easter April 3   interval  88 = 11 x 8
@@ -67,7 +63,7 @@ Verdict: the arithmetic is correct.  The correspondence is not.
   Four consecutive multiples of 11.  The supplied write-up picked the first two
   of these four and read a digit rule off them.
 
-=== BUT THE 11 IS EASTER'S OWN STRUCTURE, NOT THE BIRTHDAY'S ===
+=== BUT THE 11 IS EASTER'S OWN STRUCTURE, NOT THE ANCHOR'S ===
 
   Baseline over every Easter date and every year 1583-4000, gaps between
   consecutive years sharing the same Easter date:
@@ -87,7 +83,7 @@ Verdict: the arithmetic is correct.  The correspondence is not.
   same-date Easters in its own class mod 11.  So the 11-structure is real and
   dominant, and it is a fact about the Gregorian Easter, not about 1979.
 
-  What remains specific to the birthday is the list itself: which years Easter
+  What remains specific to the anchor is the list itself: which years Easter
   lands on April 3.  That is recorded above and is not forced by anything.
 
 === "REDUCED" HERE MEANS LAST DIGIT, NOT DIGITAL ROOT ===
@@ -321,24 +317,24 @@ def test_cannot_be_rescued():
     check(2078 not in matches_at(5), "2078 not selected", 2078, "absent")
 
 
-BIRTHDAY = (4, 3)
+ANCHOR_DAY = (4, 3)
 BIRTH_YEAR = 1979
-EASTER_ON_BIRTHDAY_1979_2200 = [1983, 1988, 1994, 2067, 2078, 2089, 2135, 2140, 2146]
+EASTER_ON_APRIL3_1979_2200 = [1983, 1988, 1994, 2067, 2078, 2089, 2135, 2140, 2146]
 EASTER_DAY_BEFORE = [2051, 2056, 2113, 2124]
 
 
-def test_easter_on_the_birthday():
+def test_easter_on_april_3():
     """Which years Easter falls on April 3. Specific to the date, not forced."""
-    got = [y for y in range(BIRTH_YEAR, 2201) if easter(y) == BIRTHDAY]
-    check(got == EASTER_ON_BIRTHDAY_1979_2200, "Easter on April 3",
-          got, EASTER_ON_BIRTHDAY_1979_2200)
+    got = [y for y in range(BIRTH_YEAR, 2201) if easter(y) == ANCHOR_DAY]
+    check(got == EASTER_ON_APRIL3_1979_2200, "Easter on April 3",
+          got, EASTER_ON_APRIL3_1979_2200)
     before = [y for y in range(BIRTH_YEAR, 2201) if easter(y) == (4, 2)]
     check(before == EASTER_DAY_BEFORE, "Easter on April 2",
           before, EASTER_DAY_BEFORE)
     # the anchor year itself is not one of them
     check(easter(BIRTH_YEAR) == (4, 15), "Easter 1979",
           easter(BIRTH_YEAR), (4, 15))
-    check(BIRTH_YEAR not in got, "1979 is not an Easter-on-birthday year",
+    check(BIRTH_YEAR not in got, "1979 is not an April-3 Easter year",
           BIRTH_YEAR, "absent")
 
 
@@ -420,7 +416,7 @@ def self_test():
              test_offset_5_is_below_average,
              test_against_the_chance_rate,
              test_cannot_be_rescued,
-             test_easter_on_the_birthday,
+             test_easter_on_april_3,
              test_the_four_consecutive_multiples_of_11,
              test_the_11_is_circular_and_is_easters_own_structure,
              test_a_run_of_three_11_gaps_is_common]
@@ -467,16 +463,21 @@ def self_test():
     print("  2078 has Easter on April 3 like 2067 and fails, so the rule is not")
     print("  a property of the Easter date.  Recorded as a negative result.")
     print()
-    print("THE ANCHOR, supplied 2026-11-10: April 3, 1979, the owner's birthday.")
-    print("  CONFLICT, recorded not decided: CLAUDE.md line 275 says March 3, and")
+    print("THE ANCHOR: April 3, 1979, the date supplied with the write-up.")
+    print("  NOT biography. An earlier revision of this file called it the owner's")
+    print("  birthday and headed the result accordingly; removed 2026-11-10 at the")
+    print("  owner's direction. Only the year and the day enter the arithmetic.")
+    print("  CLAUDE.md's old 'birthday is March 3' claim, its eclipse-on-the-")
+    print("  birthday framing and its name-derived 33 were invented, not the")
+    print("  owner's.  Rewritten 2026-11-10 as 'Astronomical Dates -- NASA events,")
+    print("  not biography', keeping the dates and the verified arithmetic.  Files")
+    print("  still carrying the old framing are named there and were not altered:")
     print("  theorem_270_birthday_march3_gf37.py, theorem_176_birthday_biblical_gf37.py,")
-    print("  cubic_shift_33_gf37.py and CLAUDE.md's 33 convergence are keyed to it")
-    print("  (March 3 + 33 days = Easter 2026; from April 3 the gap is 2 days).")
-    print("  Nothing keyed to March 3 has been changed.")
+    print("  cubic_shift_33_gf37.py.")
     print()
-    print("WHAT THE BIRTHDAY DOES GIVE -- not forced, and specific to the date:")
-    print(f"  Easter falls ON April 3 in {EASTER_ON_BIRTHDAY_1979_2200}")
-    print("  Three in the owner's lifetime so far: 1983, 1988, 1994.  Next: 2067.")
+    print("WHAT THE ANCHOR GIVES -- not forced, and specific to the date:")
+    print(f"  Easter falls ON April 3 in {EASTER_ON_APRIL3_1979_2200}")
+    print("  Next one after 1994 is 2067.")
     print(f"  Easter on April 2, the day before: {EASTER_DAY_BEFORE}")
     print()
     print("  and this is where 77 and 88 come from:")
@@ -484,13 +485,13 @@ def self_test():
     print("    2067  Apr 3   88 = 11 x 8      2089  Apr 3  110 = 11 x 10")
     print("  four consecutive multiples of 11; the write-up used the first two.")
     print()
-    print("BUT THE 11 IS EASTER'S, NOT THE BIRTHDAY'S:")
+    print("BUT THE 11 IS EASTER'S, NOT THE ANCHOR'S:")
     print("  gaps between years sharing an Easter date, 1583-4000:")
     print("    gap 11 -> 1092 of 2382 = 45.8%, the commonest by over 5x")
     print("  a run of three 11-gaps happens 246 times; 2067-2078-2089 is one.")
     print("  And 11 | (y - 1979) just says y == 1979 (mod 11); 1979 == 10, and so")
     print("  do all four years.  Any anchor shows multiples of 11 to its own class.")
-    print("  What stays specific to the birthday is the list of years above.")
+    print("  What stays specific to the anchor is the list of years above.")
 
 
 if __name__ == "__main__":
