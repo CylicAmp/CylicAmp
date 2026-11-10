@@ -33,12 +33,62 @@ Verdict: the arithmetic is correct.  The correspondence is not.
   interval is 77 years minus a day.  The correspondence is at the year-label
   level, which is how it was stated.
 
-=== ONE PIECE OF MISSING INFORMATION, NOT GUESSED AT ===
+=== THE ANCHOR, NOW SUPPLIED ===
 
-  The anchor is given as April 3, 1979.  Easter 1979 was April 15, 1979, so
-  April 3 that year is not Easter.  What April 3, 1979 is has not been
-  supplied and is not inferred here.  Everything below holds for that anchor
-  whatever it turns out to be, since only the year 1979 enters the arithmetic.
+  April 3, 1979 is the owner's birthday (owner, 2026-11-10: "April 3 1979 is my
+  birthday").  Easter 1979 was April 15, so the anchor is the birthday itself,
+  not that year's Easter.
+
+  UNRESOLVED CONFLICT, recorded and not decided here.  CLAUDE.md line 275 says
+  the birthday is March 3, and a body of work is keyed to that date, including
+  theorem_270_birthday_march3_gf37.py, theorem_176_birthday_biblical_gf37.py,
+  cubic_shift_33_gf37.py and the "33 convergence" in CLAUDE.md, which depends
+  on March 3 + 33 days = April 5 = Easter 2026.  From April 3 that gap is 2
+  days, not 33, so the two dates are not interchangeable and the biographical
+  material cannot be keyed to both.  Which date those results should use is a
+  question for the owner; nothing keyed to March 3 has been altered.
+
+=== WHAT THE BIRTHDAY ANCHOR DOES GIVE -- a concrete, checkable list ===
+
+  Easter falls on April 3 -- the birthday itself -- in these years:
+
+      1983, 1988, 1994, 2067, 2078, 2089, 2135, 2140, 2146     (1979-2200)
+
+  Three of them are in the owner's lifetime so far: 1983, 1988, 1994.  The next
+  is 2067.  Easter falls on April 2, the day before, in 2051, 2056, 2113, 2124.
+
+  This is where 77 and 88 come from.  Taking intervals from the birth year:
+
+      2056  Easter April 2   interval  77 = 11 x 7
+      2067  Easter April 3   interval  88 = 11 x 8
+      2078  Easter April 3   interval  99 = 11 x 9
+      2089  Easter April 3   interval 110 = 11 x 10
+
+  Four consecutive multiples of 11.  The supplied write-up picked the first two
+  of these four and read a digit rule off them.
+
+=== BUT THE 11 IS EASTER'S OWN STRUCTURE, NOT THE BIRTHDAY'S ===
+
+  Baseline over every Easter date and every year 1583-4000, gaps between
+  consecutive years sharing the same Easter date:
+
+      gap 11  ->  1092 of 2382 pairs  =  45.8%     by far the most common
+      gap 57  ->   206                =   8.6%
+      gap  5  ->   170                =   7.1%
+
+  An 11-year gap is the single commonest way for Easter to return to a date, so
+  a run of them is expected rather than remarkable.  Runs of three consecutive
+  11-gaps occur 246 times in that range and runs of four occur 116 times; the
+  April 3 run 2067-2078-2089 is a run of three.
+
+  And the multiples of 11 are circular: an interval y - 1979 divisible by 11 is
+  exactly the statement y == 1979 (mod 11), and 1979 == 10 (mod 11), as do 2056,
+  2067, 2078 and 2089.  Any anchor year would show multiples of 11 to the
+  same-date Easters in its own class mod 11.  So the 11-structure is real and
+  dominant, and it is a fact about the Gregorian Easter, not about 1979.
+
+  What remains specific to the birthday is the list itself: which years Easter
+  lands on April 3.  That is recorded above and is not forced by anything.
 
 === "REDUCED" HERE MEANS LAST DIGIT, NOT DIGITAL ROOT ===
 
@@ -271,6 +321,96 @@ def test_cannot_be_rescued():
     check(2078 not in matches_at(5), "2078 not selected", 2078, "absent")
 
 
+BIRTHDAY = (4, 3)
+BIRTH_YEAR = 1979
+EASTER_ON_BIRTHDAY_1979_2200 = [1983, 1988, 1994, 2067, 2078, 2089, 2135, 2140, 2146]
+EASTER_DAY_BEFORE = [2051, 2056, 2113, 2124]
+
+
+def test_easter_on_the_birthday():
+    """Which years Easter falls on April 3. Specific to the date, not forced."""
+    got = [y for y in range(BIRTH_YEAR, 2201) if easter(y) == BIRTHDAY]
+    check(got == EASTER_ON_BIRTHDAY_1979_2200, "Easter on April 3",
+          got, EASTER_ON_BIRTHDAY_1979_2200)
+    before = [y for y in range(BIRTH_YEAR, 2201) if easter(y) == (4, 2)]
+    check(before == EASTER_DAY_BEFORE, "Easter on April 2",
+          before, EASTER_DAY_BEFORE)
+    # the anchor year itself is not one of them
+    check(easter(BIRTH_YEAR) == (4, 15), "Easter 1979",
+          easter(BIRTH_YEAR), (4, 15))
+    check(BIRTH_YEAR not in got, "1979 is not an Easter-on-birthday year",
+          BIRTH_YEAR, "absent")
+
+
+def test_the_four_consecutive_multiples_of_11():
+    for y, mult, day in ((2056, 7, 2), (2067, 8, 3), (2078, 9, 3), (2089, 10, 3)):
+        iv = y - BIRTH_YEAR
+        check(iv == 11 * mult, f"{y} interval", iv, 11 * mult)
+        check(easter(y) == (4, day), f"Easter {y}", easter(y), (4, day))
+    # and the supplied write-up used the first two of these four
+    check((2056 - BIRTH_YEAR, 2067 - BIRTH_YEAR) == (77, 88),
+          "the two supplied intervals", (2056 - BIRTH_YEAR, 2067 - BIRTH_YEAR),
+          (77, 88))
+
+
+def test_the_11_is_circular_and_is_easters_own_structure():
+    # divisible by 11 is exactly the same residue class mod 11 as the anchor
+    check(BIRTH_YEAR % 11 == 10, "1979 mod 11", BIRTH_YEAR % 11, 10)
+    for y in (2056, 2067, 2078, 2089):
+        check(y % 11 == BIRTH_YEAR % 11, f"{y} mod 11", y % 11, 10)
+        check(((y - BIRTH_YEAR) % 11 == 0) == (y % 11 == BIRTH_YEAR % 11),
+              f"{y}: 11 | interval iff same class", True, True)
+
+    # the baseline: 11 is the commonest gap between years sharing an Easter date
+    from collections import Counter
+    gaps = Counter()
+    for mo in (3, 4):
+        for dy in range(1, 32):
+            if (mo, dy) < (3, 22) or (mo, dy) > (4, 25):
+                continue
+            ys = [y for y in range(1583, 4000) if easter(y) == (mo, dy)]
+            for i in range(len(ys) - 1):
+                gaps[ys[i + 1] - ys[i]] += 1
+    total = sum(gaps.values())
+    check(total == 2382, "consecutive same-date pairs", total, 2382)
+    check(gaps.most_common(1)[0][0] == 11, "commonest gap",
+          gaps.most_common(1)[0][0], 11)
+    check(gaps[11] == 1092, "count of 11-gaps", gaps[11], 1092)
+    share = gaps[11] / total
+    check(0.45 < share < 0.46, "11-gap share", f"{share:.3f}", "0.45-0.46")
+    # and 11 beats every other gap by a wide margin
+    second = gaps.most_common(2)[1][1]
+    check(gaps[11] > 5 * second, "11 dominates the runner-up",
+          f"{gaps[11]} vs {second}", "more than 5x")
+
+
+def test_a_run_of_three_11_gaps_is_common():
+    from collections import Counter
+    runs = Counter()
+    for mo in (3, 4):
+        for dy in range(1, 32):
+            if (mo, dy) < (3, 22) or (mo, dy) > (4, 25):
+                continue
+            ys = [y for y in range(1583, 4000) if easter(y) == (mo, dy)]
+            r = 1
+            for i in range(len(ys) - 1):
+                if ys[i + 1] - ys[i] == 11:
+                    r += 1
+                else:
+                    runs[r] += 1
+                    r = 1
+            runs[r] += 1
+    check(runs[3] == 246, "runs of three", runs[3], 246)
+    check(runs[4] == 116, "runs of four", runs[4], 116)
+    # 2067-2078-2089 is one such run of three, so it is not distinguished
+    a3 = [y for y in range(1583, 2400) if easter(y) == (4, 3)]
+    i = a3.index(2067)
+    check(a3[i:i + 3] == [2067, 2078, 2089], "the April 3 run",
+          a3[i:i + 3], [2067, 2078, 2089])
+    check(a3[i + 3] - a3[i + 2] != 11, "the run stops at three",
+          a3[i + 3] - a3[i + 2], "not 11")
+
+
 def self_test():
     tests = [test_easter_algorithm_is_sound,
              test_the_supplied_numbers_are_right,
@@ -279,7 +419,11 @@ def self_test():
              test_repdigit_last_digit_is_forced,
              test_offset_5_is_below_average,
              test_against_the_chance_rate,
-             test_cannot_be_rescued]
+             test_cannot_be_rescued,
+             test_easter_on_the_birthday,
+             test_the_four_consecutive_multiples_of_11,
+             test_the_11_is_circular_and_is_easters_own_structure,
+             test_a_run_of_three_11_gaps_is_common]
     for t in tests:
         t()
         print(f"  ok  {t.__name__}")
@@ -322,6 +466,31 @@ def self_test():
     print("  Gregorian range the rule fires slightly less often than chance.")
     print("  2078 has Easter on April 3 like 2067 and fails, so the rule is not")
     print("  a property of the Easter date.  Recorded as a negative result.")
+    print()
+    print("THE ANCHOR, supplied 2026-11-10: April 3, 1979, the owner's birthday.")
+    print("  CONFLICT, recorded not decided: CLAUDE.md line 275 says March 3, and")
+    print("  theorem_270_birthday_march3_gf37.py, theorem_176_birthday_biblical_gf37.py,")
+    print("  cubic_shift_33_gf37.py and CLAUDE.md's 33 convergence are keyed to it")
+    print("  (March 3 + 33 days = Easter 2026; from April 3 the gap is 2 days).")
+    print("  Nothing keyed to March 3 has been changed.")
+    print()
+    print("WHAT THE BIRTHDAY DOES GIVE -- not forced, and specific to the date:")
+    print(f"  Easter falls ON April 3 in {EASTER_ON_BIRTHDAY_1979_2200}")
+    print("  Three in the owner's lifetime so far: 1983, 1988, 1994.  Next: 2067.")
+    print(f"  Easter on April 2, the day before: {EASTER_DAY_BEFORE}")
+    print()
+    print("  and this is where 77 and 88 come from:")
+    print("    2056  Apr 2   77 = 11 x 7      2078  Apr 3   99 = 11 x 9")
+    print("    2067  Apr 3   88 = 11 x 8      2089  Apr 3  110 = 11 x 10")
+    print("  four consecutive multiples of 11; the write-up used the first two.")
+    print()
+    print("BUT THE 11 IS EASTER'S, NOT THE BIRTHDAY'S:")
+    print("  gaps between years sharing an Easter date, 1583-4000:")
+    print("    gap 11 -> 1092 of 2382 = 45.8%, the commonest by over 5x")
+    print("  a run of three 11-gaps happens 246 times; 2067-2078-2089 is one.")
+    print("  And 11 | (y - 1979) just says y == 1979 (mod 11); 1979 == 10, and so")
+    print("  do all four years.  Any anchor shows multiples of 11 to its own class.")
+    print("  What stays specific to the birthday is the list of years above.")
 
 
 if __name__ == "__main__":
