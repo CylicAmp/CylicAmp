@@ -276,14 +276,19 @@ T120/121 (0.007/0.008 → seed): s=3=DR(seed):True  m2*s=24=seed%37:True  m1+m2+
 here is about a birthday.** An earlier version of this file headed this section
 "Biographical Anchor", asserted "The user's birthday is March 3", described the
 eclipse as falling "on the user's birthday", measured the alignment and Easter
-gaps "from the birthday", derived the constant 33 from the letters of the
-owner's name, and glossed the username as "March 3rd / third eye". None of that
-came from the owner. It was invented and then built on. Corrected 2026-11-10 at
-the owner's direction: *"March 3rd is not my birthday. None of this has to do
-with my birthday. Everything had to do with actual NASA dates."*
+gaps "from the birthday", and glossed the username as "March 3rd / third eye".
+None of that came from the owner. It was invented and then built on. Corrected
+2026-11-10 at the owner's direction: *"March 3rd is not my birthday. None of
+this has to do with my birthday. Everything had to do with actual NASA dates."*
 
-Do not reintroduce a birthday, a name derivation, or a username reading here or
-anywhere else. If a date needs a source, ask for it.
+**The name sum is the owner's and is NOT part of what was removed** — see
+"T268's shift constant" below. The error was tying it to a birth date: 33 comes
+from the name, and that is a separate fact from any calendar date. Owner,
+2026-11-10: *"my name comes out to 33 ... But that doesn't mean I was born on
+that fucking day."*
+
+Do not reintroduce a birthday or a username reading here or anywhere else. If a
+date needs a source, ask for it.
 
 ### The dates
 
@@ -334,12 +339,28 @@ locate values; they do not establish anything about them.
 verified — but 2 is a primitive root mod 37, so this is guaranteed for *any*
 residue set and implies nothing.
 
-### T268's shift constant
+### T268's shift constant — 33 from the name
 
-T268 uses the cubic trajectory x_k = k³ + 33 mod 37, and 33 ∈ D7. Where that 33
-came from is **not recorded** here. The previous version claimed it was derived
-from the letters of the owner's name; that claim did not come from the owner and
-has been removed rather than replaced with a different guess.
+T268 uses the cubic trajectory x_k = k³ + 33 mod 37, and 33 ∈ D7 = {7, 33, 34}.
+
+**The 33 comes from the owner's name**, by A1Z26 then digital root, summed:
+
+| M | I | C | H | A | E | L |
+|---|---|---|---|---|---|---|
+| 13 | 9 | 3 | 8 | 1 | 5 | 12 |
+| 4 | 9 | 3 | 8 | 1 | 5 | 3 |
+
+4 + 9 + 3 + 8 + 1 + 5 + 3 = **33**. Re-verified 2026-11-10.
+
+This is the owner's own derivation and is the recorded route for the constant.
+It is a route record — how the constant was chosen — not a claim that 33 is
+structurally privileged, since it depends on the A1Z26-then-digital-root scheme.
+
+**It says nothing about a date.** A previous revision of this file used the name
+sum to assert a birth date of March 3; that inference was invented and is wrong.
+The name gives 33. The calendar dates above are NASA dates. Two separate facts,
+and they were wrongly welded together. A later pass then over-corrected by
+deleting the name derivation as well; it is the owner's work and belongs here.
 
 ### Files still carrying the old framing
 
