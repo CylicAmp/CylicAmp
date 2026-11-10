@@ -84,7 +84,11 @@ def write_all(msgs):
     for n, m in enumerate(msgs, 1):
         by_day.setdefault(m["ts"][:10], []).append((n, m))
     for day, items in by_day.items():
-        with open(DAYS / f"{day}.txt", "w", encoding="utf-8") as f:
+        # newline="" on write as well as on read in check(), so the day file is
+        # byte-exact. Without it Python rewrites every "\n" as os.linesep, which
+        # is "\r\n" on Windows, and then nothing matches verbatim. Harmless on
+        # Linux, where os.linesep is already "\n", but the two must agree.
+        with open(DAYS / f"{day}.txt", "w", encoding="utf-8", newline="") as f:
             f.write(f"Owner's messages, {day}, verbatim as written (UTC timestamps).\n"
                     "Nothing below is edited, except credentials, which are removed and marked "
                     "where they were.\n")
@@ -125,7 +129,14 @@ def check():
     for row, m in zip(index, msgs):
         if hashlib.sha256(m["text"].encode("utf-8")).hexdigest() != row["sha256"]:
             bad.append(f"#{row['n']} sha mismatch")
-        day = (STORE / row["file"]).read_text(encoding="utf-8")
+        # newline="" disables universal-newline translation. Without it Python
+        # turns a stored carriage return into "\n" on the way in, so any message
+        # containing a CR can never match itself and reads as "not verbatim".
+        # Message #253 (2026-11-09) is the first to contain one: a curl progress
+        # meter, which uses CR to rewrite its line. read_text() grew a newline
+        # parameter only in 3.13, and CI runs 3.11, so this uses open().
+        with (STORE / row["file"]).open(encoding="utf-8", newline="") as fh:
+            day = fh.read()
         if f"===== #{row['n']}  {m['ts']} =====\n{m['text']}\n" not in day:
             bad.append(f"#{row['n']} not verbatim in {row['file']}")
         if any(re.search(p, m["text"]) for p in CREDENTIALS):
