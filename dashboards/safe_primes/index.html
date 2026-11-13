@@ -1,0 +1,275 @@
+<title>Safe Primes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap">
+<style>
+/* Layout: one column of panels; numbers sit in plates that wrap, never pushing the page wider. */
+:root {
+  --bg: #eef0f2; --panel: #ffffff; --ink: #1b2026; --muted: #5b6672; --line: #d3d8de; --plate: #f6f7f8;
+  --accent: #1f5f8b; --on-accent: #ffffff; --good: #1d7a46; --good-bg: #e3f3ea; --bad: #b3261e; --bad-bg: #fbe7e5;
+  --warn: #8a5a00; --warn-bg: #fbf0d9;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-code: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121519; --panel: #1a1f25; --ink: #e6e9ed; --muted: #9aa5b1; --line: #2e353d; --plate: #222830;
+    --accent: #6fb3e0; --on-accent: #0e1216; --good: #5fd08f; --good-bg: #16301f; --bad: #ff8a80; --bad-bg: #3a1a18;
+    --warn: #f0c060; --warn-bg: #352a12; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121519; --panel: #1a1f25; --ink: #e6e9ed; --muted: #9aa5b1; --line: #2e353d; --plate: #222830;
+  --accent: #6fb3e0; --on-accent: #0e1216; --good: #5fd08f; --good-bg: #16301f; --bad: #ff8a80; --bad-bg: #3a1a18;
+  --warn: #f0c060; --warn-bg: #352a12; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
+}
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 20px; }
+header h1 { font-family: var(--font-display); font-weight: 700; font-size: 2.4rem; line-height: 1.05; margin: 0; }
+header p { margin: 8px 0 0; color: var(--muted); max-width: 62ch; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; display: grid; gap: 12px; min-width: 0; }
+.panel h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.08em; margin: 0; color: var(--muted); }
+label { font-weight: 500; font-size: 0.95rem; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+input[type="text"], select {
+  flex: 1 1 200px; min-width: 0; font-family: var(--font-code); font-size: 1.05rem; padding: 10px 12px;
+  border: 1px solid var(--line); border-radius: 4px; background: var(--plate); color: var(--ink);
+}
+select { flex: 0 1 auto; font-family: var(--font-body); }
+input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button {
+  font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; padding: 10px 14px; border-radius: 4px; cursor: pointer;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--on-accent);
+}
+button.quiet { background: transparent; color: var(--accent); }
+button:disabled { opacity: 0.55; cursor: progress; }
+.plate {
+  font-family: var(--font-code); font-size: 0.92rem; background: var(--plate); border: 1px dashed var(--line);
+  border-radius: 4px; padding: 10px 12px; overflow-wrap: anywhere; min-width: 0; font-variant-numeric: tabular-nums;
+}
+.kv { display: grid; gap: 6px; }
+.kv div { display: grid; gap: 2px; }
+.kv b { font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.verdict { display: inline-flex; font-weight: 600; padding: 6px 12px; border-radius: 999px; width: fit-content; }
+.verdict.good { color: var(--good); background: var(--good-bg); }
+.verdict.bad { color: var(--bad); background: var(--bad-bg); }
+.verdict.warn { color: var(--warn); background: var(--warn-bg); }
+.msg { font-size: 0.95rem; color: var(--muted); min-height: 1.5em; }
+.list { font-family: var(--font-code); font-size: 0.88rem; line-height: 1.7; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.list span { color: var(--muted); }
+.how { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.how li { border-left: 3px solid var(--line); padding-left: 10px; }
+.how b { font-weight: 600; }
+.small { font-size: 0.85rem; color: var(--muted); }
+code { font-family: var(--font-code); font-size: 0.92em; }
+</style>
+
+<main>
+  <header>
+    <h1>Safe Primes</h1>
+    <p>A Sophie Germain prime p has 2p + 1 prime too, and 2p + 1 is then a safe prime: 5 → 11, 11 → 23, 23 → 47. Key exchange between computers (Diffie–Hellman) runs on safe primes. This page makes new ones, checks any number, and lists them.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="h-make">
+    <h2 id="h-make">Make a safe prime</h2>
+    <div class="row">
+      <label for="bits">Size</label>
+      <select id="bits">
+        <option value="64">64 bits</option>
+        <option value="128">128 bits</option>
+        <option value="256" selected>256 bits</option>
+        <option value="512">512 bits</option>
+        <option value="1024">1024 bits (up to a minute on a phone)</option>
+      </select>
+      <button type="button" id="make-btn">Make one</button>
+      <button type="button" class="quiet" id="copy-btn">Copy q</button>
+    </div>
+    <div class="msg" id="make-msg" aria-live="polite"></div>
+    <div class="kv" id="make-out"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-check">
+    <h2 id="h-check">Check a number</h2>
+    <label for="check-in">Number (decimal, or hex starting 0x)</label>
+    <div class="row">
+      <input type="text" id="check-in" value="2063" autocomplete="off" spellcheck="false">
+      <button type="button" id="check-btn">Check</button>
+    </div>
+    <div id="check-out" aria-live="polite"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-list">
+    <h2 id="h-list">List them</h2>
+    <label for="list-in">Sophie Germain primes below</label>
+    <div class="row">
+      <input type="text" id="list-in" value="1000" autocomplete="off" inputmode="numeric">
+      <button type="button" id="list-btn">List</button>
+    </div>
+    <div class="msg" id="list-msg"></div>
+    <div class="list" id="list-out"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-how">
+    <h2 id="h-how">How it works</h2>
+    <ul class="how">
+      <li><b>The table.</b> Entry k says whether the odd number 2k + 1 is prime. For p = 2k + 1, the number 2p + 1 = 4k + 3 is entry 2k + 1. So a Sophie Germain prime is entries k and 2k + 1 both prime.</li>
+      <li><b>Always true.</b> Above 3, p leaves 2 by 3 (if it left 1, 2p + 1 would be a multiple of 3), so p and 2p + 1 both have digit root 2, 5 or 8, and every safe prime above 7 leaves 11 by 12.</li>
+      <li><b>Making a big one.</b> Start at a random p that leaves 5 by 6. Step up by 6 and cross out every p where p or 2p + 1 has a prime factor below 65,536. Test each survivor p with Miller–Rabin: 64 random rounds, so a composite passes with chance below 4<sup>−64</sup>. Below 3.3 × 10<sup>24</sup> the bases 2 to 41 make it exact.</li>
+      <li><b>The proof for q.</b> Once p is prime, q = 2p + 1 is proved prime (Pocklington): q is prime exactly when 2<sup>q−1</sup> leaves 1 by q and 3 does not divide q.</li>
+      <li><b>For key exchange</b>, use generator 4: it is a square, so it makes the group of size p. Generator 2 does the same when q leaves 7 by 8.</li>
+    </ul>
+    <p class="small">The same arithmetic as <code>exports/safe_primes.py</code> in the CylicAmp repository, whose tests match OEIS A092816 up to 10<sup>7</sup> and check five RFC 3526 and RFC 7919 key-exchange primes. Its 512-, 1024- and 2048-bit outputs were confirmed by sympy and OpenSSL.</p>
+  </section>
+</main>
+
+<script>
+/* ===== arithmetic (same as exports/safe_primes.py) ===== */
+function oddPrimeTable(N) {
+  const P = new Uint8Array(N + 1).fill(1);
+  P[0] = 0;
+  for (let k = 1; (2 * k + 1) * (2 * k + 1) <= 2 * N + 1; k++) {
+    if (!P[k]) continue;
+    const p = 2 * k + 1;
+    for (let j = (p * p - 1) / 2; j <= N; j += p) P[j] = 0;
+  }
+  return P;
+}
+function sophieGermainList(N) {
+  if (N <= 2) return [];
+  const P = oddPrimeTable(N), out = [2], m = Math.floor((N - 2) / 2);
+  for (let k = 1; k <= m; k++) if (P[k] && P[2 * k + 1]) out.push(2 * k + 1);
+  return out;
+}
+const SMALL_PRIMES = (() => { const T = oddPrimeTable(32768), out = [2]; for (let k = 1; k < T.length; k++) if (T[k]) out.push(2 * k + 1); return out; })();
+const DET_BASES = [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n, 41n];
+const DET_LIMIT = 3317044064679887385961981n;
+function modPow(b, e, m) {
+  let r = 1n; b %= m;
+  while (e > 0n) { if (e & 1n) r = r * b % m; b = b * b % m; e >>= 1n; }
+  return r;
+}
+function randomBelow(n) {           // uniform in [0, n)
+  const bytes = Math.ceil(n.toString(16).length / 2) + 8;
+  const buf = new Uint8Array(bytes);
+  if (globalThis.crypto && crypto.getRandomValues) crypto.getRandomValues(buf);
+  else for (let i = 0; i < bytes; i++) buf[i] = Math.floor(Math.random() * 256);
+  let x = 0n; for (const v of buf) x = (x << 8n) | BigInt(v);
+  return x % n;
+}
+function witness(a, n, d, s) {
+  let x = modPow(a, d, n);
+  if (x === 1n || x === n - 1n) return false;
+  for (let i = 1n; i < s; i++) { x = x * x % n; if (x === n - 1n) return false; }
+  return true;
+}
+function isPrime(n, rounds = 64, bases = null) {
+  if (n < 2n) return false;
+  for (let i = 0; i < 100; i++) { const p = BigInt(SMALL_PRIMES[i]); if (n === p) return true; if (n % p === 0n) return false; }
+  let d = n - 1n, s = 0n;
+  while ((d & 1n) === 0n) { d >>= 1n; s++; }
+  if (bases === null && n < DET_LIMIT) bases = DET_BASES;
+  if (bases !== null) return !bases.some(a => a % n !== 0n && witness(a, n, d, s));
+  for (let i = 0; i < rounds; i++) if (witness(2n + randomBelow(n - 3n), n, d, s)) return false;
+  return true;
+}
+function pocklingtonSafe(q) { return modPow(2n, q - 1n, q) === 1n && q % 3n !== 0n; }
+function isSafePrime(q, rounds = 64) {
+  if (q < 5n || q % 2n === 0n) return false;
+  return isPrime((q - 1n) / 2n, rounds) && pocklingtonSafe(q);
+}
+const SIEVE = SMALL_PRIMES.filter(r => r > 3).map(r => { let inv = 1; for (let x = 1; x < r; x++) if ((6 * x) % r === 1) { inv = x; break; } return [r, inv]; });
+async function safePrime(bits, window = 4096, onWindow = null) {
+  const lo = 1n << BigInt(bits - 2), hi = (1n << BigInt(bits - 1)) - 1n;
+  const sieve = SIEVE.filter(([r]) => BigInt(r) < lo);
+  for (let tries = 0; ; tries++) {
+    let p0 = lo + randomBelow(hi - lo);
+    p0 += (5n - p0 % 6n + 6n) % 6n;
+    const alive = new Uint8Array(window).fill(1);
+    for (const [r, inv] of sieve) {
+      const pm = Number(p0 % BigInt(r));
+      for (const bad of [0, (r - 1) / 2]) {
+        let j = ((bad - pm) % r + r) % r * inv % r;
+        for (; j < window; j += r) alive[j] = 0;
+      }
+    }
+    for (let j = 0; j < window; j++) {
+      if (!alive[j]) continue;
+      const p = p0 + 6n * BigInt(j);
+      if (p > hi) break;
+      const q = 2n * p + 1n;
+      if (modPow(2n, p - 1n, p) === 1n && pocklingtonSafe(q) && isPrime(p)) return [q, p, tries + 1];
+    }
+    if (onWindow) await onWindow(tries + 1);
+  }
+}
+/* ===== page ===== */
+(() => {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  let lastQ = null;
+  const parse = s => { s = s.trim().replace(/[\s_,]/g, ""); if (!/^(0x[0-9a-f]+|\d+)$/i.test(s)) throw new Error("bad"); return BigInt(s); };
+
+  $("make-btn").addEventListener("click", async () => {
+    const bits = Number($("bits").value);
+    $("make-btn").disabled = true;
+    $("make-out").innerHTML = "";
+    $("make-msg").textContent = `Searching for a ${bits}-bit safe prime…`;
+    const t = performance.now();
+    const [q, p, windows] = await safePrime(bits, 4096, async n => {
+      $("make-msg").textContent = `Searching for a ${bits}-bit safe prime… (${n * 4096} candidates walked)`;
+      await new Promise(r => setTimeout(r, 0));
+    });
+    const secs = ((performance.now() - t) / 1000).toFixed(1);
+    lastQ = q;
+    const sure = p < DET_LIMIT ? "proved (bases 2 to 41)" : "Miller–Rabin, 64 random rounds";
+    $("make-msg").textContent = `Found in ${secs} s.`;
+    $("make-out").innerHTML =
+      `<div><b>Safe prime q (${q.toString(2).length} bits)</b><div class="plate">${q}</div></div>` +
+      `<div><b>q in hex</b><div class="plate">0x${q.toString(16).toUpperCase()}</div></div>` +
+      `<div><b>p = (q − 1) / 2</b><div class="plate">${p}</div></div>` +
+      `<div><b>Sure</b><div>p prime: ${sure}. q prime: proved from p (Pocklington).</div></div>` +
+      `<div><b>Generator</b><div>4 makes the group of size p${q % 8n === 7n ? "; 2 also works (q leaves 7 by 8)" : ""}.</div></div>`;
+    $("make-btn").disabled = false;
+  });
+
+  $("copy-btn").addEventListener("click", () => {
+    if (lastQ === null) { $("make-msg").textContent = "Make one first."; return; }
+    const s = lastQ.toString();
+    try { navigator.clipboard.writeText(s).then(() => { $("make-msg").textContent = "Copied q."; }, () => { $("make-msg").textContent = "Select the number above and copy it."; }); }
+    catch (e) { $("make-msg").textContent = "Select the number above and copy it."; }
+  });
+
+  function check() {
+    let q;
+    try { q = parse($("check-in").value); } catch (e) { $("check-out").innerHTML = `<div class="msg">Type a whole number, in decimal or as hex starting 0x.</div>`; return; }
+    let html;
+    if (isSafePrime(q)) html = `<div class="verdict good">Safe prime</div><div class="msg">(q − 1) / 2 = ${esc((q - 1n) / 2n)} is prime.</div>`;
+    else if (q > 2n && q % 2n === 1n && isPrime(q)) html = `<div class="verdict warn">Prime, but not safe</div><div class="msg">(q − 1) / 2 = ${esc((q - 1n) / 2n)} is not prime.</div>`;
+    else html = `<div class="verdict bad">Not a safe prime</div><div class="msg">It is not prime.</div>`;
+    $("check-out").innerHTML = html;
+  }
+  $("check-btn").addEventListener("click", check);
+  $("check-in").addEventListener("keydown", e => { if (e.key === "Enter") check(); });
+
+  function list() {
+    let N = Number($("list-in").value.replace(/[\s_,]/g, ""));
+    if (!Number.isInteger(N) || N < 3) { $("list-msg").textContent = "Type a whole number of 3 or more."; $("list-out").innerHTML = ""; return; }
+    if (N > 20000000) { N = 20000000; $("list-in").value = "20000000"; }
+    const sg = sophieGermainList(N);
+    const shown = sg.slice(0, 300);
+    $("list-msg").textContent = `${sg.length.toLocaleString()} Sophie Germain primes below ${N.toLocaleString()}` + (sg.length > shown.length ? ` (first ${shown.length} shown)` : "") + ". Each is followed by its safe prime.";
+    $("list-out").innerHTML = shown.map(p => `${p}<span>→${2 * p + 1}</span>`).join("  ");
+  }
+  $("list-btn").addEventListener("click", list);
+  $("list-in").addEventListener("keydown", e => { if (e.key === "Enter") list(); });
+
+  check();
+  list();
+})();
+</script>
