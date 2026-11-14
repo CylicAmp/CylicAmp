@@ -1,0 +1,23 @@
+{
+ "source": "full odd sieve to 10^9 + 40, numpy, 2026-11-14 (scratchpad/scan/scan.py)",
+ "counts": {
+  "pi_1e9": 50847534,
+  "pi_1e9p8": 50847535,
+  "h2_base_le_1e9": 3424506,
+  "h2_pair_le_1e9": 3424506,
+  "h2_base_le_1e9p8": 3424507,
+  "h4_base_le_1e9": 3424680,
+  "h4_pair_le_1e9": 3424680,
+  "h4_base_le_1e9p8": 3424680,
+  "h6_base_le_1e9": 6849047,
+  "h6_pair_le_1e9": 6849047,
+  "h6_base_le_1e9p8": 6849047,
+  "cousin_mod30": {
+   "1": 0,
+   "3": 1,
+   "7": 1141562,
+   "13": 1141544,
+   "19": 1141573
+  }
+ }
+}
