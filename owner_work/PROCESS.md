@@ -829,3 +829,21 @@ File: `math/theorems/owner_1_plus_2_bars_2026_10_26.py`.
 
 **Checks:** right. Each loop is 1 + 3 + 7 = 11 (3 + 7 = 10). The two lines are one move: +37 whole, then +3 and +7. +37 adds 1 to the root (37 → 1): 11 (2) → 48 (3). Both ways: restarting at the second 1 (the owner's way) gives 1 → 4 → 11 three times; carrying the total gives 1 4 11 14 21 24 31, roots 1 4 2 5 3 6 4. By 37, 11 and 48 leave the same 11.
 File: `math/theorems/owner_11_plus_37_loop_2026_10_26.py`.
+
+## 2026-11-14 — the Gaussian integral by polar coordinates
+
+(Message numbers stopped when the message record was turned off on 2026-10-26; entries since are by date.)
+
+**As typed:** "∫₀^∞ e^(−x²) dx = √π / 2 ≈ 0.886" · "Square it: I² = ¼ ∬ e^(−(x²+y²)) dx dy over the whole plane, the volume under a bell surface." · "In polar form, dx dy = r dr dθ. Let u = r² and the radial part becomes 1, so I² = ⅛ ∫₀^2π dθ = π/4.."
+
+**Cleaned:**
+
+    I = ∫ from 0 to ∞ of e^(−x²) dx
+    I² = ¼ × (volume under e^(−(x² + y²)) over the whole plane)
+    dx dy → r dr dθ;  u = r², du = 2r dr  →  ∫ e^(−r²) r dr = ½ × ∫ e^(−u) du = ½ × 1
+    I² = ¼ × ½ × ∫ from 0 to 2π of dθ = ⅛ × 2π = π/4  →  I = √π / 2 = 0.886
+
+**Process:** square the integral to get a volume; keep one quarter of the plane; turn to polar; substitute u = r² so the radial part is ½ × 1; put the ½ with the ¼ to make ⅛; go once around (2π).
+
+**Checks:** all right. I = 0.886226925…; the quarter-plane volume = π/4 = 0.785398…; radial part = ½, its u-integral = 1; ⅛ × 2π = π/4. Without the ¼ the whole plane gives π, so over the whole line the integral is √π = 1.7724…
+File: `math/theorems/owner_gaussian_integral_polar_2026_11_14.py`.
