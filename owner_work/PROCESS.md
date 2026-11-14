@@ -847,3 +847,20 @@ File: `math/theorems/owner_11_plus_37_loop_2026_10_26.py`.
 
 **Checks:** all right. I = 0.886226925…; the quarter-plane volume = π/4 = 0.785398…; radial part = ½, its u-integral = 1; ⅛ × 2π = π/4. Without the ¼ the whole plane gives π, so over the whole line the integral is √π = 1.7724…
 File: `math/theorems/owner_gaussian_integral_polar_2026_11_14.py`.
+
+## 2026-11-14 — the repdigit ladder 111 … 999: the 3 6 9 path
+
+**As written** (on the printed list 3 × 37 = 111 … 27 × 37 = 999): "111" between every two rows; roots 3 6 9 | 3 6 9 | 3 6 9 coloured red, green, blue; a path of 3s down the side with small 1 and 2 marks, boxes at 222, 666 and 888, a cross at 555; "3+3=6+6=12" (at 222) · "3x4=12+6=1+8=9" (at 555) · "+3+1=4+9=1+3=4" (at 777).
+
+**Cleaned:**
+
+    111 → 222 → 333 → … → 999, each step + 111
+    roots: 3 → 6 → 9 → 3 → 6 → 9 → 3 → 6 → 9   (each step + 3)
+    3 + 3 = 6 → 6 + 6 = 12
+    3 × 4 = 12 → 12 + 6 = 18 → 1 + 8 = 9
+    3 + 1 = 4 → 4 + 9 = 13 → 1 + 3 = 4
+
+**Process:** mark the step between rows (111); take each row's root and colour the three kinds; walk down the side adding 3 at each step; mark the middle row 555; write the three chains.
+
+**Checks:** all right. Each row is the one above + 111, and 111 has root 3, so the roots go up by 3: 3 6 9 three times. The chains: 3 + 3 = 6, 6 + 6 = 12; 3 × 4 = 12, 12 + 6 = 18 → 9; 3 + 1 = 4, 4 + 9 = 13 → 4. Forced by 111 = 3 × 37. The 1 and 2 marks are recorded as drawn.
+File: `math/theorems/owner_repdigit_ladder_369_path_2026_11_14.py`.
