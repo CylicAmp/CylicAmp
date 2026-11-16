@@ -1,0 +1,184 @@
+<title>Diamond Blocks</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap">
+<style>
+/* Layout: verdict, the four diamonds side by side, why the two cuts balance, the uniqueness grid, the chain. */
+:root {
+  --bg: #eef0f2; --panel: #ffffff; --ink: #1b2026; --muted: #5b6672; --line: #d3d8de; --plate: #f6f7f8;
+  --outer: #eb6834; --inner: #2a78d6; --hit: #fde7dc;
+  --good: #1d7a46; --good-bg: #e3f3ea; --bad: #b3261e; --bad-bg: #fbe7e5; --warn: #8a5a00; --warn-bg: #fbf0d9;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-code: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121519; --panel: #1a1f25; --ink: #e6e9ed; --muted: #9aa5b1; --line: #2e353d; --plate: #222830;
+    --outer: #d95926; --inner: #3987e5; --hit: #3a2418;
+    --good: #5fd08f; --good-bg: #16301f; --bad: #ff8a80; --bad-bg: #3a1a18; --warn: #f0c060; --warn-bg: #352a12; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121519; --panel: #1a1f25; --ink: #e6e9ed; --muted: #9aa5b1; --line: #2e353d; --plate: #222830;
+  --outer: #d95926; --inner: #3987e5; --hit: #3a2418;
+  --good: #5fd08f; --good-bg: #16301f; --bad: #ff8a80; --bad-bg: #3a1a18; --warn: #f0c060; --warn-bg: #352a12; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
+}
+main { max-width: 800px; margin: 0 auto; display: grid; gap: 20px; }
+main > *, .panel > * { min-width: 0; }
+header h1 { font-family: var(--font-display); font-weight: 700; font-size: 2.4rem; line-height: 1.05; margin: 0; }
+header p { margin: 8px 0 0; color: var(--muted); max-width: 66ch; }
+.credit { font-size: 0.85rem; }
+.credit code { overflow-wrap: anywhere; word-break: break-all; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; display: grid; gap: 12px; }
+.panel h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.08em; margin: 0; color: var(--muted); }
+.panel p { margin: 0; max-width: 68ch; }
+.verdicts { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.verdicts li { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; }
+.pill { font-size: 0.78rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; white-space: nowrap; }
+.pill.good { color: var(--good); background: var(--good-bg); }
+.pill.bad { color: var(--bad); background: var(--bad-bg); }
+.pill.warn { color: var(--warn); background: var(--warn-bg); }
+.key { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; color: var(--muted); }
+.key i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: middle; margin-right: 6px; }
+.diamonds { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.dia { background: var(--plate); border-radius: 6px; padding: 10px; display: grid; gap: 4px; justify-items: center; min-width: 0; }
+.dia h3 { margin: 0; font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
+.dia svg { width: 100%; max-width: 180px; height: auto; display: block; }
+.dia svg text { font-family: var(--font-code); }
+.dia .sums { font-family: var(--font-code); font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.line svg { width: 100%; height: auto; display: block; }
+.line svg text { font-family: var(--font-code); }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; font-variant-numeric: tabular-nums; margin: 0 auto; }
+th, td { text-align: center; padding: 6px 7px; border: 1px solid var(--line); white-space: nowrap; }
+th { font-weight: 600; color: var(--muted); font-size: 0.82rem; font-family: var(--font-code); }
+td { font-family: var(--font-code); font-size: 0.92rem; }
+td.hit { background: var(--hit); color: var(--ink); font-weight: 600; }
+.chain { font-family: var(--font-code); background: var(--plate); border-radius: 4px; padding: 10px 12px; display: grid; gap: 4px; overflow-x: auto; }
+.note { border-left: 3px solid var(--line); padding-left: 10px; color: var(--muted); font-size: 0.92rem; }
+code { font-family: var(--font-code); font-size: 0.92em; }
+</style>
+
+<main>
+  <header>
+    <h1>Diamond Blocks</h1>
+    <p>The digits 1 to 8 in four blocks: Evens, Odds, Primes and Non-primes. Each block is set as a diamond, with an outer pair and an inner pair. The Primes and Non-primes are each off balance by one in opposite directions, and together they balance at 18 and 18.</p>
+    <p class="credit">The blocks are the owner's. The diamonds and the cross-block reading came from another tool, and every line is checked in <code>math/theorems/pasted_diamond_blocks_cross_balance_audit_2026_11_14.py</code>.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="h-v">
+    <h2 id="h-v">Verdict</h2>
+    <ul class="verdicts">
+      <li><span class="pill good">Right</span><span>Every sum and imbalance: 10 | 10, 8 | 8, 9 | 8, 9 | 10, giving 0, 0, +1, −1.</span></li>
+      <li><span class="pill good">Right</span><span>Primes and Non-primes together: outer 9 + 9 = 18, inner 8 + 10 = 18.</span></li>
+      <li><span class="pill good">Right</span><span>The 18 | 18 arrangement is unique, apart from swapping outside and inside (grid below).</span></li>
+      <li><span class="pill good">Right</span><span>The chain 36 / 2 = 18, 17 + 18 = 35, 3 + 5 = 8.</span></li>
+      <li><span class="pill warn">Not shown</span><span>That the digits of 35 (3, 5) and of 18 (1, 8) "are not incidental". Those come from how the numbers are written in base 10, and nothing in the blocks produces them.</span></li>
+    </ul>
+  </section>
+
+  <section class="panel" aria-labelledby="h-d">
+    <h2 id="h-d">The four diamonds</h2>
+    <div class="key"><span><i style="background: var(--outer)"></i>outer pair (top and bottom)</span><span><i style="background: var(--inner)"></i>inner pair (left and right)</span></div>
+    <div class="diamonds" id="diamonds"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-why">
+    <h2 id="h-why">Why it balances</h2>
+    <p>Both cuts have the same outside and the same inside. The outside is 2, 8 + 1, 7 = 2, 7 + 1, 8, the four end digits 1 2 7 8. The inside is 4, 6 + 3, 5, the four middle digits 3 4 5 6. The digits pair to 9, as the arcs show: 1 + 8 = 2 + 7 = 3 + 6 = 4 + 5 = 9. That gives two pairs on each side, 18 each.</p>
+    <div class="line" id="line"></div>
+    <p>So the Prime / Non-prime cut is the Even / Odd cut with 7 and 8 traded between the blocks. The cores stay where they are: Odds and Primes share 3, 5 inside, and Evens and Non-primes share 4, 6.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h-u">
+    <h2 id="h-u">Only one way to reach 18 | 18</h2>
+    <p>Rows are the prime pair placed outside, and columns are the non-prime pair placed outside. Each cell is the outer total. 18 | 18 needs an outer total of 18 (1 + … + 8 = 36, half of it 18). Two cells reach it, and they are the same arrangement with outside and inside swapped.</p>
+    <div class="tablewrap"><table id="grid"></table></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-c">
+    <h2 id="h-c">The chain</h2>
+    <div class="chain">
+      <div>1 + 2 + … + 8 = 36  →  36 / 2 = 18</div>
+      <div>2 + 3 + 5 + 7 = 17  →  17 + 18 = 35  →  3 + 5 = 8</div>
+    </div>
+    <p>Each step is right. 17 is the sum of the primes, and 18 is each side of the balance.</p>
+    <p class="note">The digits of 35 match the shared core 3, 5, and the digits of 18 match the Non-prime outer pair 1, 8. Those are matches in how the numbers are written, so they're recorded as matches, not as a result.</p>
+  </section>
+</main>
+
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (n, a, p) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+  const blocks = [
+    { name: "Evens", outer: [2, 8], inner: [4, 6] },
+    { name: "Odds", outer: [1, 7], inner: [3, 5] },
+    { name: "Primes", outer: [2, 7], inner: [3, 5] },
+    { name: "Non-primes", outer: [1, 8], inner: [4, 6] },
+  ];
+  const sum = a => a.reduce((s, x) => s + x, 0);
+  const host = document.getElementById("diamonds");
+  for (const b of blocks) {
+    const d = document.createElement("div"); d.className = "dia";
+    const imb = sum(b.outer) - sum(b.inner);
+    d.innerHTML = `<h3>${b.name}</h3>`;
+    const svg = el("svg", { viewBox: "0 0 180 180", role: "img", "aria-label": `${b.name}: outer ${b.outer.join(" and ")}, inner ${b.inner.join(" and ")}` }, d);
+    el("polygon", { points: "90,22 158,90 90,158 22,90", fill: "none", stroke: "var(--line)", "stroke-width": 2 }, svg);
+    const spots = [[90, 22, b.outer[0], "--outer"], [90, 158, b.outer[1], "--outer"], [22, 90, b.inner[0], "--inner"], [158, 90, b.inner[1], "--inner"]];
+    for (const [x, y, v, c] of spots) {
+      el("circle", { cx: x, cy: y, r: 17, fill: `var(${c})` }, svg);
+      const t = el("text", { x, y: y + 7, "text-anchor": "middle", "font-size": 20, "font-weight": 600, fill: "#ffffff" }, svg); t.textContent = v;
+    }
+    const t1 = el("text", { x: 90, y: 86, "text-anchor": "middle", "font-size": 14, fill: "var(--outer)", "font-weight": 600 }, svg); t1.textContent = `${sum(b.outer)}`;
+    const t2 = el("text", { x: 90, y: 106, "text-anchor": "middle", "font-size": 14, fill: "var(--inner)", "font-weight": 600 }, svg); t2.textContent = `${sum(b.inner)}`;
+    const s = document.createElement("div"); s.className = "sums";
+    s.innerHTML = `outer ${sum(b.outer)} | inner ${sum(b.inner)} → <span class="pill ${imb === 0 ? "good" : "warn"}">${imb > 0 ? "+" : ""}${imb}</span>`;
+    d.appendChild(s);
+    host.appendChild(d);
+  }
+
+  // number line with the pairs to 9
+  (() => {
+    const lineHost = document.getElementById("line");
+    const W = Math.max(300, Math.min(640, Math.round(lineHost.clientWidth || 640))), H = 40 + W * 0.22;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "digits 1 to 8 on a line; 1, 2, 7, 8 outside, 3, 4, 5, 6 inside; arcs join 1-8, 2-7, 3-6, 4-5, each adding to 9" }, lineHost);
+    const X = k => 24 + (k - 1) * (W - 48) / 7, Y = H - 30;
+    for (const [a, b] of [[1, 8], [2, 7], [3, 6], [4, 5]]) {
+      const mid = (X(a) + X(b)) / 2, r = (X(b) - X(a)) / 2;
+      const ry = (Y - 34) * (b - a) / 7;
+      el("path", { d: `M ${X(a)} ${Y - 16} A ${r} ${ry} 0 0 1 ${X(b)} ${Y - 16}`, fill: "none", stroke: "var(--muted)", "stroke-width": 1.5 }, svg);
+      const t = el("text", { x: mid, y: Y - 16 - ry + 14, "text-anchor": "middle", "font-size": 12, fill: "var(--muted)" }, svg); t.textContent = "9";
+    }
+    for (let k = 1; k <= 8; k++) {
+      const outer = k <= 2 || k >= 7;
+      el("circle", { cx: X(k), cy: Y, r: 15, fill: outer ? "var(--outer)" : "var(--inner)" }, svg);
+      const t = el("text", { x: X(k), y: Y + 6, "text-anchor": "middle", "font-size": 17, "font-weight": 600, fill: "#ffffff" }, svg); t.textContent = k;
+    }
+    const lo = el("text", { x: X(1.5), y: H - 4, "text-anchor": "middle", "font-size": 12, fill: "var(--outer)" }, svg); lo.textContent = "1 + 2";
+    const hi = el("text", { x: X(7.5), y: H - 4, "text-anchor": "middle", "font-size": 12, fill: "var(--outer)" }, svg); hi.textContent = "7 + 8";
+    const mi = el("text", { x: X(4.5), y: H - 4, "text-anchor": "middle", "font-size": 12, fill: "var(--inner)" }, svg); mi.textContent = "3 + 4 + 5 + 6 = 18";
+  })();
+
+  // uniqueness grid
+  (() => {
+    const pairs = (s) => { const out = []; for (let i = 0; i < 4; i++) for (let j = i + 1; j < 4; j++) out.push([s[i], s[j]]); return out; };
+    const P = pairs([2, 3, 5, 7]), N = pairs([1, 4, 6, 8]);
+    const t = document.getElementById("grid");
+    let h = "<thead><tr><th></th>" + N.map(n => `<th>${n.join(" ")}</th>`).join("") + "</tr></thead><tbody>";
+    for (const p of P) {
+      h += `<tr><th>${p.join(" ")}</th>`;
+      for (const n of N) { const o = sum(p) + sum(n); h += `<td class="${o === 18 ? "hit" : ""}">${o}</td>`; }
+      h += "</tr>";
+    }
+    t.innerHTML = h + "</tbody>";
+  })();
+})();
+</script>
