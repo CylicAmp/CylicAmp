@@ -1,0 +1,255 @@
+<title>EGOR Complex Spectrum</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap">
+<style>
+/* Layout: one reading column; the zeta curve with the EGOR eigenvalues first, then the zoom on the first zero, then the tree, its matrices and the phase result. */
+:root {
+  --bg: #eef0f2; --panel: #ffffff; --ink: #1b2026; --muted: #5b6672; --line: #d3d8de; --plate: #f6f7f8; --grid: #e3e7eb;
+  --series-1: #2a78d6; --series-2: #eb6834; --series-3: #1baf7a; --surface: #ffffff;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-code: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121519; --panel: #1a1f25; --ink: #e6e9ed; --muted: #9aa5b1; --line: #2e353d; --plate: #222830; --grid: #2a3139;
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --surface: #1a1f25; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121519; --panel: #1a1f25; --ink: #e6e9ed; --muted: #9aa5b1; --line: #2e353d; --plate: #222830; --grid: #2a3139;
+  --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --surface: #1a1f25; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
+}
+main { max-width: 780px; margin: 0 auto; display: grid; gap: 20px; }
+header h1 { font-family: var(--font-display); font-weight: 700; font-size: 2.4rem; line-height: 1.05; margin: 0; text-wrap: balance; }
+header p { margin: 8px 0 0; color: var(--muted); max-width: 64ch; }
+.credit { font-size: 0.85rem; color: var(--muted); }
+.credit code { overflow-wrap: anywhere; word-break: break-all; }
+main > *, .panel > * { min-width: 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; display: grid; gap: 12px; min-width: 0; }
+.panel h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.08em; margin: 0; color: var(--muted); }
+.panel p { margin: 0; max-width: 66ch; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.fact { display: grid; gap: 2px; min-width: 0; }
+.fact b { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.fact span { font-family: var(--font-code); font-size: 1.05rem; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.chart { position: relative; min-width: 0; }
+.chart svg { width: 100%; height: auto; display: block; }
+.chart text { fill: var(--muted); font-family: var(--font-body); font-size: 11px; }
+.chart .lbl { fill: var(--ink); font-size: 11px; font-weight: 500; }
+.tip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 4px;
+  padding: 4px 8px; font-family: var(--font-code); font-size: 0.8rem; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.key { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; color: var(--muted); }
+.key i { display: inline-block; width: 18px; height: 3px; vertical-align: middle; margin-right: 6px; border-radius: 2px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; font-variant-numeric: tabular-nums; min-width: 100%; }
+th, td { text-align: right; padding: 6px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-weight: 600; color: var(--muted); font-size: 0.82rem; }
+td { font-family: var(--font-code); font-size: 0.92rem; }
+td:first-child, th:first-child { text-align: left; font-family: var(--font-body); }
+.mats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.mat { background: var(--plate); border-radius: 4px; padding: 10px 12px; min-width: 0; overflow-x: auto; }
+.mat b { display: block; font-size: 0.8rem; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
+.mat pre { margin: 0; font-family: var(--font-code); font-size: 0.92rem; line-height: 1.5; }
+.poly { font-family: var(--font-code); background: var(--plate); border-radius: 4px; padding: 10px 12px; overflow-x: auto; white-space: nowrap; }
+ul.list { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+ul.list li { max-width: 66ch; }
+code { font-family: var(--font-code); font-size: 0.92em; }
+.note { border-left: 3px solid var(--line); padding-left: 10px; color: var(--muted); font-size: 0.92rem; }
+</style>
+
+<main>
+  <header>
+    <h1>EGOR Complex Spectrum</h1>
+    <p>The seven-vertex EGOR tree has seven real eigenvalues. Placed on the critical line as s = ½ + iλ, they can be tested against the Riemann zeta function. Each number on this page was recomputed to 40 digits in the CylicAmp repository.</p>
+    <p class="credit">EGOR is Michael Warren Song's work, computed in EGOR. The checks are in <code>math/theorems/owner_egor_tree_complex_spectrum_audit_2026_11_16.py</code>.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="h-sum">
+    <h2 id="h-sum">The result</h2>
+    <div class="facts">
+      <div class="fact"><b>Eigenvalues</b><span>0, ±6, ±4.0271, ±14.1344</span></div>
+      <div class="fact"><b>Largest</b><span>14.1344384835</span></div>
+      <div class="fact"><b>First zeta zero</b><span>14.1347251417</span></div>
+      <div class="fact"><b>Gap</b><span>0.000287</span></div>
+      <div class="fact"><b>|ζ| at the largest</b><span>0.000227</span></div>
+    </div>
+    <p>The largest eigenvalue sits 0.000287 below the first zero. The slope of |ζ| there is 0.793, and 0.793 × 0.000287 = 0.000227: the small value is the distance to the zero times the slope. The other eigenvalues sit where |ζ| is 0.62 and 0.90.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h-curve">
+    <h2 id="h-curve">|ζ(½ + it)| from t = 0 to 16</h2>
+    <div class="key">
+      <span><i style="background: var(--series-1)"></i>|ζ(½ + it)|</span>
+      <span><i style="background: var(--series-2)"></i>EGOR eigenvalues</span>
+      <span><i style="background: var(--series-3)"></i>first zero</span>
+    </div>
+    <div class="chart" id="c-main"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-zoom">
+    <h2 id="h-zoom">Close up: the first zero</h2>
+    <div class="chart" id="c-zoom"></div>
+    <p>Near the zero, |ζ| rises in a straight line on each side. The EGOR eigenvalue lands on that line at 0.000227.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>t</th><th>|ζ(½ + it)|</th></tr></thead>
+        <tbody>
+          <tr><td>14.134438483529 (EGOR)</td><td>0.0002273605913</td></tr>
+          <tr><td>6 (EGOR)</td><td>0.9037102757</td></tr>
+          <tr><td>4.027114196957 (EGOR)</td><td>0.6163784456</td></tr>
+          <tr><td>0 (EGOR)</td><td>1.4603545088</td></tr>
+          <tr><td>14.134725141735 (first zero)</td><td>0</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-tree">
+    <h2 id="h-tree">The tree and its block</h2>
+    <p>The tree splits into two classes of 3 and 4 vertices, so its adjacency matrix is [[0, B], [Bᵀ, 0]]. The squared eigenvalues are the eigenvalues of B·Bᵀ.</p>
+    <div class="chart" id="c-tree"></div>
+    <div class="mats">
+      <div class="mat"><b>B</b><pre>3  3  9  9
+6  0  0  0
+0  0  0  6</pre></div>
+      <div class="mat"><b>B · Bᵀ</b><pre>180  18  54
+ 18  36   0
+ 54   0  36</pre></div>
+    </div>
+    <div class="poly">det(xI − B·Bᵀ) = (x − 36)(x² − 216x + 3240)</div>
+    <div class="poly">det(λI − A) = λ (λ² − 36)(λ⁴ − 216λ² + 3240)</div>
+    <p class="note">The tree is drawn as B gives it. The EGOR edge list itself is not in the repository yet. With it, the weights 3, 3, 9, 9, 6, 6 can be confirmed.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h-phase">
+    <h2 id="h-phase">Complex form and edge phases</h2>
+    <ul class="list">
+      <li>H = [[0, iB], [−iBᵀ, 0]] is Hermitian. It equals the real matrix turned by diag(1, 1, 1, −i, −i, −i, −i), so it has the same seven eigenvalues.</li>
+      <li>Any complex phases on the six edges leave the polynomial unchanged. The repository checks 20 random draws. On a tree each phase can be moved onto a vertex and cancelled, because every pair of vertices has exactly one path between them.</li>
+      <li>This is a known fact about gain graphs: a connected gain graph has the plain graph's spectrum exactly when it is balanced, and a tree is always balanced (N. Reff, arXiv 1110.4554). Changing the spectrum with phases needs a cycle.</li>
+    </ul>
+  </section>
+
+  <section class="panel" aria-labelledby="h-next">
+    <h2 id="h-next">Where it goes next</h2>
+    <ul class="list">
+      <li><b>Spectral route.</b> A defined sequence of EGOR graphs or operators, their characteristic polynomials, and whether their spectra keep a stable relation to the zeta ordinates.</li>
+      <li><b>Dirichlet-series route.</b> The finite-sieve Dirichlet series carried into the complex plane, with its zeros and poles, and bounds that hold as the sieve cutoff grows.</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+const DATA = {"main": [[0.0, 1.460355], [0.04, 1.455998], [0.08, 1.443181], [0.12, 1.422618], [0.16, 1.395384], [0.2, 1.362771], [0.24, 1.326144], [0.28, 1.286817], [0.32, 1.245965], [0.36, 1.204582], [0.4, 1.163459], [0.44, 1.123201], [0.48, 1.084244], [0.52, 1.046881], [0.56, 1.011297], [0.6, 0.977587], [0.64, 0.945785], [0.68, 0.915875], [0.72, 0.887812], [0.76, 0.861526], [0.8, 0.836938], [0.84, 0.813959], [0.88, 0.792496], [0.92, 0.772459], [0.96, 0.753757], [1.0, 0.736305], [1.04, 0.720021], [1.08, 0.704827], [1.12, 0.690651], [1.16, 0.677425], [1.2, 0.665085], [1.24, 0.653574], [1.28, 0.642837], [1.32, 0.632824], [1.36, 0.623489], [1.4, 0.614789], [1.44, 0.606686], [1.48, 0.599141], [1.52, 0.592123], [1.56, 0.585599], [1.6, 0.579541], [1.64, 0.573923], [1.68, 0.56872], [1.72, 0.563909], [1.76, 0.55947], [1.8, 0.555382], [1.84, 0.551628], [1.88, 0.548192], [1.92, 0.545056], [1.96, 0.542208], [2.0, 0.539633], [2.04, 0.537319], [2.08, 0.535255], [2.12, 0.533429], [2.16, 0.531831], [2.2, 0.530452], [2.24, 0.529283], [2.28, 0.528316], [2.32, 0.527543], [2.36, 0.526957], [2.4, 0.526551], [2.44, 0.526319], [2.48, 0.526254], [2.52, 0.526352], [2.56, 0.526606], [2.6, 0.527013], [2.64, 0.527567], [2.68, 0.528264], [2.72, 0.5291], [2.76, 0.530071], [2.8, 0.531174], [2.84, 0.532404], [2.88, 0.53376], [2.92, 0.535238], [2.96, 0.536834], [3.0, 0.538547], [3.04, 0.540374], [3.08, 0.542312], [3.12, 0.544359], [3.16, 0.546513], [3.2, 0.548771], [3.24, 0.551133], [3.28, 0.553596], [3.32, 0.556158], [3.36, 0.558818], [3.4, 0.561574], [3.44, 0.564425], [3.48, 0.567368], [3.52, 0.570404], [3.56, 0.57353], [3.6, 0.576746], [3.64, 0.58005], [3.68, 0.583441], [3.72, 0.586918], [3.76, 0.59048], [3.8, 0.594126], [3.84, 0.597856], [3.88, 0.601667], [3.92, 0.60556], [3.96, 0.609533], [4.0, 0.613586], [4.04, 0.617718], [4.08, 0.621928], [4.12, 0.626216], [4.16, 0.63058], [4.2, 0.635021], [4.24, 0.639537], [4.28, 0.644127], [4.32, 0.648792], [4.36, 0.65353], [4.4, 0.658342], [4.44, 0.663225], [4.48, 0.66818], [4.52, 0.673207], [4.56, 0.678304], [4.6, 0.683471], [4.64, 0.688707], [4.68, 0.694012], [4.72, 0.699386], [4.76, 0.704827], [4.8, 0.710335], [4.84, 0.71591], [4.88, 0.721551], [4.92, 0.727257], [4.96, 0.733028], [5.0, 0.738863], [5.04, 0.744763], [5.08, 0.750725], [5.12, 0.756749], [5.16, 0.762836], [5.2, 0.768983], [5.24, 0.775192], [5.28, 0.78146], [5.32, 0.787787], [5.36, 0.794174], [5.4, 0.800618], [5.44, 0.807119], [5.48, 0.813676], [5.52, 0.82029], [5.56, 0.826958], [5.6, 0.833681], [5.64, 0.840457], [5.68, 0.847286], [5.72, 0.854167], [5.76, 0.861099], [5.8, 0.868081], [5.84, 0.875112], [5.88, 0.882191], [5.92, 0.889318], [5.96, 0.896491], [6.0, 0.90371], [6.04, 0.910974], [6.08, 0.91828], [6.12, 0.92563], [6.16, 0.93302], [6.2, 0.940451], [6.24, 0.947921], [6.28, 0.955429], [6.32, 0.962974], [6.36, 0.970554], [6.4, 0.978169], [6.44, 0.985817], [6.48, 0.993496], [6.52, 1.001206], [6.56, 1.008946], [6.6, 1.016713], [6.64, 1.024506], [6.68, 1.032324], [6.72, 1.040165], [6.76, 1.048029], [6.8, 1.055913], [6.84, 1.063815], [6.88, 1.071735], [6.92, 1.07967], [6.96, 1.087618], [7.0, 1.095579], [7.04, 1.103551], [7.08, 1.11153], [7.12, 1.119517], [7.16, 1.127508], [7.2, 1.135503], [7.24, 1.143498], [7.28, 1.151492], [7.32, 1.159484], [7.36, 1.16747], [7.4, 1.17545], [7.44, 1.18342], [7.48, 1.191379], [7.52, 1.199325], [7.56, 1.207254], [7.6, 1.215166], [7.64, 1.223057], [7.68, 1.230926], [7.72, 1.23877], [7.76, 1.246586], [7.8, 1.254372], [7.84, 1.262126], [7.88, 1.269845], [7.92, 1.277526], [7.96, 1.285167], [8.0, 1.292765], [8.04, 1.300318], [8.08, 1.307823], [8.12, 1.315276], [8.16, 1.322676], [8.2, 1.330019], [8.24, 1.337303], [8.28, 1.344524], [8.32, 1.35168], [8.36, 1.358768], [8.4, 1.365784], [8.44, 1.372725], [8.48, 1.37959], [8.52, 1.386373], [8.56, 1.393073], [8.6, 1.399685], [8.64, 1.406207], [8.68, 1.412636], [8.72, 1.418968], [8.76, 1.425199], [8.8, 1.431327], [8.84, 1.437348], [8.88, 1.443259], [8.92, 1.449056], [8.96, 1.454735], [9.0, 1.460293], [9.04, 1.465728], [9.08, 1.471034], [9.12, 1.476208], [9.16, 1.481248], [9.2, 1.486148], [9.24, 1.490906], [9.28, 1.495518], [9.32, 1.499979], [9.36, 1.504287], [9.4, 1.508438], [9.44, 1.512427], [9.48, 1.516251], [9.52, 1.519907], [9.56, 1.523389], [9.6, 1.526696], [9.64, 1.529821], [9.68, 1.532763], [9.72, 1.535516], [9.76, 1.538078], [9.8, 1.540443], [9.84, 1.542609], [9.88, 1.544571], [9.92, 1.546325], [9.96, 1.547867], [10.0, 1.549195], [10.04, 1.550302], [10.08, 1.551187], [10.12, 1.551844], [10.16, 1.55227], [10.2, 1.552461], [10.24, 1.552413], [10.28, 1.552123], [10.32, 1.551586], [10.36, 1.550798], [10.4, 1.549756], [10.44, 1.548456], [10.48, 1.546894], [10.52, 1.545066], [10.56, 1.542969], [10.6, 1.540599], [10.64, 1.537951], [10.68, 1.535024], [10.72, 1.531812], [10.76, 1.528313], [10.8, 1.524522], [10.84, 1.520436], [10.88, 1.516052], [10.92, 1.511367], [10.96, 1.506376], [11.0, 1.501078], [11.04, 1.495467], [11.08, 1.489541], [11.12, 1.483298], [11.16, 1.476733], [11.2, 1.469844], [11.24, 1.462627], [11.28, 1.45508], [11.32, 1.447201], [11.36, 1.438985], [11.4, 1.430431], [11.44, 1.421536], [11.48, 1.412296], [11.52, 1.402711], [11.56, 1.392777], [11.6, 1.382491], [11.64, 1.371853], [11.68, 1.360859], [11.72, 1.349508], [11.76, 1.337797], [11.8, 1.325725], [11.84, 1.31329], [11.88, 1.30049], [11.92, 1.287325], [11.96, 1.273791], [12.0, 1.259889], [12.04, 1.245616], [12.08, 1.230973], [12.12, 1.215957], [12.16, 1.200568], [12.2, 1.184805], [12.24, 1.168668], [12.28, 1.152155], [12.32, 1.135268], [12.36, 1.118006], [12.4, 1.100367], [12.44, 1.082354], [12.48, 1.063965], [12.52, 1.045202], [12.56, 1.026064], [12.6, 1.006553], [12.64, 0.986668], [12.68, 0.966412], [12.72, 0.945786], [12.76, 0.924789], [12.8, 0.903425], [12.84, 0.881694], [12.88, 0.859599], [12.92, 0.837141], [12.96, 0.814323], [13.0, 0.791146], [13.04, 0.767613], [13.08, 0.743727], [13.12, 0.71949], [13.16, 0.694906], [13.2, 0.669978], [13.24, 0.644709], [13.28, 0.619102], [13.32, 0.593162], [13.36, 0.566891], [13.4, 0.540295], [13.44, 0.513378], [13.48, 0.486143], [13.52, 0.458597], [13.56, 0.430742], [13.6, 0.402585], [13.64, 0.374131], [13.68, 0.345385], [13.72, 0.316353], [13.76, 0.28704], [13.8, 0.257453], [13.84, 0.227598], [13.88, 0.197481], [13.92, 0.167109], [13.96, 0.136488], [14.0, 0.105626], [14.04, 0.07453], [14.08, 0.043207], [14.12, 0.011665], [14.16, 0.020088], [14.2, 0.052045], [14.24, 0.084198], [14.28, 0.116537], [14.32, 0.149054], [14.36, 0.181741], [14.4, 0.214589], [14.44, 0.247588], [14.48, 0.28073], [14.52, 0.314004], [14.56, 0.347401], [14.6, 0.380912], [14.64, 0.414525], [14.68, 0.448232], [14.72, 0.482021], [14.76, 0.515881], [14.8, 0.549803], [14.84, 0.583775], [14.88, 0.617787], [14.92, 0.651826], [14.96, 0.685882], [15.0, 0.719942], [15.04, 0.753996], [15.08, 0.788032], [15.12, 0.822036], [15.16, 0.855998], [15.2, 0.889905], [15.24, 0.923744], [15.28, 0.957504], [15.32, 0.99117], [15.36, 1.024732], [15.4, 1.058174], [15.44, 1.091486], [15.48, 1.124652], [15.52, 1.157661], [15.56, 1.190499], [15.6, 1.223153], [15.64, 1.255608], [15.68, 1.287852], [15.72, 1.319871], [15.76, 1.351651], [15.8, 1.383178], [15.84, 1.414439], [15.88, 1.445419], [15.92, 1.476106], [15.96, 1.506484], [16.0, 1.536539]], "zoom": [[14.133, 0.00136812], [14.133025, 0.001348297], [14.13305, 0.001328473], [14.133075, 0.00130865], [14.1331, 0.001288826], [14.133125, 0.001269002], [14.13315, 0.001249178], [14.133175, 0.001229354], [14.1332, 0.00120953], [14.133225, 0.001189706], [14.13325, 0.001169882], [14.133275, 0.001150058], [14.1333, 0.001130234], [14.133325, 0.001110409], [14.13335, 0.001090585], [14.133375, 0.00107076], [14.1334, 0.001050936], [14.133425, 0.001031111], [14.13345, 0.001011286], [14.133475, 0.000991461], [14.1335, 0.000971636], [14.133525, 0.000951811], [14.13355, 0.000931986], [14.133575, 0.000912161], [14.1336, 0.000892335], [14.133625, 0.00087251], [14.13365, 0.000852685], [14.133675, 0.000832859], [14.1337, 0.000813033], [14.133725, 0.000793208], [14.13375, 0.000773382], [14.133775, 0.000753556], [14.1338, 0.00073373], [14.133825, 0.000713904], [14.13385, 0.000694078], [14.133875, 0.000674252], [14.1339, 0.000654425], [14.133925, 0.000634599], [14.13395, 0.000614773], [14.133975, 0.000594946], [14.134, 0.000575119], [14.134025, 0.000555293], [14.13405, 0.000535466], [14.134075, 0.000515639], [14.1341, 0.000495812], [14.134125, 0.000475985], [14.13415, 0.000456158], [14.134175, 0.000436331], [14.1342, 0.000416504], [14.134225, 0.000396676], [14.13425, 0.000376849], [14.134275, 0.000357021], [14.1343, 0.000337194], [14.134325, 0.000317366], [14.13435, 0.000297538], [14.134375, 0.000277711], [14.1344, 0.000257883], [14.134425, 0.000238055], [14.13445, 0.000218227], [14.134475, 0.000198398], [14.1345, 0.00017857], [14.134525, 0.000158742], [14.13455, 0.000138913], [14.134575, 0.000119085], [14.1346, 9.9256e-05], [14.134625, 7.9428e-05], [14.13465, 5.9599e-05], [14.134675, 3.977e-05], [14.1347, 1.9941e-05], [14.134725, 1.12e-07], [14.13475, 1.9717e-05], [14.134775, 3.9546e-05], [14.1348, 5.9375e-05], [14.134825, 7.9204e-05], [14.13485, 9.9034e-05], [14.134875, 0.000118863], [14.1349, 0.000138693], [14.134925, 0.000158522], [14.13495, 0.000178352], [14.134975, 0.000198182], [14.135, 0.000218012], [14.135025, 0.000237842], [14.13505, 0.000257672], [14.135075, 0.000277502], [14.1351, 0.000297332], [14.135125, 0.000317162], [14.13515, 0.000336993], [14.135175, 0.000356823], [14.1352, 0.000376653], [14.135225, 0.000396484], [14.13525, 0.000416315], [14.135275, 0.000436146], [14.1353, 0.000455976], [14.135325, 0.000475807], [14.13535, 0.000495638], [14.135375, 0.000515469], [14.1354, 0.000535301], [14.135425, 0.000555132], [14.13545, 0.000574963], [14.135475, 0.000594795], [14.1355, 0.000614626], [14.135525, 0.000634458], [14.13555, 0.000654289], [14.135575, 0.000674121], [14.1356, 0.000693953], [14.135625, 0.000713785], [14.13565, 0.000733617], [14.135675, 0.000753449], [14.1357, 0.000773281], [14.135725, 0.000793113], [14.13575, 0.000812945], [14.135775, 0.000832778], [14.1358, 0.00085261], [14.135825, 0.000872443], [14.13585, 0.000892275], [14.135875, 0.000912108], [14.1359, 0.000931941], [14.135925, 0.000951774], [14.13595, 0.000971607], [14.135975, 0.00099144], [14.136, 0.001011273], [14.136025, 0.001031106], [14.13605, 0.001050939], [14.136075, 0.001070773], [14.1361, 0.001090606], [14.136125, 0.00111044], [14.13615, 0.001130273], [14.136175, 0.001150107], [14.1362, 0.001169941], [14.136225, 0.001189775], [14.13625, 0.001209609], [14.136275, 0.001229443], [14.1363, 0.001249277], [14.136325, 0.001269111], [14.13635, 0.001288945], [14.136375, 0.00130878], [14.1364, 0.001328614], [14.136425, 0.001348449], [14.13645, 0.001368283], [14.136475, 0.001388118], [14.1365, 0.001407953]], "lam": [4.027114196956658, 6.0, 14.134438483529161], "g1": 14.134725141734695};
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (name, attrs, parent) => { const e = document.createElementNS(NS, name); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+  const fmt = (v, d) => Number(v).toFixed(d);
+
+  function lineChart(host, pts, opt) {
+    host.innerHTML = "";
+    const W = Math.max(300, Math.round(host.clientWidth || 640)), H = Math.round(Math.min(300, Math.max(220, W * 0.45))), m = { l: 56, r: 16, t: 28, b: 34 };
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": opt.aria });
+    host.appendChild(svg);
+    const x = t => m.l + (t - opt.x0) / (opt.x1 - opt.x0) * (W - m.l - m.r);
+    const y = v => H - m.b - (v - 0) / opt.y1 * (H - m.t - m.b);
+    for (const v of opt.yt) {
+      el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: "var(--grid)", "stroke-width": 1 }, svg);
+      const tx = el("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end" }, svg); tx.textContent = opt.yf(v);
+    }
+    for (const t of opt.xt) {
+      const tx = el("text", { x: x(t), y: H - m.b + 18, "text-anchor": "middle" }, svg); tx.textContent = opt.xf(t);
+    }
+    const ax = el("text", { x: W - m.r, y: H - 4, "text-anchor": "end" }, svg); ax.textContent = "t";
+    for (const mk of opt.marks) {
+      el("line", { x1: x(mk.t), x2: x(mk.t), y1: m.t - 6, y2: H - m.b, stroke: `var(${mk.c})`, "stroke-width": 1.5, "stroke-dasharray": mk.dash || "4 3" }, svg);
+      if (mk.label) { const tx = el("text", { x: x(mk.t) + (mk.dx || 4), y: m.t - 10 + (mk.dy || 0), class: "lbl", "text-anchor": mk.anchor || "start" }, svg); tx.textContent = mk.label; }
+    }
+    const d = pts.map((p, i) => (i ? "L" : "M") + x(p[0]).toFixed(2) + " " + y(p[1]).toFixed(2)).join(" ");
+    el("path", { d, fill: "none", stroke: "var(--series-1)", "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+    for (const dot of opt.dots || []) el("circle", { cx: x(dot.t), cy: y(dot.v), r: 4.5, fill: `var(${dot.c})`, stroke: "var(--surface)", "stroke-width": 2 }, svg);
+    if (opt.extra) opt.extra(svg, x, y);
+    const cross = el("line", { y1: m.t, y2: H - m.b, stroke: "var(--muted)", "stroke-width": 1, opacity: 0 }, svg);
+    const hit = el("rect", { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent" }, svg);
+    const tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true; host.appendChild(tip);
+    const move = ev => {
+      const r = svg.getBoundingClientRect(), px = (ev.clientX - r.left) / r.width * W;
+      const t = opt.x0 + (px - m.l) / (W - m.l - m.r) * (opt.x1 - opt.x0);
+      let best = pts[0]; for (const p of pts) if (Math.abs(p[0] - t) < Math.abs(best[0] - t)) best = p;
+      cross.setAttribute("x1", x(best[0])); cross.setAttribute("x2", x(best[0])); cross.setAttribute("opacity", 1);
+      tip.hidden = false; tip.textContent = `t = ${fmt(best[0], opt.td)}   |ζ| = ${opt.vf(best[1])}`;
+      const left = Math.min(r.width - tip.offsetWidth - 4, Math.max(4, x(best[0]) / W * r.width + 10));
+      tip.style.left = left + "px"; tip.style.top = "4px";
+    };
+    hit.addEventListener("pointermove", move);
+    hit.addEventListener("pointerleave", () => { tip.hidden = true; cross.setAttribute("opacity", 0); });
+  }
+
+  const [l1, l2, l3] = DATA.lam;
+  function renderAll() {
+  const zAt = t => { let b = DATA.main[0]; for (const p of DATA.main) if (Math.abs(p[0] - t) < Math.abs(b[0] - t)) b = p; return b[1]; };
+  lineChart(document.getElementById("c-main"), DATA.main, {
+    aria: "|zeta(1/2 + it)| for t from 0 to 16, with the EGOR eigenvalues 4.027, 6 and 14.134 and the first zero at 14.1347 marked",
+    x0: 0, x1: 16, y1: 1.6, xt: [0, 2, 4, 6, 8, 10, 12, 14, 16], yt: [0, 0.4, 0.8, 1.2, 1.6],
+    xf: t => String(t), yf: v => v.toFixed(1), td: 2, vf: v => v.toFixed(4),
+    marks: [
+      { t: l1, c: "--series-2", label: "4.027", anchor: "end", dx: -4 },
+      { t: l2, c: "--series-2", label: "6" },
+      { t: l3, c: "--series-2", label: "14.1344 · zero 14.1347", anchor: "end", dx: -4 },
+      { t: DATA.g1, c: "--series-3", dash: "1 0" },
+    ],
+    dots: [ { t: 0, v: 1.4603545088, c: "--series-2" }, { t: l1, v: 0.6163784456, c: "--series-2" }, { t: l2, v: 0.9037102757, c: "--series-2" }, { t: l3, v: 0.0002273606, c: "--series-2" } ],
+  });
+
+  lineChart(document.getElementById("c-zoom"), DATA.zoom, {
+    aria: "Close-up of |zeta(1/2 + it)| from t = 14.1330 to 14.1365: the curve falls to zero at 14.134725, and the EGOR eigenvalue 14.134438 lies on it at 0.000227",
+    x0: 14.1330, x1: 14.1365, y1: 0.0015, xt: [14.133, 14.134, 14.135, 14.136], yt: [0, 0.0005, 0.001, 0.0015],
+    xf: t => t.toFixed(3), yf: v => v.toFixed(4), td: 6, vf: v => v.toFixed(7),
+    marks: [
+      { t: l3, c: "--series-2", label: "EGOR 14.134438", anchor: "end", dx: -4 },
+      { t: DATA.g1, c: "--series-3", dash: "1 0", label: "zero 14.134725", dx: 4 },
+    ],
+    dots: [ { t: l3, v: 0.0002273606, c: "--series-2" }, { t: DATA.g1, v: 0, c: "--series-3" } ],
+    extra: (svg, x, y) => {
+      const yy = y(0.0006);
+      el("line", { x1: x(l3), x2: x(DATA.g1), y1: yy, y2: yy, stroke: "var(--ink)", "stroke-width": 1.2 }, svg);
+      for (const t of [l3, DATA.g1]) el("line", { x1: x(t), x2: x(t), y1: yy - 4, y2: yy + 4, stroke: "var(--ink)", "stroke-width": 1.2 }, svg);
+      const tx = el("text", { x: (x(l3) + x(DATA.g1)) / 2, y: yy - 8, "text-anchor": "middle", class: "lbl" }, svg);
+      tx.textContent = "gap 0.000287";
+      const t2 = el("text", { x: (x(l3) + x(DATA.g1)) / 2, y: yy + 18, "text-anchor": "middle" }, svg);
+      t2.textContent = "0.793 × 0.000287 = 0.000227";
+    },
+  });
+
+  // the tree as B gives it
+  {
+    const host = document.getElementById("c-tree"); host.innerHTML = "";
+    const W = Math.max(300, Math.round(host.clientWidth || 640)), H = 170, sx = W / 640;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "The tree from B: vertex a joins vertices 1, 2, 3, 4 with weights 3, 3, 9, 9; vertex b joins 1 with weight 6; vertex c joins 4 with weight 6" });
+    host.appendChild(svg);
+    const top = { a: [320 * sx, 34], b: [130 * sx, 34], c: [510 * sx, 34] };
+    const bot = { 1: [170 * sx, 136], 2: [280 * sx, 136], 3: [390 * sx, 136], 4: [500 * sx, 136] };
+    const edges = [["a", 1, 3], ["a", 2, 3], ["a", 3, 9], ["a", 4, 9], ["b", 1, 6], ["c", 4, 6]];
+    for (const [u, v, w] of edges) {
+      const [x1, y1] = top[u], [x2, y2] = bot[v];
+      el("line", { x1, y1, x2, y2, stroke: "var(--series-1)", "stroke-width": 2 }, svg);
+      const tx = el("text", { x: x1 + (x2 - x1) * 0.62 + 6, y: y1 + (y2 - y1) * 0.62, class: "lbl" }, svg); tx.textContent = String(w);
+    }
+    for (const [k, [cx, cy]] of [...Object.entries(top), ...Object.entries(bot)]) {
+      el("circle", { cx, cy, r: 13, fill: "var(--panel)", stroke: "var(--ink)", "stroke-width": 1.5 }, svg);
+      const tx = el("text", { x: cx, y: cy + 4, "text-anchor": "middle", class: "lbl" }, svg); tx.textContent = k;
+    }
+  }
+  }
+  renderAll();
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderAll, 150); });
+})();
+</script>
