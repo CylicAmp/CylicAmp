@@ -1,0 +1,155 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\title{The refinement rule in reverse:\\ a shortest unary word certifying area and display tolerances\\ for the ellipse $\operatorname{diag}(2,3)$}
+\author{CylicAmp, I.V test case, week of November 16--23, 2026}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Status}
+\begin{itemize}
+\item \textbf{Proved here:} the bounds, the display bound, strict nesting, and for the three tolerances
+$\varepsilon\in\{10^{-3},10^{-4},10^{-5}\}$ both the first certified word and its minimality on the family
+$n=6\cdot2^k$.
+\item \textbf{Executed:} \texttt{verify\_selector.py} (exact rational arithmetic) reproduces every number below and writes
+\texttt{selector\_results.json}.
+\item \textbf{OPEN:} the I.V correspondence. $E_\Phi$, $C_{\rm alg}$, $H$, $\lambda$, $\mu$, the $\Phi$-field and $M^7$
+have no operational definitions, and no theorem connects them to this selector. Nothing here depends on them.
+\end{itemize}
+
+\section{Setting}
+For $n\ge 3$ let $x=\pi/n$, let $L_n=\tfrac n2\sin 2x$ be the area of the regular $n$-gon inscribed in the unit circle
+and $U_n=n\tan x$ that of the circumscribed one. As in the September 22 derivation (\texttt{math/exhaustion}),
+\[
+g_n=U_n-L_n=\frac{n\sin^3x}{\cos x}.
+\]
+The linear map $A=\operatorname{diag}(2,3)$ sends the unit circle to the ellipse with semiaxes $2,3$ and multiplies every
+area by $\det A=6$, so the two polygons' images enclose the ellipse with area gap $6g_n$.
+
+\begin{definition}[Words]
+A unary word $w=1^k$ has $C(w)=k$, and it selects $n(w)=6\cdot 2^{C(w)}$ sides. Refinement composes:
+$n(uv)=n(u)\,2^{C(v)}$ because $C(uv)=C(u)+C(v)$. The rewrite results are kept as tags: $11\mapsto 2$, $111\mapsto 3$.
+\end{definition}
+
+\section{Rational bounds}
+The addendum's bounds $\ell_n<g_n<u_n$ were not available in the repository. The bounds used are the following, with
+rationals $\pi_{\rm lo}<\pi<\pi_{\rm hi}$ taken from Machin's formula
+$\pi=16\arctan\frac15-4\arctan\frac1{239}$. Each arctangent lies between two consecutive partial sums of its
+alternating series, and 40 terms give $\pi_{\rm hi}-\pi_{\rm lo}<10^{-20}$.
+
+\begin{lemma}\label{lem:bounds}
+With $y=\pi_{\rm lo}/n$ and $z=\pi_{\rm hi}/n$, for $n\ge 6$,
+\[
+\ell_n:=n\Bigl(y-\frac{y^3}{6}\Bigr)^3\;<\;g_n\;<\;u_n:=\frac{n z^3}{1-z^2/2}.
+\]
+\end{lemma}
+\begin{proof}
+For $0<x<\sqrt2$, $\sin x\ge x-x^3/6>0$ and $x\mapsto x-x^3/6$ is increasing, while $\cos x<1$; so
+$g_n>n\sin^3x\ge n(y-y^3/6)^3$. Also $\sin x<x$ and $\cos x\ge 1-x^2/2>0$ for $0<x\le\pi/6$, and
+$x\mapsto x^3/(1-x^2/2)$ is increasing; so $g_n<n x^3/(1-x^2/2)\le u_n$.
+\end{proof}
+
+\begin{lemma}[Display]\label{lem:display}
+At 100 pixels per unit, the circumscribed outline of the ellipse lies within $300\,b^2/(2-b^2)$ pixels of the ellipse,
+where $b=10/(3n)$. This is at most $1/4$ pixel exactly when $n\ge 96$ on the family $6\cdot 2^k$.
+\end{lemma}
+\begin{proof}
+The circumscribed $n$-gon of the unit circle lies within $\sec x-1$ of the circle, and $A$ stretches distances by at
+most its largest singular value, 3. Since $\cos x\ge 1-x^2/2$, $\sec x-1\le x^2/(2-x^2)$, which increases in $x$; and
+$x=\pi/n\le b$ because $\pi<10/3$. So the error is at most $3\cdot100\cdot b^2/(2-b^2)$ pixels. At $n=96$ the bound is
+$0.181$ and at $n=48$ it is $0.725$.
+\end{proof}
+
+\begin{lemma}[Strict nesting]\label{lem:nest}
+$g_n$ is strictly decreasing in $n$ for $n\ge 6$.
+\end{lemma}
+\begin{proof}
+As a function of $x=\pi/n\in(0,\pi/6]$, $g=\pi\sin^3x/(x\cos x)$ and
+$\frac{d}{dx}\log g=3\cot x-\frac1x+\tan x$. On $(0,\pi/6]$, $\tan x<2x$, so $3\cot x>\frac{3}{2x}>\frac1x$; hence
+the derivative is positive, $g$ increases with $x$, and decreases with $n$.
+\end{proof}
+
+\section{The selector and its stopping rule}
+\begin{definition}
+For a tolerance $\varepsilon$, the row $n$ is \emph{certified} if $6u_n\le\varepsilon$ and
+$300b^2/(2-b^2)\le 1/4$; it is \emph{rejected} if $6\ell_n>\varepsilon$. The selector returns the first $k$ whose row
+$n=6\cdot2^k$ is certified. With an interface limit $k\le k_{\max}$ it returns \texttt{limit\_reached} when no
+$k\le k_{\max}$ is certified.
+\end{definition}
+
+\begin{remark}[First certified vs.\ proved minimal]
+\emph{First certified} means the selector's answer: the first $k$ whose certificate passes. It could in principle be
+later than the true first $k$ if the bounds were loose. \emph{Proved minimal} adds that every smaller $k$ is rejected,
+i.e.\ its true gap $6g_n>6\ell_n>\varepsilon$, so no shorter word meets the tolerance. By Lemma~\ref{lem:nest},
+rejecting the predecessor $n/2$ already rejects every smaller $n$ in the family. The verifier also checks each one
+directly.
+\end{remark}
+
+\begin{theorem}
+For the ellipse $\operatorname{diag}(2,3)$, 100 pixels per unit, a quarter-pixel outline tolerance and
+$n=6\cdot2^k$:
+\begin{center}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+$\varepsilon$ & predecessor $n/2$ & $6\ell_{n/2}$ & first certified $n$ & $6u_n$ & word length $k$\\
+\midrule
+$10^{-3}$ & 384 & $1.2616\times10^{-3}$ & 768 & $3.1541\times10^{-4}$ & 7\\
+$10^{-4}$ & 768 & $3.1541\times10^{-4}$ & 1{,}536 & $7.8853\times10^{-5}$ & 8\\
+$10^{-5}$ & 3{,}072 & $1.9713\times10^{-5}$ & 6{,}144 & $4.9283\times10^{-6}$ & 10\\
+\bottomrule
+\end{tabular}
+\end{center}
+In each row the certificate holds ($6u_n\le\varepsilon$), the display bound holds ($n\ge96$), and the predecessor is
+rejected ($6\ell_{n/2}>\varepsilon$). So each word is first certified and proved minimal on the family.
+\end{theorem}
+\begin{proof}
+The values are exact rationals computed by \texttt{verify\_selector.py}. They are recorded in
+\texttt{selector\_results.json} and shown here to five significant figures. Certification follows from Lemmas~\ref{lem:bounds} and~\ref{lem:display},
+rejection of the predecessor from Lemma~\ref{lem:bounds}, and minimality from Lemma~\ref{lem:nest}.
+\end{proof}
+
+\begin{remark}
+The display tolerance is never the binding one here: it holds from $n=96$ ($k=4$), while every certified row has
+$n\ge768$. The area tolerance alone sets each answer.
+\end{remark}
+
+\section{Domain}
+\begin{itemize}
+\item \textbf{The addendum's nine-mark interface ($k\le 9$):} $\varepsilon=10^{-3}$ gives $k=7$ and $10^{-4}$ gives $k=8$.
+For $10^{-5}$ it returns \texttt{limit\_reached}: the $k=9$ row ($n=3{,}072$) is \emph{rejected}, since
+$6\ell_{3072}=1.9713\times10^{-5}>10^{-5}$, so the limit is not hiding a pass.
+\item \textbf{The unrestricted unary definition} permits $k=10$, and $10^{-5}$ is first certified there, at $n=6{,}144$.
+\end{itemize}
+
+\section{Executed checks}
+\texttt{verify\_selector.py} checks the following:
+\begin{itemize}
+\item the three thresholds;
+\item every certificate and every predecessor rejection;
+\item every smaller $k$ in each row;
+\item no undecided row for $k=0,\dots,10$;
+\item all 66 splits of words of lengths $0$ to $10$, comparing direct refinement against two successive refinements in
+side count, rational bounds and decisions;
+\item the tags $11\mapsto2$ and $111\mapsto3$;
+\item the September 22 result for the unit disk (first $n$ with $g_n\le10^{-4}$ is 768);
+\item a deliberately altered result, with the $n=3072,\ \varepsilon=10^{-5}$ decision set to pass, which the verifier
+rejects.
+\end{itemize}
+
+\section*{Open}
+\begin{itemize}
+\item \textbf{I.V:} operational definitions of $E_\Phi$, $C_{\rm alg}$, $H$, $\lambda$, $\mu$, the $\Phi$-field and
+$M^7$, and a theorem connecting them to this selector.
+\item \textbf{II.I:} no accepted statement or interaction operator.
+\item \textbf{Rebirth synthesis:} $P_7$, $s$, the phases and the amplitude weights.
+\item \textbf{Vortex 9:} node coordinates, connectivity, edge weights and an update operator.
+\end{itemize}
+\end{document}
