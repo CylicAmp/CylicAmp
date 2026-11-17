@@ -1,0 +1,25 @@
+{
+  "component": "Tsirelson quantum operator bound",
+  "mathematical_status": "PROVEN",
+  "CHSH_convention": "C = A0 (x) (B0 - B1) + A1 (x) (B0 + B1)",
+  "corrected_identity": "C^2 = 4I + [A0,A1] (x) [B0,B1]",
+  "upper_bound": "||C|| <= 2 sqrt2",
+  "saturating_observables": {
+    "A0": "sigma_z",
+    "A1": "sigma_x",
+    "B0": "(sigma_z + sigma_x)/sqrt2",
+    "B1": "(sigma_x - sigma_z)/sqrt2"
+  },
+  "saturating_state": "(|00> + |11>)/sqrt2",
+  "C_explicit": "sqrt2 (sigma_z (x) sigma_z + sigma_x (x) sigma_x)",
+  "commutators": {"[A0,A1]": "2i sigma_y", "[B0,B1]": "2i sigma_y"},
+  "C_squared_explicit": "4I - 4 sigma_y (x) sigma_y",
+  "C_eigenvalues": ["2 sqrt2", "0", "0", "-2 sqrt2"],
+  "exact_expectation": "2 sqrt2",
+  "exact_operator_norm": "2 sqrt2",
+  "correction_2026_11_17": "the pasted record had [B0,B1] = -2i sigma_y and C^2 = 4I + 4 sigma_y (x) sigma_y; both signs are wrong ([B0,B1] = +2i sigma_y, C^2 = 4I - 4 sigma_y (x) sigma_y). The pasted form gives (4I + 4YY)|Phi+> = 0, against C^2|Phi+> = 8|Phi+>.",
+  "finite_mixture_lean_status": "REPORTED",
+  "quantum_lean_status": "OPEN",
+  "execution_status": "exact sympy verification run in CylicAmp (math/theorems/pasted_tsirelson_saturation_audit_2026_11_17.py); no Lean compilation executed",
+  "next_component": "Formalize the commutator identity, norm inequality, and explicit saturation witness in Lean"
+}

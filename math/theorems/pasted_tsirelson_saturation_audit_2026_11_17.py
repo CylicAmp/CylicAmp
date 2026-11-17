@@ -64,5 +64,14 @@ V = sp.Matrix([[sp.cos(b), sp.sin(b)], [sp.sin(b), -sp.cos(b)]])
 Cg = kp(Z, U - V) + kp(X, U + V)
 assert sp.simplify(Cg * Cg - 4 * sp.eye(4) - kp(Z * X - X * Z, U * V - V * U)) == zero4
 
+# the corrected component record in records/ carries the right signs
+import json  # noqa: E402
+import pathlib  # noqa: E402
+
+rec = json.loads((pathlib.Path(__file__).resolve().parents[2] / "records" / "tsirelson_component_record_2026_11_17.json").read_text())
+assert rec["commutators"] == {"[A0,A1]": "2i sigma_y", "[B0,B1]": "2i sigma_y"}
+assert rec["C_squared_explicit"] == "4I - 4 sigma_y (x) sigma_y" and rec["exact_operator_norm"] == "2 sqrt2"
+assert rec["quantum_lean_status"] == "OPEN"
+
 if __name__ == "__main__":
     print("Tsirelson saturation right (C phi = 2 sqrt2 phi, ||C|| = 2 sqrt2); sign: [B0,B1] = +2iY, C^2 = 4I - 4YY")
