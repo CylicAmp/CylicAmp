@@ -864,3 +864,21 @@ File: `math/theorems/owner_gaussian_integral_polar_2026_11_14.py`.
 
 **Checks:** all right. Each row is the one above + 111, and 111 has root 3, so the roots go up by 3: 3 6 9 three times. The chains: 3 + 3 = 6, 6 + 6 = 12; 3 × 4 = 12, 12 + 6 = 18 → 9; 3 + 1 = 4, 4 + 9 = 13 → 4. Forced by 111 = 3 × 37. The 1 and 2 marks are recorded as drawn.
 File: `math/theorems/owner_repdigit_ladder_369_path_2026_11_14.py`.
+
+## 2026-11-17 — 0|505|150|150| and the 5151 / 1515 stacks
+
+**As typed:** "0|505|150|150|" · "continue if" · "15+15=6,6,12,30" · "5151 1515 6666" · "5151 1515 5151 2727" · "5151 1515 5151 1515 3333 or 12121212=4+6=10" · "01 005 01"
+
+**Cleaned:**
+
+    0 | 505 | 150 | 150   →  roots 0, 1, 6, 6
+    15 + 15 = 30;  15 → 6, 15 → 6, 6 + 6 = 12;  12 → 3, 30 → 3   (agree, so continue)
+    5151 + 1515                  →  columns 6 6 6 6        →  6666
+    5151 + 1515 + 5151           →  columns 11 7 11 7      →  2727
+    5151 + 1515 + 5151 + 1515    →  columns 12 12 12 12    →  3333  (or 12121212 unreduced)
+    0 1 / 00 5 / 0 1              →  1, 5, 1  →  151
+
+**Process:** split the string into blocks and take their roots; test 15 + 15 two ways (roots 6 + 6 = 12, the sum 30) and continue when both give 3; stack 5151 and 1515 rows and add down each column, keeping each column's root; write the zero frame 0, 00, 0 with 1, 5, 1.
+
+**Checks:** right: 6666, 2727 (11 → 2, 7), 3333 (12 → 3) and 12121212 unreduced; 15 + 15 = 30 → 3 = 12 → 3; 151 is prime. "= 4 + 6 = 10" — what 4 and 6 are is missing (12121212's digits add to 12: four 1s, four 2s); asked. Both ways: 10 digits with zeros, 6 without, digit sum 22 → 4; 4 blocks with the 0, 3 without, block sum 805 → 4. Continued: 5 rows 8484, 6 rows 9999, 7 rows 5151 — the stack repeats every 6 rows; the even stacks are 6666, 3333, 9999.
+File: `math/theorems/owner_5151_1515_column_stack_2026_11_17.py`.
