@@ -898,3 +898,19 @@ File: `math/theorems/owner_5151_1515_column_stack_2026_11_17.py`.
 
 **Checks:** right: 12, 66, 39. The cuts of each number all keep its root (3333 → 3, 12121212 → 3, 34343434 → 1, 46464646 → 4) because 10 leaves 1 by 9. 12 + 34 = 46, so 12121212 + 34343434 = 46464646 and every cut adds the same way. Both ways: with the comma 3,333 → 336, and the comma groups of the three repeats add to 345, 811, 1156. Each repeat is its pair × 1010101 = pair × 73 × 101 × 137.
 File: `math/theorems/owner_3333_cuts_and_repeats_2026_11_17.py`.
+
+## 2026-11-17 — the sequence 12121212, 34343434, 12121212, 46464646, 12121212
+
+**As typed:** "3333=12 or 66 or 39" · "12121212=" · "34343434=" · "12121212" · "46464646=" · "12121212"
+
+**Cleaned:** the repeats in order, with 12121212 between each:
+
+    12121212 → 34343434 → 12121212 → 46464646 → 12121212
+    pair roots:     3 → 7 → 3 → 1 → 3        3 + 7 + 3 + 1 + 3 = 17 → 8
+    number roots:   3 → 1 → 3 → 4 → 3        = 14 → 5
+    single digits:  12 + 28 + 12 + 40 + 12 = 104 → 5;   pairs 48 + 136 + 48 + 184 + 48 = 464 → 5
+
+**Process:** set 12121212 between the other two repeats (the 3333 = 12 of the first line written as the repeat of 12), asking for each value.
+
+**Checks:** right, both ways: reducing each pair to its root (3333, 7777, 3333, 1111, 3333) the five add to 17 → 8; taking each whole number's root they add to 14 → 5, and the single-digit and pair cuts also give 5. They differ because a four-copy repeat has root 4 × d, not d. The handoff pasted with these lines is audited in `pasted_unified_handoff_ledger_audit_2026_11_17.py`.
+File: `math/theorems/pasted_unified_handoff_ledger_audit_2026_11_17.py`.
