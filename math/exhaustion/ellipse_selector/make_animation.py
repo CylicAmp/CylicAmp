@@ -27,7 +27,7 @@ assert th[EPS]["first_certified_n"] == B["n"] and th[EPS]["preceding_n"] == A["n
 FREQS = [396, 417, 432, 528, 639, 741, 852, 963]          # recorded labels, kept as given
 
 SCALE = 100                                              # pixels per unit, as in the display tolerance
-PW, PH = 520, 860                                        # one panel
+PW, PH = 520, 900                                        # one panel
 
 
 def polygon_path(n, cx, cy):
