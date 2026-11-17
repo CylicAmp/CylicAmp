@@ -882,3 +882,19 @@ File: `math/theorems/owner_repdigit_ladder_369_path_2026_11_14.py`.
 
 **Checks:** right: 6666, 2727 (11 → 2, 7), 3333 (12 → 3) and 12121212 unreduced; 15 + 15 = 30 → 3 = 12 → 3; 151 is prime. "= 4 + 6 = 10" — what 4 and 6 are is missing (12121212's digits add to 12: four 1s, four 2s); asked. Both ways: 10 digits with zeros, 6 without, digit sum 22 → 4; 4 blocks with the 0, 3 without, block sum 805 → 4. Continued: 5 rows 8484, 6 rows 9999, 7 rows 5151 — the stack repeats every 6 rows; the even stacks are 6666, 3333, 9999.
 File: `math/theorems/owner_5151_1515_column_stack_2026_11_17.py`.
+
+## 2026-11-17 — 3333 = 12 or 66 or 39, and 12121212, 34343434, 46464646
+
+**As typed:** "3333=12 or 66 or 39" · "12121212=" · "34343434=" · "46464646="
+
+**Cleaned:**
+
+    3333  →  3 + 3 + 3 + 3 = 12   or   33 + 33 = 66   or   3 + 3 + 33 = 39
+    12121212  →  singles 12,  pairs 48,  (1 + 2 + 12) + (1 + 2 + 12) = 30,  halves 2424,  commas 345
+    34343434  →  singles 28,  pairs 136,  41 + 41 = 82,  halves 6868,  commas 811
+    46464646  →  singles 40,  pairs 184,  56 + 56 = 112,  halves 9292,  commas 1156
+
+**Process:** cut the number into pieces three ways (single digits, pairs, two singles and a pair) and add the pieces; asked for the same on the three 8-digit repeats.
+
+**Checks:** right: 12, 66, 39. The cuts of each number all keep its root (3333 → 3, 12121212 → 3, 34343434 → 1, 46464646 → 4) because 10 leaves 1 by 9. 12 + 34 = 46, so 12121212 + 34343434 = 46464646 and every cut adds the same way. Both ways: with the comma 3,333 → 336, and the comma groups of the three repeats add to 345, 811, 1156. Each repeat is its pair × 1010101 = pair × 73 × 101 × 137.
+File: `math/theorems/owner_3333_cuts_and_repeats_2026_11_17.py`.
