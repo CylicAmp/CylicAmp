@@ -914,3 +914,10 @@ File: `math/theorems/owner_3333_cuts_and_repeats_2026_11_17.py`.
 
 **Checks:** right, both ways: reducing each pair to its root (3333, 7777, 3333, 1111, 3333) the five add to 17 → 8; taking each whole number's root they add to 14 → 5, and the single-digit and pair cuts also give 5. They differ because a four-copy repeat has root 4 × d, not d. The handoff pasted with these lines is audited in `pasted_unified_handoff_ledger_audit_2026_11_17.py`.
 File: `math/theorems/pasted_unified_handoff_ledger_audit_2026_11_17.py`.
+
+## 2026-11-18 — 142856
+
+**As typed:** "142856" · "work i did"
+
+**Checks:** the owner's work on 142856 is not in the repo, the removed message record, or Google Drive — asked for. The number itself: 142856 = 142857 − 1 = 2³ × 7 × 2551 (142857 is 1/7's repeating block); 7 × 142856 = 999992; digits add to 26 → 8; by 37 it leaves 36 (−1), since 37 divides 142857; reversed, 658241 = 71 × 73 × 127.
+File: `math/theorems/owner_142856_2026_11_18.py`.
