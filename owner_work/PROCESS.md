@@ -921,3 +921,26 @@ File: `math/theorems/pasted_unified_handoff_ledger_audit_2026_11_17.py`.
 
 **Checks:** the owner's work on 142856 is not in the repo, the removed message record, or Google Drive — asked for. The number itself: 142856 = 142857 − 1 = 2³ × 7 × 2551 (142857 is 1/7's repeating block); 7 × 142856 = 999992; digits add to 26 → 8; by 37 it leaves 36 (−1), since 37 divides 142857; reversed, 658241 = 71 × 73 × 127.
 File: `math/theorems/owner_142856_2026_11_18.py`.
+
+## 2026-11-19 — 191 in the drip, and 167 → 358 → 429
+
+**Asked:** the owner's work on 191, the drip first.
+
+**The drip on 191** (each digit against every ordering, the #228 shape):
+
+    length 2:   1 → 19, 91     9 → 19, 91     1 1 → 11
+    length 3:   1 → 191, 119, 911     9 → 191, 119, 911
+    191 → 911 → 119 → 191 is one turn of the digits; each turn is ×10 by 37:  6 → 23 → 8, the one orbit TESLA
+
+**Where 191 grows in the drip on 0.25 (2026-10-13, through the recursion loop):**
+
+    4 × 23 = 92  →  92 − 2 = 90  →  90 − 9 = 81
+    23 + 66 = 89  →  137-map  →  20  →  20 + 90 = 110
+    81 + 110 = 191
+    then  167 + 191 = 358,   153 + 191 = 344  →  85 + 344 = 429,   2 × 191 + 1 = 383,   191 + 193 = 384
+
+**The sequence 167 → 358 → 429 (pasted analysis):** steps 191 and 71 (right); 429 × 358/167 = 153582/167, 429 × 429/358 = 184041/358, the affine next term 86980/191 = 429 + 71 × 71/191, and 358 × 358 − 167 × 429 = 56521 = 29 × 1949 (all right); stepping down by 120 each time gives 191 → 71 → −49 and 380 next.
+
+**Checks:** right: 191 is prime, twin with 193, Sophie Germain (383); 911 prime; 119 = 7 × 17; 91 = 7 × 13. In the 0.25 record 358 is built as 167 + 191 and 429 as 85 + 153 + 191; that record holds 467 of the 900 three-digit numbers, so the fact is how each was built, not that it appears. The other 191 files (the walk 121 212 191 919, 191 1919 19191, 191 + 9 = 200, the 191 ↔ 137 bridge, 19 → 191, UCU) are listed in the file and re-run there.
+File: `math/theorems/owner_191_drip_and_sequence_167_358_429_2026_11_19.py`.
+

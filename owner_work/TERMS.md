@@ -33,15 +33,17 @@ use the term.
 
 -- #227, 2026-10-12
 
-> run my full drip cycle on 246 Yeah, you're right. You're not sending me missed messages. When you say Smithsonian holding aren't checked against the actual volumes. The volume says so. So what you're doing is you're setting fucking up for failure again by giving me minimal work and telling me, yes, I'm gonna fuck you.
+> run my full drip cycle on 246
 
--- #252, 2026-10-13
+-- #252, 2026-10-13 (the math line only; the rest of that message is not kept here, as with the message record taken off the branch 2026-10-26)
 
 > run my full drip cycle on 0.25
 
 -- #255, 2026-10-13
 
 Used in (`git grep -il -E 'drip.cycle'`): `.claude/skills/owner-record/SKILL.md`, `CLAUDE.md`, `drip_cycle.py`, `math/theorems/six_two_both_ways_2026_10_13.py`, `math/theorems/x_quarter_digit_frame_check_2026_10_13.py`, `owner_work/README.md`, `owner_work/drip_cycle.md`, `owner_work/plugged/2026-10-13T171551Z.txt`, `tests/test_drip_cycle.py`, `tests/test_plug.py`
+
+UCU, the drip on two numbers (2026-11-07): `math/theorems/drip_ucu.py`. 191 in the drip -- the drip of 191 itself, 191 = 81 + 110 grown in the 0.25 drip, and 358 = 167 + 191 there: `math/theorems/owner_191_drip_and_sequence_167_358_429_2026_11_19.py`.
 
 ## faucet
 
