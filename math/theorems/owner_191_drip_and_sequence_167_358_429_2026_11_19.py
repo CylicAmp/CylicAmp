@@ -36,6 +36,7 @@ Frameworks run: records/gf37_audit_191_drip_2026_11_19.txt.
 3. THE SEQUENCE 167, 358, 429 (pasted analysis, 2026-11-19) -- every number right:
      358 - 167 = 191,  429 - 358 = 71
      step-1 ratio  429 x 358/167 = 153582/167 = 919.65        step-2 ratio  429 x 429/358 = 184041/358 = 514.08
+     (these and 86980/191 are fractions, not whole numbers: remainders 109, 29, 75)
      affine        m = 71/191,  b = 358 - 167m = 56521/191,  x4 = 429m + b = 86980/191 = 455.39 = 429 + 71 x 71/191
      D = 358 x 358 - 167 x 429 = 128164 - 71643 = 56521 = 29 x 1949 (both prime),  b = D/191
      gap between the two ratio predictions = 429 x D/(167 x 358) = 405.57
@@ -142,6 +143,9 @@ b = x2 - m * x1
 x4 = m * x3 + b
 assert m == F(71, 191) and b == F(56521, 191) and x4 == F(86980, 191) == x3 + F(71 * 71, 191)
 assert round(float(x4), 2) == 455.39
+# the three predictions are fractions, not whole numbers: 167 x 919 = 153473 (109 over), 358 x 514 = 184012 (29 over),
+# 191 x 455 = 86905 (75 over)
+assert [divmod(153582, 167), divmod(184041, 358), divmod(86980, 191)] == [(919, 109), (514, 29), (455, 75)]
 Dq = x2 * x2 - x1 * x3
 assert (x2 * x2, x1 * x3, Dq) == (128164, 71643, 56521) and factorint(Dq) == {29: 1, 1949: 1} and b == F(Dq, 191)
 gap = F(153582, 167) - F(184041, 358)

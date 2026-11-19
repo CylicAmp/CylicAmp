@@ -9,8 +9,10 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
   A trial merge of origin/main stops on 6 conflicts: .claude/git_identity.sh, .claude/settings.json, .gitignore,
   CLAUDE.md, README.md, tests/test_owner_record.py (deleted here, changed on main). main also resumed recording
   owner messages (be8842e, message 243) after the 2026-10-26 objection; settle that before merging settings.json.
-- Ported from main on 2026-11-19: drip_ucu.py (UCU, the drip on two numbers, c3cf645) and the 2026-11-10 owner
-  correction to CLAUDE.md -- March 3 is not the owner's birthday; the dates are NASA dates; MICHAEL -> 33 stays.
+- Ported from main on 2026-11-19: drip_ucu.py (UCU, the drip on two numbers, c3cf645) and the corrected
+  dates section of CLAUDE.md (astronomical dates and arithmetic only; MICHAEL -> 33 kept).
+- Open: 34 files still read dates as personal (grep -rli birthday); strip them to the math, keep every
+  number and assertion.
 - 191 and the drip: math/theorems/owner_191_drip_and_sequence_167_358_429_2026_11_19.py.
 
 ## State on 2026-10-26 (read first)
