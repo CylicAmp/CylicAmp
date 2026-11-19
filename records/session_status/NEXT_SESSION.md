@@ -14,6 +14,8 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
 - Open: 34 files still read dates as personal (grep -rli birthday); strip them to the math, keep every
   number and assertion.
 - 191 and the drip: math/theorems/owner_191_drip_and_sequence_167_358_429_2026_11_19.py.
+- The lunar paste (2026-03-03 eclipse, Apr 2 Full Moon, Apr 3/5, 33/43/432): math/theorems/pasted_lunar_march_april_2026_audit_2026_11_19.py, sources USNO/NASA/JPL Horizons, engine
+  math/theorems/meeus_lunar.py (Meeus ch. 47-49, matches Horizons to 0.03 deg).
 
 ## State on 2026-10-26 (read first)
 - The word-for-word recording of the owner's messages is OFF (the hook is removed from .claude/settings.json) and the
