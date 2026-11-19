@@ -69,3 +69,27 @@ def test_braid_group_and_perturbation():
     for pm in EXPECTED_PM_UP_TO_10000:
         for b in BRAID_981:
             assert digital_root(pm + b) == digital_root(pm)
+
+
+def test_mirror_is_fixed_by_the_class_and_never_prime():
+    # the owner's mirror run of 2026-11-19: 1759 gives the same mirror numbers as 1093 (M%37 = 26, M%333 = 248, roots
+    # 4 / 5), 2251 the same as 2917 (M%37 = 15, M%333 = 89); for one width the mirror is fixed by the class by 333,
+    # so no mirror test can keep 1093 and drop 1759. M = 10^w - 1 - p is even for odd p, so it is never prime.
+    for p in generate_michael_primes(1, 10000):
+        w = len(str(p))
+        m = 10**w - 1 - p
+        assert m % 2 == 0 and m % 333 == (10**w - 1 - p % 333) % 333
+    for a, b in ((1759, 1093), (2251, 2917)):
+        ra, rb = audit_node(a), audit_node(b)
+        assert (ra["mirror_mod_37"], ra["mirror"] % 333, ra["dr"], ra["mirror_dr"]) == \
+               (rb["mirror_mod_37"], rb["mirror"] % 333, rb["dr"], rb["mirror_dr"])
+    assert (audit_node(1759)["mirror"], audit_node(2251)["mirror"]) == (8240, 7748)
+
+
+def test_no_residue_rule_below_41_drops_the_two():
+    ledger = set(EXPECTED_PM_UP_TO_10000)
+    drops = [m for m in range(2, 400) if all(x % m not in {p % m for p in ledger} for x in (1759, 2251))]
+    # the ledger fills 32 of the 40 nonzero residues of 41, and 161 of the moduli below 400 drop both primes:
+    # a modulus that separates them is expected by chance, so none of these is a rule
+    assert drops[:3] == [41, 73, 80] and len(drops) == 161
+    assert len({p % 41 for p in ledger}) == 32
