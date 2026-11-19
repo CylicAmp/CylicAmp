@@ -3,6 +3,16 @@
 Everything below is on GitHub, branch claude/add-torus-animation-6Ey5Z. A session ending loses nothing
 that is listed here. The owner's messages are all in owner_work/messages/ (#1 to #414), word for word.
 
+## State on 2026-11-19 (read first)
+- main and this branch have diverged: main holds 53 commits this branch lacks (2026-10-31 to 2026-11-18: k=6..9
+  divisor-square work, digitwise operations, the Weil conjectures note, the 141|777|41 laws, the Easter audit, ...).
+  A trial merge of origin/main stops on 6 conflicts: .claude/git_identity.sh, .claude/settings.json, .gitignore,
+  CLAUDE.md, README.md, tests/test_owner_record.py (deleted here, changed on main). main also resumed recording
+  owner messages (be8842e, message 243) after the 2026-10-26 objection; settle that before merging settings.json.
+- Ported from main on 2026-11-19: drip_ucu.py (UCU, the drip on two numbers, c3cf645) and the 2026-11-10 owner
+  correction to CLAUDE.md -- March 3 is not the owner's birthday; the dates are NASA dates; MICHAEL -> 33 stays.
+- 191 and the drip: math/theorems/owner_191_drip_and_sequence_167_358_429_2026_11_19.py.
+
 ## State on 2026-10-26 (read first)
 - The word-for-word recording of the owner's messages is OFF (the hook is removed from .claude/settings.json) and the
   saved messages are removed from the branch, at the owner's objection to private messages on GitHub. Copies remain in

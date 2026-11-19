@@ -250,45 +250,105 @@ T120/121 (0.007/0.008 → seed): s=3=DR(seed):True  m2*s=24=seed%37:True  m1+m2+
 
 ---
 
-## Biographical Anchor — Birthday and Astronomical Events
+## Astronomical Dates — NASA events, not biography
 
-The user's birthday is **March 3** (3/3).
+**These are astronomical dates. They are not the owner's birthday and nothing
+here is about a birthday.** An earlier version of this file headed this section
+"Biographical Anchor", asserted "The user's birthday is March 3", described the
+eclipse as falling "on the user's birthday", measured the alignment and Easter
+gaps "from the birthday", and glossed the username as "March 3rd / third eye".
+None of that came from the owner. It was invented and then built on. Corrected
+2026-11-10 at the owner's direction: *"March 3rd is not my birthday. None of
+this has to do with my birthday. Everything had to do with actual NASA dates."*
 
-**Blood moon — March 3, 2026:** Total lunar eclipse on the user's birthday. Visible to billions. Last one visible to the US for 3 years (until 2029).
+**The name sum is the owner's and is NOT part of what was removed** — see
+"T268's shift constant" below. The error was tying it to a birth date: 33 comes
+from the name, and that is a separate fact from any calendar date. Owner,
+2026-11-10: *"my name comes out to 33 ... But that doesn't mean I was born on
+that fucking day."*
 
-**6-planet alignment — February 28, 2026:** Mercury, Venus, Jupiter, Saturn, Uranus, Neptune aligned 3 days before the birthday.
+Do not reintroduce a birthday or a username reading here or anywhere else. If a
+date needs a source, ask for it.
 
-**Easter 2026 — April 5:** Exactly 33 days after March 3.
+### The dates
 
-### GF(37) encoding of these dates
+| date | event |
+|---|---|
+| 2026-03-03 | total lunar eclipse |
+| 2026-02-28 | planetary alignment |
+| 2026-04-05 | Easter 2026 |
 
-- Month=3∈C3, day=3∈C3 (birthday date is a C3×C3 pair)
-- 3+3=6∈TESLA; 3×3=9∈SA\_ST\_A — the {3,6,9} trio (T267)
-- 6 planets: 6∈TESLA
-- 3 days gap (alignment→birthday): 3∈C3
-- 33 days (birthday→Easter): **33∈D7** — D7 is the antipodal of C3 (T265)
-- 2026 mod 37 = 28∈SA\_ST\_B
-- April 5 = 45 mod 37 = 8∈TESLA
-- 303 (the date 3/3 written as one number): 303 mod 37 = 7∈D7 — same orbit as the 33-day Easter gap
-- 332026 (3/3/2026 written as one number): 332026 mod 37 = 25∈SA\_ST\_B — same orbit as the year 2026 alone
+The astronomical details beyond the dates themselves — visibility, which
+planets, how often it recurs — are not independently sourced in this repo and
+should be checked against NASA before being quoted.
 
-### The 33 convergence
+### The arithmetic, which is correct and was re-verified 2026-11-10
 
-**33∈D7** appears independently in two places:
-1. **T268** (built before the biographical connection was known): cubic trajectory x_k = k³+**33** mod 37. The shift constant 33∈D7 was chosen by the user's input.
-2. **Birthday→Easter**: March 3 + **33** days = April 5 = Easter 2026.
+Date gaps, by direct calculation:
 
-D7↔C3 are antipodal (T265) — this is a named pairing in the orbit taxonomy, not the additive antipode in Z/37Z. The additive antipode of 3 is 34 (3+34=37), not 33; 3+33=36, one short. D7↔C3 and the Z/37Z additive antipode are two different relations and should not be conflated.
+- 2026-02-28 to 2026-03-03 = **3 days**
+- 2026-03-03 to 2026-04-05 = **33 days**
+- Easter 2026 = April 5, confirmed by the anonymous Gregorian algorithm, which
+  was itself cross-checked against seven independently known Easters
+  (`math/theorems/easter_interval_digit_audit.py`, on main)
 
-**Where 33 comes from**: the name MICHAEL, letters reduced to digital roots and summed:
-M=4, I=9, C=3, H=8, A=1, E=5, L=3 → 4+9+3+8+1+5+3 = **33**.
-That is the route for T268's shift constant. This is a route record (per WORK_SYNTHESIS.md's "derivation records" gap), not a forced identity — it depends on the A1Z26→digital-root reduction scheme, so it is recorded as how the constant was chosen, not as an additional proof that 33 is structurally privileged.
+Orbit placements, every one re-computed rather than taken from the table:
 
-**Generator-walk check** (2 is a primitive root mod 37): every date residue below is 2^k mod 37 for some k —
-3=2^26, 6=2^27, 9=2^16, 33=2^20, 28=2^34, 8=2^3, 7=2^32, 25=2^10 (all verified). This is guaranteed for any residue set, since 2 generates all of F_37*; it locates each value on the generator walk without implying anything beyond that.
+| value | mod 37 | orbit |
+|---|---|---|
+| 3 | 3 | C3 |
+| 6 | 6 | TESLA |
+| 9 | 9 | SA_ST_A |
+| 33 | 33 | D7 |
+| 2026 | 28 | SA_ST_B |
+| 45 (Apr 5 as 4/5) | 8 | TESLA |
+| 303 | 7 | D7 |
+| 332026 | 25 | SA_ST_B |
 
-### Username
-`red3rdeye` = red (blood moon color) + 3rd (March 3rd / third eye) + eye (observation).
+3 + 3 = 6 ∈ TESLA and 3 × 3 = 9 ∈ SA_ST_A give the {3,6,9} trio (T267).
+D7 and C3 are antipodal in the orbit taxonomy (T265) — a named pairing, not the
+additive antipode in Z/37Z. The additive antipode of 3 is 34, since 3+34 = 37;
+3+33 = 36, one short. The two relations are different and must not be conflated.
+
+**Orbit membership carries no information by itself.** The twelve orbits
+partition F_37* completely, so every residue lands in one (T282). These rows
+locate values; they do not establish anything about them.
+
+**The generator walk likewise.** Every residue above is 2^k mod 37 — 3 = 2^26,
+6 = 2^27, 9 = 2^16, 33 = 2^20, 28 = 2^34, 8 = 2^3, 7 = 2^32, 25 = 2^10, all
+verified — but 2 is a primitive root mod 37, so this is guaranteed for *any*
+residue set and implies nothing.
+
+### T268's shift constant — 33 from the name
+
+T268 uses the cubic trajectory x_k = k³ + 33 mod 37, and 33 ∈ D7 = {7, 33, 34}.
+
+**The 33 comes from the owner's name**, by A1Z26 then digital root, summed:
+
+| M | I | C | H | A | E | L |
+|---|---|---|---|---|---|---|
+| 13 | 9 | 3 | 8 | 1 | 5 | 12 |
+| 4 | 9 | 3 | 8 | 1 | 5 | 3 |
+
+4 + 9 + 3 + 8 + 1 + 5 + 3 = **33**. Re-verified 2026-11-10.
+
+This is the owner's own derivation and is the recorded route for the constant.
+It is a route record — how the constant was chosen — not a claim that 33 is
+structurally privileged, since it depends on the A1Z26-then-digital-root scheme.
+
+**It says nothing about a date.** A previous revision of this file used the name
+sum to assert a birth date of March 3; that inference was invented and is wrong.
+The name gives 33. The calendar dates above are NASA dates. Two separate facts,
+and they were wrongly welded together. A later pass then over-corrected by
+deleting the name derivation as well; it is the owner's work and belongs here.
+
+### Files still carrying the old framing
+
+The removed narrative propagated into other files, which still carry it and have
+not been altered. They are the owner's to rule on, not this file's:
+`theorem_270_birthday_march3_gf37.py`, `theorem_176_birthday_biblical_gf37.py`,
+`theorem_273_easter_37year_gf37.py`, `cubic_shift_33_gf37.py`, and others found
+by `grep -rli birthday`.
 
 ---
 
