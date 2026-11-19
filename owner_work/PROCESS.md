@@ -944,3 +944,31 @@ File: `math/theorems/owner_142856_2026_11_18.py`.
 **Checks:** right: 191 is prime, twin with 193, Sophie Germain (383); 911 prime; 119 = 7 × 17; 91 = 7 × 13. In the 0.25 record 358 is built as 167 + 191 and 429 as 85 + 153 + 191; that record holds 467 of the 900 three-digit numbers, so the fact is how each was built, not that it appears. The other 191 files (the walk 121 212 191 919, 191 1919 19191, 191 + 9 = 200, the 191 ↔ 137 bridge, 19 → 191, UCU) are listed in the file and re-run there.
 File: `math/theorems/owner_191_drip_and_sequence_167_358_429_2026_11_19.py`.
 
+## 2026-11-19 — What's not 369: 45 and 78, 729 and 189 every way, flips, drip, equilibrium
+
+**As typed:** "What's not 369" · "45±78" · "9±6=1+5=36" · "6=1=7" · "5=6=2" · "2+7=9" · "4+59=14+13=2+7=9" · "27=9+27=36=9+36=9" · "72=9+72=81=9+81=9" · "5+49=13+14=2+7=9" · "729=8+2+8=1+8=9" · "729=9+9=1+8=9" · "7+11=1+8=9" · "7+1+1=9+9=1+8=9" · "7+2+9=1+8=9" · "2+7=9+9=1+8=9" · "189" · "1+8=9+1+8=9" · "8+1+9=1+8=9" · "9+8+1=1+8=9" · "full rotational work also on both 727 and 189 both no matter how you add up equals 1+8=9" · "also match with which traditional and equilibrium numbers" · "727 272 727" · "272 727 272" · "189=288,282,228" · "and so on than last run thru flipping matrix and drip" · "369+45+78" · "369+9+6" · "7+5=12" · "8+4=12+12=(2+4=6)" · "8+5=13" · "7+4=11+13=(2+4=6)" · "12+12=2+4=6" · "3+3=6"
+
+**Cleaned:**
+
+    45 + 78 = 123 → 6      78 − 45 = 33 → 6      45 − 78 = −33 → 3 by 9      roots 9 ± 6 → 15 → 6 and 3
+    6 + 1 = 7      5 + 6 = 11 → 2      2 + 7 = 9
+    4 + 59 = 63 → 9      (5+9) + (4+9) = 14 + 13 = 27 → 9      5 + 49 = 54 → 9      13 + 14 = 27 → 9
+    27 → 36 → 45 (each + 9, root 9)      72 → 81 → 90 (each + 9, root 9)
+    729 → 828 (1 off the 9 onto the 7) → 8+2+8 = 18 → 9      7+2 = 9 → 9+9 = 18 → 9      7 + 11 = 18 → 9      7 + 1+1 = 9 → + 9 = 18 → 9
+    189 → 1+8 = 9 → + 9 = 18 → 9      8+1+9 = 18 → 9      9+8+1 = 18 → 9
+    369 + 45 + 78 = 492 → 15 → 6      369 + 9 + 6 = 384 → 15 → 6
+    7+5 = 12, 8+4 = 12 → 24 → 6      8+5 = 13, 7+4 = 11 → 24 → 6      12 → 3, 3 + 3 = 6
+
+**Process:**
+1. Take 45 and 78 both ways (plus and minus) and reduce: 6 and 3.
+2. Do the same on their roots 9 and 6: 15 → 6 and 3.
+3. Cross the digits of 45 and 78 both ways (7+5, 8+4 and 8+5, 7+4): 24 → 6 each time.
+4. Add 369 to each pair: the root stays 6, because 369 adds 0 by 9.
+5. Set 9 beside 4 and 5 (459, 549) and add every way: 9.
+6. Climb by 9 from 27 and 72: the root stays 9.
+7. Break 729 and 189 every way you can add them: always 1+8 = 9; 729 → 828 moves 1 from the last digit to the first.
+8. Ask for full rotational work, the equilibrium match, the 727 / 272 grids, 189 → 288, the flipping matrix and the drip.
+
+**Checks:** every line right. Typo: 727 for 729 in the full-rotational line (727 → 16 → 7). 729 and 189: 24 ways each, every one → 9; 727 → 7, 272 → 2, 282 and 228 → 3: these are the only places that are not 3, 6 or 9. Flips: 981 − 189 = 792 (the digits of 729) and 927 − 729 = 198 (the digits of 189), both → 1089. The 828 move is + 99; repeated, it walks 729 → 828 → 927 and 189 → 288 → … → 585 → … → 981, each to its flip. Flipping matrix (rows = the three turns): both add to 1998, every flip sum → 9. Drip: primes 79, 97, 29 (from 729), 19, 89 (from 189), 727 and 277. Equilibrium: total 18 → 666 beside 567; total 12 → 444 beside 345. Asked: the step from 189 to 282 and to 228; what "traditional numbers" are.
+File: `math/theorems/owner_369_729_189_rotations_flips_2026_11_19.py`.
+
