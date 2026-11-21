@@ -3,6 +3,13 @@
 A screenshot (2026-11-21) lists eight results credited to L. Alpöge since July 2026. Two of them can be checked here by
 direct computation, and both are RIGHT; the other six are recorded with their status from the sources found.
 
+PRIOR WORK IN THIS REPO (found after this file was written): theorem_149_kakeya_jacobian_dimension_gf37.py and
+theorem_259_jc3_falsification.py (in the repo since 2026-10-06) already hold this same map, written as
+u = 1 + xy, F1 = u^3 z + y^2 u (4 + 3xy), F2 = y + 3x u^2 z + 3x y^2 (4 + 3xy), F3 = 2x - 3x^2 y - x^3 z,
+with det JF = -2, three points (0, 0, -1/4), (1, -3/2, 13/2), (-1, 3/2, 13/2) all sent to (-1/4, 0, 0), eight stress
+tests and the mod 37 reduction (T259), and the Kakeya comparison at dimension 3 (T149). What is this file's own: the
+second fibre (three points over (0, -3, 1), from the cubic w^3 - 2w^2 + Xw - 2Y) and the Hadamard 668 check.
+
 1. JACOBIAN CONJECTURE, DIMENSION 3 -- RIGHT (checked below).
    The explicit map of arXiv 2608.00222 (p(w) = -3w^2 + 4w, q(w) = -w^3 + w^2, g = 2 - 3xy - x^2 z, u = 1 + xy,
    w = g u, F = ((q + g w)/(g x)^2, (p + 2g)/(g x), g x)) is a polynomial map C^3 -> C^3:
@@ -71,3 +78,12 @@ assert 668 == 4 * 167 and sp.isprime(167)
 if __name__ == "__main__":
     print("Jacobian dim 3: det J = -2 and three points -> (0, -3, 1): counterexample right")
     print("Hadamard 668: H H^T = 668 I: right")
+
+# the same map as T149 / T259, in their form, and their fibre over (-1/4, 0, 0)
+U = 1 + x * y
+T259 = [U ** 3 * z + y ** 2 * U * (4 + 3 * x * y), y + 3 * x * U ** 2 * z + 3 * x * y ** 2 * (4 + 3 * x * y), 2 * x - 3 * x ** 2 * y - x ** 3 * z]
+assert all(sp.expand(a - b) == 0 for a, b in zip(T259, WRITTEN))
+T149_PTS = [(0, 0, sp.Rational(-1, 4)), (1, sp.Rational(-3, 2), sp.Rational(13, 2)), (-1, sp.Rational(3, 2), sp.Rational(13, 2))]
+assert all(tuple(f.subs({x: a, y: b, z: c}) for f in WRITTEN) == (sp.Rational(-1, 4), 0, 0) for a, b, c in T149_PTS)
+assert (ROOT / "math" / "theorems" / "theorem_259_jc3_falsification.py").exists()
+assert (ROOT / "math" / "theorems" / "theorem_149_kakeya_jacobian_dimension_gf37.py").exists()
