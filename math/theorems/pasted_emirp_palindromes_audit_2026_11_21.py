@@ -52,7 +52,7 @@ for (a, b), (fab, fba, s, d, m, q) in TABLE.items():
     assert factorint(int(f"{a}{b}")) == fab and factorint(int(f"{b}{a}")) == fba
     assert (a + b, b - a, a * b, round(b / a, 4)) == (s, d, m, q)
     da, db = divmod(a, 10)
-    assert a + b == 11 * (da + db) and b - a == 9 * (da - db) and (a + b) % 22 == 0 and (b - a) % 18 == 0
+    assert a + b == 11 * (da + db) and b - a == 9 * (db - da) and (a + b) % 22 == 0 and (b - a) % 18 == 0
 assert sum(EM2) == 418 and factorint(418) == {2: 1, 11: 1, 19: 1}
 assert all(int(str(n) + str(n)[::-1]) % 11 == 0 for n in range(10, 10000))   # even-length palindromes divide by 11
 
