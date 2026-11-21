@@ -13,6 +13,9 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
   dates section of CLAUDE.md (astronomical dates and arithmetic only; MICHAEL -> 33 kept).
 - Open: 34 files still read dates as personal (grep -rli birthday); strip them to the math, keep every
   number and assertion.
+- michael_prime_crt.py (built 2026-11-19 from the owner's test file, verbatim in owner_work/): the given ledger leaves out
+  1759 and 2251; no rule found that drops them (tests/test_michael_prime_crt.py pins it). Asked: the other version
+  of the module (with is_crt_candidate / _is_crt_prime and 97 tests) that matches the 45.
 - 191 and the drip: math/theorems/owner_191_drip_and_sequence_167_358_429_2026_11_19.py.
 - The lunar paste (2026-03-03 eclipse, Apr 2 Full Moon, Apr 3/5, 33/43/432): math/theorems/pasted_lunar_march_april_2026_audit_2026_11_19.py, sources USNO/NASA/JPL Horizons, engine
   math/theorems/meeus_lunar.py (Meeus ch. 47-49, matches Horizons to 0.03 deg).

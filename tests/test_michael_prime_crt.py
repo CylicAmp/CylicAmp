@@ -93,3 +93,13 @@ def test_no_residue_rule_below_41_drops_the_two():
     # a modulus that separates them is expected by chance, so none of these is a rule
     assert drops[:3] == [41, 73, 80] and len(drops) == 161
     assert len({p % 41 for p in ledger}) == 32
+
+
+def test_the_two_share_a_class_by_41_that_the_ledger_never_uses():
+    # rule hunt of 2026-11-20 (2631 single features, 1,049,076 feature pairs, nulls over all 1081 pairs): no rule found.
+    # Its one lead: 2251 - 1759 = 492 = 4 x 3 x 41, so both leave 37 by 41, a class the 45 never use -- but they leave
+    # 8 of the 40 classes by 41 empty, so a prime lands in an empty one about 1 time in 5, and "not 37 by 41" is longer
+    # than naming the two primes. Chance, not a rule.
+    ledger = set(EXPECTED_PM_UP_TO_10000)
+    assert 2251 - 1759 == 492 == 4 * 3 * 41 and 1759 % 41 == 2251 % 41 == 37
+    assert sorted(set(range(1, 41)) - {p % 41 for p in ledger}) == [18, 22, 24, 28, 29, 34, 35, 37]
