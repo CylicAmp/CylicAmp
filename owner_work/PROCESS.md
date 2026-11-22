@@ -980,3 +980,10 @@ File: `math/theorems/owner_369_729_189_rotations_flips_2026_11_19.py`.
 Ties to earlier work: the odd squares of #340 (9, 36, 81 = T(2), T(5), T(8) + 1), the ones by zeros of #368 (99 × 101, 9999 × 10001 = 9999 × 73 × 137), the twin products of T385 (T(p) = p × (p + 2)), the 9999 complement of T364, and What's not 369 (33 of 99 rows are 3, 6, 9).
 File: `math/theorems/pasted_consecutive_sums_99_rows_audit_2026_11_22.py`.
 
+## 2026-11-22 — the diagram: 1 2 3 4 beside 2 ? 6 8 (image)
+
+**As drawn:** left column 1, 2, 3, 4; right column 2, (covered by the hexagon), 6, 8; each row joined; staircases stepping down to the right; a triangle from 1 and 4 to a point on the right; a hexagon with a web at the centre.
+
+**Checks:** right: each right node is twice the left (1 → 2, 3 → 6, 4 → 8); the rows add to 3, 6, 9, 12 → 3, 6, 9, 3; the corners are 1, 2, 4, 8, the start of the doubling chain 1 2 4 8 7 5 by 9, the same as "1248 / 751" in #270. Asked: the covered number in row 2, and what the hexagon, the triangle and the staircases stand for.
+File: `math/theorems/owner_doubling_diagram_1234_2468_2026_11_22.py`.
+
