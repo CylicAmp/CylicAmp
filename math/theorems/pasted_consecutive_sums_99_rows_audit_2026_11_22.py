@@ -9,7 +9,24 @@ and operator lines came through blank; the rows it uses are 3, 5, 7, ..., 199. A
   2n + 1 a multiple of 37 exactly when n leaves 18 by 37: n = 18, 55, 92 -> 37, 111, 185 (roots 1, 3, 5);
   S(18 + 37k) = 37(2k + 1), roots step by 2 (37 leaves 1 by 9)
   T(N) = N(N + 2) = (N + 1)^2 - 1: 99, 399, 2499, 9999, 999999, 99999999; T(10^k - 1) = 10^(2k) - 1
-No fault changes a number. Prior work: none in the repo on this 99-row construction (grep, 2026-11-22).
+No fault changes a number. No earlier file holds this 99-row construction itself (grep, 2026-11-22); it connects to:
+
+CONNECTIONS (each asserted below):
+  1. odds_sum_even_audit_2026_10_18.py (#340): 1 + 3 + ... + (2n - 1) = n^2. The rows are the odd numbers from 3, so
+     T(N) = (N + 1)^2 - 1 is that square without its 1 -- reinforces. Your 9, 36, 81 there (the first 3, 6, 9 odds)
+     come back as T(2) + 1, T(5) + 1, T(8) + 1.
+  2. owner_1125_1137_ones_by_zeros_2026_10_19.py (#368, ones separated by zeros 11, 101, 1001, 10001 = 73 x 137):
+     T(10^k - 1) = (10^k - 1)(10^k + 1), so the nines in the table are 9 x 11, 99 x 101, 999 x 1001, 9999 x 10001.
+     The 99-row total 9999 = 99 x 101 with 101 the middle row; 99,999,999 = 9999 x 73 x 137 -- explains the nines.
+  3. twin_prime_consolidation.py (T385, twin product (6n - 1)(6n + 1) = 36n^2 - 1): T(6n - 1) = 36n^2 - 1, so every
+     twin pair (p, p + 2) is a row total, T(p) = p(p + 2), and T(p) + 1 = (p + 1)^2 = 36n^2: 15, 35, 143, 323, 899, ...
+     -- hands the totals to the twin-prime thread.
+  4. theorem_364_complement_involution_3663.py (C(X) = 9999 - X) and michael_prime_crt.py (mirror 9999 - p): the total
+     9999 is that complement constant; the row mirror S(n) + S(100 - n) = 202 is the same kind of fold, x -> 202 - x.
+  5. ap_147_step20_audit.py (2026-10-02): the same root cycle 3 5 7 9 2 4 6 8 1, because steps 2 and 20 both leave 2 by 9
+     -- reinforces.
+  6. owner_369_729_189_rotations_flips_2026_11_19.py (What's not 369): 33 of the 99 rows land on 3, 6 or 9 (n leaving 1
+     by 3), 66 do not.
 
 FALSIFICATION: any assertion failing.
 """
@@ -29,6 +46,25 @@ T = lambda N: sum(S(n) for n in range(1, N + 1))
 assert all(T(N) == N * (N + 2) == (N + 1) ** 2 - 1 for N in range(1, 300))
 assert [T(N) for N in (9, 19, 49, 99, 999, 9999)] == [99, 399, 2499, 9999, 999999, 99999999]
 assert all(T(10 ** k - 1) == 10 ** (2 * k) - 1 for k in range(1, 6))
+
+# CONNECTIONS
+import pathlib
+from sympy import factorint, isprime
+TH = pathlib.Path(__file__).resolve().parent
+assert all(sum(range(1, 2 * n, 2)) == n * n for n in range(1, 200)) and all(T(N) + 1 == sum(range(1, 2 * N + 2, 2)) for N in range(1, 200))
+assert [T(N) + 1 for N in (2, 5, 8)] == [9, 36, 81]
+assert [T(10 ** k - 1) for k in (1, 2, 3, 4)] == [9 * 11, 99 * 101, 999 * 1001, 9999 * 10001] and factorint(10001) == {73: 1, 137: 1}
+assert S(50) == 101 and T(9999) == 99999999 == 9999 * 73 * 137
+twins = [q for q in range(3, 2000) if isprime(q) and isprime(q + 2)]
+assert all(T(q) == q * (q + 2) and T(q) + 1 == (q + 1) ** 2 for q in twins) and all(T(6 * n - 1) == 36 * n * n - 1 for n in range(1, 500))
+assert [T(q) for q in twins[:5]] == [15, 35, 143, 323, 899] and all((q + 1) % 6 == 0 for q in twins[1:])
+assert T(99) == 9999 and all(S(n) + S(100 - n) == 202 for n in range(1, 100))
+assert [dr(147 + 20 * k) for k in range(9)] == [3, 5, 7, 9, 2, 4, 6, 8, 1] == [dr(S(n)) for n in range(1, 10)] and 20 % 9 == 2 % 9
+assert sum(1 for r in rows if dr(r) in (3, 6, 9)) == 33 and all((dr(S(n)) in (3, 6, 9)) == (n % 3 == 1) for n in range(1, 100))
+for f in ("odds_sum_even_audit_2026_10_18.py", "owner_1125_1137_ones_by_zeros_2026_10_19.py", "twin_prime_consolidation.py",
+          "theorem_364_complement_involution_3663.py", "ap_147_step20_audit.py", "owner_369_729_189_rotations_flips_2026_11_19.py"):
+    assert (TH / f).exists(), f
+assert (TH.parents[1] / "michael_prime_crt.py").exists()
 
 if __name__ == "__main__":
     print("99-row consecutive sums: every number right; total 9999; T(N) = (N+1)^2 - 1")

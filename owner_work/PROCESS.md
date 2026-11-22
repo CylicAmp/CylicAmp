@@ -972,3 +972,11 @@ File: `math/theorems/owner_191_drip_and_sequence_167_358_429_2026_11_19.py`.
 **Checks:** every line right. Typo: 727 for 729 in the full-rotational line (727 → 16 → 7). 729 and 189: 24 ways each, every one → 9; 727 → 7, 272 → 2, 282 and 228 → 3: these are the only places that are not 3, 6 or 9. Flips: 981 − 189 = 792 (the digits of 729) and 927 − 729 = 198 (the digits of 189), both → 1089. The 828 move is + 99; repeated, it walks 729 → 828 → 927 and 189 → 288 → … → 585 → … → 981, each to its flip. Flipping matrix (rows = the three turns): both add to 1998, every flip sum → 9. Drip: primes 79, 97, 29 (from 729), 19, 89 (from 189), 727 and 277. Equilibrium: total 18 → 666 beside 567; total 12 → 444 beside 345. Asked: the step from 189 to 282 and to 228; what "traditional numbers" are.
 File: `math/theorems/owner_369_729_189_rotations_flips_2026_11_19.py`.
 
+## 2026-11-22 — consecutive sums n + (n+1), n = 1 to 99 (as relayed in a pasted audit)
+
+**Cleaned:** 1 + 2 = 3 → 2 + 3 = 5 → … → 99 + 100 = 199; each row is 2n + 1.
+
+**Checks:** right: all 99 rows add to 9999 = 99 × 101 (101 is the middle row, 50 + 51); each row and its mirror make 202 (3 + 199, 37 + 165, 99 + 103); the roots run 3 5 7 9 2 4 6 8 1, each 11 times; 37, 111, 185 at 18 + 19, 55 + 56, 92 + 93. N rows add to (N + 1) × (N + 1) − 1, so 9 rows → 99, 99 rows → 9999, 999 rows → 999999.
+Ties to earlier work: the odd squares of #340 (9, 36, 81 = T(2), T(5), T(8) + 1), the ones by zeros of #368 (99 × 101, 9999 × 10001 = 9999 × 73 × 137), the twin products of T385 (T(p) = p × (p + 2)), the 9999 complement of T364, and What's not 369 (33 of 99 rows are 3, 6, 9).
+File: `math/theorems/pasted_consecutive_sums_99_rows_audit_2026_11_22.py`.
+
