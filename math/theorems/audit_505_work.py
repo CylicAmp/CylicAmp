@@ -16,6 +16,7 @@ over the history.  Files where 505 carries content:
   9. math/theorems/one_over_137_framework.md (+ math/primes copy)
          "505 mod-18 ladder (double-sealed)", "505-anchor DR=1 sovereign coordinate"
  10. reference/two_digit_chains.txt  row 50: digits 5,0 -> 505 = 5*101
+ 12. claude.ai artifacts: one hit, modulus 505 in the Prime Pairs Moduli Scan data
  11. owner's sent mail: verifiable_math.json (order-10 magic constant 505) and
      twin_prime_data.csv in the Matrix Power Cycle over F37 zip (rows x=14, x=28)
 
@@ -187,6 +188,13 @@ check(18 * 14 - 1 == 251 and 18 * 14 + 1 == 253 and 252 + 253 == 505 == 36 * 14 
 check(factor(253) == {11: 1, 23: 1} and not is_prime(505),
       "row x=14 is_twin False is right (253 = 11*23); row x=28 (503, 505) False is right (505 = 5*101)")
 check(505 % P == 24 and 1010 % 74 == 48, "row x=14 columns: 505 mod 37 = 24, 1010 mod 74 = 48")
+
+print("\n== 12. the owner's 54 claude.ai artifacts (searched 2026-11-22, every page + Docs/Sheet/Data stores) ==")
+# One hit: "Prime Pairs Moduli Scan" (claude.ai/artifact/QMngwdcKjnBFBBmVH8kBE1), DATA.pts row
+# [505, 0.7184, 0] -- modulus q = 505 in the ~5,000-moduli variance scan to 1e9; third field = q prime.
+check(not is_prime(505), "moduli scan row q=505 carries prime-flag 0, and 505 is composite (5 x 101)")
+# No other artifact contains 505: 42 HTML pages, 9 Docs, 1 Sheet (zeta zeros 1-1000), 1 Data page
+# (claim ledger CSV, 0 hits), 1 Slides deck with no slides in it.
 
 print()
 if FAIL:
