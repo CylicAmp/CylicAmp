@@ -987,3 +987,10 @@ File: `math/theorems/pasted_consecutive_sums_99_rows_audit_2026_11_22.py`.
 **Checks:** right: each right node is twice the left (1 → 2, 3 → 6, 4 → 8); the rows add to 3, 6, 9, 12 → 3, 6, 9, 3; the corners are 1, 2, 4, 8, the start of the doubling chain 1 2 4 8 7 5 by 9, the same as "1248 / 751" in #270. Asked: the covered number in row 2, and what the hexagon, the triangle and the staircases stand for.
 File: `math/theorems/owner_doubling_diagram_1234_2468_2026_11_22.py`.
 
+## 2026-11-22 — ODD CENTER: the palindrome parity theorem (image)
+
+**As shown:** "Odd length: free center → all sums realizable. Even: paired digits → only even sums. The center is King. Unpaired, free." · "Odd lengths OO" · "Even lengths OZ" · a table by length 1, 2, 4, 5, 6, 7.
+
+**Checks:** right: an even-length palindrome adds to 2 × its paired digits, so only even sums (2, 4, … up to 9 × length); an odd length adds 2 × paired + centre, and the free centre fills every sum from 2 to 9 × length (checked on every palindrome up to 10 digits). Wrong in the table: rows 5 and 7 say "even only" (12321 → 9); row 4 abba has no centre; the row strings are one letter longer than their lengths; abcdba, abddcba, abdccba are not palindromes. Asked: what OO and OZ stand for. Ties: T160's portal (A0A → A1A … A9A) is the free centre.
+File: `math/theorems/owner_palindrome_parity_odd_center_2026_11_22.py`.
+
