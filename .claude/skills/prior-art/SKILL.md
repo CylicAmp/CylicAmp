@@ -28,6 +28,14 @@ Four theorems written in one session re-derived work already in the repo:
 
 None was caught by reading. All were caught in one run of the index.
 
+## Outside material counts too (2026-11-21)
+
+A check of an outside claim is a file like any other: search the corpus for its subject before writing it. On
+2026-11-21 a screenshot listed the dimension-3 Jacobian counterexample; a new check file was written and committed
+before `grep -ril jacobian` was run. theorem_259_jc3_falsification.py and theorem_149_kakeya_jacobian_dimension_gf37.py
+had held the same map, its fibre over (-1/4, 0, 0), eight stress tests and the mod 37 reduction since 2026-10-06.
+When the owner asks whether their work on a subject exists, the answer starts from that grep, never from memory.
+
 ## Procedure
 
 1. **Name the claim in one sentence** before searching. If you cannot,
