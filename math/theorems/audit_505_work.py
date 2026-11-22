@@ -16,6 +16,8 @@ over the history.  Files where 505 carries content:
   9. math/theorems/one_over_137_framework.md (+ math/primes copy)
          "505 mod-18 ladder (double-sealed)", "505-anchor DR=1 sovereign coordinate"
  10. reference/two_digit_chains.txt  row 50: digits 5,0 -> 505 = 5*101
+ 11. owner's sent mail: verifiable_math.json (order-10 magic constant 505) and
+     twin_prime_data.csv in the Matrix Power Cycle over F37 zip (rows x=14, x=28)
 
 Incidental hits, no 505 content: a chi2 ratio 1.505 (T374), a table row index
 (reversal_spans_all_tables.md row 55: T(10)*... = 505 is listed as a value only),
@@ -170,6 +172,21 @@ check(505 * 4444 == 2244220 == 2 ** 2 * 5 * 11 * 101 ** 2, "505 x 4444 = 2,244,2
 
 print("\n== 10. reference/two_digit_chains.txt row 50 ==")
 check(int("5" + "0" + "5") == 505 == 101 * 5, "aba for (a,b) = (5,0): 505 = 101 x 5")
+
+print("\n== 11. owner's sent mail (searched 2026-11-22: Gmail from:me +505, 4 messages) ==")
+# verifiable_math.json (attachment, 2026-05-17): magic-square constants, order 10 -> 505
+check(10 * (10 ** 2 + 1) // 2 == 505 and dr(505) == 1,
+      "magic constant of the order-10 magic square: n(n^2+1)/2 = 10*101/2 = 505, DR 1")
+check([n * (n * n + 1) // 2 for n in range(3, 11)] == [15, 34, 65, 111, 175, 260, 369, 505],
+      "the file's magic-constant column, orders 3..10, all correct")
+check(dr(15) == 6 and [n for n in range(3, 200) if dr(n * (n * n + 1) // 2) == 6][:3] == [3, 12, 21],
+      "file's key finding: DR 6 only for n = 3 mod 9 (3, 12, 21, ...)")
+# twin_prime_data.csv (Matrix Power Cycle over F37 zip, 2026-09-21): p = 18x-1, q = 18x+1
+check(18 * 14 - 1 == 251 and 18 * 14 + 1 == 253 and 252 + 253 == 505 == 36 * 14 + 1,
+      "row x=14: (251, 253), center 252, center+q = 505 = 36x+1")
+check(factor(253) == {11: 1, 23: 1} and not is_prime(505),
+      "row x=14 is_twin False is right (253 = 11*23); row x=28 (503, 505) False is right (505 = 5*101)")
+check(505 % P == 24 and 1010 % 74 == 48, "row x=14 columns: 505 mod 37 = 24, 1010 mod 74 = 48")
 
 print()
 if FAIL:
