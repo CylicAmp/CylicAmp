@@ -1010,3 +1010,17 @@ File: `math/theorems/owner_egor_permanent_determinant_mod9_2026_11_28.py`; note 
 **Checks:** right: 182, 186, 246 are the least spans of admissible 39-, 40-, 50-tuples (246 − 182 = 64, the shift of the 39-suffix); gates are the roots 1+8+2 = 11 → 2, 1+8+6 = 15 → 6, 2+4+6 = 12 → 3; digraphs are the neighbour sums 3+7 = 10 → 1, 7+7 = 14 → 5, 8+8 = 16 → 7; 888 = 246 + 642. Asked: the step 182 → 373 and 186 → 777 (the flip-sum gives 463 and 867).
 File: `math/theorems/owner_182_186_246_three_paths_2026_11_28.py`.
 
+## 2026-11-28 — 1)12|1|21(8 and 9240.5|5.0429, built out
+
+**As typed:** "1)12|1|21(8" · "9240.5|5.0429" · "build out how I taught"
+
+**Cleaned:**
+
+    1 → 12 | 1 | 21 → (8)          12 | 1 | 21 = 12121, the (1)2(1)2(1) of #259
+    9240.5 | 5.0429               5.0429 is 9240.5 read backwards
+
+**Process (the build out of 181, #270):** split and add (12 + 1 + 21 = 34 → 7; with the front 1, 35 → 8); flip (12 + 21 = 33, 21 − 12 = 9); halve the odd into equal halves (12121 = 6060.5 + 6060.5; 9240.5 + 9240.5 = 18481); read the mirror.
+
+**Checks:** right: 12121 = 17 × 23 × 31; 1 + 12 + 1 + 21 = 35 → 8 (the (8), my reading); 9240.5 × 2 = 18481 = 18 | 4 | 81, a palindrome and a prime, the 181 of #270 with a 4 in the centre (my reading); both halves of line 2 add to 20, 18481 → 22 → 4. Asked: whether the (8) is 35 → 8, and whether 9240.5 is the half of 18481.
+File: `math/theorems/owner_12_1_21_and_9240_5_build_out_2026_11_28.py`.
+
