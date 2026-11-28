@@ -1039,3 +1039,10 @@ File: `math/theorems/owner_12_1_21_and_9240_5_build_out_2026_11_28.py`.
 **Checks:** right, every step: 9240.5 + 9240.5 = 18481; 5.0429 is 9240.5 backwards; the half on itself gives 94801, its mirror 10849 (also the column add of 5.0429 on itself); every pair of halves stacks to a mirror image (33, 52825, 14741). Asked: what the 1) and the (8) of line 1 are in these steps. The first reply's splits and flips are superseded.
 File: `math/theorems/owner_12_1_21_and_9240_5_build_out_2026_11_28.py`.
 
+## 2026-11-28 — the 7-wave (equations as relayed in a paste)
+
+**As relayed:** 7×2 = 14 → 1+4 = 5 · 7×3 = 21 → 2+1 = 3 · 7×5 = 35 → 3+5 = 8 · 7×7 = 49 → 4+9 = 13 → 1+3 = 4 · (1+8)+(1+8) = 9+9 = 18 → 1+8 = 9, or 3+6 = 9
+
+**Checks:** right, every line. Times 7, the roots go 1 → 7 → 4 → 1 and 2 → 5 → 8 → 2, and 3, 6, 9 stay put; by 37 the powers of 7 run 7, 12, 10, 33, 9, 26, 34, 16, 1 (nine steps). In the paste: "×7 is the inverse of doubling" is wrong (×7 is doubling with the sign flipped; the inverse is ×5); τ(75) = 6, τ(48) = 10.
+File: `math/theorems/pasted_seven_wave_audit_2026_11_28.py`.
+
