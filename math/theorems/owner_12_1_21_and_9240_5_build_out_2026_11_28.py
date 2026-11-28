@@ -1,34 +1,33 @@
 # CLASS: AUDIT
 """
-The owner's lines of 2026-11-28, built out the way the owner taught the build out of 181 (#270: split it up and down,
-add, take the root; halve the odd into equal halves, "equal odds compress", 1 / 2 = 0.5 + 0.5 = 1; read the mirror).
+The owner's lines of 2026-11-28 and the owner's correction of the first build-out.
 
 THE OWNER'S LINES, verbatim:
     1)12|1|21(8
     9240.5|5.0429
+    94801|10849
     build out how I taught
+THE OWNER'S CORRECTION (the method): "it's where we take something we cut it in half. We added up, we make it a mirror
+    image. I showed you how to add things up when there's more than two lines" -- the adding is the column stack of
+    2026-11-17 (owner_5151_1515_column_stack_2026_11_17.py): lay the lines one under another and add down each column,
+    keeping each column's root.
 
-CLEANED (readings marked; each checked):
-    1 → 12 | 1 | 21 → (8)        a number, a centre, its flip: 12 | 1 | 21 = 12121
-    9240.5 | 5.0429             a number and its mirror (5.0429 is 9240.5 read backwards)
-
-BUILD OUT, LINE 1:
-    12 | 1 | 21 joined = 12121 = the owner's (1)2(1)2(1) of #259 = 17 x 23 x 31
-    up:   12 + 1 + 21 = 34 → 3 + 4 = 7
-    with the 1 in front: 1 + 12 + 1 + 21 = 35 → 3 + 5 = 8      (reading: the (8) is this result)
-          digits 1 + 1 + 2 + 1 + 2 + 1 = 8 as well
-    flip: 12 + 21 = 33 → 6;  21 - 12 = 9;  12 x 21 = 252 → 9;  3 x 7 = 21 and its flip 12 (#259 "(3x7=12 and 21)")
-    halve the odd: 12121 = 6060.5 + 6060.5
-    the ends: 1 + 8 = 9, the first 9-pair of #270 (124 + 875 = 999: 1+8, 2+7, 4+5)
-BUILD OUT, LINE 2:
-    9240.5 + 9240.5 = 18481: the odd number halved into two equal halves, the move of 1 / 2 = 0.5 + 0.5 = 1 (#270)
-    18481 = 18 | 4 | 81, a palindrome and a prime -- 181 of #270 with 4 set in the centre    (reading, asked)
-    digits: 9 + 2 + 4 + 0 + 5 = 20 → 2 on each side, 40 → 4 both sides; 18481 → 1 + 8 + 4 + 8 + 1 = 22 → 4
-    both ways: 9240.5 has 5 digits with the zero, 4 without; the digit sum is 20 either way
-    the whole part 9240 = 2^3 x 3 x 5 x 7 x 11
-TIE: 12121 = (1)2(1)2(1) and 18481 = (1)8(4)8(1) are both five-digit palindromes a b c b a; 12121 = 17 x 23 x 31,
-    18481 prime.
-ASKED: is the (8) the total 1 + 12 + 1 + 21 = 35 → 8, and is 9240.5 the half of 18481 = 18 | 4 | 81 built out of 181?
+THE PROCESS, step by step (each checked RIGHT):
+    take something, cut it in half:   18481 -> 9240.5            (9240.5 + 9240.5 = 18481)
+    make it a mirror image:           9240.5 | 5.0429            (5.0429 is 9240.5 read backwards)
+    add it up, column by column, the half laid on itself, keeping each column's root:
+          9 2 4 0 5          5 0 4 2 9
+        + 9 2 4 0 5        + 5 0 4 2 9
+          18 4 8 0 10        10 0 8 4 18
+       -> 9 4 8 0 1       -> 1 0 8 4 9
+    the mirror again:                 94801 | 10849              (each is the other read backwards)
+    adding the two halves of a line down the columns gives a mirror image itself:
+        12 over 21          -> 3 3         = 33
+        9240.5 over 5.0429  -> 5 2 8 2 5   = 52825
+        94801 over 10849    -> 1 4 7 4 1   = 14741        and 52825 laid on itself -> 14741 again
+    (forced: column k and column (n+1-k) add the same two digits, so the result always reads the same both ways)
+ASKED: the 1) and the (8) of line 1 -- what each one is in the steps.
+Superseded reading (2026-11-28, first reply): splits and flips in place of the column add; the owner marked it incorrect.
 Frameworks: records/gf37_audit_12_1_21_9240_2026_11_28.txt.
 
 FALSIFICATION: any assertion failing.
@@ -36,20 +35,20 @@ FALSIFICATION: any assertion failing.
 import pathlib
 from fractions import Fraction as F
 
-from sympy import factorint, isprime
-
 TH = pathlib.Path(__file__).resolve().parent
-dr = lambda n: 1 + (n - 1) % 9
-assert int("12" + "1" + "21") == 12121 and "12" == "21"[::-1] and factorint(12121) == {17: 1, 23: 1, 31: 1}
-assert 12 + 1 + 21 == 34 and dr(34) == 7 and 1 + 12 + 1 + 21 == 35 and dr(35) == 8 and sum(map(int, "112121")) == 8
-assert 12 + 21 == 33 and dr(33) == 6 and 21 - 12 == 9 and 12 * 21 == 252 and dr(252) == 9 and 3 * 7 == 21
-assert F(12121, 2) * 2 == 12121 and F(12121, 2) == F(60605, 10) and 1 + 8 == 9 and 124 + 875 == 999
-assert "9240.5"[::-1] == "5.0429" and F(92405, 10) * 2 == 18481 and str(18481) == str(18481)[::-1] and isprime(18481)
-assert int("18" + "4" + "81") == 18481 and "181" == "1" + "8" + "1"
-assert sum(map(int, "92405")) == sum(map(int, "50429")) == 20 and dr(40) == 4 and sum(map(int, "18481")) == 22 and dr(22) == 4
-assert len("92405") == 5 and len("9245") == 4 and factorint(9240) == {2: 3, 3: 1, 5: 1, 7: 1, 11: 1}
-assert "12121" in (TH / "grid_split_23_over_6_2026_10_13.py").read_text()
-assert "build out of 181" in (TH / "odd_even_doubling_181_2026_10_13.py").read_text()
+root = lambda n: 0 if n == 0 else 1 + (n - 1) % 9
+
+
+def column_add(*rows):
+    return "".join(str(root(sum(int(r[i]) for r in rows))) for i in range(len(rows[0])))
+
+
+assert F(92405, 10) * 2 == 18481 and "9240.5"[::-1] == "5.0429" and "94801"[::-1] == "10849"
+assert column_add("92405", "92405") == "94801" and column_add("50429", "50429") == "10849"
+assert column_add("12", "21") == "33" and column_add("92405", "50429") == "52825" and column_add("94801", "10849") == "14741"
+assert column_add("52825", "52825") == "14741"
+assert all(column_add(s, s[::-1]) == column_add(s, s[::-1])[::-1] for s in ("12", "92405", "94801", "123456", "70718"))
+assert "column" in (TH / "owner_5151_1515_column_stack_2026_11_17.py").read_text()
 
 if __name__ == "__main__":
-    print("12|1|21 = 12121 (#259), 1+12+1+21 = 35 -> 8; 9240.5 x 2 = 18481 = 18|4|81, prime palindrome; mirror right")
+    print("cut in half 18481 -> 9240.5, mirror 5.0429, add up by columns -> 94801, mirror 10849; halves stack to 52825, 14741")

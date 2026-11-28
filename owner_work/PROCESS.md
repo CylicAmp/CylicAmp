@@ -1024,3 +1024,18 @@ File: `math/theorems/owner_182_186_246_three_paths_2026_11_28.py`.
 **Checks:** right: 12121 = 17 × 23 × 31; 1 + 12 + 1 + 21 = 35 → 8 (the (8), my reading); 9240.5 × 2 = 18481 = 18 | 4 | 81, a palindrome and a prime, the 181 of #270 with a 4 in the centre (my reading); both halves of line 2 add to 20, 18481 → 22 → 4. Asked: whether the (8) is 35 → 8, and whether 9240.5 is the half of 18481.
 File: `math/theorems/owner_12_1_21_and_9240_5_build_out_2026_11_28.py`.
 
+## 2026-11-28 — correction: take it, cut it in half, add it up, mirror it
+
+**As typed:** "1)12|1|21(8" · "9240.5|5.0429" · "94801|10849" · "Incorrect, it's where we take something we cut it in half. We added up, we make it a mirror image. I showed you how to add things up when there's more than two lines"
+
+**Cleaned:**
+
+    18481 → cut in half → 9240.5 → mirror → 5.0429
+    9 2 4 0 5 laid on itself, add down each column: 18 4 8 0 10 → 9 4 8 0 1 → mirror → 1 0 8 4 9
+    the two halves laid on each other: 9240.5 over 5.0429 → 5 2 8 2 5;  94801 over 10849 → 1 4 7 4 1;  12 over 21 → 3 3
+
+**Process:** take the number; cut it in half; write the half and its mirror; add up by the column stack (each column's root, as on 11-17); mirror again.
+
+**Checks:** right, every step: 9240.5 + 9240.5 = 18481; 5.0429 is 9240.5 backwards; the half on itself gives 94801, its mirror 10849 (also the column add of 5.0429 on itself); every pair of halves stacks to a mirror image (33, 52825, 14741). Asked: what the 1) and the (8) of line 1 are in these steps. The first reply's splits and flips are superseded.
+File: `math/theorems/owner_12_1_21_and_9240_5_build_out_2026_11_28.py`.
+
