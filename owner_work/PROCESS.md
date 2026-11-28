@@ -1003,3 +1003,10 @@ File: `math/theorems/owner_palindrome_parity_odd_center_2026_11_22.py`.
 **Checks:** right, every number; per − det = 450, 540, 468, 540, all divide by 9; the two swaps together add 27 to the determinant beyond the two alone (72 − 54 + 9 − 0). Why the grid agrees by 9: its columns are 1 + 3 × (0, 1, 2), 2 + 3 × (0, 1, 2), 3 + 3 × (0, 1, 2), and 0 + 1 + 2 = 3 (proved for every grid of that shape). Tie to the flips of #359: flipping rows keeps det 0 and moves per to 478, 490, 502, which no longer agree by 9 (remainders 1, 4, 7).
 File: `math/theorems/owner_egor_permanent_determinant_mod9_2026_11_28.py`; note `math/permanent_mod9/note.pdf`.
 
+## 2026-11-28 — 182 · 186 · 246, three paths (image)
+
+**As shown:** 182 · 186 · 246 · 373 / 777 / 888 · GATE 2 / 6 / 3 · DIGRAPHS (1,1) / (5,5) / (7,7).
+
+**Checks:** right: 182, 186, 246 are the least spans of admissible 39-, 40-, 50-tuples (246 − 182 = 64, the shift of the 39-suffix); gates are the roots 1+8+2 = 11 → 2, 1+8+6 = 15 → 6, 2+4+6 = 12 → 3; digraphs are the neighbour sums 3+7 = 10 → 1, 7+7 = 14 → 5, 8+8 = 16 → 7; 888 = 246 + 642. Asked: the step 182 → 373 and 186 → 777 (the flip-sum gives 463 and 867).
+File: `math/theorems/owner_182_186_246_three_paths_2026_11_28.py`.
+
