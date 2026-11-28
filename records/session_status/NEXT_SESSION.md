@@ -19,6 +19,9 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
 - Owner's hands-and-feet series (named 2026-11-22; OO / OZ of the ODD CENTER image may belong to it): searched
   2026-11-22 in every file and commit on every branch, the removed message record (Oct 5-26), Google Drive and Gmail
   -- not found. Asked for it. When it arrives: owner_work/ + PROCESS.md + TERMS.md, tie to the palindrome files.
+- The owner's page "Egor Algorithm -- Logic, Rules, and Tests" (another tool's workspace; not in Drive): its Lemma 1-9
+  table and the newer inventory linking Lemma 5 to the 12-phalanx count are asked for (2026-11-28); Lemma 5 in the repo
+  is 7 + 10 = 17 (pasted_v6_ledger_lemmas_audit_2026_11_17.py).
 - 191 and the drip: math/theorems/owner_191_drip_and_sequence_167_358_429_2026_11_19.py.
 - The lunar paste (2026-03-03 eclipse, Apr 2 Full Moon, Apr 3/5, 33/43/432): math/theorems/pasted_lunar_march_april_2026_audit_2026_11_19.py, sources USNO/NASA/JPL Horizons, engine
   math/theorems/meeus_lunar.py (Meeus ch. 47-49, matches Horizons to 0.03 deg).
