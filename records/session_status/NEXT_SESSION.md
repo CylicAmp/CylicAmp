@@ -22,6 +22,10 @@ that is listed here. The owner's messages are all in owner_work/messages/ (#1 to
 - The owner's page "Egor Algorithm -- Logic, Rules, and Tests" (another tool's workspace; not in Drive): its Lemma 1-9
   table and the newer inventory linking Lemma 5 to the 12-phalanx count are asked for (2026-11-28); Lemma 5 in the repo
   is 7 + 10 = 17 (pasted_v6_ledger_lemmas_audit_2026_11_17.py).
+- 2026-11-28: all 18 GitHub branches and the full commit history searched for the t983 matrix, the 42 <-> 24 stack,
+  the phalanx inventory, the hands-and-feet series, the Egor Algorithm page and the owner's 142856 work: none was ever
+  committed (the only hits are this session's own asks). They live in other tools' workspaces. Intake offered: the
+  owner drops exports or screenshots in a Google Drive folder named "CylicAmp inbox"; a session reads it and commits.
 - 191 and the drip: math/theorems/owner_191_drip_and_sequence_167_358_429_2026_11_19.py.
 - The lunar paste (2026-03-03 eclipse, Apr 2 Full Moon, Apr 3/5, 33/43/432): math/theorems/pasted_lunar_march_april_2026_audit_2026_11_19.py, sources USNO/NASA/JPL Horizons, engine
   math/theorems/meeus_lunar.py (Meeus ch. 47-49, matches Horizons to 0.03 deg).
