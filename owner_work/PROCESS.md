@@ -994,3 +994,12 @@ File: `math/theorems/owner_doubling_diagram_1234_2468_2026_11_22.py`.
 **Checks:** right: an even-length palindrome adds to 2 × its paired digits, so only even sums (2, 4, … up to 9 × length); an odd length adds 2 × paired + centre, and the free centre fills every sum from 2 to 9 × length (checked on every palindrome up to 10 digits). Wrong in the table: rows 5 and 7 say "even only" (12321 → 9); row 4 abba has no centre; the row strings are one letter longer than their lengths; abcdba, abddcba, abdccba are not palindromes. Asked: what OO and OZ stand for. Ties: T160's portal (A0A → A1A … A9A) is the free centre.
 File: `math/theorems/owner_palindrome_parity_odd_center_2026_11_22.py`.
 
+## 2026-11-28 — permanent and determinant of 1 2 3 / 4 5 6 / 7 8 9 and two swaps (Egor)
+
+**As computed (Egor, relayed):** per 450, det 0 · swap 2 ↔ 5 → 594, 54 · swap 7 ↔ 8 → 459, −9 · both → 612, 72.
+
+**Process:** take the grid; swap 2 and 5, then 7 and 8, then both; compute the permanent (all six products added) and the determinant (odd ones subtracted).
+
+**Checks:** right, every number; per − det = 450, 540, 468, 540, all divide by 9; the two swaps together add 27 to the determinant beyond the two alone (72 − 54 + 9 − 0). Why the grid agrees by 9: its columns are 1 + 3 × (0, 1, 2), 2 + 3 × (0, 1, 2), 3 + 3 × (0, 1, 2), and 0 + 1 + 2 = 3 (proved for every grid of that shape). Tie to the flips of #359: flipping rows keeps det 0 and moves per to 478, 490, 502, which no longer agree by 9 (remainders 1, 4, 7).
+File: `math/theorems/owner_egor_permanent_determinant_mod9_2026_11_28.py`; note `math/permanent_mod9/note.pdf`.
+
